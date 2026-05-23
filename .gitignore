@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Streamlit
+.streamlit/config.toml
+!.streamlit/config.toml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large Data
+*.xlsx
+*.csv
+!data/processed/*.csv
+
+# API Keys
+.env
+.env.example
+
+# AI assistant internals
+.claude
+.claude/
+**/.claude/**
+
+# Large binary / design files in output/
+output/*.pdf
+output/*.pptx
+output/*.afdesign
+output/*.svg
+output/*.png
+output/dev/
+output/RAB/
+output/scripts/
+
+# Large reference files
+refrensi/Ref/
+refrensi/Ref-Luar/
+refrensi/Ref-PPT/
+refrensi/Ref-indo/
+
+# Google Apps Script (data pipeline draft, not app code)
+data/google-apps-script/
+
+# docs images (generated screenshots, not source)
+docs/image/
