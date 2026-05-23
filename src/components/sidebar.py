@@ -67,7 +67,6 @@ def render_sidebar():
         st.page_link("pages/7_Validasi_Metode.py",          label=_("Validasi Metode"),          icon=None)
         st.page_link("pages/8_Bibliometric_Discovery.py",   label=_("Bibliometric Discovery"),   icon=None)
         st.page_link("pages/10_Infografis.py",              label=_("Infografis"),               icon=None)
-        st.page_link("pages/11_Infografis_Summary.py",      label=_("Infografis Summary"),       icon=None)
 
         st.markdown("---")
         st.caption("CELIOS · ECC Intelligence System · 2026")
