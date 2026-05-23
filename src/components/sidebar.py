@@ -10,6 +10,9 @@ def render_sidebar():
 
     st.markdown("""
     <style>
+    /* Hide default Streamlit auto-generated page navigation */
+    [data-testid="stSidebarNav"] { display: none !important; }
+
     .sidebar-label {
         font-size: 0.7rem;
         font-weight: 600;
