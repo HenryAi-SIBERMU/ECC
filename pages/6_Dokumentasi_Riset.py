@@ -28,8 +28,11 @@ else:
         "estimasi-halaman-publikasi-ecc.md":"Estimasi Halaman Publikasi",
     }
     options = {label_map.get(f, f): f for f in md_files}
+    labels = list(options.keys())
+    default_label = "Framework Riset ECC"
+    default_idx = labels.index(default_label) if default_label in labels else 0
 
-    selected_label = st.selectbox("Pilih dokumen:", list(options.keys()))
+    selected_label = st.selectbox("Pilih dokumen:", labels, index=default_idx)
     selected_file = options[selected_label]
     file_path = os.path.join(DOCS_DIR, selected_file)
 
