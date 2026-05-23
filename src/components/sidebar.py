@@ -26,8 +26,13 @@ def render_sidebar():
 
         if os.path.exists(logo_path):
             st.image(logo_path, use_container_width=True)
-        else:
-            st.caption("CELIOS — ECC Intelligence System")
+
+        st.markdown("""
+        <div style="text-align:center; padding: 6px 0 2px 0;">
+            <div style="font-size:0.85rem; font-weight:700; color:#66BB6A; letter-spacing:0.03em;">ECC Intelligence System</div>
+            <div style="font-size:0.7rem; color:#9E9E9E; margin-top:2px;">Daya Dukung Lingkungan Hidup Indonesia</div>
+        </div>
+        """, unsafe_allow_html=True)
 
         st.markdown("---")
 
