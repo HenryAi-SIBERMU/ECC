@@ -1,0 +1,1821 @@
+
+--- PAGE 100 ---
+a. Angka Kesakitan Malaria
+Secara nasional angka kesakitan malaria selama tahun 2009 –2016 cenderung
+menurun yaitu dari 1,8 per 1.000 penduduk berisiko pada tahun 2009 menjadi 0,84 per
+1.000 penduduk berisiko pada tahun 2016. Penurunan API tersebut dapat dilihat pada
+Gambar 6.37.
+GAMBAR 6.37
+ANGKA KESAKITAN MALARIA ( ANNUAL PARACITE INCIDENCE /API)
+PER 1.000 PENDUDUK BERISIKO TAHUN 2009-2016
+3,0
+2,5
+1,96
+k 2,0 1,8
+u 1,75
+d 1,69
+u
+d
+n
+e 1,38
+p 1,5
+0
+0
+.0
+1 0,99
+r
+e 0,85
+p 1,0 0.84
+I
+P
+A
+0,5
+0,0
+2009 2010 2011 2012 2013 2014 2015 2016
+Tahun
+Sumber: Ditjen P2P, Kemenkes RI, 2017
+Papua merupakan provinsi dengan API tertinggi, yaitu 45,85 per 1.000 penduduk.
+Angka ini sangat tinggi jika dibandingkan dengan provinsi lainnya. Empat provinsi dengan API
+per 1.000 penduduk tertinggi lainnya, yaitu Papua Barat (10,20), Nusa Tenggara Timur (5,17),
+Maluku (3,83), dan Maluku Utara (2,44). Sebanyak 83% kasus berasal dari Papua, Papua
+Barat, dan Nusa Tenggara Timur. Angka kesakitan malaria menurut provinsi dapat dilihat
+pada Gambar 6.38.
+Secara nasional, sebesar 95% suspek malaria diperiksa secara laboratorium (Rapid
+Diagnostic Test dan Mikroskop). Informasi lengkap mengenai jumlah kasus malaria dan jenis
+tes sediaan darah menurut provinsi dapat dilihat pada Lampiran 6.25.
+187
+Bab VI
+--- PAGE 101 ---
+GAMBAR 6.38
+ANGKA KESAKITAN MALARIA ( ANNUAL PARACITE INCIDENCE/ API)
+PER 1.000 PENDUDUK BERISIKO MENURUT PROVINSI TAHUN 2016
+INDONESIA 0,84
+Papua 45,85
+Papua Barat 6,79
+Nusa Tenggara Timur 5,41
+Maluku 3,95
+Maluku Utara 2,44
+Bengkulu 1,45
+Sulawesi Utara 0,72
+Kalimantan Selatan 0,52
+Sulawesi Tengah 0,49
+Sulawesi Tenggara 0,44
+Lampung 0,40
+Kepulauan Riau 0,36
+Kalimantan Timur 0,35
+Sumatera Selatan 0,28
+Sumatera Utara 0,27
+Nusa Tenggara Barat 0,24
+Kalimantan Tengah 0,19
+Gorontalo 0,15
+Jambi 0,14
+Sumatera Barat 0,12
+Sulawesi Selatan 0,12
+Kep. Bangka Belitung 0,11
+Sulawesi Barat 0,09
+Kalimantan Barat 0,06
+Aceh 0,05
+Kalimantan Utara 0,03
+Jawa Tengah 0,03
+Riau 0,03
+DI Yogyakarta 0,03
+Jawa Timur 0,01
+Jawa Barat 0,01
+DKI Jakarta 0,01
+Banten
+Bali
+0 5 10 15 20 25 30 35 40 45 50
+API per 1.000 Penduduk
+Sumber: Ditjen P2P, Kemenkes RI, 2017
+Pada tahun 2016 terdapat 413 kabupaten/kota dengan API<1 per 1.000 penduduk,
+sementara target Rencana Strategi Kementerian Kesehatan untuk angka kesakitan malaria
+atau Annual Parasite Incidence ( API) tahun 2016 adalah jumlah kabupaten/kota dengan
+API<1 per 1.000 penduduk sebanyak 360 kabupaten/kota. Dengan demikian cakupan API
+2016 mencapai target Renstra. Jumlah kabupaten/kota dengan API<1 per 1.000 penduduk
+menurut provinsi dapat dilihat pada Gambar 6.39.
+188
+Tahun 2016
+--- PAGE 102 ---
+GAMBAR 6.39
+JUMLAH KABUPATEN/KOTA DENGAN API< 1 PER 1.000 PENDUDUK
+MENURUT PROVINSI TAHUN 2016
+Jawa Timur 38
+Jawa Tengah 35
+Sumatera Utara 29
+Jawa Barat 27
+Sulawesi Selatan 24
+Aceh 23
+Sumatera Barat 18
+Sulawesi Tenggara 16
+Kalimantan Tengah 14
+Kalimantan Barat 14
+Sumatera Selatan 14
+Sulawesi Utara 12
+Lampung 12
+Riau 12
+Kalimantan Selatan 11
+Jambi 11
+Nusa Tenggara Barat 10
+Sulawesi Tengah 9
+Bali 9
+Kalimantan Timur 8
+Banten 8
+Kep. Bangka Belitung 7
+Sulawesi Barat 6
+Gorontalo 6
+Nusa Tenggara Timur 6
+DKI Jakarta 6
+Kepulauan Riau 6
+Kalimantan Utara 5
+DI Yogyakarta 5
+Bengkulu 5
+Maluku 3
+Maluku Utara 2
+Papua 1
+Papua Barat 1
+0 5 10 15 20 25 30 35 40 45 50
+Jumlah Kab/kota dengan API<1
+Sumber: Ditjen P2P, Kemenkes RI, 2017
+b. Pengobatan Malaria
+Pengobatan malaria harus dilakukan secara efektif. Pemberian jenis obat harus benar
+dan cara meminumnya harus tepat waktu yang sesuai dengan acuan program pengendalian
+malaria. Pengobatan efektif adalah pemberian ACT ( Artemicin-based Combination Therapy)
+pada 24 jam pertama pasien panas dan obat harus diminum habis. Persentase ACT menurut
+provinsi tahun 2016 dapat dilihat pada Gambar 6.40.
+189
+Bab VI
+--- PAGE 103 ---
+GAMBAR 6.40
+PERSENTASE PEMBERIAN ARTEMICIN-BASED COMBINATION THERAPY (ACT)
+MENURUT PROVINSI TAHUN 2016
+Sulawesi Utara 100%
+Bali 100%
+Banten 100%
+DI Yogyakarta 100%
+DKI Jakarta 100%
+Kep. Bangka Belitung 100%
+Sumatera Barat 100%
+Sulawesi Barat 99%
+Gorontalo 98%
+Maluku 97%
+Lampung 97%
+Sulawesi Tenggara 97%
+Nusa Tenggara Timur Target Indikator 97%
+Kalimantan Tengah Program Janji
+96%
+Sulawesi Selatan Presiden/Wakil 94%
+Presiden 2016: ≥85%
+Sumatera Utara 94%
+Jambi 93%
+Kalimantan Selatan 93%
+Papua 92%
+Bengkulu 89%
+Nusa Tenggara Barat 89%
+Kalimantan Timur 88%
+Jawa Timur 86%
+Aceh 86%
+Sumatera Selatan 84%
+Jawa Tengah 83%
+Maluku Utara 80%
+Papua Barat 79%
+Kalimantan Barat 78%
+Riau 77%
+Jawa Barat 71%
+Kalimantan Utara 64%
+Sulawesi Tengah 60%
+Kepulauan Riau 57%
+0% 20% 40% 60% 80% 100%
+% ACT
+Sumber: Ditjen P2P, Kemenkes RI, 2017
+5. Rabies
+Rabies merupakan penyakit mematikan baik pada manusia maupun hewan yang
+disebabkan oleh infeksi virus (golongan Rhabdovirus) yang ditularkan melalui gigitan hewan
+seperti anjing, kucing, kelelawar, kera, musang dan serigala yang di dalam tubuhnya
+mengandung virus.
+Tahun 2016 terdapat 24 provinsi tertular rabies dari 34 provinsi di Indonesia.
+Sebanyak sepuluh provinsi lainnya dinyatakan bebas Rabies, lima diantaranya provinsi bebas
+190
+Tahun 2016
+--- PAGE 104 ---
+Upaya pengendalian faktor risiko PTM yang telah dilakukan berupa promosi Perilaku
+Hidup Bersih dan Sehat melalui perilaku CERDIK, yaitu Cek kesehatan secara berkala,
+Enyahkan asap rokok, Rajin aktivitas fisik, Diet sehat seimbang, Istirahat yang cukup, dan
+Kelola stres. Cek kesehatan secara berkala yaitu pemeriksaan faktor risiko PTM dapat
+dilakukan melalui Pos Pembinaan Terpadu (Posbindu) PTM, dan mengikuti deteksi dini
+kanker serviks dan kanker payudara di Puskesmas.
+Selain itu, upaya pengendalian PTM melalui pengendalian masalah tembakau
+dilakukan dengan penerbitan peraturan terkait Kawasan Tanpa Rokok (KTR) oleh Pemerintah
+Daerah dan membentuk Aliansi Walikota/Bupati dalam Pengendalian Tembakau dan
+Penyakit Tidak Menular. Sedangkan untuk pengaturan makanan berisiko, diterbitkan
+Peraturan Menteri Kesehatan tentang gula, garam dan lemak dalam makanan yang dijual
+bebas. Upaya pengendalian PTM tidak akan berhasil jika hanya dilakukan oleh Kementerian
+Kesehatan tanpa dukungan seluruh jajaran lintas sektor, baik pemerintah, swasta, organisasi
+profesi, organisasi kemasyarakatan, bahkan seluruh lapisan masyarakat.
+Indikator program pengendalian penyakit tidak menular pada Rencana Strategis
+Kementerian Kesehatan tahun 2015-2019 adalah sebagai berikut.
+1. Persentase Puskesmas yang melaksanakan pengendalian PTM secara terpadu
+(Puskesmas Pandu PTM).
+2. Persentase desa/kelurahan yang melaksanakan kegiatan Pos Pembinaan Terpadu
+(Posbindu) PTM.
+3. Persentase perempuan usia 30-50 tahun yang dideteksi dini kanker leher rahim dan
+kanker payudara.
+4. Persentase kabupaten/kota yang melaksanakan kebijakan Kawasan Tanpa Rokok
+(KTR) minimal pada 50% sekolah.
+Beberapa kegiatan yang telah dikembangkan oleh Kementerian Kesehatan dalam
+upaya untuk mengendalikan penyakit tidak menular sampai dengan tahun 2016 adalah
+sebagai berikut.
+1. Meningkatkan Upaya Pengendalian PTM di Puskemas
+Pengendalian PTM di Puskesmas diwujudkan dengan adanya Puskesmas Pandu PTM.
+Puskesmas Pandu PTM adalah Puskesmas yang melaksanakan pencegahan dan pengendalian
+PTM secara komprehensif dan terintegrasi melalui Upaya Kesehatan Masyarakat (UKM) dan
+Upaya Kesehatan Perorangan (UKP). Peningkatan peran serta masyarakat dalam pencegahan
+dan pengendalian PTM, baik secara perorangan maupun kelompok dilakukan melalui
+kegiatan Upaya Kesehatan Berbasis Masyarakat (UKBM) dengan membentuk dan
+mengembangkan Pos Pembinaan Terpadu (Posbindu) PTM.
+Secara nasional terdapat 48,87% Puskesmas yang melaksanakan pengendalian PTM
+secara terpadu (Puskesmas Pandu PTM). Kepulauan Bangka Belitung merupakan provinsi
+199
+Bab VI
+--- PAGE 105 ---
+dengan Puskesmas Pandu PTM terbanyak dimana hampir seluruh Puskesmas atau 98,39%
+Puskesmas telah melaksanakan pengendalian PTM secara terpadu. Sebagian besar
+Puskesmas di DI Yogyakarta dan Jawa Timur juga telah melaksanakan pengendalian PTM
+secara terpadu, yaitu sebesar 90,08% dan 87,71%. Namun, proporsi Puskesmas Pandu PTM
+di Papua masih rendah, yaitu hanya 1,83% dari Puskesmas yang ada. Puskesmas yang
+melaksanakan pengendalian PTM secara terpadu menurut provinsi dapat dilihat pada
+Gambar 6.46.
+GAMBAR 6.46
+PERSENTASE PUSKESMAS YANG MELAKSANAKAN PENGENDALIAN
+TERPADU (PANDU) PTM MENURUT PROVINSI S.D. TAHUN 2016
+INDONESIA 48,87
+Kep. Bangka Belitung 98,39
+DI Yogyakarta 90,08
+Jawa Timur 87,71
+Lampung 72,60
+Banten 71,67
+Jambi 71,04
+DKI Jakarta 68,24
+Kalimantan Barat 66,81
+Nusa Tenggara Barat 61,39
+Sumatera Selatan 58,07
+Jawa Tengah 57,60
+Sumatera Barat 56,44
+Kalimantan Tengah 52,31
+Kepulauan Riau 52,05
+Sulawesi Selatan 46,65
+Sumatera Utara 43,26
+Sulawesi Tengah 40,74
+Sulawesi Utara 39,89
+Kalimantan Selatan 39,57
+Aceh 39,12
+Jawa Barat 38,67
+Bengkulu 35,56
+Bali 35,00
+Kalimantan Timur 34,86
+Sulawesi Tenggara 31,23
+Gorontalo 31,18
+Kalimantan Utara 26,53
+Riau 25,35
+Nusa Tenggara Timur 24,26
+Maluku 21,61
+Papua Barat 19,87
+Maluku Utara 13,28
+Sulawesi Barat 12,77
+Papua 1,78
+0 20 40 60 80 100
+% Puskesmas yang Melaksanakan Pengendalian Terpadu PTM
+Sumber: Ditjen P2P, Kemenkes RI, 2017
+2. Pos Pembinaan Terpadu Penyakit Tidak Menular (Posbindu PTM)
+Posbindu PTM yang mulai dikembangkan pada tahun 2011 merupakan wujud peran
+serta masyarakat dalam melakukan kegiatan deteksi dini dan pemantauan faktor risiko PTM
+utama yang dilaksanakan secara terpadu, rutin, dan periodik. Kegiatan Posbindu PTM juga
+200
+Tahun 2016
+--- PAGE 106 ---
+terintegrasi dengan rutin di masyarakat, seperti di lingkungan tempat tinggal dalam wadah
+desa/kelurahan siaga aktif. Tujuan Posbindu PTM adalah meningkatkan peran serta
+masyarakat dalam pencegahan dan penemuan dini faktor risiko PTM. Sasaran utama
+kegiatan adalah kelompok masyarakat sehat, berisiko dan penyandang PTM berusia 15 tahun
+ke atas.
+Desa/kelurahan yang melaksanakan Posbindu PTM dapat dilihat pada Gambar 6.47
+berikut. Secara nasional desa/kelurahan yang melaksanakan kegiatan Posbindu PTM sebesar
+14,85%. Persentase ini masih di bawah target Rencana Strategis Kementerian Kesehatan
+tahun 2016 yaitu sebesar 20%. Jika dilihat menurut provinsi, DKI Jakarta merupakan provinsi
+dengan desa/kelurahan terbanyak yang melaksanakan Posbindu PTM, yaitu sebesar 87,27%.
+Provinsi dengan desa/kelurahan yang melaksanakan Posbindu PTM terbanyak lainnya yaitu
+Kep. Bangka Belitung dan DI Yogyakarta sebesar 74,42% dan 53,65%. Sementara itu, hanya
+0,9% desa di Papua yang melaksanakan Posbindu PTM.
+GAMBAR 6.47
+PERSENTASE DESA/KELURAHAN YANG MELAKSANAKAN POSBINDU PTM
+MENURUT PROVINSI S.D. TAHUN 2016
+INDONESIA 14,85
+DKI Jakarta 87,27
+Kep. Bangka Belitung 74,42
+DI Yogyakarta 53,65
+Sumatera Barat 41,60
+Nusa Tenggara Barat 32,01
+Jawa Timur 29,08
+Banten 27,14
+Sulawesi Selatan 26,99
+Kepulauan Riau 25,96
+Lampung 25,42
+Jambi 23,05
+Kalimantan Barat 15,80
+Jawa Barat 15,60
+Bengkulu 15,14
+Gorontalo 15,09
+Sumatera Selatan 15,02
+Sulawesi Utara 14,59
+Jawa Tengah 13,48
+Sulawesi Tenggara 11,92
+Kalimantan Tengah 11,83
+Bali 11,31
+Kalimantan Timur 10,76
+Aceh 10,46
+Sulawesi Tengah 10,16
+Kalimantan Selatan 8,91
+Sumatera Utara 7,46
+Riau 7,03
+Kalimantan Utara 6,85
+Nusa Tenggara Timur 6,13
+Maluku 6,01
+Sulawesi Barat 5,87
+Papua Barat 4,08
+Maluku Utara 3,81
+Papua 0,90
+0 20 40 60 80 100
+% Desa/Kelurahan yang Melaksanakan Posbindu
+Sumber: Ditjen P2P, Kemenkes RI, 2017
+201
+Bab VI
+--- PAGE 107 ---
+3. Pengendalian Konsumsi Hasil Tembakau
+Pengendalian tembakau di Indonesia merupakan salah satu upaya pengendalian
+faktor risiko PTM, dalam rangka menurunkan prevalensi penyakit tidak menular. Beberapa
+upaya yang telah dikembangkan adalah sebagai berikut.
+a. Perlindungan masyarakat terhadap paparan asap rokok melalui pengembangan
+kawasan tanpa rokok dengan mendorong terbentuknya peraturan dan kebijakan
+daerah serta implementasinya.
+b. Menyediakan layanan upaya berhenti rokok di Fasilitas Pelayanan Kesehatan
+(Fasyankes) baik primer dan sekunder maupun tersier. Selain itu juga, bagi masyarakat
+yang tidak sempat dan tidak dapat datang ke Fasyankes, disiapkan layanan konseling
+upaya berhenti merokok melalui telepon tanpa bayar.
+c. Memberikan informasi dan edukasi kepada masyarakat untuk hidup sehat tanpa rokok
+termasuk akibat merokok melalui iklan layanan masyarakat serta promosi kesehatan.
+d. Melakukan monitoring dan implementasi kebijakan pengendalian konsumsi hasil
+tembakau.
+GAMBAR 6.48
+PERSENTASE KABUPATEN/KOTA YANG MEMPUNYAI PERATURAN KTR
+MENURUT PROVINSI S.D. TAHUN 2016
+INDONESIA 44,0
+Bali 100,0
+DKI Jakarta 100,0
+Kep. Bangka Belitung 100,0
+Kalimantan Timur 90,0
+Lampung 86,7
+DI Yogyakarta 80,0
+Sulawesi Selatan 79,2
+Sulawesi Utara 66,7
+Nusa Tenggara Barat 60,0
+Jawa Barat 59,3
+Kalimantan Tengah 57,1
+Kepulauan Riau 57,1
+Aceh 52,2
+Maluku Utara 50,0
+Gorontalo 50,0
+Banten 50,0
+Bengkulu 50,0
+Riau 50,0
+Sulawesi Tengah 46,2
+Kalimantan Selatan 46,2
+Jambi 45,5
+Sumatera Barat 42,1
+Sumatera Selatan 41,2
+Kalimantan Utara 40,0
+Jawa Tengah 37,1
+Sulawesi Barat 33,3
+Papua Barat 30,8
+Nusa Tenggara Timur 27,3
+Sumatera Utara 21,2
+Jawa Timur 18,4
+Maluku 18,2
+Kalimantan Barat 14,3
+Sulawesi Tenggara 11,8
+Papua 3,4
+0 20 40 60 80 100
+% Kab/Kota yang Mempunyai Peraturan KTR
+Sumber: Ditjen P2P, Kemenkes RI, 2017
+202
+Tahun 2016
+--- PAGE 108 ---
+Sampai dengan tahun 2016 terdapat 226 atau 44,0% kabupaten/kota yang sudah
+mempunyai peraturan Kawasan Tanpa Rokok (KTR). Jika dilihat menurut provinsi, semua
+kabupaten/kota di Bali, DKI Jakarta, dan Kep. Bangka Belitung sudah mempunyai peraturan
+KTR, diikuti oleh Kalimantan Timur sebesar 90,0%, dan Lampung sebesar 86,7%. Sementara
+itu, di Papua hanya terdapat 3,4% kabupaten/kota yang mempunyai peraturan KTR. Target
+Rencana Strategis Kementerian Kesehatan tahun 2016 adalah secara nasional, sebesar 20,2%
+kabupaten/kota sudah melaksanakan kebijakan Kawasan Tanpa Rokok (KTR) minimal pada
+50% sekolah. Berdasarkan implementasi KTR, diketahui bahwa sampai dengan tahun 2016,
+sebesar 21,2% kabupaten/kota sudah melaksanakan kebijakan Kawasan Tanpa Rokok (KTR)
+minimal pada 50% sekolah. Dengan demikian, target Rencana Strategis Kementerian
+Kesehatan tahun 2016 sudah tercapai. Kabupaten/kota yang sudah mempunyai peraturan
+KTR dan sudah melaksanakan kebijakan KTR minimal pada 50% sekolah dapat dilihat pada
+Gambar 6.48 dan 6.49.
+GAMBAR 6.49
+PERSENTASE KABUPATEN/KOTA YANG MELAKSANAKAN KEBIJAKAN KTR
+MINIMAL PADA 50% SEKOLAH
+MENURUT PROVINSI S.D. TAHUN 2016
+INDONESIA 21,2
+Bali 100,0
+DI Yogyakarta 100,0
+DKI Jakarta 100,0
+Sumatera Barat 42,1
+Kalimantan Utara 40,0
+Jambi 36,4
+Sulawesi Barat 33,3
+Gorontalo 33,3
+Kalimantan Timur 30,0
+Nusa Tenggara Barat 30,0
+Jawa Barat 29,6
+Kepulauan Riau 28,6
+Kep. Bangka Belitung 28,6
+Lampung 26,7
+Banten 25,0
+Sumatera Selatan 23,5
+Kalimantan Selatan 23,1
+Kalimantan Tengah 21,4
+Kalimantan Barat 21,4
+Maluku Utara 20,0
+Sulawesi Utara 20,0
+Bengkulu 20,0
+Maluku 18,2
+Sulawesi Selatan 16,7
+Riau 16,7
+Papua Barat 15,4
+Sulawesi Tengah 15,4
+Sulawesi Tenggara 11,8
+Nusa Tenggara Timur 9,1
+Aceh 8,7
+Jawa Tengah 8,6
+Papua 6,9
+Sumatera Utara 6,1
+Jawa Timur 5,3
+0 20 40 60 80 100
+% Kab/Kota Implementasi KTR min. pada 50% Sekolah
+Sumber: Ditjen P2P, Kemenkes RI, 2017
+203
+Bab VI
+--- PAGE 109 ---
+E. DAMPAK KESEHATAN AKIBAT BENCANA
+Menurut UU no 24 tahun 2007 tentang Penanggulangan Bencana, bencana
+dikategorikan menjadi bencana alam, bencana non alam, dan bencana sosial. Bencana alam
+adalah bencana yang diakibatkan oleh peristiwa atau serangkaian peristiwa yang disebabkan
+oleh alam antara lain berupa banjir, letusan gunung berapi, gempa bumi, tsunami,
+kekeringan, angin puting beliung, dan tanah langsor. Bencana non alam antara lain
+kebakaran hutan dan lahan yang disebabkan oleh manusia, kecelakan transportasi,
+kecelakaan industri, kegagalan teknologi, dan wabah penyakit. Bencana sosial yang dimaksud
+yaitu diantaranya berupa konflik sosial atau kerusuhan sosial dalam masyarakat yang terjadi.
+Selama tahun 2016 di Indonesia tercatat 661 kejadian bencana yang menimbulkan
+krisis kesehatan. Bencana yang terjadi tersebut terdiri dari 17 jenis bencana. Pada tahun
+2016, banjir merupakan bencana yang paling sering terjadi dan bencana dengan jumlah
+provinsi yang paling banyak terkena. Frekuensi banjir sebanyak 145 kejadian (22%) dan
+meliputi 26 provinsi. Jumlah total korban meninggal akibat banjir sebanyak 42 orang, luka
+berat/rawat inap sebanyak 566 orang, luka ringan/rawat jalan sebanyak 4.435 orang, hilang
+sebanyak 3 orang, dan menyebabkan 143.805 orang mengungsi. Berikut gambaran kejadian
+bencana di Indonesia selama tahun 2016.
+GAMBAR 6.51
+JUMLAH KEJADIAN BENCANA MENURUT JENIS PER BULAN DI INDONESIA
+TAHUN 2016
+80
+75
+70 67
+65
+62 62
+60 57
+56
+53 54
+50 46
+45 46
+43 41
+40
+36 34 37 36 34
+33
+30 27 30 30
+30
+27 21
+19
+20 20
+17 21
+11 14 13 15
+10 9 12
+3 2 3 3 2 4 3
+0 0 1 1 1 1
+Jan Feb Mar Apr Mei Jun Jul Aug Sep Okt Nov Des
+BencanaA lam BencanaN onA lam BencanaS osial TotalB encana
+Sumber: Pusat Krisis Kesehatan, Kemenkes 2017
+Pada grafik di atas dapat dilihat bahwa jumlah bencana alam terendah terjadi pada
+bulan Agustus dan tertinggi di bulan Februari. Sedangkan jumlah bencana non alam terendah
+205
+Bab VI
+--- PAGE 110 ---
+terjadi di bulan April dan tertinggi di bulan Agustus. Selain itu, tidak terjadi bencana sosial
+pada bulan April dan tercatat jumlah kejadiannya tertinggi di bulan Juli. Secara total, jumlah
+bencana paling sedikit terjadi di bulan Juli dan tertinggi di bulan Februari.
+GAMBAR 6.52
+PERSENTASE KEJADIAN BENCANA MENURUT JENIS DI INDONESIA
+TAHUN 2016
+Bencana
+Sosial
+4%
+Bencana
+Non Alam Bencana
+36% Alam
+60%
+Sumber: Pusat Krisis Kesehatan, Kemenkes 2017
+Bencana alam merupakan bencana yang paling sering terjadi di Indonesia pada tahun
+2016 dengan persentase 60%. Sisanya, sebanyak 36% merupakan bencana non alam, dan 4%
+dari kejadian bencana termasuk kedalam bencana sosial.
+GAMBAR 6.53
+PERSENTASE KEJADIAN BENCANA ALAM DI INDONESIA
+TAHUN 2016
+Banjir dan
+Gelombang
+Tanah
+Pasang/
+Longsor
+Badai
+3,5%
+2,5%
+Angin Puting
+Beliung
+Banjir
+15,0%
+36,3%
+Banjir
+Bandang
+9,5%
+Tanah
+Longsor Letusan
+29,8% Gunung Api
+0,5%
+Gempa Bumi
+3,0%
+Sumber: Pusat Krisis Kesehatan, Kemenkes 2017
+Bencana alam yang paling sering terjadi di Indonesia yaitu bencana banjir (36,3%),
+diikuti oleh tanah longsor (29,8%), dan angin puting beliung (15%). Sedangkan bencana
+gempa bumi dan tsunami, dan kekeringan, tidak terjadi pada tahun 2016.
+206
+Tahun 2016
+--- PAGE 111 ---
+GAMBAR 6.54
+PERSENTASE KEJADIAN BENCANA NON ALAM DI INDONESIA
+TAHUN 2016
+Gagal Teknologi
+9%
+Kebakaran
+Kebakaran
+20%
+Hutan dan
+Lahan
+1%
+KLB Keracunan
+41% Kecelakaan
+Transpor tasi
+26%
+Kecelakaan
+KLB Penyakit Industri
+1% 2%
+Sumber: Pusat Krisis Kesehatan, Kemenkes 2017
+Bencana non alam yang paling sering terjadi di Indonesia yaitu bencana KLB-
+Keracunan (41%), diikuti oleh kecelakaan transportasi (26%), dan kebakaran (20%). Bencana
+wabah penyakit (epidemi - pandemi) tidak terjadi pada tahun 2016.
+GAMBAR 6.55
+PERSENTASE KEJADIAN BENCANA SOSIAL DI INDONESIA
+TAHUN 2016
+Aksi Teror
+dan Sabotase
+33%
+Konflik Sosial
+atau
+Kerusuhan
+Sosial
+67%
+Sumber: Pusat Krisis Kesehatan, Kemenkes 2017
+Konflik sosial atau kerusuhan sosial merupakan bencana sosial yang paling sering
+terjadi di Indonesia tahun 2016, yaitu sebesar 67%. Sedangkan 33% bencana sosial terjadi
+akibat aksi teror dan sabotase di masyarakat.
+207
+Bab VI
+--- PAGE 112 ---
+GAMBAR 6.56
+JUMLAH KEJADIAN BENCANA MENURUT PROVINSI
+TAHUN 2016
+Jawa Barat 130
+Jawa Timur 95
+Jawa Tengah 85
+DKI Jakarta 44
+Sumatera Barat 40
+Sumatera Utara 28
+Aceh 28
+Sulawesi Selatan 24
+Sumatera Selatan 17
+Banten 13
+Kalimantan Timur 11
+Riau 11
+Papua 10
+Kalimantan Barat 10
+Nusa Tenggara Barat 10
+Sulawesi Tengah 9
+Bali 9
+Jambi 9
+Sulawesi Utara 8
+Nusa Tenggara Timur 8
+DI Yogyakarta 8
+Kep. Bangka Belitung 8
+Lampung 7
+Bengkulu 7
+Kepulauan Riau 6
+Papua Barat 4
+Maluku Utara 4
+Maluku 4
+Gorontalo 4
+Sulawesi Tenggara 3
+Kalimantan Utara 3
+Kalimantan Selatan 2
+Sulawesi Barat 1
+Kalimantan Tengah 1
+0 20 40 60 80 100 120 140
+Sumber: Pusat Krisis Kesehatan, Kemenkes 2017
+Jawa Barat merupakan provinsi yang terbanyak mengalami kejadian bencana di tahun
+2016, yakni sebanyak 130 kejadian. Provinsi berikutnya yang mengalami kejadian bencana
+terbanyak yaitu Provinsi Jawa Timur dengan 95 kejadian dan Provinsi Jawa Tengah dengan
+85 kejadian bencana. Sedangkan provinsi yang paling sedikit mengalami bencana yaitu
+Provinsi Kalimantan Tengah dan Sulawesi Barat (1 bencana) dan Kalimantan Selatan (2
+bencana).
+208
+Tahun 2016
+--- PAGE 113 ---
+GAMBAR 6.57
+JUMLAH PROVINSI TERKENA BENCANA MENURUT JENIS BENCANA
+TAHUN 2016
+Banjir 26
+Tanah Longsor 21
+Banjir Bandang 18
+Angin Puting Beliung 14
+Banjir dan Tanah Longsor 11
+Gelombang Pasang/Badai 8
+Gempa Bumi 8
+Letusan Gunung Api 2
+Kecelakaan Transportasi 24
+KLB - Keracunan 17
+Kebakaran 11
+Gagal Teknologi 9
+Kecelakaan Industri 3 Bencana Alam
+KLB - Penyakit 1
+Bencana Non Alam
+Kebakaran Hutan dan Lahan 1
+Konflik Sosial/Kerusuhan Sosial 10 Bencana Sosial
+Aksi Teror dan Sabotase 5
+0 5 10 15 20 25 30
+Sumber: Pusat Krisis Kesehatan, Kemenkes 2017
+Bencana alam dengan jumlah provinsi terkena terbanyak yaitu bencana banjir,
+dengan 26 provinsi terkena, kemudian bencana non alam kecelakaan transportasi dengan 24
+provinsi, dan bencana alam tanah longsor dengan 21 provinsi.
+TABEL 6.5
+JUMLAH KEJADIAN BENCANA ALAM DAN JUMLAH KORBAN YANG DITIMBULKAN
+TAHUN 2016
+Jumlah
+Jumlah
+Jumlah Jumlah Korban Jumlah
+Korban Jumlah
+Bencana Alam Kejadian Korban Luka Korban
+Luka Berat/ Pengungsi
+Bencana Meninggal Ringan/ Hilang
+Rawat Inap
+Rawat Jalan
+Banjir 145 42 566 4.435 3 143.805
+Letusan Gunung Api 2 9 2 0 0 1.840
+Gempa Bumi 12 107 456 755 0 92.699
+Gempa Bumi dan Tsunami 0 0 0 0 0 0
+Tanah Longsor 119 168 76 1.356 24 11.906
+Banjir Bandang 38 81 480 44.854 27 16.704
+Kekeringan 0 0 0 0 0 0
+Angin Puting Beliung 60 20 50 97 0 1.150
+Gelombang Pasang/Badai 10 4 6 3.230 2 1.737
+Banjir dan Tanah Longsor 14 11 28 851 1 7.541
+Jumlah 400 442 1.664 55.578 57 277.382
+Sumber: Pusat Krisis Kesehatan, Kemenkes 2017
+209
+Bab VI
+--- PAGE 114 ---
+Jumlah korban meninggal terbanyak diakibatkan oleh bencana tanah longsor, yakni
+sebanyak 168 orang (38%), diikuti oleh gempa bumi sebanyak 107 orang (16%), dan banjir
+bandang sebanyak 81 orang (12%). Sedangkan bencana yang paling banyak menimbulkan
+korban luka berat/rawat inap yaitu bencana banjir dengan 566 orang (34%), kemudian banjir
+bandang sebanyak 480 orang (29%), dan gempa bumi dengan 456 orang (27%). Bencana
+dengan korban luka ringan/rawat jalan terbanyak yakni bencana banjir bandang dengan
+44.854 orang (81%), kemudian banjir dengan 4.435 orang (8%) dan gelombang pasang/badai
+dengan 3.230 orang (6%). Untuk korban hilang, bencana banjir bandang yang terjadi pada
+tahun 2016 merupakan bencana alam dengan korban hilang terbanyak, yakni menyebabkan
+27 orang hilang (47%). Bencana banjir merupakan bencana dengan korban pengungsi
+terbanyak, yakni sebanyak 143.805 orang (52%). Bencana dengan korban pengungsi
+terbanyak ke dua yaitu bencana gempa bumi dengan 92.699 orang (33%) dan banjir bandang
+dengan 16.704 orang (6%).
+TABEL 6.6
+JUMLAH KEJADIAN BENCANA NON ALAM DAN JUMLAH KORBAN YANG DITIMBULKAN
+TAHUN 2016
+Jumlah Jumlah
+Korban Korban
+Jumlah Jumlah Jumlah
+Luka Luka Jumlah
+Bencana Non Alam Kejadian Korban Korban
+Berat/ Ringan/ Pengungsi
+Bencana Meninggal Hilang
+Rawat Rawat
+Inap Jalan
+Kebakaran 48 42 34 112 0 3.104
+Kebakaran Hutan dan Lahan 2 0 0 103 0 500
+Kecelakaan Transportasi 62 252 193 391 45 0
+Kecelakaan Industri 4 1 10 5 0 0
+KLB - Penyakit 2 0 4 77 0 0
+KLB - Keracunan 98 34 1.945 2.566 0 0
+Gagal Teknologi 21 20 67 55 0 0
+Wabah Penyakit (Epidemi) 0 0 0 0 0 0
+Jumlah 237 349 2.253 3.309 45 3.604
+Sumber: Pusat Krisis Kesehatan, Kemenkes 2017
+Jumlah korban meninggal terbanyak diakibatkan oleh kecelakaan transportasi, yakni
+sebanyak 252 orang, diikuti oleh kebakaran sebanyak 42 orang, dan KLB keracunan sebanyak
+34 orang. Tidak hanya merupakan bencana non alam dengan jumlah korban meninggal
+terbanyak, kecelakaan transportasi juga merupakan bencana dengan persentase korban
+meninggal terbanyak bila dibandingkan dengan jumlah kejadiannya, yakni sebesar 406%,
+210
+Tahun 2016
+--- PAGE 115 ---
+lebih banyak dari seluruh bencana lainnya yang terjadi. Sedangkan bencana non alam yang
+paling banyak menimbulkan korban luka berat/rawat inap yaitu KLB keracunan dengan 1.945
+orang, kemudian kecelakaan transportasi sebanyak 193 orang, dan gagal teknologi dengan
+67 orang. Bencana dengan korban luka ringan/rawat jalan terbanyak yakni bencana KLB
+keracunan dengan 2.566 orang, kemudian kecelakaan transportasi dengan 391 orang dan
+kebakaran dengan 112 orang. Untuk korban hilang, hanya kecelakaan transportasi yang
+menimbulkan korban, yaitu sebanyak 45 orang. Hanya terdapat dua bencana non alam yang
+menimbulkan korban pengungsi, yaitu kebakaran dan kebakaran hutan dan lahan, yaitu
+sebanyak 3.104 dan 500 orang.
+TABEL 6.7
+JUMLAH KEJADIAN BENCANA SOSIAL DAN JUMLAH KORBAN YANG DITIMBULKAN
+TAHUN 2016
+Jumlah Jumlah
+Korban Korban
+Jumlah Jumlah Jumlah
+Luka Luka Jumlah
+Bencana Sosial Kejadian Korban Korban
+Berat/ Ringan/ Pengungsi
+Bencana Meninggal Hilang
+Rawat Rawat
+Inap Jalan
+Konflik Sosial/Kerusuhan
+16 13 91 1.808 0 5.391
+Sosial
+Aksi Teror dan Sabotase 8 13 37 23 0 0
+Jumlah 24 26 128 1.831 0 5.391
+Sumber: Pusat Krisis Kesehatan, Kemenkes 2017
+Jenis bencana sosial yang menimbulkan paling banyak korban luka berat/rawat inap,
+korban luka ringan/rawat jalan, dan korban pengungsi, yaitu konflik sosial/kerusuhan sosial,
+yakni sebanyak 91, 1.808, dan 5.391 orang. Sedangkan kedua jenis bencana sosial
+mengakibatkan jumlah korban meninggal yang sama banyak, yaitu 13 orang. Selain itu,
+kedua jenis bencana sosial baik konflik sosial/kerusuhan sosial maupun aksi teror dan
+sabotase tidak menimbulkan korban hilang.
+F. PELAYANAN KESEHATAN HAJI
+Indonesia merupakan negara dengan jamaah haji terbesar di dunia. Jumlah jamaah
+haji Indonesia pada tahun 2016 sebanyak 168.800 orang.
+Tahun 2016, penyelenggaraan kesehatan haji memasuki era baru dengan terbitnya
+Peraturan Menteri Kesehatan Nomor 15 Tahun 2016 tentang Istithaah Kesehatan Jemaah
+Haji. Permenkes ini membawa konsekuensi bahwa penyelenggaraan kesehatan haji
+mengedepankan pembinaan kesehatan untuk memperkuat pelayanan dan perlindungan
+211
+Bab VI
+--- PAGE 116 ---
+kesehatan haji. Untuk itu upaya pembinaan sudah harus dilakukan sedini mungkin yang
+diawali dengan pemeriksaan kesehatan awal. Berbagai faktor risiko kesehatan dikendalikan
+melalui pembinaan kesehatan yang berjenjang sampai pada tahap penetapan istithaah
+kesehata jemaah haji di tingkat kabupaten.
+Konsekuensi dari pelaksanaan Permenkes tersebut juga mengubah orientasi
+penyelenggaraan kesehatan haji dengan penguatan upaya promotif dan preventif pada
+setiap tahap kegiatan penyelenggaraan kesehatan haji. Kegiatan promosi kesehatan dan
+pencegahan penyakit pada jemaah haji yang dilaksanakan di Indonesia sampai Arab Saudi
+diapresiasi oleh Kementerian Kesehatan Arab Saudi dengan memberikan penghargaan The
+Ambasador of Health Awareness in Hajj season 2016 kepada Misi Kesehatan Haji Indonesia.
+Jemaah Haji selama menjalankan ibadah haji mendapat pendampingan petugas
+kesehatan yang menyertai di kelompok terbang (kloter) terdiri dari petugas 1 dokter dan 2
+para medis serta petugas non kloter kesehatan atau Panitia Penyelenggara Ibadah Haji
+(PPIH) Arab Saudi. Pada tahun 2016, petugas kesehatan haji Indonesia di Arab Saudi terdiri
+dari Tim Promotif dan Preventif (TPP), Tim Gerak Cepat (TGC), Tim Kuratif dan Rehabilitatif
+(TKR) dan Tenaga Pendamping Kesehatan (TPK).
+1. Pemeriksaan Kesehatan Jemaah Haji
+Pemeriksaan dan pembinaan kesehatan jemaah haji sudah dimulai pada awal tahun
+2016. Data hasil kegiatan tersebut kemudian diinput ke aplikasi Sistem Komputerisasi Haji
+Terpadu Bidang Kesehatan (Siskohatkes). Indikator penyelenggaraan kesehatan haji adalah
+cakupan hasil pemeriksaan dan pembinaan kesehatan jemaah haji yang diinput kedalam
+Siskohatkes 3 (tiga) bulan sebelum operasional haji. Karena pemberangkatan kloter pertama
+musim haji tahun 2016 jatuh pada tanggal 8 Agustus 2016, maka Indikator tersebut harus
+sudah tercapai pada tanggal 8 Mei 2016, dengan target sebesar 65%. Sedangkan hasil
+cakupan yang dicapai pada tahun 2016 secara nasional adalah 65,68% atau 109.720
+pemeriksaan, dan telah mencapai target yang ditentukan. Provinsi dengan capaian tertinggi
+adalah DKI Jakarta (102,55%) dan terendah Maluku (6,04%). Capaian hasil pemeriksaan
+pertama jemaah haji berdasarkan tempat pemeriksaan adalah sebagai berikut.
+212
+Tahun 2016
+--- PAGE 117 ---
+GAMBAR 6.58
+CAPAIAN PEMERIKSAAN PERTAMA JAMAAH HAJI
+MENURUT PROVINSI TEMPAT PEMERIKSAAN TAHUN 2016
+INDONESIA 65,68
+DKI Jakarta 102,55
+Riau 97,61
+Kep. Bangka Belitung 95,69
+DI Yogyakarta 81,13
+Gorontalo 80,61
+Jawa Barat 78,51
+Banten 77,75
+Maluku Utara 76,26
+Sumatera Selatan 75,24
+Sumatera Barat 74,06
+Kepulauan Riau 73,10
+Sulawesi Barat 71,86
+Papua Barat 67,91
+Jawa Timur 67,78
+Sulawesi Utara 66,97
+Sulawesi Selatan 63,53
+Jambi 63,53
+Sulawesi Tenggara 62,26
+Sulawesi Tengah 59,97
+Jawa Tengah 58,83
+Bali 55,69
+Aceh 53,23
+Kalimantan Selatan 48,79
+Target 65%
+Sumatera Utara 43,52
+Kalimantan Timur 37,13
+Lampung 35,45
+Nusa Tenggara Barat 34,30
+Nusa Tenggara Timur 31,41
+Kalimantan Tengah 30,29
+Bengkulu 28,79
+Kalimantan Barat 13,45
+Papua 11,60
+Maluku 6,04
+0 20 40 60 80 100 120
+%
+Sumber: Pusat Kesehatan Haji, Kemenkes RI, 2017
+Dibandingkan tahun 2015, terjadi peningkatan sebesar 5% yang dapat dilaksanakan
+dengan membangun kemitraan dan kerja sama dengan lintas sektor terkait serta
+dilaksanakan sejak awal Januari 2016.
+2. Kondisi Jemaah Haji Indonesia
+Jemaah haji Indonesia tahun 2016 terdiri dari 84.244 orang (55%) perempuan dan
+68.853 orang laki-laki (45%). Jumlah ini adalah jumlah di luar petugas haji.
+213
+Bab VI
+--- PAGE 118 ---
+Gambar 7.4 menunjukkan bahwa secara nasional persentase rumah tangga dengan
+akses air minum layak sebesar 71,14%. Provinsi dengan persentase rumah tangga dengan
+akses air minum layak tertinggi yaitu DKI Jakarta (92,44%), Bali (88,71%) dan Kepulauan Riau
+(85,31%). Sedangkan provinsi dengan persentase rumah tangga menurut akses air minum
+layak terendah adalah Bengkulu (37,35%), Lampung (52,41%), dan Papua (52,69%). Rincian
+lengkap tentang persentase rumah tangga menurut akses air minum layak tahun 2016 dapat
+dilihat pada Lampiran 7.3.
+GAMBAR 7.5
+PERSENTASE SARANA AIR MINUM YANG DILAKUKAN PENGAWASAN TAHUN 2016
+Indonesia 16,02
+Gorontalo 42,38
+Sumatera Barat 41,00
+Sulawesi Barat 39,33
+Bengkulu 35,86
+Maluku Utara 33,03
+DI Yogyakarta 31,54
+Kep. Bangka Belitung 30,79
+Kalimantan Utara * 25,93
+Sulawesi Utara 24,52
+Jambi 21,64
+Riau 20,74
+Sulawesi Tengah 20,04
+Kalimantan Tengah 18,37
+Nusa Tenggara Barat 18,07
+Kalimantan Selatan 17,39
+Jawa Tengah 15,05
+Kalimantan Timur 14,21
+Sulawesi Tenggara 13,67
+Jawa Barat 13,48
+Kalimantan Barat 13,22
+Nusa Tenggara Timur 12,81
+Sulawesi Selatan 11,46
+Kepulauan Riau 10,71
+Banten 10,09
+Jawa Timur 8,59
+Target Renstra
+Papua Barat 7,79
+2016: 35%
+Lampung 6,96
+Sumatera Utara 6,14
+Sumatera Selatan 6,04
+DKI Jakarta 6,00
+Aceh 5,83
+Bali 2,79
+0 20 40 60 80 100
+Sumber: Direktorat Jenderal Kesehatan Masyarakat, Kemenkes RI, 2017
+Pengawasan kualitas air minum diatur oleh Peraturan Menteri Kesehatan Nomor
+736/MENKES/PER/VI/2010 tentang Tata Laksana dan Pengawasan Kualitas Air Minum,
+dalam peraturan tersebut dijelaskan bahwa pengawasan internal dilakukan oleh
+penyelenggara air minum komersial dan pengawasan eksternal dilakukan oleh Dinas
+Kesehatan Kabupaten/Kota. Pengawas kualitas air minum internal adalah penyelenggara air
+minum yang diawasi kualitas hasil produksinya secara eksternal oleh Dinas Kesehatan
+Provinsi/Kabupaten/Kota dan KKP yang dibuktikan dengan jumlah sampel pengujian kualitas
+229
+Bab VII
+--- PAGE 119 ---
+air. Penyelenggara air minum adalah PDAM/BPAM/PT yang terdaftar di Persatuan
+Perusahaan Air Minum Seluruh Indonesia (Perpamsi); Sarana air minum perpipaan non
+PDAM; dan Sarana air minum bukan jaringan perpipaan komunal.
+Data yang diperoleh oleh Direktorat Jenderal Kesehatan Masyarakat sampai Maret
+2017, secara nasional pada tahun 2016 dari 32.578 sarana air minum terdapat 16,02%
+(5.218) sarana air minum yang diawasi (Gambar 7.5), hasil ini belum mencapai target
+Renstra Kementerian Kesehatan tahun 2016 yaitu 35% sarana air minum yang dilakukan
+pengawasan. Terdapat 4 (empat) provinsi sudah memenuhi target Renstra Kemenkes tahun
+2016 dengan memperoleh hasil lebih dari 35% persentase sarana air minum yang diawasi,
+yaitu Gorontalo (42,38%), Sumatera Barat (41%), Sulawesi Barat (39,33%), dan Bengkulu
+(35,86%). Sedangkan provinsi dengan persentase terendah diantaranya Bali (2,79%), Aceh
+(5,83%), dan DKI Jakarta (6%).
+Gambaran persentase sarana air minum yang dilakukan pengawasan tahun 2016
+sangat berbeda dengan tahun sebelumnya. Pada tahun 2015, secara nasional dari 234.002
+sarana air minum terdapat 43,58% (101.972) sarana air minum yang diawasi, angka ini telah
+mencapai target Renstra Kementerian Kesehatan tahun 2015 yaitu 30% sarana air minum
+yang dilakukan pengawasan. Gambaran sarana air minum yang dilakukan pengawasan
+tahun 2015 dan tahun 2016 belum dapat dibandingkan karena pada tahun 2015 jumlah
+sarana air minum mencapai 234.002, merupakan jumlah seluruh jenis air minum yaitu
+PDAM, perpipaan non PDAM, sarana kumonal non perpipaan (DAM = Depot Air Minum,
+sumur gali, dll), sedangkan pada tahun 2016 jumlah 32.578 sarana air minum yang telah
+terdata hanyalah DAM saja. Rincian lengkap tentang persentase sarana air minum yang
+dilakukan pengawasan tahun 2017 dapat dilihat pada Lampiran 7.4.
+D. Akses Sanitasi Layak
+Sanitasi adalah perilaku disengaja dalam pembudayaan hidup bersih dengan maksud
+mencegah manusia bersentuhan langsung dengan kotoran dan bahan buangan berbahaya
+lainnya dengan harapan usaha ini akan menjaga dan meningkatkan kesehatan manusia.
+Sanitasi yang baik merupakan elemen penting yang menunjang kesehatan manusia. Definisi
+sanitasi dari WHO merujuk kepada penyediaan sarana dan pelayanan pembuangan limbah
+kotoran manusia seperti urine dan faeces. Istilah sanitasi juga mengacu kepada
+pemeliharaan kondisi higienis melalui upaya pengelolaan sampah dan pengolahan limbah
+cair. Sanitasi berhubungan dengan kesehatan lingkungan yang mempengaruhi derajat
+kesehatan masyarakat. Buruknya kondisi sanitasi akan berdampak negatif di banyak aspek
+kehidupan, mulai dari turunnya kualitas lingkungan hidup masyarakat, tercemarnya sumber
+air minum bagi masyarakat, meningkatnya jumlah kejadian diare dan munculnya beberapa
+penyakit.
+Mulai tahun 2015 definisi rumah tangga yang memiliki akses sanitasi layak adalah
+apabila fasilitas sanitasi yang digunakan memenuhi syarat kesehatan, antara lain dilengkapi
+230
+Tahun 2016
+--- PAGE 120 ---
+dengan jenis kloset leher angsa atau plengsengan dengan tutup dan memiliki tempat
+pembuangan akhir tinja tangki (septic tank ) atau Sistem Pengolahan Air Limbah (SPAL), dan
+merupakan fasilitas buang air besar yang digunakan sendiri atau bersama. Metode
+pembuangan tinja yang baik yaitu menggunakan jamban dengan syarat sebagai berikut:
+1. Tanah permukaan tidak boleh terjadi kontaminasi.
+2. Tidak boleh terjadi kontaminasi pada air tanah yang mungkin memasuki mata air
+atau sumur.
+3. Tidak boleh terkontaminasi air permukaan.
+4. Tinja tidak boleh terjangkau oleh lalat dan hewan lain.
+5. Tidak boleh terjadi penanganan tinja segar, atau bila memang benar-benar
+diperlukan, harus dibatasi seminimal mungkin.
+6. Jamban harus bebas dari bau atau kondisi yang tidak sedap dipandang.
+7. Metode pembuatan dan pengoperasian harus sederhana dan tidak mahal.
+GAMBAR 7.6
+PERSENTASE RUMAH TANGGA YANG MEMILIKI AKSES TERHADAP SANITASI LAYAK
+TAHUN 2016
+INDONESIA 67,80
+DKI Jakarta 91,13
+Bali 89,33
+DI Yogyakarta 85,78
+Kep. Bangka Belitung 83,16
+Kepulauan Riau 79,55
+Kalimantan Timur 76,76
+Sulawesi Selatan 76,51
+Sulawesi Utara 75,27
+Banten 73,42
+Sumatera Utara 72,86
+Riau 71,36
+Jawa Tengah 70,66
+Nusa Tenggara Barat 70,31
+Sulawesi Tenggara 68,26
+Jawa Timur 68,15
+Maluku 66,81
+Jambi 65,65
+Sumatera Selatan 65,05
+Maluku Utara 64,71
+Kalimantan Utara 64,68
+Papua Barat 64,55
+Jawa Barat 63,79
+Aceh 62,68
+Kalimantan Selatan 60,89
+Sulawesi Tengah 59,94
+Gorontalo 59,85
+Sulawesi Barat 59,81
+Lampung 58,58
+Sumatera Barat 53,24
+Kalimantan Barat 52,06
+Kalimantan Tengah 50,97
+Bengkulu 49,75
+Nusa Tenggara Timur 40,46
+Papua 31,43
+0 20 40 60 80 100
+Sumber: Badan Pusat Statistik, Susenas Kor 2016
+231
+Bab VII
+--- PAGE 121 ---
+Gambar 7.6 menunjukkan hasil Susenas Kor 2016 mengenai persentase rumah
+tangga yang memiliki akses terhadap sanitasi layak. Secara nasional, terdapat 67,80% rumah
+tangga yang memiliki akses terhadap sanitasi layak. Provinsi dengan persentase rumah
+tangga yang memiliki akses terhadap sanitasi layak tertinggi yaitu DKI Jakarta (91,13%), Bali
+(89,33%), dan DI Yogyakarta sebesar (85,78%). Sedangkan provinsi dengan persentase
+rumah tangga yang memiliki akses terhadap sanitasi layak terendah adalah Papua (31,43%)
+Nusa Tenggara Timur (40,46%), dan Bengkulu (49,75%). Rincian lengkap tentang persentase
+rumah tangga yang memiliki akses terhadap sanitasi layak tahun 2014-2016 dapat dilihat
+pada Lampiran 7.5.
+E. Tempat-Tempat Umum (TTU) Yang Memenuhi Syarat Kesehatan
+Tempat-Tempat Umum (TTU) adalah tempat atau sarana umum yang digunakan
+untuk kegiatan masyarakat dan diselenggarakan oleh pemerintah/swasta atau perorangan,
+antara lain pasar rakyat, sekolah, fasyankes, terminal, bandara, stasiun, pelabuhan, bioskop,
+hotel dan tempat umum lainnya. TTU yang memenuhi syarat kesehatan adalah tempat dan
+fasilitas umum minimal sarana pendidikan dan pasar rakyat yang memenuhi syarat
+kesehatan. TTU dinyatakan sehat apabila memenuhi persyaratan fisiologis, psikologis, dan
+dapat mencegah penularan penyakit antar pengguna, penghuni, dan masyarakat sekitarnya
+serta memenuhi persyaratan dalam pencegahan terjadinya masalah kesehatan. Pemerintah
+Daerah minimal wajib mengelola 2 tempat-tempat umum, yaitu:
+1. Sarana pendidikan dasar yang dimaksud adalah Sekolah Dasar (SD/MI), Sekolah
+Menengah Pertama (SMP/MTs) dan yang sederajat milik pemerintah dan swasta
+yang terintegrasi.
+2. Pasar rakyat yang dimaksud adalah pasar yang berlokasi permanen, ada pengelola,
+sebagian besar barang yang diperjual belikan yaitu kebutuhan dasar sehari-hari
+dengan fasilitas infrastruktur sederhana, dan dikelola oleh Pemerintah Daerah dan
+Badan Usaha Milik Daerah.
+Pada Gambar 7.7 menunjukkan secara nasional persentase TTU yang telah
+memenuhi syarat kesehatan pada tahun 2016 adalah mencapai 52,64%, pencapaian ini
+telah melebihi target Renstra Kementerian Kesehatan 2016 yaitu 52%. Namun capaian
+tersebut cenderung menurun dibandingkan capaian tahun 2015 (61,44%). Provinsi dengan
+persentase tertinggi adalah Kalimantan Utara (89,47%), Kep. Bangka Belitung (88,53%), dan
+Bengkulu (86,76%). Terdapat 8 (delapan) provinsi yang belum mencapai target 2016
+diantaranya Sumatera Utara, Kepulauan Riau, Sulawesi Barat, Papua Barat, Jawa Timur,
+Maluku Utara, Jawa Tengah, dan provinsi dengan persentase terendah adalah Lampung
+(1,41%). Rincian lengkap tentang persentase TTU yang memenuhi syarat kesehatan tahun
+2016 dapat dilihat pada Lampiran 7.6.
+232
+Tahun 2016
+--- PAGE 122 ---
+GAMBAR 7.7
+PERSENTASE TEMPAT-TEMPAT UMUM YANG MEMENUHI SYARAT KESEHATAN
+TAHUN 2016
+Indonesia 52,64
+0,00
+Kalimantan Utara 89,47
+Kep. Bangka Belitung 88,53
+Bengkulu 86,76
+Sumatera Selatan 84,46
+Nusa Tenggara Barat 83,68
+Sulawesi Tengah 83,03
+Sulawesi Selatan 82,65
+DKI Jakarta 82,62
+Sulawesi Tenggara 81,17
+Banten 80,01
+Kalimantan Timur 77,33
+Sulawesi Utara 75,97
+Bali 75,79
+Kalimantan Tengah 75,47
+DI. Yogyakarta 74,25
+Jawa Barat 71,81
+Riau 69,70
+Kalimantan Selatan 69,14
+Nusa Tenggara Timur 67,79
+Gorontalo 67,39
+Aceh 66,67
+Papua 66,23
+Jambi 64,46
+Kalimantan Barat 62,50
+Sumatera Barat 61,09
+Maluku 58,93
+Sumatera Utara 49,65
+TargetRenstra 2016
+Kepulauan Riau 45,85 52%
+Sulawesi Barat 41,79
+Papua Barat 32,56
+Jawa Timur 21,47
+Maluku Utara 7,90
+Jawa Tengah 2,98
+Lampung 1,41
+0 20 40 60 80 100
+Sumber: Direktorat Jenderal Kesehatan Masyarakat, Kemenkes RI, 2017
+Masalah yang dihadapi dalam pelaksanaan upaya peningkatan jumlah TTU yang
+memenuhi syarat diantaranya adalah anggaran daerah untuk program kesehatan lingkungan
+masih rendah, belum semua daerah (kabupaten/kota termasuk puskesmas) memiliki
+peralatan pengukuran parameter kualitas lingkungan yang sesuai, pendataan ulang di
+daerah untuk akurasi data yang tercatat, tumpang tindih regulasi antar
+kementerian/lembaga yang belum bersinergi, dan masih belum optimalnya koordinasi baik
+233
+Bab VII
+--- PAGE 123 ---
+lintas program maupun lintas sektor, serta institusi terkait baik di tingkat pusat maupun
+daerah.
+Upaya yang telah dilakukan dalam peningkatan TTU diantaranya melakukan advokasi
+dan sosialisasi secara terpadu bersama lintas program di lingkungan Kemenkes), dan lintas
+sektor (Kemendagri, Kemenparekraf, Kemendikbud, dan Satuan Kerja Pemerintah
+Daerah/SKPD terkait, serta institusi (Perguruan Tinggi, HAKLI, Persatuan Hotel dan
+Restauran Indonesia/PHRI, dan lainnya), serta mitra yang terkait lainnya baik di pusat dan
+daerah, melengkapi daerah dengan peralatan pengukuran parameter kualitas lingkungan,
+meningkatkan dan memperkuat strategi kemitraan, serta meningkatkan kapasitas
+pemilik/penyelenggara TTU agar ikut berpartisipasi dalam peningkatan kualitas kesehatan
+lingkungan.
+F. Tempat Pengelolaan Makanan (TPM)
+Sebagai salah satu jenis tempat pelayanan umum yang mengolah dan menyediakan
+makanan bagi masyarakat banyak, maka Tempat Pengelolaan Makanan (TPM) memiliki
+potensi yang cukup besar untuk menimbulkan gangguan kesehatan atau penyakit bahkan
+keracunan akibat dari makanan yang dihasilkannya. TPM adalah usaha pengelolaan
+makanan yang meliputi jasaboga atau katering, rumah makan dan restoran, depot air
+minum, kantin, dan makanan jajanan. Berdasarkan Kepmenkes Nomor
+1098/Menkes/SK/VII/2003 tentang Persyaratan Higiene Sanitasi Rumah Makan dan
+Restoran, persyaratan higiene sanitasi yang harus dipenuhi meliputi:
+1. persyaratan lokasi dan bangunan,
+2. persyaratan fasilitas sanitasi,
+3. persyaratan dapur, rumah makan, dan gudang makanan,
+4. persyaratan bahan makanan dan makanan jadi,
+5. persyaratan pengolahan makanan,
+6. persyaratan penyimpanan bahan makanan dan makanan jadi,
+7. persyaratan penyajian makanan jadi,
+8. persyaratan peralatan yang digunakan.
+Pelaksanaan kegiatan higiene sanitasi pangan merupakan salah satu aspek dalam
+menjaga keamanan pangan yang harus dilaksanakan secara terstruktur dan terukur dengan
+kegiatan, sasaran dan ukuran kinerja yang jelas, salah satunya dengan mewujudkan Tempat
+Pengelolaan Makanan yang memenuhi syarat kesehatan. TPM siap saji yang terdiri dari
+Rumah Makan/Restoran, Jasa Boga, Depot Air Minum, Sentra Makanan Jajanan, Kantin
+Sekolah yang memenuhi syarat kesehatan adalah TPM yang memenuhi persyaratan higiene
+sanitasi yang dibuktikan dengan sertifikat layak higiene sanitasi.
+234
+Tahun 2016
+--- PAGE 124 ---
+GAMBAR 7.8
+PERSENTASE TEMPAT PENGOLAHAN MAKANAN YANG MEMENUHI
+SYARAT KESEHATAN TAHUN 2016
+Indonesia 13,66
+Kalimantan Utara 33,68
+Sumatera Barat 33,05
+Maluku Utara 27,73
+Nusa Tenggara Timur 24,16
+Bengkulu 23,49
+Sulawesi Barat 23,00
+Nusa Tenggara Barat 19,52
+Jambi 19,27
+Jawa Timur 19,14
+Gorontalo 19,05
+Kalimantan Tengah 18,39
+Sulawesi Tengah 17,29
+Kep. Bangka Belitung 16,80
+Sulawesi Utara 16,49
+Riau 15,89
+DI Yogyakarta 14,85
+Papua Barat 14,83
+Jawa Barat 14,71
+Sumatera Utara 14,51
+Sulawesi Selatan 12,08
+Kalimantan Selatan 11,77
+Kalimantan Barat 11,42
+Kalimantan Timur 10,44
+Kepulauan Riau 9,02
+Banten 8,48
+Jawa Tengah 8,27 Target Renstra
+Sulawesi Tenggara 7,53 2016: 14%
+Papua 6,67
+Aceh 6,21
+Bali 5,72
+DKI Jakarta 5,44
+Sumatera Selatan 5,01
+Lampung 3,79
+Maluku 3,75
+0 5 10 15 20 25 30 35 40
+Sumber: Direktorat Jenderal Kesehatan Masyarakat, Kemenkes RI, 2017
+Gambar 7.8 menunjukkan bahwa persentase TPM yang memenuhi syarat kesehatan
+secara nasional pada tahun 2016 adalah 13,66%, capaian ini meningkat dari sebelumnya
+tahun 2015 (10,39%). Persentase ini belum memenuhi target Renstra Kementerian
+Kesehatan 2016 untuk TPM memenuhi syarat kesehatan yaitu sebesar 14%. Provinsi dengan
+persentase TPM yang memenuhi syarat kesehatan tertinggi adalah Kalimantan Utara
+(33,68%), Sumatera Barat (33,05%), dan Maluku Utara (27,73%). Sedangkan provinsi dengan
+235
+Bab VII
+--- PAGE 125 ---
+persentase TPM yang memenuhi syarat kesehatan terendah adalah Maluku (3,75%),
+Lampung (3,79%) dan Sumatera Selatan (5,01%). Rincian lengkap tentang persentase TPM
+yang memenuhi syarat kesehatan tahun 2016 dapat dilihat pada Lampiran 7.7.
+Upaya yang dilakukan untuk meningkatkan jumlah TPM yang memenuhi syarat di
+antaranya dengan memberikan dukungan aspek legal untuk operasionalisasi pembinaan dan
+pengawasan TPM dan Tempat Pengolahan Pangan (TPP), meningkatkan jejaring kemitraan,
+meningkatkan kapasitas SDM, menyediakan sarana dan prasarana seperti media Komunikasi
+Edukasi dan Informasi (KIE) tentang higiene sanitasi pangan dan alat deteksi cepat sistem
+kewaspadaan dini KLB keracunan pangan, menyediakan pengelolaan data dan informasi
+yang up to date dan real time dengan e-monev Higiene Sanitasi Pangan (HSP),
+mengembangkan daerah intervensi kabupaten/kota yang berkomitmen untuk pelaksanaan
+pembinaan dan pengendalian TPM terstandar, dan memfasilitasi tugas perbantuan sentra
+pangan jajanan di kabupaten/kota.
+G. Pengelolaan Limbah Medis
+Berdasarkan lampiran dari Keputusan Menteri Kesehatan Nomor 1204 Tahun 2004
+tentang Persyaratan Kesehatan Lingkungan Rumah Sakit, definisi limbah medis adalah
+semua limbah yang dihasilkan dari kegiatan medis dalam bentuk padat, cair, dan gas.
+Limbah medis padat adalah limbah padat yang terdiri dari limbah infeksius, limbah patologi,
+limbah benda tajam, limbah farmasi, limbah sitoksis, limbah kimiawi, limbah radioaktif,
+limbah kontainer bertekanan, dan limbah dengan kandungan logam berat tinggi. Limbah
+cair adalah semua buangan air termasuk tinja yang kemungkinan mengandung
+mikroorganisme, bahan kimia beracun, dan radiaktif yang berbahaya bagi kesehatan.
+Limbah gas adalah semua limbah yang berbentuk gas yang berasal dari kegiatan
+pembakaran seperti insinerator, dapur, perlengkapan generator, anestesi, dan pembuatan
+obat sitotoksik.
+Pengelolaan limbah medis tentunya berbeda dengan limbah domestik atau limbah
+rumah tangga. Penempatan limbah medis dilakukan pada wadah yang sesuai dengan
+karakteristik bahan kimia, radioaktif, dan volumenya. Limbah medis yang telah terkumpul
+tidak diperbolehkan untuk langsung dibuang ke tempat pembuangan limbah domestik
+tetapi harus melalui proses pengolahan terlebih dahulu. Untuk limbah medis yang
+berbentuk gas dilengkapi alat pereduksi emisi gas dan debu pada proses pembuangannya.
+Selain itu perlu dilakukan pula upaya minimalisasi limbah yaitu dengan mengurangi jumlah
+limbah yang dihasilkan dengan cara mengurangi bahan (reduce), menggunakan kembali
+(reuse), dan daur ulang (recycle). Penghijauan juga baik dilakukan untuk mengurangi polusi
+dari limbah yang berbentuk gas dan untuk menyerap debu.
+236
+Tahun 2016
+--- PAGE 126 ---
+GAMBAR 7.9
+PERSENTASE RUMAH SAKIT YANG MELAKUKAN PENGELOLAAN LIMBAH
+MEDIS SESUAI STANDAR TAHUN 2016
+Indonesia 17,36
+Lampung 74,67
+DI Yogyakarta 62,67
+Kalimantan Utara 57,14
+Bali 50,88
+Sumatera Barat 50,00
+Banten 47,42
+Gorontalo 46,15
+Kalimantan Timur 28,26
+Riau 27,78
+Kalimantan Tengah 23,81
+Jambi 23,68
+DKI Jakarta 21,47
+Nusa Tenggara Barat 20,69
+Sulawesi Selatan 19,28
+Jawa Barat 16,62
+Kalimantan Selatan 16,22
+Kep. Bangka Belitung 15,38
+Maluku Utara 15,00
+Sulawesi Tenggara 12,90
+Kepulauan Riau 10,71
+Aceh 9,09
+Maluku 7,41
+Jawa Tengah 6,83
+Sumatera Utara 4,84
+Target Renstra
+Sumatera Selatan 2,99
+2016: 15%
+Sulawesi Utara 2,70
+Kalimantan Barat 2,22
+Jawa Timur 1,34
+0 20 40 60 80 100
+Sumber: Direktorat Jenderal Kesehatan Masyarakat, Kemenkes RI, 2017
+Cakupan Rumah Sakit yang melakukan pengelolaan limbah sesuai standar pada
+tahun 2015 adalah sebesar 15,29%, pada Gambar 7.9 menunjukkan persentase rumah sakit
+yang melakukan pengelolaan limbah medis sesuai standar pada tahun 2016 meningkat
+menjadi 17,36% pada tahun 2016. Capaian ini telah melampaui Renstra 2016 yaitu sebesar
+15%. Provinsi dengan presentase tertinggi adalah Provinsi Lampung (74,67%), DI Yogyakarta
+(62,67%), dan Kalimantan Utara (57,14%). Sedangkan Provinsi dengan persentase terendah
+adalah Jawa timur (1,34%), Kalimantan Barat (2,22%), dan Sulawesi Utara (2,70%). Ada 6
+(enam) provinsi yaitu Papua, Papua Barat, Sulawesi Barat, Sulawesi Tengah, NTT, dan
+Bengkulu yang belum melakukan pengelolaan limbah medis rumah sakit sesuai standar.
+237
+Bab VII
+--- PAGE 127 ---
+Rincian lengkap tentang persentase rumah sakit yang melakukan pengelolaan limbah medis
+sesuai standar tahun 2016 dapat d lihat pada Lampiran 7.8.
+Kendala yang dihadapi dalam pengelolaan limbah medis, seperti masih sedikitnya
+fasilitas pelayanan kesehatan yang melakukan pengelolaan limbah medis sesuai standar,
+masih banyak fasilitas pelayanan kesehatan yang menggunakan alat kesehatan yang
+bermerkuri, serta hambatan teknis dan perizinan dalam pengolahan limbah medis. Oleh
+karena itu, langkah-langkah yang dapat dilakukan untuk mengatasi masalah di atas, di
+antaranya dengan:
+1. mempermudah proses perizinan pengolah limbah terutama dengan metode non
+insinerasi,
+2. mengadakan pelatihan tingkat internasional bagi Kementerian Kesehatan dan RSUP,
+3. menyusun peraturan teknis pengelolaan limbah bahan berbahaya dan beracun (B3)
+fasilitas pelayanan kesehatan bekerja sama dengan Kementerian Lingkungan Hidup
+dan Kehutanan (KLHK),
+4. mengembangkan sistem pengumpulan data dan informasi elektronik serta
+manajemen data sebagai bahan penentu kebijakan,
+5. mencetak media poster pengamanan limbah medis.
+H. Perumahan
+Rumah merupakan sebuah bangunan, tempat manusia tinggal dan melangsungkan
+kehidupannya. Berdasarkan Undang-undang Nomor 1 Tahun 2011 tentang Perumahan dan
+Pemukiman, perumahan adalah kelompok rumah yang berfungsi sebagai lingkungan tempat
+tinggal atau lingkungan hunian yang dilengkapi dengan sarana dan prasarana lingkungan.
+Dalam pengertian yang luas, rumah bukan hanya sebuah bangunan (struktural), melainkan
+juga tempat kediaman yang memenuhi syarat-syarat kehidupan yang layak dan sehat,
+dipandang dari berbagai segi kehidupan masyarakat. Rumah dapat dimengerti sebagai
+tempat perlindungan, untuk menikmati kehidupan, beristirahat bersama keluarga. Rumah
+yang layak harus menjamin kepentingan keluarga salah satunya menjamin kesehatan
+keluarga.
+Definisi perumahan (housing) menurut WHO (World Health Organitation) adalah
+suatu struktur fisik di mana orang menggunakannya untuk tempat berlindung, di mana
+lingkungan dari struktur tersebut termasuk juga semua fasilitas dan pelayanan yang
+diperlukan, perlengkapan yang berguna untuk kesehatan jasmani, rohani, dan keadaan
+sosial yang baik untuk keluarga dan individu. Rumah sehat merupakan salah satu sarana
+untuk mencapai derajat kesehatan yang optimal.
+Persyaratan rumah sehat yang tercantum dalam Residential Environment dari WHO
+(1974) antara lain:
+238
+Tahun 2016
+--- PAGE 128 ---
+1. Harus dapat berlindung dari hujan, panas, dingin, dan berfungsi sebagai tempat
+istrahat.
+2. Mempunyai tenpat-tempat untuk tidur, memasak, mandi, mencuci, kakus dan kamar
+mandi.
+3. Dapat melindungi bahaya kebisingan dan bebas dari pencemaran.
+4. Bebas dari bahan bangunan berbahaya.
+5. Terbuat dari bahan bangunan yang kokoh dan dapat melindungi penghuninya dari
+gempa, keruntuhan, dan penyakit menular.
+6. MemberI rasa aman dan lingkungan tetangga yang serasi.
+Salah satu Instrumen Penilaian Rumah Sehat mengacu pada Pedoman Teknis
+Penilaian Rumah Sehat Departemen Kesehatan RI Tahun 2007, dengan pembagian bobot
+penilaian meliputi bobot komponen rumah, bobot sarana sanitasi, serta bobot pada perilaku
+penghuni. Sesuai dengan pedoman ini, secara umum rumah dikatakan sehat apabila
+memenuhi kriteria sebagai berikut (1) memenuhi kebutuhan psikologis antara lain privasi
+yang cukup, komunikasi yang sehat antar anggota keluarga dan penghuni rumah, adanya
+ruangan khusus untuk istirahat (ruang tidur), bagi masing-masing penghuni, (2) memenuhi
+persyaratan pencegahan penularan penyakit antar penghuni rumah dengan penyediaan air
+bersih, pengelolaan tinja dan limbah rumah tangga, bebas vektor penyakit dan tikus,
+kepadatan hunian yang tidak berlebihan, cukup sinar matahari pagi, terlindungnya
+makanan dan minuman dari pencemaran, disamping pencahayaan dan penghawaan yang
+cukup, dan (3) memenuhi persyaratan pencegahan terjadinya kecelakaan baik yang timbul
+karena pengaruh luar dan dalam rumah, antara lain persyaratan garis sempadan jalan,
+konstruksi bangunan rumah, bahaya kebakaran dan kecelakaan di dalam rumah.
+Rumah layak huni mendukung terciptanya rumah yang sehat. Definisi rumah layak
+huni menurut Badan Pusat Statistik 2015, adalah rumah yang memenuhi persyaratan
+keselamatan, bangunan dan kecukupan minimum luas bangunan serta kesehatan
+penghuninya. Penilaian rumah layak huni diperoleh melalui indikator komposit dari tujuh
+indikator terkait yaitu;
+1. Akses Air Layak.
+2. Akses Sanitasi Layak.
+3. Sufficient Living Area (Luas lantai per kapita > 7,2 m2).
+4. Jenis Lantai.
+5. Jenis Dinding.
+6. Jenis Atap.
+7. Penerangan Listrik.
+Rumah yang dikategorikan layak huni, adalah rumah yang maksimum hanya
+memiliki dua indikator pembentuk yang kurang baik dari tujuh indikator rumah layak huni.
+Indikator rumah layak huni dapat mengetahui tingkat kesejahteraan masyarakat. Semakin
+239
+Bab VII
+--- PAGE 129 ---
+tinggi tingkat kesejahteraan masyarakat mengindikasikan semakin terpenuhi kebutuhan
+dasar akan perumahan sehat.
+GAMBAR 7.10
+PERSENTASE RUMAH TANGGA YANG MENEMPATI RUMAH LAYAK HUNI
+MENURUT PROVINSI TAHUN 2016
+Indonesia 93,93
+0,00
+DKI Jakarta 99,51
+Bali 98,99
+DI Yogyakarta 98,42
+Kepulauan Riau 98,18
+Kalimantan Utara 97,41
+Kalimantan Timur 97,36
+Kep. Bangka Belitung 97,31
+Nusa Tenggara Barat 96,52
+Jawa Barat 96,37
+Riau 96,27
+Jawa Timur 95,97
+Jawa Tengah 95,94
+Banten 95,33
+Sulawesi Utara 94,81
+Jambi 94,68
+Kalimantan Selatan 94,33
+Sulawesi Selatan 94,02
+Sumatera Barat 93,10
+Lampung 93,07
+Sumatera Utara 92,87
+Sumatera Selatan 92,23
+Sulawesi Tenggara 91,90
+Kalimantan Tengah 91,31
+Gorontalo 91,16
+Aceh 90,84
+Bengkulu 90,65
+Papua Barat 88,40
+Kalimantan Barat 87,83
+Maluku Utara 87,15
+Sulawesi Tengah 86,67
+Maluku 86,51
+0 20 40 60 80 100
+Sumber: Badan Pusat Statistik, Susenas Kor 2016
+Gambar 7.10 menunjukan bahwa pada tahun 2016 capaian rumah tangga di
+Indonesia yang telah menempati rumah layak huni 93,93%, meningkat dari tahun
+sebelumnya tahun 2015 sebesar 92,80% rumah tangga. Provinsi dengan rumah layak huni
+240
+Tahun 2016
+--- PAGE 130 ---
+terbesar yaitu DKI Jakarta (99,51%), Bali (98,99%), dan DI Yogyakarta (98,42%). Provinsi
+dengan persentase rumah layak huni terendah yaitu Maluku (86,51%), Sulawesi Tengah
+(86,67%), dan Maluku Utara (87,15%). Data dari BPS 2015, jika dikategorikan menurut tipe
+daerah, persentase rumah tangga di daerah perkotaan relatif lebih besar dibanding dengan
+daerah perdesaan, yaitu (97,65% berbanding 87,92%). Hal ini menunjukkan bahwa
+kebutuhan dalam upaya peningkatan penyediaan rumah layak huni di daerah perdesaan
+lebih besar dari daerah perkotaan. Rincian lengkap mengenai rumah layak huni menurut
+provinsi dapat dilihat pada Lampiran 7.9.
+Rumah tangga kumuh adalah masuk dalam kategori rumah tidak layak huni,
+merupakan rumah yang tidak memenuhi persyaratan keselamatan, bangunan dan
+kecukupan minimum luas bangunan serta memenuhi syarat bagi kesehatan penghuninya.
+Seperti halnya indikator rumah layak huni, indikator penilaian rumah kumuh merupakan
+indikator komposit. Indikator pembentuk rumah tangga kumuh sama dengan indikator
+pembentukan rumah layak huni/rumah tidak layak huni. Perbedaanya ada pada
+pembobotan penghitungan rumah tangga kumuh. Komponen yang digunakan dalam
+penghitungan indikator Rumah Tangga Kumuh adalah :
+1. Akses Air Layak.
+2. Akses Sanitasi Layak.
+3. Sufficient Living Area (Luas lantai per kapita > 7,2 m2).
+4. Jenis Lantai, Dinding dan Atap.
+Gambar 7.11 menunjukkan persentase rumah tangga kumuh menurut provinsi
+secara nasional pada tahun 2016 sebesar 6,07%, menurun dari tahun sebelumnya tahun
+2015 persentase rumah tangga kumuh 7,07%. Angka nasional rumah tangga kumuh
+menunujukkan bahwa tingkat kesejahteraan masyarakat Indonesia sudah cukup baik.
+Terdapat 20 provinsi yang persentase rumah tangga kumuh lebih tinggi dari angka nasional,
+provinsi dengan persentase rumah tangga kumuh terendah yaitu DI Yogyakarta (1,67%),
+Jawa Tengah (1,86%), dan Bali (1,90%). Sedangkan provinsi dengan rumah tangga kumuh
+terbesar yaitu Papua (44,87%), NTT (29,37%), dan Maluku (12,62%). Data dari BPS tahun
+2015, persentase rumah tangga kumuh di daerah perdesaan lebih besar dari daerah
+perkotaan (9,20 persen berbanding 4.96%). Sehingga memperlihatkan kebutuhan akan
+penurunan angka rumah tangga kumuh di perdesaan lebih besar dari daerah perkotaan.
+Rincian lengkap rumah tangga kumuh menurut provinsi pada tahun 2015-2016 dapat dilihat
+pada Lampiran 7.10.
+241
+Bab VII
+--- PAGE 131 ---
+GAMBAR 7.11
+PERSENTASE RUMAH TANGGA KUMUH MENURUT PROVINSI
+TAHUN 2016
+Indonesia 6,07
+0,00
+DI Yogyakarta 1,67
+Jawa Tengah 1,86
+Bali 1,90
+Kepulauan Riau 2,02
+Kep. Bangka Belitung 2,72
+Jawa Timur 2,76
+Lampung 3,07
+Kalimantan Timur 4,21
+Banten 4,44
+Sulawesi Selatan 4,57
+Riau 4,70
+Jambi 5,36
+Kalimantan Selatan 5,54
+DKI Jakarta 5,74
+Jawa Barat 6,36
+Kalimantan Tengah 7,12
+Sulawesi Tenggara 7,34
+Kalimantan Barat 7,55
+Kalimantan Utara 7,74
+Nusa Tenggara Barat 7,83
+Sulawesi Utara 8,34
+Bengkulu 8,78
+Sumatera Barat 8,84
+Sumatera Utara 8,90
+Maluku Utara 9,45
+Sumatera Selatan 9,99
+Aceh 10,25
+Sulawesi Tengah 10,42
+Gorontalo 11,69
+Papua Barat 12,03
+Sulawesi Barat 12,21
+Maluku 12,62
+Nusa Tenggara Timur 29,37
+Papua 44,87
+0 20 40 60 80 100
+Sumber: Badan Pusat Statistik, Susenas Kor 2016
+***
+242
+Tahun 2016
+--- PAGE 132 ---
+DAFTAR PUSTAKA
+Badan Pusat Statistik. 2015. Indikator Perumahan dan Kesehatan Lingkungan Tahun 2015.
+Jakarta: Badan Pusat Statistik.
+Badan Pusat Statistik.2016. Buku 1 Pengeluaran Untuk Konsumsi Penduduk Indonesia,
+Susenas Maret 2016, Jakarta: Badan Pusat Statistik RI.
+Badan Pusat Statistik. 2016. Indikator Kesejahteraan Rakyat Tahun 2016. Jakarta: Badan
+Pusat Statistik.
+Badan Pusat Statistik. 2017. Produk Domestik Bruto Indonesia Menurut Pengeluaran 2012-
+2017, Jakarta: Badan Pusat Statistik RI
+Badan Pusat Statistik.2017. Laporan Bulanan Data Sosial Ekonomi, Juli 2017 , Jakarta: Badan
+Pusat Statistik RI
+Direktorat Kesehatan Lingkungan, 2016. Roadmap STBM 2015-2019. Jakarta: Direktorat
+Jenderal Kesehatan Masyarakat Kementerian Kesehatan RI.
+Kementerian Dalam Negeri RI. 2015. Peraturan Menteri Dalam Negeri RI Nomor 56 Tahun
+2015 Tentang Kode Dan Data Wilayah Administrasi Pemerintahan. Jakarta: Kementerian
+Dalam Negeri RI.
+Kementerian Kesehatan RI. 2003. Keputusan Menteri Kesehatan Nomor
+1098/MENKES/SK/VII/2003 tentang Persyaratan Higiene Sanitasi Rumah Makan dan
+Restoran. Jakarta: Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2004. Keputusan Menteri Kesehatan Nomor
+1204/MENKES/SK/X/2004 tentang Persyaratan Kesehatan Lingkungan Rumah Sakit . Jakarta:
+Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2006. Keputusan Menteri Kesehatan Nomor
+1429/MENKES/SK/XII/2006 tentang Penyelenggaraan Kesehatan Lingkungan Sekolah.
+Jakarta: Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2010. Peraturan Menteri Kesehatan Nomor 374 Tahun 2010
+tentang Pengendalian Vektor . Jakarta: Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2010. Peraturan Menteri Kesehatan RI Nomor 299 Tahun 2010
+tentang Penyelenggaraan Program Internsip dan Penempatan Dokter Pasca Internsip.
+Jakarta: Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2010. Peraturan Menteri Kesehatan Nomor
+736/MENKES/PER/VI/2010 tentang Tata Laksana dan Pengawasan Kualitas Air Minum.
+Jakarta: Kementerian Kesehatan RI.
+243
+--- PAGE 133 ---
+Kementerian Kesehatan RI. 2010. Peraturan Menteri Kesehatan Nomor 492 Tahun 2010
+tentang Persyaratan Kualitas Air Minum. Jakarta: Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2011. Peraturan Menteri Kesehatan Nomor
+889/MENKES/PER/V/2011 tentang Registrasi, Izin Praktik Dan Izin Kerja Tenaga Kefarmasian.
+Jakarta: Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2012. Peraturan Menteri Kesehatan Nomor
+33/MENKES/PER/2012 tentang ASI. Jakarta: Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2013. Peraturan Menteri Kesehatan Nomor 7 Tahun 2013
+tentang Pedoman Pengangkatan dan Penempatan Dokter dan Bidan Sebagai Pegawai Tidak
+Tetap. Jakarta: Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2013. Peraturan Menteri Kesehatan Nomor 9 Tahun 2013
+tentang Penugasan Khusus Tenaga Kesehatan. Jakarta: Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2013. Peraturan Menteri Kesehatan Nomor 46 Tahun 2013
+tentang Registrasi Tenaga Kesehatan. Jakarta: Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2013. Peraturan Menteri Kesehatan Nomor 67 Tahun 2013
+tentang Pendayagunaan Tenaga Kesehatan Warga Negara Asing. Jakarta: Kementerian
+Kesehatan RI.
+Kementerian Kesehatan RI. 2014. Peraturan Menteri Kesehatan Nomor 56 Tahun 2014
+tentang Klasifikasi dan Perizinan Rumah Sakit . Jakarta: Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2014. Peraturan Menteri Kesehatan Nomor 75 Tahun 2014
+tentang Puskesmas. Jakarta: Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2014. Estimasi dan Proyeksi HIV/AIDS di Indonesia Tahun 2011-
+2016. Jakarta: Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2014. Pedoman Nasional Pengendalian Tuberkulosis. Jakarta:
+Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2014. Peraturan Menteri Kesehatan Nomor 3 Tahun 2014
+tentang Sanitasi Total Berbasis Masyarakat . Jakarta: Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2015. Rencana Strategis Kementerian Kesehatan Tahun 2015-
+2019. Jakarta: Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2015. Keputusan Menteri Kesehatan Nomor
+–
+HK.02.02/MENKES/52/2015 tentang Rencana Strategis Kementerian Kesehatan 2015 2019.
+Jakarta: Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2015. Peraturan Menteri Kesehatan Nomor 23 Tahun 2015
+tentang Penugasan Khusus Tenaga Kesehatan Berbasis Tim (Team Based) dalam Mendukung
+Program Nusantara Sehat . Jakarta: Kementerian Kesehatan RI.
+244
+--- PAGE 134 ---
+Kementerian Kesehatan RI. 2015. Survei Prevalensi Tuberkulosis 2013-2014. Jakarta:
+Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2015. Peraturan Menteri Kesehatan Nomor 21 Tahun 2015
+tentang Standar Kapsul Vitamin A bagi Bayi, Anak Balita dan Ibu Nifas. Jakarta: Kementerian
+Kesehatan RI.
+Kementerian Kesehatan RI. 2016. Peraturan Menteri Kesehatan Nomor 15 Tahun 2016
+tentang Istithaah Kesehatan Jemaah Haji . Jakarta: Kementerian Kesehatan RI.
+Kementerian Kesehatan RI. 2017. Buku Saku Pemantauan Status Gizi Tahun 2016. Jakarta:
+Kementerian Kesehatan RI.
+Kementerian Koordinator Bidang Kesejahteraan Rakyat. 2013. Keputusan Menteri
+Koordinator Bidang Kesejahteraan Rakyat Nomor 54 Tahun 2013 tentang Rencana
+–
+Pengembangan Tenaga Kesehatan Tahun 2011 2025. Jakarta: Kementerian Koordinator
+Bidang Kesejahteraan Rakyat.
+Konsil Kedokteran Indonesia. 2011. Peraturan Konsil Kedokteran Indonesia Nomor 6 tahun
+2011 tentang Registrasi Dokter dan Dokter Gigi . Jakarta: Konsil Kedokteran Indonesia.
+Konsil Kedokteran Indonesia. 2014. Peraturan Konsil Kedokteran Indonesia Nomor 21 Tahun
+2014 Tentang Registrasi Dokter dan Dokter Gigi Peserta Program Pendidikan Dokter Spesialis
+dan Dokter Gigi Spesialis. Jakarta: Konsil Kedokteran Indonesia.
+Republik Indonesia. 2009. Undang Undang Nomor 36 Tahun 2009 tentang Kesehatan.
+Lembaran Negara Republik Indonesia Tahun 2009, Nomor 144. Jakarta: Sekretariat Negara.
+Republik Indonesia. 2012. Peraturan Presiden Nomor 72 Tahun 2012 tentang Sistem
+Kesehatan Nasional. Lembaran Negara Republik Indonesia Tahun 2012, Nomor 193. Jakarta:
+Sekretariat Negara.
+Republik Indonesia. 2014. Undang Undang Nomor 36 Tahun 2014 tentang Tenaga
+Kesehatan. Lembaran Negara Republik Indonesia Tahun 2014, Nomor 298. Jakarta:
+Sekretariat Negara.
+Republik Indonesia. 2014. Peraturan Pemerintah Nomor 66 Tahun 2014 tentang Kesehatan
+Lingkungan. Lembaran Negara Republik Indonesia Tahun 2014, Nomor 184. Jakarta:
+Sekretariat Negara.
+Republik Indonesia. 2015. Peraturan Presiden Nomor 131 Tahun 2015 tentang Penetapan
+–
+Daerah Tertinggal Tahun 2015 2019. Lembaran Negara Republik Indonesia Tahun 2015,
+Nomor 259. Jakarta: Sekretariat Negara.
+Republik Indonesia. 2015. Peraturan Presiden Republik Indonesia Nomor 2 Tahun 2015
+tentang Rencana Pembangunan Jangka Menengah Nasional Tahun 2015-2019. Jakarta:
+Sekretariat Negara.
+World Health Organization. 2016. Global Tuberculosis Report 2016. Jenewa: WHO.
+* * *
+245
+--- PAGE 135 ---
+Lampiran 1.6
+ESTIMASI JUMLAH PENDUDUK MENURUT PENDUDUK USIA MUDA, USIA PRODUKTIF DAN USIA NON PRODUKTIF,
+JENIS KELAMIN, DAN PROVINSI TAHUN 2016
+Jumlah Penduduk Usia Muda (<15 Tahun) Jumlah Penduduk Usia Produktif (15-64 Tahun) Jumlah Penduduk Usia Non Produktif (65+ Tahun) Angka
+No Provinsi Beban Tanggungan
+Laki-laki Perempuan Total Laki-laki Perempuan Total Laki-laki Perempuan Total (ABT)
+(1) (2) (3) (4) (5) (6) (7) (8) (9) (10) (11) (12)
+1 Aceh 814.226 780.890 1.595.116 1.642.610 1.656.746 3.299.356 88.277 113.499 201.776 54,46
+2 SumateraU tara 2.290.502 2.195.106 4.485.608 4.494.280 4.539.617 9.033.897 252.544 330.862 583.406 56,11
+3 SumateraB arat 806.562 774.753 1.581.315 1.684.864 1.701.138 3.386.002 125.847 166.364 292.211 55,33
+4 Riau 1.029.602 982.034 2.011.636 2.215.418 2.086.041 4.301.459 91.854 96.022 187.876 51,13
+5 Jambi 488.349 473.177 961.526 1.208.938 1.149.480 2.358.418 67.648 71.334 138.982 46,66
+6 SumateraS elatan 1.197.130 1.142.445 2.339.575 2.783.725 2.681.212 5.464.937 166.285 190.104 356.389 49,33
+7 Bengkulu 274.716 261.632 536.348 659.684 632.161 1.291.845 36.886 39.714 76.600 47,45
+8 Lampung 1.176.505 1.121.198 2.297.703 2.826.542 2.668.030 5.494.572 202.647 210.219 412.866 49,33
+9 Kep.B angkaB elitung 195.757 187.039 382.796 505.457 456.399 961.856 27.366 29.809 57.175 45,74
+10 Kep.R iau 318.284 304.085 622.369 693.819 664.229 1.358.048 23.408 24.344 47.752 49,34
+11 DKIJa karta 1.306.745 1.247.190 2.553.935 3.664.443 3.659.948 7.324.391 188.495 210.807 399.302 40,32
+12 JawaB arat 6.522.018 6.210.095 12.732.113 16.329.470 15.835.946 32.165.416 1.159.773 1.322.087 2.481.860 47,30
+13 JawaT engah 4.249.536 4.032.863 8.282.399 11.398.138 11.609.441 23.007.579 1.223.520 1.505.597 2.729.117 47,86
+14 DIY ogyakarta 415.136 395.050 810.186 1.274.454 1.291.311 2.565.765 150.361 194.600 344.961 45,02
+15 JawaT imur 4.573.298 4.379.248 8.952.546 13.407.248 13.733.047 27.140.295 1.307.460 1.674.851 2.982.311 43,97
+16 Banten 1.770.680 1.690.050 3.460.730 4.266.685 4.083.523 8.350.208 184.275 207.935 392.210 46,14
+17 Bali 523.119 495.787 1.018.906 1.459.689 1.432.450 2.892.139 132.134 156.890 289.024 45,22
+18 NusaT enggaraB arat 746.262 715.539 1.461.801 1.517.829 1.674.396 3.192.225 111.659 130.477 242.136 53,38
+19 NusaT enggaraT imur 921.064 892.135 1.813.199 1.538.356 1.596.518 3.134.874 118.533 136.908 255.441 65,99
+20 KalimantanB arat 728.653 697.145 1.425.798 1.645.296 1.582.916 3.228.212 101.717 106.011 207.728 50,60
+21 KalimantanT engah 367.381 351.202 718.583 925.300 827.293 1.752.593 39.593 39.423 79.016 45,51
+22 KalimantanS elatan 593.913 566.907 1.160.820 1.389.930 1.341.196 2.731.126 72.235 91.298 163.533 48,49
+23 KalimantanT imur 502.230 475.071 977.301 1.279.077 1.138.432 2.417.509 54.986 51.436 106.422 44,83
+24 KalimantanU tara 104.511 99.223 203.734 237.677 203.978 441.655 11.341 9.603 20.944 50,87
+25 SulawesiU tara 319.198 303.748 622.946 856.022 808.313 1.664.335 68.223 81.417 149.640 46,42
+26 SulawesiT engah 430.370 409.566 839.936 995.545 950.157 1.945.702 66.237 69.840 136.077 50,16
+27 SulawesiS elatan 1.252.938 1.199.445 2.452.383 2.736.192 2.907.770 5.643.962 214.980 295.050 510.030 52,49
+28 SulawesiT enggara 436.345 415.002 851.347 798.224 797.016 1.595.240 47.755 56.666 104.421 59,91
+29 Gorontalo 165.394 157.958 323.352 388.378 388.217 776.595 22.710 28.108 50.818 48,18
+30 SulawesiB arat 210.682 201.154 411.836 420.326 420.885 841.211 24.444 28.987 53.431 55,31
+31 Maluku 290.877 276.633 567.510 540.723 536.154 1.076.877 33.568 37.593 71.161 59,31
+32 MalukuU tara 202.304 194.172 396.476 383.223 366.678 749.901 19.541 19.994 39.535 58,14
+33 PapuaB arat 141.106 134.411 275.517 318.900 279.538 598.438 10.562 8.845 19.407 49,28
+34 Papua 497.621 471.894 969.515 1.164.235 1.024.135 2.188.370 28.115 21.444 49.559 46,57
+Indonesia 35.863.014 34.233.847 70.096.861 87.650.697 86.724.311 174.375.008 6.474.979 7.758.138 14.233.117 48,36
+Sumber: Pusat Data dan Informasi, Kemenkes RI, 2016
+--- PAGE 136 ---
+Lampiran 1.7
+ESTIMASI JUMLAH WANITA USIA SUBUR (15 - 49 TAHUN), WUS IMUNISASI (15 - 39 TAHUN),
+IBU HAMIL, IBU BERSALIN, DAN IBU NIFAS MENURUT PROVINSI TAHUN 2016
+Jumlah Wanita Usia Subur Jumlah WUS Imunisasi
+No Provinsi Jumlah Ibu Hamil Jumlah Ibu Bersalin/Nifas
+(15 - 49 tahun) (15 - 39 tahun)
+(1) (2) (3) (4) (5) (6)
+1 Aceh 1.393.653 1.093.724 128.497 122.657
+2 Sumatera Utara 3.675.463 2.815.356 343.978 328.342
+3 Sumatera Barat 1.347.451 1.025.125 122.662 117.087
+4 Riau 1.786.991 1.391.407 168.360 160.708
+5 Jambi 956.727 732.896 73.434 70.096
+6 Sumatera Selatan 2.205.108 1.692.567 181.085 172.854
+7 Bengkulu 526.265 403.079 41.298 39.421
+8 Lampung 2.167.475 1.623.773 173.699 165.803
+9 Kepulauan Bangka Belitung 377.443 289.232 29.868 28.511
+10 Kepulauan Riau 586.799 459.647 46.926 44.793
+11 DKI Jakarta 3.014.528 2.291.305 194.270 185.439
+12 Jawa Barat 12.884.324 9.685.146 975.780 931.427
+13 Jawa Tengah 8.832.601 6.377.151 596.722 569.599
+14 DI Yogyakarta 976.903 708.585 59.524 56.819
+15 Jawa Timur 10.451.422 7.462.261 638.168 609.161
+16 Banten 3.462.770 2.650.918 270.246 257.962
+17 Bali 1.124.552 801.612 71.720 68.460
+18 Nusa Tenggara Barat 1.377.346 1.050.406 116.301 111.014
+19 Nusa Tenggara Timur 1.306.263 1.009.409 148.553 141.800
+20 Kalimantan Barat 1.311.861 1.015.002 112.679 107.558
+21 Kalimantan Tengah 705.445 541.872 58.955 56.275
+22 Kalimantan Selatan 1.104.519 823.916 91.310 87.159
+23 Kalimantan Timur 962.853 732.070 82.224 78.486
+24 Kalimantan Utara 172.519 134.318 13.338 12.731
+25 Sulawesi Utara 629.994 461.264 45.942 43.853
+26 Sulawesi Tengah 785.974 594.309 69.549 66.387
+27 Sulawesi Selatan 2.353.301 1.775.145 188.046 179.499
+28 Sulawesi Tenggara 672.140 523.196 68.140 65.042
+29 Gorontalo 320.115 243.561 26.008 24.826
+30 Sulawesi Barat 357.753 275.686 35.437 33.826
+31 Maluku 446.156 351.912 48.326 46.130
+32 Maluku Utara 310.774 243.758 31.942 30.490
+33 Papua Barat 242.251 192.336 23.450 22.384
+34 Papua 909.463 700.899 78.157 74.605
+Indonesia 69.739.202 52.172.843 5.354.594 5.111.204
+Sumber: Pusat Data dan Informasi, Kemenkes RI, 2016
+--- PAGE 137 ---
+Lampiran 1.8
+ESTIMASI JUMLAH ANAK PRA SEKOLAH, JUMLAH ANAK USIA KELAS 1 SD/SETINGKAT, DAN JUMLAH ANAK USIA SD/SETINGKAT
+MENURUT PROVINSI TAHUN 2016
+Jumlah Anak Prasekolah (5 - 6 tahun) Jumlah Anak Usia Kelas 1 SD/Setingkat (7 Tahun) Jumlah Anak Usia SD/Setingkat (7 - 12 Tahun)
+No Provinsi
+Laki-laki Perempuan Total Laki-laki Perempuan Total Laki-laki Perempuan Total
+(1) (2) (3) (4) (5) (6) (7) (8) (9) (10) (11)
+1 Aceh 114.218 110.055 224.273 55.413 52.764 108.177 313.747 299.429 613.176
+2 Sumatera Utara 321.192 309.929 631.121 155.304 148.871 304.175 899.003 855.039 1.754.042
+3 Sumatera Barat 111.134 106.865 217.999 54.147 51.939 106.086 316.850 303.554 620.404
+4 Riau 142.516 136.403 278.919 67.088 63.140 130.228 392.167 370.939 763.106
+5 Jambi 65.089 63.011 128.100 31.655 30.975 62.630 194.663 189.546 384.209
+6 Sumatera Selatan 164.594 157.148 321.742 79.960 75.661 155.621 470.470 445.458 915.928
+7 Bengkulu 37.097 35.360 72.457 18.334 17.283 35.617 109.381 103.162 212.543
+8 Lampung 164.851 156.895 321.746 80.146 75.798 155.944 462.789 438.183 900.972
+9 Kep. Bangka Belitung 26.315 25.155 51.470 12.962 12.343 25.305 77.288 73.509 150.797
+10 Kep. Riau 45.162 43.441 88.603 21.775 20.684 42.459 124.825 118.066 242.891
+11 DKI Jakarta 193.367 186.986 380.353 88.694 84.453 173.147 490.126 460.701 950.827
+12 JawaB arat 887.330 843.267 1.730.597 430.818 407.335 838.153 2.556.237 2.421.673 4.977.910
+13 Jawa Tengah 572.536 538.859 1.111.395 284.647 269.265 553.912 1.712.967 1.628.318 3.341.285
+14 DI Yogyakarta 57.008 54.333 111.341 27.473 26.071 53.544 163.203 154.449 317.652
+15 JawaT imur 610.066 584.015 1.194.081 307.849 293.755 601.604 1.862.783 1.778.266 3.641.049
+16 Banten 251.522 240.141 491.663 120.198 113.709 233.907 681.298 645.399 1.326.697
+17 Bali 68.704 65.043 133.747 35.562 33.344 68.906 217.630 204.499 422.129
+18 Nusa Tenggara Barat 102.906 98.888 201.794 50.802 48.420 99.222 294.103 280.409 574.512
+19 Nusa Tenggara Timur 123.679 120.145 243.824 60.827 60.579 121.406 362.597 353.377 715.974
+20 Kalimantan Barat 100.254 95.928 196.182 48.287 45.955 94.242 283.280 269.737 553.017
+21 Kalimantan Tengah 48.829 46.622 95.451 24.464 23.112 47.576 144.272 136.340 280.612
+22 Kalimantan Selatan 84.326 81.289 165.615 39.874 37.668 77.542 230.415 217.702 448.117
+23 Kalimantan Timur 68.586 64.845 133.431 32.882 30.821 63.703 193.173 180.990 374.163
+24 Kalimantan Utara 14.413 13.691 28.104 6.910 6.507 13.417 40.361 38.132 78.493
+25 Sulawesi Utara 43.042 40.548 83.590 20.751 20.039 40.790 127.272 121.168 248.440
+26 Sulawesi Tengah 60.214 58.041 118.255 27.558 25.861 53.419 163.824 153.883 317.707
+27 Sulawesi Selatan 169.931 162.995 332.926 82.525 79.377 161.902 493.775 471.627 965.402
+28 Sulawesi Tenggara 60.928 57.997 118.925 30.559 28.870 59.429 172.590 163.019 335.609
+29 Gorontalo 22.077 21.131 43.208 10.917 10.363 21.280 65.066 61.679 126.745
+30 Sulawesi Barat 28.349 27.183 55.532 14.006 13.205 27.211 81.394 76.766 158.160
+31 Maluku 39.472 37.526 76.998 19.276 18.020 37.296 111.877 105.095 216.972
+32 Maluku Utara 27.449 26.500 53.949 13.547 12.947 26.494 79.799 76.272 156.071
+33 Papua Barat 18.624 17.754 36.378 9.248 8.649 17.897 55.221 51.878 107.099
+34 Papua 65.675 63.729 129.404 32.725 31.703 64.428 196.822 185.196 382.018
+Indonesia 4.911.455 4.691.718 9.603.173 2.397.183 2.279.486 4.676.669 14.141.268 13.433.460 27.574.728
+Sumber: Pusat Data dan Informasi, Kemenkes RI, 2016
+--- PAGE 138 ---
+Lampiran 1.9
+JUMLAH PENDUDUK MISKIN, PERSENTASE PENDUDUK MISKIN DAN GARIS KEMISKINAN
+TAHUN 2000 - 2016
+JumlahP enduduk Miskin (dalamJ utaO rang) Persentase PendudukM iskin Garis Kemiskinan( Rp/Kapita/Bulan)
+No Tahun
+Perkotaan Perdesaan Total Perkotaan Perdesaan Total Perkotaan Perdesaan
+(1) (2) (3) (4) (5) (6) (7) (8) (9) (10)
+1 2000 12,31 26,43 38,74 14,6 22,38 19,14 91.632,00 73.648,00
+2 2001 8,60 29,27 37,87 9,79 24,84 18,41 100.011,00 80.382,00
+3 2002 13,32 25,08 38,39 14,46 21,1 18,2 130.499,00 96.512,00
+4 2003 12,26 25,08 37,34 13,57 20,23 17,42 138.803,00 105.888,00
+5 2004 11,37 24,78 36,15 12,13 20,11 16,66 143.455,00 108.725,00
+6 2005 12,40 22,7 35,1 11,68 19,98 15,97 165.565,00 117.365,00
+7 2006 14,49 24,81 39,3 13,47 21,81 17,75 174.290,00 130.584,00
+8 2007 13,56 23,61 37,17 12,52 20,37 16,58 187.942,00 146.837,00
+9 2008 12,77 22,19 34,96 11,65 18,93 15,42 204.895,99 161.830,79
+10 2009 11,91 20,62 32,53 10,72 17,35 14,15 222.123,10 179.834,57
+11 2010 11,10 19,93 31,02 9,87 16,56 13,33 232.989,00 192.353,83
+12 Maret2 011 11,05 18,97 30,02 9,23 15,72 12,49 253.015,51 213.394,51
+13 September2 011 10,95 18,94 29,89 9,09 15,59 12,36 263.593,84 223.180,69
+14 Maret2 012 10,65 18,49 29,13 8,78 15,12 11,96 267.407,53 229.225,78
+15 September20 12 10,51 18,09 28,59 8,6 14,7 11,66 277.381,99 240.441,35
+16 Maret20 13 10,33 17,74 28,07 8,39 14,32 11,37 289.042,00 253.273,00
+17 September2 013 10,63 17,92 28,55 8,52 14,42 11,47 308.626,00 275.779,00
+18 Maret2 014 10,51 17,77 28,28 8,34 14,17 11,25 318.514,00 286.097,00
+19 September2 014 10,36 17,37 27,73 8,16 13,76 10,96 326.853,00 296.681,00
+20 Maret2 015 10,65 17,94 28,59 8,29 14,21 11,22 342.541,00 317.881,00
+21 September2 015 10,62 17,89 28,51 8,22 14,09 11,13 356.378,00 333.034,00
+22 Maret2 016 10,34 17,67 28,01 7,79 14,11 10,86 364.527,00 343.647,00
+23 September2 016 10,49 17,28 27,76 7,73 13,96 10,70 372.114,00 350.420,00
+Sumber : Badan Pusat Statistik, 2017
+--- PAGE 139 ---
+Lampiran 1.10
+GARIS KEMISKINAN, JUMLAH DAN PERSENTASE PENDUDUK MISKIN MENURUT PROVINSI DAN TIPE DAERAH TAHUN 2016
+Maret September
+Perkotaan Perdesaan Total Perkotaan Perdesaan Total
+No Provinsi (K Re p bmG / ukia ls ar ak ni ps i )n ita an / (ribJu um orla ah ng) P MPe e ir sns kde iu nn d t (a %us ke ) (K Re p bmG / ukia ls ar ak ni ps i )n ita an / (ribJu um orla ah ng) MP Pe e isr n ks de inun d (ta %us k )e (K Re p bmG / ukia ls a ar ki p nis n i )ta an / (riJ bu um ol ra ah ng) P MPe e ir sns kde inun dt (a %us ke ) (K Re p bmG / ukia ls ar ak ni ps i )n ita an / (riJ bu um ol ra ah ng) MP Pe e isr n ks de inun d (ta %us k )e (K Re p bmG / ukia ls a ar ki p nis n i )ta an / Jum ol ra ah n g(r )ibu MP Pe e isr n ks de inun d (ta %us k )e Gar (i Rs p K b/ ue k lm aa npis )ik tain /an Jum ol ra ah n g( )ribu MP Pe e isr n ks de inun d (ta %us k )e
+(1) (2) (3) (4) (5) (6) (7) (8) (9) (10) (11) (12) (13) (14) (15) (16) (17) (18) (19) (20)
+1 Aceh 427.970 159,50 10,82 403.985 688,94 19,15 410.956 848,44 16,73 445.488 163,02 10,79 415.826 678,29 18,80 424.765 841,31 16,43
+2 Sumatera Utara 398.408 690,80 9,75 377.748 765,15 10,97 388.156 1.455,95 10,35 413.835 690,34 9,69 388.707 762,21 10,86 401.832 1.452,55 10,27
+3 SumateraB arat 441.523 118,96 5,54 413.790 252,59 8,16 425.141 371,55 7,09 454.674 119,51 5,52 425.520 257,00 8,27 438.075 376,51 7,14
+4 Riau 426.346 162,45 6,40 425.777 352,95 9,00 426.001 515,40 7,98 439.542 164,12 6,38 433.960 337,47 8,51 437.259 501,59 7,67
+5 Jambi 438.600 115,35 10,86 342.137 174,46 7,32 371.875 289,81 8,41 448.615 116,33 10,73 349.735 174,48 7,30 379.648 290,81 8,37
+6 Sumatera Selatan 388.060 374,53 12,74 331.570 726,67 13,99 351.984 1.101,20 13,54 400.159 377,88 12,73 339.874 718,62 13,77 361.696 1.096,50 13,39
+7 Bengkulu 430.572 97,34 16,19 409.863 231,27 17,85 416.427 328,61 17,32 458.435 98,07 16,16 427.315 227,53 17,43 437.184 325,60 17,03
+8 Lampung 392.488 233,39 10,53 354.678 936,21 15,69 364.922 1.169,60 14,29 398.378 227,44 10,15 357.792 912,34 15,24 368.592 1.139,78 13,86
+9 Kep.B angkaB elitung 521.773 19,63 2,78 546.998 53,13 7,72 534.229 72,76 5,22 553.681 19,37 2,67 573.582 51,70 7,57 564.391 71,07 5,04
+10 Kep. R iau 494.418 87,78 5,16 466.989 32,63 10,43 490.157 120,41 5,98 505.980 86,19 4,99 481.687 32,95 10,47 502.653 119,14 5,84
+11 DKIJak arta 510.359 384,30 3,75 510.359 384,30 3,75 520.690 385,84 3,75 520.690 385,84 3,75
+12 JawaB arat 325.017 2.497,59 7,67 324.937 1.726,73 11,80 324.992 4.224,32 8,95 332.145 2.543,30 7,55 331.237 1.624,81 11,72 332.119 4.168,11 8,77
+13 JawaT engah 315.269 1.824,08 11,44 319.188 2.682,81 14,89 317.348 4.506,89 13,27 322.799 1.879,55 11,38 322.489 2.614,20 14,88 322.748 4.493,75 13,19
+14 DIY ogyakarta 364.786 297,71 11,79 331.308 197,23 16,63 354.084 494,94 13,34 370.510 301,25 11,68 337.230 187,58 16,27 360.169 488,83 13,10
+15 Jawa Timur 319.662 1.518,79 7,94 323.779 3.184,51 16,01 321.761 4.703,30 12,05 329.241 1.552,77 7,91 328.846 3.085,76 15,83 329.172 4.638,53 11,85
+16 Banten 377.052 377,10 4,51 347.765 281,01 7,45 367.949 658,11 5,42 382.903 380,16 4,49 351.708 277,58 7,32 373.365 657,74 5,36
+17 Bali 348.571 96,98 3,68 322.660 81,20 5,23 338.967 178,18 4,25 357.427 93,74 3,53 328.033 81,20 5,21 346.398 174,94 4,15
+18 NusaT enggaraB arat 343.580 385,22 18,20 326.656 419,23 15,17 333.996 804,45 16,48 346.581 378,83 17,55 328.775 407,75 14,82 336.573 786,58 16,02
+19 NusaT enggaraT imur 386.139 112,02 10,58 306.721 1.037,90 25,17 322.947 1.149,92 22,19 389.661 112,48 10,17 310.296 1.037,60 25,19 327.003 1.150,08 22,01
+20 KalimantanB arat 353.143 78,29 5,16 345.480 303,06 9,11 347.880 381,35 7,87 366.477 75,98 4,97 360.940 314,34 9,38 363.027 390,32 8,00
+21 KalimantanT engah 348.254 41,07 4,60 387.202 102,42 6,23 373.484 143,49 5,66 357.224 40,61 4,49 392.543 96,85 5,83 380.524 137,46 5,36
+22 KalimantanS elatan 386.462 60,83 3,48 370.612 134,87 5,89 377.480 195,70 4,85 399.162 60,90 3,43 380.647 123,26 5,37 389.273 184,16 4,52
+23 KalimantanT imur 519.653 88,04 3,93 495.975 124,88 10,05 511.205 212,92 6,11 535.137 89,64 3,86 510.041 121,60 10,15 526.686 211,24 6,00
+24 KalimantanU tara 523.914 14,21 3,78 499.980 26,91 9,47 513.614 41,12 6,23 539.499 17,25 4,50 518.305 29,78 10,29 530.566 47,03 6,99
+25 Sulawesi Utara 312.328 60,62 5,34 321.985 142,20 10,97 317.478 202,82 8,34 314.004 59,73 5,22 322.366 140,62 10,82 318.984 200,35 8,20
+26 SulawesiT engah 391.070 75,45 10,18 370.392 345,07 15,91 375.659 420,52 14,45 399.413 75,90 10,07 376.658 337,25 15,48 382.775 413,15 14,09
+27 SulawesiS elatan 281.676 149,13 4,51 263.674 657,90 12,46 270.601 807,03 9,40 286.669 150,60 4,47 267.428 646,21 12,30 275.361 796,81 9,24
+28 SulawesiT enggara 289.827 51,01 6,74 271.961 275,86 15,49 277.288 326,87 12,88 294.286 53,18 6,87 276.978 274,11 15,31 282.161 327,29 12,77
+29 Gorontalo 284.308 24,08 5,84 284.190 179,11 24,41 284.232 203,19 17,72 287.156 24,02 5,78 285.999 179,67 24,30 286.968 203,69 17,63
+30 SulawesiB arat 273.224 22,85 8,59 290.340 129,88 12,56 286.840 152,73 11,74 280.117 25,07 8,43 295.739 121,83 12,00 292.519 146,90 11,19
+31 Maluku 412.980 52,08 7,66 415.177 275,64 26,82 414.302 327,72 19,18 424.788 54,24 7,86 423.698 277,55 26,88 424.656 331,79 19,26
+32 MalukuU tara 390.788 10,57 3,32 371.289 64,10 7,44 376.554 74,67 6,33 405.368 12,45 3,76 379.454 63,95 7,43 386.489 76,40 6,41
+33 PapuaB arat 487.727 20,96 6,14 466.996 204,85 37,48 474.967 225,81 25,43 508.262 20,11 5,69 480.945 203,49 37,33 492.969 223,60 24,88
+34 Papua 466.985 37,08 4,42 412.991 874,25 37,14 427.176 911,33 28,54 479.294 35,77 4,21 425.264 879,10 37,07 440.021 914,87 28,40
+Indonesia 364.527 10.339,79 7,79 343.647 17.665,62 14,11 354.386 28.005,41 10,86 372.114 10.485,64 7,73 350.420 17.278,68 13,96 361.990 27.764,32 10,70
+Sumber : BadanPusat Statistik,2017
+Catatan: DKIJakarta tidak memilikidesa

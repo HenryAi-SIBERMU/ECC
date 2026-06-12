@@ -1,4 +1,4 @@
-import streamlit as st
+﻿import streamlit as st
 import os
 import sys
 
@@ -51,7 +51,7 @@ render_sidebar()
 st.markdown('<div class="main-title">Environmental Carrying Capacity</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">CELIOS Intelligence System — Dashboard Riset Daya Dukung Lingkungan Hidup Indonesia</div>', unsafe_allow_html=True)
 
-st.warning("Sistem ini sedang dalam tahap pengembangan aktif. Data yang ditampilkan masih berupa simulasi. Fitur analisis penuh akan tersedia secara bertahap.")
+st.warning("Sistem ini sedang dalam pengembangan. Konten analisis penuh akan tersedia secara bertahap.")
 
 st.markdown("---")
 
@@ -80,3 +80,6 @@ st.markdown("""
 **Metodologi:** Diadaptasi dari Świąder et al. (2020) · **Cakupan:** 38 Provinsi Indonesia · **Baseline:** 2023  
 **Sumber data:** BPS WebAPI · PLN Statistik · SIPSN KLHK · ESDM · KLHK GIS · BNPB InaRisk · GFN
 """)
+
+# Force reload 
+

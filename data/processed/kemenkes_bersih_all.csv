@@ -1,0 +1,1481 @@
+provinsi,tahun,indikator,nilai
+Aceh,2014,Kasus Diare Dilayani,106791
+Aceh,2014,Kasus ISPA/Pneumonia,1369
+Aceh,2014,Kasus Kusta Baru,583
+Aceh,2014,Kasus Malaria Positif,778
+Aceh,2015,Kasus Diare Dilayani,64589
+Aceh,2015,Kasus ISPA/Pneumonia,1129
+Aceh,2015,Kasus Kusta Baru,524
+Aceh,2015,Kasus Malaria Positif,422
+Aceh,2016,Kasus Diare Dilayani,25341
+Aceh,2016,Kasus ISPA/Pneumonia,1854
+Aceh,2016,Kasus Kusta Baru,422
+Aceh,2016,Kasus Malaria Positif,243
+Aceh,2017,Kasus ISPA/Pneumonia,2157
+Aceh,2017,Kasus Kusta Baru,324
+Aceh,2017,Kasus Malaria Positif,299
+Aceh,2018,Kasus Diare Dilayani,72805
+Aceh,2018,Kasus ISPA/Pneumonia,2741
+Aceh,2018,Kasus Kusta Baru,366
+Aceh,2018,Kasus Malaria Positif,128
+Aceh,2019,Kasus Diare Dilayani,74415
+Aceh,2019,Kasus ISPA/Pneumonia,3265
+Aceh,2019,Kasus Kusta Baru,354
+Aceh,2019,Kasus Malaria Positif,92
+Aceh,2020,Kasus Diare Dilayani,56698
+Aceh,2020,Kasus ISPA/Pneumonia,1956
+Aceh,2020,Kasus Kusta Baru,227
+Aceh,2020,Kasus Malaria Positif,239
+Aceh,2021,Kasus Diare Dilayani,29866
+Aceh,2021,Kasus ISPA/Pneumonia,1318
+Aceh,2021,Kasus Kusta Baru,254
+Aceh,2021,Kasus Malaria Positif,324
+Aceh,2022,Kasus Diare Dilayani,46362
+Aceh,2022,Kasus ISPA/Pneumonia,2080
+Aceh,2022,Kasus Kusta Baru,87
+Aceh,2022,Kasus Malaria Positif,137
+Aceh,2023,Kasus Diare Dilayani,51810
+Aceh,2023,Kasus ISPA/Pneumonia,3053
+Aceh,2023,Kasus Kusta Baru,284
+Aceh,2023,Kasus Malaria Positif,166
+Aceh,2024,Kasus Diare Dilayani,45444
+Aceh,2024,Kasus ISPA/Pneumonia,3296
+Aceh,2024,Kasus Kusta Baru,265
+Aceh,2024,Kasus Malaria Positif,372
+Bali,2014,Kasus Diare Dilayani,51447
+Bali,2014,Kasus ISPA/Pneumonia,4712
+Bali,2014,Kasus Kusta Baru,81
+Bali,2014,Kasus Malaria Positif,10
+Bali,2015,Kasus Diare Dilayani,93333
+Bali,2015,Kasus ISPA/Pneumonia,5731
+Bali,2015,Kasus Kusta Baru,61
+Bali,2015,Kasus Malaria Positif,5
+Bali,2016,Kasus Diare Dilayani,32651
+Bali,2016,Kasus ISPA/Pneumonia,6688
+Bali,2016,Kasus Kusta Baru,99
+Bali,2016,Kasus Malaria Positif,6
+Bali,2017,Kasus ISPA/Pneumonia,5370
+Bali,2017,Kasus Kusta Baru,70
+Bali,2017,Kasus Malaria Positif,33
+Bali,2018,Kasus Diare Dilayani,58064
+Bali,2018,Kasus ISPA/Pneumonia,4777
+Bali,2018,Kasus Kusta Baru,112
+Bali,2018,Kasus Malaria Positif,70
+Bali,2019,Kasus Diare Dilayani,62505
+Bali,2019,Kasus ISPA/Pneumonia,5096
+Bali,2019,Kasus Kusta Baru,120
+Bali,2019,Kasus Malaria Positif,32
+Bali,2020,Kasus Diare Dilayani,22022
+Bali,2020,Kasus ISPA/Pneumonia,2944
+Bali,2020,Kasus Kusta Baru,64
+Bali,2020,Kasus Malaria Positif,17
+Bali,2021,Kasus Diare Dilayani,25691
+Bali,2021,Kasus ISPA/Pneumonia,2584
+Bali,2021,Kasus Kusta Baru,101
+Bali,2021,Kasus Malaria Positif,33
+Bali,2022,Kasus Diare Dilayani,15936
+Bali,2022,Kasus ISPA/Pneumonia,5269
+Bali,2022,Kasus Kusta Baru,41
+Bali,2022,Kasus Malaria Positif,28
+Bali,2023,Kasus Diare Dilayani,33716
+Bali,2023,Kasus ISPA/Pneumonia,6155
+Bali,2023,Kasus Kusta Baru,131
+Bali,2023,Kasus Malaria Positif,59
+Bali,2024,Kasus Diare Dilayani,41739
+Bali,2024,Kasus ISPA/Pneumonia,6055
+Bali,2024,Kasus Kusta Baru,119
+Bali,2024,Kasus Malaria Positif,75
+Banten,2014,Kasus Diare Dilayani,246077
+Banten,2014,Kasus ISPA/Pneumonia,34853
+Banten,2014,Kasus Kusta Baru,823
+Banten,2014,Kasus Malaria Positif,46
+Banten,2015,Kasus Diare Dilayani,59694
+Banten,2015,Kasus ISPA/Pneumonia,32978
+Banten,2015,Kasus Kusta Baru,1026
+Banten,2015,Kasus Malaria Positif,28
+Banten,2016,Kasus Diare Dilayani,164079
+Banten,2016,Kasus ISPA/Pneumonia,30649
+Banten,2016,Kasus Kusta Baru,926
+Banten,2016,Kasus Malaria Positif,28
+Banten,2017,Kasus ISPA/Pneumonia,31651
+Banten,2017,Kasus Kusta Baru,942
+Banten,2017,Kasus Malaria Positif,42
+Banten,2018,Kasus Diare Dilayani,236699
+Banten,2018,Kasus ISPA/Pneumonia,33775
+Banten,2018,Kasus Kusta Baru,846
+Banten,2018,Kasus Malaria Positif,55
+Banten,2019,Kasus Diare Dilayani,250516
+Banten,2019,Kasus ISPA/Pneumonia,35151
+Banten,2019,Kasus Kusta Baru,927
+Banten,2019,Kasus Malaria Positif,33
+Banten,2020,Kasus Diare Dilayani,221426
+Banten,2020,Kasus ISPA/Pneumonia,23174
+Banten,2020,Kasus Kusta Baru,580
+Banten,2020,Kasus Malaria Positif,6
+Banten,2021,Kasus Diare Dilayani,242094
+Banten,2021,Kasus ISPA/Pneumonia,23530
+Banten,2021,Kasus Kusta Baru,616
+Banten,2021,Kasus Malaria Positif,23
+Banten,2022,Kasus Diare Dilayani,217495
+Banten,2022,Kasus ISPA/Pneumonia,29540
+Banten,2022,Kasus Kusta Baru,212
+Banten,2022,Kasus Malaria Positif,83
+Banten,2023,Kasus Diare Dilayani,245029
+Banten,2023,Kasus ISPA/Pneumonia,33647
+Banten,2023,Kasus Kusta Baru,782
+Banten,2023,Kasus Malaria Positif,133
+Banten,2024,Kasus Diare Dilayani,172447
+Banten,2024,Kasus ISPA/Pneumonia,35808
+Banten,2024,Kasus Kusta Baru,791
+Banten,2024,Kasus Malaria Positif,130
+Bengkulu,2014,Kasus Diare Dilayani,10653
+Bengkulu,2014,Kasus ISPA/Pneumonia,1207
+Bengkulu,2014,Kasus Kusta Baru,21
+Bengkulu,2014,Kasus Malaria Positif,3971
+Bengkulu,2015,Kasus Diare Dilayani,26115
+Bengkulu,2015,Kasus ISPA/Pneumonia,1039
+Bengkulu,2015,Kasus Kusta Baru,17
+Bengkulu,2015,Kasus Malaria Positif,3814
+Bengkulu,2016,Kasus Diare Dilayani,12017
+Bengkulu,2016,Kasus ISPA/Pneumonia,530
+Bengkulu,2016,Kasus Kusta Baru,20
+Bengkulu,2016,Kasus Malaria Positif,2770
+Bengkulu,2017,Kasus ISPA/Pneumonia,493
+Bengkulu,2017,Kasus Kusta Baru,26
+Bengkulu,2017,Kasus Malaria Positif,1031
+Bengkulu,2018,Kasus Diare Dilayani,21093
+Bengkulu,2018,Kasus ISPA/Pneumonia,958
+Bengkulu,2018,Kasus Kusta Baru,25
+Bengkulu,2018,Kasus Malaria Positif,317
+Bengkulu,2019,Kasus Diare Dilayani,26966
+Bengkulu,2019,Kasus ISPA/Pneumonia,550
+Bengkulu,2019,Kasus Kusta Baru,20
+Bengkulu,2019,Kasus Malaria Positif,82
+Bengkulu,2020,Kasus Diare Dilayani,19039
+Bengkulu,2020,Kasus ISPA/Pneumonia,291
+Bengkulu,2020,Kasus Kusta Baru,14
+Bengkulu,2020,Kasus Malaria Positif,105
+Bengkulu,2021,Kasus Diare Dilayani,15832
+Bengkulu,2021,Kasus ISPA/Pneumonia,330
+Bengkulu,2021,Kasus Kusta Baru,15
+Bengkulu,2021,Kasus Malaria Positif,2
+Bengkulu,2022,Kasus Diare Dilayani,11843
+Bengkulu,2022,Kasus ISPA/Pneumonia,425
+Bengkulu,2022,Kasus Kusta Baru,8
+Bengkulu,2022,Kasus Malaria Positif,12
+Bengkulu,2023,Kasus Diare Dilayani,10569
+Bengkulu,2023,Kasus ISPA/Pneumonia,853
+Bengkulu,2023,Kasus Kusta Baru,11
+Bengkulu,2023,Kasus Malaria Positif,29
+Bengkulu,2024,Kasus Diare Dilayani,10625
+Bengkulu,2024,Kasus ISPA/Pneumonia,463
+Bengkulu,2024,Kasus Kusta Baru,7
+Bengkulu,2024,Kasus Malaria Positif,3
+DI Yogyakarta,2014,Kasus Diare Dilayani,0
+DI Yogyakarta,2014,Kasus ISPA/Pneumonia,2996
+DI Yogyakarta,2014,Kasus Kusta Baru,79
+DI Yogyakarta,2014,Kasus Malaria Positif,86
+DI Yogyakarta,2015,Kasus Diare Dilayani,147807
+DI Yogyakarta,2015,Kasus ISPA/Pneumonia,2829
+DI Yogyakarta,2015,Kasus Kusta Baru,105
+DI Yogyakarta,2015,Kasus Malaria Positif,126
+DI Yogyakarta,2016,Kasus Diare Dilayani,8442
+DI Yogyakarta,2016,Kasus ISPA/Pneumonia,3160
+DI Yogyakarta,2016,Kasus Kusta Baru,40
+DI Yogyakarta,2016,Kasus Malaria Positif,95
+DI Yogyakarta,2017,Kasus ISPA/Pneumonia,4214
+DI Yogyakarta,2017,Kasus Kusta Baru,94
+DI Yogyakarta,2017,Kasus Malaria Positif,86
+DI Yogyakarta,2018,Kasus Diare Dilayani,67580
+DI Yogyakarta,2018,Kasus ISPA/Pneumonia,6021
+DI Yogyakarta,2018,Kasus Kusta Baru,42
+DI Yogyakarta,2018,Kasus Malaria Positif,30
+DI Yogyakarta,2019,Kasus Diare Dilayani,69902
+DI Yogyakarta,2019,Kasus ISPA/Pneumonia,6912
+DI Yogyakarta,2019,Kasus Kusta Baru,60
+DI Yogyakarta,2019,Kasus Malaria Positif,12
+DI Yogyakarta,2020,Kasus Diare Dilayani,26877
+DI Yogyakarta,2020,Kasus ISPA/Pneumonia,2335
+DI Yogyakarta,2020,Kasus Kusta Baru,68
+DI Yogyakarta,2020,Kasus Malaria Positif,6
+DI Yogyakarta,2021,Kasus Diare Dilayani,14738
+DI Yogyakarta,2021,Kasus ISPA/Pneumonia,1178
+DI Yogyakarta,2021,Kasus Kusta Baru,25
+DI Yogyakarta,2021,Kasus Malaria Positif,25
+DI Yogyakarta,2022,Kasus Diare Dilayani,23858
+DI Yogyakarta,2022,Kasus ISPA/Pneumonia,1690
+DI Yogyakarta,2022,Kasus Kusta Baru,18
+DI Yogyakarta,2022,Kasus Malaria Positif,147
+DI Yogyakarta,2023,Kasus Diare Dilayani,37730
+DI Yogyakarta,2023,Kasus ISPA/Pneumonia,5445
+DI Yogyakarta,2023,Kasus Kusta Baru,50
+DI Yogyakarta,2023,Kasus Malaria Positif,87
+DI Yogyakarta,2024,Kasus Diare Dilayani,41886
+DI Yogyakarta,2024,Kasus ISPA/Pneumonia,12780
+DI Yogyakarta,2024,Kasus Kusta Baru,51
+DI Yogyakarta,2024,Kasus Malaria Positif,121
+DKI Jakarta,2014,Kasus Diare Dilayani,223579
+DKI Jakarta,2014,Kasus ISPA/Pneumonia,39864
+DKI Jakarta,2014,Kasus Kusta Baru,258
+DKI Jakarta,2014,Kasus Malaria Positif,32
+DKI Jakarta,2015,Kasus Diare Dilayani,357799
+DKI Jakarta,2015,Kasus ISPA/Pneumonia,39755
+DKI Jakarta,2015,Kasus Kusta Baru,317
+DKI Jakarta,2015,Kasus Malaria Positif,23
+DKI Jakarta,2016,Kasus Diare Dilayani,246895
+DKI Jakarta,2016,Kasus ISPA/Pneumonia,44967
+DKI Jakarta,2016,Kasus Kusta Baru,310
+DKI Jakarta,2016,Kasus Malaria Positif,70
+DKI Jakarta,2017,Kasus ISPA/Pneumonia,43451
+DKI Jakarta,2017,Kasus Kusta Baru,300
+DKI Jakarta,2017,Kasus Malaria Positif,111
+DKI Jakarta,2018,Kasus Diare Dilayani,305638
+DKI Jakarta,2018,Kasus ISPA/Pneumonia,42305
+DKI Jakarta,2018,Kasus Kusta Baru,372
+DKI Jakarta,2018,Kasus Malaria Positif,63
+DKI Jakarta,2019,Kasus Diare Dilayani,298293
+DKI Jakarta,2019,Kasus ISPA/Pneumonia,46354
+DKI Jakarta,2019,Kasus Kusta Baru,570
+DKI Jakarta,2019,Kasus Malaria Positif,91
+DKI Jakarta,2020,Kasus Diare Dilayani,191294
+DKI Jakarta,2020,Kasus ISPA/Pneumonia,23516
+DKI Jakarta,2020,Kasus Kusta Baru,323
+DKI Jakarta,2020,Kasus Malaria Positif,58
+DKI Jakarta,2021,Kasus Diare Dilayani,122914
+DKI Jakarta,2021,Kasus ISPA/Pneumonia,12908
+DKI Jakarta,2021,Kasus Kusta Baru,396
+DKI Jakarta,2021,Kasus Malaria Positif,115
+DKI Jakarta,2022,Kasus Diare Dilayani,165527
+DKI Jakarta,2022,Kasus ISPA/Pneumonia,25061
+DKI Jakarta,2022,Kasus Kusta Baru,97
+DKI Jakarta,2022,Kasus Malaria Positif,148
+DKI Jakarta,2023,Kasus Diare Dilayani,195609
+DKI Jakarta,2023,Kasus ISPA/Pneumonia,34516
+DKI Jakarta,2023,Kasus Kusta Baru,542
+DKI Jakarta,2023,Kasus Malaria Positif,265
+DKI Jakarta,2024,Kasus Diare Dilayani,195005
+DKI Jakarta,2024,Kasus ISPA/Pneumonia,41032
+DKI Jakarta,2024,Kasus Kusta Baru,481
+DKI Jakarta,2024,Kasus Malaria Positif,358
+Gorontalo,2014,Kasus Diare Dilayani,0
+Gorontalo,2014,Kasus ISPA/Pneumonia,1572
+Gorontalo,2014,Kasus Kusta Baru,152
+Gorontalo,2014,Kasus Malaria Positif,949
+Gorontalo,2015,Kasus Diare Dilayani,14086
+Gorontalo,2015,Kasus ISPA/Pneumonia,4226
+Gorontalo,2015,Kasus Kusta Baru,223
+Gorontalo,2015,Kasus Malaria Positif,649
+Gorontalo,2016,Kasus Diare Dilayani,16206
+Gorontalo,2016,Kasus ISPA/Pneumonia,4084
+Gorontalo,2016,Kasus Kusta Baru,177
+Gorontalo,2016,Kasus Malaria Positif,176
+Gorontalo,2017,Kasus ISPA/Pneumonia,3996
+Gorontalo,2017,Kasus Kusta Baru,214
+Gorontalo,2017,Kasus Malaria Positif,46
+Gorontalo,2018,Kasus Diare Dilayani,20801
+Gorontalo,2018,Kasus ISPA/Pneumonia,3237
+Gorontalo,2018,Kasus Kusta Baru,210
+Gorontalo,2018,Kasus Malaria Positif,58
+Gorontalo,2019,Kasus Diare Dilayani,21869
+Gorontalo,2019,Kasus ISPA/Pneumonia,3013
+Gorontalo,2019,Kasus Kusta Baru,218
+Gorontalo,2019,Kasus Malaria Positif,32
+Gorontalo,2020,Kasus Diare Dilayani,12539
+Gorontalo,2020,Kasus ISPA/Pneumonia,1514
+Gorontalo,2020,Kasus Kusta Baru,106
+Gorontalo,2020,Kasus Malaria Positif,36
+Gorontalo,2021,Kasus Diare Dilayani,9982
+Gorontalo,2021,Kasus ISPA/Pneumonia,1424
+Gorontalo,2021,Kasus Kusta Baru,121
+Gorontalo,2021,Kasus Malaria Positif,49
+Gorontalo,2022,Kasus Diare Dilayani,9611
+Gorontalo,2022,Kasus ISPA/Pneumonia,1947
+Gorontalo,2022,Kasus Kusta Baru,60
+Gorontalo,2022,Kasus Malaria Positif,52
+Gorontalo,2023,Kasus Diare Dilayani,14482
+Gorontalo,2023,Kasus ISPA/Pneumonia,2716
+Gorontalo,2023,Kasus Kusta Baru,166
+Gorontalo,2023,Kasus Malaria Positif,1569
+Gorontalo,2024,Kasus Diare Dilayani,13040
+Gorontalo,2024,Kasus ISPA/Pneumonia,2843
+Gorontalo,2024,Kasus Kusta Baru,212
+Gorontalo,2024,Kasus Malaria Positif,1581
+Jambi,2014,Kasus Diare Dilayani,64180
+Jambi,2014,Kasus ISPA/Pneumonia,5499
+Jambi,2014,Kasus Kusta Baru,78
+Jambi,2014,Kasus Malaria Positif,2855
+Jambi,2015,Kasus Diare Dilayani,56994
+Jambi,2015,Kasus ISPA/Pneumonia,7114
+Jambi,2015,Kasus Kusta Baru,72
+Jambi,2015,Kasus Malaria Positif,1612
+Jambi,2016,Kasus Diare Dilayani,26001
+Jambi,2016,Kasus ISPA/Pneumonia,5572
+Jambi,2016,Kasus Kusta Baru,61
+Jambi,2016,Kasus Malaria Positif,492
+Jambi,2017,Kasus ISPA/Pneumonia,5484
+Jambi,2017,Kasus Kusta Baru,60
+Jambi,2017,Kasus Malaria Positif,187
+Jambi,2018,Kasus Diare Dilayani,74741
+Jambi,2018,Kasus ISPA/Pneumonia,4080
+Jambi,2018,Kasus Kusta Baru,78
+Jambi,2018,Kasus Malaria Positif,189
+Jambi,2019,Kasus Diare Dilayani,70023
+Jambi,2019,Kasus ISPA/Pneumonia,3525
+Jambi,2019,Kasus Kusta Baru,94
+Jambi,2019,Kasus Malaria Positif,66
+Jambi,2020,Kasus Diare Dilayani,46383
+Jambi,2020,Kasus ISPA/Pneumonia,1812
+Jambi,2020,Kasus Kusta Baru,61
+Jambi,2020,Kasus Malaria Positif,68
+Jambi,2021,Kasus Diare Dilayani,38704
+Jambi,2021,Kasus ISPA/Pneumonia,1163
+Jambi,2021,Kasus Kusta Baru,45
+Jambi,2021,Kasus Malaria Positif,39
+Jambi,2022,Kasus Diare Dilayani,31636
+Jambi,2022,Kasus ISPA/Pneumonia,1207
+Jambi,2022,Kasus Kusta Baru,11
+Jambi,2022,Kasus Malaria Positif,264
+Jambi,2023,Kasus Diare Dilayani,21513
+Jambi,2023,Kasus ISPA/Pneumonia,1139
+Jambi,2023,Kasus Kusta Baru,68
+Jambi,2023,Kasus Malaria Positif,199
+Jambi,2024,Kasus Diare Dilayani,29469
+Jambi,2024,Kasus ISPA/Pneumonia,1620
+Jambi,2024,Kasus Kusta Baru,54
+Jambi,2024,Kasus Malaria Positif,49
+Jawa Barat,2014,Kasus Diare Dilayani,1068685
+Jawa Barat,2014,Kasus ISPA/Pneumonia,197654
+Jawa Barat,2014,Kasus Kusta Baru,1917
+Jawa Barat,2014,Kasus Malaria Positif,282
+Jawa Barat,2015,Kasus Diare Dilayani,50868
+Jawa Barat,2015,Kasus ISPA/Pneumonia,180357
+Jawa Barat,2015,Kasus Kusta Baru,2026
+Jawa Barat,2015,Kasus Malaria Positif,179
+Jawa Barat,2016,Kasus Diare Dilayani,930176
+Jawa Barat,2016,Kasus ISPA/Pneumonia,174612
+Jawa Barat,2016,Kasus Kusta Baru,2046
+Jawa Barat,2016,Kasus Malaria Positif,323
+Jawa Barat,2017,Kasus ISPA/Pneumonia,145135
+Jawa Barat,2017,Kasus Kusta Baru,1813
+Jawa Barat,2017,Kasus Malaria Positif,328
+Jawa Barat,2018,Kasus Diare Dilayani,803533
+Jawa Barat,2018,Kasus ISPA/Pneumonia,131382
+Jawa Barat,2018,Kasus Kusta Baru,2124
+Jawa Barat,2018,Kasus Malaria Positif,181
+Jawa Barat,2019,Kasus Diare Dilayani,881093
+Jawa Barat,2019,Kasus ISPA/Pneumonia,104866
+Jawa Barat,2019,Kasus Kusta Baru,2100
+Jawa Barat,2019,Kasus Malaria Positif,436
+Jawa Barat,2020,Kasus Diare Dilayani,604464
+Jawa Barat,2020,Kasus ISPA/Pneumonia,70508
+Jawa Barat,2020,Kasus Kusta Baru,1404
+Jawa Barat,2020,Kasus Malaria Positif,319
+Jawa Barat,2021,Kasus Diare Dilayani,430520
+Jawa Barat,2021,Kasus ISPA/Pneumonia,67185
+Jawa Barat,2021,Kasus Kusta Baru,1328
+Jawa Barat,2021,Kasus Malaria Positif,247
+Jawa Barat,2022,Kasus Diare Dilayani,404051
+Jawa Barat,2022,Kasus ISPA/Pneumonia,101967
+Jawa Barat,2022,Kasus Kusta Baru,584
+Jawa Barat,2022,Kasus Malaria Positif,498
+Jawa Barat,2023,Kasus Diare Dilayani,644506
+Jawa Barat,2023,Kasus ISPA/Pneumonia,102576
+Jawa Barat,2023,Kasus Kusta Baru,1790
+Jawa Barat,2023,Kasus Malaria Positif,512
+Jawa Barat,2024,Kasus Diare Dilayani,663921
+Jawa Barat,2024,Kasus ISPA/Pneumonia,133926
+Jawa Barat,2024,Kasus Kusta Baru,1805
+Jawa Barat,2024,Kasus Malaria Positif,512
+Jawa Tengah,2014,Kasus Diare Dilayani,393829
+Jawa Tengah,2014,Kasus ISPA/Pneumonia,99465
+Jawa Tengah,2014,Kasus Kusta Baru,1860
+Jawa Tengah,2014,Kasus Malaria Positif,1629
+Jawa Tengah,2015,Kasus Diare Dilayani,503509
+Jawa Tengah,2015,Kasus ISPA/Pneumonia,36279
+Jawa Tengah,2015,Kasus Kusta Baru,1807
+Jawa Tengah,2015,Kasus Malaria Positif,2190
+Jawa Tengah,2016,Kasus Diare Dilayani,95635
+Jawa Tengah,2016,Kasus ISPA/Pneumonia,59650
+Jawa Tengah,2016,Kasus Kusta Baru,1609
+Jawa Tengah,2016,Kasus Malaria Positif,1091
+Jawa Tengah,2017,Kasus ISPA/Pneumonia,59995
+Jawa Tengah,2017,Kasus Kusta Baru,1644
+Jawa Tengah,2017,Kasus Malaria Positif,904
+Jawa Tengah,2018,Kasus Diare Dilayani,573625
+Jawa Tengah,2018,Kasus ISPA/Pneumonia,60660
+Jawa Tengah,2018,Kasus Kusta Baru,1445
+Jawa Tengah,2018,Kasus Malaria Positif,732
+Jawa Tengah,2019,Kasus Diare Dilayani,559994
+Jawa Tengah,2019,Kasus ISPA/Pneumonia,50263
+Jawa Tengah,2019,Kasus Kusta Baru,1336
+Jawa Tengah,2019,Kasus Malaria Positif,297
+Jawa Tengah,2020,Kasus Diare Dilayani,412805
+Jawa Tengah,2020,Kasus ISPA/Pneumonia,41049
+Jawa Tengah,2020,Kasus Kusta Baru,1035
+Jawa Tengah,2020,Kasus Malaria Positif,265
+Jawa Tengah,2021,Kasus Diare Dilayani,297062
+Jawa Tengah,2021,Kasus ISPA/Pneumonia,35978
+Jawa Tengah,2021,Kasus Kusta Baru,642
+Jawa Tengah,2021,Kasus Malaria Positif,805
+Jawa Tengah,2022,Kasus Diare Dilayani,322481
+Jawa Tengah,2022,Kasus ISPA/Pneumonia,38348
+Jawa Tengah,2022,Kasus Kusta Baru,322
+Jawa Tengah,2022,Kasus Malaria Positif,931
+Jawa Tengah,2023,Kasus Diare Dilayani,372779
+Jawa Tengah,2023,Kasus ISPA/Pneumonia,55232
+Jawa Tengah,2023,Kasus Kusta Baru,1285
+Jawa Tengah,2023,Kasus Malaria Positif,567
+Jawa Tengah,2024,Kasus Diare Dilayani,467663
+Jawa Tengah,2024,Kasus ISPA/Pneumonia,82862
+Jawa Tengah,2024,Kasus Kusta Baru,1294
+Jawa Tengah,2024,Kasus Malaria Positif,747
+Jawa Timur,2014,Kasus Diare Dilayani,1015968
+Jawa Timur,2014,Kasus ISPA/Pneumonia,106551
+Jawa Timur,2014,Kasus Kusta Baru,4116
+Jawa Timur,2014,Kasus Malaria Positif,315
+Jawa Timur,2015,Kasus Diare Dilayani,28979
+Jawa Timur,2015,Kasus ISPA/Pneumonia,96087
+Jawa Timur,2015,Kasus Kusta Baru,4013
+Jawa Timur,2015,Kasus Malaria Positif,25
+Jawa Timur,2016,Kasus Diare Dilayani,338806
+Jawa Timur,2016,Kasus ISPA/Pneumonia,93279
+Jawa Timur,2016,Kasus Kusta Baru,3999
+Jawa Timur,2016,Kasus Malaria Positif,303
+Jawa Timur,2017,Kasus ISPA/Pneumonia,92975
+Jawa Timur,2017,Kasus Kusta Baru,3373
+Jawa Timur,2017,Kasus Malaria Positif,107
+Jawa Timur,2018,Kasus Diare Dilayani,742060
+Jawa Timur,2018,Kasus ISPA/Pneumonia,92913
+Jawa Timur,2018,Kasus Kusta Baru,3259
+Jawa Timur,2018,Kasus Malaria Positif,361
+Jawa Timur,2019,Kasus Diare Dilayani,678248
+Jawa Timur,2019,Kasus ISPA/Pneumonia,89361
+Jawa Timur,2019,Kasus Kusta Baru,2940
+Jawa Timur,2019,Kasus Malaria Positif,636
+Jawa Timur,2020,Kasus Diare Dilayani,572925
+Jawa Timur,2020,Kasus ISPA/Pneumonia,76929
+Jawa Timur,2020,Kasus Kusta Baru,1863
+Jawa Timur,2020,Kasus Malaria Positif,295
+Jawa Timur,2021,Kasus Diare Dilayani,510033
+Jawa Timur,2021,Kasus ISPA/Pneumonia,74071
+Jawa Timur,2021,Kasus Kusta Baru,1696
+Jawa Timur,2021,Kasus Malaria Positif,212
+Jawa Timur,2022,Kasus Diare Dilayani,423492
+Jawa Timur,2022,Kasus ISPA/Pneumonia,92118
+Jawa Timur,2022,Kasus Kusta Baru,789
+Jawa Timur,2022,Kasus Malaria Positif,579
+Jawa Timur,2023,Kasus Diare Dilayani,642000
+Jawa Timur,2023,Kasus ISPA/Pneumonia,75199
+Jawa Timur,2023,Kasus Kusta Baru,2348
+Jawa Timur,2023,Kasus Malaria Positif,565
+Jawa Timur,2024,Kasus Diare Dilayani,435344
+Jawa Timur,2024,Kasus ISPA/Pneumonia,99628
+Jawa Timur,2024,Kasus Kusta Baru,2198
+Jawa Timur,2024,Kasus Malaria Positif,553
+Kalimantan Barat,2014,Kasus Diare Dilayani,0
+Kalimantan Barat,2014,Kasus ISPA/Pneumonia,2443
+Kalimantan Barat,2014,Kasus Kusta Baru,43
+Kalimantan Barat,2014,Kasus Malaria Positif,753
+Kalimantan Barat,2015,Kasus Diare Dilayani,31616
+Kalimantan Barat,2015,Kasus ISPA/Pneumonia,2791
+Kalimantan Barat,2015,Kasus Kusta Baru,57
+Kalimantan Barat,2015,Kasus Malaria Positif,640
+Kalimantan Barat,2016,Kasus Diare Dilayani,0
+Kalimantan Barat,2016,Kasus ISPA/Pneumonia,2542
+Kalimantan Barat,2016,Kasus Kusta Baru,91
+Kalimantan Barat,2016,Kasus Malaria Positif,297
+Kalimantan Barat,2017,Kasus ISPA/Pneumonia,2026
+Kalimantan Barat,2017,Kasus Kusta Baru,61
+Kalimantan Barat,2017,Kasus Malaria Positif,152
+Kalimantan Barat,2018,Kasus Diare Dilayani,64731
+Kalimantan Barat,2018,Kasus ISPA/Pneumonia,1965
+Kalimantan Barat,2018,Kasus Kusta Baru,99
+Kalimantan Barat,2018,Kasus Malaria Positif,99
+Kalimantan Barat,2019,Kasus Diare Dilayani,59061
+Kalimantan Barat,2019,Kasus ISPA/Pneumonia,1709
+Kalimantan Barat,2019,Kasus Kusta Baru,80
+Kalimantan Barat,2019,Kasus Malaria Positif,22
+Kalimantan Barat,2020,Kasus Diare Dilayani,36794
+Kalimantan Barat,2020,Kasus ISPA/Pneumonia,1165
+Kalimantan Barat,2020,Kasus Kusta Baru,52
+Kalimantan Barat,2020,Kasus Malaria Positif,64
+Kalimantan Barat,2021,Kasus Diare Dilayani,32964
+Kalimantan Barat,2021,Kasus ISPA/Pneumonia,735
+Kalimantan Barat,2021,Kasus Kusta Baru,59
+Kalimantan Barat,2021,Kasus Malaria Positif,17
+Kalimantan Barat,2022,Kasus Diare Dilayani,40282
+Kalimantan Barat,2022,Kasus ISPA/Pneumonia,2115
+Kalimantan Barat,2022,Kasus Kusta Baru,27
+Kalimantan Barat,2022,Kasus Malaria Positif,53
+Kalimantan Barat,2023,Kasus Diare Dilayani,34376
+Kalimantan Barat,2023,Kasus ISPA/Pneumonia,1958
+Kalimantan Barat,2023,Kasus Kusta Baru,67
+Kalimantan Barat,2023,Kasus Malaria Positif,41
+Kalimantan Barat,2024,Kasus Diare Dilayani,36776
+Kalimantan Barat,2024,Kasus ISPA/Pneumonia,2270
+Kalimantan Barat,2024,Kasus Kusta Baru,74
+Kalimantan Barat,2024,Kasus Malaria Positif,62
+Kalimantan Selatan,2014,Kasus Diare Dilayani,96098
+Kalimantan Selatan,2014,Kasus ISPA/Pneumonia,18820
+Kalimantan Selatan,2014,Kasus Kusta Baru,156
+Kalimantan Selatan,2014,Kasus Malaria Positif,5303
+Kalimantan Selatan,2015,Kasus Diare Dilayani,31314
+Kalimantan Selatan,2015,Kasus ISPA/Pneumonia,14764
+Kalimantan Selatan,2015,Kasus Kusta Baru,145
+Kalimantan Selatan,2015,Kasus Malaria Positif,2716
+Kalimantan Selatan,2016,Kasus Diare Dilayani,9986
+Kalimantan Selatan,2016,Kasus ISPA/Pneumonia,13262
+Kalimantan Selatan,2016,Kasus Kusta Baru,124
+Kalimantan Selatan,2016,Kasus Malaria Positif,2117
+Kalimantan Selatan,2017,Kasus ISPA/Pneumonia,10687
+Kalimantan Selatan,2017,Kasus Kusta Baru,98
+Kalimantan Selatan,2017,Kasus Malaria Positif,1135
+Kalimantan Selatan,2018,Kasus Diare Dilayani,67818
+Kalimantan Selatan,2018,Kasus ISPA/Pneumonia,12018
+Kalimantan Selatan,2018,Kasus Kusta Baru,168
+Kalimantan Selatan,2018,Kasus Malaria Positif,844
+Kalimantan Selatan,2019,Kasus Diare Dilayani,66532
+Kalimantan Selatan,2019,Kasus ISPA/Pneumonia,12276
+Kalimantan Selatan,2019,Kasus Kusta Baru,151
+Kalimantan Selatan,2019,Kasus Malaria Positif,861
+Kalimantan Selatan,2020,Kasus Diare Dilayani,36343
+Kalimantan Selatan,2020,Kasus ISPA/Pneumonia,6454
+Kalimantan Selatan,2020,Kasus Kusta Baru,76
+Kalimantan Selatan,2020,Kasus Malaria Positif,517
+Kalimantan Selatan,2021,Kasus Diare Dilayani,29466
+Kalimantan Selatan,2021,Kasus ISPA/Pneumonia,4493
+Kalimantan Selatan,2021,Kasus Kusta Baru,73
+Kalimantan Selatan,2021,Kasus Malaria Positif,295
+Kalimantan Selatan,2022,Kasus Diare Dilayani,33482
+Kalimantan Selatan,2022,Kasus ISPA/Pneumonia,11466
+Kalimantan Selatan,2022,Kasus Kusta Baru,35
+Kalimantan Selatan,2022,Kasus Malaria Positif,499
+Kalimantan Selatan,2023,Kasus Diare Dilayani,47741
+Kalimantan Selatan,2023,Kasus ISPA/Pneumonia,13281
+Kalimantan Selatan,2023,Kasus Kusta Baru,136
+Kalimantan Selatan,2023,Kasus Malaria Positif,334
+Kalimantan Selatan,2024,Kasus Diare Dilayani,44075
+Kalimantan Selatan,2024,Kasus ISPA/Pneumonia,13952
+Kalimantan Selatan,2024,Kasus Kusta Baru,142
+Kalimantan Selatan,2024,Kasus Malaria Positif,302
+Kalimantan Tengah,2014,Kasus Diare Dilayani,32634
+Kalimantan Tengah,2014,Kasus ISPA/Pneumonia,416
+Kalimantan Tengah,2014,Kasus Kusta Baru,62
+Kalimantan Tengah,2014,Kasus Malaria Positif,3130
+Kalimantan Tengah,2015,Kasus Diare Dilayani,119037
+Kalimantan Tengah,2015,Kasus ISPA/Pneumonia,408
+Kalimantan Tengah,2015,Kasus Kusta Baru,26
+Kalimantan Tengah,2015,Kasus Malaria Positif,1047
+Kalimantan Tengah,2016,Kasus Diare Dilayani,9472
+Kalimantan Tengah,2016,Kasus ISPA/Pneumonia,466
+Kalimantan Tengah,2016,Kasus Kusta Baru,51
+Kalimantan Tengah,2016,Kasus Malaria Positif,474
+Kalimantan Tengah,2017,Kasus ISPA/Pneumonia,471
+Kalimantan Tengah,2017,Kasus Kusta Baru,38
+Kalimantan Tengah,2017,Kasus Malaria Positif,760
+Kalimantan Tengah,2018,Kasus Diare Dilayani,39450
+Kalimantan Tengah,2018,Kasus ISPA/Pneumonia,611
+Kalimantan Tengah,2018,Kasus Kusta Baru,75
+Kalimantan Tengah,2018,Kasus Malaria Positif,664
+Kalimantan Tengah,2019,Kasus Diare Dilayani,48493
+Kalimantan Tengah,2019,Kasus ISPA/Pneumonia,1133
+Kalimantan Tengah,2019,Kasus Kusta Baru,85
+Kalimantan Tengah,2019,Kasus Malaria Positif,202
+Kalimantan Tengah,2020,Kasus Diare Dilayani,21666
+Kalimantan Tengah,2020,Kasus ISPA/Pneumonia,515
+Kalimantan Tengah,2020,Kasus Kusta Baru,43
+Kalimantan Tengah,2020,Kasus Malaria Positif,162
+Kalimantan Tengah,2021,Kasus Diare Dilayani,18357
+Kalimantan Tengah,2021,Kasus ISPA/Pneumonia,1062
+Kalimantan Tengah,2021,Kasus Kusta Baru,45
+Kalimantan Tengah,2021,Kasus Malaria Positif,171
+Kalimantan Tengah,2022,Kasus Diare Dilayani,16649
+Kalimantan Tengah,2022,Kasus ISPA/Pneumonia,1598
+Kalimantan Tengah,2022,Kasus Kusta Baru,19
+Kalimantan Tengah,2022,Kasus Malaria Positif,216
+Kalimantan Tengah,2023,Kasus Diare Dilayani,9631
+Kalimantan Tengah,2023,Kasus ISPA/Pneumonia,1856
+Kalimantan Tengah,2023,Kasus Kusta Baru,63
+Kalimantan Tengah,2023,Kasus Malaria Positif,134
+Kalimantan Tengah,2024,Kasus Diare Dilayani,20353
+Kalimantan Tengah,2024,Kasus ISPA/Pneumonia,1480
+Kalimantan Tengah,2024,Kasus Kusta Baru,75
+Kalimantan Tengah,2024,Kasus Malaria Positif,137
+Kalimantan Timur,2014,Kasus Diare Dilayani,0
+Kalimantan Timur,2014,Kasus ISPA/Pneumonia,622
+Kalimantan Timur,2014,Kasus Kusta Baru,154
+Kalimantan Timur,2014,Kasus Malaria Positif,1115
+Kalimantan Timur,2015,Kasus Diare Dilayani,34647
+Kalimantan Timur,2015,Kasus ISPA/Pneumonia,7828
+Kalimantan Timur,2015,Kasus Kusta Baru,176
+Kalimantan Timur,2015,Kasus Malaria Positif,1562
+Kalimantan Timur,2016,Kasus Diare Dilayani,51776
+Kalimantan Timur,2016,Kasus ISPA/Pneumonia,7153
+Kalimantan Timur,2016,Kasus Kusta Baru,158
+Kalimantan Timur,2016,Kasus Malaria Positif,1228
+Kalimantan Timur,2017,Kasus ISPA/Pneumonia,6799
+Kalimantan Timur,2017,Kasus Kusta Baru,153
+Kalimantan Timur,2017,Kasus Malaria Positif,1573
+Kalimantan Timur,2018,Kasus Diare Dilayani,71401
+Kalimantan Timur,2018,Kasus ISPA/Pneumonia,5860
+Kalimantan Timur,2018,Kasus Kusta Baru,181
+Kalimantan Timur,2018,Kasus Malaria Positif,2297
+Kalimantan Timur,2019,Kasus Diare Dilayani,68256
+Kalimantan Timur,2019,Kasus ISPA/Pneumonia,5140
+Kalimantan Timur,2019,Kasus Kusta Baru,195
+Kalimantan Timur,2019,Kasus Malaria Positif,2065
+Kalimantan Timur,2020,Kasus Diare Dilayani,34421
+Kalimantan Timur,2020,Kasus ISPA/Pneumonia,2167
+Kalimantan Timur,2020,Kasus Kusta Baru,124
+Kalimantan Timur,2020,Kasus Malaria Positif,2365
+Kalimantan Timur,2021,Kasus Diare Dilayani,30308
+Kalimantan Timur,2021,Kasus ISPA/Pneumonia,1519
+Kalimantan Timur,2021,Kasus Kusta Baru,122
+Kalimantan Timur,2021,Kasus Malaria Positif,2249
+Kalimantan Timur,2022,Kasus Diare Dilayani,37843
+Kalimantan Timur,2022,Kasus ISPA/Pneumonia,3392
+Kalimantan Timur,2022,Kasus Kusta Baru,43
+Kalimantan Timur,2022,Kasus Malaria Positif,3263
+Kalimantan Timur,2023,Kasus Diare Dilayani,50108
+Kalimantan Timur,2023,Kasus ISPA/Pneumonia,4719
+Kalimantan Timur,2023,Kasus Kusta Baru,157
+Kalimantan Timur,2023,Kasus Malaria Positif,3665
+Kalimantan Timur,2024,Kasus Diare Dilayani,55417
+Kalimantan Timur,2024,Kasus ISPA/Pneumonia,5799
+Kalimantan Timur,2024,Kasus Kusta Baru,129
+Kalimantan Timur,2024,Kasus Malaria Positif,1606
+Kalimantan Utara,2014,Kasus Diare Dilayani,0
+Kalimantan Utara,2014,Kasus Malaria Positif,57
+Kalimantan Utara,2015,Kasus Diare Dilayani,167846
+Kalimantan Utara,2015,Kasus ISPA/Pneumonia,0
+Kalimantan Utara,2015,Kasus Kusta Baru,41
+Kalimantan Utara,2015,Kasus Malaria Positif,18
+Kalimantan Utara,2016,Kasus Diare Dilayani,0
+Kalimantan Utara,2016,Kasus ISPA/Pneumonia,2632
+Kalimantan Utara,2016,Kasus Kusta Baru,29
+Kalimantan Utara,2016,Kasus Malaria Positif,22
+Kalimantan Utara,2017,Kasus ISPA/Pneumonia,1558
+Kalimantan Utara,2017,Kasus Kusta Baru,52
+Kalimantan Utara,2017,Kasus Malaria Positif,65
+Kalimantan Utara,2018,Kasus Diare Dilayani,14770
+Kalimantan Utara,2018,Kasus ISPA/Pneumonia,2559
+Kalimantan Utara,2018,Kasus Kusta Baru,41
+Kalimantan Utara,2018,Kasus Malaria Positif,27
+Kalimantan Utara,2019,Kasus Diare Dilayani,16287
+Kalimantan Utara,2019,Kasus ISPA/Pneumonia,1387
+Kalimantan Utara,2019,Kasus Kusta Baru,39
+Kalimantan Utara,2019,Kasus Malaria Positif,56
+Kalimantan Utara,2020,Kasus Diare Dilayani,14877
+Kalimantan Utara,2020,Kasus ISPA/Pneumonia,322
+Kalimantan Utara,2020,Kasus Kusta Baru,23
+Kalimantan Utara,2020,Kasus Malaria Positif,67
+Kalimantan Utara,2021,Kasus Diare Dilayani,8465
+Kalimantan Utara,2021,Kasus ISPA/Pneumonia,685
+Kalimantan Utara,2021,Kasus Kusta Baru,30
+Kalimantan Utara,2021,Kasus Malaria Positif,33
+Kalimantan Utara,2022,Kasus Diare Dilayani,12193
+Kalimantan Utara,2022,Kasus ISPA/Pneumonia,1342
+Kalimantan Utara,2022,Kasus Kusta Baru,16
+Kalimantan Utara,2022,Kasus Malaria Positif,113
+Kalimantan Utara,2023,Kasus Diare Dilayani,12239
+Kalimantan Utara,2023,Kasus ISPA/Pneumonia,1270
+Kalimantan Utara,2023,Kasus Kusta Baru,23
+Kalimantan Utara,2023,Kasus Malaria Positif,143
+Kalimantan Utara,2024,Kasus Diare Dilayani,13889
+Kalimantan Utara,2024,Kasus ISPA/Pneumonia,1524
+Kalimantan Utara,2024,Kasus Kusta Baru,35
+Kalimantan Utara,2024,Kasus Malaria Positif,137
+Kep.  Bangka Belitung,2023,Kasus Diare Dilayani,14585
+Kep. Bangka Belitung,2014,Kasus Diare Dilayani,8973
+Kep. Bangka Belitung,2014,Kasus ISPA/Pneumonia,7666
+Kep. Bangka Belitung,2014,Kasus Malaria Positif,1192
+Kep. Bangka Belitung,2015,Kasus Diare Dilayani,188108
+Kep. Bangka Belitung,2015,Kasus ISPA/Pneumonia,7869
+Kep. Bangka Belitung,2015,Kasus Malaria Positif,1484
+Kep. Bangka Belitung,2016,Kasus Diare Dilayani,12149
+Kep. Bangka Belitung,2016,Kasus ISPA/Pneumonia,7236
+Kep. Bangka Belitung,2016,Kasus Malaria Positif,158
+Kep. Bangka Belitung,2017,Kasus Malaria Positif,95
+Kep. Bangka Belitung,2018,Kasus Malaria Positif,227
+Kep. Bangka Belitung,2019,Kasus Diare Dilayani,17669
+Kep. Bangka Belitung,2019,Kasus ISPA/Pneumonia,4125
+Kep. Bangka Belitung,2020,Kasus Diare Dilayani,12515
+Kep. Bangka Belitung,2020,Kasus ISPA/Pneumonia,2147
+Kep. Bangka Belitung,2021,Kasus Diare Dilayani,10334
+Kep. Bangka Belitung,2021,Kasus ISPA/Pneumonia,1890
+Kep. Bangka Belitung,2022,Kasus Diare Dilayani,11361
+Kep. Bangka Belitung,2022,Kasus ISPA/Pneumonia,2676
+Kep. Bangka Belitung,2023,Kasus ISPA/Pneumonia,2675
+Kep. Bangka Belitung,2024,Kasus Diare Dilayani,17822
+Kep. Bangka Belitung,2024,Kasus ISPA/Pneumonia,2240
+Kepulauan  Bangka Belitung,2023,Kasus Kusta Baru,50
+Kepulauan Bangka Belitung,2014,Kasus Kusta Baru,54
+Kepulauan Bangka Belitung,2015,Kasus Kusta Baru,35
+Kepulauan Bangka Belitung,2016,Kasus Kusta Baru,31
+Kepulauan Bangka Belitung,2017,Kasus ISPA/Pneumonia,5591
+Kepulauan Bangka Belitung,2017,Kasus Kusta Baru,49
+Kepulauan Bangka Belitung,2018,Kasus Diare Dilayani,19455
+Kepulauan Bangka Belitung,2018,Kasus ISPA/Pneumonia,5135
+Kepulauan Bangka Belitung,2018,Kasus Kusta Baru,46
+Kepulauan Bangka Belitung,2019,Kasus Kusta Baru,46
+Kepulauan Bangka Belitung,2019,Kasus Malaria Positif,130
+Kepulauan Bangka Belitung,2020,Kasus Kusta Baru,38
+Kepulauan Bangka Belitung,2020,Kasus Malaria Positif,187
+Kepulauan Bangka Belitung,2021,Kasus Kusta Baru,49
+Kepulauan Bangka Belitung,2021,Kasus Malaria Positif,104
+Kepulauan Bangka Belitung,2022,Kasus Kusta Baru,13
+Kepulauan Bangka Belitung,2022,Kasus Malaria Positif,123
+Kepulauan Bangka Belitung,2023,Kasus Malaria Positif,61
+Kepulauan Bangka Belitung,2024,Kasus Kusta Baru,52
+Kepulauan Bangka Belitung,2024,Kasus Malaria Positif,13
+Kepulauan Riau,2014,Kasus Diare Dilayani,0
+Kepulauan Riau,2014,Kasus ISPA/Pneumonia,0
+Kepulauan Riau,2014,Kasus Kusta Baru,17
+Kepulauan Riau,2014,Kasus Malaria Positif,836
+Kepulauan Riau,2015,Kasus Diare Dilayani,708976
+Kepulauan Riau,2015,Kasus ISPA/Pneumonia,859
+Kepulauan Riau,2015,Kasus Kusta Baru,24
+Kepulauan Riau,2015,Kasus Malaria Positif,688
+Kepulauan Riau,2016,Kasus Diare Dilayani,5351
+Kepulauan Riau,2016,Kasus ISPA/Pneumonia,1214
+Kepulauan Riau,2016,Kasus Kusta Baru,34
+Kepulauan Riau,2016,Kasus Malaria Positif,721
+Kepulauan Riau,2017,Kasus ISPA/Pneumonia,1826
+Kepulauan Riau,2017,Kasus Kusta Baru,30
+Kepulauan Riau,2017,Kasus Malaria Positif,357
+Kepulauan Riau,2018,Kasus Diare Dilayani,25073
+Kepulauan Riau,2018,Kasus ISPA/Pneumonia,2207
+Kepulauan Riau,2018,Kasus Kusta Baru,88
+Kepulauan Riau,2018,Kasus Malaria Positif,238
+Kepulauan Riau,2019,Kasus Diare Dilayani,29895
+Kepulauan Riau,2019,Kasus ISPA/Pneumonia,2012
+Kepulauan Riau,2019,Kasus Kusta Baru,48
+Kepulauan Riau,2019,Kasus Malaria Positif,139
+Kepulauan Riau,2020,Kasus Diare Dilayani,21212
+Kepulauan Riau,2020,Kasus ISPA/Pneumonia,826
+Kepulauan Riau,2020,Kasus Kusta Baru,56
+Kepulauan Riau,2020,Kasus Malaria Positif,198
+Kepulauan Riau,2021,Kasus Diare Dilayani,16432
+Kepulauan Riau,2021,Kasus ISPA/Pneumonia,1092
+Kepulauan Riau,2021,Kasus Kusta Baru,32
+Kepulauan Riau,2021,Kasus Malaria Positif,39
+Kepulauan Riau,2022,Kasus Diare Dilayani,15834
+Kepulauan Riau,2022,Kasus ISPA/Pneumonia,2964
+Kepulauan Riau,2022,Kasus Kusta Baru,13
+Kepulauan Riau,2022,Kasus Malaria Positif,46
+Kepulauan Riau,2023,Kasus Diare Dilayani,9305
+Kepulauan Riau,2023,Kasus ISPA/Pneumonia,1509
+Kepulauan Riau,2023,Kasus Kusta Baru,39
+Kepulauan Riau,2023,Kasus Malaria Positif,16
+Kepulauan Riau,2024,Kasus Diare Dilayani,21425
+Kepulauan Riau,2024,Kasus ISPA/Pneumonia,1255
+Kepulauan Riau,2024,Kasus Kusta Baru,39
+Kepulauan Riau,2024,Kasus Malaria Positif,306
+Lampung,2014,Kasus Diare Dilayani,98446
+Lampung,2014,Kasus ISPA/Pneumonia,9812
+Lampung,2014,Kasus Kusta Baru,142
+Lampung,2014,Kasus Malaria Positif,4389
+Lampung,2015,Kasus Diare Dilayani,312119
+Lampung,2015,Kasus ISPA/Pneumonia,6942
+Lampung,2015,Kasus Kusta Baru,53
+Lampung,2015,Kasus Malaria Positif,3991
+Lampung,2016,Kasus Diare Dilayani,43323
+Lampung,2016,Kasus ISPA/Pneumonia,7684
+Lampung,2016,Kasus Kusta Baru,77
+Lampung,2016,Kasus Malaria Positif,3298
+Lampung,2017,Kasus ISPA/Pneumonia,6273
+Lampung,2017,Kasus Kusta Baru,164
+Lampung,2017,Kasus Malaria Positif,4297
+Lampung,2018,Kasus Diare Dilayani,133916
+Lampung,2018,Kasus ISPA/Pneumonia,8576
+Lampung,2018,Kasus Kusta Baru,153
+Lampung,2018,Kasus Malaria Positif,3181
+Lampung,2019,Kasus Diare Dilayani,114536
+Lampung,2019,Kasus ISPA/Pneumonia,9539
+Lampung,2019,Kasus Kusta Baru,145
+Lampung,2019,Kasus Malaria Positif,1521
+Lampung,2020,Kasus Diare Dilayani,74283
+Lampung,2020,Kasus ISPA/Pneumonia,7531
+Lampung,2020,Kasus Kusta Baru,121
+Lampung,2020,Kasus Malaria Positif,424
+Lampung,2021,Kasus Diare Dilayani,49194
+Lampung,2021,Kasus ISPA/Pneumonia,6972
+Lampung,2021,Kasus Kusta Baru,130
+Lampung,2021,Kasus Malaria Positif,557
+Lampung,2022,Kasus Diare Dilayani,65969
+Lampung,2022,Kasus ISPA/Pneumonia,5859
+Lampung,2022,Kasus Kusta Baru,40
+Lampung,2022,Kasus Malaria Positif,714
+Lampung,2023,Kasus Diare Dilayani,76257
+Lampung,2023,Kasus ISPA/Pneumonia,6090
+Lampung,2023,Kasus Kusta Baru,142
+Lampung,2023,Kasus Malaria Positif,1215
+Lampung,2024,Kasus Diare Dilayani,74406
+Lampung,2024,Kasus ISPA/Pneumonia,7537
+Lampung,2024,Kasus Kusta Baru,170
+Lampung,2024,Kasus Malaria Positif,2596
+Maluku,2014,Kasus Diare Dilayani,0
+Maluku,2014,Kasus ISPA/Pneumonia,760
+Maluku,2014,Kasus Kusta Baru,545
+Maluku,2014,Kasus Malaria Positif,10249
+Maluku,2015,Kasus Diare Dilayani,20736
+Maluku,2015,Kasus ISPA/Pneumonia,247
+Maluku,2015,Kasus Kusta Baru,211
+Maluku,2015,Kasus Malaria Positif,9802
+Maluku,2016,Kasus Diare Dilayani,7764
+Maluku,2016,Kasus ISPA/Pneumonia,534
+Maluku,2016,Kasus Kusta Baru,442
+Maluku,2016,Kasus Malaria Positif,6780
+Maluku,2017,Kasus ISPA/Pneumonia,1065
+Maluku,2017,Kasus Kusta Baru,418
+Maluku,2017,Kasus Malaria Positif,4019
+Maluku,2018,Kasus Diare Dilayani,5902
+Maluku,2018,Kasus ISPA/Pneumonia,1084
+Maluku,2018,Kasus Kusta Baru,455
+Maluku,2018,Kasus Malaria Positif,2058
+Maluku,2019,Kasus Diare Dilayani,15332
+Maluku,2019,Kasus ISPA/Pneumonia,1105
+Maluku,2019,Kasus Kusta Baru,431
+Maluku,2019,Kasus Malaria Positif,1302
+Maluku,2020,Kasus Diare Dilayani,15877
+Maluku,2020,Kasus ISPA/Pneumonia,561
+Maluku,2020,Kasus Kusta Baru,302
+Maluku,2020,Kasus Malaria Positif,766
+Maluku,2021,Kasus Diare Dilayani,16730
+Maluku,2021,Kasus ISPA/Pneumonia,554
+Maluku,2021,Kasus Kusta Baru,332
+Maluku,2021,Kasus Malaria Positif,809
+Maluku,2022,Kasus Diare Dilayani,21746
+Maluku,2022,Kasus ISPA/Pneumonia,817
+Maluku,2022,Kasus Kusta Baru,103
+Maluku,2022,Kasus Malaria Positif,1119
+Maluku,2023,Kasus Diare Dilayani,6401
+Maluku,2023,Kasus ISPA/Pneumonia,1196
+Maluku,2023,Kasus Kusta Baru,417
+Maluku,2023,Kasus Malaria Positif,1668
+Maluku,2024,Kasus Diare Dilayani,17183
+Maluku,2024,Kasus ISPA/Pneumonia,1121
+Maluku,2024,Kasus Kusta Baru,430
+Maluku,2024,Kasus Malaria Positif,2288
+Maluku Utara,2014,Kasus Diare Dilayani,0
+Maluku Utara,2014,Kasus ISPA/Pneumonia,0
+Maluku Utara,2014,Kasus Kusta Baru,544
+Maluku Utara,2014,Kasus Malaria Positif,3790
+Maluku Utara,2015,Kasus Diare Dilayani,5003
+Maluku Utara,2015,Kasus ISPA/Pneumonia,633
+Maluku Utara,2015,Kasus Kusta Baru,544
+Maluku Utara,2015,Kasus Malaria Positif,3220
+Maluku Utara,2016,Kasus Diare Dilayani,0
+Maluku Utara,2016,Kasus ISPA/Pneumonia,613
+Maluku Utara,2016,Kasus Kusta Baru,421
+Maluku Utara,2016,Kasus Malaria Positif,2888
+Maluku Utara,2017,Kasus ISPA/Pneumonia,971
+Maluku Utara,2017,Kasus Kusta Baru,558
+Maluku Utara,2017,Kasus Malaria Positif,957
+Maluku Utara,2018,Kasus Diare Dilayani,15403
+Maluku Utara,2018,Kasus ISPA/Pneumonia,1130
+Maluku Utara,2018,Kasus Kusta Baru,696
+Maluku Utara,2018,Kasus Malaria Positif,485
+Maluku Utara,2019,Kasus Diare Dilayani,19861
+Maluku Utara,2019,Kasus ISPA/Pneumonia,834
+Maluku Utara,2019,Kasus Kusta Baru,909
+Maluku Utara,2019,Kasus Malaria Positif,580
+Maluku Utara,2020,Kasus Diare Dilayani,11268
+Maluku Utara,2020,Kasus ISPA/Pneumonia,373
+Maluku Utara,2020,Kasus Kusta Baru,505
+Maluku Utara,2020,Kasus Malaria Positif,202
+Maluku Utara,2021,Kasus Diare Dilayani,10878
+Maluku Utara,2021,Kasus ISPA/Pneumonia,330
+Maluku Utara,2021,Kasus Kusta Baru,530
+Maluku Utara,2021,Kasus Malaria Positif,128
+Maluku Utara,2022,Kasus Diare Dilayani,15796
+Maluku Utara,2022,Kasus ISPA/Pneumonia,741
+Maluku Utara,2022,Kasus Kusta Baru,242
+Maluku Utara,2022,Kasus Malaria Positif,232
+Maluku Utara,2023,Kasus Diare Dilayani,8460
+Maluku Utara,2023,Kasus ISPA/Pneumonia,984
+Maluku Utara,2023,Kasus Kusta Baru,666
+Maluku Utara,2023,Kasus Malaria Positif,244
+Maluku Utara,2024,Kasus Diare Dilayani,11256
+Maluku Utara,2024,Kasus ISPA/Pneumonia,870
+Maluku Utara,2024,Kasus Kusta Baru,637
+Maluku Utara,2024,Kasus Malaria Positif,205
+Nusa Tenggara Barat,2014,Kasus Diare Dilayani,189168
+Nusa Tenggara Barat,2014,Kasus ISPA/Pneumonia,24178
+Nusa Tenggara Barat,2014,Kasus Kusta Baru,281
+Nusa Tenggara Barat,2014,Kasus Malaria Positif,3662
+Nusa Tenggara Barat,2015,Kasus Diare Dilayani,18125
+Nusa Tenggara Barat,2015,Kasus ISPA/Pneumonia,24872
+Nusa Tenggara Barat,2015,Kasus Kusta Baru,292
+Nusa Tenggara Barat,2015,Kasus Malaria Positif,2014
+Nusa Tenggara Barat,2016,Kasus Diare Dilayani,89269
+Nusa Tenggara Barat,2016,Kasus ISPA/Pneumonia,25946
+Nusa Tenggara Barat,2016,Kasus Kusta Baru,243
+Nusa Tenggara Barat,2016,Kasus Malaria Positif,1168
+Nusa Tenggara Barat,2017,Kasus ISPA/Pneumonia,18569
+Nusa Tenggara Barat,2017,Kasus Kusta Baru,221
+Nusa Tenggara Barat,2017,Kasus Malaria Positif,765
+Nusa Tenggara Barat,2018,Kasus Diare Dilayani,133779
+Nusa Tenggara Barat,2018,Kasus ISPA/Pneumonia,20229
+Nusa Tenggara Barat,2018,Kasus Kusta Baru,249
+Nusa Tenggara Barat,2018,Kasus Malaria Positif,1702
+Nusa Tenggara Barat,2019,Kasus Diare Dilayani,127151
+Nusa Tenggara Barat,2019,Kasus ISPA/Pneumonia,21408
+Nusa Tenggara Barat,2019,Kasus Kusta Baru,321
+Nusa Tenggara Barat,2019,Kasus Malaria Positif,954
+Nusa Tenggara Barat,2020,Kasus Diare Dilayani,108298
+Nusa Tenggara Barat,2020,Kasus ISPA/Pneumonia,11735
+Nusa Tenggara Barat,2020,Kasus Kusta Baru,248
+Nusa Tenggara Barat,2020,Kasus Malaria Positif,247
+Nusa Tenggara Barat,2021,Kasus Diare Dilayani,92978
+Nusa Tenggara Barat,2021,Kasus ISPA/Pneumonia,11913
+Nusa Tenggara Barat,2021,Kasus Kusta Baru,170
+Nusa Tenggara Barat,2021,Kasus Malaria Positif,367
+Nusa Tenggara Barat,2022,Kasus Diare Dilayani,76733
+Nusa Tenggara Barat,2022,Kasus ISPA/Pneumonia,13852
+Nusa Tenggara Barat,2022,Kasus Kusta Baru,45
+Nusa Tenggara Barat,2022,Kasus Malaria Positif,497
+Nusa Tenggara Barat,2023,Kasus Diare Dilayani,69603
+Nusa Tenggara Barat,2023,Kasus ISPA/Pneumonia,13255
+Nusa Tenggara Barat,2023,Kasus Kusta Baru,248
+Nusa Tenggara Barat,2023,Kasus Malaria Positif,338
+Nusa Tenggara Barat,2024,Kasus Diare Dilayani,102324
+Nusa Tenggara Barat,2024,Kasus ISPA/Pneumonia,17883
+Nusa Tenggara Barat,2024,Kasus Kusta Baru,283
+Nusa Tenggara Barat,2024,Kasus Malaria Positif,250
+Nusa Tenggara Timur,2014,Kasus Diare Dilayani,0
+Nusa Tenggara Timur,2014,Kasus ISPA/Pneumonia,0
+Nusa Tenggara Timur,2014,Kasus Kusta Baru,378
+Nusa Tenggara Timur,2014,Kasus Malaria Positif,64953
+Nusa Tenggara Timur,2015,Kasus Diare Dilayani,21086
+Nusa Tenggara Timur,2015,Kasus ISPA/Pneumonia,2364
+Nusa Tenggara Timur,2015,Kasus Kusta Baru,280
+Nusa Tenggara Timur,2015,Kasus Malaria Positif,36039
+Nusa Tenggara Timur,2016,Kasus Diare Dilayani,66341
+Nusa Tenggara Timur,2016,Kasus ISPA/Pneumonia,4176
+Nusa Tenggara Timur,2016,Kasus Kusta Baru,261
+Nusa Tenggara Timur,2016,Kasus Malaria Positif,28129
+Nusa Tenggara Timur,2017,Kasus ISPA/Pneumonia,3890
+Nusa Tenggara Timur,2017,Kasus Kusta Baru,405
+Nusa Tenggara Timur,2017,Kasus Malaria Positif,30451
+Nusa Tenggara Timur,2018,Kasus Diare Dilayani,70236
+Nusa Tenggara Timur,2018,Kasus ISPA/Pneumonia,3959
+Nusa Tenggara Timur,2018,Kasus Kusta Baru,375
+Nusa Tenggara Timur,2018,Kasus Malaria Positif,18386
+Nusa Tenggara Timur,2019,Kasus Diare Dilayani,27597
+Nusa Tenggara Timur,2019,Kasus ISPA/Pneumonia,6620
+Nusa Tenggara Timur,2019,Kasus Kusta Baru,389
+Nusa Tenggara Timur,2019,Kasus Malaria Positif,12909
+Nusa Tenggara Timur,2020,Kasus Diare Dilayani,52818
+Nusa Tenggara Timur,2020,Kasus ISPA/Pneumonia,2764
+Nusa Tenggara Timur,2020,Kasus Kusta Baru,275
+Nusa Tenggara Timur,2020,Kasus Malaria Positif,15304
+Nusa Tenggara Timur,2021,Kasus Diare Dilayani,40137
+Nusa Tenggara Timur,2021,Kasus ISPA/Pneumonia,1686
+Nusa Tenggara Timur,2021,Kasus Kusta Baru,342
+Nusa Tenggara Timur,2021,Kasus Malaria Positif,9419
+Nusa Tenggara Timur,2022,Kasus Diare Dilayani,41796
+Nusa Tenggara Timur,2022,Kasus ISPA/Pneumonia,3091
+Nusa Tenggara Timur,2022,Kasus Kusta Baru,156
+Nusa Tenggara Timur,2022,Kasus Malaria Positif,15812
+Nusa Tenggara Timur,2023,Kasus Diare Dilayani,19037
+Nusa Tenggara Timur,2023,Kasus ISPA/Pneumonia,4621
+Nusa Tenggara Timur,2023,Kasus Kusta Baru,534
+Nusa Tenggara Timur,2023,Kasus Malaria Positif,6931
+Nusa Tenggara Timur,2024,Kasus Diare Dilayani,29313
+Nusa Tenggara Timur,2024,Kasus ISPA/Pneumonia,4966
+Nusa Tenggara Timur,2024,Kasus Kusta Baru,447
+Nusa Tenggara Timur,2024,Kasus Malaria Positif,8894
+Papua,2014,Kasus Diare Dilayani,4245488
+Papua,2014,Kasus ISPA/Pneumonia,0
+Papua,2014,Kasus Kusta Baru,1061
+Papua,2014,Kasus Malaria Positif,103095
+Papua,2015,Kasus Diare Dilayani,46584
+Papua,2015,Kasus ISPA/Pneumonia,0
+Papua,2015,Kasus Kusta Baru,1084
+Papua,2015,Kasus Malaria Positif,100561
+Papua,2016,Kasus Diare Dilayani,16242
+Papua,2016,Kasus ISPA/Pneumonia,716
+Papua,2016,Kasus Kusta Baru,1267
+Papua,2016,Kasus Malaria Positif,147066
+Papua,2017,Kasus ISPA/Pneumonia,53
+Papua,2017,Kasus Kusta Baru,968
+Papua,2017,Kasus Malaria Positif,192648
+Papua,2018,Kasus Diare Dilayani,43229
+Papua,2018,Kasus ISPA/Pneumonia,535
+Papua,2018,Kasus Kusta Baru,1800
+Papua,2018,Kasus Malaria Positif,176070
+Papua,2019,Kasus Diare Dilayani,34892
+Papua,2019,Kasus ISPA/Pneumonia,17
+Papua,2019,Kasus Kusta Baru,1533
+Papua,2019,Kasus Malaria Positif,216380
+Papua,2020,Kasus Diare Dilayani,34372
+Papua,2020,Kasus ISPA/Pneumonia,0
+Papua,2020,Kasus Kusta Baru,1022
+Papua,2020,Kasus Malaria Positif,216841
+Papua,2021,Kasus Diare Dilayani,12584
+Papua,2021,Kasus ISPA/Pneumonia,1953
+Papua,2021,Kasus Kusta Baru,997
+Papua,2021,Kasus Malaria Positif,275243
+Papua,2022,Kasus Diare Dilayani,42596
+Papua,2022,Kasus ISPA/Pneumonia,2990
+Papua,2022,Kasus Kusta Baru,402
+Papua,2022,Kasus Malaria Positif,393801
+Papua,2023,Kasus Diare Dilayani,7437
+Papua,2023,Kasus ISPA/Pneumonia,750
+Papua,2023,Kasus Kusta Baru,784
+Papua,2023,Kasus Malaria Positif,148723
+Papua,2024,Kasus Diare Dilayani,5610
+Papua,2024,Kasus ISPA/Pneumonia,1153
+Papua,2024,Kasus Kusta Baru,1225
+Papua,2024,Kasus Malaria Positif,229786
+Papua Barat,2014,Kasus Diare Dilayani,0
+Papua Barat,2014,Kasus ISPA/Pneumonia,0
+Papua Barat,2014,Kasus Kusta Baru,633
+Papua Barat,2014,Kasus Malaria Positif,18294
+Papua Barat,2015,Kasus Diare Dilayani,16437
+Papua Barat,2015,Kasus ISPA/Pneumonia,0
+Papua Barat,2015,Kasus Kusta Baru,717
+Papua Barat,2015,Kasus Malaria Positif,27266
+Papua Barat,2016,Kasus Diare Dilayani,0
+Papua Barat,2016,Kasus ISPA/Pneumonia,0
+Papua Barat,2016,Kasus Kusta Baru,905
+Papua Barat,2016,Kasus Malaria Positif,6063
+Papua Barat,2017,Kasus ISPA/Pneumonia,356
+Papua Barat,2017,Kasus Kusta Baru,788
+Papua Barat,2017,Kasus Malaria Positif,13706
+Papua Barat,2018,Kasus Diare Dilayani,9956
+Papua Barat,2018,Kasus ISPA/Pneumonia,1112
+Papua Barat,2018,Kasus Kusta Baru,956
+Papua Barat,2018,Kasus Malaria Positif,7957
+Papua Barat,2019,Kasus Diare Dilayani,8578
+Papua Barat,2019,Kasus ISPA/Pneumonia,1304
+Papua Barat,2019,Kasus Kusta Baru,1270
+Papua Barat,2019,Kasus Malaria Positif,7079
+Papua Barat,2020,Kasus Diare Dilayani,3762
+Papua Barat,2020,Kasus ISPA/Pneumonia,1291
+Papua Barat,2020,Kasus Kusta Baru,699
+Papua Barat,2020,Kasus Malaria Positif,9970
+Papua Barat,2021,Kasus Diare Dilayani,9250
+Papua Barat,2021,Kasus ISPA/Pneumonia,338
+Papua Barat,2021,Kasus Kusta Baru,781
+Papua Barat,2021,Kasus Malaria Positif,7628
+Papua Barat,2022,Kasus Diare Dilayani,10122
+Papua Barat,2022,Kasus ISPA/Pneumonia,1063
+Papua Barat,2022,Kasus Kusta Baru,285
+Papua Barat,2022,Kasus Malaria Positif,13080
+Papua Barat,2023,Kasus Diare Dilayani,6921
+Papua Barat,2023,Kasus ISPA/Pneumonia,2197
+Papua Barat,2023,Kasus Kusta Baru,365
+Papua Barat,2023,Kasus Malaria Positif,8274
+Papua Barat,2024,Kasus Diare Dilayani,7309
+Papua Barat,2024,Kasus ISPA/Pneumonia,1203
+Papua Barat,2024,Kasus Kusta Baru,392
+Papua Barat,2024,Kasus Malaria Positif,7823
+Papua Pegunungan,2023,Kasus ISPA/Pneumonia,0
+Papua Pegunungan,2023,Kasus Malaria Positif,10171
+Papua Pegunungan,2024,Kasus ISPA/Pneumonia,0
+Papua Pegunungan,2024,Kasus Malaria Positif,37975
+Papua Selatan,2023,Kasus Diare Dilayani,3886
+Papua Selatan,2023,Kasus ISPA/Pneumonia,0
+Papua Selatan,2023,Kasus Kusta Baru,93
+Papua Selatan,2023,Kasus Malaria Positif,38220
+Papua Selatan,2024,Kasus Diare Dilayani,3658
+Papua Selatan,2024,Kasus ISPA/Pneumonia,1873
+Papua Selatan,2024,Kasus Kusta Baru,188
+Papua Selatan,2024,Kasus Malaria Positif,56991
+Papua Tengah,2023,Kasus Diare Dilayani,3726
+Papua Tengah,2023,Kasus ISPA/Pneumonia,0
+Papua Tengah,2023,Kasus Kusta Baru,224
+Papua Tengah,2023,Kasus Malaria Positif,147285
+Papua Tengah,2024,Kasus Diare Dilayani,1771
+Papua Tengah,2024,Kasus ISPA/Pneumonia,0
+Papua Tengah,2024,Kasus Kusta Baru,269
+Papua Tengah,2024,Kasus Malaria Positif,168278
+Riau,2014,Kasus Diare Dilayani,125463
+Riau,2014,Kasus ISPA/Pneumonia,10367
+Riau,2014,Kasus Kusta Baru,120
+Riau,2014,Kasus Malaria Positif,845
+Riau,2015,Kasus Diare Dilayani,104649
+Riau,2015,Kasus ISPA/Pneumonia,9552
+Riau,2015,Kasus Kusta Baru,108
+Riau,2015,Kasus Malaria Positif,625
+Riau,2016,Kasus Diare Dilayani,7717
+Riau,2016,Kasus ISPA/Pneumonia,11250
+Riau,2016,Kasus Kusta Baru,144
+Riau,2016,Kasus Malaria Positif,166
+Riau,2017,Kasus ISPA/Pneumonia,6277
+Riau,2017,Kasus Kusta Baru,136
+Riau,2017,Kasus Malaria Positif,211
+Riau,2018,Kasus Diare Dilayani,80498
+Riau,2018,Kasus ISPA/Pneumonia,5846
+Riau,2018,Kasus Kusta Baru,119
+Riau,2018,Kasus Malaria Positif,74
+Riau,2019,Kasus Diare Dilayani,83358
+Riau,2019,Kasus ISPA/Pneumonia,4272
+Riau,2019,Kasus Kusta Baru,107
+Riau,2019,Kasus Malaria Positif,137
+Riau,2020,Kasus Diare Dilayani,62440
+Riau,2020,Kasus ISPA/Pneumonia,2179
+Riau,2020,Kasus Kusta Baru,84
+Riau,2020,Kasus Malaria Positif,1740
+Riau,2021,Kasus Diare Dilayani,41163
+Riau,2021,Kasus ISPA/Pneumonia,1595
+Riau,2021,Kasus Kusta Baru,75
+Riau,2021,Kasus Malaria Positif,897
+Riau,2022,Kasus Diare Dilayani,20058
+Riau,2022,Kasus ISPA/Pneumonia,2153
+Riau,2022,Kasus Kusta Baru,33
+Riau,2022,Kasus Malaria Positif,1811
+Riau,2023,Kasus Diare Dilayani,31624
+Riau,2023,Kasus ISPA/Pneumonia,2128
+Riau,2023,Kasus Kusta Baru,133
+Riau,2023,Kasus Malaria Positif,2619
+Riau,2024,Kasus Diare Dilayani,38745
+Riau,2024,Kasus ISPA/Pneumonia,1853
+Riau,2024,Kasus Kusta Baru,112
+Riau,2024,Kasus Malaria Positif,2716
+Sulawesi Barat,2014,Kasus Diare Dilayani,0
+Sulawesi Barat,2014,Kasus ISPA/Pneumonia,243
+Sulawesi Barat,2014,Kasus Kusta Baru,199
+Sulawesi Barat,2014,Kasus Malaria Positif,325
+Sulawesi Barat,2015,Kasus Diare Dilayani,14723
+Sulawesi Barat,2015,Kasus ISPA/Pneumonia,1532
+Sulawesi Barat,2015,Kasus Kusta Baru,215
+Sulawesi Barat,2015,Kasus Malaria Positif,220
+Sulawesi Barat,2016,Kasus Diare Dilayani,25825
+Sulawesi Barat,2016,Kasus ISPA/Pneumonia,2549
+Sulawesi Barat,2016,Kasus Kusta Baru,181
+Sulawesi Barat,2016,Kasus Malaria Positif,119
+Sulawesi Barat,2017,Kasus ISPA/Pneumonia,1815
+Sulawesi Barat,2017,Kasus Kusta Baru,195
+Sulawesi Barat,2017,Kasus Malaria Positif,147
+Sulawesi Barat,2018,Kasus Diare Dilayani,36616
+Sulawesi Barat,2018,Kasus ISPA/Pneumonia,1450
+Sulawesi Barat,2018,Kasus Kusta Baru,212
+Sulawesi Barat,2018,Kasus Malaria Positif,254
+Sulawesi Barat,2019,Kasus Diare Dilayani,32427
+Sulawesi Barat,2019,Kasus ISPA/Pneumonia,1484
+Sulawesi Barat,2019,Kasus Kusta Baru,182
+Sulawesi Barat,2019,Kasus Malaria Positif,194
+Sulawesi Barat,2020,Kasus Diare Dilayani,18290
+Sulawesi Barat,2020,Kasus ISPA/Pneumonia,565
+Sulawesi Barat,2020,Kasus Kusta Baru,138
+Sulawesi Barat,2020,Kasus Malaria Positif,143
+Sulawesi Barat,2021,Kasus Diare Dilayani,15589
+Sulawesi Barat,2021,Kasus ISPA/Pneumonia,396
+Sulawesi Barat,2021,Kasus Kusta Baru,101
+Sulawesi Barat,2021,Kasus Malaria Positif,93
+Sulawesi Barat,2022,Kasus Diare Dilayani,19758
+Sulawesi Barat,2022,Kasus ISPA/Pneumonia,744
+Sulawesi Barat,2022,Kasus Kusta Baru,58
+Sulawesi Barat,2022,Kasus Malaria Positif,241
+Sulawesi Barat,2023,Kasus Diare Dilayani,22773
+Sulawesi Barat,2023,Kasus ISPA/Pneumonia,848
+Sulawesi Barat,2023,Kasus Kusta Baru,151
+Sulawesi Barat,2023,Kasus Malaria Positif,321
+Sulawesi Barat,2024,Kasus Diare Dilayani,16785
+Sulawesi Barat,2024,Kasus ISPA/Pneumonia,1381
+Sulawesi Barat,2024,Kasus Kusta Baru,169
+Sulawesi Barat,2024,Kasus Malaria Positif,315
+Sulawesi Selatan,2014,Kasus Diare Dilayani,0
+Sulawesi Selatan,2014,Kasus ISPA/Pneumonia,4168
+Sulawesi Selatan,2014,Kasus Kusta Baru,1143
+Sulawesi Selatan,2014,Kasus Malaria Positif,800
+Sulawesi Selatan,2015,Kasus Diare Dilayani,28221
+Sulawesi Selatan,2015,Kasus ISPA/Pneumonia,2445
+Sulawesi Selatan,2015,Kasus Kusta Baru,1220
+Sulawesi Selatan,2015,Kasus Malaria Positif,818
+Sulawesi Selatan,2016,Kasus Diare Dilayani,172650
+Sulawesi Selatan,2016,Kasus ISPA/Pneumonia,5528
+Sulawesi Selatan,2016,Kasus Kusta Baru,1124
+Sulawesi Selatan,2016,Kasus Malaria Positif,992
+Sulawesi Selatan,2017,Kasus ISPA/Pneumonia,6120
+Sulawesi Selatan,2017,Kasus Kusta Baru,1091
+Sulawesi Selatan,2017,Kasus Malaria Positif,1201
+Sulawesi Selatan,2018,Kasus Diare Dilayani,167900
+Sulawesi Selatan,2018,Kasus ISPA/Pneumonia,5350
+Sulawesi Selatan,2018,Kasus Kusta Baru,935
+Sulawesi Selatan,2018,Kasus Malaria Positif,1285
+Sulawesi Selatan,2019,Kasus Diare Dilayani,145456
+Sulawesi Selatan,2019,Kasus ISPA/Pneumonia,5108
+Sulawesi Selatan,2019,Kasus Kusta Baru,1152
+Sulawesi Selatan,2019,Kasus Malaria Positif,861
+Sulawesi Selatan,2020,Kasus Diare Dilayani,86993
+Sulawesi Selatan,2020,Kasus ISPA/Pneumonia,3027
+Sulawesi Selatan,2020,Kasus Kusta Baru,615
+Sulawesi Selatan,2020,Kasus Malaria Positif,765
+Sulawesi Selatan,2021,Kasus Diare Dilayani,67241
+Sulawesi Selatan,2021,Kasus ISPA/Pneumonia,2443
+Sulawesi Selatan,2021,Kasus Kusta Baru,694
+Sulawesi Selatan,2021,Kasus Malaria Positif,936
+Sulawesi Selatan,2022,Kasus Diare Dilayani,87402
+Sulawesi Selatan,2022,Kasus ISPA/Pneumonia,4872
+Sulawesi Selatan,2022,Kasus Kusta Baru,278
+Sulawesi Selatan,2022,Kasus Malaria Positif,1736
+Sulawesi Selatan,2023,Kasus Diare Dilayani,110987
+Sulawesi Selatan,2023,Kasus ISPA/Pneumonia,9050
+Sulawesi Selatan,2023,Kasus Kusta Baru,817
+Sulawesi Selatan,2023,Kasus Malaria Positif,1805
+Sulawesi Selatan,2024,Kasus Diare Dilayani,120370
+Sulawesi Selatan,2024,Kasus ISPA/Pneumonia,9052
+Sulawesi Selatan,2024,Kasus Kusta Baru,776
+Sulawesi Selatan,2024,Kasus Malaria Positif,1905
+Sulawesi Tengah,2014,Kasus Diare Dilayani,206494
+Sulawesi Tengah,2014,Kasus ISPA/Pneumonia,7923
+Sulawesi Tengah,2014,Kasus Kusta Baru,269
+Sulawesi Tengah,2014,Kasus Malaria Positif,2282
+Sulawesi Tengah,2015,Kasus Diare Dilayani,12803
+Sulawesi Tengah,2015,Kasus ISPA/Pneumonia,10152
+Sulawesi Tengah,2015,Kasus Kusta Baru,494
+Sulawesi Tengah,2015,Kasus Malaria Positif,1953
+Sulawesi Tengah,2016,Kasus Diare Dilayani,12992
+Sulawesi Tengah,2016,Kasus ISPA/Pneumonia,10565
+Sulawesi Tengah,2016,Kasus Kusta Baru,317
+Sulawesi Tengah,2016,Kasus Malaria Positif,1446
+Sulawesi Tengah,2017,Kasus ISPA/Pneumonia,9895
+Sulawesi Tengah,2017,Kasus Kusta Baru,342
+Sulawesi Tengah,2017,Kasus Malaria Positif,543
+Sulawesi Tengah,2018,Kasus Diare Dilayani,59544
+Sulawesi Tengah,2018,Kasus ISPA/Pneumonia,8980
+Sulawesi Tengah,2018,Kasus Kusta Baru,294
+Sulawesi Tengah,2018,Kasus Malaria Positif,186
+Sulawesi Tengah,2019,Kasus Diare Dilayani,52584
+Sulawesi Tengah,2019,Kasus ISPA/Pneumonia,8430
+Sulawesi Tengah,2019,Kasus Kusta Baru,295
+Sulawesi Tengah,2019,Kasus Malaria Positif,179
+Sulawesi Tengah,2020,Kasus Diare Dilayani,38757
+Sulawesi Tengah,2020,Kasus ISPA/Pneumonia,5724
+Sulawesi Tengah,2020,Kasus Kusta Baru,201
+Sulawesi Tengah,2020,Kasus Malaria Positif,199
+Sulawesi Tengah,2021,Kasus Diare Dilayani,29273
+Sulawesi Tengah,2021,Kasus ISPA/Pneumonia,4668
+Sulawesi Tengah,2021,Kasus Kusta Baru,180
+Sulawesi Tengah,2021,Kasus Malaria Positif,56
+Sulawesi Tengah,2022,Kasus Diare Dilayani,27582
+Sulawesi Tengah,2022,Kasus ISPA/Pneumonia,6273
+Sulawesi Tengah,2022,Kasus Kusta Baru,113
+Sulawesi Tengah,2022,Kasus Malaria Positif,173
+Sulawesi Tengah,2023,Kasus Diare Dilayani,10648
+Sulawesi Tengah,2023,Kasus ISPA/Pneumonia,7873
+Sulawesi Tengah,2023,Kasus Kusta Baru,322
+Sulawesi Tengah,2023,Kasus Malaria Positif,636
+Sulawesi Tengah,2024,Kasus Diare Dilayani,34225
+Sulawesi Tengah,2024,Kasus ISPA/Pneumonia,8840
+Sulawesi Tengah,2024,Kasus Kusta Baru,356
+Sulawesi Tengah,2024,Kasus Malaria Positif,1141
+Sulawesi Tenggara,2014,Kasus Diare Dilayani,25430
+Sulawesi Tenggara,2014,Kasus ISPA/Pneumonia,5081
+Sulawesi Tenggara,2014,Kasus Kusta Baru,268
+Sulawesi Tenggara,2014,Kasus Malaria Positif,1124
+Sulawesi Tenggara,2015,Kasus Diare Dilayani,115878
+Sulawesi Tenggara,2015,Kasus ISPA/Pneumonia,3262
+Sulawesi Tenggara,2015,Kasus Kusta Baru,281
+Sulawesi Tenggara,2015,Kasus Malaria Positif,1073
+Sulawesi Tenggara,2016,Kasus Diare Dilayani,30304
+Sulawesi Tenggara,2016,Kasus ISPA/Pneumonia,3106
+Sulawesi Tenggara,2016,Kasus Kusta Baru,329
+Sulawesi Tenggara,2016,Kasus Malaria Positif,1226
+Sulawesi Tenggara,2017,Kasus ISPA/Pneumonia,2577
+Sulawesi Tenggara,2017,Kasus Kusta Baru,337
+Sulawesi Tenggara,2017,Kasus Malaria Positif,596
+Sulawesi Tenggara,2018,Kasus Diare Dilayani,32359
+Sulawesi Tenggara,2018,Kasus ISPA/Pneumonia,3713
+Sulawesi Tenggara,2018,Kasus Kusta Baru,293
+Sulawesi Tenggara,2018,Kasus Malaria Positif,831
+Sulawesi Tenggara,2019,Kasus Diare Dilayani,27212
+Sulawesi Tenggara,2019,Kasus ISPA/Pneumonia,3648
+Sulawesi Tenggara,2019,Kasus Kusta Baru,214
+Sulawesi Tenggara,2019,Kasus Malaria Positif,812
+Sulawesi Tenggara,2020,Kasus Diare Dilayani,15237
+Sulawesi Tenggara,2020,Kasus ISPA/Pneumonia,1283
+Sulawesi Tenggara,2020,Kasus Kusta Baru,127
+Sulawesi Tenggara,2020,Kasus Malaria Positif,415
+Sulawesi Tenggara,2021,Kasus Diare Dilayani,14929
+Sulawesi Tenggara,2021,Kasus ISPA/Pneumonia,1048
+Sulawesi Tenggara,2021,Kasus Kusta Baru,209
+Sulawesi Tenggara,2021,Kasus Malaria Positif,351
+Sulawesi Tenggara,2022,Kasus Diare Dilayani,17004
+Sulawesi Tenggara,2022,Kasus ISPA/Pneumonia,1515
+Sulawesi Tenggara,2022,Kasus Kusta Baru,65
+Sulawesi Tenggara,2022,Kasus Malaria Positif,590
+Sulawesi Tenggara,2023,Kasus Diare Dilayani,26539
+Sulawesi Tenggara,2023,Kasus ISPA/Pneumonia,1572
+Sulawesi Tenggara,2023,Kasus Kusta Baru,220
+Sulawesi Tenggara,2023,Kasus Malaria Positif,585
+Sulawesi Tenggara,2024,Kasus Diare Dilayani,24613
+Sulawesi Tenggara,2024,Kasus ISPA/Pneumonia,1647
+Sulawesi Tenggara,2024,Kasus Kusta Baru,183
+Sulawesi Tenggara,2024,Kasus Malaria Positif,525
+Sulawesi Utara,2014,Kasus Diare Dilayani,0
+Sulawesi Utara,2014,Kasus ISPA/Pneumonia,11208
+Sulawesi Utara,2014,Kasus Kusta Baru,349
+Sulawesi Utara,2014,Kasus Malaria Positif,2244
+Sulawesi Utara,2015,Kasus Diare Dilayani,59614
+Sulawesi Utara,2015,Kasus ISPA/Pneumonia,753
+Sulawesi Utara,2015,Kasus Kusta Baru,427
+Sulawesi Utara,2015,Kasus Malaria Positif,2128
+Sulawesi Utara,2016,Kasus Diare Dilayani,6337
+Sulawesi Utara,2016,Kasus ISPA/Pneumonia,559
+Sulawesi Utara,2016,Kasus Kusta Baru,379
+Sulawesi Utara,2016,Kasus Malaria Positif,1752
+Sulawesi Utara,2017,Kasus ISPA/Pneumonia,321
+Sulawesi Utara,2017,Kasus Kusta Baru,454
+Sulawesi Utara,2017,Kasus Malaria Positif,900
+Sulawesi Utara,2018,Kasus Diare Dilayani,20626
+Sulawesi Utara,2018,Kasus ISPA/Pneumonia,427
+Sulawesi Utara,2018,Kasus Kusta Baru,360
+Sulawesi Utara,2018,Kasus Malaria Positif,609
+Sulawesi Utara,2019,Kasus Diare Dilayani,19435
+Sulawesi Utara,2019,Kasus ISPA/Pneumonia,752
+Sulawesi Utara,2019,Kasus Kusta Baru,590
+Sulawesi Utara,2019,Kasus Malaria Positif,501
+Sulawesi Utara,2020,Kasus Diare Dilayani,3369
+Sulawesi Utara,2020,Kasus ISPA/Pneumonia,274
+Sulawesi Utara,2020,Kasus Kusta Baru,356
+Sulawesi Utara,2020,Kasus Malaria Positif,900
+Sulawesi Utara,2021,Kasus Diare Dilayani,10687
+Sulawesi Utara,2021,Kasus ISPA/Pneumonia,281
+Sulawesi Utara,2021,Kasus Kusta Baru,378
+Sulawesi Utara,2021,Kasus Malaria Positif,713
+Sulawesi Utara,2022,Kasus Diare Dilayani,9374
+Sulawesi Utara,2022,Kasus ISPA/Pneumonia,209
+Sulawesi Utara,2022,Kasus Kusta Baru,185
+Sulawesi Utara,2022,Kasus Malaria Positif,1069
+Sulawesi Utara,2023,Kasus Diare Dilayani,8604
+Sulawesi Utara,2023,Kasus ISPA/Pneumonia,143
+Sulawesi Utara,2023,Kasus Kusta Baru,456
+Sulawesi Utara,2023,Kasus Malaria Positif,1221
+Sulawesi Utara,2024,Kasus Diare Dilayani,11532
+Sulawesi Utara,2024,Kasus ISPA/Pneumonia,243
+Sulawesi Utara,2024,Kasus Kusta Baru,441
+Sulawesi Utara,2024,Kasus Malaria Positif,1245
+Sumatera Barat,2014,Kasus Diare Dilayani,111804
+Sumatera Barat,2014,Kasus ISPA/Pneumonia,13384
+Sumatera Barat,2014,Kasus Kusta Baru,159
+Sumatera Barat,2014,Kasus Malaria Positif,908
+Sumatera Barat,2015,Kasus Diare Dilayani,178761
+Sumatera Barat,2015,Kasus ISPA/Pneumonia,15373
+Sumatera Barat,2015,Kasus Kusta Baru,54
+Sumatera Barat,2015,Kasus Malaria Positif,752
+Sumatera Barat,2016,Kasus Diare Dilayani,36322
+Sumatera Barat,2016,Kasus ISPA/Pneumonia,13868
+Sumatera Barat,2016,Kasus Kusta Baru,54
+Sumatera Barat,2016,Kasus Malaria Positif,650
+Sumatera Barat,2017,Kasus ISPA/Pneumonia,10576
+Sumatera Barat,2017,Kasus Kusta Baru,53
+Sumatera Barat,2017,Kasus Malaria Positif,512
+Sumatera Barat,2018,Kasus Diare Dilayani,122201
+Sumatera Barat,2018,Kasus ISPA/Pneumonia,11346
+Sumatera Barat,2018,Kasus Kusta Baru,63
+Sumatera Barat,2018,Kasus Malaria Positif,482
+Sumatera Barat,2019,Kasus Diare Dilayani,88290
+Sumatera Barat,2019,Kasus ISPA/Pneumonia,10206
+Sumatera Barat,2019,Kasus Kusta Baru,91
+Sumatera Barat,2019,Kasus Malaria Positif,316
+Sumatera Barat,2020,Kasus Diare Dilayani,72584
+Sumatera Barat,2020,Kasus ISPA/Pneumonia,4471
+Sumatera Barat,2020,Kasus Kusta Baru,35
+Sumatera Barat,2020,Kasus Malaria Positif,93
+Sumatera Barat,2021,Kasus Diare Dilayani,57203
+Sumatera Barat,2021,Kasus ISPA/Pneumonia,3595
+Sumatera Barat,2021,Kasus Kusta Baru,72
+Sumatera Barat,2021,Kasus Malaria Positif,72
+Sumatera Barat,2022,Kasus Diare Dilayani,48394
+Sumatera Barat,2022,Kasus ISPA/Pneumonia,5591
+Sumatera Barat,2022,Kasus Kusta Baru,19
+Sumatera Barat,2022,Kasus Malaria Positif,197
+Sumatera Barat,2023,Kasus Diare Dilayani,40689
+Sumatera Barat,2023,Kasus ISPA/Pneumonia,6405
+Sumatera Barat,2023,Kasus Kusta Baru,65
+Sumatera Barat,2023,Kasus Malaria Positif,56
+Sumatera Barat,2024,Kasus Diare Dilayani,50105
+Sumatera Barat,2024,Kasus ISPA/Pneumonia,8576
+Sumatera Barat,2024,Kasus Kusta Baru,57
+Sumatera Barat,2024,Kasus Malaria Positif,54
+Sumatera Selatan,2014,Kasus Diare Dilayani,169769
+Sumatera Selatan,2014,Kasus ISPA/Pneumonia,17384
+Sumatera Selatan,2014,Kasus Kusta Baru,304
+Sumatera Selatan,2014,Kasus Malaria Positif,2371
+Sumatera Selatan,2015,Kasus Diare Dilayani,148248
+Sumatera Selatan,2015,Kasus ISPA/Pneumonia,17254
+Sumatera Selatan,2015,Kasus Kusta Baru,330
+Sumatera Selatan,2015,Kasus Malaria Positif,2495
+Sumatera Selatan,2016,Kasus Diare Dilayani,44015
+Sumatera Selatan,2016,Kasus ISPA/Pneumonia,13505
+Sumatera Selatan,2016,Kasus Kusta Baru,278
+Sumatera Selatan,2016,Kasus Malaria Positif,2286
+Sumatera Selatan,2017,Kasus ISPA/Pneumonia,13345
+Sumatera Selatan,2017,Kasus Kusta Baru,281
+Sumatera Selatan,2017,Kasus Malaria Positif,911
+Sumatera Selatan,2018,Kasus Diare Dilayani,164934
+Sumatera Selatan,2018,Kasus ISPA/Pneumonia,12097
+Sumatera Selatan,2018,Kasus Kusta Baru,303
+Sumatera Selatan,2018,Kasus Malaria Positif,646
+Sumatera Selatan,2019,Kasus Diare Dilayani,173537
+Sumatera Selatan,2019,Kasus ISPA/Pneumonia,10682
+Sumatera Selatan,2019,Kasus Kusta Baru,235
+Sumatera Selatan,2019,Kasus Malaria Positif,602
+Sumatera Selatan,2020,Kasus Diare Dilayani,89294
+Sumatera Selatan,2020,Kasus ISPA/Pneumonia,5928
+Sumatera Selatan,2020,Kasus Kusta Baru,180
+Sumatera Selatan,2020,Kasus Malaria Positif,69
+Sumatera Selatan,2021,Kasus Diare Dilayani,94538
+Sumatera Selatan,2021,Kasus ISPA/Pneumonia,3999
+Sumatera Selatan,2021,Kasus Kusta Baru,222
+Sumatera Selatan,2021,Kasus Malaria Positif,25
+Sumatera Selatan,2022,Kasus Diare Dilayani,86487
+Sumatera Selatan,2022,Kasus ISPA/Pneumonia,6651
+Sumatera Selatan,2022,Kasus Kusta Baru,98
+Sumatera Selatan,2022,Kasus Malaria Positif,40
+Sumatera Selatan,2023,Kasus Diare Dilayani,95955
+Sumatera Selatan,2023,Kasus ISPA/Pneumonia,6496
+Sumatera Selatan,2023,Kasus Kusta Baru,203
+Sumatera Selatan,2023,Kasus Malaria Positif,51
+Sumatera Selatan,2024,Kasus Diare Dilayani,27263
+Sumatera Selatan,2024,Kasus ISPA/Pneumonia,6896
+Sumatera Selatan,2024,Kasus Kusta Baru,264
+Sumatera Selatan,2024,Kasus Malaria Positif,99
+Sumatera Utara,2014,Kasus Diare Dilayani,0
+Sumatera Utara,2014,Kasus ISPA/Pneumonia,27273
+Sumatera Utara,2014,Kasus Kusta Baru,176
+Sumatera Utara,2014,Kasus Malaria Positif,9357
+Sumatera Utara,2015,Kasus Diare Dilayani,229557
+Sumatera Utara,2015,Kasus ISPA/Pneumonia,17226
+Sumatera Utara,2015,Kasus Kusta Baru,197
+Sumatera Utara,2015,Kasus Malaria Positif,6840
+Sumatera Utara,2016,Kasus Diare Dilayani,0
+Sumatera Utara,2016,Kasus ISPA/Pneumonia,7997
+Sumatera Utara,2016,Kasus Kusta Baru,177
+Sumatera Utara,2016,Kasus Malaria Positif,3807
+Sumatera Utara,2017,Kasus ISPA/Pneumonia,5452
+Sumatera Utara,2017,Kasus Kusta Baru,158
+Sumatera Utara,2017,Kasus Malaria Positif,2442
+Sumatera Utara,2018,Kasus Diare Dilayani,128088
+Sumatera Utara,2018,Kasus ISPA/Pneumonia,6293
+Sumatera Utara,2018,Kasus Kusta Baru,177
+Sumatera Utara,2018,Kasus Malaria Positif,1299
+Sumatera Utara,2019,Kasus Diare Dilayani,215250
+Sumatera Utara,2019,Kasus ISPA/Pneumonia,6625
+Sumatera Utara,2019,Kasus Kusta Baru,192
+Sumatera Utara,2019,Kasus Malaria Positif,1033
+Sumatera Utara,2020,Kasus Diare Dilayani,200335
+Sumatera Utara,2020,Kasus ISPA/Pneumonia,2508
+Sumatera Utara,2020,Kasus Kusta Baru,108
+Sumatera Utara,2020,Kasus Malaria Positif,998
+Sumatera Utara,2021,Kasus Diare Dilayani,26945
+Sumatera Utara,2021,Kasus ISPA/Pneumonia,3345
+Sumatera Utara,2021,Kasus Kusta Baru,114
+Sumatera Utara,2021,Kasus Malaria Positif,2531
+Sumatera Utara,2022,Kasus Diare Dilayani,174199
+Sumatera Utara,2022,Kasus ISPA/Pneumonia,5098
+Sumatera Utara,2022,Kasus Kusta Baru,54
+Sumatera Utara,2022,Kasus Malaria Positif,5226
+Sumatera Utara,2023,Kasus Diare Dilayani,105226
+Sumatera Utara,2023,Kasus ISPA/Pneumonia,5028
+Sumatera Utara,2023,Kasus Kusta Baru,153
+Sumatera Utara,2023,Kasus Malaria Positif,4921
+Sumatera Utara,2024,Kasus Diare Dilayani,133953
+Sumatera Utara,2024,Kasus ISPA/Pneumonia,6328
+Sumatera Utara,2024,Kasus Kusta Baru,108
+Sumatera Utara,2024,Kasus Malaria Positif,6596

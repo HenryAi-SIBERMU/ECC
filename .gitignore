@@ -48,3 +48,5 @@ data/google-apps-script/
 
 # docs images (generated screenshots, not source)
 docs/image/
+
+.venv/

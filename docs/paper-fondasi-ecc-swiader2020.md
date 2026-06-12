@@ -82,11 +82,19 @@ BC = Σ (A_n × YF_n × EQF_n)
 
 ### Formula 3 — Konsumsi Pangan Tertimbang (Weighted Average)
 
+Dikarenakan ketiadaan data konsumsi di level munisipalitas, paper ini menggunakan data rata-rata wilayah (Lower Silesia) yang dibobot berdasarkan ukuran lokalitas (kelas populasi kota/desa).
+
 ```
 A_Fi = (W_Ln × A_FiLn) + (W_V × A_FnV)
 ```
 
-Digunakan ketika data konsumsi tidak tersedia di level lokal → menarik dari data rata-rata regional/nasional menggunakan pembobotan populasi.
+| Simbol | Keterangan | Satuan |
+|--------|------------|--------|
+| `A_Fi` | Konsumsi produk makanan ke-`i` yang disesuaikan (adjusted) | kg/kapita |
+| `W_Ln` | Bobot proporsi penduduk di kota (Town/City) | persentase |
+| `A_FiLn` | Konsumsi rata-rata produk `i` di kota | kg/kapita |
+| `W_V` | Bobot proporsi penduduk di pedesaan (Village) | persentase |
+| `A_FnV` | Konsumsi rata-rata produk `i` di pedesaan | kg/kapita |
 
 ### Formula 4 — Bobot Populasi Per Kelas Lokalitas
 
@@ -94,7 +102,13 @@ Digunakan ketika data konsumsi tidak tersedia di level lokal → menarik dari da
 W_Ln = I_In / (I_In + I_IV)
 ```
 
-Mempertimbangkan perbedaan pola konsumsi antara kota besar, kota kecil, dan pedesaan.
+| Simbol | Keterangan |
+|--------|------------|
+| `W_Ln` | Bobot kelas kota ke-`n` |
+| `I_In` | Jumlah penduduk di kota kelas `n` |
+| `I_IV` | Total penduduk di seluruh kota (Towns) dan desa (Villages) di munisipalitas tersebut |
+
+Pendekatan ini sangat krusial untuk CELIOS karena di Indonesia, data konsumsi BPS (Susenas) seringkali hanya akurat di level provinsi/kabupaten, sehingga untuk level yang lebih mikro (kecamatan/desa) memerlukan pembobotan rasio urban-rural seperti ini.
 
 ---
 
@@ -151,24 +165,24 @@ Setiap tipe lahan memiliki **Yield Factor (YF)** dan **Equivalence Factor (EQF)*
 
 ## 7. Zona Lingkungan (Environmental Zones)
 
-Framework ini menambahkan layer **zona pembatas** yang dikurangi dari BC potensial:
+Framework ini menambahkan layer **zona pembatas** yang dikurangi dari BC potensial. Langkah ini diotomatisasi menggunakan perangkat lunak **CommunityViz** (ekstensi ArcGIS) untuk menghitung indikator berbasis keruangan.
 
 ### Excluded Zones (Zona Terbatas Mutlak)
-- Kawasan Lindung (Protected Areas) → tidak boleh dieksploitasi sama sekali
+- **Kawasan Lindung (Protected Areas)** → Tidak boleh dieksploitasi untuk permukiman manusia demi menjaga layanan ekosistem dan keanekaragaman hayati.
 
 ### Restricted Zones (Zona Terbatas Bersyarat)
-- **Good-quality soils** → cadangan lahan pertanian urban
-- **Flood-risk areas** → kawasan rawan banjir (berdasarkan probabilitas banjir Q 10%)
+- **Good-quality soils** → Cadangan tanah subur yang disiapkan untuk *urban agriculture* (pertanian perkotaan). Ini penting untuk ketahanan pangan lokal.
+- **Flood-risk areas** → Kawasan rawan banjir (berdasarkan probabilitas banjir historis Q 10%).
 
 **Kode Identifikasi Zona (dalam paper):**
 
-| Kode | Isi |
-|------|-----|
-| `P` | Protected areas |
-| `O` | Good-quality soils (urban agriculture reserve) |
-| `F` | Flood-risk areas |
-| `POO` | Protected + Good soils |
-| `PSF` | Protected + Good soils + Flood risk (zona paling ketat) |
+| Kode | Isi | Deskripsi Ekologis |
+|------|-----|--------------------|
+| `P` | Protected areas | Area konservasi alam (Natura 2000, dll) |
+| `O` | Good-quality soils | Lahan pertanian produktif yang dilindungi dari konversi perumahan |
+| `F` | Flood-risk areas | Area yang dihindari karena risiko bencana |
+| `POO` | Protected + Good soils | Kombinasi perlindungan biodiversitas & ketahanan pangan |
+| `PSF` | Protected + Good soils + Flood risk | Zona paling ketat (mengurangi ekspansi urban paling drastis) |
 
 ---
 
@@ -184,30 +198,34 @@ Paper membangun **4 skenario alternatif** untuk mengevaluasi kebijakan tata ruan
 | **Scenario 3** | PF | + Protected + Flood-risk |
 | **Scenario 4** | PSF | + Protected + Good soils + Flood-risk (terlengkap) |
 
-**Temuan kunci skenario:**
-- Skenario PSF memberikan penurunan CF tertinggi: Zórawina −62.18%, Kobierzyce −34%
-- Bahkan perubahan BC < +0.01% sudah berdampak nyata pada pengurangan CF
+**Temuan kunci skenario (Berdasarkan Ekstraksi PageIndex GPT-5.1):**
+- Perlindungan **Good-quality soils** (tanah pertanian) memiliki efek paling drastis dalam mencegah lonjakan CF dibanding pembatasan perlindungan alam atau banjir.
+- Skenario PSF memberikan penurunan area permukiman terencana tertinggi yang berkorelasi dengan penurunan ekspansi CF masa depan, khususnya di wilayah dominan pertanian (Zórawina −62.18%, Kobierzyce −34%).
+- Bahkan perubahan kecil pada BC (< +0.01%) akibat perlindungan zona-zona ini memberikan dampak nyata pada pengurangan total defisit ekologis.
 
 ---
 
 ## 9. Alat & Data yang Digunakan
 
-| Komponen | Sumber Data (Polandia) | Analog Indonesia |
-|----------|------------------------|------------------|
-| Populasi | GUS (BPS-nya Polandia) | **BPS Indonesia** |
-| Konsumsi pangan | Susenas-equiv Polandia per kelas lokalitas | **Susenas BPS** |
-| Limbah cair | MPWiK Wrocław (PDAM-equiv) | **Dinas LHK / PDAM** |
-| Sampah | Laporan TPA lokal | **SIPSN KLHK** |
-| Listrik | PLN-equiv Polandia | **Laporan PLN** |
-| Gas | Laporan distribusi gas kota | **Pertamina / PGN** |
-| Kendaraan | SAMSAT-equiv | **Korlantas / SAMSAT** |
-| Tutupan lahan | CLC 2018 (Copernicus) | **Peta KLHK / BIG** |
-| Kawasan lindung | Natura 2000 | **KLHK Kawasan Konservasi** |
-| Rawan banjir | Pan´stwoweGospodarstwoWodne | **BNPB Peta Risiko Banjir** |
-| YF & EQF | Global Footprint Network (GFN) | **GFN NFA — perlu akses/lisensi** |
+Paper ini sangat menekankan pentingnya integrasi resolusi tinggi seperti *Digital Elevation Models (DEMs)* dan LiDAR dalam pemodelan lingkungan.
 
-**Analisis spasial:** ArcGIS dengan modul Calculation Variables (CV)  
-→ *Analog CELIOS: Plotly/Altair + peta provinsi Indonesia*
+| Komponen | Sumber Data (Polandia) | Analog Indonesia untuk CELIOS |
+|----------|------------------------|-------------------------------|
+| **Populasi** | GUS (Badan Statistik Nasional) | **BPS Indonesia (Sensus/Susenas)** |
+| **Konsumsi Pangan** | Data pengeluaran rumah tangga regional | **Susenas BPS (Modul Konsumsi)** |
+| **Limbah Cair** | MPWiK Wrocław (PDAM/Sanitasi lokal) | **Dinas LHK / PDAM / BPS** |
+| **Sampah Padat** | Laporan tahunan TPA munisipalitas | **SIPSN KLHK** |
+| **Listrik** | Laporan agregat penyedia listrik | **Statistik PLN** |
+| **Gas** | Data distribusi operator jaringan gas | **Pertamina / PGN / BPH Migas** |
+| **Mobilitas** | Database registrasi kendaraan lokal | **Korlantas Polri / BPS Transportasi** |
+| **Tutupan Lahan** | CLC 2018 (Corine Land Cover - Copernicus) | **Peta Penutupan Lahan KLHK / BIG** |
+| **Kawasan Lindung**| Jaringan Natura 2000 Eropa | **SK Kawasan Konservasi KLHK** |
+| **Rawan Banjir** | Państwowe Gospodarstwo Wodne (Otoritas Air) | **Peta Risiko Bencana BNPB / Inarisk** |
+| **YF & EQF** | Global Footprint Network (GFN) NFA | **GFN NFA — Data per negara** |
+
+**Analisis Spasial & Otomasi:**  
+Pemrosesan dilakukan di **ArcGIS** menggunakan ekstensi **CommunityViz** dengan modul *Calculation Variables (CV)*. Modul ini memungkinkan pengguna untuk mendefinisikan persamaan secara dinamis dan mengotomatisasi kalkulasi serta visualisasi perubahan tata guna lahan tanpa memerlukan software tambahan.  
+→ *Analog CELIOS: Kita akan menggunakan Python (Geopandas/Rasterio) dikombinasikan dengan Streamlit + Plotly/DeckGL.*
 
 ---
 
@@ -215,14 +233,17 @@ Paper membangun **4 skenario alternatif** untuk mengevaluasi kebijakan tata ruan
 
 | Metrik | Nilai |
 |--------|-------|
-| CF total Wrocław + suburban | **3,652,211 gha** |
-| CF per kapita | **4.523 gha/kapita** |
-| "Earths needed" (study area) | **2.77 bumi** |
-| "Earths needed" (rata-rata Polandia) | 2.72 bumi |
+| Populasi *Current* -> *Planned* | **807.503 jiwa** -> **1.392.297 jiwa** |
+| Radius Ekologis (Spatial extent) | **107,8 km** melebar ke **141,4 km** |
+| CF total Wrocław + suburban | **3.652.211 gha** (naik 72% di Base Scenario) |
+| CF per kapita | **4,523 gha/kapita** |
+| Komposisi CF Terbesar | **Listrik (66,6%)**, **Mobilitas (16,8%)**, **Pangan (6,4%)** |
+| "Earths needed" (study area) | **2,77 bumi** |
+| "Earths needed" (rata-rata Polandia) | 2,72 bumi |
 | Area hutan dibutuhkan untuk menyerap CF | ~2 juta ha (≈ luas Lower Silesia) |
-| Jika semua lahan dikonversi ke padang hijau | 4.4–4.5 juta ha (83–85% 3 voivodeship) |
 
-**Deficit additional** jika semua rencana tata ruang diimplementasikan: **+5,858,170 gha**
+**Defisit Ekologis Tambahan** jika semua rencana tata ruang (Base Scenario) diimplementasikan secara penuh:
+Kenaikan total CF mencapai **6.275.076 gha** (+72%). Menariknya, meskipun persentase pertumbuhan CF kota Wrocław lebih kecil dibanding wilayah sub-urbannya (hanya tumbuh 55%), namun karena populasi asalnya sangat padat, kota Wrocław menyumbang **75% dari total defisit ekologis** seluruh regional tersebut.
 
 ---
 
