@@ -562,6 +562,21 @@ Konsekuensi dari obral izin ini tergambar dengan brutal dalam metrik deforestasi
 Visualisasi yang bergerak dinamis ini dengan telanjang membongkar fakta bahwa ekspansi industri hilirisasi adalah predator utama hutan hujan tropis. Tidak ada yang namanya "Deforestasi Berkelanjutan"; yang terjadi adalah kanibalisme ruang di mana habitat flora-fauna, wilayah tangkapan air, dan ruang kelola masyarakat adat diratakan dengan tanah demi mengejar kuota produksi nikel global. Fakta ini menegaskan bahwa kita tidak sedang menyelamatkan iklim bumi dengan mobil listrik, melainkan sekadar memindahkan titik pusat kehancuran ekologis ke halaman belakang masyarakat Sulawesi. Sub-bab ini secara empiris membuktikan bahwa besarnya kawasan industri berbanding lurus dengan masifnya laju pembabatan hutan.
 """)
 
+# Load temporal concession data (izin baru per tahun)
+df_izin = pd.read_csv('data/processed/sulawesi_izin_baru_per_tahun.csv')
+
+# Calculate cumulative concession expansion per province over time
+df_izin = df_izin.sort_values(by=['Provinsi', 'Tahun'])
+df_izin['Kumulatif_Luas_Konsesi_Ha'] = df_izin.groupby('Provinsi')['Total_Luas_Konsesi_Baru_Ha'].cumsum()
+
+# Merge concession data with deforestation data
+df_panel_2_3 = pd.merge(
+    df_panel_2_3, 
+    df_izin[['Provinsi', 'Tahun', 'Total_Luas_Konsesi_Baru_Ha', 'Kumulatif_Luas_Konsesi_Ha']], 
+    on=['Provinsi', 'Tahun'], 
+    how='left'
+).fillna(0)
+
 # Sort data for animation (Crucial for plotly animation frames)
 df_panel_2_3.sort_values(by=['Tahun', 'Provinsi'], inplace=True)
 
@@ -624,12 +639,11 @@ for year in years:
         showscale=bool(year == years[0])  # Show colorbar only on first frame
     )
     
-    # Scattermapbox layer (Bubble for Deforestation Growth - Animated Size)
+    # Scattermapbox layer (Bubble for CUMULATIVE INDUSTRIAL CONCESSION)
     lats = []
     lons = []
     sizes = []
     texts = []
-    colors_bubble = []
     
     for _, row in df_year.iterrows():
         prov = row['Provinsi']
@@ -638,16 +652,14 @@ for year in years:
             lats.append(lat)
             lons.append(lon)
             
-            # Size proportional to CUMULATIVE DEFORESTATION (grows over time!)
-            # This makes bubbles animate/grow as deforestation increases
-            size = (row['Kumulatif_Deforestasi_Ha'] / 10000) ** 0.5 * 10
-            sizes.append(max(size, 4))  # Minimum size 4
-            
-            # Color intensity by industrial area (static)
-            colors_bubble.append(row['Luas_IUP_Kawasan_Ha'])
+            # Size proportional to CUMULATIVE CONCESSION EXPANSION (grows over time)
+            # This shows progressive industrial land grab
+            size = (row['Kumulatif_Luas_Konsesi_Ha'] / 10000) ** 0.5 * 15
+            sizes.append(max(size, 5))  # Minimum size 5
             
             texts.append(f"<b>{prov}</b><br>" + 
-                        f"Luas Kawasan Industri: {row['Luas_IUP_Kawasan_Ha']:,.0f} Ha<br>" +
+                        f"Konsesi Kumulatif: {row['Kumulatif_Luas_Konsesi_Ha']:,.0f} Ha<br>" +
+                        f"Konsesi Baru Tahun Ini: {row['Total_Luas_Konsesi_Baru_Ha']:,.0f} Ha<br>" +
                         f"Deforestasi Kumulatif: {row['Kumulatif_Deforestasi_Ha']:,.0f} Ha<br>" +
                         f"Deforestasi Tahun Ini: {row['Total_Deforestasi_Ha']:,.0f} Ha<br>" +
                         f"Tahun: {int(row['Tahun'])}")
@@ -660,7 +672,7 @@ for year in years:
             size=sizes,
             color='#FBC02D',  # Yellow-gold for industrial expansion
             opacity=0.65,
-            sizemode='diameter'  # Ensures size is treated as diameter
+            sizemode='diameter'
         ),
         text=texts,
         hovertemplate='%{text}<extra></extra>',
@@ -720,12 +732,13 @@ for _, row in df_init.iterrows():
         lats_init.append(lat)
         lons_init.append(lon)
         
-        # Size proportional to CUMULATIVE DEFORESTATION (starts small in 2014)
-        size = (row['Kumulatif_Deforestasi_Ha'] / 10000) ** 0.5 * 10
-        sizes_init.append(max(size, 4))
+        # Size proportional to CUMULATIVE CONCESSION EXPANSION (grows over time)
+        size = (row['Kumulatif_Luas_Konsesi_Ha'] / 10000) ** 0.5 * 15
+        sizes_init.append(max(size, 5))
         
         texts_init.append(f"<b>{prov}</b><br>" + 
-                         f"Luas Kawasan Industri: {row['Luas_IUP_Kawasan_Ha']:,.0f} Ha<br>" +
+                         f"Konsesi Kumulatif: {row['Kumulatif_Luas_Konsesi_Ha']:,.0f} Ha<br>" +
+                         f"Konsesi Baru Tahun Ini: {row['Total_Luas_Konsesi_Baru_Ha']:,.0f} Ha<br>" +
                          f"Deforestasi Kumulatif: {row['Kumulatif_Deforestasi_Ha']:,.0f} Ha<br>" +
                          f"Deforestasi Tahun Ini: {row['Total_Deforestasi_Ha']:,.0f} Ha<br>" +
                          f"Tahun: {int(row['Tahun'])}")
@@ -850,11 +863,11 @@ st.plotly_chart(fig_2_3, use_container_width=True)
 # Prepare interpretation text separately to avoid HTML escaping
 interp_text_23 = """
 <b style="color: #66BB6A;">Pembedahan Geospasial Temporal:</b><br>
-Peta animasi di atas secara brutal menelanjangi bagaimana "perlombaan menuju kiamat ekologis" terjadi secara beruntun dari tahun ke tahun. Tekan tombol <b>▶ PLAY</b> di pojok kiri bawah untuk melihat evolusi temporal kehancuran hutan Sulawesi.<br>
-<b>Gradient Hijau-Coklat (Choropleth)</b>: Menunjukkan transformasi tutupan hutan dari hijau (hutan masih baik) menjadi kuning-orange (hutan tertekan) hingga coklat gelap (hutan gundul total). Semakin coklat = semakin parah deforestasi kumulatifnya. Perhatikan bagaimana Sulteng & Sultra berubah dari hijau ke coklat pekat.<br>
-<b>Lingkaran Kuning (Bubbles - ANIMATED)</b>: Merepresentasikan Deforestasi Kumulatif yang terus bertambah. Ukuran lingkaran akan membesar seiring waktu — semakin besar bubble = semakin masif akumulasi kehilangan hutan. Perhatikan bagaimana bubble Sulteng & Sultra membengkak drastis dari 2014 ke 2023.<br>
-<b>Korelasi Visual</b>: Perhatikan bagaimana provinsi dengan bubble yang membesar paling cepat (Sulteng & Sultra) secara konsisten berubah warna dari hijau menjadi coklat gelap. Ini adalah bukti forensik bahwa ekspansi konsesi adalah mesin deforestasi.<br>
-<i style="color: #AAA;">Geser slider tahun untuk membandingkan kondisi awal (2014 - masih hijau) dengan kondisi terkini (2023 - coklat pekat). Anda akan melihat bagaimana warna berubah dari hijau menjadi coklat dan lingkaran kuning membengkak secara dramatis—visualisasi nyata dari aneksasi ruang dan pembantaian hutan yang sistematis.</i>
+Peta animasi di atas secara brutal menelanjangi bagaimana ekspansi kawasan industri mendorong kehancuran hutan secara sistematis. Tekan tombol <b>▶ PLAY</b> di pojok kiri bawah untuk melihat evolusi temporal dari 2014 hingga 2023.<br>
+<b>Gradient Hijau-Coklat (Choropleth - Warna Provinsi)</b>: Menunjukkan transformasi tutupan hutan dari hijau (deforestasi rendah) menjadi kuning-orange (hutan tertekan) hingga coklat gelap (hutan gundul total). Semakin coklat = semakin parah deforestasi kumulatifnya. Perhatikan bagaimana Sulteng & Sultra berubah dari hijau ke coklat pekat.<br>
+<b>Lingkaran Kuning (Bubbles - Ekspansi Konsesi Kumulatif)</b>: Merepresentasikan <b>akumulasi luas konsesi industri yang terus bertambah setiap tahun</b>. Ukuran bubble menunjukkan seberapa besar kawasan yang telah dikuasai industri ekstraktif secara kumulatif dari 2014 hingga tahun berjalan. Perhatikan bagaimana bubble Sulteng & Sultra <b>tumbuh membesar seiring waktu</b> — ini adalah visualisasi nyata dari land grabbing yang progresif dan ekspansif.<br>
+<b>Korelasi Visual</b>: Provinsi dengan bubble yang tumbuh paling cepat (ekspansi konsesi masif) adalah provinsi yang warnanya paling cepat berubah menjadi coklat (deforestasi parah). Ini adalah bukti forensik visual bahwa <b>ekspansi konsesi industri = mesin pembantai hutan</b>. Sulteng & Sultra dengan bubble yang terus membesar secara konsisten menunjukkan warna coklat gelap — konfirmasi empiris kausalitas industri ekstraktif terhadap kehancuran ekologis.<br>
+<i style="color: #AAA;">Geser slider tahun untuk membandingkan kondisi awal (2014) dengan kondisi terkini (2023). Anda akan melihat bagaimana provinsi dengan ekspansi konsesi tertinggi (bubble yang tumbuh besar) adalah yang paling cepat berubah warna dari hijau menjadi coklat — visualisasi nyata dari aneksasi ruang dan pembantaian hutan yang sistematis.</i>
 """
 
 st.markdown(f"""
@@ -864,8 +877,8 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 with st.expander("Lihat Data Mentah: Grafik Scatter Kumulatif Deforestasi", expanded=False):
-    st.dataframe(df_panel_2_3[['Provinsi', 'Tahun', 'Luas_IUP_Kawasan_Ha', 'Total_Deforestasi_Ha', 'Kumulatif_Deforestasi_Ha']], use_container_width=True, hide_index=True)
-    st.caption("📁 **Sumber File:** `data/processed/sulawesi_kawasan_nikel_luas.csv` & `data/processed/sulawesi_deforestasi_gfw.csv`")
+    st.dataframe(df_panel_2_3[['Provinsi', 'Tahun', 'Total_Luas_Konsesi_Baru_Ha', 'Kumulatif_Luas_Konsesi_Ha', 'Total_Deforestasi_Ha', 'Kumulatif_Deforestasi_Ha']], use_container_width=True, hide_index=True)
+    st.caption("📁 **Sumber File:** `data/processed/sulawesi_izin_baru_per_tahun.csv` & `data/processed/sulawesi_gfw_master_1_dekade_2014_2023.csv`")
 
 # SPSS Crosstab Section 2.3
 x_options_2_3 = {
