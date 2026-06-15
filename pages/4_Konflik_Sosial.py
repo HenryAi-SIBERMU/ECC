@@ -499,12 +499,11 @@ with col_jiwa:
         margin=dict(t=60, b=40)
     )
     
-    # Anotasi Anomali
     val_2012 = df_sektor_tahun[df_sektor_tahun['tahun'] == 2012]['dampak_masyarakat_jiwa'].sum()
     if val_2012 > 0:
         fig_jiwa.add_annotation(
             x=2012, y=val_2012,
-            text="<a href='#anomali-1' style='color:white;text-decoration:none;'><b>Anomali 1</b></a>",
+            text="<a href='#anomali-1' target='_self' style='color:white;text-decoration:none;'><b>Anomali 1</b></a>",
             hovertext="<b>2012 (Pertambangan)</b><br>Klik untuk melihat detail di bawah",
             showarrow=True, arrowhead=2, arrowcolor="#FF5252", ax=0, ay=-35,
             font=dict(size=11, color="white"), bgcolor="rgba(211,47,47,0.8)", bordercolor="#FF5252"
@@ -513,8 +512,17 @@ with col_jiwa:
     if val_2019 > 0:
         fig_jiwa.add_annotation(
             x=2019, y=val_2019,
-            text="<a href='#anomali-2' style='color:white;text-decoration:none;'><b>Anomali 2</b></a>",
+            text="<a href='#anomali-2' target='_self' style='color:white;text-decoration:none;'><b>Anomali 2</b></a>",
             hovertext="<b>2019 (PSN & Kehutanan)</b><br>Klik untuk melihat detail di bawah",
+            showarrow=True, arrowhead=2, arrowcolor="#FF5252", ax=0, ay=-35,
+            font=dict(size=11, color="white"), bgcolor="rgba(211,47,47,0.8)", bordercolor="#FF5252"
+        )
+    val_2020 = df_sektor_tahun[df_sektor_tahun['tahun'] == 2020]['dampak_masyarakat_jiwa'].sum()
+    if val_2020 > 0:
+        fig_jiwa.add_annotation(
+            x=2020, y=val_2020,
+            text="<a href='#anomali-5' target='_self' style='color:white;text-decoration:none;'><b>Anomali 5</b></a>",
+            hovertext="<b>2020 (Kehutanan)</b><br>Klik untuk melihat detail di bawah",
             showarrow=True, arrowhead=2, arrowcolor="#FF5252", ax=0, ay=-35,
             font=dict(size=11, color="white"), bgcolor="rgba(211,47,47,0.8)", bordercolor="#FF5252"
         )
@@ -541,12 +549,11 @@ with col_ha:
         margin=dict(t=60, b=40)
     )
 
-    # Anotasi Anomali
     val_2010 = df_sektor_tahun[df_sektor_tahun['tahun'] == 2010]['luas_ha'].sum()
     if val_2010 > 0:
         fig_ha.add_annotation(
             x=2010, y=val_2010,
-            text="<a href='#anomali-3' style='color:#111;text-decoration:none;'><b>Anomali 3</b></a>",
+            text="<a href='#anomali-3' target='_self' style='color:#111;text-decoration:none;'><b>Anomali 3</b></a>",
             hovertext="<b>2010 (Perkebunan)</b><br>Klik untuk melihat detail di bawah",
             showarrow=True, arrowhead=2, arrowcolor="#FFC107", ax=0, ay=-35,
             font=dict(size=11, color="#111"), bgcolor="rgba(255,193,7,0.9)", bordercolor="#FFB300"
@@ -555,7 +562,7 @@ with col_ha:
     if val_2015 > 0:
         fig_ha.add_annotation(
             x=2015, y=val_2015,
-            text="<a href='#anomali-4' style='color:#111;text-decoration:none;'><b>Anomali 4</b></a>",
+            text="<a href='#anomali-4' target='_self' style='color:#111;text-decoration:none;'><b>Anomali 4</b></a>",
             hovertext="<b>2015 (Hutan & Kebun)</b><br>Klik untuk melihat detail di bawah",
             showarrow=True, arrowhead=2, arrowcolor="#FFC107", ax=0, ay=-35,
             font=dict(size=11, color="#111"), bgcolor="rgba(255,193,7,0.9)", bordercolor="#FFB300"
@@ -652,6 +659,19 @@ Tahun 2015 didominasi konflik klaim tata ruang berskala puluhan ribu hektar di b
 * **Sektor:** Kehutanan
 * **Perusahaan Terlibat:** PT. Alam Bukit Tiga Puluh / Yayasan WWF Indonesia
 * **Narasi Kasus:** Proyek *Ecosystem Restoration Concession* (ERC) yang diinisiasi WWF justru memicu konflik dengan warga desa Pemayungan. Penetapan konsesi hijau tanpa proses FPIC (Persetujuan Atas Dasar Informasi Awal Tanpa Paksaan) menyingkirkan masyarakat dari wilayah kelolanya sendiri atas nama "konservasi".
+
+---
+
+<a id="anomali-5"></a>
+#### ANOMALI 5: Puncak Krisis Kemanusiaan Tahun 2020 (Sektor Kehutanan)
+Tahun 2020 mencatatkan anomali rekor tertinggi secara absolut untuk grafik Korban Terdampak (mencapai lebih dari 134.000 jiwa). Di tengah darurat pandemi COVID-19, pengusiran paksa dan konflik agraria justru tereskalasi dengan tingkat kebrutalan baru:
+
+**1. Konflik PT Wirakarya Sakti (WKS) vs Masyarakat Adat (Jambi)**
+* **Total Korban:** > 134.000 Jiwa
+* **Sektor:** Kehutanan (Hutan Produksi)
+* **Perusahaan Terlibat:** PT. Wirakarya Sakti (WKS)
+* **Pemerintah Terlibat:** Polres Tebo, Pemprov Jambi, DPRD Jambi, dan lintas instansi Pemkab.
+* **Narasi Kasus:** Konflik historis tak berkesudahan antara PT WKS dan warga sekitar konsesi HTI. Pada April 2020, kontraktor perusahaan secara sadar menerbangkan *drone* dan menyemprotkan cairan racun herbisida dari udara ke lahan warga (Dusun Pelayang Tebat) yang ditanami sawit dan palawija. Metode represi agrikultural udara ini mematikan sumber pangan warga secara instan dan memicu darurat sosial di ratusan ribu warga desa yang menggantungkan hidup pada lahan tersebut.
 """)
 
 st.subheader("4.3 Kriminalisasi Aktivis dan Resistensi Ruang Sipil")
