@@ -232,6 +232,18 @@ df_panel['Label Data'] = df_panel.apply(lambda x: f"Izin Baru: {int(x['Jumlah_Iz
 # Tambahkan label teks khusus jumlah izin jika > 0 agar muncul di blok (flat text)
 df_panel['Teks_IUP'] = df_panel['Jumlah_Izin_Baru'].apply(lambda x: f"{int(x)}" if x > 0 else "")
 
+# Interpretation Box dipindah ke ATAS grafik sesuai instruksi
+st.markdown("""
+<div style="background:#1E1E1E; padding:20px; border-radius:10px; border-left:5px solid #E74C3C; margin-bottom: 25px;">
+    <b style="color:#E74C3C; font-size:1.1rem;">Pembedahan Realitas Ekologis (Governance Failure):</b><br><br>
+    <div style="color: #E0E0E0; font-size: 0.95rem; line-height: 1.6;">
+    Peta waktu (<i>Surge Timeline</i>) di bawah ini menelanjangi kegagalan fungsi instrumen daya dukung lingkungan (D3TLH) secara spesifik di tiap provinsi. Warna hijau (<i>Within Capacity</i>) seharusnya menjadi standar operasional di mana izin tidak diterbitkan saat deforestasi sudah berada di fase kritis. Namun, realita grafis berkata lain.<br><br>
+    Perhatikan dominasi <b>blok merah solid (<i>Over Capacity</i>)</b> yang nyaris menyapu bersih lini masa provinsi seperti Sulawesi Tengah dan Sulawesi Tenggara sepanjang satu dekade terakhir. Blok merah ini menandakan bahwa negara secara sadar terus mengobral Izin Tambang Baru (IUP)—seperti yang ditunjukkan oleh angka di dalam blok—persis di saat provinsi tersebut sedang mengalami darurat kerusakan tutupan hutan alam (deforestasi di atas rata-rata historisnya).<br><br>
+    Alih-alih membunyikan "rem darurat", instrumen D3TLH terbukti hanya berakhir sebagai formalitas di atas kertas, yang sepenuhnya dibajak oleh syahwat ekspansi investasi oligarki.
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
 # Render Gantt Chart (px.timeline) - Surge Style
 fig_timeline = px.timeline(
     df_panel, 
@@ -275,21 +287,11 @@ fig_timeline.update_layout(
 
 st.plotly_chart(fig_timeline, use_container_width=True)
 
-# Interpretation Box
-st.markdown("""
-<div style="background:#1E1E1E; padding:20px; border-radius:10px; border-left:5px solid #E74C3C; margin-bottom: 25px;">
-    <b style="color:#E74C3C; font-size:1.1rem;">Pembedahan Realitas Ekologis (Governance Failure):</b><br><br>
-    <div style="color: #E0E0E0; font-size: 0.95rem; line-height: 1.6;">
-    Peta waktu (<i>Surge Timeline</i>) di atas menelanjangi kegagalan fungsi instrumen daya dukung lingkungan (D3TLH) secara spesifik di tiap provinsi. Warna hijau (<i>Within Capacity</i>) seharusnya menjadi standar operasional di mana izin tidak diterbitkan saat deforestasi sudah berada di fase kritis. Namun, realita grafis berkata lain.<br><br>
-    Perhatikan dominasi <b>blok merah solid (<i>Over Capacity</i>)</b> yang nyaris menyapu bersih lini masa provinsi seperti Sulawesi Tengah dan Sulawesi Tenggara sepanjang satu dekade terakhir. Blok merah ini menandakan bahwa negara secara sadar terus mengobral Izin Tambang Baru (IUP)—seperti yang ditunjukkan oleh angka di dalam blok—persis di saat provinsi tersebut sedang mengalami darurat kerusakan tutupan hutan alam (deforestasi di atas rata-rata historisnya).<br><br>
-    Alih-alih membunyikan "rem darurat", instrumen D3TLH terbukti hanya berakhir sebagai formalitas di atas kertas, yang sepenuhnya dibajak oleh syahwat ekspansi investasi oligarki.
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-with st.expander("Lihat Data Mentah: Sinkronisasi Waktu", expanded=False):
-    st.dataframe(df_timeline, use_container_width=True, hide_index=True)
-    st.caption("📁 **Sumber File:** Agregasi dari `sulawesi_izin_baru_per_tahun.csv` (Minerbaone) & `sulawesi_gfw_master_1_dekade_2014_2023.csv` (GFW). Catatan: Data GFW 2024 bernilai 0 karena jeda rilis tahunan dari satelit penginderaan.")
+with st.expander("Lihat Data Mentah: Status Daya Dukung Lingkungan per Provinsi", expanded=False):
+    # Membersihkan dan merapikan kolom untuk tabel
+    df_tabel = df_panel[['Tahun', 'Provinsi', 'Jumlah_Izin_Baru', 'Total_Deforestasi_Ha', 'Status']].sort_values(['Provinsi', 'Tahun'])
+    st.dataframe(df_tabel, use_container_width=True, hide_index=True)
+    st.caption("📁 **Sumber File:** Agregasi dari `sulawesi_izin_baru_per_tahun.csv` (Minerbaone) & `sulawesi_gfw_master_1_dekade_2014_2023.csv` (GFW).")
 
 st.markdown("---")
 
