@@ -60,4 +60,51 @@ Menyatukan keempat dimensi skor di atas menjadi satu nilai tunggal (*Single Inde
 * **Interpretasi Output**: Menghasilkan skor akhir berskala 0 hingga 10 yang mendasari penentuan "Vonis Eksekutif" di dashboard. Nilai agregat di atas 8.0 menandakan **Status: Daya Tampung Jebol** yang secara saintifik membatalkan klaim aman dari dokumen D3TLH pemerintah.
 
 ---
-*(Catatan: Model matematis untuk Matriks Daya Tampung Air, Daya Dukung Lahan/Kebencanaan, dan Kedaulatan Ruang akan diintegrasikan secara berkesinambungan di bawah blok ini ke depannya).*
+*(Catatan: Model matematis untuk Matriks Daya Dukung Lahan/Kebencanaan, dan Kedaulatan Ruang akan diintegrasikan secara berkesinambungan di bawah blok ini ke depannya).*
+
+## 2. Matriks Daya Tampung Air
+
+### 2.1. Skor Kualitas Air (Korelasi IKA & Izin IUP)
+Mengukur kegagalan sistem dalam mempertahankan kualitas air di tengah obral izin tambang.
+* **Metrik Asal**: Rata-rata Indeks Kualitas Air BPS (IKA) & Total Izin Baru Diterbitkan.
+* **Pendekatan Statistik / Model**: **Weighted Linear Combination (WLC)** dipadukan dengan **Min-Max Normalization** untuk rasio dua dimensi.
+* **Logika Pembuktian**: Jika daya tampung air masih memadai secara sains, maka IKA harus stabil. Turunnya IKA mendekati angka batas cemar (50) diiringi penambahan IUP membuktikan obral izin mengabaikan batas ambang ekologi sungai/laut.
+* **Formula**:
+  ```python
+  Skor_Air_1 = min(10.0, max(0, (50 - IKA_Terkini) / 10) * 5 + min(5.0, (Total_Izin_Baru / 100) * 5))
+  ```
+* **Threshold Kritis**: Apabila IKA anjlok di bawah 50 dan jumlah izin baru mencapai lebih dari 100, poin maksimal 10.0 otomatis tercapai.
+
+### 2.2. Skor Anomali Penyakit Bawaan Air (Morbiditas Diare)
+Mengukur dampak kontaminasi logam berat pada rantai suplai air minum/sungai warga.
+* **Metrik Asal**: Total Kumulatif Kasus Diare di Sentra Nikel vs Daerah Non-Sentra.
+* **Pendekatan Statistik / Model**: Modifikasi dari **Incidence Rate Ratio (IRR)**. Membandingkan rata-rata kepadatan kasus antara populasi Ring-1 tambang dengan provinsi sekitar.
+* **Logika Pembuktian**: Ledakan kasus diare akut di wilayah konsesi membantah "Mitos AMDAL" bahwa logam berat terencerkan di perairan terbuka dan tidak masuk ke air tanah warga.
+* **Formula**:
+  ```python
+  Rasio = (Kasus_Sentra / 2 Provinsi) / (Kasus_Non_Sentra / 4 Provinsi)
+  Skor_Air_2 = min(10.0, max(0.0, (Rasio - 1) * 2.5))
+  ```
+* **Threshold Kritis**: Rasio 5x lipat mencetak skor absolut 10.0.
+
+### 2.3. Skor Darurat Konflik Pesisir/Nelayan
+Mengukur penggusuran ruang laut dan konflik sosial-ekologis sektor perairan.
+* **Metrik Asal**: Jumlah kejadian konflik ruang laut, pesisir, wilayah tangkap nelayan, dan sungai dari dataset KPA/TanahKita.
+* **Pendekatan Statistik / Model**: **Socio-Ecological Escalation Index**. Menghitung rasio absolut letusan konflik agraria sektoral berhadapan dengan daya serap mitigasi sosial pemerintah.
+* **Logika Pembuktian**: Janji "kesejahteraan CSR" dan penguatan livelihood pesisir fiktif belaka bila grafik letusan konflik nelayan vs perusahaan tambang menanjak secara konstan sejak 2015.
+* **Formula**:
+  ```python
+  Skor_Air_3 = min(10.0, (Jumlah_Konflik_Air_Pesisir / 15.0) * 10)
+  ```
+* **Threshold Kritis**: Terkumpulnya 15 konflik masif spesifik ruang pesisir memicu skor darurat 10.0.
+
+### 2.4. Skor Ancaman Bendungan Tailing (DSTP)
+Mengukur kuantitas limbah murni (sludge/tailing) yang mengancam biota laut dan wilayah resapan.
+* **Metrik Asal**: Proporsi sebaran Timbulan B3 (mayoritas slag & tailing smelter) (Juta Ton).
+* **Pendekatan Statistik / Model**: **Carrying Capacity Index (Indeks Daya Tampung)** berbasis ambang batas toleransi spasial.
+* **Logika Pembuktian**: Praktik pembuangan limbah bawah laut (Deep Sea Tailing Placement) dan pembangunan bendungan tailing raksasa rentan gempa membawa risiko kepunahan genetik ekosistem *coral triangle* laut dalam Sulawesi.
+* **Formula**:
+  ```python
+  Skor_Air_4 = min(10.0, (Total_Tailing_Ton / 20_000_000) * 10)
+  ```
+* **Threshold Kritis**: Timbulan di luar ambang batas (melampaui 20 Juta Ton/Tahun) mencetak skor 10.0.

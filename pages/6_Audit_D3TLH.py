@@ -531,34 +531,144 @@ with colA2:
 st.markdown("<br>", unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# B. MITOS KAPASITAS AIR VS IKA
+# B. MITOS DAYA TAMPUNG AIR
 # ---------------------------------------------------------
+# --- Pre-computation for Water Scores (Skala 0-10) ---
+# Skor 1: IKA vs Perizinan Baru
+ika_terkini = 50
+total_izin_baru = 0
+if not df_ika.empty:
+    df_ika_avg = df_ika.groupby('Tahun')['Indeks Kualitas Air'].mean().reset_index()
+    if 2024 in df_ika_avg['Tahun'].values:
+        ika_terkini = df_ika_avg[df_ika_avg['Tahun'] == 2024]['Indeks Kualitas Air'].values[0]
+if not df_izin.empty:
+    total_izin_baru = df_izin['Jumlah_Izin_Baru'].sum()
+
+# Normalisasi: IKA kritis < 50, Izin Baru 100 IUP = skor 10
+skor_air_1 = min(10.0, max(0, (50 - ika_terkini) / 10) * 5 + min(5.0, (total_izin_baru / 100) * 5))
+
+# Skor 2: Morbiditas Diare
+skor_air_2 = 0
+rasio_diare = 0
+kasus_diare_sentra = 0
+kasus_diare_non = 0
+if not df_kes.empty:
+    df_diare = df_kes[df_kes['indikator'].str.contains('Diare', case=False, na=False)]
+    kasus_diare_sentra = df_diare[df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
+    kasus_diare_non = df_diare[~df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
+    rasio_diare = (kasus_diare_sentra / 2) / (kasus_diare_non / 4) if kasus_diare_non > 0 else 0
+    skor_air_2 = min(10.0, max(0.0, (rasio_diare - 1) * 2.5))
+
+# Skor 3: Konflik Air/Pesisir
+skor_air_3 = 0
+jumlah_konflik_air = 0
+luas_konflik_air = 0
+df_konflik_air = pd.DataFrame()
+if not df_konflik.empty:
+    keywords = 'air|laut|pesisir|nelayan|sungai|pulau|tailing'
+    df_konflik_air = df_konflik[df_konflik['sektor'].str.contains(keywords, case=False, na=False) | 
+                                df_konflik['judul'].str.contains(keywords, case=False, na=False) | 
+                                df_konflik['deskripsi'].str.contains(keywords, case=False, na=False)]
+    jumlah_konflik_air = len(df_konflik_air)
+    if 'luas_ha' in df_konflik_air.columns:
+        luas_konflik_air = pd.to_numeric(df_konflik_air['luas_ha'], errors='coerce').sum()
+    # Normalisasi: 15 Konflik = Skor 10
+    skor_air_3 = min(10.0, (jumlah_konflik_air / 15.0) * 10)
+
+# Skor 4: Beban Tailing (Proxy B3)
+skor_air_4 = 0
+if not df_b3.empty:
+    skor_air_4 = min(10.0, (df_b3['Estimasi Timbulan (Ton/Tahun)'].sum() / 20_000_000) * 10)
+
+skor_akumulasi_air = (skor_air_1 + skor_air_2 + skor_air_3 + skor_air_4) / 4
+
 colB1, colB2 = st.columns([1, 2])
 with colB1:
-    st.markdown("""
+    st.markdown(f"""
     <div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #3498DB; height:100%;">
         <h4 style="color:#FFF; margin-top:0;">Mitos D3TLH: Daya Tampung Air</h4>
         <p style="color:#BDC3C7; font-size:0.9rem;">"Pembuangan tailing diizinkan selama beban cemaran sungai/laut masih secara teori mampu mengencerkan."</p>
         <hr style="border-color:#34495E;">
         <h4 style="color:#3498DB;">Fakta Forensik ECC:</h4>
-        <p style="color:#E0E0E0; font-size:0.9rem;">Penurunan drastis Indeks Kualitas Air (IKA BPS) dan hancurnya wilayah tangkap nelayan pesisir.</p>
+        <p style="color:#E0E0E0; font-size:0.9rem;">Penurunan drastis Indeks Kualitas Air dan hancurnya pesisir ditandai ledakan morbiditas air.</p>
+        
+        <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #3498DB;">
+            <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Akumulasi Skor Kerusakan</div>
+            <div style="font-size: 32px; font-weight: 800; color: #3498DB; line-height: 1.2;">{skor_akumulasi_air:.1f} <span style="font-size: 16px;">/ 10</span></div>
+            <div style="font-size: 11px; color: #3498DB; margin-top: 5px; font-weight: bold;">STATUS: DAYA TAMPUNG JEBOL</div>
+        </div>
+        
         <div style="background:#2980B9; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
-            VONIS: Kegagalan Prediksi Kerusakan Terumbu Karang & Livelihood
+            VONIS: Kegagalan Pengukuran Toksisitas
         </div>
     </div>
     """, unsafe_allow_html=True)
 
 with colB2:
-    if not df_ika.empty:
-        df_ika_long = df_ika.rename(columns={'Indeks Kualitas Air': 'Nilai IKA'})
-        # Filter Provinsi terkait tambang (Sulteng & Sultra) untuk fokus visual
-        df_ika_long = df_ika_long[df_ika_long['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]
-        fig2 = px.line(df_ika_long, x='Tahun', y='Nilai IKA', color='Provinsi', markers=True,
-                       title="Runtuhnya Indeks Kualitas Air (IKA) - BPS",
-                       color_discrete_sequence=['#3498DB', '#E74C3C'])
-        fig2.add_hline(y=50, line_dash="dot", annotation_text="Batas Kritis Cemar", annotation_position="bottom right", line_color="#E74C3C")
-        fig2.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-        st.plotly_chart(fig2, use_container_width=True)
+    tab_w1, tab_w2, tab_w3, tab_w4 = st.tabs(["💧 Kualitas Air", "🦠 Morbiditas Diare", "🎣 Konflik Nelayan", "☠️ Beban Tailing"])
+    
+    with tab_w1:
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Klaim sungai/laut mampu mengencerkan limbah berbanding terbalik dengan hancurnya Indeks Kualitas Air BPS di tengah obral izin IUP baru.</div>", unsafe_allow_html=True)
+        col1, col2, col3 = st.columns(3)
+        col1.metric("Total Izin Baru Diterbitkan", f"{total_izin_baru:,.0f} IUP", "2014-2024")
+        col2.metric("Rata-rata IKA Sulawesi", f"{ika_terkini:.1f}", "Skala 0-100", delta_color="inverse")
+        col3.metric("Skor Kualitas Air", f"{skor_air_1:.1f} / 10", "STATUS: CEMAR KRITIS", delta_color="inverse")
+        st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
+        
+        if not df_ika.empty:
+            df_ika_long = df_ika.rename(columns={'Indeks Kualitas Air': 'Nilai IKA'})
+            df_ika_long = df_ika_long[df_ika_long['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]
+            fig_w1 = px.line(df_ika_long, x='Tahun', y='Nilai IKA', color='Provinsi', markers=True,
+                           title="Runtuhnya Indeks Kualitas Air (IKA) di Area Sentra Nikel")
+            fig_w1.add_hline(y=50, line_dash="dot", annotation_text="Batas Kritis Cemar (50)", annotation_position="bottom right", line_color="#E74C3C")
+            fig_w1.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
+            st.plotly_chart(fig_w1, use_container_width=True)
+            
+    with tab_w2:
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> AMDAL gagal menghitung dampak kontaminasi logam berat ke air tanah yang dikonsumsi warga, dibuktikan dengan ledakan pasien Diare di lingkar tambang.</div>", unsafe_allow_html=True)
+        col1, col2, col3 = st.columns(3)
+        col1.metric("Kasus Diare Sentra Nikel", f"{kasus_diare_sentra:,.0f}", "Sulteng & Sultra")
+        col2.metric("Kasus Diare Daerah Lain", f"{kasus_diare_non:,.0f}", "4 Provinsi Non-Sentra", delta_color="normal")
+        col3.metric("Skor Anomali Penyakit", f"{skor_air_2:.1f} / 10", f"Rasio: {rasio_diare:.1f}x Lipat", delta_color="inverse")
+        st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
+        
+        if not df_kes.empty:
+            df_diare_trend = df_diare.copy()
+            df_diare_trend['Kategori'] = df_diare_trend['provinsi'].apply(lambda x: 'Sentra Tambang' if x in ['Sulawesi Tengah', 'Sulawesi Tenggara'] else 'Non-Sentra')
+            df_d_agg = df_diare_trend.groupby(['tahun', 'Kategori'])['nilai'].sum().reset_index()
+            fig_w2 = px.area(df_d_agg, x='tahun', y='nilai', color='Kategori', title="Ledakan Kasus Diare (Indikator Kualitas Air Tanah)")
+            fig_w2.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
+            st.plotly_chart(fig_w2, use_container_width=True)
+
+    with tab_w3:
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Ekosistem tangkap nelayan dihancurkan oleh limbah tailing dan privatisasi pesisir untuk Smelter, memicu lonjakan konflik agraria laut.</div>", unsafe_allow_html=True)
+        col1, col2, col3 = st.columns(3)
+        col1.metric("Total Konflik Pesisir/Air", f"{jumlah_konflik_air} Kasus", "Data TanahKita")
+        col2.metric("Estimasi Luas Terdampak", f"{luas_konflik_air:,.0f} Ha", "Ruang Hidup Nelayan", delta_color="inverse")
+        col3.metric("Skor Konflik Ruang Air", f"{skor_air_3:.1f} / 10", "STATUS: DARURAT AGRARIA", delta_color="inverse")
+        st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
+        
+        if not df_konflik_air.empty and 'Tahun' in df_konflik_air.columns:
+            df_k_trend = df_konflik_air.groupby('Tahun').size().reset_index(name='Jumlah')
+            fig_w3 = px.bar(df_k_trend, x='Tahun', y='Jumlah', title="Frekuensi Letusan Konflik Pesisir & Nelayan per Tahun")
+            fig_w3.add_vline(x=2015, line_dash="dot", line_color="#E74C3C", annotation_text="Awal Eskalasi Smelter")
+            fig_w3.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
+            st.plotly_chart(fig_w3, use_container_width=True)
+
+    with tab_w4:
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Resiko kebocoran Tailings Dam (Bendungan Tailing) atau Deep Sea Tailing Placement (DSTP) yang ditutupi oleh klaim 'mitigasi teknologi'.</div>", unsafe_allow_html=True)
+        col1, col2, col3 = st.columns(3)
+        col1.metric("Total Timbulan Limbah/Tailing", f"{df_b3['Estimasi Timbulan (Ton/Tahun)'].sum()/1_000_000:.1f} Jt Ton", "Mayoritas Slag/Tailing")
+        col2.metric("Titik Resiko", "Smelter & Laut Dalam", "DSTP & Tailing Dam", delta_color="inverse")
+        col3.metric("Skor Ancaman Tailing", f"{skor_air_4:.1f} / 10", "STATUS: ZONA MERAH", delta_color="inverse")
+        st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
+        
+        if not df_b3.empty:
+            fig_w4 = px.treemap(df_b3, path=['Provinsi', 'Sektor'], values='Estimasi Timbulan (Ton/Tahun)', 
+                                color='Estimasi Timbulan (Ton/Tahun)', color_continuous_scale='Blues',
+                                title="Proporsi Beban Limbah Tailing & B3 ke Ekosistem Air")
+            fig_w4.update_layout(template="plotly_dark", margin=dict(l=0, r=0, t=40, b=0))
+            st.plotly_chart(fig_w4, use_container_width=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
