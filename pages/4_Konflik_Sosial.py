@@ -681,23 +681,39 @@ Tahun 2020 mencatatkan anomali rekor tertinggi secara absolut untuk grafik Korba
 """)
 
 st.subheader("4.3 Kriminalisasi Aktivis dan Resistensi Ruang Sipil")
-st.markdown("""
-Data secara gamblang menunjukkan bahwa ekspansi industri tidak hanya memonopoli tanah, tetapi juga memicu **represi sistematis terhadap ruang sipil**. Kriminalisasi warga, penangkapan sewenang-wenang, hingga tindak kekerasan seringkali menjadi instrumen pembungkam bagi komunitas adat dan petani yang berupaya mempertahankan ruang hidupnya dari gempuran investasi ekstraktif.
-""")
+st.markdown('<span style="background:#E53935;color:#FFCDD2;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Analisis Agregat Kasus Represi & Pelanggaran HAM (Sumber: Database Tanah Kita)</span>', unsafe_allow_html=True)
 
 # Pastikan kolom kriminalisasi berupa numerik yang aman
 df_dampak['jumlah_ditangkap'] = pd.to_numeric(df_dampak['jumlah_ditangkap'], errors='coerce').fillna(0)
 df_dampak['jumlah_luka'] = pd.to_numeric(df_dampak['jumlah_luka'], errors='coerce').fillna(0)
 df_dampak['jumlah_tewas'] = pd.to_numeric(df_dampak['jumlah_tewas'], errors='coerce').fillna(0)
 
-col_m1, col_m2, col_m3, col_m4 = st.columns(4)
-
+# Kalkulasi metrik agregat
 total_kriminalisasi = df_dampak[df_dampak['indikasi_kriminalisasi'] == True].shape[0]
 total_ditangkap = int(df_dampak['jumlah_ditangkap'].sum())
 total_luka = int(df_dampak['jumlah_luka'].sum())
 total_tewas = int(df_dampak['jumlah_tewas'].sum())
 
-with col_m1:
+# Kalkulasi untuk narasi
+df_krim_tahun = df_dampak[(df_dampak['indikasi_kriminalisasi'] == True) & (df_dampak['tahun'] >= 2000)].groupby('tahun').size().reset_index(name='jumlah_kasus')
+df_krim_sektor = df_dampak[(df_dampak['indikasi_kriminalisasi'] == True) & (df_dampak['Sektor_Grup'] != 'Lainnya')].groupby('Sektor_Grup').size().reset_index(name='jumlah_kasus').sort_values('jumlah_kasus', ascending=True)
+
+top_sektor = df_krim_sektor.iloc[-1]['Sektor_Grup'] if not df_krim_sektor.empty else "Industri"
+top_sektor_count = df_krim_sektor.iloc[-1]['jumlah_kasus'] if not df_krim_sektor.empty else 0
+top_tahun = int(df_krim_tahun.loc[df_krim_tahun['jumlah_kasus'].idxmax()]['tahun']) if not df_krim_tahun.empty else 0
+top_tahun_count = int(df_krim_tahun['jumlah_kasus'].max()) if not df_krim_tahun.empty else 0
+
+st.markdown(f"""
+Rentetan data kuantitatif di wilayah Sulawesi secara telanjang membantah klaim arus utama yang kerap didengungkan oleh pemerintah dan oligarki korporasi, bahwa ekspansi industri ekstraktif membawa kesejahteraan dan pertumbuhan inklusif bagi masyarakat lokal. Fakta empiris justru memperlihatkan bahwa tata kelola investasi di Indonesia secara struktural dibangun di atas fondasi represi dan kekerasan terhadap ruang sipil. 
+
+Dari **{total_kriminalisasi} kasus indikasi kriminalisasi** yang berhasil didokumentasikan, tercatat sebanyak **{total_ditangkap} warga dan aktivis lingkungan yang ditangkap** secara sewenang-wenang. Angka ini bukanlah statistik hampa, melainkan representasi dari hancurnya keadilan ekologis dan perampasan ruang hidup masyarakat adat, petani, dan nelayan yang dipaksa menyerahkan tanah leluhurnya demi akumulasi kapital segelintir elit industri ekstraktif.
+
+Jika kita membedah lebih dalam pada distribusi sektoral, **Sektor {top_sektor}** muncul sebagai aktor dominan yang paling sering menggunakan instrumen koersif negara, menyumbang total **{top_sektor_count} kasus represi**. Penggunaan aparat keamanan negara maupun preman korporasi untuk memuluskan perampasan tanah menunjukkan bahwa hukum seringkali ditundukkan pada kepentingan bisnis raksasa yang lapar lahan. Eskalasi konflik paling mematikan mencapai puncaknya pada tahun **{top_tahun}** dengan mencatatkan **{top_tahun_count} kasus secara bersamaan**. Dalam banyak peristiwa empiris, warga lokal yang sekadar mempertahankan hak konstitusional mereka atas lingkungan hidup yang baik dan sehat justru dilabeli sebagai provokator dan dijerat pasal pidana karet.
+
+Tragedi kemanusiaan ini menjadi semakin kelam dengan hilangnya nyawa **{total_tewas} pejuang lingkungan** yang melayang sia-sia di pusaran konflik agraria. Gugurnya pahlawan-pahlawan ruang hidup ini menggarisbawahi kegagalan mutlak instrumen pengaman ekologis—seperti D3TLH maupun dokumen AMDAL—dalam menjamin keselamatan rakyat. Selama pendekatan pembangunan eksploitatif yang bertumpu pada sekuritisasi investasi ini dipertahankan, setiap hektar hutan yang dibabat akan selalu berlumuran air mata konflik.
+""")
+
+col_m1, col_m2, col_m3, col_m4 = st.columns(4)
     st.metric(label="Kasus Indikasi Kriminalisasi", value=f"{total_kriminalisasi} Kasus")
 with col_m2:
     st.metric(label="Warga/Aktivis Ditangkap", value=f"{total_ditangkap} Orang")
@@ -734,43 +750,9 @@ with col_trend:
         st.dataframe(df_krim_tahun, use_container_width=True, hide_index=True)
         st.caption("📁 **Sumber File:** `data/processed/sulawesi_konflik_agraria_tanahkita.csv` - Tren jumlah kasus kriminalisasi per tahun.")
 
-# Chart 2: Kriminalisasi per Sektor
-df_krim_sektor = df_dampak[(df_dampak['indikasi_kriminalisasi'] == True) & (df_dampak['Sektor_Grup'] != 'Lainnya')].groupby('Sektor_Grup').size().reset_index(name='jumlah_kasus').sort_values('jumlah_kasus', ascending=True)
-
-with col_sektor:
-    fig_krim_sektor = px.bar(
-        df_krim_sektor,
-        y='Sektor_Grup',
-        x='jumlah_kasus',
-        orientation='h',
-        color='Sektor_Grup',
-        color_discrete_map=color_map,
-        title='Sektor Industri Paling Represif',
-        labels={'jumlah_kasus': 'Total Kasus', 'Sektor_Grup': 'Sektor Pemicu'}
-    )
-    fig_krim_sektor.update_layout(
-        showlegend=False,
-        plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-        xaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)'), 
-        yaxis=dict(showgrid=False),
-        margin=dict(t=50, b=40)
-    )
-    st.plotly_chart(fig_krim_sektor, use_container_width=True)
-    with st.expander("Lihat Data Mentah: Sektor Represif", expanded=False):
-        st.dataframe(df_krim_sektor, use_container_width=True, hide_index=True)
-        st.caption("📁 **Sumber File:** `data/processed/sulawesi_konflik_agraria_tanahkita.csv` - Total kasus kriminalisasi dikelompokkan per sektor.")
-
-top_sektor = df_krim_sektor.iloc[-1]['Sektor_Grup'] if not df_krim_sektor.empty else "Industri"
-top_sektor_count = df_krim_sektor.iloc[-1]['jumlah_kasus'] if not df_krim_sektor.empty else 0
-top_tahun = int(df_krim_tahun.loc[df_krim_tahun['jumlah_kasus'].idxmax()]['tahun']) if not df_krim_tahun.empty else 0
-top_tahun_count = int(df_krim_tahun['jumlah_kasus'].max()) if not df_krim_tahun.empty else 0
-
 st.markdown(f"""
 <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #E53935; margin-bottom: 25px; margin-top: 25px;">
-    <b style="color: #E53935;">Interpretasi Ekologis dan Sosial Kritis: Menggugat Narasi Pertumbuhan Inklusif</b><br><br>
-    Rentetan data kuantitatif di atas secara telanjang membantah klaim arus utama yang kerap didengungkan oleh pemerintah dan oligarki korporasi bahwa ekspansi industri ekstraktif, termasuk proyek hilirisasi dan Proyek Strategis Nasional (PSN), membawa kesejahteraan dan pertumbuhan inklusif bagi masyarakat lokal. Fakta empiris justru memperlihatkan bahwa tata kelola investasi di Indonesia secara struktural dibangun di atas fondasi represi dan kekerasan terhadap ruang sipil. Dari <span style="color:#E53935;font-weight:bold;">{total_kriminalisasi}</span> kasus indikasi kriminalisasi yang berhasil didokumentasikan, tercatat sebanyak <span style="color:#E53935;font-weight:bold;">{total_ditangkap}</span> warga dan aktivis lingkungan yang ditangkap secara sewenang-wenang. Angka ini bukanlah statistik hampa, melainkan representasi dari hancurnya keadilan ekologis dan perampasan ruang hidup masyarakat adat, petani, dan nelayan yang dipaksa menyerahkan tanah leluhurnya demi akumulasi kapital segelintir elit industri ekstraktif.<br><br>
-    Jika kita membedah lebih dalam pada distribusi sektoral, <span style="color:#E53935;font-weight:bold;">Sektor {top_sektor}</span> muncul sebagai aktor dominan yang paling sering menggunakan instrumen koersif negara, menyumbang total <span style="color:#E53935;font-weight:bold;">{top_sektor_count}</span> kasus represi. Penggunaan aparat keamanan negara maupun preman korporasi untuk memuluskan perampasan tanah menunjukkan bahwa hukum seringkali ditundukkan pada kepentingan bisnis raksasa yang lapar lahan. Eskalasi konflik paling mematikan mencapai puncaknya pada tahun <span style="color:#E53935;font-weight:bold;">{top_tahun}</span> dengan mencatatkan <span style="color:#E53935;font-weight:bold;">{top_tahun_count}</span> kasus secara bersamaan. Dalam banyak peristiwa empiris, warga lokal yang sekadar mempertahankan hak konstitusional mereka atas lingkungan hidup yang baik dan sehat, serta membela hak ulayat dari ancaman <i>land grabbing</i>, justru dengan mudah dilabeli sebagai provokator, kelompok anti-pembangunan, hingga dijerat secara sistematis menggunakan pasal-pasal pidana karet.<br><br>
-    Tragedi kemanusiaan ini menjadi semakin kelam dengan hilangnya nyawa <span style="color:#E53935;font-weight:bold;">{total_tewas}</span> pejuang lingkungan yang melayang sia-sia di pusaran konflik agraria. Gugurnya pahlawan-pahlawan ruang hidup ini menggarisbawahi kegagalan mutlak instrumen pengaman ekologis institusional—seperti Daya Dukung dan Daya Tampung Lingkungan Hidup (D3TLH) maupun dokumen AMDAL—dalam menjamin keselamatan hak asasi rakyat. Negara terbukti absen dalam memberikan perlindungan esensial, dan membiarkan masuknya alat berat korporasi yang meratakan pemukiman serta menghancurkan wilayah kelola turun-temurun warga. Selama pendekatan pembangunan eksploitatif yang bertumpu pada sekuritisasi investasi ini terus dipertahankan, dan prinsip persetujuan bebas masyarakat (<i>Free, Prior and Informed Consent</i>) diabaikan secara struktural, maka dapat dipastikan bahwa setiap hektar hutan yang dibabat dan setiap ton mineral yang diekspor akan selalu berlumuran dengan air mata konflik rakyat. Narasi kampanye "Hilirisasi Hijau" yang masif disuarakan hanyalah kamuflase politik belaka jika dalam realitas tapaknya harus selalu ditebus dengan ongkos kemanusiaan yang luar biasa destruktif.
+    <b>Interpretasi Ekologis & Hak Asasi Manusia:</b> Tingginya angka kriminalisasi dan korban tewas di sekitar area konsesi (terutama {top_sektor}) membuktikan bahwa perampasan ruang selalu dibarengi dengan pendekatan represif. Ini membantah telak narasi "Hilirisasi Hijau" yang nyatanya ditebus dengan ongkos kemanusiaan yang berdarah.
 </div>
 """, unsafe_allow_html=True)
 
