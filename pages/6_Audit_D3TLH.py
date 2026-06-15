@@ -300,7 +300,6 @@ with colA2:
         
         with tab1:
             # --- 1. Ekspansi PLTU vs Penurunan Kualitas Udara ---
-            st.error("**🚨 SKORING STATUS: WASPADA MERAH** | Kualitas udara (IKU) se-Sulawesi terus anjlok mendekati batas kritis berbanding lurus dengan ledakan pembakaran batu bara PLTU Captive.")
             st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Pemerintah sering merilis angka rata-rata IKU tahunan seolah 'Masih Aman', menutupi tren eksponensial di mana kualitas udara terjun bebas tepat setelah keran mega-smelter dibuka lebar pada 2014-2015.</div>", unsafe_allow_html=True)
             
             if not df_pltu_op.empty and not df_iku.empty:
@@ -319,8 +318,19 @@ with colA2:
                         cap = df_pltu_op[(df_pltu_op['Provinsi'] == prov) & (df_pltu_op['Start year'] <= y)]['Capacity (MW)'].sum()
                         panel_data_pltu.append({'Tahun': y, 'Provinsi': prov, 'Kapasitas_PLTU_MW': cap})
                 df_pltu_trend = pd.DataFrame(panel_data_pltu)
-                
                 df_iku_avg = df_iku[df_iku['Tahun'].between(2010, 2024)].groupby('Tahun')['IKU'].mean().reset_index()
+                
+                # Perhitungan Skor Matematis Tab 1
+                kapasitas_terkini = df_pltu_trend[df_pltu_trend['Tahun'] == 2024]['Kapasitas_PLTU_MW'].sum()
+                iku_terkini = df_iku_avg[df_iku_avg['Tahun'] == 2024]['IKU'].values[0] if not df_iku_avg[df_iku_avg['Tahun'] == 2024].empty else 75
+                # Model Matematis: Indeks Ancaman (0-10) = Kombinasi bobot Kapasitas PLTU dan Penurunan IKU dari batas 80
+                skor_ancaman_udara = min(10.0, (kapasitas_terkini / 5000) * 5 + max(0, (80 - iku_terkini) / 10) * 5)
+                
+                col1, col2, col3 = st.columns(3)
+                col1.metric("Kapasitas PLTU Aktif", f"{kapasitas_terkini:,.0f} MW", "Tahun 2024")
+                col2.metric("Rata-rata IKU Sulawesi", f"{iku_terkini:.1f}", "Skala 0-100", delta_color="inverse")
+                col3.metric("Skor Ancaman Udara", f"{skor_ancaman_udara:.1f} / 10", "STATUS: KRITIS", delta_color="inverse")
+                st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
                 
                 owid_colors = ['#9B5A40', '#E58872', '#5E85B4', '#A09CAE', '#82B989', '#E3D7A4']
                 fig_2_2_combined = make_subplots(specs=[[{"secondary_y": True}]])
@@ -365,14 +375,24 @@ with colA2:
 
         with tab2:
             # --- 2. Tren Historis Kasus ISPA/Pneumonia ---
-            st.error("**🚨 SKORING STATUS: DARURAT MEDIS** | Ledakan pasien infeksi pernapasan akut (ISPA) terjadi secara asimetris, terpusat khusus di provinsi ring-1 nikel.")
             st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Dokumen daya dukung mengabaikan lonjakan tajam pasien ISPA di RSUD Morowali dan Kendari. Grafik membuktikan bahwa tren ISPA di provinsi non-tambang relatif stabil, namun meroket secara paralel dengan asap di provinsi sentra nikel.</div>", unsafe_allow_html=True)
             
             df_ts_filtered = df_kes[df_kes['indikator'].str.contains('ISPA', case=False, na=False)].copy()
             if not df_ts_filtered.empty:
                 df_ts_filtered['Kategori'] = df_ts_filtered['provinsi'].apply(lambda x: 'Sentra Industri (Sulteng & Sultra)' if x in ['Sulawesi Tengah', 'Sulawesi Tenggara'] else 'Non-Sentra Industri (Lainnya)')
-                # Aggregate per tahun per provinsi
                 df_ts_agg = df_ts_filtered.groupby(['tahun', 'provinsi', 'Kategori'])['nilai'].sum().reset_index()
+                
+                # Perhitungan Skor Matematis Tab 2
+                kasus_sentra = df_ts_filtered[df_ts_filtered['Kategori'].str.contains('Sentra')]['nilai'].sum()
+                kasus_non_sentra = df_ts_filtered[~df_ts_filtered['Kategori'].str.contains('Sentra')]['nilai'].sum()
+                # Rasio Anomali: Perbandingan rata-rata kasus per provinsi (Sentra vs Non-Sentra)
+                rasio_anomali = (kasus_sentra / 2) / (kasus_non_sentra / 4) if kasus_non_sentra > 0 else 0
+                
+                col1, col2, col3 = st.columns(3)
+                col1.metric("Total Kasus ISPA Sentra", f"{kasus_sentra:,.0f}", "Sulteng & Sultra")
+                col2.metric("Total Kasus ISPA Lainnya", f"{kasus_non_sentra:,.0f}", "4 Provinsi Non-Sentra", delta_color="normal")
+                col3.metric("Skor Rasio Anomali", f"{rasio_anomali:.1f}x Lipat", "STATUS: DARURAT MEDIS", delta_color="inverse")
+                st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
                 
                 fig_3_3 = px.line(
                     df_ts_agg, x='tahun', y='nilai', color='provinsi', markers=True, line_dash='Kategori',
@@ -406,23 +426,27 @@ with colA2:
                     
         with tab3:
             # --- 3. Fakta Data Timbulan Limbah Udara & B3 ---
-            st.error("**🚨 SKORING STATUS: OVER-CAPACITY B3** | Timbulan limbah beracun dan partikulat debu tidak sebanding dengan kapasitas sarana mitigasi lingkungan.")
             st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Data perizinan D3TLH fokus pada syarat emisi cerobong di atas kertas, tetapi mengabaikan gunung-gunung debu slag (fly ash) di darat yang bebas tertiup angin memapari puluhan desa setiap harinya.</div>", unsafe_allow_html=True)
             
             # Hitung fakta cepat
             total_b3_sulteng = 0
+            total_b3_all = 0
             if not df_b3.empty:
-                # Pastikan kolom berupa numerik
                 df_b3['Estimasi Timbulan (Ton/Tahun)'] = pd.to_numeric(df_b3['Estimasi Timbulan (Ton/Tahun)'], errors='coerce').fillna(0)
                 total_b3_sulteng = df_b3[df_b3['Provinsi'] == 'Sulawesi Tengah']['Estimasi Timbulan (Ton/Tahun)'].sum()
+                total_b3_all = df_b3['Estimasi Timbulan (Ton/Tahun)'].sum()
             
             total_ispa_sentra = df_ts_filtered[df_ts_filtered['Kategori'].str.contains('Sentra')]['nilai'].sum() if not df_ts_filtered.empty else 0
             
-            col_f1, col_f2 = st.columns(2)
-            col_f1.metric("Total Limbah B3 Sulteng (Ton/Tahun)", f"{total_b3_sulteng/1_000_000:.1f} Juta", "Partikulat/Fly Ash ke Udara")
-            col_f2.metric("Total Kasus ISPA Sentra Nikel", f"{total_ispa_sentra:,.0f}", "2014-2024", delta_color="inverse")
+            # Model Matematis: Skor Over-Capacity = Total Limbah B3 dibagi dengan Baseline Daya Tampung (Asumsi 1 Juta Ton/Tahun)
+            skor_overcapacity = (total_b3_all / 1_000_000)
             
-            st.markdown("<hr style='border:1px solid #444'>", unsafe_allow_html=True)
+            col_f1, col_f2, col_f3 = st.columns(3)
+            col_f1.metric("Total Limbah B3 Sulteng", f"{total_b3_sulteng/1_000_000:.1f} Jt Ton/Thn", "Partikulat/Fly Ash")
+            col_f2.metric("Total Kasus ISPA Sentra", f"{total_ispa_sentra:,.0f}", "2014-2024", delta_color="inverse")
+            col_f3.metric("Skor Over-Capacity", f"{skor_overcapacity:.1f}x Lipat", "STATUS: OVER-CAPACITY B3", delta_color="inverse")
+            
+            st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
             
             if not df_b3.empty:
                 df_b3_prov = df_b3.groupby('Provinsi')['Estimasi Timbulan (Ton/Tahun)'].sum().reset_index()
@@ -443,17 +467,22 @@ with colA2:
                     
         with tab4:
             # --- 4. Hilangnya Paru-Paru Udara (Deforestasi CO2) ---
-            st.warning("**⚠️ SKORING STATUS: DEFISIT EKOSISTEM** | Ekosistem filter karbon utama Sulawesi diratakan demi konsesi, melepaskan cadangan emisi yang ditahan berabad-abad.")
             st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Audit resmi pemerintah hanya menghitung 'emisi yang keluar dari corong pabrik', tetapi dengan sengaja mengaburkan 'emisi dari jutaan pohon yang mati' akibat ekspansi lahan tambang itu sendiri.</div>", unsafe_allow_html=True)
             
             if not df_gfw.empty:
                 df_gfw['Total_Emisi_CO2_Megagram'] = pd.to_numeric(df_gfw['Total_Emisi_CO2_Megagram'], errors='coerce').fillna(0)
-                total_emisi = df_gfw['Total_Emisi_CO2_Megagram'].sum() / 1_000_000 # dalam Juta Megagram / Juta Ton
-                total_deforestasi = df_gfw['Total_Deforestasi_Ha'].sum() / 1_000
+                total_emisi = df_gfw['Total_Emisi_CO2_Megagram'].sum() / 1_000_000 # Juta Ton
+                total_deforestasi = df_gfw['Total_Deforestasi_Ha'].sum() / 1_000 # Ribu Ha
                 
-                col_e1, col_e2 = st.columns(2)
-                col_e1.metric("Total Emisi CO2 Lepas (1 Dekade)", f"{total_emisi:.1f} Jt Ton", "Dampak Hilangnya Hutan")
-                col_e2.metric("Total Hutan Hilang di Sulawesi", f"{total_deforestasi:.1f} Ribu Ha", "Filter Karbon Alami", delta_color="inverse")
+                # Model Matematis: Skor Defisit Ekosistem = Rasio Emisi CO2 terhadap daya serap hutan yang hilang (asumsi 10 Juta Ton adalah batas kritis ekologis)
+                skor_defisit = min(10.0, total_emisi / 10.0)
+                
+                col_e1, col_e2, col_e3 = st.columns(3)
+                col_e1.metric("Total Emisi CO2 Lepas", f"{total_emisi:.1f} Jt Ton", "1 Dekade Terakhir")
+                col_e2.metric("Total Hutan Hilang", f"{total_deforestasi:.1f} Ribu Ha", "Filter Karbon Alami", delta_color="inverse")
+                col_e3.metric("Skor Defisit Ekosistem", f"{skor_defisit:.1f} / 10", "STATUS: DARURAT KARBON", delta_color="inverse")
+                
+                st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
                 
                 df_emisi_trend = df_gfw.groupby(['Tahun', 'Provinsi'])['Total_Emisi_CO2_Megagram'].sum().reset_index()
                 fig_emisi = px.area(df_emisi_trend, x='Tahun', y='Total_Emisi_CO2_Megagram', color='Provinsi',
