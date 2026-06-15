@@ -136,54 +136,32 @@ rasio_akselerasi = (izin_pasca_2020 / izin_pra_2020) if izin_pra_2020 > 0 else 0
 st.markdown('<div class="org-badge">CELIOS — Center of Economic and Law Studies</div>', unsafe_allow_html=True)
 st.markdown('<h1 class="main-title">Pola Penerbitan Izin di Zona Kritis Ekologis</h1>', unsafe_allow_html=True)
 
-import plotly.graph_objects as go
-
-# Bento Cards Visualizations (Plotly Indicators)
+# Bento Cards untuk Fakta Kritis D3TLH
 st.markdown("<br>", unsafe_allow_html=True)
-c1, c2, c3 = st.columns(3)
+c1, c2 = st.columns(2)
 
-# 1. Indicator: Konflik Agraria
 with c1:
-    fig1 = go.Figure(go.Indicator(
-        mode = "number",
-        value = 568,
-        title = {"text": "Konflik Agraria & Lahan<br><span style='font-size:0.8em;color:gray'>Laporan TanahKita.id (Kasus)</span>"},
-        number = {'font': {'color': '#E74C3C', 'size': 50}}
-    ))
-    fig1.update_layout(height=200, margin=dict(t=30, b=0, l=0, r=0), paper_bgcolor="rgba(0,0,0,0)")
-    st.plotly_chart(fig1, use_container_width=True)
+    st.markdown("""
+    <div style="background:#1A1A1A; padding: 20px; border-radius: 10px; border-top: 4px solid #E74C3C; height: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+        <div style="font-size:0.8rem; color:#E74C3C; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">FAKTA TANAHKITA.ID</div>
+        <div style="color: #fff; font-size: 1.3rem; font-weight:bold; margin-bottom:12px; line-height:1.3;">AMDAL Formalitas & Konflik Agraria</div>
+        <div style="color:#B0BEC5; font-size:0.9rem; line-height:1.5;">
+            Laporan KPA menunjukkan mayoritas IUP terbit tanpa <i>Free, Prior, and Informed Consent</i> (FPIC). Dokumen AMDAL dan analisis daya dukung (D3TLH) direkayasa sebagai formalitas prosedural tanpa pelibatan masyarakat adat yang ruang hidupnya dirampas.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
-# 2. Indicator: Kualitas Air (Gauge)
 with c2:
-    fig2 = go.Figure(go.Indicator(
-        mode = "gauge+number",
-        value = 51.6,
-        title = {"text": "Indeks Kualitas Air (IKA)<br><span style='font-size:0.8em;color:gray'>Rata-rata Sentra Nikel (BPS)</span>"},
-        gauge = {
-            'axis': {'range': [0, 100], 'tickwidth': 1, 'tickcolor': "white"},
-            'bar': {'color': "#F39C12"},
-            'bgcolor': "rgba(0,0,0,0)",
-            'steps': [
-                {'range': [0, 55], 'color': "rgba(231, 76, 60, 0.2)"},
-                {'range': [55, 70], 'color': "rgba(243, 156, 18, 0.2)"},
-                {'range': [70, 100], 'color': "rgba(46, 204, 113, 0.2)"}],
-            'threshold': {'line': {'color': "#E74C3C", 'width': 4}, 'thickness': 0.75, 'value': 51.6}
-        },
-        number = {'font': {'color': '#F39C12', 'size': 40}}
-    ))
-    fig2.update_layout(height=200, margin=dict(t=30, b=0, l=20, r=20), paper_bgcolor="rgba(0,0,0,0)")
-    st.plotly_chart(fig2, use_container_width=True)
+    st.markdown("""
+    <div style="background:#1A1A1A; padding: 20px; border-radius: 10px; border-top: 4px solid #F39C12; height: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+        <div style="font-size:0.8rem; color:#F39C12; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">DATA BPS (SLHI)</div>
+        <div style="color: #fff; font-size: 1.3rem; font-weight:bold; margin-bottom:12px; line-height:1.3;">Krisis Kualitas Air (IKA) di Bawah 55</div>
+        <div style="color:#B0BEC5; font-size:0.9rem; line-height:1.5;">
+            Indeks Kualitas Air (IKA) di sentra nikel seperti Sultra dan Sulteng konsisten terpuruk di level cemaran berat (46-55). Sedimentasi lumpur tambang laut menghancurkan terumbu karang dan mengusir wilayah tangkap nelayan sejauh puluhan mil.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
-# 3. Indicator: Hutan Lindung
-with c3:
-    fig3 = go.Figure(go.Indicator(
-        mode = "number",
-        value = 2.07,
-        number = {'valueformat': '.2f', 'suffix': " Jt Ha", 'font': {'color': '#3498DB', 'size': 50}},
-        title = {"text": "Kawasan Lindung Hilang<br><span style='font-size:0.8em;color:gray'>Dataset GFW (1 Dekade)</span>"}
-    ))
-    fig3.update_layout(height=200, margin=dict(t=30, b=0, l=0, r=0), paper_bgcolor="rgba(0,0,0,0)")
-    st.plotly_chart(fig3, use_container_width=True)
 st.markdown("<br>", unsafe_allow_html=True)
 st.markdown('<p class="sub-title">Evaluasi terhadap kegagalan instrumen tata kelola lingkungan dalam meredam perizinan tambang di wilayah yang telah melampaui daya dukung ekologis.</p>', unsafe_allow_html=True)
 
@@ -361,7 +339,55 @@ with st.expander("Lihat Data Mentah: Agregasi Waktu Historis", expanded=False):
 
 st.markdown("---")
 
-st.subheader("5.2 Kegagalan Tata Kelola: Izin Terbit di Zona Darurat Ekologis")
+st.subheader("5.2 Fakta Spasial: Tabrakan Tata Ruang di Kawasan Konservasi")
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Overlay Area Kawasan Lindung (GFW)</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
+
+st.markdown("""
+Dataset spasial menunjukkan obral IUP tambang tidak mempedulikan batas tata ruang. Jutaan hektar kawasan penyangga kehidupan (Hutan Produksi, Kawasan Lindung, dan Area Resapan Air) secara sistematis dirusak dan dihilangkan fungsi ekologisnya demi memuluskan ekspansi ekstraksi nikel.
+""")
+
+try:
+    df_kawasan = pd.read_csv('data/processed/sulawesi_gfw_kawasan_lindung_loss_2014_2023.csv')
+    df_kawasan = df_kawasan[(df_kawasan['wdpa_protected_areas__iucn_cat'].astype(str) != '0') & (df_kawasan['Tahun'] <= 2023)]
+    df_kawasan_thn = df_kawasan.groupby('Tahun')['Luas_Hilang_Kawasan_Lindung_Ha'].sum().reset_index()
+
+    fig_kawasan = go.Figure()
+    fig_kawasan.add_trace(go.Scatter(
+        x=df_kawasan_thn['Tahun'],
+        y=df_kawasan_thn['Luas_Hilang_Kawasan_Lindung_Ha'],
+        fill='tozeroy',
+        mode='lines+markers',
+        line=dict(color='#3498DB', width=3),
+        marker=dict(size=8, color='#3498DB'),
+        name='Kawasan Konservasi Hilang',
+        hovertemplate="<b>Tahun %{x}</b><br>Kawasan Hancur: %{y:,.0f} Ha<extra></extra>"
+    ))
+    fig_kawasan.update_layout(
+        title='Kehancuran Kawasan Konservasi & Resapan Air (2014-2023)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)',
+        height=400,
+        margin=dict(l=0, r=20, t=50, b=40),
+        xaxis=dict(tickformat="%Y", dtick="M12", showgrid=False),
+        yaxis=dict(title='Luas Hilang (Hektar)', showgrid=True, gridcolor='rgba(255,255,255,0.05)')
+    )
+    st.plotly_chart(fig_kawasan, use_container_width=True)
+    
+    st.markdown("""
+    <div style="background:#1E1E1E; padding:15px 20px; border-radius:8px; border-left:4px solid #3498DB; margin-top: 10px; margin-bottom: 25px;">
+        <span style="color: #E0E0E0; font-size: 0.95rem;">
+            <b style="color:#3498DB;">Fakta Lapangan:</b> Dalam dekade terakhir, total lebih dari <b>2 juta hektar</b> kawasan hutan lindung yang seharusnya dijaga ketat oleh instrumen tata ruang dan D3TLH telah hancur (area overlay IUCN). Ini membuktikan bahwa tata ruang ditabrak dan direvisi begitu saja untuk mengakomodasi IUP.
+        </span>
+    </div>
+    """, unsafe_allow_html=True)
+
+except Exception as e:
+    st.error(f"Gagal memuat visualisasi kawasan lindung: {e}")
+
+st.markdown("---")
+
+st.subheader("5.3 Pembuktian Statistik: Uji Chi-Square Crosstab")
 st.info("⚠️ Placeholder: Crosstab Analysis (SPSS Style) untuk membuktikan signifikansi pengabaian kondisi ekologis terhadap keputusan penerbitan izin.")
 
 st.markdown("<br><br>", unsafe_allow_html=True)
