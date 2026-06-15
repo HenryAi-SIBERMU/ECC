@@ -143,10 +143,10 @@ c1, c2 = st.columns(2)
 with c1:
     st.markdown("""
     <div style="background:#1A1A1A; padding: 20px; border-radius: 10px; border-top: 4px solid #E74C3C; height: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
-        <div style="font-size:0.8rem; color:#E74C3C; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">FAKTA TANAHKITA.ID</div>
-        <div style="color: #fff; font-size: 1.3rem; font-weight:bold; margin-bottom:12px; line-height:1.3;">AMDAL Formalitas & Konflik Agraria</div>
+        <div style="font-size:0.8rem; color:#E74C3C; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">FAKTA CRI, MIGHTY EARTH, TANAHKITA.ID</div>
+        <div style="color: #fff; font-size: 1.3rem; font-weight:bold; margin-bottom:12px; line-height:1.3;">Mayoritas IUP Tanpa FPIC</div>
         <div style="color:#B0BEC5; font-size:0.9rem; line-height:1.5;">
-            Laporan KPA menunjukkan mayoritas IUP terbit tanpa <i>Free, Prior, and Informed Consent</i> (FPIC). Dokumen AMDAL dan analisis daya dukung (D3TLH) direkayasa sebagai formalitas prosedural tanpa pelibatan masyarakat adat yang ruang hidupnya dirampas.
+            Laporan Climate Rights International, Mighty Earth, dan Business-Human Rights Resource Centre mendokumentasikan banyak IUP tambang nikel di Sulawesi terbit <b>tanpa <i>Free, Prior, and Informed Consent</i> (FPIC)</b> dari masyarakat adat. Dokumen AMDAL kerap disusun <b>tanpa konsultasi bermakna</b> dan pelibatan masyarakat yang ruang hidupnya dirampas.
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -165,7 +165,7 @@ with c2:
 st.markdown("<br>", unsafe_allow_html=True)
 st.markdown('<p class="sub-title">Evaluasi terhadap kegagalan instrumen tata kelola lingkungan dalam meredam perizinan tambang di wilayah yang telah melampaui daya dukung ekologis.</p>', unsafe_allow_html=True)
 
-with st.expander("🔍 Metodologi Pendekatan", expanded=False):
+with st.expander("Metodologi Pendekatan", expanded=False):
     st.markdown("""
     **Kerangka Logis (Alur Kausalitas):**
     Bagian ini dirancang untuk menjawab sub-pertanyaan kritis dalam studi D3TLH: *"Apakah izin baru tetap diterbitkan ketika tekanan ekologis sudah tinggi?"*
@@ -335,7 +335,7 @@ with st.expander("Lihat Data Mentah: Agregasi Waktu Historis", expanded=False):
     df_tabel['Jumlah_Izin_Baru'] = df_tabel['Jumlah_Izin_Baru'].astype(int)
     
     st.dataframe(df_tabel, use_container_width=True, hide_index=True)
-    st.caption("📁 **Sumber File:** Agregasi dari `sulawesi_izin_baru_per_tahun.csv` (Minerbaone) & `sulawesi_gfw_master_1_dekade_2014_2023.csv` (GFW).")
+    st.caption("**Sumber File:** Agregasi dari `sulawesi_izin_baru_per_tahun.csv` (Minerbaone) & `sulawesi_gfw_master_1_dekade_2014_2023.csv` (GFW).")
 
 st.markdown("---")
 
@@ -350,44 +350,437 @@ Dataset spasial menunjukkan obral IUP tambang tidak mempedulikan batas tata ruan
 try:
     df_kawasan = pd.read_csv('data/processed/sulawesi_gfw_kawasan_lindung_loss_2014_2023.csv')
     df_kawasan = df_kawasan[(df_kawasan['wdpa_protected_areas__iucn_cat'].astype(str) != '0') & (df_kawasan['Tahun'] <= 2023)]
-    df_kawasan_thn = df_kawasan.groupby('Tahun')['Luas_Hilang_Kawasan_Lindung_Ha'].sum().reset_index()
+    
+    # Pivot untuk Stacked Bar Chart
+    df_pivot_chart = pd.pivot_table(
+        df_kawasan, 
+        values='Luas_Hilang_Kawasan_Lindung_Ha', 
+        index='Tahun', 
+        columns='wdpa_protected_areas__iucn_cat', 
+        aggfunc='sum',
+        fill_value=0
+    ).reset_index()
+
+    # Hitung nilai kumulatif (karena hutan yang hilang tidak kembali, kerusakannya permanen)
+    if 1 in df_pivot_chart.columns:
+        df_pivot_chart[1] = df_pivot_chart[1].cumsum()
+    if 2 in df_pivot_chart.columns:
+        df_pivot_chart[2] = df_pivot_chart[2].cumsum()
+        
+    df_pivot_chart['Total'] = df_pivot_chart.get(1, 0) + df_pivot_chart.get(2, 0)
 
     fig_kawasan = go.Figure()
+    
+    # Cagar Alam (IUCN Kategori 1)
+    if 1 in df_pivot_chart.columns:
+        fig_kawasan.add_trace(go.Bar(
+            x=df_pivot_chart['Tahun'],
+            y=df_pivot_chart[1],
+            name='Cagar Alam / Suaka Margasatwa',
+            marker_color='#E74C3C',
+            text=[f"{v/1000:,.1f}k" if v > 0 else "" for v in df_pivot_chart[1]],
+            textposition='outside',
+            textfont=dict(color='#E74C3C', size=11),
+            hovertemplate="<b>Hingga Tahun %{x}</b><br>Total Cagar Alam Hancur: %{y:,.0f} Ha<extra></extra>"
+        ))
+        
+    # Taman Nasional (IUCN Kategori 2)
+    if 2 in df_pivot_chart.columns:
+        fig_kawasan.add_trace(go.Bar(
+            x=df_pivot_chart['Tahun'],
+            y=df_pivot_chart[2],
+            name='Taman Nasional',
+            marker_color='#F39C12',
+            text=[f"{v/1000:,.1f}k" if v > 0 else "" for v in df_pivot_chart[2]],
+            textposition='outside',
+            textfont=dict(color='#F39C12', size=11),
+            hovertemplate="<b>Hingga Tahun %{x}</b><br>Total Taman Nsnl. Hancur: %{y:,.0f} Ha<extra></extra>"
+        ))
+        
+    # Hitung dan Tampilkan Garis Total
+    df_pivot_chart['Total'] = df_pivot_chart.get(1, 0) + df_pivot_chart.get(2, 0)
     fig_kawasan.add_trace(go.Scatter(
-        x=df_kawasan_thn['Tahun'],
-        y=df_kawasan_thn['Luas_Hilang_Kawasan_Lindung_Ha'],
-        fill='tozeroy',
-        mode='lines+markers',
-        line=dict(color='#3498DB', width=3),
-        marker=dict(size=8, color='#3498DB'),
-        name='Kawasan Konservasi Hilang',
-        hovertemplate="<b>Tahun %{x}</b><br>Kawasan Hancur: %{y:,.0f} Ha<extra></extra>"
+        x=df_pivot_chart['Tahun'],
+        y=df_pivot_chart['Total'],
+        name='Total Kehancuran Kumulatif',
+        mode='lines+markers+text',
+        text=[f"Total: {v/1000:,.1f}k" for v in df_pivot_chart['Total']],
+        textposition='top center',
+        textfont=dict(color='white', size=11, weight='bold'),
+        line=dict(color='white', width=2, dash='dot'),
+        marker=dict(size=7, color='white'),
+        hovertemplate="<b>Hingga Tahun %{x}</b><br>Total Area Hancur: %{y:,.0f} Ha<extra></extra>"
     ))
+
     fig_kawasan.update_layout(
-        title='Kehancuran Kawasan Konservasi & Resapan Air (2014-2023)',
+        title='Akumulasi Kehancuran Total: Cagar Alam & Taman Nasional (2014-2023)',
+        barmode='group',
         plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)',
-        height=400,
-        margin=dict(l=0, r=20, t=50, b=40),
+        height=450,
+        margin=dict(l=0, r=20, t=60, b=40),
         xaxis=dict(tickformat="%Y", dtick="M12", showgrid=False),
-        yaxis=dict(title='Luas Hilang (Hektar)', showgrid=True, gridcolor='rgba(255,255,255,0.05)')
+        yaxis=dict(title='Total Luas Hancur (Hektar)', showgrid=True, gridcolor='rgba(255,255,255,0.05)'),
+        legend=dict(orientation="h", yanchor="bottom", y=1.05, xanchor="center", x=0.5)
     )
     st.plotly_chart(fig_kawasan, use_container_width=True)
     
     st.markdown("""
     <div style="background:#1E1E1E; padding:15px 20px; border-radius:8px; border-left:4px solid #3498DB; margin-top: 10px; margin-bottom: 25px;">
         <span style="color: #E0E0E0; font-size: 0.95rem;">
-            <b style="color:#3498DB;">Fakta Lapangan:</b> Dalam dekade terakhir, total lebih dari <b>2 juta hektar</b> kawasan hutan lindung yang seharusnya dijaga ketat oleh instrumen tata ruang dan D3TLH telah hancur (area overlay IUCN). Ini membuktikan bahwa tata ruang ditabrak dan direvisi begitu saja untuk mengakomodasi IUP.
+            <b style="color:#3498DB;">Fakta Lapangan:</b> Dalam dekade terakhir, total lebih dari <b>56 ribu hektar</b> kawasan konservasi tingkat tinggi (Cagar Alam & Taman Nasional) yang seharusnya haram disentuh oleh aktivitas ekstraktif telah dihancurkan. Ini membuktikan bahwa batas tata ruang ditabrak dan instrumen lingkungan dikompromikan demi memuluskan operasional pertambangan.
         </span>
     </div>
     """, unsafe_allow_html=True)
+
+    with st.expander("Lihat Data Mentah: Rincian Kawasan Konservasi", expanded=False):
+        # Buat Pivot Table agar kolomnya lebih kaya dan informatif
+        df_pivot = pd.pivot_table(
+            df_kawasan, 
+            values='Luas_Hilang_Kawasan_Lindung_Ha', 
+            index='Tahun', 
+            columns='wdpa_protected_areas__iucn_cat', 
+            aggfunc='sum',
+            fill_value=0
+        ).reset_index()
+        
+        # Rename kolom sesuai kategori IUCN di Indonesia
+        df_pivot = df_pivot.rename(columns={
+            1: "Cagar Alam / Suaka Marga Satwa (Ha)", 
+            2: "Taman Nasional (Ha)"
+        })
+        
+        # Tambahkan kolom Total
+        df_pivot['Total Kehancuran (Ha)'] = df_pivot['Cagar Alam / Suaka Marga Satwa (Ha)'] + df_pivot['Taman Nasional (Ha)']
+        df_pivot['Tahun'] = df_pivot['Tahun'].astype(int).astype(str)
+        
+        # Formatting angka
+        for col in ["Cagar Alam / Suaka Marga Satwa (Ha)", "Taman Nasional (Ha)", "Total Kehancuran (Ha)"]:
+            df_pivot[col] = df_pivot[col].apply(lambda x: f"{x:,.2f}")
+            
+        st.dataframe(df_pivot, use_container_width=True, hide_index=True)
+        st.caption("**Sumber File:** `sulawesi_gfw_kawasan_lindung_loss_2014_2023.csv` (GFW dengan overlay WDPA IUCN Kategori 1 & 2).")
 
 except Exception as e:
     st.error(f"Gagal memuat visualisasi kawasan lindung: {e}")
 
 st.markdown("---")
 
-st.subheader("5.3 Pembuktian Statistik: Uji Chi-Square Crosstab")
+st.subheader("5.3 Realitas Lapangan: Izin Bermasalah, FPIC Diabaikan, Masyarakat Dikorbankan")
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Cross-Dataset Integration (KPA CATAHU + Tanahkita + CRI/Mighty Earth Reports)</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
+
+st.markdown("""
+<div style="text-align: justify; line-height: 1.8; color: #E0E0E0; font-size: 1.05rem; margin-bottom: 25px;">
+Di balik lautan angka statistik penerbitan IUP, tersembunyi realitas mengerikan: <b>mayoritas izin tambang nikel di Sulawesi terbit tanpa <i>Free, Prior, and Informed Consent</i> (FPIC) dari masyarakat adat</b>. Laporan terbaru dari <b>Climate Rights International (2024-2025)</b>, <b>Mighty Earth (2024)</b>, dan <b>Business & Human Rights Resource Centre</b> mendokumentasikan pola sistematis di mana perusahaan tambang nikel secara ilegal membabat hutan lindung dan hutan produksi di seluruh Indonesia, termasuk Sulawesi, tanpa konsultasi bermakna dengan masyarakat lokal. Dokumen AMDAL dan analisis daya dukung (D3TLH) disusun sebagai <b>formalitas prosedural belaka</b>—sekadar stempel legalisasi untuk memfasilitasi investasi raksasa tanpa pelibatan komunitas yang ruang hidupnya dirampas.
+<br><br>
+Penelusuran mendalam terhadap <b>database Konsorsium Pembaruan Agraria (KPA) CATAHU 2016-2025</b> dan <b>Tanahkita.id</b> mengungkap fakta mengejutkan: dari <b>21 kasus masalah izin perusahaan</b> yang teridentifikasi dalam 9 laporan tahunan KPA, <b>mayoritas melibatkan perusahaan tambang dengan HGU kadaluarsa, operasi ilegal tanpa izin kehutanan, dan tumpang tindih klaim lahan</b>. Di Sulawesi sendiri, tercatat <b>12 konflik pertambangan</b> dengan <b>4 kasus pelanggaran FPIC eksplisit</b> yang melibatkan penembakan warga, kriminalisasi aktivis, dan penggusuran paksa lahan adat.
+<br><br>
+Yang paling mengkhawatirkan: perusahaan-perusahaan dengan rekam jejak konflik agraria dan pelanggaran HAM ini <b>terus beroperasi hingga hari ini</b>, bahkan beberapa di antaranya menjadi bagian dari Proyek Strategis Nasional (PSN) yang dilindungi negara. Ini membuktikan bahwa sistem perizinan tambang di Indonesia bukan hanya gagal melindungi lingkungan, tetapi juga <b>secara sistematis mengorbankan hak-hak masyarakat adat dan lokal demi kepentingan oligarki ekstraktif</b>.
+</div>
+""", unsafe_allow_html=True)
+
+# Load datasets
+@st.cache_data
+def load_konflik_data():
+    return pd.read_csv('data/processed/sulawesi_konflik_tambang_fpic.csv')
+
+@st.cache_data
+def load_masalah_izin_data():
+    return pd.read_csv('data/processed/kpa_masalah_izin_perusahaan.csv')
+
+df_konflik = load_konflik_data()
+df_masalah = load_masalah_izin_data()
+
+# Calculate metrics
+total_konflik = len(df_konflik)
+konflik_fpic = df_konflik['indikasi_fpic'].sum()
+total_masalah_izin = len(df_masalah)
+perusahaan_masalah_sulawesi = df_masalah[df_masalah['lokasi'].str.contains('Sulawesi', case=False, na=False)]['nama_perusahaan'].nunique()
+
+# Bento Cards untuk Key Metrics
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.markdown(f"""
+    <div class="metric-card">
+        <div>
+            <div class="metric-label">KONFLIK PERTAMBANGAN SULAWESI</div>
+            <div class="metric-value" style="color: #E53935;">{total_konflik} <span style="font-size:1rem;color:#777;">Kasus</span></div>
+            <div class="metric-desc">Total konflik pertambangan terdokumentasi di Sulawesi (1968-2023) dengan <b>{konflik_fpic} kasus pelanggaran FPIC eksplisit</b> yang melibatkan kekerasan, kriminalisasi, dan penggusuran paksa.</div>
+        </div>
+        <div class="metric-source">Sumber: Tanahkita.id (KPA/YLBHI)<br>File: sulawesi_konflik_tambang_fpic.csv</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col2:
+    st.markdown(f"""
+    <div class="metric-card">
+        <div>
+            <div class="metric-label">PERUSAHAAN IZIN BERMASALAH</div>
+            <div class="metric-value" style="color: #FFB74D;">{total_masalah_izin} <span style="font-size:1rem;color:#777;">Kasus</span></div>
+            <div class="metric-desc">Kasus masalah izin perusahaan yang teridentifikasi dalam CATAHU KPA (2016-2025): HGU kadaluarsa, operasi ilegal, IUP bermasalah, dan tumpang tindih klaim lahan.</div>
+        </div>
+        <div class="metric-source">Sumber: KPA CATAHU 2016-2025<br>File: kpa_masalah_izin_perusahaan.csv</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col3:
+    st.markdown(f"""
+    <div class="metric-card">
+        <div>
+            <div class="metric-label">PERUSAHAAN BERMASALAH DI SULAWESI</div>
+            <div class="metric-value" style="color: #4DB6AC;">{perusahaan_masalah_sulawesi} <span style="font-size:1rem;color:#777;">Perusahaan</span></div>
+            <div class="metric-desc">Perusahaan unik yang disebutkan dalam laporan KPA dengan lokasi operasi di Sulawesi, mayoritas terlibat dalam kasus tumpang tindih lahan dan HGU kadaluarsa.</div>
+        </div>
+        <div class="metric-source">Sumber: KPA CATAHU 2016-2025<br>File: kpa_masalah_izin_perusahaan.csv</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+# ---- VISUALIZATION 1: Timeline Konflik & Masalah Izin ----
+st.markdown("#### Timeline Historis: Konflik Pertambangan & Masalah Izin (1968-2025)")
+
+# Prepare timeline data
+df_konflik_timeline = df_konflik.copy()
+df_konflik_timeline['kategori'] = 'Konflik Pertambangan'
+df_konflik_timeline = df_konflik_timeline.rename(columns={'tahun': 'Tahun', 'judul': 'Keterangan'})
+df_konflik_timeline['Keterangan'] = df_konflik_timeline['Keterangan'].str[:80] + '...'
+
+df_masalah_timeline = df_masalah[df_masalah['lokasi'].str.contains('Sulawesi', case=False, na=False)].copy()
+df_masalah_timeline['kategori'] = 'Masalah Izin (KPA)'
+df_masalah_timeline['Tahun'] = df_masalah_timeline['tahun_laporan'].astype(int)
+df_masalah_timeline['Keterangan'] = df_masalah_timeline['nama_perusahaan'] + ' - ' + df_masalah_timeline['jenis_masalah_izin']
+
+# Combine
+df_combined_timeline = pd.concat([
+    df_konflik_timeline[['Tahun', 'kategori', 'Keterangan']],
+    df_masalah_timeline[['Tahun', 'kategori', 'Keterangan']]
+], ignore_index=True).sort_values('Tahun')
+
+# Count by year and category
+df_timeline_agg = df_combined_timeline.groupby(['Tahun', 'kategori']).size().reset_index(name='Jumlah')
+
+fig_timeline_konflik = px.bar(
+    df_timeline_agg,
+    x='Tahun',
+    y='Jumlah',
+    color='kategori',
+    barmode='group',
+    color_discrete_map={
+        'Konflik Pertambangan': '#E74C3C',
+        'Masalah Izin (KPA)': '#F39C12'
+    },
+    title='Distribusi Temporal: Konflik Pertambangan vs Masalah Izin Perusahaan',
+    labels={'Jumlah': 'Jumlah Kasus', 'Tahun': 'Tahun'},
+    text='Jumlah'
+)
+
+fig_timeline_konflik.update_traces(textposition='outside', textfont_size=11)
+fig_timeline_konflik.update_layout(
+    plot_bgcolor='rgba(0,0,0,0)',
+    paper_bgcolor='rgba(0,0,0,0)',
+    height=450,
+    hovermode='x unified',
+    xaxis=dict(tickmode='linear', tick0=1968, dtick=5, showgrid=False),
+    yaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.05)'),
+    legend=dict(orientation="h", yanchor="bottom", y=1.05, xanchor="center", x=0.5, title="")
+)
+
+st.plotly_chart(fig_timeline_konflik, use_container_width=True)
+
+st.markdown("""
+<div style="background:#1E1E1E; padding:15px 20px; border-radius:8px; border-left:4px solid #E74C3C; margin-top: 10px; margin-bottom: 25px;">
+    <span style="color: #E0E0E0; font-size: 0.95rem;">
+        <b style="color:#E74C3C;">Temuan Kunci:</b> Lonjakan konflik pertambangan terjadi pada periode 2011-2023, bersamaan dengan boom nikel di Sulawesi. Laporan KPA menunjukkan pola sistematis: mayoritas konflik melibatkan perusahaan dengan HGU kadaluarsa, operasi ilegal, dan pengabaian FPIC. Era pasca-2020 menunjukkan intensifikasi masalah izin, mengonfirmasi jebolnya instrumen tata kelola lingkungan.
+    </span>
+</div>
+""", unsafe_allow_html=True)
+
+# ---- VISUALIZATION 2: Jenis Masalah Izin (Breakdown) ----
+st.markdown("#### Breakdown Jenis Masalah Izin Perusahaan")
+
+# Parse jenis_masalah_izin (bisa multiple, dipisah dengan semicolon)
+masalah_list = []
+for _, row in df_masalah.iterrows():
+    masalah_str = str(row['jenis_masalah_izin'])
+    for m in masalah_str.split(';'):
+        masalah_list.append({
+            'Jenis Masalah': m.strip(),
+            'Tahun': row['tahun_laporan'],
+            'Perusahaan': row['nama_perusahaan']
+        })
+
+df_masalah_breakdown = pd.DataFrame(masalah_list)
+df_masalah_count = df_masalah_breakdown.groupby('Jenis Masalah').size().reset_index(name='Jumlah Kasus').sort_values('Jumlah Kasus', ascending=True)
+
+fig_masalah = px.bar(
+    df_masalah_count,
+    x='Jumlah Kasus',
+    y='Jenis Masalah',
+    orientation='h',
+    title='Jenis Masalah Izin yang Paling Sering Terjadi (KPA CATAHU 2016-2025)',
+    text='Jumlah Kasus',
+    color='Jumlah Kasus',
+    color_continuous_scale='Reds'
+)
+
+fig_masalah.update_traces(textposition='outside', textfont_size=12)
+fig_masalah.update_layout(
+    plot_bgcolor='rgba(0,0,0,0)',
+    paper_bgcolor='rgba(0,0,0,0)',
+    height=400,
+    showlegend=False,
+    xaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.05)'),
+    yaxis=dict(showgrid=False)
+)
+
+st.plotly_chart(fig_masalah, use_container_width=True)
+
+st.markdown("""
+<div style="background:#1E1E1E; padding:15px 20px; border-radius:8px; border-left:4px solid #F39C12; margin-top: 10px; margin-bottom: 25px;">
+    <span style="color: #E0E0E0; font-size: 0.95rem;">
+        <b style="color:#F39C12;">Pola Pelanggaran Dominan:</b> Tumpang tindih klaim lahan (17 kasus) dan HGU kadaluarsa (10 kasus) menjadi masalah terbanyak. Ini membuktikan lemahnya koordinasi antar-kementerian dan diabaikannya status legal lahan dalam proses penerbitan IUP baru. Operasi ilegal (3 kasus) dan IUP bermasalah (2 kasus) menunjukkan pengawasan yang sangat lemah dari otoritas berwenang.
+    </span>
+</div>
+""", unsafe_allow_html=True)
+
+# ---- VISUALIZATION 3: Perusahaan dengan FPIC Violations ----
+st.markdown("#### Perusahaan dengan Pelanggaran FPIC Eksplisit")
+
+df_fpic_violations = df_konflik[df_konflik['indikasi_fpic'] == True].copy()
+df_fpic_violations['Perusahaan'] = df_fpic_violations['nama_perusahaan'].str.split(';').str[0].str.strip()
+df_fpic_violations = df_fpic_violations[['tahun', 'Perusahaan', 'provinsi', 'lokasi', 'judul', 'detail_url']].sort_values('tahun', ascending=False)
+
+# Create expanders for each case
+for idx, row in df_fpic_violations.iterrows():
+    with st.expander(f"🔴 **{row['tahun']}** — {row['Perusahaan']} ({row['provinsi']})", expanded=False):
+        st.markdown(f"""
+        **Judul Konflik:** {row['judul']}
+        
+        **Komoditas:** {row['lokasi']}
+        
+        **Provinsi:** {row['provinsi']}
+        
+        **Sumber:** [Tanahkita.id]({row['detail_url']})
+        """)
+
+st.markdown("""
+<div style="background:#1E1E1E; padding:15px 20px; border-radius:8px; border-left:4px solid #C0392B; margin-top: 10px; margin-bottom: 25px;">
+    <span style="color: #E0E0E0; font-size: 0.95rem;">
+        <b style="color:#C0392B;">Kasus Terburuk:</b> PT Gema Kreasi Perdana (GKP) di Pulau Wawonii beroperasi dengan IPPKH kadaluarsa, mengkriminalisasi puluhan warga penolak, dan menghancurkan lahan pertanian yang dikelola 30 tahun oleh 37,000+ jiwa. PT Sumber Energi Jaya di Minahasa Selatan menembaki warga pada 4 Juni 2012. PT Vale Indonesia mengubah lahan adat To Karunsi'e menjadi lapangan golf. Ini bukan kecelakaan—ini desain sistemik.
+    </span>
+</div>
+""", unsafe_allow_html=True)
+
+# ---- VISUALIZATION 4: Data Table dengan Filter ----
+st.markdown("#### 📋 Database Lengkap: Konflik & Masalah Izin di Sulawesi")
+
+tab1, tab2 = st.tabs(["🔥 Konflik Pertambangan (Tanahkita)", "📄 Masalah Izin Perusahaan (KPA)"])
+
+with tab1:
+    # Filter options
+    col_filter1, col_filter2 = st.columns(2)
+    with col_filter1:
+        filter_provinsi = st.multiselect(
+            "Filter Provinsi",
+            options=['Semua'] + sorted(df_konflik['provinsi'].unique().tolist()),
+            default=['Semua']
+        )
+    with col_filter2:
+        filter_komoditas = st.multiselect(
+            "Filter Komoditas",
+            options=['Semua'] + sorted(df_konflik['lokasi'].unique().tolist()),
+            default=['Semua']
+        )
+    
+    # Apply filters
+    df_konflik_filtered = df_konflik.copy()
+    if 'Semua' not in filter_provinsi:
+        df_konflik_filtered = df_konflik_filtered[df_konflik_filtered['provinsi'].isin(filter_provinsi)]
+    if 'Semua' not in filter_komoditas:
+        df_konflik_filtered = df_konflik_filtered[df_konflik_filtered['lokasi'].isin(filter_komoditas)]
+    
+    # Display table
+    df_konflik_display = df_konflik_filtered[['tahun', 'judul', 'nama_perusahaan', 'provinsi', 'lokasi', 'indikasi_fpic']].copy()
+    df_konflik_display = df_konflik_display.rename(columns={
+        'tahun': 'Tahun',
+        'judul': 'Judul Konflik',
+        'nama_perusahaan': 'Perusahaan',
+        'provinsi': 'Provinsi',
+        'lokasi': 'Komoditas',
+        'indikasi_fpic': 'Pelanggaran FPIC'
+    })
+    df_konflik_display['Pelanggaran FPIC'] = df_konflik_display['Pelanggaran FPIC'].map({True: '✅ YA', False: '⚠️ Tidak Eksplisit'})
+    
+    st.dataframe(df_konflik_display, use_container_width=True, hide_index=True, height=400)
+    st.caption(f"**Total {len(df_konflik_filtered)} konflik** | Sumber: `sulawesi_konflik_tambang_fpic.csv` (Tanahkita.id)")
+
+with tab2:
+    # Filter options
+    col_filter3, col_filter4 = st.columns(2)
+    with col_filter3:
+        filter_tahun_laporan = st.multiselect(
+            "Filter Tahun Laporan",
+            options=['Semua'] + sorted(df_masalah['tahun_laporan'].unique().tolist()),
+            default=['Semua']
+        )
+    with col_filter4:
+        filter_masalah = st.multiselect(
+            "Filter Jenis Masalah",
+            options=['Semua'] + sorted(df_masalah_breakdown['Jenis Masalah'].unique().tolist()),
+            default=['Semua']
+        )
+    
+    # Apply filters
+    df_masalah_filtered = df_masalah.copy()
+    if 'Semua' not in filter_tahun_laporan:
+        df_masalah_filtered = df_masalah_filtered[df_masalah_filtered['tahun_laporan'].isin(filter_tahun_laporan)]
+    if 'Semua' not in filter_masalah:
+        # Filter rows that contain any of the selected masalah types
+        df_masalah_filtered = df_masalah_filtered[df_masalah_filtered['jenis_masalah_izin'].str.contains('|'.join(filter_masalah), case=False, na=False)]
+    
+    # Display table
+    df_masalah_display = df_masalah_filtered[['tahun_laporan', 'nama_perusahaan', 'lokasi', 'jenis_masalah_izin', 'luas_ha']].copy()
+    df_masalah_display = df_masalah_display.rename(columns={
+        'tahun_laporan': 'Tahun Laporan',
+        'nama_perusahaan': 'Perusahaan',
+        'lokasi': 'Lokasi',
+        'jenis_masalah_izin': 'Jenis Masalah',
+        'luas_ha': 'Luas (Ha)'
+    })
+    
+    st.dataframe(df_masalah_display, use_container_width=True, hide_index=True, height=400)
+    st.caption(f"**Total {len(df_masalah_filtered)} kasus** | Sumber: `kpa_masalah_izin_perusahaan.csv` (KPA CATAHU 2016-2025)")
+
+st.markdown("---")
+
+# ---- CITATION BOX ----
+st.markdown("#### 📚 Referensi Utama & Verifikasi Independen")
+
+st.markdown("""
+<div style="background:#1A1A1A; padding:20px; border-radius:10px; border:1px solid #333; margin-bottom:25px;">
+    <h5 style="color:#66BB6A; margin-top:0;">Laporan Organisasi Internasional:</h5>
+    <ul style="line-height:1.8; color:#E0E0E0;">
+        <li><b>Climate Rights International (2024-2025)</b>: "Indonesia: Nickel Industry Harming Human Rights and the Environment" — Dokumentasi pelanggaran hak asasi dan lingkungan di industri nikel Indonesia. <a href="https://cri.org/indonesia" target="_blank" style="color:#66BB6A;">cri.org/indonesia</a></li>
+        <li><b>Mighty Earth (2024)</b>: "From Forests to Electric Vehicles" — Temuan: perusahaan tambang nikel secara ilegal membabat hutan lindung dan produksi, <b>tanpa menggunakan FPIC untuk konsultasi dengan komunitas lokal di Kabaena</b>. <a href="https://mightyearth.org/article/from-forests-to-electric-vehicles/" target="_blank" style="color:#66BB6A;">mightyearth.org</a></li>
+        <li><b>Business & Human Rights Resource Centre (2024)</b>: "Indonesia: Nickel mining levels forests without FPIC" — Dokumentasi dampak kesehatan, lingkungan, dan ekonomi yang merugikan masyarakat lokal. <a href="https://www.business-humanrights.org/" target="_blank" style="color:#66BB6A;">business-humanrights.org</a></li>
+        <li><b>EJAtlas</b>: "Islanders resisting nickel mining permits, Wawonii, Southeast Sulawesi" — Studi kasus Pulau Wawonii: "Meskipun konsesi mencakup area pemukiman dan tanah leluhur, <b>penduduk tidak dilibatkan dalam proses pengambilan keputusan</b>." <a href="https://www.ejatlas.org/conflict/islanders-resisting-nickel-mining-permits-wawonii-southeast-sulawesi-indonesia" target="_blank" style="color:#66BB6A;">ejatlas.org</a></li>
+        <li><b>Mongabay (2025)</b>: "Nickel boom on an Indonesian island brings toxic seas, lost incomes" — Temuan: "Komunitas yang terdampak melaporkan <b>perampasan lahan tanpa konsultasi atau kompensasi yang layak, partisipasi publik yang terbatas, dan kriminalisasi terhadap protes</b>, semuanya melanggar hak-hak masyarakat adat dan hukum nasional." <a href="https://news.mongabay.com/2025/07/" target="_blank" style="color:#66BB6A;">mongabay.com</a></li>
+    </ul>
+    
+    <h5 style="color:#66BB6A; margin-top:20px;">Database Nasional:</h5>
+    <ul style="line-height:1.8; color:#E0E0E0;">
+        <li><b>Konsorsium Pembaruan Agraria (KPA)</b>: Catatan Akhir Tahun (CATAHU) 2016-2025 — 9 laporan tahunan komprehensif tentang konflik agraria dan masalah perizinan di Indonesia.</li>
+        <li><b>Tanahkita.id</b>: Database konflik agraria YLBHI/KPA — 568 kasus konflik nasional, 12 kasus pertambangan Sulawesi terekam.</li>
+    </ul>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("---")
+
+st.subheader("5.4 Pembuktian Statistik: Uji Chi-Square Crosstab")
 st.info("⚠️ Placeholder: Crosstab Analysis (SPSS Style) untuk membuktikan signifikansi pengabaian kondisi ekologis terhadap keputusan penerbitan izin.")
 
 st.markdown("<br><br>", unsafe_allow_html=True)
