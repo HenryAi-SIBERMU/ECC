@@ -800,8 +800,51 @@ st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;bord
 
 st.markdown("""
 Hipotesis utama dalam evaluasi ini adalah bahwa **industrialisasi dan ekspansi korporasi** berbanding lurus dengan **eskalasi konflik dan represi** terhadap masyarakat. 
-Untuk mengujinya secara statistik sesuai pedoman D3TLH, tabel crosstab dan uji Chi-Square di bawah membandingkan variabel pemicu ekspansi (Periode/Aktor) terhadap instrumen kekerasan (Kriminalisasi/Fatalitas). Unit observasinya adalah catatan kejadian letupan konflik historis.
+Untuk mengujinya secara statistik sesuai pedoman D3TLH, analisis dibagi menjadi dua bagian: (1) Komparasi metrik Before-After, dan (2) Uji signifikansi Crosstab Chi-Square. Unit observasinya adalah catatan kejadian letupan konflik historis.
 """)
+
+st.markdown("#### A. Analisis Komparatif Before-After (Pra vs Era Hilirisasi)")
+st.markdown("Perbandingan absolut eskalasi konflik agraria sebelum dan sesudah rezim hilirisasi masif dimulai (cut-off tahun 2014).")
+
+# Kalkulasi
+df_ba = df_dampak[df_dampak['tahun'] >= 1990].copy()
+df_pra = df_ba[df_ba['tahun'] < 2014]
+df_pasca = df_ba[df_ba['tahun'] >= 2014]
+
+tahun_pra = max(1, 2014 - int(df_pra['tahun'].min())) if not df_pra.empty else 24
+tahun_pasca = max(1, int(df_pasca['tahun'].max()) - 2013) if not df_pasca.empty else 11
+
+avg_pra = len(df_pra) / tahun_pra
+avg_pasca = len(df_pasca) / tahun_pasca
+
+col_ba1, col_ba2 = st.columns(2)
+
+with col_ba1:
+    st.markdown(f"""
+    <div style="background:#1E1E1E; padding:20px; border-radius:10px; border-top:4px solid #9E9E9E;">
+        <h4 style="margin-top:0; color:#9E9E9E;">Pra-Ekspansi (1990 - 2013)</h4>
+        <h1 style="color:#FFF; font-size: 2.5rem; margin: 10px 0;">{avg_pra:.1f} <span style="font-size: 1rem; color:#AAA;">Kasus/Tahun</span></h1>
+        <hr style="border-color: #333; margin: 15px 0;">
+        <p style="margin: 5px 0;">Total Letupan Konflik: <b>{len(df_pra)}</b> kejadian</p>
+        <p style="margin: 5px 0;">Total Warga Ditangkap: <b>{int(df_pra['jumlah_ditangkap'].sum())}</b> jiwa</p>
+        <p style="margin: 5px 0; color:#FF8A80;">Total Korban Tewas: <b>{int(df_pra['jumlah_tewas'].sum())}</b> jiwa</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col_ba2:
+    st.markdown(f"""
+    <div style="background:#1E1E1E; padding:20px; border-radius:10px; border-top:4px solid #E53935;">
+        <h4 style="margin-top:0; color:#E53935;">Pasca-Ekspansi (2014 - 2024)</h4>
+        <h1 style="color:#FFF; font-size: 2.5rem; margin: 10px 0;">{avg_pasca:.1f} <span style="font-size: 1rem; color:#AAA;">Kasus/Tahun</span></h1>
+        <hr style="border-color: #333; margin: 15px 0;">
+        <p style="margin: 5px 0;">Total Letupan Konflik: <b>{len(df_pasca)}</b> kejadian</p>
+        <p style="margin: 5px 0;">Total Warga Ditangkap: <b>{int(df_pasca['jumlah_ditangkap'].sum())}</b> jiwa</p>
+        <p style="margin: 5px 0; color:#FF5252;">Total Korban Tewas: <b>{int(df_pasca['jumlah_tewas'].sum())}</b> jiwa</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+st.markdown("#### B. Uji Statistik Crosstab (Chi-Square SPSS Style)")
 
 import scipy.stats as stats
 
