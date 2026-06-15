@@ -217,10 +217,14 @@ df_timeline = df_timeline[df_timeline['Tahun'] <= 2023] # Filter out 2024 karena
 from plotly.subplots import make_subplots
 
 st.markdown("""
-Visualisasi di bawah ini menelanjangi kegagalan fungsi instrumen daya dukung lingkungan (D3TLH). Batang merah merepresentasikan luas deforestasi yang seharusnya menjadi "rem darurat" bagi pemerintah. Namun, perhatikan garis kuning yang merepresentasikan penerbitan izin tambang baru.
-
-Alih-alih menurun saat deforestasi memburuk, kurva izin (garis kuning) justru ikut melesat tajam dan mencapai puncaknya bertepatan dengan tingginya kerusakan hutan (batang merah). Ini menandakan bahwa instrumen tata ruang justru hanya menjadi stempel legalisasi untuk mengobral Izin Tambang Baru (IUP) di tengah darurat lingkungan.
-""")
+<div style="text-align: justify; line-height: 1.8; color: #E0E0E0; font-size: 1.05rem; margin-bottom: 25px;">
+Visualisasi <i>Dual-Axis Combo Chart</i> di bawah ini memberikan penelanjangan empiris yang tidak terbantahkan mengenai kegagalan sistemik dari instrumen Daya Dukung dan Daya Tampung Lingkungan Hidup (D3TLH). Dalam teori tata kelola lingkungan yang rasional, tingkat kerusakan ekologis historis—yang direpresentasikan oleh akumulasi batang merah (luas deforestasi alam)—seharusnya berfungsi secara mutlak sebagai "rem darurat" institusional. Ketika suatu bentang alam telah menunjukkan tren degradasi tutupan hutan yang ekstrem, maka instrumen negara semestinya mengunci wilayah tersebut dari ekspansi industri ekstraktif baru demi memberi ruang bagi pemulihan ekologis (<i>ecological recovery</i>). Namun, realita grafis persilangan waktu di bawah justru membuktikan skandal tata kelola yang mematikan.
+<br><br>
+Alih-alih menunjukkan korelasi negatif yang rasional di mana laju perizinan menurun seiring memburuknya kondisi hutan, kurva garis kuning (Penerbitan Izin Tambang Baru) justru bergerak secara sinkron dan parasitik, melesat tajam beriringan dengan naiknya skala kerusakan lingkungan. Anomali paling mencolok dapat diamati pada periode pasca-2020, di mana lonjakan perizinan mencapai rekor tertingginya tepat pada momentum ketika grafik deforestasi sedang berada di fase krisis tertingginya. Fenomena ini bukanlah sebuah kebetulan statistik, melainkan cerminan dari desain kebijakan yang eksploitatif. Sinkronisasi maut antara kehancuran ekosistem hutan dan obral izin secara masif ini mengonfirmasi tesis <i>governance failure</i>, di mana instrumen tata ruang dan dokumen perlindungan ekologis telah sepenuhnya dilumpuhkan.
+<br><br>
+Dokumen AMDAL dan analisis daya dukung lingkungan (D3TLH) telah direduksi nilainya menjadi sekadar ornamen administratif belaka; hanya berfungsi sebagai stempel legalisasi prosedural untuk memfasilitasi kelancaran investasi ekstraktif raksasa. Negara, melalui aparatus birokrasinya, secara sadar dan sistematis mengabaikan sinyal darurat dari alam demi melayani syahwat akumulasi kapital oligarki tambang mineral dan perluasan komoditas lainnya. Akibat pembiaran struktural ini, wilayah-wilayah penyangga kehidupan di semenanjung Sulawesi kini secara nyata dikorbankan menjadi zona tumbal (<i>sacrifice zones</i>) di mana ilusi ilusi pertumbuhan ekonomi dan angka rasio PDB nasional pada akhirnya harus dibayar sangat mahal dengan ongkos kebangkrutan ekologis permanen yang beban bencananya akan ditanggung secara tidak adil oleh generasi masyarakat lokal di masa mendatang.
+</div>
+""", unsafe_allow_html=True)
 
 # Render Combo Chart (Bar + Line) Dual Axis
 fig_timeline = make_subplots(specs=[[{'secondary_y': True}]])
