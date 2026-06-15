@@ -681,4 +681,85 @@ Tahun 2020 mencatatkan anomali rekor tertinggi secara absolut untuk grafik Korba
 """)
 
 st.subheader("4.3 Kriminalisasi Aktivis dan Resistensi Ruang Sipil")
-st.info("Analisis pemberitaan media, data protes/demonstrasi, dan angka kriminalisasi aktivis lingkungan (memenuhi indikator riset: 'Kriminalisasi warga' dan 'Pemberitaan media negatif').")
+st.markdown("""
+Data secara gamblang menunjukkan bahwa ekspansi industri tidak hanya memonopoli tanah, tetapi juga memicu **represi sistematis terhadap ruang sipil**. Kriminalisasi warga, penangkapan sewenang-wenang, hingga tindak kekerasan seringkali menjadi instrumen pembungkam bagi komunitas adat dan petani yang berupaya mempertahankan ruang hidupnya dari gempuran investasi ekstraktif.
+""")
+
+# Pastikan kolom kriminalisasi berupa numerik yang aman
+df_dampak['jumlah_ditangkap'] = pd.to_numeric(df_dampak['jumlah_ditangkap'], errors='coerce').fillna(0)
+df_dampak['jumlah_luka'] = pd.to_numeric(df_dampak['jumlah_luka'], errors='coerce').fillna(0)
+df_dampak['jumlah_tewas'] = pd.to_numeric(df_dampak['jumlah_tewas'], errors='coerce').fillna(0)
+
+col_m1, col_m2, col_m3, col_m4 = st.columns(4)
+
+total_kriminalisasi = df_dampak[df_dampak['indikasi_kriminalisasi'] == True].shape[0]
+total_ditangkap = int(df_dampak['jumlah_ditangkap'].sum())
+total_luka = int(df_dampak['jumlah_luka'].sum())
+total_tewas = int(df_dampak['jumlah_tewas'].sum())
+
+with col_m1:
+    st.metric(label="Kasus Indikasi Kriminalisasi", value=f"{total_kriminalisasi} Kasus")
+with col_m2:
+    st.metric(label="Warga/Aktivis Ditangkap", value=f"{total_ditangkap} Orang")
+with col_m3:
+    st.metric(label="Korban Luka-luka", value=f"{total_luka} Orang")
+with col_m4:
+    st.metric(label="Korban Tewas", value=f"{total_tewas} Orang")
+
+st.markdown("---")
+
+col_trend, col_sektor = st.columns(2)
+
+# Chart 1: Tren Kriminalisasi per Tahun (hanya menampilkan sejak 2000 untuk kejelasan tren modern)
+df_krim_tahun = df_dampak[(df_dampak['indikasi_kriminalisasi'] == True) & (df_dampak['tahun'] >= 2000)].groupby('tahun').size().reset_index(name='jumlah_kasus')
+
+with col_trend:
+    fig_krim_tahun = px.line(
+        df_krim_tahun, 
+        x='tahun', 
+        y='jumlah_kasus',
+        markers=True,
+        title='Tren Kasus Kriminalisasi & Represi (Pasca 2000)',
+        labels={'jumlah_kasus': 'Total Kasus', 'tahun': 'Tahun Kejadian'}
+    )
+    fig_krim_tahun.update_traces(line_color='#E53935', marker=dict(size=8, color='#B71C1C'))
+    fig_krim_tahun.update_layout(
+        plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
+        xaxis=dict(showgrid=False, tickmode='linear', dtick=2), 
+        yaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)'),
+        margin=dict(t=50, b=40)
+    )
+    st.plotly_chart(fig_krim_tahun, use_container_width=True)
+
+# Chart 2: Kriminalisasi per Sektor
+df_krim_sektor = df_dampak[(df_dampak['indikasi_kriminalisasi'] == True) & (df_dampak['Sektor_Grup'] != 'Lainnya')].groupby('Sektor_Grup').size().reset_index(name='jumlah_kasus').sort_values('jumlah_kasus', ascending=True)
+
+with col_sektor:
+    fig_krim_sektor = px.bar(
+        df_krim_sektor,
+        y='Sektor_Grup',
+        x='jumlah_kasus',
+        orientation='h',
+        color='Sektor_Grup',
+        color_discrete_map=color_map,
+        title='Sektor Industri Paling Represif',
+        labels={'jumlah_kasus': 'Total Kasus', 'Sektor_Grup': 'Sektor Pemicu'}
+    )
+    fig_krim_sektor.update_layout(
+        showlegend=False,
+        plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
+        xaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)'), 
+        yaxis=dict(showgrid=False),
+        margin=dict(t=50, b=40)
+    )
+    st.plotly_chart(fig_krim_sektor, use_container_width=True)
+
+st.markdown("#### 🚨 Arsip Kasus Represi dan Kekerasan Fisik Tertinggi")
+st.caption("Menampilkan 10 kasus dengan jumlah korban penangkapan atau tewas terbanyak berdasarkan data yang berhasil didokumentasikan.")
+
+df_kekerasan = df_dampak[(df_dampak['jumlah_ditangkap'] > 0) | (df_dampak['jumlah_tewas'] > 0)].sort_values(['jumlah_ditangkap', 'jumlah_tewas'], ascending=[False, False])
+df_kekerasan_display = df_kekerasan[['tahun', 'Sektor_Grup', 'keterlibatan_perusahaan', 'jumlah_ditangkap', 'jumlah_tewas', 'deskripsi']].copy()
+df_kekerasan_display['keterlibatan_perusahaan'] = df_kekerasan_display['keterlibatan_perusahaan'].fillna('Tidak/Belum Teridentifikasi')
+df_kekerasan_display.columns = ['Tahun', 'Sektor', 'Perusahaan Terlibat', 'Ditangkap (Jiwa)', 'Tewas (Jiwa)', 'Narasi Singkat Kejadian']
+
+st.dataframe(df_kekerasan_display.head(10), use_container_width=True, hide_index=True)
