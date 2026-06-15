@@ -558,12 +558,12 @@ with col_ha:
             showarrow=True, arrowhead=2, arrowcolor="#FFC107", ax=0, ay=-35,
             font=dict(size=11, color="#111"), bgcolor="rgba(255,193,7,0.9)", bordercolor="#FFB300"
         )
-    val_2015 = df_sektor_tahun[df_sektor_tahun['tahun'] == 2015]['luas_ha'].sum()
-    if val_2015 > 0:
+    val_2014 = df_sektor_tahun[df_sektor_tahun['tahun'] == 2014]['luas_ha'].sum()
+    if val_2014 > 0:
         fig_ha.add_annotation(
-            x=2015, y=val_2015,
+            x=2014, y=val_2014,
             text="<a href='#anomali-4' target='_self' style='color:#111;text-decoration:none;'><b>Anomali 4</b></a>",
-            hovertext="<b>2015 (Hutan & Kebun)</b><br>Klik untuk melihat detail di bawah",
+            hovertext="<b>2014 (Hutan & Kebun)</b><br>Klik untuk melihat detail di bawah",
             showarrow=True, arrowhead=2, arrowcolor="#FFC107", ax=0, ay=-35,
             font=dict(size=11, color="#111"), bgcolor="rgba(255,193,7,0.9)", bordercolor="#FFB300"
         )
@@ -647,27 +647,23 @@ Tahun 2010 merupakan titik nadir perampasan tanah berskala raksasa di sektor per
 ---
 
 <a id="anomali-4"></a>
-#### ANOMALI 4: Lonjakan Area Konflik Tahun 2015 (Kehutanan & Perkebunan)
-Tahun 2015 didominasi konflik klaim tata ruang berskala puluhan ribu hektar di berbagai daerah:
+#### ANOMALI 4: Lonjakan Area Konflik Tahun 2014 (Kehutanan & Perkebunan)
+Tahun 2014 mencatatkan lonjakan masif pada luasan area konflik, didominasi oleh pencaplokan pulau-pulau kecil untuk konsesi kehutanan dan perkebunan raksasa:
 
-**1. PT Bintang Lima Makmur vs Suku Nuaulu (Maluku)**
-* **Luas Area:** 24.550 Hektar
-* **Sektor:** Kehutanan
-* **Narasi Kasus:** Eksploitasi hutan lewat izin HPH secara absolut menghancurkan wilayah Suku Nuaulu. Bagi mereka, hilangnya hutan berarti hilangnya tradisi, ruang hidup, dan kedaulatan identitas mereka.
-* **Sumber Referensi:** [Ambon Ekspres (Bintang Lima Makmur)](http://ambonekspres.fajar.co.id/2016/02/15/pt-bintang-lima-makmur-ancaman-bagi-suku-nuaulu/)
+**1. Megaproyek Perkebunan Tebu PT Menara Group (Kepulauan Aru, Maluku)**
+* **Luas Area:** 626.900 Hektar
+* **Sektor:** Kehutanan (Dialihfungsikan ke Perkebunan)
+* **Perusahaan Terlibat:** Konsorsium PT Menara Group (28 perusahaan)
+* **Pemerintah Terlibat:** Menteri Kehutanan, Gubernur Maluku, Bupati Kepulauan Aru
+* **Narasi Kasus:** Sebuah skandal perampasan ruang hidup yang hampir menghilangkan Kabupaten Kepulauan Aru dari peta ekologis. Pemerintah menerbitkan izin prinsip seluas lebih dari 600 ribu hektar (sebagian besar daratan Kepulauan Aru) kepada konsorsium PT Menara Group untuk perkebunan tebu. Hal ini memicu gerakan masif lokal, nasional, dan global **#SaveAru** karena proyek ini dinilai akan menghancurkan ruang hidup masyarakat adat secara total, memusnahkan keanekaragaman hayati endemis, dan menenggelamkan pulau-pulau kecil akibat eksploitasi air tanah skala industri.
+* **Sumber Referensi:** [Mongabay (Gerakan #SaveAru)](https://www.mongabay.co.id/2014/04/16/save-aru-perjuangan-masyarakat-kepulauan-aru-melawan-korporasi/) | [Forest Watch Indonesia](https://fwi.or.id/publikasi/menyelamatkan-kepulauan-aru/)
 
-**2. Sengketa PT Tiga Mitra Pratama (Aceh Jaya)**
-* **Luas Area:** 20.000 Hektar
+**2. Sengketa Lahan PT Perkebunan Nusantara II (Langkat)**
+* **Luas Area:** ~18.000 Hektar
 * **Sektor:** Perkebunan
-* **Narasi Kasus:** Lahan Hak Guna Usaha (HGU) yang ditelantarkan perusahaan sejak 1994, memicu sengketa berkepanjangan dengan Pemkab dan masyarakat setempat.
-* **Sumber Referensi:** [Serambi News (HGU PT TMP Bermasalah)](https://aceh.tribunnews.com/2015/01/08/hgu-pt-tmp-di-aceh-jaya-bermasalah)
-
-**3. Konsesi WWF (PT Alam Bukit Tiga Puluh) di Jambi**
-* **Luas Area:** 14.000 Hektar
-* **Sektor:** Kehutanan
-* **Perusahaan Terlibat:** PT. Alam Bukit Tiga Puluh / Yayasan WWF Indonesia
-* **Narasi Kasus:** Proyek *Ecosystem Restoration Concession* (ERC) yang diinisiasi WWF justru memicu konflik dengan warga desa Pemayungan. Penetapan konsesi hijau tanpa proses FPIC (Persetujuan Atas Dasar Informasi Awal Tanpa Paksaan) menyingkirkan masyarakat dari wilayah kelolanya sendiri atas nama "konservasi".
-* **Sumber Referensi:** [Mongabay (Konflik Konsesi Restorasi Jambi)](https://www.mongabay.co.id/2018/06/15/kala-warga-dan-perusahaan-restorasi-ekosistem-di-jambi-berkonflik/)
+* **Perusahaan Terlibat:** PTPN II
+* **Narasi Kasus:** Konflik panjang antara masyarakat adat/petani dengan PTPN II atas klaim eks-HGU dan kawasan hutan yang tak kunjung diselesaikan, memicu letupan kekerasan dan penggusuran kebun rakyat.
+* **Sumber Referensi:** [Catatan KPA & KontraS]
 
 ---
 
