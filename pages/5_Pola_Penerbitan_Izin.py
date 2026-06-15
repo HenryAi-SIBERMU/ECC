@@ -137,31 +137,42 @@ st.markdown('<div class="org-badge">CELIOS — Center of Economic and Law Studie
 st.markdown('<h1 class="main-title">Pola Penerbitan Izin di Zona Kritis Ekologis</h1>', unsafe_allow_html=True)
 
 # Bento Cards untuk Fakta Kritis D3TLH
-st.markdown("""
-<div class="bento-container" style="margin-top: 1.5rem; margin-bottom: 3rem;">
-    <div class="bento-card" style="border-top: 4px solid #E74C3C;">
-        <div class="metric-label" style="font-size:0.9rem;">FAKTA TANAHKITA.ID</div>
-        <div class="metric-value" style="color: #E74C3C; font-size: 1.6rem; margin:10px 0;">AMDAL Formalitas & Konflik Agraria</div>
-        <div class="metric-desc" style="color:#B0BEC5;">
-            Laporan KPA menunjukkan mayoritas IUP terbit tanpa <i>Free, Prior, and Informed Consent</i> (FPIC). Dokumen AMDAL dan analisis daya dukung (D3TLH) direkayasa sebagai formalitas prosedural tanpa melibatkan masyarakat adat yang ruang hidupnya dirampas.
+st.markdown("<br>", unsafe_allow_html=True)
+c1, c2, c3 = st.columns(3)
+
+with c1:
+    st.markdown("""
+    <div style="background:#1A1A1A; padding: 20px; border-radius: 10px; border-top: 4px solid #E74C3C; height: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+        <div style="font-size:0.8rem; color:#E74C3C; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">FAKTA TANAHKITA.ID</div>
+        <div style="color: #fff; font-size: 1.3rem; font-weight:bold; margin-bottom:12px; line-height:1.3;">AMDAL Formalitas & Konflik Agraria</div>
+        <div style="color:#B0BEC5; font-size:0.9rem; line-height:1.5;">
+            Laporan KPA menunjukkan mayoritas IUP terbit tanpa <i>Free, Prior, and Informed Consent</i> (FPIC). Dokumen AMDAL dan analisis daya dukung (D3TLH) direkayasa sebagai formalitas prosedural tanpa pelibatan masyarakat adat yang ruang hidupnya dirampas.
         </div>
     </div>
-    <div class="bento-card" style="border-top: 4px solid #F39C12;">
-        <div class="metric-label" style="font-size:0.9rem;">DATA BPS (SLHI)</div>
-        <div class="metric-value" style="color: #F39C12; font-size: 1.6rem; margin:10px 0;">Krisis Kualitas Air (IKA) di Bawah 55</div>
-        <div class="metric-desc" style="color:#B0BEC5;">
-            Indeks Kualitas Air (IKA) di sentra nikel seperti Sultra dan Sulteng konsisten terpuruk di level cemaran berat (angka 46-55). Sedimentasi lumpur tambang laut menghancurkan terumbu karang dan mengusir wilayah tangkap nelayan tradisional sejauh puluhan mil.
+    """, unsafe_allow_html=True)
+
+with c2:
+    st.markdown("""
+    <div style="background:#1A1A1A; padding: 20px; border-radius: 10px; border-top: 4px solid #F39C12; height: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+        <div style="font-size:0.8rem; color:#F39C12; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">DATA BPS (SLHI)</div>
+        <div style="color: #fff; font-size: 1.3rem; font-weight:bold; margin-bottom:12px; line-height:1.3;">Krisis Kualitas Air (IKA) di Bawah 55</div>
+        <div style="color:#B0BEC5; font-size:0.9rem; line-height:1.5;">
+            Indeks Kualitas Air (IKA) di sentra nikel seperti Sultra dan Sulteng konsisten terpuruk di level cemaran berat (46-55). Sedimentasi lumpur tambang laut menghancurkan terumbu karang dan mengusir wilayah tangkap nelayan sejauh puluhan mil.
         </div>
     </div>
-    <div class="bento-card" style="border-top: 4px solid #3498DB;">
-        <div class="metric-label" style="font-size:0.9rem;">DATA GFW & ESDM</div>
-        <div class="metric-value" style="color: #3498DB; font-size: 1.6rem; margin:10px 0;">Tabrakan Tata Ruang & Kawasan Hutan</div>
-        <div class="metric-desc" style="color:#B0BEC5;">
-            Dataset tumpang tindih menunjukkan obral IUP tambang nikel tidak mempedulikan status tata ruang. Puluhan ribu hektar izin baru diterbitkan tepat di atas Kawasan Hutan Produksi dan Area Resapan Air yang krusial untuk menahan bencana banjir bandang.
+    """, unsafe_allow_html=True)
+
+with c3:
+    st.markdown("""
+    <div style="background:#1A1A1A; padding: 20px; border-radius: 10px; border-top: 4px solid #3498DB; height: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+        <div style="font-size:0.8rem; color:#3498DB; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">DATA GFW & ESDM</div>
+        <div style="color: #fff; font-size: 1.3rem; font-weight:bold; margin-bottom:12px; line-height:1.3;">Tabrakan Tata Ruang & Kawasan Hutan</div>
+        <div style="color:#B0BEC5; font-size:0.9rem; line-height:1.5;">
+            Dataset spasial menunjukkan obral IUP tambang tidak mempedulikan batas tata ruang. Puluhan ribu hektar izin baru diterbitkan tepat di atas Kawasan Hutan Produksi dan Area Resapan Air yang krusial untuk menahan bencana.
         </div>
     </div>
-</div>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
 st.markdown('<p class="sub-title">Evaluasi terhadap kegagalan instrumen tata kelola lingkungan dalam meredam perizinan tambang di wilayah yang telah melampaui daya dukung ekologis.</p>', unsafe_allow_html=True)
 
 with st.expander("🔍 Metodologi Pendekatan", expanded=False):
