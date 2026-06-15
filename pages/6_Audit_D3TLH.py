@@ -295,7 +295,7 @@ with colA1:
 
 with colA2:
     if not df_kes.empty:
-        tab1, tab2 = st.tabs(["Korelasi PLTU & Kualitas Udara", "Dampak Kasus ISPA/Pneumonia"])
+        tab1, tab2, tab3 = st.tabs(["Korelasi PLTU & Kualitas Udara", "Dampak Kasus ISPA/Pneumonia", "Fakta Beban Limbah & Emisi"])
         
         with tab1:
             # --- 1. Ekspansi PLTU vs Penurunan Kualitas Udara ---
@@ -390,6 +390,36 @@ with colA2:
                     df_ts_pivot = df_ts_agg.pivot(index='tahun', columns='provinsi', values='nilai').reset_index()
                     st.dataframe(df_ts_pivot, use_container_width=True, hide_index=True)
                     st.caption("Sumber File: `sulawesi_kesehatan_detail_2014_2024.csv`")
+                    
+        with tab3:
+            # --- 3. Fakta Data Timbulan Limbah Udara & B3 ---
+            st.markdown("##### Bukti Kuantitatif: Ledakan Limbah Udara & Emisi")
+            
+            # Hitung fakta cepat
+            total_b3_sulteng = 0
+            if not df_b3.empty:
+                total_b3_sulteng = df_b3[df_b3['Provinsi'] == 'Sulawesi Tengah']['Estimasi Timbulan (Ton/Tahun)'].sum()
+            
+            total_ispa_sentra = df_ts_filtered[df_ts_filtered['Kategori'].str.contains('Sentra')]['nilai'].sum() if not df_ts_filtered.empty else 0
+            
+            col_f1, col_f2 = st.columns(2)
+            col_f1.metric("Total Limbah B3 Sulteng (Ton/Tahun)", f"{total_b3_sulteng/1_000_000:.1f} Juta", "Partikulat/Fly Ash ke Udara")
+            col_f2.metric("Total Kasus ISPA Sentra Nikel", f"{total_ispa_sentra:,.0f}", "2014-2024", delta_color="inverse")
+            
+            st.markdown("<hr style='border:1px solid #444'>", unsafe_allow_html=True)
+            
+            if not df_b3.empty:
+                df_b3_prov = df_b3.groupby('Provinsi')['Estimasi Timbulan (Ton/Tahun)'].sum().reset_index()
+                fig_b3 = px.bar(df_b3_prov, x='Estimasi Timbulan (Ton/Tahun)', y='Provinsi', orientation='h',
+                                text='Estimasi Timbulan (Ton/Tahun)', color='Estimasi Timbulan (Ton/Tahun)',
+                                color_continuous_scale='Reds', title="Beban Timbulan B3 per Provinsi")
+                fig_b3.update_traces(texttemplate='%{text:,.0f} ton', textposition='outside')
+                fig_b3.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
+                st.plotly_chart(fig_b3, use_container_width=True)
+                
+                with st.expander("Lihat Data Mentah: Timbulan Limbah B3", expanded=False):
+                    st.dataframe(df_b3, use_container_width=True, hide_index=True)
+                    st.caption("Sumber File: `sulawesi_limbah_b3.csv`")
 
 st.markdown("<br>", unsafe_allow_html=True)
 
