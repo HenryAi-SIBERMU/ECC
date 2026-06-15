@@ -1,33 +1,27 @@
-# Panduan Standardisasi UI & Skoring Matriks D3TLH (ECC Dashboard)
+# Panduan Standardisasi Komprehensif Matriks D3TLH (ECC Dashboard)
 
-Dokumen ini berisi *log* penyelarasan (*fine-tuning*) dan panduan *blueprint* pengembangan yang telah disepakati dari pengerjaan "Matriks Daya Tampung Udara". Panduan ini **Wajib** digunakan sebagai standar (*template*) untuk membangun matriks-matriks selanjutnya (Daya Tampung Air, Lahan/Kebencanaan, Kedaulatan Ruang, dll).
+Dokumen ini adalah **Blueprint Wajib** yang merangkum *seluruh* proses *fine-tuning* yang telah kita lakukan saat membangun "Matriks Daya Tampung Udara". Panduan ini harus direplikasi secara presisi saat menyusun Matriks Daya Tampung Air, Daya Dukung Lahan (Kebencanaan), dan Sosial/Kedaulatan Ruang.
 
-## 1. Arsitektur Layout Utama (Split 1:2)
-Setiap halaman/bagian matriks harus dipisah menggunakan sistem rasio kolom 1:2.
-*   **Kolom Kiri (colA1 - Lebar 1x)**: Khusus untuk "Kartu Vonis Eksekutif" atau "Mitos vs Fakta". Menggunakan latar gelap (`#2C3E50`), garis tepi merah (`#E74C3C`), dan secara eksklusif memuat **Akumulasi Skor Kerusakan** (angka tunggal raksasa).
-*   **Kolom Kanan (colA2 - Lebar 2x)**: Khusus untuk penjabaran analitik mendalam menggunakan komponen navigasi **4 Tab Interaktif** (`st.tabs`).
+## 1. Tata Letak (Layout) & Navigasi
+*   **Sistem Split Kolom 1:2**: Layar dibagi menjadi 2. Kolom kiri khusus untuk Kartu "Mitos vs Fakta" dan *Vonis Akumulasi Skor*. Kolom kanan khusus untuk analisis mendalam.
+*   **Wajib Menggunakan Tab (`st.tabs`)**: Jangan menumpuk grafik secara vertikal memanjang ke bawah. Semua sajian data harus dikemas ke dalam 4 (atau lebih) Tab interaktif agar rapi dan fokus.
 
-## 2. Sistem Skoring Universal (Skala 0-10) & Model Matematis
-Setiap data empiris, sebesar apapun satuannya (Juta Ton, Ribuan Megawatt), **wajib** dikonversi dan dinormalisasi menjadi Indeks Skala 0 hingga 10 menggunakan model statistik (misal: *Min-Max Normalization, Carrying Capacity Index, IRR/Relative Risk*).
-*   **Dynamic Thresholding (Normalisasi Batas Atas)**: Jangan menggunakan batas mentok (*ceiling*) yang terlalu kecil. Jika data empiris sangat ekstrem (misal 25x lipat dari ambang batas), gunakan pembagi (denominator) yang logis (misal dibagi 30) agar skor tidak selalu *hardcode* mentok di 10.0. Tujuannya agar metrik menampilkan angka dinamis (misal: 8.1, 9.4).
+## 2. Strategi Penggunaan Grafik & Dataset (Efisiensi & Maksimalisasi)
+*   **Jangan Membuat Grafik Baru Jika Sudah Ada (Re-use)**: Cari dan ambil grafik/visualisasi yang sudah pernah dibuat di halaman (*page*) sebelumnya. Modifikasi sedikit jika perlu, alih-alih membuat kode plotting baru dari nol.
+*   **Maksimalkan SEMUA Dataset**: Jangan pelit data. Gunakan semua dataset yang kita miliki (kesehatan, IKU, IKA, deforestasi, B3, perizinan, dll). Jika ada dataset yang tidak bisa divisualisasikan dalam bentuk grafik, tampilkan sebagai **Fakta Data (Angka/Teks)** di dalam Tab tersebut. Jangan sampai ada data relevan yang terbuang.
 
-## 3. Komponen Tab: Sistem 3 Metrik
-Setiap Tab **tidak boleh** hanya menyajikan grafik kosong. Di atas grafik, harus selalu didahului oleh penjabaran angka cepat (`st.columns(3)`):
-*   **Metrik 1 (Kiri)**: Data Absolut Penyebab (Misal: Total Timbulan B3, Kapasitas MW).
-*   **Metrik 2 (Tengah)**: Data Komparator / Dampak Langsung (Misal: Jumlah Kasus ISPA, Total Hutan Hilang).
-*   **Metrik 3 (Kanan)**: **Skor Matematis (0-10)** dengan label peringatan keras di bawahnya (`delta_color="inverse"`), misal: "STATUS: DARURAT MEDIS".
+## 3. Komponen di Dalam Setiap Tab
+Setiap Tab harus memiliki struktur urut dari atas ke bawah sebagai berikut:
+1.  **Statement/Narasi Tipis di Atas Grafik**: Selalu letakkan kalimat pengantar/narasi anomali (menggunakan HTML *micro-copy* tipis warna abu-abu) sebelum menampilkan grafik. Jangan gunakan `st.error` / *alert box* yang memakan ruang.
+2.  **3 Kolom Metrik (Angka Cepat)**: Gunakan `st.columns(3)` untuk memaparkan: (1) Data Fakta Absolut, (2) Data Pembanding/Dampak, (3) Skor Metrik Numerik (0-10) dengan status kritis di bawahnya.
+3.  **Grafik Interaktif (Plotly)**: Visualisasi utama yang telah diberi injeksi anomali (lihat poin 4).
 
-## 4. Penggunaan "Narasi Anomali" Tipis (Micro-Copy)
-Hindari penggunaan *banner alert* yang tebal dan memakan ruang (seperti `st.error` atau `st.warning`) untuk teks yang panjang.
-*   Gunakan HTML *micro-copy* tipis berwarna abu-abu terang sebagai narasi pembuka/pembuat *framing* saintifik di atas grafik.
-*   *Template Code*: `<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> [Teks penjelasan kegagalan/kebohongan data dokumen D3TLH]</div>`
+## 4. Injeksi Kritis pada Grafik (Anotasi & Threshold)
+Grafik standar tidak cukup. Setiap grafik *wajib* disuntik dengan elemen analitik investigatif:
+*   **Garis Threshold (Batas Kritis)**: Tambahkan garis batas horizontal (`add_hline`) atau vertikal (`add_vline`) yang mencolok (misalnya garis putus-putus merah). Contoh: Garis "Kapasitas Toleransi Ambruk" di angka 5 Juta Ton, atau garis "Eskalasi Pabrik Nikel" di tahun 2015.
+*   **Notasi/Anotasi Kritis**: Berikan teks notasi (`add_annotation`) langsung menempel di dalam grafik untuk menunjuk anomali tertentu. Buat visualnya agar publik awam langsung paham di mana letak kejanggalan/bahayanya tanpa harus berpikir keras.
 
-## 5. Aggregasi "Vonis" / Akumulasi Skor Kerusakan
-Metrik terpenting dari seluruh halaman.
-*   **Metode**: Rata-rata dari keempat Tab (atau *Simple Additive Weighting* berbobot sama 25%).
-*   **Lokasi**: Ditempatkan di dalam Kolom Kiri (Kartu Mitos vs Fakta).
-*   **Visual**: Teks berukuran 32px, dicetak sangat tebal (Font weight: 800), merah (`#E74C3C`), di dalam kotak pembatas *dark mode* murni (`#1A202C`). **Dilarang** menggunakan icon emoji (seperti 🚨) untuk menjaga kesan dasbor forensik intelijen yang kaku, ilmiah, dan presisi.
-
----
-**Catatan Implementasi:**
-Setiap kali membuka/membangun Matriks baru (Air, Lahan, Sosial), programmer/AI **wajib** membaca panduan ini dan melakukan replikasi logika UI/UX serta *data flow* matematika yang serupa.
+## 5. Sistem Skoring & Model Matematis (Skala 0-10)
+*   **Vonis Angka, Bukan Teks Panjang**: Ubah peringatan bahaya menjadi Skor Skala 0-10. Tampilkan metrik ini sejajar dengan angka data aslinya.
+*   **Model Matematis Dinamis**: Jangan *hardcode* nilai agar mentok di 10.0. Gunakan normalisasi (*Dynamic Thresholding*, rasio IRR, *Carrying Capacity Index*) dengan batas atas (denominator) yang wajar sehingga skor bisa tampil dinamis (misal: 8.1, 9.4).
+*   **Akumulasi Skor Kerusakan (Kartu Kiri)**: Satukan semua skor dari tiap Tab menggunakan rata-rata (*Simple Additive Weighting*). Tampilkan angka akumulasi (misal `9.8 / 10`) secara mencolok, *bold*, tebal di dalam kartu Mitos vs Fakta, **tanpa** menggunakan icon emoji (🚨) agar terkesan serius dan forensik.
