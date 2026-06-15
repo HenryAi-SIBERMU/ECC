@@ -213,72 +213,59 @@ df_izin_thn = df_izin.groupby('Tahun')['Jumlah_Izin_Baru'].sum().reset_index()
 df_gfw_thn = df_gfw.groupby('Tahun')['Total_Deforestasi_Ha'].sum().reset_index()
 df_timeline = pd.merge(df_gfw_thn, df_izin_thn, on='Tahun', how='outer').fillna(0).sort_values('Tahun')
 
-# Normalisasi data ke skala 0-100 (Indeks Sinkronisasi)
-min_def, max_def = df_timeline['Total_Deforestasi_Ha'].min(), df_timeline['Total_Deforestasi_Ha'].max()
-min_izn, max_izn = df_timeline['Jumlah_Izin_Baru'].min(), df_timeline['Jumlah_Izin_Baru'].max()
-
-df_timeline['Norm_Deforestasi'] = ((df_timeline['Total_Deforestasi_Ha'] - min_def) / (max_def - min_def)) * 100
-df_timeline['Norm_Izin'] = ((df_timeline['Jumlah_Izin_Baru'] - min_izn) / (max_izn - min_izn)) * 100
+from plotly.subplots import make_subplots
 
 st.markdown("""
-Visualisasi **Dumbbell Chart** di bawah ini menelanjangi kegagalan fungsi instrumen daya dukung lingkungan (D3TLH) dengan menyandingkan *Indeks Deforestasi* dan *Indeks Penerbitan Izin* (diskalakan 0-100). Jarak (garis penghubung) antara titik merah dan kuning merepresentasikan tingkat sinkronisasi atau anomali. 
+Visualisasi di bawah ini menelanjangi kegagalan fungsi instrumen daya dukung lingkungan (D3TLH). Batang merah merepresentasikan luas deforestasi yang seharusnya menjadi "rem darurat" bagi pemerintah. Namun, perhatikan garis kuning yang merepresentasikan penerbitan izin tambang baru.
 
-Secara ekologis, saat indeks deforestasi melonjak tinggi (titik merah bergeser ke kanan), negara seharusnya mengerem perizinan (titik kuning berada di kiri). Namun, realita grafis berkata lain. Perhatikan bagaimana pada tahun-tahun darurat ekologis, titik kuning justru ikut melesat tajam berhimpitan atau bahkan melampaui titik merah. Ini menandakan bahwa alih-alih membunyikan sirine bahaya, instrumen tata ruang justru menjadi stempel legalisasi untuk mengobral Izin Tambang Baru (IUP).
+Alih-alih menurun saat deforestasi memburuk, kurva izin (garis kuning) justru ikut melesat tajam dan mencapai puncaknya bertepatan dengan tingginya kerusakan hutan (batang merah). Ini menandakan bahwa instrumen tata ruang justru hanya menjadi stempel legalisasi untuk mengobral Izin Tambang Baru (IUP) di tengah darurat lingkungan.
 """)
 
-# Render Dumbbell Chart
-fig_timeline = go.Figure()
+# Render Combo Chart (Bar + Line) Dual Axis
+fig_timeline = make_subplots(specs=[[{'secondary_y': True}]])
 
-# 1. Garis Penghubung (Dumbbell Link)
-for i, row in df_timeline.iterrows():
-    fig_timeline.add_trace(go.Scatter(
-        x=[row['Norm_Deforestasi'], row['Norm_Izin']],
-        y=[str(int(row['Tahun'])), str(int(row['Tahun']))],
-        mode='lines',
-        line=dict(color='rgba(255,255,255,0.15)', width=4),
-        showlegend=False,
-        hoverinfo='skip'
-    ))
+# 1. Bar Chart: Deforestasi (Sumbu Y Kiri)
+fig_timeline.add_trace(
+    go.Bar(
+        x=df_timeline['Tahun'], 
+        y=df_timeline['Total_Deforestasi_Ha'], 
+        name='Total Deforestasi (Hektar)', 
+        marker_color='rgba(231, 76, 60, 0.7)', # Merah transparan
+        marker_line_color='#C0392B',
+        marker_line_width=1.5,
+        hovertemplate="<b>Tahun %{x}</b><br>Deforestasi: %{y:,.0f} Ha<extra></extra>"
+    ),
+    secondary_y=False,
+)
 
-# 2. Marker Deforestasi (Merah)
-fig_timeline.add_trace(go.Scatter(
-    x=df_timeline['Norm_Deforestasi'],
-    y=df_timeline['Tahun'].astype(int).astype(str),
-    mode='markers',
-    name='Indeks Deforestasi',
-    customdata=df_timeline['Total_Deforestasi_Ha'],
-    marker=dict(color='#E74C3C', size=16, symbol='circle', line=dict(color='#1E1E1E', width=2)),
-    hovertemplate="<b>Tahun %{y}</b><br>Luas Deforestasi: %{customdata:,.0f} Hektar<extra></extra>"
-))
-
-# 3. Marker Izin Baru (Kuning)
-fig_timeline.add_trace(go.Scatter(
-    x=df_timeline['Norm_Izin'],
-    y=df_timeline['Tahun'].astype(int).astype(str),
-    mode='markers',
-    name='Indeks Penerbitan IUP',
-    customdata=df_timeline['Jumlah_Izin_Baru'],
-    marker=dict(color='#F1C40F', size=16, symbol='circle', line=dict(color='#1E1E1E', width=2)),
-    hovertemplate="<b>Tahun %{y}</b><br>Izin Tambang Baru: %{customdata} IUP<extra></extra>"
-))
+# 2. Line Chart: Izin Baru (Sumbu Y Kanan)
+fig_timeline.add_trace(
+    go.Scatter(
+        x=df_timeline['Tahun'], 
+        y=df_timeline['Jumlah_Izin_Baru'], 
+        name='Total Penerbitan Izin (IUP)', 
+        mode='lines+markers+text',
+        text=df_timeline['Jumlah_Izin_Baru'].astype(int).astype(str),
+        textposition='top center',
+        textfont=dict(color='#F1C40F', size=12, weight='bold'),
+        line=dict(color='#F1C40F', width=3),
+        marker=dict(symbol='circle', size=10, color='#F1C40F', line=dict(color='#1E1E1E', width=2)),
+        hovertemplate="<b>Tahun %{x}</b><br>Izin Baru: %{y} IUP<extra></extra>"
+    ),
+    secondary_y=True,
+)
 
 fig_timeline.update_layout(
-    title='Dumbbell Sinkronisasi: Jarak Indeks Deforestasi vs Eskalasi Izin',
+    title='Tren Eskalasi Bersamaan: Kerusakan Hutan (Batang) vs Penerbitan Izin (Garis)',
     plot_bgcolor='rgba(0,0,0,0)',
     paper_bgcolor='rgba(0,0,0,0)',
-    height=550,
+    hovermode='x unified',
+    height=500,
     margin=dict(l=0, r=20, t=60, b=40),
     xaxis=dict(
-        title='Indeks Akselerasi (Skala 0 - 100)',
-        range=[-5, 105],
-        showgrid=True,
-        gridcolor='rgba(255,255,255,0.05)',
-        zeroline=False
-    ),
-    yaxis=dict(
-        title='Tahun',
-        autorange='reversed', # Tahun terbaru di atas
-        showgrid=False
+        tickformat="%Y",
+        dtick="M12",
+        showgrid=False,
     ),
     legend=dict(
         orientation="h", 
@@ -289,6 +276,9 @@ fig_timeline.update_layout(
         title=""
     )
 )
+
+fig_timeline.update_yaxes(title_text='Deforestasi (Hektar)', secondary_y=False, showgrid=True, gridcolor='rgba(255,255,255,0.05)', color='#E74C3C')
+fig_timeline.update_yaxes(title_text='Jumlah Izin Baru (IUP)', secondary_y=True, showgrid=False, color='#F1C40F')
 
 st.plotly_chart(fig_timeline, use_container_width=True)
 
