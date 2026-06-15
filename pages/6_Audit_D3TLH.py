@@ -300,6 +300,9 @@ with colA2:
         
         with tab1:
             # --- 1. Ekspansi PLTU vs Penurunan Kualitas Udara ---
+            st.error("**🚨 SKORING STATUS: WASPADA MERAH** | Kualitas udara (IKU) se-Sulawesi terus anjlok mendekati batas kritis berbanding lurus dengan ledakan pembakaran batu bara PLTU Captive.")
+            st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Pemerintah sering merilis angka rata-rata IKU tahunan seolah 'Masih Aman', menutupi tren eksponensial di mana kualitas udara terjun bebas tepat setelah keran mega-smelter dibuka lebar pada 2014-2015.</div>", unsafe_allow_html=True)
+            
             if not df_pltu_op.empty and not df_iku.empty:
                 years = list(range(2010, 2025))
                 prov_map = {
@@ -340,13 +343,17 @@ with colA2:
                     ), secondary_y=True
                 )
                 
+                # Menambahkan Batas Kritis IKU (Misal: 70 adalah batas bawah kualitas sangat baik/aman)
+                fig_2_2_combined.add_hline(y=70, line_dash="dot", annotation_text="Batas Kritis Kualitas Udara", line_color="#FF5252", secondary_y=True)
+                fig_2_2_combined.add_vline(x=2014, line_dash="dash", line_color="rgba(255,255,255,0.3)", annotation_text="Booming Smelter Dimulai", annotation_position="top right")
+                
                 fig_2_2_combined.update_layout(
                     title=dict(text="Ekspansi PLTU vs Penurunan Kualitas Udara (2010-2024)", font=dict(color='#ECEFF1', size=16)),
                     plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font=dict(color='#ECEFF1', family='Arial, sans-serif'),
                     legend=dict(orientation="v", yanchor="top", y=0.98, xanchor="left", x=0.02, bgcolor='rgba(30,30,30,0.8)', bordercolor='#555', borderwidth=1),
                     xaxis=dict(title="", tickmode='linear', dtick=2, tickformat='d', showgrid=False, showline=True, linecolor='#555555'),
                     yaxis=dict(title="Kapasitas PLTU Kumulatif (MW)", showgrid=True, gridcolor='rgba(255,255,255,0.1)', side='left'),
-                    yaxis2=dict(title="Indeks Kualitas Udara (IKU)", showgrid=False, overlaying='y', side='right', range=[60, 100]),
+                    yaxis2=dict(title="Indeks Kualitas Udara (IKU)", showgrid=False, overlaying='y', side='right', range=[50, 100]),
                     hovermode="x unified", margin=dict(l=0, r=0, t=40, b=0)
                 )
                 st.plotly_chart(fig_2_2_combined, use_container_width=True)
@@ -358,6 +365,9 @@ with colA2:
 
         with tab2:
             # --- 2. Tren Historis Kasus ISPA/Pneumonia ---
+            st.error("**🚨 SKORING STATUS: DARURAT MEDIS** | Ledakan pasien infeksi pernapasan akut (ISPA) terjadi secara asimetris, terpusat khusus di provinsi ring-1 nikel.")
+            st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Dokumen daya dukung mengabaikan lonjakan tajam pasien ISPA di RSUD Morowali dan Kendari. Grafik membuktikan bahwa tren ISPA di provinsi non-tambang relatif stabil, namun meroket secara paralel dengan asap di provinsi sentra nikel.</div>", unsafe_allow_html=True)
+            
             df_ts_filtered = df_kes[df_kes['indikator'].str.contains('ISPA', case=False, na=False)].copy()
             if not df_ts_filtered.empty:
                 df_ts_filtered['Kategori'] = df_ts_filtered['provinsi'].apply(lambda x: 'Sentra Industri (Sulteng & Sultra)' if x in ['Sulawesi Tengah', 'Sulawesi Tenggara'] else 'Non-Sentra Industri (Lainnya)')
@@ -375,6 +385,8 @@ with colA2:
                     else:
                         trace.line.width = 2
                         trace.opacity = 0.6
+                
+                fig_3_3.add_vline(x=2015, line_dash="dash", line_color="#FFEB3B", annotation_text="Eskalasi Pabrik Nikel", annotation_position="top left")
                 
                 fig_3_3.update_layout(
                     title="Tren Historis Kasus ISPA/Pneumonia (2014-2024)",
@@ -394,7 +406,8 @@ with colA2:
                     
         with tab3:
             # --- 3. Fakta Data Timbulan Limbah Udara & B3 ---
-            st.markdown("##### Bukti Kuantitatif: Ledakan Limbah Udara & Emisi")
+            st.error("**🚨 SKORING STATUS: OVER-CAPACITY B3** | Timbulan limbah beracun dan partikulat debu tidak sebanding dengan kapasitas sarana mitigasi lingkungan.")
+            st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Data perizinan D3TLH fokus pada syarat emisi cerobong di atas kertas, tetapi mengabaikan gunung-gunung debu slag (fly ash) di darat yang bebas tertiup angin memapari puluhan desa setiap harinya.</div>", unsafe_allow_html=True)
             
             # Hitung fakta cepat
             total_b3_sulteng = 0
@@ -416,6 +429,10 @@ with colA2:
                 fig_b3 = px.bar(df_b3_prov, x='Estimasi Timbulan (Ton/Tahun)', y='Provinsi', orientation='h',
                                 text='Estimasi Timbulan (Ton/Tahun)', color='Estimasi Timbulan (Ton/Tahun)',
                                 color_continuous_scale='Reds', title="Beban Timbulan B3 per Provinsi")
+                
+                # Tambahkan garis batas halusinasi aman
+                fig_b3.add_vline(x=5_000_000, line_dash="dot", line_color="#FFF", annotation_text="Kapasitas Toleransi Ambruk", annotation_position="top right")
+                
                 fig_b3.update_traces(texttemplate='%{text:,.0f} ton', textposition='outside')
                 fig_b3.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
                 st.plotly_chart(fig_b3, use_container_width=True)
@@ -426,7 +443,9 @@ with colA2:
                     
         with tab4:
             # --- 4. Hilangnya Paru-Paru Udara (Deforestasi CO2) ---
-            st.markdown("##### Bukti Kuantitatif: Lepasnya Filter Udara Alami")
+            st.warning("**⚠️ SKORING STATUS: DEFISIT EKOSISTEM** | Ekosistem filter karbon utama Sulawesi diratakan demi konsesi, melepaskan cadangan emisi yang ditahan berabad-abad.")
+            st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Audit resmi pemerintah hanya menghitung 'emisi yang keluar dari corong pabrik', tetapi dengan sengaja mengaburkan 'emisi dari jutaan pohon yang mati' akibat ekspansi lahan tambang itu sendiri.</div>", unsafe_allow_html=True)
+            
             if not df_gfw.empty:
                 df_gfw['Total_Emisi_CO2_Megagram'] = pd.to_numeric(df_gfw['Total_Emisi_CO2_Megagram'], errors='coerce').fillna(0)
                 total_emisi = df_gfw['Total_Emisi_CO2_Megagram'].sum() / 1_000_000 # dalam Juta Megagram / Juta Ton
