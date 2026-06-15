@@ -17,6 +17,25 @@ Riset ini hadir untuk membantah hal tersebut. Kita akan membuktikan bahwa D3TLH 
 
 ---
 
+## 2. Fakta Dorking: Metodologi Resmi D3TLH Pemerintah (Jasa Ekosistem)
+
+Berdasarkan penelusuran dokumen pedoman teknis D3TLH dari KLHK dan dokumen RPPLH daerah, pemerintah saat ini menyusun D3TLH dengan pendekatan murni spasial/bio-fisik yang disebut **Jasa Ekosistem (*Ecosystem Services*)**. 
+
+Indikator resmi yang digunakan dibagi menjadi 4 kategori:
+1.  **Jasa Penyediaan (*Provisioning*):** Kapasitas lahan menyediakan pangan, air bersih, dan bahan baku.
+2.  **Jasa Pengaturan (*Regulating*):** Kapasitas tata air, mitigasi banjir, dan pemurnian udara.
+3.  **Jasa Pendukung (*Supporting*):** Kesuburan tanah dan siklus hara.
+4.  **Jasa Budaya (*Cultural*):** Nilai rekreasi dan warisan alam.
+
+### Letak Cacat Metodologi (Blind Spots):
+Rumus utama yang dipakai pemerintah untuk menghitung indeks di atas hanyalah: **Peta Ekoregion + Peta Tutupan Lahan (*Land Cover*)**.
+Akibatnya, instrumen ini menghasilkan kesesatan logika tata kelola:
+*   **Abaikan Nyawa & Morbiditas:** D3TLH menghitung "Kapasitas Pemurnian Udara" dari sisa luasan hutan di peta satelit. Mereka **TIDAK PERNAH** menghitung lonjakan puluhan ribu pasien ISPA di Puskesmas akibat debu smelter.
+*   **Abaikan Kedaulatan Ruang:** D3TLH menghitung "Kapasitas Pertanian", tapi abai terhadap fakta bahwa lahan tersebut telah dirampas paksa dari warga lokal (Konflik Agraria).
+*   **Sekadar Indeks Tata Ruang, Bukan Veto:** Saat indeks D3TLH turun dari "Sangat Baik" menjadi "Sedang", pemerintah menggunakannya bukan sebagai "Rem Darurat" untuk menolak izin, melainkan sekadar "Catatan Mitigasi" agar izin baru tetap bisa keluar.
+
+---
+
 ## 2. Matriks Komparasi: AMDAL Pemerintah vs D3TLH Versi Riset (Tandingan)
 
 Tabel di bawah ini adalah pondasi utama kita untuk menyerang kelemahan metodologis AMDAL/D3TLH resmi.
