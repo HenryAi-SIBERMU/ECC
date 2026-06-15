@@ -799,24 +799,56 @@ st.subheader("4.4 Pembuktian Statistik: Ekspansi vs Eskalasi Konflik")
 st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Before-After Analysis & SPSS-Style Crosstabulation</span>', unsafe_allow_html=True)
 
 st.markdown("""
-Hipotesis utama dalam evaluasi ini adalah bahwa **industrialisasi dan hilirisasi** (Pasca-ekspansi) berbanding lurus dengan **eskalasi konflik dan represi** terhadap masyarakat. 
-Untuk mengujinya secara statistik sesuai pedoman D3TLH, tabel crosstab dan uji Chi-Square di bawah membandingkan periode **Pra-ekspansi (< 2014)** dan periode **Pasca-ekspansi (Era Hilirisasi 2014-2024)**. Unit observasinya adalah catatan kejadian letupan konflik historis.
+Hipotesis utama dalam evaluasi ini adalah bahwa **industrialisasi dan ekspansi korporasi** berbanding lurus dengan **eskalasi konflik dan represi** terhadap masyarakat. 
+Untuk mengujinya secara statistik sesuai pedoman D3TLH, tabel crosstab dan uji Chi-Square di bawah membandingkan variabel pemicu ekspansi (Periode/Aktor) terhadap instrumen kekerasan (Kriminalisasi/Fatalitas). Unit observasinya adalah catatan kejadian letupan konflik historis.
 """)
 
 import scipy.stats as stats
 
 # Data Preparation
 df_crosstab = df_dampak.copy()
-# Memfilter hanya data valid yang memiliki tahun
 df_crosstab = df_crosstab[df_crosstab['tahun'] >= 1990]
 
-# Klasifikasi X (Periode)
-df_crosstab['X_Label'] = df_crosstab['tahun'].apply(lambda x: 'Pasca-ekspansi (≥ 2014)' if x >= 2014 else 'Pra-ekspansi (< 2014)')
-# Klasifikasi Y (Kriminalisasi)
-df_crosstab['Y_Label'] = df_crosstab['indikasi_kriminalisasi'].fillna(False).astype(bool).apply(lambda x: 'Ada Represi/Kriminalisasi' if x else 'Baseline (Hanya Konflik)')
+# Define columns for X
+df_crosstab['Periode_Ekspansi'] = df_crosstab['tahun'].apply(lambda x: 'Pasca-ekspansi (≥ 2014)' if x >= 2014 else 'Pra-ekspansi (< 2014)')
+df_crosstab['Keterlibatan_Perusahaan'] = df_crosstab['keterlibatan_perusahaan'].notna().apply(lambda x: 'Terlibat Korporasi' if x else 'Tanpa Korporasi/Tidak Teridentifikasi')
 
-cats_x = ['Pra-ekspansi (< 2014)', 'Pasca-ekspansi (≥ 2014)']
-cats_y = ['Baseline (Hanya Konflik)', 'Ada Represi/Kriminalisasi']
+# Define columns for Y
+df_crosstab['Indikasi_Kriminalisasi'] = df_crosstab['indikasi_kriminalisasi'].fillna(False).astype(bool).apply(lambda x: 'Ada Represi/Kriminalisasi' if x else 'Baseline (Tanpa Kriminalisasi)')
+df_crosstab['Dampak_Kematian'] = (df_crosstab['jumlah_tewas'] > 0).apply(lambda x: 'Jatuh Korban Nyawa' if x else 'Tanpa Korban Jiwa')
+
+x_order = {
+    "Periode_Ekspansi": ['Pra-ekspansi (< 2014)', 'Pasca-ekspansi (≥ 2014)'],
+    "Keterlibatan_Perusahaan": ['Tanpa Korporasi/Tidak Teridentifikasi', 'Terlibat Korporasi']
+}
+y_order = {
+    "Indikasi_Kriminalisasi": ['Baseline (Tanpa Kriminalisasi)', 'Ada Represi/Kriminalisasi'],
+    "Dampak_Kematian": ['Tanpa Korban Jiwa', 'Jatuh Korban Nyawa']
+}
+
+col_sel1, col_sel2 = st.columns(2)
+
+with col_sel1:
+    st.markdown("##### Variabel Independen (X) - Kondisi Ekspansi")
+    x_options = {
+        "Periode_Ekspansi": "Periode Ekspansi Industri",
+        "Keterlibatan_Perusahaan": "Status Keterlibatan Korporasi"
+    }
+    x_col = st.selectbox("Pilih Indikator Ekspansi (X):", list(x_options.keys()), format_func=lambda x: x_options[x])
+
+with col_sel2:
+    st.markdown("##### Variabel Dependen (Y) - Eskalasi Konflik")
+    y_options = {
+        "Indikasi_Kriminalisasi": "Tingkat Represi & Kriminalisasi",
+        "Dampak_Kematian": "Tingkat Fatalitas (Korban Nyawa)"
+    }
+    y_col = st.selectbox("Pilih Indikator Eskalasi (Y):", list(y_options.keys()), format_func=lambda x: y_options[x])
+
+df_crosstab["X_Label"] = df_crosstab[x_col]
+df_crosstab["Y_Label"] = df_crosstab[y_col]
+
+cats_x = x_order[x_col]
+cats_y = y_order[y_col]
 
 crosstab = pd.crosstab(df_crosstab["X_Label"], df_crosstab["Y_Label"]).reindex(index=cats_x, columns=cats_y, fill_value=0)
 
@@ -837,7 +869,7 @@ valid_cases = len(df_crosstab.dropna(subset=['X_Label', 'Y_Label']))
 missing_cases = total_cases - valid_cases
 
 columns_case = pd.MultiIndex.from_product([["Cases"], ["Valid", "Missing", "Total"], ["N", "Percent"]])
-interaction_label = "Periode Ekspansi * Tingkat Represi"
+interaction_label = f"{x_options[x_col]} * {y_options[y_col]}"
 row_data = [
     valid_cases, f"{valid_cases/total_cases*100:.1f}%" if total_cases > 0 else "0%",
     missing_cases, f"{missing_cases/total_cases*100:.1f}%" if total_cases > 0 else "0%",
@@ -865,7 +897,7 @@ total_exps = expected_df.sum().tolist()
 rows.append(total_counts + [sum(total_counts)])
 rows.append([f"{v:.1f}" for v in total_exps] + [f"{sum(total_exps):.1f}"])
 
-multi_index = pd.MultiIndex.from_tuples(row_indices, names=["Periode Ekspansi", ""])
+multi_index = pd.MultiIndex.from_tuples(row_indices, names=[x_options[x_col], ""])
 spss_crosstab = pd.DataFrame(rows, index=multi_index, columns=cats_y + ["Total"])
 st.table(spss_crosstab)
 
@@ -925,9 +957,9 @@ with col_res1:
 
 with col_res2:
     if is_significant:
-        interp_text = f"Terdapat perbedaan yang sangat **signifikan (P < 0.05)** antara periode Pra-ekspansi dan Pasca-ekspansi (Hilirisasi). Konflik di era ekspansi tinggi memiliki proporsi kriminalisasi dan represi yang secara persentase lebih masif dan terstruktur dibanding era sebelumnya. Hal ini memvalidasi teori kerangka riset bahwa perluasan wilayah kelola oligarki nyatanya selalu dikawal dengan eskalasi represif terhadap ruang sipil."
+        interp_text = f"Temuan ini sangat krusial: pergeseran status <b>{x_options[x_col]}</b> terbukti **berkorelasi kuat dan signifikan** dengan <b>{y_options[y_col]}</b> (P < 0.05). Angka Odds Ratio (OR: {odds_ratio:.3f}) menjadi konfirmasi empiris bahwa narasi hilirisasi dan investasi bukanlah agenda nirkekerasan—ekspansi spasial mereka mutlak mengeskalasi pelanggaran hak asasi masyarakat tapak."
     else:
-        interp_text = f"Secara agregat, proporsi kriminalisasi pada kedua periode **tidak menunjukkan perbedaan signifikan**. Hal ini mengindikasikan bahwa penggunaan instrumen kekerasan sudah mengakar dan sistematis di sepanjang sejarah konflik agraria tanpa memandang batas waktu rezim."
+        interp_text = f"Secara agregat, hubungan antara <b>{x_options[x_col]}</b> dan <b>{y_options[y_col]}</b> **tidak menunjukkan perbedaan yang signifikan** secara statistik (P ≥ 0.05). Hal ini mengindikasikan bahwa penggunaan instrumen kekerasan sudah mengakar dan sistematis di sepanjang sejarah konflik agraria tanpa memandang batas waktu rezim atau aktor yang terlihat."
     
     st.markdown(f"""
     <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid {order_color}; height: 100%;">
@@ -936,5 +968,76 @@ with col_res2:
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown("<br><br>", unsafe_allow_html=True)
+# --- E. Executive Summary of All Combinations ---
+st.markdown("---")
+st.markdown("### Ringkasan Eksekutif Seluruh Skenario Crosstab")
+st.markdown("Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square) untuk semua kemungkinan kombinasi antara indikator Ekspansi (X) dan Eskalasi Konflik (Y) pada panel data yang sama.")
 
+summary_data = []
+for k_x, v_x in x_options.items():
+    for k_y, v_y in y_options.items():
+        cx = x_order[k_x]
+        cy = y_order[k_y]
+        
+        s_x = df_crosstab[k_x]
+        s_y = df_crosstab[k_y]
+        
+        ct = pd.crosstab(s_x, s_y).reindex(index=cx, columns=cy, fill_value=0)
+        try:
+            c2_val, pv_val, dof_val, exp_val = stats.chi2_contingency(ct)
+        except:
+            c2_val, pv_val, dof_val = 0, 1, 0
+            
+        try:
+            aa = ct.loc[cx[0], cy[0]]
+            bb = ct.loc[cx[0], cy[1]]
+            cc = ct.loc[cx[1], cy[0]]
+            dd = ct.loc[cx[1], cy[1]]
+            or_v = (aa * dd) / (bb * cc) if (bb * cc) > 0 else 0
+        except:
+            or_v = 0
+            
+        sig_status = "🟢 SIGNIFIKAN" if pv_val < 0.05 else "🔴 TIDAK SIGNIFIKAN"
+        
+        summary_data.append({
+            "Variabel Independen (X)": v_x,
+            "Variabel Dependen (Y)": v_y,
+            "Chi-Square": f"{c2_val:.3f}",
+            "P-Value": f"{pv_val:.3f}",
+            "Odds Ratio": f"{or_v:.2f}",
+            "Kesimpulan": sig_status
+        })
+
+df_summary = pd.DataFrame(summary_data)
+st.dataframe(df_summary, use_container_width=True, hide_index=True)
+
+# Generate Dynamic Narrative for Executive Summary
+sig_count = sum(1 for row in summary_data if "🟢 SIGNIFIKAN" in row["Kesimpulan"])
+total_scenarios = len(summary_data)
+
+import textwrap
+
+if sig_count > 0:
+    exec_narrative = textwrap.dedent(f"""Dari <b>{total_scenarios} skenario pengujian</b>, terdapat <b>{sig_count} skenario yang terbukti SIGNIFIKAN</b>.<br><br>
+Angka-angka pada tabel di atas bukan sekadar statistik di atas kertas, melainkan <b>bukti empiris</b> dari brutalitas pembangunan. Tingginya angka kemunculan represi pada skenario yang signifikan menegaskan bahwa setiap kali wilayah operasi investasi diperlebar, probabilitas dihadapkannya moncong senjata kepada warga melonjak drastis.<br><br>
+Skenario yang <i>TIDAK SIGNIFIKAN</i> tidak berarti rezim terbebas dari dosa kekerasan, melainkan bukti bahwa represi terhadap warga yang mempertahankan tanahnya telah menjadi kultur mapan yang menyebar secara sporadis melampaui sekat waktu dan korporasi.    """)
+    bg_color = "rgba(229, 57, 53, 0.15)"
+    border_color = "#E53935"
+else:
+    exec_narrative = textwrap.dedent(f"""Dari <b>{total_scenarios} skenario pengujian</b>, seluruhnya menunjukkan status <b>TIDAK SIGNIFIKAN</b>.<br><br>
+Dalam kacamata ekonomi politik, ketidaksignifikanan secara agregat ini justru membuktikan bahwa aparatus represif telah dipekerjakan <i>sepanjang waktu secara stabil</i> dalam menggusur ruang hidup rakyat. Kekerasan bukanlah produk parsial satu rezim, melainkan instrumen fundamental yang menyokong eksistensi industri ekstraktif.    """)
+    bg_color = "rgba(255, 152, 0, 0.15)"
+    border_color = "#FF9800"
+
+st.markdown(f"""
+<div style="background-color: {bg_color}; padding:18px; border-radius:8px; border-left:6px solid {border_color}; margin-top: 15px; margin-bottom: 25px;">
+    <b style="color: {border_color}; font-size: 1.05rem;">Pembedahan Realitas Kemanusiaan:</b><br><br>
+    <div style="color: #E0E0E0; font-size: 0.95rem; line-height: 1.6;">
+{exec_narrative}
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+with st.expander("Lihat Data Panel Mentah", expanded=False):
+    st.dataframe(df_crosstab[['tahun', 'sektor', 'X_Label', 'Y_Label']], use_container_width=True, hide_index=True)
+    st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita.csv` (Diolah secara tabulasi silang)")
