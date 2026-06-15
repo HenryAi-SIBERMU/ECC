@@ -780,7 +780,7 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("#### 🚨 Arsip Kasus Represi dan Kekerasan Fisik Tertinggi")
+st.markdown("#### Arsip Kasus Represi dan Kekerasan Fisik Tertinggi")
 st.caption("Menampilkan 10 kasus dengan jumlah korban penangkapan atau tewas terbanyak berdasarkan data yang berhasil didokumentasikan.")
 
 df_kekerasan = df_dampak[(df_dampak['jumlah_ditangkap'] > 0) | (df_dampak['jumlah_tewas'] > 0)].sort_values(['jumlah_ditangkap', 'jumlah_tewas'], ascending=[False, False])
