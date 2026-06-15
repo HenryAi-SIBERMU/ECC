@@ -714,6 +714,7 @@ Tragedi kemanusiaan ini menjadi semakin kelam dengan hilangnya nyawa **{total_te
 """)
 
 col_m1, col_m2, col_m3, col_m4 = st.columns(4)
+with col_m1:
     st.metric(label="Kasus Indikasi Kriminalisasi", value=f"{total_kriminalisasi} Kasus")
 with col_m2:
     st.metric(label="Warga/Aktivis Ditangkap", value=f"{total_ditangkap} Orang")
