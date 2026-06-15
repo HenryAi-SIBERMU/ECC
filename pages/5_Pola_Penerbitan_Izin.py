@@ -184,12 +184,12 @@ st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=T
 # PLACEHOLDERS
 # ---------------------------------------------------------
 
-st.markdown("## 1. Fakta Penyebab: Sinkronisasi Waktu (Timeline Mapping)")
+st.subheader("5.1 Fakta Penyebab: Sinkronisasi Waktu (Timeline Mapping)")
 st.info("⚠️ Placeholder: Grafik Timeline Penerbitan Izin vs Tren Kerusakan Lingkungan akan dirender di sini.")
 
 st.markdown("---")
 
-st.markdown("## 2. Kegagalan Tata Kelola: Izin Terbit di Zona Darurat Ekologis")
+st.subheader("5.2 Kegagalan Tata Kelola: Izin Terbit di Zona Darurat Ekologis")
 st.info("⚠️ Placeholder: Crosstab Analysis (SPSS Style) untuk membuktikan signifikansi pengabaian kondisi ekologis terhadap keputusan penerbitan izin.")
 
 st.markdown("<br><br>", unsafe_allow_html=True)
