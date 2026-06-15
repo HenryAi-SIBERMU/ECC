@@ -99,9 +99,11 @@ def load_data():
     df_bencana = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_bencana_bnpb_2014_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_bencana_bnpb_2014_2024.csv")) else pd.DataFrame()
     df_konflik = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita.csv")) else pd.DataFrame()
     df_izin = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_izin_baru_per_tahun.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_izin_baru_per_tahun.csv")) else pd.DataFrame()
-    return df_kes, df_ika, df_bencana, df_konflik, df_izin
+    df_iku = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_iku_2015_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_iku_2015_2024.csv")) else pd.DataFrame()
+    df_b3 = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_limbah_b3.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_limbah_b3.csv")) else pd.DataFrame()
+    return df_kes, df_ika, df_bencana, df_konflik, df_izin, df_iku, df_b3
 
-df_kes, df_ika, df_bencana, df_konflik, df_izin = load_data()
+df_kes, df_ika, df_bencana, df_konflik, df_izin, df_iku, df_b3 = load_data()
 
 # =====================================================================
 # EXECUTIVE SUMMARY & BENTO CARDS (AGREGASI KRISIS)
@@ -291,13 +293,40 @@ with colA1:
 
 with colA2:
     if not df_kes.empty:
-        df_ispa = df_kes[df_kes['indikator'].str.contains('ISPA', case=False, na=False)]
-        df_ispa_plot = df_ispa.groupby(['tahun', 'provinsi'])['nilai'].sum().reset_index()
-        fig1 = px.line(df_ispa_plot, x='tahun', y='nilai', color='provinsi', markers=True,
-                       title="Eskalasi Pasien ISPA di Sentra Nikel Sulawesi",
-                       color_discrete_sequence=['#E74C3C', '#F39C12', '#3498DB'])
-        fig1.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-        st.plotly_chart(fig1, use_container_width=True)
+        tab1, tab2, tab3 = st.tabs(["Kasus ISPA", "Indeks Kualitas Udara (IKU)", "Emisi Udara & Limbah B3"])
+        
+        with tab1:
+            df_ispa = df_kes[df_kes['indikator'].str.contains('ISPA', case=False, na=False)]
+            df_ispa_plot = df_ispa.groupby(['tahun', 'provinsi'])['nilai'].sum().reset_index()
+            fig1 = px.line(df_ispa_plot, x='tahun', y='nilai', color='provinsi', markers=True,
+                           title="Eskalasi Pasien ISPA di Sentra Nikel Sulawesi",
+                           color_discrete_sequence=['#E74C3C', '#F39C12', '#3498DB', '#9B59B6', '#1ABC9C'])
+            fig1.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
+            st.plotly_chart(fig1, use_container_width=True)
+            
+        with tab2:
+            if not df_iku.empty:
+                df_iku_filtered = df_iku[df_iku['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]
+                fig_iku = px.line(df_iku_filtered, x='Tahun', y='IKU', color='Provinsi', markers=True,
+                               title="Penurunan Indeks Kualitas Udara (Data BPS)",
+                               color_discrete_sequence=['#E74C3C', '#3498DB'])
+                fig_iku.add_hline(y=70, line_dash="dot", annotation_text="Batas Kritis", line_color="#F39C12")
+                fig_iku.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
+                st.plotly_chart(fig_iku, use_container_width=True)
+            else:
+                st.info("Dataset IKU belum tersedia.")
+                
+        with tab3:
+            if not df_b3.empty:
+                # Aggregate B3 emissions by province for air-related or total
+                df_b3_prov = df_b3.groupby('Provinsi')['Estimasi Timbulan (Ton/Tahun)'].sum().reset_index()
+                fig_b3 = px.bar(df_b3_prov, x='Provinsi', y='Estimasi Timbulan (Ton/Tahun)', color='Provinsi',
+                                title="Beban Timbulan Debu & Limbah Beracun",
+                                color_discrete_sequence=['#E74C3C', '#95A5A6', '#F1C40F'])
+                fig_b3.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
+                st.plotly_chart(fig_b3, use_container_width=True)
+            else:
+                st.info("Dataset Limbah B3 belum tersedia.")
 
 st.markdown("<br>", unsafe_allow_html=True)
 
