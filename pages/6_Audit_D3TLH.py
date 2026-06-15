@@ -398,6 +398,8 @@ with colA2:
             # Hitung fakta cepat
             total_b3_sulteng = 0
             if not df_b3.empty:
+                # Pastikan kolom berupa numerik
+                df_b3['Estimasi Timbulan (Ton/Tahun)'] = pd.to_numeric(df_b3['Estimasi Timbulan (Ton/Tahun)'], errors='coerce').fillna(0)
                 total_b3_sulteng = df_b3[df_b3['Provinsi'] == 'Sulawesi Tengah']['Estimasi Timbulan (Ton/Tahun)'].sum()
             
             total_ispa_sentra = df_ts_filtered[df_ts_filtered['Kategori'].str.contains('Sentra')]['nilai'].sum() if not df_ts_filtered.empty else 0
