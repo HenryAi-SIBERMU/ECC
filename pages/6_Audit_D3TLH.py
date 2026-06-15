@@ -84,6 +84,135 @@ st.markdown('<div class="main-title">Audit Forensik Metodologi D3TLH & AMDAL</di
 st.markdown('<div class="sub-title">Fase 1: Evaluasi Kebijakan Ekstraktif - Pembuktian Terbalik</div>', unsafe_allow_html=True)
 
 # =====================================================================
+# DATA LOADING
+# =====================================================================
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+
+DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "processed")
+
+@st.cache_data
+def load_data():
+    df_kes = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_kesehatan_detail_2014_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_kesehatan_detail_2014_2024.csv")) else pd.DataFrame()
+    df_ika = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv")) else pd.DataFrame()
+    df_bencana = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_bencana_bnpb_2014_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_bencana_bnpb_2014_2024.csv")) else pd.DataFrame()
+    df_konflik = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita.csv")) else pd.DataFrame()
+    df_izin = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_izin_baru_per_tahun.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_izin_baru_per_tahun.csv")) else pd.DataFrame()
+    return df_kes, df_ika, df_bencana, df_konflik, df_izin
+
+df_kes, df_ika, df_bencana, df_konflik, df_izin = load_data()
+
+# =====================================================================
+# EXECUTIVE SUMMARY & BENTO CARDS (AGREGASI KRISIS)
+# =====================================================================
+st.markdown("""
+<div style="background: #1E1E1E; padding: 20px; border-radius: 8px; border-left: 5px solid #F44336; margin-bottom: 30px;">
+    <h3 style="color: #EF5350; margin-top: 0;">Kesimpulan Eksekutif</h3>
+    <p style="color: #E0E0E0; font-size: 1.05rem; line-height: 1.6; margin-bottom: 0;">
+        D3TLH dan AMDAL telah gagal dan mati sebagai alat pelindung nyawa ruang hidup. Dokumen-dokumen perizinan tersebut telah mereduksi penderitaan manusia menjadi sekadar angka-angka spasial di atas kertas, berfungsi tak lebih dari "stempel birokrasi" untuk melegalkan pengrusakan ekologis secara sistematis.
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
+# Hitung agregat untuk Bento Cards
+tot_ispa = 0
+if not df_kes.empty:
+    df_ispa_bento = df_kes[df_kes['indikator'].str.contains('ISPA', case=False, na=False)]
+    tot_ispa = df_ispa_bento['nilai'].sum()
+
+tot_bencana = 0
+tot_korban = 0
+if not df_bencana.empty:
+    tot_bencana = df_bencana['jumlah_kejadian'].sum()
+    tot_korban = df_bencana['korban_terdampak'].sum()
+
+tot_konflik = 0
+if not df_konflik.empty:
+    tot_konflik = len(df_konflik)
+
+penurunan_ika_str = "N/A"
+if not df_ika.empty:
+    df_ika_filtered = df_ika[df_ika['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]
+    if not df_ika_filtered.empty:
+        rata_2016 = df_ika_filtered[df_ika_filtered['Tahun'].astype(str) == '2016']['Indeks Kualitas Air'].mean()
+        rata_2024 = df_ika_filtered[df_ika_filtered['Tahun'].astype(str) == '2024']['Indeks Kualitas Air'].mean()
+        # Fallback if specific years aren't exactly matched
+        if pd.isna(rata_2016) or pd.isna(rata_2024):
+             penurunan_ika_str = "Kritis"
+        else:
+             penurunan = rata_2016 - rata_2024
+             penurunan_ika_str = f"-{penurunan:.1f} Poin"
+
+st.markdown("""
+<style>
+.metric-card {
+    background: linear-gradient(135deg, #1A1F2B, #232B3B);
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+.metric-value { font-size: 2rem; font-weight: 700; }
+.metric-label { font-size: 0.9rem; color: #AAA; margin-bottom: 5px; font-weight: 600; }
+.metric-desc { font-size: 0.8rem; color: #9E9E9E; margin-top: 10px; line-height: 1.4; text-align: left; }
+</style>
+""", unsafe_allow_html=True)
+
+colB1, colB2, colB3, colB4 = st.columns(4)
+
+with colB1:
+    st.markdown(f"""
+    <div class="metric-card">
+        <div>
+            <div class="metric-label">Ledakan Pasien ISPA</div>
+            <div class="metric-value" style="color: #F44336;">{int(tot_ispa):,}</div>
+            <div class="metric-desc">Total kasus ISPA tercatat. Fakta kegagalan AMDAL Kualitas Udara.</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with colB2:
+    st.markdown(f"""
+    <div class="metric-card">
+        <div>
+            <div class="metric-label">Kehancuran Ekosistem Air</div>
+            <div class="metric-value" style="color: #FF5252;">{penurunan_ika_str}</div>
+            <div class="metric-desc">Penurunan rata-rata Indeks Kualitas Air di Sulteng & Sultra.</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with colB3:
+    st.markdown(f"""
+    <div class="metric-card">
+        <div>
+            <div class="metric-label">Bencana Ekologis BNPB</div>
+            <div class="metric-value" style="color: #FF9800;">{int(tot_bencana):,}</div>
+            <div class="metric-desc">Kejadian banjir & longsor dengan {int(tot_korban):,} korban/mengungsi.</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with colB4:
+    st.markdown(f"""
+    <div class="metric-card">
+        <div>
+            <div class="metric-label">Konflik Agraria & Lahan</div>
+            <div class="metric-value" style="color: #00BCD4;">{tot_konflik} Kasus</div>
+            <div class="metric-desc">Total kasus perampasan lahan. Bukti nihilnya kedaulatan warga.</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=True)
+
+
+# =====================================================================
 # SECTION 1: FILOSOFI AUDIT FORENSIK
 # =====================================================================
 st.markdown("""
@@ -128,24 +257,7 @@ Berdasarkan dokumen pedoman teknis D3TLH (seperti Permen LH 17/2009 dan panduan 
 </div>
 """, unsafe_allow_html=True)
 
-# =====================================================================
-# DATA LOADING
-# =====================================================================
-import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
 
-DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "processed")
-
-@st.cache_data
-def load_data():
-    df_kes = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_kesehatan_detail_2014_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_kesehatan_detail_2014_2024.csv")) else pd.DataFrame()
-    df_ika = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv")) else pd.DataFrame()
-    df_bencana = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_bencana_bnpb_2014_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_bencana_bnpb_2014_2024.csv")) else pd.DataFrame()
-    df_konflik = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita.csv")) else pd.DataFrame()
-    return df_kes, df_ika, df_bencana, df_konflik
-
-df_kes, df_ika, df_bencana, df_konflik = load_data()
 
 # =====================================================================
 # SECTION 3: MATRIKS PEMBUKTIAN TERBALIK
@@ -270,13 +382,43 @@ with colD1:
 with colD2:
     if not df_konflik.empty:
         # Group by Sektor and create a bar/treemap
-        df_konflik_grouped = df_konflik.groupby('Sektor')['Luas Lahan (Ha)'].sum().reset_index()
-        fig4 = px.pie(df_konflik_grouped, values='Luas Lahan (Ha)', names='Sektor', hole=0.4,
+        df_konflik_grouped = df_konflik.groupby('sektor')['luas_ha'].sum().reset_index()
+        fig4 = px.pie(df_konflik_grouped, values='luas_ha', names='sektor', hole=0.4,
                       title="Total Luasan Lahan Konflik Agraria di Sulawesi Berdasarkan Sektor",
                       color_discrete_sequence=px.colors.sequential.Purples_r)
         fig4.update_traces(textposition='inside', textinfo='percent+label')
         fig4.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
         st.plotly_chart(fig4, use_container_width=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+# ---------------------------------------------------------
+# E. MITOS PENGAMBILAN KEPUTUSAN VS ANOMALI PERIZINAN IUP
+# ---------------------------------------------------------
+colE1, colE2 = st.columns([1, 2])
+with colE1:
+    st.markdown("""
+    <div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #2ECC71; height:100%;">
+        <h4 style="color:#FFF; margin-top:0;">Mitos D3TLH: Veto Kebijakan</h4>
+        <p style="color:#BDC3C7; font-size:0.9rem;">"D3TLH dianggap sebagai dokumen pengunci tata ruang yang akan membatasi izin jika ekologi kritis."</p>
+        <hr style="border-color:#34495E;">
+        <h4 style="color:#2ECC71;">Fakta Forensik ECC:</h4>
+        <p style="color:#E0E0E0; font-size:0.9rem;">Lonjakan fantastis penerbitan IUP Nikel baru justru terjadi di saat dan di tempat indikator kesehatan & ekologi sedang merah.</p>
+        <div style="background:#27AE60; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
+            VONIS: Kegagalan Tata Kelola (Regulatory Capture)
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with colE2:
+    if not df_izin.empty:
+        # Group by Tahun
+        df_izin_grouped = df_izin.groupby(['Tahun', 'Provinsi'])['Jumlah_Izin_Baru'].sum().reset_index()
+        fig5 = px.bar(df_izin_grouped, x='Tahun', y='Jumlah_Izin_Baru', color='Provinsi',
+                      title="Anomali Obral Perizinan (IUP Baru) di Tengah Krisis Lingkungan",
+                      color_discrete_sequence=['#2ECC71', '#27AE60', '#F1C40F'])
+        fig5.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
+        st.plotly_chart(fig5, use_container_width=True)
 
 st.markdown("<br><hr style='border: 1px dashed #444;'><br>", unsafe_allow_html=True)
 
