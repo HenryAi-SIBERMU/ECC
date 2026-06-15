@@ -103,9 +103,10 @@ def load_data():
     df_iku = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_iku_2015_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_iku_2015_2024.csv")) else pd.DataFrame()
     df_b3 = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_limbah_b3.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_limbah_b3.csv")) else pd.DataFrame()
     df_pltu_op = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv")) else pd.DataFrame()
-    return df_kes, df_ika, df_bencana, df_konflik, df_izin, df_iku, df_b3, df_pltu_op
+    df_gfw = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_master_1_dekade_2014_2023.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_gfw_master_1_dekade_2014_2023.csv")) else pd.DataFrame()
+    return df_kes, df_ika, df_bencana, df_konflik, df_izin, df_iku, df_b3, df_pltu_op, df_gfw
 
-df_kes, df_ika, df_bencana, df_konflik, df_izin, df_iku, df_b3, df_pltu_op = load_data()
+df_kes, df_ika, df_bencana, df_konflik, df_izin, df_iku, df_b3, df_pltu_op, df_gfw = load_data()
 
 # =====================================================================
 # EXECUTIVE SUMMARY & BENTO CARDS (AGREGASI KRISIS)
@@ -295,7 +296,7 @@ with colA1:
 
 with colA2:
     if not df_kes.empty:
-        tab1, tab2, tab3 = st.tabs(["Korelasi PLTU & Kualitas Udara", "Dampak Kasus ISPA/Pneumonia", "Fakta Beban Limbah & Emisi"])
+        tab1, tab2, tab3, tab4 = st.tabs(["Korelasi PLTU & Kualitas Udara", "Dampak Kasus ISPA/Pneumonia", "Fakta Beban Limbah & Emisi", "Hilangnya Paru-Paru Udara"])
         
         with tab1:
             # --- 1. Ekspansi PLTU vs Penurunan Kualitas Udara ---
@@ -422,6 +423,29 @@ with colA2:
                 with st.expander("Lihat Data Mentah: Timbulan Limbah B3", expanded=False):
                     st.dataframe(df_b3, use_container_width=True, hide_index=True)
                     st.caption("Sumber File: `sulawesi_limbah_b3.csv`")
+                    
+        with tab4:
+            # --- 4. Hilangnya Paru-Paru Udara (Deforestasi CO2) ---
+            st.markdown("##### Bukti Kuantitatif: Lepasnya Filter Udara Alami")
+            if not df_gfw.empty:
+                df_gfw['Total_Emisi_CO2_Megagram'] = pd.to_numeric(df_gfw['Total_Emisi_CO2_Megagram'], errors='coerce').fillna(0)
+                total_emisi = df_gfw['Total_Emisi_CO2_Megagram'].sum() / 1_000_000 # dalam Juta Megagram / Juta Ton
+                total_deforestasi = df_gfw['Total_Deforestasi_Ha'].sum() / 1_000
+                
+                col_e1, col_e2 = st.columns(2)
+                col_e1.metric("Total Emisi CO2 Lepas (1 Dekade)", f"{total_emisi:.1f} Jt Ton", "Dampak Hilangnya Hutan")
+                col_e2.metric("Total Hutan Hilang di Sulawesi", f"{total_deforestasi:.1f} Ribu Ha", "Filter Karbon Alami", delta_color="inverse")
+                
+                df_emisi_trend = df_gfw.groupby(['Tahun', 'Provinsi'])['Total_Emisi_CO2_Megagram'].sum().reset_index()
+                fig_emisi = px.area(df_emisi_trend, x='Tahun', y='Total_Emisi_CO2_Megagram', color='Provinsi',
+                                   title="Tren Emisi Karbon Akibat Deforestasi (2014-2023)")
+                fig_emisi.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
+                st.plotly_chart(fig_emisi, use_container_width=True)
+                
+                with st.expander("Lihat Data Panel: Emisi CO2 Deforestasi", expanded=False):
+                    df_emisi_pivot = df_emisi_trend.pivot(index='Tahun', columns='Provinsi', values='Total_Emisi_CO2_Megagram').reset_index()
+                    st.dataframe(df_emisi_pivot, use_container_width=True, hide_index=True)
+                    st.caption("Sumber File: `sulawesi_gfw_master_1_dekade_2014_2023.csv`")
 
 st.markdown("<br>", unsafe_allow_html=True)
 
