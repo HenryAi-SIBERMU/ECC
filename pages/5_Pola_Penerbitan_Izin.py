@@ -234,6 +234,9 @@ fig_timeline.add_trace(
         marker_color='rgba(231, 76, 60, 0.7)', # Merah transparan
         marker_line_color='#C0392B',
         marker_line_width=1.5,
+        text=df_timeline['Total_Deforestasi_Ha'].apply(lambda x: f"{int(x):,} Ha"),
+        textposition='auto',
+        textfont=dict(color='white', size=11),
         hovertemplate="<b>Tahun %{x}</b><br>Deforestasi: %{y:,.0f} Ha<extra></extra>"
     ),
     secondary_y=False,
