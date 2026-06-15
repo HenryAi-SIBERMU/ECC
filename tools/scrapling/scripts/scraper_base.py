@@ -34,9 +34,9 @@ class BaseScraper:
         verbose: bool = False
     ):
         self.name = name
+        self.logger = self._setup_logger(verbose)  # Initialize logger FIRST
         self.config = self._load_config(config_path)
         self.delay = delay or self.config.get(name, {}).get("delay", 1.0)
-        self.logger = self._setup_logger(verbose)
         self.session = self._create_session()
         self.data: List[Dict[str, Any]] = []
         self.checkpoint_path: Optional[Path] = None

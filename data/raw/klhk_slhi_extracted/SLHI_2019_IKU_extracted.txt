@@ -1,0 +1,541 @@
+SLHI 2019 - Ekstraksi Data Kualitas Udara
+======================================================================
+
+
+======================================================================
+Page 75 [HIGH]
+Matches: iku, sulawesi
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2019
+BAB 3 KONDISI HUTAN DI INDONESIA48oleh kawasan Kawasan Hutan Produksi Terbatas, Hutan Lindung maupun Kawasan 
+Konservasi. Pada tahun 2011-2018, hampir seluruh deforestasi tertinggi disumbang 
+oleh kawasan Hutan Tetap. Hanya pada periode 2012-2013 saja yang persentase 
+deforestasi tertinggi pada HPK (53,4 persen) disusul kemudian oleh Hutan Tetap 
+(41,2 persen). 
+Hutan Produksi Tetap (HP) dan Hutan Produksi Terbatas (HPT) memiliki 
+kontribusi tertinggi terhadap angka deforestasi kawasan Hutan Tetap. Salah satu 
+faktor yang menyebabkan tingginya deforestasi pada fungsi kawasan hutan 
+tersebut karena merupakan areal kegiatan penanaman Hutan Tanaman Industri 
+(HTI) serta sumber penghasil kayu.
+Sementara itu, pada Gambar 3.10. menjelaskan sebaran deforestasi yang 
+terjadi di pulau/kepulauan besar pada tahun 2017-2018 baik di dalam kawasan 
+hutan maupun di luar kawasan hutan. Deforestasi paling tinggi terjadi di Kalimantan, 
+baik di dalam kawasan hutan (65,6 ribu ha) maupun di luar kawasan hutan (83,5 
+ribu ha).  Selanjutnya diikuti, Sumatera (56,8 ribu ha), Sulawesi (37,3 ribu ha), Papua Gambar 3.9.Deforestasi di Dalam Kawasan  Hutan Menurut Fungsi Hutan  (ribu 
+ha) Tahun 2011-2018  
+Keterangan   : Hutan Tetap berada di Dalam Kawasan Hutan berdasarkan fungsinya , yang terdiri dari HK, HL, HP 
+                       dan HPT
+Sumber            : Statistik Bidang Planologi Kehutanan dan Tata Lingkungan 2017, Deforestasi Indonesia Tahun 2016-
+                       2017 dan Statistik Lingkungan Hidup dan Kehutanan 2018, Kementerian Lingkungan Hidup dan 
+                       Kehutananhttps://www.bps.go.id
+
+
+======================================================================
+Page 315 [HIGH]
+Matches: iku, sulawesi
+======================================================================
+
+Environment Statistics of Indonesia 2019
+COMPONENT 2. ENVIRONMENTAL RESOURCES AND THEIR USE288Tabel
+Table2.11Rekapitulasi Luas Kebakaran Hutan dan Lahan Menurut Provinsi (ha), 2014-2019
+Recapitulation of Forest and Land Fire Area by Province (ha), 2014-2019
+Provinsi
+Province2014 2015 2016 2017 2018 2019
+(1) (2) (3) (4) (5) (6) (7)
+Aceh 155,66 913,27 9 158,45 3 865,16 1 284,70 606,00
+Sumatera Utara 3 219,90 6 010,92 33 028,62 767,98 3 678,79 1 775,00
+Sumatera Barat 120,50 3 940,14 2 629,82 2 227,43 2 421,90 309,00
+Riau 6 301,10 183 808,59 85 219,51 6 866,09 37 236,27 49 266,00
+Jambi 3 470,61 115 634,34 8 281,25 109,17 1 577,75 11 022,00
+Sumatera Selatan 8 504,86 646 298,80 8 784,91 3 625,66 16 226,60 11 826,00
+Bengkulu 5,25 931,76 1 000,39 131,04  8,82 1,00
+Lampung 22,80 71 326,49 3 201,24 6 177,79 15 156,22 2 913,00
+Kep. Bangka Belitung - 19 770,81 - - 2 055,67 1 495,00
+Kepulauan Riau - - 67,36 19,61  320,96 5 621,00
+DKI Jakarta - - - - - -
+Jawa Barat 552,69 2 886,03 - 648,11 4 104,51 2 786,00
+Jawa Tengah 159,76 2 471,70 - 6 028,48  331,67 2 958,00
+DI Yogyakarta 0,27 - - - - 23,00
+Jawa Timur 4 975,32 7 966,79 - 5 116,43 8 886,39 10 508,00
+Banten 2,00 250,02 - - - -
+Bali 30,00 373,46 - 370,80 1 013,76 173,00
+Nusa Tenggara Barat 3 977,55 2 565,71 706,07 33 120,81 14 461,38 7 679,00
+Nusa Tenggara Timur 980,87 85 430,86 8 968,09 38 326,09 57 428,79 108 368,00
+Kalimantan Barat 3 556,10 93 515,80 9 174,19 7 467,33 68 422,03 25 900,00
+Kalimantan Tengah 4 022,85 583 833,44 6 148,42 1 743,82 47 432,57 44 769,00
+Kalimantan Selatan 341,00 196 516,77 2 331,96 8 290,34 98 637,99 19 490,00
+Kalimantan Timur 325,19 69 352,96 43 136,78 676,38 27 893,20 6 715,00
+Kalimantan Utara - 14 506,20 2 107,21 82,22  627,71 1 444,00
+Sulawesi Utara 236,06 4 861,31 2 240,47 103,04  326,39 768,00
+Sulawesi Tengah 70,73 31 679,88 11 744,40 1 310,19 4 147,28 525,00
+Sulawesi Selatan 483,10 10 074,32 438,40 1 035,51 1 741,27 587,00
+Sulawesi Tenggara 2 410,86 31 763,54 72,42 3313,68 8 594,67 1 472,00
+Gorontalo - 5 225,89 737,91 -  158,65 28,00
+Sulawesi Barat - 4 989,38 4 133,98 188,13  978,38 265,00
+Maluku 179,83 43 281,45 7 834,54 3 918,12 14 906,44 2 680,00
+Maluku Utara 6,50 13 261,10 103,11 31,10  69,54 454,00
+Papua Barat - 7 964,41 542,09 1 156,03  509,50 152,00
+Papua 300,00 350 005,30 186 571,60 28 767,38 88 626,84 6 144,00
+Indonesia 44 411,36 2 611 411,44 438 363,19 165 483,92 529 266,64 328 722,00
+Catatan/ Notes   : Luas Kebakaran Hutan dan Lahan dihitung berdasarkan analisis citra satelite landsat 8 OLI/TIRS yang di overlay dengan data 
+                            sebaran hotspot, serta laporan hasil groundchek hotspot dan laporan pemadaman yang dilaksanakan Manggala Agni / 
+                            The area of   forest and land fires is calculated based on the analysis of satellite images of OLI 8 / TIRS overlaid with hotspot 
+                               distribution data, as well as reports on the results of ground check hotspots and blackout reports conducted by Manggala Agni
+Sumber/ Source  : Data dikutip dari http://sipongi.menlhk.go.id/tanggal 15 September 2019 / 
+                            Data cited from http://sipongi.menlhk.go.id/ on September 15, 2019https://www.bps.go.id
+
+
+======================================================================
+Page 388 [HIGH]
+Matches: iku, sulawesi
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2019
+KOMPONEN 6. PARTISIPASI, PENGELOLAAN, DAN PERLINDUNGAN LINGKUNGAN361
+Tabel
+Table6.1APBD Provinsi untuk Lingkungan Hidup menurut Provinsi (juta rupiah), 2013-2017
+Provincial Budget for Environment by Province (million rupiahs), 2013-2017 
+Provinsi
+Province2013 2014 2015 2016 2017
+(1) (2) (3) (4) (5) (6)
+Aceh 28 861 23 594 - 27 357 33 516
+Sumatera Utara 220 488 188 148 194 471 31 716 52 954
+Sumatera Barat 25 303 25 494 - 43 618 21 746
+Riau 90 318 42 790 - 17 222 117 490
+Jambi 13 480 15 377 13 857 13 514 28 803
+Sumatera Selatan 14 947 16 665 14 362 6 957 13 511
+Bengkulu 7 424 9 315 9 248 18 222 41 258
+Lampung 11 742 11 628 16 673 12 878 12 590
+Kep. Bangka Belitung 27 068 54 761 - 21 374 26 322
+Kepulauan Riau 12 229 13 535 17 935 25 412 18 040
+DKI Jakarta 3 436 731 - - - 1 345 093
+Jawa Barat 209 612 284 250 417 982 - 17 710
+Jawa Tengah 43 661 42 041 58 929 3 386 -
+DI Yogyakarta 18 427 52 403 143 739 27 804 28 638
+Jawa Timur 48 051 36 962 35 625 30 575 31 327
+Banten 14 237 22 403 27 399 37 113 67 851
+Bali 19 533 - 38 794 307 13 020
+Nusa Tenggara Barat 8 693 9 588 12 723 2 278 139 598
+Nusa Tenggara Timur 10 952 11 628 13 020 166 10 797
+Kalimantan Barat 9 021 11 129 - 15 533 9 697
+Kalimantan Tengah 11 073 11 370 - 1 801 11 520
+Kalimantan Selatan 18 067 35 933 38 174 33 222 87 302
+Kalimantan Timur 33 594 47 104 125 592 - 14 622
+Kalimantan Utara - 4 657 40 361 29 277 17 481
+Sulawesi Utara 7 452 7 284 7 927 592 18 641
+Sulawesi Tengah 14 275 13 078 18 523 17 836 14 440
+Sulawesi Selatan 36 539 176 983 - 14 091 30 894
+Sulawesi Tenggara 7 035 - 13 052 10 819 6 141
+Gorontalo 29 663 30 460 77 310 51 977 35 917
+Sulawesi Barat 8 802 9 967 - 30 903 11 515
+Maluku 8 800 10 089 15 422 8 036 41 118
+Maluku Utara 5 990 9 661 16 877 - 7 703
+Papua Barat 51 597 57 307 68 164 2 178 100 638
+Papua 24 249 37 169 30 413 - 18 649
+Catatan/ Note    : - Data tidak tersedia/ Data not available
+Sumber/ Source   : Data dikutip dari http://djpk.kemenkeu.go.id kondisi tanggal 18 September 2017/ 
+                            Data cited from http://djpk.kemenkeu.go.id on September 18th 2017https://www.bps.go.id
+
+
+======================================================================
+Page 389 [HIGH]
+Matches: iku, sulawesi
+======================================================================
+
+Environment Statistics of Indonesia 2019
+COMPONENT 6. ENVIRONMENTAL PROTECTION, MANAGEMENT, AND ENGAGEMEN T362Tabel
+Table6.2Persentase APBD untuk Lingkungan Hidup terhadap APBD Provinsi menurut Provinsi,
+2013-2017
+Percentage of Provincial Budget for Environment by Province, 2013-2017
+Provinsi
+Province2013 2014 2015 2016 2017
+(1) (2) (3) (4) (5) (6)
+Aceh 0,24 0,18 - 0,23 0,23
+Sumatera Utara 2,49 2,21 2,24 1,93 0,41
+Sumatera Barat 0,76 0,71 - 0,97 0,35
+Riau 1,07 0,52 - 0,20 1,07
+Jambi 0,51 0,47 0,39 0,41 0,36
+Sumatera Selatan 0,26 0,26 0,22 0,14 0,20
+Bengkulu 0,42 0,49 0,41 0,90 1,23
+Lampung 0,27 0,27 0,35 0,24 0,19
+Kep. Bangka Belitung 1,42 2,72 - 1,03 1,05
+Kepulauan Riau 0,44 0,39 0,49 0,45 0,54
+DKI Jakarta 7,54 - - - 2,18
+Jawa Barat 1,20 1,34 1,69 - 0,05
+Jawa Tengah 0,34 0,30 0,34 0,10 -
+DI Yogyakarta 0,75 1,57 3,89 0,72 0,95
+Jawa Timur 0,31 0,21 0,15 0,13 0,11
+Banten 0,24 0,30 0,31 0,42 0,66
+Bali 0,45 - 0,39 0,60 0,20
+Nusa Tenggara Barat 0,35 0,34 0,43 0,42 1,33
+Nusa Tenggara Timur 0,46 0,42 0,40 0,01 0,23
+Kalimantan Barat 0,27 0,30 - 0,33 0,19
+Kalimantan Tengah 0,43 0,35 - 0,40 0,29
+Kalimantan Selatan 0,41 0,68 0,73 0,64 2,34
+Kalimantan Timur 0,26 0,34 1,35 - 0,18
+Kalimantan Utara - 0,25 1,71 1,15 0,59
+Sulawesi Utara 0,38 0,30 0,30 0,14 0,52
+Sulawesi Tengah 0,65 0,54 0,65 0,56 0,40
+Sulawesi Selatan 0,63 3,03 - 0,43 0,34
+Sulawesi Tenggara 0,34 - 0,56 0,41 0,17
+Gorontalo 2,75 2,35 5,26 3,26 1,95
+Sulawesi Barat 0,77 0,76 - 1,75 0,58
+Maluku 0,56 0,53 0,65 0,31 1,65
+Maluku Utara 0,43 0,62 0,87 - 0,29
+Papua Barat 1,21 0,98 1,01 0,12 1,40
+Papua 0,30 0,33 0,25 - 0,12
+Catatan/ Note    : - Data tidak tersedia/ Data not available
+Sumber/ Source   : Data dikutip dari http://djpk.kemenkeu.go.id kondisi tanggal 18 September 2017/ Data cited from
+                            http://djpk.kemenkeu.go.id on September 18th 2017 https://www.bps.go.id
+
+
+======================================================================
+Page 27 [MEDIUM]
+Matches: iku, pm10
+======================================================================
+
+Environment Statistics of Indonesia 2019xxvi
+KemenPUPR : Kementerian Pekerjaan Umum dan Perumahan Rakyat/ Ministry of   
+    Public Work and Public Housing
+KemenPPN/
+BAPPENAS :  Kementerian Perencanaan Pembangunan Nasional/Badan Perencanaan 
+                             Pembangunan Nasional/ Ministry of National Development Planning/
+                             National Development Planning Agency
+Kemenkes : Kementerian Kesehatan/ Ministry of Health
+PM10  :  Partikulat
+Pertamina : Perusahaan Pertambangan Minyak dan Gas Bumi Negara
+    Government Oil Company
+Perumnas : Perumahan Nasional/ National Housing Corporation
+Podes  : Potensi Desa/ Village Potential
+SBM  : Setara Barel Minyak/ Barrel Oil Equivalent (BOE)
+Susenas  : Survei Sosial Ekonomi Nasional/ National Socio Economic Survey
+TBM  : Taman Bacaan Masyarakat/ Communal Library
+TPA  : Tempat Penampungan Akhir/ Examined Final Concentrated Trash
+TPS  : Tempat Penampungan Sementara/ Temporary Waste Storage
+TSL  : Tumbuhan dan Satwa Liar/ Wild Plants and Animals
+Tora  : Tanah Objek Reforma Agraria/  Agrarian Reform Land Objects
+Walhi  : Wahana Lingkungan Hidup Indonesia/ Indonesian Forum for The   
+    Environment
+IFDES  : Indonesia Framework for The Development of Environment Statistics 
+LNG   : Liquid Natural Gas / Gas alam cair
+LPG   : Liquid Petroleum Gas / Bahan bakar gas cair
+SPM  : Suspended Particulate Matter
+TSP   : Total Suspended Partikel
+TSS  : Total Suspended Solid 
+FDES  : Framework for The Development of Environment Statistics
+UNEP  : United Nations Environment Programme
+UNFDES : United Nations Framework for The Development of Environment Statistics 
+UNCED   : United Nations Conference on Environment and Development
+USAID  : United States Agency For International Development
+VOC  : Volatile Organic Compound
+WHO   : World Health Organizationhttps://www.bps.go.id
+
+
+======================================================================
+Page 66 [MEDIUM]
+Matches: kualitas udara, iku, pm10
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2019
+BAB 3 KONDISI HUTAN DI INDONESIA39• Sosial
+Kejadian deforestasi atau kerusakan hutan yang terjadi juga berdampak 
+pada bidang pendidikan. Hal tersebut karena spesies yang akan dijadikan obyek 
+penelitian mengalami penurunan populasi dan bahkan kepunahan. Selain itu, 
+kerusakan hutan bisa menyebabkan tanah menjadi tandus, sehingga akan sulit 
+dipergunakan untuk bercocok tanam. Berbagai macam bencana juga pada akhirnya 
+menimbulkan kerugian seperti banyak orang yang kehilangan lahan, tempat 
+tinggal, maupun anggota keluarga.  
+Kemudian, dampak lainnya yakni terganggunya kesehatan masyarakat. 
+Terjadinya kebakaran hutan dan lahan menghasilkan kabut asap sehingga 
+memperburuk kualitas udara. Paparan kabut asap ini sangat mengkhawatirkan 
+karena hal tersebut tidak hanya dirasakan pada wilayah terjadinya kebakaran 
+melainkan sampai wilayah tetangganya. Menurut data yang dilansir situs iku.menlhk.
+go.id secara harian, pada 16 September 2019 per pukul 15.00 WIB, bahwa Indeks 
+Standar Pencemar Udara (ISPU) sampai tanggal 17 September 2019 menjelaskan 
+bahwa ISPU di Palangkaraya (Kalimantan Tengah) mencapai angka 500, padahal 
+ISPU dalam kategori baik berkisar antara 0-50. Hal tersebut bermakna bahwa  
+kualitas udara di Palangkaraya berada pada level Berbahaya bagi semua populasi 
+yang terpapar pada waktu tersebut. Sementara itu, kualitas udara di Pekanbaru 
+(Riau), Pontianak (Kalimantan Barat) dan Jambi  masuk dalam kategori Tidak Sehat, 
+dengan angka ISPU masing-masing 192, 160 dan 129. Dampak kondisi di level ini 
+umumnya penurunan jarak pandang dan penyebaran luas debu (dikutip dari tirto.
+id)
+Angka ISPU  berdasarkan parameter konsentrasi partikulat PM10 atau partikel 
+di udara berukuran lebih kecil dari 10 mikron. PM10 adalah partikel debu dan salah 
+satu polutan yang membahayakan sistem pernapasan jika terhisap langsung ke paru-
+paru serta mengendap di alveoli. Menurut data Badan Meteorologi, Klimatologi, 
+dan Geofisika (BMKG) yang dilansir harian berdasar parameter konsentrasi PM10 
+menunjukkan kualitas udara di Pekanbaru (Riau) pada tanggal 18 September 2019 
+sampai pukul 14.00 WIB mencapai level Sangat Tidak Sehat atau 272,03 µgram/
+m3. Sedangkan di Sampit (Kalimantan Barat), tingkat konsentrasi PM10 makin parah https://www.bps.go.id
+
+
+======================================================================
+Page 88 [MEDIUM]
+Matches: iku, indeks standar
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2019
+BAB 4 DAMPAK DAN UPAYA PELESTARIAN HUTAN61secara ekonomi telah menurun drastis akibat eksploitasi berlebihan pada periode 
+awal reformasi pemerintahan dan pelaksanaan otonomi daerah di awal tahun 
+2000. Pengelolaan hutan bukan hanya mengenai ekonomi kayu atau konservasi 
+keanekaragaman hayati, flora, atau fauna, tetapi juga mengenai keseluruhan 
+pengelolaan termasuk ekosistemnya. Sudah saatnya seluruh pihak bergerak dan 
+ikut bertanggung jawab terhadap pengelolaan hutan karena tugas ini merupakan 
+tanggung jawab seluruh elemen masyarakat.
+4.1.2  Hutan dan Kesehatan Manusia
+Kerusakan hutan menyebabkan menurunnya angka kesehatan masyarakat. 
+Deforestasi yang dilakukan dengan membakar hutan terutama hutan gambut 
+menyumbang gas karbon yang tinggi ke udara. Udara yang tercemar dapat 
+mengakibatkan gangguan pernapasan dan polusi udara. Misalnya kasus yang 
+terjadi pada provinsi di Pulau Jawa dan Sumatera Indonesia pada 2015. Tahun 2015 
+terpilih karena pada tahun tersebut terjadi kebakaran lahan dan gambut terbesar 
+di Indonesia selama 10 tahun terakhir. Lahan yang terbakar diperkirakan berjumlah 
+2,6 juta hektar (katadata.id).
+Gambar 4.1.Indeks Standar Pencemaran Udara (ISPU) di Enam Provinsi yang 
+Terdampak Asap pada September-Oktober 2015
+Sumber: Pusat Data dan Informasi (Pusdatin) Kementerian Kesehatan RI, 2015https://www.bps.go.id
+
+
+======================================================================
+Page 89 [MEDIUM]
+Matches: kualitas udara, indeks standar
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2019
+BAB 4 DAMPAK DAN UPAYA PELESTARIAN HUTAN62Kementerian Kesehatan (Kemenkes) dalam dokumennya yang berjudul 
+“Masalah Kesehatan Akibat Kabut Asap Kebakaran Hutan dan Lahan Tahun 2015” 
+menyatakan bahwa Indeks Standar Pencemaran Udara (ISPU) Provinsi Kalimantan 
+Tengah mencapai angka 2.230 atau berada pada level berbahaya dengan jarak 
+pandang terjauh hanya 600 meter dan jarak pandang terendah 500 meter 
+sedangkan ISPU Provinsi Kalimantan Barat menyentuh angka 622 pada Oktober 
+2015, artinya sangat jauh diatas ambang batas kualitas udara yang layak dihirup. 
+Angka ISPU diatas 300 masuk kriteria membahayakan kesehatan. Oleh karena 
+kabut asap yang disebabkan kebakaran hutan ini, Kemenkes menyatakan dari Juni 
+hingga pertengahan Oktober sebanyak 425.377 orang di tujuh provinsi terkena 
+Infeksi Saluran Pernapasan Akut (ISPA) (katadata.id). 
+Semakin banyak asap akibat 
+kebakaran, maka semakin banyak 
+gas karbon yang dilepaskan ke 
+udara. Gas karbon adalah salah satu 
+penyumbang terbesar emisi Gas 
+Rumah Kaca dan pencemaran udara. 
+Udara sejatinya berkontribusi besar 
+menciptakan penyakit yang sering 
+diderita oleh masyarakat, terutama 
+masyarakat perkotaan yang lebih 
+sering melakukan aktifitas bakar energi 
+yang menghasilkan gas karbon. Tubuh 
+manusia menghirup udara sekitar 500 ml sekali bernapas, dalam satu menit manusia 
+dapat bernapas sebanyak 20 kali. Maka apabila kualitas udara yang dihirup buruk 
+dan tidak sehat, dapat dibayangkan potensi kerugiannya bagi kesehatan tubuh 
+manusia. Kurang lebih 50 persen sumber penyakit berasal dari pencemaran udara 
+(Budi Haryanto, 2019).
+Asap yang ditimbulkan oleh kebakaran hutan sangat mengganggu kesehatan 
+manusia. Gangguan tersebut seperti 1) iritasi mata, 2) iritasi dan radang pada kulit, 
+3) batuk, radang tenggorokan, dan sakit kepala, 4) fungsi jantung terganggu karena 
+terjadi penumpukan plak dalam pembuluh darah yang berasal dari partikel debu 
+https://www.bps.go.id
+
+
+======================================================================
+Page 206 [MEDIUM]
+Matches: iku, indeks standar
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2019
+DAFTAR PUSTAKA179Kementerian Lingkungan Hidup dan Kehutanan. (2017). Rekalkulasi Penutupan 
+Lahan Indonesia Tahun 2016. Jakarta: KLHK.
+Kementerian Lingkungan Hidup dan Kehutanan. (2017). Statistik Bidang Planologi 
+Kehutanan dan Tata Lingkungan Tahun 2016. Jakarta: KLHK.
+Kementerian Lingkungan Hidup dan Kehutanan. (2018). Analisa Data Titik Panas 
+(Hotspot) & Areal Kebakaran Hutan dan Lahan. Jakarta: KLHK.
+Kementerian Lingkungan Hidup dan Kehutanan. (2018). Deforestasi Indonesia 
+Tahun 2016-2017. Jakarta: KLHK.
+Kementerian Lingkungan Hidup dan Kehutanan. (2018). Indonesia Second Biennial 
+Update Report : Under the United Nations Framework Convention on Climate 
+Change. Jakarta: KLHK.
+Kementerian Lingkungan Hidup dan Kehutanan. (2018). Data dan Informasi 
+Pemetaan Tematik Kehutanan Indonesia: Penutupan Lahan Indonesia, 
+Deforestasi Indonesia, Moratorium Hutan Alam Primer dan Lahan Gambut. 
+Jakarta: KLHK.
+Kementerian Lingkungan Hidup dan Kehutanan. (2018). Statistik Bidang Planologi 
+Kehutanan dan Tata Lingkungan Tahun 2017. Jakarta: KLHK.
+Kementerian Lingkungan Hidup dan Kehutanan. (2018). Statistik Direktorat Jenderal 
+PHPL Tahun 2017. Jakarta: KLHK.
+Kementerian Lingkungan Hidup dan Kehutanan. (2018). Status Hutan dan Kehutanan 
+Indonesia 2018. Jakarta: KLHK.
+Kementerian Lingkungan Hidup dan Kehutanan. (2018). Rekalkulasi Penutupan 
+Lahan Indonesia Tahun 2017. Jakarta: KLHK.Kementerian Lingkungan Hidup 
+dan Kehutanan. (2018). The State Indonesia’s Forests 2018. Jakarta: KLHK.
+Kementerian Lingkungan Hidup dan Kehutanan. (2019). Laporan Inventarisasi Gas 
+Rumah Kaca dan Monitoring, Pelaporan Verifikasi Tahun 2018. Jakarta: KLHK.
+Kementerian Lingkungan Hidup dan Kehutanan. (2019). Nilai Indeks Standar 
+Pencemaran Udara (ISPU) Kota. Diakses tanggal 16 September 2019. (http://
+iku.menlhk.go.id/aqms/).
+Kementerian Lingkungan Hidup dan Kehutanan. (2019). Statistik Direktorat Jenderal 
+PHPL Tahun 2018. Jakarta: KLHK.
+Kementerian Lingkungan Hidup dan Kehutanan. (2019). Statistik Lingkungan Hidup 
+dan Kehutanan Tahun 2018. Jakarta: KLHK.https://www.bps.go.id
+
+
+======================================================================
+Page 234 [MEDIUM]
+Matches: kualitas udara, indeks standar
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2019
+LAMPIRAN 2207in a plantation forest in a production 
+forest through land preparation, nursery, 
+planting, maintenance, harvesting and 
+marketing activities.
+31. Air Pollution Standards Index is a number 
+that does not have a unit that describes 
+the condition of ambient air quality at 
+a particular location and time based on 
+the impact on human health, aesthetic 
+values and other living things.
+32. Peat is organic material that is formed 
+naturally from the remains of incomplete 
+decomposed plants with a thickness 
+of 55 (fifty) centimeters or more and 
+accumulates in swamps
+33. Peat Ecosystem is the order of the 
+elements of Peat which, constitutes a 
+comprehensive whole that mutually 
+influences each other in shaping its 
+balance, stability and productivity.
+34. Peat Hydrological Unit (PHU) is a peat 
+ecosystem located between 2 (two) 
+rivers, between a river and sea and / or memanfaatkan hasil hutan berupa 
+kayu dalam hutan tanaman pada hutan 
+produksi melalui kegiatan penyiapan 
+lahan, pembibitan, penanaman, 
+pemeliharaan, pemanenan, dan 
+pemasaran.
+31. Indeks Standar Pencemar Udara (ISPU) 
+alah angka yang tidak mempunyai 
+satuan yang  menggambarkan kondisi 
+kualitas udara ambien di lokasi dan 
+waktu tertentu yang didasarkan kepada 
+dampak terhadap kesehatan manusia, 
+nilai estetika dan makhluk hidup lainnya.
+32. Gambut adalah material organik yang 
+terbentuk secara alami dari sisa_sisa 
+tumbuhan yang terdekomposisi tidak 
+sempurna dengan ketebalan 55 (lima 
+puluh) centimeter atau lebih dan 
+terakumulasi pada rawa.
+33. Ekosistem Gambut adalah tatanan 
+unsur Gambut yang ,merupakan satu 
+kesatuan utuh menyeluruh yang saling 
+mempengaruhi .dalam membentuk 
+keseimbangan, stabilitas, dan 
+produktivitasnya.
+34. Kesatuan Hidrologi Gambut (KHG) 
+adalah ekosistem gambut yang letaknya 
+di antara 2 (dua) sungai, di antara sungai https://www.bps.go.id
+
+
+======================================================================
+Page 237 [MEDIUM]
+Matches: iku, pm10
+======================================================================
+
+Environment Statistics of Indonesia 2019
+APPENDIX 2210binatang air lainnya/tanaman air yang 
+hidup di laut/perairan umum secara 
+bebas dan bukan milik perseorangan.
+44. Perikanan Budidaya adalah usaha 
+pemeliharaan dan pengembang biakan 
+ikan atau organisme air lainnya.
+45. Partikulat (PM10) adalah partikel udara 
+yang berukuran lebih kecil dari 10 
+mikron (mikrometer).
+46. Karbon dioksida ekuivalen  (CO2e) adalah 
+jumlah CO2 yang dapat mengakibatkan 
+pemanasan global ekuivalen.
+Iklim dan Perubahan Iklim di Indonesia
+47. Unsur Iklim mencakup suhu atau 
+temperatur,kelembapan udara, tekanan 
+udara, angin, dan curah hujan.
+48. Suhu Udara merupakan suhu panas/ 
+dinginnya udara di suatu tempat pada 
+waktu tertentu.
+49. Kelembapan Udara adalah konsentrasi 
+uap air di udara (atmosfer). 
+50. Kecepatan Angin merupakan sebuah 
+kuantitas atmosterik fundamental. 
+Kecepatan angin disebabkan oleh aquatic animals/aquatic plants that grow 
+naturally in inland openwater/marine 
+areas and no belong to the property of 
+any person.
+44. Aquaculture is raise and breeding effort 
+of fish or other aquatic organisms.
+45. Particulates (PM10) are air particles 
+smaller than 10 microns (micrometers).
+46. Equivalent carbon dioxide (CO2e) is the 
+amount of CO2 that can cause equivalent 
+global warming.
+Climate and Climate Change in Indonesia
+47. Climate elements include temperature, 
+humidity, air pressure, wind, and rainfall.
+48. Air Temperature is the temperature of the 
+hot/cold air in a place at a certain time.
+49. Humidity is the concentration of water 
+vapor in the air (atmosphere).
+50. Wind flow speed is fundamental 
+atmospheric quantity caused 
+by air moving from high to low pressure, https://www.bps.go.id
+
+
+======================================================================
+Page 297 [MEDIUM]
+Matches: kualitas udara, sulawesi
+======================================================================
+
+Environment Statistics of Indonesia  2019
+COMPONENT 1. ENVIRONMENT CONDITION AND QUALITY270Tabel
+Table1.20Indeks Kualitas Udara Tingkat Provinsi, 2015-2018 
+Air Quality Index by Province, 2015-2018
+Provinsi
+Province2015 2016 2017 2018
+(1) (2) (3) (4) (5)
+Aceh 89,4 86,3 89,8 88,3
+Sumatera Utara 88,2 79,2 87,3 85,7
+Sumatera Barat 88,5 82,9 89,9 88,2
+Riau - 72,4 90,9 89,9
+Jambi 82,9 88,1 89,4 88,0
+Sumatera Selatan 79,6 81,6 88,9 85,3
+Bengkulu 92,5 85,4 92,6 91,6
+Lampung 82,3 77,5 85,0 83,0
+Kepulauan Bangka Belitung 95,6 80,4 95,0 89,1
+Kepulauan Riau 86,6 78,6 95,5 90,8
+DKI Jakarta 78,8 56,4 53,5 66,6
+Jawa Barat 74,6 78,6 77,9 72,8
+Jawa Tengah   81,3 77,3 83,9 83,0
+DI Yogyakarta 90,6 87,6 88,1 84,3
+Jawa Timur 89,2 83,2 85,5 81,8
+Banten 50,7 58,8 75,4 71,6
+Bali   92,4 88,3 91,4 89,0
+Nusa Tenggara Barat   92,3 81,2 88,0 87,2
+Nusa Tenggara Timur  - 82,7 91,2 86,8
+Kalimantan Barat 91,6 81,5 89,1 88,3
+Kalimantan Tengah  89,9 83,8 92,3 87,1
+Kalimantan Selatan 87,6 85,6 89,0 87,5
+Kalimantan Timur  96,2 80,2 88,9 83,4
+Kalimantan Utara 1- 89,1 95,8 91,0
+Sulawesi Utara 92,7 86,7 94,3 91,1
+Sulawesi Tengah 89,1 87,9 94,4 93,6
+Sulawesi Selatan  76,8 85,8 88,7 89,1
+Sulawesi Tenggara 83,6 83,5 91,0 89,9
+Gorontalo - 88,3 94,8 92,2
+Sulawesi Barat 89,2 86,4 91,5 89,3
+Maluku 82,2 87,3 85,6 85,0
+Maluku Utara - 86,2 96,0 90,8
+Papua Barat - 93,4 95,6 90,4
+Papua - 89,6 90,0 89,9
+Sumber/ Source : Statistik Kementerian Lingkungan Hidup dan Kehutanan 2017, Kementerian Lingkungan Hidup dan Kehutanan/ 
+  Statistics of the Ministry of Environment and Forestry 2017, Ministry of Environment and Forestryhttps://www.bps.go.id
+

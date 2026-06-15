@@ -1,0 +1,394 @@
+SLHI 2024 - Ekstraksi Data Kualitas Udara
+======================================================================
+
+
+======================================================================
+Page 327 [HIGH]
+Matches: iku, sulawesi
+======================================================================
+
+299
+Partisipasi, Pengelolaan, dan Perlindungan Lingkungan
+Environmental Protection, Management, and EngagementTabel
+TableAnggaran Belanja untuk Lingkungan Hidup Menurut Provinsi (juta rupiah), 2020–2024
+Budget of Environment Expenditures by Province (million rupiah), 2020–2024 2.6.3  
+Provinsi
+Province2020120212202232023420245
+(1) (2) (3) (4) (5) (6)
+ Aceh 15.109 13.367 14.015 125.644  123.464 
+ Sumatera Utara 79.091 24.413 12.087 137.610  163.195 
+ Sumatera Barat 19.413 20.963 12.169 84.002  91.149 
+ Riau 163.655 140.582 140.728 128.720  141.299 
+ Jambi 17.778 11.647 9.674 83.514  76.266 
+ Sumatera Selatan 118.548 297.546 13.659 108.139  106.945 
+ Bengkulu 56.360 1.140 2.219 42.011  42.391 
+ Lampung 12.759 708.981 1.362.718 96.717  96.108 
+ Kepulauan Bangka Belitung 14.577 7.076 9.304 58.313  55.071 
+ Kepulauan Riau 27.282 4.533 4.369 37.125  36.690 
+ DKI Jakarta 6.019.840 4.063.993 3.213.639 5.221.150  6.222.658 
+ Jawa Barat 311.277 95.298 40.174 353.129  397.348 
+ Jawa Tengah 236.305 223.819 203.333 232.094  170.808 
+ DI Yogyakarta 573.876 85.237 172.409 385.425  288.558 
+ Jawa Timur 55.619 3.816.228 32.322 245.380  255.648 
+ Banten 56.739 55.051 50.747 77.976  75.808 
+ Bali 16.025 29.900 – 60.202  75.178 
+ Nusa Tenggara Barat 85.620 12.436 33.037 99.688  99.495 
+ Nusa Tenggara Timur 127.447 103.722 5.721 91.665  87.220 
+ Kalimantan Barat 146.087 834.075 5.205 67.376  79.017 
+ Kalimantan Tengah 13.733 15.067 6.760 109.890  168.992 
+ Kalimantan Selatan 106.464 1.546 323.403 309.307  373.311 
+ Kalimantan Timur 29.853 30.539 21.725 358.943  318.216 
+ Kalimantan Utara 11.992 15.059 7.567 58.324  86.512 
+ Sulawesi Utara 9.725 54.124 59.930 103.506  83.808 
+ Sulawesi Tengah 13.162 9.453 3.927 78.621  89.536 
+ Sulawesi Selatan 18.364 1.546 36.503 137.420  156.698 
+ Sulawesi Tenggara 10.828 160.569 30.635 74.037  79.552 
+ Gorontalo 32.829 19.860 11.289 43.884  39.810 
+ Sulawesi Barat 8.814 16.725 26.506 57.506  88.159 
+ Maluku 17.379 – 24.502 57.176  50.770 
+ Maluku Utara 14.864 12.673 36.319 134.132  78.155 
+ Papua Barat 99.730 54.749 60.385 187.314  173.007 
+ Papua Barat Daya – – – 54.197  48.347 
+ Papua 4.737 76.589 6.604 70.112  61.183 
+ Papua Selatan – – – 11.845  9.354 
+ Papua Tengah – – – 40.262  56.564 
+ Papua Pegunungan – – – 17.006  48.404 
+    Catatan/ Note:      1 Data anggaran update 8 Juli 2020/ Budget Data update 8 July 2020
+                                 2 Data anggaran update 28 Juni 2021/ Budget Data update 28 June 2021
+                                 3 Data anggaran update 22 Agustus 2022/ Budget Data update 22 August 2022
+                                  4 Data anggaran update 5 Juni 2023/ Budget Data update 5 June 2023
+                                        5 Data anggaran update 8 Juli 2024/ Budget Data update 8 July 2024
+    Sumber/ Source :    Data dikutip dari https://djpk.kemenkeu.go.id/?p=5412/ Data cited from https://djpk.kemenkeu.go.id/?p=5412https://www.bps.go.id
+
+
+======================================================================
+Page 24 [MEDIUM]
+Matches: kualitas udara, iku
+======================================================================
+
+xxii
+IKL
+IKLH
+IKTL
+IKU
+IPAL
+IPK
+IPPU
+IRES
+IUPHHK-HA
+IUPHHK-HT
+Jakstrada
+K
+KBLI
+KCD
+Kehati
+Kemendagri
+Kemendes PDTT
+Kemendikbudristek 
+Kemenhub
+Kemenkes
+Kemenkeu
+Kemenko Marves
+Kemenperin
+Kementan
+Kementerian ATR
+Kementerian ESDM
+Kementerian PPN: Indeks Kualitas Lahan/ Land Quality Index
+: Indeks Kualitas Lingkungan Hidup/ Environmental Quality Index
+: Indeks Kualitas Tutupan Lahan/ Land Cover Quality Index
+: Indeks Kualitas Udara/ Air Quality Index
+: Instalasi Pengolahan Air Limbah/ Wastewater Treatment Plants
+: Izin Pemanfaatan Kayu/ Timber Utilization Permit
+: Industrial Processes and Product Use
+: International Recommendation on Energy Statistics
+: Izin Usaha Pemanfaatan Hasil Hutan Kayu pada Hutan Alam/ Forest
+  Concession
+: Izin Usaha Pemanfaatan Hasil Hutan Kayu pada Hutan Tanaman/
+  Timber Establishment
+: Kebijakan dan Strategi Daerah/ Regional Policy and Strategy
+: Kalium/ Potassium
+: Klasifikasi Baku Lapangan Usaha Indonesia/ Indonesia Standard 
+  Industrial Classification (ISIC)
+: Kepala Cabang Dinas/ Chief of Subdistrict Branch Agency
+: Keanekaragaman Hayati/ Biodiversity
+: Kementerian Dalam Negeri/ Ministry of Home Affairs
+: Kementrian Desa, Pembangunan Daerah Tertinggal, dan Transmigrasi
+  /Ministry of Villages, Development of Disadvantaged Areas and
+  Transmigration
+: Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi/ Ministry 
+  of Education, Culture, Research, and Technology
+: Kementerian Perhubungan/ Ministry of Transportation
+: Kementerian Kesehatan/ Ministry of Health
+: Kementerian Keuangan/ Ministry of Finance
+: Kementerian Koordinator Bidang Kemaritiman dan Investasi/
+  Coordinating Ministry for Maritime and Investment Affairs
+: Kementerian Perindustrian/ Ministry of Industry
+: Kementerian Pertanian/ Ministry of Agriculture
+: Kementerian Agraria dan Tata Ruang/ Ministry of Agrarian Affairs and
+  Spatial Planning
+: Kementerian Energi dan Sumber Daya Mineral/ Ministry of Energy
+  and Mineral Resources
+: Kementerian Perencanaan Pembangunan Nasional/ Ministry of
+  National Development Planning https://www.bps.go.id
+
+
+======================================================================
+Page 46 [MEDIUM]
+Matches: iku, pm10
+======================================================================
+
+18
+Statistik Lingkungan Hidup Indonesia 2024
+Environment Statistics of Indonesia 202450. Taman Nasional
+Taman Nasional adalah Kawasan Pelestarian 
+Alam yang mempunyai ekosistem asli, dikelola 
+dengan sistem zonasi yang dimanfaatkan untuk 
+tujuan penelitian, ilmu pengetahuan, pendidikan, 
+menunjang budidaya, pariwisata, dan rekreasi.
+51. Taman Hutan Raya 
+Taman Hutan Raya (THR) adalah Kawasan 
+Pelestarian Alam untuk tujuan koleksi tumbuhan 
+dan/atau satwa yang alami atau bukan alami, 
+jenis asli dan/atau bukan jenis asli, yang tidak 
+invasif dan dimanfaatkan untuk kepentingan 
+penelitian, ilmu pengetahuan, pendidikan, 
+menunjang budidaya, budaya, pariwisata, dan 
+rekreasi.
+52. Taman Wisata Alam 
+Taman Wisata Alam adalah Kawasan Pelestarian 
+Alam yang dimanfaatkan terutama untuk 
+kepentingan pariwisata alam dan rekreasi.
+53. Kebakaan Hutan dan Lahan
+Kebakaran hutan dan lahan adalah suatu 
+keadaan dimana hutan dan lahan dilanda api, 
+sehingga mengakibatkan kerusakan hutan dan 
+lahan yang menimbulkan kerugian ekonomis 
+dan atau nilai lingkungan. Kebakaran hutan dan 
+lahan seringkali menyebabkan bencana asap 
+yang dapat mengganggu aktivitas dan kesehatan 
+masyarakat sekitar.
+54. PM 10
+Partikulat (PM 10) adalah partikel udara yang 
+berukuran lebih kecil dari 10 mikron (mikrometer).
+55. SO2
+SO2 atau Sulfur Dioksida adalah gas berbau yang 
+menyebabkan iritasi pernapasan terjadi akibat 
+pembakaran batubara, bahan bakar minyak, dan 
+bahan bakar fosil lainnya yang mengandung 
+sulfur. Bisa juga berasal dari proses alami dari 
+gunung berapi.
+56. NO2
+NO2 atau Nitrogen Dioksida adalah gas yang 
+menyebabkan gangguan pernapasan dalam 
+kadar tinggi, terjadi akibat pembakaran pada 
+kendaraan bermotor dan juga mesin-mesin 
+industri.
+57. Partikel Terlarut
+Partikel terlarut di udara adalah total konsentrasi 
+partikel di udara yang memiliki diameter <50-
+100 µm.50. National Park 
+National Park is a Nature Conservation Area 
+that has an original ecosystem, managed with a 
+zoning system that is utilized for research, science, 
+education, supporting cultivation, tourism and 
+recreation.
+51. Grand Forest Park
+Grand Forest Park is Nature Conservation Area for 
+the purpose of natural or non-natural collection 
+of plants and/or animals, native species and/or 
+non-native species, which are non-invasive and 
+used for research, science, education, supporting 
+cultivation, culture, tourism and recreation.
+52. Nature Recreation Park
+Nature Recreation Park is a Nature Conservation 
+Area that is used primarily for the benefit of nature 
+tourism and recreation.
+53. Forest and Land Fires
+Forest and land fires are a situation in which forests 
+and land are hit by fire, resulting in damage to 
+forests and land which results in economic losses 
+and/or environmental values. Forest and land fires 
+often cause smoke disasters that can disrupt the 
+activities and health of surrounding communities.
+54. PM10
+Particulates (PM 10) are air particles smaller than 
+10 microns (micrometers).
+55. SO2
+SO2 or Sulfur Dioxide is gas smell causing 
+exhalation irritation happened effect of coal 
+combustion, oil fuel and other fossil fuel 
+considering sulphur. It can also come from natural 
+process of volcanic mountain.
+56. NO 2
+NO2 or Nitrogen Dioxide is gas causing exhalation 
+trouble in high rate, happened effect of combustion 
+at motor vehicle as well as industrial machines.
+57. Suspended Particulate
+Suspended particulate in the air (Total Suspended 
+Particulate/TSP) is the total concentration of 
+particles in the air that has a diameter of <50-
+100 µm.https://www.bps.go.id
+
+
+======================================================================
+Page 47 [MEDIUM]
+Matches: kualitas udara, iku
+======================================================================
+
+19
+Kondisi dan Kualitas Lingkungan
+Environmental Conditions and Quality58. Pengukuran Partikel Terlarut
+Metode pengukuran partikel terlarut di udara 
+yang digunakan adalah Gravimetri.
+59. Waktu Pengukuran Partikel Terlarut
+Waktu pengukuran partikel terlarut di udara yang 
+adalah setiap enam hari sekali selama 24 Jam di 
+seluruh Indonesia.
+60. Nilai Baku Mutu Partikel Terlarut
+Nilai baku mutu partikel terlarut di udara adalah 
+230 µg/m3.
+61. Status Mutu Air Sungai
+Penentuan status mutu air sungai dilakukan 
+dengan Metode STORET. 
+62. Metode STORET
+Status mutu air dihitung berdasarkan Keputusan 
+Menteri Lingkungan Hidup Nomor 115 tahun 
+2003 dengan membandingkan antara data 
+kualitas air dan baku mutu air yang disesuaikan 
+peruntukannya guna menentukan status mutu 
+air. Penentuan status mutu air menggunakan 
+sistem nilai dari US-EPA (Environmental Protection 
+Agency ), dengan mengklasifikasikan mutu air 
+dalam empat kelas, yaitu :
+• Kelas A: baik sekali, skor = 0 (memenuhi 
+baku mutu)
+• Kelas B: baik, skor = -1 s/d -10 (cemar 
+ringan)
+• Kelas C: sedang, skor = -11 s/d -30 (cemar 
+sedang)
+• Kelas D: buruk, skor ≥ -31 (cemar berat)
+63. Indeks Kualitas Tutupan Lahan
+Indeks Kualitas Tutupan Lahan (IKTL) adalah nilai 
+yang menggambarkan kualitas tutupan lahan 
+yang dihitung dari kondisi tutupan hutan dan 
+tutupan vegetasi non hutan.
+64. Indeks Kualitas Udara
+Indeks Kualitas Udara (IKU) adalah ukuran yang 
+menggambarkan kualitas udara yang merupakan 
+nilai komposit parameter kualitas udara dalam 
+suatu wilayah pada waktu tertentu.
+65. Indeks Kualitas Air
+Indeks Kualitas Air (IKA) adalah suatu nilai 
+yang menggambarkan kondisi kualitas air yang 
+merupakan nilai komposit parameter kualitas air 
+dalam suatu wilayah pada waktu tertentu.
+66. Indeks Kualitas Air Laut 
+Indeks Kualitas Air Laut (IKAL) adalah suatu nilai 
+yang menggambarkan kondisi kualitas air laut 
+yang merupakan nilai komposit dari beberapa 
+parameter kualitas air laut dalam suatu wilayah 
+pada waktu tertentu.58. Suspended Particulate Measurement
+The method of measuring suspended particulate 
+in the air used is Gravimetric analysis.
+59. Time for Suspended Particulate Measurement
+TIme for measuring suspended particulate in 
+the air is every six days for 24 hours throughout 
+Indonesia.
+60. Quality Standard Value for Suspended 
+Particulate
+Quality standards value of suspended particulate  
+in the Air is 230 µg/m3.
+61. River Water Quality
+River water quality is determined by using STORET 
+method. 
+62. STORET Method
+Status of water quality is assessed based on the 
+Decree of Minister of Environment Number 115 
+Year 2003 by comparing the water quality data 
+and water quality standards that have been 
+adjusted accordingly to determine water quality 
+status. Determination of water quality status uses 
+a value system from the US-EPA (Environmental 
+Protection Agency), by classifying water quality 
+into four classes, namely :
+• Class A: very good, score = 0 (meets quality 
+standards)
+• Class B: good, score = -1 to -10 (mild smear)
+• Class C: moderate, score = -11 to -30 
+(medium polluted)
+• Class D: poor, score ≥ -31 (heavily polluted)
+63. Land Cover Quality Index
+Land Cover Quality Index is a value that describes 
+the land cover quality which is calculated from the 
+condition of forest cover and non-forest vegetation 
+cover.
+64. Air Quality Index
+Air Quality Index is a measure that describes air 
+quality which is a composite value of air quality 
+parameters in an area at a certain time.
+65. Water Quality Index
+Water Quality Index is a value that describes 
+water quality conditions which is a composite 
+value of water quality parameters in an area at 
+a certain time.
+66. Sea Water Quality Index
+Sea Water Quality Index is a value that describes 
+the condition of sea water quality which is a 
+composite value of several sea water quality 
+parameters in an area at a certain time.https://www.bps.go.id
+
+
+======================================================================
+Page 128 [MEDIUM]
+Matches: kualitas udara, sulawesi
+======================================================================
+
+100
+Statistik Lingkungan Hidup Indonesia 2024
+Environment Statistics of Indonesia 2024Tabel
+TableIndeks Kualitas Udara Menurut Provinsi, 2019–2023
+Air Quality Index by Province, 2019–2023 2.1.25  
+Provinsi
+Province2019 2020 2021 2022 2023
+(1) (2) (3) (4) (5) (6)
+ Aceh 90,71 89,51 89,63 90,62 90,94
+ Sumatera Utara 86,58 89,22 89,55 89,69 90,90
+ Sumatera Barat 89,45 90,39 90,22 90,65 90,53
+ Riau 90,20 90,42 90,13 90,69 90,89
+ Jambi 87,25 85,65 87,08 89,85 90,57
+ Sumatera Selatan 87,13 86,57 86,28 89,10 87,76
+ Bengkulu 92,69 90,52 90,81 91,27 92,49
+ Lampung 86,62 85,45 85,46 87,32 88,04
+ Kepulauan Bangka Belitung 91,94 91,03 90,39 89,75 90,15
+ Kepulauan Riau 90,63 90,80 90,91 90,27 90,13
+ DKI Jakarta 67,97 66,69 66,52 68,06 68,46
+ Jawa Barat 75,10 78,46 79,34 80,31 81,39
+ Jawa Tengah 84,81 84,73 84,60 85,14 86,35
+ DI Yogyakarta 85,19 89,55 88,59 89,16 89,01
+ Jawa Timur 83,06 84,06 83,20 84,28 84,73
+ Banten 74,98 72,83 74,14 73,97 66,67
+ Bali 89,85 88,34 89,28 89,19 88,99
+ Nusa Tenggara Barat 87,51 88,63 88,52 89,30 90,21
+ Nusa Tenggara Timur 88,18 89,80 90,51 91,52 92,03
+ Kalimantan Barat 90,04 88,88 90,71 90,90 92,03
+ Kalimantan Tengah 88,82 89,84 90,39 91,25 91,47
+ Kalimantan Selatan 88,78 88,93 89,15 89,52 92,85
+ Kalimantan Timur 90,02 89,02 88,84 87,59 89,64
+ Kalimantan Utara 93,79 94,23 93,43 94,52 93,91
+ Sulawesi Utara 92,41 90,53 91,27 92,41 93,52
+ Sulawesi Tengah 92,98 91,80 91,33 91,86 91,88
+ Sulawesi Selatan 89,60 88,73 89,13 90,35 90,58
+ Sulawesi Tenggara 90,01 91,21 90,89 92,05 92,83
+ Gorontalo 86,88 93,89 93,96 94,47 94,43
+ Sulawesi Barat 89,97 89,72 90,97 91,88 93,33
+ Maluku 88,72 90,41 90,70 91,46 92,47
+ Maluku Utara 92,38 92,10 91,64 92,74 93,19
+ Papua Barat 92,64 94,83 95,60 95,79 96,22
+ Papua Barat Daya – – – – 96,28
+ Papua 92,56 94,57 94,02 95,32 95,87
+ Papua Selatan – – – – 95,44
+ Papua Tengah – – – – 95,33
+ Papua Pegunungan – – – – 97,68
+ Indonesia 86,56 87,21 87,36 88,06 88,67
+    Sumber/ Source : Kementerian Lingkungan HIdup dan Kehutanan/ Ministry of Environment and Forestryhttps://www.bps.go.id
+

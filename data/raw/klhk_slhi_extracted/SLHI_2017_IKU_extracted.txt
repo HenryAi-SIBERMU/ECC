@@ -1,0 +1,436 @@
+SLHI 2017 - Ekstraksi Data Kualitas Udara
+======================================================================
+
+
+======================================================================
+Page 42 [HIGH]
+Matches: kualitas udara, iku, pm10, sulawesi
+======================================================================
+
+ENVIRONMENT CONDITION AND QUALITY
+Environment Statistics of  Indonesia 201719
+performed on five main pollutant parameters: 
+carbon monoxide (CO), sulfur dioxide (SO2), 
+nitrogen dioxide (NO2), surface ozone (O3), 
+and particulates (PM10) which can be seen daily 
+changes in KLHK and BMKG websites.
+The concentration of dissolved 
+particles is measured by BMKG at observation 
+stations that are usually far from community 
+centers such as industry, settlements, and 
+transportation. On January - December 2016 in 
+several cities, dissolved particles concentration 
+in the air ranged from 3.52-23.177,60 ug/m3, 
+the lowest was in Winangun Station, Sulawesi  
+Utara while the highest was in Ancol Station, 
+Jakarta. The city which score is above the 
+quality standards (230 ug/m3) throughout the 
+year is located at Glodok Station, Jakarta.
+Air Quality Index from IKLH already 
+calculated by KLHK in locations representing 
+settlement, industrial, and heavy traffic of 
+motor vehicle and parameters used are SO2 
+and NO2. As known that RPJMN 2015-2019 has 
+targeted IKLH in 2019 of 66.5-68.5 (moderate 
+category). This determination is based on the 
+assumption of minimum IKU achievement of 84. 
+Based on that target, in 2015 there are only 
+9 provinces whose value is below the expected 
+target. However, index value decreased from 
+year to year, so control should be done to 
+maintain air quality.lima parameter pencemar utama, yaitu 
+karbon monoksida (CO), sulfur dioksida (SO2), 
+nitrogen dioksida (NO2), ozon permukaan 
+(O3), dan partikulat (PM10) yang dapat dilihat 
+perubahannya setiap hari pada website KLHK 
+dan BMKG. 
+ Konsentrasi Partikel Terlarut diukur 
+oleh BMKG di stasiun-stasiun pengamatan 
+yang biasanya jauh dari pusat-pusat kegiatan 
+masyarakat seperti industri, permukiman, 
+dan transportasi. Pada Tahun 2016 terlihat 
+bahwa konsentrasi partikel terlarut di udara di 
+beberapa kota pada bulan Januari–Desember 
+berkisar antara 3,52–23.177,60 ug/m3, terendah 
+berada di Stasiun Winangun Sulawesi Utara 
+sedangkan yang tertinggi di Stasiun Ancol 
+Jakarta. Kota yang sudah menunjukkan nilai 
+diatas baku mutu yang diperbolehkan (230 ug/
+m3) sepanjang tahun berada di Stasiun Glodok, 
+Jakarta.
+ IKU bagian dari IKLH yang sudah di 
+dihitung oleh KLHK di lokasi-lokasi yang mewakili 
+daerah permukiman, industri, dan padat lalu 
+lintas kendaraan bermotor dan parameter yang 
+diukur adalah SO2 dan NO2. Seperti diketahui 
+bahwa RPJMN 2015-2019 telah menargetkan 
+IKLH pada tahun 2019 sebesar 66,5-68,5 
+(kategori cukup). Penetapan ini didasarkan 
+pada asumsi pencapaian IKU minimal sebesar 
+84. Berdasarkan target tersebut, pada tahun 
+2015 hanya terdapat 9 provinsi yang nilainya di 
+bawah target yang diharapkan. Namun terlihat 
+bahwa nilai indeks tersebut menurun dari tahun 
+ke tahun sehingga pengendalian tetap perlu 
+dilakukan agar menjaga kualitas udara.https://www.bps.go.id
+
+
+======================================================================
+Page 99 [HIGH]
+Matches: iku, sulawesi
+======================================================================
+
+PEMANFAATAN KAWASAN HUTAN DAN DEFORESTASI
+Statistik Lingkungan Hidup Indonesia 201776
+forests in Papua, Kalimantan, Sulawesi and 
+Maluku are larger than APL.
+Each forest area has a function in 
+supporting the ecosystem and the economy. Production of forest products is important for the fulfillment of public consumption, industry and export fulfillment. In supporting the economic function of the forest, exploitation can be carried out according to the carrying capacity of the forest taking into account the sustainability of forest areas. The Government, in particular KLHK, issued various permits related to the function of forests in supporting the economy, such as timber utilization permits, forest primary industry licenses, forest use permits for mining operations, to permits to release forest areas for plantations and food crop agriculture .
+2.2  Result from Forest Area
+The function of forests in supporting 
+the economy, especially domestic industries, 
+is expected to generate added value and create more jobs. The following describes the development of production of economic activities associated with forest areas.kawasan hutan di Pulau Papua, Kalimantan, Sulawesi dan Maluku lebih luas dari APL. 
+Masing-masing kawasan hutan mem-
+punyai fungsi dalam mendukung ekosistem maupun ekonomi. Produksi hasil hutan penting bagi pemenuhan konsumsi masyarakat, industri dan pemenuhan ekspor. Dalam mendukung fungsi ekonomi hutan, eksploitasi dapat dilakukan sesuai daya dukung hutan dengan mempertimbangkan kelestarian kawasan hutan. Pemerintah khususnya KLHK mengeluarkan berbagai izin yang terkait fungsi hutan dalam mendukung perekonomian, di antaranya izin usaha pemanfaatan kayu, izin industri primer hasil hutan, izin pinjam pakai kawasan hutan untuk usaha pertambangan, sampai izin pelepasan kawasan hutan untuk perkebunan dan pertanian tanaman pangan.
+2.2. Hasil Kawasan Hutan
+Fungsi hutan  dalam mendukung 
+perekonomian khususnya industri dalam negeri 
+diharapkan mampu menghasilkan nilai tambah dan menciptakan lapangan pekerjaan. Berikut ini dijabarkan perkembangan produksi aktivitas ekonomi yang terkait dengan kawasan hutan.
+Tabel   II.1.  Luas Penutupan Lahan menurut Pulau di Dalam dan di Luar Kawasan Hutan 
+Table   (Ribu Ha), 2015
+   Land Cover Area by Islands Inside and Outside Forest Area (Thousand Ha), 2015
+Sumber/ Source: Rekalkulasi Penutupan Lahan 2015/ Recalculation of Land Covering 2015
+https://www.bps.go.id
+
+
+======================================================================
+Page 240 [HIGH]
+Matches: iku, sulawesi
+======================================================================
+
+PARTICIPATION, MANAGEMENT , AND ENVIRONMENTAL PROTECTION
+Environment Statistics of  Indonesia 2017217
+institution. In the Status of the Environment 
+2012 publication, the environmental budget allocated to KLH, which is around 1 percent, is not sufficient to offset the increasingly heavy pressures on the environment. This budget is very small when compared with expenditures of ministries of other environmental managers such as Ministry of Public Works and People’s Housing gets a portion of 13.46 percent or 104.17 trillion rupiah. The Ministry’s spending / other environmental management agencies are presented in Table 6.5.
+In addition to central government 
+expenditure, there is also provincial government spending on environmental functions. Total Realization of Provincial APBD for the environment by province can be seen in Table 6.1. The budget for environmental functions in each province fluctuates from year to year during the period 2012-2016. The majority of provinces give the share of the environmental budget less than 1 percent. In 2016, the province with the highest percentage of environmental budget is Gorontalo which is 3.26 percent APBD, followed by Sumatera  Utara Province of 1.93 percent APBD, and Sulawesi  Barat 1.75 percent APBD.
+6.2.    Environmental Governance and         
+Regulation
+The extent of environmental coverage, 
+makes more complex the environmental 
+problems in Indonesia. In environmental management there are numbers of institutions at the national and regional levels to handle environmental issues according to their duties and functions. The division of responsibilities at the national level is shown in Figure 6.1. the environmental management agency, which seluruh kementrian/lembaga. Dalam publikasi Status Lingkungan Hidup 2012 menyebutkan anggaran lingkungan hidup yang dialokasikan ke KLH yang berkisar 1 persen, belum memadai untuk mengimbangi laju tekanan terhadap lingkungan hidup yang kian berat. Anggaran ini sangat kecil jika dibandingkan dengan pos belanja kementrian pengelola lingkungan hidup lain seperti Kementrian  Pekerjaan Umum dan Perumahan Rakyat mendapat porsi 13,46 persen atau 104,17 triliun rupiah. Belanja Kementrian/Lembaga pengelola lingkungan hidup lain disajikan pada Tabel 6.5.  
+Selain belanja pemerintah di tingkat 
+pusat, terdapat juga belanja pemerintah di tingkat provinsi untuk fungsi lingkungan hidup. Jumlah Realisasi APBD provinsi untuk lingkungan hidup menurut provinsi dapat dilihat di Tabel 6.1. Anggaran untuk fungsi lingkungan hidup pada tiap provinsi mengalami fluktuasi dari tahun ke tahun selama periode 2012-2016. Mayoritas provinsi memberi porsi anggaran lingkungan hidup kurang dari 1 persen. Pada tahun 2016, provinsi dengan persentase anggaran tertinggi untuk lingkungan hidup adalah Gorontalo yaitu sebesar 3,26 persen APBD, diikuti Provinsi Sumatera Utara sebesar 1,93 persen APBD, dan Sulawesi Barat 1,75 persen APBD.
+6.2.  Kelembagaan dan Regulasi Lingkungan 
+Hidup
+Luasnya cakupan lingkungan hidup, 
+membuat semakin kompleks permasalahan lingkungan yang dihadapi Indonesia. Dalam pengelolaan lingkungan hidup terdapat sejumlah lembaga di tingkat nasional dan daerah untuk menangani isu-isu lingkungan sesuai dengan tugas dan fungsinya. Pembagian tanggungjawab di tingkat nasional terlihat pada Gambar 6.1 Kementerian/Lembaga pengelola lingkungan https://www.bps.go.id
+
+
+======================================================================
+Page 250 [HIGH]
+Matches: iku, sulawesi
+======================================================================
+
+ENVIRONMENT PROTECTION, MANAGEMENT AND ENGAGEMENT
+Environment Statistics of  Indonesia 2017227
+Tabel
+Table6.1APBD Provinsi untuk Lingkungan Hidup menurut Provinsi (juta rupiah), 2012-2016
+Provincial Budget for Environment by Province (million rupiahs), 2012-2016
+Provinsi
+Province2012 2013 2014 2015 2016*
+(1) (2) (3) (4) (5) (6)
+Aceh 20 635 28 861 23 594 -  27 357 
+Sumatera Utara 263 637 220 488 188 148 194 471  31 716 
+Sumatera Barat 22 155 25 303 25 494 -  43 618 
+Riau 20 556 90 318 42 790 -  17 222 
+Jambi 10 193 13 480 15 377 13 857  13 514 
+Sumatera Selatan 8 510 14 947 16 665 14 362  6 957 
+Bengkulu 7 472 7 424 9 315 9 248  18 222 
+Lampung 7 954 11 742 11 628 16 673  12 878 
+Kep. Bangka Belitung 37 278 27 068 54 761 -  21 374 
+Kepulauan Riau 11 254 12 229 13 535 17 935  25 412 
+DKI Jakarta 1 749 795 3 436 731 - -  - 
+Jawa Barat 261 507 209 612 284 250 417 982  - 
+Jawa Tengah 32 871 43 661 42 041 58 929  3 386 
+DI Yogyakarta 10 452 18 427 52 403 143 739  27 804 
+Jawa Timur 42 762 48 051 36 962 35 625  30 575 
+Banten 12 699 14 237 22 403 27 399  37 113 
+Bali 31 393 19 533 - 38 794  307 
+Nusa Tenggara Barat 9 268 8 693 9 588 12 723  2 278 
+Nusa Tenggara Timur 10 261 10 952 11 628 13 020  166 
+Kalimantan Barat 8 139 9 021 11 129 -  15 533 
+Kalimantan Tengah 9 589 11 073 11 370 -  1 801 
+Kalimantan Selatan 12 829 18 067 35 933 38 174  33 222 
+Kalimantan Timur 38 801 33 594 47 104 125 592  - 
+Kalimantan Utara - - 4 657 40 361  29 277 
+Sulawesi Utara 7 278 7 452 7 284 7 927  592 
+Sulawesi Tengah 13 073 14 275 13 078 18 523  17 836 
+Sulawesi Selatan 20 480 36 539 176 983 -  14 091 
+Sulawesi Tenggara 6 436 7 035 - 13 052  10 819 
+Gorontalo 26 044 29 663 30 460 77 310  51 977 
+Sulawesi Barat 7 114 8 802 9 967 -  30 903 
+Maluku 15 274 8 800 10 089 15 422  8 036 
+Maluku Utara 7 815 5 990 9 661 16 877  - 
+Papua Barat 33 039 51 597 57 307 68 164  2 178 
+Papua 20 307 24 249 37 169 30 413  - 
+Catatan / Note    : * APBD Realisasi/ Realization APBD
+Sumber/ Source   : Data dikutip dari http://djpk.kemenkeu.go.id kondisi tanggal 11 Oktober 2017/ Data cited from
+                            http://djpk.kemenkeu.go.id on October 11st 2016https://www.bps.go.id
+
+
+======================================================================
+Page 251 [HIGH]
+Matches: iku, sulawesi
+======================================================================
+
+PARTISIPASI, PENGELOLAAN, DAN PERLINDUNGAN LINGKUNGAN
+Statistik Lingkungan Hidup Indonesia 2017228
+Tabel
+Table6.2Persentase APBD untuk Lingkungan Hidup terhadap APBD Provinsi menurut Provinsi,
+2012-2016
+Percentage of Provincial Budget for Environment by Province, 2012-2016
+Provinsi
+Province2012 2013 2014 2015 2016*
+(1) (2) (3) (4) (5) (6)
+Aceh 0,22 0,24 0,18 - 0.23
+Sumatera Utara 3,43 2,49 2,21  2,24 1.93
+Sumatera Barat 0,71 0,76 0,71 - 0.97
+Riau 0,32 1,07 0,52 - 0.20
+Jambi 0,52 0,51 0,47  0,39 0.41
+Sumatera Selatan 0,18 0,26 0,26  0,22 0.14
+Bengkulu 0,47 0,42 0,49  0,41 0.90
+Lampung 0,28 0,27 0,27  0,35 0.24
+Kep. Bangka Belitung 2,57 1,42 2,72 - 1.03
+Kepulauan Riau 0,47 0,44 0,39  0,49 0.45
+DKI Jakarta 5,17 7,54 - - -
+Jawa Barat 1,65 1,20 1,34  1,69 -
+Jawa Tengah 0,29 0,34 0,30  0,34 0.10
+DI Yogyakarta 0,49 0,75 1,57  3,89 0.72
+Jawa Timur 0,35 0,31 0,21  0,15 0.13
+Banten 0,31 0,24 0,30  0,31 0.42
+Bali 0,86 0,45 -  0,39 0.60
+Nusa Tenggara Barat 0,41 0,35 0,34  0,43 0.42
+Nusa Tenggara Timur 0,48 0,46 0,42  0,40 0.01
+Kalimantan Barat 0,28 0,27 0,30 - 0.33
+Kalimantan Tengah 0,43 0,43 0,35 - 0.40
+Kalimantan Selatan 0,41 0,41 0,68  0,73 0.64
+Kalimantan Timur 0,37 0,26 0,34  1,35 -
+Kalimantan Utara - - 0,25  1,71 1.15
+Sulawesi Utara 0,40 0,38 0,30  0,30 0.14
+Sulawesi Tengah 0,68 0,65 0,54  0,65 0.56
+Sulawesi Selatan 0,43 0,63 3,03 - 0.43
+Sulawesi Tenggara 0,32 0,34 -  0,56 0.41
+Gorontalo 2,78 2,75 2,35  5,26 3.26
+Sulawesi Barat 0,73 0,77 0,76 - 1.75
+Maluku 1,07 0,56 0,53  0,65 0.31
+Maluku Utara 0,67 0,43 0,62  0,87 -
+Papua Barat 0,83 1,21 0,98  1,01 0.12
+Papua 0,28 0,30 0,33  0,25 -
+Catatan / Note    : * APBD Realisasi/ Realization APBD
+Sumber/ Source   : Data dikutip dari http://djpk.kemenkeu.go.id kondisi tanggal 11 Oktober 2017/ Data cited from
+                            http://djpk.kemenkeu.go.id on October 11st 2017 https://www.bps.go.id
+
+
+======================================================================
+Page 41 [MEDIUM]
+Matches: kualitas udara, iku, indeks standar
+======================================================================
+
+KONDISI DAN KUALITAS LINGKUNGAN
+Statistik Lingkungan Hidup Indonesia 201718
+aggressive CO2, or SO2. High SO2 concentration 
+in air mixed with rain water will cause acid 
+rain.
+Rain Water Quality Analysis is carried out 
+by BMKG by measuring some chemical elements 
+contained in rain water, ie Degree of Acidity 
+(pH), Conductivity, Calcium, Magnesium, 
+Sodium, Potassium, Ammonium, Chloride, 
+Sulfate, Nitrate, Total Hardness, and Acidity. 
+Table 1.17 shows that in 2016 when compared 
+to the water quality criterion, it can be seen 
+that there are two parameters that exceed the 
+quality standard, namely Nitrate parameter 
+that has exceeded the quality standard in all 
+provinces and Magnesium parameter that has 
+exceeded the quality standard in 25 provinces. 
+This shows that rain water is still quite feasible 
+to be used as a drinking water source in 
+Indonesia.
+Air Quality
+Air pollution is defined as one or more 
+of pollutants presence or their combinations in 
+quantities and/or time periods which may cause 
+human health disturbance, flora and fauna 
+life, or any material damage that causes life 
+quality disturbance or degradation, comfort, or 
+carrying out activities (Canter, 1996 in Harrop, 
+2002). Currently, air quality in Indonesia can 
+be seen from some data such as Air Pollution 
+Standards Index (ISPU), Dissolved Particle 
+Concentration, and Air Quality Index (IKU).
+Air Pollution Standard Index is 
+measurement conducted by BMKG observation 
+station and some observation point such as 
+settlement, industry, and heavy traffic of 
+motor vehicles by KLHK. ISPU measurement was mengandung zat-zat yang terdapat di udara 
+seperti NH3, CO2 agresif, ataupun SO2. Adanya 
+konsentrasi SO2 yang tinggi di udara yang 
+bercampur dengan air hujan akan menyebabkan 
+terjadinya hujan asam (acid rain).  
+ Analisis Kualitas Air Hujan dilakukan 
+oleh BMKG dengan mengukur beberapa unsur 
+kimia yang terkandung dalam air hujan, yaitu 
+Derajat Keasaman (pH), Daya Hantar, Kalsium, 
+Magnesium, Natrium, Kalium, Amonium, 
+Klorida, Sulphat, Nitrat, Kesadahan Total, dan 
+Keasaman. Tabel 1.17 menunjukkan pada tahun 
+2016 jika dibandingkan dengan kriteria mutu air 
+Kelas I, terlihat bahwa terdapat dua parameter 
+yang melebihi baku mutu, yaitu parameter 
+Nitrat yang telah melebihi baku mutunya di 
+semua provinsi dan parameter Magnesium yang 
+sudah melebihi baku mutunya di 25 provinsi. Hal 
+ini menunjukkan bahwa air hujan masih cukup 
+layak untuk dijadikan sumber air minum di 
+Indonesia.
+Kualitas Udara
+ Pencemaran udara didefinisikan 
+sebagai kehadiran satu atau lebih dari pencemar 
+atau kombinasinya dalam jumlah dan atau masa 
+waktu yang dapat menyebabkan gangguan 
+kesehatan manusia, kehidupan flora dan fauna, 
+atau pun kerusakan material yang menyebabkan 
+gangguan atau penurunan kualitas hidup, 
+kenyamanan, atau melaksanakan kegiatan 
+(Canter, 1996 dalam Harrop, 2002). Saat ini, 
+kualitas udara di Indonesia dapat dilihat dari 
+beberapa data antara lain Indeks Standar 
+Pencemar Udara (ISPU), Konsentrasi Partikel 
+Terlarut, dan Indeks Kualitas Udara (IKU).
+ ISPU adalah pengukuran yang dilakukan 
+di stasiun pengamatan BMKG dan beberapa titik 
+pengamatan seperti permukiman, industri, 
+dan lalu lintas padat kendaraan bermotor oleh 
+KLHK. Pengukuran ISPU dilakukan berdasarkan https://www.bps.go.id
+
+
+======================================================================
+Page 43 [MEDIUM]
+Matches: kualitas udara, sulawesi
+======================================================================
+
+KONDISI DAN KUALITAS LINGKUNGAN
+Statistik Lingkungan Hidup Indonesia 201720
+Gambar  1.7  Indeks Kualitas Udara, 2013-2015
+Figure   Air Quality Index, 2013-2015
+Sumber/ Source : Statistik Kementerian Lingkungan Hidup dan Kehutanan 2015
+            Ministry of Environment and Forestry Statistics 2015406080100
+Target RPJ MN
+84Aceh
+Sumatera Utara
+Sumatera Barat
+Riau
+Jamb i
+Sumatera Selatan
+Bengkulu
+Lamp ung
+Kepulauan Bangka Belitung
+Kepulauan Ria u
+DKI Jakart a
+Jawa Barat
+Jawa Tenga h
+DI Yogya karta
+Jawa Tim ur
+Banten
+Bali
+Nusa  Tengg ara Barat
+Nusa  Tengg ara Timur
+Kalima ntan Barat
+Kaimantan Tengah
+Kalima ntan S elatan
+Kalima ntan T imur
+Sulawesi Utara
+Sulawesi Tenga h
+Sulawesi S elatan
+Sulawesi Tengg ara
+Gorontal o
+Sulawesi Barat
+Malu ku
+Malu ku Utara
+Papua Barat
+PapuaRPJMN’ s tar get
+2013
+20142015https://www.bps.go.id
+
+
+======================================================================
+Page 89 [MEDIUM]
+Matches: kualitas udara, sulawesi
+======================================================================
+
+KONDISI DAN KUALITAS LINGKUNGAN
+Statistik Lingkungan Hidup Indonesia 201766
+Tabel
+Table1.20Indeks Kualitas Udara Tingkat Provinsi, 2013-2015 
+Air Quality Index by Province, 2013-2015
+Provinsi
+ProvinceTahun
+Year
+2013 2014 2015
+(1) (2) (3) (4)
+Aceh 91.28 91.20 89.44
+Sumatera Utara 87.81 87.23 88.15
+Sumatera Barat 86.41 89.16 88.48
+Riau 52.89 60.30 -
+Jambi 85.46 91.26 82.93
+Sumatera Selatan 83.86 89.25 79.64
+Bengkulu 87.61 86.48 92.51
+Lampung 79.19 85.98 82.26
+Kepulauan Bangka Belitung 84.36 90.39 95.61
+Kepulauan Riau 94.45 95.53 86.61
+DKI Jakarta 41.51 46.28 78.78
+Jawa Barat 65.56 59.24 74.63
+Jawa Tengah   79.43 82.64 81.32
+DI Yogyakarta 86.04 82.01 90.58
+Jawa Timur 72.45 73.2 89.21
+Banten 57.79 53.15 50.65
+Bali   82.80 86.61 92.35
+Nusa Tenggara Barat   86.82 92.83 92.27
+Nusa Tenggara Timur  83.51 77.13 -
+Kalimantan Barat 87.74 84.57 91.57
+Kalimantan Tengah  88.92 92.69 89.87
+Kalimantan Selatan 81.83 88.35 87.60
+Kalimantan Timur  84.79 83.96 96.20
+Kalimantan Utara 1- - -
+Sulawesi Utara 83.97 88.55 92.72
+Sulawesi Tengah 87.96 85.99 89.12
+Sulawesi Selatan  87.98 90.43 76.80
+Sulawesi Tenggara 86.50 92.56 83.61
+Gorontalo 90.24 96.20 -
+Sulawesi Barat 86.58 92.23 89.21
+Maluku 90.90 91.81 82.23
+Maluku Utara 96.94 96.94 -
+Papua Barat 91.03 91.03 -
+Papua 88.67 84.24 -
+Sumber/ Source : Statistik Kementerian Lingkungan Hidup dan Kehutanan 2015, Kementerian Lingkungan Hidup dan Kehutanan
+Statistics of the Ministry of Environment and Forestry 2015, Ministry of Environment and Forestryhttps://www.bps.go.id
+
+
+======================================================================
+Page 107 [MEDIUM]
+Matches: kualitas udara, sulawesi
+======================================================================
+
+PEMANFAATAN KAWASAN HUTAN DAN DEFORESTASI
+Statistik Lingkungan Hidup Indonesia 201784
+severe impact on the loss of millions of 
+hectares of forest every year. Certainly, the former forest cover of the mine area is severely damaged and relatively difficult to restore to its original state. Land degradation also occurs in the area around the mine, water pollution, metal contamination and increased sediment of rivers, reservoirs, seas etc. Not only that, all mining methods affect air quality that adversely affect human health, contribute to diseases associated with the respiratory tract and are absorbed into the skin.
+• The food needs of the population has triggered the rise of smallholder farmers and the emergence of large-scale modern agriculture. For smallholders around the forest, where land potential is large, agriculture is done by shifting cultivation, but the role of forest conversion is not great as most of the forest they open is part of long-rotated customary land. Smallholder farmers usually only seek for forest areas that have been exploited and abandoned by the timber industry.
+• Deliberate burning by large-scale plantation owners to clear land, resulting in large, uncontrolled fires. By 2015, the largest forest fires occur in Kalimantan Tengah reaching 122,883 hectares and then 30,985 hectares Sumatera Selatan, while Jambi, Kalimantan Timur, Lampung and Sulawesi Utara, each forest fires over 18,000 hectare. Part of this area grows back into shrubs, partly used by small-scale farmers, but little systematic effort is made to restore forest cover or develop merupakan dampak yang paling parah bagi hilangnya jutaan hektar luasan hutan setiap tahunnya. Sudah pasti, tutupan hutan bekas area tambang mengalami kerusakan yang parah dan relatif sulit dikembalikan ke kondisi semula. Degradasi lahan juga terjadi di wilayah sekitar tambang, polusi air, kontaminasi logam dan peningkatan sedimen sungai, waduk, laut dll. Tidak hanya itu, seluruh metode penambangan mempengaruhi kualitas udara yang berdampak buruk pada kesehatan manusia, berkontribusi terhadap penyakit yang berhubungan dengan saluran pernapasan dan teresap ke kulit.
+• Kebutuha n pangan penduduk menjadi 
+pemicu meningkatnya petani rakyat dan munculnya pertanian modern skala besar. Untuk petani rakyat sekitar hutan, dimana potensi lahan masih luas, pertanian dilakukan dengan sistem ladang berpindah, namun peran terhadap konversi hutan tidak besar karena kebanyakan hutan yang mereka buka adalah bagian dari tanah adat yang telah lama dirotasikan. Petani rakyat biasanya hanya mengusahakan areal hutan yang sudah dieksploitasi dan ditinggalkan oleh industri perkayuan. 
+• Pembakaran secara sengaja oleh pemilik 
+perkebunan skala besar untuk membuka lahan, mengakibatkan kebakaran besar yang tidak terkendali. Pada tahun 2015, kebakaran hutan terluas terjadi di Kalimantan Tengah mencapai 122.883 hektar dan kemudian Sumatera Selatan seluas 30.985 hektar, sedangkan Jambi, Kalimantan Timur, Lampung dan Sulawesi Utara, masing-masing terjadi kebakaran hutan dengan luas diatas 18 ribu hektar.  Sebagian dari lahan ini tumbuh kembali https://www.bps.go.id
+

@@ -1,0 +1,79 @@
+{
+  "query": "\"Status Lingkungan Hidup Indonesia 2018\" filetype:pdf",
+  "results": [
+    {
+      "kind": "customsearch#result",
+      "title": "DAFTAR PUSTAKA - Repository UMKLA",
+      "htmlTitle": "DAFTAR PUSTAKA - Repository UMKLA",
+      "link": "http://repository.umkla.ac.id/1958/7/DAFTAR%20PUSTAKA%20A.pdf",
+      "displayLink": "repository.umkla.ac.id",
+      "snippet": "Azwar, Saifudin, (2013) Metode Penelitian. Yogyakarta : Pustaka Pelajar. Badan Pusat Statistik Indonesia Tahun 2018. Status Lingkungan Hidup Indonesia 2018.",
+      "htmlSnippet": "Azwar, Saifudin, (2013) Metode Penelitian. Yogyakarta : Pustaka Pelajar. Badan Pusat Statistik Indonesia Tahun 2018. <b>Status Lingkungan Hidup Indonesia 2018</b>.",
+      "formattedUrl": "http://repository.umkla.ac.id/1958/7/DAFTAR%20PUSTAKA%20A.pdf",
+      "htmlFormattedUrl": "http://repository.umkla.ac.id/1958/7/DAFTAR%20PUSTAKA%20A.pdf",
+      "pagemap": {
+        "metatags": [
+          {
+            "moddate": "D:20211129084550+07'00'",
+            "creationdate": "D:20211129014404Z",
+            "creator": "Microsoft® Word 2016",
+            "author": "bu siti perpustikes",
+            "producer": "iLovePDF"
+          }
+        ]
+      },
+      "mime": "application/pdf",
+      "fileFormat": "PDF/Adobe Acrobat"
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Studi Literatur Pemanfaatan Sampah dan Limbah Padat Menjadi ...",
+      "htmlTitle": "Studi Literatur Pemanfaatan Sampah dan Limbah Padat Menjadi ...",
+      "link": "https://semnas.biologi.fmipa.unp.ac.id/index.php/prosiding/article/download/807/756",
+      "displayLink": "semnas.biologi.fmipa.unp.ac.id",
+      "snippet": "Textile Research Journal, 87(9), 1023-1032.Kementerian Lingkungan Hidup,. \"Status Lingkungan Hidup Indonesia 2018\" (Jakarta: KLHK, 2019), hlm. 34. Kizinievič ...",
+      "htmlSnippet": "Textile Research Journal, 87(9), 1023-1032.Kementerian Lingkungan Hidup,. &quot;<b>Status Lingkungan Hidup Indonesia 2018</b>&quot; (Jakarta: KLHK, 2019), hlm. 34. Kizinievič&nbsp;...",
+      "formattedUrl": "https://semnas.biologi.fmipa.unp.ac.id/index.php/prosiding/article/.../756",
+      "htmlFormattedUrl": "https://semnas.biologi.fmipa.unp.ac.id/index.php/prosiding/article/.../756",
+      "pagemap": {
+        "metatags": [
+          {
+            "moddate": "D:20240315151425+07'00'",
+            "creationdate": "D:20240315151425+07'00'",
+            "creator": "Microsoft® Word 2010",
+            "byte-checksum": "6a639ba00c8be63eda01f277241baef8baea3d1237a9be63342789e6cc909129",
+            "author": "Dinas Pertanian",
+            "producer": "Microsoft® Word 2010"
+          }
+        ]
+      },
+      "mime": "application/pdf",
+      "fileFormat": "PDF/Adobe Acrobat"
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Kecelakaan Kapal Tanker: Risiko Tumpahan Minyak/Kimia (Bahan",
+      "htmlTitle": "Kecelakaan Kapal Tanker: Risiko Tumpahan Minyak/Kimia (Bahan",
+      "link": "https://rayyanjurnal.com/index.php/jcrd/article/download/4619/pdf",
+      "displayLink": "rayyanjurnal.com",
+      "snippet": "May 1, 2025 ... \"Laporan Status Lingkungan Hidup Indonesia 2018.\" 2019. Page 3. JCRD: Journal of Citizen Research and Development. E-ISSN: 3048-2941 P-ISSN ...",
+      "htmlSnippet": "May 1, 2025 <b>...</b> &quot;Laporan <b>Status Lingkungan Hidup Indonesia 2018</b>.&quot; 2019. Page 3. JCRD: Journal of Citizen Research and Development. E-ISSN: 3048-2941 P-ISSN&nbsp;...",
+      "formattedUrl": "https://rayyanjurnal.com/index.php/jcrd/article/download/4619/pdf",
+      "htmlFormattedUrl": "https://rayyanjurnal.com/index.php/jcrd/article/download/4619/pdf",
+      "pagemap": {
+        "metatags": [
+          {
+            "moddate": "D:20250301125628+07'00'",
+            "creator": "Microsoft® Word 2019",
+            "creationdate": "D:20250301125628+07'00'",
+            "author": "user",
+            "producer": "Microsoft® Word 2019"
+          }
+        ]
+      },
+      "mime": "application/pdf",
+      "fileFormat": "PDF/Adobe Acrobat"
+    }
+  ],
+  "count": 3
+}

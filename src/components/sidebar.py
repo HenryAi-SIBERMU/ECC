@@ -56,8 +56,8 @@ def render_sidebar():
         )
         st.markdown("---")
 
-        st.page_link("Dashboard.py", label=_("Beranda"))
-        st.page_link("pages/0_Progress_Riset.py",           label=_("Progress Riset & Data"))
+        st.page_link("Dashboard.py", label=_("Overview Nasional"))
+        # st.page_link("pages/0_Progress_Riset.py",           label=_("Progress Riset & Data"))
 
         st.markdown('<div class="sidebar-label">D3TLH Sulawesi (Fase 1)</div>', unsafe_allow_html=True)
         st.page_link("pages/1_Ekspansi_Industri.py",        label=_("Ekspansi Industri"))

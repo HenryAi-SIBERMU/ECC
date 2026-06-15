@@ -1,0 +1,730 @@
+SLHI 2021 - Ekstraksi Data Kualitas Udara
+======================================================================
+
+
+======================================================================
+Page 52 [HIGH]
+Matches: iku, sulawesi
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 202125
+BAB 2 KONDISI ENERGI DI INDONESIA  
+Gambar 2.11 Cadangan Batu Bara di Indonesia dan Dunia
+AMERIKA SERIKAT
+CHINA143,19 NEGARA DENGAN CADANGAN TERBUKTI BATU BARA TERBESAR DI DUNIA 2020 *
+RUSIA
+AUSTRALIA
+INDIA248,94
+162,17
+150,23
+111,05(Miliar Ton)
+155,6IRAK297,6
+169,7
+145JERMAN 35,9
+INDONESIA 34,87143,19
+KALIMANTAN TIMUR KALIMANTAN SELATAN SUMATERA SELATAN16,075.49
+4,210.509,507.11
+TIGA BESAR WILAYAH DENGAN CADANGAN 
+BATU BARA TERBESAR DI INDONESIA 
+(JUTA TON), 2020
+Sumber : Handbook of Energy and Economic Statistics of Indonesia 2020, 
+               Kementerian Energi dan Sumber Daya Mineral
+               * Data BP Statistical Review of World Energy 2021, diakses tanggal 5 November
+                  2021 dari https://www.cnbcindonesia.com/news/20210713090714-4-260327/
+                  produksi-top-3-dunia-ri-bukan-negara-paling-kaya-batu-baraBerkaitan dengan cadangan batu bara global, Indonesia menempati peringkat  
+tujuh dunia dengan cadangan terbukti hingga akhir 2020 (dikutip dari data BP Statistical 
+Review 2021 dalam cnbcindonesia.com tanggal 5 November 2021). Ada banyak kantung 
+cadangan batu bara di Indonesia seperti di Pulau Sumatera, Jawa, Kalimantan, Sulawesi, 
+Maluku dan Papua, namun demikian tiga daerah dengan cadangan batu bara terbesar 
+terdapat di Kalimantan Timur (16,075.49 juta ton), Sumatera Selatan (9,507.11 juta ton), 
+Kalimantan Selatan (4,210.50 juta ton) (HEESI,2020). Selain itu, batu bara juga menjadi 
+salah satu komoditas yang diperdagangkan. Beberapa negara  menjadi tujuan ekspor 
+dari komoditas ini seperti China, India, Jepang dan Korea Selatan.https://www.bps.go.id
+
+
+======================================================================
+Page 184 [HIGH]
+Matches: iku, sulawesi
+======================================================================
+
+KOMPONEN 2 SUMBER DAYA LINGKUNGAN DAN PENGGUNAANNYA
+Statistik Lingkungan Hidup Indonesia 2021157Tabel 2.10 Rekapitulasi Luas Kebakaran Hutan dan Lahan Menurut Provinsi (ha), 2016-2021
+Provinsi 2016 2017 2018 2019 2020 2021
+(1) (2) (3) (4) (5) (6) (7)
+Aceh 9 158,45 3 865,16 1 284,70 730,00  1 078,00   681,00
+Sumatera Utara 33 028,62 767,98 3 678,79 2 514,00 2  3 744,00  2 893,00
+Sumatera Barat 2 629,82 2 227,43 2 421,90 2 133,00  1 573,00  1 228,00
+Riau 85 219,51 6 866,09 37 236,27 90 550,00  15 442,00  8 303,00
+Jambi 8 281,25 109,17 1 577,75 56 593,00  1 002,00   174,00
+Sumatera Selatan 8 784,91 3 625,66 16 226,60 336 798,00   950,00  2 003,00
+Bengkulu 1 000,39 131,04  8,82 11,00   221,00   55,00
+Lampung 3 201,24 6 177,79 15 156,22 35 546,00  1 358,00  1 304,00
+Kep. Bangka Belitung - - 2 055,67 4 778,00   576,00   226,00
+Kepulauan Riau 67,36 19,61  320,96 6 134,00  8 805,00  1 574,00
+DKI Jakarta - - - - - -
+Jawa Barat - 648,11 4 104,51 9 552,00  2 344,00   142,00
+Jawa Tengah - 6 028,48  331,67 4 782,00  7 516,00   117,00
+DI Yogyakarta - - - 23,00   181,00 -
+Jawa Timur - 5 116,43 8 886,39 23 655,00  19 148,00  8 695,00
+Banten - - - 9,00   2,00 -
+Bali - 370,80 1 013,76 373,00   29,00   3,00
+Nusa Tenggara Barat 706,07 33 120,81 14 461,38 60 234,00  29 157,00  33 521,00
+Nusa Tenggara Timur 8 968,09 38 326,09 57 428,79 136 920,00  114 719,00  63 270,00
+Kalimantan Barat 9 174,19 7 467,33 68 422,03 151 919,00  7 646,00  17 192,00
+Kalimantan Tengah 6 148,42 1 743,82 47 432,57 317 749,00  7 681,00  2 050,00
+Kalimantan Selatan 2 331,96 8 290,34 98 637,99 137 848,00  4 017,00  4 584,00
+Kalimantan Timur 43 136,78 676,38 27 893,20 68 524,00  5 221,00   934,00
+Kalimantan Utara 2 107,21 82,22  627,71 8 559,00  1 721,00   578,00
+Sulawesi Utara 2 240,47 103,04  326,39 4 574,00   177,00   401,00
+Sulawesi Tengah 11 744,40 1 310,19 4 147,28 11 551,00  2 555,00  1 833,00
+Sulawesi Selatan 438,40 1 035,51 1 741,27 15 697,00  1 902,00   212,00
+Sulawesi Tenggara 72,42 3 313,68 8 594,67 16 929,00  3 206,00  1 245,00
+Gorontalo 737,91 -  158,65 1 909,00   80,00   118,00
+Sulawesi Barat 4 133,98 188,13  978,38 3 029,00   569,00   714,00
+Maluku 7 834,54 3 918,12 14 906,44 27 211,00  20 270,00  2 802,00
+Maluku Utara 103,11 31,10  69,54 2 781,00   59,00   95,00
+Papua Barat 542,09 1 156,03  509,50 1 533,00  5 716,00   42,00
+Papua 186 571,60 28 767,38 88 626,84 108 110,00  28 277,00  3 115,00
+Indonesia 438 363,19 165 483,92 529 266,64 1 649 258,00  296 942,00  160 104,00
+Keterangan   : Luas Kebakaran Hutan dan Lahan dihitung berdasarkan analisis citra satelite landsat 8 OLI/TIRS yang di overlay dengan  
+                     data sebaran hotspot, serta laporan hasil groundchek hotspot dan laporan pemadaman yang dilaksanakan Manggala Agni 
+Sumber       : Data dikutip dari http://sipongi.menlhk.go.id/tanggal 26 Oktober 2021https://www.bps.go.id
+
+
+======================================================================
+Page 205 [HIGH]
+Matches: iku, sulawesi
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2021178
+KOMPONEN 2 SUMBER DAYA LINGKUNGAN DAN PENGGUNAANNYALanjutan Tabel  2.24
+ProvinsiKuda Kambing  Domba 
+2019r2020 x2019r2020 x2019r2020 x
+(1) (8) (9) (10) (11) (12) (13)
+Aceh 2,65 2,72 613,87 632,28 95,66 98,53
+Sumatera Utara 1,39 1,39 867,82 866,26 729,15 737,69
+Sumatera Barat 1,56 1,70 250,60 255,52 5,43 5,54
+Riau 0,09 0,09 233,68 242,41 28,97 29,02
+Jambi 0,18 0,18 400,39 397,81 74,66 79,09
+Sumatera Selatan 0,10 0,08 393,79 415,76 33,99 35,72
+Bengkulu 0,05 0,04 203,97 208,87 9,09 9,27
+Lampung 0,13 0,13  1 459,41  1 480,35 80,57 80,26
+Kep, Bangka Belitung 0,04 0,04 8,87 9,15 0,12 0,12
+Kepulauan Riau 0,03 0,03 21,34 22,59 0,01 0,01
+DKI Jakarta 0,25 0,25 5,45 5,45 1,47 1,47
+Jawa Barat 9,98 9,65  1 335,59  1 353,80  12 229,25  12 272,44
+Jawa Tengah 9,74 8,20  3 969,84 4 060,68  2 418,43  2 406,93
+DI Yogyakarta 1,85 1,78 402,94 406,61 143,96 146,67
+Jawa Timur 9,88 9,90 3 524,90  3 624,23  1 382,42  1 416,97
+Banten 0,20 0,20 718,08 732,38 488,74 322,81
+Bali 0,15 0,15 45,10 49,23 - -
+Nusa Tenggara Barat 47,30 52,41 684,69 718,75 22,74 23,14
+Nusa Tenggara Timur 109,55 115,13 835,61 999,73 64,51 76,53
+Kalimantan Barat 0,03 0,03 148,09 150,12 0,15 0,16
+Kalimantan Tengah 0,02 0,02 45,31 46,88 0,47 0,54
+Kalimantan Selatan 0,13 0,13 75,22 76,94 1,86 1,72
+Kalimantan Timur 0,10 0,10 67,89 69,93 0,59 0,60
+Kalimantan Utara 0,00 0,01 13,99 14,00 0,02 0,03
+Sulawesi Utara 3,98 3,99 55,71 55,89 - -
+Sulawesi Tengah 1,27 1,37 517,91 558,50 9,33 11,56
+Sulawesi Selatan 166,09 174,39 755,59 800,92 0,84 0,84
+Sulawesi Tenggara 0,71 0,76 183,73 195,58 - -
+Gorontalo 1,76 1,75 102,75 103,78 - -
+Sulawesi Barat 1,34 1,38 194,19 201,06 - -
+Maluku 1,34 1,40 101,36 103,66 11,20 11,28
+Maluku Utara 0,03 0,05 140,39 147,91 - -
+Papua Barat 0,01 - 18,20 18,53 - -
+Papua 2,66 2,72 66,86 70,83 0,11 0,16
+Indonesia 374,57 392,14  18 463,12  19 096,38  17 833,73  17 769,08
+Sumber         : Kementerian Pertanian, Statistik Peternakan dan Kesehatan Hewan 2020 https://www.bps.go.id
+
+
+======================================================================
+Page 275 [HIGH]
+Matches: iku, sulawesi
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2021248
+KOMPONEN 6 PENGELOLAAN DAN PERLINDUNGAN LINGKUNGANTabel 6.2 APBD Provinsi untuk Lingkungan Hidup menurut Provinsi (juta rupiah)  2017-2021
+Provinsi 2017 2018 2019 2020 2021
+(1) (2) (3) (4) (5) (6)
+Aceh 33 516 61 529 17 772 15 109 13 367
+Sumatera Utara 52 954 69 823 81 646 79 091 24 413
+Sumatera Barat 21 746 37 116 21 090 19 413 20 963
+Riau 117 490 135 571 151 927 163 655 140 582
+Jambi 28 803 15 844 24 235 17 778 11 647
+Sumatera Selatan 13 511 18 128 24 101 118 548 297 546
+Bengkulu 41 258 63 111 58 739 56 360 1 140
+Lampung 12 590 12 410 11 306 12 759 708 981
+Kep. Bangka Belitung 26 322 14 654 25 504 14 577 7 076
+Kepulauan Riau 18 040 27 844 28 615 27 282 4 533
+DKI Jakarta 1 345 093 2 565 808 7 462 670 6 019 840 4 063 993
+Jawa Barat 17 710 128 956 229 466 311 277 95 298
+Jawa Tengah - - 221 628 236 305 223 819
+DI Yogyakarta 28 638 50 997 73 883 573 876 85 237
+Jawa Timur 31 327 24 598 58 133 55 619 3 816 228
+Banten 67 851 57 455 51 074 56 739 55 051
+Bali 13 020 12 527 16 648 16 025 29 900
+Nusa Tenggara Barat 139 598 66 635 69 001 85 620 12 436
+Nusa Tenggara Timur 10 797 10 278 13 545 127 447 103 722
+Kalimantan Barat 9 697 5 135 2 299 146 087 834 075
+Kalimantan Tengah 11 520 14 237 15 195 13 733 15 067
+Kalimantan Selatan 87 302 56 480 90 752 106 464 1 546
+Kalimantan Timur 14 622 16 585 27 722 29 853 30 539
+Kalimantan Utara 17 481 12 864 8 119 11 992 15 059
+Sulawesi Utara 18 641 11 588 12 402 9 725 54 124
+Sulawesi Tengah 14 440 16 805 15 109 13 162 9 453
+Sulawesi Selatan 30 894 - 22 552 18 364 1 546
+Sulawesi Tenggara 6 141 16 665 13 898 10 828 160 569
+Gorontalo 35 917 32 201 30 641 32 829 19 860
+Sulawesi Barat 11 515 8 434 10 214 8 814 16 725
+Maluku 41 118 25 644 7 458 17 379 -
+Maluku Utara 7 703 8 191 16 996 14 864 12 673
+Papua Barat 100 638 19 892 26 793 99 730 54 749
+Papua 18 649 19 516 13 030 4 737 76 589
+Keterangan              : - Data tidak tersedia
+Sumber                   :   Data dikutip dari http://www.djpk.kemenkeu.go.id  pada tanggal 28 Juni 2021https://www.bps.go.id
+
+
+======================================================================
+Page 276 [HIGH]
+Matches: iku, sulawesi
+======================================================================
+
+KOMPONEN 6 PENGELOLAAN DAN PERLINDUNGAN LINGKUNGAN
+Statistik Lingkungan Hidup Indonesia 2021249Tabel 6.3Persentase APBD untuk Lingkungan Hidup terhadap APBD Provinsi menurut Provinsi,
+2017-2021
+Provinsi 2017 2018 2019 2020 2021
+(1) (2) (3) (4) (5) (6)
+Aceh 0,23 0,41 0,10 0,09 0,08
+Sumatera Utara 0,41 0,50 0,53 0,56 0,18
+Sumatera Barat 0,35 0,56 0,30 0,27 0,31
+Riau 1,07 1,31 1,66 1,59 1,60
+Jambi 0,36 0,35 0,50 0,34 0,26
+Sumatera Selatan 0,20 0,31 0,25 1,12 2,77
+Bengkulu 1,23 1,84 1,62 1,62 0,04
+Lampung 0,19 0,15 0,15 0,16 9,48
+Kep. Bangka Belitung 1,05 0,51 0,87 0,59 0,23
+Kepulauan Riau 0,54 0,77 0,78 0,69 0,11
+DKI Jakarta 2,18 3,61 9,22 7,56 5,57
+Jawa Barat 0,05 0,38 0,62 0,68 0,21
+Jawa Tengah - - 0,83 0,81 0,84
+DI Yogyakarta 0,95 0,92 1,24 8,84 1,47
+Jawa Timur 0,11 0,08 0,17 0,16 11,58
+Banten 0,66 0,51 0,42 0,43 0,35
+Bali 0,20 0,19 0,24 0,22 0,35
+Nusa Tenggara Barat 1,33 1,25 1,31 1,50 0,23
+Nusa Tenggara Timur 0,23 0,21 0,25 1,87 1,37
+Kalimantan Barat 0,19 0.09 0,04 2,22 1,46
+Kalimantan Tengah 0,29 0,31 0,28 0,25 0,31
+Kalimantan Selatan 2,34 0,93 1,29 1,40 2,77
+Kalimantan Timur 0,18 0,19 0,26 0,24 0,26
+Kalimantan Utara 0,59 0,41 0,27 0,42 0,64
+Sulawesi Utara 0,52 0,28 0,28 0,21 1,32
+Sulawesi Tengah 0,40 0,44 0,35 0,29 0,22
+Sulawesi Selatan 0,34 - 0,23 0,17 0,01
+Sulawesi Tenggara 0,17 0,47 0,33 0,19 3,07
+Gorontalo 1,95 1,77 1,57 1,58 1,04
+Sulawesi Barat 0,58 0,44 0,49 0,40 0,81
+Maluku 1,65 0,74 0,23 0,52 0,00
+Maluku Utara 0,29 0,35 0,63 0,44 0,61
+Papua Barat 1,40 0,25 0,31 1,06 0,75
+Papua 0,12 0,14 0,09 0,03 0,62
+Keterangan             :- Data tidak tersedia
+Sumber                   :  Data dikutip dari http://www.djpk.kemenkeu.go.id/ pada tanggal 28 Juni 2021 https://www.bps.go.id
+
+
+======================================================================
+Page 13 [MEDIUM]
+Matches: kualitas udara, iku
+======================================================================
+
+xii
+Statistik Lingkungan Hidup Indonesia 20211.16 Jumlah Koleksi Spesies pada Taman Kehati sampai dengan Tahun 2019 ..  103
+1.17 Kesatuan Pengelolaan Hutan Konservasi Taman Nasional ..........................  104
+1.18 Rekapitulasi Peningkatan Populasi Satwa Terancam Punah Prioritas Tahun 
+2018-2019 .....................................................................................................................  105
+1.19  Rata - Rata Tahunan Konsentrasi Partikel Terlarut pada Udara Kota-Kota 
+ Besar di Indonesia, 2019 dan 2020  .......................................................................  107   
+1.20 Rata-rata Bulanan Hasil Pengukuran Konsentrasi Gas SO 2 dan NO 2
+ di Stasiun BMKG Jakarta (ppm/24 jam), 2019 dan 2020  ..............................  109
+1.21  Kualitas Udara Ambien Perkotaan Parameter Rata-Rata Partikulat 10 (PM 10), 
+ 2015-2019 ......................................................................................................................  111
+1.22  Kualitas Udara Ambien Perkotaan Parameter Rata-rata Karbon 
+ Monoksida (CO), 2015-2019  ..................................................................................  113
+1.23  Kualitas Udara Ambien Perkotaan Parameter Rata-Rata Sulfur Dioksida 
+ (SO 2), 2015-2019 ..........................................................................................................  115
+1.24  Kualitas Udara Ambien Perkotaan Parameter Rata-rata Nitrogen 
+ Dioksida (NO 2), 2015-2019 .....................................................................................  117
+1.25  Kualitas Udara Ambien Perkotaan Parameter Rata-rata Hidro Karbon 
+ (HC), 2015-2019  .........................................................................................................  119
+1.26  Kualitas Air Sungai di Ibukota Provinsi yang Digunakan sebagai Bahan Baku 
+ Air Minum, 2020 ..........................................................................................................  121
+1.27  Status Mutu Kualitas Sungai, 2016-2020 ..................................................................  127
+1.28  Perubahan Kondisi Beberapa Sungai, 2016-2017 dan 2017-2018 .........................  132
+1.29  Indeks Kualitas Air, 2015-2020 .................................................................................  133
+1.30  Analisis Air Hujan di Beberapa Kota di Indonesia, 2019  ........................................  134
+1.31  Analisis Air Hujan di Beberapa Kota di Indonesia, 2020  ..............................  138
+1.32  Indeks Kualitas Udara Tingkat Provinsi, 2015-2020 ............................................  142
+1.33  Indeks Kualitas Lingkungan Hidup Tingkat Provinsi, 2015-2020 .....................  143
+KOMPONEN 2: SUMBER DAYA LINGKUNGAN DAN PENGGUNAANNYA
+2.1  Produksi Jenis Bahan Tambang Utama, 2015-2019 ........................................  145https://www.bps.go.id
+
+
+======================================================================
+Page 25 [MEDIUM]
+Matches: iku, pm10
+======================================================================
+
+xxiv
+Statistik Lingkungan Hidup Indonesia 20213. SINGKATAN :
+AOC : Aircraft Operator Certificate 
+API : Annual Parasite Incidence
+BOD  : Biological Oxygen Demand
+BSCF  : Billion Standard Cubic Feet 
+COD  : Chemical Oxygen Demand
+B3 : Bahan Berbahaya Beracun
+BBM : Bahan Bakar Minyak
+BMKG : Badan Meteorologi, Klimatologi dan Geofisika
+BNPB  : Badan Nasional Penanggulangan Bencana 
+BPBD  : Badan Penanggulangan Bencana Daerah
+BPPT  : Badan Pengkajian dan Penerapan Teknologi 
+DAS  : Daerah Aliran Sungai
+DBD : Demam Berdarah Dengue
+Ha : Hektar
+HL : Hutan Lindung
+HK : Hutan Konservasi
+HP : Hutan Produksi Tetap
+HP : Hutan Produksi yang Dapat Dikonversi
+HPT : Hutan Produksi Terbatas
+HTI : Hutan Tanaman Industri  
+KLHK : Kementerian Lingkungan Hidup dan Kehutanan
+KemenPUPR : Kementerian Pekerjaan Umum dan Perumahan Rakyat
+KemenPPN/ : Kementerian Perencanaan Pembangunan Nasional/Badan
+BAPPENAS    Perencanaan Pembangunan Nasional
+Kemenkes : Kementerian Kesehatan
+PM10 : Partikulat
+Pertamina : Perusahaan Pertambangan Minyak dan Gas Bumi Negara
+Perumnas : Perumahan Nasional
+Podes : Potensi Desa
+Susenas  : Survei Sosial Ekonomi Nasionalhttps://www.bps.go.id
+
+
+======================================================================
+Page 138 [MEDIUM]
+Matches: kualitas udara, iku, pm10
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2021111
+KOMPONEN 1 KONDISI DAN KUALITAS LINGKUNGANTabel 1.21 Kualitas Udara Ambien Perkotaan Parameter Rata-Rata Partikulat 10 (PM10), 2015-2019
+Kota KategoriKualitas Udara Tepi Jalan Raya
+Rata-Rata PM10 (BM 150)Baku Mutu
+2015 2016 2017 2018 2019 (μg/Nm3)
+(1) (2) (3) (4) (5) (6) (7) (8)
+Bandung Kota Metropolitan 66 - - - - 150
+Bekasi Kota Metropolitan 108 - - 78 - 150
+Depok Kota Metropolitan 89 - - - - 150
+Jakarta Barat Kota Metropolitan 127 102 32 84 18 150
+Jakarta Pusat Kota Metropolitan 120 89 26 13 128 150
+Jakarta Selatan Kota Metropolitan 100 69 13 31 80 150
+Jakarta Timur Kota Metropolitan 130 - 19 - 22 150
+Jakarta Utara Kota Metropolitan 124 - - 34 72 150
+Makasar Kota Metropolitan 92 43 0 - 29 150
+Medan Kota Metropolitan 45 136 - - - 150
+Palembang Kota Metropolitan - 51 46 48 - 150
+Semarang Kota Metropolitan 74 69 - - 62 150
+Surabaya Kota Metropolitan 65 - - - - 150
+Tangerang Kota Metropolitan 79 - - - 64 150
+Balikpapan Kota Besar 44 49 - 21 25 150
+Bandar Lampung Kota Besar 19 75 - - - 150
+Banjarmasin Kota Besar - 11 - 31 57 150
+Bogor Kota Besar 60 - - - - 150
+Cimahi Kota Besar - - - 20 - 150
+Denpasar Kota Besar 29 128 90 37 102 150
+Batam Kota Besar 50 106 - - - 150
+Malang Kota Besar 137 - - - 123 150
+Manado Kota Besar 57 45 8 - - 150
+Padang Kota Besar 100 127 - - - 150
+Pekan Baru Kota Besar - - - - - 150
+Pontianak Kota Besar 122 11 - - 90 150
+Samarinda Kota Besar 33 38 - 40 31 150
+Surakarta Kota Besar 53 57 - 36 68 150
+Tangerang Selatan Kota Besar 67 - - - 49 150
+Yogyakarta Kota Besar 69 133 - 104 66 150
+Ambon Kota Sedang 52 64 - - - 150
+Banda Aceh Kota Sedang 48 118 - - - 150
+Bengkulu Kota Sedang 119 89 - - - 150
+Gorontalo Kota Sedang 28 30 - 39 59 150
+Jambi Kota Sedang - 33 - 27 88 150
+Jayapura Kota Sedang 58 - - - - 150
+Kendari Kota Sedang 62 - - - - 150
+Ternate Kota Sedang 123 - - - - 150https://www.bps.go.id
+
+
+======================================================================
+Page 139 [MEDIUM]
+Matches: kualitas udara, iku, pm10
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2021112
+KOMPONEN 1 KONDISI DAN KUALITAS LINGKUNGANLanjutan Tabel  1.21
+Kota KategoriKualitas Udara Tepi Jalan Raya
+Rata-Rata PM10 (BM 150)Baku Mutu
+2015 2016 2017 2018 2019 (μg/Nm3)
+(1) (2) (3) (4) (5) (6) (7) (8)
+Kupang Kota Sedang 54 74 - - - 150
+Mamuju Kota Sedang 48 36 - - - 150
+Manokwari Kota Sedang - - - - - 150
+Mataram Kota Sedang 125 38 - - - 150
+Palangka Raya Kota Sedang - - - - - 150
+Palu Kota Sedang 76 33 - - - 150
+Pangkal Pinang Kota Sedang 34 - - - - 150
+Serang Kota Sedang 100 - 44 - - 150
+Tanjung Pinang Kota Sedang 51 72 - - - 150
+Sumber: Kementerian Lingkungan Hidup dan Kehutanan, Direktorat Jenderal Pengendalian Pencemaran dan Kerusakan Lingkungan, 2019https://www.bps.go.id
+
+
+======================================================================
+Page 140 [MEDIUM]
+Matches: kualitas udara, iku
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2021113
+KOMPONEN 1 KONDISI DAN KUALITAS LINGKUNGANTabel 1.22 Kualitas Udara Ambien Perkotaan Parameter Rata-rata Karbon Monoksida (CO), 2015-2019
+Kota KategoriKualitas Udara Tepi Jalan Raya
+Rata-Rata CO (BM 10 000)Baku Mutu
+2015 2016 2017 2018 2019 (μg/Nm3)
+(1) (2) (3) (4) (5) (6) (7) (8)
+Bandung Kota Metropolitan 4 827 - - - - 10 000
+Bekasi Kota Metropolitan 5 875 - - 1 913 - 10 000
+Depok Kota Metropolitan 6 010 - - - 6 313 10 000
+Jakarta Barat Kota Metropolitan 6 679 4 129 6 223 - 5 468 10 000
+Jakarta Pusat Kota Metropolitan 6 045 5 415 496 1 402 4 707 10 000
+Jakarta Selatan Kota Metropolitan 5 946 1 637 1 402 1 595 4 533 10 000
+Jakarta Timur Kota Metropolitan 6 041 1 183 8 509 1 277 629 10 000
+Jakarta Utara Kota Metropolitan 6 079 - 7 366 1 651 3 053 10 000
+Makasar Kota Metropolitan 3 436 1 634 305 1 277 859 10 000
+Medan Kota Metropolitan 3 145 2 602 - - - 10 000
+Palembang Kota Metropolitan  - 1 146 4 303 3 940 - 10 000
+Semarang Kota Metropolitan 5 890 3 526 - 2 338 3 970 10 000
+Surabaya Kota Metropolitan 3 207 - - - - 10 000
+Tangerang Kota Metropolitan 4 754 - - - 3 666 10 000
+Balikpapan Kota Besar 4 661 1 909 - 1 336 4 321 10 000
+Bandar Lampung Kota Besar 3 703 - - - - 10 000
+Banjarmasin Kota Besar - 1 269 - 3 817 458 10 000
+Bogor Kota Besar 5 361 - - - - 10 000
+Cimahi Kota Besar - - - 1 915 - 10 000
+Denpasar Kota Besar 2 989 2 882 4 230 3 964 4 642 10 000
+Batam Kota Besar 2 214 4 387 - - 3 473 10 000
+Malang Kota Besar 4 288 - - - 1 214 10 000
+Manado Kota Besar - 5 197 1 309 - - 10 000
+Padang Kota Besar 2 516 878 - - - 10 000
+Pekan Baru Kota Besar - - - - - 10 000
+Pontianak Kota Besar 1 183 1 363 - - 2 978 10 000
+Samarinda Kota Besar 3 149 2 672 - 2 497 1 270 10 000
+Surakarta Kota Besar 3 054 2 251 - 1 654 4 711 10 000
+Tangerang 
+SelatanKota Besar 4 640 - - - 2 826 10 000
+Yogyakarta Kota Besar 865 655 6 757 - 113 10 000
+Ambon Kota Sedang 4 491 4 361 - - - 10 000
+Banda Aceh Kota Sedang 4 867 3 856 - - - 10 000
+Bengkulu Kota Sedang 2 317 344 - - - 10 000
+Gorontalo Kota Sedang 3 685 4 688 - 4 064 4 533 10 000
+Jambi Kota Sedang - 611 - 941 6 072 10 000
+Jayapura Kota Sedang 3 024 - - - - 10 000
+Kendari Kota Sedang 931 - - - - 10 000
+Ternate Kota Sedang 1 689 - - - - 10 000https://www.bps.go.id
+
+
+======================================================================
+Page 141 [MEDIUM]
+Matches: kualitas udara, iku
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2021114
+KOMPONEN 1 KONDISI DAN KUALITAS LINGKUNGANLanjutan Tabel  1.22
+Kota KategoriKualitas Udara Tepi Jalan Raya
+Rata-Rata CO (BM 10 000)Baku Mutu
+2015 2016 2017 2018 2019 (μg/Nm3)
+(1) (2) (3) (4) (5) (6) (7) (8)
+Kupang Kota Sedang 790 573 - - - 10 000
+Mamuju Kota Sedang 4 540 3 490 - - - 10 000
+Manokwari Kota Sedang - - - - - 10 000
+Mataram Kota Sedang 3 665 2 754 - - - 10 000
+Palangka Raya Kota Sedang - - - - - 10 000
+Palu Kota Sedang 4 670 3 563 - - - 10 000
+Pangkal Pinang Kota Sedang 1 878 - - - - 10 000
+Serang Kota Sedang 4 941 - 4 513 - - 10 000
+Tanjung Pinang Kota Sedang 1 683 3 822 - - - 10 000
+Sumber: Kementerian Lingkungan Hidup dan Kehutanan, Direktorat Jenderal Pengendalian Pencemaran dan Kerusakan Lingkungan, 2019https://www.bps.go.id
+
+
+======================================================================
+Page 142 [MEDIUM]
+Matches: kualitas udara, iku
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2021115
+KOMPONEN 1 KONDISI DAN KUALITAS LINGKUNGANTabel 1.23 Kualitas Udara Ambien Perkotaan Parameter Rata-Rata Sulfur Dioksida (SO2), 2015-2019
+Kota KategoriKualitas Udara Tepi Jalan Raya
+Rata-Rata SO2 (BM 365)Baku Mutu
+2015 2016 2017 2018 2019 (μg/Nm3)
+(1) (2) (3) (4) (5) (6) (7) (8)
+Bandung Kota Metropolitan 35 - - - - 365
+Bekasi Kota Metropolitan 49 - - 48 - 365
+Depok Kota Metropolitan 51 - - - - 365
+Jakarta Barat Kota Metropolitan 53 63 38 41 43 365
+Jakarta Pusat Kota Metropolitan 44 17 36 48 40 365
+Jakarta Selatan Kota Metropolitan 41 82 48 12 38 365
+Jakarta Timur Kota Metropolitan 45 14 38 73 38 365
+Jakarta Utara Kota Metropolitan 42 - 32 39 48 365
+Makasar Kota Metropolitan 90 - 48 98 56 365
+Medan Kota Metropolitan 238 20 - - - 365
+Palembang Kota Metropolitan - 82 64 65 - 365
+Semarang Kota Metropolitan 144 75 - 48 31 365
+Surabaya Kota Metropolitan 125 - - - - 365
+Tangerang Kota Metropolitan 38 - - - 38 365
+-
+Balikpapan Kota Besar 175 44 - 17 34 365
+Bandar Lampung Kota Besar 128 25 - - - 365
+Banjarmasin Kota Besar - 108 - 32 11 365
+Bogor Kota Besar 41 - - - - 365
+Cimahi Kota Besar - - - - 29
+Denpasar Kota Besar 136 19 32 30 40 365
+Batam Kota Besar 120 136 - - 108 365
+Malang Kota Besar 34 - - - 8 365
+Manado Kota Besar - - 48 - - 365
+Padang Kota Besar 143 82 - - - 365
+Pekan Baru Kota Besar − − - - - 365
+Pontianak Kota Besar 43 28 - - 53 365
+Samarinda Kota Besar 79  − - 22 28 365
+Surakarta Kota Besar 140 68 - 64 41 365
+Tangerang Selatan Kota Besar 36 - - - 35 365
+Yogyakarta Kota Besar 19 19 31 26 15 365
+Ambon Kota Sedang 38 37 - - - 365
+Banda Aceh Kota Sedang 245 - - - - 365
+Bengkulu Kota Sedang 54 39 - - - 365
+Gorontalo Kota Sedang 30 29 - - 37 365
+Jambi Kota Sedang - - - - 57 365
+Jayapura Kota Sedang 50 - - - - 365
+Kendari Kota Sedang 74 - - - - 365
+Ternate Kota Sedang 62 - - - - 365https://www.bps.go.id
+
+
+======================================================================
+Page 143 [MEDIUM]
+Matches: kualitas udara, iku
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2021116
+KOMPONEN 1 KONDISI DAN KUALITAS LINGKUNGANLanjutan Tabel  1.23
+Kota KategoriKualitas Udara Tepi Jalan Raya
+Rata-Rata SO2 (BM 365)Baku Mutu
+2015 2016 2017 2018 2019 (μg/Nm3)
+(1) (2) (3) (4) (5) (6) (7) (8)
+Kupang Kota Sedang 126 40 - - - 365
+Mamuju Kota Sedang 33 26 - - - 365
+Manokwari Kota Sedang - - - - - 365
+Mataram Kota Sedang 173 80 - - - 365
+Palangka Raya Kota Sedang - - - - - 365
+Palu Kota Sedang 35 22 - - - 365
+Pangkal Pinang Kota Sedang 58 - - - - 365
+Serang Kota Sedang 35 - 224 - - 365
+Tanjung Pinang Kota Sedang 149 98 - - - 365
+Sumber: Kementerian Lingkungan Hidup dan Kehutanan, Direktorat Jenderal Pengendalian Pencemaran dan Kerusakan Lingkungan, 2019https://www.bps.go.id
+
+
+======================================================================
+Page 144 [MEDIUM]
+Matches: kualitas udara, iku
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2021117
+KOMPONEN 1 KONDISI DAN KUALITAS LINGKUNGANTabel 1.24 Kualitas Udara Ambien Perkotaan Parameter Rata-rata Nitrogen Dioksida (NO2), 2015-2019
+Kota KategoriKualitas Udara Tepi Jalan Raya
+Rata-Rata NO2 (BM 365)Baku Mutu
+2015 2016 2017 2018 2019 (μg/Nm3)
+(1) (2) (3) (4) (5) (6) (7) (8)
+Bandung Kota Metropolitan 31 - - - - 150
+Bekasi Kota Metropolitan 43 - - 111 - 150
+Depok Kota Metropolitan 41 - - - 24 150
+Jakarta Barat Kota Metropolitan 47 100 8 46 86 150
+Jakarta Pusat Kota Metropolitan 42 - 35 26 36 150
+Jakarta Selatan Kota Metropolitan 39 85 26 17 34 150
+Jakarta Timur Kota Metropolitan 43 32 6 48 29 150
+Jakarta Utara Kota Metropolitan 47 - 12 11 45 150
+Makasar Kota Metropolitan 34 - 124 48 16 150
+Medan Kota Metropolitan 41 - - - - 150
+Palembang Kota Metropolitan - 46 43 45 - 150
+Semarang Kota Metropolitan 45 88 - 26 66 150
+Surabaya Kota Metropolitan 25 - - - - 150
+Tangerang Kota Metropolitan 35 - - - 41 150
+Balikpapan Kota Besar 91 14 - 21 14 150
+Bandar Lampung Kota Besar 77 11 - - - 150
+Banjarmasin Kota Besar - 19 - 26 4 150
+Bogor Kota Besar 34  − - - - 150
+Cimahi Kota Besar - - - 17 11 150
+Denpasar Kota Besar 36 70 18 27 33 150
+Batam Kota Besar 33 87 - - 63 150
+Malang Kota Besar 31 - - - 36 150
+Manado Kota Besar - - 83 - - 150
+Padang Kota Besar 44 12 - - - 150
+Pekan Baru Kota Besar - - - - - 150
+Pontianak Kota Besar 12 9 - - 13 150
+Samarinda Kota Besar 95 14 - 57 43 150
+Surakarta Kota Besar 13 76 - 54 34 150
+Tangerang Selatan Kota Besar 34 - - - 41 150
+Yogyakarta Kota Besar 25 32 34 37 23 150
+Ambon Kota Sedang 32 32 - - - 150
+Banda Aceh Kota Sedang 132 23 - - - 150
+Bengkulu Kota Sedang 28 20 - - - 150
+Gorontalo Kota Sedang 30 29 - 25 31 150
+Jambi Kota Sedang - 16 - 40 62 150
+Jayapura Kota Sedang 48 - - - - 150
+Kendari Kota Sedang 8 - - - - 150
+Ternate Kota Sedang 59 - - - - 150https://www.bps.go.id
+
+
+======================================================================
+Page 145 [MEDIUM]
+Matches: kualitas udara, iku
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2021118
+KOMPONEN 1 KONDISI DAN KUALITAS LINGKUNGANLanjutan Tabel 1.24
+Kota KategoriKualitas Udara Tepi Jalan Raya
+Rata-Rata NO2 (BM 365)Baku Mutu
+2015 2016 2017 2018 2019 (μg/Nm3)
+(1) (2) (3) (4) (5) (6) (7) (8)
+Kupang Kota Sedang 8 40 - - - 150
+Mamuju Kota Sedang 21 26 - - - 150
+Manokwari Kota Sedang - - - - - 150
+Mataram Kota Sedang 109 34 - - - 150
+Palangka Raya Kota Sedang - - - - - 150
+Palu Kota Sedang 27 22 - - - 150
+Pangkal Pinang Kota Sedang 12 - - - - 150
+Serang Kota Sedang 33 - 85 - - 150
+Tanjung Pinang Kota Sedang 28 59 - - - 150
+Sumbe : Kementerian Lingkungan Hidup dan Kehutanan, Direktorat Jenderal Pengendalian Pencemaran dan Kerusakan Lingkungan, 2019https://www.bps.go.id
+
+
+======================================================================
+Page 146 [MEDIUM]
+Matches: kualitas udara, iku
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2021119
+KOMPONEN 1 KONDISI DAN KUALITAS LINGKUNGANTabel 1.25 Kualitas Udara Ambien Perkotaan Parameter Rata-rata Hidro Karbon (HC), 2015-2019
+Kota KategoriKualitas Udara Tepi Jalan Raya
+Rata-Rata HC (BM 160)Baku Mutu
+2015 2016 2017 2018 2019 (μg/Nm3)
+(1) (2) (3) (4) (5) (6) (7) (8)
+Bandung Kota Metropolitan 124 - - - - 160
+Bekasi Kota Metropolitan 137 - - 8 - 160
+Depok Kota Metropolitan 129 - - - 36 160
+Jakarta Barat Kota Metropolitan 142 64 86 - 11 160
+Jakarta Pusat Kota Metropolitan 146 - 8 12 16 160
+Jakarta Selatan Kota Metropolitan 139 28 12 - 15 160
+Jakarta Timur Kota Metropolitan 142 7 91 6 6 160
+Jakarta Utara Kota Metropolitan 146 - 119 86 17 160
+Makasar Kota Metropolitan 133 74 6 6 11 160
+Medan Kota Metropolitan 155 260 - - - 160
+Palembang Kota Metropolitan - 42 4 5 - 160
+Semarang Kota Metropolitan 132 123 - 7 7 160
+Surabaya Kota Metropolitan 107 - - - - 160
+Tangerang Kota Metropolitan 126 - - - 84 160
+Balikpapan Kota Besar 122 94 - 13 14 160
+Bandar Lampung Kota Besar 82 - - - - 160
+Banjarmasin Kota Besar - 111 - 9 - 160
+Bogor Kota Besar 131 - - - - 160
+Cimahi Kota Besar - - - 22 - 160
+Denpasar Kota Besar 129 128 130 8 46 160
+Batam Kota Besar 142 132 - - 111 160
+Malang Kota Besar 129 - - - 30 160
+Manado Kota Besar - 109 7 - - 160
+Padang Kota Besar 131 76 - - - 160
+Pekan Baru Kota Besar - - - - - 160
+Pontianak Kota Besar 119 107 - - 10 160
+Samarinda Kota Besar 96 88 - 8 9 160
+Surakarta Kota Besar 113 136 - 8 19 160
+Tangerang Selatan Kota Besar 126 - - - 96 160
+Yogyakarta Kota Besar 38 - - - - 160
+Ambon Kota Sedang 126 129 - - - 160
+Banda Aceh Kota Sedang 40 32 - - - 160
+Bengkulu Kota Sedang 102 94 - - - 160
+Gorontalo Kota Sedang 113 113 - 10 46 160
+Jambi Kota Sedang - 65 - 6 115 160
+Jayapura Kota Sedang 79 - - - - 160
+Kendari Kota Sedang 109 - - - - 160
+Ternate Kota Sedang 113 - - - - 160https://www.bps.go.id
+
+
+======================================================================
+Page 147 [MEDIUM]
+Matches: kualitas udara, iku
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2021120
+KOMPONEN 1 KONDISI DAN KUALITAS LINGKUNGANLanjutan Tabel  1.25
+Kota KategoriKualitas Udara Tepi Jalan Raya
+Rata-Rata HC (BM 160)Baku Mutu
+2015 2016 2017 2018 2019 (μg/Nm3)
+(1) (2) (3) (4) (5) (6) (7) (8)
+Kupang Kota Sedang 146 64 - - - 160
+Mamuju Kota Sedang 131 111 - - - 160
+Manokwari Kota Sedang - - - - - 160
+Mataram Kota Sedang 140 84 - - - 160
+Palangka Raya Kota Sedang - - - - - 160
+Palu Kota Sedang 137 103 - - - 160
+Pangkal Pinang Kota Sedang 131 - - - - 160
+Serang Kota Sedang 131 - 37 - - 160
+Tanjung Pinang Kota Sedang 117 86 - - - 160
+Sumber: Kementerian Lingkungan Hidup dan Kehutanan, Direktorat Jenderal Pengendalian Pencemaran dan Kerusakan Lingkungan, 2019https://www.bps.go.id
+
+
+======================================================================
+Page 169 [MEDIUM]
+Matches: kualitas udara, sulawesi
+======================================================================
+
+Statistik Lingkungan Hidup Indonesia 2021142
+KOMPONEN 1 KONDISI DAN KUALITAS LINGKUNGANTabel 1.32 Indeks Kualitas Udara Tingkat Provinsi, 2015-2020
+Provinsi 2015 2016 2017 2018 2019 2020
+(1) (2) (3) (4)  (5)  (6)  (7)
+Aceh 89,44 86,30 89,84 88,33 90,71 89,51
+Sumatera Utara 88,15 79,20 87,32 85,72 86,58 89,22
+Sumatera Barat 88,48 82,90 89,87 88,37 89,45 90,39
+Riau - 72,40 90,90 89,91 90,20 90,42
+Jambi 82,93 88,10 89,39 88,04 87,25 85,65
+Sumatera Selatan 79,64 81,60 88,88 85,32 87,13 86,57
+Bengkulu 92,51 85,40 92,55 91,63 92,69 90,52
+Lampung 82,26 77,50 85,02 82,98 86,62 85,45
+Kepulauan Bangka Belitung 95,61 80,40 94,97 89,09 91,94 91,03
+Kepulauan Riau 86,61 78,60 95,47 90,83 90,63 90,80
+DKI Jakarta 78,78 56,40 53,50 66,57 67,97 66,69
+Jawa Barat 74,63 78,60 77,85 72.80 75,10 78,46
+Jawa Tengah 81,32 77,30 83,91 82,97 84,81 84,73
+DI Yogyakarta 90,58 87,60 88,08 84,25 85,19 89,55
+Jawa Timur 89,21 83,20 85,49 81,80 83,06 84,06
+Banten 50,65 58,80 75,36 71,63 74,98 72,83
+Bali 92,35 88,30 91,40 88,97 89,85 88,34
+Nusa Tenggara Barat 92,27 81,20 88,02 87,17 87,51 88,63
+Nusa Tenggara Timur - 82,70 91,18 86,83 88,18 89,80
+Kalimantan Barat 91,57 81,50 89,12 88,68 90,04 88,88
+Kalimantan Tengah 89,87 83,80 92,25 87,07 88,82 89,84
+Kalimantan Selatan 87,60 85,60 89,02 87,75 88,78 88,93
+Kalimantan Timur 96,20 80,20 88,87 83,36 90,02 89,02
+Kalimantan Utara 89,10 95,83 90,95 93,79 94,23
+Sulawesi Utara 92,72 86,70 94,32 91,07 92,41 90,53
+Sulawesi Tengah 89,12 87,90 94,38 93,56 92,98 91,80
+Sulawesi Selatan 76,80 85,80 88,66 89,09 89,60 88,73
+Sulawesi Tenggara 83,61 83,50 91,04 89,85 90,01 91,21
+Gorontalo - 88,30 94,79 92,17 86,88 93,89
+Sulawesi Barat 89,21 86,40 91,45 89,26 89,97 89,72
+Maluku 82,33 87,30 85,64 84,99 88,72 90,41
+Maluku Utara - 86,20 96,00 90,77 92,38 92,10
+Papua Barat - 93,40 95,63 90,41 92,64 94,83
+Papua - 89,60 90,01 89,89 92,56 94,57
+Indonesia 84,96 81,78 87,03 84,74 86,56 87,21
+Sumber: Kementerian Lingkungan Hidup dan Kehutanan, Direktorat Jenderal Pengendalian Pencemaran dan Kerusakan Lingkungan, 2021https://www.bps.go.id
+
