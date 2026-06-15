@@ -591,12 +591,14 @@ Tahun 2012 mencatatkan ledakan korban jiwa tertinggi di Sektor Pertambangan, did
 * **Perusahaan Terlibat:** PT Semen Gombong / Medco Group
 * **Pemerintah Terlibat:** Pemkab Kebumen, Pemprov Jawa Tengah, Kementerian ESDM
 * **Narasi Kasus:** Ekspansi komoditas batu gamping seluas 147,50 Ha oleh PT Medco Group mengancam ekosistem karst Gombong. Izin Usaha Pertambangan (IUP) yang terus diperpanjang memicu perlawanan besar-besaran dari masyarakat (Perpag) yang menolak pabrik semen karena mengancam sumber air dan ruang hidup puluhan ribu warga.
+* **Sumber Referensi:** [Tribun Jateng (Aksi Tolak Semen)](http://jateng.tribunnews.com/2018/10/16/perpag-kebumen-akan-aksi-besar-besaran-tolak-pabrik-semen) | [LBH Semarang](http://lbhsemarang.or.id/policy-brief-lbh-semarang-menata-karst-gombong-fungsi-lindung-yang-diusung/)
 
 **2. Konflik Gunung Tumpang Pitu, Banyuwangi**
 * **Total Korban:** 13.936 Jiwa
 * **Perusahaan Terlibat:** PT Bumi Suksindo (BSI) / PT. Merdeka Copper Gold
 * **Pemerintah Terlibat:** Pemkab Banyuwangi, Pengadilan Negeri, Mahkamah Agung
 * **Narasi Kasus:** Konsesi tambang emas seluas 4.998 Ha di wilayah Desa Sumberagung. Keputusan Bupati yang mengubah status lindung dan memberikan IUP OP memicu penolakan keras yang berujung pada bentrokan, unjuk rasa masif, serta rentetan kriminalisasi terhadap aktivis dan warga penolak tambang.
+* **Sumber Referensi:** [Mongabay (Konflik Tumpang Pitu)](https://www.mongabay.co.id/2015/12/02/saat-warga-penolak-tambang-emas-tumpang-pitu-berhadapan-dengan-aparat/)
 
 ---
 
@@ -610,6 +612,7 @@ Tahun 2019 menunjukkan eskalasi brutal pengusiran warga atas nama Proyek Strateg
 * **Perusahaan Terlibat:** PT. Wijaya Karya, PT. PP, Shimizu Corporation, JICA
 * **Pemerintah Terlibat:** Kemenhub, PUPR, BPN, Gubernur Jawa Barat, LMAN
 * **Narasi Kasus:** Ditetapkan sebagai PSN oleh Presiden melalui Perpres 47/2016. Proyek yang didanai JICA ini memicu krisis agraria parah karena proses pembebasan lahan yang cacat, merugikan puluhan ribu nelayan dan petani yang tanahnya digusur tanpa ganti rugi yang layak hingga akhir 2019.
+* **Sumber Referensi:** [Mongabay (Derita Nelayan Patimban)](https://www.mongabay.co.id/2020/12/28/derita-nelayan-terdampak-pembangunan-pelabuhan-patimban/)
 
 **2. Penolakan Tambang Timah di Perairan Bangka**
 * **Total Korban:** 13.494 Jiwa
@@ -617,6 +620,7 @@ Tahun 2019 menunjukkan eskalasi brutal pengusiran warga atas nama Proyek Strateg
 * **Perusahaan Terlibat:** PT. Timah Tbk
 * **Pemerintah Terlibat:** Pemprov Kep. Bangka Belitung, Kementerian KKP, Dinas Perikanan
 * **Narasi Kasus:** Nelayan pesisir Matras melakukan pengusiran terhadap Kapal Isap Produksi (KIP) milik PT Timah Tbk yang beroperasi di wilayah tangkapan nelayan. Ekspansi timah lepas pantai menghancurkan terumbu karang dan mematikan ekonomi nelayan tradisional.
+* **Sumber Referensi:** [Tempo (Nelayan Matras Tolak Kapal Isap)](https://nasional.tempo.co/read/1231626/nelayan-matras-bangka-tolak-kapal-isap-timah)
 
 **3. HTI PT Biomass Andalan Energi (Mentawai)**
 * **Total Korban:** 10.395 Jiwa
@@ -624,6 +628,7 @@ Tahun 2019 menunjukkan eskalasi brutal pengusiran warga atas nama Proyek Strateg
 * **Perusahaan Terlibat:** PT. Biomass Andalan Energi
 * **Pemerintah Terlibat:** KLHK, BKPM, Pemkab Mentawai, Gubernur Sumatera Barat
 * **Narasi Kasus:** Penerbitan Izin Usaha Pemanfaatan Hasil Hutan Kayu pada Hutan Tanaman Industri (IUPHHK-HTI) yang mengancam ruang hidup masyarakat adat Mentawai. Koalisi masyarakat mendesak KLHK membatalkan izin tersebut karena berisiko menghabisi ekosistem pulau kecil.
+* **Sumber Referensi:** [Mongabay (Warga Mentawai Tolak HTI)](https://www.mongabay.co.id/2019/08/12/kala-warga-mentawai-tolak-kehadiran-hti/)
 
 ---
 
@@ -637,6 +642,7 @@ Tahun 2010 merupakan titik nadir perampasan tanah berskala raksasa di sektor per
 * **Perusahaan Terlibat:** PT. Dongin Prabhawa, PT. Cendrawasih Jaya Mandiri
 * **Pemerintah Terlibat:** Menteri Kehutanan, Menko Perekonomian, Menteri Pertanian, Pemprov Papua
 * **Narasi Kasus:** Kebijakan *Top-Down* dari pemerintah pusat untuk menciptakan lumbung pangan dan energi memicu kanibalisme daratan seluas 1,2 juta Hektar. Suku Malind dan masyarakat adat Papua digusur dan kehilangan hak ulayatnya, sementara sungai-sungai mereka dicemari oleh pestisida dan aktivitas korporasi kelapa sawit.
+* **Sumber Referensi:** [Project Multatuli (MIFEE Proyek Gagal)](https://projectmultatuli.org/mifee-proyek-pangan-raksasa-papua-yang-gagal-dan-merampas-tanah-adat/)
 
 ---
 
@@ -648,17 +654,20 @@ Tahun 2015 didominasi konflik klaim tata ruang berskala puluhan ribu hektar di b
 * **Luas Area:** 24.550 Hektar
 * **Sektor:** Kehutanan
 * **Narasi Kasus:** Eksploitasi hutan lewat izin HPH secara absolut menghancurkan wilayah Suku Nuaulu. Bagi mereka, hilangnya hutan berarti hilangnya tradisi, ruang hidup, dan kedaulatan identitas mereka.
+* **Sumber Referensi:** [Ambon Ekspres (Bintang Lima Makmur)](http://ambonekspres.fajar.co.id/2016/02/15/pt-bintang-lima-makmur-ancaman-bagi-suku-nuaulu/)
 
 **2. Sengketa PT Tiga Mitra Pratama (Aceh Jaya)**
 * **Luas Area:** 20.000 Hektar
 * **Sektor:** Perkebunan
 * **Narasi Kasus:** Lahan Hak Guna Usaha (HGU) yang ditelantarkan perusahaan sejak 1994, memicu sengketa berkepanjangan dengan Pemkab dan masyarakat setempat.
+* **Sumber Referensi:** [Serambi News (HGU PT TMP Bermasalah)](https://aceh.tribunnews.com/2015/01/08/hgu-pt-tmp-di-aceh-jaya-bermasalah)
 
 **3. Konsesi WWF (PT Alam Bukit Tiga Puluh) di Jambi**
 * **Luas Area:** 14.000 Hektar
 * **Sektor:** Kehutanan
 * **Perusahaan Terlibat:** PT. Alam Bukit Tiga Puluh / Yayasan WWF Indonesia
 * **Narasi Kasus:** Proyek *Ecosystem Restoration Concession* (ERC) yang diinisiasi WWF justru memicu konflik dengan warga desa Pemayungan. Penetapan konsesi hijau tanpa proses FPIC (Persetujuan Atas Dasar Informasi Awal Tanpa Paksaan) menyingkirkan masyarakat dari wilayah kelolanya sendiri atas nama "konservasi".
+* **Sumber Referensi:** [Mongabay (Konflik Konsesi Restorasi Jambi)](https://www.mongabay.co.id/2018/06/15/kala-warga-dan-perusahaan-restorasi-ekosistem-di-jambi-berkonflik/)
 
 ---
 
@@ -672,6 +681,7 @@ Tahun 2020 mencatatkan anomali rekor tertinggi secara absolut untuk grafik Korba
 * **Perusahaan Terlibat:** PT. Wirakarya Sakti (WKS)
 * **Pemerintah Terlibat:** Polres Tebo, Pemprov Jambi, DPRD Jambi, dan lintas instansi Pemkab.
 * **Narasi Kasus:** Konflik historis tak berkesudahan antara PT WKS dan warga sekitar konsesi HTI. Pada April 2020, kontraktor perusahaan secara sadar menerbangkan *drone* dan menyemprotkan cairan racun herbisida dari udara ke lahan warga (Dusun Pelayang Tebat) yang ditanami sawit dan palawija. Metode represi agrikultural udara ini mematikan sumber pangan warga secara instan dan memicu darurat sosial di ratusan ribu warga desa yang menggantungkan hidup pada lahan tersebut.
+* **Sumber Referensi:** [Mongabay (WKS Semprot Racun dari Udara)](https://www.mongabay.co.id/2020/05/11/konflik-lahan-berkepanjangan-perusahaan-semprot-racun-dari-udara-ke-kebun-warga/)
 """)
 
 st.subheader("4.3 Kriminalisasi Aktivis dan Resistensi Ruang Sipil")
