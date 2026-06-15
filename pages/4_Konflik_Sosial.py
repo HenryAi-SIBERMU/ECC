@@ -710,54 +710,57 @@ st.markdown("---")
 
 col_trend, col_sektor = st.columns(2)
 
-# Chart 1: Tren Kriminalisasi per Tahun (hanya menampilkan sejak 2000 untuk kejelasan tren modern)
-df_krim_tahun = df_dampak[(df_dampak['indikasi_kriminalisasi'] == True) & (df_dampak['tahun'] >= 2000)].groupby('tahun').size().reset_index(name='jumlah_kasus')
+# Chart 1: Stacked Bar Chart Proporsi Kriminalisasi (Pasca 2010)
+df_tren_all = df_dampak[df_dampak['tahun'] >= 2010].copy()
+df_tren_all['Status Represi'] = df_tren_all['indikasi_kriminalisasi'].apply(lambda x: 'Terdapat Kriminalisasi' if x == True else 'Konflik Umum')
+df_tren_group = df_tren_all.groupby(['tahun', 'Status Represi']).size().reset_index(name='jumlah_kasus')
 
 with col_trend:
-    fig_krim_tahun = px.line(
-        df_krim_tahun, 
-        x='tahun', 
+    fig_krim_tahun = px.bar(
+        df_tren_group,
+        x='tahun',
         y='jumlah_kasus',
-        markers=True,
-        title='Tren Kasus Kriminalisasi & Represi (Pasca 2000)',
-        labels={'jumlah_kasus': 'Total Kasus', 'tahun': 'Tahun Kejadian'}
+        color='Status Represi',
+        title='Proporsi Kekerasan/Kriminalisasi dalam Konflik (Pasca 2010)',
+        color_discrete_map={'Terdapat Kriminalisasi': '#D32F2F', 'Konflik Umum': '#546E7A'},
+        labels={'jumlah_kasus': 'Total Kasus', 'tahun': 'Tahun Kejadian'},
+        barmode='stack'
     )
-    fig_krim_tahun.update_traces(line_color='#E53935', marker=dict(size=8, color='#B71C1C'))
     fig_krim_tahun.update_layout(
         plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
         xaxis=dict(showgrid=False, tickmode='linear', dtick=2), 
         yaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)'),
-        margin=dict(t=50, b=40)
+        legend=dict(orientation="h", yanchor="bottom", y=1.05, xanchor="right", x=1, title=""),
+        margin=dict(t=70, b=40)
     )
     st.plotly_chart(fig_krim_tahun, use_container_width=True)
 
-# Chart 2: Kriminalisasi per Sektor
-df_krim_sektor = df_dampak[(df_dampak['indikasi_kriminalisasi'] == True) & (df_dampak['Sektor_Grup'] != 'Lainnya')].groupby('Sektor_Grup').size().reset_index(name='jumlah_kasus').sort_values('jumlah_kasus', ascending=True)
+# Chart 2: Donut Chart Kriminalisasi per Sektor
+df_krim_sektor = df_dampak[(df_dampak['indikasi_kriminalisasi'] == True) & (df_dampak['Sektor_Grup'] != 'Lainnya')].groupby('Sektor_Grup').size().reset_index(name='jumlah_kasus')
 
 with col_sektor:
-    fig_krim_sektor = px.bar(
+    fig_krim_sektor = px.pie(
         df_krim_sektor,
-        y='Sektor_Grup',
-        x='jumlah_kasus',
-        orientation='h',
+        values='jumlah_kasus',
+        names='Sektor_Grup',
+        hole=0.6,
         color='Sektor_Grup',
         color_discrete_map=color_map,
-        title='Sektor Industri Paling Represif',
-        labels={'jumlah_kasus': 'Total Kasus', 'Sektor_Grup': 'Sektor Pemicu'}
+        title='Sektor Industri Pemicu Kriminalisasi Terbesar'
     )
+    fig_krim_sektor.update_traces(textposition='inside', textinfo='percent+label')
     fig_krim_sektor.update_layout(
         showlegend=False,
         plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-        xaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)'), 
-        yaxis=dict(showgrid=False),
-        margin=dict(t=50, b=40)
+        margin=dict(t=70, b=40, l=20, r=20)
     )
     st.plotly_chart(fig_krim_sektor, use_container_width=True)
 
-st.markdown("#### 🚨 Arsip Kasus Represi dan Kekerasan Fisik Tertinggi")
-st.caption("Menampilkan 10 kasus dengan jumlah korban penangkapan atau tewas terbanyak berdasarkan data yang berhasil didokumentasikan.")
+st.markdown("#### 🚨 Arsip Kasus Represi dan Kekerasan Fisik Tertinggi (Satu Dekade Terakhir)")
+st.caption("Menampilkan 10 kasus pasca-2010 dengan jumlah korban penangkapan atau tewas terbanyak berdasarkan data yang berhasil didokumentasikan.")
 
-df_kekerasan = df_dampak[(df_dampak['jumlah_ditangkap'] > 0) | (df_dampak['jumlah_tewas'] > 0)].sort_values(['jumlah_ditangkap', 'jumlah_tewas'], ascending=[False, False])
+# Filter >= 2010 agar data-data outlier lawas (misal 1952) tidak mendominasi arsip kekinian
+df_kekerasan = df_dampak[(df_dampak['tahun'] >= 2010) & ((df_dampak['jumlah_ditangkap'] > 0) | (df_dampak['jumlah_tewas'] > 0))].sort_values(['jumlah_ditangkap', 'jumlah_tewas'], ascending=[False, False])
 df_kekerasan_display = df_kekerasan[['tahun', 'Sektor_Grup', 'keterlibatan_perusahaan', 'jumlah_ditangkap', 'jumlah_tewas', 'deskripsi']].copy()
 df_kekerasan_display['keterlibatan_perusahaan'] = df_kekerasan_display['keterlibatan_perusahaan'].fillna('Tidak/Belum Teridentifikasi')
 df_kekerasan_display.columns = ['Tahun', 'Sektor', 'Perusahaan Terlibat', 'Ditangkap (Jiwa)', 'Tewas (Jiwa)', 'Narasi Singkat Kejadian']
