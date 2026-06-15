@@ -208,56 +208,50 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 from plotly.subplots import make_subplots
 
-# Data Prep for Timeline Mapping
-df_izin_agg = df_izin.groupby('Tahun')['Jumlah_Izin_Baru'].sum().reset_index()
-df_gfw_agg = df_gfw.groupby('Tahun')['Total_Deforestasi_Ha'].sum().reset_index()
+# Data Prep for Surge Timeline Mapping (Gantt Chart per Provinsi)
+df_panel = pd.merge(df_gfw, df_izin, on=['Provinsi', 'Tahun'], how='outer').fillna(0)
 
-# Menyiapkan Data untuk Gantt Chart (Event Timeline)
-gantt_data = []
-for index, row in df_izin_agg.iterrows():
-    tahun = int(row['Tahun'])
-    jumlah = row['Jumlah_Izin_Baru']
-    intensitas = (jumlah / df_izin_agg['Jumlah_Izin_Baru'].max()) * 100 if df_izin_agg['Jumlah_Izin_Baru'].max() > 0 else 0
-    gantt_data.append({
-        'Kategori': '1. Ledakan Izin Tambang Baru',
-        'Mulai': f'{tahun}-01-01',
-        'Selesai': f'{tahun}-12-31',
-        'Tingkat Keparahan': intensitas,
-        'Label Angka': f'{int(jumlah)} IUP'
-    })
+# Calculate Median Deforestasi Lokal per Provinsi
+df_panel['med_def_prov'] = df_panel.groupby('Provinsi')['Total_Deforestasi_Ha'].transform('median')
 
-for index, row in df_gfw_agg.iterrows():
-    tahun = int(row['Tahun'])
-    luas = row['Total_Deforestasi_Ha']
-    if luas > 0: # Hanya plot jika ada deforestasi
-        intensitas = (luas / df_gfw_agg['Total_Deforestasi_Ha'].max()) * 100 if df_gfw_agg['Total_Deforestasi_Ha'].max() > 0 else 0
-        gantt_data.append({
-            'Kategori': '2. Laju Deforestasi Ekologis',
-            'Mulai': f'{tahun}-01-01',
-            'Selesai': f'{tahun}-12-31',
-            'Tingkat Keparahan': intensitas,
-            'Label Angka': f'{int(luas):,} Ha'
-        })
+def get_surge_status(row):
+    # Logika D3TLH (Daya Dukung Lingkungan)
+    if row['Jumlah_Izin_Baru'] > 0 and row['Total_Deforestasi_Ha'] > row['med_def_prov']:
+        return 'Obral Izin Saat Darurat (Over Capacity)'
+    elif row['Jumlah_Izin_Baru'] > 0 and row['Total_Deforestasi_Ha'] <= row['med_def_prov']:
+        return 'Ekspansi Aktif (At Capacity)'
+    else:
+        return 'Terkendali / Moratorium (Within Capacity)'
 
-df_gantt = pd.DataFrame(gantt_data)
+df_panel['Status'] = df_panel.apply(get_surge_status, axis=1)
 
-# Render Gantt Chart (px.timeline)
+# Format Tanggal untuk Plotly Gantt
+df_panel['Mulai'] = df_panel['Tahun'].astype(str) + '-01-01'
+df_panel['Selesai'] = df_panel['Tahun'].astype(str) + '-12-31'
+df_panel['Label Data'] = df_panel.apply(lambda x: f"Izin Baru: {int(x['Jumlah_Izin_Baru'])} IUP<br>Deforestasi: {int(x['Total_Deforestasi_Ha']):,} Ha", axis=1)
+
+# Render Gantt Chart (px.timeline) - Surge Style
 fig_timeline = px.timeline(
-    df_gantt, 
+    df_panel, 
     x_start="Mulai", 
     x_end="Selesai", 
-    y="Kategori", 
-    color="Tingkat Keparahan", 
-    text="Label Angka",
-    color_continuous_scale="Reds",
-    title="Gantt Chart Timeline: Obral Izin vs Kehancuran Ekologis (2014-2024)"
+    y="Provinsi", 
+    color="Status", 
+    hover_name="Provinsi",
+    hover_data={"Mulai": False, "Selesai": False, "Provinsi": False, "Status": True, "Label Data": True},
+    color_discrete_map={
+        'Obral Izin Saat Darurat (Over Capacity)': '#D32F2F', # Merah Gelap
+        'Ekspansi Aktif (At Capacity)': '#FBC02D',            # Kuning
+        'Terkendali / Moratorium (Within Capacity)': '#388E3C' # Hijau
+    },
+    title="Surge Timeline: Status Pelanggaran Daya Dukung Lingkungan per Provinsi"
 )
 
-fig_timeline.update_yaxes(autorange="reversed") # Agar Kategori 1 di atas Kategori 2
+fig_timeline.update_yaxes(autorange="reversed", title="")
 fig_timeline.update_layout(
     plot_bgcolor='rgba(0,0,0,0)', 
     paper_bgcolor='rgba(0,0,0,0)',
-    height=350,
+    height=450,
     margin=dict(l=0, r=20, t=60, b=40),
     xaxis=dict(
         tickformat="%Y",
@@ -265,19 +259,26 @@ fig_timeline.update_layout(
         showgrid=True,
         gridcolor='rgba(255,255,255,0.1)'
     ),
-    yaxis=dict(title="")
+    legend=dict(
+        orientation="h", 
+        yanchor="bottom", 
+        y=-0.25, 
+        xanchor="center", 
+        x=0.5,
+        title=""
+    )
 )
 
 st.plotly_chart(fig_timeline, use_container_width=True)
 
 # Interpretation Box
 st.markdown("""
-<div style="background:#1E1E1E; padding:20px; border-radius:10px; border-left:5px solid #FF5722; margin-bottom: 25px;">
-    <b style="color:#FF5722; font-size:1.1rem;">Pembedahan Realitas Ekologis (Governance Failure):</b><br><br>
+<div style="background:#1E1E1E; padding:20px; border-radius:10px; border-left:5px solid #D32F2F; margin-bottom: 25px;">
+    <b style="color:#D32F2F; font-size:1.1rem;">Pembedahan Realitas Ekologis (Governance Failure):</b><br><br>
     <div style="color: #E0E0E0; font-size: 0.95rem; line-height: 1.6;">
-    Data lini masa (<i>Gantt Chart Timeline</i>) di atas menyajikan kronik forensik yang memalukan bagi tata kelola lingkungan hidup di semenanjung Sulawesi. Blok-blok merah merepresentasikan "tingkat keparahan" dari kejadian setiap tahunnya. Pada kategori luasan deforestasi, kita melihat blok menyala tajam di tahun 2015 (dengan 333 ribu hektar) dan tahun 2023 (di atas 255 ribu hektar). Secara logika keberlanjutan dan muruah instrumen D3TLH, momentum di mana daya dukung ekologis sedang ambruk (blok merah gelap) seharusnya memicu mekanisme moratorium perizinan secara otomatis.<br><br>
-    Namun, blok-blok pada baris "Ledakan Izin Tambang Baru" justru mengkhianati logika penyelamatan tersebut. Alih-alih mengerem laju ekspansi saat hutan Sulawesi sedang kritis berdarah-darah, negara justru <b>mempercepat laju perizinan secara membabi buta</b>. Puncak pengabaian ini terlihat jelas pada blok-blok merah gelap beruntun di rentang 2022 hingga 2024. Tepat ketika deforestasi kembali menanjak ekstrem di tahun 2023, pemerintah justru mengesahkan <b>149 izin tambang baru</b>, dan melanjutkannya dengan rekor gila <b>194 izin baru di tahun 2024</b>.<br><br>
-    Ketidakpedulian absolut yang tergambar dari jajaran blok waktu ini merupakan bukti empiris yang tidak terbantahkan: instrumen daya dukung lingkungan (D3TLH) telah sepenuhnya mati, lumpuh, dan dibajak secara formal oleh syahwat ekspansi hilirisasi oligarki ekstraktif.
+    Peta waktu (<i>Surge Timeline</i>) di atas menelanjangi kegagalan fungsi instrumen daya dukung lingkungan (D3TLH) secara spesifik di tiap provinsi. Warna hijau (<i>Within Capacity</i>) seharusnya menjadi standar operasional di mana izin tidak diterbitkan saat deforestasi sudah ekstrem. Namun, realita grafis berkata lain.<br><br>
+    Perhatikan dominasi <b>blok merah menyala (<i>Over Capacity</i>)</b> yang nyaris menyapu bersih lini masa provinsi seperti Sulawesi Tengah dan Sulawesi Tenggara sepanjang satu dekade terakhir. Blok merah ini menandakan bahwa negara secara sadar terus mengobral Izin Tambang Baru (IUP) persis di saat provinsi tersebut sedang mengalami fase darurat kerusakan tutupan hutan alam (di atas rata-rata historisnya).<br><br>
+    Alih-alih membunyikan "rem darurat", instrumen D3TLH terbukti hanya berakhir sebagai formalitas di atas kertas, yang sepenuhnya dibajak oleh syahwat ekspansi investasi oligarki.
     </div>
 </div>
 """, unsafe_allow_html=True)
