@@ -1,0 +1,33 @@
+tahun,provinsi,jenis_bencana,jumlah_kejadian,korban_terdampak
+2014,Sulawesi Tengah,Banjir,24,15000
+2015,Sulawesi Tengah,Banjir,28,18500
+2016,Sulawesi Tengah,Banjir,35,22000
+2017,Sulawesi Tengah,Banjir,42,31000
+2018,Sulawesi Tengah,Banjir,48,45000
+2019,Sulawesi Tengah,Banjir,65,62000
+2020,Sulawesi Tengah,Banjir,82,85000
+2021,Sulawesi Tengah,Banjir,95,110000
+2022,Sulawesi Tengah,Banjir,112,135000
+2023,Sulawesi Tengah,Banjir,135,160000
+2014,Sulawesi Tenggara,Banjir,15,8000
+2015,Sulawesi Tenggara,Banjir,18,11000
+2016,Sulawesi Tenggara,Banjir,22,14500
+2017,Sulawesi Tenggara,Banjir,30,21000
+2018,Sulawesi Tenggara,Banjir,38,28000
+2019,Sulawesi Tenggara,Banjir,52,45000
+2020,Sulawesi Tenggara,Banjir,68,62000
+2021,Sulawesi Tenggara,Banjir,85,78000
+2022,Sulawesi Tenggara,Banjir,102,95000
+2023,Sulawesi Tenggara,Banjir,124,115000
+2018,Sulawesi Tengah,Tanah Longsor,12,2500
+2019,Sulawesi Tengah,Tanah Longsor,18,3800
+2020,Sulawesi Tengah,Tanah Longsor,25,5200
+2021,Sulawesi Tengah,Tanah Longsor,32,7100
+2022,Sulawesi Tengah,Tanah Longsor,41,9500
+2023,Sulawesi Tengah,Tanah Longsor,54,12000
+2018,Sulawesi Tenggara,Tanah Longsor,8,1500
+2019,Sulawesi Tenggara,Tanah Longsor,14,2800
+2020,Sulawesi Tenggara,Tanah Longsor,22,4500
+2021,Sulawesi Tenggara,Tanah Longsor,28,6200
+2022,Sulawesi Tenggara,Tanah Longsor,35,8400
+2023,Sulawesi Tenggara,Tanah Longsor,48,10500
