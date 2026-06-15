@@ -325,23 +325,21 @@ skor_akumulasi_udara = (skor_1 + skor_2 + skor_3 + skor_4) / 4
 colA1, colA2 = st.columns([1, 2])
 with colA1:
     st.markdown(f"""
-    <div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #E74C3C; height:100%;">
-        <h4 style="color:#FFF; margin-top:0;">Mitos D3TLH: Daya Tampung Udara</h4>
-        <p style="color:#BDC3C7; font-size:0.9rem;">"Daya tampung udara (berdasarkan peta tutupan lahan) diklaim masih luas dan mampu menyerap emisi."</p>
-        <hr style="border-color:#34495E;">
-        <h4 style="color:#E74C3C;">Fakta Forensik ECC:</h4>
-        <p style="color:#E0E0E0; font-size:0.9rem;">Lonjakan drastis persentase Kasus ISPA dan penyakit saluran pernapasan di lingkar tambang.</p>
-        
-        <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E74C3C;">
-            <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Akumulasi Skor Kerusakan</div>
-            <div style="font-size: 32px; font-weight: 800; color: #E74C3C; line-height: 1.2;">{skor_akumulasi_udara:.1f} <span style="font-size: 16px;">/ 10</span></div>
-            <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">🚨 STATUS: DAYA TAMPUNG JEBOL</div>
-        </div>
-        
-        <div style="background:#C0392B; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
-            VONIS: Kegagalan Deteksi Morbiditas Akumulatif
-        </div>
+<div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #E74C3C; height:100%;">
+    <h4 style="color:#FFF; margin-top:0;">Mitos D3TLH: Daya Tampung Udara</h4>
+    <p style="color:#BDC3C7; font-size:0.9rem;">"Daya tampung udara (berdasarkan peta tutupan lahan) diklaim masih luas dan mampu menyerap emisi."</p>
+    <hr style="border-color:#34495E;">
+    <h4 style="color:#E74C3C;">Fakta Forensik ECC:</h4>
+    <p style="color:#E0E0E0; font-size:0.9rem;">Lonjakan drastis persentase Kasus ISPA dan penyakit saluran pernapasan di lingkar tambang.</p>
+    <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E74C3C;">
+        <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Akumulasi Skor Kerusakan</div>
+        <div style="font-size: 32px; font-weight: 800; color: #E74C3C; line-height: 1.2;">{skor_akumulasi_udara:.1f} <span style="font-size: 16px;">/ 10</span></div>
+        <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">🚨 STATUS: DAYA TAMPUNG JEBOL</div>
     </div>
+    <div style="background:#C0392B; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
+        VONIS: Kegagalan Deteksi Morbiditas Akumulatif
+    </div>
+</div>
     """, unsafe_allow_html=True)
 
 with colA2:
