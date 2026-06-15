@@ -208,59 +208,49 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 from plotly.subplots import make_subplots
 
-# Data Prep for Surge Timeline Mapping (Gantt Chart per Provinsi)
-df_panel = pd.merge(df_gfw, df_izin, on=['Provinsi', 'Tahun'], how='outer').fillna(0)
-
-# Calculate Median Deforestasi Lokal per Provinsi
-df_panel['med_def_prov'] = df_panel.groupby('Provinsi')['Total_Deforestasi_Ha'].transform('median')
-
-def get_surge_status(row):
-    # Logika D3TLH (Daya Dukung Lingkungan)
-    if row['Jumlah_Izin_Baru'] > 0 and row['Total_Deforestasi_Ha'] > row['med_def_prov']:
-        return 'Obral Izin Saat Darurat (Over Capacity)'
-    elif row['Jumlah_Izin_Baru'] > 0 and row['Total_Deforestasi_Ha'] <= row['med_def_prov']:
-        return 'Ekspansi Aktif (At Capacity)'
-    else:
-        return 'Terkendali / Moratorium (Within Capacity)'
-
-df_panel['Status'] = df_panel.apply(get_surge_status, axis=1)
-
-# Format Tanggal untuk Plotly Gantt
-df_panel['Mulai'] = df_panel['Tahun'].astype(str) + '-01-01'
-df_panel['Selesai'] = df_panel['Tahun'].astype(str) + '-12-31'
-df_panel['Label Data'] = df_panel.apply(lambda x: f"Izin Baru: {int(x['Jumlah_Izin_Baru'])} IUP<br>Deforestasi: {int(x['Total_Deforestasi_Ha']):,} Ha", axis=1)
-# Tambahkan label teks khusus jumlah izin jika > 0 agar muncul di blok (flat text)
-df_panel['Teks_IUP'] = df_panel['Jumlah_Izin_Baru'].apply(lambda x: f"{int(x)}" if x > 0 else "")
+# Data Prep for Time-Series Dual-Axis Line Chart
+df_izin_thn = df_izin.groupby('Tahun')['Jumlah_Izin_Baru'].sum().reset_index()
+df_gfw_thn = df_gfw.groupby('Tahun')['Total_Deforestasi_Ha'].sum().reset_index()
+df_timeline = pd.merge(df_gfw_thn, df_izin_thn, on='Tahun', how='outer').fillna(0).sort_values('Tahun')
 
 st.markdown("""
-Visualisasi *Surge Timeline* di bawah ini menelanjangi kegagalan fungsi instrumen daya dukung lingkungan (D3TLH) secara spesifik di tiap provinsi. Warna hijau (*Within Capacity*) seharusnya menjadi standar operasional di mana izin tidak diterbitkan saat deforestasi sudah berada di fase kritis. Namun, realita grafis berkata lain.
+Visualisasi *Time-Series* di bawah ini menelanjangi kegagalan fungsi instrumen daya dukung lingkungan (D3TLH). Kurva deforestasi (garis merah) yang merepresentasikan hilangnya tutupan hutan alam seharusnya menjadi "rem darurat" agar negara menahan penerbitan izin baru ketika kondisinya memburuk. Namun, realita grafis berkata lain.
 
-Perhatikan dominasi blok merah solid (*Over Capacity*) yang nyaris menyapu bersih lini masa provinsi seperti Sulawesi Tengah dan Sulawesi Tenggara sepanjang satu dekade terakhir. Blok merah ini menandakan bahwa negara secara sadar terus mengobral Izin Tambang Baru (IUP)—seperti yang ditunjukkan oleh angka di dalam blok—persis di saat provinsi tersebut sedang mengalami darurat kerusakan tutupan hutan alam (deforestasi di atas rata-rata historisnya).
+Perhatikan sinkronisasi garis kuning (Izin Tambang Baru) yang justru ikut melesat naik beriringan dengan naiknya kerusakan ekologis. Anomali paling mencolok terjadi ketika kurva deforestasi sedang berada di puncak eskalasinya (seperti lonjakan menuju tahun 2015 dan pasca-2020). Alih-alih membunyikan sirine bahaya, tren ini menandakan bahwa negara secara sadar terus mengobral Izin Tambang Baru (IUP) di tengah fase darurat lingkungan.
 """)
 
-# Render Gantt Chart (px.timeline) - Surge Style
-fig_timeline = px.timeline(
-    df_panel, 
-    x_start="Mulai", 
-    x_end="Selesai", 
-    y="Provinsi", 
-    color="Status", 
-    text="Teks_IUP",
-    hover_name="Provinsi",
-    hover_data={"Mulai": False, "Selesai": False, "Provinsi": False, "Status": True, "Label Data": True, "Teks_IUP": False},
-    color_discrete_map={
-        'Obral Izin Saat Darurat (Over Capacity)': '#E74C3C', # Merah Solid Flat
-        'Ekspansi Aktif (At Capacity)': '#F1C40F',            # Kuning Solid Flat
-        'Terkendali / Moratorium (Within Capacity)': '#2ECC71' # Hijau Solid Flat
-    },
-    title="Surge Timeline: Status Pelanggaran Daya Dukung Lingkungan per Provinsi"
+# Render Dual-Axis Line Chart (Sesuai Referensi User)
+fig_timeline = make_subplots(specs=[[{'secondary_y': True}]])
+
+fig_timeline.add_trace(
+    go.Scatter(
+        x=df_timeline['Tahun'], 
+        y=df_timeline['Total_Deforestasi_Ha'], 
+        name='Total Deforestasi (Hektar)', 
+        mode='lines+markers',
+        line=dict(color='#E74C3C', width=3),
+        marker=dict(symbol='circle-open', size=9, line=dict(color='#E74C3C', width=3))
+    ),
+    secondary_y=False,
 )
 
-fig_timeline.update_yaxes(autorange="reversed", title="")
-fig_timeline.update_traces(textposition='inside', insidetextanchor='middle', textfont=dict(color='black', weight='bold'), marker=dict(line=dict(width=0))) # Teks IUP di dalam blok
+fig_timeline.add_trace(
+    go.Scatter(
+        x=df_timeline['Tahun'], 
+        y=df_timeline['Jumlah_Izin_Baru'], 
+        name='Total Penerbitan Izin (IUP)', 
+        mode='lines+markers',
+        line=dict(color='#F1C40F', width=3),
+        marker=dict(symbol='circle-open', size=9, line=dict(color='#F1C40F', width=3))
+    ),
+    secondary_y=True,
+)
+
 fig_timeline.update_layout(
-    plot_bgcolor='rgba(0,0,0,0)', 
+    title='Tren Sinkronisasi Waktu: Laju Deforestasi vs Penerbitan Izin Baru',
+    plot_bgcolor='rgba(0,0,0,0)',
     paper_bgcolor='rgba(0,0,0,0)',
+    hovermode='x unified',
     height=450,
     margin=dict(l=0, r=20, t=60, b=40),
     xaxis=dict(
@@ -272,12 +262,15 @@ fig_timeline.update_layout(
     legend=dict(
         orientation="h", 
         yanchor="bottom", 
-        y=-0.25, 
+        y=1.05, 
         xanchor="center", 
         x=0.5,
         title=""
     )
 )
+
+fig_timeline.update_yaxes(title_text='Total Deforestasi (Hektar)', secondary_y=False, showgrid=True, gridcolor='rgba(255,255,255,0.1)', color='#E74C3C')
+fig_timeline.update_yaxes(title_text='Jumlah Izin Baru (IUP)', secondary_y=True, showgrid=False, color='#F1C40F')
 
 st.plotly_chart(fig_timeline, use_container_width=True)
 
@@ -285,14 +278,18 @@ st.plotly_chart(fig_timeline, use_container_width=True)
 st.markdown("""
 <div style="background:#1E1E1E; padding:15px 20px; border-radius:8px; border-left:4px solid #F57C00; margin-top: 10px; margin-bottom: 25px;">
     <span style="color: #E0E0E0; font-size: 0.95rem;">
-        <b style="color:#F57C00;">Interpretasi Governance Failure:</b> Alih-alih membunyikan "rem darurat", data historis mengonfirmasi bahwa instrumen D3TLH hanya berakhir sebagai formalitas administratif yang secara sistematis diabaikan demi memfasilitasi ekspansi oligarki ekstraktif di zona-zona krisis ekologis.
+        <b style="color:#F57C00;">Interpretasi Governance Failure:</b> Alih-alih membunyikan "rem darurat", data tren historis mengonfirmasi bahwa instrumen D3TLH hanya berakhir sebagai formalitas administratif yang secara sistematis diabaikan demi memfasilitasi ekspansi oligarki ekstraktif.
     </span>
 </div>
 """, unsafe_allow_html=True)
 
-with st.expander("Lihat Data Mentah: Status Daya Dukung Lingkungan per Provinsi", expanded=False):
-    # Membersihkan dan merapikan kolom untuk tabel
-    df_tabel = df_panel[['Tahun', 'Provinsi', 'Jumlah_Izin_Baru', 'Total_Deforestasi_Ha', 'Status']].sort_values(['Provinsi', 'Tahun'])
+with st.expander("Lihat Data Mentah: Agregasi Waktu Historis", expanded=False):
+    # Format data untuk tabel
+    df_tabel = df_timeline.copy()
+    df_tabel['Tahun'] = df_tabel['Tahun'].astype(int).astype(str)
+    df_tabel['Total_Deforestasi_Ha'] = df_tabel['Total_Deforestasi_Ha'].apply(lambda x: f"{x:,.0f}")
+    df_tabel['Jumlah_Izin_Baru'] = df_tabel['Jumlah_Izin_Baru'].astype(int)
+    
     st.dataframe(df_tabel, use_container_width=True, hide_index=True)
     st.caption("📁 **Sumber File:** Agregasi dari `sulawesi_izin_baru_per_tahun.csv` (Minerbaone) & `sulawesi_gfw_master_1_dekade_2014_2023.csv` (GFW).")
 
