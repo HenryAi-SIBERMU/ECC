@@ -498,6 +498,27 @@ with col_jiwa:
         yaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)'),
         margin=dict(t=60, b=40)
     )
+    
+    # Anotasi Anomali
+    val_2012 = df_sektor_tahun[df_sektor_tahun['tahun'] == 2012]['dampak_masyarakat_jiwa'].sum()
+    if val_2012 > 0:
+        fig_jiwa.add_annotation(
+            x=2012, y=val_2012,
+            text="<a href='#anomali-1' style='color:white;text-decoration:none;'><b>Anomali 1</b></a>",
+            hovertext="<b>2012 (Pertambangan)</b><br>Klik untuk melihat detail di bawah",
+            showarrow=True, arrowhead=2, arrowcolor="#FF5252", ax=0, ay=-35,
+            font=dict(size=11, color="white"), bgcolor="rgba(211,47,47,0.8)", bordercolor="#FF5252"
+        )
+    val_2019 = df_sektor_tahun[df_sektor_tahun['tahun'] == 2019]['dampak_masyarakat_jiwa'].sum()
+    if val_2019 > 0:
+        fig_jiwa.add_annotation(
+            x=2019, y=val_2019,
+            text="<a href='#anomali-2' style='color:white;text-decoration:none;'><b>Anomali 2</b></a>",
+            hovertext="<b>2019 (PSN & Kehutanan)</b><br>Klik untuk melihat detail di bawah",
+            showarrow=True, arrowhead=2, arrowcolor="#FF5252", ax=0, ay=-35,
+            font=dict(size=11, color="white"), bgcolor="rgba(211,47,47,0.8)", bordercolor="#FF5252"
+        )
+
     st.plotly_chart(fig_jiwa, use_container_width=True)
 
 with col_ha:
@@ -519,6 +540,27 @@ with col_ha:
         yaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)'),
         margin=dict(t=60, b=40)
     )
+
+    # Anotasi Anomali
+    val_2010 = df_sektor_tahun[df_sektor_tahun['tahun'] == 2010]['luas_ha'].sum()
+    if val_2010 > 0:
+        fig_ha.add_annotation(
+            x=2010, y=val_2010,
+            text="<a href='#anomali-3' style='color:#111;text-decoration:none;'><b>Anomali 3</b></a>",
+            hovertext="<b>2010 (Perkebunan)</b><br>Klik untuk melihat detail di bawah",
+            showarrow=True, arrowhead=2, arrowcolor="#FFC107", ax=0, ay=-35,
+            font=dict(size=11, color="#111"), bgcolor="rgba(255,193,7,0.9)", bordercolor="#FFB300"
+        )
+    val_2015 = df_sektor_tahun[df_sektor_tahun['tahun'] == 2015]['luas_ha'].sum()
+    if val_2015 > 0:
+        fig_ha.add_annotation(
+            x=2015, y=val_2015,
+            text="<a href='#anomali-4' style='color:#111;text-decoration:none;'><b>Anomali 4</b></a>",
+            hovertext="<b>2015 (Hutan & Kebun)</b><br>Klik untuk melihat detail di bawah",
+            showarrow=True, arrowhead=2, arrowcolor="#FFC107", ax=0, ay=-35,
+            font=dict(size=11, color="#111"), bgcolor="rgba(255,193,7,0.9)", bordercolor="#FFB300"
+        )
+
     st.plotly_chart(fig_ha, use_container_width=True)
 
 st.markdown("""
@@ -533,7 +575,8 @@ Berdasarkan ekstraksi dataset secara mendalam pada kolom `deskripsi`, `keterliba
 
 ---
 
-#### 🔴 ANOMALI 1: Lonjakan Korban Jiwa Tahun 2012 (Sektor Pertambangan)
+<a id="anomali-1"></a>
+#### ANOMALI 1: Lonjakan Korban Jiwa Tahun 2012 (Sektor Pertambangan)
 Tahun 2012 mencatatkan ledakan korban jiwa tertinggi di Sektor Pertambangan, didominasi oleh dua megaproyek yang memicu represi masif terhadap warga:
 
 **1. Konflik Kawasan Bentang Alam Karst (KBAK) Gombong**
@@ -550,7 +593,8 @@ Tahun 2012 mencatatkan ledakan korban jiwa tertinggi di Sektor Pertambangan, did
 
 ---
 
-#### 🔴 ANOMALI 2: Lonjakan Korban Jiwa Tahun 2019 (Infrastruktur PSN & Kehutanan)
+<a id="anomali-2"></a>
+#### ANOMALI 2: Lonjakan Korban Jiwa Tahun 2019 (Infrastruktur PSN & Kehutanan)
 Tahun 2019 menunjukkan eskalasi brutal pengusiran warga atas nama Proyek Strategis Nasional (PSN) dan pencaplokan hutan:
 
 **1. Megaproyek Pelabuhan Internasional Patimban (Subang)**
@@ -576,7 +620,8 @@ Tahun 2019 menunjukkan eskalasi brutal pengusiran warga atas nama Proyek Strateg
 
 ---
 
-#### 🟡 ANOMALI 3: Lonjakan Area Konflik Tahun 2010 (Perkebunan)
+<a id="anomali-3"></a>
+#### ANOMALI 3: Lonjakan Area Konflik Tahun 2010 (Perkebunan)
 Tahun 2010 merupakan titik nadir perampasan tanah berskala raksasa di sektor perkebunan (Agroindustri):
 
 **1. Megaproyek MIFEE (Merauke Integrated Food and Energy Estate)**
@@ -588,7 +633,8 @@ Tahun 2010 merupakan titik nadir perampasan tanah berskala raksasa di sektor per
 
 ---
 
-#### 🟡 ANOMALI 4: Lonjakan Area Konflik Tahun 2015 (Kehutanan & Perkebunan)
+<a id="anomali-4"></a>
+#### ANOMALI 4: Lonjakan Area Konflik Tahun 2015 (Kehutanan & Perkebunan)
 Tahun 2015 didominasi konflik klaim tata ruang berskala puluhan ribu hektar di berbagai daerah:
 
 **1. PT Bintang Lima Makmur vs Suku Nuaulu (Maluku)**
