@@ -208,10 +208,11 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 import plotly.graph_objects as go
 
-# Data Prep for Dumbbell Chart
+# Data Prep for Time-Series Dual-Axis Line Chart
 df_izin_thn = df_izin.groupby('Tahun')['Jumlah_Izin_Baru'].sum().reset_index()
 df_gfw_thn = df_gfw.groupby('Tahun')['Total_Deforestasi_Ha'].sum().reset_index()
 df_timeline = pd.merge(df_gfw_thn, df_izin_thn, on='Tahun', how='outer').fillna(0).sort_values('Tahun')
+df_timeline = df_timeline[df_timeline['Tahun'] <= 2023] # Filter out 2024 karena data GFW mentok di 2023
 
 from plotly.subplots import make_subplots
 
