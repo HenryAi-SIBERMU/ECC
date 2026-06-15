@@ -229,6 +229,8 @@ df_panel['Status'] = df_panel.apply(get_surge_status, axis=1)
 df_panel['Mulai'] = df_panel['Tahun'].astype(str) + '-01-01'
 df_panel['Selesai'] = df_panel['Tahun'].astype(str) + '-12-31'
 df_panel['Label Data'] = df_panel.apply(lambda x: f"Izin Baru: {int(x['Jumlah_Izin_Baru'])} IUP<br>Deforestasi: {int(x['Total_Deforestasi_Ha']):,} Ha", axis=1)
+# Tambahkan label teks khusus jumlah izin jika > 0 agar muncul di blok (flat text)
+df_panel['Teks_IUP'] = df_panel['Jumlah_Izin_Baru'].apply(lambda x: f"{int(x)}" if x > 0 else "")
 
 # Render Gantt Chart (px.timeline) - Surge Style
 fig_timeline = px.timeline(
@@ -237,17 +239,19 @@ fig_timeline = px.timeline(
     x_end="Selesai", 
     y="Provinsi", 
     color="Status", 
+    text="Teks_IUP",
     hover_name="Provinsi",
-    hover_data={"Mulai": False, "Selesai": False, "Provinsi": False, "Status": True, "Label Data": True},
+    hover_data={"Mulai": False, "Selesai": False, "Provinsi": False, "Status": True, "Label Data": True, "Teks_IUP": False},
     color_discrete_map={
-        'Obral Izin Saat Darurat (Over Capacity)': '#D32F2F', # Merah Gelap
-        'Ekspansi Aktif (At Capacity)': '#FBC02D',            # Kuning
-        'Terkendali / Moratorium (Within Capacity)': '#388E3C' # Hijau
+        'Obral Izin Saat Darurat (Over Capacity)': '#E74C3C', # Merah Solid Flat
+        'Ekspansi Aktif (At Capacity)': '#F1C40F',            # Kuning Solid Flat
+        'Terkendali / Moratorium (Within Capacity)': '#2ECC71' # Hijau Solid Flat
     },
     title="Surge Timeline: Status Pelanggaran Daya Dukung Lingkungan per Provinsi"
 )
 
 fig_timeline.update_yaxes(autorange="reversed", title="")
+fig_timeline.update_traces(textposition='inside', insidetextanchor='middle', textfont=dict(color='black', weight='bold'), marker=dict(line=dict(width=0))) # Teks IUP di dalam blok
 fig_timeline.update_layout(
     plot_bgcolor='rgba(0,0,0,0)', 
     paper_bgcolor='rgba(0,0,0,0)',
@@ -273,11 +277,11 @@ st.plotly_chart(fig_timeline, use_container_width=True)
 
 # Interpretation Box
 st.markdown("""
-<div style="background:#1E1E1E; padding:20px; border-radius:10px; border-left:5px solid #D32F2F; margin-bottom: 25px;">
-    <b style="color:#D32F2F; font-size:1.1rem;">Pembedahan Realitas Ekologis (Governance Failure):</b><br><br>
+<div style="background:#1E1E1E; padding:20px; border-radius:10px; border-left:5px solid #E74C3C; margin-bottom: 25px;">
+    <b style="color:#E74C3C; font-size:1.1rem;">Pembedahan Realitas Ekologis (Governance Failure):</b><br><br>
     <div style="color: #E0E0E0; font-size: 0.95rem; line-height: 1.6;">
-    Peta waktu (<i>Surge Timeline</i>) di atas menelanjangi kegagalan fungsi instrumen daya dukung lingkungan (D3TLH) secara spesifik di tiap provinsi. Warna hijau (<i>Within Capacity</i>) seharusnya menjadi standar operasional di mana izin tidak diterbitkan saat deforestasi sudah ekstrem. Namun, realita grafis berkata lain.<br><br>
-    Perhatikan dominasi <b>blok merah menyala (<i>Over Capacity</i>)</b> yang nyaris menyapu bersih lini masa provinsi seperti Sulawesi Tengah dan Sulawesi Tenggara sepanjang satu dekade terakhir. Blok merah ini menandakan bahwa negara secara sadar terus mengobral Izin Tambang Baru (IUP) persis di saat provinsi tersebut sedang mengalami fase darurat kerusakan tutupan hutan alam (di atas rata-rata historisnya).<br><br>
+    Peta waktu (<i>Surge Timeline</i>) di atas menelanjangi kegagalan fungsi instrumen daya dukung lingkungan (D3TLH) secara spesifik di tiap provinsi. Warna hijau (<i>Within Capacity</i>) seharusnya menjadi standar operasional di mana izin tidak diterbitkan saat deforestasi sudah berada di fase kritis. Namun, realita grafis berkata lain.<br><br>
+    Perhatikan dominasi <b>blok merah solid (<i>Over Capacity</i>)</b> yang nyaris menyapu bersih lini masa provinsi seperti Sulawesi Tengah dan Sulawesi Tenggara sepanjang satu dekade terakhir. Blok merah ini menandakan bahwa negara secara sadar terus mengobral Izin Tambang Baru (IUP)—seperti yang ditunjukkan oleh angka di dalam blok—persis di saat provinsi tersebut sedang mengalami darurat kerusakan tutupan hutan alam (deforestasi di atas rata-rata historisnya).<br><br>
     Alih-alih membunyikan "rem darurat", instrumen D3TLH terbukti hanya berakhir sebagai formalitas di atas kertas, yang sepenuhnya dibajak oleh syahwat ekspansi investasi oligarki.
     </div>
 </div>
