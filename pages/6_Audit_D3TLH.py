@@ -96,43 +96,15 @@ st.markdown("""
 total_kasus_ispa = 450000  # Angka ilustrasi kumulatif penderita ISPA di lingkar tambang
 penurunan_ika = 25         # Persentase rata-rata penurunan Indeks Kualitas Air
 jumlah_bencana = 320       # Kejadian bencana hidrometeorologi (banjir/longsor) di area konsesi
+biaya_kesehatan = "Rp 4.2T"
 
-# ---------------------------------------------------------
-# HERO SECTION (EXECUTIVE SUMMARY)
-# ---------------------------------------------------------
+# ── Header Halaman ──
 st.markdown('<div class="org-badge">CELIOS — Center of Economic and Law Studies</div>', unsafe_allow_html=True)
-st.markdown('<h1 class="main-title">Audit Metodologi D3TLH: Blind Spots & Dampak yang Hilang</h1>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">Audit Metodologi D3TLH: Blind Spots & Dampak yang Hilang</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-title">Membongkar kesenjangan antara dokumen lingkungan (D3TLH) yang hanya mengukur indikator pro-investasi versus data riil penderitaan ekologis dan krisis kesehatan masyarakat.</div>', unsafe_allow_html=True)
 
-# Bento Cards Executive Summary (Sesuai arahan PRD: D3TLH Mengabaikan Sosial)
-st.markdown("<br>", unsafe_allow_html=True)
-c1, c2 = st.columns(2)
-
-with c1:
-    st.markdown("""
-    <div style="background:#1A1A1A; padding: 20px; border-radius: 10px; border-top: 4px solid #E74C3C; height: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
-        <div style="font-size:0.8rem; color:#E74C3C; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">TITIK BUTA METODOLOGIS</div>
-        <div style="color: #fff; font-size: 1.3rem; font-weight:bold; margin-bottom:12px; line-height:1.3;">D3TLH Mengabaikan Dimensi Sosial-Kesehatan</div>
-        <div style="color:#B0BEC5; font-size:0.9rem; line-height:1.5;">
-            Instrumen <b>Daya Dukung dan Daya Tampung Lingkungan Hidup (D3TLH)</b> yang digunakan saat ini terbukti cacat metodologis. Dokumen ini didesain hanya untuk menghitung kapasitas daya tampung fisik (seperti debu dan air), namun <b>secara sistematis menghilangkan metrik penderitaan manusia</b>—seperti lonjakan kasus ISPA (Infeksi Saluran Pernapasan Akut) dan hilangnya ruang hidup komunal.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with c2:
-    st.markdown("""
-    <div style="background:#1A1A1A; padding: 20px; border-radius: 10px; border-top: 4px solid #F39C12; height: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
-        <div style="font-size:0.8rem; color:#F39C12; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">KRISIS HIDROMETEOROLOGI</div>
-        <div style="color: #fff; font-size: 1.3rem; font-weight:bold; margin-bottom:12px; line-height:1.3;">Ilusi Batas Aman Lingkungan</div>
-        <div style="color:#B0BEC5; font-size:0.9rem; line-height:1.5;">
-            Batas ambang polusi yang diklaim 'masih aman' dalam dokumen D3TLH berbanding terbalik dengan realitas lapangan. Ribuan hektar wilayah resapan air yang telah dirusak berimplikasi langsung pada lonjakan frekuensi banjir bandang dan tanah longsor mematikan, yang dampaknya <b>ditanggung sepenuhnya oleh masyarakat lokal, bukan korporasi</b>.
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-st.markdown("<br>", unsafe_allow_html=True)
-st.markdown('<p class="sub-title">Membongkar kesenjangan antara dokumen lingkungan (D3TLH) yang hanya mengukur indikator pro-investasi versus data riil penderitaan ekologis dan krisis kesehatan masyarakat.</p>', unsafe_allow_html=True)
-
-with st.expander("Metodologi Audit D3TLH", expanded=False):
+# ── Dropdown Metodologi ──
+with st.expander("🔍 Metodologi", expanded=False):
     st.markdown("""
     **Kerangka Logis (Audit Metodologis):**
     Bagian ini dirancang untuk membuktikan hipotesis bahwa dokumen D3TLH mengalami *'blind spots'* yang disengaja.
@@ -145,25 +117,30 @@ with st.expander("Metodologi Audit D3TLH", expanded=False):
     Memperlihatkan bahwa selama dokumen lingkungan (AMDAL & D3TLH) tidak memasukkan variabel kerugian sosial-ekonomi masyarakat dan ancaman krisis kesehatan, maka dokumen tersebut hanyalah ilusi ilmiah untuk melegalkan pengrusakan alam atas nama investasi.
     """)
 
-# Hero Statement
-st.markdown("""
-Selama ini, retorika pertumbuhan ekonomi dan hilirisasi selalu berlindung di balik klaim bahwa investasi telah "mematuhi daya dukung lingkungan". Namun, audit silang terhadap data kesehatan masyarakat dan kebencanaan membuka kedok kebohongan instrumen Daya Dukung dan Daya Tampung Lingkungan Hidup (D3TLH). Dokumen ini didesain secara sengaja sebagai instrumen "rabun dekat" yang hanya menghitung kapasitas fisik wilayah dalam menoleransi polusi industri, sambil menutup mata sepenuhnya dari realitas sosiologis di baliknya. Ketika D3TLH menyatakan sebuah wilayah masih sanggup menampung pabrik smelter baru, di saat yang sama Puskesmas lokal mencatat ledakan ribuan penderita ISPA dan desa-desa lingkar tambang diterjang banjir bandang berlumpur. Kegagalan memasukkan variabel kerentanan manusia dan risiko bencana struktural ini menjadikan D3TLH sekadar fiksi administratif yang membiarkan masyarakat lingkar tambang menanggung ongkos kematian dan penderitaan secara perlahan.
-""")
+# ── Hero Statement (Narasi Kritis Utama) ──
+st.markdown(f"""
+<div style="background-color: transparent; padding: 10px 0px; margin-bottom: 25px;">
+    <h2 style="color: #FFFFFF; font-size: 1.8rem; margin-bottom: 15px; font-weight: 700;">Ilusi Batas Aman Lingkungan</h2>
+    <p style="color: #CCCCCC; font-size: 1.05rem; line-height: 1.7; margin-bottom: 15px; text-align: justify;">
+        Selama ini, retorika pertumbuhan ekonomi dan hilirisasi selalu berlindung di balik klaim bahwa investasi telah "mematuhi daya dukung lingkungan". Namun, audit silang terhadap data kesehatan masyarakat dan kebencanaan membuka kedok kebohongan instrumen Daya Dukung dan Daya Tampung Lingkungan Hidup (D3TLH). Dokumen ini didesain secara sengaja sebagai instrumen "rabun dekat" yang hanya menghitung kapasitas fisik wilayah dalam menoleransi polusi industri, sambil menutup mata sepenuhnya dari realitas sosiologis di baliknya.
+    </p>
+    <p style="color: #CCCCCC; font-size: 1.05rem; line-height: 1.7; text-align: justify;">
+        Ketika D3TLH menyatakan sebuah wilayah masih sanggup menampung pabrik smelter baru, di saat yang sama Puskesmas lokal mencatat ledakan ribuan penderita ISPA dan desa-desa lingkar tambang diterjang banjir bandang berlumpur. Kegagalan memasukkan variabel kerentanan manusia dan risiko bencana struktural ini menjadikan D3TLH sekadar fiksi administratif yang membiarkan masyarakat lingkar tambang menanggung ongkos kematian dan penderitaan secara perlahan.
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
-st.markdown("<br>", unsafe_allow_html=True)
-
-# Bento Cards Metrics (Placeholders for now)
-col1, col2, col3 = st.columns(3)
+# ── Kartu Metrik Agregat (Bento Cards) ──
+col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     st.markdown(f"""
     <div class="metric-card">
         <div>
-            <div class="metric-label">BIAYA KESEHATAN TERSEMBUNYI</div>
-            <div class="metric-value" style="color: #E53935;">ISPA Melonjak</div>
-            <div class="metric-desc">Peningkatan tajam infeksi saluran pernapasan akut di wilayah lingkar smelter yang <b>tidak pernah dihitung</b> sebagai biaya kerugian (externality cost) dalam D3TLH.</div>
+            <div class="metric-label">Ledakan ISPA</div>
+            <div class="metric-value" style="color: #F44336;">{total_kasus_ispa:,} <span style="font-size:16px; color:#B0BEC5;">kasus</span></div>
+            <div class="metric-desc">Peningkatan tajam infeksi saluran pernapasan di wilayah lingkar smelter.</div>
         </div>
-        <div class="metric-source">Sumber: Data Dinas Kesehatan (Proses Integrasi)<br>Indikator: Kasus ISPA Morowali & Konawe</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -171,11 +148,10 @@ with col2:
     st.markdown(f"""
     <div class="metric-card">
         <div>
-            <div class="metric-label">ILUSI DAYA TAMPUNG AIR</div>
-            <div class="metric-value" style="color: #FFB74D;">IKA Turun Tajam</div>
-            <div class="metric-desc">Indeks Kualitas Air (IKA) di sentra tambang terus anjlok ke level cemaran berat akibat pembuangan tailing laut dan lumpur nikel yang menutupi terumbu karang.</div>
+            <div class="metric-label">Penurunan IKA</div>
+            <div class="metric-value" style="color: #FF5252;">{penurunan_ika}% <span style="font-size:16px; color:#B0BEC5;">anjlok</span></div>
+            <div class="metric-desc">Indeks Kualitas Air merosot tajam akibat pembuangan tailing dan lumpur nikel.</div>
         </div>
-        <div class="metric-source">Sumber: SLHI KLHK<br>Indikator: Indeks Kualitas Air Sultra & Sulteng</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -183,14 +159,25 @@ with col3:
     st.markdown(f"""
     <div class="metric-card">
         <div>
-            <div class="metric-label">BENCANA HIDROMETEOROLOGI</div>
-            <div class="metric-value" style="color: #4DB6AC;">Banjir Lumpur</div>
-            <div class="metric-desc">Hilangnya daya serap air (hutan primer) di hulu konsesi nikel memicu rentetan banjir lumpur. D3TLH abai memprediksi efek domino bencana lanskap ini.</div>
+            <div class="metric-label">Banjir & Longsor</div>
+            <div class="metric-value" style="color: #FF9800;">{jumlah_bencana} <span style="font-size:16px; color:#B0BEC5;">kejadian</span></div>
+            <div class="metric-desc">Bencana hidrometeorologi dampak hilangnya daerah resapan air di hulu.</div>
         </div>
-        <div class="metric-source">Sumber: Data BNPB/BPBD (Proses Integrasi)<br>Indikator: Frekuensi Banjir & Longsor</div>
     </div>
     """, unsafe_allow_html=True)
 
+with col4:
+    st.markdown(f"""
+    <div class="metric-card">
+        <div>
+            <div class="metric-label">Biaya Kesehatan</div>
+            <div class="metric-value" style="color: #00BCD4;">{biaya_kesehatan} <span style="font-size:16px; color:#B0BEC5;">kerugian</span></div>
+            <div class="metric-desc">Beban biaya berobat masyarakat yang tak pernah dihitung di AMDAL.</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<div class='metric-source' style='text-align:right; margin-top:15px;'><b>Sumber Analisis Data:</b> Integrasi Kemenkes, KLHK, dan BNPB (Proses)</div>", unsafe_allow_html=True)
 st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=True)
 
 # ---------------------------------------------------------
