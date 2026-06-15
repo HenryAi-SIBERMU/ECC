@@ -6,9 +6,11 @@ Dokumen ini adalah **Blueprint Wajib** yang merangkum *seluruh* proses *fine-tun
 *   **Sistem Split Kolom 1:2**: Layar dibagi menjadi 2. Kolom kiri khusus untuk Kartu "Mitos vs Fakta" dan *Vonis Akumulasi Skor*. Kolom kanan khusus untuk analisis mendalam.
 *   **Wajib Menggunakan Tab (`st.tabs`)**: Jangan menumpuk grafik secara vertikal memanjang ke bawah. Semua sajian data harus dikemas ke dalam 4 (atau lebih) Tab interaktif agar rapi dan fokus.
 
-## 2. Strategi Penggunaan Grafik & Dataset (Efisiensi & Maksimalisasi)
-*   **Jangan Membuat Grafik Baru Jika Sudah Ada (Re-use)**: Cari dan ambil grafik/visualisasi yang sudah pernah dibuat di halaman (*page*) sebelumnya. Modifikasi sedikit jika perlu, alih-alih membuat kode plotting baru dari nol.
-*   **Maksimalkan SEMUA Dataset**: Jangan pelit data. Gunakan semua dataset yang kita miliki (kesehatan, IKU, IKA, deforestasi, B3, perizinan, dll). Jika ada dataset yang tidak bisa divisualisasikan dalam bentuk grafik, tampilkan sebagai **Fakta Data (Angka/Teks)** di dalam Tab tersebut. Jangan sampai ada data relevan yang terbuang.
+## 2. MAKSIMALKAN GRAFIK, FAKTA, DAN DATA DARI SEMUA PAGE & DATASET
+Ini adalah prinsip paling krusial dalam menyusun matriks:
+*   **Gunakan Semua yang Kita Punya**: Jangan pernah membiarkan data menganggur. Eksploitasi *semua* dataset yang telah kita kumpulkan (Kesehatan, IKA, IKU, Deforestasi, Limbah B3, Titik Izin IUP/Smelter, dll).
+*   **Daur Ulang (Re-Use) Grafik dari Page Lain**: Jika di halaman 1, 2, 3, 4, atau 5 sudah pernah dibuat sebuah grafik/peta yang relevan, **tarik dan gunakan kembali (re-use)** grafik tersebut ke dalam Tab Matriks. Jangan membuang waktu membuat grafik baru dari nol jika asetnya sudah ada.
+*   **Visualisasikan Semua Fakta**: Jika suatu dataset tidak cocok dijadikan grafik linier/bar, maka wajib diubah menjadi **Fakta Data Teks/Angka Metrik**. Tidak boleh ada data yang luput dari paparan argumen.
 
 ## 3. Komponen di Dalam Setiap Tab
 Setiap Tab harus memiliki struktur urut dari atas ke bawah sebagai berikut:
