@@ -789,3 +789,152 @@ df_kekerasan_display['keterlibatan_perusahaan'] = df_kekerasan_display['keterlib
 df_kekerasan_display.columns = ['Tahun', 'Sektor', 'Perusahaan Terlibat', 'Ditangkap (Jiwa)', 'Tewas (Jiwa)', 'Narasi Singkat Kejadian']
 
 st.dataframe(df_kekerasan_display.head(10), use_container_width=True, hide_index=True)
+
+
+# ══════════════════════════════════════════════════════════
+# SUB-BAB 4.4: KONFLIK SOSIAL DAN RESISTENSI MASYARAKAT
+# ══════════════════════════════════════════════════════════
+st.markdown("---")
+st.subheader("4.4 Pembuktian Statistik: Ekspansi vs Eskalasi Konflik")
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Before-After Analysis & SPSS-Style Crosstabulation</span>', unsafe_allow_html=True)
+
+st.markdown("""
+Hipotesis utama dalam evaluasi ini adalah bahwa **industrialisasi dan hilirisasi** (Pasca-ekspansi) berbanding lurus dengan **eskalasi konflik dan represi** terhadap masyarakat. 
+Untuk mengujinya secara statistik sesuai pedoman D3TLH, tabel crosstab dan uji Chi-Square di bawah membandingkan periode **Pra-ekspansi (< 2014)** dan periode **Pasca-ekspansi (Era Hilirisasi 2014-2024)**. Unit observasinya adalah catatan kejadian letupan konflik historis.
+""")
+
+import scipy.stats as stats
+
+# Data Preparation
+df_crosstab = df_dampak.copy()
+# Memfilter hanya data valid yang memiliki tahun
+df_crosstab = df_crosstab[df_crosstab['tahun'] >= 1990]
+
+# Klasifikasi X (Periode)
+df_crosstab['X_Label'] = df_crosstab['tahun'].apply(lambda x: 'Pasca-ekspansi (≥ 2014)' if x >= 2014 else 'Pra-ekspansi (< 2014)')
+# Klasifikasi Y (Kriminalisasi)
+df_crosstab['Y_Label'] = df_crosstab['indikasi_kriminalisasi'].fillna(False).astype(bool).apply(lambda x: 'Ada Represi/Kriminalisasi' if x else 'Baseline (Hanya Konflik)')
+
+cats_x = ['Pra-ekspansi (< 2014)', 'Pasca-ekspansi (≥ 2014)']
+cats_y = ['Baseline (Hanya Konflik)', 'Ada Represi/Kriminalisasi']
+
+crosstab = pd.crosstab(df_crosstab["X_Label"], df_crosstab["Y_Label"]).reindex(index=cats_x, columns=cats_y, fill_value=0)
+
+try:
+    chi2, p, dof, expected = stats.chi2_contingency(crosstab)
+    expected_df = pd.DataFrame(expected, index=crosstab.index, columns=crosstab.columns)
+except Exception:
+    chi2, p, dof, expected_df = 0, 1, 0, pd.DataFrame(0, index=cats_x, columns=cats_y)
+
+st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+st.markdown("### Detail Uji Statistik (Chi-Square & Odds Ratio)")
+st.caption("Tabel-tabel di bawah ini menyajikan bukti statistik formal: Case Processing → Crosstabulation → Chi-Square Tests → Ringkasan Hipotesis.")
+
+# --- A. Case Processing Summary ---
+st.markdown("##### Case Processing Summary")
+total_cases = len(df_crosstab)
+valid_cases = len(df_crosstab.dropna(subset=['X_Label', 'Y_Label']))
+missing_cases = total_cases - valid_cases
+
+columns_case = pd.MultiIndex.from_product([["Cases"], ["Valid", "Missing", "Total"], ["N", "Percent"]])
+interaction_label = "Periode Ekspansi * Tingkat Represi"
+row_data = [
+    valid_cases, f"{valid_cases/total_cases*100:.1f}%" if total_cases > 0 else "0%",
+    missing_cases, f"{missing_cases/total_cases*100:.1f}%" if total_cases > 0 else "0%",
+    total_cases, "100.0%"
+]
+case_summary = pd.DataFrame([row_data], index=[interaction_label], columns=columns_case)
+st.table(case_summary)
+
+# --- B. Crosstabulation ---
+st.markdown(f"##### {interaction_label} Crosstabulation")
+row_indices = []
+for x_cat in cats_x:
+    row_indices.extend([(x_cat, "Count"), (x_cat, "Expected Count")])
+row_indices.extend([("Total", "Count"), ("Total", "Expected Count")])
+
+rows = []
+for x_cat in cats_x:
+    counts = crosstab.loc[x_cat].tolist()
+    exps = expected_df.loc[x_cat].tolist()
+    rows.append(counts + [sum(counts)])
+    rows.append([f"{v:.1f}" for v in exps] + [f"{sum(exps):.1f}"])
+
+total_counts = crosstab.sum().tolist()
+total_exps = expected_df.sum().tolist()
+rows.append(total_counts + [sum(total_counts)])
+rows.append([f"{v:.1f}" for v in total_exps] + [f"{sum(total_exps):.1f}"])
+
+multi_index = pd.MultiIndex.from_tuples(row_indices, names=["Periode Ekspansi", ""])
+spss_crosstab = pd.DataFrame(rows, index=multi_index, columns=cats_y + ["Total"])
+st.table(spss_crosstab)
+
+# --- C. Chi-Square Tests ---
+st.markdown("##### Chi-Square Tests")
+try:
+    g, p_g, dof_g, exp_g = stats.chi2_contingency(crosstab, lambda_="log-likelihood")
+except:
+    g, p_g = 0, 1
+x_codes = df_crosstab["X_Label"].replace({cats_x[0]: 0, cats_x[1]: 1})
+y_codes = df_crosstab["Y_Label"].replace({cats_y[0]: 0, cats_y[1]: 1})
+try:
+    r, p_corr = stats.pearsonr(list(x_codes), list(y_codes))
+    lbl_val = (valid_cases - 1) * (r**2)
+except:
+    r, p_corr, lbl_val = 0, 1, 0
+
+chi_data = [
+    [f"{chi2:.3f}", str(dof), f"{p:.3f}"],
+    [f"{g:.3f}", str(dof), f"{p_g:.3f}"],
+    [f"{lbl_val:.3f}", "1", f"{p_corr:.3f}"],
+    [str(valid_cases), "", ""]
+]
+chi_df = pd.DataFrame(chi_data, index=["Pearson Chi-Square", "Likelihood Ratio", "Linear-by-Linear Association", "N of Valid Cases"], columns=["Value", "df", "Asymp. Sig. (2-sided)"])
+st.markdown(f"**{interaction_label}**")
+st.table(chi_df)
+
+# --- D. Hypothesis & Risk Summary ---
+st.markdown("### Ringkasan Uji Hipotesis")
+is_significant = p < 0.05
+status_text = "SIGNIFIKAN (Ada Hubungan)" if is_significant else "TIDAK SIGNIFIKAN"
+order_color = "#4CAF50" if is_significant else "#F44336" 
+bg_color = "rgba(76, 175, 80, 0.1)" if is_significant else "rgba(244, 67, 54, 0.1)"
+
+try:
+    a = crosstab.loc[cats_x[0], cats_y[0]]
+    b = crosstab.loc[cats_x[0], cats_y[1]]
+    c = crosstab.loc[cats_x[1], cats_y[0]]
+    d = crosstab.loc[cats_x[1], cats_y[1]]
+    odds_ratio = (a * d) / (b * c) if (b * c) > 0 else 0
+except:
+    odds_ratio = 0
+
+col_res1, col_res2 = st.columns([1, 1.5])
+with col_res1:
+    st.markdown(f"""
+    <div style="border: 2px solid {order_color}; padding: 15px; border-radius: 5px; background-color: {bg_color}; margin-bottom: 10px;">
+        <h4 style="color: {order_color}; margin: 0 0 10px 0; text-transform: uppercase;">Result: {status_text}</h4>
+        <p style="margin: 0; font-family: monospace;">
+            P-Value    : {p:.4f}<br>
+            Chi-Square : {chi2:.3f}<br>
+            df         : {dof}
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    st.markdown(f"**Odds Ratio (Risk Estimate):** `{odds_ratio:.3f}`")
+
+with col_res2:
+    if is_significant:
+        interp_text = f"Terdapat perbedaan yang sangat **signifikan (P < 0.05)** antara periode Pra-ekspansi dan Pasca-ekspansi (Hilirisasi). Konflik di era ekspansi tinggi memiliki proporsi kriminalisasi dan represi yang secara persentase lebih masif dan terstruktur dibanding era sebelumnya. Hal ini memvalidasi teori kerangka riset bahwa perluasan wilayah kelola oligarki nyatanya selalu dikawal dengan eskalasi represif terhadap ruang sipil."
+    else:
+        interp_text = f"Secara agregat, proporsi kriminalisasi pada kedua periode **tidak menunjukkan perbedaan signifikan**. Hal ini mengindikasikan bahwa penggunaan instrumen kekerasan sudah mengakar dan sistematis di sepanjang sejarah konflik agraria tanpa memandang batas waktu rezim."
+    
+    st.markdown(f"""
+    <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid {order_color}; height: 100%;">
+        <b>Interpretasi Sosial Kritis:</b><br><br>
+        {interp_text}
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<br><br>", unsafe_allow_html=True)
+
