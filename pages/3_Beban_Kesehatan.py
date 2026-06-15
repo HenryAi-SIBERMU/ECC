@@ -536,7 +536,7 @@ st.markdown("##### Chi-Square Tests")
 g, p_g, dof_g, exp_g = stats.chi2_contingency(crosstab, lambda_="log-likelihood")
 x_codes = df_panel["X_Label"].replace({label_x_low: 0, label_x_high: 1})
 y_codes = df_panel["Y_Label"].replace({label_y_low: 0, label_y_high: 1})
-r, p_corr = stats.pearsonr(x_codes, y_codes)
+r, p_corr = stats.pearsonr(list(x_codes), list(y_codes))
 lbl_val = (valid_cases - 1) * (r**2)
 
 chi_data = [
@@ -1076,7 +1076,7 @@ st.markdown("##### Chi-Square Tests")
 g_ika, p_g_ika, dof_g_ika, exp_g_ika = stats.chi2_contingency(crosstab_ika, lambda_="log-likelihood")
 ika_codes = df_ika_diare["IKA_Label"].replace({label_ika_low: 0, label_ika_high: 1})
 diare_codes = df_ika_diare["Diare_Label"].replace({label_diare_low: 0, label_diare_high: 1})
-r_ika, p_corr_ika = stats.pearsonr(ika_codes, diare_codes)
+r_ika, p_corr_ika = stats.pearsonr(list(ika_codes), list(diare_codes))
 lbl_val_ika = (valid_cases_ika - 1) * (r_ika**2)
 
 chi_data_ika = [

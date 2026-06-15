@@ -447,7 +447,7 @@ st.markdown("##### Chi-Square Tests")
 g, p_g, dof_g, exp_g = stats.chi2_contingency(crosstab, lambda_="log-likelihood")
 x_codes = df_panel["X_Label"].replace({label_x_low: 0, label_x_high: 1})
 y_codes = df_panel["Y_Label"].replace({label_y_low: 0, label_y_high: 1})
-r, p_corr = stats.pearsonr(x_codes, y_codes)
+r, p_corr = stats.pearsonr(list(x_codes), list(y_codes))
 lbl_val = (valid_cases - 1) * (r**2)
 
 chi_data = [
@@ -802,7 +802,7 @@ except:
 x_codes_2 = df_panel_1_2["X_Label"].replace({label_x_low_2: 0, label_x_high_2: 1})
 y_codes_2 = df_panel_1_2["Y_Label"].replace({label_y_low_2: 0, label_y_high_2: 1})
 try:
-    r_2, p_corr_2 = stats.pearsonr(x_codes_2, y_codes_2)
+    r_2, p_corr_2 = stats.pearsonr(list(x_codes_2), list(y_codes_2))
     lbl_val_2 = (valid_cases_2 - 1) * (r_2**2)
 except:
     r_2, p_corr_2, lbl_val_2 = 0, 1, 0
@@ -1360,7 +1360,7 @@ except:
 x_codes_3 = df_panel_1_3["X_Label"].replace({label_x_low_3: 0, label_x_high_3: 1})
 y_codes_3 = df_panel_1_3["Y_Label"].replace({label_y_low_3: 0, label_y_high_3: 1})
 try:
-    r_3, p_corr_3 = stats.pearsonr(x_codes_3, y_codes_3)
+    r_3, p_corr_3 = stats.pearsonr(list(x_codes_3), list(y_codes_3))
     lbl_val_3 = (valid_cases_3 - 1) * (r_3**2)
 except:
     r_3, p_corr_3, lbl_val_3 = 0, 1, 0
