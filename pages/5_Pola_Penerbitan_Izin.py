@@ -655,7 +655,7 @@ df_fpic_violations = df_fpic_violations[['tahun', 'Perusahaan', 'provinsi', 'lok
 
 # Create expanders for each case
 for idx, row in df_fpic_violations.iterrows():
-    with st.expander(f"🔴 **{row['tahun']}** — {row['Perusahaan']} ({row['provinsi']})", expanded=False):
+        with st.expander(f"**{row['tahun']}** — {row['Perusahaan']} ({row['provinsi']})", expanded=False):
         st.markdown(f"""
         **Judul Konflik:** {row['judul']}
         
@@ -675,9 +675,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ---- VISUALIZATION 4: Data Table dengan Filter ----
-st.markdown("#### 📋 Database Lengkap: Konflik & Masalah Izin di Sulawesi")
+st.markdown("#### Database Lengkap: Konflik & Masalah Izin di Sulawesi")
 
-tab1, tab2 = st.tabs(["🔥 Konflik Pertambangan (Tanahkita)", "📄 Masalah Izin Perusahaan (KPA)"])
+tab1, tab2 = st.tabs(["Konflik Pertambangan (Tanahkita)", "Masalah Izin Perusahaan (KPA)"])
 
 with tab1:
     # Filter options
@@ -757,24 +757,24 @@ with tab2:
 st.markdown("---")
 
 # ---- CITATION BOX ----
-st.markdown("#### 📚 Referensi Utama & Verifikasi Independen")
+st.markdown("#### Referensi Utama & Verifikasi Independen")
 
 st.markdown("""
 <div style="background:#1A1A1A; padding:20px; border-radius:10px; border:1px solid #333; margin-bottom:25px;">
-    <h5 style="color:#66BB6A; margin-top:0;">Laporan Organisasi Internasional:</h5>
-    <ul style="line-height:1.8; color:#E0E0E0;">
-        <li><b>Climate Rights International (2024-2025)</b>: "Indonesia: Nickel Industry Harming Human Rights and the Environment" — Dokumentasi pelanggaran hak asasi dan lingkungan di industri nikel Indonesia. <a href="https://cri.org/indonesia" target="_blank" style="color:#66BB6A;">cri.org/indonesia</a></li>
-        <li><b>Mighty Earth (2024)</b>: "From Forests to Electric Vehicles" — Temuan: perusahaan tambang nikel secara ilegal membabat hutan lindung dan produksi, <b>tanpa menggunakan FPIC untuk konsultasi dengan komunitas lokal di Kabaena</b>. <a href="https://mightyearth.org/article/from-forests-to-electric-vehicles/" target="_blank" style="color:#66BB6A;">mightyearth.org</a></li>
-        <li><b>Business & Human Rights Resource Centre (2024)</b>: "Indonesia: Nickel mining levels forests without FPIC" — Dokumentasi dampak kesehatan, lingkungan, dan ekonomi yang merugikan masyarakat lokal. <a href="https://www.business-humanrights.org/" target="_blank" style="color:#66BB6A;">business-humanrights.org</a></li>
-        <li><b>EJAtlas</b>: "Islanders resisting nickel mining permits, Wawonii, Southeast Sulawesi" — Studi kasus Pulau Wawonii: "Meskipun konsesi mencakup area pemukiman dan tanah leluhur, <b>penduduk tidak dilibatkan dalam proses pengambilan keputusan</b>." <a href="https://www.ejatlas.org/conflict/islanders-resisting-nickel-mining-permits-wawonii-southeast-sulawesi-indonesia" target="_blank" style="color:#66BB6A;">ejatlas.org</a></li>
-        <li><b>Mongabay (2025)</b>: "Nickel boom on an Indonesian island brings toxic seas, lost incomes" — Temuan: "Komunitas yang terdampak melaporkan <b>perampasan lahan tanpa konsultasi atau kompensasi yang layak, partisipasi publik yang terbatas, dan kriminalisasi terhadap protes</b>, semuanya melanggar hak-hak masyarakat adat dan hukum nasional." <a href="https://news.mongabay.com/2025/07/" target="_blank" style="color:#66BB6A;">mongabay.com</a></li>
-    </ul>
-    
-    <h5 style="color:#66BB6A; margin-top:20px;">Database Nasional:</h5>
-    <ul style="line-height:1.8; color:#E0E0E0;">
-        <li><b>Konsorsium Pembaruan Agraria (KPA)</b>: Catatan Akhir Tahun (CATAHU) 2016-2025 — 9 laporan tahunan komprehensif tentang konflik agraria dan masalah perizinan di Indonesia.</li>
-        <li><b>Tanahkita.id</b>: Database konflik agraria YLBHI/KPA — 568 kasus konflik nasional, 12 kasus pertambangan Sulawesi terekam.</li>
-    </ul>
+<h5 style="color:#66BB6A; margin-top:0;">Laporan Organisasi Internasional:</h5>
+<ul style="line-height:1.8; color:#E0E0E0;">
+<li><b>Climate Rights International (2024-2025)</b>: "Indonesia: Nickel Industry Harming Human Rights and the Environment" — Dokumentasi pelanggaran hak asasi dan lingkungan di industri nikel Indonesia. <a href="https://cri.org/indonesia" target="_blank" style="color:#66BB6A;">cri.org/indonesia</a></li>
+<li><b>Mighty Earth (2024)</b>: "From Forests to Electric Vehicles" — Temuan: perusahaan tambang nikel secara ilegal membabat hutan lindung dan produksi, <b>tanpa menggunakan FPIC untuk konsultasi dengan komunitas lokal di Kabaena</b>. <a href="https://mightyearth.org/article/from-forests-to-electric-vehicles/" target="_blank" style="color:#66BB6A;">mightyearth.org</a></li>
+<li><b>Business & Human Rights Resource Centre (2024)</b>: "Indonesia: Nickel mining levels forests without FPIC" — Dokumentasi dampak kesehatan, lingkungan, dan ekonomi yang merugikan masyarakat lokal. <a href="https://www.business-humanrights.org/" target="_blank" style="color:#66BB6A;">business-humanrights.org</a></li>
+<li><b>EJAtlas</b>: "Islanders resisting nickel mining permits, Wawonii, Southeast Sulawesi" — Studi kasus Pulau Wawonii: "Meskipun konsesi mencakup area pemukiman dan tanah leluhur, <b>penduduk tidak dilibatkan dalam proses pengambilan keputusan</b>." <a href="https://www.ejatlas.org/conflict/islanders-resisting-nickel-mining-permits-wawonii-southeast-sulawesi-indonesia" target="_blank" style="color:#66BB6A;">ejatlas.org</a></li>
+<li><b>Mongabay (2025)</b>: "Nickel boom on an Indonesian island brings toxic seas, lost incomes" — Temuan: "Komunitas yang terdampak melaporkan <b>perampasan lahan tanpa konsultasi atau kompensasi yang layak, partisipasi publik yang terbatas, dan kriminalisasi terhadap protes</b>, semuanya melanggar hak-hak masyarakat adat dan hukum nasional." <a href="https://news.mongabay.com/2025/07/" target="_blank" style="color:#66BB6A;">mongabay.com</a></li>
+</ul>
+
+<h5 style="color:#66BB6A; margin-top:20px;">Database Nasional:</h5>
+<ul style="line-height:1.8; color:#E0E0E0;">
+<li><b>Konsorsium Pembaruan Agraria (KPA)</b>: Catatan Akhir Tahun (CATAHU) 2016-2025 — 9 laporan tahunan komprehensif tentang konflik agraria dan masalah perizinan di Indonesia.</li>
+<li><b>Tanahkita.id</b>: Database konflik agraria YLBHI/KPA — 568 kasus konflik nasional, 12 kasus pertambangan Sulawesi terekam.</li>
+</ul>
 </div>
 """, unsafe_allow_html=True)
 
