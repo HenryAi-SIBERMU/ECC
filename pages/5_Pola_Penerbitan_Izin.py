@@ -203,7 +203,56 @@ st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=T
 # ---------------------------------------------------------
 
 st.subheader("5.1 Fakta Penyebab: Sinkronisasi Waktu (Timeline Mapping)")
-st.info("⚠️ Placeholder: Grafik Timeline Penerbitan Izin vs Tren Kerusakan Lingkungan akan dirender di sini.")
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Dual-Axis Time-Series Overlay (Plotly)</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
+
+from plotly.subplots import make_subplots
+
+# Data Prep for Timeline Mapping
+df_izin_agg = df_izin.groupby('Tahun')['Jumlah_Izin_Baru'].sum().reset_index()
+df_gfw_agg = df_gfw.groupby('Tahun')['Total_Deforestasi_Ha'].sum().reset_index()
+
+# Merge and pad missing years up to 2024
+df_timeline = pd.merge(df_izin_agg, df_gfw_agg, on='Tahun', how='outer').fillna(0).sort_values('Tahun')
+
+# Plotly Dual-Axis Chart
+fig_timeline = make_subplots(specs=[[{"secondary_y": True}]])
+fig_timeline.add_trace(
+    go.Bar(x=df_timeline['Tahun'], y=df_timeline['Jumlah_Izin_Baru'], name="Total Izin Baru (Kiri)", marker_color='#F57C00', opacity=0.85),
+    secondary_y=False,
+)
+fig_timeline.add_trace(
+    go.Scatter(x=df_timeline['Tahun'], y=df_timeline['Total_Deforestasi_Ha'], name="Deforestasi Alam (Kanan)", line=dict(color='#E53935', width=4), mode='lines+markers', marker=dict(size=8, color='#B71C1C')),
+    secondary_y=True,
+)
+fig_timeline.update_layout(
+    title="Sinkronisasi Absolut: Obral Izin vs Kehancuran Ekologis (2014-2024)",
+    plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
+    legend=dict(orientation="h", yanchor="bottom", y=1.05, xanchor="center", x=0.5),
+    margin=dict(l=0, r=0, t=80, b=40),
+    hovermode="x unified"
+)
+fig_timeline.update_xaxes(showgrid=False, tickmode='linear', dtick=1, title_text="Tahun")
+fig_timeline.update_yaxes(title_text="Jumlah Penerbitan Izin (IUP)", showgrid=True, gridcolor='rgba(255,255,255,0.1)', secondary_y=False)
+fig_timeline.update_yaxes(title_text="Laju Deforestasi (Hektar)", showgrid=False, secondary_y=True)
+
+st.plotly_chart(fig_timeline, use_container_width=True)
+
+# Interpretation Box
+st.markdown("""
+<div style="background:#1E1E1E; padding:20px; border-radius:10px; border-left:5px solid #FF5722; margin-bottom: 25px;">
+    <b style="color:#FF5722; font-size:1.1rem;">Pembedahan Realitas Ekologis (Governance Failure):</b><br><br>
+    <div style="color: #E0E0E0; font-size: 0.95rem; line-height: 1.6;">
+    Data deret waktu (<i>time-series</i>) di atas menyajikan kronik forensik yang memalukan bagi tata kelola lingkungan hidup di semenanjung Sulawesi. Kurva merah menyala yang merepresentasikan luasan deforestasi berfluktuasi secara masif, dengan rekor kehancuran menembus <b>333 ribu hektar</b> pada tahun 2015 dan kembali melonjak drastis di atas <b>255 ribu hektar</b> pada tahun 2023. Secara logika keberlanjutan dan muruah instrumen D3TLH, momentum di mana daya dukung ekologis sedang ambruk seharusnya memicu mekanisme moratorium perizinan secara otomatis.<br><br>
+    Namun, batang-batang oranye yang menunjukkan jumlah obral izin usaha pertambangan (IUP) baru justru mengkhianati logika penyelamatan tersebut. Alih-alih mengerem laju ekspansi saat hutan Sulawesi sedang kritis berdarah-darah, negara justru <b>mempercepat laju perizinan secara membabi buta</b>. Puncak pengabaian ini terjadi pada rentang 2022 hingga 2024, di mana grafik batang oranye meroket secara eksponensial tak terkendali. Tepat ketika grafik merah (deforestasi) kembali menanjak ekstrem di tahun 2023, pemerintah justru mengesahkan <b>149 izin tambang baru</b>, dan melanjutkannya dengan rekor gila <b>194 izin baru di tahun 2024</b>.<br><br>
+    Ketidakpedulian absolut antara kondisi krisis ruang hidup (sumbu Y kanan) dengan ambisi perampasan ruang konsesi (sumbu Y kiri) ini merupakan bukti empiris yang tidak terbantahkan: instrumen daya dukung lingkungan (D3TLH) telah sepenuhnya mati, lumpuh, dan dibajak secara formal oleh syahwat ekspansi hilirisasi oligarki ekstraktif.
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+with st.expander("Lihat Data Mentah: Sinkronisasi Waktu", expanded=False):
+    st.dataframe(df_timeline, use_container_width=True, hide_index=True)
+    st.caption("📁 **Sumber File:** Agregasi dari `sulawesi_izin_baru_per_tahun.csv` (Minerbaone) & `sulawesi_gfw_master_1_dekade_2014_2023.csv` (GFW). Catatan: Data GFW 2024 bernilai 0 karena jeda rilis tahunan dari satelit penginderaan.")
 
 st.markdown("---")
 
