@@ -710,57 +710,74 @@ st.markdown("---")
 
 col_trend, col_sektor = st.columns(2)
 
-# Chart 1: Stacked Bar Chart Proporsi Kriminalisasi (Pasca 2010)
-df_tren_all = df_dampak[df_dampak['tahun'] >= 2010].copy()
-df_tren_all['Status Represi'] = df_tren_all['indikasi_kriminalisasi'].apply(lambda x: 'Terdapat Kriminalisasi' if x == True else 'Konflik Umum')
-df_tren_group = df_tren_all.groupby(['tahun', 'Status Represi']).size().reset_index(name='jumlah_kasus')
+# Chart 1: Tren Kriminalisasi per Tahun (hanya menampilkan sejak 2000 untuk kejelasan tren modern)
+df_krim_tahun = df_dampak[(df_dampak['indikasi_kriminalisasi'] == True) & (df_dampak['tahun'] >= 2000)].groupby('tahun').size().reset_index(name='jumlah_kasus')
 
 with col_trend:
-    fig_krim_tahun = px.bar(
-        df_tren_group,
-        x='tahun',
+    fig_krim_tahun = px.line(
+        df_krim_tahun, 
+        x='tahun', 
         y='jumlah_kasus',
-        color='Status Represi',
-        title='Proporsi Kekerasan/Kriminalisasi dalam Konflik (Pasca 2010)',
-        color_discrete_map={'Terdapat Kriminalisasi': '#D32F2F', 'Konflik Umum': '#546E7A'},
-        labels={'jumlah_kasus': 'Total Kasus', 'tahun': 'Tahun Kejadian'},
-        barmode='stack'
+        markers=True,
+        title='Tren Kasus Kriminalisasi & Represi (Pasca 2000)',
+        labels={'jumlah_kasus': 'Total Kasus', 'tahun': 'Tahun Kejadian'}
     )
+    fig_krim_tahun.update_traces(line_color='#E53935', marker=dict(size=8, color='#B71C1C'))
     fig_krim_tahun.update_layout(
         plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
         xaxis=dict(showgrid=False, tickmode='linear', dtick=2), 
         yaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)'),
-        legend=dict(orientation="h", yanchor="bottom", y=1.05, xanchor="right", x=1, title=""),
-        margin=dict(t=70, b=40)
+        margin=dict(t=50, b=40)
     )
     st.plotly_chart(fig_krim_tahun, use_container_width=True)
+    with st.expander("Lihat Data Mentah: Tren Kriminalisasi", expanded=False):
+        st.dataframe(df_krim_tahun, use_container_width=True, hide_index=True)
+        st.caption("📁 **Sumber File:** `data/processed/sulawesi_konflik_agraria_tanahkita.csv` - Tren jumlah kasus kriminalisasi per tahun.")
 
-# Chart 2: Donut Chart Kriminalisasi per Sektor
-df_krim_sektor = df_dampak[(df_dampak['indikasi_kriminalisasi'] == True) & (df_dampak['Sektor_Grup'] != 'Lainnya')].groupby('Sektor_Grup').size().reset_index(name='jumlah_kasus')
+# Chart 2: Kriminalisasi per Sektor
+df_krim_sektor = df_dampak[(df_dampak['indikasi_kriminalisasi'] == True) & (df_dampak['Sektor_Grup'] != 'Lainnya')].groupby('Sektor_Grup').size().reset_index(name='jumlah_kasus').sort_values('jumlah_kasus', ascending=True)
 
 with col_sektor:
-    fig_krim_sektor = px.pie(
+    fig_krim_sektor = px.bar(
         df_krim_sektor,
-        values='jumlah_kasus',
-        names='Sektor_Grup',
-        hole=0.6,
+        y='Sektor_Grup',
+        x='jumlah_kasus',
+        orientation='h',
         color='Sektor_Grup',
         color_discrete_map=color_map,
-        title='Sektor Industri Pemicu Kriminalisasi Terbesar'
+        title='Sektor Industri Paling Represif',
+        labels={'jumlah_kasus': 'Total Kasus', 'Sektor_Grup': 'Sektor Pemicu'}
     )
-    fig_krim_sektor.update_traces(textposition='inside', textinfo='percent+label')
     fig_krim_sektor.update_layout(
         showlegend=False,
         plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-        margin=dict(t=70, b=40, l=20, r=20)
+        xaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)'), 
+        yaxis=dict(showgrid=False),
+        margin=dict(t=50, b=40)
     )
     st.plotly_chart(fig_krim_sektor, use_container_width=True)
+    with st.expander("Lihat Data Mentah: Sektor Represif", expanded=False):
+        st.dataframe(df_krim_sektor, use_container_width=True, hide_index=True)
+        st.caption("📁 **Sumber File:** `data/processed/sulawesi_konflik_agraria_tanahkita.csv` - Total kasus kriminalisasi dikelompokkan per sektor.")
 
-st.markdown("#### 🚨 Arsip Kasus Represi dan Kekerasan Fisik Tertinggi (Satu Dekade Terakhir)")
-st.caption("Menampilkan 10 kasus pasca-2010 dengan jumlah korban penangkapan atau tewas terbanyak berdasarkan data yang berhasil didokumentasikan.")
+top_sektor = df_krim_sektor.iloc[-1]['Sektor_Grup'] if not df_krim_sektor.empty else "Industri"
+top_sektor_count = df_krim_sektor.iloc[-1]['jumlah_kasus'] if not df_krim_sektor.empty else 0
+top_tahun = int(df_krim_tahun.loc[df_krim_tahun['jumlah_kasus'].idxmax()]['tahun']) if not df_krim_tahun.empty else 0
+top_tahun_count = int(df_krim_tahun['jumlah_kasus'].max()) if not df_krim_tahun.empty else 0
 
-# Filter >= 2010 agar data-data outlier lawas (misal 1952) tidak mendominasi arsip kekinian
-df_kekerasan = df_dampak[(df_dampak['tahun'] >= 2010) & ((df_dampak['jumlah_ditangkap'] > 0) | (df_dampak['jumlah_tewas'] > 0))].sort_values(['jumlah_ditangkap', 'jumlah_tewas'], ascending=[False, False])
+st.markdown(f"""
+<div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #E53935; margin-bottom: 25px; margin-top: 25px;">
+    <b style="color: #E53935;">Interpretasi Ekologis dan Sosial Kritis: Menggugat Narasi Pertumbuhan Inklusif</b><br><br>
+    Rentetan data kuantitatif di atas secara telanjang membantah klaim arus utama yang kerap didengungkan oleh pemerintah dan oligarki korporasi bahwa ekspansi industri ekstraktif, termasuk proyek hilirisasi dan Proyek Strategis Nasional (PSN), membawa kesejahteraan dan pertumbuhan inklusif bagi masyarakat lokal. Fakta empiris justru memperlihatkan bahwa tata kelola investasi di Indonesia secara struktural dibangun di atas fondasi represi dan kekerasan terhadap ruang sipil. Dari <b>{total_kriminalisasi}</b> kasus indikasi kriminalisasi yang berhasil didokumentasikan, tercatat sebanyak <b>{total_ditangkap}</b> warga dan aktivis lingkungan yang ditangkap secara sewenang-wenang. Angka ini bukanlah statistik hampa, melainkan representasi dari hancurnya keadilan ekologis dan perampasan ruang hidup masyarakat adat, petani, dan nelayan yang dipaksa menyerahkan tanah leluhurnya demi akumulasi kapital segelintir elit industri ekstraktif.<br><br>
+    Jika kita membedah lebih dalam pada distribusi sektoral, <b>Sektor {top_sektor}</b> muncul sebagai aktor dominan yang paling sering menggunakan instrumen koersif negara, menyumbang total <b>{top_sektor_count}</b> kasus represi. Penggunaan aparat keamanan negara maupun preman korporasi untuk memuluskan perampasan tanah menunjukkan bahwa hukum seringkali ditundukkan pada kepentingan bisnis raksasa yang lapar lahan. Eskalasi konflik paling mematikan mencapai puncaknya pada tahun <b>{top_tahun}</b> dengan mencatatkan <b>{top_tahun_count}</b> kasus secara bersamaan. Dalam banyak peristiwa empiris, warga lokal yang sekadar mempertahankan hak konstitusional mereka atas lingkungan hidup yang baik dan sehat, serta membela hak ulayat dari ancaman <i>land grabbing</i>, justru dengan mudah dilabeli sebagai provokator, kelompok anti-pembangunan, hingga dijerat secara sistematis menggunakan pasal-pasal pidana karet.<br><br>
+    Tragedi kemanusiaan ini menjadi semakin kelam dengan hilangnya nyawa <b>{total_tewas}</b> pejuang lingkungan yang melayang sia-sia di pusaran konflik agraria. Gugurnya pahlawan-pahlawan ruang hidup ini menggarisbawahi kegagalan mutlak instrumen pengaman ekologis institusional—seperti Daya Dukung dan Daya Tampung Lingkungan Hidup (D3TLH) maupun dokumen AMDAL—dalam menjamin keselamatan hak asasi rakyat. Negara terbukti absen dalam memberikan perlindungan esensial, dan membiarkan masuknya alat berat korporasi yang meratakan pemukiman serta menghancurkan wilayah kelola turun-temurun warga. Selama pendekatan pembangunan eksploitatif yang bertumpu pada sekuritisasi investasi ini terus dipertahankan, dan prinsip persetujuan bebas masyarakat (<i>Free, Prior and Informed Consent</i>) diabaikan secara struktural, maka dapat dipastikan bahwa setiap hektar hutan yang dibabat dan setiap ton mineral yang diekspor akan selalu berlumuran dengan air mata konflik rakyat. Narasi kampanye "Hilirisasi Hijau" yang masif disuarakan hanyalah kamuflase politik belaka jika dalam realitas tapaknya harus selalu ditebus dengan ongkos kemanusiaan yang luar biasa destruktif.
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("#### 🚨 Arsip Kasus Represi dan Kekerasan Fisik Tertinggi")
+st.caption("Menampilkan 10 kasus dengan jumlah korban penangkapan atau tewas terbanyak berdasarkan data yang berhasil didokumentasikan.")
+
+df_kekerasan = df_dampak[(df_dampak['jumlah_ditangkap'] > 0) | (df_dampak['jumlah_tewas'] > 0)].sort_values(['jumlah_ditangkap', 'jumlah_tewas'], ascending=[False, False])
 df_kekerasan_display = df_kekerasan[['tahun', 'Sektor_Grup', 'keterlibatan_perusahaan', 'jumlah_ditangkap', 'jumlah_tewas', 'deskripsi']].copy()
 df_kekerasan_display['keterlibatan_perusahaan'] = df_kekerasan_display['keterlibatan_perusahaan'].fillna('Tidak/Belum Teridentifikasi')
 df_kekerasan_display.columns = ['Tahun', 'Sektor', 'Perusahaan Terlibat', 'Ditangkap (Jiwa)', 'Tewas (Jiwa)', 'Narasi Singkat Kejadian']
