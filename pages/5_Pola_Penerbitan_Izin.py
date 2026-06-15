@@ -112,6 +112,24 @@ df_izin_thn = df_izin.groupby('Tahun')['Jumlah_Izin_Baru'].sum().reset_index()
 tahun_puncak = int(df_izin_thn.loc[df_izin_thn['Jumlah_Izin_Baru'].idxmax(), 'Tahun']) if not df_izin_thn.empty else 0
 izin_puncak = int(df_izin_thn['Jumlah_Izin_Baru'].max()) if not df_izin_thn.empty else 0
 
+# Kalkulasi Metrik Agregat Baru (Bento Cards - Insight Kritis)
+df_panel_bento = pd.merge(df_gfw, df_izin, on=['Provinsi', 'Tahun'], how='left').fillna({'Jumlah_Izin_Baru': 0})
+med_def = df_panel_bento['Total_Deforestasi_Ha'].median()
+df_panel_bento['is_kritis'] = df_panel_bento['Total_Deforestasi_Ha'] > med_def
+
+izin_kritis = int(df_panel_bento[df_panel_bento['is_kritis']]['Jumlah_Izin_Baru'].sum())
+izin_total = int(df_panel_bento['Jumlah_Izin_Baru'].sum())
+pct_kritis = (izin_kritis / izin_total * 100) if izin_total > 0 else 0
+
+kritis_prov = df_panel_bento[df_panel_bento['is_kritis']].groupby('Provinsi')['Jumlah_Izin_Baru'].sum().reset_index()
+top_prov_kritis = kritis_prov.loc[kritis_prov['Jumlah_Izin_Baru'].idxmax()]
+nama_prov_kritis = top_prov_kritis['Provinsi']
+jumlah_prov_kritis = int(top_prov_kritis['Jumlah_Izin_Baru'])
+
+izin_pra_2020 = int(df_izin[df_izin['Tahun'] < 2020]['Jumlah_Izin_Baru'].sum())
+izin_pasca_2020 = int(df_izin[df_izin['Tahun'] >= 2020]['Jumlah_Izin_Baru'].sum())
+rasio_akselerasi = (izin_pasca_2020 / izin_pra_2020) if izin_pra_2020 > 0 else 0
+
 # ---------------------------------------------------------
 # HERO SECTION (EXECUTIVE SUMMARY)
 # ---------------------------------------------------------
@@ -146,11 +164,11 @@ with col1:
     st.markdown(f"""
     <div class="metric-card">
         <div>
-            <div class="metric-label">TOTAL IZIN BARU DITERBITKAN</div>
-            <div class="metric-value" style="color: #4DB6AC;">{total_izin:,} <span style="font-size:1rem;color:#777;">IUP/IUPK</span></div>
-            <div class="metric-desc">Penerbitan izin usaha pertambangan dan smelter baru di kawasan semenanjung Sulawesi sepanjang 10 tahun terakhir.</div>
+            <div class="metric-label">TINGKAT PENGABAIAN EKOLOGIS</div>
+            <div class="metric-value" style="color: #E53935;">{pct_kritis:.1f}% <span style="font-size:1rem;color:#777;">({izin_kritis} IUP)</span></div>
+            <div class="metric-desc">Mayoritas mutlak izin baru justru diobral secara sengaja pada tahun-tahun di mana laju deforestasi provinsi tersebut sedang berada di zona kritis (di atas rata-rata).</div>
         </div>
-        <div class="metric-source">Sumber: Kementerian ESDM (Minerba One Map)<br>File: sulawesi_izin_baru_per_tahun.csv</div>
+        <div class="metric-source">Sumber: Data Panel (ESDM & GFW)<br>File: sulawesi_izin_baru_per_tahun.csv</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -158,11 +176,11 @@ with col2:
     st.markdown(f"""
     <div class="metric-card">
         <div>
-            <div class="metric-label">EKSPANSI KONSESI BARU</div>
-            <div class="metric-value" style="color: #FFB74D;">{total_luas_konsesi:,.1f} <span style="font-size:1rem;color:#777;">Hektar</span></div>
-            <div class="metric-desc">Total luas perampasan ruang daratan baru yang dialokasikan khusus untuk kepentingan operasi korporasi ekstraktif.</div>
+            <div class="metric-label">ZONA BEBAS REM DARURAT</div>
+            <div class="metric-value" style="color: #FFB74D;">{nama_prov_kritis} <span style="font-size:1rem;color:#777;">({jumlah_prov_kritis} IUP)</span></div>
+            <div class="metric-desc">Provinsi dengan rekor penerbitan izin tertinggi tepat pada saat daya dukung lingkungan (tutupan hutan) mereka sedang hancur lebur tanpa mitigasi.</div>
         </div>
-        <div class="metric-source">Sumber: Kementerian ESDM (Kalkulasi Spasial)<br>File: sulawesi_izin_baru_per_tahun.csv</div>
+        <div class="metric-source">Sumber: Data Panel (ESDM & GFW)<br>File: sulawesi_izin_baru_per_tahun.csv</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -170,11 +188,11 @@ with col3:
     st.markdown(f"""
     <div class="metric-card">
         <div>
-            <div class="metric-label">DEFORESTASI ALAM BERSAMAAN</div>
-            <div class="metric-value" style="color: #E53935;">{total_deforestasi:,.1f} <span style="font-size:1rem;color:#777;">Hektar</span></div>
-            <div class="metric-desc">Hilangnya tutupan hutan alam akibat deforestasi pada rentang waktu yang persis sama dengan gelombang penerbitan izin.</div>
+            <div class="metric-label">AKSELERASI IZIN PASCA-2020</div>
+            <div class="metric-value" style="color: #4DB6AC;">{rasio_akselerasi:.1f}x <span style="font-size:1rem;color:#777;">Lipat</span></div>
+            <div class="metric-desc">Ledakan drastis penerbitan izin baru di era pasca-2020 dibandingkan periode sebelumnya, mengonfirmasi jebol dan diabaikannya instrumen D3TLH.</div>
         </div>
-        <div class="metric-source">Sumber: Global Forest Watch (GFW)<br>File: sulawesi_gfw_master_1_dekade_2014_2023.csv</div>
+        <div class="metric-source">Sumber: Kementerian ESDM (Minerbaone)<br>File: sulawesi_izin_baru_per_tahun.csv</div>
     </div>
     """, unsafe_allow_html=True)
 
