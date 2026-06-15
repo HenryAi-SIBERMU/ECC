@@ -655,7 +655,7 @@ df_fpic_violations = df_fpic_violations[['tahun', 'Perusahaan', 'provinsi', 'lok
 
 # Create expanders for each case
 for idx, row in df_fpic_violations.iterrows():
-        with st.expander(f"**{row['tahun']}** — {row['Perusahaan']} ({row['provinsi']})", expanded=False):
+    with st.expander(f"**{row['tahun']}** — {row['Perusahaan']} ({row['provinsi']})", expanded=False):
         st.markdown(f"""
         **Judul Konflik:** {row['judul']}
         
