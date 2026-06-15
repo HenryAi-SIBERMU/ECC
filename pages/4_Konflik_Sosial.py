@@ -751,6 +751,29 @@ with col_trend:
         st.dataframe(df_krim_tahun, use_container_width=True, hide_index=True)
         st.caption("📁 **Sumber File:** `data/processed/sulawesi_konflik_agraria_tanahkita.csv` - Tren jumlah kasus kriminalisasi per tahun.")
 
+with col_sektor:
+    fig_krim_sektor = px.bar(
+        df_krim_sektor,
+        y='Sektor_Grup',
+        x='jumlah_kasus',
+        orientation='h',
+        color='Sektor_Grup',
+        color_discrete_map=color_map,
+        title='Sektor Industri Paling Represif',
+        labels={'jumlah_kasus': 'Total Kasus', 'Sektor_Grup': 'Sektor Pemicu'}
+    )
+    fig_krim_sektor.update_layout(
+        showlegend=False,
+        plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
+        xaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)'), 
+        yaxis=dict(showgrid=False),
+        margin=dict(t=50, b=40)
+    )
+    st.plotly_chart(fig_krim_sektor, use_container_width=True)
+    with st.expander("Lihat Data Mentah: Sektor Represif", expanded=False):
+        st.dataframe(df_krim_sektor, use_container_width=True, hide_index=True)
+        st.caption("📁 **Sumber File:** `data/processed/sulawesi_konflik_agraria_tanahkita.csv` - Total kasus kriminalisasi dikelompokkan per sektor.")
+
 st.markdown(f"""
 <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #E53935; margin-bottom: 25px; margin-top: 25px;">
     <b>Interpretasi Ekologis & Hak Asasi Manusia:</b> Tingginya angka kriminalisasi dan korban tewas di sekitar area konsesi (terutama {top_sektor}) membuktikan bahwa perampasan ruang selalu dibarengi dengan pendekatan represif. Ini membantah telak narasi "Hilirisasi Hijau" yang nyatanya ditebus dengan ongkos kemanusiaan yang berdarah.
