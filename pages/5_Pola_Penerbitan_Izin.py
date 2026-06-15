@@ -780,7 +780,7 @@ st.markdown("""
 
 st.markdown("---")
 
-st.subheader("5.4 Skakmat Statistik: Korelasi Mutlak Banjir Izin & Deforestasi (Crosstab SPSS)")
+st.subheader("5.4 Pembuktian Empiris: Uji Statistik Korelasi Penerbitan Izin & Deforestasi (Crosstab)")
 
 # --- Data Preparation ---
 df_panel = pd.merge(df_gfw, df_izin, on=['Provinsi', 'Tahun'], how='left').fillna({'Jumlah_Izin_Baru': 0, 'Total_Luas_Konsesi_Baru_Ha': 0})
