@@ -279,15 +279,65 @@ st.markdown("""
 # ---------------------------------------------------------
 # A. MITOS KUALITAS UDARA VS ISPA
 # ---------------------------------------------------------
+# --- Pre-computation for Scores (Skala 0-10) ---
+# Skor 1: Ancaman Udara
+kapasitas_terkini = 0
+iku_terkini = 75
+if not df_pltu_op.empty:
+    kapasitas_terkini = df_pltu_op[(df_pltu_op['Status'].str.lower() == 'operating')]['Capacity (MW)'].sum()
+if not df_iku.empty:
+    df_iku_avg_pre = df_iku.groupby('Tahun')['IKU'].mean().reset_index()
+    if 2024 in df_iku_avg_pre['Tahun'].values:
+        iku_terkini = df_iku_avg_pre[df_iku_avg_pre['Tahun'] == 2024]['IKU'].values[0]
+skor_1 = min(10.0, (kapasitas_terkini / 5000) * 5 + max(0, (80 - iku_terkini) / 10) * 5)
+
+# Skor 2: Rasio Anomali ISPA
+skor_2 = 0
+rasio_anomali = 0
+kasus_sentra = 0
+if not df_kes.empty:
+    df_ts_pre = df_kes[df_kes['indikator'].str.contains('ISPA', case=False, na=False)]
+    kasus_sentra = df_ts_pre[df_ts_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
+    kasus_non_sentra = df_ts_pre[~df_ts_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
+    rasio_anomali = (kasus_sentra / 2) / (kasus_non_sentra / 4) if kasus_non_sentra > 0 else 0
+    skor_2 = min(10.0, max(0.0, (rasio_anomali - 1) * 2.5))
+
+# Skor 3: Over-Capacity B3
+skor_3 = 0
+skor_overcapacity = 0
+total_b3_sulteng = 0
+if not df_b3.empty:
+    df_b3['Estimasi Timbulan (Ton/Tahun)'] = pd.to_numeric(df_b3['Estimasi Timbulan (Ton/Tahun)'], errors='coerce').fillna(0)
+    total_b3_all_pre = df_b3['Estimasi Timbulan (Ton/Tahun)'].sum()
+    total_b3_sulteng = df_b3[df_b3['Provinsi'] == 'Sulawesi Tengah']['Estimasi Timbulan (Ton/Tahun)'].sum()
+    skor_overcapacity = total_b3_all_pre / 1_000_000
+    skor_3 = min(10.0, (skor_overcapacity / 20.0) * 10) # Asumsi 20x lipat = Kritis 10
+
+# Skor 4: Defisit Ekosistem
+skor_4 = 0
+if not df_gfw.empty:
+    df_gfw['Total_Emisi_CO2_Megagram'] = pd.to_numeric(df_gfw['Total_Emisi_CO2_Megagram'], errors='coerce').fillna(0)
+    total_emisi_pre = df_gfw['Total_Emisi_CO2_Megagram'].sum() / 1_000_000
+    skor_4 = min(10.0, total_emisi_pre / 10.0)
+
+skor_akumulasi_udara = (skor_1 + skor_2 + skor_3 + skor_4) / 4
+
 colA1, colA2 = st.columns([1, 2])
 with colA1:
-    st.markdown("""
+    st.markdown(f"""
     <div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #E74C3C; height:100%;">
         <h4 style="color:#FFF; margin-top:0;">Mitos D3TLH: Daya Tampung Udara</h4>
         <p style="color:#BDC3C7; font-size:0.9rem;">"Daya tampung udara (berdasarkan peta tutupan lahan) diklaim masih luas dan mampu menyerap emisi."</p>
         <hr style="border-color:#34495E;">
         <h4 style="color:#E74C3C;">Fakta Forensik ECC:</h4>
         <p style="color:#E0E0E0; font-size:0.9rem;">Lonjakan drastis persentase Kasus ISPA dan penyakit saluran pernapasan di lingkar tambang.</p>
+        
+        <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E74C3C;">
+            <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Akumulasi Skor Kerusakan</div>
+            <div style="font-size: 32px; font-weight: 800; color: #E74C3C; line-height: 1.2;">{skor_akumulasi_udara:.1f} <span style="font-size: 16px;">/ 10</span></div>
+            <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">🚨 STATUS: DAYA TAMPUNG JEBOL</div>
+        </div>
+        
         <div style="background:#C0392B; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
             VONIS: Kegagalan Deteksi Morbiditas Akumulatif
         </div>
@@ -320,16 +370,14 @@ with colA2:
                 df_pltu_trend = pd.DataFrame(panel_data_pltu)
                 df_iku_avg = df_iku[df_iku['Tahun'].between(2010, 2024)].groupby('Tahun')['IKU'].mean().reset_index()
                 
-                # Perhitungan Skor Matematis Tab 1
-                kapasitas_terkini = df_pltu_trend[df_pltu_trend['Tahun'] == 2024]['Kapasitas_PLTU_MW'].sum()
-                iku_terkini = df_iku_avg[df_iku_avg['Tahun'] == 2024]['IKU'].values[0] if not df_iku_avg[df_iku_avg['Tahun'] == 2024].empty else 75
-                # Model Matematis: Indeks Ancaman (0-10) = Kombinasi bobot Kapasitas PLTU dan Penurunan IKU dari batas 80
-                skor_ancaman_udara = min(10.0, (kapasitas_terkini / 5000) * 5 + max(0, (80 - iku_terkini) / 10) * 5)
+                # Gunakan skor pre-calculated
+                kapasitas_grafik = df_pltu_trend[df_pltu_trend['Tahun'] == 2024]['Kapasitas_PLTU_MW'].sum()
+                iku_grafik = df_iku_avg[df_iku_avg['Tahun'] == 2024]['IKU'].values[0] if not df_iku_avg[df_iku_avg['Tahun'] == 2024].empty else 75
                 
                 col1, col2, col3 = st.columns(3)
-                col1.metric("Kapasitas PLTU Aktif", f"{kapasitas_terkini:,.0f} MW", "Tahun 2024")
-                col2.metric("Rata-rata IKU Sulawesi", f"{iku_terkini:.1f}", "Skala 0-100", delta_color="inverse")
-                col3.metric("Skor Ancaman Udara", f"{skor_ancaman_udara:.1f} / 10", "STATUS: KRITIS", delta_color="inverse")
+                col1.metric("Kapasitas PLTU Aktif", f"{kapasitas_grafik:,.0f} MW", "Tahun 2024")
+                col2.metric("Rata-rata IKU Sulawesi", f"{iku_grafik:.1f}", "Skala 0-100", delta_color="inverse")
+                col3.metric("Skor Ancaman Udara", f"{skor_1:.1f} / 10", "STATUS: KRITIS", delta_color="inverse")
                 st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
                 
                 owid_colors = ['#9B5A40', '#E58872', '#5E85B4', '#A09CAE', '#82B989', '#E3D7A4']
@@ -382,16 +430,14 @@ with colA2:
                 df_ts_filtered['Kategori'] = df_ts_filtered['provinsi'].apply(lambda x: 'Sentra Industri (Sulteng & Sultra)' if x in ['Sulawesi Tengah', 'Sulawesi Tenggara'] else 'Non-Sentra Industri (Lainnya)')
                 df_ts_agg = df_ts_filtered.groupby(['tahun', 'provinsi', 'Kategori'])['nilai'].sum().reset_index()
                 
-                # Perhitungan Skor Matematis Tab 2
-                kasus_sentra = df_ts_filtered[df_ts_filtered['Kategori'].str.contains('Sentra')]['nilai'].sum()
-                kasus_non_sentra = df_ts_filtered[~df_ts_filtered['Kategori'].str.contains('Sentra')]['nilai'].sum()
-                # Rasio Anomali: Perbandingan rata-rata kasus per provinsi (Sentra vs Non-Sentra)
-                rasio_anomali = (kasus_sentra / 2) / (kasus_non_sentra / 4) if kasus_non_sentra > 0 else 0
+                # Gunakan skor pre-calculated
+                kasus_sentra_grafik = df_ts_filtered[df_ts_filtered['Kategori'].str.contains('Sentra')]['nilai'].sum()
+                kasus_non_sentra_grafik = df_ts_filtered[~df_ts_filtered['Kategori'].str.contains('Sentra')]['nilai'].sum()
                 
                 col1, col2, col3 = st.columns(3)
-                col1.metric("Total Kasus ISPA Sentra", f"{kasus_sentra:,.0f}", "Sulteng & Sultra")
-                col2.metric("Total Kasus ISPA Lainnya", f"{kasus_non_sentra:,.0f}", "4 Provinsi Non-Sentra", delta_color="normal")
-                col3.metric("Skor Rasio Anomali", f"{rasio_anomali:.1f}x Lipat", "STATUS: DARURAT MEDIS", delta_color="inverse")
+                col1.metric("Total Kasus ISPA Sentra", f"{kasus_sentra_grafik:,.0f}", "Sulteng & Sultra")
+                col2.metric("Total Kasus ISPA Lainnya", f"{kasus_non_sentra_grafik:,.0f}", "4 Provinsi Non-Sentra", delta_color="normal")
+                col3.metric("Skor Rasio Anomali", f"{skor_2:.1f} / 10", f"Rasio: {rasio_anomali:.1f}x Lipat", delta_color="inverse")
                 st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
                 
                 fig_3_3 = px.line(
@@ -428,23 +474,11 @@ with colA2:
             # --- 3. Fakta Data Timbulan Limbah Udara & B3 ---
             st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Data perizinan D3TLH fokus pada syarat emisi cerobong di atas kertas, tetapi mengabaikan gunung-gunung debu slag (fly ash) di darat yang bebas tertiup angin memapari puluhan desa setiap harinya.</div>", unsafe_allow_html=True)
             
-            # Hitung fakta cepat
-            total_b3_sulteng = 0
-            total_b3_all = 0
-            if not df_b3.empty:
-                df_b3['Estimasi Timbulan (Ton/Tahun)'] = pd.to_numeric(df_b3['Estimasi Timbulan (Ton/Tahun)'], errors='coerce').fillna(0)
-                total_b3_sulteng = df_b3[df_b3['Provinsi'] == 'Sulawesi Tengah']['Estimasi Timbulan (Ton/Tahun)'].sum()
-                total_b3_all = df_b3['Estimasi Timbulan (Ton/Tahun)'].sum()
-            
-            total_ispa_sentra = df_ts_filtered[df_ts_filtered['Kategori'].str.contains('Sentra')]['nilai'].sum() if not df_ts_filtered.empty else 0
-            
-            # Model Matematis: Skor Over-Capacity = Total Limbah B3 dibagi dengan Baseline Daya Tampung (Asumsi 1 Juta Ton/Tahun)
-            skor_overcapacity = (total_b3_all / 1_000_000)
-            
+            # Gunakan nilai pre-calculated
             col_f1, col_f2, col_f3 = st.columns(3)
             col_f1.metric("Total Limbah B3 Sulteng", f"{total_b3_sulteng/1_000_000:.1f} Jt Ton/Thn", "Partikulat/Fly Ash")
-            col_f2.metric("Total Kasus ISPA Sentra", f"{total_ispa_sentra:,.0f}", "2014-2024", delta_color="inverse")
-            col_f3.metric("Skor Over-Capacity", f"{skor_overcapacity:.1f}x Lipat", "STATUS: OVER-CAPACITY B3", delta_color="inverse")
+            col_f2.metric("Total Kasus ISPA Sentra", f"{kasus_sentra:,.0f}", "2014-2024", delta_color="inverse")
+            col_f3.metric("Skor Over-Capacity", f"{skor_3:.1f} / 10", f"Beban: {skor_overcapacity:.1f}x Batas", delta_color="inverse")
             
             st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
             
@@ -474,13 +508,10 @@ with colA2:
                 total_emisi = df_gfw['Total_Emisi_CO2_Megagram'].sum() / 1_000_000 # Juta Ton
                 total_deforestasi = df_gfw['Total_Deforestasi_Ha'].sum() / 1_000 # Ribu Ha
                 
-                # Model Matematis: Skor Defisit Ekosistem = Rasio Emisi CO2 terhadap daya serap hutan yang hilang (asumsi 10 Juta Ton adalah batas kritis ekologis)
-                skor_defisit = min(10.0, total_emisi / 10.0)
-                
                 col_e1, col_e2, col_e3 = st.columns(3)
                 col_e1.metric("Total Emisi CO2 Lepas", f"{total_emisi:.1f} Jt Ton", "1 Dekade Terakhir")
                 col_e2.metric("Total Hutan Hilang", f"{total_deforestasi:.1f} Ribu Ha", "Filter Karbon Alami", delta_color="inverse")
-                col_e3.metric("Skor Defisit Ekosistem", f"{skor_defisit:.1f} / 10", "STATUS: DARURAT KARBON", delta_color="inverse")
+                col_e3.metric("Skor Defisit Ekosistem", f"{skor_4:.1f} / 10", "STATUS: DARURAT KARBON", delta_color="inverse")
                 
                 st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
                 
