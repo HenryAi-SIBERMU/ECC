@@ -295,92 +295,101 @@ with colA1:
 
 with colA2:
     if not df_kes.empty:
-        # --- 1. Ekspansi PLTU vs Penurunan Kualitas Udara ---
-        if not df_pltu_op.empty and not df_iku.empty:
-            years = list(range(2010, 2025))
-            prov_map = {'Sulawesi Tengah': 'Sulawesi Tengah', 'Sulawesi Tenggara': 'Sulawesi Tenggara', 'Sulawesi Selatan': 'Sulawesi Selatan', 'Sulawesi Utara': 'Sulawesi Utara', 'Sulawesi Barat': 'Sulawesi Barat', 'Gorontalo': 'Gorontalo'}
-            panel_data_pltu = []
-            for y in years:
-                for prov in prov_map.values():
-                    cap = df_pltu_op[(df_pltu_op['Provinsi'] == prov) & (df_pltu_op['Start year'] <= y)]['Capacity (MW)'].sum()
-                    panel_data_pltu.append({'Tahun': y, 'Provinsi': prov, 'Kapasitas_PLTU_MW': cap})
-            df_pltu_trend = pd.DataFrame(panel_data_pltu)
-            
-            df_iku_avg = df_iku[df_iku['Tahun'].between(2010, 2024)].groupby('Tahun')['IKU'].mean().reset_index()
-            
-            owid_colors = ['#9B5A40', '#E58872', '#5E85B4', '#A09CAE', '#82B989', '#E3D7A4']
-            fig_2_2_combined = make_subplots(specs=[[{"secondary_y": True}]])
-            
-            for i, prov in enumerate(df_pltu_trend['Provinsi'].unique()):
-                d = df_pltu_trend[df_pltu_trend['Provinsi'] == prov]
+        tab1, tab2 = st.tabs(["Korelasi PLTU & Kualitas Udara", "Dampak Kasus ISPA/Pneumonia"])
+        
+        with tab1:
+            # --- 1. Ekspansi PLTU vs Penurunan Kualitas Udara ---
+            if not df_pltu_op.empty and not df_iku.empty:
+                years = list(range(2010, 2025))
+                prov_map = {
+                    'Central Sulawesi': 'Sulawesi Tengah', 'South East Sulawesi': 'Sulawesi Tenggara',
+                    'South Sulawesi': 'Sulawesi Selatan', 'North Sulawesi': 'Sulawesi Utara',
+                    'West Sulawesi': 'Sulawesi Barat', 'Gorontalo': 'Gorontalo'
+                }
+                df_pltu_op['Provinsi'] = df_pltu_op['Subnational unit (province, state)'].map(prov_map)
+                df_pltu_op = df_pltu_op[(df_pltu_op['Status'].str.lower() == 'operating') & df_pltu_op['Start year'].notna()]
+                
+                panel_data_pltu = []
+                for y in years:
+                    for prov in prov_map.values():
+                        cap = df_pltu_op[(df_pltu_op['Provinsi'] == prov) & (df_pltu_op['Start year'] <= y)]['Capacity (MW)'].sum()
+                        panel_data_pltu.append({'Tahun': y, 'Provinsi': prov, 'Kapasitas_PLTU_MW': cap})
+                df_pltu_trend = pd.DataFrame(panel_data_pltu)
+                
+                df_iku_avg = df_iku[df_iku['Tahun'].between(2010, 2024)].groupby('Tahun')['IKU'].mean().reset_index()
+                
+                owid_colors = ['#9B5A40', '#E58872', '#5E85B4', '#A09CAE', '#82B989', '#E3D7A4']
+                fig_2_2_combined = make_subplots(specs=[[{"secondary_y": True}]])
+                
+                for i, prov in enumerate(df_pltu_trend['Provinsi'].unique()):
+                    d = df_pltu_trend[df_pltu_trend['Provinsi'] == prov]
+                    fig_2_2_combined.add_trace(
+                        go.Scatter(
+                            x=d['Tahun'], y=d['Kapasitas_PLTU_MW'], name=prov, mode='lines', stackgroup='one',
+                            line=dict(width=0.5, color='#444444'), fillcolor=owid_colors[i % len(owid_colors)],
+                            hoveron='points+fills', hovertemplate='%{y:.0f} MW<extra></extra>'
+                        ), secondary_y=False
+                    )
+                
                 fig_2_2_combined.add_trace(
                     go.Scatter(
-                        x=d['Tahun'], y=d['Kapasitas_PLTU_MW'], name=prov, mode='lines', stackgroup='one',
-                        line=dict(width=0.5, color='#444444'), fillcolor=owid_colors[i % len(owid_colors)],
-                        hoveron='points+fills', hovertemplate='%{y:.0f} MW<extra></extra>'
-                    ), secondary_y=False
+                        x=df_iku_avg['Tahun'], y=df_iku_avg['IKU'], name="Rata-rata IKU Sulawesi", mode='lines+markers', 
+                        marker=dict(color='#FFFFFF', size=8, line=dict(width=2, color='#D32F2F')), 
+                        line=dict(color='#D32F2F', width=4), hovertemplate='IKU: %{y:.2f}<extra></extra>'
+                    ), secondary_y=True
                 )
-            
-            fig_2_2_combined.add_trace(
-                go.Scatter(
-                    x=df_iku_avg['Tahun'], y=df_iku_avg['IKU'], name="Rata-rata IKU Sulawesi", mode='lines+markers', 
-                    marker=dict(color='#FFFFFF', size=8, line=dict(width=2, color='#D32F2F')), 
-                    line=dict(color='#D32F2F', width=4), hovertemplate='IKU: %{y:.2f}<extra></extra>'
-                ), secondary_y=True
-            )
-            
-            fig_2_2_combined.update_layout(
-                title=dict(text="Ekspansi PLTU vs Penurunan Kualitas Udara (2010-2024)", font=dict(color='#ECEFF1', size=16)),
-                plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font=dict(color='#ECEFF1', family='Arial, sans-serif'),
-                legend=dict(orientation="v", yanchor="top", y=0.98, xanchor="left", x=0.02, bgcolor='rgba(30,30,30,0.8)', bordercolor='#555', borderwidth=1),
-                xaxis=dict(title="", tickmode='linear', dtick=2, tickformat='d', showgrid=False, showline=True, linecolor='#555555'),
-                yaxis=dict(title="Kapasitas PLTU Kumulatif (MW)", showgrid=True, gridcolor='rgba(255,255,255,0.1)', side='left'),
-                yaxis2=dict(title="Indeks Kualitas Udara (IKU)", showgrid=False, overlaying='y', side='right', range=[60, 100]),
-                hovermode="x unified", margin=dict(l=0, r=0, t=40, b=0)
-            )
-            st.plotly_chart(fig_2_2_combined, use_container_width=True)
-            
-            with st.expander("Lihat Data Mentah: Kapasitas PLTU per Provinsi", expanded=False):
-                df_pivot_pltu = df_pltu_trend.pivot(index='Tahun', columns='Provinsi', values='Kapasitas_PLTU_MW').reset_index()
-                st.dataframe(df_pivot_pltu, use_container_width=True, hide_index=True)
-                st.caption("Sumber: `sulawesi_pltu_captive.csv`")
-            
-            st.markdown("<br>", unsafe_allow_html=True)
+                
+                fig_2_2_combined.update_layout(
+                    title=dict(text="Ekspansi PLTU vs Penurunan Kualitas Udara (2010-2024)", font=dict(color='#ECEFF1', size=16)),
+                    plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font=dict(color='#ECEFF1', family='Arial, sans-serif'),
+                    legend=dict(orientation="v", yanchor="top", y=0.98, xanchor="left", x=0.02, bgcolor='rgba(30,30,30,0.8)', bordercolor='#555', borderwidth=1),
+                    xaxis=dict(title="", tickmode='linear', dtick=2, tickformat='d', showgrid=False, showline=True, linecolor='#555555'),
+                    yaxis=dict(title="Kapasitas PLTU Kumulatif (MW)", showgrid=True, gridcolor='rgba(255,255,255,0.1)', side='left'),
+                    yaxis2=dict(title="Indeks Kualitas Udara (IKU)", showgrid=False, overlaying='y', side='right', range=[60, 100]),
+                    hovermode="x unified", margin=dict(l=0, r=0, t=40, b=0)
+                )
+                st.plotly_chart(fig_2_2_combined, use_container_width=True)
+                
+                with st.expander("Lihat Data Mentah: Kapasitas PLTU per Provinsi", expanded=False):
+                    df_pivot_pltu = df_pltu_trend.pivot(index='Tahun', columns='Provinsi', values='Kapasitas_PLTU_MW').reset_index()
+                    st.dataframe(df_pivot_pltu, use_container_width=True, hide_index=True)
+                    st.caption("Sumber: `sulawesi_pltu_captive.csv`")
 
-        # --- 2. Tren Historis Kasus ISPA/Pneumonia ---
-        df_ts_filtered = df_kes[df_kes['indikator'].str.contains('ISPA', case=False, na=False)].copy()
-        if not df_ts_filtered.empty:
-            df_ts_filtered['Kategori'] = df_ts_filtered['provinsi'].apply(lambda x: 'Sentra Industri (Sulteng & Sultra)' if x in ['Sulawesi Tengah', 'Sulawesi Tenggara'] else 'Non-Sentra Industri (Lainnya)')
-            # Aggregate per tahun per provinsi
-            df_ts_agg = df_ts_filtered.groupby(['tahun', 'provinsi', 'Kategori'])['nilai'].sum().reset_index()
-            
-            fig_3_3 = px.line(
-                df_ts_agg, x='tahun', y='nilai', color='provinsi', markers=True, line_dash='Kategori',
-                color_discrete_sequence=px.colors.qualitative.Set2
-            )
-            
-            for trace in fig_3_3.data:
-                if trace.name in ['Sulawesi Tengah', 'Sulawesi Tenggara']:
-                    trace.line.width = 4
-                else:
-                    trace.line.width = 2
-                    trace.opacity = 0.6
-            
-            fig_3_3.update_layout(
-                title="Tren Historis Kasus ISPA/Pneumonia (2014-2024)",
-                height=450, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-                legend=dict(title="Provinsi", orientation="v", yanchor="top", y=1, xanchor="left", x=1.02),
-                font=dict(color='#B0BEC5'),
-                xaxis=dict(title="Tahun", showgrid=True, gridcolor='rgba(255,255,255,0.1)', dtick=1),
-                yaxis=dict(title="Jumlah Kasus", showgrid=True, gridcolor='rgba(255,255,255,0.1)', zeroline=False),
-                margin=dict(l=0, r=0, t=40, b=0)
-            )
-            st.plotly_chart(fig_3_3, use_container_width=True)
-            
-            with st.expander("Lihat Data Panel: Kasus ISPA/Pneumonia (2014-2024)", expanded=False):
-                df_ts_pivot = df_ts_agg.pivot(index='tahun', columns='provinsi', values='nilai').reset_index()
-                st.dataframe(df_ts_pivot, use_container_width=True, hide_index=True)
-                st.caption("Sumber File: `sulawesi_kesehatan_detail_2014_2024.csv`")
+        with tab2:
+            # --- 2. Tren Historis Kasus ISPA/Pneumonia ---
+            df_ts_filtered = df_kes[df_kes['indikator'].str.contains('ISPA', case=False, na=False)].copy()
+            if not df_ts_filtered.empty:
+                df_ts_filtered['Kategori'] = df_ts_filtered['provinsi'].apply(lambda x: 'Sentra Industri (Sulteng & Sultra)' if x in ['Sulawesi Tengah', 'Sulawesi Tenggara'] else 'Non-Sentra Industri (Lainnya)')
+                # Aggregate per tahun per provinsi
+                df_ts_agg = df_ts_filtered.groupby(['tahun', 'provinsi', 'Kategori'])['nilai'].sum().reset_index()
+                
+                fig_3_3 = px.line(
+                    df_ts_agg, x='tahun', y='nilai', color='provinsi', markers=True, line_dash='Kategori',
+                    color_discrete_sequence=px.colors.qualitative.Set2
+                )
+                
+                for trace in fig_3_3.data:
+                    if trace.name in ['Sulawesi Tengah', 'Sulawesi Tenggara']:
+                        trace.line.width = 4
+                    else:
+                        trace.line.width = 2
+                        trace.opacity = 0.6
+                
+                fig_3_3.update_layout(
+                    title="Tren Historis Kasus ISPA/Pneumonia (2014-2024)",
+                    height=450, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
+                    legend=dict(title="Provinsi", orientation="v", yanchor="top", y=1, xanchor="left", x=1.02),
+                    font=dict(color='#B0BEC5'),
+                    xaxis=dict(title="Tahun", showgrid=True, gridcolor='rgba(255,255,255,0.1)', dtick=1),
+                    yaxis=dict(title="Jumlah Kasus", showgrid=True, gridcolor='rgba(255,255,255,0.1)', zeroline=False),
+                    margin=dict(l=0, r=0, t=40, b=0)
+                )
+                st.plotly_chart(fig_3_3, use_container_width=True)
+                
+                with st.expander("Lihat Data Panel: Kasus ISPA/Pneumonia (2014-2024)", expanded=False):
+                    df_ts_pivot = df_ts_agg.pivot(index='tahun', columns='provinsi', values='nilai').reset_index()
+                    st.dataframe(df_ts_pivot, use_container_width=True, hide_index=True)
+                    st.caption("Sumber File: `sulawesi_kesehatan_detail_2014_2024.csv`")
 
 st.markdown("<br>", unsafe_allow_html=True)
 
