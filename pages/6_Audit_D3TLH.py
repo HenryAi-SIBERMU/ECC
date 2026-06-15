@@ -289,7 +289,8 @@ if not df_iku.empty:
     df_iku_avg_pre = df_iku.groupby('Tahun')['IKU'].mean().reset_index()
     if 2024 in df_iku_avg_pre['Tahun'].values:
         iku_terkini = df_iku_avg_pre[df_iku_avg_pre['Tahun'] == 2024]['IKU'].values[0]
-skor_1 = min(10.0, (kapasitas_terkini / 5000) * 5 + max(0, (80 - iku_terkini) / 10) * 5)
+# Normalisasi: PLTU Max 10.000 MW, IKU kritis pada 50 (range 80 ke 50)
+skor_1 = min(10.0, (kapasitas_terkini / 10000) * 5 + max(0, (80 - iku_terkini) / 30) * 5)
 
 # Skor 2: Rasio Anomali ISPA
 skor_2 = 0
@@ -300,6 +301,7 @@ if not df_kes.empty:
     kasus_sentra = df_ts_pre[df_ts_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
     kasus_non_sentra = df_ts_pre[~df_ts_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
     rasio_anomali = (kasus_sentra / 2) / (kasus_non_sentra / 4) if kasus_non_sentra > 0 else 0
+    # Normalisasi: Rasio 5x lipat = skor 10
     skor_2 = min(10.0, max(0.0, (rasio_anomali - 1) * 2.5))
 
 # Skor 3: Over-Capacity B3
@@ -311,14 +313,16 @@ if not df_b3.empty:
     total_b3_all_pre = df_b3['Estimasi Timbulan (Ton/Tahun)'].sum()
     total_b3_sulteng = df_b3[df_b3['Provinsi'] == 'Sulawesi Tengah']['Estimasi Timbulan (Ton/Tahun)'].sum()
     skor_overcapacity = total_b3_all_pre / 1_000_000
-    skor_3 = min(10.0, (skor_overcapacity / 20.0) * 10) # Asumsi 20x lipat = Kritis 10
+    # Normalisasi: Batas ekstrem 30x lipat dari daya tampung = skor 10
+    skor_3 = min(10.0, (skor_overcapacity / 30.0) * 10)
 
 # Skor 4: Defisit Ekosistem
 skor_4 = 0
 if not df_gfw.empty:
     df_gfw['Total_Emisi_CO2_Megagram'] = pd.to_numeric(df_gfw['Total_Emisi_CO2_Megagram'], errors='coerce').fillna(0)
     total_emisi_pre = df_gfw['Total_Emisi_CO2_Megagram'].sum() / 1_000_000
-    skor_4 = min(10.0, total_emisi_pre / 10.0)
+    # Normalisasi: Emisi 150 Juta Ton = skor 10
+    skor_4 = min(10.0, (total_emisi_pre / 150.0) * 10)
 
 skor_akumulasi_udara = (skor_1 + skor_2 + skor_3 + skor_4) / 4
 
@@ -334,7 +338,7 @@ with colA1:
     <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E74C3C;">
         <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Akumulasi Skor Kerusakan</div>
         <div style="font-size: 32px; font-weight: 800; color: #E74C3C; line-height: 1.2;">{skor_akumulasi_udara:.1f} <span style="font-size: 16px;">/ 10</span></div>
-        <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">🚨 STATUS: DAYA TAMPUNG JEBOL</div>
+        <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: DAYA TAMPUNG JEBOL</div>
     </div>
     <div style="background:#C0392B; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
         VONIS: Kegagalan Deteksi Morbiditas Akumulatif
