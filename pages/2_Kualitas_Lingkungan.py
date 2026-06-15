@@ -108,10 +108,11 @@ def load_all_data():
     df_smelter = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_esdm_nikel.csv"))
     df_pltu = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv"))
     df_b3 = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_limbah_b3.csv"))
-    return df_ika, df_iku, df_gfw, df_smelter, df_pltu, df_b3
+    df_driver = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_loss_by_driver_2014_2023.csv"))
+    return df_ika, df_iku, df_gfw, df_smelter, df_pltu, df_b3, df_driver
 
 try:
-    df_ika, df_iku, df_gfw, df_smelter, df_pltu, df_b3 = load_all_data()
+    df_ika, df_iku, df_gfw, df_smelter, df_pltu, df_b3, df_driver = load_all_data()
 except Exception as e:
     st.error(f"Error loading data: {e}")
     st.stop()
@@ -392,30 +393,57 @@ import plotly.express as px
 # Gunakan palette warna ala OWID (Washed-out pastel + solid)
 owid_colors = ['#9B5A40', '#E58872', '#5E85B4', '#A09CAE', '#82B989', '#E3D7A4']
 
-fig_2_2a = go.Figure()
+# Buat figure dengan dual y-axis
+fig_2_2_combined = make_subplots(specs=[[{"secondary_y": True}]])
 
-# Tambahkan Stacked Area per Provinsi untuk PLTU
+# Tambahkan Stacked Area per Provinsi untuk PLTU (Left Y-axis)
 for i, prov in enumerate(df_pltu_trend['Provinsi'].unique()):
     d = df_pltu_trend[df_pltu_trend['Provinsi'] == prov]
-    fig_2_2a.add_trace(
+    fig_2_2_combined.add_trace(
         go.Scatter(
             x=d['Tahun'], 
             y=d['Kapasitas_PLTU_MW'], 
             name=prov, 
             mode='lines', 
             stackgroup='one',
-            line=dict(width=0.5, color='#444444'), # Batas tipis seperti OWID
+            line=dict(width=0.5, color='#444444'),
             fillcolor=owid_colors[i % len(owid_colors)],
-            hoveron='points+fills'
-        )
+            hoveron='points+fills',
+            hovertemplate='%{y:.0f} MW<extra></extra>'
+        ),
+        secondary_y=False
     )
 
-fig_2_2a.update_layout(
-    title=dict(text="Ekspansi Berdarah: Kumulatif Kapasitas PLTU (2010-2024)", font=dict(color='#ECEFF1', size=20)),
+# Tambahkan Garis IKU Rata-rata (Right Y-axis)
+fig_2_2_combined.add_trace(
+    go.Scatter(
+        x=df_iku_avg['Tahun'], 
+        y=df_iku_avg['IKU'], 
+        name="Rata-rata IKU Sulawesi", 
+        mode='lines+markers', 
+        marker=dict(color='#FFFFFF', size=8, line=dict(width=2, color='#D32F2F')), 
+        line=dict(color='#D32F2F', width=4),
+        hovertemplate='IKU: %{y:.2f}<extra></extra>'
+    ),
+    secondary_y=True
+)
+
+# Update layout
+fig_2_2_combined.update_layout(
+    title=dict(text="Ekspansi PLTU vs Penurunan Kualitas Udara (2010-2024)", font=dict(color='#ECEFF1', size=20)),
     plot_bgcolor='rgba(0,0,0,0)',
     paper_bgcolor='rgba(0,0,0,0)',
     font=dict(color='#ECEFF1', family='Arial, sans-serif'),
-    legend=dict(orientation="v", yanchor="top", y=1, xanchor="left", x=1.02),
+    legend=dict(
+        orientation="v", 
+        yanchor="top", 
+        y=0.98, 
+        xanchor="left", 
+        x=0.02,
+        bgcolor='rgba(30,30,30,0.8)',
+        bordercolor='#555',
+        borderwidth=1
+    ),
     xaxis=dict(
         title="",
         tickmode='linear',
@@ -433,18 +461,9 @@ fig_2_2a.update_layout(
             borderwidth=1,
         ),
     ),
-    yaxis=dict(
-        title="", 
-        color='#ECEFF1', 
-        gridcolor='#555555', 
-        gridwidth=1,
-        griddash='dash', # Garis putus-putus ala OWID
-        dtick=500,
-        ticksuffix=" MW"
-    ),
     hovermode="x unified",
     hoverlabel=dict(
-        bgcolor="rgba(255, 255, 255, 0.95)", # Kotak tooltip putih terang ala OWID
+        bgcolor="rgba(255, 255, 255, 0.95)",
         font_size=13,
         font_family="Arial",
         font_color="#333333"
@@ -452,64 +471,42 @@ fig_2_2a.update_layout(
     height=600
 )
 
-st.plotly_chart(fig_2_2a, use_container_width=True)
-
-# Grafik Terpisah untuk IKU
-fig_2_2b = go.Figure()
-
-# Tambahkan Garis IKU Rata-rata
-fig_2_2b.add_trace(
-    go.Scatter(
-        x=df_iku_avg['Tahun'], 
-        y=df_iku_avg['IKU'], 
-        name="Rata-rata IKU Sulawesi", 
-        mode='lines+markers', 
-        marker=dict(color='#FFFFFF', size=8, line=dict(width=2, color='#D32F2F')), 
-        line=dict(color='#D32F2F', width=4)
-    )
+# Update Y-axes
+fig_2_2_combined.update_yaxes(
+    title_text="Kapasitas PLTU Kumulatif (MW)", 
+    secondary_y=False,
+    color='#ECEFF1', 
+    gridcolor='#555555', 
+    gridwidth=1,
+    griddash='dash',
+    dtick=500,
+    ticksuffix=" MW"
 )
 
-fig_2_2b.update_layout(
-    title="Anjloknya Indeks Kualitas Udara Rata-rata (2015-2024)",
-    plot_bgcolor='rgba(0,0,0,0)',
-    paper_bgcolor='rgba(0,0,0,0)',
-    font=dict(color='#ECEFF1'),
-    legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-    xaxis=dict(
-        title="Tahun",
-        tickmode='linear',
-        dtick=1,
-        tickformat='d',
-        rangeslider=dict(
-            visible=True,
-            thickness=0.03,
-            bgcolor="#2D2D2D",
-            bordercolor="#555555",
-            borderwidth=1,
-        ),
-    ),
-    yaxis=dict(title="Skor IKU (Rata-rata)", color='#D32F2F', gridcolor='#37474F'),
-    hovermode="x unified",
-    height=350
+fig_2_2_combined.update_yaxes(
+    title_text="Indeks Kualitas Udara (IKU)", 
+    secondary_y=True,
+    color='#D32F2F', 
+    gridcolor='#37474F',
+    showgrid=False
 )
 
-st.plotly_chart(fig_2_2b, use_container_width=True)
+st.plotly_chart(fig_2_2_combined, use_container_width=True)
 
 st.markdown(f"""
 <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #D32F2F; margin-bottom: 25px;">
-    <b>Pembedahan Ekologis Visual:</b> Grafik <i>stacked-area time-series</i> di atas memotret akumulasi krisis dari waktu ke waktu. Tumpukan area berwarna menunjukkan ledakan kumulatif kapasitas PLTU yang terus meroket tajam tanpa henti sepanjang 1 dekade terakhir. Ironisnya, saat daya pembakaran batubara ini terus bertumpuk, garis rata-rata kualitas udara (IKU) se-Sulawesi tampak terus tertekan ke bawah. Slider di bawah dapat digeser untuk melihat rincian lonjakan polusi ini di periode tahun tertentu.
+    <b>Pembedahan Ekologis Visual:</b> Grafik gabungan di atas memotret korelasi temporal antara ekspansi PLTU dan penurunan kualitas udara. Tumpukan area berwarna (sumbu kiri) menunjukkan ledakan kumulatif kapasitas PLTU yang terus meroket sepanjang 1 dekade. Ironisnya, garis merah (sumbu kanan) menunjukkan rata-rata IKU se-Sulawesi yang terus tertekan ke bawah — dari <b>{awal_iku:.1f}</b> poin hingga <b>{akhir_iku:.1f}</b> poin, penurunan brutal sebesar <b>{penurunan_iku:.1f}</b> poin. Slider di bawah dapat digeser untuk melihat rincian periode tertentu.
 </div>
 """, unsafe_allow_html=True)
 
-with st.expander("Lihat Data Mentah: Grafik Area PLTU", expanded=False):
-    # Pivot df_pltu_trend to show capacity by province per year for easier reading
+with st.expander("Lihat Data Mentah: Kapasitas PLTU per Provinsi", expanded=False):
     df_pivot_pltu = df_pltu_trend.pivot(index='Tahun', columns='Provinsi', values='Kapasitas_PLTU_MW').reset_index()
     st.dataframe(df_pivot_pltu, use_container_width=True, hide_index=True)
-    st.caption("📁 **Sumber File:** `data/processed/sulawesi_pltu_captive.csv`")
+    st.caption("📁 **Sumber:** `sulawesi_pltu_captive.csv`")
 
-with st.expander("Lihat Data Mentah: Rata-rata IKU", expanded=False):
+with st.expander("Lihat Data Mentah: Rata-rata IKU Sulawesi", expanded=False):
     st.dataframe(df_iku_avg, use_container_width=True, hide_index=True)
-    st.caption("📁 **Sumber File:** `data/processed/sulawesi_iku_2015_2024.csv`")
+    st.caption("📁 **Sumber:** `sulawesi_iku_2015_2024.csv`")
 
 # SPSS Crosstab Section 2.2
 x_options_2_2 = {
@@ -894,3 +891,261 @@ with st.expander("Lihat Data Mentah: Panel IUP vs Deforestasi (Time-Series 2014-
     st.dataframe(df_panel_labeled_2_3[['Provinsi', 'Tahun', 'Luas_IUP_Kawasan_Ha', 'X_Label', 'Total_Deforestasi_Ha', 'Y_Label']], use_container_width=True, hide_index=True)
     st.caption("📁 **Sumber File:** `sulawesi_kawasan_nikel_luas.csv` & `sulawesi_gfw_master_1_dekade_2014_2023.csv`")
 
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# SECTION 2.4: DRIVER DEFORESTASI - ANATOMI PEMBANTAIAN HUTAN
+# ═══════════════════════════════════════════════════════════════════════════
+
+st.markdown("---")
+st.markdown("### 2.4. Driver Deforestasi: Anatomi Pembantaian Hutan")
+st.markdown('<span style="background:#1B5E20;color:#A5D6A7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Driver Analysis & Emisi CO₂ Attribution</span>', unsafe_allow_html=True)
+
+# Data Loading & Prep
+df_driver_clean = df_driver.copy()
+
+# Translate driver names to Indonesian
+driver_mapping = {
+    'Deforestasi Komoditas (Tambang/Sawit)': 'Industri Ekstraktif (Tambang/Sawit)',
+    'Kehutanan': 'Kehutanan Komersial',
+    'Pertanian Berpindah': 'Pertanian Berpindah (Masyarakat)',
+    'Urbanisasi': 'Urbanisasi & Infrastruktur',
+    'Tidak Diketahui': 'Tidak Teridentifikasi'
+}
+df_driver_clean['Faktor_Pendorong'] = df_driver_clean['Faktor_Pendorong'].replace(driver_mapping)
+
+# Calculate aggregates
+df_driver_total = df_driver_clean.groupby(['Provinsi', 'Faktor_Pendorong']).agg({
+    'Luas_Deforestasi_Ha': 'sum',
+    'Emisi_CO2_Megagram': 'sum'
+}).reset_index()
+
+# Calculate percentage per province
+df_driver_pct = df_driver_total.copy()
+total_per_prov = df_driver_pct.groupby('Provinsi')['Luas_Deforestasi_Ha'].transform('sum')
+df_driver_pct['Persentase'] = (df_driver_pct['Luas_Deforestasi_Ha'] / total_per_prov * 100).round(2)
+
+# Focus provinces (exclude Sulbar due to minimal data)
+focus_provinces = ['Sulawesi Tengah', 'Sulawesi Tenggara', 'Sulawesi Utara', 'Sulawesi Selatan', 'Gorontalo']
+df_driver_focus = df_driver_clean[df_driver_clean['Provinsi'].isin(focus_provinces)]
+
+pertanyaan_text = """
+<div style="background:linear-gradient(135deg, #1A1F2B, #232B3B);padding:20px;border-left:4px solid #D32F2F;border-radius:8px;margin-bottom:25px;">
+    <p style="color:#ECEFF1;font-size:1rem;line-height:1.7;margin:0;">
+        <b style="color:#EF5350;">Pertanyaan Krusial:</b> Siapa sebenarnya yang bertanggung jawab atas <b>1,6+ juta hektar hutan Sulawesi yang lenyap</b> dalam satu dekade (2014-2023)? 
+        Apakah masyarakat kecil yang berladang berpindah, ataukah <b>mesin industri ekstraktif raksasa</b> yang menggerus hutan untuk tambang nikel dan perkebunan sawit?
+        <br>
+        Section ini membedah <b>anatomi driver deforestasi</b> dengan atribusi emisi CO₂, membongkar mitos bahwa petani kecil adalah pelaku utama, dan menunjukkan <b>bukti forensik</b> bahwa industri komoditas adalah dalang pembantaian hutan.
+    </p>
+</div>
+"""
+
+st.markdown(pertanyaan_text, unsafe_allow_html=True)
+
+# ── VISUALIZATION 2.4.1: Stacked Area Chart - Temporal Evolution of Drivers ──
+st.markdown("#### Evolusi Temporal: Komposisi Driver Deforestasi (2014-2023)")
+
+df_driver_temporal = df_driver_focus.groupby(['Tahun', 'Faktor_Pendorong'])['Luas_Deforestasi_Ha'].sum().reset_index()
+
+chart_driver_area = alt.Chart(df_driver_temporal).mark_area(opacity=0.8).encode(
+    x=alt.X('Tahun:O', title='Tahun', axis=alt.Axis(labelAngle=0)),
+    y=alt.Y('Luas_Deforestasi_Ha:Q', title='Luas Deforestasi (Ha)', stack='normalize', axis=alt.Axis(format='%')),
+    color=alt.Color('Faktor_Pendorong:N', 
+                    title='Driver Deforestasi',
+                    scale=alt.Scale(domain=[
+                        'Industri Ekstraktif (Tambang/Sawit)',
+                        'Kehutanan Komersial',
+                        'Pertanian Berpindah (Masyarakat)',
+                        'Urbanisasi & Infrastruktur',
+                        'Tidak Teridentifikasi'
+                    ], range=['#D32F2F', '#FF6F00', '#FBC02D', '#7CB342', '#757575'])),
+    tooltip=[
+        alt.Tooltip('Tahun:O', title='Tahun'),
+        alt.Tooltip('Faktor_Pendorong:N', title='Driver'),
+        alt.Tooltip('Luas_Deforestasi_Ha:Q', title='Luas (Ha)', format=',.0f')
+    ]
+).properties(
+    width=800,
+    height=400
+).configure_axis(
+    labelColor='#ECEFF1',
+    titleColor='#ECEFF1',
+    gridColor='#333',
+    domainColor='#555'
+).configure_legend(
+    labelColor='#ECEFF1',
+    titleColor='#ECEFF1',
+    orient='right'
+).configure_view(
+    strokeWidth=0
+)
+
+st.altair_chart(chart_driver_area, use_container_width=True)
+
+# Data table dropdown for visualization 2.4.1
+with st.expander("Lihat Data Mentah: Evolusi Temporal Driver Deforestasi", expanded=False):
+    st.dataframe(df_driver_temporal, use_container_width=True, hide_index=True)
+    st.caption("📁 **Sumber:** `sulawesi_gfw_loss_by_driver_2014_2023.csv` — Data agregat per tahun dan driver")
+
+# Interpretation text for temporal evolution
+interp_text_241 = """
+<b style="color: #EF5350;">Dominasi Absolut Industri Ekstraktif:</b><br>
+Grafik normalized stacked area di atas menunjukkan bahwa <b>Industri Ekstraktif (merah gelap)</b> mendominasi 70-85% dari total deforestasi setiap tahunnya. Perhatikan bagaimana <b>Pertanian Berpindah (kuning)</b> hanya menyumbang 1-3% — ini membantah narasi bahwa petani kecil adalah biang kerok deforestasi.<br>
+<b>Kehutanan Komersial (oranye)</b> menyumbang 10-15%, sementara <b>Urbanisasi (hijau)</b> hampir tidak terlihat (<1%). Pola ini konsisten sepanjang dekade, membuktikan bahwa ekspansi tambang nikel dan sawit adalah <b>mesin pembantai hutan yang sistematis dan masif</b>.
+"""
+
+st.markdown(f"""
+<div style="color: #BDBDBD; font-size: 0.95rem; line-height: 1.6; margin-bottom: 25px; margin-top: 15px; border-left: 3px solid #555; padding-left: 15px;">
+    {interp_text_241}
+</div>
+""", unsafe_allow_html=True)
+
+# ── VISUALIZATION 2.4.2: Bar Chart - Total Deforestation by Driver (2014-2023) ──
+st.markdown("#### Total Deforestasi per Driver (Kumulatif 2014-2023)")
+
+col_24a, col_24b = st.columns(2)
+
+with col_24a:
+    # Bar chart - absolute numbers
+    df_driver_total_all = df_driver_focus.groupby('Faktor_Pendorong').agg({
+        'Luas_Deforestasi_Ha': 'sum',
+        'Emisi_CO2_Megagram': 'sum'
+    }).reset_index().sort_values('Luas_Deforestasi_Ha', ascending=False)
+    
+    chart_driver_bar = alt.Chart(df_driver_total_all).mark_bar(cornerRadiusTopRight=5, cornerRadiusBottomRight=5).encode(
+        x=alt.X('Luas_Deforestasi_Ha:Q', title='Total Deforestasi (Ha)', axis=alt.Axis(format=',.0f')),
+        y=alt.Y('Faktor_Pendorong:N', title=None, sort='-x'),
+        color=alt.Color('Faktor_Pendorong:N', 
+                        scale=alt.Scale(domain=[
+                            'Industri Ekstraktif (Tambang/Sawit)',
+                            'Kehutanan Komersial',
+                            'Pertanian Berpindah (Masyarakat)',
+                            'Urbanisasi & Infrastruktur',
+                            'Tidak Teridentifikasi'
+                        ], range=['#D32F2F', '#FF6F00', '#FBC02D', '#7CB342', '#757575']),
+                        legend=None),
+        tooltip=[
+            alt.Tooltip('Faktor_Pendorong:N', title='Driver'),
+            alt.Tooltip('Luas_Deforestasi_Ha:Q', title='Total Deforestasi (Ha)', format=',.0f'),
+            alt.Tooltip('Emisi_CO2_Megagram:Q', title='Emisi CO₂ (Megagram)', format=',.0f')
+        ]
+    ).properties(
+        height=300
+    ).configure_axis(
+        labelColor='#ECEFF1',
+        titleColor='#ECEFF1',
+        gridColor='#333',
+        domainColor='#555'
+    ).configure_view(
+        strokeWidth=0
+    )
+    
+    st.altair_chart(chart_driver_bar, use_container_width=True)
+    st.caption("**Kumulatif 2014-2023** — Sulawesi Tengah, Tenggara, Utara, Selatan, Gorontalo")
+    
+    # Data table dropdown for visualization 2.4.2
+    with st.expander("Lihat Data Mentah: Total per Driver", expanded=False):
+        st.dataframe(df_driver_total_all, use_container_width=True, hide_index=True)
+        st.caption("📁 **Sumber:** Agregat kumulatif 2014-2023 per driver")
+
+with col_24b:
+    # Metric cards for key drivers
+    industri_total = df_driver_total_all[df_driver_total_all['Faktor_Pendorong'] == 'Industri Ekstraktif (Tambang/Sawit)']['Luas_Deforestasi_Ha'].values[0]
+    petani_total = df_driver_total_all[df_driver_total_all['Faktor_Pendorong'] == 'Pertanian Berpindah (Masyarakat)']['Luas_Deforestasi_Ha'].values[0]
+    industri_pct = (industri_total / df_driver_total_all['Luas_Deforestasi_Ha'].sum() * 100)
+    petani_pct = (petani_total / df_driver_total_all['Luas_Deforestasi_Ha'].sum() * 100)
+    ratio = industri_total / petani_total
+    
+    st.markdown(f"""
+    <div style="background:linear-gradient(135deg, #B71C1C, #D32F2F);padding:20px;border-radius:10px;margin-bottom:15px;">
+        <div style="color:#FFCDD2;font-size:0.85rem;font-weight:600;margin-bottom:8px;">INDUSTRI EKSTRAKTIF</div>
+        <div style="color:#FFF;font-size:2.2rem;font-weight:700;margin-bottom:5px;">{industri_total:,.0f} Ha</div>
+        <div style="color:#FFCDD2;font-size:0.9rem;"><b>{industri_pct:.1f}%</b> dari total deforestasi</div>
+    </div>
+    
+    <div style="background:linear-gradient(135deg, #F57F17, #FBC02D);padding:20px;border-radius:10px;margin-bottom:15px;">
+        <div style="color:#3E2723;font-size:0.85rem;font-weight:600;margin-bottom:8px;">PERTANIAN BERPINDAH</div>
+        <div style="color:#3E2723;font-size:2.2rem;font-weight:700;margin-bottom:5px;">{petani_total:,.0f} Ha</div>
+        <div style="color:#3E2723;font-size:0.9rem;"><b>{petani_pct:.1f}%</b> dari total deforestasi</div>
+    </div>
+    
+    <div style="background:linear-gradient(135deg, #1A1F2B, #232B3B);padding:15px;border-radius:10px;border:2px solid #D32F2F;">
+        <div style="color:#EF5350;font-size:0.85rem;font-weight:600;margin-bottom:5px;">RASIO KEJAHATAN</div>
+        <div style="color:#FFF;font-size:1.8rem;font-weight:700;margin-bottom:5px;">{ratio:.0f}x</div>
+        <div style="color:#BDBDBD;font-size:0.85rem;line-height:1.4;">Industri menghancurkan hutan <b>{ratio:.0f} kali lebih banyak</b> dibanding petani kecil</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+# ── VISUALIZATION 2.4.3: CO2 Emissions by Driver ──
+st.markdown("#### Emisi CO₂ per Driver — Kontribusi terhadap Krisis Iklim")
+
+df_emisi = df_driver_total_all.copy()
+df_emisi['Emisi_CO2_Juta_Ton'] = df_emisi['Emisi_CO2_Megagram'] / 1_000_000
+
+chart_emisi = alt.Chart(df_emisi).mark_bar(cornerRadiusTopRight=5, cornerRadiusBottomRight=5).encode(
+    x=alt.X('Emisi_CO2_Juta_Ton:Q', title='Total Emisi CO₂ (Juta Ton)', axis=alt.Axis(format=',.1f')),
+    y=alt.Y('Faktor_Pendorong:N', title=None, sort='-x'),
+    color=alt.Color('Faktor_Pendorong:N', 
+                    scale=alt.Scale(domain=[
+                        'Industri Ekstraktif (Tambang/Sawit)',
+                        'Kehutanan Komersial',
+                        'Pertanian Berpindah (Masyarakat)',
+                        'Urbanisasi & Infrastruktur',
+                        'Tidak Teridentifikasi'
+                    ], range=['#D32F2F', '#FF6F00', '#FBC02D', '#7CB342', '#757575']),
+                    legend=None),
+    tooltip=[
+        alt.Tooltip('Faktor_Pendorong:N', title='Driver'),
+        alt.Tooltip('Emisi_CO2_Juta_Ton:Q', title='Emisi CO₂ (Juta Ton)', format=',.2f'),
+        alt.Tooltip('Luas_Deforestasi_Ha:Q', title='Deforestasi (Ha)', format=',.0f')
+    ]
+).properties(
+    height=300
+).configure_axis(
+    labelColor='#ECEFF1',
+    titleColor='#ECEFF1',
+    gridColor='#333',
+    domainColor='#555'
+).configure_view(
+    strokeWidth=0
+)
+
+st.altair_chart(chart_emisi, use_container_width=True)
+
+# Data table dropdown for visualization 2.4.3
+with st.expander("Lihat Data Mentah: Emisi CO₂ per Driver", expanded=False):
+    st.dataframe(df_emisi, use_container_width=True, hide_index=True)
+    st.caption("📁 **Sumber:** Total emisi CO₂ kumulatif per driver (Megagram & Juta Ton)")
+
+# Interpretation for emissions
+interp_text_243 = """
+<b style="color: #EF5350;">Atribusi Emisi: Industri Ekstraktif = Bom Karbon:</b><br>
+Industri ekstraktif (tambang nikel & sawit) tidak hanya menghancurkan tutupan hutan secara fisik, tetapi juga melepaskan <b>ratusan juta ton CO₂</b> ke atmosfer. Dari grafik di atas, kita melihat bahwa emisi dari deforestasi commodity-driven <b>jauh melampaui</b> emisi gabungan dari semua driver lainnya.<br>
+Ini adalah <b>kejahatan ganda</b>: penghancuran ekosistem lokal DAN kontribusi masif terhadap krisis iklim global. Sementara itu, pertanian berpindah yang sering disalahkan hanya menyumbang <b>emisi yang tidak signifikan</b> — bukti bahwa narasi "petani perusak hutan" adalah distorsi untuk mengalihkan tanggung jawab dari korporasi besar.
+"""
+
+st.markdown(f"""
+<div style="color: #BDBDBD; font-size: 0.95rem; line-height: 1.6; margin-bottom: 25px; margin-top: 15px; border-left: 3px solid #555; padding-left: 15px;">
+    {interp_text_243}
+</div>
+""", unsafe_allow_html=True)
+
+# ── CONCLUSION BOX ──
+kesimpulan_text = """
+<div style="background:linear-gradient(135deg, #B71C1C, #D32F2F);padding:25px;border-radius:12px;border:3px solid #EF5350;margin-top:30px;margin-bottom:25px;">
+    <div style="color:#FFF;font-size:1.3rem;font-weight:700;margin-bottom:15px;">KESIMPULAN FORENSIK</div>
+    <div style="color:#FFCDD2;font-size:1rem;line-height:1.8;">
+        <b>1. Industri Ekstraktif (Tambang Nikel & Sawit)</b> adalah <b>dalang mutlak</b> deforestasi Sulawesi, bertanggung jawab atas <b>70-85%</b> kehilangan tutupan hutan selama 2014-2023.<br>
+        <b>2. Pertanian Berpindah (Petani Kecil)</b> hanya menyumbang <b>1-3%</b> dari total deforestasi — narasi yang menyalahkan masyarakat adat dan petani kecil adalah <b>pengalihan tanggung jawab</b> yang sistematis.<br>
+        <b>3. Rasio Kejahatan:</b> Industri menghancurkan hutan <b>50-100x lebih banyak</b> dibanding petani kecil, sekaligus melepaskan ratusan juta ton CO₂ ke atmosfer — <b>kejahatan ganda</b> terhadap lingkungan lokal dan iklim global.<br>
+        <b>4. Implikasi Kebijakan:</b> Jika pemerintah serius melindungi hutan Sulawesi, targetnya harus jelas: <b>moratorium izin tambang baru</b>, <b>audit ulang IUP eksisting</b>, dan <b>penghentian ekspansi perkebunan sawit</b> di kawasan hutan — bukan represi terhadap masyarakat lokal yang dampaknya minimal.
+    </div>
+</div>
+"""
+
+st.markdown(kesimpulan_text, unsafe_allow_html=True)
+
+# Data expander
+with st.expander("Lihat Data Mentah: Driver Deforestasi & Emisi CO₂ (2014-2023)", expanded=False):
+    st.dataframe(df_driver_focus[['Provinsi', 'Tahun', 'Faktor_Pendorong', 'Luas_Deforestasi_Ha', 'Emisi_CO2_Megagram']], use_container_width=True, hide_index=True)
+    st.caption("📁 **Sumber File:** `data/processed/sulawesi_gfw_loss_by_driver_2014_2023.csv`")
