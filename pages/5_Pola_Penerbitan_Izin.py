@@ -133,7 +133,7 @@ rasio_akselerasi = (izin_pasca_2020 / izin_pra_2020) if izin_pra_2020 > 0 else 0
 # ---------------------------------------------------------
 # HERO SECTION (EXECUTIVE SUMMARY)
 # ---------------------------------------------------------
-st.markdown('<div class="org-badge">Modul Kajian 5</div>', unsafe_allow_html=True)
+st.markdown('<div class="org-badge">CELIOS — Center of Economic and Law Studies</div>', unsafe_allow_html=True)
 st.markdown('<h1 class="main-title">Pola Penerbitan Izin di Zona Kritis Ekologis</h1>', unsafe_allow_html=True)
 st.markdown('<p class="sub-title">Evaluasi terhadap kegagalan instrumen tata kelola lingkungan dalam meredam perizinan tambang di wilayah yang telah melampaui daya dukung ekologis.</p>', unsafe_allow_html=True)
 
