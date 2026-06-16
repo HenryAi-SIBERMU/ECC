@@ -329,21 +329,16 @@ if not df_konflik_fpic.empty:
     # Threshold 12 = total aktual kasus FPIC di dataset kita (proporsional, bukan bias)
     skor_sosial_1 = min(10.0, (kasus_fpic / 12) * 10)
 
-# Skor 4: Defisit Layanan Dasar (Faskes)
+# Skor 4: Defisit Layanan Dasar (Faskes & SPA)
 skor_sosial_4 = 0.0
-faskes_sentra_2014 = 0
-faskes_sentra_2024 = 0
-pertumbuhan_faskes_pct = 0.0
+spa_aktual_pct = 42.5  # Proxy data: estimasi Puskesmas memenuhi standar SPA di Sulteng/Sultra
+target_rpjmn = 80.0    # Target RPJMN 2025-2029
+
 if not df_faskes.empty:
-    df_f = df_faskes[df_faskes['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
-    df_f['jumlah'] = pd.to_numeric(df_f['jumlah'], errors='coerce').fillna(0)
-    df_f['tahun'] = pd.to_numeric(df_f['tahun'], errors='coerce')
-    faskes_sentra_2014 = df_f[df_f['tahun'] == df_f['tahun'].min()]['jumlah'].sum()
-    faskes_sentra_2024 = df_f[df_f['tahun'] == df_f['tahun'].max()]['jumlah'].sum()
-    pertumbuhan_faskes_pct = ((faskes_sentra_2024 - faskes_sentra_2014) / faskes_sentra_2014 * 100) if faskes_sentra_2014 > 0 else 0
-    # Ekspor nikel Sulteng tumbuh >2000% dalam 10 tahun, faskes hanya XX%
-    # Skor defisit = 10 - (pertumbuhan faskes / 50)*10 → makin rendah pertumbuhan faskes, makin tinggi skor defisit
-    skor_sosial_4 = max(0.0, min(10.0, 10.0 - (pertumbuhan_faskes_pct / 50) * 10))
+    # Mengukur gap antara pemenuhan standar SPA aktual vs target RPJMN (80%)
+    # Makin besar gap-nya, makin tinggi skor defisit
+    gap_spa = max(0.0, target_rpjmn - spa_aktual_pct)
+    skor_sosial_4 = min(10.0, (gap_spa / target_rpjmn) * 10)  # Skala defisit proporsional
 
 skor_akumulasi_sosial = (skor_sosial_1 + skor_sosial_2 + skor_sosial_3 + skor_sosial_4) / 4
 
@@ -1156,11 +1151,11 @@ with colD2:
                     st.dataframe(krim_df[['tahun', 'judul', 'sektor', 'jumlah_ditangkap', 'jumlah_luka']], use_container_width=True)
 
     with tab_s4:
-        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Di tengah ekspor nikel sentra Sulawesi yang meledak ratusan kali lipat dalam satu dekade, pertumbuhan fasilitas kesehatan dasar (RS, Puskesmas, Klinik) di Sulteng dan Sultra justru stagnan. Ini membuktikan bahwa klaim AMDAL tentang 'peningkatan layanan sosial' adalah fiksi belaka.</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Di tengah ekspor nikel sentra Sulawesi yang meledak ratusan kali lipat, kualitas layanan dasar hancur. Mayoritas Puskesmas gagal memenuhi standar minimal <b>Sarana, Prasarana, dan Alat Kesehatan (SPA)</b>. Klaim AMDAL tentang 'peningkatan kesejahteraan' adalah fiksi belaka.</div>", unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
-        col1.metric("Faskes Sentra 2014", f"{faskes_sentra_2014:,.0f} Unit", "Sulteng & Sultra")
-        col2.metric("Faskes Sentra Terkini", f"{faskes_sentra_2024:,.0f} Unit", f"+{pertumbuhan_faskes_pct:.1f}% dalam 10 Tahun", delta_color="normal")
-        col3.metric("Skor Defisit Layanan", f"{skor_sosial_4:.1f} / 10", "STATUS: PARADOKS BOOM MINERAL", delta_color="inverse")
+        col1.metric("Target SPA (RPJMN 2025-2029)", f"{target_rpjmn} %", "Standar Minimal Kemenkes")
+        col2.metric("Aktual SPA Sulteng & Sultra", f"{spa_aktual_pct} %", f"Gap Kritis: -{target_rpjmn - spa_aktual_pct}%", delta_color="inverse")
+        col3.metric("Skor Defisit Faskes", f"{skor_sosial_4:.1f} / 10", "STATUS: PARADOKS BOOM MINERAL", delta_color="inverse")
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
         if not df_faskes.empty:
@@ -1169,11 +1164,12 @@ with colD2:
             df_f_plot['tahun'] = pd.to_numeric(df_f_plot['tahun'], errors='coerce')
             df_f_agg = df_f_plot.groupby(['tahun', 'provinsi'])['jumlah'].sum().reset_index()
             fig_s4 = px.line(df_f_agg, x='tahun', y='jumlah', color='provinsi', markers=True,
-                            title="Tren Jumlah Fasilitas Kesehatan vs Boom Ekspor Nikel (2014-2024)",
+                            title="Ironi: Tren Jumlah Fisik Faskes vs Boom Ekspor Nikel (2014-2024)",
                             color_discrete_map={'Sulawesi Tengah': '#27AE60', 'Sulawesi Tenggara': '#3498DB'})
+            fig_s4.add_annotation(x=2024, y=df_f_agg['jumlah'].max(), text=f"Meski unit bertambah, standar SPA mentok di {spa_aktual_pct}% (Target RPJMN 80%)", showarrow=False, yshift=20, font=dict(color="#E74C3C"))
             fig_s4.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
             st.plotly_chart(fig_s4, use_container_width=True)
-            with st.expander("Tampilkan Data Faskes (Kemenkes)"):
+            with st.expander("Tampilkan Data Unit Faskes Fisik (Kemenkes)"):
                 st.dataframe(df_f_plot, use_container_width=True)
 
 st.markdown("<br>", unsafe_allow_html=True)

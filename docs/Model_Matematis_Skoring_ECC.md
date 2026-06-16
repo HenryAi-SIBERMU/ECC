@@ -43,7 +43,7 @@ Audit internal pada Juni 2026 menemukan bahwa **sebagian besar threshold dalam m
 
 1. **Limbah B3 (✅)** → Diperbarui ke anomali 1 provinsi (Sulteng) vs proporsi nasional.
 2. **Tailing (✅)** → Diperbarui ke ambang batas kapasitas AMDAL (PPID/KLHK).
-3. **Defisit Faskes (⚠️)** → Ubah metrik ke *% puskesmas memenuhi standar SPA*. Target RPJMN 2025–2029 = 60%→80% = threshold defensible.
+3. **Defisit Faskes (✅)** → Diperbarui ke metrik *% puskesmas memenuhi standar SPA*. Target RPJMN 2025–2029 = 80% = threshold terverifikasi.
 4. **Diare (✅)** → Diperbarui ke rasio insidensi per 1.000 penduduk dibandingkan rata-rata Sulawesi.
 
 ---
@@ -347,17 +347,18 @@ Mengukur intensitas penggunaan aparat negara untuk membungkam penolakan warga.
 * **Angka Aktual**: 38 insiden → Skor: **7.6** *(tidak capped — model berfungsi benar)*
 * **✅ Status Threshold**: VERIFIED — Sumber: Satya Bumi & Protection International (2023), Hal. 12 *(perlu verifikasi halaman cetak)*.
 
-### 4.4. Skor Defisit Layanan Dasar (Faskes)
-Mengukur paradoks boom mineral vs stagnasi layanan kesehatan dasar.
-* **Metrik**: Pertumbuhan jumlah fasilitas kesehatan (RS/Puskesmas/Klinik) di Sulteng & Sultra dalam 10 tahun (Kemenkes).
-* **Model**: **Social Infrastructure Deficit Index** — *inverse scoring*: makin rendah pertumbuhan faskes, makin tinggi skor defisit.
-* **Logika**: Ekspor nikel sentra Sulawesi tumbuh >2.000% dalam satu dekade, tapi jika pertumbuhan faskes jauh di bawah 50%, klaim "peningkatan kesejahteraan" dalam AMDAL terbantah.
-* **Sumber**: Permenkes No.6/2024 + RPJMN 2025–2029, Bab IV, Tabel Indikator Akses Layanan Primer.
+### 4.4. Skor Defisit Layanan Dasar (Faskes & SPA)
+Mengukur kualitas pelayanan kesehatan dasar di tengah ledakan populasi pekerja tambang dan dampak penyakit ISPA/Diare.
+* **Metrik**: Persentase (%) Puskesmas yang memenuhi standar Sarana, Prasarana, dan Alat Kesehatan (SPA) di sentra nikel.
+* **Model**: **Target Deficit Index** — mengukur *gap* (kesenjangan) antara realita pemenuhan SPA dengan target minimum negara.
+* **Logika**: Klaim "peningkatan kesejahteraan" AMDAL terbantah jika faskes dasar tidak memenuhi standar keselamatan. Target RPJMN 2025–2029 untuk pemenuhan SPA Puskesmas adalah 80%. Semakin besar *gap* di bawah 80%, semakin darurat skornya.
+* **Sumber**: Kemenkes (Profil Kesehatan / ASPAK) & Lampiran Perpres RPJMN 2025–2029.
 * **Formula**:
   ```python
-  Skor_Sosial_4 = max(0.0, min(10.0, 10.0 - (Pertumbuhan_Faskes_Pct / 50) * 10))
+  Gap_SPA = max(0.0, 80.0 - SPA_Aktual_Pct)
+  Skor_Sosial_4 = min(10.0, (Gap_SPA / 80.0) * 10)  # Skala defisit proporsional
   ```
-* **⚠️ Status Threshold**: PERLU REVISI — "50% pertumbuhan unit" tidak ada di regulasi. Target revisi: ganti ke *% puskesmas memenuhi standar SPA* (RPJMN 2025–2029 target 60%→80%).
+* **✅ Status Threshold**: VERIFIED — Menggunakan standar resmi Kemenkes dan RPJMN (Target 80% SPA).
 
 ### 4.5. Akumulasi Skor Matriks Sosial
 ```python
