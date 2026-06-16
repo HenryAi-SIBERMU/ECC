@@ -210,11 +210,14 @@ if not df_ika.empty:
 skor_air_1 = min(10.0, max(0, (80 - ika_sulteng) / 30) * 10)
 
 skor_air_2 = 0
-kasus_diare_sentra = 0
 if not df_kes.empty:
     df_diare = df_kes[df_kes['indikator'].str.contains('Diare', case=False, na=False)]
-    kasus_diare_sentra = df_diare[df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
-    skor_air_2 = min(10.0, (kasus_diare_sentra / 500_000) * 10)
+    k_sentra = df_diare[df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
+    k_non = df_diare[~df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
+    ir_s = (k_sentra / 5_700_000) * 1000
+    ir_n = (k_non / 14_200_000) * 1000 if k_non > 0 else 1
+    r_diare = ir_s / ir_n if ir_n > 0 else 0
+    skor_air_2 = min(10.0, max(0.0, (r_diare - 1) * 10.0))
 
 skor_air_3 = 0
 jumlah_konflik_air = 0
@@ -228,7 +231,8 @@ if not df_konflik.empty:
 
 skor_air_4 = 0
 if not df_b3.empty:
-    skor_air_4 = min(10.0, (df_b3['Estimasi Timbulan (Ton/Tahun)'].sum() / 20_000_000) * 10)
+    t_b3_sulteng = df_b3[df_b3['Provinsi'] == 'Sulawesi Tengah']['Estimasi Timbulan (Ton/Tahun)'].sum()
+    skor_air_4 = min(10.0, (t_b3_sulteng / 25_000_000) * 10)
 
 skor_akumulasi_air = (skor_air_1 + skor_air_2 + skor_air_3 + skor_air_4) / 4
 
@@ -826,12 +830,21 @@ skor_air_1 = min(10.0, max(0, (80 - ika_sulteng) / 30) * 10)
 skor_air_2 = 0
 kasus_diare_sentra = 0
 kasus_diare_non = 0
+rasio_diare = 0
 if not df_kes.empty:
     df_diare = df_kes[df_kes['indikator'].str.contains('Diare', case=False, na=False)]
     kasus_diare_sentra = df_diare[df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
     kasus_diare_non = df_diare[~df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
-    # Normalisasi absolut: 500.000 kasus = Skor 10.0
-    skor_air_2 = min(10.0, (kasus_diare_sentra / 500_000) * 10)
+    
+    # Penduduk 2023: Sentra ~5.7M, Non-Sentra ~14.2M
+    populasi_sentra = 5_700_000
+    populasi_non = 14_200_000
+    
+    ir_sentra = (kasus_diare_sentra / populasi_sentra) * 1000
+    ir_non = (kasus_diare_non / populasi_non) * 1000 if populasi_non > 0 else 1
+    
+    rasio_diare = ir_sentra / ir_non if ir_non > 0 else 0
+    skor_air_2 = min(10.0, max(0.0, (rasio_diare - 1) * 10.0))
 
 # Skor 3: Konflik Air/Pesisir
 skor_air_3 = 0
@@ -851,8 +864,10 @@ if not df_konflik.empty:
 
 # Skor 4: Beban Tailing (Proxy B3)
 skor_air_4 = 0
+total_tailing_sulteng = 0
 if not df_b3.empty:
-    skor_air_4 = min(10.0, (df_b3['Estimasi Timbulan (Ton/Tahun)'].sum() / 20_000_000) * 10)
+    total_tailing_sulteng = df_b3[df_b3['Provinsi'] == 'Sulawesi Tengah']['Estimasi Timbulan (Ton/Tahun)'].sum()
+    skor_air_4 = min(10.0, (total_tailing_sulteng / 25_000_000) * 10)
 
 skor_akumulasi_air = (skor_air_1 + skor_air_2 + skor_air_3 + skor_air_4) / 4
 
@@ -896,11 +911,11 @@ with colB2:
             st.plotly_chart(fig_w1, use_container_width=True)
             
     with tab_w2:
-        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> AMDAL gagal menghitung dampak kontaminasi logam berat ke air tanah yang dikonsumsi warga, dibuktikan dengan ledakan pasien Diare di lingkar tambang.</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> AMDAL gagal menghitung dampak kontaminasi logam berat ke air tanah yang dikonsumsi warga, dibuktikan dengan ledakan pasien Diare di lingkar tambang. <b>Threshold Kritis: Incidence Rate Ratio (IRR) > 2.0</b> (Risiko 2x lipat dari populasi rata-rata). Sumber: <i>Kemenkes Profil Kesehatan 2023, Hal. 112</i>.</div>", unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
         col1.metric("Kasus Diare Sentra Nikel", f"{kasus_diare_sentra:,.0f}", "Sulteng & Sultra")
         col2.metric("Kasus Diare Daerah Lain", f"{kasus_diare_non:,.0f}", "4 Provinsi Non-Sentra", delta_color="normal")
-        col3.metric("Skor Beban Penyakit", f"{skor_air_2:.1f} / 10", "STATUS: DARURAT MEDIS", delta_color="inverse")
+        col3.metric("Skor Beban Penyakit", f"{skor_air_2:.1f} / 10", f"IRR: {rasio_diare:.1f}x Lipat", delta_color="inverse")
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
         if not df_kes.empty:
@@ -908,7 +923,6 @@ with colB2:
             df_diare_trend['Kategori'] = df_diare_trend['provinsi'].apply(lambda x: 'Sentra Tambang' if x in ['Sulawesi Tengah', 'Sulawesi Tenggara'] else 'Non-Sentra')
             df_d_agg = df_diare_trend.groupby(['tahun', 'Kategori'])['nilai'].sum().reset_index()
             fig_w2 = px.area(df_d_agg, x='tahun', y='nilai', color='Kategori', title="Ledakan Kasus Diare (Indikator Kualitas Air Tanah)")
-            fig_w2.add_hline(y=100000, line_dash="dash", line_color="#E74C3C", annotation_text="Batas Kritis Endemik (100k Kasus)", annotation_position="top left")
             fig_w2.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
             st.plotly_chart(fig_w2, use_container_width=True)
 
@@ -928,11 +942,11 @@ with colB2:
             st.plotly_chart(fig_w3, use_container_width=True)
 
     with tab_w4:
-        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Resiko kebocoran Tailings Dam (Bendungan Tailing) atau Deep Sea Tailing Placement (DSTP) yang ditutupi oleh klaim 'mitigasi teknologi'.</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Resiko kebocoran Tailings Dam (Bendungan Tailing) atau Deep Sea Tailing Placement (DSTP) yang ditutupi oleh klaim 'mitigasi teknologi'. <b>Threshold Kritis: 25 Juta Ton/Tahun</b> (Batas Kapasitas AMDAL Gabungan Kawasan IMIP & OSS). Sumber: <i>Dokumen AMDAL KLHK, PPID</i>.</div>", unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
-        col1.metric("Total Timbulan Limbah/Tailing", f"{df_b3['Estimasi Timbulan (Ton/Tahun)'].sum()/1_000_000:.1f} Jt Ton", "Mayoritas Slag/Tailing")
+        col1.metric("Total Timbulan Tailing/B3", f"{total_tailing_sulteng/1_000_000:.1f} Jt Ton", "Mayoritas Slag/Tailing Sulteng")
         col2.metric("Titik Resiko", "Smelter & Laut Dalam", "DSTP & Tailing Dam", delta_color="inverse")
-        col3.metric("Skor Ancaman Tailing", f"{skor_air_4:.1f} / 10", "STATUS: ZONA MERAH", delta_color="inverse")
+        col3.metric("Skor Ancaman Tailing", f"{skor_air_4:.1f} / 10", f"AMDAL Limit: 25 Jt Ton", delta_color="inverse")
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
         if not df_b3.empty:
