@@ -877,6 +877,7 @@ with colC2:
             fig_l1 = px.bar(df_b_trend, x='tahun', y='jumlah_kejadian', color='provinsi', 
                            title="Frekuensi Bencana Hidrometeorologi (Banjir & Longsor)",
                            color_discrete_sequence=px.colors.qualitative.Pastel)
+            fig_l1.add_hline(y=50, line_dash="dash", line_color="#E74C3C", annotation_text="Batas Darurat Bencana (50/Tahun)", annotation_position="top left")
             fig_l1.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
             st.plotly_chart(fig_l1, use_container_width=True)
             with st.expander("Tampilkan Data Mentah (BNPB)"):
@@ -897,6 +898,7 @@ with colC2:
             df_g_trend = df_g.groupby(['Tahun', 'Provinsi'])['Total_Deforestasi_Ha'].sum().reset_index()
             fig_l2 = px.line(df_g_trend, x='Tahun', y='Total_Deforestasi_Ha', color='Provinsi', markers=True,
                            title="Laju Deforestasi Akibat Pertambangan & Sawit")
+            fig_l2.add_hline(y=25000, line_dash="dash", line_color="#E74C3C", annotation_text="Batas Kritis Tahunan (25.000 Ha)", annotation_position="bottom right")
             fig_l2.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
             st.plotly_chart(fig_l2, use_container_width=True)
             with st.expander("Tampilkan Data Mentah (Global Forest Watch)"):
