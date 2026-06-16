@@ -749,7 +749,7 @@ with colA2:
             col_f1, col_f2, col_f3 = st.columns(3)
             col_f1.metric("Total Limbah B3 Sulteng", f"{total_b3_sulteng/1_000_000:.1f} Jt Ton/Thn", "Threshold kritis: 30 Jt Ton (KLHK LKj 2022 Hal.47)")
             col_f2.metric("Total Kasus ISPA Sentra", f"{kasus_sentra:,.0f}", "2014-2024", delta_color="inverse")
-            col_f3.metric("Skor Over-Capacity B3", f"{skor_3:.1f} / 10", f"Beban: {skor_overcapacity:.1f}x dari 30 Jt Ton", delta_color="inverse")
+            col_f3.metric("Skor Over-Capacity B3", f"{skor_3:.1f} / 10", f"Beban: {skor_overcapacity:.1f} Jt dari 30 Jt", delta_color="inverse")
             
             st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
             
