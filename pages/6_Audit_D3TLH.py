@@ -318,10 +318,10 @@ perusahaan_ilegal = 0
 kapasitas_pltu = 0.0
 
 if not df_izin.empty:
-    df_izin['tahun'] = pd.to_numeric(df_izin['tahun'], errors='coerce')
-    df_izin['jumlah_izin'] = pd.to_numeric(df_izin['jumlah_izin'], errors='coerce').fillna(0)
-    df_izin_recent = df_izin[df_izin['tahun'] >= 2014]
-    izin_baru = df_izin_recent['jumlah_izin'].sum()
+    df_izin['Tahun'] = pd.to_numeric(df_izin['Tahun'], errors='coerce')
+    df_izin['Jumlah_Izin_Baru'] = pd.to_numeric(df_izin['Jumlah_Izin_Baru'], errors='coerce').fillna(0)
+    df_izin_recent = df_izin[df_izin['Tahun'] >= 2014]
+    izin_baru = df_izin_recent['Jumlah_Izin_Baru'].sum()
     skor_veto_1 = min(10.0, (izin_baru / 100) * 10) # 100 izin baru di masa krisis = 10.0
 
 if not df_kpa_izin.empty:
@@ -1138,8 +1138,8 @@ with colE2:
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
         if not df_izin.empty:
-            df_izin_plot = df_izin[df_izin['tahun'] >= 2014].copy()
-            fig_v1 = px.bar(df_izin_plot, x='tahun', y='jumlah_izin', title="Lonjakan Penerbitan IUP di Era Krisis Lingkungan", color_discrete_sequence=['#E67E22'])
+            df_izin_plot = df_izin[df_izin['Tahun'] >= 2014].copy()
+            fig_v1 = px.bar(df_izin_plot, x='Tahun', y='Jumlah_Izin_Baru', title="Lonjakan Penerbitan IUP di Era Krisis Lingkungan", color_discrete_sequence=['#E67E22'])
             fig_v1.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
             st.plotly_chart(fig_v1, use_container_width=True)
             with st.expander("Tampilkan Data Penerbitan Izin (Ditjen Minerba)"):
