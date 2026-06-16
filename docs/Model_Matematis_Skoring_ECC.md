@@ -23,9 +23,9 @@ Mengukur asimetri distribusi penyakit infeksi saluran pernapasan di ekoregion.
 * **Formula**:
   ```python
   Rasio = (Rata_Rata_Kasus_Sentra) / (Rata_Rata_Kasus_Non_Sentra)
-  Skor_2 = min(10.0, max(0.0, (Rasio - 1) * 2.5))
+  Skor_2 = min(10.0, max(0.0, (Rasio - 1) * 10.0))
   ```
-* **Threshold Kritis**: Jika rasio mencapai 5x lipat lebih masif dari daerah lain, skor menembus nilai absolut 10.0 (Darurat Medis).
+* **Threshold Kritis**: Jika rasio mencapai 2x lipat (2.0) lebih masif dari daerah lain, skor langsung menembus nilai mutlak 10.0 (Darurat Medis).
 
 ### 1.3. Skor Over-Capacity Limbah B3
 Mengukur tingkat kelampauan daya tampung limbah beracun dan abu terbang (fly ash).

@@ -301,8 +301,8 @@ if not df_kes.empty:
     kasus_sentra = df_ts_pre[df_ts_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
     kasus_non_sentra = df_ts_pre[~df_ts_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
     rasio_anomali = (kasus_sentra / 2) / (kasus_non_sentra / 4) if kasus_non_sentra > 0 else 0
-    # Normalisasi: Rasio 5x lipat = skor 10
-    skor_2 = min(10.0, max(0.0, (rasio_anomali - 1) * 2.5))
+    # Normalisasi: Rasio 2x lipat = skor 10
+    skor_2 = min(10.0, max(0.0, (rasio_anomali - 1) * 10.0))
 
 # Skor 3: Over-Capacity B3
 skor_3 = 0
@@ -433,8 +433,8 @@ with colA2:
                 df_ts_agg = df_ts_filtered.groupby(['tahun', 'provinsi', 'Kategori'])['nilai'].sum().reset_index()
                 
                 # Gunakan skor pre-calculated
-                kasus_sentra_grafik = df_ts_filtered[df_ts_filtered['Kategori'].str.contains('Sentra')]['nilai'].sum()
-                kasus_non_sentra_grafik = df_ts_filtered[~df_ts_filtered['Kategori'].str.contains('Sentra')]['nilai'].sum()
+                kasus_sentra_grafik = df_ts_filtered[df_ts_filtered['Kategori'] == 'Sentra Industri (Sulteng & Sultra)']['nilai'].sum()
+                kasus_non_sentra_grafik = df_ts_filtered[df_ts_filtered['Kategori'] == 'Non-Sentra Industri (Lainnya)']['nilai'].sum()
                 
                 col1, col2, col3 = st.columns(3)
                 col1.metric("Total Kasus ISPA Sentra", f"{kasus_sentra_grafik:,.0f}", "Sulteng & Sultra")
