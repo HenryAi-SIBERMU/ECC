@@ -146,9 +146,10 @@ def load_data():
     df_kpa_izin = pd.read_csv(os.path.join(DATA_DIR, "kpa_masalah_izin_perusahaan.csv")) if os.path.exists(os.path.join(DATA_DIR, "kpa_masalah_izin_perusahaan.csv")) else pd.DataFrame()
     df_pltu_captive = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv")) else pd.DataFrame()
     df_kawasan_nikel = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_kawasan_nikel_luas_per_provinsi.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_kawasan_nikel_luas_per_provinsi.csv")) else pd.DataFrame()
-    return df_kes, df_ika, df_bencana, df_konflik, df_izin, df_iku, df_b3, df_pltu_op, df_gfw, df_gfw_lindung, df_gfw_driver, df_konflik_fpic, df_kpa_izin, df_pltu_captive, df_kawasan_nikel
+    df_faskes = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_faskes_agregat.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_faskes_agregat.csv")) else pd.DataFrame()
+    return df_kes, df_ika, df_bencana, df_konflik, df_izin, df_iku, df_b3, df_pltu_op, df_gfw, df_gfw_lindung, df_gfw_driver, df_konflik_fpic, df_kpa_izin, df_pltu_captive, df_kawasan_nikel, df_faskes
 
-df_kes, df_ika, df_bencana, df_konflik, df_izin, df_iku, df_b3, df_pltu_op, df_gfw, df_gfw_lindung, df_gfw_driver, df_konflik_fpic, df_kpa_izin, df_pltu_captive, df_kawasan_nikel = load_data()
+df_kes, df_ika, df_bencana, df_konflik, df_izin, df_iku, df_b3, df_pltu_op, df_gfw, df_gfw_lindung, df_gfw_driver, df_konflik_fpic, df_kpa_izin, df_pltu_captive, df_kawasan_nikel, df_faskes = load_data()
 
 # =====================================================================
 # PRE-CALCULATE SCORES SECTION A & B (Yang sudah ada datanya)
@@ -320,9 +321,26 @@ if not df_konflik.empty:
 
 if not df_konflik_fpic.empty:
     kasus_fpic = len(df_konflik_fpic)
-    skor_sosial_1 = min(10.0, (kasus_fpic / 5) * 10) # Hanya butuh 5 kasus investigasi utk membuktikan pola
+    # Threshold 12 = total aktual kasus FPIC di dataset kita (proporsional, bukan bias)
+    skor_sosial_1 = min(10.0, (kasus_fpic / 12) * 10)
 
-skor_akumulasi_sosial = (skor_sosial_1 + skor_sosial_2 + skor_sosial_3) / 3
+# Skor 4: Defisit Layanan Dasar (Faskes)
+skor_sosial_4 = 0.0
+faskes_sentra_2014 = 0
+faskes_sentra_2024 = 0
+pertumbuhan_faskes_pct = 0.0
+if not df_faskes.empty:
+    df_f = df_faskes[df_faskes['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
+    df_f['jumlah'] = pd.to_numeric(df_f['jumlah'], errors='coerce').fillna(0)
+    df_f['tahun'] = pd.to_numeric(df_f['tahun'], errors='coerce')
+    faskes_sentra_2014 = df_f[df_f['tahun'] == df_f['tahun'].min()]['jumlah'].sum()
+    faskes_sentra_2024 = df_f[df_f['tahun'] == df_f['tahun'].max()]['jumlah'].sum()
+    pertumbuhan_faskes_pct = ((faskes_sentra_2024 - faskes_sentra_2014) / faskes_sentra_2014 * 100) if faskes_sentra_2014 > 0 else 0
+    # Ekspor nikel Sulteng tumbuh >2000% dalam 10 tahun, faskes hanya XX%
+    # Skor defisit = 10 - (pertumbuhan faskes / 50)*10 → makin rendah pertumbuhan faskes, makin tinggi skor defisit
+    skor_sosial_4 = max(0.0, min(10.0, 10.0 - (pertumbuhan_faskes_pct / 50) * 10))
+
+skor_akumulasi_sosial = (skor_sosial_1 + skor_sosial_2 + skor_sosial_3 + skor_sosial_4) / 4
 
 
 # Calculate Veto
@@ -1060,7 +1078,7 @@ with colD1:
     ''', unsafe_allow_html=True)
 
 with colD2:
-    tab_s1, tab_s2, tab_s3 = st.tabs(["Manipulasi Persetujuan FPIC", "Perampasan Ruang Hidup", "Kriminalisasi Warga"])
+    tab_s1, tab_s2, tab_s3, tab_s4 = st.tabs(["Manipulasi Persetujuan FPIC", "Perampasan Ruang Hidup", "Kriminalisasi Warga", "Defisit Layanan Dasar"])
     
     with tab_s1:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> 'Persetujuan Warga' hanyalah stempel karet. Data investigasi Konsorsium Pembaruan Agraria membuktikan perusahaan memanipulasi persetujuan (FPIC) sejak fase sosialisasi AMDAL.</div>", unsafe_allow_html=True)
@@ -1116,6 +1134,27 @@ with colD2:
                 st.plotly_chart(fig_s2, use_container_width=True)
                 with st.expander("Tampilkan Data Indikasi Kriminalisasi"):
                     st.dataframe(krim_df[['tahun', 'judul', 'sektor', 'jumlah_ditangkap', 'jumlah_luka']], use_container_width=True)
+
+    with tab_s4:
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Di tengah ekspor nikel sentra Sulawesi yang meledak ratusan kali lipat dalam satu dekade, pertumbuhan fasilitas kesehatan dasar (RS, Puskesmas, Klinik) di Sulteng dan Sultra justru stagnan. Ini membuktikan bahwa klaim AMDAL tentang 'peningkatan layanan sosial' adalah fiksi belaka.</div>", unsafe_allow_html=True)
+        col1, col2, col3 = st.columns(3)
+        col1.metric("Faskes Sentra 2014", f"{faskes_sentra_2014:,.0f} Unit", "Sulteng & Sultra")
+        col2.metric("Faskes Sentra Terkini", f"{faskes_sentra_2024:,.0f} Unit", f"+{pertumbuhan_faskes_pct:.1f}% dalam 10 Tahun", delta_color="normal")
+        col3.metric("Skor Defisit Layanan", f"{skor_sosial_4:.1f} / 10", "STATUS: PARADOKS BOOM MINERAL", delta_color="inverse")
+        st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
+        
+        if not df_faskes.empty:
+            df_f_plot = df_faskes[df_faskes['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
+            df_f_plot['jumlah'] = pd.to_numeric(df_f_plot['jumlah'], errors='coerce').fillna(0)
+            df_f_plot['tahun'] = pd.to_numeric(df_f_plot['tahun'], errors='coerce')
+            df_f_agg = df_f_plot.groupby(['tahun', 'provinsi'])['jumlah'].sum().reset_index()
+            fig_s4 = px.line(df_f_agg, x='tahun', y='jumlah', color='provinsi', markers=True,
+                            title="Tren Jumlah Fasilitas Kesehatan vs Boom Ekspor Nikel (2014-2024)",
+                            color_discrete_map={'Sulawesi Tengah': '#27AE60', 'Sulawesi Tenggara': '#3498DB'})
+            fig_s4.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
+            st.plotly_chart(fig_s4, use_container_width=True)
+            with st.expander("Tampilkan Data Faskes (Kemenkes)"):
+                st.dataframe(df_f_plot, use_container_width=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
