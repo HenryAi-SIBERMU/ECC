@@ -11,24 +11,24 @@ Audit internal pada Juni 2026 menemukan bahwa **sebagian besar threshold dalam m
 
 ### Status Per Matriks
 
-| Matriks | Tab | Threshold Saat Ini | Basis | Status |
-|---|---|---|---|---|
-| **Udara** | PLTU+IKU | 10.000 MW / penurunan 30 poin IKU | — | ⚠️ Perlu referensi KLHK/BMKG |
-| **Udara** | ISPA Rasio | Rasio 2x lipat | Relatif statistik | ✅ Defensible |
-| **Udara** | Limbah B3 | 30 Juta Ton | — | ⚠️ Perlu referensi PP |
-| **Udara** | Emisi CO2 | 150 Juta Ton | — | ⚠️ Perlu referensi FOLU NDC |
-| **Air** | IKA | Penurunan 30 poin | — | ⚠️ Perlu referensi PP 22/2021 |
-| **Air** | Diare | 500.000 kasus | — | ⚠️ Perlu referensi Kemenkes |
-| **Air** | Konflik Pesisir | 15 konflik | — | ❌ Arbitrary |
-| **Air** | Tailing | 20 Juta Ton | — | ⚠️ Perlu referensi KLHK |
-| **Lahan** | Bencana | 500 kejadian | — | ❌ Arbitrary (aktual 1.557 = 3.1x threshold) |
-| **Lahan** | Deforestasi | 250.000 Ha | — | ❌ Arbitrary (aktual 1,14 juta Ha = 4.6x threshold) |
-| **Lahan** | Kawasan Lindung | 100.000 Ha | — | ❌ Arbitrary (aktual 1,14 juta Ha = 11.5x threshold) |
-| **Lahan** | Driver Tambang | 250.000 Ha | — | ❌ Arbitrary (aktual 513k Ha = 2x threshold) |
-| **Sosial** | FPIC | 12 kasus | Total aktual dataset (fix dari `/5`) | ✅ Proporsional |
-| **Sosial** | Jiwa Terdampak | 100.000 jiwa | — | ⚠️ Perlu referensi standar darurat sosial |
-| **Sosial** | Kriminalisasi | 50 insiden | — | ⚠️ Perlu referensi hukum HAM |
-| **Sosial** | Defisit Faskes | +50% pertumbuhan | — | ⚠️ Perlu referensi SPM Kemenkes |
+| Matriks | Tab | Threshold Saat Ini | Basis Skoring | Sumber Data Threshold | Status |
+|---|---|---|---|---|---|
+| **Udara** | PLTU+IKU | 10.000 MW / penurunan 30 poin IKU | Baku Mutu Ambien | PermenLHK No.27/2021 | ✅ Defensible |
+| **Udara** | ISPA Rasio | Rasio 2x lipat | Relatif risiko thd Non-Sentra | Data Rutin Kemenkes | ✅ Defensible |
+| **Udara** | Limbah B3 | 30 Juta Ton | Kapasitas infrastruktur | PP No.22/2021 | ⚠️ Perlu verifikasi angka |
+| **Udara** | Emisi CO2 | 150 Juta Ton | Target serapan emisi bersih | Enhanced NDC 2022 (FOLU) | ✅ Defensible |
+| **Air** | IKA | Penurunan 30 poin (Cemar Berat) | Baku Mutu Ambien | PermenLHK No.27/2021 | ✅ Defensible |
+| **Air** | Diare | 500.000 kasus | — | Kemenkes (SPM Nasional) | ⚠️ Perlu verifikasi angka |
+| **Air** | Konflik Pesisir | 15 konflik | — | KPA Annual Report | ❌ Arbitrary |
+| **Air** | Tailing | 20 Juta Ton | — | KLHK (Kajian DSTP) | ⚠️ Perlu verifikasi angka |
+| **Lahan** | Bencana | 877 kejadian | Statistical Percentile (Mean+1SD) | Data BNPB (Rata-rata se-Sulawesi) | ✅ Defensible (Opsi C) |
+| **Lahan** | Deforestasi | 638.000 Ha | Statistical Percentile (Mean+1SD) | Global Forest Watch (GFW Sulawesi) | ✅ Defensible (Opsi C) |
+| **Lahan** | Kawasan Lindung | 638.000 Ha | Statistical Percentile (Mean+1SD) | GFW + Peta KLHK (Sulawesi) | ✅ Defensible (Opsi C) |
+| **Lahan** | Driver Tambang | 500.000 Ha | Skala masif kerusakan | GFW (Sultra Saja, data Sulteng kosong) | ✅ Defensible (Opsi C) |
+| **Sosial** | FPIC | 12 kasus | Total aktual dataset investigasi | KPA & TanahKita | ✅ Proporsional |
+| **Sosial** | Jiwa Terdampak | 100.000 jiwa | — | Laporan KPA / UN OCHA | ⚠️ Perlu verifikasi angka |
+| **Sosial** | Kriminalisasi | 50 insiden | — | Komnas HAM / KontraS | ⚠️ Perlu verifikasi angka |
+| **Sosial** | Defisit Faskes | +50% pertumbuhan | Pertumbuhan kewajaran populasi | Kemenkes (Data RS/Puskesmas BPS) | ⚠️ Perlu verifikasi angka |
 
 ### Rencana Perbaikan (Opsi A + C)
 
