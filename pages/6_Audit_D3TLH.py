@@ -239,7 +239,9 @@ if not df_bencana.empty:
     df_bencana_sentra = df_bencana[df_bencana['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
     df_bencana_sentra['jumlah_kejadian'] = pd.to_numeric(df_bencana_sentra['jumlah_kejadian'], errors='coerce').fillna(0)
     bencana_sulteng_sultra = df_bencana_sentra['jumlah_kejadian'].sum()
-    skor_lahan_1 = min(10.0, (bencana_sulteng_sultra / 2_000) * 10)  # Threshold: 2.000 bencana dalam 10 thn = krisis absolut
+    
+    # Skor 1: Bencana (Threshold Opsi C: 877 kejadian)
+    skor_lahan_1 = min(10.0, (bencana_sulteng_sultra / 877) * 10)
 
 skor_lahan_2 = 0
 deforestasi_sentra = 0
@@ -247,7 +249,9 @@ if not df_gfw.empty:
     df_gfw_sentra = df_gfw[df_gfw['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
     df_gfw_sentra['Total_Deforestasi_Ha'] = pd.to_numeric(df_gfw_sentra['Total_Deforestasi_Ha'], errors='coerce').fillna(0)
     deforestasi_sentra = df_gfw_sentra['Total_Deforestasi_Ha'].sum()
-    skor_lahan_2 = min(10.0, (deforestasi_sentra / 2_000_000) * 10)  # Threshold: 2 juta Ha = seluruh hutan sentra nikel habis
+    
+    # Skor 2: Deforestasi (Threshold Opsi C: 638,000 Ha)
+    skor_lahan_2 = min(10.0, (deforestasi_sentra / 638_000) * 10)
 
 
 # Calculate Lahan 3 & 4
@@ -260,14 +264,18 @@ if not df_gfw_lindung.empty:
     df_l = df_gfw_lindung[df_gfw_lindung['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
     df_l['Luas_Hilang_Kawasan_Lindung_Ha'] = pd.to_numeric(df_l['Luas_Hilang_Kawasan_Lindung_Ha'], errors='coerce').fillna(0)
     lindung_hilang = df_l['Luas_Hilang_Kawasan_Lindung_Ha'].sum()
-    skor_lahan_3 = min(10.0, (lindung_hilang / 1_500_000) * 10)  # Threshold: 1.5 juta Ha kawasan lindung = titik kolaps ekosistem
+    
+    # Skor 3: Pelanggaran Lindung (Threshold Opsi C: 638,000 Ha)
+    skor_lahan_3 = min(10.0, (lindung_hilang / 638_000) * 10) # Sangat ketat karena ini kawasan lindung
 
 if not df_gfw_driver.empty:
     df_d = df_gfw_driver[df_gfw_driver['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
     df_d['Luas_Deforestasi_Ha'] = pd.to_numeric(df_d['Luas_Deforestasi_Ha'], errors='coerce').fillna(0)
-    tambang_driver = df_d[df_d['Faktor_Pendorong'] == 'Deforestasi Komoditas (Tambang/Sawit)']
-    tambang_driver_ha = tambang_driver['Luas_Deforestasi_Ha'].sum()
-    skor_lahan_4 = min(10.0, (tambang_driver_ha / 750_000) * 10)  # Threshold: 750k Ha = mayoritas deforestasi dikendalikan tambang
+    df_driver_tambang = df_d[df_d['Faktor_Pendorong'] == 'Deforestasi Komoditas (Tambang/Sawit)']
+    tambang_driver_ha = df_driver_tambang['Luas_Deforestasi_Ha'].sum()
+    
+    # Skor 4: Tambang Driver (Threshold Opsi C: 500,000 Ha)
+    skor_lahan_4 = min(10.0, (tambang_driver_ha / 500_000) * 10)
 
 # Skor 5: Gap AMDAL vs IUP (Ekspansi Spekulatif)
 skor_lahan_5 = 0.0
@@ -547,53 +555,6 @@ st.markdown("""
 # ---------------------------------------------------------
 # A. MITOS KUALITAS UDARA VS ISPA
 # ---------------------------------------------------------
-# --- Pre-computation for Scores (Skala 0-10) ---
-# Skor 1: Ancaman Udara
-kapasitas_terkini = 0
-iku_terkini = 75
-if not df_pltu_op.empty:
-    kapasitas_terkini = df_pltu_op[(df_pltu_op['Status'].str.lower() == 'operating')]['Capacity (MW)'].sum()
-if not df_iku.empty:
-    df_iku_avg_pre = df_iku.groupby('Tahun')['IKU'].mean().reset_index()
-    if 2024 in df_iku_avg_pre['Tahun'].values:
-        iku_terkini = df_iku_avg_pre[df_iku_avg_pre['Tahun'] == 2024]['IKU'].values[0]
-# Normalisasi: PLTU Max 10.000 MW, IKU kritis pada 50 (range 80 ke 50)
-skor_1 = min(10.0, (kapasitas_terkini / 10000) * 5 + max(0, (80 - iku_terkini) / 30) * 5)
-
-# Skor 2: Rasio Anomali ISPA
-skor_2 = 0
-rasio_anomali = 0
-kasus_sentra = 0
-if not df_kes.empty:
-    df_ts_pre = df_kes[df_kes['indikator'].str.contains('ISPA', case=False, na=False)]
-    kasus_sentra = df_ts_pre[df_ts_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
-    kasus_non_sentra = df_ts_pre[~df_ts_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
-    rasio_anomali = (kasus_sentra / 2) / (kasus_non_sentra / 4) if kasus_non_sentra > 0 else 0
-    # Normalisasi: Rasio 2x lipat = skor 10
-    skor_2 = min(10.0, max(0.0, (rasio_anomali - 1) * 10.0))
-
-# Skor 3: Over-Capacity B3
-skor_3 = 0
-skor_overcapacity = 0
-total_b3_sulteng = 0
-if not df_b3.empty:
-    df_b3['Estimasi Timbulan (Ton/Tahun)'] = pd.to_numeric(df_b3['Estimasi Timbulan (Ton/Tahun)'], errors='coerce').fillna(0)
-    total_b3_all_pre = df_b3['Estimasi Timbulan (Ton/Tahun)'].sum()
-    total_b3_sulteng = df_b3[df_b3['Provinsi'] == 'Sulawesi Tengah']['Estimasi Timbulan (Ton/Tahun)'].sum()
-    skor_overcapacity = total_b3_all_pre / 1_000_000
-    # Normalisasi: Batas ekstrem 30x lipat dari daya tampung = skor 10
-    skor_3 = min(10.0, (skor_overcapacity / 30.0) * 10)
-
-# Skor 4: Defisit Ekosistem
-skor_4 = 0
-if not df_gfw.empty:
-    df_gfw['Total_Emisi_CO2_Megagram'] = pd.to_numeric(df_gfw['Total_Emisi_CO2_Megagram'], errors='coerce').fillna(0)
-    total_emisi_pre = df_gfw['Total_Emisi_CO2_Megagram'].sum() / 1_000_000
-    # Normalisasi: Emisi 150 Juta Ton = skor 10
-    skor_4 = min(10.0, (total_emisi_pre / 150.0) * 10)
-
-skor_akumulasi_udara = (skor_1 + skor_2 + skor_3 + skor_4) / 4
-
 colA1, colA2 = st.columns([1, 2])
 with colA1:
     st.markdown(f"""
@@ -619,7 +580,6 @@ with colA2:
         tab1, tab2, tab3, tab4 = st.tabs(["Korelasi PLTU & Kualitas Udara", "Dampak Kasus ISPA/Pneumonia", "Fakta Beban Limbah & Emisi", "Hilangnya Paru-Paru Udara"])
         
         with tab1:
-            # --- 1. Ekspansi PLTU vs Penurunan Kualitas Udara ---
             st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Pemerintah sering merilis angka rata-rata IKU tahunan seolah 'Masih Aman', menutupi tren eksponensial di mana kualitas udara terjun bebas tepat setelah keran mega-smelter dibuka lebar pada 2014-2015.</div>", unsafe_allow_html=True)
             
             if not df_pltu_op.empty and not df_iku.empty:
@@ -640,7 +600,6 @@ with colA2:
                 df_pltu_trend = pd.DataFrame(panel_data_pltu)
                 df_iku_avg = df_iku[df_iku['Tahun'].between(2010, 2024)].groupby('Tahun')['IKU'].mean().reset_index()
                 
-                # Gunakan skor pre-calculated
                 kapasitas_grafik = df_pltu_trend[df_pltu_trend['Tahun'] == 2024]['Kapasitas_PLTU_MW'].sum()
                 iku_grafik = df_iku_avg[df_iku_avg['Tahun'] == 2024]['IKU'].values[0] if not df_iku_avg[df_iku_avg['Tahun'] == 2024].empty else 75
                 
@@ -671,7 +630,6 @@ with colA2:
                     ), secondary_y=True
                 )
                 
-                # Menambahkan Batas Kritis IKU (Misal: 70 adalah batas bawah kualitas sangat baik/aman)
                 fig_2_2_combined.add_hline(y=70, line_dash="dot", annotation_text="Batas Kritis Kualitas Udara", line_color="#FF5252", secondary_y=True)
                 fig_2_2_combined.add_vline(x=2014, line_dash="dash", line_color="rgba(255,255,255,0.3)", annotation_text="Booming Smelter Dimulai", annotation_position="top right")
                 
@@ -692,7 +650,6 @@ with colA2:
                     st.caption("Sumber: `sulawesi_pltu_captive.csv`")
 
         with tab2:
-            # --- 2. Tren Historis Kasus ISPA/Pneumonia ---
             st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Dokumen daya dukung mengabaikan lonjakan tajam pasien ISPA di RSUD Morowali dan Kendari. Grafik membuktikan bahwa tren ISPA di provinsi non-tambang relatif stabil, namun meroket secara paralel dengan asap di provinsi sentra nikel.</div>", unsafe_allow_html=True)
             
             df_ts_filtered = df_kes[df_kes['indikator'].str.contains('ISPA', case=False, na=False)].copy()
@@ -700,7 +657,6 @@ with colA2:
                 df_ts_filtered['Kategori'] = df_ts_filtered['provinsi'].apply(lambda x: 'Sentra Industri (Sulteng & Sultra)' if x in ['Sulawesi Tengah', 'Sulawesi Tenggara'] else 'Non-Sentra Industri (Lainnya)')
                 df_ts_agg = df_ts_filtered.groupby(['tahun', 'provinsi', 'Kategori'])['nilai'].sum().reset_index()
                 
-                # Gunakan skor pre-calculated
                 kasus_sentra_grafik = df_ts_filtered[df_ts_filtered['Kategori'] == 'Sentra Industri (Sulteng & Sultra)']['nilai'].sum()
                 kasus_non_sentra_grafik = df_ts_filtered[df_ts_filtered['Kategori'] == 'Non-Sentra Industri (Lainnya)']['nilai'].sum()
                 
@@ -741,10 +697,8 @@ with colA2:
                     st.caption("Sumber File: `sulawesi_kesehatan_detail_2014_2024.csv`")
                     
         with tab3:
-            # --- 3. Fakta Data Timbulan Limbah Udara & B3 ---
             st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Data perizinan D3TLH fokus pada syarat emisi cerobong di atas kertas, tetapi mengabaikan gunung-gunung debu slag (fly ash) di darat yang bebas tertiup angin memapari puluhan desa setiap harinya.</div>", unsafe_allow_html=True)
             
-            # Gunakan nilai pre-calculated
             col_f1, col_f2, col_f3 = st.columns(3)
             col_f1.metric("Total Limbah B3 Sulteng", f"{total_b3_sulteng/1_000_000:.1f} Jt Ton/Thn", "Partikulat/Fly Ash")
             col_f2.metric("Total Kasus ISPA Sentra", f"{kasus_sentra:,.0f}", "2014-2024", delta_color="inverse")
@@ -758,7 +712,6 @@ with colA2:
                                 text='Estimasi Timbulan (Ton/Tahun)', color='Estimasi Timbulan (Ton/Tahun)',
                                 color_continuous_scale='Reds', title="Beban Timbulan B3 per Provinsi")
                 
-                # Tambahkan garis batas halusinasi aman
                 fig_b3.add_vline(x=5_000_000, line_dash="dot", line_color="#FFF", annotation_text="Kapasitas Toleransi Ambruk", annotation_position="top right")
                 
                 fig_b3.update_traces(texttemplate='%{text:,.0f} ton', textposition='outside')
@@ -770,7 +723,6 @@ with colA2:
                     st.caption("Sumber File: `sulawesi_limbah_b3.csv`")
                     
         with tab4:
-            # --- 4. Hilangnya Paru-Paru Udara (Deforestasi CO2) ---
             st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Audit resmi pemerintah hanya menghitung 'emisi yang keluar dari corong pabrik', tetapi dengan sengaja mengaburkan 'emisi dari jutaan pohon yang mati' akibat ekspansi lahan tambang itu sendiri.</div>", unsafe_allow_html=True)
             
             if not df_gfw.empty:
@@ -801,56 +753,6 @@ st.markdown("<br>", unsafe_allow_html=True)
 # ---------------------------------------------------------
 # B. MITOS DAYA TAMPUNG AIR
 # ---------------------------------------------------------
-# --- Pre-computation for Water Scores (Skala 0-10) ---
-# Skor 1: IKA 
-ika_terkini = 50
-ika_sulteng = 50
-if not df_ika.empty:
-    df_ika_avg = df_ika.groupby('Tahun')['Indeks Kualitas Air'].mean().reset_index()
-    if 2024 in df_ika_avg['Tahun'].values:
-        ika_terkini = df_ika_avg[df_ika_avg['Tahun'] == 2024]['Indeks Kualitas Air'].values[0]
-    
-    df_sulteng = df_ika[df_ika['Provinsi'] == 'Sulawesi Tengah']
-    if not df_sulteng.empty and 2024 in df_sulteng['Tahun'].values:
-        ika_sulteng = df_sulteng[df_sulteng['Tahun'] == 2024]['Indeks Kualitas Air'].values[0]
-
-# Normalisasi: IKA ideal = 80, IKA cemar berat = 50
-skor_air_1 = min(10.0, max(0, (80 - ika_sulteng) / 30) * 10)
-
-# Skor 2: Morbiditas Diare
-skor_air_2 = 0
-kasus_diare_sentra = 0
-kasus_diare_non = 0
-if not df_kes.empty:
-    df_diare = df_kes[df_kes['indikator'].str.contains('Diare', case=False, na=False)]
-    kasus_diare_sentra = df_diare[df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
-    kasus_diare_non = df_diare[~df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
-    # Normalisasi absolut: 500.000 kasus = Skor 10.0
-    skor_air_2 = min(10.0, (kasus_diare_sentra / 500_000) * 10)
-
-# Skor 3: Konflik Air/Pesisir
-skor_air_3 = 0
-jumlah_konflik_air = 0
-luas_konflik_air = 0
-df_konflik_air = pd.DataFrame()
-if not df_konflik.empty:
-    keywords = 'air|laut|pesisir|nelayan|sungai|pulau|tailing'
-    df_konflik_air = df_konflik[df_konflik['sektor'].str.contains(keywords, case=False, na=False) | 
-                                df_konflik['judul'].str.contains(keywords, case=False, na=False) | 
-                                df_konflik['deskripsi'].str.contains(keywords, case=False, na=False)]
-    jumlah_konflik_air = len(df_konflik_air)
-    if 'luas_ha' in df_konflik_air.columns:
-        luas_konflik_air = pd.to_numeric(df_konflik_air['luas_ha'], errors='coerce').sum()
-    # Normalisasi: 15 Konflik = Skor 10
-    skor_air_3 = min(10.0, (jumlah_konflik_air / 15.0) * 10)
-
-# Skor 4: Beban Tailing (Proxy B3)
-skor_air_4 = 0
-if not df_b3.empty:
-    skor_air_4 = min(10.0, (df_b3['Estimasi Timbulan (Ton/Tahun)'].sum() / 20_000_000) * 10)
-
-skor_akumulasi_air = (skor_air_1 + skor_air_2 + skor_air_3 + skor_air_4) / 4
-
 colB1, colB2 = st.columns([1, 2])
 with colB1:
     st.markdown(f"""
@@ -938,8 +840,6 @@ with colB2:
             st.plotly_chart(fig_w4, use_container_width=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
-
-
 
 # ---------------------------------------------------------
 # C. MITOS DEFORESTASI VS BENCANA ALAM (DAYA DUKUNG LAHAN)
@@ -1031,9 +931,9 @@ with colC2:
                 st.dataframe(df_gfw_lindung, use_container_width=True)
 
     with tab_l4:
-        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Data mematahkan mitos bahwa perambahan dilakukan oleh warga lokal. Penyebab (Driver) utama deforestasi ini dikendalikan oleh <b>Ekstraksi Komoditas</b> (Izin Tambang & Perkebunan Skala Besar).</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Data atribusi GFW mematahkan alibi 'ladang berpindah'. Pertambangan dan Sawit adalah aktor dominan penghancur hutan. ⚠️ <i>Catatan: Data GFW untuk Sulteng absen/kosong, angka setengah juta hektar ini MURNI dari Sulawesi Tenggara saja.</i></div>", unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
-        col1.metric("Deforestasi Komoditas", f"{tambang_driver_ha:,.0f} Ha", "Sulteng & Sultra")
+        col1.metric("Aktor Komoditas (Tambang/Sawit)", f"{tambang_driver_ha:,.0f} Ha", "Sultra Saja (Data GFW)", delta_color="inverse")
         col2.metric("Aktor Pendorong Utama", "Tambang & Sawit", "Bukan Pertanian Warga", delta_color="normal")
         col3.metric("Skor Dominasi Ekstraktif", f"{skor_lahan_4:.1f} / 10", "STATUS: MONOPOLI KONSESI", delta_color="inverse")
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
