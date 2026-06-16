@@ -107,3 +107,51 @@ Mengukur kuantitas limbah murni (sludge/tailing) yang mengancam biota laut dan w
   Skor_Air_4 = min(10.0, (Total_Tailing_Ton / 20_000_000) * 10)
   ```
 * **Threshold Kritis**: Timbulan di luar ambang batas (melampaui 20 Juta Ton/Tahun) mencetak skor 10.0.
+
+
+## 3. Matriks Daya Dukung Lahan & Sosial (Matriks C)
+
+### 3.1. Skor Bencana Ekologis (Banjir & Longsor)
+Mengukur efektivitas mitigasi spasial terhadap bencana hidrometeorologi.
+* **Metrik Asal**: Frekuensi kejadian Bencana Banjir dan Longsor di Sulteng & Sultra (BNPB).
+* **Pendekatan Statistik / Model**: **Disaster Frequency Index**. 
+* **Logika Pembuktian**: Jika dokumen AMDAL dan D3TLH berfungsi mengamankan sabuk hijau ekosistem hulu, seharusnya tidak ada lonjakan letusan banjir bandang pasca operasi tambang skala masif.
+* **Formula**:
+  `python
+  Skor_Lahan_1 = min(10.0, (Bencana_Sulteng_Sultra / 500) * 10)
+  `
+* **Threshold Kritis**: Apabila bencana menembus angka 500 kejadian kumulatif di area sentra nikel, status divonis sebagai **Darurat Bencana**.
+
+### 3.2. Skor Deforestasi Hutan Primer
+Mengukur kegagalan perlindungan kawasan penyangga karbon.
+* **Metrik Asal**: Luas tutupan pohon / deforestasi yang hilang dalam Ha (Global Forest Watch).
+* **Pendekatan Statistik / Model**: **Cumulative Loss Burden**.
+* **Logika Pembuktian**: Penilaian Jasa Pengaturan Iklim secara teoretis gagal bila fakta di darat menunjukkan deforestasi primer tidak terkontrol dan dibiarkan atas nama konsesi tambang.
+* **Formula**:
+  `python
+  Skor_Lahan_2 = min(10.0, (Deforestasi_Sentra_Ha / 250_000) * 10)
+  `
+* **Threshold Kritis**: Kehilangan tutupan pohon lebih dari 250.000 Ha akan mencetak skor kerusakan maksimum 10.0.
+
+### 3.3. Skor Konflik Darat (Sosial & Agraria)
+Mengkuantifikasi kekerasan dan letusan perlawanan rakyat mempertahankan ruang hidup.
+* **Metrik Asal**: Total kasus perampasan tanah / ruang produktif di luar sektor pesisir (KPA/TanahKita).
+* **Pendekatan Statistik / Model**: **Socio-Ecological Escalation Index (Darat)**.
+* **Logika Pembuktian**: Mitos bahwa 'tambang menyejahterakan warga lokal' dimentahkan oleh maraknya insiden kriminalisasi warga dan penggusuran kebun pertanian produktif.
+* **Formula**:
+  `python
+  Skor_Sosial_1 = min(10.0, (Konflik_Darat / 300) * 10)
+  `
+* **Threshold Kritis**: Terkumpulnya 300 kasus konflik tanah memicu skor **Darurat Sosial** 10.0.
+
+### 3.4. Skor Veto Kebijakan (Monopoli Izin)
+Mengevaluasi kelumpuhan tata kelola (Regulatory Capture) oleh oligarki ekstraktif.
+* **Metrik Asal**: Luas izin konsesi baru (IUP) yang terus diterbitkan.
+* **Pendekatan Statistik / Model**: **Policy Recklessness Metric (Pengabaian Alarm Darurat)**.
+* **Logika Pembuktian**: Di saat skor udara kritis, penyakit pernapasan meledak, kualitas air ambruk, dan bencana rutin terjadi, pemerintah secara irelevan tetap melelang dan mengobral Izin Baru tanpa mengaktifkan hak Veto Spasial.
+* **Formula**:
+  `python
+  Skor_Veto_1 = min(10.0, (Luas_Izin_Sentra_Ha / 500_000) * 10)
+  `
+* **Threshold Kritis**: Penguasaan wilayah konsesi IUP baru lebih dari 500.000 Ha memicu vonis kegagalan Tata Kelola.
+
