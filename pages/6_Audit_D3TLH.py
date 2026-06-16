@@ -557,7 +557,7 @@ if not df_iku.empty:
     df_iku_avg_pre = df_iku.groupby('Tahun')['IKU'].mean().reset_index()
     if 2024 in df_iku_avg_pre['Tahun'].values:
         iku_terkini = df_iku_avg_pre[df_iku_avg_pre['Tahun'] == 2024]['IKU'].values[0]
-# Normalisasi: PLTU Max 10.000 MW, IKU kritis pada 50 (range 80 ke 50)
+# Threshold: PLTU maks 10.000 MW (normalisasi), IKU kritis pada 50 (turun 30 poin dari 80 — PermenLHK No.27/2021)
 skor_1 = min(10.0, (kapasitas_terkini / 10000) * 5 + max(0, (80 - iku_terkini) / 30) * 5)
 
 # Skor 2: Rasio Anomali ISPA
@@ -645,9 +645,10 @@ with colA2:
                 iku_grafik = df_iku_avg[df_iku_avg['Tahun'] == 2024]['IKU'].values[0] if not df_iku_avg[df_iku_avg['Tahun'] == 2024].empty else 75
                 
                 col1, col2, col3 = st.columns(3)
-                col1.metric("Kapasitas PLTU Aktif", f"{kapasitas_grafik:,.0f} MW", "Max threshold: 10.000 MW")
-                col2.metric("Rata-rata IKU Sulawesi", f"{iku_grafik:.1f}", "Kritis jika turun ke 50 (PermenLHK 27/2021)", delta_color="inverse")
+                col1.metric("Kapasitas PLTU Aktif (Scoring)", f"{kapasitas_terkini:,.0f} MW", "Max threshold: 10.000 MW")
+                col2.metric("IKU Dipakai Skor", f"{iku_terkini:.1f}", "Kritis jika turun ke 50 (PermenLHK 27/2021)", delta_color="inverse")
                 col3.metric("Skor Ancaman Udara", f"{skor_1:.1f} / 10", "STATUS: KRITIS", delta_color="inverse")
+                st.caption(f"⚠️ Data panel chart: {kapasitas_grafik:,.0f} MW (hanya PLTU dengan data Start Year). Scoring menggunakan semua PLTU aktif = {kapasitas_terkini:,.0f} MW, IKU = {iku_terkini:.1f}.")
                 st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
                 
                 owid_colors = ['#9B5A40', '#E58872', '#5E85B4', '#A09CAE', '#82B989', '#E3D7A4']
