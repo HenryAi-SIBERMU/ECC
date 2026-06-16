@@ -546,8 +546,8 @@ if not df_ika.empty:
     if not df_sulteng.empty and 2024 in df_sulteng['Tahun'].values:
         ika_sulteng = df_sulteng[df_sulteng['Tahun'] == 2024]['Indeks Kualitas Air'].values[0]
 
-# Normalisasi: IKA kritis < 50
-skor_air_1 = min(10.0, max(0, (55 - ika_sulteng) / 10) * 10)
+# Normalisasi: IKA ideal = 80, IKA cemar berat = 50
+skor_air_1 = min(10.0, max(0, (80 - ika_sulteng) / 30) * 10)
 
 # Skor 2: Morbiditas Diare
 skor_air_2 = 0

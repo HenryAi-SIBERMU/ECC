@@ -64,16 +64,16 @@ Menyatukan keempat dimensi skor di atas menjadi satu nilai tunggal (*Single Inde
 
 ## 2. Matriks Daya Tampung Air
 
-### 2.1. Skor Kualitas Air (Korelasi IKA & Izin IUP)
-Mengukur kegagalan sistem dalam mempertahankan kualitas air di tengah obral izin tambang.
-* **Metrik Asal**: Rata-rata Indeks Kualitas Air BPS (IKA) & Total Izin Baru Diterbitkan.
-* **Pendekatan Statistik / Model**: **Weighted Linear Combination (WLC)** dipadukan dengan **Min-Max Normalization** untuk rasio dua dimensi.
-* **Logika Pembuktian**: Jika daya tampung air masih memadai secara sains, maka IKA harus stabil. Turunnya IKA mendekati angka batas cemar (50) diiringi penambahan IUP membuktikan obral izin mengabaikan batas ambang ekologi sungai/laut.
+### 2.1. Skor Kualitas Air (Degradasi IKA)
+Mengukur kegagalan sistem dalam mempertahankan kualitas air di sentra nikel.
+* **Metrik Asal**: Indeks Kualitas Air BPS (IKA) Sulteng vs Rata-rata Sulawesi.
+* **Pendekatan Statistik / Model**: **Min-Max Normalization** terhadap rentang degradasi kualitas.
+* **Logika Pembuktian**: Air dikatakan sehat jika IKA mendekati 80. Jika obral izin tambang tidak mengganggu daya tampung, IKA akan stabil. Menurunnya IKA hingga mendekati batas cemar berat (50) membuktikan kerusakan masif.
 * **Formula**:
   ```python
-  Skor_Air_1 = min(10.0, max(0, (50 - IKA_Terkini) / 10) * 5 + min(5.0, (Total_Izin_Baru / 100) * 5))
+  Skor_Air_1 = min(10.0, max(0, (80 - IKA_Terkini) / 30) * 10)
   ```
-* **Threshold Kritis**: Apabila IKA anjlok di bawah 50 dan jumlah izin baru mencapai lebih dari 100, poin maksimal 10.0 otomatis tercapai.
+* **Threshold Kritis**: Penurunan nilai IKA sebesar 30 poin (dari ideal 80 anjlok menjadi 50) akan menghasilkan poin kerusakan maksimal 10.0.
 
 ### 2.2. Skor Anomali Penyakit Bawaan Air (Morbiditas Diare)
 Mengukur dampak kontaminasi logam berat pada rantai suplai air minum/sungai warga.
