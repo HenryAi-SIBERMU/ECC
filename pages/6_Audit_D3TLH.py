@@ -4,7 +4,7 @@ import os, sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from src.components.sidebar import render_sidebar
 
-st.set_page_config(page_title="CELIOS ECC - Audit Forensik D3TLH", layout="wide")
+st.set_page_config(page_title="CELIOS ECC - Audit Forensik Metodologi D3TLH", layout="wide")
 render_sidebar()
 
 # ── Styles (Sesuai Pedoman UI/UX CELIOS) ──
@@ -116,7 +116,7 @@ st.markdown("""
 
 # ── Header Halaman ──
 st.markdown('<div class="org-badge">CELIOS — Center of Economic and Law Studies</div>', unsafe_allow_html=True)
-st.markdown('<div class="main-title">Audit Forensik Metodologi D3TLH & AMDAL</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">Audit Forensik Metodologi D3TLH</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Fase 1: Evaluasi Kebijakan Ekstraktif - Pembuktian Terbalik</div>', unsafe_allow_html=True)
 
 # =====================================================================
@@ -283,7 +283,7 @@ if not df_kawasan_nikel.empty:
     rasio_ekspansi = gap_amdal_iup / total_iup_nikel if total_iup_nikel > 0 else 0
     skor_lahan_5 = min(10.0, rasio_ekspansi * 10)  # 100% gap = skor 10
 
-skor_akumulasi_lahan = (skor_lahan_1 + skor_lahan_2 + skor_lahan_3 + skor_lahan_4 + skor_lahan_5) / 5
+skor_akumulasi_lahan = (skor_lahan_1 + skor_lahan_2 + skor_lahan_3 + skor_lahan_4) / 4
 
 
 # Calculate Sosial
@@ -947,7 +947,7 @@ with colC1:
     ''', unsafe_allow_html=True)
 
 with colC2:
-    tab_l1, tab_l2, tab_l3, tab_l4, tab_l5 = st.tabs(["Bencana Banjir & Longsor", "Deforestasi Primer", "Pelanggaran Kawasan Lindung", "Aktor Deforestasi", "AMDAL Spekulatif"])
+    tab_l1, tab_l2, tab_l3, tab_l4 = st.tabs(["Bencana Banjir & Longsor", "Deforestasi Primer", "Pelanggaran Kawasan Lindung", "Aktor Deforestasi"])
     
     with tab_l1:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Data BNPB membuktikan bahwa klaim 'mitigasi bencana' dalam AMDAL sama sekali tidak terbukti di lapangan.</div>", unsafe_allow_html=True)
@@ -1033,26 +1033,6 @@ with colC2:
             with st.expander("Tampilkan Data Mentah Drivers (GFW)"):
                 st.dataframe(df_gfw_driver, use_container_width=True)
 
-    with tab_l5:
-        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Data ESDM membuktikan bahwa dokumen AMDAL bukan dibuat untuk <i>melindungi</i> lingkungan, melainkan sebagai instrumen <b>ekspansi spekulatif</b>. Perusahaan mengajukan AMDAL untuk kawasan yang jauh melampaui luas IUP yang mereka miliki — mendokumentasikan secara sepihak atas lahan yang belum (dan mungkin tidak akan pernah) mereka kantongi izinnya.</div>", unsafe_allow_html=True)
-        col1, col2, col3 = st.columns(3)
-        col1.metric("Total Luas IUP Nikel", f"{total_iup_nikel:,.0f} Ha", "Sulteng & Sultra (ESDM)")
-        col2.metric("Total Luas AMDAL Diajukan", f"{total_amdal_nikel:,.0f} Ha", f"+{gap_amdal_iup:,.0f} Ha Melebihi IUP", delta_color="inverse")
-        col3.metric("Skor AMDAL Spekulatif", f"{skor_lahan_5:.1f} / 10", "STATUS: EKSPANSI TERSELUBUNG", delta_color="inverse")
-        st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
-        
-        if not df_kawasan_nikel.empty:
-            df_kn_plot = df_kawasan_nikel[df_kawasan_nikel['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
-            df_kn_melt = df_kn_plot.melt(id_vars='provinsi', value_vars=['total_luas_iup_ha', 'total_luas_amdal_ha'],
-                                          var_name='Tipe', value_name='Luas_Ha')
-            df_kn_melt['Tipe'] = df_kn_melt['Tipe'].replace({'total_luas_iup_ha': 'Luas IUP (Izin Resmi)', 'total_luas_amdal_ha': 'Luas AMDAL (Diklaim)'})
-            fig_l5 = px.bar(df_kn_melt, x='provinsi', y='Luas_Ha', color='Tipe', barmode='group',
-                           title="Perbandingan Luas IUP vs Luas AMDAL yang Diklaim Perusahaan",
-                           color_discrete_map={'Luas IUP (Izin Resmi)': '#3498DB', 'Luas AMDAL (Diklaim)': '#E74C3C'})
-            fig_l5.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-            st.plotly_chart(fig_l5, use_container_width=True)
-            with st.expander("Tampilkan Data Mentah (ESDM/KLH)"):
-                st.dataframe(df_kawasan_nikel, use_container_width=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
