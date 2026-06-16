@@ -534,18 +534,20 @@ st.markdown("<br>", unsafe_allow_html=True)
 # B. MITOS DAYA TAMPUNG AIR
 # ---------------------------------------------------------
 # --- Pre-computation for Water Scores (Skala 0-10) ---
-# Skor 1: IKA vs Perizinan Baru
+# Skor 1: IKA 
 ika_terkini = 50
-total_izin_baru = 0
+ika_sulteng = 50
 if not df_ika.empty:
     df_ika_avg = df_ika.groupby('Tahun')['Indeks Kualitas Air'].mean().reset_index()
     if 2024 in df_ika_avg['Tahun'].values:
         ika_terkini = df_ika_avg[df_ika_avg['Tahun'] == 2024]['Indeks Kualitas Air'].values[0]
-if not df_izin.empty:
-    total_izin_baru = df_izin['Jumlah_Izin_Baru'].sum()
+    
+    df_sulteng = df_ika[df_ika['Provinsi'] == 'Sulawesi Tengah']
+    if not df_sulteng.empty and 2024 in df_sulteng['Tahun'].values:
+        ika_sulteng = df_sulteng[df_sulteng['Tahun'] == 2024]['Indeks Kualitas Air'].values[0]
 
-# Normalisasi: IKA kritis < 50, Izin Baru 100 IUP = skor 10
-skor_air_1 = min(10.0, max(0, (50 - ika_terkini) / 10) * 5 + min(5.0, (total_izin_baru / 100) * 5))
+# Normalisasi: IKA kritis < 50
+skor_air_1 = min(10.0, max(0, (55 - ika_sulteng) / 10) * 10)
 
 # Skor 2: Morbiditas Diare
 skor_air_2 = 0
@@ -585,32 +587,32 @@ skor_akumulasi_air = (skor_air_1 + skor_air_2 + skor_air_3 + skor_air_4) / 4
 colB1, colB2 = st.columns([1, 2])
 with colB1:
     st.markdown(f"""
-    <div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #3498DB; height:100%;">
-        <h4 style="color:#FFF; margin-top:0;">Mitos D3TLH: Daya Tampung Air</h4>
-        <p style="color:#BDC3C7; font-size:0.9rem;">"Pembuangan tailing diizinkan selama beban cemaran sungai/laut masih secara teori mampu mengencerkan."</p>
-        <hr style="border-color:#34495E;">
-        <h4 style="color:#3498DB;">Fakta Forensik ECC:</h4>
-        <p style="color:#E0E0E0; font-size:0.9rem;">Penurunan drastis Indeks Kualitas Air dan hancurnya pesisir ditandai ledakan morbiditas air.</p>
-        
-        <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #3498DB;">
-            <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Akumulasi Skor Kerusakan</div>
-            <div style="font-size: 32px; font-weight: 800; color: #3498DB; line-height: 1.2;">{skor_akumulasi_air:.1f} <span style="font-size: 16px;">/ 10</span></div>
-            <div style="font-size: 11px; color: #3498DB; margin-top: 5px; font-weight: bold;">STATUS: DAYA TAMPUNG JEBOL</div>
-        </div>
-        
-        <div style="background:#2980B9; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
-            VONIS: Kegagalan Pengukuran Toksisitas
-        </div>
+<div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #3498DB; height:100%;">
+    <h4 style="color:#FFF; margin-top:0;">Mitos D3TLH: Daya Tampung Air</h4>
+    <p style="color:#BDC3C7; font-size:0.9rem;">"Pembuangan tailing diizinkan selama beban cemaran sungai/laut masih secara teori mampu mengencerkan."</p>
+    <hr style="border-color:#34495E;">
+    <h4 style="color:#3498DB;">Fakta Forensik ECC:</h4>
+    <p style="color:#E0E0E0; font-size:0.9rem;">Penurunan drastis Indeks Kualitas Air dan hancurnya pesisir ditandai ledakan morbiditas air.</p>
+    
+    <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #3498DB;">
+        <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Akumulasi Skor Kerusakan</div>
+        <div style="font-size: 32px; font-weight: 800; color: #3498DB; line-height: 1.2;">{skor_akumulasi_air:.1f} <span style="font-size: 16px;">/ 10</span></div>
+        <div style="font-size: 11px; color: #3498DB; margin-top: 5px; font-weight: bold;">STATUS: DAYA TAMPUNG JEBOL</div>
     </div>
-    """, unsafe_allow_html=True)
+    
+    <div style="background:#2980B9; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
+        VONIS: Kegagalan Pengukuran Toksisitas
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 with colB2:
-    tab_w1, tab_w2, tab_w3, tab_w4 = st.tabs(["💧 Kualitas Air", "🦠 Morbiditas Diare", "🎣 Konflik Nelayan", "☠️ Beban Tailing"])
+    tab_w1, tab_w2, tab_w3, tab_w4 = st.tabs(["Kualitas Air", "Morbiditas Diare", "Konflik Nelayan", "Beban Tailing"])
     
     with tab_w1:
-        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Klaim sungai/laut mampu mengencerkan limbah berbanding terbalik dengan hancurnya Indeks Kualitas Air BPS di tengah obral izin IUP baru.</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Klaim sungai/laut mampu mengencerkan limbah berbanding terbalik dengan hancurnya Indeks Kualitas Air BPS hingga menyentuh batas cemar kotor.</div>", unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
-        col1.metric("Total Izin Baru Diterbitkan", f"{total_izin_baru:,.0f} IUP", "2014-2024")
+        col1.metric("IKA Sulteng Terkini", f"{ika_sulteng:.1f}", "Indeks BPS", delta_color="inverse")
         col2.metric("Rata-rata IKA Sulawesi", f"{ika_terkini:.1f}", "Skala 0-100", delta_color="inverse")
         col3.metric("Skor Kualitas Air", f"{skor_air_1:.1f} / 10", "STATUS: CEMAR KRITIS", delta_color="inverse")
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
@@ -664,7 +666,7 @@ with colB2:
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
         if not df_b3.empty:
-            fig_w4 = px.treemap(df_b3, path=['Provinsi', 'Sektor'], values='Estimasi Timbulan (Ton/Tahun)', 
+            fig_w4 = px.treemap(df_b3, path=['Provinsi', 'Kawasan/Perusahaan'], values='Estimasi Timbulan (Ton/Tahun)', 
                                 color='Estimasi Timbulan (Ton/Tahun)', color_continuous_scale='Blues',
                                 title="Proporsi Beban Limbah Tailing & B3 ke Ekosistem Air")
             fig_w4.update_layout(template="plotly_dark", margin=dict(l=0, r=0, t=40, b=0))
