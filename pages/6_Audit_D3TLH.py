@@ -620,7 +620,7 @@ with colA2:
         
         with tab1:
             # --- 1. Ekspansi PLTU vs Penurunan Kualitas Udara ---
-            st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Pemerintah sering merilis angka rata-rata IKU tahunan seolah 'Masih Aman', menutupi tren eksponensial di mana kualitas udara terjun bebas tepat setelah keran mega-smelter dibuka lebar pada 2014-2015.</div>", unsafe_allow_html=True)
+            st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Pemerintah sering merilis angka rata-rata IKU tahunan seolah 'Masih Aman', menutupi tren eksponensial di mana kualitas udara terjun bebas tepat setelah keran mega-smelter dibuka lebar pada 2014-2015. <b>Threshold Kritis: IKU = 50</b> (batas terbawah Kategori Sedang/awal Kurang — <i>PermenLHK No.27/2021, Lampiran Tbl.1</i>).</div>", unsafe_allow_html=True)
             
             if not df_pltu_op.empty and not df_iku.empty:
                 years = list(range(2010, 2025))
@@ -645,8 +645,8 @@ with colA2:
                 iku_grafik = df_iku_avg[df_iku_avg['Tahun'] == 2024]['IKU'].values[0] if not df_iku_avg[df_iku_avg['Tahun'] == 2024].empty else 75
                 
                 col1, col2, col3 = st.columns(3)
-                col1.metric("Kapasitas PLTU Aktif", f"{kapasitas_grafik:,.0f} MW", "Tahun 2024")
-                col2.metric("Rata-rata IKU Sulawesi", f"{iku_grafik:.1f}", "Skala 0-100", delta_color="inverse")
+                col1.metric("Kapasitas PLTU Aktif", f"{kapasitas_grafik:,.0f} MW", "Max threshold: 10.000 MW")
+                col2.metric("Rata-rata IKU Sulawesi", f"{iku_grafik:.1f}", "Kritis jika turun ke 50 (PermenLHK 27/2021)", delta_color="inverse")
                 col3.metric("Skor Ancaman Udara", f"{skor_1:.1f} / 10", "STATUS: KRITIS", delta_color="inverse")
                 st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
                 
@@ -671,8 +671,9 @@ with colA2:
                     ), secondary_y=True
                 )
                 
-                # Menambahkan Batas Kritis IKU (Misal: 70 adalah batas bawah kualitas sangat baik/aman)
-                fig_2_2_combined.add_hline(y=70, line_dash="dot", annotation_text="Batas Kritis Kualitas Udara", line_color="#FF5252", secondary_y=True)
+                # Threshold IKU = 50 (batas terbawah Sedang/awal Kurang — PermenLHK No.27/2021 Lampiran Tbl.1)
+                fig_2_2_combined.add_hline(y=50, line_dash="dot", annotation_text="IKU=50: Batas Kritis Kurang (PermenLHK 27/2021)", annotation_font_color="#FF5252", line_color="#FF5252", secondary_y=True)
+                fig_2_2_combined.add_hline(y=70, line_dash="dash", annotation_text="IKU=70: Batas Bawah Baik", annotation_font_color="#FFA726", line_color="#FFA726", secondary_y=True)
                 fig_2_2_combined.add_vline(x=2014, line_dash="dash", line_color="rgba(255,255,255,0.3)", annotation_text="Booming Smelter Dimulai", annotation_position="top right")
                 
                 fig_2_2_combined.update_layout(
@@ -742,13 +743,13 @@ with colA2:
                     
         with tab3:
             # --- 3. Fakta Data Timbulan Limbah Udara & B3 ---
-            st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Data perizinan D3TLH fokus pada syarat emisi cerobong di atas kertas, tetapi mengabaikan gunung-gunung debu slag (fly ash) di darat yang bebas tertiup angin memapari puluhan desa setiap harinya.</div>", unsafe_allow_html=True)
+            st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Data perizinan D3TLH fokus pada syarat emisi cerobong di atas kertas, tetapi mengabaikan gunung-gunung debu slag (fly ash) di darat yang bebas tertiup angin memapari puluhan desa setiap harinya. <b>Threshold Kritis: 30 Juta Ton/Tahun</b> = 7% dari total neraca B3 nasional 427 juta ton dari 1 provinsi (anomali 2,4x proporsional). Sumber: <i>KLHK LKj 2022, IKK Pengelolaan Limbah B3, Hal. 47</i>.</div>", unsafe_allow_html=True)
             
             # Gunakan nilai pre-calculated
             col_f1, col_f2, col_f3 = st.columns(3)
-            col_f1.metric("Total Limbah B3 Sulteng", f"{total_b3_sulteng/1_000_000:.1f} Jt Ton/Thn", "Partikulat/Fly Ash")
+            col_f1.metric("Total Limbah B3 Sulteng", f"{total_b3_sulteng/1_000_000:.1f} Jt Ton/Thn", "Threshold kritis: 30 Jt Ton (KLHK LKj 2022 Hal.47)")
             col_f2.metric("Total Kasus ISPA Sentra", f"{kasus_sentra:,.0f}", "2014-2024", delta_color="inverse")
-            col_f3.metric("Skor Over-Capacity", f"{skor_3:.1f} / 10", f"Beban: {skor_overcapacity:.1f}x Batas", delta_color="inverse")
+            col_f3.metric("Skor Over-Capacity B3", f"{skor_3:.1f} / 10", f"Beban: {skor_overcapacity:.1f}x dari 30 Jt Ton", delta_color="inverse")
             
             st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
             
@@ -758,8 +759,8 @@ with colA2:
                                 text='Estimasi Timbulan (Ton/Tahun)', color='Estimasi Timbulan (Ton/Tahun)',
                                 color_continuous_scale='Reds', title="Beban Timbulan B3 per Provinsi")
                 
-                # Tambahkan garis batas halusinasi aman
-                fig_b3.add_vline(x=5_000_000, line_dash="dot", line_color="#FFF", annotation_text="Kapasitas Toleransi Ambruk", annotation_position="top right")
+                # Threshold B3 = 30 Juta Ton (7% nasional dari 1 prov — KLHK LKj 2022 Hal.47)
+                fig_b3.add_vline(x=30_000_000, line_dash="dot", line_color="#FF5252", annotation_text="Threshold Kritis: 30 Jt Ton (KLHK LKj 2022 Hal.47)", annotation_font_color="#FF5252", annotation_position="top left")
                 
                 fig_b3.update_traces(texttemplate='%{text:,.0f} ton', textposition='outside')
                 fig_b3.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
@@ -771,7 +772,7 @@ with colA2:
                     
         with tab4:
             # --- 4. Hilangnya Paru-Paru Udara (Deforestasi CO2) ---
-            st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Audit resmi pemerintah hanya menghitung 'emisi yang keluar dari corong pabrik', tetapi dengan sengaja mengaburkan 'emisi dari jutaan pohon yang mati' akibat ekspansi lahan tambang itu sendiri.</div>", unsafe_allow_html=True)
+            st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Audit resmi pemerintah hanya menghitung 'emisi yang keluar dari corong pabrik', tetapi dengan sengaja mengaburkan 'emisi dari jutaan pohon yang mati' akibat ekspansi lahan tambang itu sendiri. <b>Threshold Kritis: 150 Juta Ton CO2e</b> = melampaui target NDC FOLU Net Sink 2030 (-140 juta ton CO2e). Sumber: <i>SK MenLHK No.SK.168/MENLHK/PKTL/PLA.1/2/2022, Bag. III, Hal. 5</i>.</div>", unsafe_allow_html=True)
             
             if not df_gfw.empty:
                 df_gfw['Total_Emisi_CO2_Megagram'] = pd.to_numeric(df_gfw['Total_Emisi_CO2_Megagram'], errors='coerce').fillna(0)
@@ -779,15 +780,19 @@ with colA2:
                 total_deforestasi = df_gfw['Total_Deforestasi_Ha'].sum() / 1_000 # Ribu Ha
                 
                 col_e1, col_e2, col_e3 = st.columns(3)
-                col_e1.metric("Total Emisi CO2 Lepas", f"{total_emisi:.1f} Jt Ton", "1 Dekade Terakhir")
+                col_e1.metric("Total Emisi CO2 Lepas", f"{total_emisi:.1f} Jt Ton", f"Threshold: 150 Jt Ton (SK.168 NDC FOLU Hal.5)")
                 col_e2.metric("Total Hutan Hilang", f"{total_deforestasi:.1f} Ribu Ha", "Filter Karbon Alami", delta_color="inverse")
-                col_e3.metric("Skor Defisit Ekosistem", f"{skor_4:.1f} / 10", "STATUS: DARURAT KARBON", delta_color="inverse")
+                col_e3.metric("Skor Defisit Ekosistem", f"{skor_4:.1f} / 10", "STATUS: DARURAT KARBON / GAGAL NDC", delta_color="inverse")
                 
                 st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
                 
                 df_emisi_trend = df_gfw.groupby(['Tahun', 'Provinsi'])['Total_Emisi_CO2_Megagram'].sum().reset_index()
                 fig_emisi = px.area(df_emisi_trend, x='Tahun', y='Total_Emisi_CO2_Megagram', color='Provinsi',
                                    title="Tren Emisi Karbon Akibat Deforestasi (2014-2023)")
+                # Threshold CO2 = 150 Juta Ton (>NDC FOLU -140 juta ton — SK.168/MENLHK Bag.III Hal.5)
+                fig_emisi.add_hline(y=150_000_000, line_dash="dot", line_color="#FF5252",
+                                   annotation_text="Threshold Kritis: 150 Jt Ton CO2e (Gagal NDC FOLU — SK.168/MENLHK)",
+                                   annotation_font_color="#FF5252", annotation_position="top left")
                 fig_emisi.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
                 st.plotly_chart(fig_emisi, use_container_width=True)
                 
