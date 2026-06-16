@@ -167,7 +167,7 @@ if not df_kes.empty:
     kasus_sentra = df_ts_pre[df_ts_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
     kasus_non_sentra = df_ts_pre[~df_ts_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
     rasio_anomali = (kasus_sentra / 2) / (kasus_non_sentra / 4) if kasus_non_sentra > 0 else 0
-    skor_2 = min(10.0, max(0.0, (rasio_anomali - 1) * 2.5))
+    skor_2 = min(10.0, max(0.0, (rasio_anomali - 1) * 10.0))
 
 skor_3 = 0
 skor_overcapacity = 0
