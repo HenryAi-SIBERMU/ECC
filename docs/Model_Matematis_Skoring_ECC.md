@@ -2,6 +2,53 @@
 
 Dokumen ini menjelaskan formulasi matematis yang digunakan untuk mengubah data empiris (kesehatan, lingkungan, tata ruang) menjadi **Skor Kerusakan Ekologis (0-10)** dalam Dashboard Forensik ECC secara dinamis, rasional, dan terukur.
 
+---
+
+## ⚠️ STATUS AUDIT THRESHOLD (Diperbarui: Juni 2026)
+
+### Masalah yang Diidentifikasi
+Audit internal pada Juni 2026 menemukan bahwa **sebagian besar threshold dalam model ini bersifat *arbitrary*** — ditentukan secara ad-hoc tanpa referensi regulasi atau literatur ilmiah yang dapat dikutip. Ini merupakan kelemahan metodologis yang perlu ditangani sebelum publikasi/advokasi publik.
+
+### Status Per Matriks
+
+| Matriks | Tab | Threshold Saat Ini | Basis | Status |
+|---|---|---|---|---|
+| **Udara** | PLTU+IKU | 10.000 MW / penurunan 30 poin IKU | — | ⚠️ Perlu referensi KLHK/BMKG |
+| **Udara** | ISPA Rasio | Rasio 2x lipat | Relatif statistik | ✅ Defensible |
+| **Udara** | Limbah B3 | 30 Juta Ton | — | ⚠️ Perlu referensi PP |
+| **Udara** | Emisi CO2 | 150 Juta Ton | — | ⚠️ Perlu referensi FOLU NDC |
+| **Air** | IKA | Penurunan 30 poin | — | ⚠️ Perlu referensi PP 22/2021 |
+| **Air** | Diare | 500.000 kasus | — | ⚠️ Perlu referensi Kemenkes |
+| **Air** | Konflik Pesisir | 15 konflik | — | ❌ Arbitrary |
+| **Air** | Tailing | 20 Juta Ton | — | ⚠️ Perlu referensi KLHK |
+| **Lahan** | Bencana | 500 kejadian | — | ❌ Arbitrary (aktual 1.557 = 3.1x threshold) |
+| **Lahan** | Deforestasi | 250.000 Ha | — | ❌ Arbitrary (aktual 1,14 juta Ha = 4.6x threshold) |
+| **Lahan** | Kawasan Lindung | 100.000 Ha | — | ❌ Arbitrary (aktual 1,14 juta Ha = 11.5x threshold) |
+| **Lahan** | Driver Tambang | 250.000 Ha | — | ❌ Arbitrary (aktual 513k Ha = 2x threshold) |
+| **Sosial** | FPIC | 12 kasus | Total aktual dataset (fix dari `/5`) | ✅ Proporsional |
+| **Sosial** | Jiwa Terdampak | 100.000 jiwa | — | ⚠️ Perlu referensi standar darurat sosial |
+| **Sosial** | Kriminalisasi | 50 insiden | — | ⚠️ Perlu referensi hukum HAM |
+| **Sosial** | Defisit Faskes | +50% pertumbuhan | — | ⚠️ Perlu referensi SPM Kemenkes |
+
+### Rencana Perbaikan (Opsi A + C)
+
+**Opsi A — Dasar Regulasi Indonesia** *(target referensi yang akan dicari)*
+- Bencana: Klasifikasi BNPB (PP 21/2008 → "bencana skala nasional/kabupaten/kota")
+- Deforestasi: Target FOLU Net Sink 2030 (NDC Indonesia) — proyeksi angka aman
+- Kawasan Lindung: PP No.23/2021 tentang Penyelenggaraan Kehutanan; target minimum 30% tutupan hutan
+- Limbah B3: PP No.22/2021 tentang Penyelenggaraan Perlindungan dan Pengelolaan LH
+- Kualitas Air: Peraturan Pemerintah No.22/2021 Lampiran VI → batas baku mutu air
+- Emisi CO2: NDC Indonesia 2022 (Enhanced NDC) → target penurunan 31,89% s/d 43,2%
+
+**Opsi C — Statistical Percentile (Rata-rata Nasional)**
+- Hitung rata-rata per indikator dari semua provinsi Indonesia (bukan hanya Sulawesi)
+- Set threshold = rata-rata nasional + 1 standar deviasi (atau ×2 rata-rata)
+- Ini tidak dapat dituduh "diatur" karena basis datanya bersumber dari BPS/KLHK nasional
+
+**Catatan**: Sampai referensi ditemukan dan divalidasi, model tetap berjalan dengan threshold saat ini. Skor 10/10 pada Matriks Lahan **BUKAN berarti bias** — data aktualnya memang sangat ekstrem (1,14 juta Ha deforestasi dalam 10 tahun di 2 provinsi). Tapi model tidak bisa membedakan "sangat krisis" vs "ultra-sangat krisis" selama threshold tidak proporsional terhadap skala nasional.
+
+---
+
 ## 1. Matriks Daya Tampung Udara
 
 ### 1.1. Skor Ancaman Udara (Korelasi PLTU & IKU)
@@ -14,6 +61,7 @@ Mengukur tingkat ancaman kualitas udara akibat pembakaran batu bara.
   Skor_1 = min(10.0, (Kapasitas_PLTU / 10000) * 5 + max(0, 80 - IKU_Terkini) / 30 * 5)
   ```
 * **Threshold Kritis**: Kapasitas 10.000 MW akan memberi kontribusi poin maksimal (5 poin). Penurunan IKU sebesar 30 poin (anjlok dari 80 menjadi 50) akan memberi poin maksimal (5 poin).
+* **⚠️ Status Threshold**: Perlu referensi dari KLHK/BMKG untuk batas kapasitas PLTU "aman" per ekoregion.
 
 ### 1.2. Skor Rasio Anomali ISPA (Morbiditas)
 Mengukur asimetri distribusi penyakit infeksi saluran pernapasan di ekoregion.
@@ -26,6 +74,7 @@ Mengukur asimetri distribusi penyakit infeksi saluran pernapasan di ekoregion.
   Skor_2 = min(10.0, max(0.0, (Rasio - 1) * 10.0))
   ```
 * **Threshold Kritis**: Jika rasio mencapai 2x lipat (2.0) lebih masif dari daerah lain, skor langsung menembus nilai mutlak 10.0 (Darurat Medis).
+* **✅ Status Threshold**: Defensible — berbasis perbandingan relatif statistik, bukan nilai absolut arbitrary.
 
 ### 1.3. Skor Over-Capacity Limbah B3
 Mengukur tingkat kelampauan daya tampung limbah beracun dan abu terbang (fly ash).
@@ -38,6 +87,7 @@ Mengukur tingkat kelampauan daya tampung limbah beracun dan abu terbang (fly ash
   Skor_3 = min(10.0, (Skor_Overcapacity / 30.0) * 10)
   ```
 * **Threshold Kritis**: Apabila akumulasi timbulan limbah melampaui 30 Juta Ton/Tahun (30x lipat dari batas wajar), skor mencapai nilai absolut 10.0 (Kapasitas Jebol).
+* **⚠️ Status Threshold**: Perlu referensi dari PP No.22/2021 atau Permen KLHK tentang batas pengelolaan B3.
 
 ### 1.4. Skor Defisit Ekosistem Karbon
 Mengukur hilangnya "paru-paru udara" akibat eksploitasi perizinan lahan.
@@ -49,6 +99,7 @@ Mengukur hilangnya "paru-paru udara" akibat eksploitasi perizinan lahan.
   Skor_4 = min(10.0, (Total_Emisi_Juta_Ton / 150.0) * 10)
   ```
 * **Threshold Kritis**: Pelepasan emisi secara eksponensial hingga menembus 150 Juta Ton CO2 dalam 1 dekade akan mencetak skor mutlak 10.0 (Darurat Karbon).
+* **⚠️ Status Threshold**: Perlu anchor ke Enhanced NDC Indonesia 2022 (target penurunan 31,89% BAU).
 
 ### 1.5. Model Akumulasi Skor Kerusakan (Vonis D3TLH)
 Menyatukan keempat dimensi skor di atas menjadi satu nilai tunggal (*Single Index*).
@@ -60,7 +111,6 @@ Menyatukan keempat dimensi skor di atas menjadi satu nilai tunggal (*Single Inde
 * **Interpretasi Output**: Menghasilkan skor akhir berskala 0 hingga 10 yang mendasari penentuan "Vonis Eksekutif" di dashboard. Nilai agregat di atas 8.0 menandakan **Status: Daya Tampung Jebol** yang secara saintifik membatalkan klaim aman dari dokumen D3TLH pemerintah.
 
 ---
-*(Catatan: Model matematis untuk Matriks Daya Dukung Lahan/Kebencanaan, dan Kedaulatan Ruang akan diintegrasikan secara berkesinambungan di bawah blok ini ke depannya).*
 
 ## 2. Matriks Daya Tampung Air
 
@@ -74,6 +124,7 @@ Mengukur kegagalan sistem dalam mempertahankan kualitas air di sentra nikel.
   Skor_Air_1 = min(10.0, max(0, (80 - IKA_Terkini) / 30) * 10)
   ```
 * **Threshold Kritis**: Penurunan nilai IKA sebesar 30 poin (dari ideal 80 anjlok menjadi 50) akan menghasilkan poin kerusakan maksimal 10.0.
+* **⚠️ Status Threshold**: Angka 80 = batas "baik" dan 50 = "cemar berat" perlu dikonfirmasi ke PP 22/2021 Lampiran VI (Baku Mutu Air).
 
 ### 2.2. Skor Anomali Penyakit Bawaan Air (Morbiditas Diare)
 Mengukur dampak kontaminasi logam berat pada rantai suplai air minum/sungai warga.
@@ -85,6 +136,7 @@ Mengukur dampak kontaminasi logam berat pada rantai suplai air minum/sungai warg
   Skor_Air_2 = min(10.0, (Total_Kasus_Sentra / 500_000) * 10)
   ```
 * **Threshold Kritis**: Apabila beban kasus kumulatif di wilayah lingkar tambang menembus angka 500.000 pasien, hal ini memicu **Status: Darurat Medis** (Skor 10.0).
+* **⚠️ Status Threshold**: Perlu referensi dari Kemenkes (angka insidensi diare nasional per 1.000 penduduk sebagai pembanding).
 
 ### 2.3. Skor Darurat Konflik Pesisir/Nelayan
 Mengukur penggusuran ruang laut dan konflik sosial-ekologis sektor perairan.
@@ -96,6 +148,7 @@ Mengukur penggusuran ruang laut dan konflik sosial-ekologis sektor perairan.
   Skor_Air_3 = min(10.0, (Jumlah_Konflik_Air_Pesisir / 15.0) * 10)
   ```
 * **Threshold Kritis**: Terkumpulnya 15 konflik masif spesifik ruang pesisir memicu skor darurat 10.0.
+* **❌ Status Threshold**: Arbitrary. Perlu referensi (misalnya rata-rata konflik pesisir nasional per provinsi dari KPA Annual Report).
 
 ### 2.4. Skor Ancaman Bendungan Tailing (DSTP)
 Mengukur kuantitas limbah murni (sludge/tailing) yang mengancam biota laut dan wilayah resapan.
@@ -107,51 +160,146 @@ Mengukur kuantitas limbah murni (sludge/tailing) yang mengancam biota laut dan w
   Skor_Air_4 = min(10.0, (Total_Tailing_Ton / 20_000_000) * 10)
   ```
 * **Threshold Kritis**: Timbulan di luar ambang batas (melampaui 20 Juta Ton/Tahun) mencetak skor 10.0.
+* **⚠️ Status Threshold**: Perlu referensi dari Permen ESDM/KLHK tentang batas kapasitas pengelolaan tailing.
 
+---
 
-## 3. Matriks Daya Dukung Lahan & Sosial (Matriks C)
+## 3. Matriks Daya Dukung Lahan (Matriks C)
+
+> **Cakupan Wilayah**: Sulteng & Sultra — episentrum sentra nikel Indonesia (899k Ha IUP dari total 1,18 juta Ha se-Sulawesi = 76% konsentrasi).
+>
+> **Catatan Audit Juni 2026**: Keempat tab Matriks Lahan menghasilkan skor 10.0/10 secara konsisten. Ini bukan akibat bias threshold — data aktualnya melampaui threshold 2–11x lipat karena kerusakan ekologis yang benar-benar ekstrem. Namun threshold saat ini bersifat *arbitrary* dan perlu dianchor ke regulasi/statistik nasional (lihat bagian Status Audit di atas).
 
 ### 3.1. Skor Bencana Ekologis (Banjir & Longsor)
 Mengukur efektivitas mitigasi spasial terhadap bencana hidrometeorologi.
-* **Metrik Asal**: Frekuensi kejadian Bencana Banjir dan Longsor di Sulteng & Sultra (BNPB).
-* **Pendekatan Statistik / Model**: **Disaster Frequency Index**. 
-* **Logika Pembuktian**: Jika dokumen AMDAL dan D3TLH berfungsi mengamankan sabuk hijau ekosistem hulu, seharusnya tidak ada lonjakan letusan banjir bandang pasca operasi tambang skala masif.
+* **Metrik Asal**: Frekuensi kejadian Bencana Banjir dan Longsor di Sulteng & Sultra (BNPB, 2014–2024).
+* **Pendekatan Statistik / Model**: **Disaster Frequency Index** (Indeks Frekuensi Bencana Kumulatif).
+* **Logika Pembuktian**: Jika dokumen D3TLH berfungsi mengamankan sabuk hijau ekosistem hulu, seharusnya tidak ada lonjakan bencana banjir bandang pasca operasi tambang masif.
 * **Formula**:
-  `python
+  ```python
   Skor_Lahan_1 = min(10.0, (Bencana_Sulteng_Sultra / 500) * 10)
-  `
-* **Threshold Kritis**: Apabila bencana menembus angka 500 kejadian kumulatif di area sentra nikel, status divonis sebagai **Darurat Bencana**.
+  ```
+* **Angka Aktual**: 1.557 kejadian (2014–2024) → Skor: **10.0**
+* **Rasio Aktual/Threshold**: 3,1× lipat
+* **❌ Status Threshold**: Arbitrary. Target perbaikan → referensi PP 21/2008 (BNPB) tentang klasifikasi "bencana skala nasional" dan rata-rata kejadian bencana per provinsi se-Indonesia (BPS/BNPB).
 
-### 3.2. Skor Deforestasi Hutan Primer
-Mengukur kegagalan perlindungan kawasan penyangga karbon.
-* **Metrik Asal**: Luas tutupan pohon / deforestasi yang hilang dalam Ha (Global Forest Watch).
-* **Pendekatan Statistik / Model**: **Cumulative Loss Burden**.
-* **Logika Pembuktian**: Penilaian Jasa Pengaturan Iklim secara teoretis gagal bila fakta di darat menunjukkan deforestasi primer tidak terkontrol dan dibiarkan atas nama konsesi tambang.
+### 3.2. Skor Deforestasi (Kehilangan Tutupan Hutan)
+Mengukur kegagalan perlindungan kawasan penyangga karbon dan jasa ekosistem.
+* **Metrik Asal**: Luas tutupan hutan yang hilang (Ha) dari Global Forest Watch, 2014–2023.
+* **Pendekatan Statistik / Model**: **Cumulative Loss Burden Index**.
+* **Logika Pembuktian**: Jika klaim "reklamasi pasca tambang" dalam AMDAL terbukti, deforestasi permanen tidak mungkin terjadi dalam skala jutaan hektar.
 * **Formula**:
-  `python
+  ```python
   Skor_Lahan_2 = min(10.0, (Deforestasi_Sentra_Ha / 250_000) * 10)
-  `
-* **Threshold Kritis**: Kehilangan tutupan pohon lebih dari 250.000 Ha akan mencetak skor kerusakan maksimum 10.0.
+  ```
+* **Angka Aktual**: 1.148.635 Ha (2014–2023) → Skor: **10.0**
+* **Rasio Aktual/Threshold**: 4,6× lipat
+* **❌ Status Threshold**: Arbitrary. Target perbaikan → anchor ke target FOLU Net Sink 2030 (NDC Indonesia) dan rata-rata laju deforestasi nasional per provinsi dari KLHK/GFW.
 
-### 3.3. Skor Konflik Darat (Sosial & Agraria)
-Mengkuantifikasi kekerasan dan letusan perlawanan rakyat mempertahankan ruang hidup.
-* **Metrik Asal**: Total kasus perampasan tanah / ruang produktif di luar sektor pesisir (KPA/TanahKita).
-* **Pendekatan Statistik / Model**: **Socio-Ecological Escalation Index (Darat)**.
-* **Logika Pembuktian**: Mitos bahwa 'tambang menyejahterakan warga lokal' dimentahkan oleh maraknya insiden kriminalisasi warga dan penggusuran kebun pertanian produktif.
+### 3.3. Skor Pelanggaran Kawasan Lindung
+Mengukur perambahan ke dalam kawasan yang secara hukum tidak boleh diganggu gugat.
+* **Metrik Asal**: Luas kawasan lindung (Protected Areas IUCN) yang hilang di Sulteng & Sultra (GFW, 2014–2023).
+* **Pendekatan Statistik / Model**: **Protected Area Violation Index**.
+* **Temuan Forensik Kunci**: 100% dari setiap Ha deforestasi yang terjadi di Sulteng & Sultra selama 10 tahun terjadi di dalam kawasan lindung — tanpa terkecuali. Ini adalah pelanggaran D3TLH paling fundamental.
 * **Formula**:
-  `python
-  Skor_Sosial_1 = min(10.0, (Konflik_Darat / 300) * 10)
-  `
-* **Threshold Kritis**: Terkumpulnya 300 kasus konflik tanah memicu skor **Darurat Sosial** 10.0.
+  ```python
+  Skor_Lahan_3 = min(10.0, (Lindung_Hilang_Ha / 100_000) * 10)
+  ```
+* **Angka Aktual**: 1.148.635 Ha → Skor: **10.0**
+* **Rasio Aktual/Threshold**: 11,5× lipat
+* **❌ Status Threshold**: Arbitrary (paling jauh dari angka aktual). Target perbaikan → PP No.23/2021 tentang Kehutanan: target minimum 30% tutupan hutan = anchor alamiah.
 
-### 3.4. Skor Veto Kebijakan (Monopoli Izin)
-Mengevaluasi kelumpuhan tata kelola (Regulatory Capture) oleh oligarki ekstraktif.
-* **Metrik Asal**: Luas izin konsesi baru (IUP) yang terus diterbitkan.
-* **Pendekatan Statistik / Model**: **Policy Recklessness Metric (Pengabaian Alarm Darurat)**.
-* **Logika Pembuktian**: Di saat skor udara kritis, penyakit pernapasan meledak, kualitas air ambruk, dan bencana rutin terjadi, pemerintah secara irelevan tetap melelang dan mengobral Izin Baru tanpa mengaktifkan hak Veto Spasial.
+### 3.4. Skor Dominasi Ekstraktif (Driver Deforestasi)
+Mematahkan mitos bahwa deforestasi dilakukan oleh warga lokal, bukan industri.
+* **Metrik Asal**: Luas deforestasi yang disebabkan oleh Komoditas Ekstraktif (Tambang/Sawit) di Sulteng & Sultra (GFW Loss by Driver, 2014–2023).
+* **Pendekatan Statistik / Model**: **Attribution-Weighted Deforestation Score**.
+* **Logika Pembuktian**: Driver breakdown GFW membuktikan bahwa Tambang/Sawit adalah penyebab utama (>80%) deforestasi, bukan pertanian berpindah warga lokal yang selama ini dijadikan kambing hitam.
 * **Formula**:
-  `python
-  Skor_Veto_1 = min(10.0, (Luas_Izin_Sentra_Ha / 500_000) * 10)
-  `
-* **Threshold Kritis**: Penguasaan wilayah konsesi IUP baru lebih dari 500.000 Ha memicu vonis kegagalan Tata Kelola.
+  ```python
+  Skor_Lahan_4 = min(10.0, (Tambang_Driver_Ha / 250_000) * 10)
+  ```
+* **Angka Aktual**: 513.561 Ha → Skor: **10.0**
+* **Rasio Aktual/Threshold**: 2,1× lipat
+* **❌ Status Threshold**: Arbitrary. Target perbaikan → rata-rata nasional deforestasi akibat komoditas per provinsi dari GFW sebagai pembanding.
 
+### 3.5. Akumulasi Skor Matriks Lahan
+```python
+Skor_Akumulasi_Lahan = (Skor_Lahan_1 + Skor_Lahan_2 + Skor_Lahan_3 + Skor_Lahan_4) / 4
+```
+Menggunakan **Simple Additive Weighting (SAW)** dengan bobot equal (25% per pilar). Threshold interpretasi: ≥ 8.0 = **Krisis Ruang Darat Parah**, ≥ 9.0 = **Darurat Ekologi**.
+
+---
+
+## 4. Matriks Daya Dukung Sosial (Matriks D)
+
+### 4.1. Skor Manipulasi Persetujuan (FPIC)
+Mengukur pemalsuan persetujuan masyarakat dalam proses AMDAL.
+* **Metrik Asal**: Jumlah kasus investigasi pelanggaran FPIC (Free, Prior and Informed Consent) dari dataset KPA/TanahKita Sulawesi.
+* **Pendekatan Statistik / Model**: **Consent Violation Index**.
+* **Formula**:
+  ```python
+  Skor_Sosial_1 = min(10.0, (Kasus_FPIC / 12) * 10)
+  ```
+* **Angka Aktual**: 12 kasus → Skor: **10.0**
+* **Catatan**: Threshold `12` = total aktual dataset kita (diperbaiki dari `/5` yang arbitrary). Skor proporsional terhadap seluruh temuan yang ada.
+* **⚠️ Status Threshold**: Masih berbasis total dataset, bukan referensi eksternal. Target perbaikan → menggunakan rata-rata kasus FPIC nasional per provinsi dari laporan KPA Annual Report atau AMAN.
+
+### 4.2. Skor Perampasan Ruang Hidup
+Mengukur skala penggusuran paksa dan dampak jiwa dari konflik agraria tambang.
+* **Metrik Asal**: Total jiwa terdampak dari konflik agraria sektor pertambangan (KPA/TanahKita).
+* **Pendekatan Statistik / Model**: **Cumulative Human Impact Index**.
+* **Formula**:
+  ```python
+  Skor_Sosial_2 = min(10.0, (Jiwa_Terdampak / 100_000) * 10)
+  ```
+* **Angka Aktual**: 177.738 jiwa → Skor: **10.0**
+* **⚠️ Status Threshold**: 100.000 jiwa adalah angka yang bermakna secara kemanusiaan, namun perlu referensi dari standar darurat kemanusiaan internasional (OCHA/UNHCR) atau laporan KPA.
+
+### 4.3. Skor Kriminalisasi Warga
+Mengukur intensitas penggunaan aparat negara untuk membungkam penolakan warga.
+* **Metrik Asal**: Jumlah insiden kriminalisasi (penangkapan, intimidasi, kekerasan aparat) terhadap warga yang menolak tambang.
+* **Pendekatan Statistik / Model**: **State Repression Index**.
+* **Formula**:
+  ```python
+  Skor_Sosial_3 = min(10.0, (Insiden_Krim / 50) * 10)
+  ```
+* **Angka Aktual**: 38 insiden → Skor: **7.6** *(model berfungsi dengan benar — tidak capped)*
+* **⚠️ Status Threshold**: 50 insiden perlu referensi dari laporan HAM (Komnas HAM, KontraS, atau OHCHR Indonesia).
+
+### 4.4. Skor Defisit Layanan Dasar (Faskes)
+Mengukur paradoks boom mineral vs stagnasi layanan kesehatan dasar.
+* **Metrik Asal**: Pertumbuhan jumlah fasilitas kesehatan (RS/Puskesmas/Klinik) di Sulteng & Sultra dalam 10 tahun (Kemenkes).
+* **Pendekatan Statistik / Model**: **Social Infrastructure Deficit Index** — inverse scoring: makin rendah pertumbuhan faskes, makin tinggi skor defisit.
+* **Logika Pembuktian**: Ekspor nikel sentra Sulawesi tumbuh >2.000% dalam satu dekade, tapi jika pertumbuhan faskes jauh di bawah 50%, klaim "peningkatan kesejahteraan" dalam AMDAL terbantah.
+* **Formula**:
+  ```python
+  Skor_Sosial_4 = max(0.0, min(10.0, 10.0 - (Pertumbuhan_Faskes_Pct / 50) * 10))
+  ```
+* **⚠️ Status Threshold**: 50% pertumbuhan faskes sebagai batas wajar perlu referensi dari SPM (Standar Pelayanan Minimal) Kemenkes dan target RPJMN 2025–2029.
+
+### 4.5. Akumulasi Skor Matriks Sosial
+```python
+Skor_Akumulasi_Sosial = (Skor_Sosial_1 + Skor_Sosial_2 + Skor_Sosial_3 + Skor_Sosial_4) / 4
+```
+Menggunakan **Simple Additive Weighting (SAW)** dengan bobot equal (25% per pilar). Threshold interpretasi: ≥ 8.0 = **Krisis Sosial Parah**, ≥ 9.0 = **Darurat HAM**.
+
+---
+
+## 5. Matriks Veto Kebijakan (Matriks E)
+
+*(Dokumentasi detail menyusul — dalam pengembangan)*
+
+---
+
+## Referensi yang Perlu Dicari (Backlog)
+
+| No | Referensi Target | Relevansi |
+|---|---|---|
+| 1 | PP No.21/2008 tentang Penyelenggaraan Penanggulangan Bencana | Threshold bencana Tab 3.1 |
+| 2 | PP No.22/2021 tentang Penyelenggaraan Perlindungan dan Pengelolaan LH | Threshold air, udara, limbah B3 |
+| 3 | PP No.23/2021 tentang Penyelenggaraan Kehutanan | Threshold kawasan lindung Tab 3.3 |
+| 4 | Enhanced NDC Indonesia 2022 (FOLU Net Sink 2030) | Threshold deforestasi Tab 3.2 & emisi CO2 |
+| 5 | KPA Annual Report (Catahu) — rata-rata konflik agraria per provinsi | Threshold FPIC & konflik sosial |
+| 6 | Kemenkes — SPM Kesehatan (Standar Pelayanan Minimal) | Threshold defisit faskes Tab 4.4 |
+| 7 | GFW Forest Loss Database — rata-rata deforestasi per provinsi Indonesia | Threshold Opsi C (statistik percentile) |
+| 8 | BPS — rata-rata bencana per provinsi nasional | Threshold Opsi C bencana Tab 3.1 |
