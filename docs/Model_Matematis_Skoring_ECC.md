@@ -77,15 +77,14 @@ Mengukur kegagalan sistem dalam mempertahankan kualitas air di sentra nikel.
 
 ### 2.2. Skor Anomali Penyakit Bawaan Air (Morbiditas Diare)
 Mengukur dampak kontaminasi logam berat pada rantai suplai air minum/sungai warga.
-* **Metrik Asal**: Total Kumulatif Kasus Diare di Sentra Nikel vs Daerah Non-Sentra.
-* **Pendekatan Statistik / Model**: Modifikasi dari **Incidence Rate Ratio (IRR)**. Membandingkan rata-rata kepadatan kasus antara populasi Ring-1 tambang dengan provinsi sekitar.
-* **Logika Pembuktian**: Ledakan kasus diare akut di wilayah konsesi membantah "Mitos AMDAL" bahwa logam berat terencerkan di perairan terbuka dan tidak masuk ke air tanah warga.
+* **Metrik Asal**: Total Kumulatif Kasus Diare di Sentra Nikel (Sulteng & Sultra).
+* **Pendekatan Statistik / Model**: **Cumulative Burden Index**. Mengukur akumulasi beban penyakit endemis absolut terhadap daya tampung mitigasi medis regional.
+* **Logika Pembuktian**: "Mitos AMDAL" menyebut logam berat terencerkan secara aman di perairan. Realitanya, tingginya insiden diare membuktikan sumber air warga terpapar secara masif dan gagal dimitigasi.
 * **Formula**:
   ```python
-  Rasio = (Kasus_Sentra / 2 Provinsi) / (Kasus_Non_Sentra / 4 Provinsi)
-  Skor_Air_2 = min(10.0, max(0.0, (Rasio - 1) * 2.5))
+  Skor_Air_2 = min(10.0, (Total_Kasus_Sentra / 500_000) * 10)
   ```
-* **Threshold Kritis**: Rasio 5x lipat mencetak skor absolut 10.0.
+* **Threshold Kritis**: Apabila beban kasus kumulatif di wilayah lingkar tambang menembus angka 500.000 pasien, hal ini memicu **Status: Darurat Medis** (Skor 10.0).
 
 ### 2.3. Skor Darurat Konflik Pesisir/Nelayan
 Mengukur penggusuran ruang laut dan konflik sosial-ekologis sektor perairan.

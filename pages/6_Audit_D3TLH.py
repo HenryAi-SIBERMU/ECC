@@ -551,15 +551,14 @@ skor_air_1 = min(10.0, max(0, (80 - ika_sulteng) / 30) * 10)
 
 # Skor 2: Morbiditas Diare
 skor_air_2 = 0
-rasio_diare = 0
 kasus_diare_sentra = 0
 kasus_diare_non = 0
 if not df_kes.empty:
     df_diare = df_kes[df_kes['indikator'].str.contains('Diare', case=False, na=False)]
     kasus_diare_sentra = df_diare[df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
     kasus_diare_non = df_diare[~df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
-    rasio_diare = (kasus_diare_sentra / 2) / (kasus_diare_non / 4) if kasus_diare_non > 0 else 0
-    skor_air_2 = min(10.0, max(0.0, (rasio_diare - 1) * 2.5))
+    # Normalisasi absolut: 500.000 kasus = Skor 10.0
+    skor_air_2 = min(10.0, (kasus_diare_sentra / 500_000) * 10)
 
 # Skor 3: Konflik Air/Pesisir
 skor_air_3 = 0
@@ -628,7 +627,7 @@ with colB2:
         col1, col2, col3 = st.columns(3)
         col1.metric("Kasus Diare Sentra Nikel", f"{kasus_diare_sentra:,.0f}", "Sulteng & Sultra")
         col2.metric("Kasus Diare Daerah Lain", f"{kasus_diare_non:,.0f}", "4 Provinsi Non-Sentra", delta_color="normal")
-        col3.metric("Skor Anomali Penyakit", f"{skor_air_2:.1f} / 10", f"Rasio: {rasio_diare:.1f}x Lipat", delta_color="inverse")
+        col3.metric("Skor Beban Penyakit", f"{skor_air_2:.1f} / 10", "STATUS: DARURAT MEDIS", delta_color="inverse")
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
         if not df_kes.empty:
@@ -636,6 +635,7 @@ with colB2:
             df_diare_trend['Kategori'] = df_diare_trend['provinsi'].apply(lambda x: 'Sentra Tambang' if x in ['Sulawesi Tengah', 'Sulawesi Tenggara'] else 'Non-Sentra')
             df_d_agg = df_diare_trend.groupby(['tahun', 'Kategori'])['nilai'].sum().reset_index()
             fig_w2 = px.area(df_d_agg, x='tahun', y='nilai', color='Kategori', title="Ledakan Kasus Diare (Indikator Kualitas Air Tanah)")
+            fig_w2.add_hline(y=100000, line_dash="dash", line_color="#E74C3C", annotation_text="Batas Kritis Endemik (100k Kasus)", annotation_position="top left")
             fig_w2.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
             st.plotly_chart(fig_w2, use_container_width=True)
 
