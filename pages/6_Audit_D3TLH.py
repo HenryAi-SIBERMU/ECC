@@ -1043,7 +1043,7 @@ with colD1:
     ''', unsafe_allow_html=True)
 
 with colD2:
-    tab_s1, tab_s2, tab_s3 = st.tabs(["Fase 1: Manipulasi Persetujuan", "Fase 2: Perampasan Ruang Hidup", "Fase 3: Kriminalisasi Warga"])
+    tab_s1, tab_s2, tab_s3 = st.tabs(["Manipulasi Persetujuan FPIC", "Perampasan Ruang Hidup", "Kriminalisasi Warga"])
     
     with tab_s1:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> 'Persetujuan Warga' hanyalah stempel karet. Data investigasi Konsorsium Pembaruan Agraria membuktikan perusahaan memanipulasi persetujuan (FPIC) sejak fase sosialisasi AMDAL.</div>", unsafe_allow_html=True)
@@ -1127,7 +1127,7 @@ with colE1:
     ''', unsafe_allow_html=True)
 
 with colE2:
-    tab_v1, tab_v2, tab_v3 = st.tabs(["Fase 1: Obral Konsesi Legal", "Fase 2: Pembiaran Pelanggaran", "Fase 3: Karpet Merah Energi Kotor"])
+    tab_v1, tab_v2, tab_v3 = st.tabs(["Obral Konsesi Legal", "Pembiaran Pelanggaran", "Karpet Merah Energi Kotor"])
     
     with tab_v1:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Di tengah memuncaknya status krisis daya dukung lingkungan, pemerintah secara paradoks justru menerbitkan ratusan izin eksploitasi tambang (IUP) baru. Dokumen veto tidak berfungsi.</div>", unsafe_allow_html=True)
