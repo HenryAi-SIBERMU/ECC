@@ -210,11 +210,12 @@ if not df_ika.empty:
 skor_air_1 = min(10.0, max(0, (80 - ika_sulteng) / 30) * 10)
 
 skor_air_2 = 0
+kasus_diare_sentra = 0
 if not df_kes.empty:
     df_diare = df_kes[df_kes['indikator'].str.contains('Diare', case=False, na=False)]
-    k_sentra = df_diare[df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
+    kasus_diare_sentra = df_diare[df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
     k_non = df_diare[~df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
-    ir_s = (k_sentra / 5_700_000) * 1000
+    ir_s = (kasus_diare_sentra / 5_700_000) * 1000
     ir_n = (k_non / 14_200_000) * 1000 if k_non > 0 else 1
     r_diare = ir_s / ir_n if ir_n > 0 else 0
     skor_air_2 = min(10.0, max(0.0, (r_diare - 1) * 10.0))
