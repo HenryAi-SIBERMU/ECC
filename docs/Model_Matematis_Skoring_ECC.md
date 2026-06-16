@@ -370,7 +370,48 @@ Menggunakan **Simple Additive Weighting (SAW)** dengan bobot equal (25% per pila
 
 ## 5. Matriks Veto Kebijakan (Matriks E)
 
-*(Dokumentasi detail menyusul — dalam pengembangan)*
+Mengukur "Regulatory Capture" (kelumpuhan tata kelola) di mana dokumen lingkungan yang secara teoretis berfungsi membatasi kerusakan (veto) justru diabaikan oleh aparatur negara.
+
+### 5.1. Skor Obral Konsesi Legal (Paradoks Izin)
+Mengukur anomali penerbitan izin di kawasan yang daya dukungnya sudah jebol.
+* **Metrik**: Jumlah Izin Usaha Pertambangan (IUP) baru yang diterbitkan sejak 2014.
+* **Model**: **Paradoxical Issuance Index**.
+* **Logika**: Jika dokumen AMDAL/D3TLH benar-benar berfungsi membatasi daya dukung, penerbitan izin baru di wilayah krisis (Sulteng/Sultra) harusnya nol atau sangat direm. Menerbitkan ratusan izin di wilayah krisis adalah kegagalan sistemik.
+* **Sumber**: Ditjen Minerba ESDM (Data Izin Baru).
+* **Threshold**: 100 IUP baru pasca-2014 dianggap krisis mutlak.
+* **Formula**:
+  ```python
+  Skor_Veto_1 = min(10.0, (Izin_Baru / 100) * 10)
+  ```
+
+### 5.2. Skor Pembiaran Pelanggaran (Impunitas)
+Mengukur kelemahan instrumen penegakan hukum negara terhadap korporat.
+* **Metrik**: Jumlah perusahaan yang terbukti melanggar (HGU mati, tumpang tindih kawasan, tak berizin) namun dibiarkan beroperasi tanpa sanksi tegas.
+* **Model**: **Impunity Tolerance Index**.
+* **Sumber**: KPA (Data Kasus Pelanggaran Izin).
+* **Threshold**: 10 perusahaan dibiarkan beroperasi ilegal = Skor 10.0.
+* **Formula**:
+  ```python
+  Skor_Veto_2 = min(10.0, (Perusahaan_Ilegal / 10) * 10)
+  ```
+
+### 5.3. Skor Karpet Merah Energi Kotor (Hipokrisi Iklim)
+Mengukur kontradiksi mutlak kebijakan iklim nasional dengan realita kawasan industri.
+* **Metrik**: Total kapasitas PLTU Batubara Captive yang diizinkan beroperasi untuk smelter nikel.
+* **Model**: **Climate Hypocrisy Index**.
+* **Logika**: Membangun PLTU batubara raksasa di kawasan yang daya dukung udara dan airnya hancur adalah bentuk veto terbalik (merusak, bukan melindungi).
+* **Sumber**: Global Energy Monitor (GEM) - Data PLTU Captive Sulawesi.
+* **Threshold**: 5.000 MW (5 GW) = Skor 10.0. (Kenyataan di Sulawesi melampaui 16 GW).
+* **Formula**:
+  ```python
+  Skor_Veto_3 = min(10.0, (Kapasitas_PLTU_MW / 5000) * 10)
+  ```
+
+### 5.4. Akumulasi Skor Matriks Veto
+```python
+Skor_Akumulasi_Veto = (Skor_Veto_1 + Skor_Veto_2 + Skor_Veto_3) / 3
+```
+Menggunakan **Simple Additive Weighting (SAW)** dengan bobot equal. Threshold: ≥ 8.0 = **Regulatory Capture** (Negara lumpuh disetir oligarki).
 
 ---
 
