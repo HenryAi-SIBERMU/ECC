@@ -443,7 +443,7 @@ with col5:
         </div>
         <div class="metric-source">
             <b>VONIS:</b> Kegagalan Tata Kelola Negara<br>
-            <i>Luas Izin Baru Sulteng & Sultra: {luas_izin_sentra:,.0f} Ha</i>
+            <i>{izin_baru:,.0f} Izin Baru & {kapasitas_pltu/1000:,.1f} GW PLTU Captive Diloloskan</i>
         </div>
     </div>
     """, unsafe_allow_html=True)
