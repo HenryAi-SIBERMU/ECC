@@ -421,18 +421,19 @@ try:
     with col1:
         st.metric(label="Total Unit PLTU Captive (Beroperasi/Dibangun/Direncanakan)", value=f"{len(df_pltu)} Unit", delta="Khusus Kawasan Sulawesi")
     with col2:
-        total_mw = df_pltu['Kapasitas (MW)'].sum()
+        total_mw = df_pltu['Capacity (MW)'].sum()
         st.metric(label="Total Kapasitas Pembangkitan Kotor", value=f"{total_mw:,.0f} MW", delta="Sangat Masif")
         
     st.markdown("**Distribusi Kapasitas PLTU Captive per Provinsi (MW)**")
-    pltu_prov = df_pltu.groupby('Provinsi')['Kapasitas (MW)'].sum().reset_index().sort_values(by='Kapasitas (MW)', ascending=True)
-    fig_pltu = px.bar(pltu_prov, x='Kapasitas (MW)', y='Provinsi', orientation='h', color='Kapasitas (MW)', color_continuous_scale='YlOrRd')
+    df_pltu['Provinsi'] = df_pltu['Subnational unit (province, state)']
+    pltu_prov = df_pltu.groupby('Provinsi')['Capacity (MW)'].sum().reset_index().sort_values(by='Capacity (MW)', ascending=True)
+    fig_pltu = px.bar(pltu_prov, x='Capacity (MW)', y='Provinsi', orientation='h', color='Capacity (MW)', color_continuous_scale='YlOrRd')
     fig_pltu.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', margin=dict(l=0, r=0, t=10, b=0), height=300)
     st.plotly_chart(fig_pltu, use_container_width=True)
     
     with st.expander("Bongkar Data: Daftar Lengkap PLTU Batubara Captive di Sulawesi"):
         df_pltu_show = df_pltu.copy()
-        df_pltu_show['Tahun Beroperasi'] = df_pltu_show['Tahun Beroperasi'].apply(lambda x: f"{x:.0f}" if pd.notnull(x) else "Belum Operasi")
+        df_pltu_show['Tahun Beroperasi'] = df_pltu_show['Start year'].apply(lambda x: f"{x:.0f}" if pd.notnull(x) else "Belum Operasi")
         st.dataframe(df_pltu_show, use_container_width=True, hide_index=True)
         st.caption("📁 **Sumber Data:** Global Coal Plant Tracker (GEM) - Ekstraksi Januari 2026")
         

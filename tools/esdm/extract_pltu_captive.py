@@ -52,13 +52,8 @@ def extract_pltu_captive():
     
     final_df = captive_df[out_cols].copy()
     
-    # Rename columns to Indonesian
-    final_df.columns = [
-        'Nama PLTU', 'Unit', 'Pemilik', 'Induk Perusahaan', 
-        'Kapasitas (MW)', 'Status', 'Tahun Beroperasi', 
-        'Provinsi', 'Kabupaten/Kota', 
-        'Disuplai ke Industri'
-    ]
+    # Add captive_flag expected by older dashboards
+    final_df['captive_flag'] = True
     
     out_dir = 'data/processed'
     os.makedirs(out_dir, exist_ok=True)
