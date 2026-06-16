@@ -1,106 +1,68 @@
-source,GEM unit/phase ID,Plant name,"Subnational unit (province, state)",Owner,Status,Start year,Capacity (MW),Conversion to (fuel),Latitude,Longitude,captive_flag
-GEM Global Coal Plant Tracker (January 2026),G100000113971,Amurang-2 power station,North Sulawesi,PT PLN (Persero) [100%],operating,2018.0,30.0,,1.182502,124.480564,False
-GEM Global Coal Plant Tracker (January 2026),G100000113972,Amurang-2 power station,North Sulawesi,PT PLN (Persero) [100%],operating,2018.0,30.0,,1.182502,124.480564,False
-GEM Global Coal Plant Tracker (January 2026),G100000100180,Amurang power station,North Sulawesi,PT PLN (Persero) [100%],operating,2012.0,30.0,,1.182502,124.480564,False
-GEM Global Coal Plant Tracker (January 2026),G100000100181,Amurang power station,North Sulawesi,PT PLN (Persero) [100%],operating,2012.0,30.0,,1.182502,124.480564,False
-GEM Global Coal Plant Tracker (January 2026),G100000114349,Bantaeng BSE power station,South Sulawesi,PT Bantaeng Sigma Energy [100%],cancelled,2023.0,300.0,,-5.51695,120.02061,False
-GEM Global Coal Plant Tracker (January 2026),G100000114350,Bantaeng BSE power station,South Sulawesi,PT Bantaeng Sigma Energy [100%],cancelled,2023.0,300.0,,-5.51695,120.02061,False
-GEM Global Coal Plant Tracker (January 2026),G100000100643,Barru power station,South Sulawesi,PT PLN (Persero) [100%],operating,2023.0,100.0,,-4.29329,119.63135,False
-GEM Global Coal Plant Tracker (January 2026),G100000100641,Barru power station,South Sulawesi,PT PLN (Persero) [100%],operating,2013.0,50.0,,-4.29329,119.63135,False
-GEM Global Coal Plant Tracker (January 2026),G100000100642,Barru power station,South Sulawesi,PT PLN (Persero) [100%],operating,2013.0,50.0,,-4.29329,119.63135,False
-GEM Global Coal Plant Tracker (January 2026),G100000113822,Bau-Bau Power Station,Southeast Sulawesi,PT PLN (Persero),cancelled,2024.0,30.0,,-5.459424,122.605949,False
-GEM Global Coal Plant Tracker (January 2026),G100000113823,Bau-Bau Power Station,Southeast Sulawesi,PT PLN (Persero),cancelled,2028.0,30.0,fossil gas: natural gas,-5.459424,122.605949,False
-GEM Global Coal Plant Tracker (January 2026),G100000115105,Delong Nickel Phase III power station,Central Sulawesi,PT Gunbuster Nickel Industry [100%],operating,2021.0,135.0,,-2.004694,121.4380707,False
-GEM Global Coal Plant Tracker (January 2026),G100000115106,Delong Nickel Phase III power station,Central Sulawesi,PT Gunbuster Nickel Industry [100%],operating,2022.0,135.0,,-2.004694,121.4380707,False
-GEM Global Coal Plant Tracker (January 2026),G100000115107,Delong Nickel Phase III power station,Central Sulawesi,PT Gunbuster Nickel Industry [100%],operating,2022.0,135.0,,-2.004694,121.4380707,False
-GEM Global Coal Plant Tracker (January 2026),G100000115108,Delong Nickel Phase III power station,Central Sulawesi,PT Gunbuster Nickel Industry [100%],operating,2022.0,135.0,,-2.004694,121.4380707,False
-GEM Global Coal Plant Tracker (January 2026),G100000115109,Delong Nickel Phase III power station,Central Sulawesi,PT Gunbuster Nickel Industry [100%],operating,2022.0,135.0,,-2.004694,121.4380707,False
-GEM Global Coal Plant Tracker (January 2026),G100000115110,Delong Nickel Phase III power station,Central Sulawesi,PT Gunbuster Nickel Industry [100%],operating,2022.0,135.0,,-2.004694,121.4380707,False
-GEM Global Coal Plant Tracker (January 2026),G100000115111,Delong Nickel Phase III power station,Central Sulawesi,PT Gunbuster Nickel Industry [100%],operating,2023.0,135.0,,-2.004694,121.4380707,False
-GEM Global Coal Plant Tracker (January 2026),G100000115349,Delong Nickel Phase III power station,Central Sulawesi,PT Gunbuster Nickel Industry [100%],shelved,,150.0,,-2.004694,121.4380707,False
-GEM Global Coal Plant Tracker (January 2026),G100000115350,Delong Nickel Phase III power station,Central Sulawesi,PT Gunbuster Nickel Industry [100%],shelved,,300.0,,-2.004694,121.4380707,False
-GEM Global Coal Plant Tracker (January 2026),G100000115351,Delong Nickel Phase III power station,Central Sulawesi,PT Gunbuster Nickel Industry [100%],shelved,,300.0,,-2.004694,121.4380707,False
-GEM Global Coal Plant Tracker (January 2026),G100000115352,Delong Nickel Phase III power station,Central Sulawesi,PT Gunbuster Nickel Industry [100%],shelved,,300.0,,-2.004694,121.4380707,False
-GEM Global Coal Plant Tracker (January 2026),G100000115353,Delong Nickel Phase III power station,Central Sulawesi,PT Gunbuster Nickel Industry [100%],shelved,,300.0,,-2.004694,121.4380707,False
-GEM Global Coal Plant Tracker (January 2026),G100000114331,Delong Nickel Phase II power station,Southeast Sulawesi,PT Obsidian Stainless Steel [100%],operating,2020.0,135.0,,-3.8279104,122.4682708,True
-GEM Global Coal Plant Tracker (January 2026),G100000114333,Delong Nickel Phase II power station,Southeast Sulawesi,PT Obsidian Stainless Steel [100%],operating,2020.0,135.0,,-3.8279104,122.4682708,True
-GEM Global Coal Plant Tracker (January 2026),G100000114334,Delong Nickel Phase II power station,Southeast Sulawesi,PT Obsidian Stainless Steel [100%],operating,2020.0,135.0,,-3.8279104,122.4682708,True
-GEM Global Coal Plant Tracker (January 2026),G100000114335,Delong Nickel Phase II power station,Southeast Sulawesi,PT Obsidian Stainless Steel [100%],operating,2021.0,135.0,,-3.8279104,122.4682708,True
-GEM Global Coal Plant Tracker (January 2026),G100000114336,Delong Nickel Phase II power station,Southeast Sulawesi,PT Obsidian Stainless Steel [100%],operating,2021.0,135.0,,-3.8282793,122.4662306,True
-GEM Global Coal Plant Tracker (January 2026),G100000114337,Delong Nickel Phase II power station,Southeast Sulawesi,PT Obsidian Stainless Steel [100%],operating,2021.0,135.0,,-3.8282793,122.4662306,True
-GEM Global Coal Plant Tracker (January 2026),G100000114338,Delong Nickel Phase II power station,Southeast Sulawesi,PT Obsidian Stainless Steel [100%],operating,2021.0,135.0,,-3.8282793,122.4662306,True
-GEM Global Coal Plant Tracker (January 2026),G100000114339,Delong Nickel Phase II power station,Southeast Sulawesi,PT Obsidian Stainless Steel [100%],operating,2021.0,135.0,,-3.8282793,122.4662306,True
-GEM Global Coal Plant Tracker (January 2026),G100000114340,Delong Nickel Phase II power station,Southeast Sulawesi,PT Obsidian Stainless Steel [100%],operating,2022.0,380.0,,-3.8274877,122.462752,True
-GEM Global Coal Plant Tracker (January 2026),G100000114332,Delong Nickel Phase II power station,Southeast Sulawesi,PT Obsidian Stainless Steel [100%],operating,2021.0,380.0,,-3.8274877,122.462752,True
-GEM Global Coal Plant Tracker (January 2026),G100000115354,Delong Nickel Phase II power station,Southeast Sulawesi,PT Obsidian Stainless Steel [100%],cancelled,,380.0,,-3.8274877,122.462752,True
-GEM Global Coal Plant Tracker (January 2026),G100000114341,Delong Nickel Phase I power station,South Sulawesi,PT Virtue Dragon Nickel Industry [100%],operating,2018.0,30.0,,-3.907537,122.419265,True
-GEM Global Coal Plant Tracker (January 2026),G100000114342,Delong Nickel Phase I power station,South Sulawesi,PT Virtue Dragon Nickel Industry [100%],operating,2018.0,30.0,,-3.907537,122.419265,True
-GEM Global Coal Plant Tracker (January 2026),G100000114343,Delong Nickel Phase I power station,South Sulawesi,PT Virtue Dragon Nickel Industry [100%],operating,2019.0,50.0,,-3.907537,122.419265,True
-GEM Global Coal Plant Tracker (January 2026),G100000114344,Delong Nickel Phase I power station,South Sulawesi,PT Virtue Dragon Nickel Industry [100%],operating,2019.0,50.0,,-3.907537,122.419265,True
-GEM Global Coal Plant Tracker (January 2026),G100000114345,Delong Nickel Phase I power station,South Sulawesi,PT Virtue Dragon Nickel Industry [100%],operating,2019.0,60.0,,-3.907537,122.419265,True
-GEM Global Coal Plant Tracker (January 2026),G100000114346,Delong Nickel Phase I power station,South Sulawesi,PT Virtue Dragon Nickel Industry [100%],operating,2019.0,60.0,,-3.907537,122.419265,True
-GEM Global Coal Plant Tracker (January 2026),G100000114347,Delong Nickel Phase I power station,South Sulawesi,PT Virtue Dragon Nickel Industry [100%],operating,2018.0,125.0,,-3.907537,122.419265,True
-GEM Global Coal Plant Tracker (January 2026),G100000114348,Delong Nickel Phase I power station,South Sulawesi,PT Virtue Dragon Nickel Industry [100%],operating,2018.0,125.0,,-3.907537,122.419265,True
-GEM Global Coal Plant Tracker (January 2026),G100001031228,Delong Nickel Phase IV power station,Central Sulawesi,PT Nadesico Nickel Industry,construction,,330.0,,-2.01656606,121.4311814,False
-GEM Global Coal Plant Tracker (January 2026),G100001031233,Delong Nickel Phase IV power station,Central Sulawesi,PT Nadesico Nickel Industry,operating,2024.0,330.0,,-2.01656606,121.4311814,False
-GEM Global Coal Plant Tracker (January 2026),G100000105669,Kendari-3 power station,Southeast Sulawesi,PT DSSP Power Kendari [100%],operating,2019.0,50.0,,-4.0512916,122.6534484,False
-GEM Global Coal Plant Tracker (January 2026),G100000105670,Kendari-3 power station,Southeast Sulawesi,PT DSSP Power Kendari [100%],operating,2019.0,50.0,,-4.0512916,122.6534484,False
-GEM Global Coal Plant Tracker (January 2026),G100000107744,Palu power station,Central Sulawesi,PT PLN (Persero) [100%],operating,2025.0,50.0,,-0.733203,119.85592,False
-GEM Global Coal Plant Tracker (January 2026),G100000113216,Palu power station,Central Sulawesi,PT PLN (Persero) [100%],operating,2025.0,50.0,,-0.733203,119.85592,False
-GEM Global Coal Plant Tracker (January 2026),G100000108075,Pomalaa Nickel power station,Southeast Sulawesi,PT Aneka Tambang Tbk [100%],operating,2016.0,30.0,,-4.179865,121.592935,True
-GEM Global Coal Plant Tracker (January 2026),G100000108076,Pomalaa Nickel power station,Southeast Sulawesi,PT Aneka Tambang Tbk [100%],operating,2016.0,30.0,,-4.179865,121.592935,True
-GEM Global Coal Plant Tracker (January 2026),G100001053834,PT IHIP power station,Central Sulawesi,PT Baoshuo Taman Industry Investment Group,announced,,100.0,,-2.2578515,121.769024,True
-GEM Global Coal Plant Tracker (January 2026),G100001000642,PT IHIP power station,Central Sulawesi,PT Baoshuo Taman Industry Investment Group,operating,2024.0,117.0,,-2.2578515,121.769024,True
-GEM Global Coal Plant Tracker (January 2026),G100001000643,PT IHIP power station,Central Sulawesi,PT Baoshuo Taman Industry Investment Group,operating,2024.0,117.0,,-2.2578515,121.769024,True
-GEM Global Coal Plant Tracker (January 2026),G100001000644,PT IHIP power station,Central Sulawesi,PT Baoshuo Taman Industry Investment Group,operating,2024.0,116.0,,-2.2578515,121.769024,True
-GEM Global Coal Plant Tracker (January 2026),G100000108236,Punagaya power station,South Sulawesi,PT Bosowa Makassar [100%],operating,2018.0,135.0,,-5.617881,119.5511895,False
-GEM Global Coal Plant Tracker (January 2026),G100000108237,Punagaya power station,South Sulawesi,PT Bosowa Makassar [100%],operating,2018.0,135.0,,-5.617881,119.5511895,False
-GEM Global Coal Plant Tracker (January 2026),G100000108234,Punagaya power station,South Sulawesi,PT Bosowa Makassar [100%],operating,2011.0,125.0,,-5.617881,119.5511895,False
-GEM Global Coal Plant Tracker (January 2026),G100000108235,Punagaya power station,South Sulawesi,PT Bosowa Makassar [100%],operating,2011.0,125.0,,-5.617881,119.5511895,False
-GEM Global Coal Plant Tracker (January 2026),G100000114329,Qingdao Zhongsheng captive power station,Central Sulawesi,PT Metal Smeltindo Selaras [100%],operating,2022.0,65.0,,-3.04035,122.261559,False
-GEM Global Coal Plant Tracker (January 2026),G100000114330,Qingdao Zhongsheng captive power station,Central Sulawesi,PT Metal Smeltindo Selaras [100%],operating,2022.0,65.0,,-3.04035,122.261559,False
-GEM Global Coal Plant Tracker (January 2026),G100000115119,Qingdao Zhongsheng captive power station,Central Sulawesi,PT Metal Smeltindo Selaras [100%],cancelled,,65.0,,-3.04035,122.261559,False
-GEM Global Coal Plant Tracker (January 2026),G100000115120,Qingdao Zhongsheng captive power station,Central Sulawesi,PT Metal Smeltindo Selaras [100%],cancelled,,65.0,,-3.04035,122.261559,False
-GEM Global Coal Plant Tracker (January 2026),G100000115121,Qingdao Zhongsheng captive power station,Central Sulawesi,PT Metal Smeltindo Selaras [100%],cancelled,,65.0,,-3.04035,122.261559,False
-GEM Global Coal Plant Tracker (January 2026),G100000115122,Qingdao Zhongsheng captive power station,Central Sulawesi,PT Metal Smeltindo Selaras [100%],cancelled,,65.0,,-3.04035,122.261559,False
-GEM Global Coal Plant Tracker (January 2026),G100000115259,Sulawesi Labota power station,Central Sulawesi,PT Walsin Nickel Industrial Indonesia [100%],operating,2021.0,350.0,,-2.8679078,122.1770864,False
-GEM Global Coal Plant Tracker (January 2026),G100000115260,Sulawesi Labota power station,Central Sulawesi,Indonesia Eternal Smelting Co [100%],operating,2022.0,350.0,,-2.8679078,122.1770864,False
-GEM Global Coal Plant Tracker (January 2026),G100000115261,Sulawesi Labota power station,Central Sulawesi,Indonesia Huaqing Aluminum Co Ltd [100%],operating,2023.0,380.0,,-2.8679078,122.1770864,False
-GEM Global Coal Plant Tracker (January 2026),G100000115123,Sulawesi Labota power station,Central Sulawesi,Indonesia Wanjia Ferro Nickel Co Ltd [100%],operating,2023.0,380.0,,-2.8689871,122.17188,False
-GEM Global Coal Plant Tracker (January 2026),G100000115124,Sulawesi Labota power station,Central Sulawesi,Indonesia Zhaohui Ferro Nickel Co Ltd [100%],operating,2023.0,380.0,,-2.8689871,122.17188,False
-GEM Global Coal Plant Tracker (January 2026),G100000115125,Sulawesi Labota power station,Central Sulawesi,PT Sulawesi Mining Investment [100%],operating,2023.0,380.0,,-2.8689871,122.17188,False
-GEM Global Coal Plant Tracker (January 2026),G100000115360,Sulawesi Labota power station,Central Sulawesi,PT Sulawesi Mining Investment [100%],operating,2023.0,380.0,,-2.8688307,122.1692807,False
-GEM Global Coal Plant Tracker (January 2026),G100000115361,Sulawesi Labota power station,Central Sulawesi,PT Sulawesi Mining Investment [100%],operating,2024.0,380.0,,-2.8688307,122.1692807,False
-GEM Global Coal Plant Tracker (January 2026),G100000115362,Sulawesi Labota power station,Central Sulawesi,PT Sulawesi Mining Investment [100%],operating,2024.0,380.0,,-2.8688307,122.1692807,False
-GEM Global Coal Plant Tracker (January 2026),G100000109667,Sulawesi Mining power station,Central Sulawesi,PT Indonesia Tsingshan Stainless Steel [100%],operating,2017.0,350.0,,-2.8295432,122.1551372,False
-GEM Global Coal Plant Tracker (January 2026),G100000113217,Sulawesi Mining power station,Central Sulawesi,PT Indonesia Tsingshan Stainless Steel [100%],operating,2017.0,350.0,,-2.8295432,122.1551372,False
-GEM Global Coal Plant Tracker (January 2026),G100000109665,Sulawesi Mining power station,Central Sulawesi,PT Indonesia Guang Ching Nickel and Stainless Steel Industry [100%],operating,2016.0,150.0,,-2.827384,122.1552699,False
-GEM Global Coal Plant Tracker (January 2026),G100000109666,Sulawesi Mining power station,Central Sulawesi,PT Indonesia Guang Ching Nickel and Stainless Steel Industry [100%],operating,2020.0,150.0,,-2.827384,122.1552699,False
-GEM Global Coal Plant Tracker (January 2026),G100000109663,Sulawesi Mining power station,Central Sulawesi,PT Sulawesi Mining Investment [100%],operating,2015.0,65.0,,-2.8255878,122.1554483,False
-GEM Global Coal Plant Tracker (January 2026),G100000109664,Sulawesi Mining power station,Central Sulawesi,PT Sulawesi Mining Investment [100%],operating,2015.0,65.0,,-2.8255878,122.1554483,False
-GEM Global Coal Plant Tracker (January 2026),G100000114323,Sulawesi Mining power station,Central Sulawesi,PT Indonesia Tsingshan Stainless Steel [100%],operating,2019.0,350.0,,-2.827384,122.1552699,False
-GEM Global Coal Plant Tracker (January 2026),G100000114324,Sulawesi Mining power station,Central Sulawesi,PT Indonesia Tsingshan Stainless Steel [100%],operating,2019.0,350.0,,-2.827384,122.1552699,False
-GEM Global Coal Plant Tracker (January 2026),G100000115363,Sulawesi Mining power station,Central Sulawesi,Indonesia Morowali Power Co [100%],operating,2020.0,250.0,,-2.827384,122.1552699,True
-GEM Global Coal Plant Tracker (January 2026),G100000109668,Sulawesi Star power station,South Sulawesi,Bharat Heavy Electricals Ltd; PT Star Vyobros,cancelled,,200.0,,-4.8,119.9,False
-GEM Global Coal Plant Tracker (January 2026),G100000113831,Sulbagsel-1 power station,South Sulawesi,PT PLN (Persero) [100%],cancelled,2023.0,200.0,,-3.821501,121.972097,False
-GEM Global Coal Plant Tracker (January 2026),G100000114190,Sulbagsel-1 power station,South Sulawesi,PT PLN (Persero) [100%],cancelled,2024.0,200.0,,-3.821501,121.972097,False
-GEM Global Coal Plant Tracker (January 2026),G100000114191,Sulbagsel-2 power station,South Sulawesi,PT PLN (Persero),cancelled,2023.0,200.0,,-3.814451,122.447753,False
-GEM Global Coal Plant Tracker (January 2026),G100000114192,Sulbagsel-2 power station,South Sulawesi,PT PLN (Persero),cancelled,2024.0,200.0,,-3.814451,122.447753,False
-GEM Global Coal Plant Tracker (January 2026),G100000109670,Sulbagut-1 power station,Gorontalo,PT Gorontalo Listrik Perdana [100%],operating,2022.0,50.0,,0.942698,122.941575,False
-GEM Global Coal Plant Tracker (January 2026),G100000109671,Sulbagut-1 power station,Gorontalo,PT Gorontalo Listrik Perdana [100%],operating,2022.0,50.0,,0.942698,122.941575,False
-GEM Global Coal Plant Tracker (January 2026),G100000109672,Sulbagut-2 power station,North Sulawesi,to be determined [100%],cancelled,2027.0,100.0,,1.185709,124.474885,False
-GEM Global Coal Plant Tracker (January 2026),G100000109673,Sulbagut-2 power station,North Sulawesi,to be determined [100%],cancelled,2028.0,100.0,,1.185709,124.474885,False
-GEM Global Coal Plant Tracker (January 2026),G100000109674,Sulbagut-3 power station,North Sulawesi,to be determined [100%],cancelled,2024.0,50.0,,0.868701,123.96431,False
-GEM Global Coal Plant Tracker (January 2026),G100000109675,Sulbagut-3 power station,North Sulawesi,to be determined [100%],cancelled,2025.0,50.0,,0.868701,123.96431,False
-GEM Global Coal Plant Tracker (January 2026),G100000109679,Sulsel-2 power station,South Sulawesi,to be determined [100%],cancelled,,200.0,,-5.70008,119.725767,False
-GEM Global Coal Plant Tracker (January 2026),G100000109680,Sulsel-2 power station,South Sulawesi,to be determined [100%],cancelled,,200.0,,-5.70008,119.725767,False
-GEM Global Coal Plant Tracker (January 2026),G100000109686,Sulut-1 power station,North Sulawesi,PT PLN (Persero) [100%],construction,2025.0,50.0,,0.890184,123.470106,False
-GEM Global Coal Plant Tracker (January 2026),G100000113218,Sulut-1 power station,North Sulawesi,PT PLN (Persero) [100%],construction,2025.0,50.0,,0.890184,123.470106,False
-GEM Global Coal Plant Tracker (January 2026),G100000109687,Sulut-3 power station,North Sulawesi,PT Minahasa Cahaya Lestari [100%],operating,2021.0,50.0,,1.374331,125.085455,False
-GEM Global Coal Plant Tracker (January 2026),G100000109688,Sulut-3 power station,North Sulawesi,PT Minahasa Cahaya Lestari [100%],operating,2021.0,50.0,,1.374331,125.085455,False
-GEM Global Coal Plant Tracker (January 2026),G100000109863,Takalar power station,South Sulawesi,PT PLN (Persero) [100%],operating,2017.0,100.0,,-5.623635,119.550822,False
-GEM Global Coal Plant Tracker (January 2026),G100000109864,Takalar power station,South Sulawesi,PT PLN (Persero) [100%],operating,2018.0,100.0,,-5.623635,119.550822,False
-GEM Global Coal Plant Tracker (January 2026),G100000110240,Tonasa Cement Plant power station,South Sulawesi,PT Semen Gresik [100%],operating,2013.0,35.0,,-4.816711,119.501684,False
-GEM Global Coal Plant Tracker (January 2026),G100000110241,Tonasa Cement Plant power station,South Sulawesi,PT Semen Gresik [100%],operating,2013.0,35.0,,-4.816711,119.501684,False
-GEM Global Coal Plant Tracker (January 2026),G100000115128,Wanxiang Nickel Indonesia power station,Central Sulawesi,PT Wanxiang Steel Indonesia [100%],operating,2022.0,65.0,,-2.730952,122.030621,False
-GEM Global Coal Plant Tracker (January 2026),G100000115129,Wanxiang Nickel Indonesia power station,Central Sulawesi,PT Wanxiang Steel Indonesia [100%],operating,2022.0,65.0,,-2.730952,122.030621,False
+Nama PLTU,Unit,Pemilik,Induk Perusahaan,Kapasitas (MW),Status,Tahun Beroperasi,Provinsi,Kabupaten/Kota,Disuplai ke Industri
+Delong Nickel Phase IV power station,Unit 3,PT Nadesico Nickel Industry,Jiangsu Delong Nickel Industry Co Ltd; Tongren Zhongwei Hongling No. 1 Enterprise Management Consulting Partnership LP; Zhongwei Hong Kong Zhengbang New Energy Co Ltd; Zhongwei Hong Kong Zhenghong New Energy Co Ltd,330.0,operating,2024.0,Sulawesi Tengah,,
+PT IHIP power station,Unit 1,PT Baoshuo Taman Industry Investment Group,Huakai Investment Co Ltd; Tongxiang Wushi Trading Co Ltd; unknown; Zhenshi Holding Group Co Ltd,117.0,operating,2024.0,Sulawesi Tengah,West Bungku,
+PT IHIP power station,Unit 2,PT Baoshuo Taman Industry Investment Group,Huakai Investment Co Ltd; Tongxiang Wushi Trading Co Ltd; unknown; Zhenshi Holding Group Co Ltd,117.0,operating,2024.0,Sulawesi Tengah,West Bungku,
+PT IHIP power station,Unit 3,PT Baoshuo Taman Industry Investment Group,Huakai Investment Co Ltd; Tongxiang Wushi Trading Co Ltd; unknown; Zhenshi Holding Group Co Ltd,116.0,operating,2024.0,Sulawesi Tengah,West Bungku,
+Sulawesi Labota power station,Unit 8,PT Sulawesi Mining Investment [100%],Dingxin Group [55.0%]; PT Bintang Delapan Group [45.0%],380.0,operating,2024.0,Sulawesi Tengah,Morowali,power
+Sulawesi Labota power station,Unit 9,PT Sulawesi Mining Investment [100%],Dingxin Group [55.0%]; PT Bintang Delapan Group [45.0%],380.0,operating,2024.0,Sulawesi Tengah,Morowali,power
+Delong Nickel Phase III power station,Unit 07,PT Gunbuster Nickel Industry [100%],Jiangsu Delong Nickel Industry Co Ltd,135.0,operating,2023.0,Sulawesi Tengah,Petasia,power
+Sulawesi Labota power station,Unit 3,Indonesia Huaqing Aluminum Co Ltd [100%],Huafeng Group; Qingshan Industrial Co Ltd,380.0,operating,2023.0,Sulawesi Tengah,Morowali,power
+Sulawesi Labota power station,Unit 4,Indonesia Wanjia Ferro Nickel Co Ltd [100%],Indonesia Wanjia Ferro Nickel Co Ltd [100.0%],380.0,operating,2023.0,Sulawesi Tengah,Morowali,power
+Sulawesi Labota power station,Unit 5,Indonesia Zhaohui Ferro Nickel Co Ltd [100%],Indonesia Zhaohui Ferro Nickel Co Ltd [100.0%],380.0,operating,2023.0,Sulawesi Tengah,Morowali,power
+Sulawesi Labota power station,Unit 6,PT Sulawesi Mining Investment [100%],Dingxin Group [55.0%]; PT Bintang Delapan Group [45.0%],380.0,operating,2023.0,Sulawesi Tengah,Morowali,power
+Sulawesi Labota power station,Unit 7,PT Sulawesi Mining Investment [100%],Dingxin Group [55.0%]; PT Bintang Delapan Group [45.0%],380.0,operating,2023.0,Sulawesi Tengah,Morowali,power
+Delong Nickel Phase III power station,Unit 02,PT Gunbuster Nickel Industry [100%],Jiangsu Delong Nickel Industry Co Ltd,135.0,operating,2022.0,Sulawesi Tengah,Petasia,power
+Delong Nickel Phase III power station,Unit 03,PT Gunbuster Nickel Industry [100%],Jiangsu Delong Nickel Industry Co Ltd,135.0,operating,2022.0,Sulawesi Tengah,Petasia,power
+Delong Nickel Phase III power station,Unit 04,PT Gunbuster Nickel Industry [100%],Jiangsu Delong Nickel Industry Co Ltd,135.0,operating,2022.0,Sulawesi Tengah,Petasia,power
+Delong Nickel Phase III power station,Unit 05,PT Gunbuster Nickel Industry [100%],Jiangsu Delong Nickel Industry Co Ltd,135.0,operating,2022.0,Sulawesi Tengah,Petasia,power
+Delong Nickel Phase III power station,Unit 06,PT Gunbuster Nickel Industry [100%],Jiangsu Delong Nickel Industry Co Ltd,135.0,operating,2022.0,Sulawesi Tengah,Petasia,power
+Qingdao Zhongsheng captive power station,Unit 1,PT Metal Smeltindo Selaras [100%],PT Metal Smeltindo Selaras [100.0%],65.0,operating,2022.0,Sulawesi Tengah,Morowali,power
+Qingdao Zhongsheng captive power station,Unit 2,PT Metal Smeltindo Selaras [100%],PT Metal Smeltindo Selaras [100.0%],65.0,operating,2022.0,Sulawesi Tengah,Morowali,power
+Sulawesi Labota power station,Unit 2,Indonesia Eternal Smelting Co [100%],Eternal Tsingshan Group Ltd,350.0,operating,2022.0,Sulawesi Tengah,Morowali,power
+Wanxiang Nickel Indonesia power station,Unit 1,PT Wanxiang Steel Indonesia [100%],PT Wanxiang Steel Indonesia [100.0%],65.0,operating,2022.0,Sulawesi Tengah,Central Bungku,
+Wanxiang Nickel Indonesia power station,Unit 2,PT Wanxiang Steel Indonesia [100%],PT Wanxiang Steel Indonesia [100.0%],65.0,operating,2022.0,Sulawesi Tengah,Central Bungku,
+Delong Nickel Phase II power station,Unit 09,PT Obsidian Stainless Steel [100%],Xiamen Xiangyu Group Co Ltd [51.0%]; Jiangsu Delong Nickel Industry Co Ltd [49.0%],380.0,operating,2022.0,Sulawesi Tenggara,Kendari,power
+Delong Nickel Phase III power station,Unit 01,PT Gunbuster Nickel Industry [100%],Jiangsu Delong Nickel Industry Co Ltd,135.0,operating,2021.0,Sulawesi Tengah,Petasia,power
+Sulawesi Labota power station,Unit 1,PT Walsin Nickel Industrial Indonesia [100%],Walsin Lihwa Corp,350.0,operating,2021.0,Sulawesi Tengah,Morowali,power
+Delong Nickel Phase II power station,Unit 04,PT Obsidian Stainless Steel [100%],Xiamen Xiangyu Group Co Ltd [51.0%]; Jiangsu Delong Nickel Industry Co Ltd [49.0%],135.0,operating,2021.0,Sulawesi Tenggara,Kendari,power
+Delong Nickel Phase II power station,Unit 05,PT Obsidian Stainless Steel [100%],Xiamen Xiangyu Group Co Ltd [51.0%]; Jiangsu Delong Nickel Industry Co Ltd [49.0%],135.0,operating,2021.0,Sulawesi Tenggara,Kendari,power
+Delong Nickel Phase II power station,Unit 06,PT Obsidian Stainless Steel [100%],Xiamen Xiangyu Group Co Ltd [51.0%]; Jiangsu Delong Nickel Industry Co Ltd [49.0%],135.0,operating,2021.0,Sulawesi Tenggara,Kendari,power
+Delong Nickel Phase II power station,Unit 07,PT Obsidian Stainless Steel [100%],Xiamen Xiangyu Group Co Ltd [51.0%]; Jiangsu Delong Nickel Industry Co Ltd [49.0%],135.0,operating,2021.0,Sulawesi Tenggara,Kendari,power
+Delong Nickel Phase II power station,Unit 08,PT Obsidian Stainless Steel [100%],Xiamen Xiangyu Group Co Ltd [51.0%]; Jiangsu Delong Nickel Industry Co Ltd [49.0%],135.0,operating,2021.0,Sulawesi Tenggara,Kendari,power
+Delong Nickel Phase II power station,Unit 10,PT Obsidian Stainless Steel [100%],Xiamen Xiangyu Group Co Ltd [51.0%]; Jiangsu Delong Nickel Industry Co Ltd [49.0%],380.0,operating,2021.0,Sulawesi Tenggara,Kendari,power
+Sulawesi Mining power station,Phase II Unit 2,PT Indonesia Guang Ching Nickel and Stainless Steel Industry [100%],Guangdong Guangxin Holdings Group,150.0,operating,2020.0,Sulawesi Tengah,Morowali,power
+Sulawesi Mining power station,Unit 9,Indonesia Morowali Power Co [100%],Eternal Tsingshan Group Ltd,250.0,operating,2020.0,Sulawesi Tengah,Morowali,power
+Delong Nickel Phase II power station,Unit 01,PT Obsidian Stainless Steel [100%],Xiamen Xiangyu Group Co Ltd [51.0%]; Jiangsu Delong Nickel Industry Co Ltd [49.0%],135.0,operating,2020.0,Sulawesi Tenggara,Kendari,power
+Delong Nickel Phase II power station,Unit 02,PT Obsidian Stainless Steel [100%],Xiamen Xiangyu Group Co Ltd [51.0%]; Jiangsu Delong Nickel Industry Co Ltd [49.0%],135.0,operating,2020.0,Sulawesi Tenggara,Kendari,power
+Delong Nickel Phase II power station,Unit 03,PT Obsidian Stainless Steel [100%],Xiamen Xiangyu Group Co Ltd [51.0%]; Jiangsu Delong Nickel Industry Co Ltd [49.0%],135.0,operating,2020.0,Sulawesi Tenggara,Kendari,power
+Delong Nickel Phase I power station,Unit 3,PT Virtue Dragon Nickel Industry [100%],unknown,50.0,operating,2019.0,Sulawesi Selatan,Kendari,power
+Delong Nickel Phase I power station,Unit 4,PT Virtue Dragon Nickel Industry [100%],unknown,50.0,operating,2019.0,Sulawesi Selatan,Kendari,power
+Delong Nickel Phase I power station,Unit 5,PT Virtue Dragon Nickel Industry [100%],unknown,60.0,operating,2019.0,Sulawesi Selatan,Kendari,power
+Delong Nickel Phase I power station,Unit 6,PT Virtue Dragon Nickel Industry [100%],unknown,60.0,operating,2019.0,Sulawesi Selatan,Kendari,power
+Sulawesi Mining power station,Phase IV Unit 1,PT Indonesia Tsingshan Stainless Steel [100%],Eternal Tsingshan Group Ltd,350.0,operating,2019.0,Sulawesi Tengah,Morowali,power
+Sulawesi Mining power station,Phase IV Unit 2,PT Indonesia Tsingshan Stainless Steel [100%],Eternal Tsingshan Group Ltd,350.0,operating,2019.0,Sulawesi Tengah,Morowali,power
+Delong Nickel Phase I power station,Unit 1,PT Virtue Dragon Nickel Industry [100%],unknown,30.0,operating,2018.0,Sulawesi Selatan,Kendari,power
+Delong Nickel Phase I power station,Unit 2,PT Virtue Dragon Nickel Industry [100%],unknown,30.0,operating,2018.0,Sulawesi Selatan,Kendari,power
+Delong Nickel Phase I power station,Unit 7,PT Virtue Dragon Nickel Industry [100%],unknown,125.0,operating,2018.0,Sulawesi Selatan,Kendari,power
+Delong Nickel Phase I power station,Unit 8,PT Virtue Dragon Nickel Industry [100%],unknown,125.0,operating,2018.0,Sulawesi Selatan,Kendari,power
+Sulawesi Mining power station,Phase III Unit 1,PT Indonesia Tsingshan Stainless Steel [100%],Eternal Tsingshan Group Ltd,350.0,operating,2017.0,Sulawesi Tengah,Morowali,power
+Sulawesi Mining power station,Phase III Unit 2,PT Indonesia Tsingshan Stainless Steel [100%],Eternal Tsingshan Group Ltd,350.0,operating,2017.0,Sulawesi Tengah,Morowali,power
+Sulawesi Mining power station,Phase II Unit 1,PT Indonesia Guang Ching Nickel and Stainless Steel Industry [100%],Guangdong Guangxin Holdings Group,150.0,operating,2016.0,Sulawesi Tengah,Morowali,power
+Pomalaa Nickel power station,Unit S1,PT Aneka Tambang Tbk [100%],PT Aneka Tambang Tbk [100.0%],30.0,operating,2016.0,Sulawesi Tenggara,,
+Pomalaa Nickel power station,Unit S2,PT Aneka Tambang Tbk [100%],PT Aneka Tambang Tbk [100.0%],30.0,operating,2016.0,Sulawesi Tenggara,,
+Sulawesi Mining power station,Phase I Unit 1,PT Sulawesi Mining Investment [100%],Dingxin Group [55.0%]; PT Bintang Delapan Group [45.0%],65.0,operating,2015.0,Sulawesi Tengah,Morowali,power
+Sulawesi Mining power station,Phase I Unit 2,PT Sulawesi Mining Investment [100%],Dingxin Group [55.0%]; PT Bintang Delapan Group [45.0%],65.0,operating,2015.0,Sulawesi Tengah,Morowali,power
+Tonasa Cement Plant power station,Phase V Unit 1,PT Semen Gresik [100%],PT Semen Indonesia (Persero) Tbk [100.0%],35.0,operating,2013.0,Sulawesi Selatan,Biringkassi Port,power
+Tonasa Cement Plant power station,Phase V Unit 2,PT Semen Gresik [100%],PT Semen Indonesia (Persero) Tbk [100.0%],35.0,operating,2013.0,Sulawesi Selatan,Biringkassi Port,power
+Delong Nickel Phase III power station,Unit 08,PT Gunbuster Nickel Industry [100%],Jiangsu Delong Nickel Industry Co Ltd,150.0,shelved,,Sulawesi Tengah,Petasia,power
+Delong Nickel Phase III power station,Unit 09,PT Gunbuster Nickel Industry [100%],Jiangsu Delong Nickel Industry Co Ltd,300.0,shelved,,Sulawesi Tengah,Petasia,power
+Delong Nickel Phase III power station,Unit 10,PT Gunbuster Nickel Industry [100%],Jiangsu Delong Nickel Industry Co Ltd,300.0,shelved,,Sulawesi Tengah,Petasia,power
+Delong Nickel Phase III power station,Unit 11,PT Gunbuster Nickel Industry [100%],Jiangsu Delong Nickel Industry Co Ltd,300.0,shelved,,Sulawesi Tengah,Petasia,power
+Delong Nickel Phase III power station,Unit 12,PT Gunbuster Nickel Industry [100%],Jiangsu Delong Nickel Industry Co Ltd,300.0,shelved,,Sulawesi Tengah,Petasia,power
+Delong Nickel Phase IV power station,Unit 2,PT Nadesico Nickel Industry,Jiangsu Delong Nickel Industry Co Ltd; Tongren Zhongwei Hongling No. 1 Enterprise Management Consulting Partnership LP; Zhongwei Hong Kong Zhengbang New Energy Co Ltd; Zhongwei Hong Kong Zhenghong New Energy Co Ltd,330.0,construction,,Sulawesi Tengah,,
+PT IHIP power station,Expansion Unit,PT Baoshuo Taman Industry Investment Group,Huakai Investment Co Ltd; Tongxiang Wushi Trading Co Ltd; unknown; Zhenshi Holding Group Co Ltd,100.0,announced,,Sulawesi Tengah,West Bungku,
+Qingdao Zhongsheng captive power station,Unit 3,PT Metal Smeltindo Selaras [100%],PT Metal Smeltindo Selaras [100.0%],65.0,cancelled,,Sulawesi Tengah,Morowali,power
+Qingdao Zhongsheng captive power station,Unit 4,PT Metal Smeltindo Selaras [100%],PT Metal Smeltindo Selaras [100.0%],65.0,cancelled,,Sulawesi Tengah,Morowali,power
+Qingdao Zhongsheng captive power station,Unit 5,PT Metal Smeltindo Selaras [100%],PT Metal Smeltindo Selaras [100.0%],65.0,cancelled,,Sulawesi Tengah,Morowali,power
+Qingdao Zhongsheng captive power station,Unit 6,PT Metal Smeltindo Selaras [100%],PT Metal Smeltindo Selaras [100.0%],65.0,cancelled,,Sulawesi Tengah,Morowali,power
+Delong Nickel Phase II power station,Unit 11,PT Obsidian Stainless Steel [100%],Xiamen Xiangyu Group Co Ltd [51.0%]; Jiangsu Delong Nickel Industry Co Ltd [49.0%],380.0,cancelled,,Sulawesi Tenggara,Kendari,power
