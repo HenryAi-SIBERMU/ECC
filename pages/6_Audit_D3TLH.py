@@ -183,7 +183,7 @@ if not df_b3.empty:
     df_b3['Estimasi Timbulan (Ton/Tahun)'] = pd.to_numeric(df_b3['Estimasi Timbulan (Ton/Tahun)'], errors='coerce').fillna(0)
     total_b3_all_pre = df_b3['Estimasi Timbulan (Ton/Tahun)'].sum()
     total_b3_sulteng = df_b3[df_b3['Provinsi'] == 'Sulawesi Tengah']['Estimasi Timbulan (Ton/Tahun)'].sum()
-    skor_overcapacity = total_b3_all_pre / 1_000_000
+    skor_overcapacity = total_b3_sulteng / 1_000_000
     skor_3 = min(10.0, (skor_overcapacity / 30.0) * 10)
 
 skor_4 = 0
@@ -209,17 +209,12 @@ if not df_ika.empty:
 
 skor_air_1 = min(10.0, max(0, (80 - ika_sulteng) / 30) * 10)
 
-# IRR Diare: threshold 2x lipat (Kemenkes Profil Kesehatan 2023, WHO EHC Sect.6)
 skor_air_2 = 0
-rasio_diare = 0
 kasus_diare_sentra = 0
-kasus_diare_non_pre = 0
 if not df_kes.empty:
-    df_diare_pre = df_kes[df_kes['indikator'].str.contains('Diare', case=False, na=False)]
-    kasus_diare_sentra = df_diare_pre[df_diare_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
-    kasus_diare_non_pre = df_diare_pre[~df_diare_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
-    rasio_diare = (kasus_diare_sentra / 2) / (kasus_diare_non_pre / 4) if kasus_diare_non_pre > 0 else 0
-    skor_air_2 = min(10.0, max(0.0, (rasio_diare - 1) * 10.0))
+    df_diare = df_kes[df_kes['indikator'].str.contains('Diare', case=False, na=False)]
+    kasus_diare_sentra = df_diare[df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
+    skor_air_2 = min(10.0, (kasus_diare_sentra / 500_000) * 10)
 
 skor_air_3 = 0
 jumlah_konflik_air = 0
@@ -562,7 +557,7 @@ if not df_iku.empty:
     df_iku_avg_pre = df_iku.groupby('Tahun')['IKU'].mean().reset_index()
     if 2024 in df_iku_avg_pre['Tahun'].values:
         iku_terkini = df_iku_avg_pre[df_iku_avg_pre['Tahun'] == 2024]['IKU'].values[0]
-# Threshold: PLTU maks 10.000 MW (normalisasi), IKU kritis pada 50 (turun 30 poin dari 80 — PermenLHK No.27/2021)
+# Normalisasi: PLTU Max 10.000 MW, IKU kritis pada 50 (range 80 ke 50)
 skor_1 = min(10.0, (kapasitas_terkini / 10000) * 5 + max(0, (80 - iku_terkini) / 30) * 5)
 
 # Skor 2: Rasio Anomali ISPA
@@ -585,7 +580,7 @@ if not df_b3.empty:
     df_b3['Estimasi Timbulan (Ton/Tahun)'] = pd.to_numeric(df_b3['Estimasi Timbulan (Ton/Tahun)'], errors='coerce').fillna(0)
     total_b3_all_pre = df_b3['Estimasi Timbulan (Ton/Tahun)'].sum()
     total_b3_sulteng = df_b3[df_b3['Provinsi'] == 'Sulawesi Tengah']['Estimasi Timbulan (Ton/Tahun)'].sum()
-    skor_overcapacity = total_b3_all_pre / 1_000_000
+    skor_overcapacity = total_b3_sulteng / 1_000_000
     # Normalisasi: Batas ekstrem 30x lipat dari daya tampung = skor 10
     skor_3 = min(10.0, (skor_overcapacity / 30.0) * 10)
 
@@ -650,10 +645,9 @@ with colA2:
                 iku_grafik = df_iku_avg[df_iku_avg['Tahun'] == 2024]['IKU'].values[0] if not df_iku_avg[df_iku_avg['Tahun'] == 2024].empty else 75
                 
                 col1, col2, col3 = st.columns(3)
-                col1.metric("Kapasitas PLTU Aktif (Scoring)", f"{kapasitas_terkini:,.0f} MW", "Max threshold: 10.000 MW")
-                col2.metric("IKU Dipakai Skor", f"{iku_terkini:.1f}", "Kritis jika turun ke 50 (PermenLHK 27/2021)", delta_color="inverse")
+                col1.metric("Kapasitas PLTU Aktif", f"{kapasitas_grafik:,.0f} MW", "Max threshold: 10.000 MW")
+                col2.metric("Rata-rata IKU Sulawesi", f"{iku_grafik:.1f}", "Kritis jika turun ke 50 (PermenLHK 27/2021)", delta_color="inverse")
                 col3.metric("Skor Ancaman Udara", f"{skor_1:.1f} / 10", "STATUS: KRITIS", delta_color="inverse")
-                st.caption(f"⚠️ Data panel chart: {kapasitas_grafik:,.0f} MW (hanya PLTU dengan data Start Year). Scoring menggunakan semua PLTU aktif = {kapasitas_terkini:,.0f} MW, IKU = {iku_terkini:.1f}.")
                 st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
                 
                 owid_colors = ['#9B5A40', '#E58872', '#5E85B4', '#A09CAE', '#82B989', '#E3D7A4']
@@ -828,19 +822,16 @@ if not df_ika.empty:
 # Normalisasi: IKA ideal = 80, IKA cemar berat = 50
 skor_air_1 = min(10.0, max(0, (80 - ika_sulteng) / 30) * 10)
 
-# Skor 2: Morbiditas Diare - IRR (Incidence Rate Ratio)
-# Threshold: IRR >= 2x lipat = skor 10.0 (Kemenkes Profil Kesehatan 2023, WHO EHC Sect.6)
+# Skor 2: Morbiditas Diare
 skor_air_2 = 0
-rasio_diare = 0
 kasus_diare_sentra = 0
 kasus_diare_non = 0
 if not df_kes.empty:
     df_diare = df_kes[df_kes['indikator'].str.contains('Diare', case=False, na=False)]
     kasus_diare_sentra = df_diare[df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
     kasus_diare_non = df_diare[~df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
-    # IRR: rasio per-provinsi sentra vs non-sentra. Threshold 2x lipat = Darurat Medis
-    rasio_diare = (kasus_diare_sentra / 2) / (kasus_diare_non / 4) if kasus_diare_non > 0 else 0
-    skor_air_2 = min(10.0, max(0.0, (rasio_diare - 1) * 10.0))
+    # Normalisasi absolut: 500.000 kasus = Skor 10.0
+    skor_air_2 = min(10.0, (kasus_diare_sentra / 500_000) * 10)
 
 # Skor 3: Konflik Air/Pesisir
 skor_air_3 = 0
@@ -889,10 +880,10 @@ with colB2:
     tab_w1, tab_w2, tab_w3, tab_w4 = st.tabs(["Kualitas Air", "Morbiditas Diare", "Konflik Nelayan", "Beban Tailing"])
     
     with tab_w1:
-        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Klaim sungai/laut mampu mengencerkan limbah berbanding terbalik dengan hancurnya Indeks Kualitas Air BPS hingga menyentuh batas cemar kotor. <b>Threshold Kritis: IKA = 50</b> (batas terbawah Kategori Sedang/awal Kurang -- <i>PermenLHK No.27/2021, Lampiran Tbl.1</i>).</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Klaim sungai/laut mampu mengencerkan limbah berbanding terbalik dengan hancurnya Indeks Kualitas Air BPS hingga menyentuh batas cemar kotor.</div>", unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
-        col1.metric("IKA Sulteng Terkini", f"{ika_sulteng:.1f}", "Threshold kritis: 50 (PermenLHK 27/2021)", delta_color="inverse")
-        col2.metric("Rata-rata IKA Sulawesi", f"{ika_terkini:.1f}", "Ideal: 80, Kritis: 50", delta_color="inverse")
+        col1.metric("IKA Sulteng Terkini", f"{ika_sulteng:.1f}", "Indeks BPS", delta_color="inverse")
+        col2.metric("Rata-rata IKA Sulawesi", f"{ika_terkini:.1f}", "Skala 0-100", delta_color="inverse")
         col3.metric("Skor Kualitas Air", f"{skor_air_1:.1f} / 10", "STATUS: CEMAR KRITIS", delta_color="inverse")
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
@@ -905,11 +896,11 @@ with colB2:
             st.plotly_chart(fig_w1, use_container_width=True)
             
     with tab_w2:
-        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> AMDAL gagal menghitung dampak kontaminasi logam berat ke air tanah yang dikonsumsi warga, dibuktikan dengan ledakan pasien Diare di lingkar tambang. <b>Threshold Kritis: IRR = 2x lipat</b> (beban penyakit sentra 2x lebih tinggi dari non-sentra -- <i>Kemenkes Profil Kesehatan 2023, WHO EHC Sect.6</i>).</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> AMDAL gagal menghitung dampak kontaminasi logam berat ke air tanah yang dikonsumsi warga, dibuktikan dengan ledakan pasien Diare di lingkar tambang.</div>", unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
         col1.metric("Kasus Diare Sentra Nikel", f"{kasus_diare_sentra:,.0f}", "Sulteng & Sultra")
         col2.metric("Kasus Diare Daerah Lain", f"{kasus_diare_non:,.0f}", "4 Provinsi Non-Sentra", delta_color="normal")
-        col3.metric("Skor Diare (IRR)", f"{skor_air_2:.1f} / 10", f"Rasio: {rasio_diare:.1f}x lipat (Threshold 2x)", delta_color="inverse")
+        col3.metric("Skor Beban Penyakit", f"{skor_air_2:.1f} / 10", "STATUS: DARURAT MEDIS", delta_color="inverse")
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
         if not df_kes.empty:
@@ -917,39 +908,31 @@ with colB2:
             df_diare_trend['Kategori'] = df_diare_trend['provinsi'].apply(lambda x: 'Sentra Tambang' if x in ['Sulawesi Tengah', 'Sulawesi Tenggara'] else 'Non-Sentra')
             df_d_agg = df_diare_trend.groupby(['tahun', 'Kategori'])['nilai'].sum().reset_index()
             fig_w2 = px.area(df_d_agg, x='tahun', y='nilai', color='Kategori', title="Ledakan Kasus Diare (Indikator Kualitas Air Tanah)")
-            # Batas visual: rata-rata kasus per-provinsi x2 (IRR 2x lipat threshold)
-            kasus_per_non_prov = kasus_diare_non / 4 if kasus_diare_non > 0 else 0
-            batas_irr_2x = kasus_per_non_prov * 2
-            fig_w2.add_hline(y=batas_irr_2x, line_dash="dash", line_color="#E74C3C",
-                             annotation_text=f"IRR 2x Threshold: {batas_irr_2x:,.0f} kasus/prov (Kemenkes 2023, WHO EHC)",
-                             annotation_position="top left")
+            fig_w2.add_hline(y=100000, line_dash="dash", line_color="#E74C3C", annotation_text="Batas Kritis Endemik (100k Kasus)", annotation_position="top left")
             fig_w2.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
             st.plotly_chart(fig_w2, use_container_width=True)
 
     with tab_w3:
-        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Ekosistem tangkap nelayan dihancurkan oleh limbah tailing dan privatisasi pesisir untuk Smelter, memicu lonjakan konflik agraria laut. <b>Threshold Kritis: 15 kasus</b> = 4.8x lipat dari proporsional nasional (KPA Annual Report 2022: rata-rata 3.1 konflik/2 prov). Sumber: <i>KPA Annual Report 2022, Hal. 12-15</i>.</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Ekosistem tangkap nelayan dihancurkan oleh limbah tailing dan privatisasi pesisir untuk Smelter, memicu lonjakan konflik agraria laut.</div>", unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
         col1.metric("Total Konflik Pesisir/Air", f"{jumlah_konflik_air} Kasus", "Data TanahKita")
         col2.metric("Estimasi Luas Terdampak", f"{luas_konflik_air:,.0f} Ha", "Ruang Hidup Nelayan", delta_color="inverse")
-        col3.metric("Skor Konflik Pesisir", f"{skor_air_3:.1f} / 10", f"{jumlah_konflik_air} kasus / threshold 15 (KPA 2022)", delta_color="inverse")
+        col3.metric("Skor Konflik Ruang Air", f"{skor_air_3:.1f} / 10", "STATUS: DARURAT AGRARIA", delta_color="inverse")
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
         if not df_konflik_air.empty and 'Tahun' in df_konflik_air.columns:
             df_k_trend = df_konflik_air.groupby('Tahun').size().reset_index(name='Jumlah')
             fig_w3 = px.bar(df_k_trend, x='Tahun', y='Jumlah', title="Frekuensi Letusan Konflik Pesisir & Nelayan per Tahun")
             fig_w3.add_vline(x=2015, line_dash="dot", line_color="#E74C3C", annotation_text="Awal Eskalasi Smelter")
-            fig_w3.add_hline(y=15, line_dash="dot", line_color="#FF5252",
-                             annotation_text="Threshold Kritis: 15 Kasus (4.8x proporsional KPA 2022)",
-                             annotation_font_color="#FF5252", annotation_position="top right")
             fig_w3.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
             st.plotly_chart(fig_w3, use_container_width=True)
 
     with tab_w4:
-        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Risiko kebocoran Tailings Dam atau Deep Sea Tailing Placement (DSTP) ditutupi klaim 'mitigasi teknologi'. <b>Threshold Kritis: 20 Juta Ton/Tahun</b> = 4.7% dari neraca B3 nasional 427 juta ton dari 1 provinsi (proporsional 2.9%, anomali 1.6x). Sumber: <i>PermenLHK No.P.10/2023 Pasal 8-12 + KLHK LKj 2022 Hal.47</i>.</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Resiko kebocoran Tailings Dam (Bendungan Tailing) atau Deep Sea Tailing Placement (DSTP) yang ditutupi oleh klaim 'mitigasi teknologi'.</div>", unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
         col1.metric("Total Timbulan Limbah/Tailing", f"{df_b3['Estimasi Timbulan (Ton/Tahun)'].sum()/1_000_000:.1f} Jt Ton", "Mayoritas Slag/Tailing")
         col2.metric("Titik Resiko", "Smelter & Laut Dalam", "DSTP & Tailing Dam", delta_color="inverse")
-        col3.metric("Skor Ancaman Tailing", f"{skor_air_4:.1f} / 10", f"Threshold: 20 Jt Ton (PermenLHK P.10/2023)", delta_color="inverse")
+        col3.metric("Skor Ancaman Tailing", f"{skor_air_4:.1f} / 10", "STATUS: ZONA MERAH", delta_color="inverse")
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
         if not df_b3.empty:
