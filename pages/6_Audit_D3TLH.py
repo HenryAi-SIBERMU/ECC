@@ -75,6 +75,42 @@ st.markdown("""
     color: #EF5350;
     font-weight: 700;
 }
+.metric-card {
+    background: linear-gradient(135deg, #1A1F2B, #232B3B);
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+.metric-value {
+    font-size: 2rem;
+    font-weight: 700;
+}
+.metric-label {
+    font-size: 0.9rem;
+    color: #AAA;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+.metric-desc {
+    font-size: 0.8rem;
+    color: #9E9E9E;
+    margin-top: 10px;
+    line-height: 1.4;
+    text-align: left;
+}
+.metric-source {
+    font-size: 0.75rem;
+    color: #777;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dotted #444;
+    text-align: left;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -109,7 +145,88 @@ def load_data():
 df_kes, df_ika, df_bencana, df_konflik, df_izin, df_iku, df_b3, df_pltu_op, df_gfw = load_data()
 
 # =====================================================================
-# EXECUTIVE SUMMARY & BENTO CARDS (AGREGASI KRISIS)
+# PRE-CALCULATE SCORES SECTION A & B (Yang sudah ada datanya)
+# =====================================================================
+
+# --- SECTION A: UDARA ---
+kapasitas_terkini = 0
+iku_terkini = 75
+if not df_pltu_op.empty:
+    kapasitas_terkini = df_pltu_op[(df_pltu_op['Status'].str.lower() == 'operating')]['Capacity (MW)'].sum()
+if not df_iku.empty:
+    df_iku_avg_pre = df_iku.groupby('Tahun')['IKU'].mean().reset_index()
+    if 2024 in df_iku_avg_pre['Tahun'].values:
+        iku_terkini = df_iku_avg_pre[df_iku_avg_pre['Tahun'] == 2024]['IKU'].values[0]
+skor_1 = min(10.0, (kapasitas_terkini / 10000) * 5 + max(0, (80 - iku_terkini) / 30) * 5)
+
+skor_2 = 0
+rasio_anomali = 0
+kasus_sentra = 0
+if not df_kes.empty:
+    df_ts_pre = df_kes[df_kes['indikator'].str.contains('ISPA', case=False, na=False)]
+    kasus_sentra = df_ts_pre[df_ts_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
+    kasus_non_sentra = df_ts_pre[~df_ts_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
+    rasio_anomali = (kasus_sentra / 2) / (kasus_non_sentra / 4) if kasus_non_sentra > 0 else 0
+    skor_2 = min(10.0, max(0.0, (rasio_anomali - 1) * 2.5))
+
+skor_3 = 0
+skor_overcapacity = 0
+total_b3_sulteng = 0
+if not df_b3.empty:
+    df_b3['Estimasi Timbulan (Ton/Tahun)'] = pd.to_numeric(df_b3['Estimasi Timbulan (Ton/Tahun)'], errors='coerce').fillna(0)
+    total_b3_all_pre = df_b3['Estimasi Timbulan (Ton/Tahun)'].sum()
+    total_b3_sulteng = df_b3[df_b3['Provinsi'] == 'Sulawesi Tengah']['Estimasi Timbulan (Ton/Tahun)'].sum()
+    skor_overcapacity = total_b3_all_pre / 1_000_000
+    skor_3 = min(10.0, (skor_overcapacity / 30.0) * 10)
+
+skor_4 = 0
+total_emisi_co2 = 0
+if not df_gfw.empty:
+    df_gfw['Total_Emisi_CO2_Megagram'] = pd.to_numeric(df_gfw['Total_Emisi_CO2_Megagram'], errors='coerce').fillna(0)
+    total_emisi_co2 = df_gfw['Total_Emisi_CO2_Megagram'].sum() / 1_000_000
+    skor_4 = min(10.0, (total_emisi_co2 / 150.0) * 10)
+
+skor_akumulasi_udara = (skor_1 + skor_2 + skor_3 + skor_4) / 4
+
+# --- SECTION B: AIR ---
+ika_terkini = 50
+ika_sulteng = 50
+if not df_ika.empty:
+    df_ika_avg = df_ika.groupby('Tahun')['Indeks Kualitas Air'].mean().reset_index()
+    if 2024 in df_ika_avg['Tahun'].values:
+        ika_terkini = df_ika_avg[df_ika_avg['Tahun'] == 2024]['Indeks Kualitas Air'].values[0]
+    
+    df_sulteng = df_ika[df_ika['Provinsi'] == 'Sulawesi Tengah']
+    if not df_sulteng.empty and 2024 in df_sulteng['Tahun'].values:
+        ika_sulteng = df_sulteng[df_sulteng['Tahun'] == 2024]['Indeks Kualitas Air'].values[0]
+
+skor_air_1 = min(10.0, max(0, (80 - ika_sulteng) / 30) * 10)
+
+skor_air_2 = 0
+kasus_diare_sentra = 0
+if not df_kes.empty:
+    df_diare = df_kes[df_kes['indikator'].str.contains('Diare', case=False, na=False)]
+    kasus_diare_sentra = df_diare[df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
+    skor_air_2 = min(10.0, (kasus_diare_sentra / 500_000) * 10)
+
+skor_air_3 = 0
+jumlah_konflik_air = 0
+if not df_konflik.empty:
+    keywords = 'air|laut|pesisir|nelayan|sungai|pulau|tailing'
+    df_konflik_air = df_konflik[df_konflik['sektor'].str.contains(keywords, case=False, na=False) | 
+                                df_konflik['judul'].str.contains(keywords, case=False, na=False) | 
+                                df_konflik['deskripsi'].str.contains(keywords, case=False, na=False)]
+    jumlah_konflik_air = len(df_konflik_air)
+    skor_air_3 = min(10.0, (jumlah_konflik_air / 15.0) * 10)
+
+skor_air_4 = 0
+if not df_b3.empty:
+    skor_air_4 = min(10.0, (df_b3['Estimasi Timbulan (Ton/Tahun)'].sum() / 20_000_000) * 10)
+
+skor_akumulasi_air = (skor_air_1 + skor_air_2 + skor_air_3 + skor_air_4) / 4
+
+# =====================================================================
+# KESIMPULAN EKSEKUTIF
 # =====================================================================
 st.markdown("""
 <div style="background: #1E1E1E; padding: 20px; border-radius: 8px; border-left: 5px solid #F44336; margin-bottom: 30px;">
@@ -120,96 +237,102 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Hitung agregat untuk Bento Cards
-tot_ispa = 0
-if not df_kes.empty:
-    df_ispa_bento = df_kes[df_kes['indikator'].str.contains('ISPA', case=False, na=False)]
-    tot_ispa = df_ispa_bento['nilai'].sum()
+# =====================================================================
+# KARTU METRIK (Style PERSIS Page 3)
+# =====================================================================
+col1, col2 = st.columns(2)
 
-tot_bencana = 0
-tot_korban = 0
-if not df_bencana.empty:
-    tot_bencana = df_bencana['jumlah_kejadian'].sum()
-    tot_korban = df_bencana['korban_terdampak'].sum()
-
-tot_konflik = 0
-if not df_konflik.empty:
-    tot_konflik = len(df_konflik)
-
-penurunan_ika_str = "N/A"
-if not df_ika.empty:
-    df_ika_filtered = df_ika[df_ika['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]
-    if not df_ika_filtered.empty:
-        rata_2016 = df_ika_filtered[df_ika_filtered['Tahun'].astype(str) == '2016']['Indeks Kualitas Air'].mean()
-        rata_2024 = df_ika_filtered[df_ika_filtered['Tahun'].astype(str) == '2024']['Indeks Kualitas Air'].mean()
-        # Fallback if specific years aren't exactly matched
-        if pd.isna(rata_2016) or pd.isna(rata_2024):
-             penurunan_ika_str = "Kritis"
-        else:
-             penurunan = rata_2016 - rata_2024
-             penurunan_ika_str = f"-{penurunan:.1f} Poin"
-
-st.markdown("""
-<style>
-.metric-card {
-    background: linear-gradient(135deg, #1A1F2B, #232B3B);
-    border: 1px solid #333;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-}
-.metric-value { font-size: 2rem; font-weight: 700; }
-.metric-label { font-size: 0.9rem; color: #AAA; margin-bottom: 5px; font-weight: 600; }
-.metric-desc { font-size: 0.8rem; color: #9E9E9E; margin-top: 10px; line-height: 1.4; text-align: left; }
-</style>
-""", unsafe_allow_html=True)
-
-colB1, colB2, colB3, colB4 = st.columns(4)
-
-with colB1:
+with col1:
     st.markdown(f"""
     <div class="metric-card">
         <div>
-            <div class="metric-label">Ledakan Pasien ISPA</div>
-            <div class="metric-value" style="color: #F44336;">{int(tot_ispa):,}</div>
-            <div class="metric-desc">Total kasus ISPA tercatat. Fakta kegagalan AMDAL Kualitas Udara.</div>
+            <div class="metric-label">DAYA TAMPUNG UDARA</div>
+            <div class="metric-value" style="color: #E53935;">{skor_akumulasi_udara:.1f}</div>
+            <div class="metric-desc">
+                <b>STATUS: DAYA TAMPUNG JEBOL</b><br><br>
+                Lonjakan drastis persentase Kasus ISPA dan penyakit saluran pernapasan di lingkar tambang.
+            </div>
+        </div>
+        <div class="metric-source">
+            <b>VONIS:</b> Kegagalan Deteksi Morbiditas Akumulatif<br>
+            <i>Kapasitas PLTU: {kapasitas_terkini:,.0f} MW / IKU: {iku_terkini:.1f} / Rasio ISPA: {rasio_anomali:.1f}x</i>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-with colB2:
+with col2:
     st.markdown(f"""
     <div class="metric-card">
         <div>
-            <div class="metric-label">Kehancuran Ekosistem Air</div>
-            <div class="metric-value" style="color: #FF5252;">{penurunan_ika_str}</div>
-            <div class="metric-desc">Penurunan rata-rata Indeks Kualitas Air di Sulteng & Sultra.</div>
+            <div class="metric-label">DAYA TAMPUNG AIR</div>
+            <div class="metric-value" style="color: #3498DB;">{skor_akumulasi_air:.1f}</div>
+            <div class="metric-desc">
+                <b>STATUS: DAYA TAMPUNG JEBOL</b><br><br>
+                Penurunan drastis Indeks Kualitas Air dan hancurnya pesisir ditandai ledakan morbiditas air.
+            </div>
+        </div>
+        <div class="metric-source">
+            <b>VONIS:</b> Kegagalan Pengukuran Toksisitas<br>
+            <i>IKA Sulteng: {ika_sulteng:.1f} / Kasus Diare: {kasus_diare_sentra:,.0f} / Konflik Air: {jumlah_konflik_air}</i>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-with colB3:
-    st.markdown(f"""
-    <div class="metric-card">
+st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
+
+# Row 2: Placeholder untuk 3 kartu yang belum ada datanya
+col3, col4, col5 = st.columns(3)
+
+with col3:
+    st.markdown("""
+    <div class="metric-card" style="opacity: 0.6;">
         <div>
-            <div class="metric-label">Bencana Ekologis BNPB</div>
-            <div class="metric-value" style="color: #FF9800;">{int(tot_bencana):,}</div>
-            <div class="metric-desc">Kejadian banjir & longsor dengan {int(tot_korban):,} korban/mengungsi.</div>
+            <div class="metric-label">DAYA DUKUNG LAHAN</div>
+            <div class="metric-value" style="color: #FF9800;">N/A</div>
+            <div class="metric-desc">
+                <b>STATUS: SEDANG DIOLAH</b><br><br>
+                Data banjir bandang dan longsor sedang dianalisis untuk menghitung skor kerusakan.
+            </div>
+        </div>
+        <div class="metric-source">
+            <b>VONIS:</b> Kegagalan Mengukur Efek Domino Lanskap<br>
+            <i>Data: BNPB Bencana 2014-2024 (processing...)</i>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-with colB4:
-    st.markdown(f"""
-    <div class="metric-card">
+with col4:
+    st.markdown("""
+    <div class="metric-card" style="opacity: 0.6;">
         <div>
-            <div class="metric-label">Konflik Agraria & Lahan</div>
-            <div class="metric-value" style="color: #00BCD4;">{tot_konflik} Kasus</div>
-            <div class="metric-desc">Total kasus perampasan lahan. Bukti nihilnya kedaulatan warga.</div>
+            <div class="metric-label">DAYA DUKUNG SOSIAL</div>
+            <div class="metric-value" style="color: #9C27B0;">N/A</div>
+            <div class="metric-desc">
+                <b>STATUS: SEDANG DIOLAH</b><br><br>
+                Eskalasi konflik perampasan lahan produktif dan represi aparat sedang dikuantifikasi.
+            </div>
+        </div>
+        <div class="metric-source">
+            <b>VONIS:</b> Ilusi Jasa Budaya & Kedaulatan Ruang<br>
+            <i>Data: KPA Konflik Agraria (processing...)</i>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with col5:
+    st.markdown("""
+    <div class="metric-card" style="opacity: 0.6;">
+        <div>
+            <div class="metric-label">VETO KEBIJAKAN</div>
+            <div class="metric-value" style="color: #4CAF50;">N/A</div>
+            <div class="metric-desc">
+                <b>STATUS: SEDANG DIOLAH</b><br><br>
+                Lonjakan penerbitan IUP di saat indikator kesehatan & ekologi merah sedang dianalisis.
+            </div>
+        </div>
+        <div class="metric-source">
+            <b>VONIS:</b> Kegagalan Tata Kelola (Regulatory Capture)<br>
+            <i>Data: Izin vs Kondisi Ekologi (processing...)</i>
         </div>
     </div>
     """, unsafe_allow_html=True)
