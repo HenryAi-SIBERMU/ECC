@@ -239,7 +239,7 @@ if not df_bencana.empty:
     df_bencana_sentra = df_bencana[df_bencana['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
     df_bencana_sentra['jumlah_kejadian'] = pd.to_numeric(df_bencana_sentra['jumlah_kejadian'], errors='coerce').fillna(0)
     bencana_sulteng_sultra = df_bencana_sentra['jumlah_kejadian'].sum()
-    skor_lahan_1 = min(10.0, (bencana_sulteng_sultra / 500) * 10)
+    skor_lahan_1 = min(10.0, (bencana_sulteng_sultra / 2_000) * 10)  # Threshold: 2.000 bencana dalam 10 thn = krisis absolut
 
 skor_lahan_2 = 0
 deforestasi_sentra = 0
@@ -247,7 +247,7 @@ if not df_gfw.empty:
     df_gfw_sentra = df_gfw[df_gfw['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
     df_gfw_sentra['Total_Deforestasi_Ha'] = pd.to_numeric(df_gfw_sentra['Total_Deforestasi_Ha'], errors='coerce').fillna(0)
     deforestasi_sentra = df_gfw_sentra['Total_Deforestasi_Ha'].sum()
-    skor_lahan_2 = min(10.0, (deforestasi_sentra / 250_000) * 10)
+    skor_lahan_2 = min(10.0, (deforestasi_sentra / 2_000_000) * 10)  # Threshold: 2 juta Ha = seluruh hutan sentra nikel habis
 
 
 # Calculate Lahan 3 & 4
@@ -260,14 +260,14 @@ if not df_gfw_lindung.empty:
     df_l = df_gfw_lindung[df_gfw_lindung['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
     df_l['Luas_Hilang_Kawasan_Lindung_Ha'] = pd.to_numeric(df_l['Luas_Hilang_Kawasan_Lindung_Ha'], errors='coerce').fillna(0)
     lindung_hilang = df_l['Luas_Hilang_Kawasan_Lindung_Ha'].sum()
-    skor_lahan_3 = min(10.0, (lindung_hilang / 100_000) * 10) # Sangat ketat karena ini kawasan lindung
+    skor_lahan_3 = min(10.0, (lindung_hilang / 1_500_000) * 10)  # Threshold: 1.5 juta Ha kawasan lindung = titik kolaps ekosistem
 
 if not df_gfw_driver.empty:
     df_d = df_gfw_driver[df_gfw_driver['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
     df_d['Luas_Deforestasi_Ha'] = pd.to_numeric(df_d['Luas_Deforestasi_Ha'], errors='coerce').fillna(0)
     tambang_driver = df_d[df_d['Faktor_Pendorong'] == 'Deforestasi Komoditas (Tambang/Sawit)']
     tambang_driver_ha = tambang_driver['Luas_Deforestasi_Ha'].sum()
-    skor_lahan_4 = min(10.0, (tambang_driver_ha / 250_000) * 10)
+    skor_lahan_4 = min(10.0, (tambang_driver_ha / 750_000) * 10)  # Threshold: 750k Ha = mayoritas deforestasi dikendalikan tambang
 
 # Skor 5: Gap AMDAL vs IUP (Ekspansi Spekulatif)
 skor_lahan_5 = 0.0
