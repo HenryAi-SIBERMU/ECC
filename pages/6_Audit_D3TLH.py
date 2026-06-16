@@ -588,21 +588,19 @@ colB1, colB2 = st.columns([1, 2])
 with colB1:
     st.markdown(f"""
 <div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #3498DB; height:100%;">
-    <h4 style="color:#FFF; margin-top:0;">Mitos D3TLH: Daya Tampung Air</h4>
-    <p style="color:#BDC3C7; font-size:0.9rem;">"Pembuangan tailing diizinkan selama beban cemaran sungai/laut masih secara teori mampu mengencerkan."</p>
-    <hr style="border-color:#34495E;">
-    <h4 style="color:#3498DB;">Fakta Forensik ECC:</h4>
-    <p style="color:#E0E0E0; font-size:0.9rem;">Penurunan drastis Indeks Kualitas Air dan hancurnya pesisir ditandai ledakan morbiditas air.</p>
-    
-    <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #3498DB;">
-        <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Akumulasi Skor Kerusakan</div>
-        <div style="font-size: 32px; font-weight: 800; color: #3498DB; line-height: 1.2;">{skor_akumulasi_air:.1f} <span style="font-size: 16px;">/ 10</span></div>
-        <div style="font-size: 11px; color: #3498DB; margin-top: 5px; font-weight: bold;">STATUS: DAYA TAMPUNG JEBOL</div>
-    </div>
-    
-    <div style="background:#2980B9; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
-        VONIS: Kegagalan Pengukuran Toksisitas
-    </div>
+<h4 style="color:#FFF; margin-top:0;">Mitos D3TLH: Daya Tampung Air</h4>
+<p style="color:#BDC3C7; font-size:0.9rem;">"Pembuangan tailing diizinkan selama beban cemaran sungai/laut masih secara teori mampu mengencerkan."</p>
+<hr style="border-color:#34495E;">
+<h4 style="color:#3498DB;">Fakta Forensik ECC:</h4>
+<p style="color:#E0E0E0; font-size:0.9rem;">Penurunan drastis Indeks Kualitas Air dan hancurnya pesisir ditandai ledakan morbiditas air.</p>
+<div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #3498DB;">
+<div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Akumulasi Skor Kerusakan</div>
+<div style="font-size: 32px; font-weight: 800; color: #3498DB; line-height: 1.2;">{skor_akumulasi_air:.1f} <span style="font-size: 16px;">/ 10</span></div>
+<div style="font-size: 11px; color: #3498DB; margin-top: 5px; font-weight: bold;">STATUS: DAYA TAMPUNG JEBOL</div>
+</div>
+<div style="background:#2980B9; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
+VONIS: Kegagalan Pengukuran Toksisitas
+</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -619,7 +617,6 @@ with colB2:
         
         if not df_ika.empty:
             df_ika_long = df_ika.rename(columns={'Indeks Kualitas Air': 'Nilai IKA'})
-            df_ika_long = df_ika_long[df_ika_long['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]
             fig_w1 = px.line(df_ika_long, x='Tahun', y='Nilai IKA', color='Provinsi', markers=True,
                            title="Runtuhnya Indeks Kualitas Air (IKA) di Area Sentra Nikel")
             fig_w1.add_hline(y=50, line_dash="dot", annotation_text="Batas Kritis Cemar (50)", annotation_position="bottom right", line_color="#E74C3C")
