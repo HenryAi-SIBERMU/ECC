@@ -193,7 +193,7 @@ with col1:
     <div class="metric-card">
         <div>
             <div class="metric-label">TINGKAT PENGABAIAN EKOLOGIS</div>
-            <div class="metric-value" style="color: #E53935;">{pct_kritis:.1f}% <span style="font-size:1rem;color:#777;">({izin_kritis} IUP)</span></div>
+            <div class="metric-value" style="color: #B71C1C;">{pct_kritis:.1f}% <span style="font-size:1rem;color:#777;">({izin_kritis} IUP)</span></div>
             <div class="metric-desc">Mayoritas mutlak izin baru justru diobral secara sengaja pada tahun-tahun di mana laju deforestasi provinsi tersebut sedang berada di zona kritis (di atas rata-rata).</div>
         </div>
         <div class="metric-source">Sumber: Data Panel (ESDM & GFW)<br>File: sulawesi_izin_baru_per_tahun.csv</div>
@@ -205,7 +205,7 @@ with col2:
     <div class="metric-card">
         <div>
             <div class="metric-label">ZONA BEBAS REM DARURAT</div>
-            <div class="metric-value" style="color: #FFB74D;">{nama_prov_kritis} <span style="font-size:1rem;color:#777;">({jumlah_prov_kritis} IUP)</span></div>
+            <div class="metric-value" style="color: #C62828;">{nama_prov_kritis} <span style="font-size:1rem;color:#777;">({jumlah_prov_kritis} IUP)</span></div>
             <div class="metric-desc">Provinsi dengan rekor penerbitan izin tertinggi tepat pada saat daya dukung lingkungan (tutupan hutan) mereka sedang hancur lebur tanpa mitigasi.</div>
         </div>
         <div class="metric-source">Sumber: Data Panel (ESDM & GFW)<br>File: sulawesi_izin_baru_per_tahun.csv</div>
@@ -217,7 +217,7 @@ with col3:
     <div class="metric-card">
         <div>
             <div class="metric-label">AKSELERASI IZIN PASCA-2020</div>
-            <div class="metric-value" style="color: #4DB6AC;">{rasio_akselerasi:.1f}x <span style="font-size:1rem;color:#777;">Lipat</span></div>
+            <div class="metric-value" style="color: #D32F2F;">{rasio_akselerasi:.1f}x <span style="font-size:1rem;color:#777;">Lipat</span></div>
             <div class="metric-desc">Ledakan drastis penerbitan izin baru di era pasca-2020 dibandingkan periode sebelumnya, mengonfirmasi jebol dan diabaikannya instrumen D3TLH.</div>
         </div>
         <div class="metric-source">Sumber: Kementerian ESDM (Minerbaone)<br>File: sulawesi_izin_baru_per_tahun.csv</div>
@@ -506,7 +506,7 @@ with col1:
     <div class="metric-card">
         <div>
             <div class="metric-label">KONFLIK PERTAMBANGAN SULAWESI</div>
-            <div class="metric-value" style="color: #E53935;">{total_konflik} <span style="font-size:1rem;color:#777;">Kasus</span></div>
+            <div class="metric-value" style="color: #B71C1C;">{total_konflik} <span style="font-size:1rem;color:#777;">Kasus</span></div>
             <div class="metric-desc">Total konflik pertambangan terdokumentasi di Sulawesi (1968-2023) dengan <b>{konflik_fpic} kasus pelanggaran FPIC eksplisit</b> yang melibatkan kekerasan, kriminalisasi, dan penggusuran paksa.</div>
         </div>
         <div class="metric-source">Sumber: Tanahkita.id (KPA/YLBHI)<br>File: sulawesi_konflik_tambang_fpic.csv</div>
@@ -518,7 +518,7 @@ with col2:
     <div class="metric-card">
         <div>
             <div class="metric-label">PERUSAHAAN IZIN BERMASALAH</div>
-            <div class="metric-value" style="color: #FFB74D;">{total_masalah_izin} <span style="font-size:1rem;color:#777;">Kasus</span></div>
+            <div class="metric-value" style="color: #F4511E;">{total_masalah_izin} <span style="font-size:1rem;color:#777;">Kasus</span></div>
             <div class="metric-desc">Kasus masalah izin perusahaan yang teridentifikasi dalam CATAHU KPA (2016-2025): HGU kadaluarsa, operasi ilegal, IUP bermasalah, dan tumpang tindih klaim lahan.</div>
         </div>
         <div class="metric-source">Sumber: KPA CATAHU 2016-2025<br>File: kpa_masalah_izin_perusahaan.csv</div>
@@ -530,7 +530,7 @@ with col3:
     <div class="metric-card">
         <div>
             <div class="metric-label">PERUSAHAAN BERMASALAH DI SULAWESI</div>
-            <div class="metric-value" style="color: #4DB6AC;">{perusahaan_masalah_sulawesi} <span style="font-size:1rem;color:#777;">Perusahaan</span></div>
+            <div class="metric-value" style="color: #FF8A65;">{perusahaan_masalah_sulawesi} <span style="font-size:1rem;color:#777;">Perusahaan</span></div>
             <div class="metric-desc">Perusahaan unik yang disebutkan dalam laporan KPA dengan lokasi operasi di Sulawesi, mayoritas terlibat dalam kasus tumpang tindih lahan dan HGU kadaluarsa.</div>
         </div>
         <div class="metric-source">Sumber: KPA CATAHU 2016-2025<br>File: kpa_masalah_izin_perusahaan.csv</div>

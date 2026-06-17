@@ -161,7 +161,7 @@ with col1:
     <div class="metric-card">
         <div>
             <div class="metric-label">Total Letupan Konflik</div>
-            <div class="metric-value" style="color: #F44336;">{total_konflik} <span style="font-size:16px; color:#B0BEC5;">kasus</span></div>
+            <div class="metric-value" style="color: #B71C1C;">{total_konflik} <span style="font-size:16px; color:#B0BEC5;">kasus</span></div>
             <div class="metric-desc">Insiden perampasan lahan dan sengketa agraria yang memicu perlawanan sipil.</div>
         </div>
     </div>
@@ -172,7 +172,7 @@ with col2:
     <div class="metric-card">
         <div>
             <div class="metric-label">Korban Terdampak (Jiwa)</div>
-            <div class="metric-value" style="color: #FF5252;">{total_jiwa:,} <span style="font-size:16px; color:#B0BEC5;">jiwa</span></div>
+            <div class="metric-value" style="color: #C62828;">{total_jiwa:,} <span style="font-size:16px; color:#B0BEC5;">jiwa</span></div>
             <div class="metric-desc">Jumlah warga yang kehilangan ruang hidup, digusur, atau terpinggirkan akibat konflik lahan (bukan korban meninggal).</div>
         </div>
     </div>
@@ -183,7 +183,7 @@ with col3:
     <div class="metric-card">
         <div>
             <div class="metric-label">Status: Belum Ditangani</div>
-            <div class="metric-value" style="color: #FF9800;">{status_belum_selesai} <span style="font-size:16px; color:#B0BEC5;">kasus</span></div>
+            <div class="metric-value" style="color: #D32F2F;">{status_belum_selesai} <span style="font-size:16px; color:#B0BEC5;">kasus</span></div>
             <div class="metric-desc">Kasus yang dibiarkan terkatung-katung tanpa resolusi berkeadilan bagi warga.</div>
         </div>
     </div>
@@ -194,7 +194,7 @@ with col4:
     <div class="metric-card">
         <div>
             <div class="metric-label">Masyarakat Melawan</div>
-            <div class="metric-value" style="color: #00BCD4;">{libat_masyarakat} <span style="font-size:16px; color:#B0BEC5;">komunitas</span></div>
+            <div class="metric-value" style="color: #E53935;">{libat_masyarakat} <span style="font-size:16px; color:#B0BEC5;">komunitas</span></div>
             <div class="metric-desc">Kelompok tani dan masyarakat adat yang berjuang mempertahankan ruang hidup.</div>
         </div>
     </div>
@@ -210,7 +210,7 @@ with col5:
     <div class="metric-card">
         <div>
             <div class="metric-label">Sektor Perkebunan</div>
-            <div class="metric-value" style="color: #FFC107;">{konflik_kebun} <span style="font-size:16px; color:#B0BEC5;">kasus</span></div>
+            <div class="metric-value" style="color: #D32F2F;">{konflik_kebun} <span style="font-size:16px; color:#B0BEC5;">kasus</span></div>
             <div class="metric-desc">Tumpang tindih Hak Guna Usaha (HGU) sawit skala masif dengan lahan rakyat.</div>
         </div>
     </div>
@@ -221,7 +221,7 @@ with col6:
     <div class="metric-card">
         <div>
             <div class="metric-label">Sektor Kehutanan</div>
-            <div class="metric-value" style="color: #8BC34A;">{konflik_hutan} <span style="font-size:16px; color:#B0BEC5;">kasus</span></div>
+            <div class="metric-value" style="color: #F4511E;">{konflik_hutan} <span style="font-size:16px; color:#B0BEC5;">kasus</span></div>
             <div class="metric-desc">Klaim sepihak hutan produksi dan konservasi yang menggusur masyarakat lokal.</div>
         </div>
     </div>
@@ -232,7 +232,7 @@ with col7:
     <div class="metric-card">
         <div>
             <div class="metric-label">Sektor Pertambangan</div>
-            <div class="metric-value" style="color: #FF9800;">{konflik_tambang} <span style="font-size:16px; color:#B0BEC5;">kasus</span></div>
+            <div class="metric-value" style="color: #FF6F00;">{konflik_tambang} <span style="font-size:16px; color:#B0BEC5;">kasus</span></div>
             <div class="metric-desc">Operasi pengerukan lahan dan hilirisasi untuk industri mineral serta nikel.</div>
         </div>
     </div>
@@ -248,7 +248,7 @@ with col8:
     <div class="metric-card">
         <div>
             <div class="metric-label">Infrastruktur & PSN</div>
-            <div class="metric-value" style="color: #03A9F4;">{konflik_infrastruktur} <span style="font-size:16px; color:#B0BEC5;">kasus</span></div>
+            <div class="metric-value" style="color: #FF8A65;">{konflik_infrastruktur} <span style="font-size:16px; color:#B0BEC5;">kasus</span></div>
             <div class="metric-desc">Penggusuran proyek strategis nasional seperti bendungan dan jalan.</div>
         </div>
     </div>
@@ -259,7 +259,7 @@ with col9:
     <div class="metric-card">
         <div>
             <div class="metric-label">Pariwisata & Pesisir</div>
-            <div class="metric-value" style="color: #E91E63;">{konflik_pariwisata} <span style="font-size:16px; color:#B0BEC5;">kasus</span></div>
+            <div class="metric-value" style="color: #FFAB91;">{konflik_pariwisata} <span style="font-size:16px; color:#B0BEC5;">kasus</span></div>
             <div class="metric-desc">Privatisasi pesisir dan pariwisata super-premium (KEK).</div>
         </div>
     </div>
@@ -270,7 +270,7 @@ with col10:
     <div class="metric-card">
         <div>
             <div class="metric-label">Keterlibatan Pemerintah</div>
-            <div class="metric-value" style="color: #607D8B;">{libat_pemerintah} <span style="font-size:16px; color:#B0BEC5;">kasus</span></div>
+            <div class="metric-value" style="color: #E53935;">{libat_pemerintah} <span style="font-size:16px; color:#B0BEC5;">kasus</span></div>
             <div class="metric-desc">Andil institusi negara dan pemerintah daerah dalam sengketa warga.</div>
         </div>
     </div>
@@ -281,7 +281,7 @@ with col11:
     <div class="metric-card">
         <div>
             <div class="metric-label">Keterlibatan Korporasi</div>
-            <div class="metric-value" style="color: #795548;">{libat_perusahaan} <span style="font-size:16px; color:#B0BEC5;">kasus</span></div>
+            <div class="metric-value" style="color: #EF5350;">{libat_perusahaan} <span style="font-size:16px; color:#B0BEC5;">kasus</span></div>
             <div class="metric-desc">Perusahaan swasta asing maupun BUMN yang memonopoli ruang hidup.</div>
         </div>
     </div>

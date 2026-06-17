@@ -146,7 +146,7 @@ with col1:
     <div class="metric-card">
         <div>
             <div class="metric-label">SKOR TATA KELOLA (VETO)</div>
-            <div class="metric-value" style="color: #E53935;">9.8 <span style="font-size:1rem;color:#777;">/ 10</span></div>
+            <div class="metric-value" style="color: #C62828;">9.8 <span style="font-size:1rem;color:#777;">/ 10</span></div>
             <div class="metric-desc">Tingkat keparahan kegagalan fungsi D3TLH sebagai pembatas. <b>Vonis: Regulatory Capture.</b></div>
         </div>
         <div class="metric-source">Indeks Kalkulasi Komposit Celios</div>
@@ -158,7 +158,7 @@ with col2:
     <div class="metric-card">
         <div>
             <div class="metric-label">OTORITAS D3TLH</div>
-            <div class="metric-value" style="color: #FFB74D;">Nihil</div>
+            <div class="metric-value" style="color: #D32F2F;">Nihil</div>
             <div class="metric-desc">Instrumen lingkungan terbukti tidak mengikat dan gagal membatasi laju obral perizinan secara nyata di lapangan.</div>
         </div>
         <div class="metric-source">Hasil Uji Crosstab Izin vs D3TLH</div>
@@ -170,7 +170,7 @@ with col3:
     <div class="metric-card">
         <div>
             <div class="metric-label">STATUS PENEGAKAN HUKUM</div>
-            <div class="metric-value" style="color: #4DB6AC;">Pembiaran</div>
+            <div class="metric-value" style="color: #F4511E;">Pembiaran</div>
             <div class="metric-desc">Banyaknya temuan perusahaan beroperasi secara ilegal tanpa dikenakan sanksi pencabutan izin operasi (Impunitas massal).</div>
         </div>
         <div class="metric-source">Rekam Jejak KPA & Tanahkita</div>

@@ -3,6 +3,7 @@ import pandas as pd
 import scipy.stats as stats
 import altair as alt
 import plotly.express as px
+import numpy as np
 import os
 import sys
 
@@ -100,7 +101,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data", "processed")
 
 @st.cache_data
-def load_all_data():
+def load_all_data_v2():
     df_izin = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_izin_baru_per_tahun.csv"))
     df_smelter = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_esdm_nikel.csv"))
     df_pltu = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv"))
@@ -109,7 +110,7 @@ def load_all_data():
     return df_izin, df_smelter, df_pltu, df_gfw, df_inv
 
 try:
-    df_izin, df_smelter, df_pltu, df_gfw, df_inv = load_all_data()
+    df_izin, df_smelter, df_pltu, df_gfw, df_inv = load_all_data_v2()
 except Exception as e:
     st.error(f"Error loading data: {e}")
     st.stop()
@@ -181,7 +182,7 @@ with col1:
     <div class="metric-card">
         <div>
             <div class="metric-label">Total Izin Baru (2014-2024)</div>
-            <div class="metric-value" style="color: #E53935;">{tot_izin:,.0f} <span style="font-size:1rem;">IUP</span></div>
+            <div class="metric-value" style="color: #B71C1C;">{tot_izin:,.0f} <span style="font-size:1rem;">IUP</span></div>
             <div class="metric-desc">Penambahan jumlah Izin Usaha Pertambangan (IUP) di Pulau Sulawesi dalam 1 dekade terakhir, melegitimasi pembongkaran lahan secara masif.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> Kementerian ESDM (Minerbaone)<br/><i>File: sulawesi_izin_baru_per_tahun.csv</i></div>
@@ -192,7 +193,7 @@ with col2:
     <div class="metric-card">
         <div>
             <div class="metric-label">Total Luas Konsesi Baru</div>
-            <div class="metric-value" style="color: #FF9800;">{tot_luas_izin:,.0f} <span style="font-size:1rem;">Ha</span></div>
+            <div class="metric-value" style="color: #C62828;">{tot_luas_izin:,.0f} <span style="font-size:1rem;">Ha</span></div>
             <div class="metric-desc">Akumulasi luas daratan dan perairan pesisir yang diserahkan kepada korporasi ekstraktif untuk dibongkar sejak 2014.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> Kementerian ESDM (Minerbaone)<br/><i>File: sulawesi_izin_baru_per_tahun.csv</i></div>
@@ -203,7 +204,7 @@ with col3:
     <div class="metric-card">
         <div>
             <div class="metric-label">Kapasitas PLTU Captive Aktif</div>
-            <div class="metric-value" style="color: #FF9800;">{tot_kapasitas_pltu:,.0f} <span style="font-size:1rem;">MW</span></div>
+            <div class="metric-value" style="color: #D32F2F;">{tot_kapasitas_pltu:,.0f} <span style="font-size:1rem;">MW</span></div>
             <div class="metric-desc">Beban energi kotor <i>off-grid</i> yang beroperasi eksklusif untuk menyokong pabrik peleburan nikel, mengunci emisi di luar target iklim nasional.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> Global Energy Monitor (GEM)<br/><i>File: sulawesi_pltu_captive.csv</i></div>
@@ -217,7 +218,7 @@ with col4:
     <div class="metric-card">
         <div>
             <div class="metric-label">Jumlah Fasilitas Smelter</div>
-            <div class="metric-value" style="color: #4CAF50;">{tot_smelter} <span style="font-size:1rem;">Unit</span></div>
+            <div class="metric-value" style="color: #FF6F00;">{tot_smelter} <span style="font-size:1rem;">Unit</span></div>
             <div class="metric-desc">Total fasilitas pengolahan & pemurnian (hilirisasi) nikel yang memonopoli zona industri pesisir seperti Morowali dan Konawe.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> Database Smelter ESDM & CGS<br/><i>File: sulawesi_esdm_nikel.csv</i></div>
@@ -228,7 +229,7 @@ with col5:
     <div class="metric-card">
         <div>
             <div class="metric-label">Luas Deforestasi Komoditas</div>
-            <div class="metric-value" style="color: #E53935;">{tot_deforestasi:,.0f} <span style="font-size:1rem;">Ha</span></div>
+            <div class="metric-value" style="color: #B71C1C;">{tot_deforestasi:,.0f} <span style="font-size:1rem;">Ha</span></div>
             <div class="metric-desc">Area tutupan hutan alam yang musnah secara permanen akibat dorongan industri tambang dan perkebunan monokultur skala besar.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> Global Forest Watch (GFW)<br/><i>File: sulawesi_gfw_master_1_dekade_2014_2023.csv</i></div>
@@ -239,7 +240,7 @@ with col6:
     <div class="metric-card">
         <div>
             <div class="metric-label">Investasi PMDN (2016-2024)</div>
-            <div class="metric-value" style="color: #4CAF50;">{tot_investasi_triliun:,.1f} <span style="font-size:1rem;">Triliun Rp</span></div>
+            <div class="metric-value" style="color: #D32F2F;">{tot_investasi_triliun:,.1f} <span style="font-size:1rem;">Triliun Rp</span></div>
             <div class="metric-desc">Aliran modal domestik yang dikucurkan, membuktikan bahwa angka pertumbuhan ekonomi seringkali dibayar mahal oleh kebangkrutan ekologis.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> Kementerian Investasi / BKPM<br/><i>File: sulawesi_investasi_pmdn_2016_2024.csv</i></div>

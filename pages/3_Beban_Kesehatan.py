@@ -155,7 +155,7 @@ with col1:
     <div class="metric-card">
         <div>
             <div class="metric-label">Total Kasus ISPA/Pneumonia</div>
-            <div class="metric-value" style="color: #E53935;">{tot_ispa:,.0f}</div>
+            <div class="metric-value" style="color: #B71C1C;">{tot_ispa:,.0f}</div>
             <div class="metric-desc">Penyakit pernapasan meroket drastis akibat paparan kronis debu batu bara dan emisi SO2 dari cerobong <i>smelter</i>.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> Data Agregat Dinas Kesehatan (2014-2024)<br/><i>File: sulawesi_kesehatan_detail_2014_2024.csv</i></div>
@@ -167,7 +167,7 @@ with col2:
     <div class="metric-card">
         <div>
             <div class="metric-label">Total Kasus Diare</div>
-            <div class="metric-value" style="color: #FBC02D;">{tot_diare:,.0f}</div>
+            <div class="metric-value" style="color: #F4511E;">{tot_diare:,.0f}</div>
             <div class="metric-desc">Infeksi saluran pencernaan yang membludak seiring rusaknya sumber air tanah dan sungai oleh buangan tailing tambang.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> Data Agregat Dinas Kesehatan (2014-2024)<br/><i>File: sulawesi_kesehatan_detail_2014_2024.csv</i></div>
@@ -179,7 +179,7 @@ with col3:
     <div class="metric-card">
         <div>
             <div class="metric-label">Total Kasus Malaria</div>
-            <div class="metric-value" style="color: #E64A19;">{tot_malaria:,.0f}</div>
+            <div class="metric-value" style="color: #C62828;">{tot_malaria:,.0f}</div>
             <div class="metric-desc">Penyakit vektor endemis yang bermutasi parah seiring maraknya kubangan bekas tambang yang dibiarkan menganga.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> Data Agregat Dinas Kesehatan (2014-2024)<br/><i>File: sulawesi_kesehatan_detail_2014_2024.csv</i></div>
@@ -194,7 +194,7 @@ with col4:
     <div class="metric-card">
         <div>
             <div class="metric-label">Total Kasus Kusta Baru</div>
-            <div class="metric-value" style="color: #E64A19;">{tot_kusta:,.0f}</div>
+            <div class="metric-value" style="color: #D32F2F;">{tot_kusta:,.0f}</div>
             <div class="metric-desc">Ledakan infeksi bakteri kusta yang kembali menjamur akibat memburuknya kualitas sanitasi dan air bersih komunal.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> Data Agregat Dinas Kesehatan (2014-2024)<br/><i>File: sulawesi_kesehatan_detail_2014_2024.csv</i></div>
@@ -206,7 +206,7 @@ with col5:
     <div class="metric-card">
         <div>
             <div class="metric-label">Rasio Puskesmas Terdaftar (2022)</div>
-            <div class="metric-value" style="color: #4CAF50;">{tot_puskesmas_2022:,.0f} <span style="font-size:1rem;">Unit</span></div>
+            <div class="metric-value" style="color: #FF8A65;">{tot_puskesmas_2022:,.0f} <span style="font-size:1rem;">Unit</span></div>
             <div class="metric-desc">Fasilitas primer warga yang tumbuh stagnan dan gagal mengimbangi lonjakan beban pasien akibat penyakit industri.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> BPS Ketersediaan Faskes<br/><i>File: sulawesi_faskes_agregat.csv</i></div>
@@ -218,7 +218,7 @@ with col6:
     <div class="metric-card">
         <div>
             <div class="metric-label">Rasio Rumah Sakit (2022)</div>
-            <div class="metric-value" style="color: #4CAF50;">{tot_rs_2022:,.0f} <span style="font-size:1rem;">Unit</span></div>
+            <div class="metric-value" style="color: #FFAB91;">{tot_rs_2022:,.0f} <span style="font-size:1rem;">Unit</span></div>
             <div class="metric-desc">Ketersediaan rumah sakit yang timpang di wilayah timur, mencerminkan ketidakpedulian proteksi kesehatan korporasi.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> BPS Ketersediaan Faskes<br/><i>File: sulawesi_faskes_agregat.csv</i></div>

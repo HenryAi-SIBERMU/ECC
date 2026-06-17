@@ -344,7 +344,7 @@ prov_map = {
     'Gorontalo': 'Gorontalo',
     'West Sulawesi': 'Sulawesi Barat'
 }
-df_pltu['Provinsi'] = df_pltu['Subnational unit (province, state)'].map(prov_map)
+df_pltu['Provinsi'] = df_pltu['Subnational unit (province, state)'].replace(prov_map)
 df_pltu_prov = df_pltu.groupby('Provinsi')['Capacity (MW)'].sum().reset_index()
 df_pltu_prov.rename(columns={'Capacity (MW)': 'Kapasitas_PLTU_MW'}, inplace=True)
 

@@ -410,7 +410,7 @@ with col2:
     <div class="metric-card">
         <div>
             <div class="metric-label">DAYA TAMPUNG AIR</div>
-            <div class="metric-value" style="color: #3498DB;">{skor_akumulasi_air:.1f}</div>
+            <div class="metric-value" style="color: #E53935;">{skor_akumulasi_air:.1f}</div>
             <div class="metric-desc">
                 <b>STATUS: DAYA TAMPUNG JEBOL</b><br><br>
                 Penurunan drastis Indeks Kualitas Air dan hancurnya pesisir ditandai ledakan morbiditas air.
@@ -433,7 +433,7 @@ with col3:
     <div class="metric-card">
         <div>
             <div class="metric-label">DAYA DUKUNG LAHAN</div>
-            <div class="metric-value" style="color: #FF9800;">{skor_akumulasi_lahan:.1f}</div>
+            <div class="metric-value" style="color: #E53935;">{skor_akumulasi_lahan:.1f}</div>
             <div class="metric-desc">
                 <b>STATUS: KRISIS RUANG DARAT</b><br><br>
                 Hancurnya sabuk hijau memicu rentetan bencana hidrometeorologi parah.
@@ -451,7 +451,7 @@ with col4:
     <div class="metric-card">
         <div>
             <div class="metric-label">DAYA DUKUNG SOSIAL</div>
-            <div class="metric-value" style="color: #9C27B0;">{skor_akumulasi_sosial:.1f}</div>
+            <div class="metric-value" style="color: #E53935;">{skor_akumulasi_sosial:.1f}</div>
             <div class="metric-desc">
                 <b>STATUS: DARURAT AGRARIA</b><br><br>
                 Eskalasi konflik perampasan lahan produktif dan represi aparat ke masyarakat sipil.
@@ -469,7 +469,7 @@ with col5:
     <div class="metric-card">
         <div>
             <div class="metric-label">VETO KEBIJAKAN</div>
-            <div class="metric-value" style="color: #4CAF50;">{skor_akumulasi_veto:.1f}</div>
+            <div class="metric-value" style="color: #E53935;">{skor_akumulasi_veto:.1f}</div>
             <div class="metric-desc">
                 <b>STATUS: REGULATORY CAPTURE</b><br><br>
                 Lonjakan IUP raksasa di saat indikator kesehatan & ekologi sudah menjerit merah.
@@ -598,7 +598,7 @@ colA1, colA2 = st.columns([1, 2])
 with colA1:
     st.markdown(f"""
 <div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #E74C3C; height:100%;">
-    <h4 style="color:#FFF; margin-top:0;">Mitos D3TLH: Daya Tampung Udara</h4>
+    <h4 style="color:#FFF; margin-top:0;">Audit D3TLH: Daya Tampung Udara</h4>
     <p style="color:#BDC3C7; font-size:0.9rem;">"Daya tampung udara (berdasarkan peta tutupan lahan) diklaim masih luas dan mampu menyerap emisi."</p>
     <hr style="border-color:#34495E;">
     <h4 style="color:#E74C3C;">Fakta Forensik ECC:</h4>
@@ -629,7 +629,7 @@ with colA2:
                     'South Sulawesi': 'Sulawesi Selatan', 'North Sulawesi': 'Sulawesi Utara',
                     'West Sulawesi': 'Sulawesi Barat', 'Gorontalo': 'Gorontalo'
                 }
-                df_pltu_op['Provinsi'] = df_pltu_op['Subnational unit (province, state)'].map(prov_map)
+                df_pltu_op['Provinsi'] = df_pltu_op['Subnational unit (province, state)'].replace(prov_map)
                 df_pltu_op = df_pltu_op[(df_pltu_op['Status'].str.lower() == 'operating') & df_pltu_op['Start year'].notna()]
                 
                 panel_data_pltu = []
@@ -672,8 +672,19 @@ with colA2:
                 )
                 
                 # Threshold IKU = 50 (batas terbawah Sedang/awal Kurang — PermenLHK No.27/2021 Lampiran Tbl.1)
-                fig_2_2_combined.add_hline(y=50, line_dash="dot", annotation_text="IKU=50: Batas Kritis Kurang (PermenLHK 27/2021)", annotation_font_color="#FF5252", line_color="#FF5252", secondary_y=True)
-                fig_2_2_combined.add_hline(y=70, line_dash="dash", annotation_text="IKU=70: Batas Bawah Baik", annotation_font_color="#FFA726", line_color="#FFA726", secondary_y=True)
+                fig_2_2_combined.add_hline(y=50, line_dash="dot", line_color="#FF5252", secondary_y=True)
+                fig_2_2_combined.add_hline(y=70, line_dash="dash", line_color="#FFA726", secondary_y=True)
+                
+                # Manual annotations positioned ABOVE the lines
+                fig_2_2_combined.add_annotation(
+                    x=2010, y=52, yref="y2", text="IKU=50: Batas Kritis Kurang (PermenLHK 27/2021)",
+                    showarrow=False, font=dict(color="#FF5252", size=10), xanchor="left"
+                )
+                fig_2_2_combined.add_annotation(
+                    x=2010, y=72, yref="y2", text="IKU=70: Batas Bawah Baik",
+                    showarrow=False, font=dict(color="#FFA726", size=10), xanchor="left"
+                )
+                
                 fig_2_2_combined.add_vline(x=2014, line_dash="dash", line_color="rgba(255,255,255,0.3)", annotation_text="Booming Smelter Dimulai", annotation_position="top right")
                 
                 fig_2_2_combined.update_layout(
@@ -870,18 +881,18 @@ skor_akumulasi_air = (skor_air_1 + skor_air_2 + skor_air_3 + skor_air_4) / 4
 colB1, colB2 = st.columns([1, 2])
 with colB1:
     st.markdown(f"""
-<div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #3498DB; height:100%;">
-<h4 style="color:#FFF; margin-top:0;">Mitos D3TLH: Daya Tampung Air</h4>
+<div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #E74C3C; height:100%;">
+<h4 style="color:#FFF; margin-top:0;">Audit D3TLH: Daya Tampung Air</h4>
 <p style="color:#BDC3C7; font-size:0.9rem;">"Pembuangan tailing diizinkan selama beban cemaran sungai/laut masih secara teori mampu mengencerkan."</p>
 <hr style="border-color:#34495E;">
-<h4 style="color:#3498DB;">Fakta Forensik ECC:</h4>
+<h4 style="color:#E74C3C;">Fakta Forensik ECC:</h4>
 <p style="color:#E0E0E0; font-size:0.9rem;">Penurunan drastis Indeks Kualitas Air dan hancurnya pesisir ditandai ledakan morbiditas air.</p>
-<div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #3498DB;">
+<div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E74C3C;">
 <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Akumulasi Skor Kerusakan</div>
-<div style="font-size: 32px; font-weight: 800; color: #3498DB; line-height: 1.2;">{skor_akumulasi_air:.1f} <span style="font-size: 16px;">/ 10</span></div>
-<div style="font-size: 11px; color: #3498DB; margin-top: 5px; font-weight: bold;">STATUS: DAYA TAMPUNG JEBOL</div>
+<div style="font-size: 32px; font-weight: 800; color: #E74C3C; line-height: 1.2;">{skor_akumulasi_air:.1f} <span style="font-size: 16px;">/ 10</span></div>
+<div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: DAYA TAMPUNG JEBOL</div>
 </div>
-<div style="background:#2980B9; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
+<div style="background:#C0392B; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
 VONIS: Kegagalan Pengukuran Toksisitas
 </div>
 </div>
@@ -962,18 +973,18 @@ st.markdown("<br>", unsafe_allow_html=True)
 colC1, colC2 = st.columns([1, 2])
 with colC1:
     st.markdown(f'''
-    <div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #FF9800; height:100%;">
-        <h4 style="color:#FFF; margin-top:0;">Mitos D3TLH: Daya Dukung Lahan</h4>
+    <div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #E74C3C; height:100%;">
+        <h4 style="color:#FFF; margin-top:0;">Audit D3TLH: Daya Dukung Lahan</h4>
         <p style="color:#BDC3C7; font-size:0.9rem;">"Daya dukung lahan dan tata air tanah dinilai aman secara matematis karena rasio ekoregion hutan dianggap masih mencukupi."</p>
         <hr style="border-color:#34495E;">
-        <h4 style="color:#FF9800;">Fakta Forensik ECC:</h4>
+        <h4 style="color:#E74C3C;">Fakta Forensik ECC:</h4>
         <p style="color:#E0E0E0; font-size:0.9rem;">Hancurnya sabuk hijau alam memicu rentetan bencana hidrometeorologi parah di lingkar tambang, menabrak batas fungsi kawasan lindung.</p>
-        <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #FF9800;">
+        <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E74C3C;">
             <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Skor Kerusakan Lahan</div>
-            <div style="font-size: 32px; font-weight: 800; color: #FF9800; line-height: 1.2;">{skor_akumulasi_lahan:.1f} <span style="font-size: 16px;">/ 10</span></div>
-            <div style="font-size: 11px; color: #FF9800; margin-top: 5px; font-weight: bold;">STATUS: KRISIS RUANG DARAT</div>
+            <div style="font-size: 32px; font-weight: 800; color: #E74C3C; line-height: 1.2;">{skor_akumulasi_lahan:.1f} <span style="font-size: 16px;">/ 10</span></div>
+            <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: KRISIS RUANG DARAT</div>
         </div>
-        <div style="background:#E67E22; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
+        <div style="background:#C0392B; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
             VONIS: Kegagalan Menjaga Fungsi Lanskap
         </div>
     </div>
@@ -1075,18 +1086,18 @@ st.markdown("<br>", unsafe_allow_html=True)
 colD1, colD2 = st.columns([1, 2])
 with colD1:
     st.markdown(f'''
-    <div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #9C27B0; height:100%;">
-        <h4 style="color:#FFF; margin-top:0;">Mitos D3TLH: Daya Dukung Sosial</h4>
+    <div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #E74C3C; height:100%;">
+        <h4 style="color:#FFF; margin-top:0;">Audit D3TLH: Daya Dukung Sosial</h4>
         <p style="color:#BDC3C7; font-size:0.9rem;">"Status kawasan dialokasikan untuk peruntukan tambang dengan klaim bahwa masyarakat telah memberikan persetujuan (FPIC) dalam sosialisasi amdal."</p>
         <hr style="border-color:#34495E;">
-        <h4 style="color:#9C27B0;">Fakta Forensik ECC:</h4>
+        <h4 style="color:#E74C3C;">Fakta Forensik ECC:</h4>
         <p style="color:#E0E0E0; font-size:0.9rem;">Alur penindasan terbukti jelas: Persetujuan dimanipulasi, ruang hidup jutaan hektar dirampas, dan penolakan dibungkam dengan bui.</p>
-        <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #9C27B0;">
+        <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E74C3C;">
             <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Skor Kerusakan Sosial</div>
-            <div style="font-size: 32px; font-weight: 800; color: #9C27B0; line-height: 1.2;">{skor_akumulasi_sosial:.1f} <span style="font-size: 16px;">/ 10</span></div>
-            <div style="font-size: 11px; color: #9C27B0; margin-top: 5px; font-weight: bold;">STATUS: KRISIS KEMANUSIAAN</div>
+            <div style="font-size: 32px; font-weight: 800; color: #E74C3C; line-height: 1.2;">{skor_akumulasi_sosial:.1f} <span style="font-size: 16px;">/ 10</span></div>
+            <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: KRISIS KEMANUSIAAN</div>
         </div>
-        <div style="background:#8E44AD; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
+        <div style="background:#C0392B; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
             VONIS: Ilusi Kedaulatan Ruang Warga
         </div>
     </div>
@@ -1181,18 +1192,18 @@ st.markdown("<br>", unsafe_allow_html=True)
 colE1, colE2 = st.columns([1, 2])
 with colE1:
     st.markdown(f'''
-    <div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #E67E22; height:100%;">
-        <h4 style="color:#FFF; margin-top:0;">Mitos D3TLH: Veto Kebijakan</h4>
+    <div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #E74C3C; height:100%;">
+        <h4 style="color:#FFF; margin-top:0;">Audit D3TLH: Veto Kebijakan</h4>
         <p style="color:#BDC3C7; font-size:0.9rem;">"Penyusunan D3TLH adalah dokumen sakti (veto) yang dapat membatasi izin eksploitasi jika daya dukung lingkungan telah terlampaui."</p>
         <hr style="border-color:#34495E;">
-        <h4 style="color:#E67E22;">Fakta Forensik ECC:</h4>
+        <h4 style="color:#E74C3C;">Fakta Forensik ECC:</h4>
         <p style="color:#E0E0E0; font-size:0.9rem;">Negara mengalami kelumpuhan tata kelola (Regulatory Capture). Izin diobral massal, perusahaan ilegal dibiarkan, dan infrastruktur energi kotor diloloskan di episentrum krisis.</p>
-        <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E67E22;">
+        <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E74C3C;">
             <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Skor Kegagalan Tata Kelola</div>
-            <div style="font-size: 32px; font-weight: 800; color: #E67E22; line-height: 1.2;">{skor_akumulasi_veto:.1f} <span style="font-size: 16px;">/ 10</span></div>
-            <div style="font-size: 11px; color: #E67E22; margin-top: 5px; font-weight: bold;">STATUS: REGULATORY CAPTURE</div>
+            <div style="font-size: 32px; font-weight: 800; color: #E74C3C; line-height: 1.2;">{skor_akumulasi_veto:.1f} <span style="font-size: 16px;">/ 10</span></div>
+            <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: REGULATORY CAPTURE</div>
         </div>
-        <div style="background:#D35400; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
+        <div style="background:#C0392B; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
             VONIS: Kegagalan Supremasi Hukum
         </div>
     </div>
