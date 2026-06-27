@@ -696,8 +696,8 @@ st.table(spss_crosstab)
 # --- C. Chi-Square Tests ---
 st.markdown("##### Chi-Square Tests")
 g, p_g, dof_g, exp_g = stats.chi2_contingency(crosstab, lambda_="log-likelihood")
-x_codes = df_panel["X_Label"].replace({label_x_low: 0, label_x_high: 1})
-y_codes = df_panel["Y_Label"].replace({label_y_low: 0, label_y_high: 1})
+x_codes = valid_df["X_Label"].replace({label_x_low: 0, label_x_high: 1})
+y_codes = valid_df["Y_Label"].replace({label_y_low: 0, label_y_high: 1})
 r, p_corr = stats.pearsonr(list(x_codes), list(y_codes))
 lbl_val = (valid_cases - 1) * (r**2)
 
