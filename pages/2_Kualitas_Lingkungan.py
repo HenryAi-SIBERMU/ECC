@@ -1173,8 +1173,8 @@ st.markdown("### 2.5. Kehancuran Biodiversitas: Ekstirpasi Habitat Satwa Endemik
 st.markdown('<span style="background:#1B5E20;color:#A5D6A7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Spatial Mapping (GBIF) & Analisis IUCN Red List</span>', unsafe_allow_html=True)
 
 try:
-    df_gbif = pd.read_csv('data/raw/gbif_sulawesi_occurrences.csv')
-    df_iucn = pd.read_csv('data/processed/sulawesi_biodiversitas_iucn_fase5_exploded.csv')
+    df_gbif = pd.read_csv(os.path.join(BASE_DIR, 'data', 'raw', 'gbif_sulawesi_occurrences.csv'))
+    df_iucn = pd.read_csv(os.path.join(BASE_DIR, 'data', 'processed', 'sulawesi_biodiversitas_iucn_fase5_exploded.csv'))
     
     # Pra-Kalkulasi Metrik Biodiversitas untuk Narasi Data-Driven
     tot_titik = len(df_gbif)
