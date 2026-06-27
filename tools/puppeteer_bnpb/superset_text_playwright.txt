@@ -1,0 +1,339 @@
+DIBI
+Dashboard
+Settings
+ Login
+Tentang DIBI
+Indonesia
+English
+Data Informasi Bencana Indonesia
+
+Data Informasi Bencana Indonesia (DIBI) berisikan lebih dari 50.000 data kejadian bencana sejak tahun 1815 (erupsi Gunung Tambora) hingga saat ini; beserta dampaknya. Database ini dimaksudkan untuk melayani kebutuhan data terkait kebencanaan; baik untuk mendukung aksi kemanusiaan saat tanggap darurat, upaya rehabilitasi-rekonstruksi pasca bencana, serta pengurangan risiko bencana. Dengan demikian, pengambilan keputusan serta kebijakan senantiasa berbasis data.
+
+Situs ini memungkinkan pengunjung untuk melakukan eksplorasi dataset DIBI menggunakan dashboards serta charts (tabel, grafik, serta peta) berbasis Apache Superset sebagai business intelligence (BI) tool. Laman ini merupakan contoh dari dashboard Superset dengan beberapa grafik untuk visualisasi datanya. Tersedia berbagai pilihan grafik untuk visualisasi data; selain itu, pengunjung juga dapat memfilter dan mengunduh data pada setiap grafik. Untuk detail lebih lanjut cara penggunaan dashboard, harap merujuk ke dokumentasi penggunaan yang tersedia di bawah laman ini.
+
+Pra-Tinjau Data
+#kejadian
+#menderita + mengungsi
+# bangunan
+peta jumlah kejadian
+peta jiwa terdampak
+Time series jumlah kejadian bencana berdasarkan kategori bencana
+Kriteria Bencana
+
+Berdasarkan Undang-Undang Nomor 24 Tahun 2007 tentang Penanggulangan Bencana, bencana adalah...
+
+peristiwa atau rangkaian peristiwa yang mengancam dan mengganggu kehidupan dan penghidupan masyarakat yang disebabkan, baik oleh faktor alam dan/atau faktor non-alam maupun faktor manusia sehingga mengakibatkan timbulnya korban jiwa manusia, kerusakan lingkungan, kerugian harta benda, dan dampak psikologis
+
+
+Sebagai wallidata kebencanaan di Indonesia, Badan Nasional Penanggulangan Bencana (BNPB) mengkompilasi data setiap kejadian bencana yang telah dikumpulkan oleh Badan Penanggulangan Bencana Daerah (BPBD) tingkat kabupaten/kota serta diverifikasi oleh BPBD provinsi. Terlepas dari kategori kejadian beserta besaran dampaknya, setiap data yang dilaporkan disimpan ke dalam database; namun hanya kejadian yang memenuhi kriteria ambang batas berikut akan ditandai sebagai kejadian bencana (berdasarkan Juklak 7/2023 tentang Standar Data Kejadian dan Dampak Bencana).
+
+* 1 orang meninggal dunia;
+* 50 orang yang terkena dampak/luka/mengungsi;
+* 5 unit rumah dan/atau bangunan fasilitas publik rusak;
+* 1 Hektar lahan;
+* permintaan Pemerintah Daerah untuk diberikan bantuan
+nasional; atau
+* penentuan status keadaan darurat bencana.
+
+
+Data kejadian bencana disampaikan secara harian dari BPBD kepada Pusat Pengendalian Operasi (Pusdalops) BNPB. Selanjutnya, data tersebut direkonsiliasi setiap triwulan oleh Pusat Data Informasi Komunikasi Kebencanaan BNPB (Pusdatin) serta BPBD provinsi; khususnya terkait pemenuhan kriteria ambang batas di atas. Oleh karena itu, data tahun berjalan masih bersifat sementara dan belum bisa dianggap sebagai data final hingga data tersebut dipublikasikan oleh Pusdatin sebagai data final sekitar Bulan Februari tahun berikutnya.
+
+Data kejadian bencana yang terjadi sebelum tahun 2008, dikompilasi dari berbagai sumber; baik dari pemerintahan, literatur, media, organisasi perwakilan PBB serta lembaga non-pemerintahan lainnya. Akurasi angka-angka tersebut bisa jadi lebih rendah antara lain dikarenakan adanya reporting bias; karenanya trend yang meningkat setelahnya perlu disikapi pengguna data secara bijak. Setelah berdirinya BNPB pada tahun 2008, data nasional dipublikasikan secara resmi oleh BNPB setiap tahunnya.
+
+Publikasi
+Infografis
+Akses data
+Publikasi
+Sitasi
+Kontak
+
+Kumpulan infografis tahunan selengkapnya dapat dilihat pada laman GIS BNPB.
+
+Berita DIBI
+Verifikasi Data Bencana Triwulan-2 2025
+
+Hari/Tanggal : Rabu, 16 Juli 2025
+Tempat : Zoom Meeting (https://s.id/RapatVerifikasiTW22025)
+Peserta :Seluruh staf Bidang PDSI;Pusat Pengendalian Operasi BNPB, Perwakilan BPBD Provinsi dan Kabupaten/Kota
+
+Verifikasi triwulan data bencana sudah dilakukan sejak tahun 2023. Dari beberapa rapat verifikasi data bencana sebelumnya, terdapat beberapa BPBD provinsi yang belum mengirimkan data bencananya. Adapun Ringkasan dalam hasil verifikasi Triwulan yang sudah berjalan:
+
+1.Pada pelaporan data bencana triwulan 2, 26 BPBD Provinsi telah mengirimkan data dan 12 Provinsi yang belum melaporkan data bencana Triwulan 2. Sementara itu, pada triwulan I terdapat 31 BPBD Provinsi yang sudah melaporkan data bencana dan masih menunggu 7 provinsi sisanya yang belum melaporkan. 2.Pada triwulan 1 PUSDALOPS BNPB mencatat sebanyak 814 (dari 31 provinsi) kejadian bencana beserta dengan dampak jiwa, fisik, dan struktur yang menyertainya. Namun setelah dilakukan proses verifikasi data bencana terjadi peningkatan secara signifikan. Tercatat ada 1223 kejadian bencana, dimana terdapat 409 data kejadian bencana belum terlaporkan. 3.Berdasarkan hasil verifikasi triwulan 1 per tanggal 30 Juni 2025, data bencana yang terlaporkan sebanyak 1768 kejadian bencana. Harapannya, dengan adanya verifikasi data per triwulanan akan ada peningkatan secara kualitas dan kuantitas untuk memastikan data yang akurat. 4.Dalam proses verifikasi triwulan 1 yang dilakukan terdapat data bencana yang tidak terlaporkan oleh BPBD Kabupaten/Kota kepada BNPB serta terdapat data yang terlapor ke BNPB tapi tidak tercatat oleh BPBD Provinsi sehingga terdapat selisih jumlah kejadian tiap provinsi yang tercatat di BNPB setelah dilakukan verifikasi data bencana tahun 2025 triwulan 1. Dalam pencatatan jumlah kejadian nasional yang tercatat di BNPB sebelum verifikasi sejumlah 814 kejadian dan setelah dilakukan verifikasi tercatat menjadi 1.223 kejadian bencana, sehingga terdapat 409 kejadian bencana yang tidak terlaporkan ke Pusdalops BNPB.
+
+Pada pertemuan ini, Pusdatin BNPB akan melakukan verifikasi data bencana Triwulan 2 yaitu Bulan Januari hingga Juni 2025. Verifikasi dilakukan dengan mengecek dataset kejadian bencana Januari-Juni 2025 yang ada di Pusdatin BNPB dengan yang terkumpul di BPBD Provinsi. Hal ini butuh waktu yang tidak sedikit, selama prosesnya masih ditemukan pendataan yang tidak tergolong bencana namun masih diinput di laporan sehingga BNPB mengalami tantangan dalam proses verifikasi yang dilakukan.
+
+Proses pelaporan mengacu pada Peraturan BNPB No.1 Tahun 2023 tentang Satu Data Bencana dan Petunjuk Pelaksanaan No.7 Tahun 2023 tentang Standar Data, Dampak, dan Kejadian Bencana untuk mencapai interoperabilitas data bencana serta memuat nilai ambang batas pencatatan data kejadian bencana. Tidak lupa kami juga mengingatkan mengenai data bencana yang bersumber dari OPD masing-masing wilayah bisa di crosscheck sebelum disampaikan ke jenjang diatasnya atau dipublikasi ke masyarakat.
+
+Harapan kedepan dari sisi waktu bisa lebih cepat dalam proses update data dan menggunakan format yang tercantum dalam Petunjuk Pelaksanaan No.7 Tahun 2023 guna mempermudah proses verifikasi, sehingga data dapat dimanfaatkan dengan baik untuk mendukung kebijakan penanggulangan bencana dan keperluan lainnya.
+
+Dokumentasi
+Spesifikasi Data
+Konsep & Definisi
+Proses Bisnis
+Variabel Dampak
+Pengolahan Data
+Kode Referensi
+
+Berdasarkan Peraturan BNPB Nomor 1 Tahun 2023 tentang Satu Data Bencana:
+
+Data adalah catatan atas kumpulan fakta atau deskripsi berupa angka, karakter, simbol, gambar, peta, tanda, isyarat, tulisan,suara, dan/atau bunyi, yang merepresentasikan keadaan sebenarnya atau menunjukkan suatu ide, objek, kondisi, atau situasi.
+Bencana adalah peristiwa atau rangkaian peristiwa yang mengancam dan mengganggu kehidupan dan penghidupan masyarakat yang disebabkan, baik oleh faktor alam dan/atau factor non alam maupun faktor manusia sehingga mengakibatkan timbulnya korban jiwa manusia, kerusakan lingkungan, kerugian harta benda, dan dampak psikologis.
+Data Bencana adalah Data mengenai Bencana yang sesuai kriteria yang ditetapkan oleh walidata bencana.
+Standar Data adalah standar yang mendasari Data tertentu yang terdiri dari lima komponen yaitu konsep, definisi, klasifikasi, ukuran dan satuan.
+Konsep adalah ide yang mendasari data dan tujuan data tersebut diproduksi.
+Definisi adalah penjelasan tentang data yang memberi batas atau membedakan secara jelas arti dan cakupan data tertentu dengan data yang lain.
+Klasifikasi adalah penggolongan data secara sistematis ke dalam kelompok atau kategori berdasarkan kriteria yang telah ditetapkan oleh pembina data atau dibakukan secara luas.
+Ukuran adalah unit yang digunakan dalam pengukuran jumlah, kadar, atau cakupan.
+Satuan adalah besaran tertentu dalam data yang digunakan sebagai standar untuk mengukur atau menakar sebagai sebuah keseluruhan.
+Kode Referensi adalah tanda berisi karakter yang mengandung atau menggambarkan makna, maksud atau norma tertentu sebagai rujukan identitas Data yang bersifat unik.
+Jenis & Kategori Bencana
+Kode & Batas Wilayah
+
+Tabel di samping memuat kode referensi klasifikasi jenis dan kategori bencana sebagaimana dalam Juklak 7/2023: Standar Data Kejadian dan Dampak Bencana. Terdapat modifikasi dari kode dalam Juklak, di mana kode referensi id menggunakan angka 4-digit sebagai primary key yang kemudian digunakan sebagai foreign key dalam berbagai tabel lainnya.
+
+Kode Induk Jenis dan Kategori Bencana
+Search
+id
+	
+label
+	
+kategori
+1010	Banjir	Banjir
+
+1011	Banjir Rob	Banjir
+
+1012	Banjir Bandang	Banjir
+
+1013	Banjir dan Tanah Longsor	Banjir
+
+1014	Banjir Drainase dan Selokan	Banjir
+
+1015	Banjir Waduk	Banjir
+
+1016	Banjir Genangan	Banjir
+
+1017	Tanggul Jebol	Banjir
+
+1020	Tanah Longsor	Longsor
+
+1022	Gerakan Tanah	Longsor
+
+1030	Gelombang Pasang / Abrasi	Gelombang pasang / Abrasi
+
+1031	Gelombang Pasang	Gelombang pasang / Abrasi
+
+1032	Abrasi Pantai	Gelombang pasang / Abrasi
+
+1040	Cuaca Ekstrem	Cuaca ekstrem
+
+1041	Puting Beliung	Cuaca ekstrem
+
+1042	Angin Kencang	Cuaca ekstrem
+
+1043	Angin Topan	Cuaca ekstrem
+
+1044	Hujan Es	Cuaca ekstrem
+
+1045	Siklon Tropis	Cuaca ekstrem
+
+1046	Suhu Udara Ekstrem	Cuaca ekstrem
+
+1050	Kekeringan	Kekeringan
+
+1051	Kekeringan Meteorologis	Kekeringan
+
+1052	Kekeringan Hidrologis	Kekeringan
+
+1053	Kekeringan Pertanian	Kekeringan
+
+1060	Kebakaran Hutan dan Lahan	Kebakaran hutan dan lahan
+
+1061	Kebakaran Hutan	Kebakaran hutan dan lahan
+
+1062	Kebakaran Lahan	Kebakaran hutan dan lahan
+
+1063	Kebakaran Lahan Gambut	Kebakaran hutan dan lahan
+
+1070	Gempabumi	Gempabumi
+
+1071	Gempabumi Tektonik	Gempabumi
+
+1072	Gempabumi Vulkanik	Gempabumi
+
+1073	Gempabumi Reruntuhan	Gempabumi
+
+1080	Tsunami	Tsunami
+
+1081	Tsunami Seismogenik	Tsunami
+
+1082	Tsunami Non-Seismik	Tsunami
+
+1083	Tsunami Lokal	Tsunami
+
+1084	Tsunami Regional	Tsunami
+
+1085	Tsunami Jarak Jauh	Tsunami
+
+1086	Tsunami Meteorologi	Tsunami
+
+1087	Mikrotsunami	Tsunami
+
+1078	Gempa Bumi dan Tsunami	Gempabumi
+
+1090	Erupsi Gunung Api	Erupsi gunung api
+
+1091	Awan Panas Guguran (Aliran Piroklastik Guguran)	Erupsi gunung api
+
+1092	Awan Panas (Aliran Piroklastik)	Erupsi gunung api
+
+1093	Banjir Lahar (Lahar)	Erupsi gunung api
+
+1094	Hujan Abu Vulkanik	Erupsi gunung api
+
+1095	Gas Vulkanik Beracun	Erupsi gunung api
+
+1096	Erupsi Gunung Api	Erupsi gunung api
+
+2010	Epidemi dan Wabah Penyakit	Epidemi - Wabah penyakit
+
+2011	Wabah Penyakit	Epidemi - Wabah penyakit
+
+2012	Epidemi	Epidemi - Wabah penyakit
+
+2020	Kebakaran Gedung dan Permukiman	Kebakaran permukiman
+
+2030	Gagal Teknologi	Gagal teknologi
+
+2031	Kegagalan Industri	Gagal teknologi
+
+2032	Kecelakaan Industri	Gagal teknologi
+
+3010	Konflik Sosial	Konflik sosial
+
+3012	Teror	Konflik sosial
+
+3013	Kerusuhan Sosial	Konflik sosial
+
+9999	Lainnya	Lainnya
+Cara Menggunakan Dashboard
+Pra-Tinjau
+Dashboards
+Filter
+
+Terdapat empat elemen utama eksplorasi data menggunakan Superset: dashboards, charts, datasets, serta filtering. Dashboard merupakan kombinasi dari berbagai charts yang divisualisasikan dalam beragam bentuk (tabel, grafik, dan peta) untuk eksplorasi data sehingga menghasilkan insight. Klik tautan berikut untuk eksplorasi dashboard DIBI dashboard.
+
+Setiap chart dalam Superset terhubung ke suatu dataset; yang digunakan untuk visualisasi variabel tertentu dari dataset tersebut. Baik berupa data mentah ataupun aggregat seperti SUM, AVERAGE, dll (sebagai metrics dalam Superset. Data agregat tersebut juga dapat dikelompokkan (group by) berdasarkan dimensi; contoh: jumlah korban meninggal dunia berdasarkan tahun, provinsi dan kategori bencana. Dengan demikian, dari satu dataset dapat divisualisasikan menjadi beragam chart: baik berdasarkan variabel penyusunnya, agregasi data, time-series, pilihan grafik (bar charts / pie charts / tree maps); tabel pivot; bahkan dalam bentuk peta. Terlepas dari jenis visualisasinya, pengguna senantiasa dapat melihat data di belakangnya sebagai tabel biasa dengan fitur pencarian; serta unduh data sebagai file CSV/Excel.
+
+Data juga dapat difilter; baik dengan filter pada level dashboard; atau dengan cross-filtering melalui klik pada chart ybs. Fitur ini memungkinkan visualisasi interaktif guna eksplorasi data secara instan.
+
+Publikasi terkait DIBI (dalam format HTML) - DIBI-related publications (in HTML format)
+Search
+index
+	
+url1
+	
+url2
+0	Buku Data Bencana 2010	
+1	Buku Data Bencana 2011	
+2	Buku Data Bencana 2012	
+3	Buku Data Bencana 2013	
+4	Buku Data Bencana 2014	
+5	Buku Data Bencana 2015	
+6	Buku Data Bencana 2016	
+7	Buku Data Bencana 2017	
+8	Buku Data Bencana 2018	
+9	Buku Data Bencana 2019	
+10	Buku Data Bencana 2020	
+11	Buku Data Bencana 2021	
+12	Buku Data Bencana 2022	
+13	Buku Data Bencana 2023	
+14	Profil Kebencanaan Daerah 2014	
+15	Profil Kebencanaan Daerah 2015	
+16	Profil Kebencanaan Daerah 2021	
+17	Profil Kebencanaan Daerah 2022	
+18	Buletin Info Bencana Januari 2020	Link 2
+19	Buletin Info Bencana Februari 2020	Link 2
+20	Buletin Info Bencana Maret 2020	Link 2
+21	Buletin Info Bencana April 2020	Link 2
+22	Buletin Info Bencana Mei 2020	Link 2
+23	Buletin Info Bencana Juni 2020	Link 2
+24	Buletin Info Bencana Juli 2020	Link 2
+25	Buletin Info Bencana Agustus 2020	Link 2
+26	Buletin Info Bencana September 2020	Link 2
+27	Buletin Info Bencana Oktober 2020	Link 2
+28	Buletin Info Bencana November 2020	Link 2
+29	Buletin Info Bencana Desember 2020	Link 2
+30	Buletin Info Bencana Januari 2021	Link 2
+31	Buletin Info Bencana Februari 2021	Link 2
+32	Buletin Info Bencana Maret 2021	Link 2
+33	Buletin Info Bencana April 2021	Link 2
+34	Buletin Info Bencana Mei 2021	Link 2
+35	Buletin Info Bencana Juni 2021	Link 2
+36	Buletin Info Bencana Juli 2021	Link 2
+37	Buletin Info Bencana Agustus 2021	Link 2
+38	Buletin Info Bencana September 2021	Link 2
+39	Buletin Info Bencana Oktober 2021	Link 2
+40	Buletin Info Bencana November 2021	Link 2
+41	Buletin Info Bencana Desember 2021	Link 2
+42	Buletin Info Bencana Januari 2022	Link 2
+43	Buletin Info Bencana Februari 2022	Link 2
+44	Buletin Info Bencana Maret 2022	Link 2
+45	Buletin Info Bencana April 2022	Link 2
+46	Buletin Info Bencana Mei 2022	Link 2
+47	Buletin Info Bencana Juni 2022	Link 2
+48	Buletin Info Bencana Juli 2022	Link 2
+49	Buletin Info Bencana Agustus 2022	Link 2
+50	Buletin Info Bencana September 2022	Link 2
+51	Buletin Info Bencana Oktober 2022	Link 2
+52	Buletin Info Bencana November 2022	Link 2
+53	Buletin Info Bencana Desember 2022	Link 2
+54	Buletin Info Bencana Januari 2023	Link 2
+55	Buletin Info Bencana Februari 2023	Link 2
+56	Buletin Info Bencana Maret 2023	Link 2
+57	Buletin Info Bencana April 2023	Link 2
+58	Buletin Info Bencana Mei 2023	Link 2
+59	Buletin Info Bencana Juni 2023	Link 2
+60	Buletin Info Bencana Juli 2023	Link 2
+61	Buletin Info Bencana Agustus 2023	Link 2
+62	Buletin Info Bencana September 2023	Link 2
+63	Buletin Info Bencana Oktober 2023	Link 2
+64	Buletin Info Bencana November 2023	Link 2
+65	Buletin Info Bencana Desember 2023	Link 2
+66	Buletin Info Bencana Januari 2024	Link 2
+67	Buletin Info Bencana Februari 2024	Link 2
+68	Buletin Info Bencana Maret 2024	Link 2
+69	Buletin Info Bencana April 2024	Link 2
+70	Buletin Info Bencana Mei 2024	Link 2
+71	Buletin Info Bencana Juni 2024	Link 2
+72	Buletin Info Bencana Juli 2024	Link 2
+73	Buletin Info Bencana Agustus 2024	Link 2
+74	Buletin Info Bencana September 2024	Link 2
+75	Buletin Info Bencana Oktober 2024	Link 2
+76	Buletin Info Bencana November 2024	Link 2
+77	Buletin Info Bencana Desember 2024	Link 2
+78	Buletin Info Bencana Januari 2025	Link 2
+79	Buletin Info Bencana Februari 2025	Link 2
+80	Buletin Info Bencana Maret 2025	
+81	Jurnal Dialog Penanggulangan Bencana Volume 1 Nomor 1 Tahun 2010	
+82	Jurnal Dialog Penanggulangan Bencana Volume 1 Nomor 2 Tahun 2010	
+83	Jurnal Dialog Penanggulangan Bencana Volume 2 Nomor 1 Tahun 2011	
+84	Jurnal Dialog Penanggulangan Bencana Volume 2 Nomor 2 Tahun 2011	
+85	Jurnal Dialog Penanggulangan Bencana Volume 3 Nomor 1 Tahun 2012	
+86	Jurnal Dialog Penanggulangan Bencana Volume 3 Nomor 2 Tahun 2012	
+87	Jurnal Dialog Penanggulangan Bencana Volume 4 Nomor 1 Tahun 2013	
+88	Jurnal Dialog Penanggulangan Bencana Volume 4 Nomor 2 Tahun 2013	
+89	Jurnal Dialog Penanggulangan Bencana Volume 5 Nomor 1 Tahun 2014	
+90	Jurnal Dialog Penanggulangan Bencana Volume 5 Nomor 2 Tahun 2014	
+91	Jurnal Dialog Penanggulangan Bencana Volume 6 Nomor 1 Tahun 2015	
+92	Jurnal Dialog Penanggulangan Bencana Volume 6 Nomor 2 Tahun 2015	
+93	Jurnal Dialog Penanggulangan Bencana Volume 7 Nomor 1 Tahun 2016	
+94	Jurnal Dialog Penanggulangan Bencana Volume 7 Nomor 2 Tahun 2016	
+95	Jurnal Dialog Penanggulangan Bencana Volume 8 Nomor 1 Tahun 2017	
+96	Jurnal Dialog Penanggulangan Bencana Volume 8 Nomor 2 Tahun 2017	
+97	Jurnal Dialog Penanggulangan Bencana Volume 9 Nomor 1 Tahun 2018	
+98	Jurnal Dialog Penanggulangan Bencana Volume 9 Nomor 2 Tahun 2018	
+99	Jurnal Dialog Penanggulangan Bencana Volume 10 Nomor 1 Tahun 2019	
+100	Jurnal Dialog Penanggulangan Bencana Volume 10 Nomor 2 Tahun 2019	
+101	Jurnal Dialog Penanggulangan Bencana Volume 11 Nomor 1 Tahun 2020	
+102	Jurnal Dialog Penanggulangan Bencana Volume 11 Nomor 2 Tahun 2020	
+103	Jurnal Dialog Penanggulangan Bencana Volume 12 Nomor 1 Tahun 2021	

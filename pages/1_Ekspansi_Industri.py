@@ -1503,3 +1503,77 @@ with st.expander("Lihat Data Mentah: Realisasi Investasi PMDN (BKPM)", expanded=
     st.dataframe(df_inv, use_container_width=True, hide_index=True)
     st.caption("📁 **Sumber File:** `data/processed/sulawesi_investasi_pmdn_2016_2024.csv` - Data Ekstraksi OSS/BKPM.")
 
+# ═════════════════════════════════════════════════════════════
+# 1.4 PELABUHAN EKSPOR NIKEL
+# ═════════════════════════════════════════════════════════════
+st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=True)
+st.subheader("1.4 Pelabuhan Ekspor: Ke Mana Nikel Sulawesi Dikirim?")
+
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Penelusuran Sumber Terbuka (25 sumber)</span><br><br>', unsafe_allow_html=True)
+
+st.markdown("""
+Ekspansi nikel di Sulawesi tidak berhenti pada izin dan pabrik smelter. Di setiap lokasi industri nikel besar,
+berdiri **pelabuhan atau dermaga** yang menghubungkan pabrik langsung ke kapal-kapal pengangkut menuju China
+dan pasar global. Dari 6 lokasi utama yang ditelusuri, **seluruhnya terbukti memiliki** pelabuhan atau dermaga ekspor,
+dan **4 dari 6** mendapat label Proyek Strategis Nasional (PSN) dari pemerintah.
+""")
+
+@st.cache_data
+def load_logistik_simpul():
+    base_dir = os.path.dirname(os.path.dirname(__file__))
+    return pd.read_csv(os.path.join(base_dir, 'data', 'processed', 'sulawesi_logistik_simpul_nikel.csv'))
+
+df_logistik = load_logistik_simpul()
+
+c14_1, c14_2, c14_3 = st.columns(3)
+with c14_1:
+    st.markdown(f"""
+    <div class="metric-card">
+        <div>
+            <div class="metric-label">PELABUHAN NIKEL TERKONFIRMASI</div>
+            <div class="metric-value" style="color: #43A047;">{len(df_logistik)}</div>
+            <div class="metric-desc">Seluruh lokasi industri nikel besar di Sulawesi terbukti memiliki pelabuhan atau dermaga ekspor.</div>
+        </div>
+        <div class="metric-source">Sumber: Situs perusahaan, dokumen pemerintah, media (25 sumber)<br>File: sulawesi_logistik_simpul_nikel.csv</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+psn_count = len(df_logistik[df_logistik['psn_status'] == 'terkonfirmasi'])
+with c14_2:
+    st.markdown(f"""
+    <div class="metric-card">
+        <div>
+            <div class="metric-label">BERLABEL PROYEK STRATEGIS NASIONAL</div>
+            <div class="metric-value" style="color: #FFA726;">{psn_count} <span style="font-size:1rem;color:#777;">/ {len(df_logistik)}</span></div>
+            <div class="metric-desc">Label PSN mempercepat perizinan dan memudahkan pembebasan lahan warga sekitar.</div>
+        </div>
+        <div class="metric-source">Sumber: KPPIP, Perpres 58/2017, Perpres 12/2025</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c14_3:
+    st.markdown("""
+    <div class="metric-card">
+        <div>
+            <div class="metric-label">PELABUHAN TERBESAR</div>
+            <div class="metric-value" style="color: #42A5F5;">50.000 <span style="font-size:1rem;color:#777;">ton</span></div>
+            <div class="metric-desc">GNI Petasia memiliki pelabuhan yang mampu menampung kapal pengangkut berkapasitas hingga 50.000 ton.</div>
+        </div>
+        <div class="metric-source">Sumber: gunbusternickelindustry.com</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+df_ringkas = df_logistik[['node_label', 'anchor_entity', 'port_facility', 'port_detail', 'psn_status', 'kawasan_industri']].copy()
+df_ringkas.columns = ['Lokasi', 'Perusahaan Utama', 'Status Pelabuhan', 'Detail Dermaga', 'Status PSN', 'Kawasan Industri']
+st.dataframe(df_ringkas, use_container_width=True, hide_index=True)
+st.caption("Sumber: Penelusuran sumber terbuka (25 sumber). File: `data/processed/sulawesi_logistik_simpul_nikel.csv`")
+
+st.markdown("""
+<div style="background: rgba(46, 125, 50, 0.15); padding: 16px; border-radius: 8px; border-left: 6px solid #2E7D32; margin-top: 15px;">
+<b style="color: #66BB6A;">Lihat Investigasi Lengkap</b><br>
+<span style="color: #B0BEC5; font-size: 0.95rem;">Peta lokasi, profil setiap kawasan industri, dan analisis pola pembangunan pelabuhan nikel tersedia di halaman <b>Koridor Logistik Nikel</b> (sidebar).</span>
+</div>
+""", unsafe_allow_html=True)
+

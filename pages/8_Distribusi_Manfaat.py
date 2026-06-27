@@ -104,7 +104,7 @@ st.markdown("""
         Narasi <i>"Hilirisasi Hijau"</i> dan pertumbuhan kawasan industri di Sulawesi sering kali diklaim demi kesejahteraan masyarakat dan peningkatan pendapatan negara. Namun, realitas empiris di lapangan menunjukkan sebaliknya: <b>pengerukan ekologis telah menciptakan struktur ketimpangan yang sangat ekstrem</b>. 
     </p>
     <p style="color: #CCCCCC; font-size: 1.05rem; line-height: 1.7; text-align: justify;">
-        Bagian ini menyingkap tabir ilusi <i>trickle-down effect</i> (efek tetesan ke bawah) dengan membuktikan satu hipotesis utama: Keuntungan finansial dari ekspansi industri—berupa profit korporasi, rekor nilai ekspor, dan lonjakan investasi—mengalir deras menuju kantong segelintir konglomerasi dan oligarki. Sementara itu, <b>Biaya Ekologis</b> (seperti lonjakan penyakit mematikan, meledaknya konflik agraria, hingga hancurnya sumber daya air) ditimpakan secara paksa dan massal kepada jutaan penduduk lokal Sulawesi.
+        Bagian ini menyingkap tabir ilusi <i>trickle-down effect</i> (efek tetesan ke bawah) dengan membuktikan satu hipotesis utama: Keuntungan finansial dari ekspansi industri—berupa profit korporasi, rekor nilai ekspor, dan lonjakan investasi—mengalir deras menuju kantong segelintir konglomerasi dan oligarki. Sementara itu, <b>Beban Ekologis (sebelumnya Biaya Ekologis)</b> (seperti lonjakan penyakit mematikan, meledaknya konflik agraria, hingga hancurnya sumber daya air) ditimpakan secara paksa dan massal kepada jutaan penduduk lokal Sulawesi.
     </p>
 </div>
 """, unsafe_allow_html=True)

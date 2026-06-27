@@ -1,4 +1,4 @@
-paragraph_index,text,has_izin_ilegal,has_sulawesi,has_pertambangan
+paragraph_index,text,has_izin_ilegal,has_sulawesi,has_pertambangan,Sumber
 54,"CATATAN AKHIR TAHUN 2025 KONSORSIUM PEMBARUAN AGRARIA     |   15 B.  Trend Keterlibatan Militer dalam Konflik Agraria  
  
  
@@ -38,7 +38,7 @@ Pemicu kedua,  militerisasi konflik agraria. Kehadiran tentara secara psikologis
 politis telah mengubah relasi kuasa di lapangan. Warga berhadapan dengan negara 
 bersenjata, bukan dengan meja dialog, bukan dengan kementerian dan pemda.  
  
-  W",True,False,False
+  W",True,False,False,data/raw/konflik_kpa_ylbhi_tanahkita/
 70,"CATATAN AKHIR TAHUN 2025 KONSORSIUM PEMBARUAN AGRARIA     |   23 Contoh konflik agraria akibat perkebunan sawit di tahun 2025 terjadi di Sulawesi 
 Tengah. Konflik ini terjadi antara petani di 5 (lima) desa Kecamatan Petasia Timur 
 dengan PT. Agro Nusa Abadi (ANA), salah satu anak perusahaan PT Astra Agro Lestari 
@@ -71,7 +71,7 @@ Tahun 1970, warga melakukan berbagai upaya untuk mendapatkan
 keadilan, namun tanah mereka tidak kunjung dikembalikan. Akibat 
 kebuntuan proses, pada 2009 warga di enam desa tersebut melakukan 
 reklaiming secara kolektif di atas lahan bekas desa mereka seluas 83,5 
-hektar dari total 3000 hektar, yang telah menjadi HGU PT SMART.",False,True,True
+hektar dari total 3000 hektar, yang telah menjadi HGU PT SMART.",False,True,True,data/raw/konflik_kpa_ylbhi_tanahkita/
 72,"24   |  CATATAN AKHIR TAHUN 2025 KONSORSIUM PEMBARUAN AGRARIA  Sementara, konflik agraria di perkebunan tebu salah satunya terjadi antara Masyarakat 
 Adat Suku Yei di Merauke, Papua Selatan dengan PT Murni Nusantara Mandiri (MNM). 
 Perkebunan tebu ini salah satu bagian dari Proyek Strategis Nasional (PSN) untuk 
@@ -95,7 +95,7 @@ dianiaya, karena
 mempertahankan 
 tanahnya dari 
 perampasan oleh 
-PTPN XIV.",False,True,True
+PTPN XIV.",False,True,True,data/raw/konflik_kpa_ylbhi_tanahkita/
 74,"CATATAN AKHIR TAHUN 2025 KONSORSIUM PEMBARUAN AGRARIA     |   25 Proyek tebu untuk ketahanan energi tidak hanya melibatkan perusahaan swasta, 
 namun juga perkebunan negara. Di Kabupaten Takalar, Provinsi Sulawesi Selatan, 
 PTPN XIV secara brutal melakukan penggusuran terhadap masyarakat. Bahkan konflik 
@@ -128,7 +128,7 @@ perumahan karyawan, lahan itu  justru menjadi tanaman tebu.
   
 Konflik agraria Pundenrejo, 2 rumah petani dirobohkan 
 rombongan preman bertopeng di Pati, Jawa Tengah, 7 Mei 2025.  
-Sumber foto: Dokumentasi Warga Pundenrejo Pati.",False,True,True
+Sumber foto: Dokumentasi Warga Pundenrejo Pati.",False,True,True,data/raw/konflik_kpa_ylbhi_tanahkita/
 108,"42   |  CATATAN AKHIR TAHUN 2025 KONSORSIUM PEMBARUAN AGRARIA  Provinsi Jawa Barat (Jabar) tercatat sebagai provinsi dengan letusan konflik tertinggi 
 di Indonesia dengan 39 kasus dengan luas 2.894,90 hektar dan korban terdampak 
 sebanyak 6.891 keluarga. Selanjutnya Sumatera Utara (Sumut) dengan 36 kasus 
@@ -166,7 +166,7 @@ yang telah menjadi k awasan penyangga bagi masyarakat. Puncaknya pada 12
 November 2025, Pangihutan Sijabat, Ketua Pejuang Tani Bersama Alam (Petabal) 
 ditangkap secara sepihak oleh pihak kepolisian. Hal ini memicu kemarahan warga dan 
 melakukan aksi di depan Polres Dairi. Aksi t ersebut berujung ricuh dimana sebanyak 
-35 orang warga ditahan aparat kepolisian.",False,True,True
+35 orang warga ditahan aparat kepolisian.",False,True,True,data/raw/konflik_kpa_ylbhi_tanahkita/
 112,"44   |  CATATAN AKHIR TAHUN 2025 KONSORSIUM PEMBARUAN AGRARIA  Di Jakarta, dari 21 letusan konflik agraria yang terjadi sepanjang tahun ini disebabkan 
 oleh pembangunan infrastruktur sebanyak 8 kasus, klaim fasilitas militer sebanyak 7 
 kasus serta properti dan real estate sebanyak 6 kasus. Beberapa kasus yang terjadi 
@@ -195,7 +195,7 @@ membawa
 poster menolak 
 perampasan 
 tanah rakyat 
-oleh stagas PKH",False,True,True
+oleh stagas PKH",False,True,True,data/raw/konflik_kpa_ylbhi_tanahkita/
 118,"CATATAN AKHIR TAHUN 2025 KONSORSIUM PEMBARUAN AGRARIA     |   47 Salah satu konflik agraria yang disebabkan klaim sepihak dan operasi korporasi swasta 
 adalah konflik antara Masyarakat Adat Dayak di Nunukan, Kalimantan Utara dengan 
 PT Adindo Hutani Lestari (AHL), anak perusahaan APRIL Group yang merupakan 
@@ -235,7 +235,7 @@ PT TWC memindahkan hampir 2000 pedagang di zona 2 Borobudur ke Kampung Seni
 Borobudur. Lokasi baru terletak di Dusun Kujon, bera da di zona 3 sisi barat candi. 
 Peristiwa pengosongan lapak dan “relokasi” para PKL Borobudur ini telah dilaporkan 
 ke Ombudsman Jawa Tengah pada November 2024. Ombudsman mencatat ada 324 
-pedagang yang belum mendapatkan hak lapak di Kampung Seni Borobudur.",False,True,True
+pedagang yang belum mendapatkan hak lapak di Kampung Seni Borobudur.",False,True,True,data/raw/konflik_kpa_ylbhi_tanahkita/
 120,"48   |  CATATAN AKHIR TAHUN 2025 KONSORSIUM PEMBARUAN AGRARIA  Terakhir, konflik antara Bank Tanah dengan warga Desa Watutau, Kabupaten Poso, 
 Sulawesi Tengah. Konflik ini sebenarnya sudah berlangsung selama beberapa tahun 
 terakhir, dipicu klaim sepihak Bank Tanah di tanah warga. Penolakan warga atas klaim 
@@ -245,7 +245,7 @@ telah ditetapkan sebagai tersangka.
  
   
 Patok Badan Bank Tanah di Desa Watutau, 
-Kabupaten Poso, Sulawesi Tengah.",False,True,True
+Kabupaten Poso, Sulawesi Tengah.",False,True,True,data/raw/konflik_kpa_ylbhi_tanahkita/
 136,"56   |  CATATAN AKHIR TAHUN 2025 KONSORSIUM PEMBARUAN AGRARIA  Di Kabupaten Luwu Utara, 17 orang Masyarakat Adat Rampi mengalami kriminalisasi 
 akibat menolak pertambangan PT Kalla Arebama. Penolakan warga ini lahir akibat 
 operasi pihak perusahaan telah menyebabkan hilangnya sawah, kebun, situs sakral 
@@ -255,7 +255,7 @@ masyarakat adat Rampi.
   
 Masyarakat Adat Rampi di Sulawesi Selatan pertahankan wilayah adatnya dari 
 perampasan yang dilakukan PT Kalla Arebama untuk pertambangan emas. 17 
-masyarakat adat telah dikriminalisasi karena memperjuangkan hak -haknya.",False,True,True
+masyarakat adat telah dikriminalisasi karena memperjuangkan hak -haknya.",False,True,True,data/raw/konflik_kpa_ylbhi_tanahkita/
 176,"76   |  CATATAN AKHIR TAHUN 2025 KONSORSIUM PEMBARUAN AGRARIA  5. Konflik agraria antara masyarakat Desa Punti Kalo, Kecamatan Sumay, 
 Kabupaten Tebo, Jambi dengan TNI AD terkait pembangunan Batalyon TP 844 BT. 
 Konflik dipicu aksi sepihak TNI memasang patok di atas tanah masyarakat.  
@@ -282,7 +282,7 @@ Perampasan ini ditujukan untuk
 pembangunan Fasilitas & Infrastruktur 
 Yonif Teritorial Pembangunan YTP 817 
 di Jagebob, Merauke yang mengawal 
-PSN Food Estate",False,True,True
+PSN Food Estate",False,True,True,data/raw/konflik_kpa_ylbhi_tanahkita/
 190,"CATATAN AKHIR TAHUN 2025 KONSORSIUM PEMBARUAN AGRARIA     |   83 Salah satunya adalah konflik agraria antara petani Polobangkeng, Takalar, Sulsel 
 dengan PTPN VIII yang kembali memanas. Pihak PTPN XIV menduduki secara sepihak 
 tanah eks HGU mereka yang sudah habis digarap oleh warga. Konflik ini sebenarnya 
@@ -297,7 +297,7 @@ swasembada pangan untuk kembali mencaplok tanah masyara kat.
   
 Patok PT Sinergi Gula Nusantara di tanah petani 
 Polongbangkeng, Takalar, Sulawesi Selatan.  
-Sumber  foto: I stimewa .",False,True,True
+Sumber  foto: I stimewa .",False,True,True,data/raw/konflik_kpa_ylbhi_tanahkita/
 192,"84   |  CATATAN AKHIR TAHUN 2025 KONSORSIUM PEMBARUAN AGRARIA  Di Kabupaten Garut, Jabar, PTPN VIII mencaplok tanah petani di tiga desa, yakni Desa 
 Sukamukti, Dangiang dan Mekarmukti. Dengan menggunakan alasan MoU antara 
 PTPN dengan Mabes TNI untuk mendukung program swasembada pangan pemerintah, 
@@ -315,4 +315,4 @@ Kab. Garut yang hencak dirampas oleh PTPN, bekerja
 sama dengan TNI atas nama ketahanan 
 pangan. Sinergi Gula Nusantara di tanah petani 
 Polongbangkeng, Takalar, Sulawesi Selatan.  
-Sumber  foto: I stimewa .",False,True,True
+Sumber  foto: I stimewa .",False,True,True,data/raw/konflik_kpa_ylbhi_tanahkita/

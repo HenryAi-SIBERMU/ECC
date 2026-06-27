@@ -1,0 +1,18 @@
+{
+  "stage": "rev1_logistik_tahap_c",
+  "generated_at": "2026-06-26",
+  "working_dir": "data/raw/rev1_logistik/working",
+  "outputs": {
+    "kawasan_relations_rows": 6,
+    "transport_project_tracking_rows": 5,
+    "negative_findings_rows": 5,
+    "conflict_environment_extract_rows": 12,
+    "legitimacy_matrix_rows": 6,
+    "corridor_scorecard_rows": 6,
+    "bab41_argument_map_rows": 6,
+    "narrative_blocks_rows": 6,
+    "psn_kek_backlog_rows": 7,
+    "official_source_leads_rows": 7,
+    "dorking_queue_rows": 7
+  }
+}

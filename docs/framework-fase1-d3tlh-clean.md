@@ -1,4 +1,4 @@
-﻿# Framework Riset  FASE 1
+# Framework Riset  FASE 1
 ## Evaluasi D3TLH: Daya Dukung dan Daya Tampung Lingkungan Hidup
 ### "MELAMPAUI BATAS: KEGAGALAN KEBIJAKAN D3TLH DALAM MENGENDALIKAN EKSPANSI INDUSTRI"
 
@@ -25,10 +25,10 @@
 | P1 | Bagaimana pola pertumbuhan industri dalam satu dekade terakhir? |
 | P2 | Apakah ekspansi industri berbanding lurus dengan peningkatan tekanan ekologis? |
 | P3 | Apakah beban sosial masyarakat meningkat seiring pertumbuhan industri? |
-| P4 | Apakah izin baru tetap diterbitkan ketika tekanan ekologis sudah tinggi? |
-| P5 | Apa kelemahan metodologis D3TLH dalam mengukur dampak? |
-| P6 | Apa kegagalan tata kelola dalam implementasi D3TLH? |
-| P7 | Siapa yang memperoleh keuntungan dan siapa yang menanggung biaya ekologis? |
+| P4 | Apakah izin baru tetap diterbitkan ketika tekanan sosio-ekologis sudah tinggi? |
+| P5 | Apa kelemahan metodologis D3TLH dalam mengukur potensi dampak? |
+| P6 | Apa kebuntuan tata kelola dalam implementasi D3TLH? |
+| P7 | Siapa yang memperoleh keuntungan dan siapa yang menanggung beban ekologis (sebelumnya biaya ekologis)? |
 
 ---
 
@@ -53,7 +53,7 @@
 | Izin | Terbit di zona kritis |
 | Metodologi D3TLH | Blind spots besar & tidak menyentuh aspek sosial |
 | Tata kelola | D3TLH tidak mengikat (non-mandatory) |
-| Distribusi | Keuntungan terkonsentrasi, biaya ekologis disebar ke publik |
+| Distribusi | Keuntungan terkonsentrasi, beban ekologis (sebelumnya biaya ekologis) disebar ke publik |
 
 ---
 
@@ -280,7 +280,7 @@
 
 **Temuan Target:**
 - [ ] Keuntungan ekonomi terkonsentrasi pada korporasi & negara
-- [ ] Biaya ekologis disebar ke masyarakat dan lingkungan
+- [ ] Beban ekologis (sebelumnya biaya ekologis) disebar ke masyarakat dan lingkungan
 
 ---
 

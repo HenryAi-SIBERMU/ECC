@@ -1,7 +1,7 @@
-provinsi,total_luas_iup_ha,total_luas_amdal_ha
-Gorontalo,5212.24,4981.0
-Sulawesi Barat,4423.63,0.0
-Sulawesi Selatan,181468.8,217366.0
-Sulawesi Tengah,453216.14,574124.69
-Sulawesi Tenggara,446024.9,595971.95
-Sulawesi Utara,94828.76,249679.0
+provinsi,total_luas_iup_ha,total_luas_amdal_ha,Sumber
+Gorontalo,5212.24,4981.0,sulawesi_esdm_nikel.csv
+Sulawesi Barat,4423.63,0.0,sulawesi_esdm_nikel.csv
+Sulawesi Selatan,181468.8,217366.0,sulawesi_esdm_nikel.csv
+Sulawesi Tengah,453216.14,574124.69,sulawesi_esdm_nikel.csv
+Sulawesi Tenggara,446024.9,595971.95,sulawesi_esdm_nikel.csv
+Sulawesi Utara,94828.76,249679.0,sulawesi_esdm_nikel.csv
