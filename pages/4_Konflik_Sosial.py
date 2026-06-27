@@ -1141,15 +1141,17 @@ with col_aktor_1:
             xaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)', tickformat='d')
         )
         st.plotly_chart(fig_corp, use_container_width=True)
-    st.markdown("""
+    top1_corp_name = df_aktor_perusahaan.iloc[0]['Aktor'] if not df_aktor_perusahaan.empty else "Korporasi"
+    top1_corp_freq = df_aktor_perusahaan.iloc[0]['Frekuensi'] if not df_aktor_perusahaan.empty else 0
+
+    st.markdown(f"""
     <div style="background:rgba(245, 124, 0, 0.1);padding:15px;border-left:3px solid #F57C00;border-radius:5px;font-size:0.9rem;">
-        <b>Analisis Kritis:</b> Grafik membuktikan bahwa entitas pertambangan dan agroindustri skala masif memonopoli perebutan lahan, menjadikan perampasan ruang sebagai <i>modus operandi</i> utama ekspansi modal mereka.
+        <b>Analisis Kritis:</b> Ekstraksi presisi tinggi membuktikan dominasi absolut dari entitas <b>{top1_corp_name}</b> yang terlibat dalam <b>{top1_corp_freq} catatan konflik terpisah</b>. Konsentrasi tinggi frekuensi korporasi besar ini menegaskan bahwa represi di Sulawesi bukan sekadar residu administratif, melainkan <i>modus operandi</i> struktural para penguasa modal skala masif.
     </div>
     """, unsafe_allow_html=True)
 
 with col_aktor_2:
     st.markdown("#### Top 10 Aktor Sipil & Ormas Terlibat")
-    # Abaikan terms generik seperti "Masyarakat Desa", "Masyarakat Kabupaten"
     top_civil = df_aktor_masyarakat[~df_aktor_masyarakat['Aktor'].str.contains('Masyarakat Desa|Masyarakat Kabupaten|Warga|Petani', case=False, na=False)].head(10).sort_values(by='Frekuensi', ascending=True)
     if not top_civil.empty:
         fig_civil = px.bar(
@@ -1163,8 +1165,23 @@ with col_aktor_2:
             xaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)', tickformat='d')
         )
         st.plotly_chart(fig_civil, use_container_width=True)
-    st.markdown("""
+        
+    top1_civ_name = df_aktor_masyarakat.iloc[0]['Aktor'] if not df_aktor_masyarakat.empty else "Masyarakat Adat"
+    top1_civ_freq = df_aktor_masyarakat.iloc[0]['Frekuensi'] if not df_aktor_masyarakat.empty else 0
+
+    st.markdown(f"""
     <div style="background:rgba(67, 160, 71, 0.1);padding:15px;border-left:3px solid #43A047;border-radius:5px;font-size:0.9rem;">
-        <b>Analisis Kritis:</b> Peta ini menunjukkan konsentrasi pendampingan jaringan advokasi sipil sekaligus mengisyaratkan pengerahan 'lembaga' dan 'ormas' faksi lain di lapangan, yang menandakan maraknya eskalasi benturan horizontal.
+        <b>Analisis Kritis:</b> Kemunculan <b>{top1_civ_name}</b> (disebut hingga <b>{top1_civ_freq} kali</b>) serta berbagai organisasi advokasi (*Jatam, Walhi, AMAN*) menangkap besarnya skala resistensi akar rumput. Tingginya friksi pada ormas sektoral dan kelompok identitas merangkap sebagai sinyal waspada atas potensi benturan horizontal yang diorkestrasi.
     </div>
     """, unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+with st.expander("Lihat Data Tabel Frekuensi Aktor Lengkap (Hasil Ekstraksi NLP)"):
+    col_t1, col_t2 = st.columns(2)
+    with col_t1:
+        st.markdown("**Data Entitas Korporasi**")
+        st.dataframe(df_aktor_perusahaan, use_container_width=True, hide_index=True)
+    with col_t2:
+        st.markdown("**Data Aktor Sipil & Organisasi**")
+        st.dataframe(df_aktor_masyarakat, use_container_width=True, hide_index=True)
+    st.caption("Data di atas diekstraksi secara dinamis dengan menggunakan metode NLP Regex dari kumpulan korpus `narasi`, `deskripsi`, dan `judul` kasus TanahKita (N=95 Sulawesi-Malut).")
