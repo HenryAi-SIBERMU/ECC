@@ -79,6 +79,11 @@
 | 53 | **IPCC EFDB** | `https://www.ipcc-nggip.iges.or.jp/EFDB/` | Internasional | Portal web | ⚠️ **BELUM DICOBA** | Target: Emission Factor Database — faktor emisi CO2 dari sampah, limbah, perubahan lahan | Referensi dari KLHK_DATA_SOURCES. |
 | 54 | **GFN (Global Footprint Network)** | `http://data.footprintnetwork.org/` | Internasional (NGO) | Portal web | ⚠️ **BELUM DICOBA** | Target: Data biokapasitas, EQF, YF per negara | EQF forest=1.26, cropland=2.51; YF Indonesia forest=0.87, cropland=0.82. |
 | 55 | **Google Earth Engine** | `https://earthengine.google.com` | Internasional (Google) | Python API | ⚠️ **BELUM DICOBA** | Target: Land cover change, NDVI, forest loss via satellite | Python API: `ee.Initialize()`. Cross-validasi GFW. |
+| 56 | **IUCN Red List** | `https://www.iucnredlist.org` | Internasional (NGO) | Web scraping (Puppeteer) | ✅ **BERHASIL** | CSV: Status konservasi, tren populasi satwa, dan parameter ancaman tambang | Digunakan untuk Fase 5 Ekologis. Menghasilkan daftar status satwa endemik. |
+| 57 | **GBIF** | `https://api.gbif.org/v1/occurrence` | Internasional | API | ✅ **BERHASIL** | CSV: 269 titik koordinat penampakan (occurrence) 7 satwa endemik di Sulawesi | Digabung (*spatial join*) dengan GeoJSON batas provinsi. |
+| 58 | **MapBiomas Indonesia** | `https://indonesia.mapbiomas.org` | NGO | Download CSV | ✅ **BERHASIL** | CSV: Time series of Coverage by class (1990-2024) | Analisis tutupan hutan primer vs lahan tambang. |
+| 59 | **Nusantara Atlas** | `https://nusantara-atlas.org` | NGO | Explorasi / Visualisasi | ⚠️ **BELUM DICOBA** | Peta laju deforestasi dan perubahan tutupan hutan | Alternatif data spasial hutan (Trase.earth). |
+| 60 | **Key Biodiversity Areas (KBA)** | `https://www.keybiodiversityareas.org` | Internasional (NGO) | Download Shapefile | ⚠️ **BELUM DICOBA** | Poligon kawasan keanekaragaman hayati penting | Untuk overlay (*spatial join*) dengan data konsesi IUP nikel. |
 
 ---
 
@@ -86,21 +91,21 @@
 
 | # | Portal | URL | Tipe | Metode Akses | Status | Data yang Diperoleh | Keterangan |
 |:---:|---|---|:---:|:---:|:---:|---|---|
-| 56 | **Google CSE (Custom Search Engine)** | `cse.google.com` | OSINT | API (dorking) | ✅ **BERHASIL** | 320+ URLs ditemukan untuk IKU historical | 35+ targeted queries. |
-| 57 | **DuckDuckGo / Google Dorks** | Various | OSINT | Manual + scripted | ✅ **BERHASIL** | AMDAL PDFs (42 files), CATAHU KPA, NGO reports, SLHI historical | `filetype:pdf + company name + AMDAL/konflik/lingkungan` |
-| 58 | **Mongabay / Media Lingkungan** | `https://mongabay.co.id` | Media | OSINT | ⚠️ **SEBAGIAN** | Referensi kasus, bukan data tabular | Untuk konteks dan validasi temuan. |
-| 59 | **Pasal.id** | `https://pasal.id` | Hukum | Explorasi | ❌ **GAGAL** | — | Database putusan, tidak ada bulk access. |
-| 60 | **Putusan MA** | `https://putusan3.mahkamahagung.go.id` | Hukum | Explorasi | ❌ **GAGAL** | — | Putusan pengadilan, sulit filter per kasus lingkungan. |
-| 61 | **S&P Global Market Intelligence** | (berbayar) | Komersial | Dorking | ⚠️ **OPSIONAL** | Target: Mine Economics, estimasi biaya pengelolaan limbah tailing | Opsi tingkat lanjut. |
-| 62 | **Benchmark Mineral Intelligence** | (berbayar) | Komersial | Dorking | ⚠️ **OPSIONAL** | Target: ESG nickel tailings, jejak karbon rantai pasok EV | Dork: `"Benchmark Mineral Intelligence" ESG nickel tailings Indonesia` |
-| 63 | **satu-data.go.id** | `https://satu-data.go.id` | Pemerintah (Nasional) | Portal web + dorking | ⚠️ **BELUM DICOBA** | Target: Portal Satu Data Indonesia, dataset IKLH, kualitas udara | Dorking: `site:satu-data.go.id "IKLH" 2014..2016`. |
-| 64 | **Wayback Machine (Web Archive)** | `https://web.archive.org` | Internasional | OSINT / Archive | ⚠️ **BELUM DICOBA** | Target: Arsip halaman KLHK/BPS lama yang sudah dihapus/migrasi | Dorking: `site:web.archive.org "bps.go.id" "SLHI 2014"`. |
-| 65 | **PPID BPS** | `https://ppid.bps.go.id` | Pemerintah | Permintaan informasi | ⚠️ **BELUM DICOBA** | Target: Data SLHI arsip, dokumen publik BPS | Portal Keterbukaan Informasi Publik BPS. |
-| 66 | **PPID KLHK** | `https://ppid.menlhk.go.id` | Pemerintah | Permintaan informasi | ⚠️ **BELUM DICOBA** | Target: Dokumen lingkungan hidup, SLHI lama, data limbah B3 | Portal PPID Kementerian LHK. |
-| 67 | **IDX (Bursa Efek Indonesia)** | `https://www.idx.co.id` | Keuangan | Dorking | ⚠️ **BELUM DICOBA** | Target: Laporan keuangan perusahaan tambang terdaftar (ANTAM, MBMA, INCO) — capex, investasi nikel | URL: `idx.co.id/perusahaan-tercatat/laporan-keuangan-dan-tahunan/`. Referensi dari INVESTMENT_DATA_DORKING_PLAN. |
-| 68 | **OJK (Otoritas Jasa Keuangan)** | `https://ojk.go.id` | Pemerintah | Dorking | ⚠️ **BELUM DICOBA** | Target: Data regulasi keuangan perusahaan tambang, laporan tahunan | Dorking: `site:ojk.go.id [NAMA_PERUSAHAAN] investasi tambang`. |
-| 69 | **ANTAM Investor Relations** | `https://www.antam.com/id/investor-relations` | Perusahaan | Dorking / PDF | ⚠️ **BELUM DICOBA** | Target: Laporan tahunan ANTAM, capex nikel Pomalaa/Kolaka, kapasitas produksi | Perusahaan tambang nikel terdaftar di IDX. |
-| 70 | **Vale Indonesia Investor** | `https://www.vale.com/indonesia/en/investors` | Perusahaan | Dorking / PDF | ⚠️ **BELUM DICOBA** | Target: Annual report, production capacity, investment Sorowako | Perusahaan tambang nikel terbesar di Sulsel. |
+| 61 | **Google CSE (Custom Search Engine)** | `cse.google.com` | OSINT | API (dorking) | ✅ **BERHASIL** | 320+ URLs ditemukan untuk IKU historical | 35+ targeted queries. |
+| 62 | **DuckDuckGo / Google Dorks** | Various | OSINT | Manual + scripted | ✅ **BERHASIL** | AMDAL PDFs (42 files), CATAHU KPA, NGO reports, SLHI historical | `filetype:pdf + company name + AMDAL/konflik/lingkungan` |
+| 63 | **Mongabay / Media Lingkungan** | `https://mongabay.co.id` | Media | OSINT | ⚠️ **SEBAGIAN** | Referensi kasus, bukan data tabular | Untuk konteks dan validasi temuan. |
+| 64 | **Pasal.id** | `https://pasal.id` | Hukum | Explorasi | ❌ **GAGAL** | — | Database putusan, tidak ada bulk access. |
+| 65 | **Putusan MA** | `https://putusan3.mahkamahagung.go.id` | Hukum | Explorasi | ❌ **GAGAL** | — | Putusan pengadilan, sulit filter per kasus lingkungan. |
+| 66 | **S&P Global Market Intelligence** | (berbayar) | Komersial | Dorking | ⚠️ **OPSIONAL** | Target: Mine Economics, estimasi biaya pengelolaan limbah tailing | Opsi tingkat lanjut. |
+| 67 | **Benchmark Mineral Intelligence** | (berbayar) | Komersial | Dorking | ⚠️ **OPSIONAL** | Target: ESG nickel tailings, jejak karbon rantai pasok EV | Dork: `"Benchmark Mineral Intelligence" ESG nickel tailings Indonesia` |
+| 68 | **satu-data.go.id** | `https://satu-data.go.id` | Pemerintah (Nasional) | Portal web + dorking | ⚠️ **BELUM DICOBA** | Target: Portal Satu Data Indonesia, dataset IKLH, kualitas udara | Dorking: `site:satu-data.go.id "IKLH" 2014..2016`. |
+| 69 | **Wayback Machine (Web Archive)** | `https://web.archive.org` | Internasional | OSINT / Archive | ⚠️ **BELUM DICOBA** | Target: Arsip halaman KLHK/BPS lama yang sudah dihapus/migrasi | Dorking: `site:web.archive.org "bps.go.id" "SLHI 2014"`. |
+| 70 | **PPID BPS** | `https://ppid.bps.go.id` | Pemerintah | Permintaan informasi | ⚠️ **BELUM DICOBA** | Target: Data SLHI arsip, dokumen publik BPS | Portal Keterbukaan Informasi Publik BPS. |
+| 71 | **PPID KLHK** | `https://ppid.menlhk.go.id` | Pemerintah | Permintaan informasi | ⚠️ **BELUM DICOBA** | Target: Dokumen lingkungan hidup, SLHI lama, data limbah B3 | Portal PPID Kementerian LHK. |
+| 72 | **IDX (Bursa Efek Indonesia)** | `https://www.idx.co.id` | Keuangan | Dorking | ⚠️ **BELUM DICOBA** | Target: Laporan keuangan perusahaan tambang terdaftar (ANTAM, MBMA, INCO) — capex, investasi nikel | URL: `idx.co.id/perusahaan-tercatat/laporan-keuangan-dan-tahunan/`. Referensi dari INVESTMENT_DATA_DORKING_PLAN. |
+| 73 | **OJK (Otoritas Jasa Keuangan)** | `https://ojk.go.id` | Pemerintah | Dorking | ⚠️ **BELUM DICOBA** | Target: Data regulasi keuangan perusahaan tambang, laporan tahunan | Dorking: `site:ojk.go.id [NAMA_PERUSAHAAN] investasi tambang`. |
+| 74 | **ANTAM Investor Relations** | `https://www.antam.com/id/investor-relations` | Perusahaan | Dorking / PDF | ⚠️ **BELUM DICOBA** | Target: Laporan tahunan ANTAM, capex nikel Pomalaa/Kolaka, kapasitas produksi | Perusahaan tambang nikel terdaftar di IDX. |
+| 75 | **Vale Indonesia Investor** | `https://www.vale.com/indonesia/en/investors` | Perusahaan | Dorking / PDF | ⚠️ **BELUM DICOBA** | Target: Annual report, production capacity, investment Sorowako | Perusahaan tambang nikel terbesar di Sulsel. |
 
 ---
 
@@ -108,9 +113,9 @@
 
 | # | Portal | URL | Tipe | Metode Akses | Status | Data yang Diperoleh | Keterangan |
 |:---:|---|---|:---:|:---:|:---:|---|---|
-| 71 | **Kemenkes Pusdatin** | `https://pusdatin.kemkes.go.id` (Profil Kesehatan Indonesia PDF) | Pemerintah | Download PDF + Camelot parsing | ✅ **BERHASIL** | 13 PDF Profil Kesehatan (2014-2024). Diekstrak: ISPA/Pneumonia, Diare, Malaria, Kusta, Puskesmas, RS per provinsi. | 110+ CSV raw files. |
-| 72 | **BPS Var 222** | `webapi.bps.go.id` (Var 222) | Pemerintah | API | ✅ **BERHASIL** | CSV: Keluhan Kesehatan Umum (%) per provinsi 2014-2024 | Data makro, 10 tahun lengkap. |
-| 73 | **BPS Var 42** | `webapi.bps.go.id` (Var 42) | Pemerintah | API | ⚠️ **SEBAGIAN** | CSV: Kasus Penyakit (2014-2015 saja). ISPA & Penyakit Kulit tidak ada sebagai variabel terpisah. | Data 2016+ tidak tersedia di BPS API. |
+| 76 | **Kemenkes Pusdatin** | `https://pusdatin.kemkes.go.id` (Profil Kesehatan Indonesia PDF) | Pemerintah | Download PDF + Camelot parsing | ✅ **BERHASIL** | 13 PDF Profil Kesehatan (2014-2024). Diekstrak: ISPA/Pneumonia, Diare, Malaria, Kusta, Puskesmas, RS per provinsi. | 110+ CSV raw files. |
+| 77 | **BPS Var 222** | `webapi.bps.go.id` (Var 222) | Pemerintah | API | ✅ **BERHASIL** | CSV: Keluhan Kesehatan Umum (%) per provinsi 2014-2024 | Data makro, 10 tahun lengkap. |
+| 78 | **BPS Var 42** | `webapi.bps.go.id` (Var 42) | Pemerintah | API | ⚠️ **SEBAGIAN** | CSV: Kasus Penyakit (2014-2015 saja). ISPA & Penyakit Kulit tidak ada sebagai variabel terpisah. | Data 2016+ tidak tersedia di BPS API. |
 
 ---
 
@@ -132,12 +137,12 @@
 
 | Status | Jumlah |
 |---|:---:|
-| ✅ Berhasil | **21** |
-| ⚠️ Sebagian / Terbatas / Belum Dicoba | **38** |
+| ✅ Berhasil | **24** |
+| ⚠️ Sebagian / Terbatas / Belum Dicoba | **40** |
 | ❌ Gagal / Data Corrupt | **9** |
 | 🔒 Terkunci (Login Required) | **3** |
 | ❓ Opsi (berbayar) | **2** |
-| **Total** | **73** |
+| **Total** | **78** |
 
 ### Data yang Berhasil Diambil per Jenis
 
@@ -200,16 +205,9 @@
 
 ## Catatan Pembaruan
 
-### Update Sesi 4 — Final v2 (14 Juni 2026):
-- ✅ Tambah **5 portal Open Data Regional**: Sulbar, Sulsel, Sulteng, Sultra, Gorontalo
-- ✅ Tambah **4 portal KLHK baru**: SITALA, SIRAJA, Amdalnet, KemenLH (domain baru)
-- ✅ Tambah portal nasional: **data.go.id**, **satu-data.go.id**, **OSS**
-- ✅ Tambah portal PPID: **PPID BPS**, **PPID KLHK**
-- ✅ Tambah referensi internasional: **IPCC EFDB**, **GFN**, **Google Earth Engine**
-- ✅ Tambah **Wayback Machine** untuk arsip halaman lama
-- ✅ Tambah portal investasi: **IDX**, **OJK**, **Kemenperin**, **BIG**, **ANTAM IR**, **Vale IR** (dari DORKING_PLAN_MINING_INVESTMENT & INVESTMENT_DATA_DORKING_PLAN)
-- ✅ Upgrade OpenAQ: API v3, status tetap ❌ DATA CORRUPT
-- ✅ Upgrade GFW: tambah API v1 (`production-api`) & v2 (`data-api`) URLs
-- ✅ Section Deforestasi: hapus duplikat, hanya GFW sebagai entri prioritas
-- ✅ Rename section OSINT → "OSINT / Search / Media / Investasi"
-- ✅ Statistik final: 21 berhasil, 38 belum/sebagian, 9 gagal, 3 terkunci, 2 opsional = **73 portal total**
+### Update Sesi Terakhir — Ekologis Fase 5:
+- ✅ Tambah **IUCN Red List**: Ekstraksi status konservasi 7 satwa endemik.
+- ✅ Tambah **GBIF**: Penarikan 269 titik observasi geospasial murni satwa endemik Sulawesi.
+- ✅ Tambah **MapBiomas Indonesia**: Sumber data utama raster transisi tutupan hutan (1990-2024).
+- ✅ Tambah referensi spasial baru: **Nusantara Atlas** (Trase) & **KBA (Key Biodiversity Areas)**.
+- ✅ Statistik final: 24 berhasil, 40 belum/sebagian, 9 gagal, 3 terkunci, 2 opsional = **78 portal total**

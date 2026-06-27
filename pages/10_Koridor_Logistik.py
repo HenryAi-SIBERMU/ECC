@@ -349,7 +349,7 @@ NODE_NARRATIVES = {
             "Total investasi mencapai Rp 42,9 triliun. <b>Namun sejak awal 2025, pabrik ini menghadapi masalah serius:</b> "
             "perusahaan induknya di China (Jiangsu Delong) mengalami kebangkrutan, sehingga sebagian besar lini produksi berhenti beroperasi."
         ),
-        "key_facts": ["Pelabuhan untuk kapal hingga 50.000 ton", "24 lini produksi, PLTU 1.115 MW", "Kawasan industri 1.912 hektar", "Masalah: induk perusahaan bangkrut (2025)"],
+        "key_facts": ["Pelabuhan untuk kapal hingga 50.000 ton", "24 lini produksi, PLTU 1.275 MW", "Kawasan industri 1.912 hektar", "Masalah: induk perusahaan bangkrut (2025)"],
         "source": "gunbusternickelindustry.com, Petromindo, CELIOS",
     },
     "NODE-SULTRA-KONAWE-MOROSI-VDNI": {
@@ -540,15 +540,16 @@ with st.expander("Tidak Ada Jalur Kereta — Semuanya Lewat Laut"):
     """)
 
 with st.expander("Dampak Langsung bagi Warga Sekitar"):
-    st.markdown("""
+    st.markdown(f"""
     Pelabuhan dan kawasan industri yang menopang ekspor nikel ini bukan tanpa korban:
 
-    - **Morowali:** Bukit-bukit hijau berubah menjadi gundukan tanah cokelat. Asap pabrik memenuhi langit. Air panas dari turbin PLTU mengalir langsung ke laut.
-    - **Konawe:** Pembangunan mengubah bentuk permukaan tanah di empat kecamatan, menyempitkan saluran air, dan menutup puluhan hektar tambak nelayan.
-    - **Pomalaa:** Nelayan mengadukan debu yang menutupi tambak dan area tangkapan mereka.
-    - **Sorowako:** Endapan lumpur mengancam Danau Mahalona dan Danau Towuti. Konflik lahan antara PT Vale dan masyarakat adat Karunsi'e sudah berlangsung sejak 1968.
+    - **Morowali (IMIP):** Lebih dari **12 juta ton limbah slag** menumpuk tanpa izin pengelolaan. Pabrik mengolahnya menjadi 40.000 unit batako per hari, namun tumpukan terus bertambah. Pada 2023, **21 pekerja** menjadi korban kebakaran di kawasan industri ini.
+    - **Konawe (VDNI/OSS):** Pembangunan mengubah bentuk permukaan tanah di empat kecamatan, menyempitkan saluran air, dan menutup puluhan hektar tambak nelayan. Pabrik VDNI saja mengolah **7,28 juta ton bijih nikel per tahun** — menghasilkan jutaan ton slag yang tidak punya tempat penampungan memadai.
+    - **Pomalaa (ANTAM):** Nelayan mengadukan debu dari aktivitas pelabuhan yang menutupi tambak dan area tangkapan mereka.
+    - **Sorowako (Vale):** Endapan lumpur mengancam Danau Mahalona dan Danau Towuti. Konflik lahan antara PT Vale dan masyarakat adat Karunsi'e sudah berlangsung sejak 1968. Dari konsesi seluas **118.017 hektar**, kabupaten hanya menerima **Rp 600 miliar per tahun** sebagai kontribusi daerah.
 
-    Infrastruktur yang membuat ekspor nikel menguntungkan bagi investor juga menjadi
+    Seluruh ekspor nikel olahan Sulawesi pada 2024 bernilai lebih dari **US$3,2 miliar** — mayoritas dikirim ke China.
+    Infrastruktur yang membuat ekspor ini menguntungkan bagi investor juga menjadi
     **sumber beban lingkungan** yang ditanggung langsung oleh masyarakat lokal.
     """)
 
@@ -591,3 +592,61 @@ st.dataframe(df_gaps, use_container_width=True, hide_index=True)
 with st.expander("Lihat Data Mentah: Daftar Keterbatasan Lengkap", expanded=False):
     st.dataframe(df_gaps, use_container_width=True, hide_index=True)
     st.caption("Sumber: Catatan penelusuran. File: `data/raw/rev1_logistik/working/rev1_tahap_e_remaining_gaps.csv`")
+
+st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=True)
+
+# ═════════════════════════════════════════════════════════════
+# 10.6 MENGAPA INI PENTING
+# ═════════════════════════════════════════════════════════════
+st.subheader("10.6 Mengapa Ini Penting bagi Warga Sulawesi")
+
+st.markdown(f"""
+<div style="background: linear-gradient(135deg, rgba(67,160,71,0.15), rgba(46,125,50,0.08)); padding: 24px; border-radius: 12px; border-left: 6px solid #43A047; margin-bottom: 20px;">
+<div style="color: #66BB6A; font-size: 1.3rem; font-weight: 700; margin-bottom: 16px;">Apa Artinya Semua Ini?</div>
+<div style="color: #E0E0E0; font-size: 0.95rem; line-height: 1.8;">
+
+<b>Fakta utama:</b> Seluruh {n_lokasi} lokasi industri nikel besar di Sulawesi memiliki pelabuhan ekspor.
+Artinya, nikel yang ditambang dan diolah di Sulawesi <b>tidak dipakai untuk kebutuhan dalam negeri</b> —
+seluruhnya dikirim ke luar negeri, terutama ke China. Pada tahun 2024, nilai ekspor nikel olahan dari
+Sulawesi melebihi <b>US$3,2 miliar</b> (sekitar Rp 50 triliun).<br><br>
+
+<b>Siapa yang untung?</b> Investor asing yang membangun pabrik dan pelabuhan. Mayoritas perusahaan
+pengelola adalah perusahaan China: Tsingshan (IMIP), Jiangsu Delong (GNI), Virtue Dragon (VDNI),
+dan Xiamen Xiangyu (OSS).<br><br>
+
+<b>Siapa yang menanggung beban?</b> Warga sekitar. Tambak nelayan ditutup, tanah berubah bentuk, danau
+terancam sedimentasi, dan limbah jutaan ton menumpuk. Di Sorowako, dari konsesi seluas 118.017 hektar,
+kabupaten hanya menerima <b>Rp 600 miliar per tahun</b> — sebagian kecil dari keuntungan triliunan yang
+mengalir ke pemegang saham di luar negeri.<br><br>
+
+<b>Apa yang perlu dituntut?</b>
+</div>
+</div>
+""", unsafe_allow_html=True)
+
+demands = [
+    ("Transparansi izin pelabuhan", "Dokumen izin pelabuhan industri dari Kementerian Perhubungan harus dibuka untuk publik. Saat ini, tidak satupun izin resmi pelabuhan nikel di Sulawesi yang bisa diakses warga secara terbuka."),
+    ("Kajian dampak lingkungan yang independen", "AMDAL kawasan industri nikel harus dikaji ulang oleh lembaga independen — bukan oleh konsultan yang dibayar perusahaan. Fokus: limbah slag, kualitas air laut, dan sedimentasi danau."),
+    ("Bagi hasil yang adil", "Kontribusi perusahaan nikel terhadap daerah harus diperbesar secara signifikan. Pendapatan daerah Rp 600 miliar per tahun dari konsesi 118.017 hektar (kasus Vale) tidak sebanding dengan keuntungan dan kerusakan yang ditimbulkan."),
+    ("Perlindungan hak masyarakat adat", "Konflik lahan antara perusahaan tambang dan masyarakat adat (seperti Karunsi'e di Sorowako sejak 1968) harus diselesaikan dengan mengutamakan hak-hak masyarakat adat, bukan kepentingan investor."),
+]
+
+for i, (title, desc) in enumerate(demands, 1):
+    st.markdown(f"""
+    <div style="background: #1A1A1A; padding: 16px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #FFA726;">
+        <div style="color: #FFA726; font-weight: 700; font-size: 1rem; margin-bottom: 6px;">{i}. {title}</div>
+        <div style="color: #CCC; font-size: 0.92rem; line-height: 1.6;">{desc}</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("""
+<div style="background: rgba(239, 83, 80, 0.1); padding: 18px; border-radius: 8px; border-left: 6px solid #EF5350; margin-top: 20px;">
+<div style="color: #EF5350; font-size: 1.05rem; font-weight: 700; margin-bottom: 8px;">Catatan untuk Pembaca</div>
+<div style="color: #E0E0E0; font-size: 0.92rem; line-height: 1.7;">
+Seluruh data dalam halaman ini berasal dari <b>25 sumber terbuka</b> yang bisa diverifikasi oleh siapapun:
+situs resmi perusahaan, dokumen pemerintah (KPPIP, Peraturan Presiden), laporan media investigatif,
+dan catatan kunjungan resmi TNI Angkatan Laut. Tidak ada data rahasia atau bocoran.
+Artinya: informasi ini <b>sudah ada di depan mata publik</b>, hanya belum pernah disatukan dan dibaca secara utuh.
+</div>
+</div>
+""", unsafe_allow_html=True)

@@ -1069,7 +1069,7 @@ Data panel dari 6 provinsi Sulawesi (2016-2024) membuktikan bahwa **provinsi den
 
 # --- Load IKA Data ---
 df_ika = pd.read_csv("data/processed/sulawesi_ika_2016_2024.csv")
-df_ika = df_ika.rename(columns={'Indeks Kualitas Air': 'IKA'})
+df_ika = df_ika.rename(columns={"Indeks Kualitas Air": "IKA"})
 
 # --- Merge with Diare Data ---
 df_diare_only = df_kes[df_kes["indikator"] == "Kasus Diare Dilayani"][
@@ -1855,42 +1855,67 @@ with st.expander("Lihat Data Mentah: Limbah B3 Sulawesi (2020-2024)", expanded=F
 # ══════════════════════════════════════════════════════════
 if not df_zoonosis.empty:
     st.markdown("---")
-    st.markdown('<h2 style="color: #ECEFF1; font-size: 24px;">3.6 Anomali Zoonosis: Dampak Kritis Ekspansi Industri di Level Tapak (Studi Kasus Sulteng)</h2>', unsafe_allow_html=True)
-    st.markdown('<span style="background:#F57F17;color:#FFF9C4;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Time-Series & Komparasi Spasial Wilayah (Dinas Kesehatan)</span>', unsafe_allow_html=True)
+    st.markdown(
+        '<h2 style="color: #ECEFF1; font-size: 24px;">3.6 Anomali Zoonosis: Dampak Kritis Ekspansi Industri di Level Tapak (Studi Kasus Sulteng)</h2>',
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        '<span style="background:#F57F17;color:#FFF9C4;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Time-Series & Komparasi Spasial Wilayah (Dinas Kesehatan)</span>',
+        unsafe_allow_html=True,
+    )
 
     # Data Prep untuk Zoonosis (Fokus Sulteng)
-    df_zoo_sulteng = df_zoonosis[df_zoonosis['provinsi'].str.upper() == 'SULTENG'].copy()
-    
+    df_zoo_sulteng = df_zoonosis[
+        df_zoonosis["provinsi"].str.upper() == "SULTENG"
+    ].copy()
+
     # Kategori Kabupaten
-    tambang_kab = ['MOROWALI', 'MOROWALI UTARA', 'BANGGAI']
-    
+    tambang_kab = ["MOROWALI", "MOROWALI UTARA", "BANGGAI"]
+
     def cat_wilayah(kab):
         if str(kab).upper() in tambang_kab:
-            return 'Lingkar Tambang/Smelter Aktif'
-        return 'Non-Tambang/Agraris (Kontrol)'
-        
-    df_zoo_sulteng['Kategori_Wilayah'] = df_zoo_sulteng['kabupaten_kota'].apply(cat_wilayah)
+            return "Lingkar Tambang/Smelter Aktif"
+        return "Non-Tambang/Agraris (Kontrol)"
+
+    df_zoo_sulteng["Kategori_Wilayah"] = df_zoo_sulteng["kabupaten_kota"].apply(
+        cat_wilayah
+    )
 
     # --- HERO STATEMENT (Narasi Jurnalistik Kritis) ---
-    df_tambang_only = df_zoo_sulteng[df_zoo_sulteng['Kategori_Wilayah'] == 'Lingkar Tambang/Smelter Aktif']
-    total_kasus_tambang = df_tambang_only['total_kasus'].sum()
-    
+    df_tambang_only = df_zoo_sulteng[
+        df_zoo_sulteng["Kategori_Wilayah"] == "Lingkar Tambang/Smelter Aktif"
+    ]
+    total_kasus_tambang = df_tambang_only["total_kasus"].sum()
+
     # Ekstraksi angka puncak per penyakit
     peak_narrative = ""
     if not df_tambang_only.empty:
         peaks = []
-        for p in df_tambang_only['jenis_penyakit'].unique():
-            df_p = df_tambang_only[df_tambang_only['jenis_penyakit'] == p]
-            if not df_p.empty and df_p['total_kasus'].max() > 0:
-                max_row = df_p.loc[df_p['total_kasus'].idxmax()]
-                peaks.append(f"<b>{p}</b> memuncak pada <b>{max_row['total_kasus']:,.0f} kasus</b> di {max_row['kabupaten_kota'].title()} ({max_row['tahun']})")
-        
+        for p in df_tambang_only["jenis_penyakit"].unique():
+            df_p = df_tambang_only[df_tambang_only["jenis_penyakit"] == p]
+            if not df_p.empty and df_p["total_kasus"].max() > 0:
+                max_row = df_p.loc[df_p["total_kasus"].idxmax()]
+                peaks.append(
+                    f"<b>{p}</b> memuncak pada <b>{max_row['total_kasus']:,.0f} kasus</b> di {max_row['kabupaten_kota'].title()} ({max_row['tahun']})"
+                )
+
         if len(peaks) > 1:
-            peak_narrative = " Jika dibedah berdasarkan keparahan endemiknya, rekor lonjakan menembus batas kritis ekologis: " + ", ".join(peaks[:-1]) + ", serta " + peaks[-1] + "."
+            peak_narrative = (
+                " Jika dibedah berdasarkan keparahan endemiknya, rekor lonjakan menembus batas kritis ekologis: "
+                + ", ".join(peaks[:-1])
+                + ", serta "
+                + peaks[-1]
+                + "."
+            )
         elif len(peaks) == 1:
-            peak_narrative = " Jika dibedah lebih dalam, rekor lonjakan menembus batas kritis: " + peaks[0] + "."
-    
-    st.markdown(f"""
+            peak_narrative = (
+                " Jika dibedah lebih dalam, rekor lonjakan menembus batas kritis: "
+                + peaks[0]
+                + "."
+            )
+
+    st.markdown(
+        f"""
     <p style="color:#E0E0E0; font-size: 1rem; line-height: 1.6; text-align: justify; margin-top: 20px;">
         Mitos "Hilirisasi Hijau" kembali terbantahkan secara telak ketika kita membedah realitas beban kesehatan di level tapak. Data empiris Dinas Kesehatan mencatat total akumulasi <b>{total_kasus_tambang:,.0f} kasus</b> penyakit Zoonosis meledak di wilayah Lingkar Tambang/Smelter Aktif Sulawesi Tengah (Morowali, Morowali Utara, Banggai) sepanjang rentang waktu pengamatan.{peak_narrative}
     </p>
@@ -1900,62 +1925,129 @@ if not df_zoonosis.empty:
     <p style="color:#E0E0E0; font-size: 1rem; line-height: 1.6; text-align: justify;">
         Investasi bernilai triliunan rupiah di sektor ekstraktif terbukti gagal mentransmisikan perlindungan sosial, dan justru mensubsidi biaya perusakannya kepada masyarakat lokal dalam bentuk krisis kesehatan publik yang akut. Penduduk asli dan buruh tambang kini harus menanggung beban berlapis: menghirup udara yang dipekati oleh debu batu bara <i>captive power plant</i>, sembari dihantui ancaman wabah menular akibat hancurnya daya dukung lingkungan primer. Ini adalah bukti tak terbantahkan dari praktik zona tumbal (<i>sacrifice zone</i>) yang mengorbankan ruang hidup lokal demi melumasi rantai pasok global.
     </p>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
     import plotly.express as px
 
     if not df_zoo_sulteng.empty:
         col_zoo1, col_zoo2 = st.columns([1, 2])
-        
+
         with col_zoo1:
-            list_penyakit = df_zoo_sulteng['jenis_penyakit'].unique().tolist()
-            if 'DBD' in list_penyakit:
-                list_penyakit.insert(0, list_penyakit.pop(list_penyakit.index('DBD')))
-            selected_penyakit = st.selectbox("Pilih Jenis Penyakit Zoonosis:", list_penyakit)
-            
+            list_penyakit = df_zoo_sulteng["jenis_penyakit"].unique().tolist()
+            if "DBD" in list_penyakit:
+                list_penyakit.insert(0, list_penyakit.pop(list_penyakit.index("DBD")))
+            selected_penyakit = st.selectbox(
+                "Pilih Jenis Penyakit Zoonosis:", list_penyakit
+            )
+
         with col_zoo2:
             st.markdown("<div style='height:30px;'></div>", unsafe_allow_html=True)
-            st.caption(f"Menampilkan tren pertumbuhan historis untuk **{selected_penyakit}** di Kabupaten/Kota se-Sulawesi Tengah.")
+            st.caption(
+                f"Menampilkan tren pertumbuhan historis untuk **{selected_penyakit}** di Kabupaten/Kota se-Sulawesi Tengah."
+            )
 
         # --- A. Time Series Zoonosis per Kabupaten ---
-        df_zoo_ts = df_zoo_sulteng[df_zoo_sulteng['jenis_penyakit'] == selected_penyakit].copy()
-        
-        # Warna khusus: Merah terang untuk tambang, Abu-abu pudar untuk kontrol
+        st.markdown(
+            """
+            <div style="color:#B0BEC5; font-size:0.9rem; line-height:1.5; margin: 8px 0 14px 0;">
+                <b>Keterangan pembacaan grafik:</b> garis merah solid menandai kabupaten <b>Ekstraktif/Smelter</b> (Morowali, Morowali Utara, Banggai). Gradasi merah mengikuti puncak kasus pada penyakit yang dipilih: merah paling kuat = puncak tertinggi. Garis abu-abu putus-putus menandai wilayah <b>Non-Ekstraktif/Kontrol</b>. Angka di setiap titik menunjukkan total kasus absolut pada tahun tersebut.
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        df_zoo_ts = df_zoo_sulteng[
+            df_zoo_sulteng["jenis_penyakit"] == selected_penyakit
+        ].copy()
+        df_zoo_ts["is_ekstraktif"] = (
+            df_zoo_ts["kabupaten_kota"].str.upper().isin(tambang_kab)
+        )
+        df_zoo_ts["Status_Wilayah"] = df_zoo_ts["is_ekstraktif"].map(
+            {True: "Ekstraktif/Smelter", False: "Non-Ekstraktif/Kontrol"}
+        )
+        df_zoo_ts["Kabupaten_Legend"] = df_zoo_ts.apply(
+            lambda r: f"{r['kabupaten_kota'].title()} — {r['Status_Wilayah']}", axis=1
+        )
+        df_zoo_ts["Label_Kasus"] = df_zoo_ts["total_kasus"].apply(lambda x: f"{x:,.0f}")
+
+        # Warna khusus: gradasi merah berbasis keparahan data penyakit terpilih.
+        # Semakin tinggi puncak kasus di kabupaten ekstraktif, semakin kuat warna merahnya.
+        extractive_peak = (
+            df_zoo_ts[df_zoo_ts["is_ekstraktif"]]
+            .groupby("kabupaten_kota")["total_kasus"]
+            .max()
+            .sort_values()
+        )
+        red_gradient = ["#FF8A80", "#FF3D3D", "#D50000"]  # rendah → sedang → tertinggi
+        extractive_color_by_kab = {
+            str(kab).upper(): red_gradient[min(i, len(red_gradient) - 1)]
+            for i, kab in enumerate(extractive_peak.index)
+        }
+
         color_map = {}
-        for kab in df_zoo_ts['kabupaten_kota'].unique():
-            if kab.upper() in tambang_kab:
-                color_map[kab] = '#E53935' 
-            else:
-                color_map[kab] = '#455A64'
+        for _, row in (
+            df_zoo_ts[["Kabupaten_Legend", "kabupaten_kota", "is_ekstraktif"]]
+            .drop_duplicates()
+            .iterrows()
+        ):
+            kab_key = str(row["kabupaten_kota"]).upper()
+            color_map[row["Kabupaten_Legend"]] = (
+                extractive_color_by_kab.get(kab_key, "#FF3D3D")
+                if row["is_ekstraktif"]
+                else "#455A64"
+            )
 
         fig_3_6a = px.line(
             df_zoo_ts,
-            x='tahun',
-            y='total_kasus',
-            color='kabupaten_kota',
+            x="tahun",
+            y="total_kasus",
+            color="Kabupaten_Legend",
             color_discrete_map=color_map,
-            markers=True
+            markers=True,
+            text="Label_Kasus",
+            hover_data={
+                "kabupaten_kota": True,
+                "Status_Wilayah": True,
+                "total_kasus": ":,.0f",
+                "Kabupaten_Legend": False,
+                "Label_Kasus": False,
+            },
         )
-        
-        # Highlight dan atur ketebalan garis (stroke)
+
+        # Highlight dan atur ketebalan garis (stroke), marker, serta angka di setiap titik
+        marker_symbol_by_kab = {
+            "BANGGAI": "circle",
+            "MOROWALI": "diamond",
+            "MOROWALI UTARA": "square",
+        }
         for trace in fig_3_6a.data:
-            if trace.name.upper() in tambang_kab:
-                trace.line.width = 3
-                trace.marker.size = 7
+            is_extract = "Ekstraktif/Smelter" in trace.name
+            trace.mode = "lines+markers+text"
+            trace.textposition = "top center"
+            if is_extract:
+                kab_name = trace.name.split("—")[0].strip().upper()
+                trace.line.width = 4.2
+                trace.marker.size = 9
+                trace.marker.symbol = marker_symbol_by_kab.get(kab_name, "circle")
                 trace.opacity = 1.0
+                trace.textfont = dict(size=12, color="#FFFFFF", family="Inter")
             else:
-                trace.line.width = 1.5
-                trace.line.dash = 'dot'
-                trace.opacity = 0.4
+                trace.line.width = 1.2
+                trace.line.dash = "dot"
+                trace.opacity = 0.28
                 trace.marker.size = 5
+                trace.textfont = dict(size=9, color="#78909C", family="Inter")
 
         # Tambahkan anotasi otomatis pada titik puncak (max) di wilayah tambang
-        df_tambang_only = df_zoo_ts[df_zoo_ts['kabupaten_kota'].str.upper().isin(tambang_kab)]
+        df_tambang_only = df_zoo_ts[
+            df_zoo_ts["kabupaten_kota"].str.upper().isin(tambang_kab)
+        ]
         if not df_tambang_only.empty:
-            max_row = df_tambang_only.loc[df_tambang_only['total_kasus'].idxmax()]
+            max_row = df_tambang_only.loc[df_tambang_only["total_kasus"].idxmax()]
             fig_3_6a.add_annotation(
-                x=max_row['tahun'],
-                y=max_row['total_kasus'],
+                x=max_row["tahun"],
+                y=max_row["total_kasus"],
                 text=f"Puncak {selected_penyakit}:<br>{max_row['kabupaten_kota']} ({max_row['total_kasus']:.0f} kasus)",
                 showarrow=True,
                 arrowhead=2,
@@ -1968,66 +2060,97 @@ if not df_zoonosis.empty:
                 bgcolor="rgba(229, 57, 53, 0.8)",
                 bordercolor="#EF5350",
                 borderwidth=1,
-                borderpad=4
+                borderpad=4,
             )
 
         fig_3_6a.update_layout(
             title=f"Tren Lonjakan Kasus {selected_penyakit} Tingkat Kabupaten (2019-2024)",
-            height=450,
-            plot_bgcolor='rgba(0,0,0,0)',
-            paper_bgcolor='rgba(0,0,0,0)',
-            legend=dict(title="Kabupaten/Kota", orientation="v", yanchor="top", y=1, xanchor="left", x=1.02, font=dict(size=10)),
-            font=dict(color='#B0BEC5'),
-            xaxis=dict(title="Tahun", showgrid=True, gridcolor='rgba(255,255,255,0.05)', dtick=1),
-            yaxis=dict(title="Total Kasus Absolut", showgrid=True, gridcolor='rgba(255,255,255,0.05)', zeroline=False),
-            margin=dict(r=150) # Tambah margin kanan agar legend tidak terpotong
+            height=500,
+            plot_bgcolor="rgba(0,0,0,0)",
+            paper_bgcolor="rgba(0,0,0,0)",
+            legend=dict(
+                title="Kabupaten/Kota (Status Wilayah)",
+                orientation="v",
+                yanchor="top",
+                y=1,
+                xanchor="left",
+                x=1.02,
+                font=dict(size=10),
+            ),
+            font=dict(color="#B0BEC5"),
+            xaxis=dict(
+                title="Tahun",
+                showgrid=True,
+                gridcolor="rgba(255,255,255,0.05)",
+                dtick=1,
+            ),
+            yaxis=dict(
+                title="Total Kasus Absolut",
+                showgrid=True,
+                gridcolor="rgba(255,255,255,0.05)",
+                zeroline=False,
+            ),
+            margin=dict(r=260),  # Legend lebih panjang karena memuat status wilayah
         )
-        
+
         st.plotly_chart(fig_3_6a, use_container_width=True)
 
         # --- B. Bar Chart Komparatif ---
         st.markdown("<br>", unsafe_allow_html=True)
-        
-        df_zoo_bar = df_zoo_ts.groupby('Kategori_Wilayah')['total_kasus'].mean().reset_index()
-        
+
+        df_zoo_bar = (
+            df_zoo_ts.groupby("Kategori_Wilayah")["total_kasus"].mean().reset_index()
+        )
+
         # Hitung diff untuk interpretasi
-        avg_tambang = df_zoo_bar[df_zoo_bar['Kategori_Wilayah'] == 'Lingkar Tambang/Smelter Aktif']['total_kasus'].values
-        avg_non = df_zoo_bar[df_zoo_bar['Kategori_Wilayah'] == 'Non-Tambang/Agraris (Kontrol)']['total_kasus'].values
-        
+        avg_tambang = df_zoo_bar[
+            df_zoo_bar["Kategori_Wilayah"] == "Lingkar Tambang/Smelter Aktif"
+        ]["total_kasus"].values
+        avg_non = df_zoo_bar[
+            df_zoo_bar["Kategori_Wilayah"] == "Non-Tambang/Agraris (Kontrol)"
+        ]["total_kasus"].values
+
         val_tambang = avg_tambang[0] if len(avg_tambang) > 0 else 0
         val_non = avg_non[0] if len(avg_non) > 0 else 0
-        
+
         multiplier = (val_tambang / val_non) if val_non > 0 else 0
 
         col_bar1, col_bar2 = st.columns([1.5, 1])
-        
+
         with col_bar1:
             fig_3_6b = px.bar(
                 df_zoo_bar,
-                x='Kategori_Wilayah',
-                y='total_kasus',
-                color='Kategori_Wilayah',
+                x="Kategori_Wilayah",
+                y="total_kasus",
+                color="Kategori_Wilayah",
                 color_discrete_map={
-                    'Lingkar Tambang/Smelter Aktif': '#E53935',
-                    'Non-Tambang/Agraris (Kontrol)': '#546E7A'
+                    "Lingkar Tambang/Smelter Aktif": "#E53935",
+                    "Non-Tambang/Agraris (Kontrol)": "#546E7A",
                 },
-                text_auto='.1f'
+                text_auto=".1f",
             )
-            fig_3_6b.update_traces(textposition="outside", cliponaxis=False, textfont_size=14)
+            fig_3_6b.update_traces(
+                textposition="outside", cliponaxis=False, textfont_size=14
+            )
             fig_3_6b.update_layout(
                 title=f"Rata-rata Kasus {selected_penyakit} per Tahun (Tambang vs Kontrol)",
                 height=350,
                 showlegend=False,
-                plot_bgcolor='rgba(0,0,0,0)',
-                paper_bgcolor='rgba(0,0,0,0)',
-                font=dict(color='#B0BEC5'),
+                plot_bgcolor="rgba(0,0,0,0)",
+                paper_bgcolor="rgba(0,0,0,0)",
+                font=dict(color="#B0BEC5"),
                 xaxis=dict(title="Kategori Wilayah", showgrid=False),
-                yaxis=dict(title="Rata-Rata Kasus Absolut", showgrid=True, gridcolor='rgba(255,255,255,0.1)')
+                yaxis=dict(
+                    title="Rata-Rata Kasus Absolut",
+                    showgrid=True,
+                    gridcolor="rgba(255,255,255,0.1)",
+                ),
             )
             st.plotly_chart(fig_3_6b, use_container_width=True)
-            
+
         with col_bar2:
-            st.markdown(f"""
+            st.markdown(
+                f"""
             <h4 style="color: #FF5722; margin-top: 10px; margin-bottom: 5px; font-size: 1.1rem;">Interpretasi Spesifik: {selected_penyakit}</h4>
             <p style="color:#B0BEC5; font-size: 0.95rem; line-height: 1.6; text-align: justify;">
                 Perbandingan grafik rata-rata di samping menunjukkan bahwa beban absolut kasus <b>{selected_penyakit}</b> di wilayah Lingkar Tambang/Smelter Aktif mencapai <b>{val_tambang:,.1f} kasus/tahun</b>.
@@ -2035,8 +2158,14 @@ if not df_zoonosis.empty:
             <p style="color:#B0BEC5; font-size: 0.95rem; line-height: 1.6; text-align: justify;">
                 Meskipun populasi area tambang seringkali lebih terkonsentrasi, angka ini memberikan sinyal kuat bahwa degradasi lingkungan di sekitar smelter menciptakan ceruk ekologis baru (seperti genangan air galian) yang mempercepat siklus penularan {selected_penyakit}.
             </p>
-            """, unsafe_allow_html=True)
-        
-        with st.expander("Lihat Data Mentah: Dataset Zoonosis Provinsi (2015-2024)", expanded=False):
+            """,
+                unsafe_allow_html=True,
+            )
+
+        with st.expander(
+            "Lihat Data Mentah: Dataset Zoonosis Provinsi (2015-2024)", expanded=False
+        ):
             st.dataframe(df_zoonosis, use_container_width=True, hide_index=True)
-            st.caption("📁 **Sumber File:** `data/processed/zoonosis_kab_kota_2015_2024.csv` - Hasil Ekstraksi Otomatis PDF Profil Kesehatan Provinsi Kemenkes")
+            st.caption(
+                "📁 **Sumber File:** `data/processed/zoonosis_kab_kota_2015_2024.csv` - Hasil Ekstraksi Otomatis PDF Profil Kesehatan Provinsi Kemenkes"
+            )

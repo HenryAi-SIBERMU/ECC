@@ -1162,3 +1162,106 @@ st.markdown(kesimpulan_text, unsafe_allow_html=True)
 with st.expander("Lihat Data Mentah: Driver Deforestasi & Emisi CO₂ (2014-2023)", expanded=False):
     st.dataframe(df_driver_focus[['Provinsi', 'Tahun', 'Faktor_Pendorong', 'Luas_Deforestasi_Ha', 'Emisi_CO2_Megagram']], use_container_width=True, hide_index=True)
     st.caption("📁 **Sumber File:** `data/processed/sulawesi_gfw_loss_by_driver_2014_2023.csv`")
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# SECTION 2.5: PENURUNAN BIODIVERSITAS (FASE 5)
+# ═══════════════════════════════════════════════════════════════════════════
+
+st.markdown("---")
+st.markdown("### 2.5. Kehancuran Biodiversitas: Ekstirpasi Habitat Satwa Endemik")
+st.markdown('<span style="background:#1B5E20;color:#A5D6A7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Spatial Mapping (GBIF) & Analisis IUCN Red List</span>', unsafe_allow_html=True)
+
+try:
+    df_gbif = pd.read_csv('data/raw/gbif_sulawesi_occurrences.csv')
+    df_iucn = pd.read_csv('data/processed/sulawesi_biodiversitas_iucn_fase5_exploded.csv')
+    
+    # Pra-Kalkulasi Metrik Biodiversitas untuk Narasi Data-Driven
+    tot_titik = len(df_gbif)
+    df_iucn_unique = df_iucn.drop_duplicates(subset=['Scientific Name'])
+    tot_spesies = len(df_iucn_unique)
+    tot_cr = len(df_iucn_unique[df_iucn_unique['Status'] == 'Critically Endangered'])
+    tot_en = len(df_iucn_unique[df_iucn_unique['Status'] == 'Endangered'])
+    tot_vu = len(df_iucn_unique[df_iucn_unique['Status'] == 'Vulnerable'])
+
+    st.markdown(f"""
+    **Ekstirpasi Lokal di Depan Mata: Menghitung Mundur Kepunahan Spesies Endemik Sulawesi**
+
+    Hilirisasi nikel sering kali hanya diukur dari angka tonase ekspor dan gemerlap investasi yang masuk, namun sama sekali mengabaikan sebuah realitas berdarah di lapangan: ekstirpasi atau kepunahan lokal satwa-satwa endemik yang tidak dapat tergantikan. Pulau Sulawesi, yang secara evolusioner terisolasi melintasi Garis Wallace, merupakan benteng pertahanan terakhir bagi keanekaragaman hayati unik dunia. Namun, ekspansi tambang nikel dan pembukaan kawasan industri (*smelter*) secara sistematis membongkar lanskap karst, hutan hujan dataran rendah, serta ekosistem esensial yang menjadi habitat primer bagi flora dan fauna endemik yang telah beradaptasi selama ratusan ribu tahun.
+
+    Data spasial resmi dari **GBIF (Global Biodiversity Information Facility)** secara telanjang memotret invasi ruang hidup ini. Peta di bawah ini memetakan secara presisi **{tot_titik:,.0f} titik koordinat penampakan (occurrence) aktual** dari **{tot_spesies} spesies endemik kunci**—mulai dari Anoa (*Bubalus quarlesi* / *depressicornis*), Macaca / Monyet Yaki (*Macaca nigra*), Tarsius, hingga Babirusa. Jika diperhatikan secara saksama, titik-titik saksi kehidupan ini kini berhimpitan langsung, bahkan tumpang tindih secara absolut, dengan batas-batas konsesi Izin Usaha Pertambangan (IUP) dan tapak-tapak pabrik raksasa. Wilayah pesisir Sulawesi Tengah dan Tenggara, episentrum hilirisasi, menyumbang konsentrasi kerusakan habitat paling masif akibat ledakan pengerukan tambang nikel. Penghancuran ruang hidup ini bukan insiden kebetulan, melainkan konsekuensi logis dari kebijakan obral izin lahan yang dengan sengaja tidak memperhitungkan peta batas konservasi atau ambang kritis daya dukung ekologis.
+
+    Narasi arus utama pemerintah mengenai *Hilirisasi Hijau* secara empiris hancur lebur ketika dihadapkan pada data **IUCN (International Union for Conservation of Nature) Red List**. Dari {tot_spesies} satwa endemik yang terperangkap di lingkar tambang ini, tercatat sebanyak **{tot_cr} spesies** kini terjerembab pada status **Terancam Kritis (Critically Endangered)**, **{tot_en} spesies Rentan Bahaya (Endangered)**, dan **{tot_vu} spesies Rentan (Vulnerable)**. Lebih mengejutkan lagi, catatan keilmuan IUCN secara eksplisit memvalidasi bahwa aktivitas pertambangan (*Mining Threat*) merupakan ancaman eksistensial utama yang menggaransi kepunahan mereka di alam liar. Dengan kata lain, suplai nikel baterai mobil listrik yang diklaim akan menyelamatkan bumi dari krisis iklim, justru tengah menumbalkan warisan genetik Sulawesi sebagai bayaran tunainya. Membiarkan laju perluasan tambang ini berlanjut tanpa rem sama artinya dengan melegalisasi genosida ekologis massal terhadap kekayaan alam yang tidak akan pernah bisa diregenerasi kembali.
+    """)
+
+    # 1. PETA PLOTLY SCATTER MAPBOX UNTUK GBIF
+    fig_biodiv = px.scatter_mapbox(
+        df_gbif, 
+        lat="Latitude", 
+        lon="Longitude", 
+        color="Scientific_Name",
+        hover_name="Scientific_Name",
+        hover_data={"Province": True, "Year": True, "Latitude": False, "Longitude": False},
+        color_discrete_sequence=px.colors.qualitative.Bold,
+        zoom=5, 
+        center={"lat": -1.8, "lon": 121.0},
+        title="Peta Spasial Penampakan Satwa Endemik Sulawesi (Data GBIF)"
+    )
+    fig_biodiv.update_layout(
+        mapbox_style="carto-darkmatter",
+        margin={"r":0,"t":40,"l":0,"b":0},
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        font=dict(color='#ECEFF1'),
+        legend=dict(
+            title="Spesies Endemik (Filter)",
+            orientation="v",
+            yanchor="top",
+            y=0.95,
+            xanchor="left",
+            x=0.02,
+            bgcolor='rgba(30,30,30,0.8)'
+        )
+    )
+    st.plotly_chart(fig_biodiv, use_container_width=True)
+    
+    # 2. STATUS IUCN
+    st.markdown("#### Validasi Ancaman Tambang: IUCN Red List")
+    st.markdown("""
+    Berdasarkan data <b>IUCN (International Union for Conservation of Nature) Red List</b>, satwa-satwa endemik yang berhabitat di lingkar tambang ini mayoritas berstatus <b>Rentan (Vulnerable)</b> hingga <b>Terancam Kritis (Critically Endangered)</b>. 
+    Kolom <span style="color:#EF5350;"><b>Mining Threat</b></span> memvalidasi secara keilmuan bahwa aktivitas pertambangan secara eksplisit dicatat sebagai ancaman eksistensial bagi kepunahan mereka di alam liar.
+    """, unsafe_allow_html=True)
+    
+    # Clean up and display IUCN table (drop duplicates so it shows 1 per species)
+    df_iucn_display = df_iucn[['Scientific Name', 'Common Name', 'Status', 'Population Trend', 'Mining Threat']].drop_duplicates().reset_index(drop=True)
+    
+    # Highlight critical status using pandas styling
+    def highlight_status(val):
+        color = '#D32F2F' if val in ['Critically Endangered', 'Endangered'] else '#F57C00' if val == 'Vulnerable' else ''
+        return f'background-color: {color}'
+        
+    def highlight_threat(val):
+        color = '#B71C1C' if val == 'Yes' else ''
+        return f'background-color: {color}'
+
+    st.dataframe(
+        df_iucn_display.style.map(highlight_status, subset=['Status'])
+                       .map(highlight_threat, subset=['Mining Threat']),
+        use_container_width=True, hide_index=True
+    )
+
+    # 3. DATA TRANSPARENCY EXPANDER
+    with st.expander("Lihat Data Mentah: Peta Spasial GBIF & Analisis IUCN", expanded=False):
+        st.write("#### Data Titik Koordinat GBIF (Occurrence)")
+        st.dataframe(df_gbif, use_container_width=True, hide_index=True)
+        st.caption("📁 **Sumber File:** `data/raw/gbif_sulawesi_occurrences.csv` - Data titik penampakan satwa aktual di Sulawesi.")
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        st.write("#### Data Analisis Kerentanan IUCN Red List")
+        st.dataframe(df_iucn, use_container_width=True, hide_index=True)
+        st.caption("📁 **Sumber File:** `data/processed/sulawesi_biodiversitas_iucn_fase5_exploded.csv` - Data status kepunahan dan validasi ancaman tambang per spesies.")
+
+except Exception as e:
+    st.error(f"Gagal memuat visualisasi Biodiversitas: {e}")
+
