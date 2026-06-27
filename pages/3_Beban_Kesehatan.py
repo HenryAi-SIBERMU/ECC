@@ -779,22 +779,22 @@ st.markdown(
 summary_data = []
 for k_x, v_x in x_options.items():
     for k_y, v_y in y_options.items():
-        valid_df = df_panel.dropna(subset=[k_x, k_y]).copy()
+        loop_valid_df = df_panel.dropna(subset=[k_x, k_y]).copy()
         
-        med_y = valid_df[k_y].median()
+        med_y = loop_valid_df[k_y].median()
         lbl_y_h = f"Tinggi (≥{med_y:,.1f})"
         lbl_y_l = f"Rendah (<{med_y:,.1f})"
-        s_y = valid_df[k_y].apply(lambda val: lbl_y_h if val >= med_y else lbl_y_l)
+        s_y = loop_valid_df[k_y].apply(lambda val: lbl_y_h if val >= med_y else lbl_y_l)
 
         if k_x == "Kategori_Daerah":
             lbl_x_h = "Daerah Sentra Tambang"
             lbl_x_l = "Daerah Non-Sentra"
-            s_x = valid_df[k_x]
+            s_x = loop_valid_df[k_x]
         else:
-            med_x = valid_df[k_x].median()
+            med_x = loop_valid_df[k_x].median()
             lbl_x_h = f"Tinggi (≥{med_x:,.1f})"
             lbl_x_l = f"Rendah (<{med_x:,.1f})"
-            s_x = valid_df[k_x].apply(lambda val: lbl_x_h if val >= med_x else lbl_x_l)
+            s_x = loop_valid_df[k_x].apply(lambda val: lbl_x_h if val >= med_x else lbl_x_l)
 
         ct = pd.crosstab(s_x, s_y).reindex(
             index=[lbl_x_l, lbl_x_h], columns=[lbl_y_l, lbl_y_h], fill_value=0
@@ -867,7 +867,7 @@ with st.expander(
     "Lihat Data Panel Mentah (Merge Izin & Dinas Kesehatan)", expanded=False
 ):
     st.dataframe(
-        df_panel[["Provinsi", "Tahun", x_col, "X_Label", y_col, "Y_Label"]],
+        valid_df[["Provinsi", "Tahun", x_col, "X_Label", y_col, "Y_Label"]],
         use_container_width=True,
         hide_index=True,
     )
