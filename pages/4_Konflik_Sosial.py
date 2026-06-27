@@ -1084,3 +1084,76 @@ st.markdown(f"""
 with st.expander("Lihat Data Panel Mentah", expanded=False):
     st.dataframe(df_crosstab[['tahun', 'sektor', 'X_Label', 'Y_Label']], use_container_width=True, hide_index=True)
     st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita.csv` (Diolah secara tabulasi silang)")
+
+# ══════════════════════════════════════════════════════════
+# SUB-BAB 4.5: PETA ORKESTRASI KONFLIK: AKTOR SIPIL VS EKSTRAKTIF
+# ══════════════════════════════════════════════════════════
+st.markdown("---")
+st.subheader("4.5 Peta Orkestrasi Konflik: Aktor Sipil vs Aktor Ekstraktif")
+st.markdown('<span style="background:#0277BD;color:#81D4FA;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Frequency Profiling (Text Parsing NLP) pada Data TanahKita</span><br><br>', unsafe_allow_html=True)
+
+st.markdown("""
+Konflik yang membara tidak hanya melibatkan negara dan aparat, melainkan memunculkan fenomena adu domba struktural (*orkestrasi konflik horizontal*). 
+Pemecahan entitas (*string parsing*) terhadap catatan kronologi advokasi TanahKita menelanjangi siapa yang sesungguhnya bermain di lapangan. 
+Di satu sisi, masyarakat asli sering kali didampingi oleh organisasi struktural yang solid, namun di sisi lain, mulai muncul 
+ormas-ormas, lembaga swadaya buatan, hingga institusi pseudo-adat yang digunakan sebagai proksi (*buffer*) oleh korporasi. 
+Grafik frekuensi ini membongkar dominasi aktor-aktor sipil dan perusahaan tambang yang paling banyak merebut ruang hidup.
+""")
+
+def extract_actors(column):
+    actors = []
+    for val in column.dropna():
+        parts = [x.strip() for x in str(val).split('|') if x.strip()]
+        actors.extend(parts)
+    return pd.Series(actors).value_counts().reset_index()
+
+df_aktor_masyarakat = extract_actors(df_konflik['keterlibatan_masyarakat'])
+df_aktor_masyarakat.columns = ['Aktor', 'Frekuensi']
+
+df_aktor_perusahaan = extract_actors(df_konflik['keterlibatan_perusahaan'])
+df_aktor_perusahaan.columns = ['Aktor', 'Frekuensi']
+
+col_aktor_1, col_aktor_2 = st.columns(2)
+
+with col_aktor_1:
+    st.markdown("#### Top 10 Entitas Korporasi Paling Dominan")
+    top_corp = df_aktor_perusahaan.head(10).sort_values(by='Frekuensi', ascending=True)
+    if not top_corp.empty:
+        fig_corp = px.bar(
+            top_corp, 
+            x='Frekuensi', y='Aktor', orientation='h',
+            color_discrete_sequence=['#F57C00']
+        )
+        fig_corp.update_layout(
+            plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
+            font=dict(color='#ECEFF1'), margin=dict(l=0, r=0, t=10, b=0),
+            xaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)', tickformat='d')
+        )
+        st.plotly_chart(fig_corp, use_container_width=True)
+    st.markdown("""
+    <div style="background:rgba(245, 124, 0, 0.1);padding:15px;border-left:3px solid #F57C00;border-radius:5px;font-size:0.9rem;">
+        <b>Analisis Kritis:</b> Grafik membuktikan bahwa entitas pertambangan dan agroindustri skala masif memonopoli perebutan lahan, menjadikan perampasan ruang sebagai <i>modus operandi</i> utama ekspansi modal mereka.
+    </div>
+    """, unsafe_allow_html=True)
+
+with col_aktor_2:
+    st.markdown("#### Top 10 Aktor Sipil & Ormas Terlibat")
+    # Abaikan terms generik seperti "Masyarakat Desa", "Masyarakat Kabupaten"
+    top_civil = df_aktor_masyarakat[~df_aktor_masyarakat['Aktor'].str.contains('Masyarakat Desa|Masyarakat Kabupaten|Warga|Petani', case=False, na=False)].head(10).sort_values(by='Frekuensi', ascending=True)
+    if not top_civil.empty:
+        fig_civil = px.bar(
+            top_civil, 
+            x='Frekuensi', y='Aktor', orientation='h',
+            color_discrete_sequence=['#43A047']
+        )
+        fig_civil.update_layout(
+            plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
+            font=dict(color='#ECEFF1'), margin=dict(l=0, r=0, t=10, b=0),
+            xaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)', tickformat='d')
+        )
+        st.plotly_chart(fig_civil, use_container_width=True)
+    st.markdown("""
+    <div style="background:rgba(67, 160, 71, 0.1);padding:15px;border-left:3px solid #43A047;border-radius:5px;font-size:0.9rem;">
+        <b>Analisis Kritis:</b> Peta ini menunjukkan konsentrasi pendampingan jaringan advokasi sipil sekaligus mengisyaratkan pengerahan 'lembaga' dan 'ormas' faksi lain di lapangan, yang menandakan maraknya eskalasi benturan horizontal.
+    </div>
+    """, unsafe_allow_html=True)
