@@ -88,7 +88,6 @@ st.markdown("""
 # ---------------------------------------------------------
 # DATA PREPARATION (PURE DATA-DRIVEN)
 # ---------------------------------------------------------
-@st.cache_data
 def load_konflik_data_full():
     df_konflik = pd.read_csv(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'processed', 'sulawesi_konflik_agraria_tanahkita.csv'))
     
