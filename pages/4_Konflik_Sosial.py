@@ -90,8 +90,15 @@ st.markdown("""
 # ---------------------------------------------------------
 @st.cache_data
 def load_konflik_data_full():
-    df_konflik = pd.read_csv('data/processed/sulawesi_konflik_agraria_tanahkita.csv')
-    return df_konflik
+    df_konflik = pd.read_csv(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'processed', 'sulawesi_konflik_agraria_tanahkita.csv'))
+    
+    # FILTER REGIONAL SULAWESI + MALUKU UTARA (Sentra Nikel)
+    keywords = r'\b(sulawesi|sulsel|sulteng|sultra|sulut|sulbar|gorontalo|morowali|konawe|kolaka|bombana|poso|donggala|makassar|manado|minahasa|sangihe|mamuju|majene|polewali|halmahera|maluku utara|weda|obi|soroako|luwu|bantaeng|buton|muna|wakatobi|banggai|buol|toli-toli|parigi|luwuk|kendari|baubau|palu|bitung|tomohon|kotamobagu|gowa|takalar|jeneponto|bulukumba|sinjai|bone|maros|pangkep|barru|pinrang|enrekang|toraja|palopo)\b'
+    mask = df_konflik['judul'].str.contains(keywords, case=False, na=False, regex=True) | \
+           df_konflik['deskripsi'].str.contains(keywords, case=False, na=False, regex=True) | \
+           df_konflik['narasi'].str.contains(keywords, case=False, na=False, regex=True) | \
+           df_konflik['lokasi'].str.contains(keywords, case=False, na=False, regex=True)
+    return df_konflik[mask].copy()
 
 df_konflik = load_konflik_data_full()
 
