@@ -574,8 +574,8 @@ df_kes_ispa = df_kes[df_kes["indikator"] == "Kasus ISPA/Pneumonia"][
 df_kes_diare = df_kes[df_kes["indikator"] == "Kasus Diare Dilayani"][
     ["provinsi", "tahun", "nilai"]
 ].rename(columns={"nilai": "Total_Diare", "provinsi": "Provinsi", "tahun": "Tahun"})
-df_panel = pd.merge(df_kes_ispa, df_iku, on=["Provinsi", "Tahun"], how="inner")
-df_panel = pd.merge(df_panel, df_kes_diare, on=["Provinsi", "Tahun"], how="inner")
+df_panel = pd.merge(df_kes_ispa, df_iku, on=["Provinsi", "Tahun"], how="outer")
+df_panel = pd.merge(df_panel, df_kes_diare, on=["Provinsi", "Tahun"], how="outer")
 
 # FASE 2: Klasifikasi Sentra vs Non-Sentra
 sentra_tambang = ['Sulawesi Tengah', 'Sulawesi Tenggara']
@@ -609,7 +609,9 @@ with col_sel2:
     )
 
 # --- Calculation (Binning) ---
-y_median = df_panel[y_col].median()
+valid_df = df_panel.dropna(subset=[x_col, y_col]).copy()
+
+y_median = valid_df[y_col].median()
 label_y_low = f"Rendah (<{y_median:,.1f})"
 label_y_high = f"Tinggi (≥{y_median:,.1f})"
 
@@ -617,24 +619,24 @@ if x_col == "Kategori_Daerah":
     # Jika Kategorikal (Kategori Daerah)
     label_x_low = "Daerah Non-Sentra"
     label_x_high = "Daerah Sentra Tambang"
-    df_panel["X_Label"] = df_panel[x_col]
+    valid_df["X_Label"] = valid_df[x_col]
 else:
     # Jika Numerik (IKU)
-    x_median = df_panel[x_col].median()
+    x_median = valid_df[x_col].median()
     label_x_low = f"Rendah (<{x_median:,.1f})"
     label_x_high = f"Tinggi (≥{x_median:,.1f})"
-    df_panel["X_Label"] = df_panel[x_col].apply(
+    valid_df["X_Label"] = valid_df[x_col].apply(
         lambda x: label_x_high if x >= x_median else label_x_low
     )
 
-df_panel["Y_Label"] = df_panel[y_col].apply(
+valid_df["Y_Label"] = valid_df[y_col].apply(
     lambda x: label_y_high if x >= y_median else label_y_low
 )
 
 # Crosstab Base
 cats_x = [label_x_low, label_x_high]
 cats_y = [label_y_low, label_y_high]
-crosstab = pd.crosstab(df_panel["X_Label"], df_panel["Y_Label"]).reindex(
+crosstab = pd.crosstab(valid_df["X_Label"], valid_df["Y_Label"]).reindex(
     index=cats_x, columns=cats_y, fill_value=0
 )
 
@@ -777,20 +779,22 @@ st.markdown(
 summary_data = []
 for k_x, v_x in x_options.items():
     for k_y, v_y in y_options.items():
-        med_y = df_panel[k_y].median()
+        valid_df = df_panel.dropna(subset=[k_x, k_y]).copy()
+        
+        med_y = valid_df[k_y].median()
         lbl_y_h = f"Tinggi (≥{med_y:,.1f})"
         lbl_y_l = f"Rendah (<{med_y:,.1f})"
-        s_y = df_panel[k_y].apply(lambda val: lbl_y_h if val >= med_y else lbl_y_l)
+        s_y = valid_df[k_y].apply(lambda val: lbl_y_h if val >= med_y else lbl_y_l)
 
         if k_x == "Kategori_Daerah":
             lbl_x_h = "Daerah Sentra Tambang"
             lbl_x_l = "Daerah Non-Sentra"
-            s_x = df_panel[k_x]
+            s_x = valid_df[k_x]
         else:
-            med_x = df_panel[k_x].median()
+            med_x = valid_df[k_x].median()
             lbl_x_h = f"Tinggi (≥{med_x:,.1f})"
             lbl_x_l = f"Rendah (<{med_x:,.1f})"
-            s_x = df_panel[k_x].apply(lambda val: lbl_x_h if val >= med_x else lbl_x_l)
+            s_x = valid_df[k_x].apply(lambda val: lbl_x_h if val >= med_x else lbl_x_l)
 
         ct = pd.crosstab(s_x, s_y).reindex(
             index=[lbl_x_l, lbl_x_h], columns=[lbl_y_l, lbl_y_h], fill_value=0
