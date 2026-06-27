@@ -506,30 +506,13 @@ with col_jiwa:
         margin=dict(t=60, b=40)
     )
     
-    val_2012 = df_sektor_tahun[df_sektor_tahun['tahun'] == 2012]['dampak_masyarakat_jiwa'].sum()
-    if val_2012 > 0:
+    top_jiwa = df_sektor_tahun.groupby('tahun')['dampak_masyarakat_jiwa'].sum().sort_values(ascending=False)
+    top_jiwa = top_jiwa[top_jiwa > 0].head(2)
+    for i, (year, val) in enumerate(top_jiwa.items(), 1):
         fig_jiwa.add_annotation(
-            x=2012, y=val_2012,
-            text="<a href='#anomali-1' target='_self' style='color:white;text-decoration:none;'><b>Anomali 1</b></a>",
-            hovertext="<b>2012 (Pertambangan)</b><br>Klik untuk melihat detail di bawah",
-            showarrow=True, arrowhead=2, arrowcolor="#FF5252", ax=0, ay=-35,
-            font=dict(size=11, color="white"), bgcolor="rgba(211,47,47,0.8)", bordercolor="#FF5252"
-        )
-    val_2019 = df_sektor_tahun[df_sektor_tahun['tahun'] == 2019]['dampak_masyarakat_jiwa'].sum()
-    if val_2019 > 0:
-        fig_jiwa.add_annotation(
-            x=2019, y=val_2019,
-            text="<a href='#anomali-2' target='_self' style='color:white;text-decoration:none;'><b>Anomali 2</b></a>",
-            hovertext="<b>2019 (PSN & Kehutanan)</b><br>Klik untuk melihat detail di bawah",
-            showarrow=True, arrowhead=2, arrowcolor="#FF5252", ax=0, ay=-35,
-            font=dict(size=11, color="white"), bgcolor="rgba(211,47,47,0.8)", bordercolor="#FF5252"
-        )
-    val_2020 = df_sektor_tahun[df_sektor_tahun['tahun'] == 2020]['dampak_masyarakat_jiwa'].sum()
-    if val_2020 > 0:
-        fig_jiwa.add_annotation(
-            x=2020, y=val_2020,
-            text="<a href='#anomali-5' target='_self' style='color:white;text-decoration:none;'><b>Anomali 5</b></a>",
-            hovertext="<b>2020 (Kehutanan)</b><br>Klik untuk melihat detail di bawah",
+            x=year, y=val,
+            text=f"<a href='#anomali-jiwa-{year}' target='_self' style='color:white;text-decoration:none;'><b>Anomali Jiwa {i}</b></a>",
+            hovertext=f"<b>{year} (Lonjakan Korban)</b><br>Klik untuk melihat detail di bawah",
             showarrow=True, arrowhead=2, arrowcolor="#FF5252", ax=0, ay=-35,
             font=dict(size=11, color="white"), bgcolor="rgba(211,47,47,0.8)", bordercolor="#FF5252"
         )
@@ -556,21 +539,13 @@ with col_ha:
         margin=dict(t=60, b=40)
     )
 
-    val_2010 = df_sektor_tahun[df_sektor_tahun['tahun'] == 2010]['luas_ha'].sum()
-    if val_2010 > 0:
+    top_ha = df_sektor_tahun.groupby('tahun')['luas_ha'].sum().sort_values(ascending=False)
+    top_ha = top_ha[top_ha > 0].head(2)
+    for i, (year, val) in enumerate(top_ha.items(), 1):
         fig_ha.add_annotation(
-            x=2010, y=val_2010,
-            text="<a href='#anomali-3' target='_self' style='color:#111;text-decoration:none;'><b>Anomali 3</b></a>",
-            hovertext="<b>2010 (Perkebunan)</b><br>Klik untuk melihat detail di bawah",
-            showarrow=True, arrowhead=2, arrowcolor="#FFC107", ax=0, ay=-35,
-            font=dict(size=11, color="#111"), bgcolor="rgba(255,193,7,0.9)", bordercolor="#FFB300"
-        )
-    val_2014 = df_sektor_tahun[df_sektor_tahun['tahun'] == 2014]['luas_ha'].sum()
-    if val_2014 > 0:
-        fig_ha.add_annotation(
-            x=2014, y=val_2014,
-            text="<a href='#anomali-4' target='_self' style='color:#111;text-decoration:none;'><b>Anomali 4</b></a>",
-            hovertext="<b>2014 (Hutan & Kebun)</b><br>Klik untuk melihat detail di bawah",
+            x=year, y=val,
+            text=f"<a href='#anomali-ha-{year}' target='_self' style='color:#111;text-decoration:none;'><b>Anomali Area {i}</b></a>",
+            hovertext=f"<b>{year} (Lonjakan Area)</b><br>Klik untuk melihat detail di bawah",
             showarrow=True, arrowhead=2, arrowcolor="#FFC107", ax=0, ay=-35,
             font=dict(size=11, color="#111"), bgcolor="rgba(255,193,7,0.9)", bordercolor="#FFB300"
         )
@@ -579,112 +554,56 @@ with col_ha:
 
 st.markdown("""
 <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #F44336; margin-bottom: 25px;">
-    <b style="color: #F44336;">Interpretasi Ekologis dan Sosial:</b> Monopoli tanah terbesar dilakukan oleh rezim Perkebunan monokultur (Sawit), namun daya rusak kemanusiaan terburuk (pengusiran masyarakat masif) disetir oleh sektor Kehutanan dan Pertambangan (Nikel). Lonjakan luar biasa pada grafik pasca-2005 dan dekade terakhir merepresentasikan kegagalan mutlak sistem pengaman sosial di zona investasi.
+    <b style="color: #F44336;">Interpretasi Ekologis dan Sosial:</b> Lonjakan luar biasa pada grafik merepresentasikan titik didih ledakan demografis dari kegagalan mutlak sistem pengaman sosial di zona investasi ekstraktif.
 </div>
 """, unsafe_allow_html=True)
 
 with st.expander("🔍 Bedah Forensik Anomali (Spike) Konflik Agraria", expanded=True):
     st.markdown("""
-Berdasarkan ekstraksi dataset secara mendalam pada kolom `deskripsi`, `keterlibatan_perusahaan`, `keterlibatan_pemerintah`, dan `narasi`, berikut adalah anatomi dari lonjakan-lonjakan ekstrem (*spikes*) yang terjadi pada grafik **Ledakan Korban Terdampak (Jiwa)** dan **Monopoli Area Konflik (Hektar)**.
+Berdasarkan ekstraksi dataset secara mendalam, berikut adalah bedah anatomis dari lonjakan-lonjakan ekstrem (*spikes*) yang terjadi pada grafik **Ledakan Korban Terdampak (Jiwa)** dan **Monopoli Area Konflik (Hektar)** di wilayah ini.
+    """)
+    
+    # Process and display Jiwa Anomalies
+    for i, year in enumerate(top_jiwa.index, 1):
+        st.markdown(f"---")
+        st.markdown(f"<a id='anomali-jiwa-{year}'></a>", unsafe_allow_html=True)
+        st.markdown(f"#### ANOMALI JIWA {i}: Lonjakan Korban Jiwa Tahun {year}")
+        
+        # Get top case
+        cases = df_konflik[df_konflik['tahun'] == year].copy()
+        cases['jiwa_num'] = pd.to_numeric(cases['dampak_masyarakat_jiwa'].astype(str).str.replace(',', '').str.replace(' Jiwa', ''), errors='coerce').fillna(0)
+        top_case = cases.sort_values('jiwa_num', ascending=False).iloc[0] if not cases.empty else None
+        
+        if top_case is not None:
+            judul = top_case['judul']
+            korban = top_case['jiwa_num']
+            pt = top_case['keterlibatan_perusahaan'] if pd.notna(top_case['keterlibatan_perusahaan']) else 'Tidak/Belum Teridentifikasi'
+            narasi = str(top_case['narasi'])[:450] + "..." if pd.notna(top_case['narasi']) and str(top_case['narasi']).strip() != 'nan' else (str(top_case['deskripsi'])[:450] + "...")
+            st.markdown(f"**Kasus Utama Pendongkrak Statistik: {judul}**")
+            st.markdown(f"* **Total Korban (Kasus Ini):** {int(korban):,} Jiwa")
+            st.markdown(f"* **Perusahaan Terlibat:** {pt}")
+            st.markdown(f"* **Narasi Singkat:** {narasi}")
 
----
-
-<a id="anomali-1"></a>
-#### ANOMALI 1: Lonjakan Korban Jiwa Tahun 2012 (Sektor Pertambangan)
-Tahun 2012 mencatatkan ledakan korban jiwa tertinggi di Sektor Pertambangan, didominasi oleh dua megaproyek yang memicu represi masif terhadap warga:
-
-**1. Konflik Kawasan Bentang Alam Karst (KBAK) Gombong**
-* **Total Korban:** 82.692 Jiwa
-* **Perusahaan Terlibat:** PT Semen Gombong / Medco Group
-* **Pemerintah Terlibat:** Pemkab Kebumen, Pemprov Jawa Tengah, Kementerian ESDM
-* **Narasi Kasus:** Ekspansi komoditas batu gamping seluas 147,50 Ha oleh PT Medco Group mengancam ekosistem karst Gombong. Izin Usaha Pertambangan (IUP) yang terus diperpanjang memicu perlawanan besar-besaran dari masyarakat (Perpag) yang menolak pabrik semen karena mengancam sumber air dan ruang hidup puluhan ribu warga.
-* **Sumber Referensi:** [Tribun Jateng (Aksi Tolak Semen)](http://jateng.tribunnews.com/2018/10/16/perpag-kebumen-akan-aksi-besar-besaran-tolak-pabrik-semen) | [LBH Semarang](http://lbhsemarang.or.id/policy-brief-lbh-semarang-menata-karst-gombong-fungsi-lindung-yang-diusung/)
-
-**2. Konflik Gunung Tumpang Pitu, Banyuwangi**
-* **Total Korban:** 13.936 Jiwa
-* **Perusahaan Terlibat:** PT Bumi Suksindo (BSI) / PT. Merdeka Copper Gold
-* **Pemerintah Terlibat:** Pemkab Banyuwangi, Pengadilan Negeri, Mahkamah Agung
-* **Narasi Kasus:** Konsesi tambang emas seluas 4.998 Ha di wilayah Desa Sumberagung. Keputusan Bupati yang mengubah status lindung dan memberikan IUP OP memicu penolakan keras yang berujung pada bentrokan, unjuk rasa masif, serta rentetan kriminalisasi terhadap aktivis dan warga penolak tambang.
-* **Sumber Referensi:** [Mongabay (Konflik Tumpang Pitu)](https://www.mongabay.co.id/2015/12/02/saat-warga-penolak-tambang-emas-tumpang-pitu-berhadapan-dengan-aparat/)
-
----
-
-<a id="anomali-2"></a>
-#### ANOMALI 2: Lonjakan Korban Jiwa Tahun 2019 (Infrastruktur PSN & Kehutanan)
-Tahun 2019 menunjukkan eskalasi brutal pengusiran warga atas nama Proyek Strategis Nasional (PSN) dan pencaplokan hutan:
-
-**1. Megaproyek Pelabuhan Internasional Patimban (Subang)**
-* **Total Korban:** 38.951 Jiwa
-* **Sektor:** Infrastruktur & PSN
-* **Perusahaan Terlibat:** PT. Wijaya Karya, PT. PP, Shimizu Corporation, JICA
-* **Pemerintah Terlibat:** Kemenhub, PUPR, BPN, Gubernur Jawa Barat, LMAN
-* **Narasi Kasus:** Ditetapkan sebagai PSN oleh Presiden melalui Perpres 47/2016. Proyek yang didanai JICA ini memicu krisis agraria parah karena proses pembebasan lahan yang cacat, merugikan puluhan ribu nelayan dan petani yang tanahnya digusur tanpa ganti rugi yang layak hingga akhir 2019.
-* **Sumber Referensi:** [Mongabay (Derita Nelayan Patimban)](https://www.mongabay.co.id/2020/12/28/derita-nelayan-terdampak-pembangunan-pelabuhan-patimban/)
-
-**2. Penolakan Tambang Timah di Perairan Bangka**
-* **Total Korban:** 13.494 Jiwa
-* **Sektor:** Pertambangan
-* **Perusahaan Terlibat:** PT. Timah Tbk
-* **Pemerintah Terlibat:** Pemprov Kep. Bangka Belitung, Kementerian KKP, Dinas Perikanan
-* **Narasi Kasus:** Nelayan pesisir Matras melakukan pengusiran terhadap Kapal Isap Produksi (KIP) milik PT Timah Tbk yang beroperasi di wilayah tangkapan nelayan. Ekspansi timah lepas pantai menghancurkan terumbu karang dan mematikan ekonomi nelayan tradisional.
-* **Sumber Referensi:** [Tempo (Nelayan Matras Tolak Kapal Isap)](https://nasional.tempo.co/read/1231626/nelayan-matras-bangka-tolak-kapal-isap-timah)
-
-**3. HTI PT Biomass Andalan Energi (Mentawai)**
-* **Total Korban:** 10.395 Jiwa
-* **Sektor:** Kehutanan
-* **Perusahaan Terlibat:** PT. Biomass Andalan Energi
-* **Pemerintah Terlibat:** KLHK, BKPM, Pemkab Mentawai, Gubernur Sumatera Barat
-* **Narasi Kasus:** Penerbitan Izin Usaha Pemanfaatan Hasil Hutan Kayu pada Hutan Tanaman Industri (IUPHHK-HTI) yang mengancam ruang hidup masyarakat adat Mentawai. Koalisi masyarakat mendesak KLHK membatalkan izin tersebut karena berisiko menghabisi ekosistem pulau kecil.
-* **Sumber Referensi:** [Mongabay (Warga Mentawai Tolak HTI)](https://www.mongabay.co.id/2019/08/12/kala-warga-mentawai-tolak-kehadiran-hti/)
-
----
-
-<a id="anomali-3"></a>
-#### ANOMALI 3: Lonjakan Area Konflik Tahun 2010 (Perkebunan)
-Tahun 2010 merupakan titik nadir perampasan tanah berskala raksasa di sektor perkebunan (Agroindustri):
-
-**1. Megaproyek MIFEE (Merauke Integrated Food and Energy Estate)**
-* **Luas Area:** 1.200.000 Hektar (1,2 Juta Ha)
-* **Sektor:** Perkebunan
-* **Perusahaan Terlibat:** PT. Dongin Prabhawa, PT. Cendrawasih Jaya Mandiri
-* **Pemerintah Terlibat:** Menteri Kehutanan, Menko Perekonomian, Menteri Pertanian, Pemprov Papua
-* **Narasi Kasus:** Kebijakan *Top-Down* dari pemerintah pusat untuk menciptakan lumbung pangan dan energi memicu kanibalisme daratan seluas 1,2 juta Hektar. Suku Malind dan masyarakat adat Papua digusur dan kehilangan hak ulayatnya, sementara sungai-sungai mereka dicemari oleh pestisida dan aktivitas korporasi kelapa sawit.
-* **Sumber Referensi:** [Project Multatuli (MIFEE Proyek Gagal)](https://projectmultatuli.org/mifee-proyek-pangan-raksasa-papua-yang-gagal-dan-merampas-tanah-adat/)
-
----
-
-<a id="anomali-4"></a>
-#### ANOMALI 4: Lonjakan Area Konflik Tahun 2014 (Kehutanan & Perkebunan)
-Tahun 2014 mencatatkan lonjakan masif pada luasan area konflik, didominasi oleh pencaplokan pulau-pulau kecil untuk konsesi kehutanan dan perkebunan raksasa:
-
-**1. Megaproyek Perkebunan Tebu PT Menara Group (Kepulauan Aru, Maluku)**
-* **Luas Area:** 626.900 Hektar
-* **Sektor:** Kehutanan (Dialihfungsikan ke Perkebunan)
-* **Perusahaan Terlibat:** Konsorsium PT Menara Group (28 perusahaan)
-* **Pemerintah Terlibat:** Menteri Kehutanan, Gubernur Maluku, Bupati Kepulauan Aru
-* **Narasi Kasus:** Sebuah skandal perampasan ruang hidup yang hampir menghilangkan Kabupaten Kepulauan Aru dari peta ekologis. Pemerintah menerbitkan izin prinsip seluas lebih dari 600 ribu hektar (sebagian besar daratan Kepulauan Aru) kepada konsorsium PT Menara Group untuk perkebunan tebu. Hal ini memicu gerakan masif lokal, nasional, dan global **#SaveAru** karena proyek ini dinilai akan menghancurkan ruang hidup masyarakat adat secara total, memusnahkan keanekaragaman hayati endemis, dan menenggelamkan pulau-pulau kecil akibat eksploitasi air tanah skala industri.
-* **Sumber Referensi:** [Mongabay (Gerakan #SaveAru)](https://www.mongabay.co.id/2014/04/16/save-aru-perjuangan-masyarakat-kepulauan-aru-melawan-korporasi/) | [Forest Watch Indonesia](https://fwi.or.id/publikasi/menyelamatkan-kepulauan-aru/)
-
-**2. Sengketa Lahan PT Perkebunan Nusantara II (Langkat)**
-* **Luas Area:** ~18.000 Hektar
-* **Sektor:** Perkebunan
-* **Perusahaan Terlibat:** PTPN II
-* **Narasi Kasus:** Konflik panjang antara masyarakat adat/petani dengan PTPN II atas klaim eks-HGU dan kawasan hutan yang tak kunjung diselesaikan, memicu letupan kekerasan dan penggusuran kebun rakyat.
-* **Sumber Referensi:** [Catatan KPA & KontraS]
-
----
-
-<a id="anomali-5"></a>
-#### ANOMALI 5: Puncak Krisis Kemanusiaan Tahun 2020 (Sektor Kehutanan)
-Tahun 2020 mencatatkan anomali rekor tertinggi secara absolut untuk grafik Korban Terdampak (mencapai lebih dari 134.000 jiwa). Di tengah darurat pandemi COVID-19, pengusiran paksa dan konflik agraria justru tereskalasi dengan tingkat kebrutalan baru:
-
-**1. Konflik PT Wirakarya Sakti (WKS) vs Masyarakat Adat (Jambi)**
-* **Total Korban:** > 134.000 Jiwa
-* **Sektor:** Kehutanan (Hutan Produksi)
-* **Perusahaan Terlibat:** PT. Wirakarya Sakti (WKS)
-* **Pemerintah Terlibat:** Polres Tebo, Pemprov Jambi, DPRD Jambi, dan lintas instansi Pemkab.
-* **Narasi Kasus:** Konflik historis tak berkesudahan antara PT WKS dan warga sekitar konsesi HTI. Pada April 2020, kontraktor perusahaan secara sadar menerbangkan *drone* dan menyemprotkan cairan racun herbisida dari udara ke lahan warga (Dusun Pelayang Tebat) yang ditanami sawit dan palawija. Metode represi agrikultural udara ini mematikan sumber pangan warga secara instan dan memicu darurat sosial di ratusan ribu warga desa yang menggantungkan hidup pada lahan tersebut.
-* **Sumber Referensi:** [Mongabay (WKS Semprot Racun dari Udara)](https://www.mongabay.co.id/2020/05/11/konflik-lahan-berkepanjangan-perusahaan-semprot-racun-dari-udara-ke-kebun-warga/)
+    # Process and display HA Anomalies
+    for i, year in enumerate(top_ha.index, 1):
+        st.markdown(f"---")
+        st.markdown(f"<a id='anomali-ha-{year}'></a>", unsafe_allow_html=True)
+        st.markdown(f"#### ANOMALI AREA {i}: Monopoli Area Konflik Tahun {year}")
+        
+        # Get top case
+        cases = df_konflik[df_konflik['tahun'] == year].copy()
+        cases['ha_num'] = pd.to_numeric(cases['luas_ha'].astype(str).str.replace(',', '').str.replace(' Ha', ''), errors='coerce').fillna(0)
+        top_case = cases.sort_values('ha_num', ascending=False).iloc[0] if not cases.empty else None
+        
+        if top_case is not None:
+            judul = top_case['judul']
+            luas = top_case['ha_num']
+            pt = top_case['keterlibatan_perusahaan'] if pd.notna(top_case['keterlibatan_perusahaan']) else 'Tidak/Belum Teridentifikasi'
+            narasi = str(top_case['narasi'])[:450] + "..." if pd.notna(top_case['narasi']) and str(top_case['narasi']).strip() != 'nan' else (str(top_case['deskripsi'])[:450] + "...")
+            st.markdown(f"**Kasus Utama Pendongkrak Statistik: {judul}**")
+            st.markdown(f"* **Total Daratan Dirampas (Kasus Ini):** {int(luas):,} Hektar")
+            st.markdown(f"* **Perusahaan Terlibat:** {pt}")
+            st.markdown(f"* **Narasi Singkat:** {narasi}")
 """)
 
 st.subheader("4.3 Kriminalisasi Aktivis dan Resistensi Ruang Sipil")
