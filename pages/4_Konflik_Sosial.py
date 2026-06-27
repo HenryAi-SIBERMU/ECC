@@ -1107,18 +1107,22 @@ ormas-ormas, lembaga swadaya buatan, hingga institusi pseudo-adat yang digunakan
 Grafik frekuensi ini membongkar dominasi aktor-aktor sipil dan perusahaan tambang yang paling banyak merebut ruang hidup.
 """)
 
-def extract_actors(column):
-    actors = []
-    for val in column.dropna():
-        parts = [x.strip() for x in str(val).split('|') if x.strip()]
-        actors.extend(parts)
-    return pd.Series(actors).value_counts().reset_index()
+import re
 
-df_aktor_masyarakat = extract_actors(df_konflik['keterlibatan_masyarakat'])
-df_aktor_masyarakat.columns = ['Aktor', 'Frekuensi']
+# NLP Extraction (Regex) for Actors from Text
+text_corpus = " ".join((df_konflik['judul'].fillna('') + " " + df_konflik['deskripsi'].fillna('') + " " + df_konflik['narasi'].fillna('')).tolist())
 
-df_aktor_perusahaan = extract_actors(df_konflik['keterlibatan_perusahaan'])
+# Extract Corporate Actors
+pts = re.findall(r'\b(?:PT|CV)\.?\s*[A-Z][a-zA-Z]*(?:\s+[A-Z][a-zA-Z]*){0,3}\b', text_corpus)
+pts = [" ".join(pt.split()) for pt in pts]
+df_aktor_perusahaan = pd.Series(pts).value_counts().reset_index()
 df_aktor_perusahaan.columns = ['Aktor', 'Frekuensi']
+
+# Extract Civil Society Actors
+civils = re.findall(r'\b(?:Walhi|WALHI|Jatam|JATAM|AMAN|LBH|Aliansi|Serikat|Konsorsium|Masyarakat Adat|Warga Desa)\s*[A-Z][a-zA-Z]*(?:\s+[A-Z][a-zA-Z]*){0,3}\b', text_corpus)
+civils = [" ".join(cv.split()) for cv in civils]
+df_aktor_masyarakat = pd.Series(civils).value_counts().reset_index()
+df_aktor_masyarakat.columns = ['Aktor', 'Frekuensi']
 
 col_aktor_1, col_aktor_2 = st.columns(2)
 
