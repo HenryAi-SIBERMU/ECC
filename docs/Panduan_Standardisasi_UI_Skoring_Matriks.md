@@ -27,3 +27,13 @@ Grafik standar tidak cukup. Setiap grafik *wajib* disuntik dengan elemen analiti
 *   **Vonis Angka, Bukan Teks Panjang**: Ubah peringatan bahaya menjadi Skor Skala 0-10. Tampilkan metrik ini sejajar dengan angka data aslinya.
 *   **Model Matematis Dinamis**: Jangan *hardcode* nilai agar mentok di 10.0. Gunakan normalisasi (*Dynamic Thresholding*, rasio IRR, *Carrying Capacity Index*) dengan batas atas (denominator) yang wajar sehingga skor bisa tampil dinamis (misal: 8.1, 9.4).
 *   **Akumulasi Skor Kerusakan (Kartu Kiri)**: Satukan semua skor dari tiap Tab menggunakan rata-rata (*Simple Additive Weighting*). Tampilkan angka akumulasi (misal `9.8 / 10`) secara mencolok, *bold*, tebal di dalam kartu Mitos vs Fakta, **tanpa** menggunakan icon emoji (🚨) agar terkesan serius dan forensik.
+
+## 6. Standardisasi Elemen Metodologi & Dataset
+Setiap bab/sub-bab harus secara transparan memaparkan metodologi yang digunakan, dengan pakem UI/UX berikut (seperti yang telah diimplementasikan di Halaman 1 Ekspansi Industri):
+*   **Gunakan Dropdown (`st.expander`)**: Jangan gunakan *badge/span* warna-warni yang ringkas. Selalu gunakan `with st.expander("Detail Metodologi & Dataset"):` agar penjelasan detail bisa diakses secara rapi.
+*   **Tanpa Ikon/Emoji**: Pertahankan kesan profesional dan akademis yang serius. Jangan gunakan ikon (seperti 📊, 📁) di dalam teks *expander* ini.
+*   **Format Penomoran dengan Spasi Ganda**: Konten di dalamnya wajib diformat dengan urutan *numbering* dan diberi jarak spasi baris ganda (antar poin tidak boleh menumpuk menjadi 1 paragraf panjang).
+*   **Struktur 3 Poin Utama**:
+    1.  **Metode Analisis**: Menjelaskan jenis metode analisis yang digunakan, tahapan pengolahan/agregasi data, serta (jika ada) penjelasan perumusan matematis atau regresi yang diaplikasikan. *(Hindari singkatan/istilah gaul seperti TL;DR atau nama *software* statistik tertentu seperti SPSS).*
+    2.  **Variabel/Fitur Data**: Membongkar daftar nama-nama kolom atau variabel *raw data* yang secara utuh digunakan dari *dataset* (contoh: *Plant name, Status, Capacity (MW), Deforestasi Kawasan Lindung, dll.*), bukan hanya meringkas variabel akhirnya.
+    3.  **Dataset & File**: Mencantumkan institusi sumber asal data primer/sekunder dan lokasi persis file CSV mana yang ditarik oleh kode (contoh: `data/processed/sulawesi_pltu_captive.csv`).

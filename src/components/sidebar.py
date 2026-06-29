@@ -68,7 +68,7 @@ def render_sidebar():
         )
         st.markdown("---")
 
-        st.page_link("Dashboard.py", label=_("Overview Nasional"))
+        st.page_link("Dashboard.py", label=_("Overview Temuan"))
         # st.page_link("pages/0_Progress_Riset.py",           label=_("Progress Riset & Data"))
 
         st.markdown(

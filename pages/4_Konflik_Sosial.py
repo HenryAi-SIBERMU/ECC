@@ -303,7 +303,26 @@ st.markdown("---")
 import plotly.express as px
 
 st.subheader("4.1 Tren Eskalasi Konflik Agraria Seiring Ekspansi Industri")
-st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Analisis Tren Time-Series (Sumber: KPA / Tanah Kita)</span><br><br>', unsafe_allow_html=True)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Analisis Tren Time-Series (Sumber: KPA / Tanah Kita)</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Analisis Tren Time-Series"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan visualisasi tren runtun waktu (*Time-Series Trend Analysis*) untuk melacak eskalasi kasus perampasan lahan secara historis.
+
+    1. **Model Analisis Tren Historis:**
+        * **Time-Series Tracking:** Memetakan fluktuasi dan eskalasi frekuensi letupan konflik agraria dalam rentang waktu memanjang (longitudinal).
+        * **Komparasi Periodik:** Membandingkan volume letupan konflik antara fase pra-ekspansi (sebelum hilirisasi masif) dengan fase pasca-ekspansi (era Proyek Strategis Nasional).
+        * **Pemetaan Eskalasi:** Mengidentifikasi pola lonjakan kasus perampasan lahan untuk membuktikan secara empiris relasi antara percepatan industrialisasi dengan peningkatan konflik sosial.
+    2. **Kalkulasi/Formula Pengolahan:** Agregasi jumlah konflik berdasarkan periode tahun pencatatan dan sektor industri.
+        * `Total_Konflik_Tahunan = COUNT(Kasus) GROUP BY Tahun, Sektor`
+        * `Lonjakan_Eskalasi = (Kasus_Pasca - Kasus_Pra) / Kasus_Pra * 100%`
+    3. **Variabel & Fitur Data:**
+        * **Waktu (Independen):** Tahun pencatatan konflik (1990 - 2025).
+        * **Frekuensi & Sektor (Dependen):** Jumlah insiden perampasan ruang dan sektor korporasi yang memicu konflik.
+    4. **Dataset & File:**
+        * Catatan Konflik Agraria: `data/processed/sulawesi_konflik_agraria_tanahkita.csv`
+    """)
 
 # Pemrosesan Data untuk Time-Series
 def map_sektor(status):
@@ -449,7 +468,26 @@ st.markdown("""
 # SUB-BAB 4.2: SEBARAN SEKTORAL DAMPAK
 # ══════════════════════════════════════════════════════════
 st.subheader("4.2 Sebaran Sektoral: Korban Jiwa dan Monopoli Ruang")
-st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Analisis Komparatif Dampak Sosial-Ekologis (Sumber: KPA / Tanah Kita)</span><br><br>', unsafe_allow_html=True)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Analisis Komparatif Dampak Sosial-Ekologis (Sumber: KPA / Tanah Kita)</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Analisis Komparatif Dampak Sosial-Ekologis"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan agregasi komparatif (*Comparative Aggregation Analysis*) untuk membedah skala kehancuran sosial (korban terdampak) dan monopoli ruang (hektar) antar sektor.
+
+    1. **Model Analisis Beban Sektoral (Sectoral Burden Analysis):**
+        * **Kategorisasi Sektoral (Profiling):** Mengklasifikasikan sumber konflik (sektor Tambang, Perkebunan, Kehutanan, dll.) sebagai basis pengelompokan (*grouping*).
+        * **Kuantifikasi Monopoli:** Menghitung total agregat luasan daratan (hektar) yang dirampas dan jumlah masyarakat (jiwa) yang terdampak per sektor industri.
+        * **Evaluasi Dominasi:** Membedah asimetri penguasaan ruang untuk mengidentifikasi sektor mana yang bertindak sebagai aktor dominan dalam praktik perampasan tanah (*land grabbing*).
+    2. **Kalkulasi/Formula Pengolahan:** Perhitungan sum/agregat dari seluruh korban jiwa (bukan korban meninggal, melainkan terdampak) dan hektar.
+        * `Total_Jiwa_Terdampak = SUM(Jiwa) GROUP BY Sektor`
+        * `Total_Monopoli_Area = SUM(Hektar) GROUP BY Sektor`
+    3. **Variabel & Fitur Data:**
+        * **Sektor (Independen):** Kategori proyek (Perkebunan, Kehutanan, Pertambangan, dll).
+        * **Korban Jiwa & Luas Area (Dependen):** Jumlah orang terdampak (Jiwa) dan luas sengketa (Ha).
+    4. **Dataset & File:**
+        * Dampak Konflik: `data/processed/sulawesi_konflik_agraria_tanahkita.csv`
+    """)
 
 # Pemrosesan Data untuk Dampak Sektoral
 df_dampak = df_ts.copy()
@@ -611,7 +649,26 @@ Berdasarkan ekstraksi dataset secara mendalam, berikut adalah bedah anatomis dar
             st.markdown(f"* **Sumber Referensi:** [Lihat Detail Kasus TanahKita]({link})")
 
 st.subheader("4.3 Kriminalisasi Aktivis dan Resistensi Ruang Sipil")
-st.markdown('<span style="background:#E53935;color:#FFCDD2;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Analisis Agregat Kasus Represi & Pelanggaran HAM (Sumber: Database Tanah Kita)</span>', unsafe_allow_html=True)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Analisis Agregat Kasus Represi & Pelanggaran HAM (Sumber: Database Tanah Kita)</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Analisis Agregat Kasus Represi & Pelanggaran HAM"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan agregasi kasus indikasi pelanggaran Hak Asasi Manusia dan Kriminalisasi Pejuang Lingkungan melalui ekstraksi metrik fatalitas.
+
+    1. **Pemodelan Indikator Kekerasan & Represi:**
+        * **Violence & Criminalization Tracking:** Mendokumentasikan kasus penangkapan, intimidasi, kekerasan fisik, hingga jatuhnya korban jiwa di pihak warga dan aktivis lingkungan.
+        * **Kuantifikasi Fatalitas:** Menghitung akumulasi jumlah korban kriminalisasi dan korban tewas sebagai proksi tingkat represi struktural.
+        * **Pemetaan Ruang Sipil:** Mengevaluasi sejauh mana ekspansi investasi industri ekstraktif beroperasi dengan menggunakan instrumen represi aparatur keamanan (penyempitan ruang sipil).
+    2. **Kalkulasi/Formula Pengolahan:** Penghitungan jumlah insiden kriminalisasi serta total akumulasi korban represi kekerasan fisik.
+        * `Total_Kasus_Kriminalisasi = COUNT(Kasus) WHERE Indikasi_Kriminalisasi = TRUE`
+        * `Total_Korban_Tewas = SUM(Jumlah_Tewas) GROUP BY Sektor`
+    3. **Variabel & Fitur Data:**
+        * **Status Represi (Dependen):** Boolean (Ya/Tidak) terjadinya indikasi kriminalisasi dalam konflik.
+        * **Kuantitas Korban (Dependen):** Angka mutlak (integer) korban tertangkap, terluka, dan meninggal.
+    4. **Dataset & File:**
+        * Represi dan Kriminalisasi: `data/processed/sulawesi_konflik_agraria_tanahkita.csv`
+    """)
 
 # Pastikan kolom kriminalisasi berupa numerik yang aman
 df_dampak['jumlah_ditangkap'] = pd.to_numeric(df_dampak['jumlah_ditangkap'], errors='coerce').fillna(0)
@@ -726,7 +783,26 @@ st.dataframe(df_kekerasan_display.head(10), use_container_width=True, hide_index
 # ══════════════════════════════════════════════════════════
 st.markdown("---")
 st.subheader("4.4 Pembuktian Statistik: Ekspansi vs Eskalasi Konflik")
-st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Before-After Analysis & SPSS-Style Crosstabulation</span>', unsafe_allow_html=True)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Before-After Analysis & SPSS-Style Crosstabulation</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Before-After Analysis & SPSS-Style Crosstabulation"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan Uji Chi-Square (*Crosstabulation*) gaya SPSS dan kalkulasi risiko peluang (*Odds Ratio*) untuk menguji validitas empiris secara akademis.
+
+    1. **Uji Korelasi Variabel Kategorikal:**
+        * **Crosstabulation:** Mentabulasi silang frekuensi kemunculan dua kondisi (Contoh: Keterlibatan Perusahaan vs Adanya Kriminalisasi) untuk mencari relasi ketergantungan.
+        * `H0 (Null Hypothesis): Variabel baris (Periode/Aktor) saling bebas (independent) secara absolut terhadap variabel kolom (Represi/Kematian).`
+        * `Decision Rule: Chi-Square Asymptotic Significance (P-Value) < 0.05, maka tolak H0 (Terdapat korelasi yang signifikan).`
+    2. **Kalkulasi/Formula Pengolahan:** Algoritma Uji Tabulasi Silang Chi-Square.
+        * `Chi-Square (χ²) = Σ [(Observed - Expected)² / Expected]`
+        * `Odds Ratio (OR) = (Sel A × Sel D) / (Sel B × Sel C)`
+    3. **Variabel & Fitur Data:**
+        * **Matriks Ekspansi (Independen):** Dikotomi rentang waktu (Pra/Pasca 2014) dan kehadiran korporasi.
+        * **Matriks Eskalasi (Dependen):** Kehadiran status represi dan terjadinya jatuhnya korban nyawa (Boolean dikonversi ke kategori).
+    4. **Dataset & File:**
+        * Base Data Cross-Section: `data/processed/sulawesi_konflik_agraria_tanahkita.csv`
+    """)
 
 st.markdown("""
 Hipotesis utama dalam evaluasi ini adalah bahwa **industrialisasi dan ekspansi korporasi** berbanding lurus dengan **eskalasi konflik dan represi** terhadap masyarakat. 
@@ -1020,7 +1096,26 @@ with st.expander("Lihat Data Panel Mentah", expanded=False):
 # ══════════════════════════════════════════════════════════
 st.markdown("---")
 st.subheader("4.5 Peta Orkestrasi Konflik: Aktor Sipil vs Aktor Ekstraktif")
-st.markdown('<span style="background:#0277BD;color:#81D4FA;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Frequency Profiling (Text Parsing NLP) pada Data TanahKita</span><br><br>', unsafe_allow_html=True)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Frequency Profiling (Text Parsing NLP) pada Data TanahKita</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Frequency Profiling (Text Parsing NLP)"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan teknik pemrosesan teks berbasis *Natural Language Processing* (Regex Entity Extraction) untuk membedah relasi aktor (korporasi vs sipil).
+
+    1. **Model Ekstraksi Aktor (Entity Parsing & Text Mining):**
+        * **Textual Pattern Matching:** Memindai ribuan korpus teks narasi historis menggunakan metode *Regular Expressions* (RegEx) untuk mendeteksi entitas korporasi (PT/CV) dan organisasi masyarakat sipil (CSO).
+        * **Token Counting (Frequency Profiling):** Menghitung frekuensi absolut penyebutan (*mentions*) dari setiap aktor spesifik di dalam dokumentasi konflik.
+        * **Pemetaan Oligarki:** Memvalidasi indikasi konsentrasi kekuasaan dan monopoli penguasaan ruang oleh segelintir konglomerasi besar melalui seberapa sering nama entitas tersebut muncul dalam sengketa tanah.
+    2. **Kalkulasi/Formula Pengolahan:** Regex pattern matching and Token Counting.
+        * `Count_PT = SUM(RegEx_Match(r"\\b(?:PT|CV)\\.?\\s*[A-Z][a-zA-Z]*..."))`
+        * `Count_CSO = SUM(RegEx_Match(r"\\b(?:Walhi|Jatam|AMAN|Aliansi)..."))`
+    3. **Variabel & Fitur Data:**
+        * **Teks Korpus Historis (Independen):** Penggabungan kolom `judul`, `deskripsi`, dan `narasi` dari repositori kasus.
+        * **Frekuensi Penyebutan (Dependen):** *Word counts* eksistensi entitas pada teks-teks sengketa.
+    4. **Dataset & File:**
+        * Teks Bebas (*Free-Text*): `data/processed/sulawesi_konflik_agraria_tanahkita.csv`
+    """)
 
 st.markdown("""
 Konflik yang membara tidak hanya melibatkan negara dan aparat, melainkan memunculkan fenomena adu domba struktural (*orkestrasi konflik horizontal*). 

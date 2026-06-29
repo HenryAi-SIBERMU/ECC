@@ -227,7 +227,28 @@ st.markdown("<br>", unsafe_allow_html=True)
 # ── Placeholders Sections ──
 st.markdown("---")
 st.markdown("### 2.1. Dampak Limbah Tailing: Konsentrasi Smelter vs Indeks Kualitas Air (IKA)")
-st.markdown('<span style="background:#1B5E20;color:#A5D6A7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Crosstabulation SPSS & Trendline</span>', unsafe_allow_html=True)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Crosstabulation SPSS & Trendline</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Crosstabulation SPSS & Trendline"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan pendekatan Analisis Spasial dan Uji Statistik Chi-Square (Crosstabulation) untuk mengukur dampak konsentrasi smelter terhadap penurunan kualitas air.
+
+    1. **Uji Tabulasi Silang (Chi-Square Test of Independence):**
+        * **Binning Kategori:** Variabel kontinu dikonversi menjadi data kategorikal (Biner) menggunakan nilai tengah (Median). 'Tinggi' > Median, 'Rendah' <= Median.
+        * `H0 (Null Hypothesis): Tidak ada hubungan signifikan secara statistik antara kepadatan smelter dengan Indeks Kualitas Air.`
+        * `Decision Rule (Alpha 5%): Jika P-Value < 0.05, maka Tolak H0 (Terbukti signifikan bahwa smelter menurunkan mutu air).`
+    2. **Kalkulasi/Formula Pengolahan:** Agregasi jumlah smelter per provinsi dan rata-rata Indeks Kualitas Air (IKA).
+        * `Jumlah_Smelter_Provinsi = COUNT(Smelter) GROUP BY Provinsi`
+        * `Rata_Rata_IKA = MEAN(IKA) GROUP BY Provinsi, Tahun`
+    3. **Variabel & Fitur Data:**
+        * **Jumlah_Smelter:** Variabel Independen (X). Total fasilitas smelter (beroperasi maupun konstruksi).
+        * **Indeks Kualitas Air:** Variabel Dependen (Y). Skor baku mutu air per provinsi.
+        * **Provinsi, Tahun:** Dimensi spasial dan temporal (Data Panel 2016-2023).
+    4. **Dataset & File:**
+        * Data Smelter: `data/processed/sulawesi_esdm_nikel.csv`
+        * Data IKA: `data/processed/sulawesi_ika_2016_2024.csv`
+    """)
 
 # Pra-proses Data Panel Time-Series Section 2.1
 df_smelter['provinsi'] = df_smelter['provinsi'].replace({'Sulawesi Selatan': 'Sulawesi Selatan', 'Sulawesi Tengah': 'Sulawesi Tengah', 'Sulawesi Tenggara': 'Sulawesi Tenggara', 'Sulawesi Utara': 'Sulawesi Utara', 'Gorontalo': 'Gorontalo', 'Sulawesi Barat': 'Sulawesi Barat'})
@@ -331,6 +352,28 @@ with st.expander("Lihat Data Mentah: Panel Smelter vs IKA (Time-Series 2016-2023
 
 st.markdown("---")
 st.markdown("### 2.2. Kepungan Asap: Kapasitas PLTU vs Indeks Kualitas Udara (IKU)")
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Stacked Area Time-Series & Crosstabulation</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Stacked Area Time-Series & Crosstabulation"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan Time-Series Plot dipadukan dengan Uji Chi-Square untuk melihat relasi kapasitas PLTU Captive terhadap kualitas udara ambien.
+
+    1. **Uji Tabulasi Silang (Chi-Square Test of Independence):**
+        * **Binning Kategori:** Variabel kontinu dikonversi menjadi biner via Median.
+        * `H0 (Null Hypothesis): Tidak ada hubungan signifikan antara tingginya kapasitas PLTU Captive dengan Indeks Kualitas Udara (IKU).`
+        * `Decision Rule (Alpha 5%): Jika P-Value < 0.05, maka Tolak H0 (Terbukti signifikan bahwa emisi PLTU meracuni udara ambien).`
+    2. **Kalkulasi/Formula Pengolahan:** Kumulasi kapasitas terpasang PLTU dan rata-rata IKU.
+        * `Kapasitas_PLTU_Kumulatif_Tahun_t = Σ(Capacity) WHERE Start_Year <= t`
+        * `Rata_Rata_IKU = MEAN(IKU) GROUP BY Provinsi, Tahun`
+    3. **Variabel & Fitur Data:**
+        * **Capacity (MW):** Variabel Independen (X). Daya terpasang pembangkit listrik batu bara.
+        * **IKU:** Variabel Dependen (Y). Skor Indeks Kualitas Udara dari KLHK.
+        * **Start year, Status, Provinsi:** Dimensi waktu, operasionalitas, dan letak administratif.
+    4. **Dataset & File:**
+        * Data PLTU: `data/processed/sulawesi_pltu_captive.csv`
+        * Data IKU: `data/processed/sulawesi_iku_2015_2024.csv`
+    """)
 
 # Data Loading & Prep
 df_pltu = pd.read_csv('data/processed/sulawesi_pltu_captive.csv')
@@ -375,8 +418,6 @@ df_iku_avg = df_iku[df_iku['Tahun'].between(2010, 2024)].groupby('Tahun')['IKU']
 awal_iku = df_iku_avg.iloc[0]['IKU'] if not df_iku_avg.empty else 0
 akhir_iku = df_iku_avg.iloc[-1]['IKU'] if not df_iku_avg.empty else 0
 penurunan_iku = awal_iku - akhir_iku
-
-st.markdown('<span style="background:#1B5E20;color:#A5D6A7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Stacked Area Time-Series & Trendline</span>', unsafe_allow_html=True)
 
 st.markdown(f"""
 Tumpukan area berwarna pada grafik di bawah ini merepresentasikan lonjakan kumulatif kapasitas Pembangkit Listrik Tenaga Uap (PLTU) berbasis batu bara (*captive power plants*) yang sengaja didirikan secara khusus untuk menyuplai energi kotor ke fasilitas smelter nikel. Kita melihat ledakan kapasitas pembakaran batu bara yang terus meroket secara radikal dan tanpa jeda sepanjang satu dekade terakhir, hingga memuncak di angka masif **{tot_kapasitas_pltu:,.0f} Megawatt (MW)**. Besaran energi kotor ini secara ekuivalen setara dengan daya hancur emisi sulfur dioksida (SO2) dan partikulat debu halus (PM2.5) dalam skala mematikan yang tak terbayangkan.
@@ -534,6 +575,27 @@ with st.expander("Lihat Data Mentah: Panel PLTU vs IKU (Time-Series 2015-2023)",
 
 st.markdown("---")
 st.markdown("### 2.3. Eksekusi Ruang: Ekspansi Kawasan Industri vs Tekanan Ekologis (Deforestasi)")
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Animated Bubble Chart & Crosstabulation</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Animated Bubble Chart & Crosstabulation"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan visualisasi dinamis *Hans Rosling-style Animated Bubble Chart* untuk memperlihatkan laju aneksasi konsesi tambang bersanding dengan deforestasi aktual kumulatif secara spasio-temporal.
+
+    1. **Visualisasi Data Dinamis (Animated Bubble):**
+        * **Pewarnaan (Choropleth):** Peta gradasi warna provinsi merepresentasikan level keparahan dari akumulasi total deforestasi.
+        * **Ukuran Gelembung (Bubble Size):** Skala luas konsesi industri dari waktu ke waktu.
+    2. **Kalkulasi/Formula Pengolahan:** Akumulasi luas izin baru dan deforestasi tahunan.
+        * `Kumulatif_Luas_Konsesi_Ha = CUMSUM(Total_Luas_Konsesi_Baru_Ha) OVER (ORDER BY Tahun)`
+        * `Kumulatif_Deforestasi_Ha = CUMSUM(Total_Deforestasi_Ha) OVER (ORDER BY Tahun)`
+    3. **Variabel & Fitur Data:**
+        * **Total_Luas_Konsesi_Baru_Ha:** Variabel Tekanan Ruang (Independen). Luas IUP diterbitkan per tahun.
+        * **Total_Deforestasi_Ha:** Variabel Dampak Ruang (Dependen). Deforestasi alam per tahun.
+        * **Provinsi, Tahun:** Dimensi letak administratif dan linimasa historis.
+    4. **Dataset & File:**
+        * Data Izin Konsesi: `data/processed/sulawesi_izin_baru_per_tahun.csv` dan `data/processed/sulawesi_kawasan_nikel_luas.csv`
+        * Data Deforestasi: `data/processed/sulawesi_gfw_master_1_dekade_2014_2023.csv`
+    """)
 
 # Data Loading & Prep
 df_luas = pd.read_csv('data/processed/sulawesi_kawasan_nikel_luas.csv')
@@ -551,8 +613,6 @@ tot_luas_konsesi = df_luas_prov['Luas_IUP_Kawasan_Ha'].sum()
 tot_def_10thn = df_gfw_panel['Total_Deforestasi_Ha'].sum()
 prov_max_iup = df_luas_prov.loc[df_luas_prov['Luas_IUP_Kawasan_Ha'].idxmax()]['Provinsi']
 prov_max_def = df_gfw_panel.groupby('Provinsi')['Total_Deforestasi_Ha'].sum().idxmax()
-
-st.markdown('<span style="background:#1B5E20;color:#A5D6A7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Animated Bubble Chart (Hans Rosling Style) & Crosstabulation</span>', unsafe_allow_html=True)
 
 st.markdown(f"""
 Hilirisasi ekstraktif bukan hanya soal membangun tungku peleburan logam, melainkan tentang aneksasi ruang skala masif yang memakan korban bentang alam. Narasi transisi energi yang diagungkan di atas kertas berbanding terbalik dengan realitas penghancuran hutan di tapak. Data menunjukkan bahwa pemerintah telah merelakan penguasaan daratan Pulau Sulawesi seluas **{tot_luas_konsesi:,.0f} Hektar** secara absolut kepada korporasi tambang melalui Izin Usaha Pertambangan (IUP) dan Kawasan Industri. Dominasi aneksasi lahan ini dipimpin oleh **{prov_max_iup}** yang menyerahkan ruang hidupnya paling besar untuk dirubah menjadi lanskap keruk nikel.
@@ -912,7 +972,27 @@ with st.expander("Lihat Data Mentah: Panel IUP vs Deforestasi (Time-Series 2014-
 
 st.markdown("---")
 st.markdown("### 2.4. Driver Deforestasi: Anatomi Pembantaian Hutan")
-st.markdown('<span style="background:#1B5E20;color:#A5D6A7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Driver Analysis & Emisi CO₂ Attribution</span>', unsafe_allow_html=True)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Driver Analysis & Emisi CO₂ Attribution</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Driver Analysis & Emisi CO₂ Attribution"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan agregasi tabular untuk menghitung atribusi kausalitas hilangnya tutupan lahan (deforestasi) dan kuantifikasi jejak karbon (Emisi CO₂) dari masing-masing aktor perusak lingkungan.
+
+    1. **Model Analisis Faktor Pendorong (Driver Attribution):**
+        * **Klasifikasi Entitas:** Faktor-faktor penyebab deforestasi diklasifikasikan ke dalam 5 kelompok: Industri Ekstraktif (Tambang/Sawit), Kehutanan Komersial, Pertanian Berpindah, Urbanisasi, dan Tidak Teridentifikasi.
+        * **Kuantifikasi Proporsi:** Menghitung rasio kontribusi absolut luasan deforestasi dari masing-masing aktor (driver) terhadap total kumulatif deforestasi.
+        * **Pemetaan Kausalitas:** Membedah dominasi aktor perusak lingkungan menggunakan pendekatan *Proportional Attribution Analysis* untuk mengidentifikasi kontributor utama penyusutan hutan.
+    2. **Kalkulasi/Formula Pengolahan:** Total kehilangan hutan dan estimasi konversi biomasa menjadi pelepasan gas rumah kaca.
+        * `Total_Deforestasi = Σ(Luas_Deforestasi_Ha) GROUP BY Faktor_Pendorong`
+        * `Total_Emisi = Σ(Emisi_CO2_Megagram) GROUP BY Faktor_Pendorong`
+    3. **Variabel & Fitur Data:**
+        * **Faktor_Pendorong:** Variabel Independen (X). Kategori aktivitas penyebab hilangnya hutan.
+        * **Luas_Deforestasi_Ha:** Variabel Dependen (Y1). Kehilangan tutupan pohon per hektar.
+        * **Emisi_CO2_Megagram:** Variabel Dependen (Y2). Kuantitas karbon dioksida ekuivalen yang terlepas ke atmosfer.
+    4. **Dataset & File:**
+        * Data GFW Klasifikasi Driver: `data/processed/sulawesi_gfw_loss_by_driver_2014_2023.csv`
+    """)
 
 # Data Loading & Prep
 df_driver_clean = df_driver.copy()
@@ -1170,7 +1250,28 @@ with st.expander("Lihat Data Mentah: Driver Deforestasi & Emisi CO₂ (2014-2023
 
 st.markdown("---")
 st.markdown("### 2.5. Kehancuran Biodiversitas: Ekstirpasi Habitat Satwa Endemik")
-st.markdown('<span style="background:#1B5E20;color:#A5D6A7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Spatial Mapping (GBIF) & Analisis IUCN Red List</span>', unsafe_allow_html=True)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Spatial Mapping (GBIF) & Analisis IUCN Red List</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Spatial Mapping (GBIF) & Analisis IUCN Red List"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan pemetaan titik koordinat (Geo-Spatial Mapping) dan sintesis literatur forensik status konservasi untuk melihat daya rusak tambang terhadap habitat flora/fauna endemik.
+
+    1. **Pemodelan Spasial Keterancaman (Occurrence vs Concession):**
+        * **Geo-Spatial Overlay:** Memetakan dan menumpangkan (*overlay*) sebaran titik perjumpaan aktual satwa (GBIF occurrences) di atas wilayah persebaran izin konsesi industri ekstraktif.
+        * **Kategorisasi Kerentanan (IUCN):** Mengekstraksi label status keterancaman (*Critically Endangered, Endangered, Vulnerable*) berdasarkan database IUCN Red List.
+        * **Identifikasi Ancaman:** Memvalidasi keberadaan penanda 'Mining Threat' pada rekam jejak ancaman (*Threats*) spesies untuk membuktikan tekanan pertambangan.
+    2. **Kalkulasi/Formula Pengolahan:** Perhitungan jumlah spesies terdampak dan tingkat kerentanan.
+        * `Total_Spesies = COUNT(DISTINCT Scientific_Name)`
+        * `Hitung Spesies per Kategori: Critically Endangered (CR), Endangered (EN), Vulnerable (VU)`
+    3. **Variabel & Fitur Data:**
+        * **Titik Koordinat (Lat, Lon):** Variabel Lokasi. Lokasi perjumpaan aktual satwa endemik.
+        * **Scientific Name, Status:** Identitas taksonomi spesies dan level ancaman konservasi internasional.
+        * **Ancaman Utama (Threats):** Kategorisasi penyebab penyusutan populasi (Mining Threat).
+    4. **Dataset & File:**
+        * Data Perjumpaan GBIF: `data/raw/gbif_sulawesi_occurrences.csv`
+        * Data Status IUCN: `data/processed/sulawesi_biodiversitas_iucn_fase5_exploded.csv`
+    """)
 
 try:
     df_gbif = pd.read_csv(os.path.join(BASE_DIR, 'data', 'raw', 'gbif_sulawesi_occurrences.csv'))

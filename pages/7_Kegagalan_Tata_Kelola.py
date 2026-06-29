@@ -195,7 +195,25 @@ def load_compliance_data():
 
 df_panel = load_compliance_data()
 
-st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Spatial Overlay & Crosstabulation (ESDM x GFW)</span><br><br>', unsafe_allow_html=True)
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Spatial Overlay & Crosstabulation (ESDM x GFW)</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Evaluasi Kepatuhan D3TLH Berdasarkan Data Historis"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan agregasi berbasis aturan (*Rule-based Categorization*) untuk membedah ketidaksesuaian antara status kerusakan lingkungan dengan keputusan administratif perizinan.
+
+    1. **Model Evaluasi Pelanggaran (*Compliance Modeling*):**
+        * **Kategorisasi Status (Binning):** Nilai kerusakan lingkungan absolut dibagi ke dalam tiga kelas menggunakan distribusi *percentile*: Aman (≤33%), Tertekan (33-66%), dan Kritis (>66%).
+        * **Kuantifikasi Pelanggaran D3TLH:** Mengidentifikasi secara kuantitatif apakah pemerintah tetap mengobral Izin Usaha Pertambangan (IUP) baru pada wilayah-wilayah yang secara empiris terbukti telah berada di fase 'Kritis'.
+    2. **Kalkulasi/Formula Pengolahan:**
+        * `Ambang_Kritis = Percentile(Deforestasi, 0.66)`
+        * `Total_Izin_Ilegal_Ekologis = SUM(IUP_Baru) WHERE Status_D3TLH = 'Kritis'`
+    3. **Variabel & Fitur Data:**
+        * **Variabel Konteks Lingkungan:** `Total_Deforestasi_Ha` atau `Deforestasi_Driver_Komoditas...` (sebagai basis status wilayah)
+        * **Variabel Keputusan Aktor:** `Jumlah_Izin_Baru` dan `Total_Luas_Konsesi_Baru_Ha`
+    4. **Dataset & File:**
+        * `data/processed/sulawesi_izin_baru_per_tahun.csv` dan `sulawesi_gfw_master_1_dekade_2014_2023.csv`
+    """)
 
 st.write("""Dalih "sudah sesuai aturan" sering kali digunakan oleh pemerintah daerah maupun pusat untuk membenarkan penerbitan Izin Usaha Pertambangan (IUP) yang masif di Pulau Sulawesi. Namun, jika Daya Tampung dan Daya Dukung Lingkungan Hidup (D3TLH) benar-benar dijadikan sebagai instrumen pencegahan dan batas pengaman ekologis (*ecological safeguard*), maka secara logika hukum dan sains, laju penerbitan izin baru wajib dihentikan seketika saat sebuah wilayah telah menunjukkan gejala kerusakan ekstrem, seperti deforestasi besar-besaran. Kenyataannya, data spasial menunjukkan sebuah anomali fatal: grafik penerbitan izin justru melonjak eksponensial tepat di tahun-tahun ketika hilangnya tutupan pohon sekunder dan primer mencapai titik kritis.
 
@@ -368,7 +386,24 @@ st.markdown("---")
 
 st.subheader("7.2 Tabrakan Hukum: Impunitas dan Pembiaran Operasi Ilegal")
 st.markdown("**Impunitas Korporasi dan Pembiaran Konflik Struktural di Sektor Ekstraktif**")
-st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Thematic Coding & Analisis Kasus (LSM / KPA / Tanah Kita)</span><br><br>', unsafe_allow_html=True)
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Thematic Coding & Analisis Kasus (LSM / KPA / Tanah Kita)</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Pemetaan Impunitas Korporasi"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan agregasi pelaporan berbasis insiden (*Incident-based Reporting Aggregation*) untuk mengukur tingkat pembiaran penegakan hukum (impunitas).
+
+    1. **Model Penelusuran Anomali Hukum:**
+        * **Kasus Rekam Jejak:** Menyaring dan mengklasifikasikan database konflik sengketa lahan, pelanggaran HAM, dan kasus operasi ilegal tanpa izin di level tapak.
+        * **Pemetaan Pembiaran (*State Omission*):** Menghitung total volume agregat di mana korporasi yang terbukti bermasalah secara hukum tetap dipertahankan keberadaan operasinya oleh aparatur negara.
+    2. **Kalkulasi/Formula Pengolahan:**
+        * `Total_Kasus_Impunitas = COUNT(Judul_Kasus)`
+        * `Volume_Pembiaran_Sektoral = SUM(Kasus) GROUP BY Sektor`
+    3. **Variabel & Fitur Data:**
+        * **Atribut Laporan:** `Provinsi`, `Sektor`, `Judul_Kasus`, `Deskripsi_Singkat`
+    4. **Dataset & File:**
+        * `data/processed/sulawesi_konflik_hukum.csv`
+    """)
 st.write("""Konsep Daya Tampung dan Daya Dukung Lingkungan Hidup (D3TLH) secara esensial tidak hanya mengukur batas fisik daya tahan ekosistem darat, air, dan udara, tetapi juga mengukur sejauh mana ruang hidup sosial masyarakat mampu menoleransi masuknya investasi skala raksasa. Namun, realitas di lapangan menunjukkan bahwa ambang batas sosial ini telah dilanggar secara brutal dan sistematis. Berdasarkan kompilasi data laporan masyarakat sipil, Jaringan Advokasi, serta Konsorsium Pembaruan Agraria (KPA), kami menemukan bahwa ekspansi industri ekstraktif di Sulawesi—mulai dari pertambangan nikel, perkebunan monokultur, hingga pembangunan kawasan industri strategis nasional (PSN)—selalu beriringan dengan letusan konflik agraria yang memakan korban di pihak masyarakat akar rumput.
 
 Pembiaran atas pelanggaran hukum (impunitas) terlihat sangat telanjang. Perusahaan-perusahaan yang terbukti merebut lahan tanpa persetujuan bebas, diinformasikan di awal, dan tanpa paksaan atau *Free, Prior and Informed Consent* (FPIC) dari masyarakat adat maupun penduduk lokal, tetap dibiarkan beroperasi dengan leluasa. Dalam berbagai kasus, korporasi tambang maupun perkebunan yang status izin (HGU/IUP)-nya tumpang tindih dengan tanah ulayat, atau bahkan beroperasi di luar konsesi yang sah, tidak pernah mendapatkan sanksi administratif berupa pencabutan izin. Aparat penegak hukum justru kerap digunakan sebagai instrumen represi untuk membungkam protes warga, mengkriminalisasi petani yang mempertahankan kebunnya, serta menyingkirkan masyarakat yang bermukim di sekitar area lingkar tambang.
@@ -407,7 +442,24 @@ st.markdown("---")
 
 st.subheader("7.3 Inkonsistensi Iklim: Karpet Merah PLTU Captive")
 st.markdown("**Paradoks Hilirisasi Hijau dan Karpet Merah untuk PLTU Batubara Captive**")
-st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Penyaringan Agregat Dataset Eksternal (Global Coal Plant Tracker GEM)</span><br><br>', unsafe_allow_html=True)
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Penyaringan Agregat Dataset Eksternal (Global Coal Plant Tracker GEM)</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Agregasi Beban Karbon PLTU Captive"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan inventarisasi agregat kuantitatif (*Quantitative Inventory Aggregation*) dari database global PLTU batubara independen (*captive*).
+
+    1. **Model Ekstraksi Kapasitas Fosil:**
+        * **Isolasi Regional:** Melakukan pemfilteran data inventaris energi kotor (PLTU) yang berlokasi secara presisi di kawasan industri strategis pulau Sulawesi.
+        * **Kuantifikasi Kontradiksi Karbon:** Menghitung total jumlah *unit* pembangkit dan agregat luaran listrik kotor (dalam satuan Megawatt) yang dibangun secara masif demi menopang pabrik pemurnian nikel, yang notabene dipromosikan sebagai proyek energi ramah lingkungan.
+    2. **Kalkulasi/Formula Pengolahan:**
+        * `Total_Beban_Karbon = SUM(Capacity_MW) GROUP BY Provinsi`
+        * `Total_Infrastruktur_Kotor = COUNT(Unit_PLTU)`
+    3. **Variabel & Fitur Data:**
+        * **Spesifikasi Pembangkit:** `Capacity (MW)`, `Start year`, `Provinsi (Subnational unit)`
+    4. **Dataset & File:**
+        * `data/processed/sulawesi_pltu_captive.csv`
+    """)
 st.write("""Di panggung negosiasi iklim internasional, pemerintah secara retoris selalu mempromosikan komitmen Indonesia dalam transisi energi menuju target *Net Zero Emission* serta mengkampanyekan keberhasilan program "Hilirisasi Hijau" untuk mendukung rantai pasok kendaraan listrik (EV) global. Namun, ironi terbesar dan paling memalukan dari narasi transisi energi tersebut terbentang sangat nyata di pulau Sulawesi. Demi memenuhi kebutuhan listrik raksasa untuk operasional pabrik pemurnian (*smelter*) nikel, pemerintah memberikan karpet merah perizinan untuk pembangunan puluhan Pembangkit Listrik Tenaga Uap (PLTU) Batubara *Captive*. Pembangkit-pembangkit kotor ini dibangun secara mandiri di dalam kawasan industri dan berdiri di luar sistem jaringan (grid) PLN nasional, sehingga keberadaannya sering kali luput dari skema pembatasan emisi atau target penghentian batubara (*coal phase-out*).
 
 Ekstraksi data terbaru dari *Global Coal Plant Tracker* (GEM) membongkar skalanya yang masif dan mengerikan. Kami menemukan bahwa terdapat puluhan unit PLTU *Captive*—baik yang sudah beroperasi secara aktif, sedang dalam tahap konstruksi, maupun yang telah mendapatkan izin (*permitted/announced*)—yang tersebar di sentra-sentra industri di Sulawesi Tengah, Sulawesi Tenggara, dan provinsi lainnya. Total kapasitas kotor pembangkitan dari puluhan PLTU batubara ini mencapai belasan ribu Megawatt. Ini berarti, proses pengolahan material nikel yang diklaim sebagai bahan baku energi bersih masa depan (baterai kendaraan listrik) justru diproduksi dengan membakar jutaan metrik ton batu bara setiap tahunnya, menyemburkan polutan mematikan seperti SO2, NOx, dan PM2.5 langsung ke ruang udara pemukiman warga sekitar.

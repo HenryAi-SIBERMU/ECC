@@ -233,6 +233,26 @@ st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=T
 st.subheader("5.1 Fakta Penyebab: Sinkronisasi Waktu (Timeline Mapping)")
 st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Gantt Chart Timeline (Plotly Express)</span>', unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
+with st.expander("ℹ️ Metodologi: Sinkronisasi Waktu (Timeline Mapping)"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan visualisasi deret waktu bersilang (*Dual-Axis Combo Chart*) untuk mendeteksi korelasi visual temporal.
+
+    1. **Model Komparasi Temporal:**
+        * **Time-Series Tracking:** Mengkomparasikan secara bersamaan akumulasi hilangnya luasan hutan (deforestasi) dengan laju obral perizinan pertambangan baru dari tahun 2014-2023.
+        * **Pemetaan Anomali (*Governance Failure*):** Melacak secara empiris apakah instrumen 'rem darurat' ekologis bekerja. Jika kurva perizinan terus melesat naik tepat di tahun saat grafik deforestasi menembus batas krisis, maka terjadi pengabaian tata ruang yang disengaja.
+    2. **Kalkulasi/Formula Pengolahan:**
+        * `Total_Deforestasi_Tahunan = SUM(Luas_Hilang_Ha) GROUP BY Tahun`
+        * `Total_IUP_Baru = COUNT(Izin) GROUP BY Tahun`
+    3. **Variabel & Fitur Data:**
+        * **X-Axis (Waktu):** `Tahun` (2014-2023)
+        * **Y-Axis Kiri (Dampak Ekologis):** `Total_Deforestasi_Ha`
+        * **Y-Axis Kanan (Keputusan Aktor):** `Jumlah_Izin_Baru`
+    4. **Dataset & File:**
+        * `data/processed/sulawesi_izin_baru_per_tahun.csv` (Minerbaone)
+        * `data/processed/sulawesi_gfw_master_1_dekade_2014_2023.csv` (GFW)
+    """)
+
+
 
 import plotly.graph_objects as go
 
@@ -342,6 +362,25 @@ st.markdown("---")
 st.subheader("5.2 Fakta Spasial: Tabrakan Tata Ruang di Kawasan Konservasi")
 st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Overlay Area Kawasan Lindung (GFW)</span>', unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
+with st.expander("ℹ️ Metodologi: Analisis Spasial Tabrakan Tata Ruang"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan agregasi spasial bertingkat (*Stacked Bar Chart*) untuk mendokumentasikan skala kehancuran mutlak pada wilayah yang diharamkan untuk ditambang.
+
+    1. **Model Analisis Deforestasi Konservasi:**
+        * **Geospatial Overlay (IUCN Categories):** Melakukan isolasi data *tree cover loss* (GFW) yang secara spesifik bertumpukan/beririsan dengan poligon Kawasan Konservasi IUCN Kategori 1 (Cagar Alam) dan Kategori 2 (Taman Nasional).
+        * **Kuantifikasi Kerusakan Kumulatif:** Mengkalkulasi kehancuran agregat kawasan penyangga ekosistem esensial selama satu dekade terakhir akibat penetrasi aktivitas tambang ilegal atau izin yang dipaksakan terbit.
+    2. **Kalkulasi/Formula Pengolahan:**
+        * `Luas_Hancur_Taman_Nasional = SUM(Loss_Ha) WHERE IUCN_Cat = '2'`
+        * `Luas_Hancur_Cagar_Alam = SUM(Loss_Ha) WHERE IUCN_Cat = '1'`
+        * `Total_Kumulatif_Hancur(t) = Total_Kumulatif_Hancur(t-1) + Luas_Hancur(t)`
+    3. **Variabel & Fitur Data:**
+        * **Kategorisasi Spasial (X):** `Tahun`, `wdpa_protected_areas__iucn_cat` (Kode IUCN 1 & 2)
+        * **Besaran Destruksi (Y):** `Luas_Hilang_Kawasan_Lindung_Ha`
+    4. **Dataset & File:**
+        * `data/processed/sulawesi_gfw_kawasan_lindung_loss_2014_2023.csv`
+    """)
+
+
 
 st.markdown("""
 Dataset spasial menunjukkan obral IUP tambang tidak mempedulikan batas tata ruang. Jutaan hektar kawasan penyangga kehidupan (Hutan Produksi, Kawasan Lindung, dan Area Resapan Air) secara sistematis dirusak dan dihilangkan fungsi ekologisnya demi memuluskan ekspansi ekstraksi nikel.
@@ -469,6 +508,25 @@ st.markdown("---")
 st.subheader("5.3 Realitas Lapangan: Izin Bermasalah, FPIC Diabaikan, Masyarakat Dikorbankan")
 st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Cross-Dataset Integration (KPA CATAHU + Tanahkita + CRI/Mighty Earth Reports)</span>', unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
+with st.expander("ℹ️ Metodologi: Ekstraksi Data Konflik Agraria & Pelanggaran HAM"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan triangulasi data kualitatif-kuantitatif dengan mendemonstrasikan integrasi *database* konflik agraria (*Multi-source Database Profiling*).
+
+    1. **Pemodelan Indikator Pelanggaran FPIC:**
+        * **Cross-Referencing:** Memadukan repositori konflik terbuka (KPA & Tanahkita.id) dengan laporan independen lembaga HAM global (CRI, Mighty Earth, BHRRC) untuk membongkar anomali perizinan (*non-compliance*).
+        * **Kuantifikasi Kriminalisasi:** Menghitung jumlah perampasan lahan tanpa persetujuan warga (Pelanggaran *Free, Prior, Informed Consent*/FPIC), tumpang tindih HGU, dan letupan represi bersenjata.
+    2. **Kalkulasi/Formula Pengolahan:**
+        * `Total_Pelanggaran_FPIC = COUNT(Kasus) WHERE indikasi_fpic = True`
+        * `Rekam_Jejak_Oligarki = COUNT(Jenis_Masalah_Izin) GROUP BY nama_perusahaan`
+    3. **Variabel & Fitur Data:**
+        * **Kategori Entitas:** `nama_perusahaan`, `provinsi`, `jenis_masalah_izin`, `indikasi_fpic`
+        * **Besaran Kasus:** `luas_ha`, Frekuensi kemunculan konflik.
+    4. **Dataset & File:**
+        * `data/processed/sulawesi_konflik_tambang_fpic.csv`
+        * `data/processed/kpa_masalah_izin_perusahaan.csv`
+    """)
+
+
 
 st.markdown("""
 <div style="text-align: justify; line-height: 1.8; color: #E0E0E0; font-size: 1.05rem; margin-bottom: 25px;">
@@ -781,6 +839,26 @@ st.markdown("""
 st.markdown("---")
 
 st.subheader("5.4 Pembuktian Empiris: Uji Statistik Korelasi Penerbitan Izin & Deforestasi")
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Crosstabulation & Pearson Chi-Square Test</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Uji Korelasi Penerbitan Izin & Ekstraksi Ekologis"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan pengujian statistik inferensial (*Crosstabulation & Chi-Square Test*) untuk membuktikan secara matematis apakah besaran jumlah perizinan baru menjadi prediktor kuat terhadap tingkat kerusakan deforestasi.
+
+    1. **Uji Signifikansi Statistik (Chi-Square):**
+        * **Binning (Kategorisasi Data):** Data numerik berkelanjutan (Jumlah Izin & Luas Deforestasi) dikategorikan menjadi 2 level (Tinggi & Rendah) menggunakan ambang batas Median dari distribusi panel. `Nilai > Median = Tinggi`, `Nilai <= Median = Rendah`.
+        * `H0 (Null Hypothesis): Tidak ada hubungan yang signifikan (independen) antara klasifikasi tingginya jumlah penerbitan IUP baru dengan klasifikasi tingginya luasan deforestasi pada suatu provinsi di tahun tertentu.`
+        * `Decision Rule: Tolak H0 jika nilai Asymptotic Significance (P-Value) pada uji Pearson Chi-Square < 0.05 (Alpha 5%).`
+    2. **Kalkulasi/Formula Pengolahan:**
+        * `Chi-Square (χ²) = Σ [ (O_i - E_i)² / E_i ]`
+        * `Odds Ratio = (Peluang Deforestasi Tinggi pada Izin Tinggi) / (Peluang Deforestasi Tinggi pada Izin Rendah)`
+    3. **Variabel & Fitur Data:**
+        * **Variabel Independen (X):** `Jumlah_Izin_Baru` atau `Total_Luas_Konsesi_Baru_Ha` (Interaktif Dropdown).
+        * **Variabel Dependen (Y):** `Total_Deforestasi_Ha` atau `Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha` (Interaktif Dropdown).
+    4. **Dataset & File:**
+        * Panel Join dari: `sulawesi_izin_baru_per_tahun.csv` dan `sulawesi_gfw_master_1_dekade_2014_2023.csv`
+    """)
 
 # --- Data Preparation ---
 df_panel = pd.merge(df_gfw, df_izin, on=['Provinsi', 'Tahun'], how='left').fillna({'Jumlah_Izin_Baru': 0, 'Total_Luas_Konsesi_Baru_Ha': 0})

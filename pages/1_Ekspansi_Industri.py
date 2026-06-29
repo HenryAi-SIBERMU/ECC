@@ -254,7 +254,25 @@ st.markdown("<div style='height: 30px;'></div>", unsafe_allow_html=True)
 # ══════════════════════════════════════════════════════════
 st.markdown("---")
 st.subheader("1.1 Tren Pertumbuhan Izin Tambang Baru & Uji Signifikansi")
-st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Analisis Tren & SPSS-Style Crosstabulation (Sumber: Minerbaone)</span>', unsafe_allow_html=True)
+with st.expander("ℹ️ Metodologi: Analisis Tren & Uji Tabulasi Silang"):
+    st.markdown("""
+    **Metode Analisis:** Halaman ini menggunakan pendekatan statistik *Time-Series* dan Inferensial (Uji Chi-Square) untuk menguji hipotesis bahwa ekspansi izin tambang berbanding lurus dengan laju deforestasi.
+
+    1. **Analisis Profil (Chi-Square Test):** Mengukur signifikansi hubungan antara tekanan ekspansi (X) dengan kerusakan ekologis (Y).
+        * **Binning:** Data panel (Provinsi-Tahun) diklasifikasikan menjadi kategori "Tinggi" dan "Rendah" menggunakan ambang batas nilai Tengah (Median).
+        * `H0 (Null Hypothesis): Tidak ada hubungan antara Ekspansi Perizinan dan Laju Deforestasi.`
+        * `Decision Rule: Jika P-Value < 0.10, maka Tolak H0 (Ada Hubungan Signifikan).`
+    2. **Formula Analisis Tren (Time-Series):** Mengukur agregasi jumlah izin baru dan tren persentase lonjakan (*Year-on-Year*).
+        * `Regresi Komparatif = (IUP_t - IUP_{t-1}) / IUP_{t-1} * 100%`
+    3. **Variabel & Fitur Data:**
+        * **Provinsi:** Nama provinsi lokasi izin.
+        * **Tahun:** Tahun penerbitan izin.
+        * **Jumlah_Izin_Baru:** Total izin baru yang terbit di tahun tersebut.
+        * **Total_Luas_Konsesi_Baru_Ha:** Luas konsesi (Hektar).
+        * **Sumber:** Metadata sumber data Minerbaone.
+    4. **Dataset & File:** Dataset primer dari Minerbaone (Kementerian ESDM).
+        * `data/processed/sulawesi_izin_baru_per_tahun.csv`
+    """)
 
 # --- Pindahkan agregasi ke atas markdown ---
 df_izin_agg = df_izin.groupby(['Tahun', 'Provinsi'])['Jumlah_Izin_Baru'].sum().reset_index()
@@ -594,12 +612,50 @@ with st.expander("Lihat Data Panel Mentah (Merge Izin & GFW)", expanded=False):
 st.markdown("<div style='height: 30px;'></div>", unsafe_allow_html=True)
 st.markdown("---")
 st.subheader("1.2 Agresivitas Ekspansi Kawasan Industri & PLTU Captive")
-st.markdown('<span style="background:#0D47A1;color:#BBDEFB;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Peta Konsentrasi Fasilitas Pengolahan & Energi Kotor (Sumber: CGS & GEM)</span>', unsafe_allow_html=True)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Analisis Spasial & Crosstab (Sentra vs Non-Sentra)</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Analisis Spasial & Uji Tabulasi Silang"):
+    st.markdown("""
+    **Metode Analisis:** Halaman ini menggunakan pendekatan *Descriptive Spatial Analysis* dipadukan dengan Inferensial (Uji Chi-Square) untuk membongkar pemusatan infrastruktur energi kotor (*Zona Tumbal*) dan membuktikan dampaknya terhadap kerusakan ekologis secara statistik.
+
+    1. **Analisis Profil (Chi-Square Test):** Mengukur signifikansi hubungan antara ekspansi kapasitas PLTU (X) dengan kerusakan ekologis (Y).
+        * **Binning:** Data panel (Provinsi-Tahun) diklasifikasikan menjadi kategori "Tinggi" dan "Rendah" menggunakan ambang batas nilai Tengah (Median).
+        * `H0 (Null Hypothesis): Tidak ada hubungan antara Penambahan Kapasitas PLTU Captive dan Laju Deforestasi.`
+        * `Decision Rule: Jika P-Value < 0.10, maka Tolak H0 (Ada Hubungan Signifikan).`
+    2. **Kalkulasi Emisi Historis (Cumulative Sum):** Merekam jejak karbon historis PLTU dari tahun ke tahun.
+        * `Kapasitas_Kumulatif_t = Kapasitas_Kumulatif_{t-1} + MW_t`
+    3. **Pemetaan Zona Tumbal (Proportional Ratio):** Mengukur ketimpangan distribusi fasilitas hilirisasi.
+        * `Rasio Dominasi Wilayah = (Fasilitas_Provinsi_X / Total_Fasilitas_Sulawesi) * 100%`
+    4. **Variabel & Fitur Data PLTU (Global Energy Monitor):**
+        * **Plant/Unit name, Owner/Parent:** Identitas dan kepemilikan.
+        * **Capacity (MW), Status, Start year:** Kapasitas aktif dan tahun mulai operasi.
+        * **Subnational unit (Provinsi), Local area:** Lokasi operasional.
+        * **Captive industry use, captive_flag:** Penanda PLTU khusus industri.
+    5. **Variabel & Fitur Data Smelter (ESDM/CGS):**
+        * **nama_perusahaan, jenis_badan_usaha:** Identitas perusahaan.
+        * **provinsi, komoditas, golongan:** Lokasi dan jenis tambang.
+        * **total_luas_ha, nilai_investasi_usd_juta:** Luas area dan kapitalisasi modal.
+        * **kapasitas_produksi_ton_tahun, status_operasional:** Output produksi dan status operasional.
+    6. **Dataset & File:**
+        * PLTU: `data/processed/sulawesi_pltu_captive.csv`
+        * Smelter: `data/processed/sulawesi_esdm_nikel.csv`
+    """)
 
 # --- Hitung Variabel PLTU dan Smelter ---
-sulawesi_provs = ['North Sulawesi', 'South Sulawesi', 'Southeast Sulawesi', 'Central Sulawesi', 'Gorontalo', 'West Sulawesi']
+sulawesi_provs = ['Sulawesi Utara', 'Sulawesi Selatan', 'Sulawesi Tenggara', 'Sulawesi Tengah', 'Gorontalo', 'Sulawesi Barat']
 df_pltu_op_sul = df_pltu[(df_pltu['Status'].str.lower() == 'operating') & (df_pltu['Subnational unit (province, state)'].isin(sulawesi_provs))].copy()
 df_pltu_op_sul['Tahun'] = pd.to_numeric(df_pltu_op_sul['Start year'], errors='coerce')
+
+# Klasifikasi Sentra vs Non-Sentra
+sentra_provs = ['Sulawesi Tengah', 'Sulawesi Tenggara']
+df_pltu_op_sul['Kategori_Wilayah'] = df_pltu_op_sul['Subnational unit (province, state)'].apply(lambda x: 'Daerah Sentra Tambang' if x in sentra_provs else 'Daerah Non-Sentra')
+
+# Agregasi Kumulatif per Kategori (Untuk Grafik Split)
+df_pltu_kategori = df_pltu_op_sul.groupby(['Kategori_Wilayah', 'Tahun'])['Capacity (MW)'].sum().reset_index().sort_values(['Kategori_Wilayah', 'Tahun'])
+df_pltu_kategori['Kumulatif (MW)'] = df_pltu_kategori.groupby('Kategori_Wilayah')['Capacity (MW)'].cumsum()
+
+# Agregasi Total (Untuk Teks Narasi)
 df_pltu_sul_agg = df_pltu_op_sul.groupby('Tahun')['Capacity (MW)'].sum().reset_index().sort_values('Tahun')
 df_pltu_sul_agg['Kumulatif (MW)'] = df_pltu_sul_agg['Capacity (MW)'].cumsum()
 
@@ -626,23 +682,19 @@ Kausalitas ledakan *time-series* ini divalidasi dengan sangat presisi oleh uji r
 col_adv1, col_adv2 = st.columns(2)
 
 with col_adv1:
-    # 1. Ledakan Eksponensial Energi Kotor (Area Chart Kumulatif)
-    chart_area = alt.Chart(df_pltu_sul_agg).mark_area(
-        color=alt.Gradient(
-            gradient='linear',
-            stops=[alt.GradientStop(color='#D32F2F', offset=0),
-                   alt.GradientStop(color='rgba(211, 47, 47, 0.05)', offset=1)],
-            x1=1, x2=1, y1=0, y2=1
-        ),
-        line={'color': '#D32F2F', 'size': 3}
-    ).encode(
+    # 1. Ledakan Eksponensial Energi Kotor (Area Chart Kumulatif - Split Sentra vs Non-Sentra)
+    domain_kat = ['Daerah Sentra Tambang', 'Daerah Non-Sentra']
+    range_kat = ['#D32F2F', '#90A4AE']
+    
+    chart_area = alt.Chart(df_pltu_kategori).mark_area(opacity=0.7).encode(
         x=alt.X('Tahun:O', title='', axis=alt.Axis(labelColor='#B0BEC5')),
-        y=alt.Y('Kumulatif (MW):Q', title='Kapasitas Aktif (MW)', axis=alt.Axis(gridOpacity=0.1, labelColor='#B0BEC5')),
-        tooltip=['Tahun', alt.Tooltip('Kumulatif (MW)', format=',.0f')]
-    ).properties(height=280, title=alt.TitleParams(text='Ledakan Eksponensial Energi Kotor', color='#ECEFF1', anchor='start', fontSize=14))
+        y=alt.Y('Kumulatif (MW):Q', stack=None, title='Kapasitas Aktif (MW)', axis=alt.Axis(gridOpacity=0.1, labelColor='#B0BEC5')),
+        color=alt.Color('Kategori_Wilayah:N', scale=alt.Scale(domain=domain_kat, range=range_kat), legend=alt.Legend(title="Kategori Wilayah", orient="top-left")),
+        tooltip=['Tahun', 'Kategori_Wilayah', alt.Tooltip('Kumulatif (MW)', format=',.0f')]
+    ).properties(height=280, title=alt.TitleParams(text='Ledakan Energi Kotor (Sentra vs Non-Sentra)', color='#ECEFF1', anchor='start', fontSize=14))
     
     st.altair_chart(chart_area, use_container_width=True)
-    st.markdown("<div style='font-size:0.85rem; color:#9E9E9E; margin-top:-10px; margin-bottom:15px; padding: 0 10px; border-left: 3px solid #D32F2F;'><b>Fakta Data:</b> Kapasitas PLTU Captive tidak tumbuh linier, melainkan meledak eksponensial dalam 1 dekade hingga mencapai >11 GW. Kecepatan instalasi ini mengunci Sulawesi dalam krisis karbon yang mustahil dibalikkan dalam waktu singkat.</div>", unsafe_allow_html=True)
+    st.markdown("<div style='font-size:0.85rem; color:#9E9E9E; margin-top:-10px; margin-bottom:15px; padding: 0 10px; border-left: 3px solid #D32F2F;'><b>Fakta Data:</b> Pemisahan (split) garis merah dan abu-abu secara gamblang membuktikan bahwa nyaris seluruh ledakan eksponensial PLTU Captive 1 dekade terakhir terpusat murni di Daerah Sentra Tambang.</div>", unsafe_allow_html=True)
 
 with col_adv2:
     # 2. Zona Tumbal (Smelter Bar Chart dengan Persentase)
@@ -948,14 +1000,51 @@ with st.expander("Lihat Data Panel Mentah (Merge PLTU & GFW)", expanded=False):
 st.markdown("<div style='height: 30px;'></div>", unsafe_allow_html=True)
 st.markdown("---")
 st.subheader("1.3 Realisasi Investasi vs Ekspansi Kehancuran Hutan")
-st.markdown('<span style="background:#B71C1C;color:#FFCDD2;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Overlay Investasi PMDN vs Tutupan Lahan (Sumber: BKPM & GFW)</span>', unsafe_allow_html=True)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Analisis Spasial, Dual-Axis Split & Uji Chi-Square</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
-# --- Variabel Time Series Investasi & Deforestasi ---
+with st.expander("ℹ️ Metodologi: Analisis Spasial & Uji Chi-Square (Crosstab)"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan pendekatan *Descriptive Spatial Analysis* dan inferensi statistik melalui Uji Chi-Square (Crosstabulation) untuk membuktikan korelasi antara injeksi modal PMDN dengan eskalasi kerusakan ekologis secara spasial.
+
+    1. **Uji Tabulasi Silang (Chi-Square Test of Independence):** Mengukur signifikansi hubungan antara arus masuk investasi (X) dengan tingkat kerusakan hutan (Y).
+        * **Binning Kategori:** Variabel kontinu dikonversi menjadi data kategorikal (Biner) menggunakan nilai tengah (Median). 'Tinggi' > Median, 'Rendah' <= Median.
+        * `H0 (Null Hypothesis): Tidak ada hubungan signifikan secara statistik antara tingginya arus modal PMDN dengan laju deforestasi.`
+        * `Decision Rule (Alpha 5%): Jika P-Value < 0.05, maka Tolak H0 (Terbukti secara empiris bahwa kucuran investasi menjadi driver utama kehancuran hutan).`
+    2. **Kalkulasi Dual-Axis (Trend Comparison):** Membandingkan secara visual anomali ledakan investasi (Bar Chart) terhadap fluktuasi laju deforestasi komoditas (Line Chart) menggunakan skala ganda (Dual-Axis) terpisah per kategori wilayah.
+        * `Tahun_t (Investasi) vs Tahun_t (Deforestasi)`
+    3. **Variabel & Fitur Data Investasi (BKPM):**
+        * **Tahun, Provinsi:** Dimensi waktu dan lokasi.
+        * **nilai (Juta Rupiah):** Realisasi Investasi Penanaman Modal Dalam Negeri (PMDN).
+    4. **Variabel & Fitur Data Deforestasi (GFW):**
+        * **Provinsi, Tahun:** Dimensi spasial dan temporal deforestasi.
+        * **Total_Deforestasi_Ha:** Angka agregat seluruh jenis kerusakan tutupan lahan.
+        * **Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha:** Deforestasi khusus komoditas ekstraktif.
+    5. **Dataset & File:**
+        * Investasi: `data/processed/sulawesi_investasi_pmdn_2016_2024.csv`
+        * Deforestasi: `data/processed/sulawesi_gfw_master_1_dekade_2014_2023.csv`
+    """)
+
+# --- Variabel Time Series Investasi & Deforestasi (Split Sentra vs Non-Sentra) ---
+sentra_provs = ['Sulawesi Tengah', 'Sulawesi Tenggara']
+
+# Grouping GFW by Kategori
+df_gfw_kat = df_gfw.copy()
+df_gfw_kat['Kategori_Wilayah'] = df_gfw_kat['Provinsi'].apply(lambda x: 'Sentra Tambang' if x in sentra_provs else 'Non-Sentra')
+df_gfw_kategori = df_gfw_kat.groupby(['Kategori_Wilayah', 'Tahun'])['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'].sum().reset_index()
+
+# Grouping Investasi by Kategori
+df_inv_renamed = df_inv.rename(columns={'tahun': 'Tahun', 'nilai': 'Investasi_Juta_Rp', 'provinsi': 'Provinsi'})
+df_inv_renamed['Kategori_Wilayah'] = df_inv_renamed['Provinsi'].apply(lambda x: 'Sentra Tambang' if x in sentra_provs else 'Non-Sentra')
+df_inv_renamed['Tahun'] = pd.to_numeric(df_inv_renamed['Tahun'], errors='coerce')
+df_inv_renamed['Investasi_Juta_Rp'] = pd.to_numeric(df_inv_renamed['Investasi_Juta_Rp'], errors='coerce')
+df_inv_kategori = df_inv_renamed.groupby(['Kategori_Wilayah', 'Tahun'])['Investasi_Juta_Rp'].sum().reset_index()
+
+df_viz_1_3 = pd.merge(df_gfw_kategori, df_inv_kategori, on=['Kategori_Wilayah', 'Tahun'], how='inner')
+
+# Agregat Total Untuk Narasi
 df_gfw_agg = df_gfw.groupby('Tahun')['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'].sum().reset_index()
-df_inv_agg = df_inv.rename(columns={'tahun': 'Tahun', 'nilai': 'Investasi_Juta_Rp'})
-df_inv_agg['Tahun'] = pd.to_numeric(df_inv_agg['Tahun'], errors='coerce')
-df_inv_agg['Investasi_Juta_Rp'] = pd.to_numeric(df_inv_agg['Investasi_Juta_Rp'], errors='coerce')
-df_inv_agg = df_inv_agg.groupby('Tahun')['Investasi_Juta_Rp'].sum().reset_index()
+df_inv_agg = df_inv_renamed.groupby('Tahun')['Investasi_Juta_Rp'].sum().reset_index()
 
 val_inv_2016 = df_inv_agg[df_inv_agg['Tahun'] == 2016]['Investasi_Juta_Rp'].values[0]/1e3 if 2016 in df_inv_agg['Tahun'].values else 0
 val_inv_2023 = df_inv_agg[df_inv_agg['Tahun'] == 2023]['Investasi_Juta_Rp'].values[0]/1e3 if 2023 in df_inv_agg['Tahun'].values else 0
@@ -989,6 +1078,17 @@ try:
     # Combine both datasets
     df_pad_combined = pd.concat([df_pad_detail, df_pad_no_breakdown], ignore_index=True)
     
+    # Relabel jujur: BPS tidak menyediakan data PAD level provinsi untuk Sulawesi Tenggara.
+    # Yang tersedia hanyalah pendapatan Pemerintah Desa (Kab. Buton), bukan PAD provinsi.
+    # Beri label eksplisit agar tidak menyesatkan pembaca.
+    mask_sultra = df_pad_combined['Provinsi'] == 'Sulawesi Tenggara'
+    df_pad_combined.loc[mask_sultra, 'Jenis_Pendapatan'] = 'PAD Kab. Buton (BPS: no data provinsi)'
+    
+    # Buang baris bernilai sangat kecil (< 0.05 Miliar / 50 juta Rp).
+    # Kotak bernilai puluhan juta ditampilkan sebagai "0.0 M Rp" oleh format :,.1f → menyesatkan.
+    # Threshold 0.05 Miliar = 50 juta agar hanya komponen signifikan yang tampil.
+    df_pad_combined = df_pad_combined[df_pad_combined['Nilai_Miliar_Rp'] > 0.05].reset_index(drop=True)
+    
     # Apply power 0.25 transform + minimum boosting for very small values
     # This makes tiny provinces (Gorontalo) more visible
     df_pad_combined['Nilai_Transformed'] = df_pad_combined['Nilai_Miliar_Rp'] ** 0.25
@@ -1007,6 +1107,22 @@ try:
     
     prov_tertinggi = df_pad_prov.loc[df_pad_prov['Total_PAD_Miliar_Rp'].idxmax()]
     prov_terendah = df_pad_prov.loc[df_pad_prov['Total_PAD_Miliar_Rp'].idxmin()]
+
+    # Hitung share 4 komponen PAD murni (Pajak Daerah, Retribusi, Hasil BUMD, Lain-lain PAD)
+    # secara dinamis dari data. Kecualikan transfer pusat (Dana Alokasi, Bagi Hasil, dll) dan
+    # baris "Total/agregat" yang bukan komponen PAD, agar persentase di narasi tidak drift.
+    pad_komponen = ['Pajak Daerah', 'Retribusi Daerah', 'Hasil BUMD', 'Lain-lain PAD Yang Sah']
+    df_pad_murni = df_pad_combined[df_pad_combined['Jenis_Pendapatan'].isin(pad_komponen)]
+    total_pad_murni = df_pad_murni['Nilai_Miliar_Rp'].sum()
+
+    def _share_pad(komponen):
+        v = df_pad_murni.loc[df_pad_murni['Jenis_Pendapatan'] == komponen, 'Nilai_Miliar_Rp'].sum()
+        return (v / total_pad_murni * 100) if total_pad_murni > 0 else 0.0
+
+    pct_pajak_daerah = _share_pad('Pajak Daerah')
+    pct_retribusi = _share_pad('Retribusi Daerah')
+    pct_hasil_bumd = _share_pad('Hasil BUMD')
+    pct_lain_pad = _share_pad('Lain-lain PAD Yang Sah')
     
     # Count provinces with breakdown
     num_prov_breakdown = len(provinsi_with_breakdown)
@@ -1018,9 +1134,9 @@ except Exception as e:
     st.warning(f"Data PAD tidak ditemukan: {e}")
 
 st.markdown(f"""
-Pemerintah secara konsisten membanggakan metrik makroekonomi untuk melegitimasi ekspansi ekstraktif di Pulau Sulawesi. Salah satu narasi yang paling sering diulang adalah klaim bahwa industri ini mendongkrak pendapatan daerah hingga menghasilkan **Pendapatan Asli Daerah (PAD)** secara kumulatif mencapai **{total_pad_sulawesi:,.1f} Miliar Rupiah** (2010-2023) di {total_prov} provinsi Sulawesi yang datanya tersedia. Angka PAD ini dikombinasikan dengan realisasi investasi Penanaman Modal Dalam Negeri (PMDN) yang menembus **{tot_investasi_triliun:,.1f} Triliun Rupiah** untuk menciptakan ilusi pertumbuhan ekonomi yang 'inklusif' dan 'menyejahterakan'.
+Pemerintah secara konsisten membanggakan metrik makroekonomi untuk melegitimasi ekspansi ekstraktif di Pulau Sulawesi. Salah satu narasi yang paling sering diulang adalah klaim bahwa industri ini mendongkrak pendapatan daerah hingga menghasilkan **Pendapatan Asli Daerah (PAD)** secara kumulatif mencapai **{total_pad_sulawesi:,.1f} Miliar Rupiah** (2015-2024) di {total_prov} provinsi Sulawesi yang datanya tersedia. Angka PAD ini dikombinasikan dengan realisasi investasi Penanaman Modal Dalam Negeri (PMDN) yang menembus **{tot_investasi_triliun:,.1f} Triliun Rupiah** untuk menciptakan ilusi pertumbuhan ekonomi yang 'inklusif' dan 'menyejahterakan'.
 
-Namun, grafik **"Treemap Breakdown PAD: Jenis Pendapatan Per Provinsi"** di bawah ini membongkar ketimpangan struktural di balik angka agregat tersebut. Visualisasi treemap hierarkis menunjukkan tidak hanya distribusi antar provinsi, tetapi juga—untuk {num_prov_breakdown} provinsi yang tersedia breakdown detailnya (Sulawesi Selatan dan Gorontalo)—**komposisi internal PAD**: dari mana sebenarnya penerimaan daerah berasal (Pajak Daerah, Retribusi, Hasil BUMD, atau Lain-lain PAD). Ini membeberkan realitas bahwa PAD sangat bergantung pada **Pajak Daerah (82.9% dari total breakdown)** yang bersumber dari aktivitas ekstraktif, sementara komponen lain minim kontribusi.
+Namun, grafik **"Treemap Breakdown PAD: Jenis Pendapatan Per Provinsi"** di bawah ini membongkar ketimpangan struktural di balik angka agregat tersebut. Visualisasi treemap hierarkis menunjukkan tidak hanya distribusi antar provinsi, tetapi juga—untuk {num_prov_breakdown} provinsi yang tersedia breakdown detailnya (Sulawesi Selatan & Gorontalo; Sulawesi Tenggara hanya data PAD Kabupaten Buton karena BPS tidak menyediakan data level provinsi)—**komposisi internal PAD**: dari mana sebenarnya penerimaan daerah berasal (Pajak Daerah, Retribusi, Hasil BUMD, atau Lain-lain PAD). Ini membeberkan realitas bahwa PAD sangat bergantung pada **Pajak Daerah ({pct_pajak_daerah:.1f}% dari total PAD murni)** yang bersumber dari aktivitas ekstraktif, sementara komponen lain minim kontribusi.
 """)
 
 # --- PAD Treemap Visualization with Breakdown ---
@@ -1055,7 +1171,7 @@ if has_pad_data:
     
     fig_treemap.update_layout(
         title={
-            'text': f'Breakdown PAD Per Provinsi dan Jenis Pendapatan (2010-2023)<br><sup>Level 1: {total_prov} Provinsi | Level 2: Breakdown Detail ({num_prov_breakdown} provinsi) + Total Agregat ({total_prov - num_prov_breakdown} provinsi)<br>⚠️ Ukuran kotak: nilai^0.25 + minimum boost untuk provinsi kecil</sup>',
+            'text': f'Breakdown PAD Per Provinsi dan Jenis Pendapatan (2015-2024)<br><sup>Level 1: {total_prov} Provinsi | Level 2: Breakdown Detail ({num_prov_breakdown} provinsi) + Total Agregat ({total_prov - num_prov_breakdown} provinsi)<br>⚠️ Ukuran kotak: nilai^0.25 + minimum boost untuk provinsi kecil | Sulawesi Tenggara = PAD Kab. Buton (BPS tanpa data provinsi)</sup>',
             'y':0.98,
             'x':0.5,
             'xanchor': 'center',
@@ -1091,7 +1207,7 @@ if has_pad_data:
     
     <b>1. Ketimpangan Antar Provinsi:</b> <b>{prov_tertinggi['Provinsi']}</b> mendominasi dengan total PAD <b>{prov_tertinggi['Total_PAD_Miliar_Rp']:,.1f} Miliar Rupiah ({prov_tertinggi['Kontribusi_Pct']:.1f}%)</b>, sementara <b>{prov_terendah['Provinsi']}</b> hanya menerima <b>{prov_terendah['Total_PAD_Miliar_Rp']:,.1f} Miliar Rupiah ({prov_terendah['Kontribusi_Pct']:.1f}%)</b>.<br><br>
     
-    <b>2. Komposisi Internal PAD:</b> Treemap memperlihatkan bahwa <b>82.9% PAD berasal dari Pajak Daerah</b>, yang sebagian besar bersumber dari aktivitas industri ekstraktif (pertambangan dan smelter). Komponen lain seperti Retribusi (7.8%), Hasil BUMD (3.2%), dan Lain-lain PAD (6.1%) kontribusinya minimal. <b>Ini membuktikan bahwa PAD bukan hasil diversifikasi ekonomi, melainkan sangat tergantung pada eksploitasi sumber daya alam.</b><br><br>
+    <b>2. Komposisi Internal PAD:</b> Treemap memperlihatkan bahwa <b>{pct_pajak_daerah:.1f}% PAD berasal dari Pajak Daerah</b>, yang sebagian besar bersumber dari aktivitas industri ekstraktif (pertambangan dan smelter). Komponen lain seperti Retribusi ({pct_retribusi:.1f}%), Hasil BUMD ({pct_hasil_bumd:.1f}%), dan Lain-lain PAD ({pct_lain_pad:.1f}%) kontribusinya minimal. <b>Ini membuktikan bahwa PAD bukan hasil diversifikasi ekonomi, melainkan sangat tergantung pada eksploitasi sumber daya alam.</b><br><br>
     
     Ketimpangan ganda ini membuktikan bahwa narasi "pertumbuhan inklusif" adalah ilusi belaka. Provinsi dengan smelter terkonsentrasi memonopoli penerimaan PAD dari ekstraksi pajak, namun seluruh Pulau Sulawesi—termasuk provinsi yang tidak menikmati PAD signifikan—menanggung beban ekologis berupa <b>{tot_deforestasi:,.0f} Hektar</b> deforestasi permanen. Ini adalah bentuk eksternalitas negatif klasik: keuntungan diprivatisasi (terkonsentrasi), sementara biaya lingkungan disosialisasikan (ditanggung bersama).
 </div>
@@ -1118,36 +1234,27 @@ Grafik *Dual-Axis* (Dua Sumbu) di bawah ini mempertemukan dua variabel secara ab
 Irisan fatal antara kurva batang PMDN dan garis tren deforestasi ini membuktikan secara ilmiah bahwa lonjakan investasi bukanlah indikator membaiknya kesejahteraan ekologis. Sebaliknya, setiap triliun rupiah tersebut secara mutlak beroperasi penuh sebagai **pemicu (driver) ekskalasi pembongkaran**. Klaim "hilirisasi sukses" terbukti secara empiris hanya menjadi kedok hukum bagi total agresi lenyapnya hutan seluas **{tot_deforestasi:,.0f} Hektar**. Mengganti sabuk resapan air alamiah dengan ekosistem tambang membuktikan bahwa kucuran investasi ini hanyalah ongkos nyata percepatan menuju kebangkrutan ekologis lintas generasi.
 """)
 
-df_viz_1_3 = pd.merge(df_gfw_agg, df_inv_agg, on='Tahun', how='inner')
+col_chart_s, col_chart_n = st.columns(2)
 
-df_viz_1_3 = pd.merge(df_gfw_agg, df_inv_agg, on='Tahun', how='inner')
+with col_chart_s:
+    st.markdown("<h5 style='color:#ECEFF1; text-align:center;'>Daerah Sentra Tambang</h5>", unsafe_allow_html=True)
+    df_s = df_viz_1_3[df_viz_1_3['Kategori_Wilayah'] == 'Sentra Tambang']
+    base_s = alt.Chart(df_s).encode(x=alt.X('Tahun:O', title='', axis=alt.Axis(labelAngle=-45, labelColor='#B0BEC5')))
+    bar_s = base_s.mark_bar(opacity=0.4, color='#F57C00').encode(y=alt.Y('Investasi_Juta_Rp:Q', title='Investasi PMDN (Juta Rp)', axis=alt.Axis(gridOpacity=0.05, labelColor='#B0BEC5', titleColor='#B0BEC5')), tooltip=['Tahun', alt.Tooltip('Investasi_Juta_Rp', format=',.0f', title='Investasi')])
+    line_s = base_s.mark_line(point=True, color='#D32F2F', strokeWidth=3).encode(y=alt.Y('Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha:Q', title='Deforestasi (Ha)', axis=alt.Axis(grid=False, labelColor='#D32F2F', titleColor='#D32F2F')), tooltip=['Tahun', alt.Tooltip('Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha', format=',.0f', title='Deforestasi')])
+    st.altair_chart(alt.layer(bar_s, line_s).resolve_scale(y='independent').properties(height=350), use_container_width=True)
 
-base = alt.Chart(df_viz_1_3).encode(
-    x=alt.X('Tahun:O', title='Tahun', axis=alt.Axis(labelColor='#B0BEC5'))
-)
-
-bar = base.mark_bar(opacity=0.3, color='#90A4AE').encode(
-    y=alt.Y('Investasi_Juta_Rp:Q', title='Realisasi Investasi PMDN (Juta Rp)', axis=alt.Axis(gridOpacity=0.05, labelColor='#90A4AE', titleColor='#90A4AE')),
-    tooltip=['Tahun', alt.Tooltip('Investasi_Juta_Rp', format=',.0f')]
-)
-
-line = base.mark_line(point=True, color='#D32F2F', strokeWidth=3).encode(
-    y=alt.Y('Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha:Q', title='Luas Deforestasi Komoditas (Ha)', axis=alt.Axis(grid=False, labelColor='#D32F2F', titleColor='#D32F2F')),
-    tooltip=['Tahun', alt.Tooltip('Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha', format=',.0f')]
-)
-
-chart_dual = alt.layer(bar, line).resolve_scale(
-    y='independent'
-).properties(
-    height=380, 
-    title=alt.TitleParams(text="Anomali Investasi Ekstraktif vs Deforestasi Komoditas", color='#ECEFF1', anchor='start')
-)
-
-st.altair_chart(chart_dual, use_container_width=True)
+with col_chart_n:
+    st.markdown("<h5 style='color:#ECEFF1; text-align:center;'>Daerah Non-Sentra</h5>", unsafe_allow_html=True)
+    df_n = df_viz_1_3[df_viz_1_3['Kategori_Wilayah'] == 'Non-Sentra']
+    base_n = alt.Chart(df_n).encode(x=alt.X('Tahun:O', title='', axis=alt.Axis(labelAngle=-45, labelColor='#B0BEC5')))
+    bar_n = base_n.mark_bar(opacity=0.4, color='#90A4AE').encode(y=alt.Y('Investasi_Juta_Rp:Q', title='Investasi PMDN (Juta Rp)', axis=alt.Axis(gridOpacity=0.05, labelColor='#B0BEC5', titleColor='#B0BEC5')), tooltip=['Tahun', alt.Tooltip('Investasi_Juta_Rp', format=',.0f', title='Investasi')])
+    line_n = base_n.mark_line(point=True, color='#546E7A', strokeWidth=3).encode(y=alt.Y('Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha:Q', title='Deforestasi (Ha)', axis=alt.Axis(grid=False, labelColor='#546E7A', titleColor='#546E7A')), tooltip=['Tahun', alt.Tooltip('Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha', format=',.0f', title='Deforestasi')])
+    st.altair_chart(alt.layer(bar_n, line_n).resolve_scale(y='independent').properties(height=350), use_container_width=True)
 
 st.markdown(f"""
 <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #D32F2F; margin-bottom: 20px;">
-    <b>Interpretasi Paradoks Ekonomi:</b> Grafik *Dual-Axis* di atas membuktikan bahwa lonjakan arus investasi PMDN (diagram batang redup) beririsan langsung memicu ekskalasi deforestasi hutan (garis merah). Klaim keberhasilan investasi ternyata dibayar sangat mahal oleh kebangkrutan ekologis di hulu. Area penyangga yang seharusnya memitigasi bencana iklim justru dikonversi menjadi zona ekstraktif.
+    <b>Interpretasi Paradoks Ekonomi (Spasial):</b> Perbandingan grafik <i>Dual-Axis</i> Sentra vs Non-Sentra di atas menelanjangi pola destruktif modal. Di <b>Daerah Sentra Tambang</b>, ledakan arus investasi PMDN (batang oranye) beririsan mutlak dengan meroketnya grafik deforestasi hutan (garis merah). Sebaliknya, di <b>Daerah Non-Sentra</b>, pergerakan modal dan deforestasi jauh lebih landai dan stagnan. Ini mengonfirmasi bahwa kucuran investasi triliunan rupiah tidak mendatangkan "kesejahteraan inklusif", melainkan secara absolut difungsikan sebagai alat modal (driver) untuk membongkar penyangga ekologis secara brutal di zona-zona tumbal.
 </div>
 """, unsafe_allow_html=True)
 
@@ -1509,7 +1616,29 @@ with st.expander("Lihat Data Mentah: Realisasi Investasi PMDN (BKPM)", expanded=
 st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=True)
 st.subheader("1.4 Pelabuhan Ekspor: Ke Mana Nikel Sulawesi Dikirim?")
 
-st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Penelusuran Sumber Terbuka (25 sumber)</span><br><br>', unsafe_allow_html=True)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Open Source Intelligence (OSINT)</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Open Source Intelligence (OSINT)"):
+    st.markdown("""
+    **Metode Analisis:** Halaman ini menggunakan teknik investigasi *Open Source Intelligence* (OSINT) dan Studi Literatur Forensik untuk memetakan rantai pasok dan monopoli infrastruktur logistik pesisir.
+
+    1. **Kurasi & Validasi Silang (Cross-Validation):** Membangun matriks relasional dari sumber-sumber publik yang berserakan.
+        * **Triangulasi Data:** Mencocokkan data citra satelit, dokumen perizinan lingkungan, dan laporan pengiriman kargo (ekspor).
+        * `Hipotesis Kerja: Infrastruktur PSN secara eksklusif dibangun bukan untuk publik, melainkan sebagai "karpet merah" kelancaran rantai pasok oligarki nikel ke pasar global.`
+    2. **Kalkulasi/Formula Pengolahan:** Menghitung jumlah fasilitas pelabuhan aktif dan persentase yang terafiliasi dengan status PSN.
+        * `Rasio Dominasi PSN = (Fasilitas_PSN / Total_Fasilitas) * 100%`
+    3. **Variabel & Fitur Data (Tabular OSINT):**
+        * **Nama Kawasan Industri, Pemilik/Pengelola Induk:** Identitas kawasan sentra.
+        * **Provinsi, Kabupaten/Kota:** Lokasi administratif geografis.
+        * **Status Pelabuhan/Dermaga Khusus:** Ada / Tidak Ada / Dalam Konstruksi.
+        * **Status PSN:** Afiliasi dengan Proyek Strategis Nasional.
+        * **Tujuan Ekspor Utama:** Negara tujuan pengiriman kargo (Mayoritas China).
+        * **Daftar Referensi:** Tautan (URL/Link) sumber dokumen pembuktian.
+    4. **Dataset & File:** Referensi tekstual sekunder dan data kompilasi manual.
+        * `data/processed/sulawesi_logistik_simpul_nikel.csv`
+    """)
+st.markdown("<br>", unsafe_allow_html=True)
 
 st.markdown("""
 Ekspansi nikel di Sulawesi tidak berhenti pada izin dan pabrik smelter. Di setiap lokasi industri nikel besar,

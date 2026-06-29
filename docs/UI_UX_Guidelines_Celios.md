@@ -35,8 +35,15 @@ Tepat di bawah setiap judul Sub-Bab, **wajib** mencantumkan *Tag Metode* berupa 
 Proyek Celios sangat mengedepankan narasi riset advokasi. Grafik tidak boleh dibiarkan berbicara sendiri.
 *   **Judul Halaman (Main Title):** **Dilarang** menggunakan awalan penomoran seperti "Page 1:" atau "Page 2:" di dalam UI. Langsung gunakan judul substantifnya (contoh: "Ekspansi Industri Ekstraktif").
 *   **Struktur Header Eksekutif:** Di bagian atas setiap halaman analisis penting, wajib menggunakan urutan **Dropdown Metodologi**, **Hero Statement**, lalu **Bento Cards**.
-    1.  **Dropdown Metodologi (`st.expander`):** Tepat di bawah sub-judul, wajib diletakkan `st.expander("🔍 Metodologi")` yang menguraikan kerangka kerja halaman tersebut.
-        *   *Isi Metodologi:* Harus mencakup penjelasan **Alur Kausalitas** (contoh: `A → B → C`), pemetaan **Variabel (X)** (faktor penyebab/tekanan), **Variabel (Y)** (dampak/hasil), serta **Metode Pengolahan Data** (contoh: *Crosstabulation*, *Trend Analysis*).
+    1.  **Dropdown Metodologi (`st.expander`):** Tepat di bawah sub-judul, wajib diletakkan `st.expander("ℹ️ Metodologi: [Nama Pengujian]")` yang menguraikan kerangka kerja halaman tersebut.
+        *   **Struktur Isi Wajib (Hierarchical Bullet Points):**
+            *   **Kalimat Pembuka:** Penjelasan tebal (*bold*) mengenai pendekatan utama (contoh: `**Metode Analisis:** Halaman ini menggunakan...`).
+            *   **1. Penjelasan Model/Pengujian (Penting!):** 
+                *   **Untuk Uji Statistik (misal: Crosstabulation/Chi-Square):** WAJIB menjabarkan rincian teknis seperti *Binning*, `H0 (Null Hypothesis)`, dan `Decision Rule`. Gunakan Markdown *Code Blocks* (backticks).
+                *   **Untuk Analisis Deskriptif/Tren/Spasial:** DILARANG KERAS menggunakan istilah `H0` atau `Decision Rule`. Sebagai gantinya, gunakan terminologi **Pemodelan Matematis/Analitik** (contoh: *Kuantifikasi Kesenjangan*, *Evaluasi Dominasi*, *Textual Pattern Matching*, *Pemetaan Kausalitas*).
+            *   **2. Kalkulasi/Formula Pengolahan:** Tulis rumus matematis pengolahan (contoh: `Kapasitas Kumulatif = Σ(MW_t)` atau rumus Regresi) menggunakan format Markdown *Code Blocks*.
+            *   **3. Variabel & Fitur Data:** Dilarang keras hanya menulis ringkasan. **WAJIB membongkar dan menuliskan seluruh nama variabel/kolom data mentah** (seperti *Capacity (MW), Owner, Laju_Deforestasi_Ha*) yang ada di dalam dataset CSV. Kelompokkan dengan jelas (misal: Variabel Independen/X dan Dependen/Y).
+            *   **4. Dataset & File:** Cantumkan nama sumber institusi dan *path* file CSV murni di dalam Markdown *Code Blocks* (contoh: `data/processed/sulawesi_pltu_captive.csv`).
     2.  **Hero Statement (Paragraf Narasi Kritis Utama):** Ini adalah teks pengantar (tanpa kotak aksen/warna terang, cukup *background* transparan) yang **WAJIB diletakkan tepat di bawah Tag Metode atau Dropdown Metodologi (sebelum pemilih/dropdown data dan sebelum grafik)**. Paragraf ini **WAJIB** dibangun sebagai sebuah *storytelling* jurnalistik-kritis yang panjang (minimal 250 kata) dan *data-driven*. Narasi ini harus mengekstrak angka mutlak dari agregasi awal (menggunakan Python `f-strings`), menyebut langsung total kasus/kerusakan secara eksplisit, dan menarik kesimpulan kausalitas yang membantah narasi arus utama (misalnya "Membantah Hilirisasi Hijau").
     3.  **Bento Cards (Grid Kartu Metrik Agregat):** Letakkan tepat di bawah Hero Statement dalam bentuk grid (contoh: 2 baris x 3 kolom).
         *   *Kewajiban Bento Cards:* **Setiap kartu WAJIB memiliki deskripsi naratif** yang menjelaskan konteks/arti angka tersebut di dalam kartunya.
@@ -81,6 +88,26 @@ Jika riset membutuhkan pengujian hipotesis bivariat (seperti Chi-Square Test), U
 *   **Chi-Square Tests Table:** Menampilkan Nilai *Pearson Chi-Square*, *Likelihood Ratio*, dan `P-Value` (Asymp. Sig).
 *   **Dynamic Hypothesis Card:** Menyediakan *Card UI* bersyarat. Jika P-Value < 0.05, warna border hijau menyala. Jika P-Value ≥ 0.05, warna border merah menyala. **Narasi interpretasi WAJIB responsif** terhadap perubahan ini.
 
+## 8. Dropdown Metodologi & Tag Metode (Methodology Transparency)
+Untuk memastikan transparansi dan kejelasan argumen akademis, **SETIAP** sub-bab analisis utama **WAJIB** menyertakan informasi metodologi dengan urutan hierarki yang sangat ketat tepat di bawah judul sub-bab (`st.subheader`):
+
+1.  **Tag Metode (Method Tag):**
+    Diwajibkan menggunakan elemen `<span>` kustom untuk memberikan *highlight* visual jenis metode utama sebelum teks narasi dimulai. Dilarang keras menggunakan teks markdown biasa.
+    *   **Format Wajib:**
+        ```python
+        st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: [Nama Metode Singkat]</span>', unsafe_allow_html=True)
+        st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+        ```
+2.  **Dropdown Metodologi Detail (Expander):**
+    Tepat di bawah Tag Metode, wajib disediakan *expander* yang membedah anatomi pengujian statistik atau spasial yang digunakan. Konten dalam *expander* ini **TIDAK BOLEH** hanya sekadar teks narasi umum, melainkan **WAJIB** mendokumentasikan parameter kuantitatif secara eksak:
+    *   **Metode Analisis:** Penjelasan rasionalitas pemilihan metode (misal: Descriptive Spatial Analysis, Chi-Square).
+    *   **Model Parameter / Pengujian:** Penjelasan teknis konversi variabel atau langkah kuantifikasi.
+    *   **Kaidah Pengujian:** 
+        *   **Jika Uji Statistik:** Tuliskan formal `H0 (Null Hypothesis)` dan *Decision Rule* (misal: "Alpha 5%. Jika P-Value < 0.05, Tolak H0").
+        *   **Jika Uji Non-Statistik (Deskriptif/Tren/Spasial):** Tuliskan abstraksi matematisnya (contoh: "Pemetaan Kausalitas: Membedah asimetri penguasaan ruang"). **DILARANG KERAS memakai `H0` atau `Decision Rule`.**
+    *   **Identifikasi Variabel:** Pemetaan tegas mana Variabel Independen (X) dan Variabel Dependen (Y).
+    *   **Daftar Dataset:** Pencantuman spesifik letak dan nama *file raw/processed* yang dibaca (path `.csv`).
+
 ---
 **Kesimpulan Implementasi untuk Page 1:**
-Saat *coding* Page 1 (Ekspansi Industri), tiap sub-bab akan diawali dengan judul yang mengalir (tanpa mencantumkan label nama kode kaku seperti "(Crosstab 1)" di *subheader*), *Tag Metode*, diikuti narasi kritis (*Data-driven* Python `f-strings`), grafik dengan anotasi, matriks Crosstabulation SPSS (jika relevan), blok Interpretasi, dan ditutup dengan `st.expander` berisi data CSV murni (seperti `sulawesi_izin_baru_per_tahun.csv` dan `sulawesi_esdm_nikel.csv`).
+Saat *coding* Page 1 (Ekspansi Industri), tiap sub-bab akan diawali dengan judul yang mengalir (tanpa mencantumkan label nama kode kaku seperti "(Crosstab 1)" di *subheader*), **wajib diikuti Tag Metode dan Dropdown Metodologi detail**, kemudian teks narasi kritis (*Data-driven* Python `f-strings`), grafik dengan anotasi, matriks Crosstabulation SPSS (jika relevan), blok Interpretasi, dan ditutup dengan `st.expander` berisi data CSV murni (seperti `sulawesi_izin_baru_per_tahun.csv` dan `sulawesi_esdm_nikel.csv`).

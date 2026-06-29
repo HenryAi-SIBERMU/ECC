@@ -231,7 +231,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 st.markdown(
-    '<div class="sub-title">Membaca tekanan demografi, intensifikasi ruang, dan transisi ekonomi di lingkar smelter nikel Sulawesi.</div>',
+    '<div class="sub-title">Membaca tekanan demografi, intensifikasi ruang, dan transisi ekonomi di lingkar industri ekstraktif Sulawesi.</div>',
     unsafe_allow_html=True,
 )
 
@@ -239,7 +239,7 @@ with st.expander("🔍 Metodologi", expanded=False):
     st.markdown("""
     **Alur Kausalitas:** `Ekspansi Nikel` → `Tekanan Demografi & Kepadatan` → `Pergeseran Struktur Ekonomi` → `Beban Sosial-Kesehatan`.
 
-    **Variabel Tekanan (X):** kabupaten prioritas smelter, IUP kumulatif, porsi PDRB pertambangan dan industri pengolahan, serta nilai investasi PMDN provinsi.
+        **Variabel Tekanan (X):** kabupaten prioritas industri ekstraktif, IUP kumulatif, porsi PDRB pertambangan dan industri pengolahan, serta nilai investasi PMDN provinsi.
 
     **Variabel Dampak (Y):** jumlah penduduk kabupaten, kepadatan penduduk, laju pertumbuhan penduduk, kasus DBD sebagai proxy tekanan kesehatan, dan pergeseran proporsi PDRB pertanian vs tambang+industri.
 
@@ -252,10 +252,10 @@ st.markdown(
 <div style="background-color: transparent; padding: 10px 0px; margin-bottom: 25px;">
     <h2 style="color: #FFFFFF; font-size: 1.8rem; margin-bottom: 15px; font-weight: 700;">Ketika Hilirisasi Mengubah Struktur Masyarakat</h2>
     <p style="color: #CCCCCC; font-size: 1.05rem; line-height: 1.7; margin-bottom: 15px; text-align: justify;">
-        Ekspansi nikel di Sulawesi bukan hanya perubahan industri, melainkan rekayasa ulang ruang hidup. Data demografi dan ekonomi sektoral menunjukkan bahwa kawasan yang menjadi pusat smelter mengalami tekanan ganda: populasi dan kepadatan meningkat, sementara struktur ekonomi regional bergerak meninggalkan basis agraris menuju dominasi tambang dan industri pengolahan. Di Sulawesi Tengah, provinsi yang menjadi episentrum Morowali dan Morowali Utara, porsi PDRB sektor pertanian turun dari <b>{pertanian_awal:.2f}%</b> pada {int(sulteng_first["tahun"])} menjadi <b>{pertanian_akhir:.2f}%</b> pada {int(sulteng_last["tahun"])}. Pada periode yang sama, gabungan sektor pertambangan dan industri pengolahan melonjak dari <b>{industri_awal:.2f}%</b> menjadi <b>{industri_akhir:.2f}%</b>.
+        Ekspansi nikel di Sulawesi bukan hanya perubahan industri, melainkan rekayasa ulang ruang hidup. Data demografi dan ekonomi sektoral menunjukkan bahwa kawasan yang menjadi pusat industri ekstraktif mengalami tekanan ganda: populasi dan kepadatan meningkat, sementara struktur ekonomi regional bergerak meninggalkan basis agraris menuju dominasi tambang dan industri pengolahan. Di Sulawesi Tengah, provinsi yang menjadi episentrum Morowali dan Morowali Utara, porsi PDRB sektor pertanian turun dari <b>{pertanian_awal:.2f}%</b> pada {int(sulteng_first["tahun"])} menjadi <b>{pertanian_akhir:.2f}%</b> pada {int(sulteng_last["tahun"])}. Pada periode yang sama, gabungan sektor pertambangan dan industri pengolahan melonjak dari <b>{industri_awal:.2f}%</b> menjadi <b>{industri_akhir:.2f}%</b>.
     </p>
     <p style="color: #CCCCCC; font-size: 1.05rem; line-height: 1.7; text-align: justify;">
-        Perubahan ini tidak netral. Indeks pergeseran agraris-ke-industri di Sulawesi Tengah naik dari <b>{shift_awal:.3f}</b> menjadi <b>{shift_akhir:.3f}</b>, atau sekitar <b>{shift_multiplier:.1f} kali</b>. Pada level kabupaten, Morowali memperlihatkan sinyal tekanan demografi yang tajam: pada 2020, data SIMDASI mencatat penduduk sebesar <b>{morowali_pop_2020:.1f} ribu jiwa</b> dengan laju pertumbuhan sumber <b>{morowali_growth_2020:.2f}%</b>. Angka-angka ini tidak cukup untuk menyebut migrasi langsung secara definitif, tetapi cukup kuat sebagai proxy bahwa kawasan smelter mengalami tarikan penduduk dan intensifikasi ruang yang tidak dialami merata oleh wilayah non-industri. Dengan demikian, hilirisasi tidak hanya memindahkan bijih menjadi logam; ia juga memindahkan beban sosial ke masyarakat lokal.
+        Perubahan ini tidak netral. Indeks pergeseran agraris-ke-industri di Sulawesi Tengah naik dari <b>{shift_awal:.3f}</b> menjadi <b>{shift_akhir:.3f}</b>, atau sekitar <b>{shift_multiplier:.1f} kali</b>. Pada level kabupaten, Morowali memperlihatkan sinyal tekanan demografi yang tajam: pada 2020, data SIMDASI mencatat penduduk sebesar <b>{morowali_pop_2020:.1f} ribu jiwa</b> dengan laju pertumbuhan sumber <b>{morowali_growth_2020:.2f}%</b>. Angka-angka ini tidak cukup untuk menyebut migrasi langsung secara definitif, tetapi cukup kuat sebagai proxy bahwa kawasan industri ekstraktif mengalami tarikan penduduk dan intensifikasi ruang yang tidak dialami merata oleh wilayah non-industri. Dengan demikian, hilirisasi tidak hanya memindahkan bijih menjadi logam; ia juga memindahkan beban sosial ke masyarakat lokal.
     </p>
 </div>
 """,
@@ -314,9 +314,9 @@ with row2[0]:
         f"""
     <div class="metric-card">
         <div>
-            <div class="metric-label">KABUPATEN SMELTER PRIORITAS</div>
+            <div class="metric-label">KABUPATEN INDUSTRI EKSTRAKTIF</div>
             <div class="metric-value" style="color:#43A047;">{n_smelter_kab}</div>
-            <div class="metric-desc">Kabupaten prioritas untuk membaca tekanan demografi dan ekonomi di lingkar smelter nikel Sulawesi.</div>
+            <div class="metric-desc">Kabupaten prioritas untuk membaca tekanan demografi dan ekonomi di lingkar industri ekstraktif Sulawesi.</div>
         </div>
         <div class="metric-source">Sumber: Klasifikasi Fase 4<br>File: sulawesi_demografi_master_fase4.csv</div>
     </div>
@@ -328,9 +328,9 @@ with row2[1]:
         f"""
     <div class="metric-card">
         <div>
-            <div class="metric-label">RASIO KEPADATAN SMELTER</div>
+            <div class="metric-label">RASIO KEPADATAN INDUSTRI EKSTRAKTIF</div>
             <div class="metric-value" style="color:#FFA726;">{density_ratio:.2f}×</div>
-            <div class="metric-desc">Perbandingan rata-rata kepadatan kabupaten smelter terhadap non-smelter pada tahun {latest_year}.</div>
+            <div class="metric-desc">Perbandingan rata-rata kepadatan kabupaten industri ekstraktif terhadap non-ekstraktif pada tahun {latest_year}.</div>
         </div>
         <div class="metric-source">Sumber: BPS SIMDASI<br>File: sulawesi_demografi_master_fase4.csv</div>
     </div>
@@ -342,9 +342,9 @@ with row2[2]:
         f"""
     <div class="metric-card">
         <div>
-            <div class="metric-label">KASUS DBD DI KABUPATEN SMELTER</div>
+            <div class="metric-label">KASUS DBD DI KABUPATEN INDUSTRI EKSTRAKTIF</div>
             <div class="metric-value" style="color:#EF5350;">{dbd_smelter:,}</div>
-            <div class="metric-desc">Akumulasi DBD sejak 2019 pada kabupaten prioritas smelter sebagai proxy tekanan kesehatan di wilayah industrialisasi.</div>
+            <div class="metric-desc">Akumulasi DBD sejak 2019 pada kabupaten prioritas industri ekstraktif sebagai proxy tekanan kesehatan di wilayah industrialisasi.</div>
         </div>
         <div class="metric-source">Sumber: Profil Kesehatan/Dinkes<br>File: zoonosis_kab_kota_2015_2024.csv</div>
     </div>
@@ -357,7 +357,7 @@ st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=T
 # ═════════════════════════════════════════════════════════════
 # 11.1 TEKANAN DEMOGRAFI
 # ═════════════════════════════════════════════════════════════
-st.subheader("11.1 Tekanan Demografi di Kabupaten Smelter")
+st.subheader("11.1 Tekanan Demografi di Kabupaten Industri Ekstraktif")
 st.markdown(
     '<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Proxy Migrasi dari Time-Series Populasi Kabupaten</span>',
     unsafe_allow_html=True,
@@ -380,7 +380,7 @@ fig_pop = px.line(
     y="jumlah_penduduk_rb",
     color="kabupaten",
     markers=True,
-    title="Populasi Kabupaten Prioritas Smelter Nikel Sulawesi",
+    title="Populasi Kabupaten Prioritas Industri Ekstraktif Sulawesi",
     labels={
         "tahun": "Tahun",
         "jumlah_penduduk_rb": "Jumlah Penduduk (ribu jiwa)",
@@ -400,7 +400,7 @@ fig_pop.add_vline(
     x=2020,
     line_dash="dash",
     line_color="#EF5350",
-    annotation_text="Sensus/boom smelter",
+    annotation_text="Sensus/boom industri ekstraktif",
     annotation_position="top left",
 )
 fig_pop.update_layout(
@@ -417,23 +417,23 @@ st.plotly_chart(fig_pop, use_container_width=True)
 st.markdown(
     f"""
 <div class="interpretation-card">
-<b>Interpretasi:</b> Grafik ini tidak dibaca sebagai data migrasi langsung, tetapi sebagai proxy tekanan demografi. Morowali menunjukkan perubahan paling mencolok pada 2020, ketika populasi mencapai <b>{morowali_pop_2020:.1f} ribu jiwa</b> dan laju sumber tercatat <b>{morowali_growth_2020:.2f}%</b>. Pola ini relevan dibaca bersama ekspansi smelter, IUP, dan infrastruktur logistik.
+<b>Interpretasi:</b> Grafik ini tidak dibaca sebagai data migrasi langsung, tetapi sebagai proxy tekanan demografi. Morowali menunjukkan perubahan paling mencolok pada 2020, ketika populasi mencapai <b>{morowali_pop_2020:.1f} ribu jiwa</b> dan laju sumber tercatat <b>{morowali_growth_2020:.2f}%</b>. Pola ini relevan dibaca bersama ekspansi industri ekstraktif, IUP, dan infrastruktur logistik.
 </div>
 """,
     unsafe_allow_html=True,
 )
 
-with st.expander("Lihat Data Mentah: Populasi Kabupaten Smelter", expanded=False):
+with st.expander("Lihat Data Mentah: Populasi Kabupaten Industri Ekstraktif", expanded=False):
     st.dataframe(pop_smelter, use_container_width=True, hide_index=True)
     st.caption(
-        "Sumber File: `data/processed/sulawesi_demografi_master_fase4.csv` - populasi kabupaten, laju, kepadatan, dan flag smelter."
+        "Sumber File: `data/processed/sulawesi_demografi_master_fase4.csv` - populasi kabupaten, laju, kepadatan, dan flag industri ekstraktif."
     )
 
 # ═════════════════════════════════════════════════════════════
 # 11.2 KEPADATAN
 # ═════════════════════════════════════════════════════════════
 st.markdown("---")
-st.subheader("11.2 Intensifikasi Ruang: Kepadatan Smelter vs Non-Smelter")
+st.subheader("11.2 Intensifikasi Ruang: Kepadatan Industri Ekstraktif vs Non-Ekstraktif")
 st.markdown(
     '<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Comparative Density Analysis</span>',
     unsafe_allow_html=True,
@@ -449,7 +449,7 @@ st.markdown(
 
 density = df_demo[df_demo["tahun"] <= 2024].copy()
 density["Kategori"] = density["is_smelter"].map(
-    {True: "Kabupaten Smelter", False: "Kabupaten Non-Smelter"}
+    {True: "Kabupaten Industri Ekstraktif", False: "Kabupaten Non-Ekstraktif"}
 )
 density_agg = density.groupby(["tahun", "Kategori"], as_index=False)[
     "kepadatan_per_km2"
@@ -460,11 +460,11 @@ fig_density = px.area(
     x="tahun",
     y="kepadatan_per_km2",
     color="Kategori",
-    title="Rata-rata Kepadatan Penduduk: Kabupaten Smelter vs Non-Smelter",
+    title="Rata-rata Kepadatan Penduduk: Kabupaten Industri Ekstraktif vs Non-Ekstraktif",
     labels={"tahun": "Tahun", "kepadatan_per_km2": "Kepadatan (jiwa/km²)"},
     color_discrete_map={
-        "Kabupaten Smelter": "#F57C00",
-        "Kabupaten Non-Smelter": "#546E7A",
+        "Kabupaten Industri Ekstraktif": "#F57C00",
+        "Kabupaten Non-Ekstraktif": "#546E7A",
     },
 )
 fig_density.update_layout(
@@ -481,7 +481,7 @@ st.plotly_chart(fig_density, use_container_width=True)
 with st.expander("Lihat Data Mentah: Agregasi Kepadatan", expanded=False):
     st.dataframe(density_agg, use_container_width=True, hide_index=True)
     st.caption(
-        "Sumber File: `data/processed/sulawesi_demografi_master_fase4.csv` - rata-rata kepadatan per kategori smelter/non-smelter."
+        "Sumber File: `data/processed/sulawesi_demografi_master_fase4.csv` - rata-rata kepadatan per kategori industri ekstraktif/non-ekstraktif."
     )
 
 # ═════════════════════════════════════════════════════════════
@@ -601,7 +601,7 @@ with st.expander("Lihat Data Mentah: Employment Shift Index", expanded=False):
 st.markdown("---")
 st.subheader("11.4 Proxy Zoonosis: Tekanan Populasi dan Beban Kesehatan")
 st.markdown(
-    '<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Crosstab DBD × Kategori Smelter</span>',
+    '<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Crosstab DBD × Kategori Industri Ekstraktif</span>',
     unsafe_allow_html=True,
 )
 st.markdown(
@@ -615,7 +615,7 @@ st.markdown(
 
 dbd = df_demo[df_demo["tahun"] >= 2019].copy()
 dbd["Kategori"] = dbd["is_smelter"].map(
-    {True: "Kabupaten Smelter", False: "Kabupaten Non-Smelter"}
+    {True: "Kabupaten Industri Ekstraktif", False: "Kabupaten Non-Ekstraktif"}
 )
 dbd_agg = dbd.groupby(["tahun", "Kategori"], as_index=False)["dbd_kasus"].mean()
 fig_dbd = px.bar(
@@ -624,11 +624,11 @@ fig_dbd = px.bar(
     y="dbd_kasus",
     color="Kategori",
     barmode="group",
-    title="Rata-rata Kasus DBD: Kabupaten Smelter vs Non-Smelter",
+    title="Rata-rata Kasus DBD: Kabupaten Industri Ekstraktif vs Non-Ekstraktif",
     labels={"tahun": "Tahun", "dbd_kasus": "Rata-rata Kasus DBD"},
     color_discrete_map={
-        "Kabupaten Smelter": "#D32F2F",
-        "Kabupaten Non-Smelter": "#546E7A",
+        "Kabupaten Industri Ekstraktif": "#D32F2F",
+        "Kabupaten Non-Ekstraktif": "#546E7A",
     },
     text_auto=".0f",
 )
@@ -643,7 +643,7 @@ fig_dbd.update_layout(
 )
 st.plotly_chart(fig_dbd, use_container_width=True)
 
-with st.expander("Lihat Data Mentah: DBD dan Kategori Smelter", expanded=False):
+with st.expander("Lihat Data Mentah: DBD dan Kategori Industri Ekstraktif", expanded=False):
     st.dataframe(
         dbd[
             [
@@ -674,7 +674,7 @@ st.markdown(
 st.markdown(
     f"""
     <div class="section-copy">
-    Matriks sintesis menggabungkan tiga lapis bukti: perubahan struktur ekonomi, keberadaan kabupaten smelter, dan beban DBD di wilayah prioritas. Tujuannya bukan mengganti analisis kausal formal, melainkan memberi ringkasan eksekutif untuk membaca provinsi mana yang paling kuat menunjukkan kombinasi tekanan ekonomi-ekologis dan sosial. Berdasarkan data yang sudah diproses, provinsi dengan kenaikan shift index tertinggi adalah <b>{top_shift_prov}</b>, dengan delta sebesar <b>{top_shift_delta:.2f}</b> poin dari tahun awal ke tahun akhir. Ini berarti perubahan struktur ekonomi tidak merata di seluruh Sulawesi; ada wilayah yang mengalami transformasi jauh lebih tajam karena posisinya dalam rantai nikel. Tabel berikut mengurutkan provinsi berdasarkan delta shift index, lalu mengaitkannya dengan jumlah kabupaten smelter dan total DBD di wilayah prioritas. Dengan susunan ini, pembaca dapat melihat bahwa tekanan sosial-ekologis bukan hanya soal satu indikator, melainkan gabungan antara ekonomi yang makin ekstraktif, penduduk yang terkonsentrasi, dan beban kesehatan yang muncul di ruang yang sama.
+    Matriks sintesis menggabungkan tiga lapis bukti: perubahan struktur ekonomi, keberadaan kabupaten industri ekstraktif, dan beban DBD di wilayah prioritas. Tujuannya bukan mengganti analisis kausal formal, melainkan memberi ringkasan eksekutif untuk membaca provinsi mana yang paling kuat menunjukkan kombinasi tekanan ekonomi-ekologis dan sosial. Berdasarkan data yang sudah diproses, provinsi dengan kenaikan shift index tertinggi adalah <b>{top_shift_prov}</b>, dengan delta sebesar <b>{top_shift_delta:.2f}</b> poin dari tahun awal ke tahun akhir. Ini berarti perubahan struktur ekonomi tidak merata di seluruh Sulawesi; ada wilayah yang mengalami transformasi jauh lebih tajam karena posisinya dalam rantai nikel. Tabel berikut mengurutkan provinsi berdasarkan delta shift index, lalu mengaitkannya dengan jumlah kabupaten industri ekstraktif dan total DBD di wilayah prioritas. Dengan susunan ini, pembaca dapat melihat bahwa tekanan sosial-ekologis bukan hanya soal satu indikator, melainkan gabungan antara ekonomi yang makin ekstraktif, penduduk yang terkonsentrasi, dan beban kesehatan yang muncul di ruang yang sama.
     </div>
     """,
     unsafe_allow_html=True,

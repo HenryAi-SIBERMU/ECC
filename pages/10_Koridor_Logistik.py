@@ -210,8 +210,26 @@ st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=T
 # 10.1 PETA
 # ═════════════════════════════════════════════════════════════
 st.subheader("10.1 Peta Lokasi Pelabuhan Nikel di Sulawesi")
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Pemetaan Lokasi dari Sumber Terbuka</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
 
-st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Pemetaan Lokasi dari Sumber Terbuka</span><br><br>', unsafe_allow_html=True)
+with st.expander("ℹ️ Metodologi: Pemetaan Geospasial Infrastruktur Logistik"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan pemetaan koordinat spasial (*Geospatial Coordinate Mapping*) untuk memvisualisasikan konsentrasi pembangunan pelabuhan terintegrasi.
+
+    1. **Model Penelusuran Geografis:**
+        * **Plotting Titik Koordinat:** Memetakan posisi absolut Latitude dan Longitude dari 6 kawasan *anchor* industri nikel (Morowali, Petasia, Morosi, Pomalaa, Sorowako) di pesisir.
+        * **Kategorisasi Status Kepemilikan:** Mengklasifikasikan fasilitas pelabuhan berdasarkan skema kepemilikannya (Mandiri/Berbagi) menggunakan pengkodean warna pada peta interaktif.
+    2. **Kalkulasi/Formula Pengolahan:**
+        * `Titik_Koordinat = (Lat, Lon) WHERE Entity = 'Kawasan_Industri_Nikel'`
+        * `Status_Node = IF(Own_Port, 'Terkonfirmasi', 'Berbagi')`
+    3. **Variabel & Fitur Data:**
+        * **Geolokasi (X, Y):** `Lat`, `Lon`
+        * **Atribut Fisik (Warna/Ukuran):** `port_facility`, `psn_status`
+    4. **Dataset & File:**
+        * `data/processed/sulawesi_logistik_simpul_nikel.csv` (Atribut Klaster)
+        * Open-source Intelligence (Citra satelit & dokumen perusahaan)
+    """)
 
 COORDS = {
     "NODE-SULTENG-MOROWALI-IMIP": {"lat": -2.19, "lon": 121.74},
@@ -283,8 +301,24 @@ st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=T
 # 10.2 TABEL DETAIL
 # ═════════════════════════════════════════════════════════════
 st.subheader("10.2 Siapa Menguasai Apa: Tabel Lengkap Kawasan Nikel")
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Kompilasi Data dari Situs Perusahaan, KPPIP, GEM, ESDM</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
 
-st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Kompilasi Data dari Situs Perusahaan, KPPIP, GEM, ESDM</span><br><br>', unsafe_allow_html=True)
+with st.expander("ℹ️ Metodologi: Tabulasi Penguasaan Rantai Pasok"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan ekstraksi dan agregasi data multisektoral (*Multisectoral Data Aggregation*) untuk membongkar integrasi vertikal infrastruktur hilirisasi.
+
+    1. **Model Ekstraksi Atribut Korporasi:**
+        * **Cross-Referencing Integrasi:** Menggabungkan data dari berbagai otoritas (KPPIP untuk status PSN, GEM untuk kapasitas PLTU, ESDM untuk Izin Tambang) ke dalam satu matriks tabel terpusat untuk setiap *anchor entity*.
+        * **Identifikasi Kepemilikan (Ownership):** Melacak jejak fasilitas pelabuhan, besaran daya PLTU, hingga tujuan akhir ekspor untuk setiap kawasan, membuktikan skema bisnis tertutup dari tambang hingga kapal pengangkut.
+    2. **Kalkulasi/Formula Pengolahan:**
+        * `Total_Aset_Kawasan = SUM(PLTU_MW, Izin_Tambang, Kapasitas_Dermaga) GROUP BY Entitas_Utama`
+    3. **Variabel & Fitur Data:**
+        * **Identitas Klaster:** `node_label`, `anchor_entity`
+        * **Kapasitas Fisik:** `pltu_mw`, `izin_nikel_count`, `export_channel`
+    4. **Dataset & File:**
+        * `data/processed/sulawesi_logistik_simpul_nikel.csv`
+    """)
 
 st.write("""Tabel berikut merangkum fakta kunci dari setiap lokasi: perusahaan mana yang menguasai pelabuhan, berapa kapasitas pembangkit listrik batubara yang dibangun, berapa izin tambang nikel yang beredar, dan ke mana produk nikelnya dikirim. Data ini dikumpulkan dari 25 sumber terbuka yang bisa diverifikasi publik — termasuk situs resmi perusahaan, dokumen pemerintah, dan laporan media investigatif.""")
 
@@ -321,8 +355,24 @@ st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=T
 # 10.3 PROFIL PER LOKASI (TABS)
 # ═════════════════════════════════════════════════════════════
 st.subheader("10.3 Profil Setiap Lokasi Industri Nikel")
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Penelusuran Sistematis Sumber Terbuka (25 sumber)</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
 
-st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Penelusuran Sistematis Sumber Terbuka (25 sumber)</span><br><br>', unsafe_allow_html=True)
+with st.expander("ℹ️ Metodologi: Investigasi Profil (Open Source Intelligence)"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan metodologi investigasi rekam jejak (*Open-Source Intelligence / OSINT Profiling*) untuk merekonstruksi sejarah dan dampak operasional tiap kawasan.
+
+    1. **Model Sintesis Dokumen Terbuka:**
+        * **Desk-Research Kualitatif:** Melakukan *crawling* dan kodifikasi tematik terhadap 25 dokumen sumber primer (laporan keuangan perusahaan, rilis pers kementerian, rekam jejak jurnalistik, hingga log kunjungan militer).
+        * **Konstruksi Fakta Kunci:** Mengekstraksi informasi kritikal mengenai besaran investasi, luas penguasaan lahan, dan riwayat konflik/kecelakaan kerja (misal: insiden ITSS, perampasan lahan adat) ke dalam profil terstruktur.
+    2. **Kalkulasi/Formula Pengolahan:**
+        * `Ekstraksi_Fakta = Filter(Informasi_Relevan) FROM Kumpulan_Dokumen_Publik`
+    3. **Variabel & Fitur Data:**
+        * **Naratif Kualitatif:** Deskripsi operasional, Riwayat konflik, Temuan anomali.
+        * **Key Facts:** Kapasitas kapal, nilai investasi, jejak pelanggaran HAM.
+    4. **Dataset & File:**
+        * Kompilasi OSINT CELIOS (Dataset Internal Non-Tabular)
+    """)
 
 NODE_NARRATIVES = {
     "NODE-SULTENG-MOROWALI-IMIP": {
@@ -496,8 +546,19 @@ st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=T
 # 10.4 SINTESIS
 # ═════════════════════════════════════════════════════════════
 st.subheader("10.4 Kesimpulan: Pola yang Terungkap")
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Analisis Pola Lintas Lokasi</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
 
-st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Analisis Pola Lintas Lokasi</span><br><br>', unsafe_allow_html=True)
+with st.expander("ℹ️ Metodologi: Ekstraksi Pola Sistemik"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan analisis kesamaan lintas-kasus (*Cross-Case Pattern Recognition*) untuk merumuskan postulat sistemik dari industri ekstraktif nikel.
+
+    1. **Model Inferensi Pola:**
+        * **Generalisasi Temuan:** Mengidentifikasi variabel yang secara konsisten berulang di seluruh 6 *node* industri (misal: "Selalu ada pelabuhan bersamaan dengan pabrik", "Status PSN mendominasi", "Absennya jalur logistik darat umum/kereta").
+        * **Kesimpulan Struktural:** Merangkum relasi kausalitas antara desain infrastruktur (eksport-oriented) dengan dampak sosial yang diwariskan kepada masyarakat lokal.
+    2. **Variabel & Fitur Data:**
+        * **Pola Ekstraktif:** Konstruksi paket (Smelter + PLTU + Pelabuhan), Fenomena 'Dilution' regulasi via PSN.
+    """)
 
 with st.expander("Pabrik, Pembangkit, dan Pelabuhan Selalu Dibangun Bersamaan", expanded=True):
     st.markdown("""
@@ -559,8 +620,19 @@ st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=T
 # 10.5 BATASAN DATA
 # ═════════════════════════════════════════════════════════════
 st.subheader("10.5 Catatan Penting & Batasan Data")
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Transparansi: Apa yang Belum Bisa Dikonfirmasi</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
 
-st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Transparansi: Apa yang Belum Bisa Dikonfirmasi</span><br><br>', unsafe_allow_html=True)
+with st.expander("ℹ️ Metodologi: Audit Keterbatasan Data (Data Gaps)"):
+    st.markdown("""
+    **Metode Analisis:** Pendekatan transparansi metodologis (*Methodological Transparency Audit*) untuk mendeklarasikan limitasi akses data publik (*Data Gaps*).
+
+    1. **Model Identifikasi Celah Informasi:**
+        * **Blind-Spot Mapping:** Mencatat secara rinci variabel-variabel strategis yang ditutupi oleh negara atau korporasi dari jangkauan publik (misal: dokumen AMDAL asli, dokumen perizinan dari Kemenhub, rincian konsumsi listrik dari PLN yang *undisclosed*).
+        * **Validasi Asumsi:** Memastikan bahwa analisis yang ditarik sebelumnya tidak melampaui batas fakta empiris yang tersedia, menjaga integritas kesimpulan.
+    2. **Dataset & File:**
+        * `data/raw/rev1_logistik/working/rev1_tahap_e_remaining_gaps.csv`
+    """)
 
 st.markdown("""
 <div style="background: rgba(255, 152, 0, 0.12); padding: 18px; border-radius: 8px; border-left: 6px solid #FFA726; margin-bottom: 20px;">

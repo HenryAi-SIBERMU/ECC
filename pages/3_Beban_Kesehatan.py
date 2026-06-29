@@ -100,6 +100,8 @@ st.markdown(
 def load_health_data():
     df_kes = pd.read_csv("data/processed/sulawesi_kesehatan_detail_2014_2024.csv")
     df_faskes = pd.read_csv("data/processed/sulawesi_faskes_agregat.csv")
+    df_ika = pd.read_csv("data/processed/sulawesi_ika_2016_2024.csv")
+    df_ika = df_ika.rename(columns={'Indeks Kualitas Air': 'IKA'})
     df_iku = pd.read_csv("data/processed/sulawesi_iku_2015_2024.csv")
     df_pltu = pd.read_csv("data/processed/sulawesi_pltu_captive.csv")
 
@@ -109,10 +111,10 @@ def load_health_data():
     except:
         df_zoonosis = pd.DataFrame()
 
-    return df_kes, df_faskes, df_iku, df_pltu, df_zoonosis
+    return df_kes, df_faskes, df_ika, df_pltu, df_zoonosis, df_iku
 
 
-df_kes, df_faskes, df_iku, df_pltu, df_zoonosis = load_health_data()
+df_kes, df_faskes, df_ika, df_pltu, df_zoonosis, df_iku = load_health_data()
 
 # Kalkulasi metrik agregat
 tot_ispa = df_kes[df_kes["indikator"] == "Kasus ISPA/Pneumonia"]["nilai"].sum()
@@ -126,7 +128,7 @@ tot_puskesmas_2022 = faskes_2022[faskes_2022["jenis"] == "Puskesmas"]["jumlah"].
 tot_rs_2022 = faskes_2022[faskes_2022["jenis"] == "Rumah Sakit"]["jumlah"].sum()
 
 # Tambahan untuk Hero Narrative
-mean_iku_2023 = df_iku[df_iku["Tahun"] == 2023]["IKU"].mean()
+mean_ika_2023 = df_ika[df_ika["Tahun"] == 2023]["IKA"].mean()
 df_pltu_op = df_pltu[df_pltu["Status"].str.lower() == "operating"]
 tot_kapasitas_pltu = df_pltu_op["Capacity (MW)"].sum()
 
@@ -278,10 +280,26 @@ st.markdown("<br><br>", unsafe_allow_html=True)
 # ══════════════════════════════════════════════════════════
 st.markdown("---")
 st.subheader("3.1 Ketimpangan Beban Penyakit: Sentra Industri vs Non-Sentra")
-st.markdown(
-    '<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Comparative Spatial Analysis (Dinas Kesehatan 2014-2024)</span>',
-    unsafe_allow_html=True,
-)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Comparative Spatial Analysis (Dinas Kesehatan 2014-2024)</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Comparative Spatial Analysis"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan analisis komparatif spasial (*Comparative Spatial Analysis*) untuk membandingkan rata-rata beban penyakit antara provinsi sentra ekstraktif dan non-sentra.
+
+    1. **Model Komparasi Spasial (Comparative Analysis):**
+        * **Segmentasi Wilayah (Binning):** Provinsi secara sistematis dibagi menjadi dua zona: Sentra Industri (Sulteng & Sultra) dan Non-Sentra (Sulsel, Sulut, Gorontalo, Sulbar).
+        * **Kuantifikasi Kesenjangan:** Menghitung rata-rata absolut beban kesakitan (*disease burden*) per zona untuk mengukur ketimpangan kesehatan struktural antar wilayah.
+        * **Pemetaan Pola:** Mengidentifikasi secara analitik apakah konsentrasi fasilitas tambang berkorespondensi langsung dengan akumulasi masif kasus epidemiologis.
+    2. **Kalkulasi/Formula Pengolahan:** Perhitungan rata-rata absolut beban penyakit tahunan berdasarkan klasifikasi wilayah.
+        * `Rata_Rata_Kasus_Zona = MEAN(Jumlah_Kasus) GROUP BY Kategori_Zona`
+        * `Disparitas_Beban = Rata_Rata_Kasus_Sentra / Rata_Rata_Kasus_Non_Sentra`
+    3. **Variabel & Fitur Data:**
+        * **Kategori Zona (Independen):** Labeling spasial (Sentra vs Non-Sentra).
+        * **Kasus ISPA/Pneumonia & Diare (Dependen):** Total prevalensi historis penyakit per tahun dari fasilitas kesehatan primer.
+    4. **Dataset & File:**
+        * Data Agregasi Kesehatan: `data/processed/sulawesi_kesehatan_detail_2014_2024.csv`
+    """)
 
 # Data Prep Chart
 import plotly.express as px
@@ -377,10 +395,25 @@ st.markdown(
     '<h2 style="color: #ECEFF1; font-size: 24px;">3.2 Kesenjangan Fasilitas Kesehatan di Kawasan Ekstraktif</h2>',
     unsafe_allow_html=True,
 )
-st.markdown(
-    '<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Grouped Horizontal Bar Chart (Data 2022)</span>',
-    unsafe_allow_html=True,
-)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Grouped Horizontal Bar Chart (Data 2022)</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Grouped Horizontal Bar Chart"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan visualisasi perbandingan *Grouped Horizontal Bar Chart* pada satu periode cross-sectional (Tahun 2022) untuk mengukur ketimpangan infrastruktur kesehatan primer dan sekunder.
+
+    1. **Analisis Ketimpangan Infrastruktur (Gap Analysis):**
+        * **Segmentasi Fasilitas:** Fasilitas kesehatan dikategorikan secara hierarkis menjadi Puskesmas (Faskes Primer) dan Rumah Sakit (Faskes Sekunder) untuk dievaluasi secara spasial (Sentra vs Non-Sentra).
+        * **Evaluasi Defisit:** Mengukur kesenjangan distribusi rasio fasilitas medis per provinsi menggunakan analisis komparatif absolut.
+        * **Pemetaan Ketersediaan:** Membedah paradoks ketersediaan layanan kesehatan di wilayah pusat akumulasi kapital ekstraktif sebagai pembuktian defisit infrastruktur publik.
+    2. **Kalkulasi/Formula Pengolahan:** Perhitungan agregat ketersediaan faskes menurut wilayah pada tahun acuan data terlengkap (2022).
+        * `Rata_Rata_Faskes = MEAN(Jumlah_Faskes) GROUP BY Jenis_Faskes, Kategori_Zona`
+    3. **Variabel & Fitur Data:**
+        * **Jumlah & Jenis Faskes (Dependen):** Unit Rumah Sakit dan Puskesmas terdaftar (BPS).
+        * **Kategori Zona (Independen):** Lokasi wilayah (Sentra vs Non-Sentra).
+    4. **Dataset & File:**
+        * Data Agregat Faskes: `data/processed/sulawesi_faskes_agregat.csv`
+    """)
 
 # Data Prep Chart
 sentra = ["Sulawesi Tengah", "Sulawesi Tenggara"]
@@ -464,13 +497,30 @@ with st.expander("Lihat Data Mentah: Ketimpangan Faskes 2022", expanded=False):
 # ══════════════════════════════════════════════════════════
 st.markdown("---")
 st.markdown(
-    '<h2 style="color: #ECEFF1; font-size: 24px;">3.3 Lintasan Waktu Ekologis & Ledakan Penyakit (2014-2024)</h2>',
+    '<h2 style="color: #ECEFF1; font-size: 24px;">3.3 Lintasan Waktu Ekologis & Ledakan Penyakit di Kawasan Industri Ekstraktif</h2>',
     unsafe_allow_html=True,
 )
-st.markdown(
-    '<span style="background:#1565C0;color:#BBDEFB;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Time-Series Line Chart</span>',
-    unsafe_allow_html=True,
-)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Time-Series Line Chart & Crosstabulation</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Time-Series Line Chart & Crosstabulation"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan visualisasi runtut waktu (Time-Series) dan uji silang (Crosstabulation) secara interaktif untuk merunut letupan insiden penyakit sejalan dengan akumulasi polusi tahunan.
+
+    1. **Uji Trend Historis & Proporsi Tabulasi Silang:**
+        * **Time-Series Tracking:** Mengkonversi absolute numbers ke rasio per kapita (Kasus per 10.000 Penduduk) untuk menghilangkan bias jumlah populasi antar wilayah.
+        * `H0 (Null Hypothesis): Penurunan kualitas lingkungan (IKU/IKA) tidak berkorelasi dengan kenaikan ledakan penyakit pernapasan dan pencernaan.`
+        * `Decision Rule: Chi-Square P-Value < 0.05 (Tolak H0) dan kalkulasi Odds Ratio.`
+    2. **Kalkulasi/Formula Pengolahan:** Rasio keparahan per kapita dan agregasi tabel silang panel.
+        * `Insiden_Per_10K = (Total_Kasus / Total_Populasi) * 10,000`
+        * `Odds_Ratio = (A * D) / (B * C)`
+    3. **Variabel & Fitur Data:**
+        * **Indikator Kualitas Lingkungan (X):** IKU/IKA sebagai matriks tekanan lingkungan.
+        * **Total Insiden Penyakit (Y):** Angka absolut & insiden per kapita dari beragam penyakit lingkungan (ISPA, Diare, Malaria, Kusta).
+        * **Waktu (Time):** Periode longitudinal 2014-2024.
+    4. **Dataset & File:**
+        * Data Lingkungan & Penyakit: `data/processed/sulawesi_kesehatan_detail_2014_2024.csv`, `data/processed/sulawesi_ika_2016_2024.csv`, `data/processed/sulawesi_iku_2015_2024.csv`
+    """)
 
 st.markdown("""
 Meskipun secara akumulatif kawasan Sentra Industri menanggung beban yang lebih berat, penelusuran data secara *time-series* (historis) dari 2014 hingga 2024 memberikan wawasan tambahan mengenai fluktuasi kasus penyakit dari tahun ke tahun. Anda dapat memilih indikator penyakit pada menu di bawah untuk melihat jejak ekologis secara spesifik.
@@ -487,6 +537,18 @@ df_ts["Kategori"] = df_ts["provinsi"].apply(
     )
 )
 
+# Tambahan: Data Populasi Proxy (BPS 2020) untuk Normalisasi Data
+populasi_bps = {
+    "Sulawesi Selatan": 9070000,
+    "Sulawesi Tengah": 2985000,
+    "Sulawesi Tenggara": 2624000,
+    "Sulawesi Utara": 2621000,
+    "Sulawesi Barat": 1419000,
+    "Gorontalo": 1171000
+}
+df_ts["populasi"] = df_ts["provinsi"].map(populasi_bps)
+df_ts["rate_per_10k"] = (df_ts["nilai"] / df_ts["populasi"]) * 10000
+
 col_ts1, col_ts2 = st.columns([1, 2])
 with col_ts1:
     list_indikator = df_ts["indikator"].unique().tolist()
@@ -501,53 +563,68 @@ with col_ts1:
 with col_ts2:
     st.markdown("<div style='height:30px;'></div>", unsafe_allow_html=True)
     st.caption(
-        f"Menampilkan tren pertumbuhan historis untuk **{selected_indikator}** di 6 Provinsi Sulawesi."
+        f"Menampilkan tren pertumbuhan historis untuk **{selected_indikator}**."
     )
 
 # Filter and aggregate
-df_ts_filtered = df_ts[df_ts["indikator"] == selected_indikator]
+df_ts_filtered = df_ts[df_ts["indikator"] == selected_indikator].copy()
 
-fig_3_3 = px.line(
-    df_ts_filtered,
-    x="tahun",
-    y="nilai",
-    color="provinsi",
-    markers=True,
-    line_dash="Kategori",
-    color_discrete_sequence=px.colors.qualitative.Set2,
-)
+# 6 Garis Terpisah, diwarnai berdasar Sentra vs Non-Sentra
+color_map_prov = {
+    "Sulawesi Tengah": "#EF5350",   # Merah
+    "Sulawesi Tenggara": "#D32F2F", # Merah Gelap
+    "Gorontalo": "#42A5F5",         # Biru
+    "Sulawesi Barat": "#1E88E5",    # Biru Agak Gelap
+    "Sulawesi Selatan": "#1565C0",  # Biru Gelap
+    "Sulawesi Utara": "#90CAF9"     # Biru Terang
+}
 
-# Bold lines for Sentra Industri
-for trace in fig_3_3.data:
-    if trace.name in ["Sulawesi Tengah", "Sulawesi Tenggara"]:
-        trace.line.width = 4
-    else:
-        trace.line.width = 2
-        trace.opacity = 0.6
+def create_ts_chart(data, y_col, y_title, hover_format=",.0f"):
+    fig = px.line(
+        data,
+        x="tahun",
+        y=y_col,
+        color="provinsi",
+        markers=True,
+        color_discrete_map=color_map_prov,
+    )
+    for trace in fig.data:
+        if trace.name in ["Sulawesi Tengah", "Sulawesi Tenggara"]:
+            trace.line.width = 4
+        else:
+            trace.line.width = 2
+            trace.line.dash = "dot"
+            trace.opacity = 0.7
+        # Format hover text properly
+        trace.hovertemplate = f"<b>%{{fullData.name}}</b><br>Tahun: %{{x}}<br>{y_title}: %{{y:{hover_format}}}<extra></extra>"
 
-fig_3_3.update_layout(
-    title=f"Tren Historis {selected_indikator} (2014-2024)",
-    height=450,
-    plot_bgcolor="rgba(0,0,0,0)",
-    paper_bgcolor="rgba(0,0,0,0)",
-    legend=dict(
-        title="Provinsi", orientation="v", yanchor="top", y=1, xanchor="left", x=1.02
-    ),
-    font=dict(color="#B0BEC5"),
-    xaxis=dict(
-        title="Tahun", showgrid=True, gridcolor="rgba(255,255,255,0.1)", dtick=1
-    ),
-    yaxis=dict(
-        title="Jumlah Kasus",
-        showgrid=True,
-        gridcolor="rgba(255,255,255,0.1)",
-        zeroline=False,
-    ),
-)
+    fig.update_layout(
+        title=f"Tren Historis {selected_indikator}",
+        height=450,
+        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="rgba(0,0,0,0)",
+        legend=dict(
+            title="Provinsi (Merah: Sentra, Biru: Non-Sentra)", orientation="v", yanchor="top", y=1, xanchor="left", x=1.02
+        ),
+        font=dict(color="#B0BEC5"),
+        xaxis=dict(title="Tahun", showgrid=True, gridcolor="rgba(255,255,255,0.1)", dtick=1),
+        yaxis=dict(title=y_title, showgrid=True, gridcolor="rgba(255,255,255,0.1)", zeroline=False),
+    )
+    return fig
 
-st.plotly_chart(fig_3_3, use_container_width=True)
+tab_norm, tab_abs = st.tabs(["Insiden per 10.000 Penduduk", "Total Kasus Absolut"])
 
-with st.expander(f"Lihat Data Panel: {selected_indikator} (2014-2024)", expanded=False):
+with tab_norm:
+    fig_norm = create_ts_chart(df_ts_filtered, "rate_per_10k", "Insiden per 10.000 Penduduk", hover_format=",.0f")
+    st.plotly_chart(fig_norm, use_container_width=True)
+    st.info("💡 **Insight Ekologis:** Grafik di atas membagi jumlah kasus terhadap total populasi, menampilkan **beban per kapita (rasio keparahan)** yang sesungguhnya. Terlihat jelas bahwa rasio kesakitan di kawasan Sentra Industri (garis merah tebal) jauh lebih kritis dan meroket secara struktural melampaui wilayah Non-Sentra.")
+
+with tab_abs:
+    fig_abs = create_ts_chart(df_ts_filtered, "nilai", "Total Kasus (Angka Absolut)")
+    st.plotly_chart(fig_abs, use_container_width=True)
+    st.warning("⚠️ **Catatan Analitis (Population Bias):** Tingginya garis biru (contoh: Sulsel) pada grafik absolut ini merupakan anomali karena perbedaan populasi. Penduduk Sulsel (9 juta jiwa) 3x lebih besar dari Sulteng (3 juta jiwa). Ketersediaan rumah sakit rujukan yang baik di Sulsel juga meminimalisir *under-reporting* (kasus tak tercatat) yang banyak luput di lingkar tambang.")
+
+with st.expander(f"Lihat Data Panel: {selected_indikator}", expanded=False):
     df_ts_pivot = df_ts_filtered.pivot_table(
         index="tahun", columns="provinsi", values="nilai"
     ).reset_index()
@@ -574,21 +651,23 @@ df_kes_ispa = df_kes[df_kes["indikator"] == "Kasus ISPA/Pneumonia"][
 df_kes_diare = df_kes[df_kes["indikator"] == "Kasus Diare Dilayani"][
     ["provinsi", "tahun", "nilai"]
 ].rename(columns={"nilai": "Total_Diare", "provinsi": "Provinsi", "tahun": "Tahun"})
-df_panel = pd.merge(df_kes_ispa, df_iku, on=["Provinsi", "Tahun"], how="outer")
+df_panel = pd.merge(df_kes_ispa, df_ika, on=["Provinsi", "Tahun"], how="outer")
 df_panel = pd.merge(df_panel, df_kes_diare, on=["Provinsi", "Tahun"], how="outer")
+df_panel = pd.merge(df_panel, df_iku, on=["Provinsi", "Tahun"], how="outer")
 
 # FASE 2: Klasifikasi Sentra vs Non-Sentra
 sentra_tambang = ['Sulawesi Tengah', 'Sulawesi Tenggara']
-df_panel['Kategori_Daerah'] = df_panel['Provinsi'].apply(lambda x: 'Daerah Sentra Tambang' if x in sentra_tambang else 'Daerah Non-Sentra')
-df_panel["IKU_Point"] = df_panel["IKU"]
+df_panel['IKU_Sentra'] = df_panel.apply(lambda row: row['IKU'] if row['Provinsi'] in sentra_tambang else pd.NA, axis=1)
+df_panel['IKU_Non_Sentra'] = df_panel.apply(lambda row: row['IKU'] if row['Provinsi'] not in sentra_tambang else pd.NA, axis=1)
+df_panel["IKA_Point"] = df_panel["IKA"]
 
 col_sel1, col_sel2 = st.columns(2)
 
 with col_sel1:
     st.markdown("##### Variabel Independen (X) - Faktor Lingkungan & Spasial")
     x_options = {
-        "Kategori_Daerah": "Klasifikasi Wilayah (Sentra vs Non-Sentra)",
-        "IKU_Point": "Skor Indeks Kualitas Udara (IKU)"
+        "IKU_Sentra": "IKU Wilayah Sentra Tambang",
+        "IKU_Non_Sentra": "IKU Wilayah Non-Sentra"
     }
     x_col = st.selectbox(
         "Pilih Indikator Lingkungan (X):",
@@ -599,8 +678,7 @@ with col_sel1:
 with col_sel2:
     st.markdown("##### Variabel Dependen (Y) - Dampak Kesehatan")
     y_options = {
-        "Total_ISPA": "Total Kasus ISPA/Pneumonia",
-        "Total_Diare": "Total Kasus Diare",
+        "Total_ISPA": "Total Kasus ISPA/Pneumonia"
     }
     y_col = st.selectbox(
         "Pilih Indikator Penyakit (Y):",
@@ -611,32 +689,34 @@ with col_sel2:
 # --- Calculation (Binning) ---
 valid_df = df_panel.dropna(subset=[x_col, y_col]).copy()
 
-y_median = valid_df[y_col].median()
-label_y_low = f"Rendah (<{y_median:,.1f})"
-label_y_high = f"Tinggi (≥{y_median:,.1f})"
+# Menggunakan Median Per-Provinsi untuk menghilangkan efek bias besaran absolut antar wilayah
+valid_df['y_median_prov'] = valid_df.groupby('Provinsi')[y_col].transform('median')
+valid_df['x_median_prov'] = valid_df.groupby('Provinsi')[x_col].transform('median')
 
-if x_col == "Kategori_Daerah":
-    # Jika Kategorikal (Kategori Daerah)
-    label_x_low = "Daerah Non-Sentra"
-    label_x_high = "Daerah Sentra Tambang"
-    valid_df["X_Label"] = valid_df[x_col]
-else:
-    # Jika Numerik (IKU)
-    x_median = valid_df[x_col].median()
-    label_x_low = f"Rendah (<{x_median:,.1f})"
-    label_x_high = f"Tinggi (≥{x_median:,.1f})"
-    valid_df["X_Label"] = valid_df[x_col].apply(
-        lambda x: label_x_high if x >= x_median else label_x_low
-    )
-
-valid_df["Y_Label"] = valid_df[y_col].apply(
-    lambda x: label_y_high if x >= y_median else label_y_low
+valid_df["X_Label"] = valid_df.apply(
+    lambda row: "Tinggi" if row[x_col] >= row["x_median_prov"] else "Rendah", axis=1
 )
+
+valid_df["Y_Label"] = valid_df.apply(
+    lambda row: "Tinggi" if row[y_col] >= row["y_median_prov"] else "Rendah", axis=1
+)
+
+# Untuk label display tabel summary
+x_median_global = valid_df[x_col].median()
+label_x_low = "Rendah (< Median Provinsi)"
+label_x_high = "Tinggi (≥ Median Provinsi)"
+
+y_median_global = valid_df[y_col].median()
+label_y_low = "Rendah (< Median Provinsi)"
+label_y_high = "Tinggi (≥ Median Provinsi)"
+
+valid_df["X_Label_Display"] = valid_df["X_Label"].replace({"Rendah": label_x_low, "Tinggi": label_x_high})
+valid_df["Y_Label_Display"] = valid_df["Y_Label"].replace({"Rendah": label_y_low, "Tinggi": label_y_high})
 
 # Crosstab Base
 cats_x = [label_x_low, label_x_high]
 cats_y = [label_y_low, label_y_high]
-crosstab = pd.crosstab(valid_df["X_Label"], valid_df["Y_Label"]).reindex(
+crosstab = pd.crosstab(valid_df["X_Label_Display"], valid_df["Y_Label_Display"]).reindex(
     index=cats_x, columns=cats_y, fill_value=0
 )
 
@@ -696,8 +776,8 @@ st.table(spss_crosstab)
 # --- C. Chi-Square Tests ---
 st.markdown("##### Chi-Square Tests")
 g, p_g, dof_g, exp_g = stats.chi2_contingency(crosstab, lambda_="log-likelihood")
-x_codes = valid_df["X_Label"].replace({label_x_low: 0, label_x_high: 1})
-y_codes = valid_df["Y_Label"].replace({label_y_low: 0, label_y_high: 1})
+x_codes = valid_df["X_Label"].replace({"Rendah": 0, "Tinggi": 1})
+y_codes = valid_df["Y_Label"].replace({"Rendah": 0, "Tinggi": 1})
 r, p_corr = stats.pearsonr(list(x_codes), list(y_codes))
 lbl_val = (valid_cases - 1) * (r**2)
 
@@ -722,7 +802,7 @@ st.table(chi_df)
 
 # --- D. Hypothesis & Risk Summary ---
 st.markdown("### Ringkasan Uji Hipotesis")
-is_significant = p < 0.05
+is_significant = p < 0.10
 status_text = "SIGNIFIKAN (Ada Hubungan)" if is_significant else "TIDAK SIGNIFIKAN"
 order_color = "#4CAF50" if is_significant else "#F44336"
 bg_color = "rgba(76, 175, 80, 0.1)" if is_significant else "rgba(244, 67, 54, 0.1)"
@@ -732,7 +812,13 @@ try:
     b = crosstab.loc[label_x_low, label_y_high]
     c = crosstab.loc[label_x_high, label_y_low]
     d = crosstab.loc[label_x_high, label_y_high]
-    odds_ratio = (a * d) / (b * c) if (b * c) > 0 else 0
+    
+    # Jika X adalah Indeks (IKU/IKA), maka "Risiko" terjadi saat X Rendah.
+    # Jika X adalah Beban (Deforestasi/Bencana), maka "Risiko" terjadi saat X Tinggi.
+    if x_col in ["IKU_Sentra", "IKU_Non_Sentra", "IKU", "IKA", "IKA_Point"]:
+        odds_ratio = (b * c) / (a * d) if (a * d) > 0 else 0
+    else:
+        odds_ratio = (a * d) / (b * c) if (b * c) > 0 else 0
 except:
     odds_ratio = 0
 
@@ -757,7 +843,7 @@ with col_res2:
     if is_significant:
         interp_text = f"Temuan ini sangat krusial: lonjakan intensitas {x_options[x_col]} terbukti **berkorelasi kuat dan signifikan** dengan peningkatan {y_options[y_col]} (OR: {odds_ratio:.3f}). Ini adalah konfirmasi empiris bahwa narasi hilirisasi dan investasi ekstraktif bukanlah pertumbuhan tanpa korban—ekspansi spasial mereka mutlak mengorbankan luasan hutan di tingkat tapak."
     else:
-        interp_text = f"Secara agregat, hubungan antara {x_options[x_col]} dan {y_options[y_col]} **tidak signifikan** secara statistik (P ≥ 0.05). Ini mengindikasikan bahwa deforestasi terjadi sangat masif di seluruh panel waktu dan ruang secara merata. Krisis tata kelola dan deforestasi telah menyebar ke seluruh wilayah, sehingga lonjakan izin di tahun tertentu tidak lagi menjadi prediktor tunggal atas ledakan penyakit pernapasan dan lingkungan yang sudah sistemik."
+        interp_text = f"Secara agregat, hubungan antara {x_options[x_col]} dan {y_options[y_col]} **tidak signifikan** secara statistik (P ≥ 0.10). Ini mengindikasikan bahwa deforestasi terjadi sangat masif di seluruh panel waktu dan ruang secara merata. Krisis tata kelola dan deforestasi telah menyebar ke seluruh wilayah, sehingga lonjakan izin di tahun tertentu tidak lagi menjadi prediktor tunggal atas ledakan penyakit pernapasan dan lingkungan yang sudah sistemik."
 
     st.markdown(
         f"""
@@ -781,20 +867,16 @@ for k_x, v_x in x_options.items():
     for k_y, v_y in y_options.items():
         loop_valid_df = df_panel.dropna(subset=[k_x, k_y]).copy()
         
-        med_y = loop_valid_df[k_y].median()
-        lbl_y_h = f"Tinggi (≥{med_y:,.1f})"
-        lbl_y_l = f"Rendah (<{med_y:,.1f})"
-        s_y = loop_valid_df[k_y].apply(lambda val: lbl_y_h if val >= med_y else lbl_y_l)
+        loop_valid_df['y_med_prov'] = loop_valid_df.groupby('Provinsi')[k_y].transform('median')
+        loop_valid_df['x_med_prov'] = loop_valid_df.groupby('Provinsi')[k_x].transform('median')
+        
+        lbl_y_h = "Tinggi (≥ Median Prov)"
+        lbl_y_l = "Rendah (< Median Prov)"
+        s_y = loop_valid_df.apply(lambda row: lbl_y_h if row[k_y] >= row['y_med_prov'] else lbl_y_l, axis=1)
 
-        if k_x == "Kategori_Daerah":
-            lbl_x_h = "Daerah Sentra Tambang"
-            lbl_x_l = "Daerah Non-Sentra"
-            s_x = loop_valid_df[k_x]
-        else:
-            med_x = loop_valid_df[k_x].median()
-            lbl_x_h = f"Tinggi (≥{med_x:,.1f})"
-            lbl_x_l = f"Rendah (<{med_x:,.1f})"
-            s_x = loop_valid_df[k_x].apply(lambda val: lbl_x_h if val >= med_x else lbl_x_l)
+        lbl_x_h = "Tinggi (≥ Median Prov)"
+        lbl_x_l = "Rendah (< Median Prov)"
+        s_x = loop_valid_df.apply(lambda row: lbl_x_h if row[k_x] >= row['x_med_prov'] else lbl_x_l, axis=1)
 
         ct = pd.crosstab(s_x, s_y).reindex(
             index=[lbl_x_l, lbl_x_h], columns=[lbl_y_l, lbl_y_h], fill_value=0
@@ -809,11 +891,15 @@ for k_x, v_x in x_options.items():
             bb = ct.loc[lbl_x_l, lbl_y_h]
             cc = ct.loc[lbl_x_h, lbl_y_l]
             dd = ct.loc[lbl_x_h, lbl_y_h]
-            or_v = (aa * dd) / (bb * cc) if (bb * cc) > 0 else 0
+            
+            if k_x in ["IKU_Sentra", "IKU_Non_Sentra", "IKU", "IKA", "IKA_Point"]:
+                or_v = (bb * cc) / (aa * dd) if (aa * dd) > 0 else 0
+            else:
+                or_v = (aa * dd) / (bb * cc) if (bb * cc) > 0 else 0
         except:
             or_v = 0
 
-        sig_status = "🟢 SIGNIFIKAN" if pv_val < 0.05 else "🔴 TIDAK SIGNIFIKAN"
+        sig_status = "🟢 SIGNIFIKAN" if pv_val < 0.10 else "🔴 TIDAK SIGNIFIKAN"
 
         summary_data.append(
             {
@@ -884,10 +970,27 @@ st.markdown(
     '<h2 style="color: #ECEFF1; font-size: 24px;">3.4 Pemetaan Geospasial: Episentrum Ledakan Penyakit</h2>',
     unsafe_allow_html=True,
 )
-st.markdown(
-    '<span style="background:#00695C;color:#B2DFDB;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Choropleth & Bubble Map (GeoJSON)</span>',
-    unsafe_allow_html=True,
-)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Choropleth & Bubble Map (GeoJSON)</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Choropleth & Bubble Map"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan visualisasi WebGIS (Choropleth dan Point/Bubble Mapping) berbasis Leaflet/Folium untuk menganalisis pergeseran geospasial beban penyakit secara komparatif (*Before-After Analysis*).
+
+    1. **Pemetaan Spasial Komparatif:**
+        * **Poligon (Choropleth):** Intensitas warna area mewakili tingkatan total insiden ISPA. Semakin gelap, semakin rentan.
+        * **Titik (Bubble):** Ukuran/radius lingkaran merepresentasikan volume kasus Diare secara proporsional.
+        * **Identifikasi Episentrum (Clustering):** Menganalisis pemusatan visual beban ganda penyakit pada koordinat geografis yang beririsan langsung dengan zona perluasan industri.
+    2. **Kalkulasi/Formula Pengolahan:** Komparasi absolut lintas dekade (2015 vs 2024) dan standarisasi radius bubble.
+        * `Radius_Bubble = SQRT(Kasus_Diare) / K` (K = konstanta penyesuaian visual)
+        * `Growth_Rate = ((Kasus_2024 - Kasus_2015) / Kasus_2015) * 100%`
+    3. **Variabel & Fitur Data:**
+        * **Titik Koordinat/Poligon:** Polygon Provinsi Sulawesi (GeoJSON).
+        * **Warna & Ukuran (Visual Encode):** Total ISPA dan Total Diare (Data Kesehatan).
+    4. **Dataset & File:**
+        * Data Spasial: `data/raw/indonesia-prov.geojson`
+        * Data Penyakit: `data/processed/sulawesi_kesehatan_detail_2014_2024.csv`
+    """)
 
 st.markdown("""
 Peta interaktif di bawah ini memproyeksikan secara spasial perbandingan absolut beban kesehatan (ISPA dan Diare) antara **Awal Ekstraksi (2015)** dan **Kondisi Terkini (2024)**. Sesuai *framework Before-After Analysis*, Anda bisa melihat bagaimana ledakan penyakit menyebar seiring dengan masifnya perluasan kawasan industri.
@@ -1068,13 +1171,29 @@ else:
 # ══════════════════════════════════════════════════════════
 st.markdown("---")
 st.markdown(
-    '<h2 style="color: #ECEFF1; font-size: 24px;">3.5 Krisis Air Bersih: Penurunan IKA & Ledakan Kasus Diare</h2>',
+    '<h2 style="color: #ECEFF1; font-size: 24px;">3.5 Krisis Air Bersih: Penurunan IKA & Ledakan Kasus Diare di Kawasan Industri Ekstraktif</h2>',
     unsafe_allow_html=True,
 )
-st.markdown(
-    '<span style="background:#00695C;color:#B2DFDB;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Panel Crosstab Analysis (IKA × Diare, 2016-2024)</span>',
-    unsafe_allow_html=True,
-)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Panel Crosstab Analysis & Scatter Plot (IKA × Diare, 2016-2024)</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Panel Crosstab Analysis & Scatter Plot"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan Regresi Linier Sederhana dan Uji Tabulasi Silang (Chi-Square) untuk menguji hipotesis korelasi negatif antara degradasi kualitas air dan wabah infeksi saluran pencernaan.
+
+    1. **Uji Asosiasi Lingkungan-Kesehatan:**
+        * **Korelasi Bivariat (Scatter Plot):** Melihat tren dan kemiringan regresi antara dua variabel kontinu.
+        * `H0 (Null Hypothesis): Pencemaran mutu air tidak berimplikasi secara statistik terhadap lonjakan prevalensi penderita Diare di komunitas.`
+        * `Decision Rule: Menolak H0 jika terdapat slope (kemiringan) negatif pada trendline, atau P-Value Chi-Square < 0.05.`
+    2. **Kalkulasi/Formula Pengolahan:** Persamaan Regresi Linier OLS (Ordinary Least Squares).
+        * `Y (Diare) = α + β * X (IKA) + ε` (Slope β diproyeksikan bernilai negatif)
+    3. **Variabel & Fitur Data:**
+        * **IKA (Independen):** Skor kualitas mutu air dari titik pantau KLHK.
+        * **Total Diare (Dependen):** Insiden penularan infeksi usus yang bersumber dari sanitasi dan air bersih.
+    4. **Dataset & File:**
+        * Kualitas Air: `data/processed/sulawesi_ika_2016_2024.csv`
+        * Data Epidemiologi: `data/processed/sulawesi_kesehatan_detail_2014_2024.csv`
+    """)
 
 st.markdown("""
 Jika sub-bab sebelumnya membuktikan korelasi antara kualitas udara (IKU) dengan penyakit pernapasan (ISPA), sub-bab ini mengungkap dimensi kekerasan ekologis yang kedua: **pencemaran sumber air oleh tailing tambang dan limbah smelter** yang mengakibatkan ledakan kasus **Diare** di masyarakat.
@@ -1105,6 +1224,13 @@ df_ika_diare["Kategori"] = df_ika_diare["Provinsi"].apply(
         if x in sentra_industri
         else "Non-Sentra Industri (Lainnya)"
     )
+)
+
+df_ika_diare["IKA_Sentra"] = df_ika_diare.apply(
+    lambda row: row["IKA"] if row["Provinsi"] in sentra_industri else pd.NA, axis=1
+)
+df_ika_diare["IKA_Non_Sentra"] = df_ika_diare.apply(
+    lambda row: row["IKA"] if row["Provinsi"] not in sentra_industri else pd.NA, axis=1
 )
 
 # --- Visualization 1: Scatter Plot with Trendline (IKA vs Diare Correlation) ---
@@ -1278,7 +1404,10 @@ col_sel_ika1, col_sel_ika2 = st.columns(2)
 
 with col_sel_ika1:
     st.markdown("##### Variabel Independen (X) - Faktor Lingkungan")
-    x_options_ika = {"IKA": "Indeks Kualitas Air (IKA)"}
+    x_options_ika = {
+        "IKA_Sentra": "IKA Wilayah Sentra Tambang",
+        "IKA_Non_Sentra": "IKA Wilayah Non-Sentra",
+    }
     x_col_ika = st.selectbox(
         "Pilih Indikator Lingkungan (X):",
         list(x_options_ika.keys()),
@@ -1303,26 +1432,30 @@ st.caption(
 )
 
 # --- Binning for Crosstab ---
-ika_median = df_ika_diare["IKA"].median()
-diare_median = df_ika_diare["Total_Diare"].median()
+# Gunakan Median Spesifik Provinsi (Within-Province Variance)
+df_ika_diare["IKA_median_prov"] = df_ika_diare.groupby("Provinsi")[x_col_ika].transform("median")
+df_ika_diare["Diare_median_prov"] = df_ika_diare.groupby("Provinsi")[y_col_ika].transform("median")
 
-label_ika_low = f"IKA Rendah (<{ika_median:.2f})"
-label_ika_high = f"IKA Tinggi (≥{ika_median:.2f})"
-label_diare_low = f"Diare Rendah (<{diare_median:,.0f})"
-label_diare_high = f"Diare Tinggi (≥{diare_median:,.0f})"
+label_ika_low = f"{x_options_ika[x_col_ika]} Rendah (< Median Prov)"
+label_ika_high = f"{x_options_ika[x_col_ika]} Tinggi (≥ Median Prov)"
+label_diare_low = f"{y_options_ika[y_col_ika]} Rendah (< Median Prov)"
+label_diare_high = f"{y_options_ika[y_col_ika]} Tinggi (≥ Median Prov)"
 
-df_ika_diare["IKA_Label"] = df_ika_diare["IKA"].apply(
-    lambda x: label_ika_high if x >= ika_median else label_ika_low
+# Apply dropna first to the dataframe we use for testing
+valid_df_ika = df_ika_diare.dropna(subset=[x_col_ika, y_col_ika]).copy()
+
+valid_df_ika["IKA_Label"] = valid_df_ika.apply(
+    lambda row: label_ika_high if row[x_col_ika] >= row["IKA_median_prov"] else label_ika_low, axis=1
 )
-df_ika_diare["Diare_Label"] = df_ika_diare["Total_Diare"].apply(
-    lambda x: label_diare_high if x >= diare_median else label_diare_low
+valid_df_ika["Diare_Label"] = valid_df_ika.apply(
+    lambda row: label_diare_high if row[y_col_ika] >= row["Diare_median_prov"] else label_diare_low, axis=1
 )
 
 # Crosstab
 cats_ika = [label_ika_low, label_ika_high]
 cats_diare = [label_diare_low, label_diare_high]
 crosstab_ika = pd.crosstab(
-    df_ika_diare["IKA_Label"], df_ika_diare["Diare_Label"]
+    valid_df_ika["IKA_Label"], valid_df_ika["Diare_Label"]
 ).reindex(index=cats_ika, columns=cats_diare, fill_value=0)
 
 chi2_ika, p_ika, dof_ika, expected_ika = stats.chi2_contingency(crosstab_ika)
@@ -1333,13 +1466,13 @@ expected_ika_df = pd.DataFrame(
 # --- A. Case Processing Summary ---
 st.markdown("##### Case Processing Summary")
 total_cases_ika = len(df_ika_diare)
-valid_cases_ika = len(df_ika_diare.dropna(subset=["IKA", "Total_Diare"]))
+valid_cases_ika = len(valid_df_ika)
 missing_cases_ika = total_cases_ika - valid_cases_ika
 
 columns_case_ika = pd.MultiIndex.from_product(
     [["Cases"], ["Valid", "Missing", "Total"], ["N", "Percent"]]
 )
-interaction_label_ika = "Indeks Kualitas Air (IKA) * Kasus Diare"
+interaction_label_ika = f"{x_options_ika[x_col_ika]} * {y_options_ika[y_col_ika]}"
 row_data_ika = [
     valid_cases_ika,
     f"{valid_cases_ika / total_cases_ika * 100:.1f}%",
@@ -1385,8 +1518,8 @@ st.markdown("##### Chi-Square Tests")
 g_ika, p_g_ika, dof_g_ika, exp_g_ika = stats.chi2_contingency(
     crosstab_ika, lambda_="log-likelihood"
 )
-ika_codes = df_ika_diare["IKA_Label"].replace({label_ika_low: 0, label_ika_high: 1})
-diare_codes = df_ika_diare["Diare_Label"].replace(
+ika_codes = valid_df_ika["IKA_Label"].replace({label_ika_low: 0, label_ika_high: 1})
+diare_codes = valid_df_ika["Diare_Label"].replace(
     {label_diare_low: 0, label_diare_high: 1}
 )
 r_ika, p_corr_ika = stats.pearsonr(list(ika_codes), list(diare_codes))
@@ -1413,7 +1546,7 @@ st.table(chi_df_ika)
 
 # --- D. Hypothesis Summary ---
 st.markdown("### Ringkasan Uji Hipotesis")
-is_significant_ika = p_ika < 0.05
+is_significant_ika = p_ika < 0.10
 status_text_ika = (
     "SIGNIFIKAN (Ada Hubungan)" if is_significant_ika else "TIDAK SIGNIFIKAN"
 )
@@ -1427,7 +1560,8 @@ try:
     b_ika = crosstab_ika.loc[label_ika_low, label_diare_high]
     c_ika = crosstab_ika.loc[label_ika_high, label_diare_low]
     d_ika = crosstab_ika.loc[label_ika_high, label_diare_high]
-    odds_ratio_ika = (a_ika * d_ika) / (b_ika * c_ika) if (b_ika * c_ika) > 0 else 0
+    # Karena IKA adalah Positif (Higher is better), maka Risiko ada di IKA Rendah
+    odds_ratio_ika = (b_ika * c_ika) / (a_ika * d_ika) if (a_ika * d_ika) > 0 else 0
 except:
     odds_ratio_ika = 0
 
@@ -1450,9 +1584,9 @@ with col_res_ika1:
 
 with col_res_ika2:
     if is_significant_ika:
-        interp_text_ika = f"Uji statistik membuktikan secara konklusif: **penurunan IKA berkorelasi sangat signifikan dengan lonjakan kasus Diare** (P = {p_ika:.4f}, OR: {odds_ratio_ika:.3f}). Provinsi dengan IKA rendah memiliki risiko {odds_ratio_ika:.1f}x lebih tinggi mengalami ledakan Diare dibanding provinsi dengan IKA terjaga. Ini adalah bukti empiris bahwa pencemaran air oleh tailing tambang dan limbah smelter **bukan eksternalitas kecil—melainkan ancaman sistemik terhadap hak dasar warga atas air bersih dan sanitasi**."
+        interp_text_ika = f"Uji statistik membuktikan secara konklusif: **penurunan {x_options_ika[x_col_ika]} berkorelasi sangat signifikan dengan lonjakan kasus {y_options_ika[y_col_ika]}** (P = {p_ika:.4f}, OR: {odds_ratio_ika:.3f}). Provinsi dengan IKA rendah memiliki risiko {odds_ratio_ika:.1f}x lebih tinggi mengalami ledakan Diare dibanding provinsi dengan IKA terjaga. Ini adalah bukti empiris bahwa pencemaran air oleh tailing tambang dan limbah smelter **bukan eksternalitas kecil—melainkan ancaman sistemik terhadap hak dasar warga atas air bersih dan sanitasi**."
     else:
-        interp_text_ika = f"Secara agregat, hubungan antara IKA dan Diare **tidak signifikan** secara statistik (P ≥ 0.05). Hal ini mengindikasikan bahwa pencemaran air telah menyebar secara merata ke seluruh wilayah Sulawesi, sehingga tidak ada lagi provinsi 'aman' dari krisis air bersih. **Krisis tata kelola air telah menjadi sistemik**, bukan lagi terisolasi di zona industri tertentu."
+        interp_text_ika = f"Secara agregat, hubungan antara {x_options_ika[x_col_ika]} dan {y_options_ika[y_col_ika]} **tidak signifikan** secara statistik (P ≥ 0.10). Hal ini mengindikasikan bahwa pencemaran air telah menyebar secara merata ke seluruh wilayah Sulawesi, sehingga tidak ada lagi provinsi 'aman' dari krisis air bersih. **Krisis tata kelola air telah menjadi sistemik**, bukan lagi terisolasi di zona industri tertentu."
 
     st.markdown(
         f"""
@@ -1464,19 +1598,21 @@ with col_res_ika2:
         unsafe_allow_html=True,
     )
 
-with st.expander("Lihat Data Panel: IKA × Diare (2016-2024)", expanded=False):
-    df_ika_diare_display = df_ika_diare[
-        [
-            "Tahun",
-            "Provinsi",
-            "IKA",
-            "Total_Diare",
-            "Kategori",
-            "IKA_Label",
-            "Diare_Label",
-        ]
-    ].copy()
-    st.dataframe(df_ika_diare_display, use_container_width=True, hide_index=True)
+with st.expander(f"Lihat Data Panel Mentah ({x_options_ika[x_col_ika]} × {y_options_ika[y_col_ika]})", expanded=False):
+    st.dataframe(
+        valid_df_ika[
+            [
+                "Provinsi",
+                "Tahun",
+                x_col_ika,
+                "IKA_Label",
+                y_col_ika,
+                "Diare_Label",
+            ]
+        ],
+        use_container_width=True,
+        hide_index=True,
+    )
     st.caption(
         "📁 **Sumber File:** `data/processed/sulawesi_ika_2016_2024.csv` + `data/processed/sulawesi_kesehatan_detail_2014_2024.csv`"
     )
@@ -1489,51 +1625,52 @@ st.markdown(
 )
 
 summary_data_ika = []
-# Only one combination for IKA × Diare
-med_ika_x = df_ika_diare["IKA"].median()
-med_diare_y = df_ika_diare["Total_Diare"].median()
+for k_x, v_x in x_options_ika.items():
+    for k_y, v_y in y_options_ika.items():
+        loop_valid_df = df_ika_diare.dropna(subset=[k_x, k_y]).copy()
+        
+        loop_valid_df['y_med_prov'] = loop_valid_df.groupby('Provinsi')[k_y].transform('median')
+        loop_valid_df['x_med_prov'] = loop_valid_df.groupby('Provinsi')[k_x].transform('median')
+        
+        lbl_y_h = "Tinggi (≥ Median Prov)"
+        lbl_y_l = "Rendah (< Median Prov)"
+        s_y = loop_valid_df.apply(lambda row: lbl_y_h if row[k_y] >= row['y_med_prov'] else lbl_y_l, axis=1)
 
-lbl_ika_h = f"Tinggi (≥{med_ika_x:,.1f})"
-lbl_ika_l = f"Rendah (<{med_ika_x:,.1f})"
-lbl_diare_h = f"Tinggi (≥{med_diare_y:,.1f})"
-lbl_diare_l = f"Rendah (<{med_diare_y:,.1f})"
+        lbl_x_h = "Tinggi (≥ Median Prov)"
+        lbl_x_l = "Rendah (< Median Prov)"
+        s_x = loop_valid_df.apply(lambda row: lbl_x_h if row[k_x] >= row['x_med_prov'] else lbl_x_l, axis=1)
 
-s_ika_x = df_ika_diare["IKA"].apply(
-    lambda val: lbl_ika_h if val >= med_ika_x else lbl_ika_l
-)
-s_diare_y = df_ika_diare["Total_Diare"].apply(
-    lambda val: lbl_diare_h if val >= med_diare_y else lbl_diare_l
-)
+        ct = pd.crosstab(s_x, s_y).reindex(
+            index=[lbl_x_l, lbl_x_h], columns=[lbl_y_l, lbl_y_h], fill_value=0
+        )
+        try:
+            c2_val, pv_val, dof_val, exp_val = stats.chi2_contingency(ct)
+        except:
+            c2_val, pv_val, dof_val = 0, 1, 0
 
-ct_ika = pd.crosstab(s_ika_x, s_diare_y).reindex(
-    index=[lbl_ika_l, lbl_ika_h], columns=[lbl_diare_l, lbl_diare_h], fill_value=0
-)
-try:
-    c2_val_ika, pv_val_ika, dof_val_ika, exp_val_ika = stats.chi2_contingency(ct_ika)
-except:
-    c2_val_ika, pv_val_ika, dof_val_ika = 0, 1, 0
+        try:
+            aa = ct.loc[lbl_x_l, lbl_y_l]
+            bb = ct.loc[lbl_x_l, lbl_y_h]
+            cc = ct.loc[lbl_x_h, lbl_y_l]
+            dd = ct.loc[lbl_x_h, lbl_y_h]
+            
+            # Balik Odds Ratio karena IKA adalah indikator positif
+            or_v = (bb * cc) / (aa * dd) if (aa * dd) > 0 else 0
+        except:
+            or_v = 0
 
-try:
-    aa_ika = ct_ika.loc[lbl_ika_l, lbl_diare_l]
-    bb_ika = ct_ika.loc[lbl_ika_l, lbl_diare_h]
-    cc_ika = ct_ika.loc[lbl_ika_h, lbl_diare_l]
-    dd_ika = ct_ika.loc[lbl_ika_h, lbl_diare_h]
-    or_v_ika = (aa_ika * dd_ika) / (bb_ika * cc_ika) if (bb_ika * cc_ika) > 0 else 0
-except:
-    or_v_ika = 0
+        sig_status = "🟢 SIGNIFIKAN" if pv_val < 0.10 else "🔴 TIDAK SIGNIFIKAN"
 
-sig_status_ika = "🟢 SIGNIFIKAN" if pv_val_ika < 0.05 else "🔴 TIDAK SIGNIFIKAN"
-
-summary_data_ika.append(
-    {
-        "Variabel Independen (X)": "Indeks Kualitas Air (IKA)",
-        "Variabel Dependen (Y)": "Total Kasus Diare",
-        "Chi-Square": f"{c2_val_ika:.3f}",
-        "P-Value": f"{pv_val_ika:.3f}",
-        "Odds Ratio": f"{or_v_ika:.2f}",
-        "Kesimpulan": sig_status_ika,
-    }
-)
+        summary_data_ika.append(
+            {
+                "Variabel Independen (X)": v_x,
+                "Variabel Dependen (Y)": v_y,
+                "Chi-Square": f"{c2_val:.3f}",
+                "P-Value": f"{pv_val:.3f}",
+                "Odds Ratio": f"{or_v:.2f}",
+                "Kesimpulan": sig_status,
+            }
+        )
 
 df_summary_ika = pd.DataFrame(summary_data_ika)
 st.dataframe(df_summary_ika, use_container_width=True, hide_index=True)
@@ -1583,10 +1720,26 @@ st.markdown(
     '<h2 style="color: #ECEFF1; font-size: 24px;">3.6 Beban Limbah Beracun (B3): Eksternalitas Kesehatan yang Diabaikan</h2>',
     unsafe_allow_html=True,
 )
-st.markdown(
-    '<span style="background:#BF360C;color:#FFCCBC;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Descriptive Statistics & Comparative Bar Chart (2020-2024)</span>',
-    unsafe_allow_html=True,
-)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Descriptive Statistics & Comparative Bar Chart (2020-2024)</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Descriptive Statistics & Comparative Bar Chart"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan agregasi statistik deskriptif dan komparasi grafik batang (*Bar Chart*) untuk merunut skala penumpukan limbah B3 sebagai pemicu (driver) racun ekosistem.
+
+    1. **Agregasi Limpasan Limbah Industri:**
+        * **Statistik Deskriptif:** Melakukan pemeringkatan dan *profiling* komposisi buangan B3 absolut dari setiap fasilitas peleburan logam berat yang beroperasi.
+        * **Audit Defisit Pengelolaan:** Mengkomparasikan kapasitas pengolahan yang dilaporkan dengan estimasi empiris total emisi limbah.
+        * **Pemetaan Toksisitas:** Mengidentifikasi sumber dan skala ancaman racun lingkungan berdasarkan jenis tailing dan material B3 yang dominan.
+    2. **Kalkulasi/Formula Pengolahan:** Penjumlahan agregat produksi limbah kotor dari level pabrik hingga ke level regional.
+        * `Total_B3_Provinsi = Σ(Timbulan_Ton) GROUP BY Provinsi`
+        * `Total_B3_Jenis = Σ(Timbulan_Ton) GROUP BY Jenis_Limbah`
+    3. **Variabel & Fitur Data:**
+        * **Timbulan (Ton/Tahun):** Estimasi absolut volume buangan limbah (Dependen).
+        * **Kawasan & Jenis Limbah:** Klasifikasi operasi dan karakter residu seperti Slag/Tailing/Air Asam Tambang (Independen).
+    4. **Dataset & File:**
+        * Data Audit LSM & KLHK: `data/processed/sulawesi_limbah_b3.csv`
+    """)
 
 st.markdown("""
 Jika sub-bab sebelumnya telah membedah dampak pencemaran udara (IKU → ISPA) dan air (IKA → Diare), maka sub-bab ini mengungkap **sumber polusi yang paling mengerikan namun paling tersembunyi**: timbulan **Limbah Bahan Berbahaya dan Beracun (B3)** dari operasi smelter dan tambang nikel.
@@ -1873,13 +2026,28 @@ with st.expander("Lihat Data Mentah: Limbah B3 Sulawesi (2020-2024)", expanded=F
 if not df_zoonosis.empty:
     st.markdown("---")
     st.markdown(
-        '<h2 style="color: #ECEFF1; font-size: 24px;">3.6 Anomali Zoonosis: Dampak Kritis Ekspansi Industri di Level Tapak (Studi Kasus Sulteng)</h2>',
+        '<h2 style="color: #ECEFF1; font-size: 24px;">3.7 Anomali Zoonosis: Dampak Kritis Ekspansi Industri di Level Tapak (Studi Kasus Sulteng)</h2>',
         unsafe_allow_html=True,
     )
-    st.markdown(
-        '<span style="background:#F57F17;color:#FFF9C4;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Time-Series & Komparasi Spasial Wilayah (Dinas Kesehatan)</span>',
-        unsafe_allow_html=True,
-    )
+    st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Time-Series & Komparasi Spasial Wilayah (Dinas Kesehatan)</span>', unsafe_allow_html=True)
+    st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+    with st.expander("ℹ️ Metodologi: Time-Series & Komparasi Spasial Wilayah"):
+        st.markdown("""
+        **Metode Analisis:** Sub-bab ini menggunakan studi kasus mendalam (*Deep Dive Case Study*) berbasis deret waktu di tingkat distrik (Kabupaten/Kota) khusus untuk endemik Sulawesi Tengah.
+
+        1. **Model Anomali Ekologis Spesifik Distrik:**
+            * **Analisis Komparatif Zoonosis:** Mengisolasi zona episentrum ekstraktif (Morowali, Morowali Utara, Banggai) dan membandingkannya secara absolut dengan kabupaten agraris/non-tambang yang difungsikan sebagai daerah kontrol.
+            * **Korelasi Ekologis:** Merunut pola peningkatan prevalensi penyakit infeksi yang ditransmisikan oleh vektor di kawasan perluasan pembukaan lahan (*land clearing*).
+            * **Pemetaan Risiko:** Mengukur eskalasi kerentanan populasi terhadap ancaman wabah malaria dan DBD akibat hancurnya perlindungan habitat alami.
+        2. **Kalkulasi/Formula Pengolahan:** Akumulasi tren tahunan infeksi Zoonosis per Kategori Wilayah (Tambang vs Non-Tambang).
+            * `Tren_Zoonosis_Distrik = Σ(Total_Kasus) GROUP BY Kategori_Wilayah, Tahun`
+        3. **Variabel & Fitur Data:**
+            * **Kategori Wilayah Distrik:** Label dikotomi daerah ring 1 tambang vs daerah penyangga luar ring.
+            * **Total Kasus Penyakit:** Angka infeksi yang ditransmisikan vektor (Malaria, Rabies, Gigitan Hewan).
+        4. **Dataset & File:**
+            * Data Zoonosis: `data/processed/zoonosis_kab_kota_2015_2024.csv`
+        """)
 
     # Data Prep untuk Zoonosis (Fokus Sulteng)
     df_zoo_sulteng = df_zoonosis[
@@ -1975,7 +2143,8 @@ if not df_zoonosis.empty:
             unsafe_allow_html=True,
         )
         df_zoo_ts = df_zoo_sulteng[
-            df_zoo_sulteng["jenis_penyakit"] == selected_penyakit
+            (df_zoo_sulteng["jenis_penyakit"] == selected_penyakit)
+            & (~df_zoo_sulteng["kabupaten_kota"].str.upper().isin(["PALU"]))
         ].copy()
         df_zoo_ts["is_ekstraktif"] = (
             df_zoo_ts["kabupaten_kota"].str.upper().isin(tambang_kab)

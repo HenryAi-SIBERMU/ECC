@@ -113,7 +113,28 @@ st.markdown("---")
 
 # ── 8.1 Sisi Manfaat: Gurita Bisnis & Monopoli Keuntungan Ekstraktif ──
 st.subheader("8.1 Sisi Manfaat: Gurita Bisnis & Monopoli Keuntungan Ekstraktif")
-st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Wealth Database Analysis (CELIOS Inequality Report 2026)</span><br><br>', unsafe_allow_html=True)
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Wealth Database Analysis (CELIOS Inequality Report 2026)</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Pemetaan Konsentrasi Kekayaan Ekstraktif"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan pemrofilan entitas bisnis berjenjang (*Hierarchical Entity Profiling*) untuk melacak aliran penguasaan sumber daya menuju kelompok elit (*Top 50 Wealthy Individuals*).
+
+    1. **Model Pengungkapan Afiliasi Oligarki:**
+        * **Mega-Crosstab Pemetaan Aktor:** Menghubungkan secara langsung data akumulasi kekayaan agregat (Net Worth) dari laporan ketimpangan dengan instrumen kerusakan aktual di lapangan (Luas Konsesi, Kapasitas PLTU, Deforestasi, dan Dampak Sosial).
+        * **Kuantifikasi Daya Rusak Privat:** Mengukur skala kerugian publik (eksternalitas negatif) yang dihasilkan oleh konsorsium atau grup bisnis afiliasi milik segelintir triliuner.
+    2. **Kalkulasi/Formula Pengolahan:**
+        * `Total_Kekayaan_Ekstraktif = SUM(Harta_Triliuner) WHERE Sektor = 'Ekstraktif'`
+        * `Beban_Ekologis_Grup_X = SUM(Rugi_Ekologis) GROUP BY Afiliasi_Pemilik`
+    3. **Variabel & Fitur Data:**
+        * **Kategori Entitas (X):** `Grup_Taipan`, `Afiliasi_Blok_Sulawesi`
+        * **Indikator Monopoli/Dampak (Y):** `Luas_Konsesi_Ha`, `Emisi_PLTU_MW`, `Estimasi_Rugi_Ekologis`
+    4. **Dataset & File:**
+        * CELIOS Inequality Report 2026
+        * `sulawesi_kawasan_nikel_luas.csv`
+        * `sulawesi_pltu_captive.csv`
+        * `sulawesi_konflik_agraria_tanahkita.csv`
+    """)
 
 st.markdown("""
 <div style="text-align: justify; line-height: 1.8; color: #E0E0E0; font-size: 1.05rem; margin-bottom: 25px;">
@@ -390,7 +411,26 @@ st.markdown("---")
 
 # ── 8.2 Sisi Beban (Penyakit & Konflik) ──
 st.subheader("8.2 Sisi Beban: Kematian, Penyakit, dan Konflik yang Disosialisasikan")
-st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Analisis Dataset ISPA & Tanahkita (CATAHU)</span><br><br>', unsafe_allow_html=True)
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Analisis Dataset ISPA & Tanahkita (CATAHU)</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Kalkulasi Tren Eksternalitas Negatif"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan agregasi deret waktu deskriptif (*Descriptive Time-Series Aggregation*) untuk mengukur lonjakan drastis beban penyakit dan sengketa sosial seiring masifnya industrialisasi ekstraktif.
+
+    1. **Model Pelacakan Krisis Kesehatan & Agraria:**
+        * **Trend Mapping:** Melacak kurva pertumbuhan eksponensial penderita Infeksi Saluran Pernapasan Akut (ISPA) dari rentang tahun 2014 hingga 2024 secara terpusat di dua episentrum nikel utama (Sulawesi Tengah dan Tenggara).
+        * **Agregasi Kasus Kritis:** Mengumpulkan metrik kuantitatif insiden konflik mematikan dan nilai estimasi kerugian fungsi lingkungan hidup (valuasi ekologis).
+    2. **Kalkulasi/Formula Pengolahan:**
+        * `Tren_Kasus_ISPA_Sentra = SUM(Penderita_ISPA) GROUP BY Tahun WHERE Provinsi IN (Sulteng, Sultra)`
+        * `Valuasi_Kerusakan_LHK = F(Luas_Deforestasi, Hilang_Fungsi_Air, Cemaran_Laut)`
+    3. **Variabel & Fitur Data:**
+        * **Rentang Waktu (X):** `Tahun` (2014-2024)
+        * **Metrik Beban Publik (Y):** `Jumlah_Kasus_ISPA`, `Jumlah_Konflik_Agraria`, `Estimasi_Rupiah_Kerusakan`
+    4. **Dataset & File:**
+        * `data/processed/sulawesi_kesehatan_detail_2014_2024.csv`
+        * `Tanahkita.id` / `KPA`
+    """)
 
 st.markdown("""
 <div style="text-align: justify; line-height: 1.8; color: #E0E0E0; font-size: 1.05rem; margin-bottom: 25px;">
@@ -494,10 +534,31 @@ st.markdown("---")
 
 # ── 8.3 Crosstab: Manfaat Ekonomi vs Beban Ekologis ──
 st.markdown("### 8.3. Pembuktian Statistik: Oligarki Untung, Rakyat Buntung")
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Crosstabulation & Pearson Chi-Square Test</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Uji Korelasi Investasi vs Ledakan Penyakit"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan pengujian statistik inferensial (*Crosstabulation & Chi-Square Test*) untuk membuktikan secara matematis apakah membesarnya arus investasi yang masuk (manfaat ekonomi makro) terbukti mendorong peningkatan penyakit pernapasan dan deforestasi (beban ekologis mikro).
+
+    1. **Uji Signifikansi Statistik (Chi-Square):**
+        * **Binning (Kategorisasi Data):** Data numerik investasi dan jumlah kasus penyakit dikategorikan menjadi 2 level (Tinggi & Rendah) menggunakan ambang batas Median historis. `Nilai > Median = Tinggi`, `Nilai <= Median = Rendah`.
+        * `H0 (Null Hypothesis): Tidak ada korelasi yang signifikan secara statistik antara tingginya nilai investasi PMDN/PAD dengan tingginya jumlah penderita ISPA/Deforestasi di provinsi Sulawesi pada suatu tahun tertentu.`
+        * `Decision Rule: Tolak H0 (Bukti Ketimpangan) jika nilai Asymptotic Significance (P-Value) pada uji Pearson Chi-Square < 0.05 (Alpha 5%).`
+    2. **Kalkulasi/Formula Pengolahan:**
+        * `Chi-Square (χ²) = Σ [ (O_i - E_i)² / E_i ]`
+        * `Odds Ratio (Risiko) = (Peluang Penyakit Tinggi pada Investasi Tinggi) / (Peluang Penyakit Tinggi pada Investasi Rendah)`
+    3. **Variabel & Fitur Data:**
+        * **Variabel Independen/Manfaat (X):** `Realisasi_Investasi_Rp` atau `PAD_Juta_Rupiah`
+        * **Variabel Dependen/Beban (Y):** `Kasus_ISPA` atau `Deforestasi_Ha`
+    4. **Dataset & File:**
+        * Integrasi Panel: `sulawesi_investasi_pmdn_2016_2024.csv`, `sulawesi_pad_2016_2024.csv`, `sulawesi_kesehatan_detail_2014_2024.csv`, `sulawesi_gfw_master...csv`
+    """)
+
 st.markdown("""
 <div style="background:#1A1F2B; padding:15px 20px; border-radius:8px; border-left:4px solid #FBC02D; margin-bottom: 25px;">
     <span style="color: #E0E0E0; font-size: 0.95rem;">
-        Untuk menjawab pertanyaan apakah <b>Manfaat Ekonomi</b> sebanding dengan <b>Beban Ekologis</b>, kami melakukan <i>crosstabulation</i> secara langsung. Hipotesis yang diuji adalah: <b>"Lonjakan triliunan investasi secara empiris tidak menyejahterakan, melainkan justru berkorelasi linear dengan ledakan penyakit di tingkat tapak."</b>
+        Untuk menjawab pertanyaan apakah <b>Manfaat Ekonomi</b> sebanding dengan <b>Beban Ekologis</b>, kami menyilangkan (*crosstabulation*) data tersebut secara langsung. Fokus hipotesis awal: <b>"Lonjakan triliunan investasi secara empiris tidak menyejahterakan, melainkan justru berkorelasi linear dengan ledakan penyakit di tingkat tapak."</b>
     </span>
 </div>
 """, unsafe_allow_html=True)
