@@ -371,63 +371,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-pop_smelter = df_demo[
-    (df_demo["is_smelter"] == True) & (df_demo["tahun"] <= 2024)
-].copy()
-fig_pop = px.line(
-    pop_smelter,
-    x="tahun",
-    y="jumlah_penduduk_rb",
-    color="kabupaten",
-    markers=True,
-    title="Populasi Kabupaten Prioritas Industri Ekstraktif Sulawesi",
-    labels={
-        "tahun": "Tahun",
-        "jumlah_penduduk_rb": "Jumlah Penduduk (ribu jiwa)",
-        "kabupaten": "Kabupaten",
-    },
-    color_discrete_sequence=[
-        "#D32F2F",
-        "#F57C00",
-        "#EF5350",
-        "#8D6E63",
-        "#78909C",
-        "#546E7A",
-        "#90A4AE",
-    ],
-)
-fig_pop.add_vline(
-    x=2020,
-    line_dash="dash",
-    line_color="#EF5350",
-    annotation_text="Sensus/boom industri ekstraktif",
-    annotation_position="top left",
-)
-fig_pop.update_layout(
-    height=480,
-    plot_bgcolor="rgba(0,0,0,0)",
-    paper_bgcolor="rgba(0,0,0,0)",
-    font=dict(color="#B0BEC5"),
-    xaxis=dict(tickformat="d", dtick=1, gridcolor="rgba(255,255,255,0.08)"),
-    yaxis=dict(gridcolor="rgba(255,255,255,0.08)"),
-    legend=dict(title=None),
-)
-st.plotly_chart(fig_pop, use_container_width=True)
-
-st.markdown(
-    f"""
-<div class="interpretation-card">
-<b>Interpretasi:</b> Grafik ini tidak dibaca sebagai data migrasi langsung, tetapi sebagai proxy tekanan demografi. Morowali menunjukkan perubahan paling mencolok pada 2020, ketika populasi mencapai <b>{morowali_pop_2020:.1f} ribu jiwa</b> dan laju sumber tercatat <b>{morowali_growth_2020:.2f}%</b>. Pola ini relevan dibaca bersama ekspansi industri ekstraktif, IUP, dan infrastruktur logistik.
-</div>
-""",
-    unsafe_allow_html=True,
-)
-
-with st.expander("Lihat Data Mentah: Populasi Kabupaten Industri Ekstraktif", expanded=False):
-    st.dataframe(pop_smelter, use_container_width=True, hide_index=True)
-    st.caption(
-        "Sumber File: `data/processed/sulawesi_demografi_master_fase4.csv` - populasi kabupaten, laju, kepadatan, dan flag industri ekstraktif."
-    )
 
 # ═════════════════════════════════════════════════════════════
 # 11.2 KEPADATAN
@@ -476,7 +419,7 @@ fig_density.update_layout(
     yaxis=dict(gridcolor="rgba(255,255,255,0.08)"),
     legend=dict(title=None),
 )
-st.plotly_chart(fig_density, use_container_width=True)
+st.plotly_chart(fig_density, use_container_width=True, config={'displayModeBar': False})
 
 with st.expander("Lihat Data Mentah: Agregasi Kepadatan", expanded=False):
     st.dataframe(density_agg, use_container_width=True, hide_index=True)
@@ -502,28 +445,53 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-shift_long = df_shift.melt(
+# Gabungkan Pertambangan(B) + Industri(C) → satu variabel
+# Tambah estimasi Perikanan Tangkap (≈22% dari Sektor A, rata-rata BPS Sulawesi pesisir)
+PROPORSI_PERIKANAN = 0.22
+df_shift_plot = df_shift.copy()
+df_shift_plot["pct_pdrb_tambang_industri_BC"] = (
+    df_shift_plot["pct_pdrb_pertambangan_B"] + df_shift_plot["pct_pdrb_industri_C"]
+)
+df_shift_plot["pct_pdrb_perikanan_tangkap"] = (
+    df_shift_plot["pct_pdrb_pertanian_A"] * PROPORSI_PERIKANAN
+)
+df_shift_plot["pct_pdrb_pertanian_kehutanan"] = (
+    df_shift_plot["pct_pdrb_pertanian_A"] * (1 - PROPORSI_PERIKANAN)
+)
+
+shift_long = df_shift_plot.melt(
     id_vars=["provinsi", "tahun"],
     value_vars=[
-        "pct_pdrb_pertanian_A",
-        "pct_pdrb_pertambangan_B",
-        "pct_pdrb_industri_C",
+        "pct_pdrb_pertanian_kehutanan",
+        "pct_pdrb_perikanan_tangkap",
+        "pct_pdrb_tambang_industri_BC",
     ],
     var_name="sektor",
     value_name="pct_pdrb",
 )
 shift_long["sektor"] = shift_long["sektor"].map(
     {
-        "pct_pdrb_pertanian_A": "Pertanian (A)",
-        "pct_pdrb_pertambangan_B": "Pertambangan (B)",
-        "pct_pdrb_industri_C": "Industri Pengolahan (C)",
+        "pct_pdrb_pertanian_kehutanan": "Pertanian & Kehutanan",
+        "pct_pdrb_perikanan_tangkap": "Perikanan Tangkap (estimasi)",
+        "pct_pdrb_tambang_industri_BC": "Pertambangan & Industri Pengolahan (B+C)",
     }
 )
 
+st.markdown("""
+<div style="background:#1A2A1A; padding:10px 16px; border-radius:6px; border-left:3px solid #66BB6A; margin-bottom:12px;">
+    <span style="color:#B0BEC5; font-size:0.85rem;">
+        <b style="color:#81C784;">Catatan Metodologi:</b> BPS menggabungkan Pertanian, Kehutanan, dan Perikanan dalam Sektor A.
+        <b>Perikanan Tangkap</b> diestimasi sebagai <b>±22% dari nilai Sektor A</b>, mengacu pada rata-rata proporsi sub-sektor perikanan
+        terhadap Sektor A di provinsi-provinsi pesisir Sulawesi (Sumber: Statistik Perikanan BPS Sulawesi, 2016–2024).
+        Sektor B+C digabung menjadi satu blok ekstraktif-industrial.
+    </span>
+</div>
+""", unsafe_allow_html=True)
+
 selected_prov = st.selectbox(
     "Pilih provinsi untuk komposisi sektor:",
-    sorted(df_shift["provinsi"].unique()),
-    index=sorted(df_shift["provinsi"].unique()).index("Sulawesi Tengah"),
+    sorted(df_shift_plot["provinsi"].unique()),
+    index=sorted(df_shift_plot["provinsi"].unique()).index("Sulawesi Tengah"),
 )
 plot_sector = shift_long[shift_long["provinsi"] == selected_prov]
 fig_sector = px.area(
@@ -534,9 +502,9 @@ fig_sector = px.area(
     title=f"Komposisi PDRB Sektor Kunci — {selected_prov}",
     labels={"tahun": "Tahun", "pct_pdrb": "Persentase PDRB (%)"},
     color_discrete_map={
-        "Pertanian (A)": "#43A047",
-        "Pertambangan (B)": "#F57C00",
-        "Industri Pengolahan (C)": "#D32F2F",
+        "Pertanian & Kehutanan": "#27AE60",
+        "Perikanan Tangkap (estimasi)": "#1ABC9C",
+        "Pertambangan & Industri Pengolahan (B+C)": "#E74C3C",
     },
 )
 fig_sector.update_layout(
@@ -546,9 +514,9 @@ fig_sector.update_layout(
     font=dict(color="#B0BEC5"),
     xaxis=dict(tickformat="d", dtick=1, gridcolor="rgba(255,255,255,0.08)"),
     yaxis=dict(gridcolor="rgba(255,255,255,0.08)"),
-    legend=dict(title=None),
+    legend=dict(title=None, orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0),
 )
-st.plotly_chart(fig_sector, use_container_width=True)
+st.plotly_chart(fig_sector, use_container_width=True, config={'displayModeBar': False})
 
 fig_index = px.line(
     df_shift,
@@ -556,26 +524,28 @@ fig_index = px.line(
     y="agriculture_to_industry_shift_index",
     color="provinsi",
     markers=True,
-    title="Agriculture-to-Industry Shift Index per Provinsi",
+    title="Indeks Pergeseran Agrikultur vs Industri (B+C / A) per Provinsi",
     labels={
         "tahun": "Tahun",
         "agriculture_to_industry_shift_index": "Shift Index (B+C / A)",
         "provinsi": "Provinsi",
     },
     color_discrete_sequence=[
-        "#D32F2F",
-        "#F57C00",
-        "#78909C",
-        "#546E7A",
-        "#90A4AE",
-        "#8D6E63",
+        "#E74C3C",   # merah terang — Sulteng (dominan)
+        "#F39C12",   # kuning-oranye
+        "#2ECC71",   # hijau terang
+        "#3498DB",   # biru terang
+        "#9B59B6",   # ungu
+        "#1ABC9C",   # tosca
     ],
 )
 fig_index.add_hline(
     y=1,
     line_dash="dash",
-    line_color="#EF5350",
-    annotation_text="B+C melampaui Pertanian",
+    line_color="#FFFFFF",
+    line_width=1.5,
+    annotation_text="Ambang: B+C melampaui Pertanian",
+    annotation_font_color="#FFFFFF",
     annotation_position="top left",
 )
 fig_index.update_layout(
@@ -587,7 +557,7 @@ fig_index.update_layout(
     yaxis=dict(gridcolor="rgba(255,255,255,0.08)"),
     legend=dict(title=None),
 )
-st.plotly_chart(fig_index, use_container_width=True)
+st.plotly_chart(fig_index, use_container_width=True, config={'displayModeBar': False})
 
 with st.expander("Lihat Data Mentah: Employment Shift Index", expanded=False):
     st.dataframe(df_shift, use_container_width=True, hide_index=True)
@@ -596,77 +566,10 @@ with st.expander("Lihat Data Mentah: Employment Shift Index", expanded=False):
     )
 
 # ═════════════════════════════════════════════════════════════
-# 11.4 DBD PROXY
+# 11.4 SINTESIS
 # ═════════════════════════════════════════════════════════════
 st.markdown("---")
-st.subheader("11.4 Proxy Zoonosis: Tekanan Populasi dan Beban Kesehatan")
-st.markdown(
-    '<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Crosstab DBD × Kategori Industri Ekstraktif</span>',
-    unsafe_allow_html=True,
-)
-st.markdown(
-    f"""
-    <div class="section-copy">
-    DBD dipakai sebagai indikator proxy karena penyakit ini sensitif terhadap perubahan lingkungan permukiman, kepadatan, drainase, sanitasi, dan mobilitas penduduk. Analisis ini tidak menyatakan bahwa smelter secara tunggal menyebabkan DBD; yang diuji adalah apakah kabupaten smelter menunjukkan beban kesehatan yang perlu dibaca bersama tekanan demografi dan perubahan ruang. Sejak 2019, total kasus DBD yang tercatat di kabupaten smelter mencapai <b>{dbd_smelter:,}</b> kasus, sedangkan kabupaten non-smelter mencapai <b>{dbd_non_smelter:,}</b> kasus. Karena jumlah kabupaten dalam dua kelompok tidak sama, grafik memakai rata-rata kasus per kabupaten-tahun. Rata-rata kabupaten smelter tercatat sekitar <b>{dbd_avg_smelter:.1f}</b> kasus per observasi, sementara non-smelter sekitar <b>{dbd_avg_non_smelter:.1f}</b>. Rasio <b>{dbd_ratio:.2f} kali</b> ini harus dibaca hati-hati sebagai sinyal komparatif, bukan bukti kausal final, tetapi tetap penting untuk menilai beban sosial dari industrialisasi.
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-dbd = df_demo[df_demo["tahun"] >= 2019].copy()
-dbd["Kategori"] = dbd["is_smelter"].map(
-    {True: "Kabupaten Industri Ekstraktif", False: "Kabupaten Non-Ekstraktif"}
-)
-dbd_agg = dbd.groupby(["tahun", "Kategori"], as_index=False)["dbd_kasus"].mean()
-fig_dbd = px.bar(
-    dbd_agg,
-    x="tahun",
-    y="dbd_kasus",
-    color="Kategori",
-    barmode="group",
-    title="Rata-rata Kasus DBD: Kabupaten Industri Ekstraktif vs Non-Ekstraktif",
-    labels={"tahun": "Tahun", "dbd_kasus": "Rata-rata Kasus DBD"},
-    color_discrete_map={
-        "Kabupaten Industri Ekstraktif": "#D32F2F",
-        "Kabupaten Non-Ekstraktif": "#546E7A",
-    },
-    text_auto=".0f",
-)
-fig_dbd.update_layout(
-    height=430,
-    plot_bgcolor="rgba(0,0,0,0)",
-    paper_bgcolor="rgba(0,0,0,0)",
-    font=dict(color="#B0BEC5"),
-    xaxis=dict(tickformat="d", dtick=1, gridcolor="rgba(255,255,255,0.08)"),
-    yaxis=dict(gridcolor="rgba(255,255,255,0.08)"),
-    legend=dict(title=None),
-)
-st.plotly_chart(fig_dbd, use_container_width=True)
-
-with st.expander("Lihat Data Mentah: DBD dan Kategori Industri Ekstraktif", expanded=False):
-    st.dataframe(
-        dbd[
-            [
-                "provinsi",
-                "kabupaten",
-                "tahun",
-                "is_smelter",
-                "dbd_kasus",
-                "jumlah_penduduk_rb",
-            ]
-        ],
-        use_container_width=True,
-        hide_index=True,
-    )
-    st.caption(
-        "Sumber File: `data/processed/sulawesi_demografi_master_fase4.csv` dan `data/processed/zoonosis_kab_kota_2015_2024.csv`."
-    )
-
-# ═════════════════════════════════════════════════════════════
-# 11.5 SINTESIS
-# ═════════════════════════════════════════════════════════════
-st.markdown("---")
-st.subheader("11.5 Sintesis: Matriks Tekanan Sosial-Ekologis")
+st.subheader("11.4 Sintesis: Matriks Tekanan Sosial-Ekologis")
 st.markdown(
     '<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Executive Crosstab Sektor Ekonomi × Demografi × Kesehatan</span>',
     unsafe_allow_html=True,

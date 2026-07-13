@@ -294,36 +294,21 @@ with st.expander("1 · EKSPANSI INDUSTRI EKSTRAKTIF", expanded=True):
 
     # ── 1.2 PLTU Captive & Zona Tumbal ──
     st.markdown("**1.2 Agresivitas Ekspansi Kawasan Industri & PLTU Captive**")
-    sulawesi_provs = ['Sulawesi Utara', 'Sulawesi Selatan', 'Sulawesi Tenggara', 'Sulawesi Tengah', 'Gorontalo', 'Sulawesi Barat']
-    df_pltu_op = df_pltu[(df_pltu['Status'].str.lower() == 'operating') & (df_pltu['Subnational unit (province, state)'].isin(sulawesi_provs))].copy()
-    df_pltu_op['Tahun'] = pd.to_numeric(df_pltu_op['Start year'], errors='coerce')
     sentra_provs = ['Sulawesi Tengah', 'Sulawesi Tenggara']
-    df_pltu_op['Kategori_Wilayah'] = df_pltu_op['Subnational unit (province, state)'].apply(lambda x: 'Daerah Sentra Tambang' if x in sentra_provs else 'Daerah Non-Sentra')
-    df_pltu_kat = df_pltu_op.groupby(['Kategori_Wilayah', 'Tahun'])['Capacity (MW)'].sum().reset_index().sort_values(['Kategori_Wilayah', 'Tahun'])
-    df_pltu_kat['Kumulatif (MW)'] = df_pltu_kat.groupby('Kategori_Wilayah')['Capacity (MW)'].cumsum()
 
-    c1_2a, c1_2b = st.columns(2)
-    with c1_2a:
-        chart_area = alt.Chart(df_pltu_kat).mark_area(opacity=0.7).encode(
-            x=alt.X('Tahun:O', title=''),
-            y=alt.Y('Kumulatif (MW):Q', stack=None, title='Kapasitas Aktif (MW)'),
-            color=alt.Color('Kategori_Wilayah:N', scale=alt.Scale(domain=['Daerah Sentra Tambang', 'Daerah Non-Sentra'], range=['#D32F2F', '#90A4AE']), legend=alt.Legend(title="Kategori")),
-            tooltip=['Tahun', 'Kategori_Wilayah', alt.Tooltip('Kumulatif (MW)', format=',.0f')]
-        ).properties(height=300, title='Ledakan Energi Kotor (Sentra vs Non-Sentra)')
-        st.altair_chart(chart_area, use_container_width=True)
-    with c1_2b:
-        df_sm_prov = df_smelter.groupby('provinsi').size().reset_index(name='jumlah_iup')
-        df_sm_prov['Persentase'] = (df_sm_prov['jumlah_iup'] / len(df_smelter)) * 100
-        df_sm_prov['color_group'] = df_sm_prov['provinsi'].apply(lambda x: x if x in sentra_provs else 'Lainnya')
-        bars_sm = alt.Chart(df_sm_prov).mark_bar(cornerRadiusEnd=2).encode(
-            y=alt.Y('provinsi:N', sort='-x', title=''),
-            x=alt.X('Persentase:Q', title='Porsi Izin (%)'),
-            color=alt.Color('color_group:N', scale=alt.Scale(domain=['Sulawesi Tengah', 'Sulawesi Tenggara', 'Lainnya'], range=['#D32F2F', '#F57C00', '#37474F']), legend=None),
-            tooltip=['provinsi', alt.Tooltip('jumlah_iup', title='Total Fasilitas'), alt.Tooltip('Persentase', format='.1f', title='Porsi (%)')]
-        )
-        txt_sm = bars_sm.mark_text(align='left', baseline='middle', dx=3, color='#ECEFF1', fontWeight='bold').encode(text=alt.Text('Persentase:Q', format='.1f'))
-        chart_1_2 = (bars_sm + txt_sm).properties(height=300, title='Konsentrasi Smelter per Provinsi')
-        st.altair_chart(chart_1_2, use_container_width=True)
+    df_sm_prov = df_smelter.groupby('provinsi').size().reset_index(name='jumlah_iup')
+    df_sm_prov['Persentase'] = (df_sm_prov['jumlah_iup'] / len(df_smelter)) * 100
+    df_sm_prov['color_group'] = df_sm_prov['provinsi'].apply(lambda x: x if x in sentra_provs else 'Lainnya')
+    bars_sm = alt.Chart(df_sm_prov).mark_bar(cornerRadiusEnd=2).encode(
+        y=alt.Y('provinsi:N', sort='-x', title=''),
+        x=alt.X('Persentase:Q', title='Porsi Izin (%)'),
+        color=alt.Color('color_group:N', scale=alt.Scale(domain=['Sulawesi Tengah', 'Sulawesi Tenggara', 'Lainnya'], range=['#D32F2F', '#F57C00', '#37474F']), legend=None),
+        tooltip=['provinsi', alt.Tooltip('jumlah_iup', title='Total Fasilitas'), alt.Tooltip('Persentase', format='.1f', title='Porsi (%)')]
+    )
+    txt_sm = bars_sm.mark_text(align='left', baseline='middle', dx=3, color='#ECEFF1', fontWeight='bold').encode(text=alt.Text('Persentase:Q', format='.1f'))
+    chart_1_2 = (bars_sm + txt_sm).properties(height=300, title='Konsentrasi Smelter per Provinsi')
+    st.altair_chart(chart_1_2, use_container_width=True)
+
 
     # ── 1.3 Treemap Breakdown PAD ──
     st.markdown("**1.3 Realisasi Investasi & Breakdown PAD Per Provinsi**")
@@ -360,7 +345,7 @@ with st.expander("1 · EKSPANSI INDUSTRI EKSTRAKTIF", expanded=True):
         paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
         font=dict(color='#B0BEC5'), margin=dict(t=30, l=5, r=5, b=5), height=480
     )
-    st.plotly_chart(fig_treemap, use_container_width=True)
+    st.plotly_chart(fig_treemap, use_container_width=True, config={'displayModeBar': False})
 
     # ── 1.4 Pelabuhan Ekspor Nikel ──
     st.markdown("**1.4 Pelabuhan Ekspor: Ke Mana Nikel Sulawesi Dikirim?**")
@@ -416,7 +401,7 @@ with st.expander("2 · KUALITAS LINGKUNGAN", expanded=False):
         mapbox_style="carto-darkmatter"
     )
     fig_ika.update_layout(margin={"r":0,"t":30,"l":0,"b":0}, paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font=dict(color='#ECEFF1'), height=420)
-    st.plotly_chart(fig_ika, use_container_width=True)
+    st.plotly_chart(fig_ika, use_container_width=True, config={'displayModeBar': False})
 
     # ── 2.2 Dual-axis: PLTU stacked area + IKU line ──
     st.markdown("**2.2 Kepungan Asap: PLTU Captive vs IKU**")
@@ -447,7 +432,7 @@ with st.expander("2 · KUALITAS LINGKUNGAN", expanded=False):
     )
     fig_2_2.update_yaxes(title_text="Kapasitas PLTU Kumulatif (MW)", secondary_y=False, color='#ECEFF1', gridcolor='#555')
     fig_2_2.update_yaxes(title_text="IKU", secondary_y=True, color='#D32F2F', showgrid=False)
-    st.plotly_chart(fig_2_2, use_container_width=True)
+    st.plotly_chart(fig_2_2, use_container_width=True, config={'displayModeBar': False})
 
     # ── 2.3 Bar Deforestasi per Provinsi ──
     st.markdown("**2.3 Eksekusi Ruang: Ekspansi Kawasan Industri vs Deforestasi**")
@@ -501,7 +486,7 @@ with st.expander("2 · KUALITAS LINGKUNGAN", expanded=False):
         color_discrete_sequence=px.colors.qualitative.Bold, zoom=5, center={"lat": -1.8, "lon": 121.0}
     )
     fig_biodiv.update_layout(mapbox_style="carto-darkmatter", margin={"r":0,"t":30,"l":0,"b":0}, paper_bgcolor='rgba(0,0,0,0)', font=dict(color='#ECEFF1'), legend=dict(orientation="v", yanchor="top", y=0.95, xanchor="left", x=0.02, bgcolor='rgba(30,30,30,0.8)'), height=450)
-    st.plotly_chart(fig_biodiv, use_container_width=True)
+    st.plotly_chart(fig_biodiv, use_container_width=True, config={'displayModeBar': False})
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════
@@ -551,7 +536,7 @@ with st.expander("3 · BEBAN KESEHATAN", expanded=False):
         plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", font=dict(color="#B0BEC5"),
         legend=dict(title=None, orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
         xaxis=dict(title="Jenis Penyakit", showgrid=False), yaxis=dict(title="Rata-Rata Kasus/Tahun", showgrid=True, gridcolor="rgba(255,255,255,0.1)"))
-    st.plotly_chart(fig_31, use_container_width=True)
+    st.plotly_chart(fig_31, use_container_width=True, config={'displayModeBar': False})
 
     # ── 3.2 Bar Faskes Gap ──
     st.markdown("**3.2 Kesenjangan Fasilitas Kesehatan di Kawasan Ekstraktif**")
@@ -565,7 +550,7 @@ with st.expander("3 · BEBAN KESEHATAN", expanded=False):
         plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", font=dict(color="#B0BEC5"),
         legend=dict(title=None, orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
         xaxis=dict(title="Rata-Rata Jumlah Faskes", showgrid=True, gridcolor="rgba(255,255,255,0.1)"), yaxis=dict(title="", showgrid=False))
-    st.plotly_chart(fig_32, use_container_width=True)
+    st.plotly_chart(fig_32, use_container_width=True, config={'displayModeBar': False})
 
     # ── 3.3 Line Tren ISPA per Provinsi ──
     st.markdown("**3.3 Lintasan Waktu Ekologis & Ledakan Penyakit**")
@@ -581,7 +566,7 @@ with st.expander("3 · BEBAN KESEHATAN", expanded=False):
         plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", font=dict(color="#B0BEC5"),
         legend=dict(title="Provinsi (Merah: Sentra)", orientation="v", yanchor="top", y=1, xanchor="left", x=1.02),
         xaxis=dict(title="Tahun", showgrid=True, gridcolor="rgba(255,255,255,0.1)", dtick=1), yaxis=dict(title="Total Kasus", showgrid=True, gridcolor="rgba(255,255,255,0.1)", zeroline=False))
-    st.plotly_chart(fig_33, use_container_width=True)
+    st.plotly_chart(fig_33, use_container_width=True, config={'displayModeBar': False})
 
     # ── 3.4 Choropleth ISPA 2024 ──
     st.markdown("**3.4 Pemetaan Geospasial: Episentrum Ledakan Penyakit**")
@@ -591,7 +576,7 @@ with st.expander("3 · BEBAN KESEHATAN", expanded=False):
         color='nilai', color_continuous_scale='YlOrRd', zoom=4.5, center={"lat": -1.8, "lon": 120.5}, opacity=0.8,
         hover_name="provinsi", hover_data={"nilai": ':,.0f'}, mapbox_style="carto-darkmatter")
     fig_34.update_layout(margin={"r":0,"t":40,"l":0,"b":0}, paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font=dict(color='#ECEFF1'), height=420)
-    st.plotly_chart(fig_34, use_container_width=True)
+    st.plotly_chart(fig_34, use_container_width=True, config={'displayModeBar': False})
 
     # ── 3.5 Scatter IKA vs Diare + Regression ──
     st.markdown("**3.5 Krisis Air Bersih: IKA vs Ledakan Kasus Diare**")
@@ -616,7 +601,7 @@ with st.expander("3 · BEBAN KESEHATAN", expanded=False):
         plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", font=dict(color="#B0BEC5"),
         legend=dict(orientation="v", yanchor="top", y=0.98, xanchor="left", x=0.02, bgcolor="rgba(30,30,30,0.8)"),
         xaxis=dict(title="Indeks Kualitas Air (IKA)", showgrid=True, gridcolor="rgba(255,255,255,0.1)"), yaxis=dict(title="Kasus Diare/Tahun", showgrid=True, gridcolor="rgba(255,255,255,0.1)"))
-    st.plotly_chart(fig_35, use_container_width=True)
+    st.plotly_chart(fig_35, use_container_width=True, config={'displayModeBar': False})
 
     # ── 3.6a Bar B3 per Provinsi ──
     st.markdown("**3.6 Beban Limbah Beracun (B3)**")
@@ -628,7 +613,7 @@ with st.expander("3 · BEBAN KESEHATAN", expanded=False):
     fig_b3.update_layout(title=f"Beban Limbah B3 per Provinsi ({df_b3_agg['Estimasi Timbulan (Ton/Tahun)'].sum()/1_000_000:.1f} Jt Ton/Tahun)", height=400,
         plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", font=dict(color="#B0BEC5"),
         xaxis=dict(title="Timbulan B3 (Ton/Tahun)", showgrid=True, gridcolor="rgba(255,255,255,0.1)"), yaxis=dict(title="", showgrid=False), coloraxis_showscale=False)
-    st.plotly_chart(fig_b3, use_container_width=True)
+    st.plotly_chart(fig_b3, use_container_width=True, config={'displayModeBar': False})
 
     # ── 3.6b Zoonosis DBD per Kabupaten Ekstraktif ──
     if df_zoo is not None and not df_zoo.empty:
@@ -646,7 +631,7 @@ with st.expander("3 · BEBAN KESEHATAN", expanded=False):
             plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", font=dict(color="#B0BEC5"),
             legend=dict(title="Kabupaten", orientation="v", yanchor="top", y=1, xanchor="left", x=1.02),
             xaxis=dict(title="Tahun", showgrid=True, gridcolor="rgba(255,255,255,0.1)", dtick=1), yaxis=dict(title="Total Kasus DBD", showgrid=True, gridcolor="rgba(255,255,255,0.1)"))
-        st.plotly_chart(fig_zoo, use_container_width=True)
+        st.plotly_chart(fig_zoo, use_container_width=True, config={'displayModeBar': False})
     st.markdown("</div>", unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════
@@ -711,14 +696,14 @@ with st.expander("4 · KONFLIK SOSIAL", expanded=False):
     df_ts = df_konflik4[df_konflik4['tahun'] >= 1990].groupby(['tahun', 'Sektor_Grup']).size().reset_index(name='Jumlah')
     fig_41 = px.bar(df_ts, x='tahun', y='Jumlah', color='Sektor_Grup', color_discrete_map=color_map, title='Ledakan Konflik Agraria di Sulawesi (1990-2025)')
     fig_41.update_layout(height=350, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font=dict(color="#B0BEC5"), legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5, title=""))
-    st.plotly_chart(fig_41, use_container_width=True)
+    st.plotly_chart(fig_41, use_container_width=True, config={'displayModeBar': False})
 
     # ── 4.2 Monopoli Area ──
     st.markdown("**4.2 Sebaran Sektoral: Monopoli Daratan (Ha)**")
     df_ha = df_konflik4[df_konflik4['tahun'] >= 1990].groupby(['tahun', 'Sektor_Grup'])['luas_ha'].sum().reset_index()
     fig_42 = px.bar(df_ha, x='tahun', y='luas_ha', color='Sektor_Grup', color_discrete_map=color_map, title='Monopoli Area Konflik per Tahun')
     fig_42.update_layout(height=350, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font=dict(color="#B0BEC5"), showlegend=False)
-    st.plotly_chart(fig_42, use_container_width=True)
+    st.plotly_chart(fig_42, use_container_width=True, config={'displayModeBar': False})
 
     # ── 4.3 Kriminalisasi ──
     st.markdown("**4.3 Kriminalisasi Aktivis & Warga**")
@@ -726,7 +711,7 @@ with st.expander("4 · KONFLIK SOSIAL", expanded=False):
     fig_43 = px.line(df_krim, x='tahun', y='kasus', markers=True, title='Tren Kriminalisasi & Represi (Pasca 2000)')
     fig_43.update_traces(line_color='#E53935', marker=dict(size=8, color='#B71C1C'))
     fig_43.update_layout(height=300, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font=dict(color="#B0BEC5"))
-    st.plotly_chart(fig_43, use_container_width=True)
+    st.plotly_chart(fig_43, use_container_width=True, config={'displayModeBar': False})
 
     # ── 4.4 Pembuktian Statistik ──
     st.markdown("**4.4 Pembuktian Statistik: Crosstab (Ekspansi vs Represi)**")
@@ -778,9 +763,9 @@ with st.expander("4 · KONFLIK SOSIAL", expanded=False):
     
     col4a, col4b = st.columns(2)
     with col4a:
-        st.plotly_chart(fig_corp4, use_container_width=True)
+        st.plotly_chart(fig_corp4, use_container_width=True, config={'displayModeBar': False})
     with col4b:
-        st.plotly_chart(fig_civs4, use_container_width=True)
+        st.plotly_chart(fig_civs4, use_container_width=True, config={'displayModeBar': False})
 
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -846,7 +831,7 @@ with st.expander("5 · POLA PENERBITAN IZIN", expanded=False):
     )
     fig_51.update_yaxes(title_text='Deforestasi (Ha)', secondary_y=False, showgrid=True, gridcolor='rgba(255,255,255,0.05)', color='#E74C3C')
     fig_51.update_yaxes(title_text='Izin Baru', secondary_y=True, showgrid=False, color='#F1C40F')
-    st.plotly_chart(fig_51, use_container_width=True)
+    st.plotly_chart(fig_51, use_container_width=True, config={'displayModeBar': False})
     
     # ── 5.2 Tabrakan Tata Ruang ──
     st.markdown("**5.2 Tabrakan Tata Ruang: Deforestasi di Kawasan Konservasi**")
@@ -862,7 +847,7 @@ with st.expander("5 · POLA PENERBITAN IZIN", expanded=False):
         fig_52.add_trace(go.Bar(x=df_pivot_chart['Tahun'], y=df_pivot_chart[2], name='Taman Nasional', marker_color='#F39C12'))
         
     fig_52.update_layout(title='Akumulasi Kehancuran: Cagar Alam & Taman Nasional (Ha)', barmode='group', height=350, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font=dict(color="#B0BEC5"), legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5))
-    st.plotly_chart(fig_52, use_container_width=True)
+    st.plotly_chart(fig_52, use_container_width=True, config={'displayModeBar': False})
 
     # ── 5.3 Konflik Agraria & Pelanggaran FPIC ──
     st.markdown("**5.3 Konflik & Pelanggaran FPIC (1968-2025)**")
@@ -879,7 +864,7 @@ with st.expander("5 · POLA PENERBITAN IZIN", expanded=False):
     
     fig_53 = px.bar(df_agg_cmb, x='Tahun', y='Jumlah', color='kategori', barmode='group', color_discrete_map={'Konflik Pertambangan': '#E74C3C', 'Masalah Izin (KPA)': '#F39C12'})
     fig_53.update_layout(title='Distribusi Temporal Konflik & Masalah Izin', height=350, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font=dict(color="#B0BEC5"), legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5, title=""))
-    st.plotly_chart(fig_53, use_container_width=True)
+    st.plotly_chart(fig_53, use_container_width=True, config={'displayModeBar': False})
 
     # ── 5.4 Pembuktian Empiris ──
     st.markdown("**5.4 Pembuktian Empiris: Uji Statistik Crosstab**")
@@ -988,7 +973,7 @@ with st.expander("7 · KEGAGALAN TATA KELOLA", expanded=False):
     prov_counts7.columns = ['Provinsi', 'Jumlah Kasus']
     fig_72 = px.bar(prov_counts7, x='Jumlah Kasus', y='Provinsi', orientation='h', color='Jumlah Kasus', color_continuous_scale='Reds', height=250)
     fig_72.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font=dict(color='#ECEFF1'), margin=dict(l=0, r=0, t=10, b=0), xaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)'))
-    st.plotly_chart(fig_72, use_container_width=True)
+    st.plotly_chart(fig_72, use_container_width=True, config={'displayModeBar': False})
 
     # ── 7.3 PLTU Captive ──
     st.markdown("**7.3 Inkonsistensi Iklim: PLTU Captive**")
@@ -996,7 +981,7 @@ with st.expander("7 · KEGAGALAN TATA KELOLA", expanded=False):
     pltu_prov7 = df_pltu7.groupby('Provinsi')['Capacity (MW)'].sum().reset_index().sort_values(by='Capacity (MW)', ascending=True)
     fig_73 = px.bar(pltu_prov7, x='Capacity (MW)', y='Provinsi', orientation='h', color='Capacity (MW)', color_continuous_scale='YlOrRd', height=250)
     fig_73.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font=dict(color='#ECEFF1'), margin=dict(l=0, r=0, t=10, b=0), xaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)'))
-    st.plotly_chart(fig_73, use_container_width=True)
+    st.plotly_chart(fig_73, use_container_width=True, config={'displayModeBar': False})
 
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -1072,7 +1057,7 @@ with st.expander("8 · DISTRIBUSI MANFAAT", expanded=False):
         textfont=dict(color='#FF5252', size=11, weight='bold')
     ))
     fig_ispa8.update_layout(title='Tren Kasus ISPA/Pneumonia di Episentrum Nikel (Sulteng & Sultra)', plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font=dict(color="#ECEFF1"), height=350, margin=dict(l=0, r=0, t=30, b=0), xaxis=dict(title='', tickmode='linear', dtick=1, showgrid=False), yaxis=dict(title='Jumlah Kasus ISPA', showgrid=True, gridcolor='rgba(255,255,255,0.05)'))
-    st.plotly_chart(fig_ispa8, use_container_width=True)
+    st.plotly_chart(fig_ispa8, use_container_width=True, config={'displayModeBar': False})
 
     # ── 8.3 Crosstab Statistik ──
     st.markdown("**8.3 Pembuktian Statistik: Oligarki Untung, Rakyat Buntung**")
@@ -1141,7 +1126,7 @@ with st.expander("9 · KORIDOR LOGISTIK", expanded=False):
     )
     fig_map9.update_traces(marker=dict(size=14))
     fig_map9.update_layout(margin=dict(l=0, r=0, t=10, b=0), paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", showlegend=False)
-    st.plotly_chart(fig_map9, use_container_width=True)
+    st.plotly_chart(fig_map9, use_container_width=True, config={'displayModeBar': False})
 
     # ── 9.2 Tabel Logistik ──
     st.markdown("**9.2 Ringkasan Klaster Logistik**")
@@ -1197,12 +1182,12 @@ with st.expander("10 · DEMOGRAFI & SOSIAL", expanded=False):
         pop_smelter = df_demo[(df_demo["is_smelter"] == True) & (df_demo["tahun"] <= 2024)].copy()
         fig_pop = px.line(pop_smelter, x="tahun", y="jumlah_penduduk_rb", color="kabupaten", markers=True, height=350)
         fig_pop.update_layout(plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", font=dict(color="#B0BEC5"), margin=dict(l=0, r=0, t=10, b=0), showlegend=False)
-        st.plotly_chart(fig_pop, use_container_width=True)
+        st.plotly_chart(fig_pop, use_container_width=True, config={'displayModeBar': False})
 
         st.markdown("**10.3 Pergeseran Shift Index (Pertanian ke Industri)**")
         fig_index = px.line(df_shift, x="tahun", y="agriculture_to_industry_shift_index", color="provinsi", markers=True, height=350)
         fig_index.update_layout(plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", font=dict(color="#B0BEC5"), margin=dict(l=0, r=0, t=10, b=0), showlegend=False)
-        st.plotly_chart(fig_index, use_container_width=True)
+        st.plotly_chart(fig_index, use_container_width=True, config={'displayModeBar': False})
 
     with c2:
         st.markdown("**10.2 Kepadatan Penduduk (Ekstraktif vs Non)**")
@@ -1211,7 +1196,7 @@ with st.expander("10 · DEMOGRAFI & SOSIAL", expanded=False):
         density_agg = density.groupby(["tahun", "Kategori"], as_index=False)["kepadatan_per_km2"].mean()
         fig_density = px.area(density_agg, x="tahun", y="kepadatan_per_km2", color="Kategori", height=350)
         fig_density.update_layout(plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", font=dict(color="#B0BEC5"), margin=dict(l=0, r=0, t=10, b=0), showlegend=False)
-        st.plotly_chart(fig_density, use_container_width=True)
+        st.plotly_chart(fig_density, use_container_width=True, config={'displayModeBar': False})
 
         st.markdown("**10.4 Rata-rata Kasus DBD (Ekstraktif vs Non)**")
         dbd = df_demo[df_demo["tahun"] >= 2019].copy()
@@ -1219,7 +1204,7 @@ with st.expander("10 · DEMOGRAFI & SOSIAL", expanded=False):
         dbd_agg = dbd.groupby(["tahun", "Kategori"], as_index=False)["dbd_kasus"].mean()
         fig_dbd = px.bar(dbd_agg, x="tahun", y="dbd_kasus", color="Kategori", barmode="group", height=350)
         fig_dbd.update_layout(plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", font=dict(color="#B0BEC5"), margin=dict(l=0, r=0, t=10, b=0), showlegend=False)
-        st.plotly_chart(fig_dbd, use_container_width=True)
+        st.plotly_chart(fig_dbd, use_container_width=True, config={'displayModeBar': False})
 
     st.markdown("</div>", unsafe_allow_html=True)
 

@@ -140,7 +140,7 @@ if os.path.exists(kemenkes_path):
             margin=dict(l=20, r=20, t=30, b=20),
             hovermode="x unified",
         )
-        st.plotly_chart(fig_ispa, use_container_width=True)
+        st.plotly_chart(fig_ispa, use_container_width=True, config={'displayModeBar': False})
     else:
         st.warning("Data ISPA Sulawesi tidak ditemukan setelah filtering.")
 else:
@@ -180,7 +180,7 @@ if os.path.exists(pmdn_path):
             yaxis=dict(gridcolor="#1F2937"),
             margin=dict(l=20, r=20, t=30, b=20),
         )
-        st.plotly_chart(fig_pmdn, use_container_width=True)
+        st.plotly_chart(fig_pmdn, use_container_width=True, config={'displayModeBar': False})
     else:
         st.warning(f"Kolom tidak sesuai. Kolom tersedia: {list(df_pmdn.columns)}")
 else:
@@ -230,7 +230,7 @@ if os.path.exists(permits_path):
                     font_color="#ECEFF1", font_size=11,
                     margin=dict(l=10, r=10, t=40, b=10),
                 )
-                st.plotly_chart(fig_donut, use_container_width=True)
+                st.plotly_chart(fig_donut, use_container_width=True, config={'displayModeBar': False})
 
             with col_b:
                 # Tren penerbitan izin per tahun (berdasarkan tanggal_berlaku)
@@ -255,7 +255,7 @@ if os.path.exists(permits_path):
                     yaxis=dict(gridcolor="#1F2937"),
                     margin=dict(l=10, r=10, t=40, b=10),
                 )
-                st.plotly_chart(fig_bar, use_container_width=True)
+                st.plotly_chart(fig_bar, use_container_width=True, config={'displayModeBar': False})
 
             # Tabel ringkas
             with st.expander("Lihat data izin tambang Sulawesi (raw, belum final)"):
@@ -306,7 +306,7 @@ if os.path.exists(kemenkes_path):
             margin=dict(l=20, r=20, t=30, b=20),
             hovermode="x unified",
         )
-        st.plotly_chart(fig_kes, use_container_width=True)
+        st.plotly_chart(fig_kes, use_container_width=True, config={'displayModeBar': False})
         st.caption("*Catatan: Sumbu Y menggunakan skala logaritmik karena rentang jumlah kasus Diare yang sangat besar dibandingkan Kusta dan Malaria.")
     else:
         st.warning("Data kesehatan lainnya tidak ditemukan.")
@@ -335,7 +335,7 @@ if os.path.exists(kpa_path):
             yaxis=dict(gridcolor="#1F2937"),
             margin=dict(l=10, r=10, t=40, b=10),
         )
-        st.plotly_chart(fig_nas, use_container_width=True)
+        st.plotly_chart(fig_nas, use_container_width=True, config={'displayModeBar': False})
         
         # 2. Level Sulawesi
         # Deteksi keyword sulawesi di judul atau deskripsi
@@ -366,7 +366,7 @@ if os.path.exists(kpa_path):
                     yaxis=dict(gridcolor="#1F2937", categoryorder="total ascending"),
                     margin=dict(l=10, r=10, t=40, b=10),
                 )
-                st.plotly_chart(fig_kpa_sul, use_container_width=True)
+                st.plotly_chart(fig_kpa_sul, use_container_width=True, config={'displayModeBar': False})
         else:
             st.info("Tidak ada konflik agraria di Sulawesi yang terdeteksi.")
     except Exception as e:
@@ -399,7 +399,7 @@ if os.path.exists(faskes_path):
             yaxis=dict(gridcolor="#1F2937"),
             margin=dict(l=20, r=20, t=40, b=20),
         )
-        st.plotly_chart(fig_faskes, use_container_width=True)
+        st.plotly_chart(fig_faskes, use_container_width=True, config={'displayModeBar': False})
 else:
     st.info("Data agregrasi fasilitas kesehatan sedang diproses.")
 
@@ -427,7 +427,7 @@ if os.path.exists(keluhan_path):
             margin=dict(l=20, r=20, t=40, b=20),
             hovermode="x unified",
         )
-        st.plotly_chart(fig_keluhan, use_container_width=True)
+        st.plotly_chart(fig_keluhan, use_container_width=True, config={'displayModeBar': False})
 else:
     st.info("Data keluhan kesehatan belum diekstrak.")
 
@@ -455,7 +455,7 @@ if os.path.exists(pad_path):
             yaxis=dict(gridcolor="#1F2937"),
             margin=dict(l=20, r=20, t=40, b=20),
         )
-        st.plotly_chart(fig_pad, use_container_width=True)
+        st.plotly_chart(fig_pad, use_container_width=True, config={'displayModeBar': False})
         st.caption("*Catatan: Data masih bersifat raw dari API BPS (satuan bervariasi Juta/Rupiah) dan sedang dalam tahap standarisasi/cleaning.")
     except Exception as e:
         st.error(f"Gagal memuat grafik PAD: {e}")

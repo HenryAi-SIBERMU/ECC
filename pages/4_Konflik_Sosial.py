@@ -456,7 +456,20 @@ if not df_total_per_tahun.empty:
             borderpad=4
         )
 
-st.plotly_chart(fig_ts, use_container_width=True)
+st.plotly_chart(fig_ts, use_container_width=True, config={'displayModeBar': False})
+
+st.markdown("""
+<div style="background-color: rgba(3, 169, 244, 0.05); border-left: 4px solid #03A9F4; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
+    <h4 style="color: #03A9F4; margin-top: 0; font-size: 1.05rem;">Interpretasi Ekologis: Anatomi Ledakan Konflik 2017</h4>
+    <p style="color: #ECEFF1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 0;">
+        Grafik di atas secara gamblang memperlihatkan anomali eskalasi ekstrem yang memuncak pada <b>tahun 2017</b> dengan rekor <b>75 letupan konflik</b>. Pembedahan data sektoral membongkar bahwa krisis ini bukanlah sekadar kebetulan; ledakan ini didominasi secara mutlak oleh sektor <b>Kehutanan (40 kasus)</b> dan <b>Perkebunan (21 kasus)</b>, yang kemudian diikuti oleh penetrasi <b>Pertambangan dan Infrastruktur PSN</b>. Tahun 2017 menandai periode kelam <i>(inflection point)</i> di mana pemerintah mengakselerasi pelepasan kawasan hutan dan Izin Pinjam Pakai Kawasan Hutan (IPPKH) secara masif guna memfasilitasi rantai pasok nikel dan megaproyek strategis nasional. Ekspansi spasial yang brutal ini secara langsung merampas wilayah kelola masyarakat adat dan merusak ekosistem penyangga, memicu gelombang perlawanan akar rumput yang direpresi. Secara empiris, narasi hilirisasi telah membuktikan dirinya beroperasi di atas ongkos perampasan ruang hidup berskala masif.
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
+with st.expander("Lihat Data Mentah: Historis Konflik Agraria", expanded=False):
+    st.dataframe(df_ts_modern, use_container_width=True, hide_index=True)
+    st.caption("📁 <b>Sumber File:</b> <code>data/processed/sulawesi_konflik_agraria_tanahkita.csv</code> - Basis data agregasi konflik agraria dari KPA/Tanah Kita.", unsafe_allow_html=True)
 
 st.markdown("""
 <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #FF9800; margin-bottom: 25px;">
@@ -554,7 +567,7 @@ with col_jiwa:
             font=dict(size=11, color="white"), bgcolor="rgba(211,47,47,0.8)", bordercolor="#FF5252"
         )
 
-    st.plotly_chart(fig_jiwa, use_container_width=True)
+    st.plotly_chart(fig_jiwa, use_container_width=True, config={'displayModeBar': False})
 
 with col_ha:
     fig_ha = px.bar(
@@ -587,7 +600,7 @@ with col_ha:
             font=dict(size=11, color="#111"), bgcolor="rgba(255,193,7,0.9)", bordercolor="#FFB300"
         )
 
-    st.plotly_chart(fig_ha, use_container_width=True)
+    st.plotly_chart(fig_ha, use_container_width=True, config={'displayModeBar': False})
 
 st.markdown("""
 <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #F44336; margin-bottom: 25px;">
@@ -733,7 +746,7 @@ with col_trend:
         yaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)'),
         margin=dict(t=50, b=40)
     )
-    st.plotly_chart(fig_krim_tahun, use_container_width=True)
+    st.plotly_chart(fig_krim_tahun, use_container_width=True, config={'displayModeBar': False})
     with st.expander("Lihat Data Mentah: Tren Kriminalisasi", expanded=False):
         st.dataframe(df_krim_tahun, use_container_width=True, hide_index=True)
         st.caption("📁 **Sumber File:** `data/processed/sulawesi_konflik_agraria_tanahkita.csv` - Tren jumlah kasus kriminalisasi per tahun.")
@@ -756,7 +769,7 @@ with col_sektor:
         yaxis=dict(showgrid=False),
         margin=dict(t=50, b=40)
     )
-    st.plotly_chart(fig_krim_sektor, use_container_width=True)
+    st.plotly_chart(fig_krim_sektor, use_container_width=True, config={'displayModeBar': False})
     with st.expander("Lihat Data Mentah: Sektor Represif", expanded=False):
         st.dataframe(df_krim_sektor, use_container_width=True, hide_index=True)
         st.caption("📁 **Sumber File:** `data/processed/sulawesi_konflik_agraria_tanahkita.csv` - Total kasus kriminalisasi dikelompokkan per sektor.")
@@ -1128,18 +1141,35 @@ Grafik frekuensi ini membongkar dominasi aktor-aktor sipil dan perusahaan tamban
 import re
 
 # NLP Extraction (Regex) for Actors from Text
-text_corpus = " ".join((df_konflik['judul'].fillna('') + " " + df_konflik['deskripsi'].fillna('') + " " + df_konflik['narasi'].fillna('')).tolist())
+# Menggunakan seluruh dataset TanahKita (Nasional, 500+ kasus) untuk memetakan Modus Operandi secara utuh
+df_nlp = pd.read_csv(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'processed', 'sulawesi_konflik_agraria_tanahkita.csv'))
+text_corpus = " ".join((df_nlp['judul'].fillna('') + " " + df_nlp['deskripsi'].fillna('') + " " + df_nlp['narasi'].fillna('')).tolist())
 
 # Extract Corporate Actors
 pts = re.findall(r'\b(?:PT|CV)\.?\s*[A-Z][a-zA-Z]*(?:\s+[A-Z][a-zA-Z]*){0,3}\b', text_corpus)
 pts = [" ".join(pt.split()) for pt in pts]
+# Gabungkan PTPN XIV, PTPN II, dll ke "PT Perkebunan Nusantara (PTPN)"
+pts = [re.sub(r'\bPTPN(?:\s+(?:XIV|XII|VII|II|14|Unit\s*14))?\b', 'PT Perkebunan Nusantara (PTPN)', pt, flags=re.IGNORECASE) for pt in pts]
 df_aktor_perusahaan = pd.Series(pts).value_counts().reset_index()
 df_aktor_perusahaan.columns = ['Aktor', 'Frekuensi']
 
-# Extract Civil Society Actors
-civils = re.findall(r'\b(?:Walhi|WALHI|Jatam|JATAM|AMAN|LBH|Aliansi|Serikat|Konsorsium|Masyarakat Adat|Warga Desa)\s*[A-Z][a-zA-Z]*(?:\s+[A-Z][a-zA-Z]*){0,3}\b', text_corpus)
-civils = [" ".join(cv.split()) for cv in civils]
-df_aktor_masyarakat = pd.Series(civils).value_counts().reset_index()
+# Extract Civil Society / Vigilante Actors (Data-Driven with Stopwords Cutoff)
+civils_raw = re.findall(r'\b(?:Preman|Ormas|Satgas|PAM Swakarsa|Pemuda Pancasila|GRIB|Laskar|Tandingan|Oknum|Security|Satpam|Pengamanan Swakarsa|Centeng|Beking)\b[^\.,;\!\?\(\)\[\]"\'\-]*', text_corpus, flags=re.IGNORECASE)
+
+stopwords = {'yang', 'dan', 'di', 'dari', 'dengan', 'untuk', 'pada', 'ke', 'dalam', 'oleh', 'serta', 'sebagai', 'adalah', 'ini', 'itu', 'tersebut', 'kepada', 'saat', 'ketika', 'juga', 'mengatasnamakan', 'berjumlah', 'melarang', 'datang', 'berupaya', 'segera', 'salah', 'lainnya', 'tak', 'nya', 'sedang', 'akan', 'karena', 'sebab', 'lalu', 'kemudian', 'mereka'}
+
+civils_clean = []
+for phrase in civils_raw:
+    words = phrase.split()
+    clean_words = []
+    for w in words:
+        if w.lower() in stopwords:
+            break
+        clean_words.append(w.title())
+    if clean_words:
+        civils_clean.append(' '.join(clean_words))
+
+df_aktor_masyarakat = pd.Series(civils_clean).value_counts().reset_index()
 df_aktor_masyarakat.columns = ['Aktor', 'Frekuensi']
 
 col_aktor_1, col_aktor_2 = st.columns(2)
@@ -1158,7 +1188,7 @@ with col_aktor_1:
             font=dict(color='#ECEFF1'), margin=dict(l=0, r=0, t=10, b=0),
             xaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)', tickformat='d')
         )
-        st.plotly_chart(fig_corp, use_container_width=True)
+        st.plotly_chart(fig_corp, use_container_width=True, config={'displayModeBar': False})
     top1_corp_name = df_aktor_perusahaan.iloc[0]['Aktor'] if not df_aktor_perusahaan.empty else "Korporasi"
     top1_corp_freq = df_aktor_perusahaan.iloc[0]['Frekuensi'] if not df_aktor_perusahaan.empty else 0
 
@@ -1169,31 +1199,32 @@ with col_aktor_1:
     """, unsafe_allow_html=True)
 
 with col_aktor_2:
-    st.markdown("#### Top 10 Aktor Sipil & Ormas Terlibat")
-    top_civil = df_aktor_masyarakat[~df_aktor_masyarakat['Aktor'].str.contains('Masyarakat Desa|Masyarakat Kabupaten|Warga|Petani', case=False, na=False)].head(10).sort_values(by='Frekuensi', ascending=True)
+    st.markdown("#### Top Aktor Proksi & Vigilante Terdeteksi")
+    top_civil = df_aktor_masyarakat.head(10).sort_values(by='Frekuensi', ascending=True)
     if not top_civil.empty:
         fig_civil = px.bar(
             top_civil, 
             x='Frekuensi', y='Aktor', orientation='h',
-            color_discrete_sequence=['#43A047']
+            color_discrete_sequence=['#D32F2F'] # Merah untuk bahaya/vigilante
         )
         fig_civil.update_layout(
             plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
             font=dict(color='#ECEFF1'), margin=dict(l=0, r=0, t=10, b=0),
             xaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)', tickformat='d')
         )
-        st.plotly_chart(fig_civil, use_container_width=True)
+        st.plotly_chart(fig_civil, use_container_width=True, config={'displayModeBar': False})
         
-    top1_civ_name = df_aktor_masyarakat.iloc[0]['Aktor'] if not df_aktor_masyarakat.empty else "Masyarakat Adat"
+    top1_civ_name = df_aktor_masyarakat.iloc[0]['Aktor'] if not df_aktor_masyarakat.empty else "Preman/Ormas"
     top1_civ_freq = df_aktor_masyarakat.iloc[0]['Frekuensi'] if not df_aktor_masyarakat.empty else 0
 
     st.markdown(f"""
-    <div style="background:rgba(67, 160, 71, 0.1);padding:15px;border-left:3px solid #43A047;border-radius:5px;font-size:0.9rem;">
-        <b>Analisis Kritis:</b> Kemunculan <b>{top1_civ_name}</b> (disebut hingga <b>{top1_civ_freq} kali</b>) serta berbagai organisasi advokasi (*Jatam, Walhi, AMAN*) menangkap besarnya skala resistensi akar rumput. Tingginya friksi pada ormas sektoral dan kelompok identitas merangkap sebagai sinyal waspada atas potensi benturan horizontal yang diorkestrasi.
+    <div style="background:rgba(211, 47, 47, 0.1);padding:15px;border-left:3px solid #D32F2F;border-radius:5px;font-size:0.9rem;">
+        <b>Analisis Kritis:</b> Kemunculan kelompok sipil seperti <b>{top1_civ_name}</b> (terdeteksi hingga <b>{top1_civ_freq} kali</b>) menangkap besarnya skala orkestrasi horizontal. Korporasi seringkali menggunakan jasa pengamanan swakarsa, kelompok preman, hingga ormas vigilante sebagai "bemper proksi" untuk mengintimidasi warga lokal dan memecah belah solidaritas akar rumput.
     </div>
     """, unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #9E9E9E; font-size: 0.9rem; margin-bottom: 5px;'><i>* Grafik di atas hanya menampilkan Top 10 entitas. Untuk melihat daftar lengkap dan detail seluruh aktor yang terdeteksi, silakan buka tabel data di bawah ini.</i></p>", unsafe_allow_html=True)
 with st.expander("Lihat Data Tabel Frekuensi Aktor Lengkap (Hasil Ekstraksi NLP)"):
     col_t1, col_t2 = st.columns(2)
     with col_t1:
@@ -1202,4 +1233,4 @@ with st.expander("Lihat Data Tabel Frekuensi Aktor Lengkap (Hasil Ekstraksi NLP)
     with col_t2:
         st.markdown("**Data Aktor Sipil & Organisasi**")
         st.dataframe(df_aktor_masyarakat, use_container_width=True, hide_index=True)
-    st.caption("Data di atas diekstraksi secara dinamis dengan menggunakan metode NLP Regex dari kumpulan korpus `narasi`, `deskripsi`, dan `judul` kasus TanahKita (N=95 Sulawesi-Malut).")
+    st.caption("📁 **Sumber File:** <code>data/processed/sulawesi_konflik_agraria_tanahkita.csv</code> - Data diekstraksi secara dinamis menggunakan NLP Regex dari korpus narasi seluruh kasus agraria (Nasional, N=568 kasus) untuk memetakan orkestrasi struktural dan modus operandi aktor secara utuh.", unsafe_allow_html=True)

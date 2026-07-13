@@ -428,7 +428,7 @@ try:
         prov_counts.columns = ['Provinsi', 'Jumlah Kasus']
         fig_prov = px.bar(prov_counts, x='Jumlah Kasus', y='Provinsi', orientation='h', title="Sebaran Wilayah Konflik", color='Jumlah Kasus', color_continuous_scale='Reds')
         fig_prov.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', margin=dict(l=0, r=0, t=30, b=0), height=250)
-        st.plotly_chart(fig_prov, use_container_width=True)
+        st.plotly_chart(fig_prov, use_container_width=True, config={'displayModeBar': False})
         
     with st.expander("Bongkar Data: Daftar Rekam Jejak Konflik Agraria & Pelanggaran Hak"):
         df_konflik_show = df_konflik[['Provinsi', 'Sektor', 'Judul_Kasus', 'Deskripsi_Singkat']].copy()
@@ -481,7 +481,7 @@ try:
     pltu_prov = df_pltu.groupby('Provinsi')['Capacity (MW)'].sum().reset_index().sort_values(by='Capacity (MW)', ascending=True)
     fig_pltu = px.bar(pltu_prov, x='Capacity (MW)', y='Provinsi', orientation='h', color='Capacity (MW)', color_continuous_scale='YlOrRd')
     fig_pltu.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', margin=dict(l=0, r=0, t=10, b=0), height=300)
-    st.plotly_chart(fig_pltu, use_container_width=True)
+    st.plotly_chart(fig_pltu, use_container_width=True, config={'displayModeBar': False})
     
     with st.expander("Bongkar Data: Daftar Lengkap PLTU Batubara Captive di Sulawesi"):
         df_pltu_show = df_pltu.copy()

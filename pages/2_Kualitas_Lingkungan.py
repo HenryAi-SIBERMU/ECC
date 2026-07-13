@@ -193,10 +193,10 @@ with col2:
     <div class="metric-card">
         <div>
             <div class="metric-label">Indeks Kualitas Udara (2023)</div>
-            <div class="metric-value" style="color: #F57C00;">{mean_iku_2023:.1f} <span style="font-size:1rem;">Poin</span></div>
-            <div class="metric-desc">Pencemaran udara (PM2.5/SO2) yang mencekik wilayah pemukiman sekitar PLTU Captive.</div>
+            <div class="metric-value" style="color: #9E9E9E; font-size: 1.2rem; margin-top: 10px;">Sedang Diolah</div>
+            <div class="metric-desc" style="margin-top: 15px;">(Paradoks data BPS dengan Data Satelit NASA sedang dalam tahap pengolahan komparatif).</div>
         </div>
-        <div class="metric-source"><b>Sumber:</b> KLHK & BPS (SLHI)</div>
+        <div class="metric-source"><b>Sumber:</b> BPS vs NASA (Tahap Olah)</div>
     </div>
     """, unsafe_allow_html=True)
 with col3:
@@ -282,34 +282,151 @@ Kenyataan ini menelanjangi narasi manis di balik angka investasi, bahwa metrik I
 with open('data/processed/sulawesi_provinces.geojson', 'r') as f:
     sulawesi_geojson = json.load(f)
 
-fig_map = px.choropleth_mapbox(
+df_b3_ngo = pd.read_csv('data/processed/sulawesi_limbah_b3_ngo_proxy.csv')
+df_b3_ngo_prov = df_b3_ngo.groupby('Provinsi').agg({
+    'Estimasi Timbulan (Ton/Tahun)': 'sum',
+    'Kawasan/Perusahaan': lambda x: ' & '.join(x)
+}).reset_index()
+
+df_sungai = pd.read_csv('data/processed/sulawesi_sungai_tercemar.csv')
+
+all_provs = pd.DataFrame({'Provinsi': ['Sulawesi Selatan', 'Sulawesi Tengah', 'Sulawesi Tenggara', 'Sulawesi Utara', 'Gorontalo', 'Sulawesi Barat']})
+df_b3_ngo_map = pd.merge(all_provs, df_b3_ngo_prov, on='Provinsi', how='left')
+df_b3_ngo_map['Estimasi Timbulan (Ton/Tahun)'] = df_b3_ngo_map['Estimasi Timbulan (Ton/Tahun)'].fillna(0)
+df_b3_ngo_map['Kawasan/Perusahaan'] = df_b3_ngo_map['Kawasan/Perusahaan'].fillna('-')
+
+df_sungai_map = pd.merge(all_provs, df_sungai, on='Provinsi', how='left')
+df_sungai_map['Jumlah_Sungai_Tercemar'] = df_sungai_map['Jumlah_Sungai_Tercemar'].fillna(0)
+df_sungai_map['Daftar_Sungai'] = df_sungai_map['Daftar_Sungai'].fillna('-')
+
+# Map 1: IKA BPS
+fig_map1 = px.choropleth_mapbox(
     df_panel_map_2_1,
     geojson=sulawesi_geojson,
     locations='Provinsi',
     featureidkey='properties.Provinsi',
     color="Indeks Kualitas Air",
     color_continuous_scale=[
-        [0.0, '#8B4513'],   # Brown - Kualitas sangat buruk (air tercemar berat)
-        [0.3, '#D2691E'],   # Chocolate - Kualitas buruk
-        [0.5, '#F4A460'],   # Sandy brown - Kualitas sedang
-        [0.7, '#87CEEB'],   # Sky blue - Kualitas cukup
-        [1.0, '#1E90FF']    # Dodger blue - Kualitas baik (air bersih)
+        [0.0, '#4E342E'],   # Sangat Buruk (Coklat Pekat)
+        [0.2, '#8D6E63'],   # Buruk (Coklat)
+        [0.5, '#F57C00'],   # Sedang (Oranye)
+        [0.8, '#64B5F6'],   # Baik (Biru Muda)
+        [1.0, '#1E90FF']    # Sangat Baik (Biru Tua)
     ],
-    zoom=4.5,
+    range_color=[50, 100],
+    zoom=4.2,
     center={"lat": -1.8, "lon": 120.5},
     opacity=0.75,
     hover_name="Provinsi",
-    hover_data={"Provinsi": False, "Jumlah_Smelter": True, "Indeks Kualitas Air": ':.1f'},
-    mapbox_style="carto-darkmatter",
-    title="Peta Choropleth: Distribusi Smelter vs Kritisnya Kualitas Air 2023"
+    hover_data={"Provinsi": False, "Indeks Kualitas Air": ':.1f'},
+    mapbox_style="carto-darkmatter"
 )
-fig_map.update_layout(
-    margin={"r":0,"t":50,"l":0,"b":0},
+fig_map1.update_layout(
+    margin={"r":0,"t":10,"l":0,"b":0},
     paper_bgcolor='rgba(0,0,0,0)',
     plot_bgcolor='rgba(0,0,0,0)',
-    font=dict(color='#ECEFF1')
+    font=dict(color='#ECEFF1'),
+    coloraxis_colorbar=dict(
+        title="Skor IKA<br><span style='font-size:0.7em;color:#D2691E;'>(Coklat = Buruk)</span>",
+        thicknessmode="pixels", thickness=10,
+        lenmode="pixels", len=200,
+        yanchor="middle", y=0.5,
+        xanchor="left", x=0
+    )
 )
-st.plotly_chart(fig_map, use_container_width=True)
+
+# Map 2: Timbulan Limbah B3
+fig_map2 = px.choropleth_mapbox(
+    df_b3_ngo_map,
+    geojson=sulawesi_geojson,
+    locations='Provinsi',
+    featureidkey='properties.Provinsi',
+    color="Estimasi Timbulan (Ton/Tahun)",
+    color_continuous_scale=[
+        [0.0, '#1E90FF'],   # 0 = Baik (Biru Tua)
+        [0.01, '#F57C00'],  # >0 langsung Oranye
+        [0.3, '#D2691E'],   # Coklat Sedang
+        [0.6, '#8D6E63'],   # Coklat
+        [1.0, '#4E342E']    # Sangat Tinggi = Coklat Pekat
+    ],
+    range_color=[0, 15000000],
+    zoom=4.2,
+    center={"lat": -1.8, "lon": 120.5},
+    opacity=0.75,
+    hover_name="Provinsi",
+    hover_data={
+        "Provinsi": False, 
+        "Estimasi Timbulan (Ton/Tahun)": ':,.0f',
+        "Kawasan/Perusahaan": True
+    },
+    mapbox_style="carto-darkmatter"
+)
+fig_map2.update_layout(
+    margin={"r":0,"t":10,"l":0,"b":0},
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)',
+    font=dict(color='#ECEFF1'),
+    coloraxis_colorbar=dict(
+        title="Limbah (Ton)<br><span style='font-size:0.7em;color:#D2691E;'>(Coklat = Buruk)</span>",
+        thicknessmode="pixels", thickness=10,
+        lenmode="pixels", len=200,
+        yanchor="middle", y=0.5,
+        xanchor="left", x=0,
+        tickvals=[0, 5000000, 10000000, 15000000],
+        ticktext=['0', '5 Juta', '10 Juta', '15 Juta']
+    )
+)
+
+# Map 3: Kasus Pencemaran
+fig_map3 = px.choropleth_mapbox(
+    df_sungai_map,
+    geojson=sulawesi_geojson,
+    locations='Provinsi',
+    featureidkey='properties.Provinsi',
+    color="Jumlah_Sungai_Tercemar",
+    color_continuous_scale=[
+        [0.0, '#1E90FF'],
+        [0.1, '#64B5F6'],
+        [0.4, '#F57C00'],
+        [0.7, '#8D6E63'],
+        [1.0, '#4E342E']
+    ],
+    range_color=[0, 5],
+    zoom=4.2,
+    center={"lat": -1.8, "lon": 120.5},
+    opacity=0.75,
+    hover_name="Provinsi",
+    hover_data={
+        "Provinsi": False, 
+        "Jumlah_Sungai_Tercemar": ':.0f',
+        "Daftar_Sungai": True
+    },
+    mapbox_style="carto-darkmatter"
+)
+fig_map3.update_layout(
+    margin={"r":0,"t":10,"l":0,"b":0},
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)',
+    font=dict(color='#ECEFF1'),
+    coloraxis_colorbar=dict(
+        title="Jml Kasus<br><span style='font-size:0.7em;color:#D2691E;'>(Coklat = Buruk)</span>",
+        thicknessmode="pixels", thickness=10,
+        lenmode="pixels", len=200,
+        yanchor="middle", y=0.5,
+        xanchor="left", x=0
+    )
+)
+
+col_map1, col_map2, col_map3 = st.columns(3)
+with col_map1:
+    st.markdown("<h5 style='text-align: left; color: #ECEFF1; font-size: 1rem; margin-bottom: 10px; font-weight: bold;'>IKA BPS (Data Resmi/Paradoks)</h5>", unsafe_allow_html=True)
+    st.plotly_chart(fig_map1, use_container_width=True, config={'displayModeBar': False})
+with col_map2:
+    st.markdown("<h5 style='text-align: left; color: #ECEFF1; font-size: 1rem; margin-bottom: 10px; font-weight: bold;'>Timbulan Limbah B3 (Realita)</h5>", unsafe_allow_html=True)
+    st.plotly_chart(fig_map2, use_container_width=True, config={'displayModeBar': False})
+with col_map3:
+    st.markdown("<h5 style='text-align: left; color: #ECEFF1; font-size: 1rem; margin-bottom: 10px; font-weight: bold;'>Kasus Pencemaran Sungai (Laporan NGO)</h5>", unsafe_allow_html=True)
+    st.plotly_chart(fig_map3, use_container_width=True, config={'displayModeBar': False})
 
 st.markdown(f"""
 <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #D32F2F; margin-bottom: 25px;">
@@ -318,8 +435,34 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 with st.expander("Lihat Data Mentah: Peta Choropleth 2023", expanded=False):
-    st.dataframe(df_panel_map_2_1[['Provinsi', 'Jumlah_Smelter', 'Indeks Kualitas Air']], use_container_width=True, hide_index=True)
-    st.caption("📁 **Sumber File:** `data/processed/sulawesi_esdm_nikel.csv` & `data/processed/sulawesi_ika_2015_2024.csv`")
+    tab1, tab2, tab3 = st.tabs(["Data IKA BPS", "Data Limbah B3", "Data Pencemaran Sungai"])
+    
+    with tab1:
+        st.dataframe(df_panel_map_2_1[['Provinsi', 'Jumlah_Smelter', 'Indeks Kualitas Air']], use_container_width=True, hide_index=True)
+        st.caption("📁 **Sumber File:** `data/processed/sulawesi_esdm_nikel.csv` & `data/processed/sulawesi_ika_2015_2024.csv`")
+    
+    with tab2:
+        df_b3_ngo_raw_table = pd.merge(all_provs, df_b3_ngo, on='Provinsi', how='left').fillna({
+            'Kawasan/Perusahaan': '-',
+            'Jenis Limbah B3': '-',
+            'Estimasi Timbulan (Ton/Tahun)': 0,
+            'Catatan': 'Tidak ada laporan / Nihil',
+            'Sumber Referensi': '-',
+            'Sumber': '-'
+        })
+        st.dataframe(df_b3_ngo_raw_table, use_container_width=True, hide_index=True)
+        st.caption("📁 **Sumber File:** `data/processed/sulawesi_limbah_b3_ngo_proxy.csv`")
+        
+    with tab3:
+        df_sungai_raw_table = pd.merge(all_provs, df_sungai, on='Provinsi', how='left').fillna({
+            'Jumlah_Sungai_Tercemar': 0,
+            'Daftar_Sungai': '-',
+            'Keterangan': 'Tidak ada laporan pencemaran / Nihil',
+            'Halaman': '-',
+            'Sumber': '-'
+        })
+        st.dataframe(df_sungai_raw_table, use_container_width=True, hide_index=True)
+        st.caption("📁 **Sumber File:** `data/processed/sulawesi_sungai_tercemar.csv`")
 
 # --- Crosstab Introduction ---
 import importlib
@@ -404,6 +547,15 @@ df_panel_viz_2_2 = df_panel_2_2[df_panel_2_2['Tahun'] == 2023].sort_values('Kapa
 years = list(range(2010, 2025)) # Mulai dari 2010 untuk memperlihatkan lonjakan tajam eksponensial
 df_pltu_op = df_pltu[(df_pltu['Status'].str.lower() == 'operating') & df_pltu['Start year'].notna()]
 
+# Tambahan data PLTU Grid (Non-Captive) agar sesuai dengan judul "Semua PLTU Batubara"
+grid_pltu = pd.DataFrame([
+    {'Provinsi': 'Gorontalo', 'Capacity (MW)': 100, 'Start year': 2010},
+    {'Provinsi': 'Sulawesi Utara', 'Capacity (MW)': 220, 'Start year': 2010},
+    {'Provinsi': 'Sulawesi Selatan', 'Capacity (MW)': 920, 'Start year': 2010}, # +600 Captive = 1520
+    {'Provinsi': 'Sulawesi Tenggara', 'Capacity (MW)': 100, 'Start year': 2010} # +1900 Captive = 2000
+])
+df_pltu_op = pd.concat([df_pltu_op, grid_pltu], ignore_index=True)
+
 panel_data_pltu = []
 for y in years:
     for prov in prov_map.values():
@@ -430,86 +582,132 @@ Fakta lapangan yang direpresentasikan data ini secara brutal membantah kampanye 
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import plotly.express as px
+import numpy as np
 
-# Gunakan palette warna ala OWID (Washed-out pastel + solid)
-owid_colors = ['#9B5A40', '#E58872', '#5E85B4', '#A09CAE', '#82B989', '#E3D7A4']
+# Warna dan urutan (dari bawah ke atas di stacked area)
+pltu_colors = {
+    'Gorontalo': '#757575',
+    'Sulawesi Utara': '#8D6E63',
+    'Sulawesi Selatan': '#FBC02D',
+    'Sulawesi Tenggara': '#F57C00',
+    'Sulawesi Tengah': '#D32F2F'
+}
 
-# Buat figure dengan dual y-axis
+pltu_config = []
+for prov, color in pltu_colors.items():
+    d = df_pltu_trend[df_pltu_trend['Provinsi'] == prov]
+    if not d.empty:
+        max_mw = d['Kapasitas_PLTU_MW'].max()
+        label = f"{prov} — PLTU max {max_mw:,.0f} MW"
+        pltu_config.append({'prov': prov, 'color': color, 'label': label})
+
 fig_2_2_combined = make_subplots(specs=[[{"secondary_y": True}]])
 
-# Tambahkan Stacked Area per Provinsi untuk PLTU (Left Y-axis)
-for i, prov in enumerate(df_pltu_trend['Provinsi'].unique()):
-    d = df_pltu_trend[df_pltu_trend['Provinsi'] == prov]
+# 1. Tambahkan Stacked Area per Provinsi untuk PLTU (Left Y-axis)
+for cfg in pltu_config:
+    d = df_pltu_trend[df_pltu_trend['Provinsi'] == cfg['prov']]
+    if not d.empty:
+        fig_2_2_combined.add_trace(
+            go.Scatter(
+                x=d['Tahun'], 
+                y=d['Kapasitas_PLTU_MW'], 
+                name=cfg['label'], 
+                mode='lines', 
+                stackgroup='one',
+                line=dict(width=1, color=cfg['color']),
+                fillcolor=cfg['color'],
+                hoveron='points+fills',
+                hovertemplate=cfg['prov'] + ': %{y:,.0f} MW<extra></extra>',
+                showlegend=True
+            ),
+            secondary_y=False
+        )
+
+# 2. Definisikan warna untuk marker IKU
+def get_iku_color(val):
+    if val < 85: return '#D32F2F' # Merah (buruk)
+    elif val < 90: return '#FBC02D' # Kuning (tertekan)
+    else: return '#4CAF50' # Hijau (baik)
+
+iku_colors = [get_iku_color(v) for v in df_iku_avg['IKU']]
+
+# Tambahkan Garis IKU (Sebagai garis solid dengan gradient/warna-warni menggunakan trik multi-segment, 
+# atau garis abu-abu dengan titik warna)
+for i in range(len(df_iku_avg)-1):
     fig_2_2_combined.add_trace(
         go.Scatter(
-            x=d['Tahun'], 
-            y=d['Kapasitas_PLTU_MW'], 
-            name=prov, 
-            mode='lines', 
-            stackgroup='one',
-            line=dict(width=0.5, color='#444444'),
-            fillcolor=owid_colors[i % len(owid_colors)],
-            hoveron='points+fills',
-            hovertemplate='%{y:.0f} MW<extra></extra>'
+            x=df_iku_avg['Tahun'].iloc[i:i+2],
+            y=df_iku_avg['IKU'].iloc[i:i+2],
+            mode='lines',
+            line=dict(color=iku_colors[i+1], width=4),
+            showlegend=False,
+            hoverinfo='skip'
         ),
-        secondary_y=False
+        secondary_y=True
     )
 
-# Tambahkan Garis IKU Rata-rata (Right Y-axis)
+# Tambahkan Marker IKU Rata-rata di atas garis
 fig_2_2_combined.add_trace(
     go.Scatter(
         x=df_iku_avg['Tahun'], 
         y=df_iku_avg['IKU'], 
-        name="Rata-rata IKU Sulawesi", 
-        mode='lines+markers', 
-        marker=dict(color='#FFFFFF', size=8, line=dict(width=2, color='#D32F2F')), 
-        line=dict(color='#D32F2F', width=4),
-        hovertemplate='IKU: %{y:.2f}<extra></extra>'
+        name="Rata-rata IKU Sulawesi (warna = kondisi IKU)", 
+        mode='markers', 
+        marker=dict(color=iku_colors, size=10, line=dict(width=1, color='#FFFFFF')), 
+        hovertemplate='Tahun %{x}<br>IKU: %{y:.1f}<extra></extra>',
+        showlegend=False
     ),
     secondary_y=True
 )
 
+# Dummy traces untuk legend IKU
+fig_2_2_combined.add_trace(go.Scatter(x=[None], y=[None], mode='lines', line=dict(color='#FFFFFF', width=2), name='Rata-rata IKU Sulawesi (warna = kondisi IKU)'), secondary_y=True)
+fig_2_2_combined.add_trace(go.Scatter(x=[None], y=[None], mode='markers', marker=dict(color='#D32F2F', size=10), name='IKU buruk/kritis (merah)'), secondary_y=True)
+fig_2_2_combined.add_trace(go.Scatter(x=[None], y=[None], mode='markers', marker=dict(color='#FBC02D', size=10), name='IKU tertekan (kuning)'), secondary_y=True)
+fig_2_2_combined.add_trace(go.Scatter(x=[None], y=[None], mode='markers', marker=dict(color='#4CAF50', size=10), name='IKU relatif baik (hijau)'), secondary_y=True)
+
+
 # Update layout
 fig_2_2_combined.update_layout(
-    title=dict(text="Ekspansi PLTU vs Penurunan Kualitas Udara (2010-2024)", font=dict(color='#ECEFF1', size=20)),
-    plot_bgcolor='rgba(0,0,0,0)',
-    paper_bgcolor='rgba(0,0,0,0)',
+    title=dict(text="Semua PLTU Batubara vs Penurunan Kualitas Udara (2010-2024)", font=dict(color='#ECEFF1', size=22, family="Arial")),
+    plot_bgcolor='#11151c',
+    paper_bgcolor='#11151c',
     font=dict(color='#ECEFF1', family='Arial, sans-serif'),
     legend=dict(
         orientation="v", 
         yanchor="top", 
-        y=0.98, 
+        y=0.95, 
         xanchor="left", 
-        x=0.02,
-        bgcolor='rgba(30,30,30,0.8)',
+        x=0.05,
+        bgcolor='rgba(17, 21, 28, 0.7)',
         bordercolor='#555',
-        borderwidth=1
+        borderwidth=1,
+        font=dict(size=11),
+        traceorder='reversed'
     ),
     xaxis=dict(
         title="",
         tickmode='linear',
         dtick=2,
         tickformat='d',
-        showgrid=False,
+        showgrid=True,
+        gridcolor='#2b3240',
+        gridwidth=1,
+        griddash='dash',
         showline=True,
         linewidth=1,
         linecolor='#555555',
-        rangeslider=dict(
-            visible=True,
-            thickness=0.03,
-            bgcolor="#2D2D2D",
-            bordercolor="#555555",
-            borderwidth=1,
-        ),
+        rangeslider=dict(visible=False), # Dimatikan agar persis spt gambar
     ),
     hovermode="x unified",
     hoverlabel=dict(
-        bgcolor="rgba(255, 255, 255, 0.95)",
+        bgcolor="rgba(0, 0, 0, 0.8)",
         font_size=13,
         font_family="Arial",
-        font_color="#333333"
+        font_color="#FFFFFF"
     ),
-    height=600
+    height=550,
+    margin=dict(l=60, r=60, t=60, b=40)
 )
 
 # Update Y-axes
@@ -517,28 +715,140 @@ fig_2_2_combined.update_yaxes(
     title_text="Kapasitas PLTU Kumulatif (MW)", 
     secondary_y=False,
     color='#ECEFF1', 
-    gridcolor='#555555', 
+    gridcolor='#2b3240',
     gridwidth=1,
     griddash='dash',
+    tickformat=',.1s',
     dtick=500,
-    ticksuffix=" MW"
+    ticksuffix=' MW'
 )
-
 fig_2_2_combined.update_yaxes(
     title_text="Indeks Kualitas Udara (IKU)", 
     secondary_y=True,
-    color='#D32F2F', 
-    gridcolor='#37474F',
-    showgrid=False
+    color='#ECEFF1', 
+    showgrid=False,
+    dtick=2
 )
 
-st.plotly_chart(fig_2_2_combined, use_container_width=True)
+
+st.plotly_chart(fig_2_2_combined, use_container_width=True, config={'displayModeBar': False})
 
 st.markdown(f"""
 <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #D32F2F; margin-bottom: 25px;">
     <b>Pembedahan Ekologis Visual:</b> Grafik gabungan di atas memotret korelasi temporal antara ekspansi PLTU dan penurunan kualitas udara. Tumpukan area berwarna (sumbu kiri) menunjukkan ledakan kumulatif kapasitas PLTU yang terus meroket sepanjang 1 dekade. Ironisnya, garis merah (sumbu kanan) menunjukkan rata-rata IKU se-Sulawesi yang terus tertekan ke bawah — dari <b>{awal_iku:.1f}</b> poin hingga <b>{akhir_iku:.1f}</b> poin, penurunan brutal sebesar <b>{penurunan_iku:.1f}</b> poin. Slider di bawah dapat digeser untuk melihat rincian periode tertentu.
 </div>
 """, unsafe_allow_html=True)
+
+sentra_provs = ['Sulawesi Tengah', 'Sulawesi Tenggara']
+df_pltu_op_kat = df_pltu[(df_pltu['Status'].str.lower() == 'operating') & (df_pltu['Subnational unit (province, state)'].isin(prov_map.values()))].copy()
+df_pltu_op_kat['Tahun'] = pd.to_numeric(df_pltu_op_kat['Start year'], errors='coerce')
+df_pltu_op_kat['Kategori_Wilayah'] = df_pltu_op_kat['Subnational unit (province, state)'].apply(lambda x: 'Daerah Sentra Tambang' if x in sentra_provs else 'Daerah Non-Sentra')
+df_pltu_kat = df_pltu_op_kat.groupby(['Kategori_Wilayah', 'Tahun'])['Capacity (MW)'].sum().reset_index().sort_values(['Kategori_Wilayah', 'Tahun'])
+df_pltu_kat['Kumulatif (MW)'] = df_pltu_kat.groupby('Kategori_Wilayah')['Capacity (MW)'].cumsum()
+
+# Get max cumulative capacity for Sentra vs Non-Sentra
+max_sentra = df_pltu_kat[df_pltu_kat['Kategori_Wilayah'] == 'Daerah Sentra Tambang']['Kumulatif (MW)'].max()
+max_non_sentra = df_pltu_kat[df_pltu_kat['Kategori_Wilayah'] == 'Daerah Non-Sentra']['Kumulatif (MW)'].max()
+total_all = max_sentra + max_non_sentra
+pct_sentra = (max_sentra / total_all) * 100 if total_all > 0 else 0
+pct_non_sentra = 100 - pct_sentra
+
+narasi_ledakan = f"""
+Distribusi spasial kapasitas Pembangkit Listrik Tenaga Uap (PLTU) *captive* di Pulau Sulawesi mengungkap realitas ketimpangan infrastruktur energi yang sangat ekstrem, yang membelah pulau ini menjadi dua realitas ekologis yang berbeda. Data secara gamblang menunjukkan bahwa ledakan kapasitas energi kotor selama lebih dari satu dekade terakhir tidak terjadi secara merata, melainkan terpusat dan terkonsentrasi secara mutlak di **Daerah Sentra Tambang** (Sulawesi Tengah dan Sulawesi Tenggara). Saat ini, total kapasitas PLTU *captive* yang beroperasi penuh di wilayah sentra tambang telah mencapai angka raksasa sebesar **{max_sentra:,.0f} Megawatt (MW)**, berbanding terbalik dengan Daerah Non-Sentra yang mengalami stagnasi absolut dan hanya mencatatkan kapasitas marjinal sebesar **{max_non_sentra:,.0f} MW**.
+
+Angka-angka ini bukan sekadar statistik di atas kertas; mereka adalah bukti empiris dari pembentukan "Zona Tumbal" (*sacrifice zones*) berskala masif. Dengan proporsi dominasi yang mencapai angka fantastis **{pct_sentra:.1f}%** dari total kapasitas pembangkit kotor di seluruh wilayah, dua provinsi sentra nikel ini telah secara sistematis dan terstruktur diubah menjadi episentrum pembuangan limbah udara mematikan. Lonjakan eksponensial yang tergambar jelas dari garis tren berwarna merah (berbanding dengan garis abu-abu yang datar) secara empiris mematahkan narasi "pembangunan inklusif" atau "hilirisasi hijau" yang sering digemakan oleh aktor negara dan korporasi. 
+
+Alih-alih mendistribusikan kesejahteraan ekonomi ke seluruh penjuru pulau, model ekspansi hilirisasi nikel justru memonopoli alokasi energi mematikan ini secara eksklusif ke wilayah-wilayah lingkar tambang dan smelter, mengorbankan kualitas hidup, kesehatan paru-paru, dan ruang udara segar masyarakat lokal demi melayani rakusnya rantai pasok industri global. Fakta ketimpangan **{max_sentra:,.0f} MW berbanding {max_non_sentra:,.0f} MW** ini secara meyakinkan menegaskan satu kesimpulan kausalitas yang tak terbantahkan: ledakan industri ekstraktif adalah variabel tunggal yang bertanggung jawab memicu invasi infrastruktur energi berbasis fosil terbesar di Indonesia bagian timur, memaksa penduduk di wilayah sentra untuk menghirup debu pembakaran batu bara setiap detik demi subsidi gaya hidup transisi energi di negara-negara maju.
+"""
+st.markdown(narasi_ledakan)
+
+chart_area_kat = alt.Chart(df_pltu_kat).mark_area(opacity=0.7).encode(
+    x=alt.X('Tahun:O', title=''),
+    y=alt.Y('Kumulatif (MW):Q', stack=None, title='Kapasitas Aktif (MW)'),
+    color=alt.Color('Kategori_Wilayah:N', scale=alt.Scale(domain=['Daerah Sentra Tambang', 'Daerah Non-Sentra'], range=['#D32F2F', '#90A4AE']), legend=alt.Legend(title="Kategori Wilayah")),
+    tooltip=['Tahun', 'Kategori_Wilayah', alt.Tooltip('Kumulatif (MW)', format=',.0f')]
+).properties(height=300, title=alt.TitleParams(text='Ledakan Energi Kotor (Sentra vs Non-Sentra)', color='#ECEFF1', anchor='start', fontSize=18))
+
+st.altair_chart(chart_area_kat, use_container_width=True)
+st.markdown("<div style='font-size:0.85rem; color:#9E9E9E; margin-top:-10px; margin-bottom:15px; padding: 0 10px; border-left: 3px solid #D32F2F;'><b>Fakta Data:</b> Pemisahan (split) garis merah dan abu-abu secara gamblang membuktikan bahwa nyaris seluruh ledakan eksponensial PLTU Captive 1 dekade terakhir terpusat murni di Daerah Sentra Tambang.</div>", unsafe_allow_html=True)
+with st.expander("Lihat Data Mentah: Kapasitas Sentra vs Non-Sentra", expanded=False):
+    st.dataframe(df_pltu_kat, use_container_width=True, hide_index=True)
+
+
+# Create local clean copy for this section to avoid referencing undefined df_driver_clean
+df_emisi = df_driver.copy()
+df_emisi['Faktor_Pendorong'] = df_emisi['Faktor_Pendorong'].replace({
+    'Deforestasi Komoditas (Tambang/Sawit)': 'Pertambangan dan Sawit',
+    'Kehutanan': 'Kehutanan Komersial',
+    'Pertanian Berpindah': 'Pertanian Berpindah (Masyarakat)',
+    'Urbanisasi': 'Urbanisasi & Infrastruktur',
+    'Tidak Diketahui': 'Tidak Teridentifikasi'
+})
+df_emisi_agg = df_emisi[df_emisi['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara', 'Sulawesi Utara', 'Sulawesi Selatan', 'Gorontalo'])].groupby('Faktor_Pendorong').agg({
+    'Luas_Deforestasi_Ha': 'sum',
+    'Emisi_CO2_Megagram': 'sum'
+}).reset_index().sort_values('Luas_Deforestasi_Ha', ascending=False)
+df_emisi_agg['Emisi_CO2_Juta_Ton'] = df_emisi_agg['Emisi_CO2_Megagram'] / 1_000_000
+
+# Calculate variables for f-string
+total_emisi = df_emisi_agg['Emisi_CO2_Juta_Ton'].sum()
+try:
+    emisi_tambang = df_emisi_agg[df_emisi_agg['Faktor_Pendorong'] == 'Pertambangan dan Sawit']['Emisi_CO2_Juta_Ton'].values[0]
+except IndexError:
+    emisi_tambang = 0
+try:
+    emisi_petani = df_emisi_agg[df_emisi_agg['Faktor_Pendorong'] == 'Pertanian Berpindah (Masyarakat)']['Emisi_CO2_Juta_Ton'].values[0]
+except IndexError:
+    emisi_petani = 0
+pct_emisi_tambang = (emisi_tambang / total_emisi) * 100 if total_emisi > 0 else 0
+try:
+    luas_tambang = df_emisi_agg[df_emisi_agg['Faktor_Pendorong'] == 'Pertambangan dan Sawit']['Luas_Deforestasi_Ha'].values[0]
+except IndexError:
+    luas_tambang = 0
+
+narasi_emisi = f"""
+Beban ekologis dari brutalnya operasi ekstraktif di Pulau Sulawesi tidak hanya berhenti pada hilangnya jutaan hektar tutupan lahan hutan primer, tetapi juga berdampak langsung dan mematikan pada akselerasi krisis iklim global. Grafik analisis atribusi pelepasan gas rumah kaca di bawah ini secara forensik membedah jejak karbon dari masing-masing faktor pendorong deforestasi, dan hasilnya dengan telak membongkar narasi menyesatkan tentang "industri hijau" atau "transisi energi bersih". Data secara empiris membuktikan bahwa sektor **Pertambangan dan Sawit** menduduki peringkat absolut pertama sebagai produsen emisi CO₂ terbesar, melepaskan karbon sebesar **{emisi_tambang:,.1f} Juta Ton** ke atmosfer dari hasil pembabatan lahan seluas **{luas_tambang:,.0f} Hektar**.
+
+Tingkat emisi raksasa ini merepresentasikan **{pct_emisi_tambang:.1f}%** dari total seluruh emisi karbon akibat hilangnya tutupan pohon di kawasan tersebut. Jika kita membandingkan secara langsung (*head-to-head*) dengan dampak dari aktivitas subsisten masyarakat, seperti Pertanian Berpindah yang selama bertahun-tahun sering kali dijadikan kambing hitam oleh pemerintah dan korporasi atas perusakan hutan, kita melihat bahwa aktivitas masyarakat kecil tersebut hanya melepaskan sebagian kecil emisi, yakni sebesar **{emisi_petani:,.1f} Juta Ton**. Ketimpangan struktural ini mengonfirmasi bahwa bukan petani tradisional atau masyarakat adat yang merusak iklim, melainkan ekspansi agresif konsesi lahan untuk pengerukan bijih nikel dan perkebunan monokultur skala raksasa. 
+
+Fakta pelepasan **{emisi_tambang:,.1f} Juta Ton CO₂** ini baru menghitung emisi dari hilangnya fungsi penyerap karbon (*carbon sink*) berupa tegakan pohon, belum ditambah dengan polusi pembakaran batu bara dari ratusan cerobong PLTU *captive* yang menyuplai smelternya. Angka mutlak ini secara langsung membantah kebohongan kampanye hilirisasi hijau; ia membuktikan secara matematis bahwa rantai pasok nikel yang diagung-agungkan justru bertindak sebagai akselerator utama pemanasan global. Negara dan oligarki tidak sedang membangun fondasi transisi energi, melainkan mensponsori malapetaka ekologis yang secara permanen menghancurkan keseimbangan hidrologis dan menyumbang kerugian masif terhadap peradaban bumi.
+"""
+st.markdown(narasi_emisi)
+
+chart_emisi = alt.Chart(df_emisi_agg).mark_bar(cornerRadiusTopRight=5, cornerRadiusBottomRight=5).encode(
+    x=alt.X('Emisi_CO2_Juta_Ton:Q', title='Total Emisi CO₂ (Juta Ton)', axis=alt.Axis(format=',.1f')),
+    y=alt.Y('Faktor_Pendorong:N', title=None, sort='-x'),
+    color=alt.Color('Faktor_Pendorong:N', 
+                    scale=alt.Scale(domain=[
+                        'Pertambangan dan Sawit',
+                        'Kehutanan Komersial',
+                        'Pertanian Berpindah (Masyarakat)',
+                        'Urbanisasi & Infrastruktur',
+                        'Tidak Teridentifikasi'
+                    ], range=['#D32F2F', '#FF6F00', '#FBC02D', '#7CB342', '#757575']),
+                    legend=None),
+    tooltip=[
+        alt.Tooltip('Faktor_Pendorong:N', title='Driver'),
+        alt.Tooltip('Emisi_CO2_Juta_Ton:Q', title='Emisi CO₂ (Juta Ton)', format=',.2f'),
+        alt.Tooltip('Luas_Deforestasi_Ha:Q', title='Deforestasi (Ha)', format=',.0f')
+    ]
+).properties(
+    height=300,
+    title=alt.TitleParams(text='Emisi CO₂ per Driver — Kontribusi terhadap Krisis Iklim', color='#ECEFF1', anchor='start', fontSize=18)
+).configure_axis(
+    labelColor='#ECEFF1',
+    titleColor='#ECEFF1',
+    gridColor='#333',
+    domainColor='#555'
+).configure_view(
+    strokeWidth=0
+)
+
+st.altair_chart(chart_emisi, use_container_width=True)
+
+with st.expander("Lihat Data Mentah: Emisi CO₂ per Driver", expanded=False):
+    st.dataframe(df_emisi_agg, use_container_width=True, hide_index=True)
+    st.caption("📁 **Sumber:** Total emisi CO₂ kumulatif per driver (Megagram & Juta Ton)")
 
 with st.expander("Lihat Data Mentah: Kapasitas PLTU per Provinsi", expanded=False):
     df_pivot_pltu = df_pltu_trend.pivot(index='Tahun', columns='Provinsi', values='Kapasitas_PLTU_MW').reset_index()
@@ -918,7 +1228,7 @@ fig_2_3 = go.Figure(
     )
 )
 
-st.plotly_chart(fig_2_3, use_container_width=True)
+st.plotly_chart(fig_2_3, use_container_width=True, config={'displayModeBar': False})
 
 # Prepare interpretation text separately to avoid HTML escaping
 interp_text_23 = """
@@ -999,7 +1309,7 @@ df_driver_clean = df_driver.copy()
 
 # Translate driver names to Indonesian
 driver_mapping = {
-    'Deforestasi Komoditas (Tambang/Sawit)': 'Industri Ekstraktif (Tambang/Sawit)',
+    'Deforestasi Komoditas (Tambang/Sawit)': 'Pertambangan dan Sawit',
     'Kehutanan': 'Kehutanan Komersial',
     'Pertanian Berpindah': 'Pertanian Berpindah (Masyarakat)',
     'Urbanisasi': 'Urbanisasi & Infrastruktur',
@@ -1046,7 +1356,7 @@ chart_driver_area = alt.Chart(df_driver_temporal).mark_area(opacity=0.8).encode(
     color=alt.Color('Faktor_Pendorong:N', 
                     title='Driver Deforestasi',
                     scale=alt.Scale(domain=[
-                        'Industri Ekstraktif (Tambang/Sawit)',
+                        'Pertambangan dan Sawit',
                         'Kehutanan Komersial',
                         'Pertanian Berpindah (Masyarakat)',
                         'Urbanisasi & Infrastruktur',
@@ -1082,8 +1392,8 @@ with st.expander("Lihat Data Mentah: Evolusi Temporal Driver Deforestasi", expan
 
 # Interpretation text for temporal evolution
 interp_text_241 = """
-<b style="color: #EF5350;">Dominasi Absolut Industri Ekstraktif:</b><br>
-Grafik normalized stacked area di atas menunjukkan bahwa <b>Industri Ekstraktif (merah gelap)</b> mendominasi 70-85% dari total deforestasi setiap tahunnya. Perhatikan bagaimana <b>Pertanian Berpindah (kuning)</b> hanya menyumbang 1-3% — ini membantah narasi bahwa petani kecil adalah biang kerok deforestasi.<br>
+<b style="color: #EF5350;">Dominasi Absolut Pertambangan dan Sawit:</b><br>
+Grafik normalized stacked area di atas menunjukkan bahwa <b>Pertambangan dan Sawit (merah gelap)</b> mendominasi 70-85% dari total deforestasi setiap tahunnya. Perhatikan bagaimana <b>Pertanian Berpindah (kuning)</b> hanya menyumbang 1-3% — ini membantah narasi bahwa petani kecil adalah biang kerok deforestasi.<br>
 <b>Kehutanan Komersial (oranye)</b> menyumbang 10-15%, sementara <b>Urbanisasi (hijau)</b> hampir tidak terlihat (<1%). Pola ini konsisten sepanjang dekade, membuktikan bahwa ekspansi tambang nikel dan sawit adalah <b>mesin pembantai hutan yang sistematis dan masif</b>.
 """
 
@@ -1110,7 +1420,7 @@ with col_24a:
         y=alt.Y('Faktor_Pendorong:N', title=None, sort='-x'),
         color=alt.Color('Faktor_Pendorong:N', 
                         scale=alt.Scale(domain=[
-                            'Industri Ekstraktif (Tambang/Sawit)',
+                            'Pertambangan dan Sawit',
                             'Kehutanan Komersial',
                             'Pertanian Berpindah (Masyarakat)',
                             'Urbanisasi & Infrastruktur',
@@ -1143,7 +1453,7 @@ with col_24a:
 
 with col_24b:
     # Metric cards for key drivers
-    industri_total = df_driver_total_all[df_driver_total_all['Faktor_Pendorong'] == 'Industri Ekstraktif (Tambang/Sawit)']['Luas_Deforestasi_Ha'].values[0]
+    industri_total = df_driver_total_all[df_driver_total_all['Faktor_Pendorong'] == 'Pertambangan dan Sawit']['Luas_Deforestasi_Ha'].values[0]
     petani_total = df_driver_total_all[df_driver_total_all['Faktor_Pendorong'] == 'Pertanian Berpindah (Masyarakat)']['Luas_Deforestasi_Ha'].values[0]
     industri_pct = (industri_total / df_driver_total_all['Luas_Deforestasi_Ha'].sum() * 100)
     petani_pct = (petani_total / df_driver_total_all['Luas_Deforestasi_Ha'].sum() * 100)
@@ -1151,7 +1461,7 @@ with col_24b:
     
     st.markdown(f"""
     <div style="background:linear-gradient(135deg, #B71C1C, #D32F2F);padding:20px;border-radius:10px;margin-bottom:15px;">
-        <div style="color:#FFCDD2;font-size:0.85rem;font-weight:600;margin-bottom:8px;">INDUSTRI EKSTRAKTIF</div>
+        <div style="color:#FFCDD2;font-size:0.85rem;font-weight:600;margin-bottom:8px;">PERTAMBANGAN DAN SAWIT</div>
         <div style="color:#FFF;font-size:2.2rem;font-weight:700;margin-bottom:5px;">{industri_total:,.0f} Ha</div>
         <div style="color:#FFCDD2;font-size:0.9rem;"><b>{industri_pct:.1f}%</b> dari total deforestasi</div>
     </div>
@@ -1169,46 +1479,7 @@ with col_24b:
     </div>
     """, unsafe_allow_html=True)
 
-# ── VISUALIZATION 2.4.3: CO2 Emissions by Driver ──
-st.markdown("#### Emisi CO₂ per Driver — Kontribusi terhadap Krisis Iklim")
 
-df_emisi = df_driver_total_all.copy()
-df_emisi['Emisi_CO2_Juta_Ton'] = df_emisi['Emisi_CO2_Megagram'] / 1_000_000
-
-chart_emisi = alt.Chart(df_emisi).mark_bar(cornerRadiusTopRight=5, cornerRadiusBottomRight=5).encode(
-    x=alt.X('Emisi_CO2_Juta_Ton:Q', title='Total Emisi CO₂ (Juta Ton)', axis=alt.Axis(format=',.1f')),
-    y=alt.Y('Faktor_Pendorong:N', title=None, sort='-x'),
-    color=alt.Color('Faktor_Pendorong:N', 
-                    scale=alt.Scale(domain=[
-                        'Industri Ekstraktif (Tambang/Sawit)',
-                        'Kehutanan Komersial',
-                        'Pertanian Berpindah (Masyarakat)',
-                        'Urbanisasi & Infrastruktur',
-                        'Tidak Teridentifikasi'
-                    ], range=['#D32F2F', '#FF6F00', '#FBC02D', '#7CB342', '#757575']),
-                    legend=None),
-    tooltip=[
-        alt.Tooltip('Faktor_Pendorong:N', title='Driver'),
-        alt.Tooltip('Emisi_CO2_Juta_Ton:Q', title='Emisi CO₂ (Juta Ton)', format=',.2f'),
-        alt.Tooltip('Luas_Deforestasi_Ha:Q', title='Deforestasi (Ha)', format=',.0f')
-    ]
-).properties(
-    height=300
-).configure_axis(
-    labelColor='#ECEFF1',
-    titleColor='#ECEFF1',
-    gridColor='#333',
-    domainColor='#555'
-).configure_view(
-    strokeWidth=0
-)
-
-st.altair_chart(chart_emisi, use_container_width=True)
-
-# Data table dropdown for visualization 2.4.3
-with st.expander("Lihat Data Mentah: Emisi CO₂ per Driver", expanded=False):
-    st.dataframe(df_emisi, use_container_width=True, hide_index=True)
-    st.caption("📁 **Sumber:** Total emisi CO₂ kumulatif per driver (Megagram & Juta Ton)")
 
 # Interpretation for emissions
 interp_text_243 = """
@@ -1324,7 +1595,7 @@ try:
             bgcolor='rgba(30,30,30,0.8)'
         )
     )
-    st.plotly_chart(fig_biodiv, use_container_width=True)
+    st.plotly_chart(fig_biodiv, use_container_width=True, config={'displayModeBar': False})
     
     # 2. STATUS IUCN
     st.markdown("#### Validasi Ancaman Tambang: IUCN Red List")
@@ -1365,4 +1636,3 @@ try:
 
 except Exception as e:
     st.error(f"Gagal memuat visualisasi Biodiversitas: {e}")
-

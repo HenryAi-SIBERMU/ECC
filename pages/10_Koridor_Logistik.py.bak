@@ -1,0 +1,724 @@
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+import os, sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+from src.components.sidebar import render_sidebar
+
+st.set_page_config(
+    page_title="Koridor Logistik Nikel — CELIOS ECC",
+    page_icon="refrensi/Celios China-Indonesia Energy Transition.png",
+    layout="wide",
+)
+render_sidebar()
+
+# ── Styles (Sesuai Pedoman UI/UX CELIOS) ──
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+* { font-family: 'Inter', sans-serif; }
+
+.main-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #43A047, #66BB6A, #81C784);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0;
+    line-height: 1.2;
+}
+
+.sub-title {
+    font-size: 1.1rem;
+    color: #9E9E9E;
+    font-weight: 300;
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+
+.org-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #1B5E20, #2E7D32);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.metric-card {
+    background: linear-gradient(135deg, #1A1F2B, #232B3B);
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+.metric-value {
+    font-size: 2rem;
+    font-weight: 700;
+}
+.metric-label {
+    font-size: 0.9rem;
+    color: #AAA;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+.metric-desc {
+    font-size: 0.8rem;
+    color: #9E9E9E;
+    margin-top: 10px;
+    line-height: 1.4;
+    text-align: left;
+}
+.metric-source {
+    font-size: 0.75rem;
+    color: #777;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dotted #444;
+    text-align: left;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# ---------------------------------------------------------
+# DATA PREPARATION (PURE DATA-DRIVEN)
+# ---------------------------------------------------------
+@st.cache_data
+def load_logistik():
+    base_dir = os.path.dirname(os.path.dirname(__file__))
+    return pd.read_csv(os.path.join(base_dir, "data", "processed", "sulawesi_logistik_simpul_nikel.csv"))
+
+df = load_logistik()
+
+n_lokasi = len(df)
+n_mandiri = len(df[df["port_facility"] == "terkonfirmasi"])
+n_berbagi = len(df[df["port_facility"] == "terkonfirmasi_berbagi"])
+n_psn = len(df[df["psn_status"] == "terkonfirmasi"])
+total_pltu = int(df["pltu_mw"].sum())
+total_izin = int(df["izin_nikel_count"].sum())
+
+# ---------------------------------------------------------
+# HERO SECTION
+# ---------------------------------------------------------
+st.markdown('<div class="org-badge">CELIOS — Center of Economic and Law Studies</div>', unsafe_allow_html=True)
+st.markdown('<h1 class="main-title">Ke Mana Nikel Sulawesi Mengalir: Pelabuhan, Kawasan Industri, dan Jalur Ekspor</h1>', unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+c1, c2 = st.columns(2)
+
+with c1:
+    st.markdown("""
+    <div style="background:#1A1A1A; padding: 20px; border-radius: 10px; border-top: 4px solid #42A5F5; height: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+        <div style="font-size:0.8rem; color:#42A5F5; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">TEMUAN TARGET 1</div>
+        <div style="color: #fff; font-size: 1.3rem; font-weight:bold; margin-bottom:12px; line-height:1.3;">Pabrik, Pembangkit Listrik, dan Pelabuhan Dibangun Sepaket</div>
+        <div style="color:#B0BEC5; font-size:0.9rem; line-height:1.5;">
+            Investor asing tidak membangun pabrik dulu baru pelabuhan belakangan. Pabrik smelter, PLTU batubara, <b>dan</b> pelabuhan ekspor dibangun <b>bersamaan</b> sebagai satu paket sejak awal — karena tanpa pelabuhan, nikel olahan tidak bisa dikirim ke luar negeri.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c2:
+    st.markdown("""
+    <div style="background:#1A1A1A; padding: 20px; border-radius: 10px; border-top: 4px solid #FFA726; height: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+        <div style="font-size:0.8rem; color:#FFA726; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">TEMUAN TARGET 2</div>
+        <div style="color: #fff; font-size: 1.3rem; font-weight:bold; margin-bottom:12px; line-height:1.3;">Status "Proyek Strategis Nasional" Jadi Tameng Hukum</div>
+        <div style="color:#B0BEC5; font-size:0.9rem; line-height:1.5;">
+            Kawasan industri nikel mendapat label <b>Proyek Strategis Nasional (PSN)</b> dari pemerintah. Label ini mempercepat perizinan dan memudahkan pembebasan lahan — termasuk lahan warga. Sementara itu, <b>Kawasan Ekonomi Khusus (KEK) tidak ada</b> di satupun lokasi tambang nikel ini.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+st.markdown('<p class="sub-title">Investigasi terhadap 6 titik pelabuhan ekspor nikel di Sulawesi: siapa yang membangun, ke mana nikelnya dikirim, dan apa dampaknya bagi warga sekitar.</p>', unsafe_allow_html=True)
+
+with st.expander("Metodologi Pendekatan", expanded=False):
+    st.markdown("""
+    **Pertanyaan yang Dijawab:**
+    *"Di mana saja pelabuhan ekspor nikel di Sulawesi dibangun, siapa yang mengendalikannya, dan apakah pemerintah memberi perlindungan khusus melalui status proyek strategis?"*
+
+    1. **Yang Ditelusuri:** 6 lokasi pelabuhan dan kawasan industri nikel di pesisir Sulawesi (Morowali, Morowali Utara, Konawe, Kolaka, Luwu Timur).
+    2. **Aspek yang Dicek:** Keberadaan pelabuhan/dermaga, status PSN/KEK, kawasan industri, pembangkit listrik batubara, izin tambang, dan jalur pengiriman.
+    3. **Cara Penelusuran:** Pemeriksaan sistematis terhadap 25 sumber terbuka — termasuk situs resmi perusahaan, dokumen pemerintah (KPPIP, Peraturan Presiden), laporan media investigatif, dan catatan kunjungan TNI Angkatan Laut.
+
+    **Temuan Negatif (Hal yang Tidak Ditemukan):**
+    - Tidak ada jalur kereta api yang menghubungkan lokasi-lokasi tambang nikel ini. Satu-satunya proyek rel di Sulawesi (Makassar-Parepare) tidak terkait nikel.
+    - Kawasan Ekonomi Khusus (KEK) tidak ada di satupun lokasi nikel ini. KEK di Sulawesi hanya ada di Palu, Bitung, dan Likupang.
+    """)
+
+st.markdown(f"""
+Narasi pemerintah tentang hilirisasi nikel selalu berfokus pada pabrik smelter dan investasi triliunan rupiah. Namun, ada satu bagian yang jarang dibicarakan secara terbuka: <b>pelabuhan</b>. Di setiap lokasi industri nikel besar di Sulawesi, berdiri dermaga dan pelabuhan yang langsung menghubungkan pabrik ke kapal-kapal pengangkut menuju China dan pasar global. Tanpa pelabuhan ini, seluruh rantai industri nikel akan lumpuh — karena produk olahan nikel memang ditujukan untuk diekspor, bukan untuk kebutuhan dalam negeri.
+
+Dari penelusuran terhadap <b>{n_lokasi} lokasi utama</b> industri nikel di Sulawesi, <b>seluruhnya terbukti memiliki</b> pelabuhan atau dermaga ekspor: <b>{n_mandiri} lokasi</b> memiliki pelabuhan sendiri, dan <b>{n_berbagi} lokasi</b> menggunakan dermaga milik perusahaan lain di kawasan yang sama. Setidaknya <b>{n_psn} dari {n_lokasi}</b> lokasi ini mendapat status Proyek Strategis Nasional (PSN) dari pemerintah — sebuah label yang mempercepat proses perizinan dan memudahkan pembebasan lahan masyarakat di sekitarnya.
+
+Yang menarik, pola pembangunannya sangat seragam: investor asing tidak membangun pabrik terlebih dahulu lalu menambah pelabuhan secara bertahap. Pabrik smelter, PLTU batubara, <b>dan</b> pelabuhan dibangun bersamaan sebagai satu paket investasi. Di IMIP Morowali, perusahaan pengelola menyediakan akses pelabuhan bagi seluruh pabrik di dalam kawasan. Di GNI Petasia, pelabuhan berkapasitas 50.000 ton dibangun bersama gudang penyimpanan sejak hari pertama. Di VDNI Konawe, investasi US$1 miliar secara eksplisit mencakup "pabrik smelter, PLTU batubara, dan pelabuhan." Di ANTAM Pomalaa, dermaga justru dibangun <b>paling pertama</b> sebelum komponen pabrik lainnya. Total pembangkit listrik batubara di keenam lokasi ini mencapai <b>{total_pltu:,} MW</b> — kapasitas raksasa yang menegaskan bahwa industri nikel "hijau" ini sesungguhnya digerakkan oleh energi paling kotor. Sementara itu, Kawasan Ekonomi Khusus (KEK) tidak ditemukan di satupun lokasi nikel ini — dari 24 KEK di seluruh Indonesia, hanya 3 berada di Sulawesi dan ketiganya tidak terkait nikel sama sekali.
+""", unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+# Bento Cards (3 Metric Cards)
+mc1, mc2, mc3 = st.columns(3)
+
+with mc1:
+    st.markdown(f"""
+    <div class="metric-card">
+        <div>
+            <div class="metric-label">PELABUHAN NIKEL TERKONFIRMASI</div>
+            <div class="metric-value" style="color: #43A047;">{n_lokasi}</div>
+            <div class="metric-desc">Seluruh lokasi industri nikel besar di Sulawesi terbukti memiliki pelabuhan atau dermaga ekspor yang menghubungkan pabrik langsung ke kapal pengangkut.</div>
+        </div>
+        <div class="metric-source">Sumber: Situs perusahaan, dokumen pemerintah, media investigatif (25 sumber)<br>File: sulawesi_logistik_simpul_nikel.csv</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with mc2:
+    st.markdown(f"""
+    <div class="metric-card">
+        <div>
+            <div class="metric-label">BERLABEL PROYEK STRATEGIS NASIONAL</div>
+            <div class="metric-value" style="color: #FFA726;">{n_psn} <span style="font-size:1rem;color:#777;">/ {n_lokasi}</span></div>
+            <div class="metric-desc">Lokasi industri nikel yang mendapat status PSN — label pemerintah yang mempercepat perizinan dan memudahkan pembebasan lahan warga.</div>
+        </div>
+        <div class="metric-source">Sumber: KPPIP, Perpres 58/2017, Perpres 12/2025<br>File: sulawesi_logistik_simpul_nikel.csv</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with mc3:
+    st.markdown(f"""
+    <div class="metric-card">
+        <div>
+            <div class="metric-label">PLTU BATUBARA DI KAWASAN NIKEL</div>
+            <div class="metric-value" style="color: #EF5350;">{total_pltu:,} <span style="font-size:1rem;color:#777;">MW</span></div>
+            <div class="metric-desc">Total kapasitas pembangkit listrik batubara yang dibangun khusus untuk menggerakkan pabrik nikel di keenam lokasi ini.</div>
+        </div>
+        <div class="metric-source">Sumber: Global Coal Plant Tracker (GEM), Situs Perusahaan<br>File: sulawesi_logistik_simpul_nikel.csv</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=True)
+
+# ═════════════════════════════════════════════════════════════
+# 10.1 PETA
+# ═════════════════════════════════════════════════════════════
+st.subheader("10.1 Peta Lokasi Pelabuhan Nikel di Sulawesi")
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Pemetaan Lokasi dari Sumber Terbuka</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Pemetaan Geospasial Infrastruktur Logistik"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan pemetaan koordinat spasial (*Geospatial Coordinate Mapping*) untuk memvisualisasikan konsentrasi pembangunan pelabuhan terintegrasi.
+
+    1. **Model Penelusuran Geografis:**
+        * **Plotting Titik Koordinat:** Memetakan posisi absolut Latitude dan Longitude dari 6 kawasan *anchor* industri nikel (Morowali, Petasia, Morosi, Pomalaa, Sorowako) di pesisir.
+        * **Kategorisasi Status Kepemilikan:** Mengklasifikasikan fasilitas pelabuhan berdasarkan skema kepemilikannya (Mandiri/Berbagi) menggunakan pengkodean warna pada peta interaktif.
+    2. **Kalkulasi/Formula Pengolahan:**
+        * `Titik_Koordinat = (Lat, Lon) WHERE Entity = 'Kawasan_Industri_Nikel'`
+        * `Status_Node = IF(Own_Port, 'Terkonfirmasi', 'Berbagi')`
+    3. **Variabel & Fitur Data:**
+        * **Geolokasi (X, Y):** `Lat`, `Lon`
+        * **Atribut Fisik (Warna/Ukuran):** `port_facility`, `psn_status`
+    4. **Dataset & File:**
+        * `data/processed/sulawesi_logistik_simpul_nikel.csv` (Atribut Klaster)
+        * Open-source Intelligence (Citra satelit & dokumen perusahaan)
+    """)
+
+COORDS = {
+    "NODE-SULTENG-MOROWALI-IMIP": {"lat": -2.19, "lon": 121.74},
+    "NODE-SULTENG-MORUT-PETASIA-GNI": {"lat": -1.88, "lon": 121.62},
+    "NODE-SULTRA-KONAWE-MOROSI-VDNI": {"lat": -3.72, "lon": 122.13},
+    "NODE-SULTRA-KONAWE-OSS": {"lat": -3.73, "lon": 122.14},
+    "NODE-SULTRA-KOLAKA-POMALAA-ANTAM": {"lat": -4.18, "lon": 121.61},
+    "NODE-SULSEL-LUTIM-SOROWAKO-VALE": {"lat": -2.53, "lon": 121.35},
+}
+
+df_map = df.copy()
+df_map["lat"] = df_map["cluster_id"].map(lambda x: COORDS.get(x, {}).get("lat"))
+df_map["lon"] = df_map["cluster_id"].map(lambda x: COORDS.get(x, {}).get("lon"))
+df_map["label"] = df_map["anchor_entity"]
+
+status_color = {"terkonfirmasi": "#43A047", "terkonfirmasi_berbagi": "#FFA726"}
+
+fig_map = px.scatter_mapbox(
+    df_map,
+    lat="lat",
+    lon="lon",
+    hover_name="label",
+    hover_data={"port_detail": True, "psn_status": True, "lat": False, "lon": False},
+    color="port_facility",
+    color_discrete_map=status_color,
+    size_max=15,
+    zoom=5.5,
+    center={"lat": -3.0, "lon": 121.7},
+    mapbox_style="carto-darkmatter",
+    title="6 Lokasi Pelabuhan Ekspor Nikel di Pesisir Sulawesi",
+    height=500,
+)
+fig_map.update_traces(marker=dict(size=14))
+fig_map.update_layout(
+    margin=dict(l=0, r=0, t=40, b=0),
+    legend=dict(
+        orientation="h",
+        yanchor="top",
+        y=-0.02,
+        xanchor="center",
+        x=0.5,
+        font=dict(color="#CCC"),
+        bgcolor="rgba(0,0,0,0)",
+    ),
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(0,0,0,0)",
+    title_font=dict(color="#ECEFF1", size=14),
+)
+st.plotly_chart(fig_map, use_container_width=True, config={'displayModeBar': False})
+
+st.markdown("""
+<div style="background-color: rgba(66, 165, 245, 0.1); padding:16px; border-radius:8px; border-left:6px solid #42A5F5; margin-top: 10px; margin-bottom: 20px;">
+<b style="color: #42A5F5; font-size: 1.0rem;">Apa yang Terlihat dari Peta Ini:</b><br><br>
+<div style="color: #E0E0E0; font-size: 0.92rem; line-height: 1.6;">
+Keenam lokasi tersebar di sepanjang pesisir timur dan tenggara Sulawesi — membentuk jalur ekspor nikel dari Morowali Utara (utara) hingga Kolaka (selatan). Seluruhnya terletak di tepi laut atau terhubung langsung ke pelabuhan di pesisir. Ini menjelaskan mengapa tidak ada jalur kereta api ke lokasi-lokasi ini: nikel Sulawesi memang dirancang untuk dikirim lewat laut, bukan darat. <b>Titik hijau</b> = pelabuhan milik sendiri. <b>Titik oranye</b> = menggunakan dermaga perusahaan lain (OSS memakai dermaga VDNI di Konawe).
+</div>
+</div>
+""", unsafe_allow_html=True)
+
+with st.expander("Lihat Data Mentah: Lokasi & Status Pelabuhan", expanded=False):
+    df_map_show = df_map[["anchor_entity", "provinsi", "kabupaten", "port_facility", "psn_status", "lat", "lon"]].copy()
+    df_map_show.columns = ["Perusahaan", "Provinsi", "Kabupaten", "Status Pelabuhan", "Status PSN", "Latitude", "Longitude"]
+    st.dataframe(df_map_show, use_container_width=True, hide_index=True)
+    st.caption("Sumber: Penelusuran sumber terbuka (25 sumber). File: `data/processed/sulawesi_logistik_simpul_nikel.csv`")
+
+st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=True)
+
+# ═════════════════════════════════════════════════════════════
+# 10.2 TABEL DETAIL
+# ═════════════════════════════════════════════════════════════
+st.subheader("10.2 Siapa Menguasai Apa: Tabel Lengkap Kawasan Nikel")
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Kompilasi Data dari Situs Perusahaan, KPPIP, GEM, ESDM</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Tabulasi Penguasaan Rantai Pasok"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan ekstraksi dan agregasi data multisektoral (*Multisectoral Data Aggregation*) untuk membongkar integrasi vertikal infrastruktur hilirisasi.
+
+    1. **Model Ekstraksi Atribut Korporasi:**
+        * **Cross-Referencing Integrasi:** Menggabungkan data dari berbagai otoritas (KPPIP untuk status PSN, GEM untuk kapasitas PLTU, ESDM untuk Izin Tambang) ke dalam satu matriks tabel terpusat untuk setiap *anchor entity*.
+        * **Identifikasi Kepemilikan (Ownership):** Melacak jejak fasilitas pelabuhan, besaran daya PLTU, hingga tujuan akhir ekspor untuk setiap kawasan, membuktikan skema bisnis tertutup dari tambang hingga kapal pengangkut.
+    2. **Kalkulasi/Formula Pengolahan:**
+        * `Total_Aset_Kawasan = SUM(PLTU_MW, Izin_Tambang, Kapasitas_Dermaga) GROUP BY Entitas_Utama`
+    3. **Variabel & Fitur Data:**
+        * **Identitas Klaster:** `node_label`, `anchor_entity`
+        * **Kapasitas Fisik:** `pltu_mw`, `izin_nikel_count`, `export_channel`
+    4. **Dataset & File:**
+        * `data/processed/sulawesi_logistik_simpul_nikel.csv`
+    """)
+
+st.write("""Tabel berikut merangkum fakta kunci dari setiap lokasi: perusahaan mana yang menguasai pelabuhan, berapa kapasitas pembangkit listrik batubara yang dibangun, berapa izin tambang nikel yang beredar, dan ke mana produk nikelnya dikirim. Data ini dikumpulkan dari 25 sumber terbuka yang bisa diverifikasi publik — termasuk situs resmi perusahaan, dokumen pemerintah, dan laporan media investigatif.""")
+
+df_detail = df[[
+    "node_label", "anchor_entity", "provinsi", "kabupaten",
+    "port_facility", "port_detail", "psn_status",
+    "kawasan_industri", "pltu_mw", "izin_nikel_count", "export_channel",
+]].copy()
+
+df_detail.columns = [
+    "Lokasi", "Perusahaan Utama", "Provinsi", "Kabupaten",
+    "Status Pelabuhan", "Detail Dermaga", "Status PSN",
+    "Kawasan Industri", "PLTU Batubara (MW)", "Jumlah Izin Nikel", "Tujuan Ekspor",
+]
+
+st.dataframe(df_detail, use_container_width=True, hide_index=True, height=280)
+
+st.markdown(f"""
+<div style="background-color: rgba(67, 160, 71, 0.1); padding:16px; border-radius:8px; border-left:6px solid #43A047; margin-top: 10px; margin-bottom: 20px;">
+<b style="color: #66BB6A; font-size: 1.0rem;">Apa yang Bisa Dibaca dari Tabel Ini:</b><br><br>
+<div style="color: #E0E0E0; font-size: 0.92rem; line-height: 1.6;">
+Dari {n_lokasi} lokasi, {n_mandiri} memiliki pelabuhan sendiri dan {n_berbagi} menggunakan dermaga perusahaan lain (OSS memakai dermaga VDNI). Total {total_izin} izin tambang nikel beredar di keenam lokasi ini, dengan PLTU batubara gabungan sebesar {total_pltu:,} MW yang dibangun khusus untuk menggerakkan pabrik-pabrik smelter. Seluruh produk nikel olahan dikirim ke luar negeri — mayoritas ke China.
+</div>
+</div>
+""", unsafe_allow_html=True)
+
+with st.expander("Lihat Data Mentah: Seluruh Kolom Dataset", expanded=False):
+    st.dataframe(df, use_container_width=True, hide_index=True)
+    st.caption("Sumber: Penelusuran sumber terbuka (25 sumber). File: `data/processed/sulawesi_logistik_simpul_nikel.csv`")
+
+st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=True)
+
+# ═════════════════════════════════════════════════════════════
+# 10.3 PROFIL PER LOKASI (TABS)
+# ═════════════════════════════════════════════════════════════
+st.subheader("10.3 Profil Setiap Lokasi Industri Nikel")
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Penelusuran Sistematis Sumber Terbuka (25 sumber)</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Investigasi Profil (Open Source Intelligence)"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan metodologi investigasi rekam jejak (*Open-Source Intelligence / OSINT Profiling*) untuk merekonstruksi sejarah dan dampak operasional tiap kawasan.
+
+    1. **Model Sintesis Dokumen Terbuka:**
+        * **Desk-Research Kualitatif:** Melakukan *crawling* dan kodifikasi tematik terhadap 25 dokumen sumber primer (laporan keuangan perusahaan, rilis pers kementerian, rekam jejak jurnalistik, hingga log kunjungan militer).
+        * **Konstruksi Fakta Kunci:** Mengekstraksi informasi kritikal mengenai besaran investasi, luas penguasaan lahan, dan riwayat konflik/kecelakaan kerja (misal: insiden ITSS, perampasan lahan adat) ke dalam profil terstruktur.
+    2. **Kalkulasi/Formula Pengolahan:**
+        * `Ekstraksi_Fakta = Filter(Informasi_Relevan) FROM Kumpulan_Dokumen_Publik`
+    3. **Variabel & Fitur Data:**
+        * **Naratif Kualitatif:** Deskripsi operasional, Riwayat konflik, Temuan anomali.
+        * **Key Facts:** Kapasitas kapal, nilai investasi, jejak pelanggaran HAM.
+    4. **Dataset & File:**
+        * Kompilasi OSINT CELIOS (Dataset Internal Non-Tabular)
+    """)
+
+NODE_NARRATIVES = {
+    "NODE-SULTENG-MOROWALI-IMIP": {
+        "title": "IMIP — Bahodopi, Morowali",
+        "icon_color": "#43A047",
+        "narrative": (
+            "IMIP (Indonesia Morowali Industrial Park) adalah kawasan industri nikel terbesar di Indonesia. "
+            "Di atas lahan seluas 2.000 hektar yang dulunya hutan dan lahan warga, kini berdiri lebih dari 50 pabrik "
+            "dengan investasi total US$34,3 miliar dan 85.000 pekerja. Kawasan ini dilengkapi pelabuhan laut untuk "
+            "kapal-kapal besar pengangkut nikel, bandara dengan landasan 1.800 meter, dan pembangkit listrik batubara "
+            "berkapasitas 5.830 MW. Perusahaan pengelola (Tsingshan, China) menyediakan akses pelabuhan bagi seluruh pabrik "
+            "di dalam kawasan — artinya setiap pabrik baru yang masuk otomatis bisa langsung mengekspor tanpa membangun dermaga sendiri."
+        ),
+        "key_facts": ["Pelabuhan laut untuk kapal besar (bulk carrier)", "Pembangkit batubara 5.830 MW", "50 pabrik, investasi US$34,3 miliar", "Bandara dengan landasan 1.800 m"],
+        "source": "Wikipedia, Jakarta Globe, Nickel Industries, EJAtlas",
+    },
+    "NODE-SULTENG-MORUT-PETASIA-GNI": {
+        "title": "GNI — Petasia, Morowali Utara",
+        "icon_color": "#42A5F5",
+        "narrative": (
+            "GNI (Gunbuster Nickel Industry) di Petasia mengoperasikan pabrik nikel dengan 24 lini produksi di dalam "
+            "kawasan industri seluas 1.912 hektar. Perusahaan ini membangun pelabuhan sendiri yang mampu menampung kapal "
+            "berkapasitas hingga 50.000 ton — salah satu pelabuhan industri nikel terbesar di Sulawesi. "
+            "Total investasi mencapai Rp 42,9 triliun. <b>Namun sejak awal 2025, pabrik ini menghadapi masalah serius:</b> "
+            "perusahaan induknya di China (Jiangsu Delong) mengalami kebangkrutan, sehingga sebagian besar lini produksi berhenti beroperasi."
+        ),
+        "key_facts": ["Pelabuhan untuk kapal hingga 50.000 ton", "24 lini produksi, PLTU 1.275 MW", "Kawasan industri 1.912 hektar", "Masalah: induk perusahaan bangkrut (2025)"],
+        "source": "gunbusternickelindustry.com, Petromindo, CELIOS",
+    },
+    "NODE-SULTRA-KONAWE-MOROSI-VDNI": {
+        "title": "VDNI — Morosi, Konawe",
+        "icon_color": "#AB47BC",
+        "narrative": (
+            "Di Morosi, Kabupaten Konawe, perusahaan China bernama VDNI (Virtue Dragon Nickel Industry) membangun "
+            "dermaga yang mampu menampung 4 tongkang dan 1 kapal besar, dengan kapasitas 50.000 ton. Jalan khusus "
+            "selebar 30 meter dibangun untuk menghubungkan dermaga langsung ke pabrik — jalur eksklusif truk pengangkut "
+            "batubara dan bijih nikel. Kawasan ini mendapat status Proyek Strategis Nasional (PSN) berdasarkan Peraturan "
+            "Presiden. Investasi naik hingga US$5 miliar. <b>Dampaknya terasa langsung:</b> pembangunan kawasan industri "
+            "ini mengubah bentuk permukaan tanah di empat kecamatan dan menutup puluhan hektar tambak milik nelayan."
+        ),
+        "key_facts": ["Dermaga: 4 tongkang + 1 kapal besar", "Kapasitas pelabuhan 50.000 ton", "Proyek Strategis Nasional (Perpres 58/2017)", "Menutup puluhan hektar tambak warga"],
+        "source": "idenews.id, liputan6, modusaceh.co, ekuatorial.com",
+    },
+    "NODE-SULTRA-KONAWE-OSS": {
+        "title": "OSS — Morosi, Konawe",
+        "icon_color": "#FFA726",
+        "narrative": (
+            "OSS (Obsidian Stainless Steel) berlokasi di Desa Porara, Kecamatan Morosi — tepat di sebelah pabrik VDNI. "
+            "Meski dimiliki perusahaan berbeda, OSS <b>menggunakan dermaga yang sama</b> dengan VDNI. Pabrik ini mampu "
+            "memproduksi hingga 3 juta ton baja tahan karat per tahun. Sama seperti VDNI, OSS juga mendapat status "
+            "Proyek Strategis Nasional. Pola ini menunjukkan bagaimana label PSN menjadi alat untuk membuka pintu "
+            "bagi investor baru yang datang ke lokasi yang sudah dibuka oleh investor sebelumnya — satu lokasi, "
+            "dua perusahaan, satu dermaga."
+        ),
+        "key_facts": ["Menggunakan dermaga milik VDNI", "Kapasitas 3 juta ton baja/tahun", "Proyek Strategis Nasional", "Induk perusahaan terancam bangkrut"],
+        "source": "idenews.id, kliksultra.id",
+    },
+    "NODE-SULTRA-KOLAKA-POMALAA-ANTAM": {
+        "title": "ANTAM — Pomalaa, Kolaka",
+        "icon_color": "#EF5350",
+        "narrative": (
+            "Pomalaa adalah kawasan nikel tertua di Sulawesi — bijih nikel pertama ditemukan di sini pada tahun 1909 "
+            "dan penambangan dimulai sejak 1938. Saat ini, ANTAM mengoperasikan tiga pabrik ferronickel. "
+            "Dermaga baru berkapasitas 12.000 ton dengan kecepatan bongkar muat 2 x 500 ton per jam dibangun sebagai "
+            "tahap <b>pertama</b> dari proyek perluasan senilai US$573 juta — artinya dermaga dibangun lebih dulu "
+            "sebelum pabrik baru. Ban berjalan (conveyor belt) sepanjang 4 km menggantikan truk untuk mengangkut bahan "
+            "dari pelabuhan ke pabrik. Di sekitar lokasi ini, sebuah kawasan industri baru seluas 11.808 hektar (IPIP) "
+            "sedang direncanakan dengan investasi US$10 miliar."
+        ),
+        "key_facts": ["Dermaga 12.000 ton (dibangun paling pertama)", "Ban berjalan 4 km ke pabrik", "Proyek perluasan US$573 juta", "Rencana kawasan baru IPIP: 11.808 ha, US$10 miliar"],
+        "source": "antam.com, Jakarta Post, Kompas.id",
+    },
+    "NODE-SULSEL-LUTIM-SOROWAKO-VALE": {
+        "title": "Vale — Sorowako, Luwu Timur",
+        "icon_color": "#78909C",
+        "narrative": (
+            "PT Vale Indonesia menguasai area konsesi seluas 118.017 hektar yang membentang di tiga provinsi. "
+            "Pelabuhan Vale di Kecamatan Nuha dikonfirmasi keberadaannya oleh kunjungan resmi TNI Angkatan Laut. "
+            "Pelabuhan kedua di Balantang, Malili, berfungsi sebagai titik pengiriman nikel ke kapal. Rute pengangkutan "
+            "dari tambang di Sorowako ke pelabuhan melewati tujuh desa: Karebbe, Balambano, Togo, Wasuponda, Asuli, "
+            "Malili, hingga Balantang. <b>Dampak yang sudah terasa:</b> sedimentasi mengancam Danau Mahalona dan "
+            "Danau Towuti, sementara konflik lahan dengan masyarakat adat Karunsi'e sudah berlangsung sejak 1968. "
+            "Ke depan, proyek baru senilai US$2,3 miliar (IHIP) akan menambah pabrik dan pelabuhan baru di kawasan ini."
+        ),
+        "key_facts": ["Pelabuhan Nuha (dikonfirmasi TNI AL)", "Pelabuhan Balantang untuk pengiriman nikel", "Konsesi 118.017 hektar lintas 3 provinsi", "Konflik lahan adat sejak 1968"],
+        "source": "TNI AL Lantamal VI, vale.com, petromindo.com",
+    },
+}
+
+tab_labels = [v["title"] for v in NODE_NARRATIVES.values()]
+tabs = st.tabs(tab_labels)
+
+for tab, (node_id, info) in zip(tabs, NODE_NARRATIVES.items()):
+    with tab:
+        row = df[df["cluster_id"] == node_id]
+        if not row.empty:
+            r = row.iloc[0]
+
+            st.markdown(f"""
+            <div style="border-left: 5px solid {info['icon_color']}; padding-left: 16px; margin-bottom: 15px;">
+                <div style="font-size: 1.4rem; font-weight: 700; color: {info['icon_color']};">{info['title']}</div>
+                <div style="font-size: 0.85rem; color: #999;">{r['provinsi']} · {r['kabupaten']} · {r['anchor_entity']}</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+            pltu_val = int(r["pltu_mw"]) if pd.notna(r["pltu_mw"]) else 0
+            izin_val = int(r["izin_nikel_count"]) if pd.notna(r["izin_nikel_count"]) else 0
+            port_status = str(r["port_facility"]).replace("_", " ").title()
+            psn_status = str(r["psn_status"]).replace("_", " ").title()
+
+            m1, m2, m3, m4 = st.columns(4)
+            with m1:
+                st.markdown(f"""
+                <div class="metric-card">
+                    <div>
+                        <div class="metric-label">PELABUHAN</div>
+                        <div class="metric-value" style="color: #43A047; font-size: 1.2rem;">{port_status}</div>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+            with m2:
+                st.markdown(f"""
+                <div class="metric-card">
+                    <div>
+                        <div class="metric-label">STATUS PSN</div>
+                        <div class="metric-value" style="color: #FFA726; font-size: 1.2rem;">{psn_status}</div>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+            with m3:
+                st.markdown(f"""
+                <div class="metric-card">
+                    <div>
+                        <div class="metric-label">PLTU BATUBARA (MW)</div>
+                        <div class="metric-value" style="color: #EF5350;">{pltu_val:,}</div>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+            with m4:
+                st.markdown(f"""
+                <div class="metric-card">
+                    <div>
+                        <div class="metric-label">IZIN NIKEL</div>
+                        <div class="metric-value" style="color: #42A5F5;">{izin_val}</div>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+
+            st.markdown(f"""
+            <div style="background: #1A1A1A; padding: 16px; border-radius: 8px; margin: 12px 0; line-height: 1.7; color: #CCC; font-size: 0.95rem;">
+            {info['narrative']}
+            </div>
+            """, unsafe_allow_html=True)
+
+            fc1, fc2 = st.columns(2)
+            with fc1:
+                st.markdown("**Fakta Kunci:**")
+                for fact in info["key_facts"]:
+                    st.markdown(f"- {fact}")
+            with fc2:
+                st.markdown("**Detail Dermaga:**")
+                st.markdown(f"_{r['port_detail']}_")
+                st.markdown(f"**Kawasan Industri:** {r['kawasan_industri']}")
+                st.markdown(f"**Tujuan Ekspor:** {r['export_channel']}")
+
+            st.caption(f"Sumber: {info['source']}")
+
+st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=True)
+
+# ═════════════════════════════════════════════════════════════
+# 10.4 SINTESIS
+# ═════════════════════════════════════════════════════════════
+st.subheader("10.4 Kesimpulan: Pola yang Terungkap")
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Analisis Pola Lintas Lokasi</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Ekstraksi Pola Sistemik"):
+    st.markdown("""
+    **Metode Analisis:** Sub-bab ini menggunakan analisis kesamaan lintas-kasus (*Cross-Case Pattern Recognition*) untuk merumuskan postulat sistemik dari industri ekstraktif nikel.
+
+    1. **Model Inferensi Pola:**
+        * **Generalisasi Temuan:** Mengidentifikasi variabel yang secara konsisten berulang di seluruh 6 *node* industri (misal: "Selalu ada pelabuhan bersamaan dengan pabrik", "Status PSN mendominasi", "Absennya jalur logistik darat umum/kereta").
+        * **Kesimpulan Struktural:** Merangkum relasi kausalitas antara desain infrastruktur (eksport-oriented) dengan dampak sosial yang diwariskan kepada masyarakat lokal.
+    2. **Variabel & Fitur Data:**
+        * **Pola Ekstraktif:** Konstruksi paket (Smelter + PLTU + Pelabuhan), Fenomena 'Dilution' regulasi via PSN.
+    """)
+
+with st.expander("Pabrik, Pembangkit, dan Pelabuhan Selalu Dibangun Bersamaan", expanded=True):
+    st.markdown("""
+    Keenam lokasi memperlihatkan pola yang sama: investor asing tidak membangun pabrik dulu baru pelabuhan belakangan.
+    Pabrik smelter, PLTU batubara, **dan** pelabuhan dibangun **bersamaan** sebagai satu paket investasi.
+
+    - Di **IMIP**, perusahaan pengelola menyediakan pelabuhan untuk seluruh pabrik di dalam kawasan.
+    - Di **GNI**, pelabuhan dan gudang penyimpanan dibangun dari hari pertama.
+    - Di **VDNI**, investasi US$1 miliar sejak awal sudah mencakup "pabrik, PLTU, dan pelabuhan."
+    - Di **ANTAM**, dermaga justru dibangun **paling pertama** — sebelum komponen pabrik lainnya.
+
+    Artinya: pelabuhan bukan sekadar pendukung, melainkan **bagian inti** dari bisnis nikel.
+    Tanpa pelabuhan, tidak ada pabrik yang masuk akal secara bisnis — karena nikel olahan memang ditujukan untuk diekspor.
+    """)
+
+with st.expander("Label 'Proyek Strategis Nasional' Mempercepat Segalanya"):
+    st.markdown("""
+    Dari enam lokasi, setidaknya empat mendapat label Proyek Strategis Nasional (PSN):
+    **IMIP-Morowali** (PSN 2022), **VDNI dan OSS** di Konawe (Perpres 58/2017), dan
+    **IPIP-Pomalaa** (PSN Desember 2022).
+
+    Apa artinya bagi warga? Label PSN membuat proses perizinan menjadi lebih cepat,
+    pembebasan lahan lebih mudah, dan dukungan pemerintah lebih besar — termasuk untuk
+    lahan yang sebelumnya dipakai warga.
+
+    Menariknya, **Kawasan Ekonomi Khusus (KEK) justru tidak ada** di satupun lokasi nikel ini.
+    Dari 24 KEK di seluruh Indonesia, hanya 3 berada di Sulawesi: Palu, Bitung, dan Likupang —
+    ketiganya tidak ada hubungannya dengan nikel.
+    """)
+
+with st.expander("Tidak Ada Jalur Kereta — Semuanya Lewat Laut"):
+    st.markdown("""
+    Tidak ada satupun jalur kereta api yang menghubungkan lokasi-lokasi tambang nikel di Sulawesi.
+    Satu-satunya proyek kereta api di Sulawesi — **Makassar-Parepare** — sama sekali tidak melewati
+    Morowali, Konawe, Pomalaa, maupun Sorowako.
+
+    Semua nikel Sulawesi dikirim **lewat laut**: ditambang, dilebur di pabrik, lalu langsung
+    dimuat ke kapal di pelabuhan untuk dikirim ke China dan pasar internasional.
+    Jalur darat hanya dipakai untuk mengangkut bahan baku dari tambang ke pabrik terdekat.
+    """)
+
+with st.expander("Dampak Langsung bagi Warga Sekitar"):
+    st.markdown(f"""
+    Pelabuhan dan kawasan industri yang menopang ekspor nikel ini bukan tanpa korban:
+
+    - **Morowali (IMIP):** Lebih dari **12 juta ton limbah slag** menumpuk tanpa izin pengelolaan. Pabrik mengolahnya menjadi 40.000 unit batako per hari, namun tumpukan terus bertambah. Pada 2023, **21 pekerja** menjadi korban kebakaran di kawasan industri ini.
+    - **Konawe (VDNI/OSS):** Pembangunan mengubah bentuk permukaan tanah di empat kecamatan, menyempitkan saluran air, dan menutup puluhan hektar tambak nelayan. Pabrik VDNI saja mengolah **7,28 juta ton bijih nikel per tahun** — menghasilkan jutaan ton slag yang tidak punya tempat penampungan memadai.
+    - **Pomalaa (ANTAM):** Nelayan mengadukan debu dari aktivitas pelabuhan yang menutupi tambak dan area tangkapan mereka.
+    - **Sorowako (Vale):** Endapan lumpur mengancam Danau Mahalona dan Danau Towuti. Konflik lahan antara PT Vale dan masyarakat adat Karunsi'e sudah berlangsung sejak 1968. Dari konsesi seluas **118.017 hektar**, kabupaten hanya menerima **Rp 600 miliar per tahun** sebagai kontribusi daerah.
+
+    Seluruh ekspor nikel olahan Sulawesi pada 2024 bernilai lebih dari **US$3,2 miliar** — mayoritas dikirim ke China.
+    Infrastruktur yang membuat ekspor ini menguntungkan bagi investor juga menjadi
+    **sumber beban lingkungan** yang ditanggung langsung oleh masyarakat lokal.
+    """)
+
+st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=True)
+
+# ═════════════════════════════════════════════════════════════
+# 10.5 BATASAN DATA
+# ═════════════════════════════════════════════════════════════
+st.subheader("10.5 Catatan Penting & Batasan Data")
+st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Transparansi: Apa yang Belum Bisa Dikonfirmasi</span>', unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Audit Keterbatasan Data (Data Gaps)"):
+    st.markdown("""
+    **Metode Analisis:** Pendekatan transparansi metodologis (*Methodological Transparency Audit*) untuk mendeklarasikan limitasi akses data publik (*Data Gaps*).
+
+    1. **Model Identifikasi Celah Informasi:**
+        * **Blind-Spot Mapping:** Mencatat secara rinci variabel-variabel strategis yang ditutupi oleh negara atau korporasi dari jangkauan publik (misal: dokumen AMDAL asli, dokumen perizinan dari Kemenhub, rincian konsumsi listrik dari PLN yang *undisclosed*).
+        * **Validasi Asumsi:** Memastikan bahwa analisis yang ditarik sebelumnya tidak melampaui batas fakta empiris yang tersedia, menjaga integritas kesimpulan.
+    2. **Dataset & File:**
+        * `data/raw/rev1_logistik/working/rev1_tahap_e_remaining_gaps.csv`
+    """)
+
+st.markdown("""
+<div style="background: rgba(255, 152, 0, 0.12); padding: 18px; border-radius: 8px; border-left: 6px solid #FFA726; margin-bottom: 20px;">
+<b style="color: #FFA726; font-size: 1.05rem;">Yang Perlu Diketahui Pembaca</b><br><br>
+<div style="color: #E0E0E0; font-size: 0.92rem; line-height: 1.7;">
+<b>1.</b> Kawasan Ekonomi Khusus (KEK) tidak ada di satupun lokasi nikel ini — jangan tertukar dengan kawasan industri biasa.<br>
+<b>2.</b> Tidak ada jalur kereta api yang menghubungkan lokasi-lokasi tambang nikel di Sulawesi.<br>
+<b>3.</b> Izin resmi pelabuhan dari Kementerian Perhubungan belum ditemukan secara terbuka — data dermaga berasal dari situs perusahaan dan laporan media.<br>
+<b>4.</b> OSS dan VDNI di Konawe menggunakan dermaga yang sama — mereka terpisah sebagai perusahaan tapi berbagi fasilitas.<br>
+<b>5.</b> Pelabuhan Vale di Sorowako terkonfirmasi dari kunjungan resmi TNI AL, namun rute ekspor langsung ke luar negeri perlu bukti tambahan.<br>
+<b>6.</b> Beberapa perusahaan (GNI, VDNI, OSS) menghadapi risiko kebangkrutan karena masalah perusahaan induk di China.
+</div>
+</div>
+""", unsafe_allow_html=True)
+
+remaining_gaps = [
+    ("Jalur kereta api", "Tidak ada proyek kereta ke lokasi nikel. Hanya Makassar-Parepare.", "Belum Ada"),
+    ("Izin pelabuhan resmi", "Dokumen izin dari Kemenhub belum ditemukan secara terbuka.", "Belum Ditemukan"),
+    ("GNI: kondisi operasional", "Induk perusahaan (Jiangsu Delong) bangkrut sejak 2025.", "Bermasalah"),
+    ("VDNI/OSS: kondisi keuangan", "Induk perusahaan dilaporkan terancam bangkrut.", "Bermasalah"),
+    ("OSS: dermaga sendiri", "Memakai dermaga VDNI, tidak punya dermaga terpisah.", "Berbagi"),
+    ("IPIP: pembangunan", "Kawasan baru 11.808 ha, terkendala pembebasan lahan.", "Belum Dibangun"),
+    ("IHIP: pembangunan", "Proyek baru US$2,3 miliar, target operasi 2027.", "Belum Dibangun"),
+]
+
+df_gaps = pd.DataFrame(remaining_gaps, columns=["Hal yang Belum Tuntas", "Penjelasan", "Status"])
+st.dataframe(df_gaps, use_container_width=True, hide_index=True)
+
+with st.expander("Lihat Data Mentah: Daftar Keterbatasan Lengkap", expanded=False):
+    st.dataframe(df_gaps, use_container_width=True, hide_index=True)
+    st.caption("Sumber: Catatan penelusuran. File: `data/raw/rev1_logistik/working/rev1_tahap_e_remaining_gaps.csv`")
+
+st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=True)
+
+# ═════════════════════════════════════════════════════════════
+# 10.6 MENGAPA INI PENTING
+# ═════════════════════════════════════════════════════════════
+st.subheader("10.6 Mengapa Ini Penting bagi Warga Sulawesi")
+
+st.markdown(f"""
+<div style="background: linear-gradient(135deg, rgba(67,160,71,0.15), rgba(46,125,50,0.08)); padding: 24px; border-radius: 12px; border-left: 6px solid #43A047; margin-bottom: 20px;">
+<div style="color: #66BB6A; font-size: 1.3rem; font-weight: 700; margin-bottom: 16px;">Apa Artinya Semua Ini?</div>
+<div style="color: #E0E0E0; font-size: 0.95rem; line-height: 1.8;">
+
+<b>Fakta utama:</b> Seluruh {n_lokasi} lokasi industri nikel besar di Sulawesi memiliki pelabuhan ekspor.
+Artinya, nikel yang ditambang dan diolah di Sulawesi <b>tidak dipakai untuk kebutuhan dalam negeri</b> —
+seluruhnya dikirim ke luar negeri, terutama ke China. Pada tahun 2024, nilai ekspor nikel olahan dari
+Sulawesi melebihi <b>US$3,2 miliar</b> (sekitar Rp 50 triliun).<br><br>
+
+<b>Siapa yang untung?</b> Investor asing yang membangun pabrik dan pelabuhan. Mayoritas perusahaan
+pengelola adalah perusahaan China: Tsingshan (IMIP), Jiangsu Delong (GNI), Virtue Dragon (VDNI),
+dan Xiamen Xiangyu (OSS).<br><br>
+
+<b>Siapa yang menanggung beban?</b> Warga sekitar. Tambak nelayan ditutup, tanah berubah bentuk, danau
+terancam sedimentasi, dan limbah jutaan ton menumpuk. Di Sorowako, dari konsesi seluas 118.017 hektar,
+kabupaten hanya menerima <b>Rp 600 miliar per tahun</b> — sebagian kecil dari keuntungan triliunan yang
+mengalir ke pemegang saham di luar negeri.<br><br>
+
+<b>Apa yang perlu dituntut?</b>
+</div>
+</div>
+""", unsafe_allow_html=True)
+
+demands = [
+    ("Transparansi izin pelabuhan", "Dokumen izin pelabuhan industri dari Kementerian Perhubungan harus dibuka untuk publik. Saat ini, tidak satupun izin resmi pelabuhan nikel di Sulawesi yang bisa diakses warga secara terbuka."),
+    ("Kajian dampak lingkungan yang independen", "AMDAL kawasan industri nikel harus dikaji ulang oleh lembaga independen — bukan oleh konsultan yang dibayar perusahaan. Fokus: limbah slag, kualitas air laut, dan sedimentasi danau."),
+    ("Bagi hasil yang adil", "Kontribusi perusahaan nikel terhadap daerah harus diperbesar secara signifikan. Pendapatan daerah Rp 600 miliar per tahun dari konsesi 118.017 hektar (kasus Vale) tidak sebanding dengan keuntungan dan kerusakan yang ditimbulkan."),
+    ("Perlindungan hak masyarakat adat", "Konflik lahan antara perusahaan tambang dan masyarakat adat (seperti Karunsi'e di Sorowako sejak 1968) harus diselesaikan dengan mengutamakan hak-hak masyarakat adat, bukan kepentingan investor."),
+]
+
+for i, (title, desc) in enumerate(demands, 1):
+    st.markdown(f"""
+    <div style="background: #1A1A1A; padding: 16px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #FFA726;">
+        <div style="color: #FFA726; font-weight: 700; font-size: 1rem; margin-bottom: 6px;">{i}. {title}</div>
+        <div style="color: #CCC; font-size: 0.92rem; line-height: 1.6;">{desc}</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("""
+<div style="background: rgba(239, 83, 80, 0.1); padding: 18px; border-radius: 8px; border-left: 6px solid #EF5350; margin-top: 20px;">
+<div style="color: #EF5350; font-size: 1.05rem; font-weight: 700; margin-bottom: 8px;">Catatan untuk Pembaca</div>
+<div style="color: #E0E0E0; font-size: 0.92rem; line-height: 1.7;">
+Seluruh data dalam halaman ini berasal dari <b>25 sumber terbuka</b> yang bisa diverifikasi oleh siapapun:
+situs resmi perusahaan, dokumen pemerintah (KPPIP, Peraturan Presiden), laporan media investigatif,
+dan catatan kunjungan resmi TNI Angkatan Laut. Tidak ada data rahasia atau bocoran.
+Artinya: informasi ini <b>sudah ada di depan mata publik</b>, hanya belum pernah disatukan dan dibaca secara utuh.
+</div>
+</div>
+""", unsafe_allow_html=True)

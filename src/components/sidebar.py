@@ -85,7 +85,7 @@ def render_sidebar():
             "pages/7_Kegagalan_Tata_Kelola.py", label=_("Kegagalan Tata Kelola")
         )
         st.page_link("pages/8_Distribusi_Manfaat.py", label=_("Distribusi Manfaat"))
-        st.page_link("pages/10_Koridor_Logistik.py", label=_("Koridor Logistik Nikel"))
+        # st.page_link("pages/10_Koridor_Logistik.py", label=_("Koridor Logistik Nikel"))
         st.page_link(
             "pages/11_Demografi_Sosial.py", label=_("Demografi & Struktur Sosial")
         )

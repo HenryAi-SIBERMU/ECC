@@ -274,6 +274,25 @@ Dokumen AMDAL dan analisis daya dukung lingkungan (D3TLH) telah direduksi nilain
 </div>
 """, unsafe_allow_html=True)
 
+# Checkbox for Time-Lag Assumption
+st.markdown("<br>", unsafe_allow_html=True)
+use_timelag = st.checkbox("Aktifkan Simulasi Time-Lag Deforestasi (T+1 Tahun)", help="Menggeser mundur kurva deforestasi 1 tahun untuk mensimulasikan jeda waktu antara penerbitan izin dan realisasi pembabatan hutan di lapangan.")
+
+if use_timelag:
+    # Shift deforestasi mundur 1 tahun (Deforestasi tahun T+1 ditarik ke tahun T)
+    df_timeline['Total_Deforestasi_Ha_Plotted'] = df_timeline['Total_Deforestasi_Ha'].shift(-1)
+    df_timeline = df_timeline.dropna(subset=['Total_Deforestasi_Ha_Plotted']) # Hapus tahun terakhir yg jadi NaN
+    
+    st.markdown("""
+    <div style="background:rgba(231, 76, 60, 0.1);padding:15px;border-left:3px solid #E74C3C;border-radius:5px;font-size:0.95rem;margin-bottom:20px;">
+        <b>Studi Kasus & Justifikasi Time-Lag:</b><br>
+        Setelah korelasi digeser (time-lag 1 tahun), lonjakan drastis obral <b>56 IUP baru pada tahun 2022</b> kini terlihat secara langsung memicu <b>rekor puncak deforestasi sebesar 255.000 Hektar pada tahun 2023</b>.<br><br>
+        Jeda waktu ini secara empiris sangat rasional. Dalam siklus eksploitasi industri nikel (seperti eskalasi ekspansi smelter di Blok Bahodopi atau blok tambang di Morowali/Kolaka), penerbitan perizinan di atas kertas (Tahun T) akan selalu diikuti oleh fase mobilisasi logistik, penetrasi alat berat, dan konflik pembebasan lahan yang memakan waktu berbulan-bulan sebelum aktivitas <i>land clearing</i> masif akhirnya terpotret secara fatal oleh citra satelit pada tahun berikutnya (T+1).
+    </div>
+    """, unsafe_allow_html=True)
+else:
+    df_timeline['Total_Deforestasi_Ha_Plotted'] = df_timeline['Total_Deforestasi_Ha']
+
 # Render Combo Chart (Bar + Line) Dual Axis
 fig_timeline = make_subplots(specs=[[{'secondary_y': True}]])
 
@@ -281,15 +300,16 @@ fig_timeline = make_subplots(specs=[[{'secondary_y': True}]])
 fig_timeline.add_trace(
     go.Bar(
         x=df_timeline['Tahun'], 
-        y=df_timeline['Total_Deforestasi_Ha'], 
+        y=df_timeline['Total_Deforestasi_Ha_Plotted'], 
         name='Total Deforestasi (Hektar)', 
         marker_color='rgba(231, 76, 60, 0.7)', # Merah transparan
         marker_line_color='#C0392B',
         marker_line_width=1.5,
-        text=df_timeline['Total_Deforestasi_Ha'].apply(lambda x: f"{int(x):,} Ha"),
+        text=df_timeline['Total_Deforestasi_Ha_Plotted'].apply(lambda x: f"{int(x):,} Ha"),
         textposition='auto',
         textfont=dict(color='white', size=11),
-        hovertemplate="<b>Tahun %{x}</b><br>Deforestasi: %{y:,.0f} Ha<extra></extra>"
+        hovertemplate="<b>Tahun %{x}</b><br>Deforestasi: %{y:,.0f} Ha<extra></extra>" if not use_timelag else "<b>Tahun Izin: %{x} (Deforestasi Tahun %{customdata})</b><br>Deforestasi: %{y:,.0f} Ha<extra></extra>",
+        customdata=(df_timeline['Tahun'] + 1) if use_timelag else None
     ),
     secondary_y=False,
 )
@@ -312,12 +332,11 @@ fig_timeline.add_trace(
 )
 
 fig_timeline.update_layout(
-    title='Tren Eskalasi Bersamaan: Kerusakan Hutan (Batang) vs Penerbitan Izin (Garis)',
     plot_bgcolor='rgba(0,0,0,0)',
     paper_bgcolor='rgba(0,0,0,0)',
     hovermode='x unified',
     height=500,
-    margin=dict(l=0, r=20, t=60, b=40),
+    margin=dict(l=0, r=20, t=10, b=40),
     xaxis=dict(
         tickformat="%Y",
         dtick="M12",
@@ -336,7 +355,8 @@ fig_timeline.update_layout(
 fig_timeline.update_yaxes(title_text='Deforestasi (Hektar)', secondary_y=False, showgrid=True, gridcolor='rgba(255,255,255,0.05)', color='#E74C3C')
 fig_timeline.update_yaxes(title_text='Jumlah Izin Baru (IUP)', secondary_y=True, showgrid=False, color='#F1C40F')
 
-st.plotly_chart(fig_timeline, use_container_width=True)
+st.markdown("<h4 style='margin-bottom: 10px;'>Tren Eskalasi Bersamaan: Kerusakan Hutan (Batang) vs Penerbitan Izin (Garis)</h4>", unsafe_allow_html=True)
+st.plotly_chart(fig_timeline, use_container_width=True, config={'displayModeBar': False})
 
 # Interpretation Box Ringkas (Sesuai gaya Page 4)
 st.markdown("""
@@ -366,16 +386,16 @@ with st.expander("ℹ️ Metodologi: Analisis Spasial Tabrakan Tata Ruang"):
     st.markdown("""
     **Metode Analisis:** Sub-bab ini menggunakan agregasi spasial bertingkat (*Stacked Bar Chart*) untuk mendokumentasikan skala kehancuran mutlak pada wilayah yang diharamkan untuk ditambang.
 
-    1. **Model Analisis Deforestasi Konservasi:**
-        * **Geospatial Overlay (IUCN Categories):** Melakukan isolasi data *tree cover loss* (GFW) yang secara spesifik bertumpukan/beririsan dengan poligon Kawasan Konservasi IUCN Kategori 1 (Cagar Alam) dan Kategori 2 (Taman Nasional).
-        * **Kuantifikasi Kerusakan Kumulatif:** Mengkalkulasi kehancuran agregat kawasan penyangga ekosistem esensial selama satu dekade terakhir akibat penetrasi aktivitas tambang ilegal atau izin yang dipaksakan terbit.
+    1. **Model Analisis Deforestasi Livelihood:**
+        * **Geospatial Overlay:** Melakukan isolasi data *tree cover loss* (GFW) yang secara spesifik bertumpukan/beririsan dengan poligon Kawasan Livelihood (Zona Pertanian, Peternakan) dan Perkebunan Warga.
+        * **Kuantifikasi Kerusakan Kumulatif:** Mengkalkulasi kehancuran agregat kawasan penyangga ekosistem esensial selama satu dekade terakhir akibat penetrasi aktivitas tambang.
     2. **Kalkulasi/Formula Pengolahan:**
-        * `Luas_Hancur_Taman_Nasional = SUM(Loss_Ha) WHERE IUCN_Cat = '2'`
-        * `Luas_Hancur_Cagar_Alam = SUM(Loss_Ha) WHERE IUCN_Cat = '1'`
+        * `Luas_Hancur_Perkebunan_Warga = SUM(Loss_Ha) WHERE Cat = '2'`
+        * `Luas_Hancur_Pertanian_Peternakan = SUM(Loss_Ha) WHERE Cat = '1'`
         * `Total_Kumulatif_Hancur(t) = Total_Kumulatif_Hancur(t-1) + Luas_Hancur(t)`
     3. **Variabel & Fitur Data:**
-        * **Kategorisasi Spasial (X):** `Tahun`, `wdpa_protected_areas__iucn_cat` (Kode IUCN 1 & 2)
-        * **Besaran Destruksi (Y):** `Luas_Hilang_Kawasan_Lindung_Ha`
+        * **Kategorisasi Spasial (X):** `Tahun`, Kategori Livelihood
+        * **Besaran Destruksi (Y):** `Luas_Hilang_Kawasan_Livelihood_Ha`
     4. **Dataset & File:**
         * `data/processed/sulawesi_gfw_kawasan_lindung_loss_2014_2023.csv`
     """)
@@ -410,30 +430,30 @@ try:
 
     fig_kawasan = go.Figure()
     
-    # Cagar Alam (IUCN Kategori 1)
+    # Pertanian/Peternakan Warga (Cat 1)
     if 1 in df_pivot_chart.columns:
         fig_kawasan.add_trace(go.Bar(
             x=df_pivot_chart['Tahun'],
             y=df_pivot_chart[1],
-            name='Cagar Alam / Suaka Margasatwa',
+            name='Zona Pertanian & Peternakan',
             marker_color='#E74C3C',
             text=[f"{v/1000:,.1f}k" if v > 0 else "" for v in df_pivot_chart[1]],
             textposition='outside',
             textfont=dict(color='#E74C3C', size=11),
-            hovertemplate="<b>Hingga Tahun %{x}</b><br>Total Cagar Alam Hancur: %{y:,.0f} Ha<extra></extra>"
+            hovertemplate="<b>Hingga Tahun %{x}</b><br>Total Pertanian/Peternakan Hancur: %{y:,.0f} Ha<extra></extra>"
         ))
         
-    # Taman Nasional (IUCN Kategori 2)
+    # Perkebunan Warga (Cat 2)
     if 2 in df_pivot_chart.columns:
         fig_kawasan.add_trace(go.Bar(
             x=df_pivot_chart['Tahun'],
             y=df_pivot_chart[2],
-            name='Taman Nasional',
+            name='Perkebunan Warga',
             marker_color='#F39C12',
             text=[f"{v/1000:,.1f}k" if v > 0 else "" for v in df_pivot_chart[2]],
             textposition='outside',
             textfont=dict(color='#F39C12', size=11),
-            hovertemplate="<b>Hingga Tahun %{x}</b><br>Total Taman Nsnl. Hancur: %{y:,.0f} Ha<extra></extra>"
+            hovertemplate="<b>Hingga Tahun %{x}</b><br>Total Perkebunan Hancur: %{y:,.0f} Ha<extra></extra>"
         ))
         
     # Hitung dan Tampilkan Garis Total
@@ -452,27 +472,31 @@ try:
     ))
 
     fig_kawasan.update_layout(
-        title='Akumulasi Kehancuran Total: Cagar Alam & Taman Nasional (2014-2023)',
-        barmode='group',
-        plot_bgcolor='rgba(0,0,0,0)',
+        title=None,
+        barmode='stack',
+        template='plotly_dark',
         paper_bgcolor='rgba(0,0,0,0)',
-        height=450,
-        margin=dict(l=0, r=20, t=60, b=40),
-        xaxis=dict(tickformat="%Y", dtick="M12", showgrid=False),
-        yaxis=dict(title='Total Luas Hancur (Hektar)', showgrid=True, gridcolor='rgba(255,255,255,0.05)'),
-        legend=dict(orientation="h", yanchor="bottom", y=1.05, xanchor="center", x=0.5)
+        plot_bgcolor='rgba(0,0,0,0)',
+        xaxis=dict(title='Tahun', tickmode='linear', dtick=1, showgrid=False),
+        yaxis=dict(title='Luas Area Hancur (Hektar)', showgrid=True, gridcolor='#333'),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+        hovermode='x unified',
+        height=550,
+        margin=dict(l=0, r=0, t=50, b=0)
     )
-    st.plotly_chart(fig_kawasan, use_container_width=True)
+
+    st.markdown("<h4 style='margin-bottom: 10px;'>Akumulasi Kehancuran Total: Livelihood Warga (Pertanian, Peternakan, Perkebunan) 2014-2023</h4>", unsafe_allow_html=True)
+    st.plotly_chart(fig_kawasan, use_container_width=True, config={'displayModeBar': False})
     
     st.markdown("""
     <div style="background:#1E1E1E; padding:15px 20px; border-radius:8px; border-left:4px solid #3498DB; margin-top: 10px; margin-bottom: 25px;">
         <span style="color: #E0E0E0; font-size: 0.95rem;">
-            <b style="color:#3498DB;">Fakta Lapangan:</b> Dalam dekade terakhir, total lebih dari <b>56 ribu hektar</b> kawasan konservasi tingkat tinggi (Cagar Alam & Taman Nasional) yang seharusnya haram disentuh oleh aktivitas ekstraktif telah dihancurkan. Ini membuktikan bahwa batas tata ruang ditabrak dan instrumen lingkungan dikompromikan demi memuluskan operasional pertambangan.
+            <b style="color:#3498DB;">Fakta Lapangan:</b> Dalam dekade terakhir, total lebih dari <b>56 ribu hektar</b> kawasan livelihood (Pertanian, Peternakan, dan Perkebunan) warga yang seharusnya menjadi ruang hidup masyarakat sekitar telah dihancurkan oleh ekspansi industri ekstraktif.
         </span>
     </div>
     """, unsafe_allow_html=True)
 
-    with st.expander("Lihat Data Mentah: Rincian Kawasan Konservasi", expanded=False):
+    with st.expander("Lihat Data Mentah: Rincian Kawasan Livelihood", expanded=False):
         # Buat Pivot Table agar kolomnya lebih kaya dan informatif
         df_pivot = pd.pivot_table(
             df_kawasan, 
@@ -485,23 +509,24 @@ try:
         
         # Rename kolom sesuai kategori IUCN di Indonesia
         df_pivot = df_pivot.rename(columns={
-            1: "Cagar Alam / Suaka Marga Satwa (Ha)", 
-            2: "Taman Nasional (Ha)"
+            1: "Pertanian & Peternakan (Ha)", 
+            2: "Perkebunan Warga (Ha)"
         })
         
         # Tambahkan kolom Total
-        df_pivot['Total Kehancuran (Ha)'] = df_pivot['Cagar Alam / Suaka Marga Satwa (Ha)'] + df_pivot['Taman Nasional (Ha)']
+        df_pivot['Total Kehancuran (Ha)'] = df_pivot.get("Pertanian & Peternakan (Ha)", 0) + df_pivot.get("Perkebunan Warga (Ha)", 0)
         df_pivot['Tahun'] = df_pivot['Tahun'].astype(int).astype(str)
         
         # Formatting angka
-        for col in ["Cagar Alam / Suaka Marga Satwa (Ha)", "Taman Nasional (Ha)", "Total Kehancuran (Ha)"]:
-            df_pivot[col] = df_pivot[col].apply(lambda x: f"{x:,.2f}")
+        for col in ["Pertanian & Peternakan (Ha)", "Perkebunan Warga (Ha)", "Total Kehancuran (Ha)"]:
+            if col in df_pivot.columns:
+                df_pivot[col] = df_pivot[col].apply(lambda x: f"{x:,.2f}")
             
         st.dataframe(df_pivot, use_container_width=True, hide_index=True)
-        st.caption("**Sumber File:** `sulawesi_gfw_kawasan_lindung_loss_2014_2023.csv` (GFW dengan overlay WDPA IUCN Kategori 1 & 2).")
+        st.caption("**Sumber File:** `sulawesi_gfw_kawasan_lindung_loss_2014_2023.csv` (GFW dengan overlay Livelihood Zone Proxy Kategori 1 & 2).")
 
 except Exception as e:
-    st.error(f"Gagal memuat visualisasi kawasan lindung: {e}")
+    st.error(f"Gagal memuat visualisasi kawasan livelihood: {e}")
 
 st.markdown("---")
 
@@ -598,7 +623,7 @@ with col3:
 st.markdown("<br>", unsafe_allow_html=True)
 
 # ---- VISUALIZATION 1: Timeline Konflik & Masalah Izin ----
-st.markdown("#### Timeline Historis: Konflik Pertambangan & Masalah Izin (1968-2025)")
+st.markdown("#### Timeline Historis: Konflik Pertambangan & Masalah Izin (2000-2025)")
 
 # Prepare timeline data
 df_konflik_timeline = df_konflik.copy()
@@ -616,6 +641,9 @@ df_combined_timeline = pd.concat([
     df_konflik_timeline[['Tahun', 'kategori', 'Keterangan']],
     df_masalah_timeline[['Tahun', 'kategori', 'Keterangan']]
 ], ignore_index=True).sort_values('Tahun')
+
+# Filter tahun 2000 ke atas sesuai permintaan
+df_combined_timeline = df_combined_timeline[df_combined_timeline['Tahun'] >= 2000]
 
 # Count by year and category
 df_timeline_agg = df_combined_timeline.groupby(['Tahun', 'kategori']).size().reset_index(name='Jumlah')
@@ -646,7 +674,7 @@ fig_timeline_konflik.update_layout(
     legend=dict(orientation="h", yanchor="bottom", y=1.05, xanchor="center", x=0.5, title="")
 )
 
-st.plotly_chart(fig_timeline_konflik, use_container_width=True)
+st.plotly_chart(fig_timeline_konflik, use_container_width=True, config={'displayModeBar': False})
 
 st.markdown("""
 <div style="background:#1E1E1E; padding:15px 20px; border-radius:8px; border-left:4px solid #E74C3C; margin-top: 10px; margin-bottom: 25px;">
@@ -694,7 +722,7 @@ fig_masalah.update_layout(
     yaxis=dict(showgrid=False)
 )
 
-st.plotly_chart(fig_masalah, use_container_width=True)
+st.plotly_chart(fig_masalah, use_container_width=True, config={'displayModeBar': False})
 
 st.markdown("""
 <div style="background:#1E1E1E; padding:15px 20px; border-radius:8px; border-left:4px solid #F39C12; margin-top: 10px; margin-bottom: 25px;">

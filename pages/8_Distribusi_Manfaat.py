@@ -399,6 +399,22 @@ html_table = """
 
 st.markdown(html_table, unsafe_allow_html=True)
 
+with st.expander("Penjelasan Metodologi: Perhitungan Estimasi Rugi Ekologis"):
+    st.markdown("""
+    Kolom **Estimasi Rugi Ekologis** (yang mencapai rentang triliunan Rupiah) dihitung menggunakan pendekatan valuasi ekonomi lingkungan dengan mengadaptasi formula dari **Peraturan Menteri LHK No. 7 Tahun 2014**.
+    
+    Nilai raksasa tersebut merepresentasikan akumulasi nyata dari dua komponen utama yang selama ini ditanggung (disubsidi) oleh rakyat dan tidak pernah masuk dalam neraca rugi korporasi:
+    1. **Kerugian Ekonomi Publik:** Meliputi anjloknya hasil tangkapan nelayan akibat laut yang tercemar sedimen, matinya tanaman lada/kakao warga karena debu pabrik, hingga membengkaknya biaya pengobatan (*out-of-pocket*) masyarakat akibat wabah ISPA.
+    2. **Biaya Pemulihan Alam:** Mengkuantifikasi harga mutlak yang harus dibayar untuk merehabilitasi fungsi ekologis yang hancur, seperti biaya teknis reboisasi hutan, netralisasi air sungai dari limbah *slag* beracun, serta biaya sosial dari puluhan juta ton emisi karbon PLTU *captive*.
+    
+    **Matriks & Skala Formula Perhitungan:**
+    Secara matematis, estimasi kerugian masing-masing grup oligarki dihitung berdasarkan skala kerusakan fisik dari instrumen monopoli mereka:
+    `Total Kerugian Ekologis = (Luas Konsesi × Valuasi Hutan/Pesisir per Ha) + (Kapasitas PLTU MW × Biaya Sosial Emisi Karbon)`
+
+    * **Variabel Konsesi (Ha):** Semakin besar luasan konsesi (HGU/IUP) yang beroperasi menembus Cagar Alam, Taman Nasional, atau merangsek permukiman warga, maka nilai *multiplier* kerugian ekonomi dan pemulihan per hektarnya akan semakin dikalikan lipat secara eksponensial.
+    * **Variabel Emisi PLTU (MW):** Operasional PLTU *captive* berbahan bakar fosil oleh *smelter* dikonversi ke taksiran jejak karbon (Jutaan ton CO2 ekuivalen per tahun). Jejak karbon ini kemudian dikalikan dengan parameter *Social Cost of Carbon (SCC)* atau Nilai Ekonomi Karbon (NEK).
+    """)
+
 st.markdown("""
 <div style="background:#1E1E1E; padding:15px 20px; border-radius:8px; border-left:4px solid #66BB6A; margin-top: 10px; margin-bottom: 25px;">
     <span style="color: #E0E0E0; font-size: 0.95rem;">
@@ -481,54 +497,7 @@ with col_beb3:
 
 st.markdown("<br>", unsafe_allow_html=True)
 
-# Grafik Tren ISPA
-try:
-    df_kesehatan = pd.read_csv('data/processed/sulawesi_kesehatan_detail_2014_2024.csv')
-    df_ispa = df_kesehatan[df_kesehatan['indikator'] == 'Kasus ISPA/Pneumonia']
-    
-    # Filter hanya provinsi sentra nikel
-    prov_sentra = ['Sulawesi Tengah', 'Sulawesi Tenggara']
-    df_ispa_sentra = df_ispa[df_ispa['provinsi'].isin(prov_sentra)]
-    
-    # Agregasi per tahun
-    df_ispa_trend = df_ispa_sentra.groupby('tahun')['nilai'].sum().reset_index()
-    
-    import plotly.graph_objects as go
-    
-    fig_ispa = go.Figure()
-    fig_ispa.add_trace(go.Scatter(
-        x=df_ispa_trend['tahun'],
-        y=df_ispa_trend['nilai'],
-        mode='lines+markers+text',
-        name='Total Kasus ISPA (Sulteng & Sultra)',
-        line=dict(color='#FF5252', width=4),
-        marker=dict(size=10, color='#FF5252', line=dict(color='white', width=2)),
-        text=df_ispa_trend['nilai'].apply(lambda x: f"{int(x):,}"),
-        textposition='top center',
-        textfont=dict(color='#FF5252', size=11, weight='bold')
-    ))
-    
-    fig_ispa.update_layout(
-        title='Tren Kumulatif Kasus ISPA/Pneumonia di Episentrum Nikel (Sulawesi Tengah & Tenggara)',
-        plot_bgcolor='rgba(0,0,0,0)',
-        paper_bgcolor='rgba(0,0,0,0)',
-        xaxis=dict(title='Tahun', tickmode='linear', dtick=1, showgrid=False),
-        yaxis=dict(title='Jumlah Kasus ISPA / Pneumonia', showgrid=True, gridcolor='rgba(255,255,255,0.05)'),
-        height=450,
-        margin=dict(l=0, r=0, t=50, b=0)
-    )
-    
-    st.plotly_chart(fig_ispa, use_container_width=True)
-    
-    st.markdown("""
-    <div style="background:#1E1E1E; padding:15px 20px; border-radius:8px; border-left:4px solid #FF5252; margin-bottom: 25px;">
-        <span style="color: #E0E0E0; font-size: 0.95rem;">
-            <b style="color:#FF5252;">Interpretasi Darurat Udara:</b> Grafik di atas merekam penderitaan napas puluhan ribu warga di sekitar kawasan industri smelter. Rata-rata 10.000+ kasus terjadi setiap tahunnya di dua provinsi episentrum tersebut. Angka yang sempat turun di era pandemi (2020-2021) akibat pembatasan mobilitas, kini kembali melonjak drastis pasca-2022, berjalan beriringan secara mematikan dengan masifnya aktivasi tungku PLTU Captive baru di kawasan Morowali dan Konawe.
-        </span>
-    </div>
-    """, unsafe_allow_html=True)
-except Exception as e:
-    st.error(f"Gagal memuat grafik ISPA: {e}")
+# Grafik Tren ISPA (Telah dipindahkan/dihapus karena duplikasi)
 
 st.markdown("---")
 

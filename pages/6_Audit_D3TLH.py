@@ -696,7 +696,7 @@ with colA2:
                     yaxis2=dict(title="Indeks Kualitas Udara (IKU)", showgrid=False, overlaying='y', side='right', range=[50, 100]),
                     hovermode="x unified", margin=dict(l=0, r=0, t=40, b=0)
                 )
-                st.plotly_chart(fig_2_2_combined, use_container_width=True)
+                st.plotly_chart(fig_2_2_combined, use_container_width=True, config={'displayModeBar': False})
                 
                 with st.expander("Lihat Data Mentah: Kapasitas PLTU per Provinsi", expanded=False):
                     df_pivot_pltu = df_pltu_trend.pivot(index='Tahun', columns='Provinsi', values='Kapasitas_PLTU_MW').reset_index()
@@ -745,7 +745,7 @@ with colA2:
                     yaxis=dict(title="Jumlah Kasus", showgrid=True, gridcolor='rgba(255,255,255,0.1)', zeroline=False),
                     margin=dict(l=0, r=0, t=40, b=0)
                 )
-                st.plotly_chart(fig_3_3, use_container_width=True)
+                st.plotly_chart(fig_3_3, use_container_width=True, config={'displayModeBar': False})
                 
                 with st.expander("Lihat Data Panel: Kasus ISPA/Pneumonia (2014-2024)", expanded=False):
                     df_ts_pivot = df_ts_agg.pivot(index='tahun', columns='provinsi', values='nilai').reset_index()
@@ -775,7 +775,7 @@ with colA2:
                 
                 fig_b3.update_traces(texttemplate='%{text:,.0f} ton', textposition='outside')
                 fig_b3.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-                st.plotly_chart(fig_b3, use_container_width=True)
+                st.plotly_chart(fig_b3, use_container_width=True, config={'displayModeBar': False})
                 
                 with st.expander("Lihat Data Mentah: Timbulan Limbah B3", expanded=False):
                     st.dataframe(df_b3, use_container_width=True, hide_index=True)
@@ -805,7 +805,7 @@ with colA2:
                                    annotation_text="Threshold Kritis: 150 Jt Ton CO2e (Gagal NDC FOLU — SK.168/MENLHK)",
                                    annotation_font_color="#FF5252", annotation_position="top left")
                 fig_emisi.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-                st.plotly_chart(fig_emisi, use_container_width=True)
+                st.plotly_chart(fig_emisi, use_container_width=True, config={'displayModeBar': False})
                 
                 with st.expander("Lihat Data Panel: Emisi CO2 Deforestasi", expanded=False):
                     df_emisi_pivot = df_emisi_trend.pivot(index='Tahun', columns='Provinsi', values='Total_Emisi_CO2_Megagram').reset_index()
@@ -915,7 +915,7 @@ with colB2:
                            title="Runtuhnya Indeks Kualitas Air (IKA) di Area Sentra Nikel")
             fig_w1.add_hline(y=50, line_dash="dot", annotation_text="Batas Kritis Cemar (50)", annotation_position="bottom right", line_color="#E74C3C")
             fig_w1.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-            st.plotly_chart(fig_w1, use_container_width=True)
+            st.plotly_chart(fig_w1, use_container_width=True, config={'displayModeBar': False})
             
     with tab_w2:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> AMDAL gagal menghitung dampak kontaminasi logam berat ke air tanah yang dikonsumsi warga, dibuktikan dengan ledakan pasien Diare di lingkar tambang. <b>Threshold Kritis: Incidence Rate Ratio (IRR) > 2.0</b> (Risiko 2x lipat dari populasi rata-rata). Sumber: <i>Kemenkes Profil Kesehatan 2023, Hal. 112</i>.</div>", unsafe_allow_html=True)
@@ -931,7 +931,7 @@ with colB2:
             df_d_agg = df_diare_trend.groupby(['tahun', 'Kategori'])['nilai'].sum().reset_index()
             fig_w2 = px.area(df_d_agg, x='tahun', y='nilai', color='Kategori', title="Ledakan Kasus Diare (Indikator Kualitas Air Tanah)")
             fig_w2.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-            st.plotly_chart(fig_w2, use_container_width=True)
+            st.plotly_chart(fig_w2, use_container_width=True, config={'displayModeBar': False})
 
     with tab_w3:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Ekosistem tangkap nelayan dihancurkan oleh limbah tailing dan privatisasi pesisir untuk Smelter, memicu lonjakan konflik agraria laut.</div>", unsafe_allow_html=True)
@@ -946,7 +946,7 @@ with colB2:
             fig_w3 = px.bar(df_k_trend, x='Tahun', y='Jumlah', title="Frekuensi Letusan Konflik Pesisir & Nelayan per Tahun")
             fig_w3.add_vline(x=2015, line_dash="dot", line_color="#E74C3C", annotation_text="Awal Eskalasi Smelter")
             fig_w3.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-            st.plotly_chart(fig_w3, use_container_width=True)
+            st.plotly_chart(fig_w3, use_container_width=True, config={'displayModeBar': False})
 
     with tab_w4:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Resiko kebocoran Tailings Dam (Bendungan Tailing) atau Deep Sea Tailing Placement (DSTP) yang ditutupi oleh klaim 'mitigasi teknologi'. <b>Threshold Kritis: 25 Juta Ton/Tahun</b> (Batas Kapasitas AMDAL Gabungan Kawasan IMIP & OSS). Sumber: <i>Dokumen AMDAL KLHK, PPID</i>.</div>", unsafe_allow_html=True)
@@ -961,7 +961,7 @@ with colB2:
                                 color='Estimasi Timbulan (Ton/Tahun)', color_continuous_scale='Blues',
                                 title="Proporsi Beban Limbah Tailing & B3 ke Ekosistem Air")
             fig_w4.update_layout(template="plotly_dark", margin=dict(l=0, r=0, t=40, b=0))
-            st.plotly_chart(fig_w4, use_container_width=True)
+            st.plotly_chart(fig_w4, use_container_width=True, config={'displayModeBar': False})
 
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -1011,7 +1011,7 @@ with colC2:
                            color_discrete_sequence=px.colors.qualitative.Pastel)
             fig_l1.add_hline(y=88, line_dash="dash", line_color="#E74C3C", annotation_text="Batas Darurat Bencana (88/Tahun)", annotation_position="top left")
             fig_l1.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-            st.plotly_chart(fig_l1, use_container_width=True)
+            st.plotly_chart(fig_l1, use_container_width=True, config={'displayModeBar': False})
             with st.expander("Tampilkan Data Mentah (BNPB)"):
                 st.dataframe(df_bencana, use_container_width=True)
 
@@ -1032,7 +1032,7 @@ with colC2:
                            title="Laju Deforestasi Akibat Pertambangan & Sawit")
             fig_l2.add_hline(y=63800, line_dash="dash", line_color="#E74C3C", annotation_text="Batas Kritis Tahunan (63.800 Ha)", annotation_position="bottom right")
             fig_l2.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-            st.plotly_chart(fig_l2, use_container_width=True)
+            st.plotly_chart(fig_l2, use_container_width=True, config={'displayModeBar': False})
             with st.expander("Tampilkan Data Mentah (Global Forest Watch)"):
                 st.dataframe(df_gfw, use_container_width=True)
 
@@ -1052,7 +1052,7 @@ with colC2:
             fig_l3 = px.area(df_gl_trend, x='Tahun', y='Luas_Hilang_Kawasan_Lindung_Ha', color='Provinsi',
                            title="Tren Perambahan Deforestasi di Kawasan Lindung (Protected Areas)")
             fig_l3.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-            st.plotly_chart(fig_l3, use_container_width=True)
+            st.plotly_chart(fig_l3, use_container_width=True, config={'displayModeBar': False})
             with st.expander("Tampilkan Data Mentah Kawasan Lindung (GFW)"):
                 st.dataframe(df_gfw_lindung, use_container_width=True)
 
@@ -1073,7 +1073,7 @@ with colC2:
                            color_discrete_sequence=px.colors.qualitative.Bold)
             fig_l4.update_traces(textposition='inside', textinfo='percent+label')
             fig_l4.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-            st.plotly_chart(fig_l4, use_container_width=True)
+            st.plotly_chart(fig_l4, use_container_width=True, config={'displayModeBar': False})
             with st.expander("Tampilkan Data Mentah Drivers (GFW)"):
                 st.dataframe(df_gfw_driver, use_container_width=True)
 
@@ -1138,7 +1138,7 @@ with colD2:
                 fig_s1 = px.area(df_k_trend, x='tahun', y='jumlah', title="Frekuensi Letusan Konflik Perampasan Lahan Tahunan", color_discrete_sequence=['#9C27B0'])
                 fig_s1.add_hline(y=10, line_dash="dash", line_color="#E74C3C", annotation_text="Batas Darurat Nasional (10 Konflik/Thn)", annotation_position="top left")
                 fig_s1.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-                st.plotly_chart(fig_s1, use_container_width=True)
+                st.plotly_chart(fig_s1, use_container_width=True, config={'displayModeBar': False})
 
     with tab_s3:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Di fase akhir, ketika warga melakukan penolakan yang sah atas perampasan, negara tidak hadir melindungi, melainkan mengirim aparat untuk memenjarakan mereka.</div>", unsafe_allow_html=True)
@@ -1157,7 +1157,7 @@ with colD2:
                 fig_s2 = px.bar(krim_trend, x='tahun', y='jumlah', title="Tren Insiden Kriminalisasi & Kekerasan Terhadap Warga", color_discrete_sequence=['#E74C3C'])
                 fig_s2.add_hline(y=5, line_dash="dash", line_color="#F1C40F", annotation_text="Batas Toleransi Demokrasi", annotation_position="top left")
                 fig_s2.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-                st.plotly_chart(fig_s2, use_container_width=True)
+                st.plotly_chart(fig_s2, use_container_width=True, config={'displayModeBar': False})
                 with st.expander("Tampilkan Data Indikasi Kriminalisasi"):
                     st.dataframe(krim_df[['tahun', 'judul', 'sektor', 'jumlah_ditangkap', 'jumlah_luka']], use_container_width=True)
 
@@ -1179,7 +1179,7 @@ with colD2:
                             color_discrete_map={'Sulawesi Tengah': '#27AE60', 'Sulawesi Tenggara': '#3498DB'})
             fig_s4.add_annotation(x=2024, y=df_f_agg['jumlah'].max(), text=f"Meski unit bertambah, standar SPA mentok di {spa_aktual_pct}% (Target RPJMN 80%)", showarrow=False, yshift=20, font=dict(color="#E74C3C"))
             fig_s4.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-            st.plotly_chart(fig_s4, use_container_width=True)
+            st.plotly_chart(fig_s4, use_container_width=True, config={'displayModeBar': False})
             with st.expander("Tampilkan Data Unit Faskes Fisik (Kemenkes)"):
                 st.dataframe(df_f_plot, use_container_width=True)
 
@@ -1224,7 +1224,7 @@ with colE2:
             df_izin_plot = df_izin[df_izin['Tahun'] >= 2014].copy()
             fig_v1 = px.bar(df_izin_plot, x='Tahun', y='Jumlah_Izin_Baru', title="Lonjakan Penerbitan IUP di Era Krisis Lingkungan", color_discrete_sequence=['#E67E22'])
             fig_v1.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-            st.plotly_chart(fig_v1, use_container_width=True)
+            st.plotly_chart(fig_v1, use_container_width=True, config={'displayModeBar': False})
             with st.expander("Tampilkan Data Penerbitan Izin (Ditjen Minerba)"):
                 st.dataframe(df_izin_plot, use_container_width=True)
 
@@ -1253,7 +1253,7 @@ with colE2:
             pltu_status = df_pltu_captive.groupby('Status').size().reset_index(name='jumlah')
             fig_v3 = px.pie(pltu_status, names='Status', values='jumlah', title="Proporsi Status PLTU Batubara Captive di Sulawesi", hole=0.4, color_discrete_sequence=px.colors.sequential.Oranges_r)
             fig_v3.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-            st.plotly_chart(fig_v3, use_container_width=True)
+            st.plotly_chart(fig_v3, use_container_width=True, config={'displayModeBar': False})
             with st.expander("Tampilkan Data PLTU Captive (Global Energy Monitor)"):
                 st.dataframe(df_pltu_captive[['Plant name', 'Owner', 'Status', 'Capacity (MW)']], use_container_width=True)
 

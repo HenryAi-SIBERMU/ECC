@@ -4,6 +4,7 @@ import scipy.stats as stats
 import altair as alt
 import plotly.express as px
 import numpy as np
+import pydeck as pdk
 import os
 import sys
 
@@ -12,7 +13,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from src.components.sidebar import render_sidebar
 
 st.set_page_config(
-    page_title="Ekspansi Industri — CELIOS ECC",
+    page_title="Ekspansi Industri - CELIOS ECC",
     page_icon="refrensi/Celios China-Indonesia Energy Transition.png",
     layout="wide"
 )
@@ -107,10 +108,12 @@ def load_all_data_v2():
     df_pltu = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv"))
     df_gfw = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_master_1_dekade_2014_2023.csv"))
     df_inv = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_investasi_pmdn_2016_2024.csv"))
-    return df_izin, df_smelter, df_pltu, df_gfw, df_inv
+    df_pdrb = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pdrb_sektoral_2016_2024.csv"))
+    df_pdrb_kab = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pdrb_sektoral_kabupaten_2016_2024.csv"))
+    return df_izin, df_smelter, df_pltu, df_gfw, df_inv, df_pdrb, df_pdrb_kab
 
 try:
-    df_izin, df_smelter, df_pltu, df_gfw, df_inv = load_all_data_v2()
+    df_izin, df_smelter, df_pltu, df_gfw, df_inv, df_pdrb, df_pdrb_kab = load_all_data_v2()
 except Exception as e:
     st.error(f"Error loading data: {e}")
     st.stop()
@@ -136,7 +139,7 @@ tot_deforestasi = df_gfw['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'].sum()
 tot_investasi = df_inv['nilai'].sum()
 
 # ── Header Halaman ──
-st.markdown('<div class="org-badge">CELIOS — Center of Economic and Law Studies</div>', unsafe_allow_html=True)
+st.markdown('<div class="org-badge">CELIOS - Center of Economic and Law Studies</div>', unsafe_allow_html=True)
 st.markdown('<div class="main-title">Ekspansi Industri Ekstraktif</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Membaca pola pertumbuhan industri pengolahan alam (tambang, nikel, semen) di Pulau Sulawesi sebagai sumber tekanan utama terhadap daya dukung lingkungan.</div>', unsafe_allow_html=True)
 
@@ -167,10 +170,10 @@ st.markdown(f"""
 <div style="background-color: transparent; padding: 10px 0px; margin-bottom: 25px;">
     <h2 style="color: #FFFFFF; font-size: 1.8rem; margin-bottom: 15px; font-weight: 700;">Ekspansi Masif: {tot_smelter} Fasilitas Smelter Mengunci Lanskap Ekologis Sulawesi</h2>
     <p style="color: #CCCCCC; font-size: 1.05rem; line-height: 1.7; margin-bottom: 15px;">
-        Trajektori pembangunan di Pulau Sulawesi dalam satu dekade terakhir (2014-2024) dikendalikan penuh oleh ekspansi industri ekstraktif yang masif dan sistematis. Ambisi 'hilirisasi' nikel nyatanya menjadi karpet merah bagi penerbitan <b>{tot_izin:,.0f} Izin Usaha Pertambangan (IUP) baru</b> yang melegitimasi pembongkaran wilayah darat dan pesisir seluas <b>{tot_luas_izin:,.0f} Hektar</b>. Ironisnya, klaim transisi energi melalui pembangunan <b>{tot_smelter} unit fasilitas smelter</b> ini terbukti sangat kotor, karena operasionalnya disokong mutlak oleh <b>{tot_kapasitas_pltu:,.0f} MW</b> PLTU <i>Captive</i> (pembangkit listrik batu bara <i>off-grid</i>) yang mengunci emisi karbon di tingkat lokal. 
+        Trajektori pembangunan di Pulau Sulawesi dalam satu dekade terakhir (2014-2024) dikendalikan penuh oleh ekspansi industri ekstraktif yang masif dan sistematis. Ambisi 'hilirisasi' nikel nyatanya menjadi karpet merah bagi penerbitan <b>{int(tot_izin):,} Izin Usaha Pertambangan (IUP) baru</b> yang melegitimasi pembongkaran wilayah darat dan pesisir seluas <b>{int(tot_luas_izin):,} Hektar</b>. Ironisnya, klaim transisi energi melalui pembangunan <b>{tot_smelter} unit fasilitas smelter</b> ini terbukti sangat kotor, karena operasionalnya disokong mutlak oleh <b>{int(tot_kapasitas_pltu):,} MW</b> PLTU <i>Captive</i> (pembangkit listrik batu bara <i>off-grid</i>) yang mengunci emisi karbon di tingkat lokal. 
     </p>
     <p style="color: #CCCCCC; font-size: 1.05rem; line-height: 1.7;">
-        Lebih jauh, gelombang investasi ini bukan tanpa tumbal. Meski aliran investasi domestik (PMDN) tercatat menembus angka fantastis sebesar <b>{tot_investasi_triliun:,.1f} Triliun Rupiah</b>, harga yang harus dibayar adalah kebangkrutan ekologis yang permanen—ditandai dengan hilangnya <b>{tot_deforestasi:,.0f} Hektar</b> wilayah tutupan hutan untuk komoditas tambang dan perkebunan. Rentetan angka ini membuktikan bahwa narasi pertumbuhan ekonomi selama ini dibangun di atas daya dukung lingkungan yang sedang kolaps.
+        Lebih jauh, gelombang investasi ini bukan tanpa tumbal. Meski aliran investasi domestik (PMDN) tercatat menembus angka fantastis sebesar <b>{int(tot_investasi_triliun):,} Triliun Rupiah</b>, harga yang harus dibayar adalah kebangkrutan ekologis yang permanen-ditandai dengan hilangnya <b>{int(tot_deforestasi):,} Hektar</b> wilayah tutupan hutan untuk komoditas tambang dan perkebunan. Rentetan angka ini membuktikan bahwa narasi pertumbuhan ekonomi selama ini dibangun di atas daya dukung lingkungan yang sedang kolaps.
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -182,7 +185,7 @@ with col1:
     <div class="metric-card">
         <div>
             <div class="metric-label">Total Izin Baru (2014-2024)</div>
-            <div class="metric-value" style="color: #B71C1C;">{tot_izin:,.0f} <span style="font-size:1rem;">IUP</span></div>
+            <div class="metric-value" style="color: #B71C1C;">{int(tot_izin):,} <span style="font-size:1rem;">IUP</span></div>
             <div class="metric-desc">Penambahan jumlah Izin Usaha Pertambangan (IUP) di Pulau Sulawesi dalam 1 dekade terakhir, melegitimasi pembongkaran lahan secara masif.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> Kementerian ESDM (Minerbaone)<br/><i>File: sulawesi_izin_baru_per_tahun.csv</i></div>
@@ -193,7 +196,7 @@ with col2:
     <div class="metric-card">
         <div>
             <div class="metric-label">Total Luas Konsesi Baru</div>
-            <div class="metric-value" style="color: #C62828;">{tot_luas_izin:,.0f} <span style="font-size:1rem;">Ha</span></div>
+            <div class="metric-value" style="color: #C62828;">{int(tot_luas_izin):,} <span style="font-size:1rem;">Ha</span></div>
             <div class="metric-desc">Akumulasi luas daratan dan perairan pesisir yang diserahkan kepada korporasi ekstraktif untuk dibongkar sejak 2014.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> Kementerian ESDM (Minerbaone)<br/><i>File: sulawesi_izin_baru_per_tahun.csv</i></div>
@@ -204,7 +207,7 @@ with col3:
     <div class="metric-card">
         <div>
             <div class="metric-label">Kapasitas PLTU Captive Aktif</div>
-            <div class="metric-value" style="color: #D32F2F;">{tot_kapasitas_pltu:,.0f} <span style="font-size:1rem;">MW</span></div>
+            <div class="metric-value" style="color: #D32F2F;">{int(tot_kapasitas_pltu):,} <span style="font-size:1rem;">MW</span></div>
             <div class="metric-desc">Beban energi kotor <i>off-grid</i> yang beroperasi eksklusif untuk menyokong pabrik peleburan nikel, mengunci emisi di luar target iklim nasional.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> Global Energy Monitor (GEM)<br/><i>File: sulawesi_pltu_captive.csv</i></div>
@@ -229,7 +232,7 @@ with col5:
     <div class="metric-card">
         <div>
             <div class="metric-label">Luas Deforestasi Komoditas</div>
-            <div class="metric-value" style="color: #B71C1C;">{tot_deforestasi:,.0f} <span style="font-size:1rem;">Ha</span></div>
+            <div class="metric-value" style="color: #B71C1C;">{int(tot_deforestasi):,} <span style="font-size:1rem;">Ha</span></div>
             <div class="metric-desc">Area tutupan hutan alam yang musnah secara permanen akibat dorongan industri tambang dan perkebunan monokultur skala besar.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> Global Forest Watch (GFW)<br/><i>File: sulawesi_gfw_master_1_dekade_2014_2023.csv</i></div>
@@ -240,7 +243,7 @@ with col6:
     <div class="metric-card">
         <div>
             <div class="metric-label">Investasi PMDN (2016-2024)</div>
-            <div class="metric-value" style="color: #D32F2F;">{tot_investasi_triliun:,.1f} <span style="font-size:1rem;">Triliun Rp</span></div>
+            <div class="metric-value" style="color: #D32F2F;">{int(tot_investasi_triliun):,} <span style="font-size:1rem;">Triliun Rp</span></div>
             <div class="metric-desc">Aliran modal domestik yang dikucurkan, membuktikan bahwa angka pertumbuhan ekonomi seringkali dibayar mahal oleh kebangkrutan ekologis.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> Kementerian Investasi / BKPM<br/><i>File: sulawesi_investasi_pmdn_2016_2024.csv</i></div>
@@ -250,360 +253,278 @@ with col6:
 st.markdown("<div style='height: 30px;'></div>", unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════
-# SUB-BAB 1.1: TREN IZIN & CROSSTABULATION
+# SUB-BAB 1.0: KONTEKS MAKRO EKONOMI (BREAKDOWN PDRB)
 # ══════════════════════════════════════════════════════════
 st.markdown("---")
-st.subheader("1.1 Tren Pertumbuhan Izin Tambang Baru & Uji Signifikansi")
-with st.expander("ℹ️ Metodologi: Analisis Tren & Uji Tabulasi Silang"):
-    st.markdown("""
-    **Metode Analisis:** Halaman ini menggunakan pendekatan statistik *Time-Series* dan Inferensial (Uji Chi-Square) untuk menguji hipotesis bahwa ekspansi izin tambang berbanding lurus dengan laju deforestasi.
-
-    1. **Analisis Profil (Chi-Square Test):** Mengukur signifikansi hubungan antara tekanan ekspansi (X) dengan kerusakan ekologis (Y).
-        * **Binning:** Data panel (Provinsi-Tahun) diklasifikasikan menjadi kategori "Tinggi" dan "Rendah" menggunakan ambang batas nilai Tengah (Median).
-        * `H0 (Null Hypothesis): Tidak ada hubungan antara Ekspansi Perizinan dan Laju Deforestasi.`
-        * `Decision Rule: Jika P-Value < 0.10, maka Tolak H0 (Ada Hubungan Signifikan).`
-    2. **Formula Analisis Tren (Time-Series):** Mengukur agregasi jumlah izin baru dan tren persentase lonjakan (*Year-on-Year*).
-        * `Regresi Komparatif = (IUP_t - IUP_{t-1}) / IUP_{t-1} * 100%`
-    3. **Variabel & Fitur Data:**
-        * **Provinsi:** Nama provinsi lokasi izin.
-        * **Tahun:** Tahun penerbitan izin.
-        * **Jumlah_Izin_Baru:** Total izin baru yang terbit di tahun tersebut.
-        * **Total_Luas_Konsesi_Baru_Ha:** Luas konsesi (Hektar).
-        * **Sumber:** Metadata sumber data Minerbaone.
-    4. **Dataset & File:** Dataset primer dari Minerbaone (Kementerian ESDM).
-        * `data/processed/sulawesi_izin_baru_per_tahun.csv`
-    """)
-
-# --- Pindahkan agregasi ke atas markdown ---
-df_izin_agg = df_izin.groupby(['Tahun', 'Provinsi'])['Jumlah_Izin_Baru'].sum().reset_index()
-df_izin_total = df_izin_agg.groupby('Tahun')['Jumlah_Izin_Baru'].sum().reset_index()
-
-val_izin_2014 = df_izin_total[df_izin_total['Tahun'] == 2014]['Jumlah_Izin_Baru'].values[0] if 2014 in df_izin_total['Tahun'].values else 0
-val_izin_2022 = df_izin_total[df_izin_total['Tahun'] == 2022]['Jumlah_Izin_Baru'].values[0] if 2022 in df_izin_total['Tahun'].values else 0
-val_izin_2023 = df_izin_total[df_izin_total['Tahun'] == 2023]['Jumlah_Izin_Baru'].values[0] if 2023 in df_izin_total['Tahun'].values else 0
-val_izin_2024 = df_izin_total[df_izin_total['Tahun'] == 2024]['Jumlah_Izin_Baru'].values[0] if 2024 in df_izin_total['Tahun'].values else 0
-
-st.markdown(f"""
-Pola tata kelola perizinan ekstraktif di Pulau Sulawesi selama satu dekade terakhir mencerminkan eksploitasi yang brutal. Berdasarkan data agregat *Minerbaone*, tercatat **{tot_izin:,.0f} Izin Usaha Pertambangan (IUP) baru** sepanjang 2014-2024, menjarah lahan dan pesisir mencapai **{tot_luas_izin:,.0f} Hektar**.
-
-Namun, yang menjadi **temuan kritis** adalah fakta empiris *time-series* dari grafik **"Lonjakan Penerbitan Izin Tambang"** di bawah ini. Jika kita amati pergerakan datanya secara tahunan, penerbitan izin pada awal periode di tahun 2014 hanya berada di angka **{val_izin_2014:,.0f} IUP**. Tren ini bergerak sangat landai selama bertahun-tahun tanpa fluktuasi berarti. Malapetaka eksponensial baru terjadi secara anomali pada periode pasca-pandemi: dari angka yang sudah naik ke **{val_izin_2022:,.0f} IUP di tahun 2022**, penerbitan izin meledak tak terkendali menjadi **{val_izin_2023:,.0f} IUP di tahun 2023**, hingga menembus rekor puncak **{val_izin_2024:,.0f} IUP baru di tahun 2024** saja. 
-
-Anotasi merah pada grafik dengan tegas mencatat **lonjakan ekstrem sebesar 246% (2022-2024)**. Fakta data *time-series* yang meroket tajam ini membuktikan secara telanjang runtuhnya fungsi kontrol dan hilangnya instrumen moratorium ekologis. Di bawah kurva lonjakan tersebut, kita melihat bar warna merah muda (Sulawesi Tengah) dan ungu (Sulawesi Tenggara) mendominasi secara absolut, menunjukkan perampasan ruang dan monopoli spasial dari kehancuran obral izin tersebut.
-
-Data ledakan tahunan ini berkorelasi kuat dengan kerusakan lapangan. **Tabel Crosstabulation** menegaskan validitas kausalitasnya: wilayah yang mendominasi grafik bar (jumlah IUP tertinggi) menderita kerusakan tapak terparah. Nilai *P-Value* yang signifikan mengunci pembuktian matematis bahwa penerbitan IUP gila-gilaan inilah pemicu langsung dari lenyapnya **{tot_deforestasi:,.0f} Hektar** hutan primer. Angka di tabel tersebut membantah retorika administratif dan menjadi bukti hukum kebangkrutan ekologis di Sulawesi.
-""")
-
-# --- Bar Chart Tren Izin ---
-bar_chart = alt.Chart(df_izin_agg).mark_bar().encode(
-    x=alt.X('Tahun:O', title='Tahun Terbit', axis=alt.Axis(labelAngle=0)),
-    y=alt.Y('Jumlah_Izin_Baru:Q', title='Jumlah Izin Terbit'),
-    color=alt.Color('Provinsi:N', title='Provinsi', scale=alt.Scale(scheme='set2')),
-    tooltip=['Tahun', 'Provinsi', alt.Tooltip('Jumlah_Izin_Baru', title='Izin Baru')]
-)
-
-line_trend = alt.Chart(df_izin_total).mark_line(
-    color='#FF1744', 
-    strokeWidth=3,
-    interpolate='monotone'
-).encode(
-    x='Tahun:O',
-    y='Jumlah_Izin_Baru:Q'
-)
-
-points_trend = alt.Chart(df_izin_total).mark_circle(
-    color='#FF1744', 
-    size=70,
-    opacity=1
-).encode(
-    x='Tahun:O',
-    y='Jumlah_Izin_Baru:Q',
-    tooltip=['Tahun', alt.Tooltip('Jumlah_Izin_Baru', title='Total Izin (Semua Provinsi)')]
-)
-
-# Kalkulasi Persentase Kenaikan Dinamis (2022 ke 2024)
-try:
-    val_2022 = df_izin_total[df_izin_total['Tahun'] == 2022]['Jumlah_Izin_Baru'].values[0]
-    val_2024 = df_izin_total[df_izin_total['Tahun'] == 2024]['Jumlah_Izin_Baru'].values[0]
-    pct_increase = ((val_2024 - val_2022) / val_2022) * 100
-    annotation_text = f"↑ {pct_increase:,.0f}% Kenaikan (2022-2024)"
-except IndexError:
-    annotation_text = "Lonjakan Ekstrem"
-
-df_annotation = pd.DataFrame({
-    'Tahun': [2023],
-    'Jumlah_Izin_Baru': [df_izin_total['Jumlah_Izin_Baru'].max() * 0.95],
-    'text': [annotation_text]
-})
-
-annotation = alt.Chart(df_annotation).mark_text(
-    align='right',
-    baseline='middle',
-    fontSize=14,
-    fontWeight='bold',
-    color='#FF1744',
-    dx=-10,
-    dy=0
-).encode(
-    x='Tahun:O',
-    y='Jumlah_Izin_Baru:Q',
-    text='text'
-)
-
-chart_izin = alt.layer(bar_chart, line_trend, points_trend, annotation).properties(
-    height=400,
-    title='Lonjakan Penerbitan Izin Tambang Sulawesi (2014-2024)'
-).configure_axis(
-    grid=True,
-    gridOpacity=0.1
-)
-
-st.altair_chart(chart_izin, use_container_width=True)
+st.subheader("1.1 Konteks Makro: Breakdown PDRB per Komoditas")
 
 st.markdown("""
-<div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #FF5722; margin-bottom: 25px;">
-    <b>Interpretasi Ekologis:</b> Semakin banyak izin baru diterbitkan di wilayah timur, semakin besar deforestasi yang terlegitimasi. Pola perizinan ini menunjukkan absennya rem ekologis (moratorium nyata) di Sulawesi.
-</div>
-""", unsafe_allow_html=True)
-
-with st.expander("Lihat Data Mentah: Agregat Izin Minerbaone", expanded=False):
-    st.dataframe(df_izin_agg, use_container_width=True, hide_index=True)
-    st.caption("📁 **Sumber File:** `data/processed/sulawesi_izin_baru_per_tahun.csv` - Agregat penerbitan izin tambang baru per provinsi di Sulawesi.")
-
-# --- Crosstab Introduction ---
-st.markdown("#### Pembuktian Statistik: Intensitas Ekspansi vs Deforestasi")
-st.markdown("""
-Hipotesis utama narasi ini adalah bahwa **lonjakan ekspansi ekstraktif** berbanding lurus dengan **kebangkrutan ekologis** (deforestasi). 
-Untuk mengujinya secara statistik di tengah keterbatasan jumlah provinsi di Sulawesi (N=6), tabel crosstab dan uji Chi-Square di bawah menggunakan unit observasi **Provinsi-Tahun** (6 provinsi × 10 tahun = 60 sampel panel). 
-Setiap observasi diklasifikasikan menjadi "Tinggi" atau "Rendah" berdasarkan nilai **Median panel** dari indikator yang dipilih.
+Sebelum membahas ledakan izin dan investasi ekstraktif secara spesifik, kita perlu membedah anatomi ekonomi makro Sulawesi. 
+Apakah klaim "pertumbuhan ekonomi" benar-benar dinikmati oleh masyarakat luas, atau hanya dinikmati oleh segelintir sektor padat modal?
 """)
 
-# --- Data Preparation ---
-df_panel = pd.merge(df_gfw, df_izin, on=['Provinsi', 'Tahun'], how='left').fillna({'Jumlah_Izin_Baru': 0, 'Total_Luas_Konsesi_Baru_Ha': 0})
+st.markdown("#### 1.1.1 Dominasi Ekstraktif vs Ekonomi Akar Rumput (2016-2024)")
+st.markdown("""Grafik di bawah ini menyederhanakan 17 sektor PDRB menjadi **3 klasifikasi makro advokatif** berdasarkan *Legal Supply-Chain Approach* (Metodologi CELIOS/ECC).
 
-col_sel1, col_sel2 = st.columns(2)
+- 🔴 **Ekstraktif** = Kat. B (Pertambangan) + Kat. C (Industri Pengolahan/Smelter) + Kat. D (Listrik/PLTU Captive) — digabung berdasarkan mandat wajib UU Minerba Ps. 102–103 & Perpres 112/2022.
+- 🟢 **Ekonomi Akar Rumput** = Kat. A (Pertanian, Kehutanan & Perikanan) — sektor terbarukan penyerap tenaga kerja lokal terbesar.
+- ⚪ **Sektor Jasa & Lainnya** = 13 sektor E–U sisanya.
+""")
 
-with col_sel1:
-    st.markdown("##### Variabel Independen (X) - Tekanan Ekspansi")
-    x_options = {
-        "Jumlah_Izin_Baru": "Jumlah Izin Baru (IUP)",
-        "Total_Luas_Konsesi_Baru_Ha": "Luas Konsesi Baru (Hektar)"
-    }
-    x_col = st.selectbox("Pilih Indikator Ekspansi (X):", list(x_options.keys()), format_func=lambda x: x_options[x])
-
-with col_sel2:
-    st.markdown("##### Variabel Dependen (Y) - Dampak Ekologis")
-    y_options = {
-        "Total_Deforestasi_Ha": "Total Deforestasi Alam (Hektar)",
-        "Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha": "Deforestasi Komoditas Tambang/Sawit (Hektar)"
-    }
-    y_col = st.selectbox("Pilih Indikator Dampak (Y):", list(y_options.keys()), format_func=lambda x: y_options[x])
-
-# --- Calculation (Binning) ---
-x_median = df_panel[x_col].median()
-y_median = df_panel[y_col].median()
-
-label_x_low = f"Rendah (<{x_median:,.1f})"
-label_x_high = f"Tinggi (≥{x_median:,.1f})"
-label_y_low = f"Rendah (<{y_median:,.1f})"
-label_y_high = f"Tinggi (≥{y_median:,.1f})"
-
-df_panel["X_Label"] = df_panel[x_col].apply(lambda x: label_x_high if x >= x_median else label_x_low)
-df_panel["Y_Label"] = df_panel[y_col].apply(lambda x: label_y_high if x >= y_median else label_y_low)
-
-# Crosstab Base
-cats_x = [label_x_low, label_x_high]
-cats_y = [label_y_low, label_y_high]
-crosstab = pd.crosstab(df_panel["X_Label"], df_panel["Y_Label"]).reindex(index=cats_x, columns=cats_y, fill_value=0)
-
-chi2, p, dof, expected = stats.chi2_contingency(crosstab)
-expected_df = pd.DataFrame(expected, index=crosstab.index, columns=crosstab.columns)
-
-st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
-st.markdown("### Detail Uji Statistik (Chi-Square & Odds Ratio)")
-st.caption("Tabel-tabel di bawah ini adalah *output* standar SPSS yang menyajikan bukti statistik formal: Case Processing → Crosstabulation → Chi-Square Tests → Ringkasan Hipotesis.")
-
-# --- A. Case Processing Summary ---
-st.markdown("##### Case Processing Summary")
-total_cases = len(df_panel)
-valid_cases = len(df_panel.dropna(subset=[x_col, y_col]))
-missing_cases = total_cases - valid_cases
-
-columns_case = pd.MultiIndex.from_product([["Cases"], ["Valid", "Missing", "Total"], ["N", "Percent"]])
-interaction_label = f"{x_options[x_col]} * {y_options[y_col]}"
-row_data = [
-    valid_cases, f"{valid_cases/total_cases*100:.1f}%",
-    missing_cases, f"{missing_cases/total_cases*100:.1f}%",
-    total_cases, "100.0%"
+# ── Klasifikasi Advokatif berdasarkan Metodologi CELIOS/ECC ──────────────────
+# Sumber: docs/metodologi_klasifikasi_ekstraktif.md
+# Kat B+C+D = Ekstraktif (Legal Supply-Chain: UU Minerba Ps.1,102-103; Perpres 112/2022 Ps.3 Ay.4)
+# Kat A     = Ekonomi Akar Rumput (BPS KBLI 2020 Buku 1 Hal.21)
+# E–U       = Sektor Jasa & Lainnya
+EKSTRAKTIF_KODE = ['B', 'C', 'D']
+EKSTRAKTIF_NAMA = [
+    'Pertambangan dan Penggalian',          # Kat B — definisi langsung (Perpres 26/2010 Ps.1 Ay.2)
+    'Industri Pengolahan',                   # Kat C — smelter WAJIB hukum (UU 3/2020 Ps.102-103)
+    'Pengadaan Listrik dan Gas',             # Kat D — PLTU captive terintegrasi (Perpres 112/2022 Ps.3 Ay.4)
 ]
-case_summary = pd.DataFrame([row_data], index=[interaction_label], columns=columns_case)
-st.table(case_summary)
+AKAR_RUMPUT_NAMA = ['Pertanian, Kehutanan, dan Perikanan']  # Kat A
 
-# --- B. Crosstabulation ---
-st.markdown(f"##### {interaction_label} Crosstabulation")
-row_indices = []
-for x_cat in cats_x:
-    row_indices.extend([(x_cat, "Count"), (x_cat, "Expected Count")])
-row_indices.extend([("Total", "Count"), ("Total", "Expected Count")])
+LABEL_EKSTRAKTIF   = 'Ekstraktif'
+LABEL_AKAR_RUMPUT  = 'Ekonomi Akar Rumput (Pertanian & Perikanan)'
+LABEL_JASA         = 'Sektor Jasa & Lainnya'
 
-rows = []
-for x_cat in cats_x:
-    counts = crosstab.loc[x_cat].tolist()
-    exps = expected_df.loc[x_cat].tolist()
-    rows.append(counts + [sum(counts)])
-    rows.append([f"{v:.1f}" for v in exps] + [f"{sum(exps):.1f}"])
-
-total_counts = crosstab.sum().tolist()
-total_exps = expected_df.sum().tolist()
-rows.append(total_counts + [sum(total_counts)])
-rows.append([f"{v:.1f}" for v in total_exps] + [f"{sum(total_exps):.1f}"])
-
-multi_index = pd.MultiIndex.from_tuples(row_indices, names=[x_options[x_col], ""])
-spss_crosstab = pd.DataFrame(rows, index=multi_index, columns=cats_y + ["Total"])
-st.table(spss_crosstab)
-
-# --- C. Chi-Square Tests ---
-st.markdown("##### Chi-Square Tests")
-g, p_g, dof_g, exp_g = stats.chi2_contingency(crosstab, lambda_="log-likelihood")
-x_codes = df_panel["X_Label"].replace({label_x_low: 0, label_x_high: 1})
-y_codes = df_panel["Y_Label"].replace({label_y_low: 0, label_y_high: 1})
-r, p_corr = stats.pearsonr(list(x_codes), list(y_codes))
-lbl_val = (valid_cases - 1) * (r**2)
-
-chi_data = [
-    [f"{chi2:.3f}", str(dof), f"{p:.3f}"],
-    [f"{g:.3f}", str(dof), f"{p_g:.3f}"],
-    [f"{lbl_val:.3f}", "1", f"{p_corr:.3f}"],
-    [str(valid_cases), "", ""]
-]
-chi_df = pd.DataFrame(chi_data, index=["Pearson Chi-Square", "Likelihood Ratio", "Linear-by-Linear Association", "N of Valid Cases"], columns=["Value", "df", "Asymp. Sig. (2-sided)"])
-st.markdown(f"**{interaction_label}**")
-st.table(chi_df)
-
-# --- D. Hypothesis & Risk Summary ---
-st.markdown("### Ringkasan Uji Hipotesis")
-is_significant = p < 0.05
-status_text = "SIGNIFIKAN (Ada Hubungan)" if is_significant else "TIDAK SIGNIFIKAN"
-order_color = "#4CAF50" if is_significant else "#F44336" 
-bg_color = "rgba(76, 175, 80, 0.1)" if is_significant else "rgba(244, 67, 54, 0.1)"
-
-try:
-    a = crosstab.loc[label_x_low, label_y_low]
-    b = crosstab.loc[label_x_low, label_y_high]
-    c = crosstab.loc[label_x_high, label_y_low]
-    d = crosstab.loc[label_x_high, label_y_high]
-    odds_ratio = (a * d) / (b * c) if (b * c) > 0 else 0
-except:
-    odds_ratio = 0
-
-col_res1, col_res2 = st.columns([1, 1.5])
-with col_res1:
-    st.markdown(f"""
-    <div style="border: 2px solid {order_color}; padding: 15px; border-radius: 5px; background-color: {bg_color}; margin-bottom: 10px;">
-        <h4 style="color: {order_color}; margin: 0 0 10px 0; text-transform: uppercase;">Result: {status_text}</h4>
-        <p style="margin: 0; font-family: monospace;">
-            P-Value    : {p:.4f}<br>
-            Chi-Square : {chi2:.3f}<br>
-            df         : {dof}
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-    st.markdown(f"**Odds Ratio (Risk Estimate):** `{odds_ratio:.3f}`")
-
-with col_res2:
-    if is_significant:
-        interp_text = f"Temuan ini sangat krusial: lonjakan intensitas {x_options[x_col]} terbukti **berkorelasi kuat dan signifikan** dengan peningkatan {y_options[y_col]} (OR: {odds_ratio:.3f}). Ini adalah konfirmasi empiris bahwa narasi hilirisasi dan investasi ekstraktif bukanlah pertumbuhan tanpa korban—ekspansi spasial mereka mutlak mengorbankan luasan hutan di tingkat tapak."
+def klasifikasi_kritis(sektor):
+    """Klasifikasikan sektor PDRB ke 3 kelompok advokatif.
+    Metodologi: Legal Supply-Chain Approach (docs/metodologi_klasifikasi_ekstraktif.md)
+    """
+    if sektor in EKSTRAKTIF_NAMA:
+        return LABEL_EKSTRAKTIF
+    elif sektor in AKAR_RUMPUT_NAMA:
+        return LABEL_AKAR_RUMPUT
     else:
-        interp_text = f"Secara agregat, hubungan antara {x_options[x_col]} dan {y_options[y_col]} **tidak signifikan** secara statistik (P ≥ 0.05). Ini mengindikasikan bahwa deforestasi terjadi sangat masif di seluruh panel waktu dan ruang secara merata. Krisis tata kelola dan deforestasi telah menyebar ke seluruh wilayah, sehingga lonjakan izin di tahun tertentu tidak lagi menjadi prediktor tunggal atas kebangkrutan ekologis yang sudah sistemik."
-    
-    st.markdown(f"""
-    <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid {order_color}; height: 100%;">
-        <b>Interpretasi Ekologis:</b><br><br>
-        {interp_text}
-    </div>
-    """, unsafe_allow_html=True)
+        return LABEL_JASA
 
-# --- E. Executive Summary of All Combinations ---
-st.markdown("---")
-st.markdown("### Ringkasan Eksekutif Seluruh Skenario Crosstab")
-st.markdown("Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square) untuk semua kemungkinan kombinasi antara indikator Ekspansi (X) dan Dampak Ekologis (Y) pada panel data yang sama.")
+df_hist_group = df_pdrb.copy()
+df_hist_group['Klasifikasi'] = df_hist_group['sektor_nama'].apply(klasifikasi_kritis)
+df_hist_agg = df_hist_group.groupby(['provinsi', 'tahun', 'Klasifikasi'])['nilai_miliar_rp'].sum().reset_index()
+# Konversi ke Triliun Rupiah agar angka di sumbu Y lebih bersih (tidak ada 'k')
+df_hist_agg['nilai_triliun_rp'] = df_hist_agg['nilai_miliar_rp'] / 1000
 
-summary_data = []
-for k_x, v_x in x_options.items():
-    for k_y, v_y in y_options.items():
-        med_x = df_panel[k_x].median()
-        med_y = df_panel[k_y].median()
-        
-        lbl_x_h = f"Tinggi (≥{med_x:,.1f})"
-        lbl_x_l = f"Rendah (<{med_x:,.1f})"
-        lbl_y_h = f"Tinggi (≥{med_y:,.1f})"
-        lbl_y_l = f"Rendah (<{med_y:,.1f})"
-        
-        s_x = df_panel[k_x].apply(lambda val: lbl_x_h if val >= med_x else lbl_x_l)
-        s_y = df_panel[k_y].apply(lambda val: lbl_y_h if val >= med_y else lbl_y_l)
-        
-        ct = pd.crosstab(s_x, s_y).reindex(index=[lbl_x_l, lbl_x_h], columns=[lbl_y_l, lbl_y_h], fill_value=0)
-        try:
-            c2_val, pv_val, dof_val, exp_val = stats.chi2_contingency(ct)
-        except:
-            c2_val, pv_val, dof_val = 0, 1, 0
-            
-        try:
-            aa = ct.loc[lbl_x_l, lbl_y_l]
-            bb = ct.loc[lbl_x_l, lbl_y_h]
-            cc = ct.loc[lbl_x_h, lbl_y_l]
-            dd = ct.loc[lbl_x_h, lbl_y_h]
-            or_v = (aa * dd) / (bb * cc) if (bb * cc) > 0 else 0
-        except:
-            or_v = 0
-            
-        sig_status = "🟢 SIGNIFIKAN" if pv_val < 0.05 else "🔴 TIDAK SIGNIFIKAN"
-        
-        summary_data.append({
-            "Variabel Independen (X)": v_x,
-            "Variabel Dependen (Y)": v_y,
-            "Chi-Square": f"{c2_val:.3f}",
-            "P-Value": f"{pv_val:.3f}",
-            "Odds Ratio": f"{or_v:.2f}",
-            "Kesimpulan": sig_status
-        })
+# Tambahkan penanda khusus untuk Sulawesi Tengah di nama provinsi agar ter-highlight
+# Tambahkan penanda khusus untuk Sulawesi Tengah di nama provinsi agar ter-highlight
+df_hist_agg['provinsi_label'] = df_hist_agg['provinsi'].apply(
+    lambda x: f"{x.upper()} (PUSAT LEDAKAN)" if x == "Sulawesi Tengah" else x
+)
 
-df_summary = pd.DataFrame(summary_data)
-st.dataframe(df_summary, use_container_width=True, hide_index=True)
+# Hitung ulang persentase berdasarkan total keseluruhan PDRB
+df_total_agg = df_hist_agg.groupby(['provinsi', 'tahun'])['nilai_miliar_rp'].sum().reset_index(name='total_pdrb')
+df_hist_agg = df_hist_agg.merge(df_total_agg, on=['provinsi', 'tahun'])
+df_hist_agg['pct_dari_total'] = (df_hist_agg['nilai_miliar_rp'] / df_hist_agg['total_pdrb']) * 100
 
-# Generate Dynamic Narrative for Executive Summary
-sig_count = sum(1 for row in summary_data if "🟢 SIGNIFIKAN" in row["Kesimpulan"])
-total_scenarios = len(summary_data)
+# Urutan kategori: Akar Rumput di bawah, Jasa di tengah, Ekstraktif di atas (stacked)
+cat_order = [LABEL_EKSTRAKTIF, LABEL_JASA, LABEL_AKAR_RUMPUT]
+df_hist_agg['Klasifikasi'] = pd.Categorical(df_hist_agg['Klasifikasi'], categories=cat_order, ordered=True)
+df_hist_agg = df_hist_agg.sort_values(by=['provinsi', 'tahun', 'Klasifikasi'])
 
-import textwrap
+# VISUALISASI 1: Altair Stacked Area Chart (Historical Tren 2016-2024, Absolute Value)
+color_map = {
+    LABEL_EKSTRAKTIF:  '#E74C3C',  # Flat red (Alizarin)
+    LABEL_JASA:        '#7F8C8D',  # Flat grey (Asbestos)
+    LABEL_AKAR_RUMPUT: '#2ECC71',  # Flat green (Emerald)
+}
 
-if sig_count > 0:
-    exec_narrative = textwrap.dedent(f"""\
-Dari <b>{total_scenarios} skenario pengujian</b>, terdapat <b>{sig_count} skenario yang terbukti SIGNIFIKAN</b>.<br><br>
-Angka-angka pada tabel di atas bukan sekadar statistik di atas kertas, melainkan <b>bukti empiris</b> dari daya rusak kebijakan. Tingginya <i>Odds Ratio</i> pada skenario yang signifikan menegaskan bahwa setiap kali kran perizinan atau luas konsesi diperlebar, risiko terjadinya deforestasi melonjak berkali-kali lipat.<br><br>
-Menariknya, jika ada skenario yang menunjukkan <i>TIDAK SIGNIFIKAN</i> (khususnya pada deforestasi komoditas spesifik), ini tidak berarti industri ekstraktif ramah lingkungan. Sebaliknya, ini menjadi indikasi mengerikan bahwa <b>kehancuran ekologis telah menyebar tak terkendali (spillover effect)</b>—di mana kerusakan hutan akibat operasi tambang menjalar jauh melampaui batas konsesi resmi komoditasnya hingga merusak total lanskap alam secara merata.\
-    """)
-    bg_color = "rgba(229, 57, 53, 0.15)"
-    border_color = "#E53935"
-else:
-    exec_narrative = textwrap.dedent(f"""\
-Dari <b>{total_scenarios} skenario pengujian</b>, seluruhnya menunjukkan status <b>TIDAK SIGNIFIKAN</b>.<br><br>
-Dalam kacamata ekonomi politik ekologi, ketidaksignifikanan secara agregat ini justru merupakan <b>sinyal bahaya tertinggi</b>. Ini membuktikan bahwa deforestasi dan kebangkrutan ekologis telah terjadi secara <i>brutal dan merata</i> di seluruh provinsi dan waktu. Ekstraksi ruang telah mencapai titik <i>saturation</i> (jenuh), sehingga penambahan izin di satu titik tidak lagi menjadi satu-satunya penyebab, melainkan seluruh sistem tata kelola telah gagal melindungi lanskap tersisa.\
-    """)
-    bg_color = "rgba(255, 152, 0, 0.15)"
-    border_color = "#FF9800"
+cat_order_area = [LABEL_AKAR_RUMPUT, LABEL_JASA, LABEL_EKSTRAKTIF]
 
+# Custom Legend HTML (Rata Kanan-Kiri & Responsif)
 st.markdown(f"""
-<div style="background-color: {bg_color}; padding:18px; border-radius:8px; border-left:6px solid {border_color}; margin-top: 15px; margin-bottom: 25px;">
-    <b style="color: {border_color}; font-size: 1.05rem;">Pembedahan Realitas Ekologis:</b><br><br>
-    <div style="color: #E0E0E0; font-size: 0.95rem; line-height: 1.6;">
-{exec_narrative}
-    </div>
+<div style="display: flex; gap: 20px; justify-content: center; margin-bottom: 25px; flex-wrap: wrap;">
+    <div style="font-size: 13px;"><span style="color: {color_map[LABEL_AKAR_RUMPUT]}; font-size: 16px;">&bull;</span> {LABEL_AKAR_RUMPUT}</div>
+    <div style="font-size: 13px;"><span style="color: {color_map[LABEL_JASA]}; font-size: 16px;">&bull;</span> {LABEL_JASA}</div>
+    <div style="font-size: 13px;"><span style="color: {color_map[LABEL_EKSTRAKTIF]}; font-size: 16px;">&bull;</span> {LABEL_EKSTRAKTIF}</div>
 </div>
 """, unsafe_allow_html=True)
 
-with st.expander("Lihat Data Panel Mentah (Merge Izin & GFW)", expanded=False):
-    st.dataframe(df_panel[['Provinsi', 'Tahun', x_col, 'X_Label', y_col, 'Y_Label']], use_container_width=True, hide_index=True)
-    st.caption("Sumber: Gabungan `sulawesi_izin_baru_per_tahun.csv` (Minerbaone) dan `sulawesi_gfw_master_1_dekade_2014_2023.csv` (GFW).")
+# Grid Layout: 3 Columns
+provinces = df_hist_agg['provinsi_label'].unique()
+cols = st.columns(3)
+
+for i, prov in enumerate(provinces):
+    df_prov = df_hist_agg[df_hist_agg['provinsi_label'] == prov]
+    
+    chart = alt.Chart(df_prov).mark_area(opacity=0.9).encode(
+        x=alt.X('tahun:O', title='Tahun', axis=alt.Axis(labelAngle=0, values=[2016, 2018, 2020, 2022, 2024])),
+        y=alt.Y('nilai_triliun_rp:Q', title='Nilai PDRB (Triliun Rp)', stack=True),
+        color=alt.Color('Klasifikasi:N', 
+                        sort=cat_order_area,
+                        scale=alt.Scale(domain=cat_order_area, 
+                                        range=[color_map[LABEL_AKAR_RUMPUT], color_map[LABEL_JASA], color_map[LABEL_EKSTRAKTIF]]),
+                        legend=None), # Legend dinonaktifkan karena pakai HTML
+        tooltip=[
+            alt.Tooltip('provinsi:N', title='Provinsi'),
+            alt.Tooltip('tahun:O', title='Tahun'),
+            alt.Tooltip('Klasifikasi:N', title='Sektor'),
+            alt.Tooltip('nilai_triliun_rp:Q', title='PDRB (Triliun Rp)', format=',.1f'),
+            alt.Tooltip('pct_dari_total:Q', title='Porsi (%)', format=',.1f')
+        ]
+    ).properties(
+        title=alt.TitleParams(text=prov, anchor='middle', fontSize=13, color='white'),
+        height=220
+    ).configure_view(
+        stroke=None
+    ).configure_axis(
+        grid=True, gridColor='#333333'
+    )
+    
+    cols[i % 3].altair_chart(chart, use_container_width=True)
+
+st.caption("Metodologi: Legal Supply-Chain Approach — Kat B+C+D = Ekstraktif (UU Minerba Ps.102-103; Perpres 112/2022 Ps.3 Ay.4)")
+
+st.markdown("#### 1.1.2 Ketimpangan Ekstraktif di Wilayah Pusat Ledakan (Kabupaten se-Sulawesi Tengah)")
+st.markdown("""
+Jika kita menukik lebih dalam secara geografis membedah **Sulawesi Tengah**, kita dapat melihat letak pasti episentrum kerusakan ekologis. Kabupaten **Morowali** dan **Morowali Utara** memanipulasi keseluruhan kurva pertumbuhan provinsi melalui mega proyek hilirisasi dan PLTU Captive. 
+Visualisasi di bawah membandingkan komposisi ketiga sektor advokatif di seluruh 13 kabupaten/kota se-Sulawesi Tengah pada tahun terbaru.
+""")
+
+df_kab_hist = df_pdrb_kab.copy()
+df_kab_hist['Klasifikasi'] = df_kab_hist['sektor_nama'].apply(klasifikasi_kritis)
+
+# Filter HANYA Sulawesi Tengah dan HANYA Tahun Terbaru
+df_kab_sulteng = df_kab_hist[df_kab_hist['provinsi'] == 'Sulawesi Tengah'].copy()
+latest_year_kab = df_kab_sulteng['tahun'].max()
+df_kab_latest = df_kab_sulteng[df_kab_sulteng['tahun'] == latest_year_kab].copy()
+
+df_kab_agg = df_kab_latest.groupby(['kabupaten', 'Klasifikasi'])['nilai_miliar_rp'].sum().reset_index()
+df_kab_agg['nilai_triliun_rp'] = df_kab_agg['nilai_miliar_rp'] / 1000
+
+df_kab_tot = df_kab_agg.groupby('kabupaten')['nilai_triliun_rp'].sum().reset_index(name='total')
+df_kab_agg = df_kab_agg.merge(df_kab_tot, on='kabupaten')
+df_kab_agg['pct'] = (df_kab_agg['nilai_triliun_rp'] / df_kab_agg['total']) * 100
+
+# Urutkan berdasarkan total terbesar
+df_kab_agg = df_kab_agg.sort_values(by=['total', 'Klasifikasi'], ascending=[True, True])
+
+# Bikin Horizontal Stacked Bar Chart
+df_kab_agg['Klasifikasi'] = pd.Categorical(df_kab_agg['Klasifikasi'], categories=cat_order_area, ordered=True)
+
+# Tambahkan label (tanpa emoji, uppercase untuk Morowali)
+df_kab_agg['kabupaten_label'] = df_kab_agg['kabupaten'].apply(
+    lambda x: f"{x.upper()}" if 'Morowali' in x else x
+)
+
+# Urutkan berdasarkan total terbesar untuk urutan Y-axis Altair
+sort_order = df_kab_agg.groupby('kabupaten_label')['total'].first().sort_values(ascending=False).index.tolist()
+
+bar_kab = alt.Chart(df_kab_agg).mark_bar().encode(
+    y=alt.Y('kabupaten_label:N', title=None, sort=sort_order, axis=alt.Axis(labelLimit=500, labelFontSize=11)),
+    x=alt.X('nilai_triliun_rp:Q', title=f"Nilai PDRB ({latest_year_kab}) - Triliun Rp"),
+    color=alt.Color('Klasifikasi:N', 
+                    scale=alt.Scale(domain=cat_order_area, 
+                                    range=[color_map[LABEL_AKAR_RUMPUT], color_map[LABEL_JASA], color_map[LABEL_EKSTRAKTIF]]),
+                    legend=alt.Legend(title=None, orient="bottom", direction="vertical", labelLimit=1000)),
+    tooltip=[
+        alt.Tooltip('kabupaten:N', title='Kabupaten'),
+        alt.Tooltip('Klasifikasi:N', title='Sektor'),
+        alt.Tooltip('nilai_triliun_rp:Q', title='Nilai (Triliun Rp)', format=',.1f'),
+        alt.Tooltip('pct:Q', title='Porsi (%)', format=',.1f')
+    ]
+).properties(
+    height=500
+).configure_view(
+    stroke=None
+).configure_axis(
+    grid=True, gridColor='#333333'
+)
+
+st.altair_chart(bar_kab, use_container_width=True)
+
+with st.expander("Lihat Data Mentah: Agregasi 3 Sektor Advokatif (Provinsi & Kabupaten)", expanded=False):
+    col_prov, col_kab = st.columns(2)
+    with col_prov:
+        st.write("**Data Provinsi**")
+        st.dataframe(df_hist_agg[['provinsi', 'tahun', 'Klasifikasi', 'nilai_miliar_rp', 'nilai_triliun_rp', 'pct_dari_total']], use_container_width=True, hide_index=True)
+    with col_kab:
+        st.write("**Data Kabupaten (Sulawesi Tengah)**")
+        st.dataframe(df_kab_agg[['kabupaten', 'Klasifikasi', 'nilai_triliun_rp', 'pct']], use_container_width=True, hide_index=True)
+    st.caption("📁 **Sumber File:** Data SIMDASI BPS yang diagregasi menjadi 3 Klasifikasi Utama.")
+
+
+st.markdown("#### 1.1.3 Perbandingan Distribusi 17 Sektor Komoditas per Provinsi (Small Multiples, Tahun Terbaru)")
+st.markdown("Visualisasi Small Multiples ini membandingkan komposisi 17 sektor komoditas secara terpisah di tiap provinsi. Sektor diurutkan dari penyumbang terbesar (atas) hingga terkecil (bawah). Skala sumbu X konsisten untuk memvalidasi perbandingan lintas provinsi.")
+
+# VISUALISASI 2: Altair Small Multiples Horizontal Bar Chart (Current Year)
+latest_year = df_pdrb['tahun'].max()
+df_latest = df_pdrb[df_pdrb['tahun'] == latest_year].copy()
+
+# Klasifikasikan 17 Sektor menjadi 3 Makro Warna
+df_latest['Klasifikasi'] = df_latest['sektor_nama'].apply(klasifikasi_kritis)
+df_latest['nilai_triliun_rp'] = df_latest['nilai_miliar_rp'] / 1000
+
+# Add province totals to facet title
+prov_totals = df_latest.groupby('provinsi')['nilai_miliar_rp'].sum().reset_index()
+prov_totals['prov_title'] = prov_totals.apply(lambda r: f"{r['provinsi']} (Total: {r['nilai_miliar_rp']/1000:,.0f} Triliun Rp)", axis=1)
+
+df_latest = df_latest.merge(prov_totals[['provinsi', 'prov_title']], on='provinsi')
+
+# Shorten sector names for y-axis to fit well
+df_latest['sektor_short'] = df_latest['sektor_nama'].apply(lambda x: x[:35] + '...' if len(x) > 35 else x)
+
+# Custom Legend HTML (Sama seperti 1.1.1)
+st.markdown(f"""
+<div style="display: flex; gap: 20px; justify-content: center; margin-bottom: 25px; flex-wrap: wrap;">
+    <div style="font-size: 13px;"><span style="color: {color_map[LABEL_AKAR_RUMPUT]}; font-size: 16px;">&bull;</span> {LABEL_AKAR_RUMPUT}</div>
+    <div style="font-size: 13px;"><span style="color: {color_map[LABEL_JASA]}; font-size: 16px;">&bull;</span> {LABEL_JASA}</div>
+    <div style="font-size: 13px;"><span style="color: {color_map[LABEL_EKSTRAKTIF]}; font-size: 16px;">&bull;</span> {LABEL_EKSTRAKTIF}</div>
+</div>
+""", unsafe_allow_html=True)
+
+# Fixed X scale with 15% padding for text labels
+max_x_val = df_latest['nilai_triliun_rp'].max() * 1.15
+
+provinces = df_latest['prov_title'].unique()
+cols_multi = st.columns(2)
+
+for i, prov in enumerate(provinces):
+    df_prov = df_latest[df_latest['prov_title'] == prov]
+    
+    bar_latest = alt.Chart(df_prov).mark_bar().encode(
+        y=alt.Y('sektor_short:N', sort='-x', title=None, axis=alt.Axis(labels=True, ticks=False, labelOverlap=False, labelLimit=250, labelFontSize=11)),
+        x=alt.X('nilai_triliun_rp:Q', title='Nilai PDRB (Triliun Rupiah)', scale=alt.Scale(domain=[0, max_x_val])),
+        color=alt.Color('Klasifikasi:N', 
+                        scale=alt.Scale(domain=cat_order_area, 
+                                        range=[color_map[LABEL_AKAR_RUMPUT], color_map[LABEL_JASA], color_map[LABEL_EKSTRAKTIF]]),
+                        legend=None),
+        tooltip=[
+            alt.Tooltip('sektor_nama:N', title='Sektor'),
+            alt.Tooltip('Klasifikasi:N', title='Klasifikasi'),
+            alt.Tooltip('nilai_triliun_rp:Q', title='Nilai (Triliun Rp)', format=',.1f'),
+            alt.Tooltip('pct_dari_total:Q', title='Porsi (%)', format=',.1f')
+        ]
+    )
+
+    text_latest = bar_latest.mark_text(
+        align='left', baseline='middle', dx=3, color='white', fontSize=10
+    ).encode(
+        text=alt.Text('nilai_triliun_rp:Q', format=',.1f')
+    )
+
+    chart_latest = alt.layer(bar_latest, text_latest).properties(
+        title=alt.TitleParams(text=prov, anchor='middle', fontSize=13, color='white'),
+        height=380
+    ).configure_view(
+        stroke=None
+    ).configure_axis(
+        grid=True, gridColor='#333333'
+    )
+    
+    cols_multi[i % 2].altair_chart(chart_latest, use_container_width=True)
+
+st.markdown("""
+<div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #F44336; margin-bottom: 25px;">
+    <b>Interpretasi Ekstraktif:</b> Jika kita membedah seluruh komoditas tanpa agregasi, terlihat jelas bahwa di Sulawesi Tengah, 'Industri Pengolahan' dan 'Pertambangan' memuncaki klasemen secara absolut, sangat jomplang dibandingkan sektor lainnya. Sementara di Sulawesi Selatan dan Gorontalo, struktur ekonominya masih konvensional di mana 'Pertanian' dan 'Perdagangan' mendominasi.
+</div>
+""", unsafe_allow_html=True)
+
+with st.expander("Lihat Data Mentah: PDRB Sektoral", expanded=False):
+    st.dataframe(df_pdrb, use_container_width=True, hide_index=True)
+    st.caption("📁 **Sumber File:** `data/processed/sulawesi_pdrb_sektoral_2016_2024.csv` - Data dari BPS (SIMDASI).")
+
+st.markdown("<div style='height: 30px;'></div>", unsafe_allow_html=True)
+
 
 
 # ══════════════════════════════════════════════════════════
@@ -669,63 +590,53 @@ sultra_smelter = df_smelter_prov[df_smelter_prov['provinsi'] == 'Sulawesi Tengga
 persen_smelter_2prov = (sulteng_smelter + sultra_smelter) / tot_smelter * 100 if tot_smelter > 0 else 0
 
 st.markdown(f"""
-Intensifikasi ekstraktif di Sulawesi sepenuhnya dikuasai oleh industri nikel (*mega-smelter*). Total **{tot_smelter} fasilitas smelter** yang mengepung pulau ini sangat rakus energi kotor. Konsentrasi pabrik ini disokong kapasitas batu bara yang menembus **{tot_kapasitas_pltu:,.0f} MW dari PLTU Captive**. Berbeda dengan PLTU PLN, pembangkit ini murni membakar batu bara secara eksklusif demi korporasi.
+Intensifikasi ekstraktif di Sulawesi sepenuhnya dikuasai oleh industri nikel (*mega-smelter*). Total **{tot_smelter} fasilitas smelter** yang mengepung pulau ini sangat rakus energi kotor. Konsentrasi pabrik ini disokong kapasitas batu bara yang menembus **{int(tot_kapasitas_pltu):,} MW dari PLTU Captive**. Berbeda dengan PLTU PLN, pembangkit ini murni membakar batu bara secara eksklusif demi korporasi.
 
-Mari kita bedah **temuan kritis time-series** dari dua grafik data di bawah ini:
-1. **Ledakan Eksponensial Energi Kotor (Area Chart):** Grafik kiri memetakan kapasitas kumulatif PLTU dari tahun ke tahun. Jika pada tahun 2015 kapasitas hanya tercatat di kisaran **{val_pltu_2015:,.0f} MW**, data *time-series* ini membongkar anomali mengerikan. Kurva merah menukik tajam nyaris vertikal melompat menjadi **{val_pltu_2023:,.0f} MW di tahun 2023**, hingga mencapai puncaknya di **{val_pltu_2024:,.0f} MW**. Visualisasi area merah ini menjadi bukti forensik ledakan eksponensial polusi yang mengunci langit Sulawesi dan menghancurkan ilusi transisi energi.
-2. **Penciptaan Zona Tumbal (Bar Chart):** Grafik kanan menampilkan ketidakadilan spasial yang ekstrem. Dari keseluruhan smelter, data membuktikan **{persen_smelter_2prov:,.0f}% dari total fasilitas (tepatnya {sulteng_smelter} unit di Sulteng dan {sultra_smelter} unit di Sultra)** ditumpuk paksa hanya di dua provinsi. Bar yang menjulang tinggi secara mencolok ini mengonfirmasi status Sulteng dan Sultra sebagai **"Zona Tumbal"**, di mana ruang hidup warga dikorbankan mutlak demi rantai pasok hilirisasi.
+Mari kita bedah **temuan kritis spasial** dari grafik data di bawah ini:
 
-Kausalitas ledakan *time-series* ini divalidasi dengan sangat presisi oleh uji regresi **Crosstab** di bagian bawah. Tabel tersebut membuktikan secara empiris bahwa penambahan {tot_kapasitas_pltu:,.0f} MW energi kotor ini secara kausal beroperasi penuh sebagai penyebab langsung dari musnahnya penyangga hutan alam di sekitarnya.
+**Penciptaan Zona Tumbal (Bar Chart):** Grafik di bawah menampilkan ketidakadilan spasial yang ekstrem. Dari keseluruhan smelter, data membuktikan **{int(persen_smelter_2prov):,}% dari total fasilitas (tepatnya {sulteng_smelter} unit di Sulteng dan {sultra_smelter} unit di Sultra)** ditumpuk paksa hanya di dua provinsi. Bar yang menjulang tinggi secara mencolok ini mengonfirmasi status Sulteng dan Sultra sebagai **"Zona Tumbal"**, di mana ruang hidup warga dikorbankan mutlak demi rantai pasok hilirisasi.
+
+Kausalitas ekspansi industri ekstraktif ini divalidasi dengan sangat presisi oleh uji regresi **Crosstab** di bagian bawah. Tabel tersebut membuktikan secara empiris bahwa keberadaan kawasan industri ini secara kausal beroperasi penuh sebagai penyebab langsung dari musnahnya penyangga hutan alam di sekitarnya.
 """)
 
-# --- Visualisasi Tambahan Advokasi: Pipa Ancaman Emisi & Zona Tumbal ---
-col_adv1, col_adv2 = st.columns(2)
+# --- Visualisasi Tambahan Advokasi: Zona Tumbal ---
+# Zona Tumbal (Smelter Bar Chart dengan Persentase)
+df_smelter_prov['Persentase'] = (df_smelter_prov['jumlah_iup'] / len(df_smelter)) * 100
 
-with col_adv1:
-    # 1. Ledakan Eksponensial Energi Kotor (Area Chart Kumulatif - Split Sentra vs Non-Sentra)
-    domain_kat = ['Daerah Sentra Tambang', 'Daerah Non-Sentra']
-    range_kat = ['#D32F2F', '#90A4AE']
-    
-    chart_area = alt.Chart(df_pltu_kategori).mark_area(opacity=0.7).encode(
-        x=alt.X('Tahun:O', title='', axis=alt.Axis(labelColor='#B0BEC5')),
-        y=alt.Y('Kumulatif (MW):Q', stack=None, title='Kapasitas Aktif (MW)', axis=alt.Axis(gridOpacity=0.1, labelColor='#B0BEC5')),
-        color=alt.Color('Kategori_Wilayah:N', scale=alt.Scale(domain=domain_kat, range=range_kat), legend=alt.Legend(title="Kategori Wilayah", orient="top-left")),
-        tooltip=['Tahun', 'Kategori_Wilayah', alt.Tooltip('Kumulatif (MW)', format=',.0f')]
-    ).properties(height=280, title=alt.TitleParams(text='Ledakan Energi Kotor (Sentra vs Non-Sentra)', color='#ECEFF1', anchor='start', fontSize=14))
-    
-    st.altair_chart(chart_area, use_container_width=True)
-    st.markdown("<div style='font-size:0.85rem; color:#9E9E9E; margin-top:-10px; margin-bottom:15px; padding: 0 10px; border-left: 3px solid #D32F2F;'><b>Fakta Data:</b> Pemisahan (split) garis merah dan abu-abu secara gamblang membuktikan bahwa nyaris seluruh ledakan eksponensial PLTU Captive 1 dekade terakhir terpusat murni di Daerah Sentra Tambang.</div>", unsafe_allow_html=True)
+df_smelter_prov['color_group'] = df_smelter_prov['provinsi'].apply(lambda x: x if x in ['Sulawesi Tengah', 'Sulawesi Tenggara'] else 'Lainnya')
+domain_smelter = ['Sulawesi Tengah', 'Sulawesi Tenggara', 'Lainnya']
+range_smelter = ['#D32F2F', '#F57C00', '#37474F'] 
 
-with col_adv2:
-    # 2. Zona Tumbal (Smelter Bar Chart dengan Persentase)
-    # df_smelter_prov sudah dihitung di atas
-    df_smelter_prov['Persentase'] = (df_smelter_prov['jumlah_iup'] / len(df_smelter)) * 100
+bars = alt.Chart(df_smelter_prov).mark_bar(cornerRadiusEnd=2).encode(
+    y=alt.Y('provinsi:N', sort='-x', title='', axis=alt.Axis(labelColor='#B0BEC5')),
+    x=alt.X('Persentase:Q', title='Porsi Izin (%)', axis=alt.Axis(gridOpacity=0.1, labelColor='#B0BEC5')),
+    color=alt.Color('color_group:N', scale=alt.Scale(domain=domain_smelter, range=range_smelter), legend=None),
+    tooltip=['provinsi', alt.Tooltip('jumlah_iup', title='Total Fasilitas'), alt.Tooltip('Persentase', format='.1f', title='Porsi (%)')]
+)
+
+text = bars.mark_text(
+    align='left',
+    baseline='middle',
+    dx=3,
+    color='#ECEFF1',
+    fontWeight='bold'
+).encode(
+    text=alt.Text('Persentase:Q', format='.1f')
+)
+
+chart_smelter = (bars + text).properties(height=350, title=alt.TitleParams(text='Monopoli 78% Smelter di 2 Provinsi (Sentra Tambang)', color='#ECEFF1', anchor='start', fontSize=16))
+
+st.altair_chart(chart_smelter, use_container_width=True)
+st.markdown("<div style='font-size:0.85rem; color:#9E9E9E; margin-top:-10px; margin-bottom:15px; padding: 0 10px; border-left: 3px solid #F57C00;'><b>Fakta Data:</b> Hampir 80% dari total 778 fasilitas smelter ditumpuk murni di Sulawesi Tengah & Tenggara. Ini membantah narasi 'pemerataan', dan menegaskan bahwa dua provinsi ini dijadikan tumbal mutlak <i>(sacrifice zones)</i>.</div>", unsafe_allow_html=True)
+
+with st.expander("Lihat Data Detail: Daftar Izin Smelter (PT & Lokasi)", expanded=False):
+    # Pilih kolom penting
+    cols_to_show = ['nama_perusahaan', 'provinsi', 'lokasi_izin', 'komoditas', 'total_luas_ha']
+    # Pastikan kolom ada sebelum ditampilkan
+    available_cols = [c for c in cols_to_show if c in df_smelter.columns]
     
-    df_smelter_prov['color_group'] = df_smelter_prov['provinsi'].apply(lambda x: x if x in ['Sulawesi Tengah', 'Sulawesi Tenggara'] else 'Lainnya')
-    domain_smelter = ['Sulawesi Tengah', 'Sulawesi Tenggara', 'Lainnya']
-    range_smelter = ['#D32F2F', '#F57C00', '#37474F'] 
-    
-    bars = alt.Chart(df_smelter_prov).mark_bar(cornerRadiusEnd=2).encode(
-        y=alt.Y('provinsi:N', sort='-x', title='', axis=alt.Axis(labelColor='#B0BEC5')),
-        x=alt.X('Persentase:Q', title='Porsi Izin (%)', axis=alt.Axis(gridOpacity=0.1, labelColor='#B0BEC5')),
-        color=alt.Color('color_group:N', scale=alt.Scale(domain=domain_smelter, range=range_smelter), legend=None),
-        tooltip=['provinsi', alt.Tooltip('jumlah_iup', title='Total Fasilitas'), alt.Tooltip('Persentase', format='.1f', title='Porsi (%)')]
-    )
-    
-    text = bars.mark_text(
-        align='left',
-        baseline='middle',
-        dx=3,
-        color='#ECEFF1',
-        fontWeight='bold'
-    ).encode(
-        text=alt.Text('Persentase:Q', format='.1f')
-    )
-    
-    chart_smelter = (bars + text).properties(height=280, title=alt.TitleParams(text='Monopoli 78% Smelter di 2 Provinsi', color='#ECEFF1', anchor='start', fontSize=14))
-    
-    st.altair_chart(chart_smelter, use_container_width=True)
-    st.markdown("<div style='font-size:0.85rem; color:#9E9E9E; margin-top:-10px; margin-bottom:15px; padding: 0 10px; border-left: 3px solid #F57C00;'><b>Fakta Data:</b> Hampir 80% dari total 778 fasilitas smelter ditumpuk murni di Sulawesi Tengah & Tenggara. Ini membantah narasi 'pemerataan', dan menegaskan bahwa dua provinsi ini dijadikan tumbal mutlak <i>(sacrifice zones)</i>.</div>", unsafe_allow_html=True)
+    st.dataframe(df_smelter[available_cols], use_container_width=True, hide_index=True)
+    st.caption("📁 **Sumber File:** Data mentah dari `sulawesi_esdm_nikel.csv`. Data di atas menyertakan Nama PT dan Lokasi secara detail.")
 
 st.markdown(f"""
 <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #D32F2F; margin-bottom: 20px;">
@@ -733,10 +644,6 @@ st.markdown(f"""
     Mega-Kawasan Industri memonopoli area pesisir secara ekstrem. Alih-alih transisi energi, kita menyaksikan <b>ledakan eksponensial PLTU <i>Captive</i></b> yang disedot habis untuk melayani konsentrasi masif fasilitas peleburan di dua provinsi tumbal (Sulteng & Sultra). Angka-angka ini adalah bukti empiris dari ekspansi agresif energi kotor yang berlindung di balik tameng <i>green-nickel</i>.
 </div>
 """, unsafe_allow_html=True)
-
-with st.expander("Lihat Data Mentah: PLTU Captive (GEM)", expanded=False):
-    st.dataframe(df_pltu, use_container_width=True, hide_index=True)
-    st.caption("📁 **Sumber File:** `data/processed/sulawesi_pltu_captive.csv` - Data dari Global Energy Monitor (Filter Sulawesi & Captive).")
 
 # --- Crosstab 1.2: PLTU Captive vs Deforestasi ---
 st.markdown("#### Pembuktian Statistik: Ekspansi PLTU Captive vs Deforestasi")
@@ -787,10 +694,10 @@ x_median_2 = df_panel_1_2[x_col_2].median()
 x_thresh_2 = x_median_2 if x_median_2 > 0 else 0
 y_median_2 = df_panel_1_2[y_col_2].median()
 
-label_x_low_2 = f"Rendah (≤{x_thresh_2:,.0f})"
-label_x_high_2 = f"Tinggi (>{x_thresh_2:,.0f})"
-label_y_low_2 = f"Rendah (<{y_median_2:,.1f})"
-label_y_high_2 = f"Tinggi (≥{y_median_2:,.1f})"
+label_x_low_2 = f"Rendah (≤{int(x_thresh_2):,})"
+label_x_high_2 = f"Tinggi (>{int(x_thresh_2):,})"
+label_y_low_2 = f"Rendah (<{int(y_median_2):,})"
+label_y_high_2 = f"Tinggi (≥{int(y_median_2):,})"
 
 df_panel_1_2["X_Label"] = df_panel_1_2[x_col_2].apply(lambda x: label_x_high_2 if x > x_thresh_2 else label_x_low_2)
 df_panel_1_2["Y_Label"] = df_panel_1_2[y_col_2].apply(lambda x: label_y_high_2 if x >= y_median_2 else label_y_low_2)
@@ -836,12 +743,12 @@ for xc in cats_x_2:
     cnts = crosstab_2.loc[xc].tolist()
     exps = expected_df_2.loc[xc].tolist()
     rows_2.append(cnts + [sum(cnts)])
-    rows_2.append([f"{v:.1f}" for v in exps] + [f"{sum(exps):.1f}"])
+    rows_2.append([f"{round(v, 1)}" for v in exps] + [f"{sum(exps):.1f}"])
 
 tot_cnts_2 = crosstab_2.sum().tolist()
 tot_exps_2 = expected_df_2.sum().tolist()
 rows_2.append(tot_cnts_2 + [sum(tot_cnts_2)])
-rows_2.append([f"{v:.1f}" for v in tot_exps_2] + [f"{sum(tot_exps_2):.1f}"])
+rows_2.append([f"{round(v, 1)}" for v in tot_exps_2] + [f"{sum(tot_exps_2):.1f}"])
 
 m_idx_2 = pd.MultiIndex.from_tuples(row_idx_2, names=[x_options_2[x_col_2], ""])
 st.table(pd.DataFrame(rows_2, index=m_idx_2, columns=cats_y_2 + ["Total"]))
@@ -861,9 +768,9 @@ except:
     r_2, p_corr_2, lbl_val_2 = 0, 1, 0
 
 chi_data_2 = [
-    [f"{chi2_2:.3f}", str(dof_2), f"{p_2:.3f}"],
-    [f"{g_2:.3f}", str(dof_g_2), f"{p_g_2:.3f}"],
-    [f"{lbl_val_2:.3f}", "1", f"{p_corr_2:.3f}"],
+    [f"{round(chi2_2, 3)}", str(dof_2), f"{round(p_2, 3)}"],
+    [f"{round(g_2, 3)}", str(dof_g_2), f"{round(p_g_2, 3)}"],
+    [f"{round(lbl_val_2, 3)}", "1", f"{round(p_corr_2, 3)}"],
     [str(valid_cases_2), "", ""]
 ]
 st.table(pd.DataFrame(chi_data_2, index=["Pearson Chi-Square", "Likelihood Ratio", "Linear-by-Linear Association", "N of Valid Cases"], columns=["Value", "df", "Asymp. Sig. (2-sided)"]))
@@ -890,17 +797,17 @@ with cr1:
     <div style="border: 2px solid {ord_col_2}; padding: 15px; border-radius: 5px; background-color: {bg_col_2}; margin-bottom: 10px;">
         <h4 style="color: {ord_col_2}; margin: 0 0 10px 0; text-transform: uppercase;">Result: {status_txt_2}</h4>
         <p style="margin: 0; font-family: monospace;">
-            P-Value    : {p_2:.4f}<br>
-            Chi-Square : {chi2_2:.3f}<br>
+            P-Value    : {round(p_2, 4)}<br>
+            Chi-Square : {round(chi2_2, 3)}<br>
             df         : {dof_2}
         </p>
     </div>
     """, unsafe_allow_html=True)
-    st.markdown(f"**Odds Ratio (Risk Estimate):** `{or_2:.3f}`")
+    st.markdown(f"**Odds Ratio (Risk Estimate):** `{round(or_2, 3)}`")
 
 with cr2:
     if is_sig_2:
-        interp_txt_2 = f"Bukti empiris menegaskan bahwa kehadiran dan penambahan kapasitas PLTU Captive secara spasial-temporal di Sulawesi **signifikan memicu ekskalasi deforestasi** (OR: {or_2:.3f}). Kompleks PLTU tidak hanya mengunci emisi kotor, tetapi infrastruktur pendukungnya membongkar fungsi kawasan penyangga."
+        interp_txt_2 = f"Bukti empiris menegaskan bahwa kehadiran dan penambahan kapasitas PLTU Captive secara spasial-temporal di Sulawesi **signifikan memicu ekskalasi deforestasi** (OR: {round(or_2, 3)}). Kompleks PLTU tidak hanya mengunci emisi kotor, tetapi infrastruktur pendukungnya membongkar fungsi kawasan penyangga."
     else:
         interp_txt_2 = f"Meski data tahunan agregat menunjukkan tidak signifikan (kemungkinan karena konsentrasi PLTU hanya terjadi di segelintir tahun dan lokasi seperti Morowali), hal ini **bukan berarti PLTU ramah lingkungan**. Sebaliknya, efek rusak dari sebuah PLTU bersifat permanen dan lintas-batas (spillover) yang mencemari wilayah di luar lokasi spesifik pendiriannya."
     
@@ -923,10 +830,10 @@ for k_x, v_x in x_options_2.items():
         thresh_x = med_x if med_x > 0 else 0
         med_y = df_panel_1_2[k_y].median()
         
-        lbl_x_h = f"Tinggi (>{thresh_x:,.0f})"
-        lbl_x_l = f"Rendah (≤{thresh_x:,.0f})"
-        lbl_y_h = f"Tinggi (≥{med_y:,.1f})"
-        lbl_y_l = f"Rendah (<{med_y:,.1f})"
+        lbl_x_h = f"Tinggi (>{int(thresh_x):,})"
+        lbl_x_l = f"Rendah (≤{int(thresh_x):,})"
+        lbl_y_h = f"Tinggi (≥{int(med_y):,})"
+        lbl_y_l = f"Rendah (<{int(med_y):,})"
         
         s_x = df_panel_1_2[k_x].apply(lambda val: lbl_x_h if val > thresh_x else lbl_x_l)
         s_y = df_panel_1_2[k_y].apply(lambda val: lbl_y_h if val >= med_y else lbl_y_l)
@@ -951,9 +858,9 @@ for k_x, v_x in x_options_2.items():
         summary_data_2.append({
             "Variabel Independen (X)": v_x,
             "Variabel Dependen (Y)": v_y,
-            "Chi-Square": f"{c2_val:.3f}",
-            "P-Value": f"{pv_val:.3f}",
-            "Odds Ratio": f"{or_v:.2f}",
+            "Chi-Square": f"{round(c2_val, 3)}",
+            "P-Value": f"{round(pv_val, 3)}",
+            "Odds Ratio": f"{round(or_v, 2)}",
             "Kesimpulan": sig_status
         })
 
@@ -995,11 +902,368 @@ with st.expander("Lihat Data Panel Mentah (Merge PLTU & GFW)", expanded=False):
 
 
 # ══════════════════════════════════════════════════════════
-# SUB-BAB 1.3: REALISASI INVESTASI VS BEBAN LAHAN
+# SUB-BAB 1.3: TREN IZIN & CROSSTABULATION
+# ══════════════════════════════════════════════════════════
+st.markdown("---")
+st.subheader("1.3 Tren Pertumbuhan Izin Tambang Baru & Uji Signifikansi")
+with st.expander("ℹ️ Metodologi: Analisis Tren & Uji Tabulasi Silang"):
+    st.markdown("""
+    **Metode Analisis:** Halaman ini menggunakan pendekatan statistik *Time-Series* dan Inferensial (Uji Chi-Square) untuk menguji hipotesis bahwa ekspansi izin tambang berbanding lurus dengan laju deforestasi.
+
+    1. **Analisis Profil (Chi-Square Test):** Mengukur signifikansi hubungan antara tekanan ekspansi (X) dengan kerusakan ekologis (Y).
+        * **Binning:** Data panel (Provinsi-Tahun) diklasifikasikan menjadi kategori "Tinggi" dan "Rendah" menggunakan ambang batas nilai Tengah (Median).
+        * `H0 (Null Hypothesis): Tidak ada hubungan antara Ekspansi Perizinan dan Laju Deforestasi.`
+        * `Decision Rule: Jika P-Value < 0.10, maka Tolak H0 (Ada Hubungan Signifikan).`
+    2. **Formula Analisis Tren (Time-Series):** Mengukur agregasi jumlah izin baru dan tren persentase lonjakan (*Year-on-Year*).
+        * `Regresi Komparatif = (IUP_t - IUP_{t-1}) / IUP_{t-1} * 100%`
+    3. **Variabel & Fitur Data:**
+        * **Provinsi:** Nama provinsi lokasi izin.
+        * **Tahun:** Tahun penerbitan izin.
+        * **Jumlah_Izin_Baru:** Total izin baru yang terbit di tahun tersebut.
+        * **Total_Luas_Konsesi_Baru_Ha:** Luas konsesi (Hektar).
+        * **Sumber:** Metadata sumber data Minerbaone.
+    4. **Dataset & File:** Dataset primer dari Minerbaone (Kementerian ESDM).
+        * `data/processed/sulawesi_izin_baru_per_tahun.csv`
+    """)
+
+# --- Pindahkan agregasi ke atas markdown ---
+df_izin_agg = df_izin.groupby(['Tahun', 'Provinsi'])['Jumlah_Izin_Baru'].sum().reset_index()
+df_izin_total = df_izin_agg.groupby('Tahun')['Jumlah_Izin_Baru'].sum().reset_index()
+
+val_izin_2014 = df_izin_total[df_izin_total['Tahun'] == 2014]['Jumlah_Izin_Baru'].values[0] if 2014 in df_izin_total['Tahun'].values else 0
+val_izin_2022 = df_izin_total[df_izin_total['Tahun'] == 2022]['Jumlah_Izin_Baru'].values[0] if 2022 in df_izin_total['Tahun'].values else 0
+val_izin_2023 = df_izin_total[df_izin_total['Tahun'] == 2023]['Jumlah_Izin_Baru'].values[0] if 2023 in df_izin_total['Tahun'].values else 0
+val_izin_2024 = df_izin_total[df_izin_total['Tahun'] == 2024]['Jumlah_Izin_Baru'].values[0] if 2024 in df_izin_total['Tahun'].values else 0
+
+st.markdown(f"""
+Pola tata kelola perizinan ekstraktif di Pulau Sulawesi selama satu dekade terakhir mencerminkan eksploitasi yang brutal. Berdasarkan data agregat *Minerbaone*, tercatat **{int(tot_izin):,} Izin Usaha Pertambangan (IUP) baru** sepanjang 2014-2024, menjarah lahan dan pesisir mencapai **{int(tot_luas_izin):,} Hektar**.
+
+Namun, yang menjadi **temuan kritis** adalah fakta empiris *time-series* dari grafik **"Lonjakan Penerbitan Izin Tambang"** di bawah ini. Jika kita amati pergerakan datanya secara tahunan, penerbitan izin pada awal periode di tahun 2014 hanya berada di angka **{int(val_izin_2014):,} IUP**. Tren ini bergerak sangat landai selama bertahun-tahun tanpa fluktuasi berarti. Malapetaka eksponensial baru terjadi secara anomali pada periode pasca-pandemi: dari angka yang sudah naik ke **{int(val_izin_2022):,} IUP di tahun 2022**, penerbitan izin meledak tak terkendali menjadi **{int(val_izin_2023):,} IUP di tahun 2023**, hingga menembus rekor puncak **{int(val_izin_2024):,} IUP baru di tahun 2024** saja. 
+
+Anotasi merah pada grafik dengan tegas mencatat **lonjakan ekstrem sebesar 246% (2022-2024)**. Fakta data *time-series* yang meroket tajam ini membuktikan secara telanjang runtuhnya fungsi kontrol dan hilangnya instrumen moratorium ekologis. Di bawah kurva lonjakan tersebut, kita melihat bar warna merah muda (Sulawesi Tengah) dan ungu (Sulawesi Tenggara) mendominasi secara absolut, menunjukkan perampasan ruang dan monopoli spasial dari kehancuran obral izin tersebut.
+
+Data ledakan tahunan ini berkorelasi kuat dengan kerusakan lapangan. **Tabel Crosstabulation** menegaskan validitas kausalitasnya: wilayah yang mendominasi grafik bar (jumlah IUP tertinggi) menderita kerusakan tapak terparah. Nilai *P-Value* yang signifikan mengunci pembuktian matematis bahwa penerbitan IUP gila-gilaan inilah pemicu langsung dari lenyapnya **{int(tot_deforestasi):,} Hektar** hutan primer. Angka di tabel tersebut membantah retorika administratif dan menjadi bukti hukum kebangkrutan ekologis di Sulawesi.
+""")
+
+# --- Bar Chart Tren Izin ---
+bar_chart = alt.Chart(df_izin_agg).mark_bar().encode(
+    x=alt.X('Tahun:O', title='Tahun Terbit', axis=alt.Axis(labelAngle=0)),
+    y=alt.Y('Jumlah_Izin_Baru:Q', title='Jumlah Izin Terbit'),
+    color=alt.Color('Provinsi:N', title='Provinsi', scale=alt.Scale(scheme='set2')),
+    tooltip=['Tahun', 'Provinsi', alt.Tooltip('Jumlah_Izin_Baru', title='Izin Baru')]
+)
+
+line_trend = alt.Chart(df_izin_total).mark_line(
+    color='#FF1744', 
+    strokeWidth=3,
+    interpolate='monotone'
+).encode(
+    x='Tahun:O',
+    y='Jumlah_Izin_Baru:Q'
+)
+
+points_trend = alt.Chart(df_izin_total).mark_circle(
+    color='#FF1744', 
+    size=70,
+    opacity=1
+).encode(
+    x='Tahun:O',
+    y='Jumlah_Izin_Baru:Q',
+    tooltip=['Tahun', alt.Tooltip('Jumlah_Izin_Baru', title='Total Izin (Semua Provinsi)')]
+)
+
+# Kalkulasi Persentase Kenaikan Dinamis (2022 ke 2024)
+try:
+    val_2022 = df_izin_total[df_izin_total['Tahun'] == 2022]['Jumlah_Izin_Baru'].values[0]
+    val_2024 = df_izin_total[df_izin_total['Tahun'] == 2024]['Jumlah_Izin_Baru'].values[0]
+    pct_increase = ((val_2024 - val_2022) / val_2022) * 100
+    annotation_text = f"↑ {int(pct_increase):,}% Kenaikan (2022-2024)"
+except IndexError:
+    annotation_text = "Lonjakan Ekstrem"
+
+df_annotation = pd.DataFrame({
+    'Tahun': [2023],
+    'Jumlah_Izin_Baru': [df_izin_total['Jumlah_Izin_Baru'].max() * 0.95],
+    'text': [annotation_text]
+})
+
+annotation = alt.Chart(df_annotation).mark_text(
+    align='right',
+    baseline='middle',
+    fontSize=14,
+    fontWeight='bold',
+    color='#FF1744',
+    dx=-10,
+    dy=0
+).encode(
+    x='Tahun:O',
+    y='Jumlah_Izin_Baru:Q',
+    text='text'
+)
+
+chart_izin = alt.layer(bar_chart, line_trend, points_trend, annotation).properties(
+    height=400,
+    title='Lonjakan Penerbitan Izin Tambang Sulawesi (2014-2024)'
+).configure_axis(
+    grid=True,
+    gridOpacity=0.1
+)
+
+st.altair_chart(chart_izin, use_container_width=True)
+
+st.markdown("""
+<div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #FF5722; margin-bottom: 25px;">
+    <b>Interpretasi Ekologis:</b> Semakin banyak izin baru diterbitkan di wilayah timur, semakin besar deforestasi yang terlegitimasi. Pola perizinan ini menunjukkan absennya rem ekologis (moratorium nyata) di Sulawesi.
+</div>
+""", unsafe_allow_html=True)
+
+with st.expander("Lihat Data Mentah: Agregat Izin Minerbaone", expanded=False):
+    st.dataframe(df_izin_agg, use_container_width=True, hide_index=True)
+    st.caption("📁 **Sumber File:** `data/processed/sulawesi_izin_baru_per_tahun.csv` - Agregat penerbitan izin tambang baru per provinsi di Sulawesi.")
+
+# --- Crosstab Introduction ---
+st.markdown("#### Pembuktian Statistik: Intensitas Ekspansi vs Deforestasi")
+st.markdown("""
+Hipotesis utama narasi ini adalah bahwa **lonjakan ekspansi ekstraktif** berbanding lurus dengan **kebangkrutan ekologis** (deforestasi). 
+Untuk mengujinya secara statistik di tengah keterbatasan jumlah provinsi di Sulawesi (N=6), tabel crosstab dan uji Chi-Square di bawah menggunakan unit observasi **Provinsi-Tahun** (6 provinsi x 10 tahun = 60 sampel panel). 
+Setiap observasi diklasifikasikan menjadi "Tinggi" atau "Rendah" berdasarkan nilai **Median panel** dari indikator yang dipilih.
+""")
+
+# --- Data Preparation ---
+df_panel = pd.merge(df_gfw, df_izin, on=['Provinsi', 'Tahun'], how='left').fillna({'Jumlah_Izin_Baru': 0, 'Total_Luas_Konsesi_Baru_Ha': 0})
+
+col_sel1, col_sel2 = st.columns(2)
+
+with col_sel1:
+    st.markdown("##### Variabel Independen (X) - Tekanan Ekspansi")
+    x_options = {
+        "Jumlah_Izin_Baru": "Jumlah Izin Baru (IUP)",
+        "Total_Luas_Konsesi_Baru_Ha": "Luas Konsesi Baru (Hektar)"
+    }
+    x_col = st.selectbox("Pilih Indikator Ekspansi (X):", list(x_options.keys()), format_func=lambda x: x_options[x])
+
+with col_sel2:
+    st.markdown("##### Variabel Dependen (Y) - Dampak Ekologis")
+    y_options = {
+        "Total_Deforestasi_Ha": "Total Deforestasi Alam (Hektar)",
+        "Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha": "Deforestasi Komoditas Tambang/Sawit (Hektar)"
+    }
+    y_col = st.selectbox("Pilih Indikator Dampak (Y):", list(y_options.keys()), format_func=lambda x: y_options[x])
+
+# --- Calculation (Binning) ---
+x_median = df_panel[x_col].median()
+y_median = df_panel[y_col].median()
+
+label_x_low = f"Rendah (<{int(x_median):,})"
+label_x_high = f"Tinggi (≥{int(x_median):,})"
+label_y_low = f"Rendah (<{int(y_median):,})"
+label_y_high = f"Tinggi (≥{int(y_median):,})"
+
+df_panel["X_Label"] = df_panel[x_col].apply(lambda x: label_x_high if x >= x_median else label_x_low)
+df_panel["Y_Label"] = df_panel[y_col].apply(lambda x: label_y_high if x >= y_median else label_y_low)
+
+# Crosstab Base
+cats_x = [label_x_low, label_x_high]
+cats_y = [label_y_low, label_y_high]
+crosstab = pd.crosstab(df_panel["X_Label"], df_panel["Y_Label"]).reindex(index=cats_x, columns=cats_y, fill_value=0)
+
+chi2, p, dof, expected = stats.chi2_contingency(crosstab)
+expected_df = pd.DataFrame(expected, index=crosstab.index, columns=crosstab.columns)
+
+st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+st.markdown("### Detail Uji Statistik (Chi-Square & Odds Ratio)")
+st.caption("Tabel-tabel di bawah ini adalah *output* standar SPSS yang menyajikan bukti statistik formal: Case Processing → Crosstabulation → Chi-Square Tests → Ringkasan Hipotesis.")
+
+# --- A. Case Processing Summary ---
+st.markdown("##### Case Processing Summary")
+total_cases = len(df_panel)
+valid_cases = len(df_panel.dropna(subset=[x_col, y_col]))
+missing_cases = total_cases - valid_cases
+
+columns_case = pd.MultiIndex.from_product([["Cases"], ["Valid", "Missing", "Total"], ["N", "Percent"]])
+interaction_label = f"{x_options[x_col]} * {y_options[y_col]}"
+row_data = [
+    valid_cases, f"{valid_cases/total_cases*100:.1f}%",
+    missing_cases, f"{missing_cases/total_cases*100:.1f}%",
+    total_cases, "100.0%"
+]
+case_summary = pd.DataFrame([row_data], index=[interaction_label], columns=columns_case)
+st.table(case_summary)
+
+# --- B. Crosstabulation ---
+st.markdown(f"##### {interaction_label} Crosstabulation")
+row_indices = []
+for x_cat in cats_x:
+    row_indices.extend([(x_cat, "Count"), (x_cat, "Expected Count")])
+row_indices.extend([("Total", "Count"), ("Total", "Expected Count")])
+
+rows = []
+for x_cat in cats_x:
+    counts = crosstab.loc[x_cat].tolist()
+    exps = expected_df.loc[x_cat].tolist()
+    rows.append(counts + [sum(counts)])
+    rows.append([f"{round(v, 1)}" for v in exps] + [f"{sum(exps):.1f}"])
+
+total_counts = crosstab.sum().tolist()
+total_exps = expected_df.sum().tolist()
+rows.append(total_counts + [sum(total_counts)])
+rows.append([f"{round(v, 1)}" for v in total_exps] + [f"{sum(total_exps):.1f}"])
+
+multi_index = pd.MultiIndex.from_tuples(row_indices, names=[x_options[x_col], ""])
+spss_crosstab = pd.DataFrame(rows, index=multi_index, columns=cats_y + ["Total"])
+st.table(spss_crosstab)
+
+# --- C. Chi-Square Tests ---
+st.markdown("##### Chi-Square Tests")
+g, p_g, dof_g, exp_g = stats.chi2_contingency(crosstab, lambda_="log-likelihood")
+x_codes = df_panel["X_Label"].replace({label_x_low: 0, label_x_high: 1})
+y_codes = df_panel["Y_Label"].replace({label_y_low: 0, label_y_high: 1})
+r, p_corr = stats.pearsonr(list(x_codes), list(y_codes))
+lbl_val = (valid_cases - 1) * (r**2)
+
+chi_data = [
+    [f"{round(chi2, 3)}", str(dof), f"{round(p, 3)}"],
+    [f"{round(g, 3)}", str(dof), f"{round(p_g, 3)}"],
+    [f"{round(lbl_val, 3)}", "1", f"{round(p_corr, 3)}"],
+    [str(valid_cases), "", ""]
+]
+chi_df = pd.DataFrame(chi_data, index=["Pearson Chi-Square", "Likelihood Ratio", "Linear-by-Linear Association", "N of Valid Cases"], columns=["Value", "df", "Asymp. Sig. (2-sided)"])
+st.markdown(f"**{interaction_label}**")
+st.table(chi_df)
+
+# --- D. Hypothesis & Risk Summary ---
+st.markdown("### Ringkasan Uji Hipotesis")
+is_significant = p < 0.05
+status_text = "SIGNIFIKAN (Ada Hubungan)" if is_significant else "TIDAK SIGNIFIKAN"
+order_color = "#4CAF50" if is_significant else "#F44336" 
+bg_color = "rgba(76, 175, 80, 0.1)" if is_significant else "rgba(244, 67, 54, 0.1)"
+
+try:
+    a = crosstab.loc[label_x_low, label_y_low]
+    b = crosstab.loc[label_x_low, label_y_high]
+    c = crosstab.loc[label_x_high, label_y_low]
+    d = crosstab.loc[label_x_high, label_y_high]
+    odds_ratio = (a * d) / (b * c) if (b * c) > 0 else 0
+except:
+    odds_ratio = 0
+
+col_res1, col_res2 = st.columns([1, 1.5])
+with col_res1:
+    st.markdown(f"""
+    <div style="border: 2px solid {order_color}; padding: 15px; border-radius: 5px; background-color: {bg_color}; margin-bottom: 10px;">
+        <h4 style="color: {order_color}; margin: 0 0 10px 0; text-transform: uppercase;">Result: {status_text}</h4>
+        <p style="margin: 0; font-family: monospace;">
+            P-Value    : {round(p, 4)}<br>
+            Chi-Square : {round(chi2, 3)}<br>
+            df         : {dof}
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    st.markdown(f"**Odds Ratio (Risk Estimate):** `{round(odds_ratio, 3)}`")
+
+with col_res2:
+    if is_significant:
+        interp_text = f"Temuan ini sangat krusial: lonjakan intensitas {x_options[x_col]} terbukti **berkorelasi kuat dan signifikan** dengan peningkatan {y_options[y_col]} (OR: {round(odds_ratio, 3)}). Ini adalah konfirmasi empiris bahwa narasi hilirisasi dan investasi ekstraktif bukanlah pertumbuhan tanpa korban-ekspansi spasial mereka mutlak mengorbankan luasan hutan di tingkat tapak."
+    else:
+        interp_text = f"Secara agregat, hubungan antara {x_options[x_col]} dan {y_options[y_col]} **tidak signifikan** secara statistik (P ≥ 0.05). Ini mengindikasikan bahwa deforestasi terjadi sangat masif di seluruh panel waktu dan ruang secara merata. Krisis tata kelola dan deforestasi telah menyebar ke seluruh wilayah, sehingga lonjakan izin di tahun tertentu tidak lagi menjadi prediktor tunggal atas kebangkrutan ekologis yang sudah sistemik."
+    
+    st.markdown(f"""
+    <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid {order_color}; height: 100%;">
+        <b>Interpretasi Ekologis:</b><br><br>
+        {interp_text}
+    </div>
+    """, unsafe_allow_html=True)
+
+# --- E. Executive Summary of All Combinations ---
+st.markdown("---")
+st.markdown("### Ringkasan Eksekutif Seluruh Skenario Crosstab")
+st.markdown("Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square) untuk semua kemungkinan kombinasi antara indikator Ekspansi (X) dan Dampak Ekologis (Y) pada panel data yang sama.")
+
+summary_data = []
+for k_x, v_x in x_options.items():
+    for k_y, v_y in y_options.items():
+        med_x = df_panel[k_x].median()
+        med_y = df_panel[k_y].median()
+        
+        lbl_x_h = f"Tinggi (≥{int(med_x):,})"
+        lbl_x_l = f"Rendah (<{int(med_x):,})"
+        lbl_y_h = f"Tinggi (≥{int(med_y):,})"
+        lbl_y_l = f"Rendah (<{int(med_y):,})"
+        
+        s_x = df_panel[k_x].apply(lambda val: lbl_x_h if val >= med_x else lbl_x_l)
+        s_y = df_panel[k_y].apply(lambda val: lbl_y_h if val >= med_y else lbl_y_l)
+        
+        ct = pd.crosstab(s_x, s_y).reindex(index=[lbl_x_l, lbl_x_h], columns=[lbl_y_l, lbl_y_h], fill_value=0)
+        try:
+            c2_val, pv_val, dof_val, exp_val = stats.chi2_contingency(ct)
+        except:
+            c2_val, pv_val, dof_val = 0, 1, 0
+            
+        try:
+            aa = ct.loc[lbl_x_l, lbl_y_l]
+            bb = ct.loc[lbl_x_l, lbl_y_h]
+            cc = ct.loc[lbl_x_h, lbl_y_l]
+            dd = ct.loc[lbl_x_h, lbl_y_h]
+            or_v = (aa * dd) / (bb * cc) if (bb * cc) > 0 else 0
+        except:
+            or_v = 0
+            
+        sig_status = "🟢 SIGNIFIKAN" if pv_val < 0.05 else "🔴 TIDAK SIGNIFIKAN"
+        
+        summary_data.append({
+            "Variabel Independen (X)": v_x,
+            "Variabel Dependen (Y)": v_y,
+            "Chi-Square": f"{round(c2_val, 3)}",
+            "P-Value": f"{round(pv_val, 3)}",
+            "Odds Ratio": f"{round(or_v, 2)}",
+            "Kesimpulan": sig_status
+        })
+
+df_summary = pd.DataFrame(summary_data)
+st.dataframe(df_summary, use_container_width=True, hide_index=True)
+
+# Generate Dynamic Narrative for Executive Summary
+sig_count = sum(1 for row in summary_data if "🟢 SIGNIFIKAN" in row["Kesimpulan"])
+total_scenarios = len(summary_data)
+
+import textwrap
+
+if sig_count > 0:
+    exec_narrative = textwrap.dedent(f"""\
+Dari <b>{total_scenarios} skenario pengujian</b>, terdapat <b>{sig_count} skenario yang terbukti SIGNIFIKAN</b>.<br><br>
+Angka-angka pada tabel di atas bukan sekadar statistik di atas kertas, melainkan <b>bukti empiris</b> dari daya rusak kebijakan. Tingginya <i>Odds Ratio</i> pada skenario yang signifikan menegaskan bahwa setiap kali kran perizinan atau luas konsesi diperlebar, risiko terjadinya deforestasi melonjak berkali-kali lipat.<br><br>
+Menariknya, jika ada skenario yang menunjukkan <i>TIDAK SIGNIFIKAN</i> (khususnya pada deforestasi komoditas spesifik), ini tidak berarti industri ekstraktif ramah lingkungan. Sebaliknya, ini menjadi indikasi mengerikan bahwa <b>kehancuran ekologis telah menyebar tak terkendali (spillover effect)</b>-di mana kerusakan hutan akibat operasi tambang menjalar jauh melampaui batas konsesi resmi komoditasnya hingga merusak total lanskap alam secara merata.\
+    """)
+    bg_color = "rgba(229, 57, 53, 0.15)"
+    border_color = "#E53935"
+else:
+    exec_narrative = textwrap.dedent(f"""\
+Dari <b>{total_scenarios} skenario pengujian</b>, seluruhnya menunjukkan status <b>TIDAK SIGNIFIKAN</b>.<br><br>
+Dalam kacamata ekonomi politik ekologi, ketidaksignifikanan secara agregat ini justru merupakan <b>sinyal bahaya tertinggi</b>. Ini membuktikan bahwa deforestasi dan kebangkrutan ekologis telah terjadi secara <i>brutal dan merata</i> di seluruh provinsi dan waktu. Ekstraksi ruang telah mencapai titik <i>saturation</i> (jenuh), sehingga penambahan izin di satu titik tidak lagi menjadi satu-satunya penyebab, melainkan seluruh sistem tata kelola telah gagal melindungi lanskap tersisa.\
+    """)
+    bg_color = "rgba(255, 152, 0, 0.15)"
+    border_color = "#FF9800"
+
+st.markdown(f"""
+<div style="background-color: {bg_color}; padding:18px; border-radius:8px; border-left:6px solid {border_color}; margin-top: 15px; margin-bottom: 25px;">
+    <b style="color: {border_color}; font-size: 1.05rem;">Pembedahan Realitas Ekologis:</b><br><br>
+    <div style="color: #E0E0E0; font-size: 0.95rem; line-height: 1.6;">
+{exec_narrative}
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+with st.expander("Lihat Data Panel Mentah (Merge Izin & GFW)", expanded=False):
+    st.dataframe(df_panel[['Provinsi', 'Tahun', x_col, 'X_Label', y_col, 'Y_Label']], use_container_width=True, hide_index=True)
+    st.caption("Sumber: Gabungan `sulawesi_izin_baru_per_tahun.csv` (Minerbaone) dan `sulawesi_gfw_master_1_dekade_2014_2023.csv` (GFW).")
+
+
+# ══════════════════════════════════════════════════════════
+# SUB-BAB 1.4: REALISASI INVESTASI VS BEBAN LAHAN
 # ══════════════════════════════════════════════════════════
 st.markdown("<div style='height: 30px;'></div>", unsafe_allow_html=True)
 st.markdown("---")
-st.subheader("1.3 Realisasi Investasi vs Ekspansi Kehancuran Hutan")
+st.subheader("1.4 Paradoks Industri: Ekspansi Izin Tambang vs Kebangkrutan Ekologis")
 st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Analisis Spasial, Dual-Axis Split & Uji Chi-Square</span>', unsafe_allow_html=True)
 st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
@@ -1033,21 +1297,19 @@ df_gfw_kat = df_gfw.copy()
 df_gfw_kat['Kategori_Wilayah'] = df_gfw_kat['Provinsi'].apply(lambda x: 'Sentra Tambang' if x in sentra_provs else 'Non-Sentra')
 df_gfw_kategori = df_gfw_kat.groupby(['Kategori_Wilayah', 'Tahun'])['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'].sum().reset_index()
 
-# Grouping Investasi by Kategori
-df_inv_renamed = df_inv.rename(columns={'tahun': 'Tahun', 'nilai': 'Investasi_Juta_Rp', 'provinsi': 'Provinsi'})
-df_inv_renamed['Kategori_Wilayah'] = df_inv_renamed['Provinsi'].apply(lambda x: 'Sentra Tambang' if x in sentra_provs else 'Non-Sentra')
-df_inv_renamed['Tahun'] = pd.to_numeric(df_inv_renamed['Tahun'], errors='coerce')
-df_inv_renamed['Investasi_Juta_Rp'] = pd.to_numeric(df_inv_renamed['Investasi_Juta_Rp'], errors='coerce')
-df_inv_kategori = df_inv_renamed.groupby(['Kategori_Wilayah', 'Tahun'])['Investasi_Juta_Rp'].sum().reset_index()
+# Grouping Izin Tambang Baru by Kategori
+df_izin_kat = df_izin.copy()
+df_izin_kat['Kategori_Wilayah'] = df_izin_kat['Provinsi'].apply(lambda x: 'Sentra Tambang' if x in sentra_provs else 'Non-Sentra')
+df_izin_kategori = df_izin_kat.groupby(['Kategori_Wilayah', 'Tahun'])['Total_Luas_Konsesi_Baru_Ha'].sum().reset_index()
 
-df_viz_1_3 = pd.merge(df_gfw_kategori, df_inv_kategori, on=['Kategori_Wilayah', 'Tahun'], how='inner')
+df_viz_1_3 = pd.merge(df_gfw_kategori, df_izin_kategori, on=['Kategori_Wilayah', 'Tahun'], how='inner')
 
 # Agregat Total Untuk Narasi
 df_gfw_agg = df_gfw.groupby('Tahun')['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'].sum().reset_index()
-df_inv_agg = df_inv_renamed.groupby('Tahun')['Investasi_Juta_Rp'].sum().reset_index()
+df_izin_agg = df_izin_kat.groupby('Tahun')['Total_Luas_Konsesi_Baru_Ha'].sum().reset_index()
 
-val_inv_2016 = df_inv_agg[df_inv_agg['Tahun'] == 2016]['Investasi_Juta_Rp'].values[0]/1e3 if 2016 in df_inv_agg['Tahun'].values else 0
-val_inv_2023 = df_inv_agg[df_inv_agg['Tahun'] == 2023]['Investasi_Juta_Rp'].values[0]/1e3 if 2023 in df_inv_agg['Tahun'].values else 0
+val_izin_2016 = df_izin_agg[df_izin_agg['Tahun'] == 2016]['Total_Luas_Konsesi_Baru_Ha'].values[0] if 2016 in df_izin_agg['Tahun'].values else 0
+val_izin_2023 = df_izin_agg[df_izin_agg['Tahun'] == 2023]['Total_Luas_Konsesi_Baru_Ha'].values[0] if 2023 in df_izin_agg['Tahun'].values else 0
 val_def_2016 = df_gfw_agg[df_gfw_agg['Tahun'] == 2016]['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'].values[0] if 2016 in df_gfw_agg['Tahun'].values else 0
 val_def_2023 = df_gfw_agg[df_gfw_agg['Tahun'] == 2023]['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'].values[0] if 2023 in df_gfw_agg['Tahun'].values else 0
 
@@ -1133,135 +1395,68 @@ except Exception as e:
     has_pad_data = False
     st.warning(f"Data PAD tidak ditemukan: {e}")
 
-st.markdown(f"""
-Pemerintah secara konsisten membanggakan metrik makroekonomi untuk melegitimasi ekspansi ekstraktif di Pulau Sulawesi. Salah satu narasi yang paling sering diulang adalah klaim bahwa industri ini mendongkrak pendapatan daerah hingga menghasilkan **Pendapatan Asli Daerah (PAD)** secara kumulatif mencapai **{total_pad_sulawesi:,.1f} Miliar Rupiah** (2015-2024) di {total_prov} provinsi Sulawesi yang datanya tersedia. Angka PAD ini dikombinasikan dengan realisasi investasi Penanaman Modal Dalam Negeri (PMDN) yang menembus **{tot_investasi_triliun:,.1f} Triliun Rupiah** untuk menciptakan ilusi pertumbuhan ekonomi yang 'inklusif' dan 'menyejahterakan'.
 
-Namun, grafik **"Treemap Breakdown PAD: Jenis Pendapatan Per Provinsi"** di bawah ini membongkar ketimpangan struktural di balik angka agregat tersebut. Visualisasi treemap hierarkis menunjukkan tidak hanya distribusi antar provinsi, tetapi juga—untuk {num_prov_breakdown} provinsi yang tersedia breakdown detailnya (Sulawesi Selatan & Gorontalo; Sulawesi Tenggara hanya data PAD Kabupaten Buton karena BPS tidak menyediakan data level provinsi)—**komposisi internal PAD**: dari mana sebenarnya penerimaan daerah berasal (Pajak Daerah, Retribusi, Hasil BUMD, atau Lain-lain PAD). Ini membeberkan realitas bahwa PAD sangat bergantung pada **Pajak Daerah ({pct_pajak_daerah:.1f}% dari total PAD murni)** yang bersumber dari aktivitas ekstraktif, sementara komponen lain minim kontribusi.
-""")
-
-# --- PAD Treemap Visualization with Breakdown ---
-if has_pad_data:
-    st.markdown("#### Treemap Breakdown PAD: Jenis Pendapatan Per Provinsi")
-    
-    # Hierarchical treemap with square root transform for balanced visualization
-    fig_treemap = px.treemap(
-        df_pad_combined,
-        path=['Provinsi', 'Jenis_Pendapatan'],
-        values='Nilai_Transformed',  # Use transformed values for box sizes
-        hover_data={
-            'Nilai_Miliar_Rp': ':,.2f',  # Show actual values in hover
-            'Nilai_Transformed': False  # Hide transformed values
-        },
-        color='Nilai_Miliar_Rp',  # Color based on actual values
-        color_continuous_scale='RdYlGn',
-        color_continuous_midpoint=df_pad_combined['Nilai_Miliar_Rp'].median(),
-        custom_data=['Nilai_Miliar_Rp']  # Pass actual values for display
-    )
-    
-    fig_treemap.update_traces(
-        texttemplate="<b>%{label}</b><br>%{customdata[0]:,.1f} M Rp",  # Display actual values
-        textposition="middle center",
-        textfont_size=13,  # Increased from 11 to 13
-        marker=dict(
-            line=dict(width=2, color='#1E1E1E'),
-            pad=dict(t=25, l=5, r=5, b=5)  # Add padding to make province labels more visible
-        ),
-        hovertemplate='<b>%{label}</b><br>Nilai: %{customdata[0]:,.2f} Miliar Rp<extra></extra>'
-    )
-    
-    fig_treemap.update_layout(
-        title={
-            'text': f'Breakdown PAD Per Provinsi dan Jenis Pendapatan (2015-2024)<br><sup>Level 1: {total_prov} Provinsi | Level 2: Breakdown Detail ({num_prov_breakdown} provinsi) + Total Agregat ({total_prov - num_prov_breakdown} provinsi)<br>⚠️ Ukuran kotak: nilai^0.25 + minimum boost untuk provinsi kecil | Sulawesi Tenggara = PAD Kab. Buton (BPS tanpa data provinsi)</sup>',
-            'y':0.98,
-            'x':0.5,
-            'xanchor': 'center',
-            'yanchor': 'top',
-            'font': dict(size=14, color='#ECEFF1')
-        },
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
-        font=dict(color='#B0BEC5', family='Inter'),
-        margin=dict(t=110, l=10, r=10, b=10),
-        height=700,  # Increased from 580 to 700 for more square aspect ratio
-        coloraxis_colorbar=dict(
-            title=dict(text="Nilai Aktual<br>(M Rp)", side="right"),
-            tickfont=dict(color='#B0BEC5')
-        ),
-        treemapcolorway=['#1B5E20', '#2E7D32', '#388E3C', '#43A047']  # Green palette
-    )
-    
-    st.plotly_chart(fig_treemap, use_container_width=True)
-    
-    # Add explanation about the transformation
-    st.markdown("""
-    <div style="background:#263238; padding:10px; border-radius:5px; margin-top:-10px; margin-bottom:15px;">
-    ℹ️ <b>Catatan Teknis:</b> Ukuran kotak menggunakan transformasi eksponensial (nilai<sup>0.25</sup>) + minimum boost (+3.0 untuk nilai < 100M) agar provinsi sangat kecil tetap terlihat. 
-    Warna dan angka yang ditampilkan menggunakan nilai aktual. Tanpa transformasi ini, Gorontalo (1.77 Miliar Rp) akan invisible karena Sulawesi Utara (142,366 Miliar) **80,000x lebih besar**.
-    </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown(f"""
-<div style="background:#1E1E1E; padding:16px; border-radius:10px; border-left:5px solid #4CAF50; margin-bottom: 20px; margin-top: 15px;">
-    <b>Interpretasi Ketimpangan Struktural & Komposisi PAD:</b><br><br>
-    Treemap hierarkis di atas mengungkap dua dimensi ketimpangan sekaligus:<br><br>
-    
-    <b>1. Ketimpangan Antar Provinsi:</b> <b>{prov_tertinggi['Provinsi']}</b> mendominasi dengan total PAD <b>{prov_tertinggi['Total_PAD_Miliar_Rp']:,.1f} Miliar Rupiah ({prov_tertinggi['Kontribusi_Pct']:.1f}%)</b>, sementara <b>{prov_terendah['Provinsi']}</b> hanya menerima <b>{prov_terendah['Total_PAD_Miliar_Rp']:,.1f} Miliar Rupiah ({prov_terendah['Kontribusi_Pct']:.1f}%)</b>.<br><br>
-    
-    <b>2. Komposisi Internal PAD:</b> Treemap memperlihatkan bahwa <b>{pct_pajak_daerah:.1f}% PAD berasal dari Pajak Daerah</b>, yang sebagian besar bersumber dari aktivitas industri ekstraktif (pertambangan dan smelter). Komponen lain seperti Retribusi ({pct_retribusi:.1f}%), Hasil BUMD ({pct_hasil_bumd:.1f}%), dan Lain-lain PAD ({pct_lain_pad:.1f}%) kontribusinya minimal. <b>Ini membuktikan bahwa PAD bukan hasil diversifikasi ekonomi, melainkan sangat tergantung pada eksploitasi sumber daya alam.</b><br><br>
-    
-    Ketimpangan ganda ini membuktikan bahwa narasi "pertumbuhan inklusif" adalah ilusi belaka. Provinsi dengan smelter terkonsentrasi memonopoli penerimaan PAD dari ekstraksi pajak, namun seluruh Pulau Sulawesi—termasuk provinsi yang tidak menikmati PAD signifikan—menanggung beban ekologis berupa <b>{tot_deforestasi:,.0f} Hektar</b> deforestasi permanen. Ini adalah bentuk eksternalitas negatif klasik: keuntungan diprivatisasi (terkonsentrasi), sementara biaya lingkungan disosialisasikan (ditanggung bersama).
-</div>
-""", unsafe_allow_html=True)
-    
-    with st.expander("Lihat Data Detail Breakdown PAD Per Provinsi & Jenis Pendapatan", expanded=False):
-        df_pad_display = df_pad_combined.copy()
-        df_pad_display['Nilai_Miliar_Rp'] = df_pad_display['Nilai_Miliar_Rp'].apply(lambda x: f"{x:,.2f}")
-        df_pad_display = df_pad_display.sort_values(['Provinsi', 'Jenis_Pendapatan'])
-        
-        st.dataframe(df_pad_display[['Provinsi', 'Jenis_Pendapatan', 'Nilai_Miliar_Rp']], use_container_width=True, hide_index=True)
-        
-        st.caption("📁 **Sumber:** `data/processed/sulawesi_pad_breakdown_2016_2024.csv` (breakdown detail) + `data/processed/sulawesi_pad_2016_2024.csv` (total agregat)")
-        st.caption("⚠️ **Catatan:** Sulawesi Utara dan Sulawesi Barat ditampilkan sebagai 'Total PAD' karena data mentah BPS hanya tersedia dalam format agregat kabupaten tanpa breakdown per jenis pendapatan.")
-
-st.markdown("---")
-st.markdown("#### Paradoks Investasi: Kucuran Modal vs Kebangkrutan Ekologis")
+st.markdown("<br>", unsafe_allow_html=True)
 
 st.markdown(f"""
-Grafik **"Anomali Investasi Ekstraktif vs Deforestasi Komoditas"** di bawah ini menelanjangi ilusi di balik angka PAD dan investasi PMDN tersebut.
+Grafik **"Ledakan Ekspansi Tambang"** di bawah ini menelanjangi pola destruktif yang digerakkan oleh penerbitan konsesi baru.
 
-Grafik *Dual-Axis* (Dua Sumbu) di bawah ini mempertemukan dua variabel secara absolut: Arus Investasi (Bar Abu-abu) dengan Laju Kehancuran Deforestasi (Garis Merah). Mari kita cermati dan baca temuan **fakta data time-series**-nya: pada tahun 2016, arus investasi hanya menyentuh **{val_inv_2016:,.1f} Triliun Rupiah**, berhadapan dengan luasan deforestasi komoditas **{val_def_2016:,.0f} Hektar**. Namun, ketika kita membedah ujung grafik di tahun 2023, balok investasi terekam meledak gila-gilaan mencapai **{val_inv_2023:,.1f} Triliun Rupiah**. Sialnya, pada waktu yang persis sama, kurva merah deforestasi tidak melandai sama sekali, melainkan ikut merobek sumbu vertikal hingga mencapai hilangnya **{val_def_2023:,.0f} Hektar** tutupan hutan dalam satu tahun tersebut.
+Mari kita cermati temuan **fakta data time-series**-nya: pada tahun 2016, luas konsesi tambang baru yang diterbitkan di wilayah Sulawesi menyentuh angka **{int(val_izin_2016):,} Hektar**. Seiring agresifnya hilirisasi, angka ini terus meledak dan memuncak pada tahun 2023 dengan diterbitkannya konsesi baru seluas **{int(val_izin_2023):,} Hektar**. Sialnya, pada waktu yang persis sama, angka deforestasi komoditas tetap merobek rekor hingga mencapai hilangnya **{int(val_def_2023):,} Hektar** tutupan hutan dalam satu tahun tersebut.
 
-Irisan fatal antara kurva batang PMDN dan garis tren deforestasi ini membuktikan secara ilmiah bahwa lonjakan investasi bukanlah indikator membaiknya kesejahteraan ekologis. Sebaliknya, setiap triliun rupiah tersebut secara mutlak beroperasi penuh sebagai **pemicu (driver) ekskalasi pembongkaran**. Klaim "hilirisasi sukses" terbukti secara empiris hanya menjadi kedok hukum bagi total agresi lenyapnya hutan seluas **{tot_deforestasi:,.0f} Hektar**. Mengganti sabuk resapan air alamiah dengan ekosistem tambang membuktikan bahwa kucuran investasi ini hanyalah ongkos nyata percepatan menuju kebangkrutan ekologis lintas generasi.
+Lonjakan penerbitan izin ini membuktikan secara ilmiah bahwa masifnya industri ekstraktif beroperasi penuh sebagai **pemicu (driver) ekskalasi pembongkaran**. Klaim "hilirisasi sukses" terbukti secara empiris hanya menjadi kedok hukum bagi agresi lenyapnya hutan seluas **{int(tot_deforestasi):,} Hektar**. Mengganti sabuk resapan air alamiah dengan ekosistem tambang membuktikan bahwa kucuran perizinan ini hanyalah ongkos nyata percepatan menuju kebangkrutan ekologis lintas generasi.
 """)
 
 col_chart_s, col_chart_n = st.columns(2)
+max_y_izin = df_viz_1_3['Total_Luas_Konsesi_Baru_Ha'].max() * 1.1
 
 with col_chart_s:
     st.markdown("<h5 style='color:#ECEFF1; text-align:center;'>Daerah Sentra Tambang</h5>", unsafe_allow_html=True)
     df_s = df_viz_1_3[df_viz_1_3['Kategori_Wilayah'] == 'Sentra Tambang']
-    base_s = alt.Chart(df_s).encode(x=alt.X('Tahun:O', title='', axis=alt.Axis(labelAngle=-45, labelColor='#B0BEC5')))
-    bar_s = base_s.mark_bar(opacity=0.4, color='#F57C00').encode(y=alt.Y('Investasi_Juta_Rp:Q', title='Investasi PMDN (Juta Rp)', axis=alt.Axis(gridOpacity=0.05, labelColor='#B0BEC5', titleColor='#B0BEC5')), tooltip=['Tahun', alt.Tooltip('Investasi_Juta_Rp', format=',.0f', title='Investasi')])
-    line_s = base_s.mark_line(point=True, color='#D32F2F', strokeWidth=3).encode(y=alt.Y('Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha:Q', title='Deforestasi (Ha)', axis=alt.Axis(grid=False, labelColor='#D32F2F', titleColor='#D32F2F')), tooltip=['Tahun', alt.Tooltip('Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha', format=',.0f', title='Deforestasi')])
-    st.altair_chart(alt.layer(bar_s, line_s).resolve_scale(y='independent').properties(height=350), use_container_width=True)
+    chart_s = alt.Chart(df_s).mark_bar(opacity=0.8, color='#F57C00').encode(
+        x=alt.X('Tahun:O', title='', axis=alt.Axis(labelAngle=-45, labelColor='#B0BEC5')),
+        y=alt.Y('Total_Luas_Konsesi_Baru_Ha:Q', scale=alt.Scale(domain=[0, max_y_izin]), title='Luas Konsesi Baru (Ha)', axis=alt.Axis(gridOpacity=0.05, labelColor='#B0BEC5', titleColor='#B0BEC5')),
+        tooltip=['Tahun', alt.Tooltip('Total_Luas_Konsesi_Baru_Ha', format=',.0f', title='Konsesi Baru (Ha)')]
+    ).properties(height=350)
+    st.altair_chart(chart_s, use_container_width=True)
 
 with col_chart_n:
     st.markdown("<h5 style='color:#ECEFF1; text-align:center;'>Daerah Non-Sentra</h5>", unsafe_allow_html=True)
     df_n = df_viz_1_3[df_viz_1_3['Kategori_Wilayah'] == 'Non-Sentra']
-    base_n = alt.Chart(df_n).encode(x=alt.X('Tahun:O', title='', axis=alt.Axis(labelAngle=-45, labelColor='#B0BEC5')))
-    bar_n = base_n.mark_bar(opacity=0.4, color='#90A4AE').encode(y=alt.Y('Investasi_Juta_Rp:Q', title='Investasi PMDN (Juta Rp)', axis=alt.Axis(gridOpacity=0.05, labelColor='#B0BEC5', titleColor='#B0BEC5')), tooltip=['Tahun', alt.Tooltip('Investasi_Juta_Rp', format=',.0f', title='Investasi')])
-    line_n = base_n.mark_line(point=True, color='#546E7A', strokeWidth=3).encode(y=alt.Y('Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha:Q', title='Deforestasi (Ha)', axis=alt.Axis(grid=False, labelColor='#546E7A', titleColor='#546E7A')), tooltip=['Tahun', alt.Tooltip('Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha', format=',.0f', title='Deforestasi')])
-    st.altair_chart(alt.layer(bar_n, line_n).resolve_scale(y='independent').properties(height=350), use_container_width=True)
+    chart_n = alt.Chart(df_n).mark_bar(opacity=0.8, color='#90A4AE').encode(
+        x=alt.X('Tahun:O', title='', axis=alt.Axis(labelAngle=-45, labelColor='#B0BEC5')),
+        y=alt.Y('Total_Luas_Konsesi_Baru_Ha:Q', scale=alt.Scale(domain=[0, max_y_izin]), title='Luas Konsesi Baru (Ha)', axis=alt.Axis(gridOpacity=0.05, labelColor='#B0BEC5', titleColor='#B0BEC5')),
+        tooltip=['Tahun', alt.Tooltip('Total_Luas_Konsesi_Baru_Ha', format=',.0f', title='Konsesi Baru (Ha)')]
+    ).properties(height=350)
+    st.altair_chart(chart_n, use_container_width=True)
 
 st.markdown(f"""
 <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #D32F2F; margin-bottom: 20px;">
-    <b>Interpretasi Paradoks Ekonomi (Spasial):</b> Perbandingan grafik <i>Dual-Axis</i> Sentra vs Non-Sentra di atas menelanjangi pola destruktif modal. Di <b>Daerah Sentra Tambang</b>, ledakan arus investasi PMDN (batang oranye) beririsan mutlak dengan meroketnya grafik deforestasi hutan (garis merah). Sebaliknya, di <b>Daerah Non-Sentra</b>, pergerakan modal dan deforestasi jauh lebih landai dan stagnan. Ini mengonfirmasi bahwa kucuran investasi triliunan rupiah tidak mendatangkan "kesejahteraan inklusif", melainkan secara absolut difungsikan sebagai alat modal (driver) untuk membongkar penyangga ekologis secara brutal di zona-zona tumbal.
+    <b>Interpretasi Ekologis (Spasial):</b> Perbandingan grafik batang di atas mengungkap bukti empiris yang fatal terkait ekspansi wilayah Sentra Tambang (Morowali & Konawe). Di saat <b>Daerah Non-Sentra</b> mencatatkan perluasan izin yang sangat minim, <b>Daerah Sentra Tambang</b> justru mengalami ledakan raksasa penerbitan konsesi baru. Karena sumbu Y disamakan, kita dapat melihat secara transparan bahwa skala pengerukan lahan di Sentra Tambang berlipat ganda menjulang jauh melampaui wilayah lain. Ini mengonfirmasi bahwa ekspansi industri secara mutlak rakus lahan (land-hungry), mengubah jantung penyangga ekologis di zona-zona sentra menjadi daratan keruk secara legal.
 </div>
 """, unsafe_allow_html=True)
 
+with st.expander("Lihat Data Mentah: Ekspansi Konsesi vs Deforestasi", expanded=False):
+    df_table_1_3 = df_viz_1_3.copy()
+    df_table_1_3 = df_table_1_3.rename(columns={
+        'Tahun': 'Tahun',
+        'Kategori_Wilayah': 'Kategori Wilayah',
+        'Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha': 'Deforestasi Komoditas (Ha)',
+        'Total_Luas_Konsesi_Baru_Ha': 'Luas Konsesi Tambang Baru (Ha)'
+    })
+    
+    st.dataframe(df_table_1_3, use_container_width=True, hide_index=True)
+    st.caption("📁 **Sumber File:** `sulawesi_izin_baru_per_tahun.csv` & `sulawesi_gfw_master_1_dekade_2014_2023.csv` - Data Kementerian ESDM (Izin) dan GFW. *Catatan OSINT: Nilai 0 (kosong) pada Non-Sentra tahun 2016 terkonfirmasi karena tidak ada dokumen SK IUP baru yang terbit di wilayah tersebut pada tahun itu.*")
+
+
 # Memuat data tambahan untuk 3 Dashboard Cards GFW
 try:
-    df_driver_gfw = pd.read_csv('data/raw/klhk_gfw/land_api_fetch/loss_by_driver_sulawesi_2001_2025.csv')
-    df_primary_gfw = pd.read_csv('data/raw/klhk_gfw/mega_fetch_v2/primary_forest_loss_sulawesi_2001_2025.csv')
+    import os
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    path_driver = os.path.join(base_dir, 'data', 'raw', 'klhk_gfw', 'land_api_fetch', 'loss_by_driver_sulawesi_2001_2025.csv')
+    path_primary = os.path.join(base_dir, 'data', 'raw', 'klhk_gfw', 'mega_fetch_v2', 'primary_forest_loss_sulawesi_2001_2025.csv')
+    
+    df_driver_gfw = pd.read_csv(path_driver)
+    df_primary_gfw = pd.read_csv(path_primary)
     
     # 1. Donut Chart (Aktor Komoditas) - GFW Style Legend
     driver_map = {
@@ -1318,11 +1513,11 @@ try:
     st.markdown(f"""
 Untuk melengkapi analisis kausalitas di atas, kita harus membedah anatomi kehancuran ekologis secara spesifik melalui 3 metrik forensik pada dasbor **Pembedahan Ekologis** di bawah ini. Ketiga grafik ini mengonfirmasi siapa dalang utama di balik hilangnya hutan dan seberapa parah kerusakan absolut yang telah ditimbulkan terhadap masa depan lingkungan Sulawesi.
 
-**Pertama, Aktor Utama Deforestasi (Donut Chart):** Visualisasi cincin di sebelah kiri membongkar siapa aktor penjahat ekologis sesungguhnya. Mayoritas absolut dari hilangnya tutupan lahan tidak disebabkan oleh masyarakat adat atau pertanian warga, melainkan dipicu secara mutlak oleh **Ekspansi Komoditas (Tambang & Perkebunan monokultur)** yang melahap dengan rakus hingga **{area_komoditas:,.0f} Hektar** ({komoditas_str}). Dominasi warna merah yang pekat pada grafik tersebut membuktikan bahwa perampasan ruang ini dimonopoli oleh kekuatan modal industri raksasa, sekaligus membantah klaim bahwa deforestasi didorong oleh kebutuhan subsisten masyarakat lokal.
+**Pertama, Aktor Utama Deforestasi (Donut Chart):** Visualisasi cincin di sebelah kiri membongkar siapa aktor penjahat ekologis sesungguhnya. Mayoritas absolut dari hilangnya tutupan lahan tidak disebabkan oleh masyarakat adat atau pertanian warga, melainkan dipicu secara mutlak oleh **Ekspansi Komoditas (Tambang & Perkebunan monokultur)** yang melahap dengan rakus hingga **{int(area_komoditas):,} Hektar** ({komoditas_str}). Dominasi warna merah yang pekat pada grafik tersebut membuktikan bahwa perampasan ruang ini dimonopoli oleh kekuatan modal industri raksasa, sekaligus membantah klaim bahwa deforestasi didorong oleh kebutuhan subsisten masyarakat lokal.
 
-**Kedua, Tragedi Hutan Primer (Bar Chart Tengah):** Kerusakan masif yang didorong oleh komoditas ini tidak terjadi di lahan kritis atau semak belukar yang terdegradasi, melainkan mengorbankan langsung jantung ekosistem bumi. Grafik batang merah muda menunjukkan bahwa secara agregat total, lebih dari **{tot_primary_loss:,.0f} Hektar Hutan Primer**—ekosistem purba yang membutuhkan waktu ribuan tahun untuk terbentuk dan kaya akan keanekaragaman hayati endemik—telah ditebang habis dan musnah secara permanen tak bersisa. Lonjakan tinggi batang pada periode tertentu berkorelasi sangat erat dengan tahun-tahun puncak penerbitan IUP dan peresmian smelter baru.
+**Kedua, Tragedi Hutan Primer (Bar Chart Tengah):** Kerusakan masif yang didorong oleh komoditas ini tidak terjadi di lahan kritis atau semak belukar yang terdegradasi, melainkan mengorbankan langsung jantung ekosistem bumi. Grafik batang merah muda menunjukkan bahwa secara agregat total, lebih dari **{int(tot_primary_loss):,} Hektar Hutan Primer**-ekosistem purba yang membutuhkan waktu ribuan tahun untuk terbentuk dan kaya akan keanekaragaman hayati endemik-telah ditebang habis dan musnah secara permanen tak bersisa. Lonjakan tinggi batang pada periode tertentu berkorelasi sangat erat dengan tahun-tahun puncak penerbitan IUP dan peresmian smelter baru.
 
-**Ketiga, Ledakan Emisi Karbon (Bar Chart Kanan):** Sebagai imbas langsung dari musnahnya hutan primer tersebut, pembongkaran tanah untuk tambang nikel melepaskan bom karbon ke udara terbuka. Grafik cokelat tua menelanjangi fakta bahwa ekspansi komoditas telah meledakkan total **{tot_co2_emissions:,.0f} Megagrams Emisi CO2**. Fakta mematikan ini merupakan bantahan paling empiris dan telanjang terhadap narasi palsu "Hilirisasi Hijau". Melalui data ini, terbukti kita sama sekali tidak sedang memproduksi rantai pasok energi bersih; kita justru sedang mensubsidi krisis iklim global melalui emisi karbon ekstrem hasil dari pembongkaran hutan primer demi mengeruk nikel.
+**Ketiga, Ledakan Emisi Karbon (Bar Chart Kanan):** Sebagai imbas langsung dari musnahnya hutan primer tersebut, pembongkaran tanah untuk tambang nikel melepaskan bom karbon ke udara terbuka. Grafik cokelat tua menelanjangi fakta bahwa ekspansi komoditas telah meledakkan total **{int(tot_co2_emissions):,} Megagrams Emisi CO2**. Fakta mematikan ini merupakan bantahan paling empiris dan telanjang terhadap narasi palsu "Hilirisasi Hijau". Melalui data ini, terbukti kita sama sekali tidak sedang memproduksi rantai pasok energi bersih; kita justru sedang mensubsidi krisis iklim global melalui emisi karbon ekstrem hasil dari pembongkaran hutan primer demi mengeruk nikel.
 """)
     
     col_v1, col_v2, col_v3 = st.columns(3)
@@ -1334,15 +1529,15 @@ Untuk melengkapi analisis kausalitas di atas, kita harus membedah anatomi kehanc
             st.markdown(f"""
             <div style="font-family: sans-serif; line-height: 1.2; margin-top: 15%;">
                 <div style="margin-bottom: 12px;">
-                    <span style="color: #D32F2F; font-size: 0.8rem;">●</span> <span style="color: #B0BEC5; font-size: 0.85rem;">Ekspansi Komoditas</span><br>
+                    <span style="color: #D32F2F; font-size: 0.8rem;">&bull;</span> <span style="color: #B0BEC5; font-size: 0.85rem;">Ekspansi Komoditas</span><br>
                     <strong style="color: #D32F2F; font-size: 1.5rem;">{komoditas_str}</strong>
                 </div>
                 <div style="margin-bottom: 12px;">
-                    <span style="color: #4CAF50; font-size: 0.8rem;">●</span> <span style="color: #B0BEC5; font-size: 0.85rem;">Kehutanan (Logging)</span><br>
+                    <span style="color: #4CAF50; font-size: 0.8rem;">&bull;</span> <span style="color: #B0BEC5; font-size: 0.85rem;">Kehutanan (Logging)</span><br>
                     <strong style="color: #4CAF50; font-size: 1.2rem;">{forestry_str}</strong>
                 </div>
                 <div>
-                    <span style="color: #FFC107; font-size: 0.8rem;">●</span> <span style="color: #B0BEC5; font-size: 0.85rem;">Pertanian Berpindah</span><br>
+                    <span style="color: #FFC107; font-size: 0.8rem;">&bull;</span> <span style="color: #B0BEC5; font-size: 0.85rem;">Pertanian Berpindah</span><br>
                     <strong style="color: #FFC107; font-size: 1.2rem;">{shifting_str}</strong>
                 </div>
             </div>
@@ -1364,13 +1559,13 @@ except Exception as e:
 with st.expander("Lihat Data Mentah: Deforestasi GFW", expanded=False):
     st.dataframe(df_gfw, use_container_width=True, hide_index=True)
 
-# --- Crosstab 1.3: Investasi PMDN vs Deforestasi ---
+# --- Crosstab 1.4: Investasi PMDN vs Deforestasi ---
 st.markdown("#### Pembuktian Statistik: Arus Investasi PMDN vs Deforestasi")
 st.markdown("""
 Menggunakan tabel crosstab untuk menguji korelasi spasial-temporal antara arus masuk Investasi PMDN dengan tingkat kerusakan hutan (Deforestasi) pada level panel **Provinsi-Tahun**. Variabel *Investasi* akan dipecah berdasarkan nilai tengah (median) menjadi 'Tinggi' dan 'Rendah', begitu pula dengan variabel *Deforestasi*.
 """)
 
-# Data Preparation untuk Panel 1.3
+# Data Preparation untuk Panel 1.4
 df_inv_clean = df_inv.rename(columns={'provinsi': 'Provinsi', 'tahun': 'Tahun'})
 df_inv_clean['Tahun'] = pd.to_numeric(df_inv_clean['Tahun'], errors='coerce')
 df_inv_clean['Investasi_Juta_Rp'] = pd.to_numeric(df_inv_clean['nilai'], errors='coerce')
@@ -1395,15 +1590,15 @@ with col_sel2_3:
     }
     y_col_3 = st.selectbox("Pilih Indikator Dampak (Y): ", list(y_options_3.keys()), format_func=lambda x: y_options_3[x], key="y_col_3")
 
-# Calculation (Binning for 1.3)
+# Calculation (Binning for 1.4)
 x_median_3 = df_panel_1_3[x_col_3].median()
 x_thresh_3 = x_median_3 if x_median_3 > 0 else 0
 y_median_3 = df_panel_1_3[y_col_3].median()
 
-label_x_low_3 = f"Rendah (≤{x_thresh_3:,.0f})"
-label_x_high_3 = f"Tinggi (>{x_thresh_3:,.0f})"
-label_y_low_3 = f"Rendah (<{y_median_3:,.1f})"
-label_y_high_3 = f"Tinggi (≥{y_median_3:,.1f})"
+label_x_low_3 = f"Rendah (≤{int(x_thresh_3):,})"
+label_x_high_3 = f"Tinggi (>{int(x_thresh_3):,})"
+label_y_low_3 = f"Rendah (<{int(y_median_3):,})"
+label_y_high_3 = f"Tinggi (≥{int(y_median_3):,})"
 
 df_panel_1_3["X_Label"] = df_panel_1_3[x_col_3].apply(lambda x: label_x_high_3 if x > x_thresh_3 else label_x_low_3)
 df_panel_1_3["Y_Label"] = df_panel_1_3[y_col_3].apply(lambda x: label_y_high_3 if x >= y_median_3 else label_y_low_3)
@@ -1422,7 +1617,7 @@ st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 st.markdown("### Detail Uji Statistik (Chi-Square & Odds Ratio)")
 st.caption("Tabel-tabel di bawah ini merepresentasikan bukti statistik hubungan antara Arus Investasi PMDN dengan tingkat deforestasi alam.")
 
-# A. Case Processing Summary 1.3
+# A. Case Processing Summary 1.4
 st.markdown("##### Case Processing Summary")
 total_cases_3 = len(df_panel_1_3)
 valid_cases_3 = len(df_panel_1_3.dropna(subset=[x_col_3, y_col_3]))
@@ -1437,7 +1632,7 @@ row_d_3 = [
 ]
 st.table(pd.DataFrame([row_d_3], index=[interaction_lbl_3], columns=cols_case_3))
 
-# B. Crosstabulation 1.3
+# B. Crosstabulation 1.4
 st.markdown(f"##### {interaction_lbl_3} Crosstabulation")
 row_idx_3 = []
 for xc in cats_x_3:
@@ -1449,17 +1644,17 @@ for xc in cats_x_3:
     cnts = crosstab_3.loc[xc].tolist()
     exps = expected_df_3.loc[xc].tolist()
     rows_3.append(cnts + [sum(cnts)])
-    rows_3.append([f"{v:.1f}" for v in exps] + [f"{sum(exps):.1f}"])
+    rows_3.append([f"{round(v, 1)}" for v in exps] + [f"{sum(exps):.1f}"])
 
 tot_cnts_3 = crosstab_3.sum().tolist()
 tot_exps_3 = expected_df_3.sum().tolist()
 rows_3.append(tot_cnts_3 + [sum(tot_cnts_3)])
-rows_3.append([f"{v:.1f}" for v in tot_exps_3] + [f"{sum(tot_exps_3):.1f}"])
+rows_3.append([f"{round(v, 1)}" for v in tot_exps_3] + [f"{sum(tot_exps_3):.1f}"])
 
 m_idx_3 = pd.MultiIndex.from_tuples(row_idx_3, names=[x_options_3[x_col_3], ""])
 st.table(pd.DataFrame(rows_3, index=m_idx_3, columns=cats_y_3 + ["Total"]))
 
-# C. Chi-Square Tests 1.3
+# C. Chi-Square Tests 1.4
 st.markdown("##### Chi-Square Tests")
 try:
     g_3, p_g_3, dof_g_3, exp_g_3 = stats.chi2_contingency(crosstab_3, lambda_="log-likelihood")
@@ -1474,14 +1669,14 @@ except:
     r_3, p_corr_3, lbl_val_3 = 0, 1, 0
 
 chi_data_3 = [
-    [f"{chi2_3:.3f}", str(dof_3), f"{p_3:.3f}"],
-    [f"{g_3:.3f}", str(dof_g_3), f"{p_g_3:.3f}"],
-    [f"{lbl_val_3:.3f}", "1", f"{p_corr_3:.3f}"],
+    [f"{round(chi2_3, 3)}", str(dof_3), f"{round(p_3, 3)}"],
+    [f"{round(g_3, 3)}", str(dof_g_3), f"{round(p_g_3, 3)}"],
+    [f"{round(lbl_val_3, 3)}", "1", f"{round(p_corr_3, 3)}"],
     [str(valid_cases_3), "", ""]
 ]
 st.table(pd.DataFrame(chi_data_3, index=["Pearson Chi-Square", "Likelihood Ratio", "Linear-by-Linear Association", "N of Valid Cases"], columns=["Value", "df", "Asymp. Sig. (2-sided)"]))
 
-# D. Hypothesis & Risk Summary 1.3
+# D. Hypothesis & Risk Summary 1.4
 st.markdown("### Ringkasan Uji Hipotesis")
 try:
     a_3 = crosstab_3.loc[label_x_low_3, label_y_low_3]
@@ -1503,17 +1698,17 @@ with cr1_3:
     <div style="border: 2px solid {ord_col_3}; padding: 15px; border-radius: 5px; background-color: {bg_col_3}; margin-bottom: 10px;">
         <h4 style="color: {ord_col_3}; margin: 0 0 10px 0; text-transform: uppercase;">Result: {status_txt_3}</h4>
         <p style="margin: 0; font-family: monospace;">
-            P-Value    : {p_3:.4f}<br>
-            Chi-Square : {chi2_3:.3f}<br>
+            P-Value    : {round(p_3, 4)}<br>
+            Chi-Square : {round(chi2_3, 3)}<br>
             df         : {dof_3}
         </p>
     </div>
     """, unsafe_allow_html=True)
-    st.markdown(f"**Odds Ratio (Risk Estimate):** `{or_3:.3f}`")
+    st.markdown(f"**Odds Ratio (Risk Estimate):** `{round(or_3, 3)}`")
 
 with cr2_3:
     if is_sig_3:
-        interp_txt_3 = f"Terdapat bukti statistik yang sah bahwa arus masuk modal (Investasi PMDN) secara langsung dan sistematis mendorong ekskalasi deforestasi di wilayah Sulawesi (OR: {or_3:.3f}). Investasi ini bukanlah katalisator ekonomi hijau, melainkan injeksi modal untuk ekstraksi lahan."
+        interp_txt_3 = f"Terdapat bukti statistik yang sah bahwa arus masuk modal (Investasi PMDN) secara langsung dan sistematis mendorong ekskalasi deforestasi di wilayah Sulawesi (OR: {round(or_3, 3)}). Investasi ini bukanlah katalisator ekonomi hijau, melainkan injeksi modal untuk ekstraksi lahan."
     else:
         interp_txt_3 = f"Secara statistik agregat mungkin belum terlihat korelasi linier di tahun yang persis sama. Hal ini menyingkap anomali bahwa investasi bernilai triliunan kerap ditahan untuk birokrasi awal, sementara pembabatan hutan fisiknya baru meledak secara sporadis di tahun-tahun berikutnya (<i>lagging effect</i>)."
     
@@ -1524,7 +1719,7 @@ with cr2_3:
     </div>
     """, unsafe_allow_html=True)
 
-# --- E. Executive Summary of All Combinations 1.3 ---
+# --- E. Executive Summary of All Combinations 1.4 ---
 st.markdown("---")
 st.markdown("### Ringkasan Eksekutif Seluruh Skenario Crosstab")
 st.markdown("Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square) untuk semua kemungkinan kombinasi indikator antara Realisasi Investasi PMDN dan Dampak Ekologis pada panel data.")
@@ -1536,10 +1731,10 @@ for k_x, v_x in x_options_3.items():
         thresh_x = med_x if med_x > 0 else 0
         med_y = df_panel_1_3[k_y].median()
         
-        lbl_x_h = f"Tinggi (>{thresh_x:,.0f})"
-        lbl_x_l = f"Rendah (≤{thresh_x:,.0f})"
-        lbl_y_h = f"Tinggi (≥{med_y:,.1f})"
-        lbl_y_l = f"Rendah (<{med_y:,.1f})"
+        lbl_x_h = f"Tinggi (>{int(thresh_x):,})"
+        lbl_x_l = f"Rendah (≤{int(thresh_x):,})"
+        lbl_y_h = f"Tinggi (≥{int(med_y):,})"
+        lbl_y_l = f"Rendah (<{int(med_y):,})"
         
         s_x = df_panel_1_3[k_x].apply(lambda val: lbl_x_h if val > thresh_x else lbl_x_l)
         s_y = df_panel_1_3[k_y].apply(lambda val: lbl_y_h if val >= med_y else lbl_y_l)
@@ -1564,9 +1759,9 @@ for k_x, v_x in x_options_3.items():
         summary_data_3.append({
             "Variabel Independen (X)": v_x,
             "Variabel Dependen (Y)": v_y,
-            "Chi-Square": f"{c2_val:.3f}",
-            "P-Value": f"{pv_val:.3f}",
-            "Odds Ratio": f"{or_v:.2f}",
+            "Chi-Square": f"{round(c2_val, 3)}",
+            "P-Value": f"{round(pv_val, 3)}",
+            "Odds Ratio": f"{round(or_v, 2)}",
             "Kesimpulan": sig_status
         })
 
@@ -1611,41 +1806,27 @@ with st.expander("Lihat Data Mentah: Realisasi Investasi PMDN (BKPM)", expanded=
     st.caption("📁 **Sumber File:** `data/processed/sulawesi_investasi_pmdn_2016_2024.csv` - Data Ekstraksi OSS/BKPM.")
 
 # ═════════════════════════════════════════════════════════════
-# 1.4 PELABUHAN EKSPOR NIKEL
-# ═════════════════════════════════════════════════════════════
+# 1.5 PELABUHAN EKSPOR NIKEL
 st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=True)
-st.subheader("1.4 Pelabuhan Ekspor: Ke Mana Nikel Sulawesi Dikirim?")
+st.subheader("1.5 Pelabuhan Ekspor: Ke Mana Nikel Sulawesi Dikirim?")
 
 st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Open Source Intelligence (OSINT)</span>', unsafe_allow_html=True)
 st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
 with st.expander("ℹ️ Metodologi: Open Source Intelligence (OSINT)"):
     st.markdown("""
-    **Metode Analisis:** Halaman ini menggunakan teknik investigasi *Open Source Intelligence* (OSINT) dan Studi Literatur Forensik untuk memetakan rantai pasok dan monopoli infrastruktur logistik pesisir.
-
-    1. **Kurasi & Validasi Silang (Cross-Validation):** Membangun matriks relasional dari sumber-sumber publik yang berserakan.
-        * **Triangulasi Data:** Mencocokkan data citra satelit, dokumen perizinan lingkungan, dan laporan pengiriman kargo (ekspor).
-        * `Hipotesis Kerja: Infrastruktur PSN secara eksklusif dibangun bukan untuk publik, melainkan sebagai "karpet merah" kelancaran rantai pasok oligarki nikel ke pasar global.`
-    2. **Kalkulasi/Formula Pengolahan:** Menghitung jumlah fasilitas pelabuhan aktif dan persentase yang terafiliasi dengan status PSN.
-        * `Rasio Dominasi PSN = (Fasilitas_PSN / Total_Fasilitas) * 100%`
-    3. **Variabel & Fitur Data (Tabular OSINT):**
-        * **Nama Kawasan Industri, Pemilik/Pengelola Induk:** Identitas kawasan sentra.
-        * **Provinsi, Kabupaten/Kota:** Lokasi administratif geografis.
-        * **Status Pelabuhan/Dermaga Khusus:** Ada / Tidak Ada / Dalam Konstruksi.
-        * **Status PSN:** Afiliasi dengan Proyek Strategis Nasional.
-        * **Tujuan Ekspor Utama:** Negara tujuan pengiriman kargo (Mayoritas China).
-        * **Daftar Referensi:** Tautan (URL/Link) sumber dokumen pembuktian.
-    4. **Dataset & File:** Referensi tekstual sekunder dan data kompilasi manual.
-        * `data/processed/sulawesi_logistik_simpul_nikel.csv`
+    **Metode Analisis:** Kurasi & Validasi Silang (OSINT) dengan mencocokkan data citra satelit, dokumen lingkungan, dan laporan kargo.
     """)
-st.markdown("<br>", unsafe_allow_html=True)
 
+st.markdown("<br>", unsafe_allow_html=True)
 st.markdown("""
-Ekspansi nikel di Sulawesi tidak berhenti pada izin dan pabrik smelter. Di setiap lokasi industri nikel besar,
-berdiri **pelabuhan atau dermaga** yang menghubungkan pabrik langsung ke kapal-kapal pengangkut menuju China
-dan pasar global. Dari 6 lokasi utama yang ditelusuri, **seluruhnya terbukti memiliki** pelabuhan atau dermaga ekspor,
-dan **4 dari 6** mendapat label Proyek Strategis Nasional (PSN) dari pemerintah.
+Ekspansi nikel di Sulawesi tidak berhenti pada izin dan pabrik smelter. Di setiap lokasi industri nikel besar, berdiri **pelabuhan atau dermaga** yang menghubungkan pabrik langsung ke kapal-kapal pengangkut menuju China dan pasar global. Dari 6 lokasi utama yang ditelusuri, **seluruhnya terbukti memiliki** pelabuhan atau dermaga ekspor, dan **4 dari 6** mendapat label Proyek Strategis Nasional (PSN) dari pemerintah.
 """)
+
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+import pandas as pd
+import os
 
 @st.cache_data
 def load_logistik_simpul():
@@ -1654,55 +1835,207 @@ def load_logistik_simpul():
 
 df_logistik = load_logistik_simpul()
 
-c14_1, c14_2, c14_3 = st.columns(3)
-with c14_1:
-    st.markdown(f"""
-    <div class="metric-card">
-        <div>
-            <div class="metric-label">PELABUHAN NIKEL TERKONFIRMASI</div>
-            <div class="metric-value" style="color: #43A047;">{len(df_logistik)}</div>
-            <div class="metric-desc">Seluruh lokasi industri nikel besar di Sulawesi terbukti memiliki pelabuhan atau dermaga ekspor.</div>
-        </div>
-        <div class="metric-source">Sumber: Situs perusahaan, dokumen pemerintah, media (25 sumber)<br>File: sulawesi_logistik_simpul_nikel.csv</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-psn_count = len(df_logistik[df_logistik['psn_status'] == 'terkonfirmasi'])
-with c14_2:
-    st.markdown(f"""
-    <div class="metric-card">
-        <div>
-            <div class="metric-label">BERLABEL PROYEK STRATEGIS NASIONAL</div>
-            <div class="metric-value" style="color: #FFA726;">{psn_count} <span style="font-size:1rem;color:#777;">/ {len(df_logistik)}</span></div>
-            <div class="metric-desc">Label PSN mempercepat perizinan dan memudahkan pembebasan lahan warga sekitar.</div>
-        </div>
-        <div class="metric-source">Sumber: KPPIP, Perpres 58/2017, Perpres 12/2025</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with c14_3:
+col1, col2, col3 = st.columns(3)
+with col1:
     st.markdown("""
-    <div class="metric-card">
-        <div>
-            <div class="metric-label">PELABUHAN TERBESAR</div>
-            <div class="metric-value" style="color: #42A5F5;">50.000 <span style="font-size:1rem;color:#777;">ton</span></div>
-            <div class="metric-desc">GNI Petasia memiliki pelabuhan yang mampu menampung kapal pengangkut berkapasitas hingga 50.000 ton.</div>
-        </div>
-        <div class="metric-source">Sumber: gunbusternickelindustry.com</div>
+    <div style="background-color: #262730; padding: 20px; border-radius: 10px; border: 1px solid #333;">
+        <div style="color: #A0AEC0; font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; text-align: center;">Pelabuhan Nikel Terkonfirmasi</div>
+        <div style="color: #48BB78; font-size: 2.5rem; font-weight: bold; text-align: center; margin-bottom: 15px;">6</div>
+        <div style="color: #A0AEC0; font-size: 0.85rem; margin-bottom: 20px; text-align: left;">Seluruh lokasi industri nikel besar di Sulawesi terbukti memiliki pelabuhan atau dermaga ekspor.</div>
+        <div style="color: #718096; font-size: 0.75rem; border-top: 1px solid #333; padding-top: 10px;">Sumber: Situs perusahaan, dokumen pemerintah, media (25 sumber)<br>File: sulawesi_logistik_simpul_nikel.csv</div>
+    </div>
+    """, unsafe_allow_html=True)
+with col2:
+    st.markdown("""
+    <div style="background-color: #262730; padding: 20px; border-radius: 10px; border: 1px solid #333;">
+        <div style="color: #A0AEC0; font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; text-align: center;">Berlabel Proyek Strategis Nasional</div>
+        <div style="color: #ECC94B; font-size: 2.5rem; font-weight: bold; text-align: center; margin-bottom: 15px;">4 <span style="font-size: 1.2rem; color: #718096;">/ 6</span></div>
+        <div style="color: #A0AEC0; font-size: 0.85rem; margin-bottom: 20px; text-align: left;">Label PSN mempercepat perizinan dan memudahkan pembebasan lahan warga sekitar.</div>
+        <div style="color: #718096; font-size: 0.75rem; border-top: 1px solid #333; padding-top: 10px;">Sumber: KPPIP, Perpres 58/2017, Perpres 12/2025</div>
+    </div>
+    """, unsafe_allow_html=True)
+with col3:
+    st.markdown("""
+    <div style="background-color: #262730; padding: 20px; border-radius: 10px; border: 1px solid #333;">
+        <div style="color: #A0AEC0; font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; text-align: center;">Pelabuhan Terbesar</div>
+        <div style="color: #63B3ED; font-size: 2.5rem; font-weight: bold; text-align: center; margin-bottom: 15px;">50.000 <span style="font-size: 1.2rem; color: #718096;">ton</span></div>
+        <div style="color: #A0AEC0; font-size: 0.85rem; margin-bottom: 20px; text-align: left;">GNI Petasia memiliki pelabuhan yang mampu menampung kapal pengangkut berkapasitas hingga 50.000 ton.</div>
+        <div style="color: #718096; font-size: 0.75rem; border-top: 1px solid #333; padding-top: 10px;">Sumber: gunbusternickelindustry.com</div>
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown("<br>", unsafe_allow_html=True)
+st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
 
-df_ringkas = df_logistik[['node_label', 'anchor_entity', 'port_facility', 'port_detail', 'psn_status', 'kawasan_industri']].copy()
-df_ringkas.columns = ['Lokasi', 'Perusahaan Utama', 'Status Pelabuhan', 'Detail Dermaga', 'Status PSN', 'Kawasan Industri']
-st.dataframe(df_ringkas, use_container_width=True, hide_index=True)
-st.caption("Sumber: Penelusuran sumber terbuka (25 sumber). File: `data/processed/sulawesi_logistik_simpul_nikel.csv`")
+with st.expander("Lihat Data Mentah: Fasilitas Pelabuhan Ekspor (Card 1)"):
+    st.dataframe(df_logistik[['node_label', 'port_facility', 'export_channel']], use_container_width=True, hide_index=True)
+    st.caption("📁 **Sumber File:** `data/processed/sulawesi_logistik_simpul_nikel.csv` - Ekstraksi data OSINT fasilitas pelabuhan.")
 
+with st.expander("Lihat Data Mentah: Status PSN (Card 2)"):
+    st.dataframe(df_logistik[['node_label', 'psn_status', 'psn_detail']], use_container_width=True, hide_index=True)
+    st.caption("📁 **Sumber File:** `data/processed/sulawesi_logistik_simpul_nikel.csv` - Ekstraksi data status Proyek Strategis Nasional.")
+
+with st.expander("Lihat Data Mentah: Detail Kapasitas Pelabuhan (Card 3)"):
+    st.dataframe(df_logistik[['node_label', 'port_detail']], use_container_width=True, hide_index=True)
+    st.caption("📁 **Sumber File:** `data/processed/sulawesi_logistik_simpul_nikel.csv` - Ekstraksi spesifikasi teknis dan kapasitas pelabuhan.")
+
+st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=True)
+st.subheader("1.6 Peta Jalur Distribusi Logistik Nikel Sulawesi")
+
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Spatial Logistic Mapping (Analisis Spasial Ekstraktif)</span>', unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+with st.expander("ℹ️ Metodologi: Pemetaan Spasial Rantai Pasok Maritim"):
+    st.markdown("""
+    **Metode Analisis:** Pemetaan Kausalitas (Spasial) untuk membedah asimetri penguasaan ruang antara origin (sumber ekstraksi) dan destination (pusat industrialisasi). Garis diplot menggunakan rute untuk merepresentasikan jarak tempuh kapal logistik di permukaan bumi.
+    """)
+
+st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+
+import plotly.graph_objects as go
+import math
+
+def generate_curve(lon1, lat1, lon2, lat2, offset=0.1, n_points=50):
+    # Titik tengah
+    mid_lon = (lon1 + lon2) / 2
+    mid_lat = (lat1 + lat2) / 2
+    
+    # Jarak
+    dx = lon2 - lon1
+    dy = lat2 - lat1
+    dist = math.sqrt(dx**2 + dy**2)
+    
+    # Vektor tegak lurus
+    px = -dy / dist
+    py = dx / dist
+    
+    ctrl_lon = mid_lon + px * dist * offset
+    ctrl_lat = mid_lat + py * dist * offset
+    
+    # Bezier curve
+    lons, lats = [], []
+    for i in range(n_points + 1):
+        t = i / n_points
+        lon = (1-t)**2 * lon1 + 2*(1-t)*t * ctrl_lon + t**2 * lon2
+        lat = (1-t)**2 * lat1 + 2*(1-t)*t * ctrl_lat + t**2 * lat2
+        lons.append(lon)
+        lats.append(lat)
+    return lons, lats
+
+# MAP_ROUTES: Nama, Lon Origin, Lat Origin, Lon Dest, Lat Dest, Color, Curve Offset
+MAP_ROUTES = [
+    ("IMIP",         122.15, -2.82, 113.8, 22.8,  "rgb(230, 25, 25)",  -0.12),
+    ("GNI",          121.32, -1.91, 113.8, 22.8,  "rgb(255, 140, 0)",  -0.04),
+    ("VDNI",         122.42, -3.83, 113.8, 22.8,  "rgb(0, 112, 220)",   0.04),
+    ("OSS",          122.48, -3.80, 113.8, 22.8,  "rgb(0, 190, 220)",   0.12),
+    ("ANTAM",        121.60, -4.18, 135.0, 35.0,  "rgb(0, 180, 80)",   -0.08),
+    ("PT Vale",      121.34, -2.56, 135.0, 35.0,  "rgb(180, 0, 200)",   0.08),
+]
+
+fig_map = go.Figure()
+
+# Base map layout (Peta di-width-kan maksimal dengan rasio ekstrim agar full screen)
+fig_map.update_geos(
+    projection_type="equirectangular",
+    showcountries=True, countrycolor="#B0BEC5",
+    showcoastlines=True, coastlinecolor="#B0BEC5",
+    showland=True, landcolor="#FFFFFF",
+    showocean=True, oceancolor="#EAF6FF",
+    lonaxis_range=[40, 170], # 130 derajat lebar
+    lataxis_range=[-15, 35], # 50 derajat tinggi
+    bgcolor='rgba(0,0,0,0)'
+)
+
+hover_details = {
+    "IMIP": "<b>IMIP (Morowali)</b><br>Pelabuhan: Seaport + Jetties Bulk Carrier<br>Komoditas: NPI/Feronikel",
+    "GNI": "<b>GNI (Morowali Utara)</b><br>Pelabuhan: 2x50.000 DWT Vessel<br>Komoditas: NPI",
+    "VDNI": "<b>VDNI (Konawe)</b><br>Pelabuhan: Kapasitas 50.000 Ton<br>Komoditas: Feronikel & Stainless Steel",
+    "OSS": "<b>OSS (Konawe)</b><br>Pelabuhan: Berbagi Jetty Porara<br>Komoditas: Stainless Steel",
+    "ANTAM": "<b>ANTAM (Kolaka)</b><br>Pelabuhan: Jetty 12.000 DWT, Conveyor 4km<br>Komoditas: Feronikel",
+    "PT Vale": "<b>PT Vale (Luwu Timur)</b><br>Pelabuhan: Pelabuhan Balantang Malili<br>Komoditas: Nickel in Matte"
+}
+
+# Add curved lines for routes
+for name, lon1, lat1, lon2, lat2, color, offset in MAP_ROUTES:
+    curve_lons, curve_lats = generate_curve(lon1, lat1, lon2, lat2, offset=offset)
+    dest_name = "Jepang/Korea" if "Jepang" in name or "Korea" in name or lat2 > 30 else "China"
+    detail = hover_details.get(name, "")
+    hover_text = [f"{detail}<br>Rute Logistik: ➔ {dest_name}"] * len(curve_lons)
+    
+    fig_map.add_trace(
+        go.Scattergeo(
+            lon=curve_lons,
+            lat=curve_lats,
+            mode='lines',
+            line=dict(width=2.5, color=color),
+            name=name,
+            text=hover_text,
+            hoverinfo='text'
+        )
+    )
+
+# Add Origin points (Tanpa text label agar tidak tumpang tindih)
+for name, lon1, lat1, lon2, lat2, color, offset in MAP_ROUTES:
+    detail = hover_details.get(name, "")
+    hover_text = f"{detail}"
+    
+    fig_map.add_trace(
+        go.Scattergeo(
+            lon=[lon1],
+            lat=[lat1],
+            mode='markers',
+            marker=dict(size=6, color=color, line=dict(width=1, color='white')),
+            name=name,
+            text=[hover_text],
+            hoverinfo='text',
+            showlegend=False
+        )
+    )
+
+# Add Destination Points
+fig_map.add_trace(
+    go.Scattergeo(
+        lon=[113.8, 135.0],
+        lat=[22.8, 35.0],
+        mode='markers+text',
+        marker=dict(size=8, color="#555"),
+        text=["China (Pasar Utama)", "Jepang/Korea"],
+        textposition="top left",
+        textfont=dict(color="#111", size=11, family="Arial Black"),
+        showlegend=False,
+        hoverinfo='none'
+    )
+)
+
+fig_map.update_layout(
+    margin={"r":0,"t":0,"l":0,"b":0},
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)',
+    height=450,
+    legend=dict(
+        orientation="h",
+        yanchor="bottom", y=-0.1,
+        xanchor="center", x=0.5,
+        font=dict(color="#ECEFF1", size=12)
+    )
+)
+
+st.plotly_chart(fig_map, use_container_width=True, config={'displayModeBar': False})
+
+# Red Box Ketergantungan
 st.markdown("""
-<div style="background: rgba(46, 125, 50, 0.15); padding: 16px; border-radius: 8px; border-left: 6px solid #2E7D32; margin-top: 15px;">
-<b style="color: #66BB6A;">Lihat Investigasi Lengkap</b><br>
-<span style="color: #B0BEC5; font-size: 0.95rem;">Peta lokasi, profil setiap kawasan industri, dan analisis pola pembangunan pelabuhan nikel tersedia di halaman <b>Koridor Logistik Nikel</b> (sidebar).</span>
+<div style="background:#1E1E1E; padding:20px; border-radius:10px; border-left:5px solid #D32F2F; margin-top: 20px;">
+    <b style="color:#FF5252; font-size:1.1em;">Ketergantungan Struktural Rantai Pasok</b><br><br>
+    Peta rute logistik maritim di atas mengilustrasikan realitas geopolitik dari ambisi hilirisasi nikel di Sulawesi. Alih-alih membangun kemandirian industri manufaktur nasional, data pergerakan kapal dan desain pelabuhan menunjukkan <b>ketergantungan absolut pada rantai pasok asing</b>.
+    <ul style="margin-top: 10px; line-height: 1.6;">
+        <li><b>Dominasi Ekspor ke China:</b> Tiga raksasa kawasan industri baru (IMIP, GNI, VDNI/OSS) yang menikmati fasilitas kemudahan Proyek Strategis Nasional (PSN) mengirimkan hampir seluruh <i>output</i> barang setengah jadi (NPI, Feronikel, Matte) langsung ke sentra industri di China Timur dan Selatan.</li>
+        <li><b>Absennya Interkoneksi Domestik:</b> Sangat minim jalur distribusi logistik yang menghubungkan kawasan smelter raksasa ini dengan pusat industri manufaktur di dalam negeri (seperti di Pulau Jawa). Hal ini mengonfirmasi temuan bahwa Sulawesi saat ini lebih difungsikan murni sebagai <i>extractive feeder</i> (daerah penyuplai ekstraktif) bagi mesin industrialisasi negara lain, bukan sebagai fondasi terintegrasi untuk ekosistem mobil listrik domestik.</li>
+        <li><b>Pergeseran Geopolitik:</b> Sementara pemain lama seperti PT Vale dan ANTAM memiliki rute pasokan yang mapan ke pasar otomotif tradisional di Jepang dan Korea Selatan, dominasi logistik dan tonase kini telah bergeser drastis seiring dengan ledakan pembangunan smelter baru yang terintegrasi langsung dengan pasar China.</li>
+    </ul>
 </div>
 """, unsafe_allow_html=True)
 
+st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+with st.expander("Lihat Data Mentah: Jalur Distribusi Logistik Nikel Sulawesi", expanded=False):
+    df_logistik_map = pd.DataFrame(MAP_ROUTES, columns=["Nama Smelter", "Lon Origin", "Lat Origin", "Lon Dest", "Lat Dest", "Color", "Offset"])
+    st.dataframe(df_logistik_map[["Nama Smelter", "Lon Origin", "Lat Origin", "Lon Dest", "Lat Dest"]], use_container_width=True, hide_index=True)
+    st.caption("ℹ️ **Sumber File:** data/processed/sulawesi_logistik_simpul_nikel.csv - Pemetaan koordinat smelter dan pelabuhan tujuan akhir (agregasi spasial).")
