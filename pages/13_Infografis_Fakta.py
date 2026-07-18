@@ -340,7 +340,7 @@ html1 = f"""
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
             <div class="card-title-text">Ancaman Kepunahan Satwa</div>
             <div class="card-value-text">{data['kepunahan']}</div>
-            <div class="card-desc-text">Satwa endemik Sulawesi didorong paksa ke jurang kepunahan massal dalam Daftar Merah IUCN</div>
+            <div class="card-desc-text">Satwa endemik (Anoa, Babirusa, Tarsius, Macaca) didorong paksa ke jurang kepunahan massal dalam Daftar Merah IUCN</div>
         </div>
         
     </div>
@@ -564,9 +564,9 @@ html2 = f"""
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Satwa Endemik Tinggal Nama</div>
+            <div class="card-title-text">Satwa Endemik Terbantai</div>
             <div class="card-value-text">{data['kepunahan']}</div>
-            <div class="card-desc-text">Habitat dikeruk habis, satwa ikonik Sulawesi didesak menuju kepunahan massal</div>
+            <div class="card-desc-text">Habitat dikeruk habis, 4 satwa ikonik (Anoa, Babirusa, Tarsius, Macaca) didesak menuju kepunahan massal</div>
         </div>
         
     </div>
@@ -791,7 +791,7 @@ html3 = f"""
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
             <div class="card-title-text">Satwa Endemik Terbantai</div>
             <div class="card-value-text">{data['kepunahan']}</div>
-            <div class="card-desc-text">Habitat dikeruk habis, satwa ikonik Sulawesi di ujung jurang kepunahan massal</div>
+            <div class="card-desc-text">Habitat dikeruk habis, 4 satwa ikonik (Anoa, Babirusa, Tarsius, Macaca) di ujung jurang kepunahan massal</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
