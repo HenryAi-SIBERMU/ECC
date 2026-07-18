@@ -192,11 +192,11 @@ with col2:
     st.markdown(f"""
     <div class="metric-card">
         <div>
-            <div class="metric-label">Indeks Kualitas Udara (2023)</div>
-            <div class="metric-value" style="color: #9E9E9E; font-size: 1.2rem; margin-top: 10px;">Sedang Diolah</div>
-            <div class="metric-desc" style="margin-top: 15px;">(Paradoks data BPS dengan Data Satelit NASA sedang dalam tahap pengolahan komparatif).</div>
+            <div class="metric-label">Polusi Udara NO₂ (NASA)</div>
+            <div class="metric-value" style="color: #D32F2F;">Naik Eksponensial</div>
+            <div class="metric-desc">Satelit TROPOMI membongkar paradoks IKU resmi. Konsentrasi gas beracun meroket tajam seiring ekspansi PLTU captive.</div>
         </div>
-        <div class="metric-source"><b>Sumber:</b> BPS vs NASA (Tahap Olah)</div>
+        <div class="metric-source"><b>Sumber:</b> Satelit Sentinel-5P (Google Earth Engine)</div>
     </div>
     """, unsafe_allow_html=True)
 with col3:
