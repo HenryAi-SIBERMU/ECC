@@ -1,0 +1,7 @@
+﻿cluster_id,node_label,company_rows,core_nickel_company_rows,permit_rows,core_nickel_permit_rows,pltu_unit_rows,pltu_capacity_mw,export_rows,export_value_usd
+NODE-SULTENG-MOROWALI-IMIP,Simpul logistik pesisir IMIP-Bahodopi,133,75,90,39,24,5830.0,0,0.0
+NODE-SULTENG-MORUT-PETASIA-GNI,Simpul logistik pesisir Petasia-GNI,67,37,55,26,33,5705.0,0,0.0
+NODE-SULTRA-KONAWE-MOROSI-VDNI,Simpul logistik Morosi-VDNI,68,36,45,19,33,5705.0,12,1379797224.01
+NODE-SULTRA-KONAWE-OSS,Simpul logistik Konawe-OSS,75,40,45,19,23,4515.0,12,1379797224.01
+NODE-SULTRA-KOLAKA-POMALAA-ANTAM,Simpul logistik Pomalaa-ANTAM,25,12,21,11,2,60.0,12,1379797224.01
+NODE-SULSEL-LUTIM-SOROWAKO-VALE,Simpul logistik Sorowako-Luwu Timur,28,19,14,10,0,0.0,5,119955826.75

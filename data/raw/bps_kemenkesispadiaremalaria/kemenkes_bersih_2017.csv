@@ -1,0 +1,103 @@
+provinsi,tahun,indikator,nilai
+Aceh,2017,Kasus ISPA/Pneumonia,2157
+Bali,2017,Kasus ISPA/Pneumonia,5370
+Banten,2017,Kasus ISPA/Pneumonia,31651
+Bengkulu,2017,Kasus ISPA/Pneumonia,493
+DI Yogyakarta,2017,Kasus ISPA/Pneumonia,4214
+DKI Jakarta,2017,Kasus ISPA/Pneumonia,43451
+Gorontalo,2017,Kasus ISPA/Pneumonia,3996
+Jambi,2017,Kasus ISPA/Pneumonia,5484
+Jawa Barat,2017,Kasus ISPA/Pneumonia,145135
+Jawa Tengah,2017,Kasus ISPA/Pneumonia,59995
+Jawa Timur,2017,Kasus ISPA/Pneumonia,92975
+Kalimantan Barat,2017,Kasus ISPA/Pneumonia,2026
+Kalimantan Selatan,2017,Kasus ISPA/Pneumonia,10687
+Kalimantan Tengah,2017,Kasus ISPA/Pneumonia,471
+Kalimantan Timur,2017,Kasus ISPA/Pneumonia,6799
+Kalimantan Utara,2017,Kasus ISPA/Pneumonia,1558
+Kepulauan Bangka Belitung,2017,Kasus ISPA/Pneumonia,5591
+Kepulauan Riau,2017,Kasus ISPA/Pneumonia,1826
+Lampung,2017,Kasus ISPA/Pneumonia,6273
+Maluku,2017,Kasus ISPA/Pneumonia,1065
+Maluku Utara,2017,Kasus ISPA/Pneumonia,971
+Nusa Tenggara Barat,2017,Kasus ISPA/Pneumonia,18569
+Nusa Tenggara Timur,2017,Kasus ISPA/Pneumonia,3890
+Papua,2017,Kasus ISPA/Pneumonia,53
+Papua Barat,2017,Kasus ISPA/Pneumonia,356
+Riau,2017,Kasus ISPA/Pneumonia,6277
+Sulawesi Barat,2017,Kasus ISPA/Pneumonia,1815
+Sulawesi Selatan,2017,Kasus ISPA/Pneumonia,6120
+Sulawesi Tengah,2017,Kasus ISPA/Pneumonia,9895
+Sulawesi Tenggara,2017,Kasus ISPA/Pneumonia,2577
+Sulawesi Utara,2017,Kasus ISPA/Pneumonia,321
+Sumatera Barat,2017,Kasus ISPA/Pneumonia,10576
+Sumatera Selatan,2017,Kasus ISPA/Pneumonia,13345
+Sumatera Utara,2017,Kasus ISPA/Pneumonia,5452
+Aceh,2017,Kasus Kusta Baru,324
+Bali,2017,Kasus Kusta Baru,70
+Banten,2017,Kasus Kusta Baru,942
+Bengkulu,2017,Kasus Kusta Baru,26
+DI Yogyakarta,2017,Kasus Kusta Baru,94
+DKI Jakarta,2017,Kasus Kusta Baru,300
+Gorontalo,2017,Kasus Kusta Baru,214
+Jambi,2017,Kasus Kusta Baru,60
+Jawa Barat,2017,Kasus Kusta Baru,1813
+Jawa Tengah,2017,Kasus Kusta Baru,1644
+Jawa Timur,2017,Kasus Kusta Baru,3373
+Kalimantan Barat,2017,Kasus Kusta Baru,61
+Kalimantan Selatan,2017,Kasus Kusta Baru,98
+Kalimantan Tengah,2017,Kasus Kusta Baru,38
+Kalimantan Timur,2017,Kasus Kusta Baru,153
+Kalimantan Utara,2017,Kasus Kusta Baru,52
+Kepulauan Bangka Belitung,2017,Kasus Kusta Baru,49
+Kepulauan Riau,2017,Kasus Kusta Baru,30
+Lampung,2017,Kasus Kusta Baru,164
+Maluku,2017,Kasus Kusta Baru,418
+Maluku Utara,2017,Kasus Kusta Baru,558
+Nusa Tenggara Barat,2017,Kasus Kusta Baru,221
+Nusa Tenggara Timur,2017,Kasus Kusta Baru,405
+Papua,2017,Kasus Kusta Baru,968
+Papua Barat,2017,Kasus Kusta Baru,788
+Riau,2017,Kasus Kusta Baru,136
+Sulawesi Barat,2017,Kasus Kusta Baru,195
+Sulawesi Selatan,2017,Kasus Kusta Baru,1091
+Sulawesi Tengah,2017,Kasus Kusta Baru,342
+Sulawesi Tenggara,2017,Kasus Kusta Baru,337
+Sulawesi Utara,2017,Kasus Kusta Baru,454
+Sumatera Barat,2017,Kasus Kusta Baru,53
+Sumatera Selatan,2017,Kasus Kusta Baru,281
+Sumatera Utara,2017,Kasus Kusta Baru,158
+Aceh,2017,Kasus Malaria Positif,299
+Bali,2017,Kasus Malaria Positif,33
+Banten,2017,Kasus Malaria Positif,42
+Bengkulu,2017,Kasus Malaria Positif,1031
+DI Yogyakarta,2017,Kasus Malaria Positif,86
+DKI Jakarta,2017,Kasus Malaria Positif,111
+Gorontalo,2017,Kasus Malaria Positif,46
+Jambi,2017,Kasus Malaria Positif,187
+Jawa Barat,2017,Kasus Malaria Positif,328
+Jawa Tengah,2017,Kasus Malaria Positif,904
+Jawa Timur,2017,Kasus Malaria Positif,107
+Kalimantan Barat,2017,Kasus Malaria Positif,152
+Kalimantan Selatan,2017,Kasus Malaria Positif,1135
+Kalimantan Tengah,2017,Kasus Malaria Positif,760
+Kalimantan Timur,2017,Kasus Malaria Positif,1573
+Kalimantan Utara,2017,Kasus Malaria Positif,65
+Kep. Bangka Belitung,2017,Kasus Malaria Positif,95
+Kepulauan Riau,2017,Kasus Malaria Positif,357
+Lampung,2017,Kasus Malaria Positif,4297
+Maluku,2017,Kasus Malaria Positif,4019
+Maluku Utara,2017,Kasus Malaria Positif,957
+Nusa Tenggara Barat,2017,Kasus Malaria Positif,765
+Nusa Tenggara Timur,2017,Kasus Malaria Positif,30451
+Papua,2017,Kasus Malaria Positif,192648
+Papua Barat,2017,Kasus Malaria Positif,13706
+Riau,2017,Kasus Malaria Positif,211
+Sulawesi Barat,2017,Kasus Malaria Positif,147
+Sulawesi Selatan,2017,Kasus Malaria Positif,1201
+Sulawesi Tengah,2017,Kasus Malaria Positif,543
+Sulawesi Tenggara,2017,Kasus Malaria Positif,596
+Sulawesi Utara,2017,Kasus Malaria Positif,900
+Sumatera Barat,2017,Kasus Malaria Positif,512
+Sumatera Selatan,2017,Kasus Malaria Positif,911
+Sumatera Utara,2017,Kasus Malaria Positif,2442

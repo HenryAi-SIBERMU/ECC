@@ -1,0 +1,40 @@
+﻿cluster_id,nama_perusahaan,provinsi,alamat,lokasi_izin,komoditas
+NODE-SULTENG-MOROWALI-IMIP,BINTANGDELAPAN MINERAL,Sulawesi Tengah,"GEDUNG IMIP, JALAN BATU MULIA 8, Desa/Kelurahan Meruya Utara,
+Kec. Kembangan, Kota Adm. Jakarta Barat, Provinsi DKI Jakarta,
+Kode Pos: 11620",KAB. MOROWALI,Nikel
+NODE-SULTENG-MOROWALI-IMIP,KENCANA BUMI MINERAL,Sulawesi Tengah,"GEDUNG IMIP, JALAN BATU MULIA 8",KAB. MOROWALI,Nikel
+NODE-SULTENG-MOROWALI-IMIP,DAMPALA SEJAHTERA BERSAMA,Sulawesi Tengah,"Jl. Trans Sulawesi Desa Dampala Kecamatan Bahodopi,
+Kabupaten Morowali, Propinsi Sulawesi Tengah",KAB. MOROWALI,Kerikil Berpasir Alami (Sirtu)
+NODE-SULTENG-MORUT-PETASIA-GNI,BUKIT MAKMUR ISTINDO NIKELTAMA,Sulawesi Tengah,GED.BLK.DS.IV TOMPIRA JL. TRANS SULAWESI TOMPIRA PETASIA MOROWALI SULTENG 94671,"KAB. MOROWALI, KAB. MOROWALI UTARA",Nikel
+NODE-SULTENG-MORUT-PETASIA-GNI,PALU BARUGA YAKU,Sulawesi Tengah,"JL. BUMI NANGKA NO. 15, KEL. BAHONTULA, KEC. PETASIA, KAB. MOROWALI UTARA, PROV. SULAWESI TENGAH",KAB. MOROWALI UTARA,Nikel
+NODE-SULTENG-MORUT-PETASIA-GNI,ANUGRAH AFIT ABADI,Sulawesi Tengah,"JL Yos Sudarso No 01, Kolonodale, Petasia",KAB. MOROWALI UTARA,Batu Gamping untuk Industri
+NODE-SULTENG-MORUT-PETASIA-GNI,BUMI NUSANTARA RESEARCES,Sulawesi Tengah,"Desa Korololaki, Desa/Kelurahan Korololaki, Kec. Petasia, Kode Pos: 94971",KAB. MOROWALI UTARA,
+NODE-SULTENG-MORUT-PETASIA-GNI,FAZDA PERTAMBANGAN BEBATUAN,Sulawesi Tengah,"JL. WOLTER MONGINSIDI NO.32 KEL. BAHOUE, KEC. PETASIA, KAB. MOROWALI UTARA, SULAWESI TENGAH",KAB. MOROWALI UTARA,Batu Gamping
+NODE-SULTENG-MORUT-PETASIA-GNI,Nadya Sederhana Membangun,Sulawesi Tengah,"Jl. Ahmad Yani, Kel. Kolonodale, Kec. Petasia, Kab. Morowali Utara, Provinsi Sulawesi Tengah",KAB. MOROWALI UTARA,Batu Gamping
+NODE-SULTENG-MORUT-PETASIA-GNI,PERMATA INDAH MATABOLO,Sulawesi Tengah,"Dusun III, Desa/Kelurahan Bunta, Kec. Petasia Timur, Kab. Morowali Utara, Provinsi Sulawesi Tengah",KAB. MOROWALI UTARA,Batu Gamping untuk Industri
+NODE-SULTENG-MORUT-PETASIA-GNI,SOIL EXCAVATION,Sulawesi Tengah,"JLN. YOS SUDARSO, KEL. KOROLAKI, KEC. PETASIA, KAB. MOROWALI UTARA, PROV. SULAWESI TENGAH",KAB. MOROWALI UTARA,Batu Gamping
+NODE-SULTENG-MORUT-PETASIA-GNI,SUKENA WALET,Sulawesi Tengah,"DUSUN II, DESA TOMPIRA KECAMATAN PETASIA TIMUR KABUPATEN MOROWALI UTARA PROVINSI SULAWESI TENGAH",KAB. MOROWALI UTARA,Pasir
+NODE-SULTRA-KONAWE-MOROSI-VDNI,CAHAYA SULTRA INDONESIA,Sulawesi Tenggara,"KAWASAN INDUSTRI VIRTU DRAGON NOMOR	111, Desa/Kelurahan Morosi",KAB. KONAWE SELATAN,Batu Gamping untuk Industri
+NODE-SULTRA-KOLAKA-POMALAA-ANTAM,PERTAMBANGAN NICKEL SULAWESI TENGGARA,Sulawesi Tenggara,JL. PROTOKOL N0.40 POMALAA-KOLAKA & JL. PROTOKOL NO.45 DAWI-DAWI POMALA,KAB. KOLAKA; KAB. KONAWE UTARA,Nikel
+NODE-SULTRA-KOLAKA-POMALAA-ANTAM,PUTRA MEKONGGA SEJAHTERA,Sulawesi Tenggara,JL. PROTOKOL NO. 21 DAWI-DAWI POMALAA,KAB. KOLAKA,Nikel
+NODE-SULTRA-KOLAKA-POMALAA-ANTAM,EVI ANDRIANI SYAM,Sulawesi Tenggara,"Jalan Poros Kolaka-Pomalaa, Kec Baula",KAB. KOLAKA,Peridotit
+NODE-SULTRA-KOLAKA-POMALAA-ANTAM,JAYA MINERAL POMALAA,Sulawesi Tenggara,Jl. Jambu Kelurahan Tonggoni Kecamatan Pomalaa,KAB. KOLAKA,Kerikil Berpasir Alami (Sirtu)
+NODE-SULSEL-LUTIM-SOROWAKO-VALE,ANUGERAH JAYA BUANA,Sulawesi Selatan,"Sopo Del Office Tower and Lifestyle A Tower Lantai 19, Jl. Mega Kuningan Barat III No.5, RT.3/RW.2, Kuningan Timur, Kota Jakarta Selatan, Daerah Khusus Jakarta – 12950",KAB. LUWU TIMUR,Nikel
+NODE-SULSEL-LUTIM-SOROWAKO-VALE,CITRA LAMPIA MANDIRI,Sulawesi Selatan,"Gedung Office 8 Lantai 35 Unit H, Jalan Senopati No. 8B, Senayan, Kebayoran Baru, Jakarta Selatan, DKI Jakarta 12190",KAB. LUWU TIMUR,Nikel
+NODE-SULSEL-LUTIM-SOROWAKO-VALE,DAYA GUNA GEMILANG,Sulawesi Selatan,Jalan Galuh II Nomor 5 ,KAB. LUWU TIMUR,Nikel
+NODE-SULSEL-LUTIM-SOROWAKO-VALE,ERA MARPADOT,Sulawesi Selatan,"MTH SQUARE GF A4/A, JL. LETJEN M.T. HARYONO KAV 10,
+Desa/Kelurahan Bidara Cina, Kec. Jatinegara, Kota Adm. Jakarta Timur,
+Provinsi DKI Jakarta,
+Kode Pos: 13330","KAB. LUWU TIMUR, KAB. KOLAKA UTARA",Nikel
+NODE-SULSEL-LUTIM-SOROWAKO-VALE,KAHALA MINERA,Sulawesi Selatan,"JL. JUANDA NO 65 KEL. AIR HITAM, KEC. SAMARINDA ULU, KOTA SAMARINDA",KAB. LUWU TIMUR,Nikel
+NODE-SULSEL-LUTIM-SOROWAKO-VALE,LINGKE SULAWESI MINERAL,Sulawesi Selatan,"Jalan Sungai Saddang, Kompleks Latanette Plaza, Blok B Nomor 12, Kel. Pisang Selatan, Kec. Ujung Pandang, Kota Makassar, Provinsi Sulawesi Selatan",KAB. LUWU TIMUR,Nikel
+NODE-SULSEL-LUTIM-SOROWAKO-VALE,MADUMA ASIH PRATAMA,Sulawesi Selatan,"Jl. Agung timur 8 Nomor 12 A, Kel. SUnter Jaya, Kec. Tanjung Priok. Kota Adm. Jakarta Utara, Prov. DKI Jakarta",KAB. LUWU TIMUR,Nikel
+NODE-SULSEL-LUTIM-SOROWAKO-VALE,MITRA BERKARYA SEJATI,Sulawesi Selatan,"APL Tower Central Park Lantai 39, Jl. Letjend. S. Parman Kav. 28",KAB. LUWU TIMUR,Nikel
+NODE-SULSEL-LUTIM-SOROWAKO-VALE,PARAMOS REZEKI INDAH,Sulawesi Selatan,"AKR Tower Lt. 16 , Jl. Panjang No.5, Kel. Kebon Jeruk, Kec. Kebon Jeruk",KAB. LUWU TIMUR,Nikel
+NODE-SULSEL-LUTIM-SOROWAKO-VALE,PONGKERU MINERAL UTAMA,Sulawesi Selatan,"Gedung Antam Tower A, Desa/Kelurahan Tanjung Barat, Kec. Jagakarsa,
+Kota Adm. Jakarta Selatan, Provinsi DKI Jakarta,
+Kode Pos: 12530",KAB. LUWU TIMUR,Nikel
+NODE-SULSEL-LUTIM-SOROWAKO-VALE,PRIMA UTAMA LESTARI,Sulawesi Selatan,"CFX Tower Lt. 6, Jl. Jend. Gatot Subroto, Kav 35-36, Kelurahan Kuningan Timur, Kecamatan Setiabudi, Kota Jakarta Selatan, Provinsi DKI Jakarta",KAB. LUWU TIMUR,Nikel
+NODE-SULSEL-LUTIM-SOROWAKO-VALE,SANROY MITRA SAUDARA,Sulawesi Selatan,"JL. JEND. A. YANI NO. 42 B, Desa/Kelurahan Tiga-belas Ulu, Kec.
+Seberang Ulu Dua, Kota Palembang, Provinsi Sumatera Selatan,
+Kode Pos: 30263",KAB. LUWU TIMUR,Nikel

@@ -1,0 +1,7 @@
+logistics_id,status_validasi,gap_type,gap_detail,priority_next_step,status_update_27jun
+NODE-SULTENG-MOROWALI-IMIP-001,terkonfirmasi,TERTUTUP,Seaport IMIP + port jetties terkonfirmasi. Sumber: Wikipedia/Jakarta Globe/Nickel Industries.,Gap tertutup. Fasilitas pelabuhan sudah terkonfirmasi publik.,selesai
+NODE-SULTENG-MORUT-PETASIA-GNI-001,terkonfirmasi,TERTUTUP,Integrated port GNI terkonfirmasi: 9x5.000 DWT Barge + 2x50.000 DWT Vessel. Sumber: situs resmi GNI.,Gap tertutup. Port terintegrasi dikonfirmasi resmi perusahaan.,selesai
+NODE-SULTRA-KONAWE-MOROSI-VDNI-001,terkonfirmasi,TERTUTUP,Jetty VDNI terkonfirmasi (2017): 4 tongkang + 1 kapal besar + pelabuhan 50.000 ton. Sumber: multi-media.,Gap tertutup. Jetty dikonfirmasi beberapa sumber berita.,selesai
+NODE-SULTRA-KONAWE-OSS-001,terkonfirmasi_berbagi,SEBAGIAN_TERTUTUP,OSS berbagi lokasi dan jetty dengan VDNI di Desa Porara Morosi. Terpisah secara entitas.,Gap sebagian tertutup — tidak bisa dipisahkan di level fasilitas sandar.,sebagian_selesai
+NODE-SULTRA-KOLAKA-POMALAA-ANTAM-001,terkonfirmasi,TERTUTUP,Jetty ANTAM terkonfirmasi: 12.000 DWT + unloading 2x500 ton/jam + belt conveyor 4 km. Sumber: antam.com.,Gap tertutup. Jetty dikonfirmasi sumber resmi perusahaan.,selesai
+NODE-SULSEL-LUTIM-SOROWAKO-VALE-001,terkonfirmasi,TERTUTUP,Pelabuhan Vale Nuha + Pelabuhan Balantang Malili dikonfirmasi TNI AL. Rute: Sorowako → Malili → Balantang.,Gap tertutup. Jalur logistik pesisir dikonfirmasi sumber resmi militer.,selesai

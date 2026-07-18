@@ -1,0 +1,34 @@
+﻿deskripsi,tahun,negara_tujuan,pelabuhan,nilai_usd,Sumber,cluster_support,source_dataset
+Ferro alloy nickel,2020,CHINA,KENDARI,130075536.47,data/raw/eksporimpor/,NODE-SULTRA-KONAWE-MOROSI-VDNI|NODE-SULTRA-KONAWE-OSS|NODE-SULTRA-KOLAKA-POMALAA-ANTAM,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Ferro alloy nickel,2020,CHINA,MAKASSAR,1651247.29,data/raw/eksporimpor/,NODE-SULSEL-LUTIM-SOROWAKO-VALE,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Ferro alloy nickel,2020,TOTAL,SEMUA,941006489.53,data/raw/eksporimpor/,AGREGAT_SULAWESI,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Ferro alloy nickel,2021,CHINA,KENDARI,134866870.23,data/raw/eksporimpor/,NODE-SULTRA-KONAWE-MOROSI-VDNI|NODE-SULTRA-KONAWE-OSS|NODE-SULTRA-KOLAKA-POMALAA-ANTAM,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Ferro alloy nickel,2021,CHINA,MAKASSAR,4234399.7,data/raw/eksporimpor/,NODE-SULSEL-LUTIM-SOROWAKO-VALE,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Ferro alloy nickel,2021,TOTAL,SEMUA,1484628630.22,data/raw/eksporimpor/,AGREGAT_SULAWESI,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Ferro-nickel,2023,CHINA,KENDARI,163501315.17,data/raw/eksporimpor/,NODE-SULTRA-KONAWE-MOROSI-VDNI|NODE-SULTRA-KONAWE-OSS|NODE-SULTRA-KOLAKA-POMALAA-ANTAM,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Ferro-nickel,2023,CHINA,MAKASSAR,40927558.07,data/raw/eksporimpor/,NODE-SULSEL-LUTIM-SOROWAKO-VALE,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Ferro-nickel,2023,TOTAL,SEMUA,3302552666.72,data/raw/eksporimpor/,AGREGAT_SULAWESI,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Ferro-nickel,2024,CHINA,KENDARI,282796811.1,data/raw/eksporimpor/,NODE-SULTRA-KONAWE-MOROSI-VDNI|NODE-SULTRA-KONAWE-OSS|NODE-SULTRA-KOLAKA-POMALAA-ANTAM,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Ferro-nickel,2024,CHINA,MAKASSAR,65596911.13,data/raw/eksporimpor/,NODE-SULSEL-LUTIM-SOROWAKO-VALE,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Ferro-nickel,2024,TOTAL,SEMUA,3272352313.33,data/raw/eksporimpor/,AGREGAT_SULAWESI,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Ferro-nickel,2026,CHINA,KENDARI,288888989.24,data/raw/eksporimpor/,NODE-SULTRA-KONAWE-MOROSI-VDNI|NODE-SULTRA-KONAWE-OSS|NODE-SULTRA-KOLAKA-POMALAA-ANTAM,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Ferro-nickel,2026,CHINA,MAKASSAR,7545710.56,data/raw/eksporimpor/,NODE-SULSEL-LUTIM-SOROWAKO-VALE,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Ferro-nickel,2026,TOTAL,SEMUA,1189270555.94,data/raw/eksporimpor/,AGREGAT_SULAWESI,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Oth stainless steel in ingots/oth primary formrectangular(oth than square)cross-section,2021,TOTAL,SEMUA,37408850.6,data/raw/eksporimpor/,AGREGAT_SULAWESI,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Semi- finished products of stainless steel; of rectangular (other than square) cross-section,2023,CHINA,KENDARI,11664921.7,data/raw/eksporimpor/,NODE-SULTRA-KONAWE-MOROSI-VDNI|NODE-SULTRA-KONAWE-OSS|NODE-SULTRA-KOLAKA-POMALAA-ANTAM,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Semi- finished products of stainless steel; of rectangular (other than square) cross-section,2023,TOTAL,SEMUA,40489018.3,data/raw/eksporimpor/,AGREGAT_SULAWESI,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Semi- finished products of stainless steel; of rectangular (other than square) cross-section,2024,CHINA,KENDARI,23316048.6,data/raw/eksporimpor/,NODE-SULTRA-KONAWE-MOROSI-VDNI|NODE-SULTRA-KONAWE-OSS|NODE-SULTRA-KOLAKA-POMALAA-ANTAM,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Semi- finished products of stainless steel; of rectangular (other than square) cross-section,2024,INDIA,KENDARI,1375988.96,data/raw/eksporimpor/,NODE-SULTRA-KONAWE-MOROSI-VDNI|NODE-SULTRA-KONAWE-OSS|NODE-SULTRA-KOLAKA-POMALAA-ANTAM,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Semi- finished products of stainless steel; of rectangular (other than square) cross-section,2024,TOTAL,SEMUA,62072723.76,data/raw/eksporimpor/,AGREGAT_SULAWESI,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Oth than stainless steel in ingots/oth primary formrectangular (oth than square)cross-section,2020,TOTAL,SEMUA,1153561339.49,data/raw/eksporimpor/,AGREGAT_SULAWESI,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Oth than stainless steel in ingots/oth primary formrectangular (oth than square)cross-section,2021,CHINA,KENDARI,53813127.5,data/raw/eksporimpor/,NODE-SULTRA-KONAWE-MOROSI-VDNI|NODE-SULTRA-KONAWE-OSS|NODE-SULTRA-KOLAKA-POMALAA-ANTAM,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Oth than stainless steel in ingots/oth primary formrectangular (oth than square)cross-section,2021,TOTAL,SEMUA,2549210267.86,data/raw/eksporimpor/,AGREGAT_SULAWESI,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Semi- finished products of stainless steel; other than of rectangular (other than square) cross-section,2023,CHINA,KENDARI,166504289.8,data/raw/eksporimpor/,NODE-SULTRA-KONAWE-MOROSI-VDNI|NODE-SULTRA-KONAWE-OSS|NODE-SULTRA-KOLAKA-POMALAA-ANTAM,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Semi- finished products of stainless steel; other than of rectangular (other than square) cross-section,2023,TOTAL,SEMUA,918857553.91,data/raw/eksporimpor/,AGREGAT_SULAWESI,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Semi- finished products of stainless steel; other than of rectangular (other than square) cross-section,2024,CHINA,KENDARI,101338106.6,data/raw/eksporimpor/,NODE-SULTRA-KONAWE-MOROSI-VDNI|NODE-SULTRA-KONAWE-OSS|NODE-SULTRA-KOLAKA-POMALAA-ANTAM,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Semi- finished products of stainless steel; other than of rectangular (other than square) cross-section,2024,INDIA,KENDARI,21655218.64,data/raw/eksporimpor/,NODE-SULTRA-KONAWE-MOROSI-VDNI|NODE-SULTRA-KONAWE-OSS|NODE-SULTRA-KOLAKA-POMALAA-ANTAM,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Semi- finished products of stainless steel; other than of rectangular (other than square) cross-section,2024,TOTAL,SEMUA,573464135.41,data/raw/eksporimpor/,AGREGAT_SULAWESI,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Semi- finished products of stainless steel; other than of rectangular (other than square) cross-section,2026,TOTAL,SEMUA,30301806.34,data/raw/eksporimpor/,AGREGAT_SULAWESI,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Nickel mattes,2023,TOTAL,SEMUA,57802978.0,data/raw/eksporimpor/,AGREGAT_SULAWESI,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Nickel mattes,2026,TOTAL,SEMUA,2411994.31,data/raw/eksporimpor/,AGREGAT_SULAWESI,data/processed/sulawesi_ekspor_detail_2020_2026.csv
+Unwrought nickel not alloyed,2024,TOTAL,SEMUA,3807488.05,data/raw/eksporimpor/,AGREGAT_SULAWESI,data/processed/sulawesi_ekspor_detail_2020_2026.csv

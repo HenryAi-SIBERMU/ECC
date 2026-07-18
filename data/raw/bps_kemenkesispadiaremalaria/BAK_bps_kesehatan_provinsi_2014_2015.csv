@@ -1,0 +1,469 @@
+provinsi,tahun,jenis_penyakit,jumlah_kasus,satuan
+Aceh,2014,Malaria,42352,Kasus
+Aceh,2015,Malaria,53921,Kasus
+Aceh,2014,TB Paru,4070,Kasus
+Aceh,2015,TB Paru,4023,Kasus
+Aceh,2014,Pneumonia,1369,Kasus
+Aceh,2015,Pneumonia,1129,Kasus
+Aceh,2014,Kusta,583,Kasus
+Aceh,2015,Kusta,524,Kasus
+Aceh,2014,Tetanus Neonatorum,7,Kasus
+Aceh,2015,Tetanus Neonatorum,0,Kasus
+Aceh,2014,Campak,1749,Kasus
+Aceh,2015,Campak,14,Kasus
+Aceh,2014,DBD,2208,Kasus
+Aceh,2015,DBD,1509,Kasus
+Sumatera Utara,2014,Malaria,88205,Kasus
+Sumatera Utara,2015,Malaria,87177,Kasus
+Sumatera Utara,2014,TB Paru,15031,Kasus
+Sumatera Utara,2015,TB Paru,16955,Kasus
+Sumatera Utara,2014,Pneumonia,27273,Kasus
+Sumatera Utara,2015,Pneumonia,17226,Kasus
+Sumatera Utara,2014,Kusta,176,Kasus
+Sumatera Utara,2015,Kusta,197,Kasus
+Sumatera Utara,2014,Tetanus Neonatorum,1,Kasus
+Sumatera Utara,2015,Tetanus Neonatorum,0,Kasus
+Sumatera Utara,2014,Campak,150,Kasus
+Sumatera Utara,2015,Campak,80,Kasus
+Sumatera Utara,2014,Diare,157,Kasus
+Sumatera Utara,2015,Diare,490,Kasus
+Sumatera Utara,2014,DBD,5378,Kasus
+Sumatera Utara,2015,DBD,5274,Kasus
+Sumatera Barat,2014,Malaria,4182,Kasus
+Sumatera Barat,2015,Malaria,6404,Kasus
+Sumatera Barat,2014,TB Paru,4712,Kasus
+Sumatera Barat,2015,TB Paru,4561,Kasus
+Sumatera Barat,2014,Pneumonia,13384,Kasus
+Sumatera Barat,2015,Pneumonia,15373,Kasus
+Sumatera Barat,2014,Kusta,159,Kasus
+Sumatera Barat,2015,Kusta,54,Kasus
+Sumatera Barat,2014,Tetanus Neonatorum,1,Kasus
+Sumatera Barat,2015,Tetanus Neonatorum,3,Kasus
+Sumatera Barat,2014,Campak,417,Kasus
+Sumatera Barat,2015,Campak,425,Kasus
+Sumatera Barat,2014,DBD,2328,Kasus
+Sumatera Barat,2015,DBD,3806,Kasus
+Riau,2014,Malaria,13441,Kasus
+Riau,2015,Malaria,15649,Kasus
+Riau,2014,TB Paru,3564,Kasus
+Riau,2015,TB Paru,4065,Kasus
+Riau,2014,Pneumonia,10367,Kasus
+Riau,2015,Pneumonia,9552,Kasus
+Riau,2014,Kusta,120,Kasus
+Riau,2015,Kusta,108,Kasus
+Riau,2014,Tetanus Neonatorum,5,Kasus
+Riau,2015,Tetanus Neonatorum,0,Kasus
+Riau,2014,Campak,297,Kasus
+Riau,2015,Campak,18,Kasus
+Riau,2014,DBD,2342,Kasus
+Riau,2015,DBD,3261,Kasus
+Jambi,2014,Malaria,32484,Kasus
+Jambi,2015,Malaria,34944,Kasus
+Jambi,2014,TB Paru,2688,Kasus
+Jambi,2015,TB Paru,3266,Kasus
+Jambi,2014,Pneumonia,5499,Kasus
+Jambi,2015,Pneumonia,7114,Kasus
+Jambi,2014,Kusta,78,Kasus
+Jambi,2015,Kusta,72,Kasus
+Jambi,2014,Tetanus Neonatorum,3,Kasus
+Jambi,2015,Tetanus Neonatorum,2,Kasus
+Jambi,2014,Campak,579,Kasus
+Jambi,2015,Campak,491,Kasus
+Jambi,2014,DBD,1308,Kasus
+Jambi,2015,DBD,1354,Kasus
+Sumatera Selatan,2014,Malaria,36529,Kasus
+Sumatera Selatan,2015,Malaria,40629,Kasus
+Sumatera Selatan,2014,TB Paru,5353,Kasus
+Sumatera Selatan,2015,TB Paru,5985,Kasus
+Sumatera Selatan,2014,Pneumonia,17384,Kasus
+Sumatera Selatan,2015,Pneumonia,17254,Kasus
+Sumatera Selatan,2014,Kusta,304,Kasus
+Sumatera Selatan,2015,Kusta,330,Kasus
+Sumatera Selatan,2014,Tetanus Neonatorum,2,Kasus
+Sumatera Selatan,2015,Tetanus Neonatorum,1,Kasus
+Sumatera Selatan,2014,Campak,589,Kasus
+Sumatera Selatan,2015,Campak,415,Kasus
+Sumatera Selatan,2014,DBD,1500,Kasus
+Sumatera Selatan,2015,DBD,3396,Kasus
+Bengkulu,2014,Malaria,34636,Kasus
+Bengkulu,2015,Malaria,32457,Kasus
+Bengkulu,2014,TB Paru,1423,Kasus
+Bengkulu,2015,TB Paru,1305,Kasus
+Bengkulu,2014,Pneumonia,1207,Kasus
+Bengkulu,2015,Pneumonia,1039,Kasus
+Bengkulu,2014,Kusta,21,Kasus
+Bengkulu,2015,Kusta,17,Kasus
+Bengkulu,2015,Tetanus Neonatorum,0,Kasus
+Bengkulu,2014,Campak,133,Kasus
+Bengkulu,2015,Campak,142,Kasus
+Bengkulu,2014,DBD,464,Kasus
+Bengkulu,2015,DBD,1003,Kasus
+Lampung,2014,Malaria,24468,Kasus
+Lampung,2015,Malaria,26379,Kasus
+Lampung,2014,TB Paru,5109,Kasus
+Lampung,2015,TB Paru,5890,Kasus
+Lampung,2014,Pneumonia,9812,Kasus
+Lampung,2015,Pneumonia,6942,Kasus
+Lampung,2014,Kusta,142,Kasus
+Lampung,2015,Kusta,53,Kasus
+Lampung,2014,Tetanus Neonatorum,3,Kasus
+Lampung,2015,Tetanus Neonatorum,0,Kasus
+Lampung,2014,Campak,236,Kasus
+Lampung,2015,Campak,37,Kasus
+Lampung,2014,Diare,1,Kasus
+Lampung,2015,Diare,33,Kasus
+Lampung,2014,DBD,1317,Kasus
+Lampung,2015,DBD,3145,Kasus
+Kep. Bangka Belitung,2014,Malaria,67750,Kasus
+Kep. Bangka Belitung,2015,Malaria,67960,Kasus
+Kep. Bangka Belitung,2014,TB Paru,915,Kasus
+Kep. Bangka Belitung,2015,TB Paru,927,Kasus
+Kep. Bangka Belitung,2014,Pneumonia,7666,Kasus
+Kep. Bangka Belitung,2015,Pneumonia,7869,Kasus
+Kep. Bangka Belitung,2014,Kusta,54,Kasus
+Kep. Bangka Belitung,2015,Kusta,35,Kasus
+Kep. Bangka Belitung,2015,Tetanus Neonatorum,1,Kasus
+Kep. Bangka Belitung,2014,Campak,47,Kasus
+Kep. Bangka Belitung,2015,Campak,63,Kasus
+Kep. Bangka Belitung,2014,DBD,321,Kasus
+Kep. Bangka Belitung,2015,DBD,623,Kasus
+Kep. Riau,2014,Malaria,4753,Kasus
+Kep. Riau,2015,Malaria,5627,Kasus
+Kep. Riau,2014,TB Paru,1339,Kasus
+Kep. Riau,2015,TB Paru,1069,Kasus
+Kep. Riau,2015,Pneumonia,859,Kasus
+Kep. Riau,2014,Kusta,17,Kasus
+Kep. Riau,2015,Kusta,24,Kasus
+Kep. Riau,2015,Tetanus Neonatorum,0,Kasus
+Kep. Riau,2014,Campak,405,Kasus
+Kep. Riau,2015,Campak,158,Kasus
+Kep. Riau,2014,DBD,1882,Kasus
+Kep. Riau,2015,DBD,1795,Kasus
+Dki Jakarta,2014,Malaria,32,Kasus
+Dki Jakarta,2015,Malaria,23,Kasus
+Dki Jakarta,2014,TB Paru,8452,Kasus
+Dki Jakarta,2015,TB Paru,8904,Kasus
+Dki Jakarta,2014,Pneumonia,39864,Kasus
+Dki Jakarta,2015,Pneumonia,39755,Kasus
+Dki Jakarta,2014,Kusta,258,Kasus
+Dki Jakarta,2015,Kusta,317,Kasus
+Dki Jakarta,2014,Tetanus Neonatorum,2,Kasus
+Dki Jakarta,2015,Tetanus Neonatorum,1,Kasus
+Dki Jakarta,2014,Campak,1361,Kasus
+Dki Jakarta,2015,Campak,1209,Kasus
+Dki Jakarta,2014,DBD,8447,Kasus
+Dki Jakarta,2015,DBD,4954,Kasus
+Jawa Barat,2014,Malaria,17125,Kasus
+Jawa Barat,2015,Malaria,174,Kasus
+Jawa Barat,2014,TB Paru,31469,Kasus
+Jawa Barat,2015,TB Paru,31231,Kasus
+Jawa Barat,2014,Pneumonia,197654,Kasus
+Jawa Barat,2015,Pneumonia,180357,Kasus
+Jawa Barat,2014,Kusta,1917,Kasus
+Jawa Barat,2015,Kusta,2026,Kasus
+Jawa Barat,2014,Tetanus Neonatorum,2,Kasus
+Jawa Barat,2015,Tetanus Neonatorum,0,Kasus
+Jawa Barat,2014,Campak,95,Kasus
+Jawa Barat,2015,Campak,650,Kasus
+Jawa Barat,2014,DBD,18116,Kasus
+Jawa Barat,2015,DBD,21237,Kasus
+Jawa Tengah,2014,Malaria,44798,Kasus
+Jawa Tengah,2015,Malaria,50654,Kasus
+Jawa Tengah,2014,TB Paru,16079,Kasus
+Jawa Tengah,2015,TB Paru,19712,Kasus
+Jawa Tengah,2014,Pneumonia,99465,Kasus
+Jawa Tengah,2015,Pneumonia,36279,Kasus
+Jawa Tengah,2014,Kusta,1860,Kasus
+Jawa Tengah,2015,Kusta,1807,Kasus
+Jawa Tengah,2015,Tetanus Neonatorum,0,Kasus
+Jawa Tengah,2014,Campak,199,Kasus
+Jawa Tengah,2015,Diare,116,Kasus
+Jawa Tengah,2014,DBD,11075,Kasus
+Jawa Tengah,2015,DBD,16398,Kasus
+Di Yogyakarta,2014,Malaria,86,Kasus
+Di Yogyakarta,2015,Malaria,126,Kasus
+Di Yogyakarta,2014,TB Paru,1239,Kasus
+Di Yogyakarta,2015,TB Paru,1241,Kasus
+Di Yogyakarta,2014,Pneumonia,2996,Kasus
+Di Yogyakarta,2015,Pneumonia,2829,Kasus
+Di Yogyakarta,2014,Kusta,79,Kasus
+Di Yogyakarta,2015,Kusta,105,Kasus
+Di Yogyakarta,2015,Tetanus Neonatorum,0,Kasus
+Di Yogyakarta,2014,Campak,1222,Kasus
+Di Yogyakarta,2015,Campak,37,Kasus
+Di Yogyakarta,2014,DBD,1955,Kasus
+Di Yogyakarta,2015,DBD,3420,Kasus
+Jawa Timur,2014,Malaria,21589,Kasus
+Jawa Timur,2015,Malaria,3515,Kasus
+Jawa Timur,2014,TB Paru,22244,Kasus
+Jawa Timur,2015,TB Paru,23487,Kasus
+Jawa Timur,2014,Pneumonia,106551,Kasus
+Jawa Timur,2015,Pneumonia,96087,Kasus
+Jawa Timur,2014,Kusta,4116,Kasus
+Jawa Timur,2015,Kusta,4013,Kasus
+Jawa Timur,2014,Tetanus Neonatorum,17,Kasus
+Jawa Timur,2015,Tetanus Neonatorum,21,Kasus
+Jawa Timur,2014,Campak,1071,Kasus
+Jawa Timur,2015,Campak,1072,Kasus
+Jawa Timur,2014,Diare,258,Kasus
+Jawa Timur,2014,DBD,9273,Kasus
+Jawa Timur,2015,DBD,20138,Kasus
+Banten,2014,Malaria,1405,Kasus
+Banten,2015,Malaria,401,Kasus
+Banten,2014,TB Paru,4688,Kasus
+Banten,2015,TB Paru,7978,Kasus
+Banten,2014,Pneumonia,34853,Kasus
+Banten,2015,Pneumonia,32978,Kasus
+Banten,2014,Kusta,823,Kasus
+Banten,2015,Kusta,1026,Kasus
+Banten,2014,Tetanus Neonatorum,22,Kasus
+Banten,2015,Tetanus Neonatorum,12,Kasus
+Banten,2014,Campak,1149,Kasus
+Banten,2015,Campak,606,Kasus
+Banten,2015,Diare,19,Kasus
+Banten,2014,DBD,3002,Kasus
+Banten,2015,DBD,3011,Kasus
+Bali,2014,Malaria,4780,Kasus
+Bali,2015,Malaria,5283,Kasus
+Bali,2014,TB Paru,1616,Kasus
+Bali,2015,TB Paru,1477,Kasus
+Bali,2014,Pneumonia,4712,Kasus
+Bali,2015,Pneumonia,5731,Kasus
+Bali,2014,Kusta,81,Kasus
+Bali,2015,Kusta,61,Kasus
+Bali,2015,Tetanus Neonatorum,0,Kasus
+Bali,2014,Campak,382,Kasus
+Bali,2015,Campak,141,Kasus
+Bali,2014,DBD,8629,Kasus
+Bali,2015,DBD,10704,Kasus
+Nusa Tenggara Barat,2014,Malaria,94530,Kasus
+Nusa Tenggara Barat,2015,Malaria,101990,Kasus
+Nusa Tenggara Barat,2014,TB Paru,4396,Kasus
+Nusa Tenggara Barat,2015,TB Paru,4149,Kasus
+Nusa Tenggara Barat,2014,Pneumonia,24178,Kasus
+Nusa Tenggara Barat,2015,Pneumonia,24872,Kasus
+Nusa Tenggara Barat,2014,Kusta,281,Kasus
+Nusa Tenggara Barat,2015,Kusta,292,Kasus
+Nusa Tenggara Barat,2015,Tetanus Neonatorum,0,Kasus
+Nusa Tenggara Barat,2014,Campak,16,Kasus
+Nusa Tenggara Barat,2015,Campak,3,Kasus
+Nusa Tenggara Barat,2014,DBD,824,Kasus
+Nusa Tenggara Barat,2015,DBD,1252,Kasus
+Nusa Tenggara Timur,2014,Malaria,296845,Kasus
+Nusa Tenggara Timur,2015,Malaria,283112,Kasus
+Nusa Tenggara Timur,2014,TB Paru,3364,Kasus
+Nusa Tenggara Timur,2015,TB Paru,3424,Kasus
+Nusa Tenggara Timur,2015,Pneumonia,2364,Kasus
+Nusa Tenggara Timur,2014,Kusta,378,Kasus
+Nusa Tenggara Timur,2015,Kusta,280,Kasus
+Nusa Tenggara Timur,2015,Tetanus Neonatorum,0,Kasus
+Nusa Tenggara Timur,2014,Campak,58,Kasus
+Nusa Tenggara Timur,2014,Diare,2089,Kasus
+Nusa Tenggara Timur,2015,Diare,452,Kasus
+Nusa Tenggara Timur,2014,DBD,167,Kasus
+Nusa Tenggara Timur,2015,DBD,506,Kasus
+Kalimantan Barat,2014,Malaria,29295,Kasus
+Kalimantan Barat,2015,Malaria,49128,Kasus
+Kalimantan Barat,2014,TB Paru,4265,Kasus
+Kalimantan Barat,2015,TB Paru,3565,Kasus
+Kalimantan Barat,2014,Pneumonia,2443,Kasus
+Kalimantan Barat,2015,Pneumonia,2791,Kasus
+Kalimantan Barat,2014,Kusta,43,Kasus
+Kalimantan Barat,2015,Kusta,57,Kasus
+Kalimantan Barat,2014,Tetanus Neonatorum,9,Kasus
+Kalimantan Barat,2015,Tetanus Neonatorum,5,Kasus
+Kalimantan Barat,2014,Campak,933,Kasus
+Kalimantan Barat,2015,Campak,254,Kasus
+Kalimantan Barat,2015,Diare,4,Kasus
+Kalimantan Barat,2014,DBD,5049,Kasus
+Kalimantan Barat,2015,DBD,1115,Kasus
+Kalimantan Tengah,2014,Malaria,24167,Kasus
+Kalimantan Tengah,2015,Malaria,23909,Kasus
+Kalimantan Tengah,2014,TB Paru,1565,Kasus
+Kalimantan Tengah,2015,TB Paru,1400,Kasus
+Kalimantan Tengah,2014,Pneumonia,416,Kasus
+Kalimantan Tengah,2015,Pneumonia,408,Kasus
+Kalimantan Tengah,2014,Kusta,62,Kasus
+Kalimantan Tengah,2015,Kusta,26,Kasus
+Kalimantan Tengah,2015,Tetanus Neonatorum,2,Kasus
+Kalimantan Tengah,2014,Campak,53,Kasus
+Kalimantan Tengah,2015,Campak,311,Kasus
+Kalimantan Tengah,2015,Diare,2,Kasus
+Kalimantan Tengah,2014,DBD,880,Kasus
+Kalimantan Tengah,2015,DBD,1502,Kasus
+Kalimantan Selatan,2014,Malaria,15898,Kasus
+Kalimantan Selatan,2015,Malaria,14056,Kasus
+Kalimantan Selatan,2014,TB Paru,3207,Kasus
+Kalimantan Selatan,2015,TB Paru,3128,Kasus
+Kalimantan Selatan,2014,Pneumonia,18820,Kasus
+Kalimantan Selatan,2015,Pneumonia,14764,Kasus
+Kalimantan Selatan,2014,Kusta,156,Kasus
+Kalimantan Selatan,2015,Kusta,145,Kasus
+Kalimantan Selatan,2015,Tetanus Neonatorum,0,Kasus
+Kalimantan Selatan,2014,Campak,121,Kasus
+Kalimantan Selatan,2014,DBD,828,Kasus
+Kalimantan Selatan,2015,DBD,3668,Kasus
+Kalimantan Timur,2014,Malaria,9177,Kasus
+Kalimantan Timur,2015,Malaria,15229,Kasus
+Kalimantan Timur,2014,TB Paru,1660,Kasus
+Kalimantan Timur,2015,TB Paru,2183,Kasus
+Kalimantan Timur,2014,Pneumonia,622,Kasus
+Kalimantan Timur,2015,Pneumonia,7828,Kasus
+Kalimantan Timur,2014,Kusta,154,Kasus
+Kalimantan Timur,2015,Kusta,176,Kasus
+Kalimantan Timur,2015,Tetanus Neonatorum,0,Kasus
+Kalimantan Timur,2014,Campak,283,Kasus
+Kalimantan Timur,2014,DBD,4752,Kasus
+Kalimantan Timur,2015,DBD,6458,Kasus
+Kalimantan Utara,2014,Malaria,4303,Kasus
+Kalimantan Utara,2015,Malaria,4240,Kasus
+Kalimantan Utara,2014,TB Paru,377,Kasus
+Kalimantan Utara,2015,TB Paru,402,Kasus
+Kalimantan Utara,2015,Kusta,41,Kasus
+Kalimantan Utara,2014,DBD,781,Kasus
+Kalimantan Utara,2015,DBD,719,Kasus
+Sulawesi Utara,2014,Malaria,18846,Kasus
+Sulawesi Utara,2015,Malaria,22274,Kasus
+Sulawesi Utara,2014,TB Paru,5226,Kasus
+Sulawesi Utara,2015,TB Paru,5034,Kasus
+Sulawesi Utara,2014,Pneumonia,11208,Kasus
+Sulawesi Utara,2015,Pneumonia,753,Kasus
+Sulawesi Utara,2014,Kusta,349,Kasus
+Sulawesi Utara,2015,Kusta,427,Kasus
+Sulawesi Utara,2015,Tetanus Neonatorum,0,Kasus
+Sulawesi Utara,2014,Campak,112,Kasus
+Sulawesi Utara,2015,Campak,62,Kasus
+Sulawesi Utara,2014,DBD,1271,Kasus
+Sulawesi Utara,2015,DBD,730,Kasus
+Sulawesi Tengah,2014,Malaria,41785,Kasus
+Sulawesi Tengah,2015,Malaria,36657,Kasus
+Sulawesi Tengah,2014,TB Paru,2433,Kasus
+Sulawesi Tengah,2015,TB Paru,2584,Kasus
+Sulawesi Tengah,2014,Pneumonia,7923,Kasus
+Sulawesi Tengah,2015,Pneumonia,10152,Kasus
+Sulawesi Tengah,2014,Kusta,269,Kasus
+Sulawesi Tengah,2015,Kusta,494,Kasus
+Sulawesi Tengah,2015,Tetanus Neonatorum,0,Kasus
+Sulawesi Tengah,2014,Campak,168,Kasus
+Sulawesi Tengah,2015,Campak,450,Kasus
+Sulawesi Tengah,2015,Diare,10,Kasus
+Sulawesi Tengah,2014,DBD,1302,Kasus
+Sulawesi Tengah,2015,DBD,1571,Kasus
+Sulawesi Selatan,2014,Malaria,22641,Kasus
+Sulawesi Selatan,2015,Malaria,24811,Kasus
+Sulawesi Selatan,2014,TB Paru,8297,Kasus
+Sulawesi Selatan,2015,TB Paru,8465,Kasus
+Sulawesi Selatan,2014,Pneumonia,4168,Kasus
+Sulawesi Selatan,2015,Pneumonia,2445,Kasus
+Sulawesi Selatan,2014,Kusta,1143,Kasus
+Sulawesi Selatan,2015,Kusta,1220,Kasus
+Sulawesi Selatan,2014,Tetanus Neonatorum,6,Kasus
+Sulawesi Selatan,2015,Tetanus Neonatorum,1,Kasus
+Sulawesi Selatan,2014,Campak,829,Kasus
+Sulawesi Selatan,2015,Campak,836,Kasus
+Sulawesi Selatan,2014,Diare,44,Kasus
+Sulawesi Selatan,2015,Diare,9,Kasus
+Sulawesi Selatan,2014,DBD,2904,Kasus
+Sulawesi Selatan,2015,DBD,3974,Kasus
+Sulawesi Tenggara,2014,Malaria,16666,Kasus
+Sulawesi Tenggara,2015,Malaria,14403,Kasus
+Sulawesi Tenggara,2014,TB Paru,3932,Kasus
+Sulawesi Tenggara,2015,TB Paru,3078,Kasus
+Sulawesi Tenggara,2014,Pneumonia,5081,Kasus
+Sulawesi Tenggara,2015,Pneumonia,3262,Kasus
+Sulawesi Tenggara,2014,Kusta,268,Kasus
+Sulawesi Tenggara,2015,Kusta,281,Kasus
+Sulawesi Tenggara,2015,Tetanus Neonatorum,1,Kasus
+Sulawesi Tenggara,2014,Campak,40,Kasus
+Sulawesi Tenggara,2015,Campak,101,Kasus
+Sulawesi Tenggara,2015,Diare,60,Kasus
+Sulawesi Tenggara,2014,DBD,838,Kasus
+Sulawesi Tenggara,2015,DBD,1500,Kasus
+Gorontalo,2014,Malaria,14121,Kasus
+Gorontalo,2015,Malaria,18635,Kasus
+Gorontalo,2014,TB Paru,1514,Kasus
+Gorontalo,2015,TB Paru,1218,Kasus
+Gorontalo,2014,Pneumonia,1572,Kasus
+Gorontalo,2015,Pneumonia,4226,Kasus
+Gorontalo,2014,Kusta,152,Kasus
+Gorontalo,2015,Kusta,223,Kasus
+Gorontalo,2015,Tetanus Neonatorum,0,Kasus
+Gorontalo,2014,Campak,15,Kasus
+Gorontalo,2015,Campak,43,Kasus
+Gorontalo,2015,Diare,18,Kasus
+Gorontalo,2014,DBD,223,Kasus
+Gorontalo,2015,DBD,231,Kasus
+Sulawesi Barat,2014,Malaria,26252,Kasus
+Sulawesi Barat,2015,Malaria,32817,Kasus
+Sulawesi Barat,2014,TB Paru,1195,Kasus
+Sulawesi Barat,2015,TB Paru,1270,Kasus
+Sulawesi Barat,2014,Pneumonia,243,Kasus
+Sulawesi Barat,2015,Pneumonia,1532,Kasus
+Sulawesi Barat,2014,Kusta,199,Kasus
+Sulawesi Barat,2015,Kusta,215,Kasus
+Sulawesi Barat,2014,Tetanus Neonatorum,3,Kasus
+Sulawesi Barat,2015,Tetanus Neonatorum,0,Kasus
+Sulawesi Barat,2014,Campak,73,Kasus
+Sulawesi Barat,2014,DBD,315,Kasus
+Sulawesi Barat,2015,DBD,486,Kasus
+Maluku,2014,Malaria,54212,Kasus
+Maluku,2015,Malaria,66474,Kasus
+Maluku,2014,TB Paru,2115,Kasus
+Maluku,2015,TB Paru,2038,Kasus
+Maluku,2014,Pneumonia,760,Kasus
+Maluku,2015,Pneumonia,247,Kasus
+Maluku,2014,Kusta,545,Kasus
+Maluku,2015,Kusta,211,Kasus
+Maluku,2015,Tetanus Neonatorum,2,Kasus
+Maluku,2014,Campak,32,Kasus
+Maluku,2015,Campak,23,Kasus
+Maluku,2014,DBD,12,Kasus
+Maluku,2015,DBD,78,Kasus
+Maluku Utara,2014,Malaria,25986,Kasus
+Maluku Utara,2015,Malaria,25349,Kasus
+Maluku Utara,2014,TB Paru,903,Kasus
+Maluku Utara,2015,TB Paru,1060,Kasus
+Maluku Utara,2015,Pneumonia,633,Kasus
+Maluku Utara,2014,Kusta,544,Kasus
+Maluku Utara,2015,Kusta,544,Kasus
+Maluku Utara,2014,Tetanus Neonatorum,1,Kasus
+Maluku Utara,2015,Tetanus Neonatorum,0,Kasus
+Maluku Utara,2014,Campak,129,Kasus
+Maluku Utara,2015,Campak,126,Kasus
+Maluku Utara,2014,DBD,148,Kasus
+Maluku Utara,2015,DBD,119,Kasus
+Papua Barat,2014,Malaria,82487,Kasus
+Papua Barat,2015,Malaria,121257,Kasus
+Papua Barat,2014,TB Paru,577,Kasus
+Papua Barat,2015,TB Paru,793,Kasus
+Papua Barat,2014,Kusta,633,Kasus
+Papua Barat,2015,Kusta,717,Kasus
+Papua Barat,2015,Tetanus Neonatorum,0,Kasus
+Papua Barat,2014,DBD,77,Kasus
+Papua Barat,2015,DBD,66,Kasus
+Papua,2014,Malaria,360181,Kasus
+Papua,2015,Malaria,327113,Kasus
+Papua,2014,TB Paru,1660,Kasus
+Papua,2015,TB Paru,2538,Kasus
+Papua,2014,Kusta,1061,Kasus
+Papua,2015,Kusta,1084,Kasus
+Papua,2015,Tetanus Neonatorum,1,Kasus
+Papua,2015,Campak,418,Kasus
+Papua,2014,DBD,431,Kasus
+Papua,2015,DBD,647,Kasus
+Indonesia,2014,Malaria,1575907,Kasus
+Indonesia,2015,Malaria,1612777,Kasus
+Indonesia,2014,TB Paru,176677,Kasus
+Indonesia,2015,TB Paru,188405,Kasus
+Indonesia,2014,Pneumonia,657490,Kasus
+Indonesia,2015,Pneumonia,554650,Kasus
+Indonesia,2014,Kusta,17025,Kasus
+Indonesia,2015,Kusta,17202,Kasus
+Indonesia,2014,Tetanus Neonatorum,84,Kasus
+Indonesia,2015,Tetanus Neonatorum,53,Kasus
+Indonesia,2014,Campak,12943,Kasus
+Indonesia,2015,Campak,8185,Kasus
+Indonesia,2014,Diare,2549,Kasus
+Indonesia,2015,Diare,1213,Kasus
+Indonesia,2014,DBD,100347,Kasus
+Indonesia,2015,DBD,129650,Kasus
