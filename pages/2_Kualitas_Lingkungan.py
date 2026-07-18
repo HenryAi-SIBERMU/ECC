@@ -159,7 +159,7 @@ with st.expander("🔍 Metodologi", expanded=False):
     *   **Laju Deforestasi Komoditas:** Kehilangan tutupan pohon akibat kegiatan ekstraktif (Global Forest Watch).
     
     **Metode Pengolahan Data:**
-    Analisis menggunakan pendekatan *Cross-sectional* dan *Time-Series* (Panel Data). Korelasi dibuktikan secara statistik melalui uji **Crosstabulation (Chi-Square/Symmetric Measures)** ala SPSS untuk melihat seberapa jauh status 'Kritis' pada wilayah beririsan dengan label 'Tinggi' pada kehadiran industri.
+    Analisis menggunakan pendekatan *Cross-sectional* dan *Time-Series* (Panel Data). Korelasi dibuktikan secara statistik melalui uji **Crosstabulation (Chi-Square/Symmetric Measures)** untuk melihat seberapa jauh status 'Kritis' pada wilayah beririsan dengan label 'Tinggi' pada kehadiran industri.
     """)
 
 # ── Hero Statement (Narasi Kritis Utama) ──
@@ -227,10 +227,10 @@ st.markdown("<br>", unsafe_allow_html=True)
 # ── Placeholders Sections ──
 st.markdown("---")
 st.markdown("### 2.1. Dampak Limbah Tailing: Konsentrasi Smelter vs Indeks Kualitas Air (IKA)")
-st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Crosstabulation SPSS & Trendline</span>', unsafe_allow_html=True)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Crosstabulation & Trendline</span>', unsafe_allow_html=True)
 st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
-with st.expander("ℹ️ Metodologi: Crosstabulation SPSS & Trendline"):
+with st.expander("ℹ️ Metodologi: Crosstabulation & Trendline"):
     st.markdown("""
     **Metode Analisis:** Sub-bab ini menggunakan pendekatan Analisis Spasial dan Uji Statistik Chi-Square (Crosstabulation) untuk mengukur dampak konsentrasi smelter terhadap penurunan kualitas air.
 
@@ -990,7 +990,7 @@ with st.expander("Lihat Data Mentah: Rata-rata IKU Sulawesi", expanded=False):
     st.dataframe(df_iku_avg, use_container_width=True, hide_index=True)
     st.caption("📁 **Sumber:** `sulawesi_iku_2015_2024.csv`")
 
-# SPSS Crosstab Section 2.2
+# Crosstab Section 2.2
 x_options_2_2 = {
     "Kapasitas_PLTU_MW": "Kapasitas PLTU (MW)"
 }
@@ -1381,7 +1381,7 @@ with st.expander("Lihat Data Mentah: Grafik Scatter Kumulatif Deforestasi", expa
     st.dataframe(df_panel_2_3[['Provinsi', 'Tahun', 'Total_Luas_Konsesi_Baru_Ha', 'Kumulatif_Luas_Konsesi_Ha', 'Total_Deforestasi_Ha', 'Kumulatif_Deforestasi_Ha']], use_container_width=True, hide_index=True)
     st.caption("📁 **Sumber File:** `data/processed/sulawesi_izin_baru_per_tahun.csv` & `data/processed/sulawesi_gfw_master_1_dekade_2014_2023.csv`")
 
-# SPSS Crosstab Section 2.3
+# Crosstab Section 2.3
 x_options_2_3 = {
     "Luas_IUP_Kawasan_Ha": "Luas Ekspansi Industri (Ha)"
 }

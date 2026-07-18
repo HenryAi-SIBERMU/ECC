@@ -1072,7 +1072,7 @@ expected_df = pd.DataFrame(expected, index=crosstab.index, columns=crosstab.colu
 
 st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 st.markdown("### Detail Uji Statistik (Chi-Square & Odds Ratio)")
-st.caption("Tabel-tabel di bawah ini adalah *output* standar SPSS yang menyajikan bukti statistik formal: Case Processing → Crosstabulation → Chi-Square Tests → Ringkasan Hipotesis.")
+st.caption("Tabel-tabel di bawah ini adalah *output* statistik formal yang menyajikan bukti statistik formal: Case Processing → Crosstabulation → Chi-Square Tests → Ringkasan Hipotesis.")
 
 # --- A. Case Processing Summary ---
 st.markdown("##### Case Processing Summary")

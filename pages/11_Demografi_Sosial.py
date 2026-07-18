@@ -632,7 +632,7 @@ y_options = {
 
 hypothesis_text = f"""
 <div class="section-copy">
-Uji crosstab berikut memakai unit observasi <b>kabupaten-tahun</b>, bukan provinsi-tahun. Perubahan ini penting karena tekanan sosial terjadi di level kabupaten, sementara agregasi provinsi membuat variasi lokal hilang dan membuat banyak tabel menjadi tidak signifikan. Variabel X merepresentasikan intensitas ekonomi ekstraktif pada provinsi-tahun, lalu diwariskan ke kabupaten di provinsi yang sama. Variabel Y merepresentasikan kepadatan, populasi, pertumbuhan penduduk, kemiskinan, dan beban DBD. Semua variabel diklasifikasikan otomatis menjadi rendah/tinggi berdasarkan median panel oleh tool SPSS crosstab. Untuk DBD, hanya observasi dengan kasus non-zero yang dipakai agar median split tidak runtuh pada nilai nol. Hasil ini tetap dibaca sebagai uji asosiasi awal, bukan bukti kausal tunggal.
+Uji crosstab berikut memakai unit observasi <b>kabupaten-tahun</b>, bukan provinsi-tahun. Perubahan ini penting karena tekanan sosial terjadi di level kabupaten, sementara agregasi provinsi membuat variasi lokal hilang dan membuat banyak tabel menjadi tidak signifikan. Variabel X merepresentasikan intensitas ekonomi ekstraktif pada provinsi-tahun, lalu diwariskan ke kabupaten di provinsi yang sama. Variabel Y merepresentasikan kepadatan, populasi, pertumbuhan penduduk, kemiskinan, dan beban DBD. Semua variabel diklasifikasikan otomatis menjadi rendah/tinggi berdasarkan median panel oleh tool crosstab. Untuk DBD, hanya observasi dengan kasus non-zero yang dipakai agar median split tidak runtuh pada nilai nol. Hasil ini tetap dibaca sebagai uji asosiasi awal, bukan bukti kausal tunggal.
 </div>
 """
 
@@ -640,7 +640,7 @@ render_spss_crosstab(
     crosstab_panel,
     x_options=x_options,
     y_options=y_options,
-    title="Uji SPSS-Style Crosstab: Ekonomi Ekstraktif vs Tekanan Sosial-Demografis",
+    title="Uji Crosstab: Ekonomi Ekstraktif vs Tekanan Sosial-Demografis",
     hypothesis_text=hypothesis_text,
     key_prefix="fase4_sintesis",
     y_is_negative=True,
@@ -653,5 +653,5 @@ render_spss_crosstab(
 with st.expander("Lihat Data Mentah: Panel Crosstab Provinsi-Tahun", expanded=False):
     st.dataframe(crosstab_panel, use_container_width=True, hide_index=True)
     st.caption(
-        "Sumber File: `data/processed/sulawesi_employment_shift_fase4.csv` dan `data/processed/sulawesi_demografi_master_fase4.csv` — panel kabupaten-tahun untuk SPSS-style crosstab."
+        "Sumber File: `data/processed/sulawesi_employment_shift_fase4.csv` dan `data/processed/sulawesi_demografi_master_fase4.csv` — panel kabupaten-tahun untuk uji crosstab."
     )

@@ -796,12 +796,12 @@ st.dataframe(df_kekerasan_display.head(10), use_container_width=True, hide_index
 # ══════════════════════════════════════════════════════════
 st.markdown("---")
 st.subheader("4.4 Pembuktian Statistik: Ekspansi vs Eskalasi Konflik")
-st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Before-After Analysis & SPSS-Style Crosstabulation</span>', unsafe_allow_html=True)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Before-After Analysis & Crosstabulation</span>', unsafe_allow_html=True)
 st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
-with st.expander("ℹ️ Metodologi: Before-After Analysis & SPSS-Style Crosstabulation"):
+with st.expander("ℹ️ Metodologi: Before-After Analysis & Crosstabulation"):
     st.markdown("""
-    **Metode Analisis:** Sub-bab ini menggunakan Uji Chi-Square (*Crosstabulation*) gaya SPSS dan kalkulasi risiko peluang (*Odds Ratio*) untuk menguji validitas empiris secara akademis.
+    **Metode Analisis:** Sub-bab ini menggunakan Uji Chi-Square (*Crosstabulation*) dan kalkulasi risiko peluang (*Odds Ratio*) untuk menguji validitas empiris secara akademis.
 
     1. **Uji Korelasi Variabel Kategorikal:**
         * **Crosstabulation:** Mentabulasi silang frekuensi kemunculan dua kondisi (Contoh: Keterlibatan Perusahaan vs Adanya Kriminalisasi) untuk mencari relasi ketergantungan.
@@ -863,7 +863,7 @@ with col_ba2:
     """, unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
-st.markdown("#### B. Uji Statistik Crosstab (Chi-Square SPSS Style)")
+st.markdown("#### B. Uji Statistik Crosstab (Chi-Square)")
 
 import scipy.stats as stats
 
