@@ -1,0 +1,69 @@
+{
+  "query": "site:issuu.com \"lingkungan hidup indonesia\" 2015",
+  "results": [
+    {
+      "kind": "customsearch#result",
+      "title": "Kabar dari Jomboran: Senyum dan Tangis Warga Bantaran Kali ...",
+      "htmlTitle": "Kabar dari Jomboran: Senyum dan Tangis Warga Bantaran Kali ...",
+      "link": "https://issuu.com/buletinmahkamah/docs/majalah_edisi_xxxiv_bppm_mahkamah/s/17406896",
+      "displayLink": "issuu.com",
+      "snippet": "... 2015). Pernyataan di atas dibenarkan oleh narasumber yang kami ... Kabar mengenai kriminalisasi ini pun terdengar hingga Wahana Lingkungan Hidup Indonesia.",
+      "htmlSnippet": "... <b>2015</b>). Pernyataan di atas dibenarkan oleh narasumber yang kami ... Kabar mengenai kriminalisasi ini pun terdengar hingga Wahana <b>Lingkungan Hidup Indonesia</b>.",
+      "formattedUrl": "https://issuu.com/buletinmahkamah/docs/majalah_edisi.../s/17406896",
+      "htmlFormattedUrl": "https://issuu.com/buletinmahkamah/docs/majalah_edisi.../s/17406896",
+      "pagemap": {
+        "cse_thumbnail": [
+          {
+            "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWqecOw9KYiANvsu7xKO5MaZsbU7f3W7DWK6J6YvK3IBZIhqpBNCEYOCiE&s",
+            "width": "278",
+            "height": "181"
+          }
+        ],
+        "imageobject": [
+          {
+            "contenturl": "https://photo.isu.pub/buletinmahkamah/photo_large.jpg",
+            "width": "160px",
+            "url": "https://issuu.com/buletinmahkamah",
+            "height": "160px"
+          }
+        ],
+        "organization": [
+          {
+            "name": "BPPM Mahkamah"
+          }
+        ],
+        "metatags": [
+          {
+            "og:image": "https://assets.isu.pub/document-structure/221118053835-ea11ca3befbe99119b6d35f4f2d9a76c/v1/6b2b920dcc45d825255cddb554187d9d.jpeg",
+            "og:type": "website",
+            "og:image:alt": "A variety of magazines, catalogs and publications surrounding the Issuu logo",
+            "og:image:width": "1200",
+            "og:site_name": "Issuu",
+            "viewport": "width=device-width, initial-scale=1, shrink-to-fit=no",
+            "og:title": "Kabar dari Jomboran: Senyum dan Tangis Warga Bantaran Kali Progo Tanggapi Tam- bang - Issuu",
+            "og:image:height": "630",
+            "og:image:type": "image/jpeg",
+            "og:url": "/buletinmahkamah/docs/majalah_edisi_xxxiv_bppm_mahkamah/s/17406896",
+            "og:description": "Bantaran Sungai Kaliprogo yang semakin kaya mineral tanah pasca erupsi Gunung Merapi",
+            "og:image:secure_url": "https://assets.isu.pub/document-structure/221118053835-ea11ca3befbe99119b6d35f4f2d9a76c/v1/6b2b920dcc45d825255cddb554187d9d.jpeg"
+          }
+        ],
+        "cse_image": [
+          {
+            "src": "https://assets.isu.pub/document-structure/221118053835-ea11ca3befbe99119b6d35f4f2d9a76c/v1/6b2b920dcc45d825255cddb554187d9d.jpeg"
+          }
+        ],
+        "article": [
+          {
+            "image": "12 minute readKabar dari Jomboran: Senyum dan Tangis Warga Bantaran Kali Progo Tanggapi Tam- bang",
+            "author": "from MAJALAH 2022 - TANAH SURGAby BPPM Mahkamah",
+            "headline": "Kabar dari Jomboran: Senyum dan Tangis Warga Bantaran Kali Progo Tanggapi Tam- bang",
+            "datepublished": "2022-11-18T05:39:11.000Z",
+            "mainentityofpage": "http://schema.org/Article"
+          }
+        ]
+      }
+    }
+  ],
+  "count": 1
+}

@@ -1,0 +1,34 @@
+======================================================================
+[PILOT] PARSING: catahu-2016-liberalisasi-agraria-diperhebat-reforma-agraria-dibelokkan.pdf
+======================================================================
+Total halaman: 18
+Scanning untuk kata kunci Sulawesi...
+
+----------------------------------------------------------------------
+[HALAMAN SULAWESI] Ditemukan di 1 halaman
+  -> [14]
+
+----------------------------------------------------------------------
+[KUTIPAN TEKS SULAWESI] 1 snippet:
+
+  [Hal.14] Di beberapa daerah, anggota-anggota KPA telah mengonsolidasikan organisasi taninya untuk menggunakan peluang tersebut, seperti di Jawa Barat, Banten, Jambi, Sumatera Selatan, Kalimantan Barat, Sulawesi Tengah dan Sulawesi Selatan
+
+----------------------------------------------------------------------
+[TABEL KONFLIK/SULAWESI] Ditemukan 1 tabel:
+
+  --- Tabel #1 (Hal. 6) ---
+  - | - | - | - | - | - | -
+  - | - | - | - | - | - | -
+  - | - | - | - | - | - | -
+  - | - | - | - | - | - | -
+  - | - | - | - | - | - | -
+  - | - | - | - | - | - | -
+  - | - | - | - | - | - | -
+  - | - | - | - | - | - | -
+  - | - | - | - | - | - | -
+  - | - | - | - | - | - | -
+  ... (+6 baris lagi)
+
+======================================================================
+[SELESAI] Silakan review file output.
+======================================================================

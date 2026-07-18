@@ -1,0 +1,42 @@
+{
+  "query": "\"Status Lingkungan Hidup Indonesia 2016\" filetype:pdf",
+  "results": [
+    {
+      "kind": "customsearch#result",
+      "title": "Analisis Pengelolaan Atraksi Wisata Kebun Binatang Surabaya (The ...",
+      "htmlTitle": "Analisis Pengelolaan Atraksi Wisata Kebun Binatang Surabaya (The ...",
+      "link": "https://pdfs.semanticscholar.org/f112/ca3c4270257454f69634200bd5dc45eb0a11.pdf",
+      "displayLink": "pdfs.semanticscholar.org",
+      "snippet": "Status Lingkungan Hidup Indonesia 2016. Jakarta. Wijayanti, Follet. 2008. Manajemen. Editor. Ari Setiawan. Yogyakarta. Salim, Peter dan Yenny Salim. 1997 ...",
+      "htmlSnippet": "<b>Status Lingkungan Hidup Indonesia 2016</b>. Jakarta. Wijayanti, Follet. 2008. Manajemen. Editor. Ari Setiawan. Yogyakarta. Salim, Peter dan Yenny Salim. 1997&nbsp;...",
+      "formattedUrl": "https://pdfs.semanticscholar.org/.../ca3c4270257454f69634200bd5dc45eb...",
+      "htmlFormattedUrl": "https://pdfs.semanticscholar.org/.../ca3c4270257454f69634200bd5dc45eb...",
+      "pagemap": {
+        "cse_thumbnail": [
+          {
+            "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwvzJ2C8EX6pcpEs3fYCiHZzof4FSB4OZqUpP9ekr-Ye7wPtgtfdcn5zRe&s",
+            "width": "300",
+            "height": "168"
+          }
+        ],
+        "metatags": [
+          {
+            "moddate": "D:20180705093451+07'00'",
+            "creationdate": "D:20180705093451+07'00'",
+            "author": "admin",
+            "producer": "Microsoft: Print To PDF",
+            "title": "Microsoft Word - Layout_21.docx"
+          }
+        ],
+        "cse_image": [
+          {
+            "src": "x-raw-image:///8e2fd9142c2c2a33e24e9114f4aee83ee1fb35ca9dce480824ce971bfbbf8b60"
+          }
+        ]
+      },
+      "mime": "application/pdf",
+      "fileFormat": "PDF/Adobe Acrobat"
+    }
+  ],
+  "count": 1
+}

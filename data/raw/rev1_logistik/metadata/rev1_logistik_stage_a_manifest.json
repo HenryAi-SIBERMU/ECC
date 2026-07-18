@@ -1,0 +1,19 @@
+{
+  "stage": "rev1_logistik_tahap_a",
+  "generated_at": "2026-06-26",
+  "metadata_dir": "data/raw/rev1_logistik/metadata",
+  "templates_dir": "data/raw/rev1_logistik/templates",
+  "working_dir": "data/raw/rev1_logistik/working",
+  "summary": {
+    "shortlist_nodes": 6,
+    "anchor_targets": 6,
+    "region_summaries": 6,
+    "source_queue_rows": 24
+  },
+  "outputs": {
+    "shortlist_logistics": "data/raw/rev1_logistik/working/sulawesi_port_logistics.csv",
+    "research_targets": "data/raw/rev1_logistik/working/port_research_targets.csv",
+    "region_summary": "data/raw/rev1_logistik/working/rev1_tahap_a_region_summary.csv",
+    "source_queue": "data/raw/rev1_logistik/working/rev1_tahap_a_source_queue.csv"
+  }
+}

@@ -1,0 +1,54 @@
+# BPS API Client Configuration
+# CELIOS ECC Intelligence System
+# 
+# Copy to config.yaml and update with your settings
+
+bps:
+  # API Key - set via environment variable BPS_API_KEY
+  api_key: "${BPS_API_KEY}"
+  
+  # Base URL
+  base_url: "https://webapi.bps.go.id/v1/api"
+  
+  # Request settings
+  timeout: 30
+  max_retries: 3
+  rate_limit: 1.0  # seconds between requests
+  
+  # Sulawesi provinces (target region for ECC analysis)
+  sulawesi_provinces:
+    - code: "71"
+      name: "Sulawesi Utara"
+    - code: "72"
+      name: "Sulawesi Tengah"
+    - code: "73"
+      name: "Sulawesi Selatan"
+    - code: "74"
+      name: "Sulawesi Tenggara"
+    - code: "75"
+      name: "Gorontalo"
+    - code: "76"
+      name: "Sulawesi Barat"
+  
+  # Data indicators/subjects
+  indicators:
+    ekspor:
+      subject_id: "ekspor"  # Will be discovered via API
+      description: "Nilai Ekspor per Sektor"
+    pad:
+      subject_id: "pad"
+      description: "Pendapatan Asli Daerah"
+    pdrb:
+      subject_id: "pdrb"
+      description: "Produk Domestik Regional Bruto"
+
+# Output settings
+output:
+  dir: "output"
+  formats: ["csv", "json", "xlsx"]
+  encoding: "utf-8-sig"
+  
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

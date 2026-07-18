@@ -1,0 +1,38 @@
+[
+  {
+    "priority": 1,
+    "source": "repo_existing",
+    "label": "Dataset dan dokumen repo yang sudah ada",
+    "purpose": "Baseline entitas smelter, izin, dan kawasan"
+  },
+  {
+    "priority": 2,
+    "source": "amdal_and_technical_docs",
+    "label": "AMDAL, lampiran teknis, audit lingkungan, dokumen perusahaan",
+    "purpose": "Bukti langsung fasilitas logistik"
+  },
+  {
+    "priority": 3,
+    "source": "esdm_cgs_gem",
+    "label": "ESDM, CGS, GEM, dan sumber smelter yang sudah dipakai repo",
+    "purpose": "Validasi entitas dan relasi industri"
+  },
+  {
+    "priority": 4,
+    "source": "bps_port_exports",
+    "label": "BPS ekspor per pelabuhan",
+    "purpose": "Validasi aktivitas logistik dan arus ekspor"
+  },
+  {
+    "priority": 5,
+    "source": "official_geospatial",
+    "label": "Geoportal atau peta resmi",
+    "purpose": "Verifikasi lokasi dan bentuk fasilitas"
+  },
+  {
+    "priority": 6,
+    "source": "news_and_osint",
+    "label": "Berita, siaran pers, dan OSINT",
+    "purpose": "Lead tambahan, bukan bukti tunggal utama"
+  }
+]

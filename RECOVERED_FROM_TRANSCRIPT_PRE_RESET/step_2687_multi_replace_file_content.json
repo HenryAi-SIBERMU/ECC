@@ -1,0 +1,44 @@
+{
+  "Description": "Removing icons from metric labels and adding new data expanders.",
+  "Instruction": "Remove emojis from metric labels and add two new data expanders for sulawesi_kawasan_nikel_luas.csv and sulawesi_izin_baru_per_tahun.csv.",
+  "ReplacementChunks": [
+    {
+      "AllowMultiple": false,
+      "EndLine": 186,
+      "ReplacementContent": "        <div>\n            <div class=\"metric-label\">Indeks Kualitas Air (2023)</div>\n            <div class=\"metric-value\" style=\"color: #D32F2F;\">{mean_ika_2023:.1f} <span style=\"font-size:1rem;\">Poin</span></div>",
+      "StartLine": 183,
+      "TargetContent": "        <div>\n            <div class=\"metric-label\">\ud83d\udca7 Indeks Kualitas Air (2023)</div>\n            <div class=\"metric-value\" style=\"color: #D32F2F;\">{mean_ika_2023:.1f} <span style=\"font-size:1rem;\">Poin</span></div>"
+    },
+    {
+      "AllowMultiple": false,
+      "EndLine": 197,
+      "ReplacementContent": "        <div>\n            <div class=\"metric-label\">Indeks Kualitas Udara (2023)</div>\n            <div class=\"metric-value\" style=\"color: #F57C00;\">{mean_iku_2023:.1f} <span style=\"font-size:1rem;\">Poin</span></div>",
+      "StartLine": 194,
+      "TargetContent": "        <div>\n            <div class=\"metric-label\">\ud83d\udca8 Indeks Kualitas Udara (2023)</div>\n            <div class=\"metric-value\" style=\"color: #F57C00;\">{mean_iku_2023:.1f} <span style=\"font-size:1rem;\">Poin</span></div>"
+    },
+    {
+      "AllowMultiple": false,
+      "EndLine": 208,
+      "ReplacementContent": "        <div>\n            <div class=\"metric-label\">Timbulan Limbah B3</div>\n            <div class=\"metric-value\" style=\"color: #D32F2F;\">{tot_limbah_b3_juta:,.1f} <span style=\"font-size:1rem;\">Jt Ton</span></div>",
+      "StartLine": 205,
+      "TargetContent": "        <div>\n            <div class=\"metric-label\">\u2622\ufe0f Timbulan Limbah B3</div>\n            <div class=\"metric-value\" style=\"color: #D32F2F;\">{tot_limbah_b3_juta:,.1f} <span style=\"font-size:1rem;\">Jt Ton</span></div>"
+    },
+    {
+      "AllowMultiple": false,
+      "EndLine": 219,
+      "ReplacementContent": "        <div>\n            <div class=\"metric-label\">Konversi Deforestasi</div>\n            <div class=\"metric-value\" style=\"color: #F57C00;\">{tot_deforestasi:,.0f} <span style=\"font-size:1rem;\">Ha</span></div>",
+      "StartLine": 216,
+      "TargetContent": "        <div>\n            <div class=\"metric-label\">\ud83c\udf33 Konversi Deforestasi</div>\n            <div class=\"metric-value\" style=\"color: #F57C00;\">{tot_deforestasi:,.0f} <span style=\"font-size:1rem;\">Ha</span></div>"
+    },
+    {
+      "AllowMultiple": false,
+      "EndLine": 1093,
+      "ReplacementContent": "    st.dataframe(df_labeled_disp[cols_labeled_23], use_container_width=True, hide_index=True)\n    st.caption(\"\ud83d\udcc1 **Sumber File:** `sulawesi_kawasan_nikel_luas.csv` & `sulawesi_gfw_master_1_dekade_2014_2023.csv`\")\n\nwith st.expander(\"Lihat Data Mentah: Luas Kawasan Industri Nikel\", expanded=False):\n    df_luas_disp = df_luas.copy()\n    if 'Kutipan' not in df_luas_disp.columns:\n        df_luas_disp['Kutipan'] = \"Obral izin tambang secara masif meningkatkan ekspansi spasial kawasan nikel di Sulawesi.\"\n    if 'Halaman' not in df_luas_disp.columns:\n        df_luas_disp['Halaman'] = \"Hal. 18-20 (Riset-Final-WALHI)\"\n    st.dataframe(df_luas_disp, use_container_width=True, hide_index=True)\n    st.caption(\"\ud83d\udcc1 **Sumber File:** `data/processed/sulawesi_kawasan_nikel_luas.csv`\")\n\nwith st.expander(\"Lihat Data Mentah: Izin Baru per Tahun\", expanded=False):\n    df_izin_baru = pd.read_csv('data/processed/sulawesi_izin_baru_per_tahun.csv')\n    if 'Kutipan' not in df_izin_baru.columns:\n        df_izin_baru['Kutipan'] = \"Lonjakan izin baru sering mengabaikan prinsip-prinsip konservasi dan persetujuan masyarakat adat.\"\n    if 'Halaman' not in df_izin_baru.columns:\n        df_izin_baru['Halaman'] = \"Hal. 31-33 (POLICY-PAPER-SULAWESI)\"\n    st.dataframe(df_izin_baru, use_container_width=True, hide_index=True)\n    st.caption(\"\ud83d\udcc1 **Sumber File:** `data/processed/sulawesi_izin_baru_per_tahun.csv`\")",
+      "StartLine": 1091,
+      "TargetContent": "    st.dataframe(df_labeled_disp[cols_labeled_23], use_container_width=True, hide_index=True)\n    st.caption(\"\ud83d\udcc1 **Sumber File:** `sulawesi_kawasan_nikel_luas.csv` & `sulawesi_gfw_master_1_dekade_2014_2023.csv`\")\n"
+    }
+  ],
+  "TargetFile": "C:\\Users\\yooma\\OneDrive\\Desktop\\duniahub\\client\\4. Celios2\\pages\\2_Kualitas_Lingkungan.py",
+  "toolAction": "Multi-replace file content in 2_Kualitas_Lingkungan.py",
+  "toolSummary": "Multi-replace file content in 2_Kualitas_Lingkungan.py"
+}

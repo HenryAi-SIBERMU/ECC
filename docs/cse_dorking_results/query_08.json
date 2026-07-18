@@ -1,0 +1,65 @@
+{
+  "query": "\"SLHI 2016\" filetype:pdf",
+  "results": [
+    {
+      "kind": "customsearch#result",
+      "title": "Statistik Lingkungan hidup indonesia - Neliti",
+      "htmlTitle": "Statistik Lingkungan hidup indonesia - Neliti",
+      "link": "https://media.neliti.com/media/publications/48275-ID-statistik-lingkungan-hidup-indonesia-2016.pdf",
+      "displayLink": "media.neliti.com",
+      "snippet": "Publikasi Statistik Lingkungan Hidup Indonesia (SLHI) 2016 adalah hasil kompilasi data primer dan sekunder mengenai kondisi lingkungan di Indonesia.",
+      "htmlSnippet": "Publikasi Statistik Lingkungan Hidup Indonesia (<b>SLHI) 2016</b> adalah hasil kompilasi data primer dan sekunder mengenai kondisi lingkungan di Indonesia.",
+      "formattedUrl": "https://media.neliti.com/.../48275-ID-statistik-lingkungan-hidup-indonesia-...",
+      "htmlFormattedUrl": "https://media.neliti.com/.../48275-ID-statistik-lingkungan-hidup-indonesia-...",
+      "pagemap": {
+        "cse_thumbnail": [
+          {
+            "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgKA5BqRsDF0VDKtOyKmtwF_Oa1o6iUjOHYVFvdWq4edKef-SGFiMXgN4&s",
+            "width": "188",
+            "height": "268"
+          }
+        ],
+        "metatags": [
+          {
+            "moddate": "D:20161219133000+07'00'",
+            "creationdate": "D:20161214162244+07'00'",
+            "creator": "Adobe Acrobat Pro 10.1.2",
+            "producer": "Adobe PDF Library 9.9"
+          }
+        ],
+        "cse_image": [
+          {
+            "src": "x-raw-image:///1ef0f55248949d3e6b7cb6888926890fc5d676984d0a9aaa78e123654c0d87b7"
+          }
+        ]
+      },
+      "mime": "application/pdf",
+      "fileFormat": "PDF/Adobe Acrobat"
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "HUBUNGAN PERTUMBUHAN PENDUDUK DENGAN TUJUAN ...",
+      "htmlTitle": "HUBUNGAN PERTUMBUHAN PENDUDUK DENGAN TUJUAN ...",
+      "link": "https://jurnal.usk.ac.id/EKaPI/article/viewFile/10017/7901",
+      "displayLink": "jurnal.usk.ac.id",
+      "snippet": "Nov 2, 2017 ... (SLHI; 2016). Sen Bin dan Alaunsavat,2016 mengemukakan Deforestasi yang disebabkan oleh ekspansi pertanian atau produksi kayu menciptakan ...",
+      "htmlSnippet": "Nov 2, 2017 <b>...</b> (<b>SLHI; 2016</b>). Sen Bin dan Alaunsavat,2016 mengemukakan Deforestasi yang disebabkan oleh ekspansi pertanian atau produksi kayu menciptakan&nbsp;...",
+      "formattedUrl": "https://jurnal.usk.ac.id/EKaPI/article/viewFile/10017/7901",
+      "htmlFormattedUrl": "https://jurnal.usk.ac.id/EKaPI/article/viewFile/10017/7901",
+      "pagemap": {
+        "metatags": [
+          {
+            "moddate": "D:20180124112913+07'00'",
+            "creator": "Microsoft® Word 2010",
+            "creationdate": "D:20180124112913+07'00'",
+            "author": "user-pc",
+            "producer": "Microsoft® Word 2010"
+          }
+        ]
+      },
+      "mime": "application/pdf",
+      "fileFormat": "PDF/Adobe Acrobat"
+    }
+  ],
+  "count": 2
+}

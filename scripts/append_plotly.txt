@@ -1,0 +1,90 @@
+# === Peta Jalur Distribusi Logistik (Plotly) ===
+import plotly.graph_objects as go
+
+st.markdown("#### 1.5 Peta Jalur Distribusi Logistik Nikel Sulawesi")
+
+MAP_ROUTES = [
+    # label, src_lon, src_lat, tgt_lon, tgt_lat, hex_color, text_pos
+    ("IMIP",         122.15, -2.82, 113.8, 22.8,  "rgb(230, 25, 25)",  "top right"),
+    ("GNI",          121.32, -1.91, 113.8, 22.8,  "rgb(255, 140, 0)",  "top center"),
+    ("VDNI/OSS",     122.42, -3.83, 113.8, 22.8,  "rgb(0, 112, 220)",  "middle right"),
+    ("ANTAM",        121.60, -4.18, 135.0, 35.0,  "rgb(0, 180, 80)",   "bottom center"),
+    ("PT Vale",      121.34, -2.56, 135.0, 35.0,  "rgb(180, 0, 200)",  "bottom left"),
+]
+
+fig = go.Figure()
+
+# Tambahkan trace untuk setiap rute smelter
+for label, slon, slat, tlon, tlat, color, pos in MAP_ROUTES:
+    fig.add_trace(go.Scattergeo(
+        lon = [slon, tlon],
+        lat = [slat, tlat],
+        mode = 'lines',
+        line = dict(width = 3.5, color = color),
+        name = label,
+        hoverinfo = 'skip',
+        showlegend = True
+    ))
+
+# Trace khusus untuk titik sumber (Sulawesi) dengan notasi PT
+src_lons = [r[1] for r in MAP_ROUTES]
+src_lats = [r[2] for r in MAP_ROUTES]
+src_labels = [r[0] for r in MAP_ROUTES]
+src_colors = [r[5] for r in MAP_ROUTES]
+src_pos = [r[6] for r in MAP_ROUTES]
+
+fig.add_trace(go.Scattergeo(
+    lon = src_lons,
+    lat = src_lats,
+    mode = 'markers+text',
+    marker = dict(size = 9, color = src_colors, symbol='circle'),
+    text = src_labels,
+    textposition = src_pos,
+    textfont=dict(size=12, color="#111", family="Inter", weight="bold"),
+    name = "Smelter Sulawesi",
+    hoverinfo = 'text',
+    showlegend = False
+))
+
+# Tambahkan label destinasi utama
+fig.add_trace(go.Scattergeo(
+    lon = [113.8, 135.0],
+    lat = [22.8, 35.0],
+    mode = 'markers+text',
+    marker = dict(size = 14, color = 'rgba(50,50,50,0.8)', symbol='circle'),
+    text = ["China (Pasar Utama)", "Jepang/Korea"],
+    textposition=["middle left", "top center"],
+    textfont=dict(size=14, color="#111", family="Inter", weight="bold"),
+    name = "Destinasi",
+    hoverinfo='text',
+    showlegend=False
+))
+
+fig.update_layout(
+    geo = dict(
+        projection_type = "natural earth",
+        showland = True,
+        landcolor = "#f4f4f4",
+        countrycolor = "#d1d1d1",
+        showocean = True,
+        oceancolor = "#e8f4f8",
+        showcountries=True,
+        center = dict(lon=118, lat=15),
+        lataxis = dict(range=[-10, 45]),
+        # Widen the longitude span drastically to force a landscape mapping area
+        lonaxis = dict(range=[60, 175]) 
+    ),
+    margin = dict(l=0, r=0, t=10, b=0),
+    legend = dict(
+        orientation="h", 
+        yanchor="bottom", 
+        y=-0.15, 
+        xanchor="center", 
+        x=0.5, 
+        font=dict(size=14, family="Inter")
+    ),
+    # Decrease height to force Streamlit container to be landscape
+    height=450
+)
+
+st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})

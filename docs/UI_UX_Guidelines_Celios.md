@@ -1,0 +1,128 @@
+# Pedoman Desain UI/UX & Struktur Dashboard (Adaptasi CELIOS 5 - LEUI)
+
+Dokumen ini disusun ulang secara komprehensif berdasarkan struktur tingkat tinggi dari proyek referensi `Celios5-LEUI` (khususnya halaman `3_H1_Inconsistency_Risk.py`). Pedoman ini bersifat **mengikat dan wajib diterapkan** pada seluruh rancangan visualisasi *Page 1* dan seterusnya pada proyek Studi D3TLH.
+
+---
+
+## 1. Aturan Emas: Pure Data-Driven (NO MOCK DATA)
+Seluruh narasi, perhitungan persentase (*growth*, rasio, proporsi), dan status (AWAS/AMAN) **WAJIB** dikalkulasi langsung secara dinamis dari file CSV mentah (folder `data/processed/`). 
+*   **Dilarang keras** melakukan *hardcode* angka statistik pada teks narasi. 
+*   Gunakan variabel Python (contoh: `{top5_share:.1f}%`, `{total_smelter:,}`) yang diinjeksi ke dalam teks narasi menggunakan `f-string` atau `.format()`.
+
+---
+
+## 2. Struktur Bab & Sub-Bab (Hierarki H1, H2, H3)
+Setiap halaman tidak boleh sekadar meletakkan grafik secara acak. Halaman harus dibagi menjadi *layer* pemikiran yang terstruktur:
+*   **Separator Header Utama:** Menggunakan garis putus-putus atau blok pemisah (contoh: `# ════════════ LAYER X: VARIABEL PENYEBAB ════════════`).
+*   **Penomoran Sub-Bab:** Wajib konsisten. 
+    *   `st.subheader("1. Fakta Penyebab: Ekspansi Industri dan Izin")`
+    *   `st.subheader("1.1 Tren Pertumbuhan Izin Tambang Baru (Crosstab 1)")`
+    *   `st.subheader("1.2 Agresivitas Ekspansi Smelter vs Luas Lahan (Crosstab 2)")`
+*   **Struktur Crosstab:** Setiap matriks *Crosstab* dari *outline* riset (misal: Jumlah Izin vs Tahun) harus mewakili satu Sub-Bab tersendiri.
+
+---
+
+## 3. Tag Metode (Method Tag)
+Tepat di bawah setiap judul Sub-Bab, **wajib** mencantumkan *Tag Metode* berupa blok `HTML <span>` kecil dengan latar belakang warna khusus untuk menjelaskan *proxy* atau variabel metode yang digunakan.
+*   **Contoh:** 
+    ```python
+    st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Crosstabulation Pertumbuhan Izin per Provinsi (Variabel X1)</span>', unsafe_allow_html=True)
+    ```
+
+---
+
+## 4. Narasi Storytelling, Advokasi, dan Kritis
+Proyek Celios sangat mengedepankan narasi riset advokasi. Grafik tidak boleh dibiarkan berbicara sendiri.
+*   **Judul Halaman (Main Title):** **Dilarang** menggunakan awalan penomoran seperti "Page 1:" atau "Page 2:" di dalam UI. Langsung gunakan judul substantifnya (contoh: "Ekspansi Industri Ekstraktif").
+*   **Struktur Header Eksekutif:** Di bagian atas setiap halaman analisis penting, wajib menggunakan urutan **Dropdown Metodologi**, **Hero Statement**, lalu **Bento Cards**.
+    1.  **Dropdown Metodologi (`st.expander`):** Tepat di bawah sub-judul, wajib diletakkan `st.expander("ℹ️ Metodologi: [Nama Pengujian]")` yang menguraikan kerangka kerja halaman tersebut.
+        *   **Struktur Isi Wajib (Hierarchical Bullet Points):**
+            *   **Kalimat Pembuka:** Penjelasan tebal (*bold*) mengenai pendekatan utama (contoh: `**Metode Analisis:** Halaman ini menggunakan...`).
+            *   **1. Penjelasan Model/Pengujian (Penting!):** 
+                *   **Untuk Uji Statistik (misal: Crosstabulation/Chi-Square):** WAJIB menjabarkan rincian teknis seperti *Binning*, `H0 (Null Hypothesis)`, dan `Decision Rule`. Gunakan Markdown *Code Blocks* (backticks).
+                *   **Untuk Analisis Deskriptif/Tren/Spasial:** DILARANG KERAS menggunakan istilah `H0` atau `Decision Rule`. Sebagai gantinya, gunakan terminologi **Pemodelan Matematis/Analitik** (contoh: *Kuantifikasi Kesenjangan*, *Evaluasi Dominasi*, *Textual Pattern Matching*, *Pemetaan Kausalitas*).
+            *   **2. Kalkulasi/Formula Pengolahan:** Tulis rumus matematis pengolahan (contoh: `Kapasitas Kumulatif = Σ(MW_t)` atau rumus Regresi) menggunakan format Markdown *Code Blocks*.
+            *   **3. Variabel & Fitur Data:** Dilarang keras hanya menulis ringkasan. **WAJIB membongkar dan menuliskan seluruh nama variabel/kolom data mentah** (seperti *Capacity (MW), Owner, Laju_Deforestasi_Ha*) yang ada di dalam dataset CSV. Kelompokkan dengan jelas (misal: Variabel Independen/X dan Dependen/Y).
+            *   **4. Dataset & File:** Cantumkan nama sumber institusi dan *path* file CSV murni di dalam Markdown *Code Blocks* (contoh: `data/processed/sulawesi_pltu_captive.csv`).
+    2.  **Hero Statement / Deskripsi Kritis Analitik (Paragraf Narasi Kritis Utama):** Ini adalah teks pengantar (tanpa kotak aksen/warna terang, cukup *background* transparan) yang **WAJIB diletakkan tepat di bawah Tag Metode atau Dropdown Metodologi (sebelum pemilih/dropdown data dan sebelum grafik)**. Paragraf ini **WAJIB** dibangun sebagai sebuah *storytelling* jurnalistik-kritis yang panjang (minimal 250 kata) dan *data-driven*. Narasi ini harus mengekstrak angka mutlak dari agregasi awal (menggunakan Python `f-strings`), menyebut langsung total kasus/kerusakan secara eksplisit, dan menarik kesimpulan kausalitas yang membantah narasi arus utama (misalnya "Membantah Hilirisasi Hijau").
+    3.  **Bento Cards (Grid Kartu Metrik Agregat):** Letakkan tepat di bawah Hero Statement dalam bentuk grid (contoh: 2 baris x 3 kolom).
+        *   *Kewajiban Bento Cards:* **Setiap kartu WAJIB memiliki deskripsi naratif** yang menjelaskan konteks/arti angka tersebut di dalam kartunya.
+        *   *Atribusi Sumber File:* **WAJIB mencantumkan institusi sumber beserta nama file CSV aslinya** di sudut bawah setiap kartu (contoh: `Sumber: Kementerian ESDM (Minerbaone) <br/> File: sulawesi_izin_baru.csv`). **DILARANG keras menggunakan icon emoji** (seperti 📁). Semua angka wajib murni *data-driven* tanpa *hardcode*.
+*   **Kotak Interpretasi/Pembedahan Realitas Ekologis (Card di Bawah Grafik):** Di bawah setiap visualisasi (grafik) atau tabel eksekutif, sediakan ringkasan narasi spesifik mengenai grafik tersebut.
+    *   *Standar Ketajaman Narasi:* Berbeda dengan versi pedoman sebelumnya, kotak ini **TIDAK PERLU** berisi narasi panjang 250 kata. Kotak Interpretasi Ekologis di bawah grafik cukup berisi **1-2 paragraf pendek** yang merangkum dinamika spesifik data yang sedang ditampilkan (misal: membandingkan angka variabel yang dipilih melalui dropdown).
+    *   *Praktik Wajib:* Jika ingin menggunakan kotak antarmuka bergaya kartu peringatan namun **TANPA IKON** (agar terlihat lebih bersih/minimalis dari bawaan `st.error`), Anda **WAJIB** menggunakan elemen kustom HTML (`<div>`) dengan `unsafe_allow_html=True`.
+    *   *Peringatan Rendering (Sangat Penting):* Saat teks diletakkan di dalam `<div>`, Streamlit tidak akan mem- *parsing* sintaks Markdown. Oleh karena itu, Anda **DILARANG KERAS** menggunakan Markdown seperti `**tebal**`. Gunakan secara murni tag HTML seperti `<b>tebal</b>`, `<i>miring</i>`, dan `<br>` untuk spasi paragraf. Jika tidak mematuhi ini, sintaks bintang akan bocor ke tampilan UI.
+    *   **Format Wajib Kotak Interpretasi (Style Code):** Kotak harus menggunakan `border: 1px solid #333`, `background-color: #12161F`, tulisan warna abu-abu `#B0BEC5`. Untuk menampilkan formula, WAJIB menggunakan `<code style="...">` yang merender formula persis seperti block kode Streamlit.
+        *   **Contoh:**
+            ```python
+            st.markdown('''
+            <div style="border: 1px solid #333; border-radius: 8px; padding: 16px; background-color: #12161F; margin-bottom: 20px;">
+                <p style="font-size: 0.9rem; color: #B0BEC5; margin-bottom: 10px;">
+                    <b>Sumber:</b> Metadata Izin Pertambangan Minerbaone, Kementerian ESDM (diolah CELIOS). Grafik kombinasi (bar dan garis) di atas memvisualisasikan "Lonjakan Penerbitan Izin Tambang Sulawesi (2014-2024)".
+                </p>
+                <p style="font-size: 0.9rem; color: #B0BEC5; margin-bottom: 10px;">
+                    Data diproses menggunakan pendekatan <i>Time-Series Analysis</i> dan Agregasi Spasial-Temporal. Data dihitung dengan mengekstraksi jumlah entitas Izin Usaha Pertambangan (IUP) baru per tahun lalu dikelompokkan berdasarkan dimensi provinsi pembentuknya. Untuk mengukur anomali eskalasi, persentase lonjakan dihitung menggunakan persamaan regresi komparatif <i>Year-on-Year</i> (YoY):
+                </p>
+                <code style="background-color: rgba(255,255,255,0.05); color: #E2E8F0; padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; font-family: monospace; display: inline-block;">Persentase Kenaikan = ((IUP_t - IUP_t-n) / IUP_t-n) * 100%</code>
+            </div>
+            ''', unsafe_allow_html=True)
+            ```
+
+---
+
+## 5. Dropdown Sumber Tabel Setiap Visualisasi (Data Transparency)
+Sebagai bentuk transparansi *data-driven*, tepat di bawah **SETIAP** analisis visual (baik itu Peta, Bar Chart, Area Chart, Scatter Plot, maupun Uji SPSS), **wajib** disediakan tombol *dropdown/expander* yang berisi tabel data mentah (*dataframe*) pembentuk visualisasi tersebut secara berdampingan.
+*   **Format Wajib:**
+    ```python
+    with st.expander("Lihat Data Mentah: [Nama Tabel Data]", expanded=False):
+        st.dataframe(df_nama_data, use_container_width=True, hide_index=True)
+        st.caption("📁 **Sumber File:** `data/processed/nama_file.csv` - [Keterangan singkat isi data]")
+    ```
+*   Sumber file (`📁 Sumber:`) juga boleh dipasang di bawah paragraf narasi pengantar dengan ukuran teks `<small>`.
+
+---
+
+## 6. Gaya Desain Visualisasi (Altair / Plotly)
+*   **Judul Grafik Internal Wajib (Internal Chart Title):** Setiap pembuatan grafik (Altair/Plotly) **WAJIB** menyertakan judul langsung di dalam konfigurasi grafiknya (misal: menggunakan `title=alt.TitleParams(text="...", color='#ECEFF1', anchor='start')` pada Altair atau `title=...` pada Plotly). Dilarang hanya mengandalkan `st.markdown` sebagai judul di atas grafik, agar ketika grafik diekspor/diunduh, konteks dan judul tetap terbawa utuh.
+*   **Konsistensi Tema Halaman (Header & Badge):** Seluruh halaman aplikasi (Hero Section) **WAJIB** menggunakan palet warna hijau khas CELIOS secara konsisten untuk judul dan *badge*. **DILARANG** menggunakan warna biru atau tema lain untuk header agar identitas *brand* terjaga.
+    *   `.org-badge`: `linear-gradient(135deg, #1B5E20, #2E7D32);`
+    *   `.main-title`: `linear-gradient(135deg, #43A047, #66BB6A, #81C784);`
+*   **Tema Utama:** Gelap Premium (*Dark Mode*). Hindari tampilan *default* bawaan yang terlalu mencolok.
+*   **Anotasi (Callouts):** Sangat disarankan menambahkan anotasi teks/tanda panah langsung di dalam grafik untuk menunjuk "Puncak Lonjakan" atau "Titik Anomali". **DILARANG** menggunakan teks interpretasi statis yang emosional. **WAJIB** menggunakan kalkulasi data dinamis yang murni empiris, contoh: menghitung persentase lonjakan langsung dari DataFrame (`↑ 235% Kenaikan (2022-2024)`).
+*   **Palet Warna (Minimalist Professional Flat):** **DILARANG KERAS** menggunakan warna pelangi (*rainbow*) atau warna cerah yang terlalu *vibrant/bright*. Gaya visualisasi harus berwibawa menyerupai laporan jurnal *Think-Tank* internasional atau *dashboard* intelijen korporat:
+    *   Gunakan warna *flat/muted* (redup namun tegas).
+    *   **Data Baseline/Konteks/Lainnya:** Gunakan gradasi *Slate Grey* atau *Blue Grey* (contoh: `#37474F`, `#546E7A`, `#78909C`, `#90A4AE`).
+    *   **Data Kritis/Bahaya (Highlight Utama):** Gunakan *Muted Red* (contoh: `#D32F2F`) atau *Muted Orange* (contoh: `#F57C00`) secara spesifik untuk menyorot anomali, kerusakan lingkungan, atau monopoli ruang (zona tumbal).
+*   **Elemen Kosmetik UI Chart:** Disarankan untuk menyamarkan garis *grid* (atur *gridOpacity* di angka 0.1 atau 0.05) agar latar belakang grafik terlihat bersih (*clean*). Warnai teks *axis* maupun *legend* dengan abu-abu netral (contoh: `#B0BEC5` atau `#ECEFF1`).
+*   **Time-Series Area Chart (Gaya OWID):** Untuk menyoroti tren kenaikan kumulatif atau eksponensial dari waktu ke waktu, gunakan *Stacked Area Chart* dengan *range slider* di bawahnya (meniru gaya *Our World in Data*). Pada sumbu X yang memuat data Tahun, resolusi harus dijaga agar tidak berdempetan (`dtick=2`) dan **WAJIB** menghilangkan format pemisah ribuan menggunakan format resolusi `tickformat='d'` (Plotly) atau yang setara pada Altair agar "2,020" tampil menjadi "2020".
+
+## 7. Analisis Statistik (SPSS Style Crosstab)
+Jika riset membutuhkan pengujian hipotesis bivariat (seperti Chi-Square Test), UI wajib dirender menyerupai layar *output* perangkat lunak statistik standar (SPSS/Stata):
+*   **Case Processing Summary:** Menampilkan hitungan N (Valid/Missing).
+*   **Crosstabulation Table:** Matriks baris/kolom bertingkat (`Count` dan `Expected Count`) dengan Multi-Index DataFrame.
+*   **Chi-Square Tests Table:** Menampilkan Nilai *Pearson Chi-Square*, *Likelihood Ratio*, dan `P-Value` (Asymp. Sig).
+*   **Dynamic Hypothesis Card:** Menyediakan *Card UI* bersyarat. Jika P-Value < 0.05, warna border hijau menyala. Jika P-Value ≥ 0.05, warna border merah menyala. **Narasi interpretasi WAJIB responsif** terhadap perubahan ini.
+
+## 8. Dropdown Metodologi & Tag Metode (Methodology Transparency)
+Untuk memastikan transparansi dan kejelasan argumen akademis, **SETIAP** sub-bab analisis utama **WAJIB** menyertakan informasi metodologi dengan urutan hierarki yang sangat ketat tepat di bawah judul sub-bab (`st.subheader`):
+
+1.  **Tag Metode (Method Tag):**
+    Diwajibkan menggunakan elemen `<span>` kustom untuk memberikan *highlight* visual jenis metode utama sebelum teks narasi dimulai. Dilarang keras menggunakan teks markdown biasa.
+    *   **Format Wajib:**
+        ```python
+        st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: [Nama Metode Singkat]</span>', unsafe_allow_html=True)
+        st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+        ```
+2.  **Dropdown Metodologi Detail (Expander):**
+    Tepat di bawah Tag Metode, wajib disediakan *expander* yang membedah anatomi pengujian statistik atau spasial yang digunakan. Konten dalam *expander* ini **TIDAK BOLEH** hanya sekadar teks narasi umum, melainkan **WAJIB** mendokumentasikan parameter kuantitatif secara eksak:
+    *   **Metode Analisis:** Penjelasan rasionalitas pemilihan metode (misal: Descriptive Spatial Analysis, Chi-Square).
+    *   **Model Parameter / Pengujian:** Penjelasan teknis konversi variabel atau langkah kuantifikasi.
+    *   **Kaidah Pengujian:** 
+        *   **Jika Uji Statistik:** Tuliskan formal `H0 (Null Hypothesis)` dan *Decision Rule* (misal: "Alpha 5%. Jika P-Value < 0.05, Tolak H0").
+        *   **Jika Uji Non-Statistik (Deskriptif/Tren/Spasial):** Tuliskan abstraksi matematisnya (contoh: "Pemetaan Kausalitas: Membedah asimetri penguasaan ruang"). **DILARANG KERAS memakai `H0` atau `Decision Rule`.**
+    *   **Identifikasi Variabel:** Pemetaan tegas mana Variabel Independen (X) dan Variabel Dependen (Y).
+    *   **Daftar Dataset:** Pencantuman spesifik letak dan nama *file raw/processed* yang dibaca (path `.csv`).
+
+---
+**Kesimpulan Implementasi untuk Page 1:**
+Saat *coding* Page 1 (Ekspansi Industri), tiap sub-bab akan diawali dengan judul yang mengalir (tanpa mencantumkan label nama kode kaku seperti "(Crosstab 1)" di *subheader*), **wajib diikuti Tag Metode dan Dropdown Metodologi detail**, kemudian teks narasi kritis (*Data-driven* Python `f-strings`), grafik dengan anotasi, matriks Crosstabulation SPSS (jika relevan), blok Interpretasi, dan ditutup dengan `st.expander` berisi data CSV murni (seperti `sulawesi_izin_baru_per_tahun.csv` dan `sulawesi_esdm_nikel.csv`).

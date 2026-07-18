@@ -1,0 +1,44 @@
+[
+  {
+    "priority_tier": 1,
+    "wilayah": "Morowali",
+    "provinsi": "Sulawesi Tengah",
+    "alasan": "Konsentrasi smelter dan kawasan industri tertinggi"
+  },
+  {
+    "priority_tier": 1,
+    "wilayah": "Morowali Utara",
+    "provinsi": "Sulawesi Tengah",
+    "alasan": "Terkait rantai pasok nikel dan pesisir industri"
+  },
+  {
+    "priority_tier": 1,
+    "wilayah": "Konawe",
+    "provinsi": "Sulawesi Tenggara",
+    "alasan": "Relevan untuk smelter, pelabuhan, dan suplai"
+  },
+  {
+    "priority_tier": 1,
+    "wilayah": "Konawe Utara",
+    "provinsi": "Sulawesi Tenggara",
+    "alasan": "Potensial kuat untuk simpul logistik pesisir"
+  },
+  {
+    "priority_tier": 2,
+    "wilayah": "Kolaka",
+    "provinsi": "Sulawesi Tenggara",
+    "alasan": "Pusat historis nikel dan ekspor"
+  },
+  {
+    "priority_tier": 2,
+    "wilayah": "Kolaka Timur",
+    "provinsi": "Sulawesi Tenggara",
+    "alasan": "Perlu cek kaitan ke tambang dan pengapalan"
+  },
+  {
+    "priority_tier": 2,
+    "wilayah": "Luwu Timur",
+    "provinsi": "Sulawesi Selatan",
+    "alasan": "Penting untuk pola logistik Sulawesi Selatan"
+  }
+]

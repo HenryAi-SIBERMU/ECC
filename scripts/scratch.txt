@@ -1,0 +1,98 @@
+18: st.markdown(
+134: st.markdown(
+138: st.markdown(
+142: st.markdown(
+149: st.markdown("""
+164: st.markdown(
+182: st.markdown(
+197: st.markdown(
+212: st.markdown(
+226: st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
+230: st.markdown(
+245: st.markdown(
+260: st.markdown(
+274: st.markdown("<br><br>", unsafe_allow_html=True)
+279: st.markdown("---")
+280: st.subheader("3.1 Ketimpangan Beban Penyakit: Sentra Industri vs Non-Sentra")
+281: st.markdown(
+349: st.markdown(f"""
+363: st.markdown(
+375: st.markdown("---")
+376: st.markdown(
+380: st.markdown(
+440: st.markdown("<br>", unsafe_allow_html=True)
+449: st.markdown(f"""
+465: st.markdown("---")
+466: st.markdown(
+470: st.markdown(
+475: st.markdown("""
+502: st.markdown("<div style='height:30px;'></div>", unsafe_allow_html=True)
+560: st.markdown("#### Pembuktian Statistik: Penurunan Kualitas Udara vs Ledakan Penyakit")
+561: st.markdown("""
+588: st.markdown("##### Variabel Independen (X) - Faktor Lingkungan & Spasial")
+600: st.markdown("##### Variabel Dependen (Y) - Dampak Kesehatan")
+646: st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+647: st.markdown("### Detail Uji Statistik (Chi-Square & Odds Ratio)")
+653: st.markdown("##### Case Processing Summary")
+674: st.markdown(f"##### {interaction_label} Crosstabulation")
+697: st.markdown("##### Chi-Square Tests")
+720: st.markdown(f"**{interaction_label}**")
+724: st.markdown("### Ringkasan Uji Hipotesis")
+741: st.markdown(
+754: st.markdown(f"**Odds Ratio (Risk Estimate):** `{odds_ratio:.3f}`")
+762: st.markdown(
+773: st.markdown("---")
+774: st.markdown("### Ringkasan Eksekutif Seluruh Skenario Crosstab")
+775: st.markdown(
+854: st.markdown(
+882: st.markdown("---")
+883: st.markdown(
+887: st.markdown(
+892: st.markdown("""
+1032: st.markdown(
+1046: st.markdown(
+1069: st.markdown("---")
+1070: st.markdown(
+1074: st.markdown(
+1079: st.markdown("""
+1111: st.markdown("#### Korelasi Langsung: Penurunan IKA vs Lonjakan Diare")
+1259: st.markdown(
+1270: st.markdown("#### Uji Statistik: Asosiasi IKA Rendah dengan Ledakan Diare")
+1271: st.markdown("""
+1280: st.markdown("##### Variabel Independen (X) - Faktor Lingkungan")
+1290: st.markdown("##### Variabel Dependen (Y) - Dampak Kesehatan")
+1299: st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+1300: st.markdown("### Detail Uji Statistik (Chi-Square & Odds Ratio)")
+1334: st.markdown("##### Case Processing Summary")
+1357: st.markdown(f"##### {interaction_label_ika} Crosstabulation")
+1384: st.markdown("##### Chi-Square Tests")
+1411: st.markdown(f"**{interaction_label_ika}**")
+1415: st.markdown("### Ringkasan Uji Hipotesis")
+1436: st.markdown(
+1449: st.markdown(f"**Odds Ratio (Risk Estimate):** `{odds_ratio_ika:.3f}`")
+1457: st.markdown(
+1485: st.markdown("---")
+1486: st.markdown("### Ringkasan Eksekutif Seluruh Skenario Crosstab")
+1487: st.markdown(
+1566: st.markdown(
+1581: st.markdown("---")
+1582: st.markdown(
+1586: st.markdown(
+1591: st.markdown("""
+1640: st.markdown(
+1659: st.markdown("#### Distribusi Limbah B3 per Provinsi")
+1708: st.markdown(
+1721: st.markdown("#### Komposisi Limbah B3 Berdasarkan Jenis")
+1761: st.markdown(
+1776: st.markdown("#### Fasilitas Penghasil Limbah B3 Terbesar")
+1816: st.markdown("#### Kaitan dengan Beban Kesehatan Masyarakat")
+1818: st.markdown("""
+1841: st.markdown(
+1874: st.markdown("---")
+1875: st.markdown(
+1879: st.markdown(
+1934: st.markdown(
+1963: st.markdown("<div style='height:30px;'></div>", unsafe_allow_html=True)
+1969: st.markdown(
+2116: st.markdown("<br>", unsafe_allow_html=True)
+2169: st.markdown(

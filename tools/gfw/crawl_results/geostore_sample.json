@@ -1,0 +1,4 @@
+{
+  "status": "failed",
+  "message": "{\"errors\":[{\"status\":404,\"detail\":\"GeoStore not found\"}]}"
+}

@@ -1,0 +1,32 @@
+{
+  "tier_1": {
+    "label": "Bukti langsung",
+    "rule": "Sumber eksplisit menyebut nama fasilitas/proyek, fungsi, lokasi, dan kaitan dengan tambang/smelter/nikel.",
+    "allowed_for_main_narrative": true,
+    "allowed_language": [
+      "terkait langsung",
+      "digunakan untuk",
+      "berfungsi sebagai"
+    ]
+  },
+  "tier_2": {
+    "label": "Bukti tidak langsung kuat",
+    "rule": "Hubungan tidak ditulis penuh, tetapi cocok di operator, lokasi, fungsi, dan didukung lebih dari satu sumber.",
+    "allowed_for_main_narrative": true,
+    "allowed_language": [
+      "terindikasi terkait",
+      "sangat mungkin menopang",
+      "berkorelasi kuat dengan"
+    ]
+  },
+  "tier_3": {
+    "label": "Indikasi awal",
+    "rule": "Masih berupa lead OSINT atau referensi tunggal yang belum tervalidasi.",
+    "allowed_for_main_narrative": false,
+    "allowed_language": [
+      "masih perlu verifikasi",
+      "indikasi awal",
+      "belum cukup untuk klaim utama"
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+# GFW API Tools Dependencies
+
+requests>=2.31.0
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Optional: For enhanced features
+# gfwpy>=0.1.0  # Official GFW Python SDK (if available)

@@ -1,0 +1,31 @@
+{
+  "query": "\"Status Lingkungan Hidup Indonesia 2014\" filetype:pdf",
+  "results": [
+    {
+      "kind": "customsearch#result",
+      "title": "Achievement Of Indonesian Sustainable Development Using ...",
+      "htmlTitle": "Achievement Of Indonesian Sustainable Development Using ...",
+      "link": "https://penerbitadm.pubmedia.id/index.php/jurnalemak/article/download/2464/2524",
+      "displayLink": "penerbitadm.pubmedia.id",
+      "snippet": "May 21, 2025 ... Status lingkungan hidup Indonesia 2014. Retrieved from http://www.indonesia.go.id/../266-kementerian-environmental-life.html. Lele, S. (1991) ...",
+      "htmlSnippet": "May 21, 2025 <b>...</b> <b>Status lingkungan hidup Indonesia 2014</b>. Retrieved from http://www.indonesia.go.id/../266-kementerian-environmental-life.html. Lele, S. (1991)&nbsp;...",
+      "formattedUrl": "https://penerbitadm.pubmedia.id/index.php/jurnalemak/article/.../2524",
+      "htmlFormattedUrl": "https://penerbitadm.pubmedia.id/index.php/jurnalemak/article/.../2524",
+      "pagemap": {
+        "metatags": [
+          {
+            "moddate": "D:20250521201355+07'00'",
+            "creationdate": "D:20250521201355+07'00'",
+            "creator": "Microsoft® Word 2019",
+            "byte-checksum": "6a5dd8ca27132d3114ca042dc3fd626aedc7bd09533c55ffaefbe8fb26ab5d3b",
+            "author": "Aqilah Putri S",
+            "producer": "Microsoft® Word 2019"
+          }
+        ]
+      },
+      "mime": "application/pdf",
+      "fileFormat": "PDF/Adobe Acrobat"
+    }
+  ],
+  "count": 1
+}

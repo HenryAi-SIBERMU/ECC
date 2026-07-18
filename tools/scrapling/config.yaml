@@ -1,0 +1,51 @@
+# Scrapling Configuration
+# CELIOS ECC Intelligence System
+
+# TanahKita.id Scraper
+tanahkita:
+  base_url: "https://tanahkita.id/data/konflik"
+  delay: 0.8  # Delay antar request (detik) - sopan ke server
+  max_retries: 3
+  timeout: 30
+  rows_per_page: 10  # Default pagination (bisa coba diubah ke 50 atau 100)
+  user_agent: "CELIOS-ECC-Research/1.0 (Academic Research; Contact: research@celios.edu)"
+  
+  # Checkpoint settings
+  checkpoint_interval: 50  # Save checkpoint setiap N entries
+  
+  # Rate limiting
+  max_concurrent_requests: 1  # Hindari scrape parallel dulu
+  respect_robots_txt: true
+
+# SIPSN KLHK (future)
+sipsn:
+  base_url: "https://sipsn.menlhk.go.id"
+  enabled: false
+
+# BPS WebAPI (future)
+bps:
+  base_url: "https://webapi.bps.go.id"
+  api_key: ""  # Isi jika ada
+  enabled: false
+
+# MODI ESDM Portal
+modi:
+  base_url: "https://modi.esdm.go.id/portal"
+  delay: 1.5  # Delay antar request - JavaScript rendering needs more time
+  max_retries: 3
+  timeout: 45  # Longer timeout for JS rendering
+  rows_per_page: 10  # Entries per page (based on screenshots)
+  user_agent: "CELIOS-ECC-Research/1.0 (Academic Research; Contact: research@celios.edu)"
+  
+  # Checkpoint settings
+  checkpoint_interval: 100  # Save every 100 companies (larger dataset)
+  
+  # Rate limiting
+  max_concurrent_requests: 1
+  respect_robots_txt: true
+
+# Global settings
+global:
+  output_dir: "output"
+  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  save_html: false  # Debug: simpan raw HTML

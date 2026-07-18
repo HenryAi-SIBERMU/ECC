@@ -1,0 +1,14 @@
+{
+  "stage": "rev1_logistik_master",
+  "generated_at": "2026-06-26",
+  "master_dir": "data/raw/rev1_logistik/master",
+  "outputs": {
+    "cluster_dim_rows": 6,
+    "company_dim_rows": 345,
+    "company_cluster_bridge_rows": 422,
+    "permit_fact_rows": 270,
+    "power_unit_fact_rows": 115,
+    "export_fact_rows": 57,
+    "evidence_fact_rows": 25
+  }
+}

@@ -1,0 +1,148 @@
+﻿_logistik_simpul_nikel.csv</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+psn_count = len(df_logistik[df_logistik['psn_status'] == 'terkonfirmasi'])
+with c14_2:
+    st.markdown(f"""
+    <div class="metric-card">
+        <div>
+            <div class="metric-label">BERLABEL PROYEK STRATEGIS NASIONAL</div>
+            <div class="metric-value" style="color: #FFA726;">{psn_count} <span style="font-size:1rem;color:#777;">/ {len(df_logistik)}</span></div>
+            <div class="metric-desc">Label PSN mempercepat perizinan dan memudahkan pembebasan lahan warga sekitar.</div>
+        </div>
+        <div class="metric-source">Sumber: KPPIP, Perpres 58/2017, Perpres 12/2025</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c14_3:
+    st.markdown("""
+    <div class="metric-card">
+        <div>
+            <div class="metric-label">PELABUHAN TERBESAR</div>
+            <div class="metric-value" style="color: #42A5F5;">50.000 <span style="font-size:1rem;color:#777;">ton</span></div>
+            <div class="metric-desc">GNI Petasia memiliki pelabuhan yang mampu menampung kapal pengangkut berkapasitas hingga 50.000 ton.</div>
+        </div>
+        <div class="metric-source">Sumber: gunbusternickelindustry.com</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+# === Peta Jalur Distribusi Logistik (PyDeck) ===
+MAP_ROUTES = [
+    # label, src_lon, src_lat, tgt_lon, tgt_lat, hex_color, width
+    # Target China di-stagger sedikit agar 3 garis sejajar & terlihat warnanya
+    ("IMIP - Morowali",      122.15, -2.82, 113.0, 23.5,  [230, 25,  25],  6),
+    ("GNI - Morowali Utara", 121.32, -1.91, 113.8, 22.8,  [255, 140, 0],   5),
+    ("VDNI/OSS - Konawe",    122.42, -3.83, 114.6, 22.1,  [0,  112, 220],  5),
+    # Target Jepang/Korea di-stagger sedikit
+    ("ANTAM - Kolaka",       121.60, -4.18, 134.5, 34.5,  [0,  180, 80],   4),
+    ("PT Vale - Sorowako",   121.34, -2.56, 135.5, 35.5,  [180, 0,  200],  4),
+]
+
+# Build dataframes
+_routes, _dots = [], []
+for name, slon, slat, tlon, tlat, col, w in MAP_ROUTES:
+    _routes.append({"label": name, "src_lon": slon, "src_lat": slat,
+                    "tgt_lon": tlon, "tgt_lat": tlat, "color": col, "width": w})
+    # smelter dot (radius 15km)
+    _dots.append({"label": name, "lon": slon, "lat": slat, "color": col, "r": 15000})
+    # destination dot (radius 15km) - ditaruh tepat di ujung arc
+    _dots.append({"label": name.split("-")[0].strip() + " -> " + ("China" if tlon < 125 else "Jepang/Korea"),
+                  "lon": tlon, "lat": tlat, "color": col, "r": 15000})
+
+# Text labels ONLY for destinations to avoid clutter in static view
+_dest_labels = [
+    ("China\n(Pasar Utama)",  113.8, 24.8),
+    ("Jepang /\nKorea",       135.0, 37.0),
+]
+_text_rows = [{"txt": t, "lon": lo, "lat": la} for t, lo, la in _dest_labels]
+
+df_routes = pd.DataFrame(_routes)
+df_dots   = pd.DataFrame(_dots)
+df_text   = pd.DataFrame(_text_rows)
+
+arc_layer = pdk.Layer(
+    "ArcLayer",
+    data=df_routes,
+    get_source_position=["src_lon", "src_lat"],
+    get_target_position=["tgt_lon", "tgt_lat"],
+    get_source_color="color",
+    get_target_color="color",
+    get_width="width",
+    pickable=True,
+    auto_highlight=True,
+)
+
+dot_layer = pdk.Layer(
+    "ScatterplotLayer",
+    data=df_dots,
+    get_position=["lon", "lat"],
+    get_fill_color="color",
+    get_line_color=[255, 255, 255],
+    stroked=True,
+    line_width_min_pixels=1,
+    get_radius="r",
+    pickable=True,
+)
+
+text_layer = pdk.Layer(
+    "TextLayer",
+    data=df_text,
+    get_position=["lon", "lat"],
+    get_text="txt",
+    get_size=14,
+    get_color=[20, 20, 20],
+    get_background_color=[255, 255, 255, 210],
+    background_padding=[5, 3, 5, 3],
+    get_text_anchor="'middle'",
+    get_alignment_baseline="'center'",
+    pickable=False,
+)
+
+view_state = pdk.ViewState(
+    longitude=122.0,
+    latitude=12.0,
+    zoom=3.0,
+    pitch=0,
+    bearing=0,
+)
+
+r = pdk.Deck(
+    layers=[arc_layer, dot_layer, text_layer],
+    initial_view_state=view_state,
+    map_style="light",
+    tooltip={"html": "<b>{label}</b>"},
+)
+
+st.markdown("#### 1.5 Peta Jalur Distribusi Logistik Nikel Sulawesi")
+st.pydeck_chart(r, use_container_width=True, height=500)
+
+# Legend bawah peta
+st.markdown("""
+<div style="margin-top:10px; padding:12px 16px; background:rgba(0,0,0,0.04);
+            border-radius:8px; display:flex; flex-wrap:wrap; gap:18px; align-items:center;">
+  <span style="font-weight:600; font-size:0.95rem; margin-right:8px;">Jalur Smelter:</span>
+  <div style="display:flex; align-items:center; gap:6px;">
+    <div style="width:14px; height:14px; border-radius:50%; background:rgb(230,25,25);"></div>
+    <span style="font-size:0.9rem;">IMIP</span>
+  </div>
+  <div style="display:flex; align-items:center; gap:6px;">
+    <div style="width:14px; height:14px; border-radius:50%; background:rgb(255,140,0);"></div>
+    <span style="font-size:0.9rem;">GNI</span>
+  </div>
+  <div style="display:flex; align-items:center; gap:6px;">
+    <div style="width:14px; height:14px; border-radius:50%; background:rgb(0,112,220);"></div>
+    <span style="font-size:0.9rem;">VDNI/OSS</span>
+  </div>
+  <div style="display:flex; align-items:center; gap:6px;">
+    <div style="width:14px; height:14px; border-radius:50%; background:rgb(0,180,80);"></div>
+    <span style="font-size:0.9rem;">ANTAM</span>
+  </div>
+  <div style="display:flex; align-items:center; gap:6px;">
+    <div style="width:14px; height:14px; border-radius:50%; background:rgb(180,0,200);"></div>
+    <span style="font-size:0.9rem;">PT Vale</span>
+  </div>
+</div>
+""", unsafe_allow_html=True)

@@ -1,0 +1,12 @@
+{
+  "AllowMultiple": false,
+  "Description": "Fix the landing page route in Dashboard.py",
+  "EndLine": 2,
+  "Instruction": "Change the switch_page target from 'pages/1_Home.py' to 'pages/0_Overview_Temuan.py' since 1_Home.py doesn't exist in the pages directory.",
+  "ReplacementContent": "st.switch_page(\"pages/0_Overview_Temuan.py\")",
+  "StartLine": 2,
+  "TargetContent": "st.switch_page(\"pages/1_Home.py\")",
+  "TargetFile": "C:\\Users\\yooma\\OneDrive\\Desktop\\duniahub\\client\\4. Celios2\\Dashboard.py",
+  "toolAction": "Fix invalid page route",
+  "toolSummary": "Fix streamlit page route to an existing file"
+}

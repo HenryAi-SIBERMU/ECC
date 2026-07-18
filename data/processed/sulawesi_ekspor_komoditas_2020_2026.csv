@@ -1,0 +1,513 @@
+kode_hs,deskripsi,tahun,nilai_usd,Sumber
+3023200,Yellowfin tunas (thunnus albacares) fresh or chilled,2024,51148.0,data/raw/eksporimpor/
+3028918,Mangrove red snappers (lutjanus argentimaculatus) fresh or chilled,2024,106850.0,data/raw/eksporimpor/
+3034100,Albacore or longfinned tunas (thunnus alalunga) frozen,2023,5175.0,data/raw/eksporimpor/
+3034100,Albacore or longfinned tunas (thunnus alalunga) frozen,2024,12471.0,data/raw/eksporimpor/
+3034200,Yellowfin tunas (Thunnus albacares) frozen excluding fish fillets,2020,17864.93,data/raw/eksporimpor/
+3034200,Yellowfin tunas (Thunnus albacares) frozen excluding fish fillets,2021,1526955.01,data/raw/eksporimpor/
+3034200,Yellowfin tunas (thunnus albacares) frozen,2023,10512239.81,data/raw/eksporimpor/
+3034200,Yellowfin tunas (thunnus albacares) frozen,2024,7542640.350000001,data/raw/eksporimpor/
+3034200,Yellowfin tunas (thunnus albacares) frozen,2026,1452719.59,data/raw/eksporimpor/
+3034300,Skipjack or stripe-bellied bonito frozen excluding fish fillets,2020,33374.85,data/raw/eksporimpor/
+3034300,Skipjack tuna (stripe-bellied bonito) (katsuwonus pelamis) frozen,2024,360932.33,data/raw/eksporimpor/
+3035410,Mackerel (scomber scombrus scomber australasicus) frozen,2023,14840.18,data/raw/eksporimpor/
+3035410,Mackerel (scomber scombrus scomber australasicus) frozen,2024,10138.0,data/raw/eksporimpor/
+3035910,Indian mackerels (rastrelliger kanagurta) island mackerels (rastrelliger faughni) frozen,2024,6896.91,data/raw/eksporimpor/
+3035990,Anchovies brisling or sprats scomberomorus spp caranx spp pacific saury decapterus spp capelin euthynnusaffinis sarda spp marlins sailfishes istiophoridae frozen,2023,28696.21,data/raw/eksporimpor/
+3035990,Anchovies brisling or sprats scomberomorus spp caranx spp pacific saury decapterus spp capelin euthynnusaffinis sarda spp marlins sailfishes istiophoridae frozen,2024,49945.98,data/raw/eksporimpor/
+3035990,Other Mackerels fish frozen excl fillets edible fish offal of subheadings 0303.91 to 0303.99,2020,2623.53,data/raw/eksporimpor/
+3038911,Grouper frozen,2023,1068430.04,data/raw/eksporimpor/
+3038911,Grouper frozen,2024,1318738.24,data/raw/eksporimpor/
+3038911,Grouper frozen,2026,197007.23,data/raw/eksporimpor/
+3038911,Grouper frozen excl. edible fish offal of subheadings 0303.91-99,2020,161535.66,data/raw/eksporimpor/
+3038911,Grouper frozen excl. edible fish offal of subheadings 0303.91-99,2021,174077.16,data/raw/eksporimpor/
+3038914,Savalai hairtails (lepturacanthus savala) belanger’s croakers (johnius belangerii) reeve’s croakers (chrysochir aureus) and bigeye croakers (pennahia anea) frozen,2023,12594.4,data/raw/eksporimpor/
+3038914,Savalai hairtails (lepturacanthus savala) belanger’s croakers (johnius belangerii) reeve’s croakers (chrysochir aureus) and bigeye croakers (pennahia anea) frozen,2024,116718.26,data/raw/eksporimpor/
+3038914,"Savalai hairtailsbelanger""sreeve""s&bigeye frozen excl. edible fish offal of subheadings 0303.91-99",2020,938910.95,data/raw/eksporimpor/
+3038914,"Savalai hairtailsbelanger""sreeve""s&bigeye frozen excl. edible fish offal of subheadings 0303.91-99",2021,455854.12,data/raw/eksporimpor/
+3038916,Torpedo scads (megalaspis cordyla) spotted sicklefish (drepane punctata) and great barracudas (sphyraena barracuda) frozen,2023,11460.0,data/raw/eksporimpor/
+3038917,Black pomfrets (parastromatus niger) frozen,2023,1440.0,data/raw/eksporimpor/
+3038918,Mangrove red snappers (lutjanus argentimaculatus) frozen,2023,259634.41,data/raw/eksporimpor/
+3038918,Mangrove red snappers (lutjanus argentimaculatus) frozen,2024,751661.31,data/raw/eksporimpor/
+3038918,Mangrove red snappers (lutjanus argentimaculatus) frozen,2026,402578.64,data/raw/eksporimpor/
+3038918,Mangrove red snappers (lutjanus) frozen excl. edible fish offal of subheadings 0303.91-99,2020,79446.28,data/raw/eksporimpor/
+3038919,Frozen marine fish other than HS code 03038911 to 03038918,2023,432171.98,data/raw/eksporimpor/
+3038919,Frozen marine fish other than HS code 03038911 to 03038918,2024,984119.6,data/raw/eksporimpor/
+3038919,Frozen marine fish other than HS code 03038911 to 03038918,2026,83718.88,data/raw/eksporimpor/
+3038919,Oth marine fish frozen excl. edible fish offal of subheadings 0303.91-99,2020,366634.87,data/raw/eksporimpor/
+3038919,Oth marine fish frozen excl. edible fish offal of subheadings 0303.91-99,2021,166215.33,data/raw/eksporimpor/
+3038929,Frozen fish other than marine fish other than hs code 03038922 to 03038928,2023,63796.8,data/raw/eksporimpor/
+3038929,Frozen fish other than marine fish other than hs code 03038922 to 03038928,2024,135243.5,data/raw/eksporimpor/
+3039100,Livers roes and milt frozen,2023,4781517.43,data/raw/eksporimpor/
+3039100,Livers roes and milt frozen,2024,1757053.0,data/raw/eksporimpor/
+3039100,Livers roes and milt frozen,2026,173825.0,data/raw/eksporimpor/
+3039100,Livers roes and milt of fish frozen,2020,79150.0,data/raw/eksporimpor/
+3039100,Livers roes and milt of fish frozen,2021,516567.84,data/raw/eksporimpor/
+3044700,Fresh or chilled fillets of dogfish and other sharks,2023,3102.0,data/raw/eksporimpor/
+3044900,Fresh or chilled fillets of oth fish subheading 030441 - 030449,2021,3152.3,data/raw/eksporimpor/
+3048700,Frozen fillet of Tunas (of the genus Thunnus) skipjack or stripe-bellied bonito (Euthynnus (Katsuwonus) pelamis),2020,7416817.19,data/raw/eksporimpor/
+3048700,Frozen fillet of Tunas (of the genus Thunnus) skipjack or stripe-bellied bonito (Euthynnus (Katsuwonus) pelamis),2021,19055524.62,data/raw/eksporimpor/
+3048700,Frozen fillets of tunas (of the genus thunnus) skipjack tuna (stripe-bellied bonito) (katsuwonus pelamis),2023,41880169.48,data/raw/eksporimpor/
+3048700,Frozen fillets of tunas (of the genus thunnus) skipjack tuna (stripe-bellied bonito) (katsuwonus pelamis),2024,47372379.6,data/raw/eksporimpor/
+3048700,Frozen fillets of tunas (of the genus thunnus) skipjack tuna (stripe-bellied bonito) (katsuwonus pelamis),2026,3196496.06,data/raw/eksporimpor/
+3048900,Frozen fillets of other fish,2020,346207.0,data/raw/eksporimpor/
+3048900,Frozen fillets of other fish,2021,20951.68,data/raw/eksporimpor/
+3048910,Frozen fillets of mahi-mahi (coryphaena hippurus),2024,41021.0,data/raw/eksporimpor/
+3048990,Frozen fillets of other fish other than HS code 03048100 to 03048910,2023,1644766.39,data/raw/eksporimpor/
+3048990,Frozen fillets of other fish other than HS code 03048100 to 03048910,2024,2833945.95,data/raw/eksporimpor/
+3048990,Frozen fillets of other fish other than HS code 03048100 to 03048910,2026,1288753.52,data/raw/eksporimpor/
+3049990,Frozen other fish meat (whether or not minced) of other fish other than HS code 03049100 to 03049910,2023,76178.5,data/raw/eksporimpor/
+3049990,Frozen other fish meat (whether or not minced) of other fish other than HS code 03049100 to 03049910,2024,691334.91,data/raw/eksporimpor/
+3052010,Livers roes and milt of freshwater fish dried salted or in brine,2020,82100.0,data/raw/eksporimpor/
+3052010,Livers roes and milt of freshwater fish dried salted or in brine,2021,1308900.0,data/raw/eksporimpor/
+3052010,Livers roes and milt of freshwater fish dried salted or in brine,2023,345000.0,data/raw/eksporimpor/
+3052010,Livers roes and milt of freshwater fish dried salted or in brine,2024,246600.0,data/raw/eksporimpor/
+3052090,Livers roes and milt of fish smoked dried salted or in brine other than freshwater fish dried salted or in brine,2023,6906876.7,data/raw/eksporimpor/
+3052090,Livers roes and milt of fish smoked dried salted or in brine other than freshwater fish dried salted or in brine,2024,9915059.0,data/raw/eksporimpor/
+3052090,Livers roes and milt of fish smoked dried salted or in brine other than freshwater fish dried salted or in brine,2026,1826604.0,data/raw/eksporimpor/
+3052090,Livers roes and milt of water marine fish dried salted or in brine,2020,5193762.0,data/raw/eksporimpor/
+3052090,Livers roes and milt of water marine fish dried salted or in brine,2021,7507026.0,data/raw/eksporimpor/
+3054900,Smoked fish of other fish including fillets other than edible fish offal,2020,1853054.97,data/raw/eksporimpor/
+3054900,Smoked fish of other fish including fillets other than edible fish offal,2021,8508829.33,data/raw/eksporimpor/
+3054910,Smoked fish including fillets other than edible fish offal of skipjack tuna (stripe-bellied bonito) (katsuwonus pelamis),2023,15122116.11,data/raw/eksporimpor/
+3054910,Smoked fish including fillets other than edible fish offal of skipjack tuna (stripe-bellied bonito) (katsuwonus pelamis),2024,12150509.56,data/raw/eksporimpor/
+3054910,Smoked fish including fillets other than edible fish offal of skipjack tuna (stripe-bellied bonito) (katsuwonus pelamis),2026,1215462.81,data/raw/eksporimpor/
+3054990,Smoked fish including fillets other than edible fish offal not elsewhere classified in heading 0305,2023,2848908.65,data/raw/eksporimpor/
+3054990,Smoked fish including fillets other than edible fish offal not elsewhere classified in heading 0305,2024,1276927.78,data/raw/eksporimpor/
+3055929,Dried fish other than edible fish offal whether or not salted but not smoked of marine fish other than anchovies (stolephorus coilia setipinna lycothrissa thryssa and encrasicholina spp),2023,129150.0,data/raw/eksporimpor/
+3055929,Dried fish other than edible fish offal whether or not salted but not smoked of marine fish other than anchovies (stolephorus coilia setipinna lycothrissa thryssa and encrasicholina spp),2024,18450.0,data/raw/eksporimpor/
+3055929,Dried of oth marine fish other than edible fish offal whether or not salted but not smoked,2021,53250.0,data/raw/eksporimpor/
+3055990,Dried fish other than edible fish offal whether or not salted but not smoked of other fish other than marine fish,2023,3216.73,data/raw/eksporimpor/
+3055990,Dried of oth not marine fish other than edible fish offal whether or not salted but not smoked,2021,17750.0,data/raw/eksporimpor/
+3056990,Other fish salted but not dried/smoked & fish in brine ot edible fish offal,2021,47578.0,data/raw/eksporimpor/
+3056990,Salted but not dried or smoked and fish in brine other than edible fish offal of other than marine fish not elsewhere classified in heading 0305,2023,36900.0,data/raw/eksporimpor/
+3056990,Salted but not dried or smoked and fish in brine other than edible fish offal of other than marine fish not elsewhere classified in heading 0305,2024,72600.0,data/raw/eksporimpor/
+3056990,Salted but not dried or smoked and fish in brine other than edible fish offal of other than marine fish not elsewhere classified in heading 0305,2026,3700.0,data/raw/eksporimpor/
+3057211,Dried salted or in brine smoked of fish maws of cod,2023,63325.0,data/raw/eksporimpor/
+3061190,Rock lobster and other sea crawfish (palinurus spp panulirus spp jasus spp) frozen other than smoked,2024,45150.0,data/raw/eksporimpor/
+3061711,Giant tiger prawns (Penaeus monodon) headless frozen fit for human consumption,2020,3623757.6,data/raw/eksporimpor/
+3061711,Giant tiger prawns (Penaeus monodon) headless frozen fit for human consumption,2021,6641311.18,data/raw/eksporimpor/
+3061711,Giant tiger prawns (penaeus monodon) frozen headless,2023,510351.96,data/raw/eksporimpor/
+3061711,Giant tiger prawns (penaeus monodon) frozen headless,2024,787680.93,data/raw/eksporimpor/
+3061711,Giant tiger prawns (penaeus monodon) frozen headless,2026,58295.0,data/raw/eksporimpor/
+3061719,Giant tiger prawns (Penaeus monodon) with head frozen fit for human consumption,2020,3197.6,data/raw/eksporimpor/
+3061719,Giant tiger prawns (penaeus monodon) frozen other than headless,2023,813779.8,data/raw/eksporimpor/
+3061719,Giant tiger prawns (penaeus monodon) frozen other than headless,2024,250515.44,data/raw/eksporimpor/
+3061719,Giant tiger prawns (penaeus monodon) frozen other than headless,2026,21553.92,data/raw/eksporimpor/
+3061721,Whiteleg shrimps (Litopenaeus vannamei) headless with tail frozen fit for human consumption,2020,546368.2,data/raw/eksporimpor/
+3061721,Whiteleg shrimps (Litopenaeus vannamei) headless with tail frozen fit for human consumption,2021,4763762.09,data/raw/eksporimpor/
+3061721,Whiteleg shrimps (litopenaeus vannamei) frozen headless with tail,2023,7045538.329999999,data/raw/eksporimpor/
+3061721,Whiteleg shrimps (litopenaeus vannamei) frozen headless with tail,2024,4603955.43,data/raw/eksporimpor/
+3061721,Whiteleg shrimps (litopenaeus vannamei) frozen headless with tail,2026,1726580.93,data/raw/eksporimpor/
+3061722,Whiteleg shrimps (Litopenaeus vannamei) headless without tail frozen fit for human consumption,2020,4486289.53,data/raw/eksporimpor/
+3061722,Whiteleg shrimps (Litopenaeus vannamei) headless without tail frozen fit for human consumption,2021,3040588.08,data/raw/eksporimpor/
+3061722,Whiteleg shrimps (litopenaeus vannamei) frozen headless without tail,2023,6392436.930000001,data/raw/eksporimpor/
+3061722,Whiteleg shrimps (litopenaeus vannamei) frozen headless without tail,2024,10387538.61,data/raw/eksporimpor/
+3061722,Whiteleg shrimps (litopenaeus vannamei) frozen headless without tail,2026,4767083.63,data/raw/eksporimpor/
+3061729,Whiteleg shrimps (Litopenaeus vannamei) with head and tail frozen fit for human consumption,2020,1630153.2,data/raw/eksporimpor/
+3061729,Whiteleg shrimps (Litopenaeus vannamei) with head and tail frozen fit for human consumption,2021,1797453.78,data/raw/eksporimpor/
+3061729,Whiteleg shrimps (litopenaeus vannamei) frozen other than headless with or without tail,2023,522029.82,data/raw/eksporimpor/
+3061729,Whiteleg shrimps (litopenaeus vannamei) frozen other than headless with or without tail,2024,672383.62,data/raw/eksporimpor/
+3061729,Whiteleg shrimps (litopenaeus vannamei) frozen other than headless with or without tail,2026,1324750.0,data/raw/eksporimpor/
+3061790,Other shrimps and prawns frozen fit for human consumption,2020,703341.28,data/raw/eksporimpor/
+3061790,Other shrimps and prawns frozen fit for human consumption,2021,461254.17,data/raw/eksporimpor/
+3061790,Shrimps and prawns other than giant tiger prawns whiteleg shrimps and giant river prawns frozen,2024,256954.3,data/raw/eksporimpor/
+3063300,Crabs live fresh or chilled,2021,32487.32,data/raw/eksporimpor/
+3069521,Shrimps and prawns in airtight containers for retail sale in shell cooked by steaming or boiling in water,2024,25445.99,data/raw/eksporimpor/
+3074310,Cuttle fish (Sepia officinalis Rossia macrosoma Sepiola spp) squid (Ommastrephes spp Loligo sppetc) frozen,2020,25026.51,data/raw/eksporimpor/
+3074310,Cuttle fish (sepia officinalis rossia macrosoma sepiola spp) and squid (ommastrephes spp loligo spp nototodarus spp sepioteuthis spp) frozen,2023,670500.45,data/raw/eksporimpor/
+3074310,Cuttle fish (sepia officinalis rossia macrosoma sepiola spp) and squid (ommastrephes spp loligo spp nototodarus spp sepioteuthis spp) frozen,2024,1056549.96,data/raw/eksporimpor/
+3074390,Cuttle fish and squid other than HS 03074310 frozen,2020,312610.25,data/raw/eksporimpor/
+3074390,Cuttle fish and squid other than HS 03074310 frozen,2021,136311.49,data/raw/eksporimpor/
+3074390,Cuttle fish and squid other than sepia officinalis rossia macrosoma sepiola spp ommastrephes spp loligo spp nototodarus spp sepioteuthis spp frozen,2023,1063151.66,data/raw/eksporimpor/
+3074390,Cuttle fish and squid other than sepia officinalis rossia macrosoma sepiola spp ommastrephes spp loligo spp nototodarus spp sepioteuthis spp frozen,2024,1262170.8299999998,data/raw/eksporimpor/
+3074390,Cuttle fish and squid other than sepia officinalis rossia macrosoma sepiola spp ommastrephes spp loligo spp nototodarus spp sepioteuthis spp frozen,2026,2116.7,data/raw/eksporimpor/
+3075200,Octopus (Octopus spp) Frozen,2020,1847418.79,data/raw/eksporimpor/
+3075200,Octopus (Octopus spp) Frozen,2021,1918411.63,data/raw/eksporimpor/
+3075200,Octopus (octopus spp) frozen,2023,7644060.140000001,data/raw/eksporimpor/
+3075200,Octopus (octopus spp) frozen,2024,7982391.33,data/raw/eksporimpor/
+3075200,Octopus (octopus spp) frozen,2026,5075051.19,data/raw/eksporimpor/
+3081920,Sea cucumbers (stichopus japonicus holothuroidea) dried salted or in brine,2020,52024.0,data/raw/eksporimpor/
+3082200,Sea urchins (strongylocentrotus spp paracentrotus lividus loxechinus albus echinus esculentus) frozen,2023,6150.0,data/raw/eksporimpor/
+3082200,Sea urchins (strongylocentrotus spp paracentrotus lividus loxechinus albus echinus esculentus) frozen,2024,6150.0,data/raw/eksporimpor/
+5080020,Shells of molluscs crustaceans or echinoderms,2024,7500.0,data/raw/eksporimpor/
+5080020,Shells of molluscs crustaceans/echinoderms unworked or simply prepared but not cut to shape powder and waste thereof,2020,2927.61,data/raw/eksporimpor/
+5080090,Coral and similar materials unworked or simply prepared but not otherwise worked,2026,13332.07,data/raw/eksporimpor/
+5080090,Coral&similar materials cuttle-bone unworked but not othwise worked powder and waste thereof,2020,3363.96,data/raw/eksporimpor/
+7093000,Aubergines (egg-plants) fresh or chilled,2023,12.78,data/raw/eksporimpor/
+7096010,Chillies (fruits of genus capsicum) fresh or chilled,2020,46066.92,data/raw/eksporimpor/
+7096010,Chillies (fruits of genus capsicum) fresh or chilled,2024,155035.0,data/raw/eksporimpor/
+7129090,Oth vegetables mix of vegetables oth garlic dried whole cut sliced broken or in powder but not further prepared,2020,1944.0,data/raw/eksporimpor/
+7141011,Manioc (cassava) sliced or in the form of pellets dried chips,2020,550000.0,data/raw/eksporimpor/
+7142010,Sweet potatoes whether or not sliced or in the form of pellets frozen,2023,55210.49,data/raw/eksporimpor/
+7142010,Sweet potatoes whether or not sliced or in the form of pellets frozen,2024,205472.43,data/raw/eksporimpor/
+7142010,Sweet potatoes whether or not sliced or in the form of pellets frozen,2026,74644.82,data/raw/eksporimpor/
+7144010,Taro (Colocasia spp) frozen,2021,19425.04,data/raw/eksporimpor/
+7144010,Taro (colocasia spp) whether or not sliced or in the form of pellets frozen,2023,11167.8,data/raw/eksporimpor/
+7149099,arrowroot salep Jerusalem artichokes & similar roots & tubers with high starch/inulin content fresh/chilled/dried,2020,360952.64,data/raw/eksporimpor/
+8011100,Coconuts desiccated and dried,2020,1923070.55,data/raw/eksporimpor/
+8011100,Coconuts desiccated and dried,2021,2032420.0,data/raw/eksporimpor/
+8011100,Coconuts desiccated fresh or dried whether or not shelled or peeled,2023,155047.88,data/raw/eksporimpor/
+8011100,Coconuts desiccated fresh or dried whether or not shelled or peeled,2024,434038.11,data/raw/eksporimpor/
+8011200,Coconuts In the inner shell (endocarp),2020,221742.0,data/raw/eksporimpor/
+8011200,Coconuts in the inner shell (endocarp) fresh or dried whether or not peeled,2023,4150759.61,data/raw/eksporimpor/
+8011200,Coconuts in the inner shell (endocarp) fresh or dried whether or not peeled,2024,12001690.25,data/raw/eksporimpor/
+8011200,Coconuts in the inner shell (endocarp) fresh or dried whether or not peeled,2026,316222.51,data/raw/eksporimpor/
+8011990,Coconuts oth desiccated or dried In the inner shell (endocarp) oth young coconut,2021,49925.0,data/raw/eksporimpor/
+8011990,Coconuts other than desiccated in the inner shell (endocarp) and young coconut fresh or dried whether or not shelled or peeled,2023,61135.53,data/raw/eksporimpor/
+8011990,Coconuts other than desiccated in the inner shell (endocarp) and young coconut fresh or dried whether or not shelled or peeled,2024,6580.0,data/raw/eksporimpor/
+8013200,Cashew nuts shelled,2020,910702.02,data/raw/eksporimpor/
+8013200,Cashew nuts shelled,2021,88108.74,data/raw/eksporimpor/
+8013200,Cashew nuts shelled fresh or dried whether or not peeled,2023,1189067.5,data/raw/eksporimpor/
+8013200,Cashew nuts shelled fresh or dried whether or not peeled,2024,6231287.85,data/raw/eksporimpor/
+8013200,Cashew nuts shelled fresh or dried whether or not peeled,2026,523160.0,data/raw/eksporimpor/
+8029000,Oth nuts ot Almonds HazelnutsWalnutsChesnutsPistachiosMacadamia nutsKola nuts fresh/dried won shelled/peeled,2020,11497.0,data/raw/eksporimpor/
+8045030,Mangosteens fresh or dried,2020,80295.0,data/raw/eksporimpor/
+8045030,Mangosteens fresh or dried,2023,58859.0,data/raw/eksporimpor/
+8045030,Mangosteens fresh or dried,2024,95287.1,data/raw/eksporimpor/
+8119000,Fruit and nuts uncooked or cooked by steaming or boiling in water frozen whether or not containing added sugar or other sweetening matter n.ec. in heading 0811,2026,1519427.74,data/raw/eksporimpor/
+9011110,Coffee Arabica WIB or Robusta OIB not roasted not decaffeinated,2020,5662144.28,data/raw/eksporimpor/
+9011110,Coffee Arabica WIB or Robusta OIB not roasted not decaffeinated,2021,2736130.2,data/raw/eksporimpor/
+9011120,Arabica not roasted not decaffeinated,2023,5019973.42,data/raw/eksporimpor/
+9011120,Arabica not roasted not decaffeinated,2024,7673206.32,data/raw/eksporimpor/
+9011130,Robusta not roasted not decaffeinated,2023,186060.0,data/raw/eksporimpor/
+9041110,White pepper neither crushed nor ground,2020,3766419.79,data/raw/eksporimpor/
+9041110,White pepper neither crushed nor ground,2021,464622.4,data/raw/eksporimpor/
+9041110,White pepper neither crushed nor ground,2023,122063.76,data/raw/eksporimpor/
+9041110,White pepper neither crushed nor ground,2024,249074.57,data/raw/eksporimpor/
+9041120,Black pepper neither crushed nor ground,2020,43726.2,data/raw/eksporimpor/
+9041120,Black pepper neither crushed nor ground,2024,115796.1,data/raw/eksporimpor/
+9041190,Pepper other than white pepper and black pepper neither crushed nor ground,2024,342395.1,data/raw/eksporimpor/
+9041190,oth pepper neither crushed nor ground,2020,145582.42,data/raw/eksporimpor/
+9071000,Cloves (whole fruit cloves and stems) neither crushed nor ground,2020,5242651.87,data/raw/eksporimpor/
+9071000,Cloves (whole fruit cloves and stems) neither crushed nor ground,2021,59042.0,data/raw/eksporimpor/
+9071000,Cloves (whole fruit cloves and stems) neither crushed nor ground,2023,1500338.48,data/raw/eksporimpor/
+9071000,Cloves (whole fruit cloves and stems) neither crushed nor ground,2024,6857396.69,data/raw/eksporimpor/
+9081100,Nutmeg neither crushed nor ground,2020,598058.84,data/raw/eksporimpor/
+9081100,Nutmeg neither crushed nor ground,2021,1979660.85,data/raw/eksporimpor/
+9081100,Nutmeg neither crushed nor ground,2023,3746068.95,data/raw/eksporimpor/
+9081100,Nutmeg neither crushed nor ground,2024,2636586.59,data/raw/eksporimpor/
+9081100,Nutmeg neither crushed nor ground,2026,283010.51,data/raw/eksporimpor/
+9081200,Nutmeg crushed or ground,2023,949892.0,data/raw/eksporimpor/
+9081200,Nutmeg crushed or ground,2024,1093950.0,data/raw/eksporimpor/
+9082100,Mace neither crushed nor ground,2021,1480699.05,data/raw/eksporimpor/
+9082100,Mace neither crushed nor ground,2023,1936592.5,data/raw/eksporimpor/
+9082100,Mace neither crushed nor ground,2024,2201600.0,data/raw/eksporimpor/
+9082200,Mace crushed or ground,2023,35705.0,data/raw/eksporimpor/
+9083100,Cardamoms neither crushed nor ground,2021,1050.0,data/raw/eksporimpor/
+9109190,oth spices oth than curry mixtures referred to in Note 1(b) to this Chapter,2020,1598.85,data/raw/eksporimpor/
+9109910,Thyme bay leaves,2020,280.65,data/raw/eksporimpor/
+9109990,oth spices oth mixtures referred to in Note 1(b) to this Chapter oth than Thyme bay leaves,2020,307.8,data/raw/eksporimpor/
+11062090,Flourmeal & powder of oth sago/of roots/ tubers of 0714oth than manioc/cassavasagosweet potato/Ipomoea batatas,2021,2491166.13,data/raw/eksporimpor/
+12030000,Copra,2023,12600.0,data/raw/eksporimpor/
+12030000,Copra,2024,32900.0,data/raw/eksporimpor/
+12122111,Eucheuma spinosum dried but not ground,2023,13498315.35,data/raw/eksporimpor/
+12122111,Eucheuma spinosum dried but not ground,2024,12112217.44,data/raw/eksporimpor/
+12122111,Eucheuma spinosum dried but not ground,2026,4484573.12,data/raw/eksporimpor/
+12122111,Eucheuma spinosum fit for human consumption dried but not ground,2020,5024352.38,data/raw/eksporimpor/
+12122111,Eucheuma spinosum fit for human consumption dried but not ground,2021,6033909.44,data/raw/eksporimpor/
+12122112,Eucheuma cottonii dried but not ground,2023,160450817.47,data/raw/eksporimpor/
+12122112,Eucheuma cottonii dried but not ground,2024,106435269.04,data/raw/eksporimpor/
+12122112,Eucheuma cottonii dried but not ground,2026,35818107.06,data/raw/eksporimpor/
+12122112,Eucheuma cottonii fit for human consumption dried but not ground,2020,64248649.86,data/raw/eksporimpor/
+12122112,Eucheuma cottonii fit for human consumption dried but not ground,2021,106139439.91,data/raw/eksporimpor/
+12122113,Gracilaria spp dried but not ground,2023,28721617.52,data/raw/eksporimpor/
+12122113,Gracilaria spp dried but not ground,2024,18129402.75,data/raw/eksporimpor/
+12122113,Gracilaria spp dried but not ground,2026,4429904.64,data/raw/eksporimpor/
+12122113,Gracilaria spp fit for human consumption dried but not ground,2020,12650804.97,data/raw/eksporimpor/
+12122113,Gracilaria spp fit for human consumption dried but not ground,2021,17338055.43,data/raw/eksporimpor/
+12122115,Sargassum spp fit for human consumption dried but not ground,2021,85360.0,data/raw/eksporimpor/
+12122119,Seaweeds and other algae other than eucheuma spinosum cottonii and gracilaria spp fit for human consumption dried but not ground,2023,12210.0,data/raw/eksporimpor/
+12122190,Seaweeds and oth algae fit for human consumption dried and ground,2021,13350.0,data/raw/eksporimpor/
+12122190,Seaweeds and other algae other than eucheuma spinosum cottonii and gracilaria spp fit for human consumption fresh chilled frozen,2026,185264.3,data/raw/eksporimpor/
+12122919,Seaweeds and other algae fresh chilled or dried of a kind used in dyeing tanning perfumery or for insecticidal fungicidal or similar purposes not fit for human consumption,2023,13795.0,data/raw/eksporimpor/
+12129990,Fruit stones and kernels other than apricot peach (including nectarine) or plum of a kind used primarily for human consumption not elsewhere specified or included,2023,6002207.46,data/raw/eksporimpor/
+12129990,Fruit stones and kernels other than apricot peach (including nectarine) or plum of a kind used primarily for human consumption not elsewhere specified or included,2024,9557846.05,data/raw/eksporimpor/
+12129990,Fruit stones and kernels other than apricot peach (including nectarine) or plum of a kind used primarily for human consumption not elsewhere specified or included,2026,4768529.37,data/raw/eksporimpor/
+12129990,Oth than stones & kernels of apricotpeach (incld nectarine)/ plumused primarily for human consumption,2020,871040.0,data/raw/eksporimpor/
+13019030,Cannabis resins,2020,14887.21,data/raw/eksporimpor/
+13019040,Lac,2020,124449.1,data/raw/eksporimpor/
+13019090,Natural gums resins gum-resins and oleoresins oth than gum arabic cannabis resins lac,2020,841987.55,data/raw/eksporimpor/
+13019090,Natural gums resins gum-resins and oleoresins oth than gum arabic cannabis resins lac,2021,125929.2,data/raw/eksporimpor/
+13019090,Natural gums resins gum-resins and oleoresins other than gum arabic and cannabis resins,2023,944370.82,data/raw/eksporimpor/
+13019090,Natural gums resins gum-resins and oleoresins other than gum arabic and cannabis resins,2024,1792588.04,data/raw/eksporimpor/
+13021990,Vegetable saps and extracts other then HS codes 13021110 to 13021950,2023,428808.88,data/raw/eksporimpor/
+13021990,Vegetable saps and extracts other then HS codes 13021110 to 13021950,2024,330097.32,data/raw/eksporimpor/
+13021990,oth vegetable saps and extracts oth than of opium liquorice hops ephedra oth than 13021920 - 13021950,2020,36190.5,data/raw/eksporimpor/
+13021990,oth vegetable saps and extracts oth than of opium liquorice hops ephedra oth than 13021920 - 13021950,2021,258190.54,data/raw/eksporimpor/
+13023100,Agar-agar,2023,4666833.29,data/raw/eksporimpor/
+13023100,Agar-agar,2024,5736861.19,data/raw/eksporimpor/
+13023100,Agar-agar,2026,2089046.71,data/raw/eksporimpor/
+13023100,Mucilages and thickeners whether or not modified of Agar-agar,2021,250212.84,data/raw/eksporimpor/
+13023911,Carrageenan powder Semirefined,2020,40416268.53,data/raw/eksporimpor/
+13023911,Carrageenan powder Semirefined,2021,31238405.98,data/raw/eksporimpor/
+13023911,Carrageenan powder semi-refined,2023,54736018.34,data/raw/eksporimpor/
+13023911,Carrageenan powder semi-refined,2024,45902119.760000005,data/raw/eksporimpor/
+13023911,Carrageenan powder semi-refined,2026,15102721.169999998,data/raw/eksporimpor/
+13023919,oth carrageenan oth than semirefined powder refined powder alkali treated carrageenan chips (ATCC),2020,4011450.0,data/raw/eksporimpor/
+13023919,oth carrageenan oth than semirefined powder refined powder alkali treated carrageenan chips (ATCC),2021,1530244.0,data/raw/eksporimpor/
+13023990,Mucilages and thickeners whether or not modified derived from vegetable products other than HS code 13023100 to 13023919,2023,4905021.92,data/raw/eksporimpor/
+14049099,Vegetable products nec or included oth used primarily in tanning/ dyeingoth than14049091 - 14049092,2020,24300.0,data/raw/eksporimpor/
+14049099,Vegetable products not elsewhere specified or included other than HS code 14042000 to 14049092,2023,33483.5,data/raw/eksporimpor/
+14049099,Vegetable products not elsewhere specified or included other than HS code 14042000 to 14049092,2024,5930.4,data/raw/eksporimpor/
+15111000,Crude palm oil,2020,156267913.73999998,data/raw/eksporimpor/
+15111000,Crude palm oil,2021,2011839.04,data/raw/eksporimpor/
+15119020,Refined palm oil,2020,23157851.86,data/raw/eksporimpor/
+15119020,Refined palm oil,2021,35207909.050000004,data/raw/eksporimpor/
+15119031,Solid fractions of palm oil refined oil but not chemically modified with iodine value 30 or more but less than 40,2023,71737938.14,data/raw/eksporimpor/
+15119031,Solid fractions of palm oil refined oil but not chemically modified with iodine value 30 or more but less than 40,2024,64019340.23,data/raw/eksporimpor/
+15119031,Solid fractions of palm oil refined oil but not chemically modified with iodine value 30 or more but less than 40,2026,4829452.98,data/raw/eksporimpor/
+15119031,Solid fractions of refined palm oil with iodine value 30 or more but less than 40,2020,62413601.41,data/raw/eksporimpor/
+15119031,Solid fractions of refined palm oil with iodine value 30 or more but less than 40,2021,142910811.53,data/raw/eksporimpor/
+15119037,Liquid fractions of palm oil refined oil but not chemically modified with iodine value 55 or more but less than 60,2023,328393551.45,data/raw/eksporimpor/
+15119037,Liquid fractions of palm oil refined oil but not chemically modified with iodine value 55 or more but less than 60,2024,262180004.86,data/raw/eksporimpor/
+15119037,Liquid fractions of refined palm oil with iodine value 55 or more but less than 60,2020,147949505.33,data/raw/eksporimpor/
+15119037,Liquid fractions of refined palm oil with iodine value 55 or more but less than 60,2021,304401354.49,data/raw/eksporimpor/
+15131100,Crude oil of coconut (copra) oil,2020,4897345.19,data/raw/eksporimpor/
+15131100,Crude oil of coconut (copra) oil,2021,8807577.54,data/raw/eksporimpor/
+15131110,Virgin coconut oil,2024,112392.0,data/raw/eksporimpor/
+15131190,Crude coconut (copra) oil and its fractions other than virgin coconut oil whether or not refined but not chemically modified,2023,12458615.47,data/raw/eksporimpor/
+15131190,Crude coconut (copra) oil and its fractions other than virgin coconut oil whether or not refined but not chemically modified,2024,1372552.91,data/raw/eksporimpor/
+15131190,Crude coconut (copra) oil and its fractions other than virgin coconut oil whether or not refined but not chemically modified,2026,43199396.52,data/raw/eksporimpor/
+15131990,Coconut (copra) and fractions thereof other than crude oil and fractions of unrefined oil whether or not refined but not chemically modified,2023,113982556.89,data/raw/eksporimpor/
+15131990,Coconut (copra) and fractions thereof other than crude oil and fractions of unrefined oil whether or not refined but not chemically modified,2024,108443238.56,data/raw/eksporimpor/
+15131990,Coconut (copra) and fractions thereof other than crude oil and fractions of unrefined oil whether or not refined but not chemically modified,2026,63586577.76,data/raw/eksporimpor/
+15131990,Coconut (copra) oil and its fractions not chemically modified oth than crude oil and oth than 15131910,2020,115890115.84,data/raw/eksporimpor/
+15131990,Coconut (copra) oil and its fractions not chemically modified oth than crude oil and oth than 15131910,2021,198368440.86,data/raw/eksporimpor/
+15132994,Palm kernel olein refined bleached and deodorized (RBD),2020,792855.77,data/raw/eksporimpor/
+15132995,Palm kernel oil RBD,2020,23448684.46,data/raw/eksporimpor/
+15132995,Palm kernel oil RBD,2021,25738104.970000003,data/raw/eksporimpor/
+15132995,Palm kernel oil refined bleached and deodorised (rbd),2023,8515191.49,data/raw/eksporimpor/
+15132995,Palm kernel oil refined bleached and deodorised (rbd),2024,30315740.77,data/raw/eksporimpor/
+15132995,Palm kernel oil refined bleached and deodorised (rbd),2026,9792740.84,data/raw/eksporimpor/
+15162014,Vegetable fats and oils and their fractions of coconuts reesterified but not further prepared,2021,18752.0,data/raw/eksporimpor/
+15180039,oth inedible mixtures or preparations of vegetable fats or oils or of fractions of different fats or oils,2021,121272.84,data/raw/eksporimpor/
+15200010,Crude glycerol,2020,8004905.180000001,data/raw/eksporimpor/
+15200010,Crude glycerol,2021,14663391.13,data/raw/eksporimpor/
+15200010,Crude glycerol,2023,10570938.1,data/raw/eksporimpor/
+15200010,Crude glycerol,2024,14001932.25,data/raw/eksporimpor/
+15200010,Crude glycerol,2026,7692182.14,data/raw/eksporimpor/
+16041411,Prepared or preserved tunas whole or in pieces but not minced in airtight containers for retail sale,2023,7488259.8,data/raw/eksporimpor/
+16041411,Prepared or preserved tunas whole or in pieces but not minced in airtight containers for retail sale,2024,8932906.61,data/raw/eksporimpor/
+16041411,Tunas whole or in pieces but not minced in airtight containers for retail sale,2021,5788893.11,data/raw/eksporimpor/
+16041419,Prepared or preserved skipjack tuna and bonito (sarda spp) whole or in pieces but not minced not in airtight containers for retail sale,2023,13972094.97,data/raw/eksporimpor/
+16041419,Prepared or preserved skipjack tuna and bonito (sarda spp) whole or in pieces but not minced not in airtight containers for retail sale,2024,8908130.88,data/raw/eksporimpor/
+16041419,Prepared or preserved skipjack tuna and bonito (sarda spp) whole or in pieces but not minced not in airtight containers for retail sale,2026,280966.47,data/raw/eksporimpor/
+16041419,Skipjack and bonito (Sarda spp) whole or in pieces but not minced in aitright containers,2021,860291.33,data/raw/eksporimpor/
+16043200,Caviar substitutes,2020,357960.0,data/raw/eksporimpor/
+16043200,Caviar substitutes,2021,156950.0,data/raw/eksporimpor/
+16051010,Crab prepared or preserved in airtight containers for retail sale,2020,877939.38,data/raw/eksporimpor/
+16051011,Swimming crabs (crabs of the family portunidae) prepared or preserveed in airtight containers for retail sale,2023,14385566.56,data/raw/eksporimpor/
+16051011,Swimming crabs (crabs of the family portunidae) prepared or preserveed in airtight containers for retail sale,2024,24473081.54,data/raw/eksporimpor/
+16051011,Swimming crabs (crabs of the family portunidae) prepared or preserveed in airtight containers for retail sale,2026,3588793.81,data/raw/eksporimpor/
+16051090,Crab prepared or preserved not in airtight containers for retail sale,2020,935088.0,data/raw/eksporimpor/
+16051090,Crab prepared or preserveed other than in airtight containers for retail sale,2023,2705121.0,data/raw/eksporimpor/
+16051090,Crab prepared or preserveed other than in airtight containers for retail sale,2024,5743437.0,data/raw/eksporimpor/
+16052100,Shrimps and prawns prepared or preserveed not in airtight container,2023,5051600.34,data/raw/eksporimpor/
+16052100,Shrimps and prawns prepared or preserveed not in airtight container,2024,6451634.35,data/raw/eksporimpor/
+16052100,Shrimps and prawns prepared or preserveed not in airtight container,2026,1314189.56,data/raw/eksporimpor/
+16052930,Breaded shrimp,2023,6812979.46,data/raw/eksporimpor/
+16052930,Breaded shrimp,2024,7210488.850000001,data/raw/eksporimpor/
+16052930,Breaded shrimp,2026,1427426.7,data/raw/eksporimpor/
+16052930,Breaded shrimp in airtight container,2020,15755564.42,data/raw/eksporimpor/
+16052930,Breaded shrimp in airtight container,2021,17603260.8,data/raw/eksporimpor/
+16055500,Octopus prepared or preserved,2023,64112.4,data/raw/eksporimpor/
+16055500,Octopus prepared or preserved,2024,1239654.26,data/raw/eksporimpor/
+16055500,Octopus prepared or preserved,2026,529981.8,data/raw/eksporimpor/
+17029099,Oth sugarincl invert sugar and sugar syrup blends in dry w/ fructose 50%,2021,347.94,data/raw/eksporimpor/
+17031090,Cane molases not added flavour/colour matter,2020,2558007.2,data/raw/eksporimpor/
+17031090,Cane molases not added flavour/colour matter,2021,2170830.6,data/raw/eksporimpor/
+17031090,Cane molasses not containing added flavouring or colouring matter,2023,2771595.37,data/raw/eksporimpor/
+17031090,Cane molasses not containing added flavouring or colouring matter,2024,1200018.0,data/raw/eksporimpor/
+18010000,Cocoa beans whole or broken raw or roasted,2021,77329.34,data/raw/eksporimpor/
+18010010,Cocoa beans whole or broken raw or roasted fermented,2023,131657.79,data/raw/eksporimpor/
+18010010,Cocoa beans whole or broken raw or roasted fermented,2024,57990.6,data/raw/eksporimpor/
+18020000,Cocoa shells husks skins and oth cocoa waste,2021,45.72,data/raw/eksporimpor/
+18020000,Cocoa shells husks skins and other cocoa waste,2024,51620.0,data/raw/eksporimpor/
+18031000,Cocoa paste defatted,2021,8380757.03,data/raw/eksporimpor/
+18031000,Cocoa paste not defatted,2023,40706212.0,data/raw/eksporimpor/
+18031000,Cocoa paste not defatted,2024,65918456.25,data/raw/eksporimpor/
+18031000,Cocoa paste not defatted,2026,49488976.25,data/raw/eksporimpor/
+18032000,Cocoa paste wholly or partly defatted,2023,506950.0,data/raw/eksporimpor/
+18040000,Cocoa butter fat and oil,2021,718.05,data/raw/eksporimpor/
+18050000,Cocoa powder not containing added sugar or oth sweetening matter,2020,492960.0,data/raw/eksporimpor/
+18050000,Cocoa powder not containing added sugar or oth sweetening matter,2021,677.11,data/raw/eksporimpor/
+19019099,oth medical foods,2021,747360.0,data/raw/eksporimpor/
+19022030,Stuffed pasta with fish crustaceans or molluscs whether or not cooked or otherwise prepared,2024,44878.9,data/raw/eksporimpor/
+19023040,Instant noodles whether or not cooked or otherwise prepared other than stuffed,2026,24195.0,data/raw/eksporimpor/
+20081999,Nuts ground-nuts and other seeds other than ground nut&cashew nut w.o.n mixed together w.o.n containing added sugar/other sweetening matter or spirit not elsewhere specified/included not roasted,2023,8194.0,data/raw/eksporimpor/
+20098920,Coconut water,2023,26858.62,data/raw/eksporimpor/
+20098920,Coconut water,2024,659710.85,data/raw/eksporimpor/
+20098920,Coconut water,2026,76939.28,data/raw/eksporimpor/
+20098930,Coconut water concentrate,2026,202800.0,data/raw/eksporimpor/
+20098999,Blackcurrant juice not suitable for infants or young children,2021,453274.5,data/raw/eksporimpor/
+20098999,Juice of any other single fruit nut or vegetable other than HS code 20098110 to 20098940 not suitable for infants or young children,2023,1628955.0,data/raw/eksporimpor/
+20098999,Juice of any other single fruit nut or vegetable other than HS code 20098110 to 20098940 not suitable for infants or young children,2024,3505950.0,data/raw/eksporimpor/
+21069030,Non-dairy creamer,2026,350150.0,data/raw/eksporimpor/
+21069049,Autolysed yeast extracts not in powder form,2021,444359.19,data/raw/eksporimpor/
+21069049,Autolysed yeast extracts other than in powder form,2023,1284674.21,data/raw/eksporimpor/
+21069049,Autolysed yeast extracts other than in powder form,2024,978162.3,data/raw/eksporimpor/
+21069093,Coconut milk whether or not powdered,2023,27838.6,data/raw/eksporimpor/
+21069093,Coconut milk whether or not powdered,2024,756731.5,data/raw/eksporimpor/
+21069093,Coconut milk whether or not powdered,2026,739598.8,data/raw/eksporimpor/
+21069099,Food preparations not elsewhere specified or included other than HS code 21061000 to 21069098,2023,779015.97,data/raw/eksporimpor/
+21069099,Food preparations not elsewhere specified or included other than HS code 21061000 to 21069098,2024,588190.3,data/raw/eksporimpor/
+21069099,Food preparations not elsewhere specified or included other than HS code 21061000 to 21069098,2026,12486.84,data/raw/eksporimpor/
+21069099,Other Food preparations not elsewhere specified or included oth than HS 21069091 - 21069098,2020,33800.0,data/raw/eksporimpor/
+23012020,Flours meals and pellets of fish with a protein content of 60% or more by weight,2024,28125.0,data/raw/eksporimpor/
+23023010,Bran and pollard,2020,162575.0,data/raw/eksporimpor/
+23023010,Bran and pollard whether or not in the form of pellets derived from the sifting milling or other working of wheat,2023,561600.0,data/raw/eksporimpor/
+23023010,Bran and pollard whether or not in the form of pellets derived from the sifting milling or other working of wheat,2026,434070.0,data/raw/eksporimpor/
+23023090,Sharps and other residues whether or not in the form of pellets derived from the sifting milling or other working of wheat other than bran and pollard,2023,25907387.94,data/raw/eksporimpor/
+23023090,Sharps and other residues whether or not in the form of pellets derived from the sifting milling or other working of wheat other than bran and pollard,2024,1980000.0,data/raw/eksporimpor/
+23023090,oth than bran and pollard,2020,1192750.0,data/raw/eksporimpor/
+23023090,oth than bran and pollard,2021,11022168.43,data/raw/eksporimpor/
+23065000,Of coconut or copra,2020,11217350.0,data/raw/eksporimpor/
+23065000,Of coconut or copra,2021,12933780.0,data/raw/eksporimpor/
+23065000,Oil-cake and oth solid residues of coconut or copra whether/not ground/in the form of pellets resulting from the extraction of vegetable/microbial fats/oils oth than those of heading 2304 or 2305,2023,17923000.0,data/raw/eksporimpor/
+23065000,Oil-cake and oth solid residues of coconut or copra whether/not ground/in the form of pellets resulting from the extraction of vegetable/microbial fats/oils oth than those of heading 2304 or 2305,2024,8468600.0,data/raw/eksporimpor/
+23065000,Oil-cake and oth solid residues of coconut or copra whether/not ground/in the form of pellets resulting from the extraction of vegetable/microbial fats/oils oth than those of heading 2304 or 2305,2026,5667200.0,data/raw/eksporimpor/
+23066010,Oil-cake & oth solid residues of palm nuts or kernels resulting from the extraction of vegetable/microbial fats/oils oth than those of heading 2304 / 2305 ground or in the form of pellets,2023,2982108.0,data/raw/eksporimpor/
+23066010,Oil-cake & oth solid residues of palm nuts or kernels resulting from the extraction of vegetable/microbial fats/oils oth than those of heading 2304 / 2305 ground or in the form of pellets,2024,769500.0,data/raw/eksporimpor/
+23066010,Palm nuts or kernels ground or in the form of pellets,2020,4878250.0,data/raw/eksporimpor/
+23066010,Palm nuts or kernels ground or in the form of pellets,2021,1962000.0,data/raw/eksporimpor/
+23066090,Oil-cake & oth solid residues of palm nuts or kernels resulting from the extraction of vegetable/microbial fats/oils oth than those of heading 2304 / 2305 other than ground/in the form of pellets,2023,51156.8,data/raw/eksporimpor/
+23066090,Oil-cake & oth solid residues of palm nuts or kernels resulting from the extraction of vegetable/microbial fats/oils oth than those of heading 2304 / 2305 other than ground/in the form of pellets,2024,1927200.0,data/raw/eksporimpor/
+23066090,Palm nuts or kernels oth than ground or in the form of pellets,2020,1552059.9,data/raw/eksporimpor/
+23066090,Palm nuts or kernels oth than ground or in the form of pellets,2021,1644064.0,data/raw/eksporimpor/
+23069090,Oil-cake & oth solid residues w.o.n ground/in the form of pellets resulting from the extraction of vegetable/microbial fats/oils oth than those of heading 2304 / 2305 other than HS code 23061000 to 23069010,2023,687569.5,data/raw/eksporimpor/
+23069090,Oil-cake & oth solid residues w.o.n ground/in the form of pellets resulting from the extraction of vegetable/microbial fats/oils oth than those of heading 2304 / 2305 other than HS code 23061000 to 23069010,2024,3446655.08,data/raw/eksporimpor/
+23080000,Veg materialswaste residues won in the form of pellets of a kind used in animal feeding,2020,71282.13,data/raw/eksporimpor/
+23080000,Veg materialswaste residues won in the form of pellets of a kind used in animal feeding,2021,15028.56,data/raw/eksporimpor/
+23080000,Vegetable materials and wastevegetable residues whether or not in pellets form used in animal feeding not else specified,2023,69886.72,data/raw/eksporimpor/
+23080000,Vegetable materials and wastevegetable residues whether or not in pellets form used in animal feeding not else specified,2024,175188.56,data/raw/eksporimpor/
+25151210,Marble & travertineMerely cutby sawing/otherwiseinto blocks a rectangular (including square) shape blocks,2020,689432.55,data/raw/eksporimpor/
+25151210,Marble & travertineMerely cutby sawing/otherwiseinto blocks a rectangular (including square) shape blocks,2021,626324.59,data/raw/eksporimpor/
+25151210,Marble and travertine merely cut by sawing or otherwise into blocks of a rectangular (including square) shape,2023,864054.0599999999,data/raw/eksporimpor/
+25151210,Marble and travertine merely cut by sawing or otherwise into blocks of a rectangular (including square) shape,2024,1549810.34,data/raw/eksporimpor/
+25151210,Marble and travertine merely cut by sawing or otherwise into blocks of a rectangular (including square) shape,2026,67765.51000000001,data/raw/eksporimpor/
+29159020,Lauric acid myristic acid their salts & esters,2020,7962988.289999999,data/raw/eksporimpor/
+29159020,Lauric acid myristic acid their salts & esters,2021,9115882.44,data/raw/eksporimpor/
+31010099,Animal fertilisersnot chemically treated,2020,64085.0,data/raw/eksporimpor/
+33012950,Essential oils of cloves,2024,22400.0,data/raw/eksporimpor/
+33012960,Essential oils of patchouli,2023,4143740.0,data/raw/eksporimpor/
+33012960,Essential oils of patchouli,2024,4551456.63,data/raw/eksporimpor/
+33012990,Oth essential oil of lemon grass citronella nutmeg cinnamon ginger ca,2020,97000.0,data/raw/eksporimpor/
+33019090,Concentrates of essential oils in fats in fixed oils in waxes or the like obtained by enfleurage or maceration terpenic by-products of the deterpenation of essential oils,2023,1205621.0,data/raw/eksporimpor/
+33019090,Concentrates of essential oils in fats in fixed oils in waxes or the like obtained by enfleurage or maceration terpenic by-products of the deterpenation of essential oils,2024,367695.57,data/raw/eksporimpor/
+38021090,Activated carbon based on other than coconut shell charcoal,2024,435300.58,data/raw/eksporimpor/
+38021090,Activated carbon based on other than coconut shell charcoal,2026,127247.55,data/raw/eksporimpor/
+38051000,Gum wood or sulphate turpentine oils,2023,1688937.84,data/raw/eksporimpor/
+38051000,Gum wood or sulphate turpentine oils,2024,1213457.36,data/raw/eksporimpor/
+38059000,Other terpenic oils other treatment of coniferous woods crude dipentene sulphite turpentine and other crude para-cymene pine oil containing alpha-terpineol as the main constituent,2024,23752.0,data/raw/eksporimpor/
+38061000,Rosin & resin acids,2020,178686.8,data/raw/eksporimpor/
+38061000,Rosin & resin acids,2021,63048.0,data/raw/eksporimpor/
+38061000,Rosin and resin acids,2023,6402386.949999999,data/raw/eksporimpor/
+38061000,Rosin and resin acids,2024,5130437.96,data/raw/eksporimpor/
+38061000,Rosin and resin acids,2026,1397609.12,data/raw/eksporimpor/
+38231910,Industrial monocarboxylic fatty acids acid oils from refining other acid oils from refining,2020,272981.28,data/raw/eksporimpor/
+38231911,Industrial monocarboxylic fatty acids acid oils from refining coconut acid oil,2023,6835961.26,data/raw/eksporimpor/
+38231911,Industrial monocarboxylic fatty acids acid oils from refining coconut acid oil,2024,5210669.05,data/raw/eksporimpor/
+38231911,Industrial monocarboxylic fatty acids acid oils from refining coconut acid oil,2026,3322996.63,data/raw/eksporimpor/
+38231920,Industrial monocarboxylic fatty acids acid oils from refining other Palm fatty acid distillate,2020,12445304.22,data/raw/eksporimpor/
+38231920,Industrial monocarboxylic fatty acids acid oils from refining other Palm fatty acid distillate,2021,27158317.01,data/raw/eksporimpor/
+38231920,Industrial monocarboxylic fatty acids other than acid oils from refining palm fatty acid distillate,2023,16428759.2,data/raw/eksporimpor/
+38231920,Industrial monocarboxylic fatty acids other than acid oils from refining palm fatty acid distillate,2024,12364558.92,data/raw/eksporimpor/
+38231920,Industrial monocarboxylic fatty acids other than acid oils from refining palm fatty acid distillate,2026,4193917.13,data/raw/eksporimpor/
+38231930,Industrial monocarboxylic fatty acids acid oils from refining other Palm kernel fatty acid distillate,2020,815830.45,data/raw/eksporimpor/
+38231930,Industrial monocarboxylic fatty acids acid oils from refining other Palm kernel fatty acid distillate,2021,344732.77,data/raw/eksporimpor/
+38231930,Industrial monocarboxylic fatty acids other than acid oils from refining palm kernel fatty acid distillate,2023,735654.15,data/raw/eksporimpor/
+38231930,Industrial monocarboxylic fatty acids other than acid oils from refining palm kernel fatty acid distillate,2024,523847.94,data/raw/eksporimpor/
+38231930,Industrial monocarboxylic fatty acids other than acid oils from refining palm kernel fatty acid distillate,2026,473352.54,data/raw/eksporimpor/
+38231990,Other industrial monocarboxylic fatty acids acid oils from refining,2020,13039.2,data/raw/eksporimpor/
+40012110,Natural rubber in smoked sheets RSS Grade 1,2023,708926.4,data/raw/eksporimpor/
+40012110,Natural rubber in smoked sheets RSS Grade 1,2024,564253.2,data/raw/eksporimpor/
+40159020,Divers' suits (wet suits) of vulcanised rubber other than hard rubber,2026,43950.0,data/raw/eksporimpor/
+44013100,Sawdust and wood waste and scrap agglomerated in logs briquettes pellets or similar forms : wood pellets,2023,5557877.67,data/raw/eksporimpor/
+44013100,Sawdust and wood waste and scrap agglomerated in logs briquettes pellets or similar forms : wood pellets,2024,8327491.89,data/raw/eksporimpor/
+44013100,Sawdust and wood waste and scrap agglomerated in logs briquettes pellets or similar forms : wood pellets,2026,2856000.0,data/raw/eksporimpor/
+44022010,Wood charcoal (including shell or nut charcoal) whether or not agglomerated of shell or nut of coconut shell,2023,512865.49,data/raw/eksporimpor/
+44022010,Wood charcoal (including shell or nut charcoal) whether or not agglomerated of shell or nut of coconut shell,2024,36695.86,data/raw/eksporimpor/
+44022010,Wood charcoal (including shell or nut charcoal) whether or not agglomerated of shell or nut of coconut shell,2026,146822.96,data/raw/eksporimpor/
+44022090,Wood charcoal (including shell or nut charcoal) whether or not agglomerated of shell or nut other than coconut shell,2023,68321.86,data/raw/eksporimpor/
+44022090,Wood charcoal (including shell or nut charcoal) whether or not agglomerated of shell or nut other than coconut shell,2026,119777.53,data/raw/eksporimpor/
+44029000,Wood charcoal (including shell or nut charcoal) whether or not agglomerated of bamboo or shell or nut,2026,888488.3200000001,data/raw/eksporimpor/
+44029010,Wood charcoal of coconut shell whether or not agglomerated.,2020,222154.0,data/raw/eksporimpor/
+44029010,Wood charcoal of coconut shell whether or not agglomerated.,2021,53250.0,data/raw/eksporimpor/
+44029090,Wood charcoal other of coconut shell whether or not agglomerated.,2021,383804.52,data/raw/eksporimpor/
+44089090,Other than face veneer sheets of non-coniferous and other than tropical wood,2021,2.0,data/raw/eksporimpor/
+44092200,Non-coniferous of tropical wood cotinuously shaped along any of its edgeeends/faces won planedsanded or end-jointed,2020,1286878.84,data/raw/eksporimpor/
+44092200,Non-coniferous of tropical wood cotinuously shaped along any of its edgeeends/faces won planedsanded or end-jointed,2021,106137.02,data/raw/eksporimpor/
+44092200,Woodnon-coniferous of tropical wood cotinuously shaped along any of its edgeeends/faceswhether or not planedsanded/end-jointed,2023,459399.54,data/raw/eksporimpor/
+44092200,Woodnon-coniferous of tropical wood cotinuously shaped along any of its edgeeends/faceswhether or not planedsanded/end-jointed,2024,133830.26,data/raw/eksporimpor/
+44123100,Oth plywoodconsis solely sheets of wood(exc bamboo)each ply <= 6 mm thickw/at least one outer ply of tropical wood,2020,1723676.84,data/raw/eksporimpor/
+44123300,Oth plysolely of sheets exc bambooeach ply< 6 mm thickw/at least one outer ply non-coniferous of alder(Alnus spp)etc,2020,303524.48,data/raw/eksporimpor/
+44129400,Oth plywoodconsis solely of sheets of wood(oth thn bamboo)each ply >6 mm thicknessBlockboardlaminboard & battenboard,2020,176324.99,data/raw/eksporimpor/
+44129990,Other plywood except bamboo each ply more than 6 mm thickness other than HS code 4412.99.10 - 4412.99.30,2020,60524.0,data/raw/eksporimpor/
+44182100,Doors and their frames and thresholds of tropical wood,2023,534.68,data/raw/eksporimpor/
+44187900,Assembled flooring panels other than of bamboo or with at least the top layer (wear layer) of bamboo other than mosaic flooring other than multilayer,2023,7920.93,data/raw/eksporimpor/
+44189200,Builders' joinery and carpentry of wood other than HS 44181100-44188900 of cellular wood panels,2023,45306.25,data/raw/eksporimpor/
+44189900,Builders' joinery and carpentry of wood other than HS 44181100-44188900 other than of bamboo and cellular wood panels,2023,8291.06,data/raw/eksporimpor/
+44189990,Other builders’ joinery and carpentry of wood other than of bamboo other than cellular wood panels,2021,46486.8,data/raw/eksporimpor/
+48059390,Uncoated paper and paperboard in rolls or sheets weighing 225 g/m2 or more other than multiply paper and paperboard and blotting paper,2024,4850058.2,data/raw/eksporimpor/
+48059390,Uncoated paper and paperboard in rolls or sheets weighing 225 g/m2 or more other than multiply paper and paperboard and blotting paper,2026,183798.78,data/raw/eksporimpor/
+50010000,Silk-worm cocoons suitable for reeling,2023,9926.8,data/raw/eksporimpor/
+53050021,Coconut fibres(coir) and abaca fibres coconut fibres raw,2021,70317.5,data/raw/eksporimpor/
+53050022,Coconut fibres(coir) and abaca fibres other coconut fibres,2020,16780.0,data/raw/eksporimpor/
+53050090,Ramie and other vegetable textile fibres not elsewhere specified or included raw or processed but not spun; tow noils and waste of these fibres (including yarn waste and garnetted stock),2023,9031.44,data/raw/eksporimpor/
+53050090,Ramie and other vegetable textile fibres not elsewhere specified or included raw or processed but not spun; tow noils and waste of these fibres (including yarn waste and garnetted stock),2024,4861.49,data/raw/eksporimpor/
+56081100,Knotted netting of twine cordage or rope; made up fishing nets; of man-made textile materials,2023,251005.0,data/raw/eksporimpor/
+56081100,Knotted netting of twine cordage or rope; made up fishing nets; of man-made textile materials,2024,33760.0,data/raw/eksporimpor/
+68022100,Marble travertine and alabaster; simply cut or sawn with a flat or even surface,2023,105260.0,data/raw/eksporimpor/
+68022100,Marble travertine and alabaster; simply cut or sawn with a flat or even surface,2024,70535.38,data/raw/eksporimpor/
+68022100,Oth monmental/building stone of marbletravertinealabastersimple,2020,29245.44,data/raw/eksporimpor/
+68022100,Oth monmental/building stone of marbletravertinealabastersimple,2021,17873.95,data/raw/eksporimpor/
+68029110,Other articles monumental or building stone; marble,2024,10100.82,data/raw/eksporimpor/
+72015000,Alloy pig iron; spiegeleisen,2024,35051011.94,data/raw/eksporimpor/
+72015000,Alloy pig iron; spiegeleisen,2026,53018021.48,data/raw/eksporimpor/
+72026000,Ferro alloy nickel,2020,1072733273.29,data/raw/eksporimpor/
+72026000,Ferro alloy nickel,2021,1623729900.15,data/raw/eksporimpor/
+72026000,Ferro-nickel,2023,3506981539.96,data/raw/eksporimpor/
+72026000,Ferro-nickel,2024,3620746035.56,data/raw/eksporimpor/
+72026000,Ferro-nickel,2026,1485705255.74,data/raw/eksporimpor/
+72112990,Flat-rolled products of iron/non-alloy steel not clad plated/coated width<600mm; cold-rolled; weight ≥ 0.25% carbon; oth than corrugated; oth than hoop&strip width ≤400 mm; oth than thick ≤ 0.17mm,2026,296434.23,data/raw/eksporimpor/
+72189100,Oth stainless steel in ingots/oth primary formrectangular(oth than square)cross-section,2021,37408850.6,data/raw/eksporimpor/
+72189100,Semi- finished products of stainless steel; of rectangular (other than square) cross-section,2023,52153940.0,data/raw/eksporimpor/
+72189100,Semi- finished products of stainless steel; of rectangular (other than square) cross-section,2024,86764761.32,data/raw/eksporimpor/
+72189900,Oth than stainless steel in ingots/oth primary formrectangular (oth than square)cross-section,2020,1153561339.49,data/raw/eksporimpor/
+72189900,Oth than stainless steel in ingots/oth primary formrectangular (oth than square)cross-section,2021,2603023395.36,data/raw/eksporimpor/
+72189900,Semi- finished products of stainless steel; other than of rectangular (other than square) cross-section,2023,1085361843.71,data/raw/eksporimpor/
+72189900,Semi- finished products of stainless steel; other than of rectangular (other than square) cross-section,2024,696457460.65,data/raw/eksporimpor/
+72189900,Semi- finished products of stainless steel; other than of rectangular (other than square) cross-section,2026,30301806.34,data/raw/eksporimpor/
+73089099,Other guardrails of iron or steel,2021,44501.0,data/raw/eksporimpor/
+75011000,Nickel mattes,2023,57802978.0,data/raw/eksporimpor/
+75011000,Nickel mattes,2026,2411994.31,data/raw/eksporimpor/
+75021000,Unwrought nickel not alloyed,2024,3807488.05,data/raw/eksporimpor/
+76012000,Aluminium alloysunwrought aluminium,2020,204720.5,data/raw/eksporimpor/
+84145999,Other table fans otherthan with fan guard and Explosion-proof air fans of a kind used in underground mining,2024,43340.11,data/raw/eksporimpor/
+84223000,Machinery for filling closing sealing/labelling bottles cans boxes bags or other containers; machinery for capsuling bottles jars tubes & similar containers; machinery for aerating beverages,2024,120000.0,data/raw/eksporimpor/
+84283990,Other continuous-action elevators and conveyors for goods or materials ; otherthan of a kind used for agriculture,2024,25000.0,data/raw/eksporimpor/
+84289090,Lifting/handling/loading/unloading mach oth than escalatorliftconveyortelefericauto mach of PCBmine wagon pusher,2021,86900.0,data/raw/eksporimpor/
+84314990,Oth parts suitable use of oth moving grading levellingscraping excavating tamping compacting,2021,59473.31,data/raw/eksporimpor/
+84716090,Other input or output units whether or not containing storage units in the same housing,2024,18508.21,data/raw/eksporimpor/
+84741010,Sorting screening separating or washing machines electrically operated,2024,33291.19,data/raw/eksporimpor/
+84796000,Machines evaporative air coolers,2020,179317.55,data/raw/eksporimpor/
+84798969,Electrically operated non-automatic service-vending machines,2024,13366.49,data/raw/eksporimpor/
+85177999,Other printed circuit boards unassembled; other than of goods for line/radio-telephony or line/radio-telegraphy,2023,3036.0,data/raw/eksporimpor/
+90181900,Electro-diagnostic apparatus (incl. apparatus for functional exploratory examination or for checking physiological parameters) not elsewhere classified in heading 9018,2024,170000.0,data/raw/eksporimpor/
+90249000,Parts and accessories of machines and appliances for testing the hardness strength compressibility elasticity or other mechanical properties of materials,2024,8180.97,data/raw/eksporimpor/
+90251919,Electrically operated thermometers and pyrometers not combined with other instruments other than liquid-filled for direct reading and temperature gauges for motor vehicles,2024,12546.41,data/raw/eksporimpor/
+90258000,Hydrometers and similar floating instruments barometers hygrometers and psychrometers recording or not and any combination of these instruments,2024,536.92,data/raw/eksporimpor/
+90261090,Instruments and apparatus for measuring or checking the flow or level of liquids other than level gauges for motor vehicles,2024,2830.7,data/raw/eksporimpor/
+90262090,Instruments and apparatus for measuring or checking pressure other than pressure gauges for motor vehicles,2024,24119.02,data/raw/eksporimpor/
+90271000,Gas or smoke analysis apparatus,2024,20530.14,data/raw/eksporimpor/
+94016990,Seats with wooden frames ; With backrest and/or the seat made of other than rattan,2023,7410.0,data/raw/eksporimpor/
+94036090,Oth wooden furnitureoth than fume cupboard,2020,39191.0,data/raw/eksporimpor/
+94036090,Oth wooden furnitureoth than fume cupboard,2021,17480.0,data/raw/eksporimpor/
+94036090,Wooden firniture other than fume cupboards of wood not used in offices or kitchen or bedroom,2023,2467838.78,data/raw/eksporimpor/
+94036090,Wooden firniture other than fume cupboards of wood not used in offices or kitchen or bedroom,2024,3345780.15,data/raw/eksporimpor/
+94036090,Wooden firniture other than fume cupboards of wood not used in offices or kitchen or bedroom,2026,1308183.6,data/raw/eksporimpor/
+96019019,Worked mother-of-pearl or tortoise-shell and articles of the foregoing; other than cigar or cigarette cases tobacco jars ornamental articles pearl nucleus,2024,405.0,data/raw/eksporimpor/
+96031020,Brooms consisting of twigs or other vegetable materials bound together with or without handles,2023,4500.0,data/raw/eksporimpor/
+96063090,Button moulds & other parts of buttons; button blanks of other material,2020,17537.5,data/raw/eksporimpor/
+96063090,Button moulds and other parts of buttons button blanks; of material other than plastics,2023,34642.5,data/raw/eksporimpor/

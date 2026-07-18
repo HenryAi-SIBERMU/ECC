@@ -1,0 +1,275 @@
+    # ══════════════════════════════════════════════════════════
+    # SUB-BAB 1.0: KONTEKS MAKRO EKONOMI (BREAKDOWN PDRB)
+    # ══════════════════════════════════════════════════════════
+    st.markdown("---")
+    st.subheader("1.1 Konteks Makro: Breakdown PDRB per Komoditas")
+
+    st.markdown("""
+    Sebelum membahas ledakan izin dan investasi ekstraktif secara spesifik, kita perlu membedah anatomi ekonomi makro Sulawesi. 
+    Apakah klaim "pertumbuhan ekonomi" benar-benar dinikmati oleh masyarakat luas, atau hanya dinikmati oleh segelintir sektor padat modal?
+    """)
+
+    st.markdown("#### 1.1.1 Dominasi Ekstraktif vs Ekonomi Akar Rumput (2016-2024)")
+    st.markdown("""Grafik di bawah ini menyederhanakan 17 sektor PDRB menjadi **3 klasifikasi makro advokatif** berdasarkan *Legal Supply-Chain Approach* (Metodologi CELIOS/ECC).
+
+    - 🔴 **Ekstraktif** = Kat. B (Pertambangan) + Kat. C (Industri Pengolahan/Smelter) + Kat. D (Listrik/PLTU Captive) — digabung berdasarkan mandat wajib UU Minerba Ps. 102–103 & Perpres 112/2022.
+    - 🟢 **Ekonomi Akar Rumput** = Kat. A (Pertanian, Kehutanan & Perikanan) — sektor terbarukan penyerap tenaga kerja lokal terbesar.
+    - ⚪ **Sektor Jasa & Lainnya** = 13 sektor E–U sisanya.
+    """)
+
+    # ── Klasifikasi Advokatif berdasarkan Metodologi CELIOS/ECC ──────────────────
+    # Sumber: docs/metodologi_klasifikasi_ekstraktif.md
+    # Kat B+C+D = Ekstraktif (Legal Supply-Chain: UU Minerba Ps.1,102-103; Perpres 112/2022 Ps.3 Ay.4)
+    # Kat A     = Ekonomi Akar Rumput (BPS KBLI 2020 Buku 1 Hal.21)
+    # E–U       = Sektor Jasa & Lainnya
+    EKSTRAKTIF_KODE = ['B', 'C', 'D']
+    EKSTRAKTIF_NAMA = [
+        'Pertambangan dan Penggalian',          # Kat B — definisi langsung (Perpres 26/2010 Ps.1 Ay.2)
+        'Industri Pengolahan',                   # Kat C — smelter WAJIB hukum (UU 3/2020 Ps.102-103)
+        'Pengadaan Listrik dan Gas',             # Kat D — PLTU captive terintegrasi (Perpres 112/2022 Ps.3 Ay.4)
+    ]
+    AKAR_RUMPUT_NAMA = ['Pertanian, Kehutanan, dan Perikanan']  # Kat A
+
+    LABEL_EKSTRAKTIF   = 'Ekstraktif'
+    LABEL_AKAR_RUMPUT  = 'Ekonomi Akar Rumput (Pertanian & Perikanan)'
+    LABEL_JASA         = 'Sektor Jasa & Lainnya'
+
+    def klasifikasi_kritis(sektor):
+        """Klasifikasikan sektor PDRB ke 3 kelompok advokatif.
+        Metodologi: Legal Supply-Chain Approach (docs/metodologi_klasifikasi_ekstraktif.md)
+        """
+        if sektor in EKSTRAKTIF_NAMA:
+            return LABEL_EKSTRAKTIF
+        elif sektor in AKAR_RUMPUT_NAMA:
+            return LABEL_AKAR_RUMPUT
+        else:
+            return LABEL_JASA
+
+    df_hist_group = df_pdrb.copy()
+    df_hist_group['Klasifikasi'] = df_hist_group['sektor_nama'].apply(klasifikasi_kritis)
+    df_hist_agg = df_hist_group.groupby(['provinsi', 'tahun', 'Klasifikasi'])['nilai_miliar_rp'].sum().reset_index()
+    # Konversi ke Triliun Rupiah agar angka di sumbu Y lebih bersih (tidak ada 'k')
+    df_hist_agg['nilai_triliun_rp'] = df_hist_agg['nilai_miliar_rp'] / 1000
+
+    # Tambahkan penanda khusus untuk Sulawesi Tengah di nama provinsi agar ter-highlight
+    # Tambahkan penanda khusus untuk Sulawesi Tengah di nama provinsi agar ter-highlight
+    df_hist_agg['provinsi_label'] = df_hist_agg['provinsi'].apply(
+        lambda x: f"{x.upper()} (PUSAT LEDAKAN)" if x == "Sulawesi Tengah" else x
+    )
+
+    # Hitung ulang persentase berdasarkan total keseluruhan PDRB
+    df_total_agg = df_hist_agg.groupby(['provinsi', 'tahun'])['nilai_miliar_rp'].sum().reset_index(name='total_pdrb')
+    df_hist_agg = df_hist_agg.merge(df_total_agg, on=['provinsi', 'tahun'])
+    df_hist_agg['pct_dari_total'] = (df_hist_agg['nilai_miliar_rp'] / df_hist_agg['total_pdrb']) * 100
+
+    # Urutan kategori: Akar Rumput di bawah, Jasa di tengah, Ekstraktif di atas (stacked)
+    cat_order = [LABEL_EKSTRAKTIF, LABEL_JASA, LABEL_AKAR_RUMPUT]
+    df_hist_agg['Klasifikasi'] = pd.Categorical(df_hist_agg['Klasifikasi'], categories=cat_order, ordered=True)
+    df_hist_agg = df_hist_agg.sort_values(by=['provinsi', 'tahun', 'Klasifikasi'])
+
+    # VISUALISASI 1: Altair Stacked Area Chart (Historical Tren 2016-2024, Absolute Value)
+    color_map = {
+        LABEL_EKSTRAKTIF:  '#E74C3C',  # Flat red (Alizarin)
+        LABEL_JASA:        '#7F8C8D',  # Flat grey (Asbestos)
+        LABEL_AKAR_RUMPUT: '#2ECC71',  # Flat green (Emerald)
+    }
+
+    cat_order_area = [LABEL_AKAR_RUMPUT, LABEL_JASA, LABEL_EKSTRAKTIF]
+
+    # Custom Legend HTML (Rata Kanan-Kiri & Responsif)
+    st.markdown(f"""
+    <div style="display: flex; gap: 20px; justify-content: center; margin-bottom: 25px; flex-wrap: wrap;">
+        <div style="font-size: 13px;"><span style="color: {color_map[LABEL_AKAR_RUMPUT]}; font-size: 16px;">&bull;</span> {LABEL_AKAR_RUMPUT}</div>
+        <div style="font-size: 13px;"><span style="color: {color_map[LABEL_JASA]}; font-size: 16px;">&bull;</span> {LABEL_JASA}</div>
+        <div style="font-size: 13px;"><span style="color: {color_map[LABEL_EKSTRAKTIF]}; font-size: 16px;">&bull;</span> {LABEL_EKSTRAKTIF}</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Grid Layout: 3 Columns
+    provinces = df_hist_agg['provinsi_label'].unique()
+    cols = st.columns(3)
+
+    for i, prov in enumerate(provinces):
+        df_prov = df_hist_agg[df_hist_agg['provinsi_label'] == prov]
+    
+        chart = alt.Chart(df_prov).mark_area(opacity=0.9).encode(
+            x=alt.X('tahun:O', title='Tahun', axis=alt.Axis(labelAngle=0, values=[2016, 2018, 2020, 2022, 2024])),
+            y=alt.Y('nilai_triliun_rp:Q', title='Nilai PDRB (Triliun Rp)', stack=True),
+            color=alt.Color('Klasifikasi:N', 
+                            sort=cat_order_area,
+                            scale=alt.Scale(domain=cat_order_area, 
+                                            range=[color_map[LABEL_AKAR_RUMPUT], color_map[LABEL_JASA], color_map[LABEL_EKSTRAKTIF]]),
+                            legend=None), # Legend dinonaktifkan karena pakai HTML
+            tooltip=[
+                alt.Tooltip('provinsi:N', title='Provinsi'),
+                alt.Tooltip('tahun:O', title='Tahun'),
+                alt.Tooltip('Klasifikasi:N', title='Sektor'),
+                alt.Tooltip('nilai_triliun_rp:Q', title='PDRB (Triliun Rp)', format=',.1f'),
+                alt.Tooltip('pct_dari_total:Q', title='Porsi (%)', format=',.1f')
+            ]
+        ).properties(
+            title=alt.TitleParams(text=prov, anchor='middle', fontSize=13, color='white'),
+            height=220
+        ).configure_view(
+            stroke=None
+        ).configure_axis(
+            grid=True, gridColor='#333333'
+        )
+    
+        cols[i % 3].altair_chart(chart, use_container_width=True)
+
+    st.caption("Metodologi: Legal Supply-Chain Approach — Kat B+C+D = Ekstraktif (UU Minerba Ps.102-103; Perpres 112/2022 Ps.3 Ay.4)")
+
+    st.markdown("#### 1.1.2 Ketimpangan Ekstraktif di Wilayah Pusat Ledakan (Kabupaten se-Sulawesi Tengah)")
+    st.markdown("""
+    Jika kita menukik lebih dalam secara geografis membedah **Sulawesi Tengah**, kita dapat melihat letak pasti episentrum kerusakan ekologis. Kabupaten **Morowali** dan **Morowali Utara** memanipulasi keseluruhan kurva pertumbuhan provinsi melalui mega proyek hilirisasi dan PLTU Captive. 
+    Visualisasi di bawah membandingkan komposisi ketiga sektor advokatif di seluruh 13 kabupaten/kota se-Sulawesi Tengah pada tahun terbaru.
+    """)
+
+    df_kab_hist = df_pdrb_kab.copy()
+    df_kab_hist['Klasifikasi'] = df_kab_hist['sektor_nama'].apply(klasifikasi_kritis)
+
+    # Filter HANYA Sulawesi Tengah dan HANYA Tahun Terbaru
+    df_kab_sulteng = df_kab_hist[df_kab_hist['provinsi'] == 'Sulawesi Tengah'].copy()
+    latest_year_kab = df_kab_sulteng['tahun'].max()
+    df_kab_latest = df_kab_sulteng[df_kab_sulteng['tahun'] == latest_year_kab].copy()
+
+    df_kab_agg = df_kab_latest.groupby(['kabupaten', 'Klasifikasi'])['nilai_miliar_rp'].sum().reset_index()
+    df_kab_agg['nilai_triliun_rp'] = df_kab_agg['nilai_miliar_rp'] / 1000
+
+    df_kab_tot = df_kab_agg.groupby('kabupaten')['nilai_triliun_rp'].sum().reset_index(name='total')
+    df_kab_agg = df_kab_agg.merge(df_kab_tot, on='kabupaten')
+    df_kab_agg['pct'] = (df_kab_agg['nilai_triliun_rp'] / df_kab_agg['total']) * 100
+
+    # Urutkan berdasarkan total terbesar
+    df_kab_agg = df_kab_agg.sort_values(by=['total', 'Klasifikasi'], ascending=[True, True])
+
+    # Bikin Horizontal Stacked Bar Chart
+    df_kab_agg['Klasifikasi'] = pd.Categorical(df_kab_agg['Klasifikasi'], categories=cat_order_area, ordered=True)
+
+    # Tambahkan label (tanpa emoji, uppercase untuk Morowali)
+    df_kab_agg['kabupaten_label'] = df_kab_agg['kabupaten'].apply(
+        lambda x: f"{x.upper()}" if 'Morowali' in x else x
+    )
+
+    # Urutkan berdasarkan total terbesar untuk urutan Y-axis Altair
+    sort_order = df_kab_agg.groupby('kabupaten_label')['total'].first().sort_values(ascending=False).index.tolist()
+
+    bar_kab = alt.Chart(df_kab_agg).mark_bar().encode(
+        y=alt.Y('kabupaten_label:N', title=None, sort=sort_order, axis=alt.Axis(labelLimit=500, labelFontSize=11)),
+        x=alt.X('nilai_triliun_rp:Q', title=f"Nilai PDRB ({latest_year_kab}) - Triliun Rp"),
+        color=alt.Color('Klasifikasi:N', 
+                        scale=alt.Scale(domain=cat_order_area, 
+                                        range=[color_map[LABEL_AKAR_RUMPUT], color_map[LABEL_JASA], color_map[LABEL_EKSTRAKTIF]]),
+                        legend=alt.Legend(title=None, orient="bottom", direction="vertical", labelLimit=1000)),
+        tooltip=[
+            alt.Tooltip('kabupaten:N', title='Kabupaten'),
+            alt.Tooltip('Klasifikasi:N', title='Sektor'),
+            alt.Tooltip('nilai_triliun_rp:Q', title='Nilai (Triliun Rp)', format=',.1f'),
+            alt.Tooltip('pct:Q', title='Porsi (%)', format=',.1f')
+        ]
+    ).properties(
+        height=500
+    ).configure_view(
+        stroke=None
+    ).configure_axis(
+        grid=True, gridColor='#333333'
+    )
+
+    st.altair_chart(bar_kab, use_container_width=True)
+
+    with st.expander("Lihat Data Mentah: Agregasi 3 Sektor Advokatif (Provinsi & Kabupaten)", expanded=False):
+        col_prov, col_kab = st.columns(2)
+        with col_prov:
+            st.write("**Data Provinsi**")
+            st.dataframe(df_hist_agg[['provinsi', 'tahun', 'Klasifikasi', 'nilai_miliar_rp', 'nilai_triliun_rp', 'pct_dari_total']], use_container_width=True, hide_index=True)
+        with col_kab:
+            st.write("**Data Kabupaten (Sulawesi Tengah)**")
+            st.dataframe(df_kab_agg[['kabupaten', 'Klasifikasi', 'nilai_triliun_rp', 'pct']], use_container_width=True, hide_index=True)
+        st.caption("📁 **Sumber File:** Data SIMDASI BPS yang diagregasi menjadi 3 Klasifikasi Utama.")
+
+
+    st.markdown("#### 1.1.3 Perbandingan Distribusi 17 Sektor Komoditas per Provinsi (Small Multiples, Tahun Terbaru)")
+    st.markdown("Visualisasi Small Multiples ini membandingkan komposisi 17 sektor komoditas secara terpisah di tiap provinsi. Sektor diurutkan dari penyumbang terbesar (atas) hingga terkecil (bawah). Skala sumbu X konsisten untuk memvalidasi perbandingan lintas provinsi.")
+
+    # VISUALISASI 2: Altair Small Multiples Horizontal Bar Chart (Current Year)
+    latest_year = df_pdrb['tahun'].max()
+    df_latest = df_pdrb[df_pdrb['tahun'] == latest_year].copy()
+
+    # Klasifikasikan 17 Sektor menjadi 3 Makro Warna
+    df_latest['Klasifikasi'] = df_latest['sektor_nama'].apply(klasifikasi_kritis)
+    df_latest['nilai_triliun_rp'] = df_latest['nilai_miliar_rp'] / 1000
+
+    # Add province totals to facet title
+    prov_totals = df_latest.groupby('provinsi')['nilai_miliar_rp'].sum().reset_index()
+    prov_totals['prov_title'] = prov_totals.apply(lambda r: f"{r['provinsi']} (Total: {r['nilai_miliar_rp']/1000:,.0f} Triliun Rp)", axis=1)
+
+    df_latest = df_latest.merge(prov_totals[['provinsi', 'prov_title']], on='provinsi')
+
+    # Shorten sector names for y-axis to fit well
+    df_latest['sektor_short'] = df_latest['sektor_nama'].apply(lambda x: x[:35] + '...' if len(x) > 35 else x)
+
+    # Custom Legend HTML (Sama seperti 1.1.1)
+    st.markdown(f"""
+    <div style="display: flex; gap: 20px; justify-content: center; margin-bottom: 25px; flex-wrap: wrap;">
+        <div style="font-size: 13px;"><span style="color: {color_map[LABEL_AKAR_RUMPUT]}; font-size: 16px;">&bull;</span> {LABEL_AKAR_RUMPUT}</div>
+        <div style="font-size: 13px;"><span style="color: {color_map[LABEL_JASA]}; font-size: 16px;">&bull;</span> {LABEL_JASA}</div>
+        <div style="font-size: 13px;"><span style="color: {color_map[LABEL_EKSTRAKTIF]}; font-size: 16px;">&bull;</span> {LABEL_EKSTRAKTIF}</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Fixed X scale with 15% padding for text labels
+    max_x_val = df_latest['nilai_triliun_rp'].max() * 1.15
+
+    provinces = df_latest['prov_title'].unique()
+    cols_multi = st.columns(2)
+
+    for i, prov in enumerate(provinces):
+        df_prov = df_latest[df_latest['prov_title'] == prov]
+    
+        bar_latest = alt.Chart(df_prov).mark_bar().encode(
+            y=alt.Y('sektor_short:N', sort='-x', title=None, axis=alt.Axis(labels=True, ticks=False, labelOverlap=False, labelLimit=250, labelFontSize=11)),
+            x=alt.X('nilai_triliun_rp:Q', title='Nilai PDRB (Triliun Rupiah)', scale=alt.Scale(domain=[0, max_x_val])),
+            color=alt.Color('Klasifikasi:N', 
+                            scale=alt.Scale(domain=cat_order_area, 
+                                            range=[color_map[LABEL_AKAR_RUMPUT], color_map[LABEL_JASA], color_map[LABEL_EKSTRAKTIF]]),
+                            legend=None),
+            tooltip=[
+                alt.Tooltip('sektor_nama:N', title='Sektor'),
+                alt.Tooltip('Klasifikasi:N', title='Klasifikasi'),
+                alt.Tooltip('nilai_triliun_rp:Q', title='Nilai (Triliun Rp)', format=',.1f'),
+                alt.Tooltip('pct_dari_total:Q', title='Porsi (%)', format=',.1f')
+            ]
+        )
+
+        text_latest = bar_latest.mark_text(
+            align='left', baseline='middle', dx=3, color='white', fontSize=10
+        ).encode(
+            text=alt.Text('nilai_triliun_rp:Q', format=',.1f')
+        )
+
+        chart_latest = alt.layer(bar_latest, text_latest).properties(
+            title=alt.TitleParams(text=prov, anchor='middle', fontSize=13, color='white'),
+            height=380
+        ).configure_view(
+            stroke=None
+        ).configure_axis(
+            grid=True, gridColor='#333333'
+        )
+    
+        cols_multi[i % 2].altair_chart(chart_latest, use_container_width=True)
+
+    st.markdown("""
+    <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #F44336; margin-bottom: 25px;">
+        <b>Interpretasi Ekstraktif:</b> Jika kita membedah seluruh komoditas tanpa agregasi, terlihat jelas bahwa di Sulawesi Tengah, 'Industri Pengolahan' dan 'Pertambangan' memuncaki klasemen secara absolut, sangat jomplang dibandingkan sektor lainnya. Sementara di Sulawesi Selatan dan Gorontalo, struktur ekonominya masih konvensional di mana 'Pertanian' dan 'Perdagangan' mendominasi.
+    </div>
+    """, unsafe_allow_html=True)
+
+    with st.expander("Lihat Data Mentah: PDRB Sektoral", expanded=False):
+        st.dataframe(df_pdrb, use_container_width=True, hide_index=True)
+        st.caption("📁 **Sumber File:** `data/processed/sulawesi_pdrb_sektoral_2016_2024.csv` - Data dari BPS (SIMDASI).")
+
+    st.markdown("<div style='height: 30px;'></div>", unsafe_allow_html=True)
+
+
+

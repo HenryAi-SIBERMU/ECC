@@ -1,0 +1,476 @@
+{
+  "file name" : "Hasil Simulasi ansys perhitungan.pdf",
+  "number of pages" : 7,
+  "author" : "ASUS TUF GAMING",
+  "title" : null,
+  "creation date" : "D:20250312130646+07'00'",
+  "modification date" : "D:20250312130646+07'00'",
+  "kids" : [ {
+    "type" : "paragraph",
+    "pdfua_tag" : "P",
+    "id" : 5,
+    "page number" : 1,
+    "bounding box" : [ 87.725, 722.384, 521.825, 756.293 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0]",
+    "content" : "HASIL SIMULASI PROFIL PENYERAPAN ENERGI PADA PENGELASAN PADUAN ALUMINIUM 3003 DALAM PENGUJIAN IMPACT CHARPY"
+  }, {
+    "type" : "paragraph",
+    "pdfua_tag" : "P",
+    "id" : 6,
+    "page number" : 1,
+    "bounding box" : [ 237.43, 693.684, 372.226, 706.973 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0]",
+    "content" : "VALIDASI PERITUNGAN"
+  }, {
+    "type" : "list",
+    "pdfua_tag" : "L",
+    "id" : 7,
+    "level" : "1",
+    "page number" : 1,
+    "bounding box" : [ 103.12, 441.154, 397.73, 678.273 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "pdfua_tag" : "LI",
+      "page number" : 1,
+      "bounding box" : [ 103.12, 644.014, 397.73, 678.273 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0]",
+      "content" : "1. Perhitungan energi serap \uD835\uDC5A × \uD835\uDC54 × \uD835\uDC3F ( \uD835\uDC36\uD835\uDC5C\uD835\uDC60 \uD835\uDEFD − \uD835\uDC36\uD835\uDC5C\uD835\uDC60 \uD835\uDC4E )",
+      "kids" : [ {
+        "type" : "paragraph",
+        "pdfua_tag" : "P",
+        "id" : 1,
+        "page number" : 1,
+        "bounding box" : [ 121.12, 615.184, 176.32, 628.473 ],
+        "font" : "TimesNewRomanPSMT",
+        "font size" : 12.0,
+        "text color" : "[0.0]",
+        "content" : "Keterangan"
+      }, {
+        "type" : "paragraph",
+        "pdfua_tag" : "P",
+        "id" : 2,
+        "page number" : 1,
+        "bounding box" : [ 121.12, 482.954, 303.22, 599.773 ],
+        "font" : "TimesNewRomanPSMT",
+        "font size" : 12.0,
+        "text color" : "[0.0]",
+        "content" : "m : Massa Pendulum (kg) g : Graviatasi (9,81 m/s2) L : Panjang lengan pendulum (meter) α : Sudut awal ketentuan β : Sudut akhir pengukuran dengan Hasil"
+      }, {
+        "type" : "paragraph",
+        "pdfua_tag" : "P",
+        "id" : 3,
+        "page number" : 1,
+        "bounding box" : [ 170.33, 461.984, 475.116, 474.396 ],
+        "font" : "CambriaMath",
+        "font size" : 12.0,
+        "text color" : "[0.0]",
+        "content" : "5,8 × 9,81 × 0,68 ( \uD835\uDC36\uD835\uDC5C\uD835\uDC60 95˙ − \uD835\uDC36\uD835\uDC5C\uD835\uDC60 150˙ ) = 30,13497 \uD835\uDC3D\uD835\uDC5C\uD835\uDC62\uD835\uDC59\uD835\uDC52"
+      } ]
+    }, {
+      "type" : "list item",
+      "pdfua_tag" : "LI",
+      "page number" : 1,
+      "bounding box" : [ 103.12, 441.154, 210.628, 454.443 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0]",
+      "content" : "2. Pembuatan Desain",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "pdfua_tag" : "Figure",
+    "id" : 10,
+    "page number" : 1,
+    "bounding box" : [ 156.45, 226.72, 438.45, 425.92 ],
+    "source" : "Hasil Simulasi ansys perhitungan_images/imageFile1.png"
+  }, {
+    "type" : "paragraph",
+    "pdfua_tag" : "P",
+    "id" : 8,
+    "page number" : 1,
+    "bounding box" : [ 121.12, 189.334, 181.648, 202.623 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0]",
+    "content" : "Keteranagan"
+  }, {
+    "type" : "list",
+    "pdfua_tag" : "L",
+    "id" : 9,
+    "level" : "2",
+    "page number" : 1,
+    "bounding box" : [ 121.12, 127.234, 396.302, 181.913 ],
+    "numbering style" : "english letters",
+    "number of list items" : 3,
+    "list items" : [ {
+      "type" : "list item",
+      "pdfua_tag" : "LI",
+      "page number" : 1,
+      "bounding box" : [ 121.12, 168.624, 187.802, 181.913 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0]",
+      "content" : "a. Pendulum",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "pdfua_tag" : "LI",
+      "page number" : 1,
+      "bounding box" : [ 121.12, 147.934, 287.33, 161.223 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0]",
+      "content" : "b. Suport atau bantalan Spesimen",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "pdfua_tag" : "LI",
+      "page number" : 1,
+      "bounding box" : [ 121.12, 127.234, 396.302, 140.523 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0]",
+      "content" : "c. Spesimen Benda uji dengan spesifikasi sesuai standar",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "heading",
+    "pdfua_tag" : "H1",
+    "id" : 11,
+    "level" : "Doctitle",
+    "page number" : 2,
+    "bounding box" : [ 103.12, 743.004, 196.048, 756.293 ],
+    "heading level" : 1,
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0]",
+    "content" : "3. Property Bahan"
+  }, {
+    "type" : "list",
+    "pdfua_tag" : "L",
+    "id" : 12,
+    "level" : "2",
+    "page number" : 2,
+    "bounding box" : [ 121.12, 557.374, 221.33, 735.673 ],
+    "numbering style" : "english letters",
+    "number of list items" : 2,
+    "list items" : [ {
+      "type" : "list item",
+      "pdfua_tag" : "LI",
+      "page number" : 2,
+      "bounding box" : [ 121.12, 722.384, 221.33, 735.673 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0]",
+      "content" : "a. Aluminium 3003",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "pdfua_tag" : "LI",
+      "page number" : 2,
+      "bounding box" : [ 121.12, 557.374, 213.35, 570.663 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0]",
+      "content" : "b. Structural Steel",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "pdfua_tag" : "Figure",
+    "id" : 14,
+    "page number" : 2,
+    "bounding box" : [ 139.05, 578.05, 529.65, 715.45 ],
+    "source" : "Hasil Simulasi ansys perhitungan_images/imageFile2.png"
+  }, {
+    "type" : "image",
+    "pdfua_tag" : "Figure",
+    "id" : 15,
+    "page number" : 2,
+    "bounding box" : [ 139.05, 410.66, 533.25, 550.46 ],
+    "source" : "Hasil Simulasi ansys perhitungan_images/imageFile3.png"
+  }, {
+    "type" : "heading",
+    "pdfua_tag" : "H1",
+    "id" : 13,
+    "level" : "Doctitle",
+    "page number" : 2,
+    "bounding box" : [ 103.12, 245.034, 524.484, 403.243 ],
+    "heading level" : 1,
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0]",
+    "content" : "4. Pemodelan geomtry Pendulum dan support ini didukung oleh material Structural Steel yang memiliki stiffness behavior rigid untuk memastikan ketahanan dan kestabilan struktur. Spesimen benda uji menggunakan Aluminium 3003 dengan stiffness behavior flexible untuk memungkinkan deformasi selama pengujian. Untuk meningkatkan massa pendulum hingga 5,8 kg perlu adanya Point Mass yang ditempatkan pada bagian pendulum berfungsi untuk menambah inersia dan mempengaruhi dinamika gerak pendulum."
+  }, {
+    "type" : "image",
+    "pdfua_tag" : "Figure",
+    "id" : 16,
+    "page number" : 2,
+    "bounding box" : [ 158.4, 91.32, 492.6, 229.32 ],
+    "source" : "Hasil Simulasi ansys perhitungan_images/imageFile4.png"
+  }, {
+    "type" : "list",
+    "pdfua_tag" : "L",
+    "id" : 17,
+    "level" : "1",
+    "page number" : 3,
+    "bounding box" : [ 103.12, 306.654, 524.466, 756.293 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "next list id" : 24,
+    "list items" : [ {
+      "type" : "list item",
+      "pdfua_tag" : "LI",
+      "page number" : 3,
+      "bounding box" : [ 103.12, 618.884, 524.456, 756.293 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0]",
+      "content" : "5. Mesh Mesh pada pendulum dan support diberikan ukuran 5 mm, sedangkan spesimen benda uji menggunakan mesh lebih halus yaitu 0,8 mm untuk meningkatkan akurasi hasil analisis. Selanjutnya, diterapkan Sweep Method pada geometry di bagian body spesimen benda uji dengan elemen order linier yang memastikan pemodelan lebih efisien dan sesuai dengan bentuk geometri spesimen.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "pdfua_tag" : "LI",
+      "page number" : 3,
+      "bounding box" : [ 103.12, 306.654, 524.466, 402.743 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0]",
+      "content" : "6. Velocity atau kecepatan Kecepatan diberikan pada sumbu Y component di bagian pendulum sesuai dengan nilai yang telah dihitung sebelumnya. Pemberian kecepatan ini bertujuan untuk mengontrol pergerakan awal pendulum, memastikan simulasi berjalan sesuai kondisi nyata, serta menganalisis respons spesimen benda uji terhadap gaya yang dihasilkan.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "pdfua_tag" : "Figure",
+    "id" : 18,
+    "page number" : 3,
+    "bounding box" : [ 181.2, 420.51, 517.2, 609.51 ],
+    "source" : "Hasil Simulasi ansys perhitungan_images/imageFile5.png"
+  }, {
+    "type" : "image",
+    "pdfua_tag" : "Figure",
+    "id" : 19,
+    "page number" : 3,
+    "bounding box" : [ 198.6, 124.3, 471.6, 290.5 ],
+    "source" : "Hasil Simulasi ansys perhitungan_images/imageFile6.png"
+  }, {
+    "type" : "paragraph",
+    "pdfua_tag" : "P",
+    "id" : 20,
+    "page number" : 4,
+    "bounding box" : [ 121.12, 719.914, 395.93, 756.293 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0]",
+    "content" : "Dengan perhitungan kecepatan sebagai berikut : √2 × \uD835\uDC54 × \uD835\uDC59 ( \uD835\uDC36\uD835\uDC5C\uD835\uDC60 \uD835\uDEFD − \uD835\uDC36\uD835\uDC5C\uD835\uDC60 \uD835\uDC4E )"
+  }, {
+    "type" : "paragraph",
+    "pdfua_tag" : "P",
+    "id" : 22,
+    "page number" : 4,
+    "bounding box" : [ 121.12, 572.514, 471.138, 712.473 ],
+    "font" : "TimesNewRomanPSMT",
+    "font size" : 12.0,
+    "text color" : "[0.0]",
+    "content" : "Keterangan g : Graviatasi (9,81 m/s2) L : Panjang lengan pendulum (meter) α : Sudut awal ketentuan β : Sudut akhir Pengukuran dengan hasil √2 × 9,81 × 0,65 ( \uD835\uDC36\uD835\uDC5C\uD835\uDC60 95˙ − \uD835\uDC36\uD835\uDC5C\uD835\uDC60 150˙ ) = 3,22356 m/s – 3223,6 mm/s"
+  }, {
+    "type" : "list",
+    "pdfua_tag" : "L",
+    "id" : 24,
+    "level" : "1",
+    "page number" : 4,
+    "bounding box" : [ 103.12, 552.184, 161.716, 565.473 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 1,
+    "previous list id" : 17,
+    "next list id" : 35,
+    "list items" : [ {
+      "type" : "list item",
+      "pdfua_tag" : "LI",
+      "page number" : 4,
+      "bounding box" : [ 103.12, 552.184, 161.716, 565.473 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0]",
+      "content" : "7. Solution",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "list",
+    "pdfua_tag" : "L",
+    "id" : 25,
+    "level" : "2",
+    "page number" : 4,
+    "bounding box" : [ 121.12, 469.354, 524.614, 544.773 ],
+    "numbering style" : "english letters",
+    "number of list items" : 1,
+    "next list id" : 28,
+    "list items" : [ {
+      "type" : "list item",
+      "pdfua_tag" : "LI",
+      "page number" : 4,
+      "bounding box" : [ 121.12, 469.354, 524.614, 544.773 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0]",
+      "content" : "a. Total Deformasi Total Deformasi adalah besarnya perubahan bentuk atau perpindahan total suatu benda akibat beban yang diberikan dalam analisis struktural. Hasil Total deformasi maximum yaitu 2561 mm dengan kondisi specimen patah.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "pdfua_tag" : "Figure",
+    "id" : 26,
+    "page number" : 4,
+    "bounding box" : [ 187.2, 301.05, 504.0, 455.5 ],
+    "source" : "Hasil Simulasi ansys perhitungan_images/imageFile7.png"
+  }, {
+    "type" : "image",
+    "pdfua_tag" : "Figure",
+    "id" : 27,
+    "page number" : 4,
+    "bounding box" : [ 192.0, 112.92, 504.6, 289.92 ],
+    "source" : "Hasil Simulasi ansys perhitungan_images/imageFile8.png"
+  }, {
+    "type" : "list",
+    "pdfua_tag" : "L",
+    "id" : 28,
+    "level" : "2",
+    "page number" : 5,
+    "bounding box" : [ 121.12, 184.124, 524.462, 756.293 ],
+    "numbering style" : "english letters",
+    "number of list items" : 2,
+    "previous list id" : 25,
+    "next list id" : 31,
+    "list items" : [ {
+      "type" : "list item",
+      "pdfua_tag" : "LI",
+      "page number" : 5,
+      "bounding box" : [ 121.12, 660.284, 524.462, 756.293 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0]",
+      "content" : "b. Starain Equivalent Elastic Strain adalah ukuran regangan total yang terjadi dalam material akibat beban yang diberikan, tanpa mempertimbangkan deformasi plastis. Hasil Equivalent Elastic Strain maximum yaitu 0,0052199 mm/mm atau 0,52199%.",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "pdfua_tag" : "LI",
+      "page number" : 5,
+      "bounding box" : [ 121.12, 184.124, 524.424, 259.523 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0]",
+      "content" : "c. Stress Equivalent Stress adalah tegangan ekuivalen yang digunakan dalam analisis kegagalan material berdasarkan teori distorsi energi. Hasil Equivalent Stress yaitu minimum 1,0246MPa dan maximum 284,82 MPa.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "pdfua_tag" : "Figure",
+    "id" : 29,
+    "page number" : 5,
+    "bounding box" : [ 193.2, 474.11, 525.0, 652.91 ],
+    "source" : "Hasil Simulasi ansys perhitungan_images/imageFile9.png"
+  }, {
+    "type" : "image",
+    "pdfua_tag" : "Figure",
+    "id" : 30,
+    "page number" : 5,
+    "bounding box" : [ 193.8, 293.52, 523.8, 468.72 ],
+    "source" : "Hasil Simulasi ansys perhitungan_images/imageFile10.png"
+  }, {
+    "type" : "image",
+    "pdfua_tag" : "Figure",
+    "id" : 32,
+    "page number" : 6,
+    "bounding box" : [ 177.6, 591.1, 524.4, 756.7 ],
+    "source" : "Hasil Simulasi ansys perhitungan_images/imageFile11.png"
+  }, {
+    "type" : "image",
+    "pdfua_tag" : "Figure",
+    "id" : 33,
+    "page number" : 6,
+    "bounding box" : [ 176.4, 375.71, 525.6, 581.51 ],
+    "source" : "Hasil Simulasi ansys perhitungan_images/imageFile12.png"
+  }, {
+    "type" : "list",
+    "pdfua_tag" : "L",
+    "id" : 31,
+    "level" : "2",
+    "page number" : 6,
+    "bounding box" : [ 121.12, 260.054, 524.464, 376.843 ],
+    "numbering style" : "english letters",
+    "number of list items" : 1,
+    "previous list id" : 28,
+    "list items" : [ {
+      "type" : "list item",
+      "pdfua_tag" : "LI",
+      "page number" : 6,
+      "bounding box" : [ 121.12, 260.054, 524.464, 376.843 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0]",
+      "content" : "d. Energi Probe Energi Probe adalah metode analisis energi dalam simulasi elemen hingga yang digunakan untuk mengevaluasi distribusi dan perubahan energi pada suatu sistem selama proses deformasi atau interaksi gaya. Hasil Energi internal yaitu 73,581 joule Joule dan energi kinetic yaitu maximum 60,513 Joule dan minimum 30,190 Joule.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "pdfua_tag" : "Figure",
+    "id" : 34,
+    "page number" : 6,
+    "bounding box" : [ 179.4, 78.998, 502.2, 250.588 ],
+    "source" : "Hasil Simulasi ansys perhitungan_images/imageFile13.png"
+  }, {
+    "type" : "image",
+    "pdfua_tag" : "Figure",
+    "id" : 36,
+    "page number" : 7,
+    "bounding box" : [ 129.9, 538.9, 524.1, 756.1 ],
+    "source" : "Hasil Simulasi ansys perhitungan_images/imageFile14.png"
+  }, {
+    "type" : "list",
+    "pdfua_tag" : "L",
+    "id" : 35,
+    "level" : "1",
+    "page number" : 7,
+    "bounding box" : [ 103.12, 98.134, 524.448, 531.373 ],
+    "numbering style" : "arabic numbers",
+    "number of list items" : 2,
+    "previous list id" : 24,
+    "list items" : [ {
+      "type" : "list item",
+      "pdfua_tag" : "LI",
+      "page number" : 7,
+      "bounding box" : [ 103.12, 518.084, 169.648, 531.373 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0]",
+      "content" : "8. Parameter",
+      "kids" : [ ]
+    }, {
+      "type" : "list item",
+      "pdfua_tag" : "LI",
+      "page number" : 7,
+      "bounding box" : [ 103.12, 98.134, 524.448, 256.323 ],
+      "font" : "TimesNewRomanPSMT",
+      "font size" : 12.0,
+      "text color" : "[0.0]",
+      "content" : "9. Kesimpulan Hasil perhitungan teoritis menunjukkan bahwa energi serap sebesar 30,13497 Joule. Dalam simulasi, energi kinetik maksimum tercatat 60,522 Joule, sedangkan energi kinetik minimum adalah 30,190 Joule dan energi internal yang diperoleh adalah 73,581 Joule. Untuk menentukan energi serap dalam simulasi digunakan selisih antara energi kinetik maksimum dan minimum yaitu 30,332 Joule. Dengan demikian error yang dihasilkan dalam perbandingan antara hasil teoritis dan simulasi adalah 0,62%.",
+      "kids" : [ ]
+    } ]
+  }, {
+    "type" : "image",
+    "pdfua_tag" : "Figure",
+    "id" : 37,
+    "page number" : 7,
+    "bounding box" : [ 130.8, 263.91, 530.95, 502.9 ],
+    "source" : "Hasil Simulasi ansys perhitungan_images/imageFile15.png"
+  } ]
+}

@@ -1,0 +1,39 @@
+{
+  "stage": "rev1_logistik_tahap_b",
+  "generated_at": "2026-06-26",
+  "working_dir": "data/raw/rev1_logistik/working",
+  "summary": {
+    "validated_logistics_nodes": 6,
+    "validated_smelter_rows": 5,
+    "evidence_rows": 17,
+    "validation_summary_rows": 6,
+    "gap_rows": 6,
+    "osint_round_1_rows": 5,
+    "osint_round_2_rows": 3,
+    "export_support_rows": 4,
+    "dataset_readiness_rows": 2,
+    "location_anchor_rows": 29,
+    "priority_company_roster_rows": 396,
+    "priority_permit_rows": 270,
+    "pltu_cluster_unit_rows": 115,
+    "export_nickel_detail_rows": 33,
+    "cluster_bulk_summary_rows": 6
+  },
+  "outputs": {
+    "shortlist_logistics": "data/raw/rev1_logistik/working/sulawesi_port_logistics.csv",
+    "smelter_validation": "data/raw/rev1_logistik/working/smelter_nikel_validation.csv",
+    "evidence_matrix": "data/raw/rev1_logistik/working/rev1_tahap_b_evidence_matrix.csv",
+    "validation_summary": "data/raw/rev1_logistik/working/rev1_tahap_b_validation_summary.csv",
+    "gap_register": "data/raw/rev1_logistik/working/rev1_tahap_b_gap_register.csv",
+    "osint_round_1": "data/raw/rev1_logistik/working/rev1_tahap_b_osint_round1.csv",
+    "osint_round_2": "data/raw/rev1_logistik/working/rev1_tahap_b_osint_round2.csv",
+    "export_support": "data/raw/rev1_logistik/working/rev1_tahap_b_export_port_support.csv",
+    "dataset_readiness": "data/raw/rev1_logistik/working/rev1_tahap_b_dataset_readiness.csv",
+    "location_anchor_extract": "data/raw/rev1_logistik/working/rev1_tahap_b_location_anchor_extract.csv",
+    "priority_company_roster": "data/raw/rev1_logistik/working/rev1_tahap_b_priority_company_roster.csv",
+    "priority_permit_extract": "data/raw/rev1_logistik/working/rev1_tahap_b_priority_permit_extract.csv",
+    "pltu_cluster_units": "data/raw/rev1_logistik/working/rev1_tahap_b_pltu_cluster_units.csv",
+    "export_nickel_detail": "data/raw/rev1_logistik/working/rev1_tahap_b_export_nickel_detail.csv",
+    "cluster_bulk_summary": "data/raw/rev1_logistik/working/rev1_tahap_b_cluster_bulk_summary.csv"
+  }
+}

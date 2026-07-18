@@ -1,0 +1,569 @@
+provinsi,tahun,indikator,nilai,satuan,Sumber
+Aceh,2016,Investasi PMDN - Nilai (Juta Rp),2456.1,Juta Rp,data/raw/bps_pmdn/
+Aceh,2017,Investasi PMDN - Nilai (Juta Rp),782.8,Juta Rp,data/raw/bps_pmdn/
+Sumatera Utara,2016,Investasi PMDN - Nilai (Juta Rp),4864.2,Juta Rp,data/raw/bps_pmdn/
+Sumatera Utara,2017,Investasi PMDN - Nilai (Juta Rp),11683.6,Juta Rp,data/raw/bps_pmdn/
+Sumatera Barat,2016,Investasi PMDN - Nilai (Juta Rp),3795.6,Juta Rp,data/raw/bps_pmdn/
+Sumatera Barat,2017,Investasi PMDN - Nilai (Juta Rp),1517.0,Juta Rp,data/raw/bps_pmdn/
+Riau,2016,Investasi PMDN - Nilai (Juta Rp),6613.7,Juta Rp,data/raw/bps_pmdn/
+Riau,2017,Investasi PMDN - Nilai (Juta Rp),10829.8,Juta Rp,data/raw/bps_pmdn/
+Jambi,2016,Investasi PMDN - Nilai (Juta Rp),3884.4,Juta Rp,data/raw/bps_pmdn/
+Jambi,2017,Investasi PMDN - Nilai (Juta Rp),3006.6,Juta Rp,data/raw/bps_pmdn/
+Sumatera Selatan,2016,Investasi PMDN - Nilai (Juta Rp),8534.1,Juta Rp,data/raw/bps_pmdn/
+Sumatera Selatan,2017,Investasi PMDN - Nilai (Juta Rp),8200.2,Juta Rp,data/raw/bps_pmdn/
+Bengkulu,2016,Investasi PMDN - Nilai (Juta Rp),949.1,Juta Rp,data/raw/bps_pmdn/
+Bengkulu,2017,Investasi PMDN - Nilai (Juta Rp),296.5,Juta Rp,data/raw/bps_pmdn/
+Lampung,2016,Investasi PMDN - Nilai (Juta Rp),6031.8,Juta Rp,data/raw/bps_pmdn/
+Lampung,2017,Investasi PMDN - Nilai (Juta Rp),7014.8,Juta Rp,data/raw/bps_pmdn/
+Kep. Bangka Belitung,2016,Investasi PMDN - Nilai (Juta Rp),2202.0,Juta Rp,data/raw/bps_pmdn/
+Kep. Bangka Belitung,2017,Investasi PMDN - Nilai (Juta Rp),1734.7,Juta Rp,data/raw/bps_pmdn/
+Kep. Riau,2016,Investasi PMDN - Nilai (Juta Rp),492.5,Juta Rp,data/raw/bps_pmdn/
+Kep. Riau,2017,Investasi PMDN - Nilai (Juta Rp),1398.0,Juta Rp,data/raw/bps_pmdn/
+Dki Jakarta,2016,Investasi PMDN - Nilai (Juta Rp),12216.9,Juta Rp,data/raw/bps_pmdn/
+Dki Jakarta,2017,Investasi PMDN - Nilai (Juta Rp),47262.3,Juta Rp,data/raw/bps_pmdn/
+Jawa Barat,2016,Investasi PMDN - Nilai (Juta Rp),30360.2,Juta Rp,data/raw/bps_pmdn/
+Jawa Barat,2017,Investasi PMDN - Nilai (Juta Rp),38390.6,Juta Rp,data/raw/bps_pmdn/
+Jawa Tengah,2016,Investasi PMDN - Nilai (Juta Rp),24070.4,Juta Rp,data/raw/bps_pmdn/
+Jawa Tengah,2017,Investasi PMDN - Nilai (Juta Rp),19866.0,Juta Rp,data/raw/bps_pmdn/
+Di Yogyakarta,2016,Investasi PMDN - Nilai (Juta Rp),948.6,Juta Rp,data/raw/bps_pmdn/
+Di Yogyakarta,2017,Investasi PMDN - Nilai (Juta Rp),294.6,Juta Rp,data/raw/bps_pmdn/
+Jawa Timur,2016,Investasi PMDN - Nilai (Juta Rp),46331.6,Juta Rp,data/raw/bps_pmdn/
+Jawa Timur,2017,Investasi PMDN - Nilai (Juta Rp),45044.5,Juta Rp,data/raw/bps_pmdn/
+Banten,2016,Investasi PMDN - Nilai (Juta Rp),12426.3,Juta Rp,data/raw/bps_pmdn/
+Banten,2017,Investasi PMDN - Nilai (Juta Rp),15141.9,Juta Rp,data/raw/bps_pmdn/
+Bali,2016,Investasi PMDN - Nilai (Juta Rp),482.3,Juta Rp,data/raw/bps_pmdn/
+Bali,2017,Investasi PMDN - Nilai (Juta Rp),592.5,Juta Rp,data/raw/bps_pmdn/
+Nusa Tenggara Barat,2016,Investasi PMDN - Nilai (Juta Rp),1342.8,Juta Rp,data/raw/bps_pmdn/
+Nusa Tenggara Barat,2017,Investasi PMDN - Nilai (Juta Rp),5413.5,Juta Rp,data/raw/bps_pmdn/
+Nusa Tenggara Timur,2016,Investasi PMDN - Nilai (Juta Rp),822.2,Juta Rp,data/raw/bps_pmdn/
+Nusa Tenggara Timur,2017,Investasi PMDN - Nilai (Juta Rp),1081.9,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Barat,2016,Investasi PMDN - Nilai (Juta Rp),9015.5,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Barat,2017,Investasi PMDN - Nilai (Juta Rp),12380.9,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Tengah,2016,Investasi PMDN - Nilai (Juta Rp),8179.1,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Tengah,2017,Investasi PMDN - Nilai (Juta Rp),3037.8,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Selatan,2016,Investasi PMDN - Nilai (Juta Rp),6163.0,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Selatan,2017,Investasi PMDN - Nilai (Juta Rp),2981.9,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Timur,2016,Investasi PMDN - Nilai (Juta Rp),6885.1,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Timur,2017,Investasi PMDN - Nilai (Juta Rp),10980.2,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Utara,2016,Investasi PMDN - Nilai (Juta Rp),3345.7,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Utara,2017,Investasi PMDN - Nilai (Juta Rp),853.3,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Utara,2016,Investasi PMDN - Nilai (Juta Rp),5069.6,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Utara,2017,Investasi PMDN - Nilai (Juta Rp),1488.2,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Tengah,2016,Investasi PMDN - Nilai (Juta Rp),1081.2,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Tengah,2017,Investasi PMDN - Nilai (Juta Rp),1929.7,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Selatan,2016,Investasi PMDN - Nilai (Juta Rp),3334.6,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Selatan,2017,Investasi PMDN - Nilai (Juta Rp),1969.4,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Tenggara,2016,Investasi PMDN - Nilai (Juta Rp),1794.2,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Tenggara,2017,Investasi PMDN - Nilai (Juta Rp),3148.7,Juta Rp,data/raw/bps_pmdn/
+Gorontalo,2016,Investasi PMDN - Nilai (Juta Rp),2202.5,Juta Rp,data/raw/bps_pmdn/
+Gorontalo,2017,Investasi PMDN - Nilai (Juta Rp),888.4,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Barat,2016,Investasi PMDN - Nilai (Juta Rp),84.1,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Barat,2017,Investasi PMDN - Nilai (Juta Rp),660.2,Juta Rp,data/raw/bps_pmdn/
+Maluku,2016,Investasi PMDN - Nilai (Juta Rp),11.4,Juta Rp,data/raw/bps_pmdn/
+Maluku,2017,Investasi PMDN - Nilai (Juta Rp),52.3,Juta Rp,data/raw/bps_pmdn/
+Maluku Utara,2016,Investasi PMDN - Nilai (Juta Rp),8.8,Juta Rp,data/raw/bps_pmdn/
+Maluku Utara,2017,Investasi PMDN - Nilai (Juta Rp),1150.6,Juta Rp,data/raw/bps_pmdn/
+Papua Barat,2016,Investasi PMDN - Nilai (Juta Rp),10.6,Juta Rp,data/raw/bps_pmdn/
+Papua Barat,2017,Investasi PMDN - Nilai (Juta Rp),59.2,Juta Rp,data/raw/bps_pmdn/
+Papua,2016,Investasi PMDN - Nilai (Juta Rp),220.5,Juta Rp,data/raw/bps_pmdn/
+Papua,2017,Investasi PMDN - Nilai (Juta Rp),1217.9,Juta Rp,data/raw/bps_pmdn/
+Indonesia,2016,Investasi PMDN - Nilai (Juta Rp),216230.8,Juta Rp,data/raw/bps_pmdn/
+Indonesia,2017,Investasi PMDN - Nilai (Juta Rp),262350.5,Juta Rp,data/raw/bps_pmdn/
+Aceh,2018,Investasi PMDN - Nilai (Juta Rp),970.0,Juta Rp,data/raw/bps_pmdn/
+Aceh,2019,Investasi PMDN - Nilai (Juta Rp),3606.9,Juta Rp,data/raw/bps_pmdn/
+Sumatera Utara,2018,Investasi PMDN - Nilai (Juta Rp),8371.8,Juta Rp,data/raw/bps_pmdn/
+Sumatera Utara,2019,Investasi PMDN - Nilai (Juta Rp),19749.0,Juta Rp,data/raw/bps_pmdn/
+Sumatera Barat,2018,Investasi PMDN - Nilai (Juta Rp),2309.4,Juta Rp,data/raw/bps_pmdn/
+Sumatera Barat,2019,Investasi PMDN - Nilai (Juta Rp),3026.6,Juta Rp,data/raw/bps_pmdn/
+Riau,2018,Investasi PMDN - Nilai (Juta Rp),9056.4,Juta Rp,data/raw/bps_pmdn/
+Riau,2019,Investasi PMDN - Nilai (Juta Rp),26292.2,Juta Rp,data/raw/bps_pmdn/
+Jambi,2018,Investasi PMDN - Nilai (Juta Rp),2876.5,Juta Rp,data/raw/bps_pmdn/
+Jambi,2019,Investasi PMDN - Nilai (Juta Rp),4437.4,Juta Rp,data/raw/bps_pmdn/
+Sumatera Selatan,2018,Investasi PMDN - Nilai (Juta Rp),9519.8,Juta Rp,data/raw/bps_pmdn/
+Sumatera Selatan,2019,Investasi PMDN - Nilai (Juta Rp),16921.1,Juta Rp,data/raw/bps_pmdn/
+Bengkulu,2018,Investasi PMDN - Nilai (Juta Rp),4902.8,Juta Rp,data/raw/bps_pmdn/
+Bengkulu,2019,Investasi PMDN - Nilai (Juta Rp),5458.1,Juta Rp,data/raw/bps_pmdn/
+Lampung,2018,Investasi PMDN - Nilai (Juta Rp),12314.7,Juta Rp,data/raw/bps_pmdn/
+Lampung,2019,Investasi PMDN - Nilai (Juta Rp),2428.9,Juta Rp,data/raw/bps_pmdn/
+Kep. Bangka Belitung,2018,Investasi PMDN - Nilai (Juta Rp),3112.9,Juta Rp,data/raw/bps_pmdn/
+Kep. Bangka Belitung,2019,Investasi PMDN - Nilai (Juta Rp),2915.2,Juta Rp,data/raw/bps_pmdn/
+Kep. Riau,2018,Investasi PMDN - Nilai (Juta Rp),4386.0,Juta Rp,data/raw/bps_pmdn/
+Kep. Riau,2019,Investasi PMDN - Nilai (Juta Rp),5656.4,Juta Rp,data/raw/bps_pmdn/
+Dki Jakarta,2018,Investasi PMDN - Nilai (Juta Rp),49097.4,Juta Rp,data/raw/bps_pmdn/
+Dki Jakarta,2019,Investasi PMDN - Nilai (Juta Rp),62094.8,Juta Rp,data/raw/bps_pmdn/
+Jawa Barat,2018,Investasi PMDN - Nilai (Juta Rp),42278.2,Juta Rp,data/raw/bps_pmdn/
+Jawa Barat,2019,Investasi PMDN - Nilai (Juta Rp),49284.2,Juta Rp,data/raw/bps_pmdn/
+Jawa Tengah,2018,Investasi PMDN - Nilai (Juta Rp),27474.9,Juta Rp,data/raw/bps_pmdn/
+Jawa Tengah,2019,Investasi PMDN - Nilai (Juta Rp),18654.7,Juta Rp,data/raw/bps_pmdn/
+Di Yogyakarta,2018,Investasi PMDN - Nilai (Juta Rp),6131.7,Juta Rp,data/raw/bps_pmdn/
+Di Yogyakarta,2019,Investasi PMDN - Nilai (Juta Rp),6298.8,Juta Rp,data/raw/bps_pmdn/
+Jawa Timur,2018,Investasi PMDN - Nilai (Juta Rp),33333.1,Juta Rp,data/raw/bps_pmdn/
+Jawa Timur,2019,Investasi PMDN - Nilai (Juta Rp),45452.7,Juta Rp,data/raw/bps_pmdn/
+Banten,2018,Investasi PMDN - Nilai (Juta Rp),18637.6,Juta Rp,data/raw/bps_pmdn/
+Banten,2019,Investasi PMDN - Nilai (Juta Rp),20708.4,Juta Rp,data/raw/bps_pmdn/
+Bali,2018,Investasi PMDN - Nilai (Juta Rp),1548.8,Juta Rp,data/raw/bps_pmdn/
+Bali,2019,Investasi PMDN - Nilai (Juta Rp),7393.2,Juta Rp,data/raw/bps_pmdn/
+Nusa Tenggara Barat,2018,Investasi PMDN - Nilai (Juta Rp),4135.1,Juta Rp,data/raw/bps_pmdn/
+Nusa Tenggara Barat,2019,Investasi PMDN - Nilai (Juta Rp),3519.0,Juta Rp,data/raw/bps_pmdn/
+Nusa Tenggara Timur,2018,Investasi PMDN - Nilai (Juta Rp),4246.1,Juta Rp,data/raw/bps_pmdn/
+Nusa Tenggara Timur,2019,Investasi PMDN - Nilai (Juta Rp),3752.6,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Barat,2018,Investasi PMDN - Nilai (Juta Rp),6591.4,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Barat,2019,Investasi PMDN - Nilai (Juta Rp),7699.1,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Tengah,2018,Investasi PMDN - Nilai (Juta Rp),13091.6,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Tengah,2019,Investasi PMDN - Nilai (Juta Rp),8591.9,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Selatan,2018,Investasi PMDN - Nilai (Juta Rp),9975.2,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Selatan,2019,Investasi PMDN - Nilai (Juta Rp),10061.0,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Timur,2018,Investasi PMDN - Nilai (Juta Rp),25942.0,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Timur,2019,Investasi PMDN - Nilai (Juta Rp),21952.0,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Utara,2018,Investasi PMDN - Nilai (Juta Rp),1356.8,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Utara,2019,Investasi PMDN - Nilai (Juta Rp),4400.9,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Utara,2018,Investasi PMDN - Nilai (Juta Rp),4320.1,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Utara,2019,Investasi PMDN - Nilai (Juta Rp),8259.6,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Tengah,2018,Investasi PMDN - Nilai (Juta Rp),8488.9,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Tengah,2019,Investasi PMDN - Nilai (Juta Rp),4438.8,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Selatan,2018,Investasi PMDN - Nilai (Juta Rp),3275.9,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Selatan,2019,Investasi PMDN - Nilai (Juta Rp),5672.6,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Tenggara,2018,Investasi PMDN - Nilai (Juta Rp),1603.4,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Tenggara,2019,Investasi PMDN - Nilai (Juta Rp),3827.1,Juta Rp,data/raw/bps_pmdn/
+Gorontalo,2018,Investasi PMDN - Nilai (Juta Rp),2666.8,Juta Rp,data/raw/bps_pmdn/
+Gorontalo,2019,Investasi PMDN - Nilai (Juta Rp),844.4,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Barat,2018,Investasi PMDN - Nilai (Juta Rp),3144.2,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Barat,2019,Investasi PMDN - Nilai (Juta Rp),1187.2,Juta Rp,data/raw/bps_pmdn/
+Maluku,2018,Investasi PMDN - Nilai (Juta Rp),1013.5,Juta Rp,data/raw/bps_pmdn/
+Maluku,2019,Investasi PMDN - Nilai (Juta Rp),283.2,Juta Rp,data/raw/bps_pmdn/
+Maluku Utara,2018,Investasi PMDN - Nilai (Juta Rp),2276.3,Juta Rp,data/raw/bps_pmdn/
+Maluku Utara,2019,Investasi PMDN - Nilai (Juta Rp),682.7,Juta Rp,data/raw/bps_pmdn/
+Papua Barat,2018,Investasi PMDN - Nilai (Juta Rp),50.9,Juta Rp,data/raw/bps_pmdn/
+Papua Barat,2019,Investasi PMDN - Nilai (Juta Rp),380.2,Juta Rp,data/raw/bps_pmdn/
+Papua,2018,Investasi PMDN - Nilai (Juta Rp),104.6,Juta Rp,data/raw/bps_pmdn/
+Papua,2019,Investasi PMDN - Nilai (Juta Rp),567.7,Juta Rp,data/raw/bps_pmdn/
+Indonesia,2018,Investasi PMDN - Nilai (Juta Rp),328604.9,Juta Rp,data/raw/bps_pmdn/
+Indonesia,2019,Investasi PMDN - Nilai (Juta Rp),386498.4,Juta Rp,data/raw/bps_pmdn/
+Aceh,2020,Investasi PMDN - Nilai (Juta Rp),8241.1,Juta Rp,data/raw/bps_pmdn/
+Aceh,2021,Investasi PMDN - Nilai (Juta Rp),7904.7,Juta Rp,data/raw/bps_pmdn/
+Sumatera Utara,2020,Investasi PMDN - Nilai (Juta Rp),18189.5,Juta Rp,data/raw/bps_pmdn/
+Sumatera Utara,2021,Investasi PMDN - Nilai (Juta Rp),18484.5,Juta Rp,data/raw/bps_pmdn/
+Sumatera Barat,2020,Investasi PMDN - Nilai (Juta Rp),3106.2,Juta Rp,data/raw/bps_pmdn/
+Sumatera Barat,2021,Investasi PMDN - Nilai (Juta Rp),4183.7,Juta Rp,data/raw/bps_pmdn/
+Riau,2020,Investasi PMDN - Nilai (Juta Rp),34117.8,Juta Rp,data/raw/bps_pmdn/
+Riau,2021,Investasi PMDN - Nilai (Juta Rp),24997.8,Juta Rp,data/raw/bps_pmdn/
+Jambi,2020,Investasi PMDN - Nilai (Juta Rp),3511.7,Juta Rp,data/raw/bps_pmdn/
+Jambi,2021,Investasi PMDN - Nilai (Juta Rp),6204.2,Juta Rp,data/raw/bps_pmdn/
+Sumatera Selatan,2020,Investasi PMDN - Nilai (Juta Rp),15824.5,Juta Rp,data/raw/bps_pmdn/
+Sumatera Selatan,2021,Investasi PMDN - Nilai (Juta Rp),16266.9,Juta Rp,data/raw/bps_pmdn/
+Bengkulu,2020,Investasi PMDN - Nilai (Juta Rp),5399.2,Juta Rp,data/raw/bps_pmdn/
+Bengkulu,2021,Investasi PMDN - Nilai (Juta Rp),4923.5,Juta Rp,data/raw/bps_pmdn/
+Lampung,2020,Investasi PMDN - Nilai (Juta Rp),7120.5,Juta Rp,data/raw/bps_pmdn/
+Lampung,2021,Investasi PMDN - Nilai (Juta Rp),10513.2,Juta Rp,data/raw/bps_pmdn/
+Kep. Bangka Belitung,2020,Investasi PMDN - Nilai (Juta Rp),1863.8,Juta Rp,data/raw/bps_pmdn/
+Kep. Bangka Belitung,2021,Investasi PMDN - Nilai (Juta Rp),3677.4,Juta Rp,data/raw/bps_pmdn/
+Kep. Riau,2020,Investasi PMDN - Nilai (Juta Rp),14249.0,Juta Rp,data/raw/bps_pmdn/
+Kep. Riau,2021,Investasi PMDN - Nilai (Juta Rp),9768.7,Juta Rp,data/raw/bps_pmdn/
+Dki Jakarta,2020,Investasi PMDN - Nilai (Juta Rp),42954.7,Juta Rp,data/raw/bps_pmdn/
+Dki Jakarta,2021,Investasi PMDN - Nilai (Juta Rp),54708.2,Juta Rp,data/raw/bps_pmdn/
+Jawa Barat,2020,Investasi PMDN - Nilai (Juta Rp),51400.5,Juta Rp,data/raw/bps_pmdn/
+Jawa Barat,2021,Investasi PMDN - Nilai (Juta Rp),59948.5,Juta Rp,data/raw/bps_pmdn/
+Jawa Tengah,2020,Investasi PMDN - Nilai (Juta Rp),30606.1,Juta Rp,data/raw/bps_pmdn/
+Jawa Tengah,2021,Investasi PMDN - Nilai (Juta Rp),31311.2,Juta Rp,data/raw/bps_pmdn/
+Di Yogyakarta,2020,Investasi PMDN - Nilai (Juta Rp),2683.4,Juta Rp,data/raw/bps_pmdn/
+Di Yogyakarta,2021,Investasi PMDN - Nilai (Juta Rp),2761.3,Juta Rp,data/raw/bps_pmdn/
+Jawa Timur,2020,Investasi PMDN - Nilai (Juta Rp),55660.6,Juta Rp,data/raw/bps_pmdn/
+Jawa Timur,2021,Investasi PMDN - Nilai (Juta Rp),52552.2,Juta Rp,data/raw/bps_pmdn/
+Banten,2020,Investasi PMDN - Nilai (Juta Rp),31145.7,Juta Rp,data/raw/bps_pmdn/
+Banten,2021,Investasi PMDN - Nilai (Juta Rp),25989.5,Juta Rp,data/raw/bps_pmdn/
+Bali,2020,Investasi PMDN - Nilai (Juta Rp),5432.7,Juta Rp,data/raw/bps_pmdn/
+Bali,2021,Investasi PMDN - Nilai (Juta Rp),6355.2,Juta Rp,data/raw/bps_pmdn/
+Nusa Tenggara Barat,2020,Investasi PMDN - Nilai (Juta Rp),6582.4,Juta Rp,data/raw/bps_pmdn/
+Nusa Tenggara Barat,2021,Investasi PMDN - Nilai (Juta Rp),9090.5,Juta Rp,data/raw/bps_pmdn/
+Nusa Tenggara Timur,2020,Investasi PMDN - Nilai (Juta Rp),3028.5,Juta Rp,data/raw/bps_pmdn/
+Nusa Tenggara Timur,2021,Investasi PMDN - Nilai (Juta Rp),3742.6,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Barat,2020,Investasi PMDN - Nilai (Juta Rp),9256.5,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Barat,2021,Investasi PMDN - Nilai (Juta Rp),10773.4,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Tengah,2020,Investasi PMDN - Nilai (Juta Rp),3710.0,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Tengah,2021,Investasi PMDN - Nilai (Juta Rp),6359.8,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Selatan,2020,Investasi PMDN - Nilai (Juta Rp),4286.3,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Selatan,2021,Investasi PMDN - Nilai (Juta Rp),11003.9,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Timur,2020,Investasi PMDN - Nilai (Juta Rp),25934.0,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Timur,2021,Investasi PMDN - Nilai (Juta Rp),30297.4,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Utara,2020,Investasi PMDN - Nilai (Juta Rp),2235.2,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Utara,2021,Investasi PMDN - Nilai (Juta Rp),3792.5,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Utara,2020,Investasi PMDN - Nilai (Juta Rp),3005.6,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Utara,2021,Investasi PMDN - Nilai (Juta Rp),3480.0,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Tengah,2020,Investasi PMDN - Nilai (Juta Rp),5261.3,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Tengah,2021,Investasi PMDN - Nilai (Juta Rp),3012.3,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Selatan,2020,Investasi PMDN - Nilai (Juta Rp),9142.0,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Selatan,2021,Investasi PMDN - Nilai (Juta Rp),12075.4,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Tenggara,2020,Investasi PMDN - Nilai (Juta Rp),2865.7,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Tenggara,2021,Investasi PMDN - Nilai (Juta Rp),4334.2,Juta Rp,data/raw/bps_pmdn/
+Gorontalo,2020,Investasi PMDN - Nilai (Juta Rp),683.6,Juta Rp,data/raw/bps_pmdn/
+Gorontalo,2021,Investasi PMDN - Nilai (Juta Rp),1004.3,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Barat,2020,Investasi PMDN - Nilai (Juta Rp),252.9,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Barat,2021,Investasi PMDN - Nilai (Juta Rp),395.3,Juta Rp,data/raw/bps_pmdn/
+Maluku,2020,Investasi PMDN - Nilai (Juta Rp),474.8,Juta Rp,data/raw/bps_pmdn/
+Maluku,2021,Investasi PMDN - Nilai (Juta Rp),2939.7,Juta Rp,data/raw/bps_pmdn/
+Maluku Utara,2020,Investasi PMDN - Nilai (Juta Rp),662.1,Juta Rp,data/raw/bps_pmdn/
+Maluku Utara,2021,Investasi PMDN - Nilai (Juta Rp),2665.3,Juta Rp,data/raw/bps_pmdn/
+Papua Barat,2020,Investasi PMDN - Nilai (Juta Rp),1925.4,Juta Rp,data/raw/bps_pmdn/
+Papua Barat,2021,Investasi PMDN - Nilai (Juta Rp),635.6,Juta Rp,data/raw/bps_pmdn/
+Papua,2020,Investasi PMDN - Nilai (Juta Rp),2722.2,Juta Rp,data/raw/bps_pmdn/
+Papua,2021,Investasi PMDN - Nilai (Juta Rp),910.8,Juta Rp,data/raw/bps_pmdn/
+Indonesia,2020,Investasi PMDN - Nilai (Juta Rp),413535.5,Juta Rp,data/raw/bps_pmdn/
+Indonesia,2021,Investasi PMDN - Nilai (Juta Rp),447063.6,Juta Rp,data/raw/bps_pmdn/
+Aceh,2022,Investasi PMDN - Nilai (Juta Rp),4424.2,Juta Rp,data/raw/bps_pmdn/
+Aceh,2023,Investasi PMDN - Nilai (Juta Rp),8883.3,Juta Rp,data/raw/bps_pmdn/
+Sumatera Utara,2022,Investasi PMDN - Nilai (Juta Rp),22789.2,Juta Rp,data/raw/bps_pmdn/
+Sumatera Utara,2023,Investasi PMDN - Nilai (Juta Rp),21574.0,Juta Rp,data/raw/bps_pmdn/
+Sumatera Barat,2022,Investasi PMDN - Nilai (Juta Rp),2559.8,Juta Rp,data/raw/bps_pmdn/
+Sumatera Barat,2023,Investasi PMDN - Nilai (Juta Rp),4488.2,Juta Rp,data/raw/bps_pmdn/
+Riau,2022,Investasi PMDN - Nilai (Juta Rp),43062.0,Juta Rp,data/raw/bps_pmdn/
+Riau,2023,Investasi PMDN - Nilai (Juta Rp),48243.3,Juta Rp,data/raw/bps_pmdn/
+Jambi,2022,Investasi PMDN - Nilai (Juta Rp),8882.7,Juta Rp,data/raw/bps_pmdn/
+Jambi,2023,Investasi PMDN - Nilai (Juta Rp),8939.0,Juta Rp,data/raw/bps_pmdn/
+Sumatera Selatan,2022,Investasi PMDN - Nilai (Juta Rp),23526.0,Juta Rp,data/raw/bps_pmdn/
+Sumatera Selatan,2023,Investasi PMDN - Nilai (Juta Rp),25602.4,Juta Rp,data/raw/bps_pmdn/
+Bengkulu,2022,Investasi PMDN - Nilai (Juta Rp),6957.3,Juta Rp,data/raw/bps_pmdn/
+Bengkulu,2023,Investasi PMDN - Nilai (Juta Rp),7218.7,Juta Rp,data/raw/bps_pmdn/
+Lampung,2022,Investasi PMDN - Nilai (Juta Rp),5809.2,Juta Rp,data/raw/bps_pmdn/
+Lampung,2023,Investasi PMDN - Nilai (Juta Rp),7625.8,Juta Rp,data/raw/bps_pmdn/
+Kep. Bangka Belitung,2022,Investasi PMDN - Nilai (Juta Rp),6309.0,Juta Rp,data/raw/bps_pmdn/
+Kep. Bangka Belitung,2023,Investasi PMDN - Nilai (Juta Rp),7961.4,Juta Rp,data/raw/bps_pmdn/
+Kep. Riau,2022,Investasi PMDN - Nilai (Juta Rp),4817.4,Juta Rp,data/raw/bps_pmdn/
+Kep. Riau,2023,Investasi PMDN - Nilai (Juta Rp),8856.6,Juta Rp,data/raw/bps_pmdn/
+Dki Jakarta,2022,Investasi PMDN - Nilai (Juta Rp),89223.6,Juta Rp,data/raw/bps_pmdn/
+Dki Jakarta,2023,Investasi PMDN - Nilai (Juta Rp),95202.1,Juta Rp,data/raw/bps_pmdn/
+Jawa Barat,2022,Investasi PMDN - Nilai (Juta Rp),80808.3,Juta Rp,data/raw/bps_pmdn/
+Jawa Barat,2023,Investasi PMDN - Nilai (Juta Rp),88012.9,Juta Rp,data/raw/bps_pmdn/
+Jawa Tengah,2022,Investasi PMDN - Nilai (Juta Rp),24992.3,Juta Rp,data/raw/bps_pmdn/
+Jawa Tengah,2023,Investasi PMDN - Nilai (Juta Rp),32987.2,Juta Rp,data/raw/bps_pmdn/
+Di Yogyakarta,2022,Investasi PMDN - Nilai (Juta Rp),2275.0,Juta Rp,data/raw/bps_pmdn/
+Di Yogyakarta,2023,Investasi PMDN - Nilai (Juta Rp),5015.5,Juta Rp,data/raw/bps_pmdn/
+Jawa Timur,2022,Investasi PMDN - Nilai (Juta Rp),65355.9,Juta Rp,data/raw/bps_pmdn/
+Jawa Timur,2023,Investasi PMDN - Nilai (Juta Rp),74937.4,Juta Rp,data/raw/bps_pmdn/
+Banten,2022,Investasi PMDN - Nilai (Juta Rp),31283.9,Juta Rp,data/raw/bps_pmdn/
+Banten,2023,Investasi PMDN - Nilai (Juta Rp),37971.7,Juta Rp,data/raw/bps_pmdn/
+Bali,2022,Investasi PMDN - Nilai (Juta Rp),6002.1,Juta Rp,data/raw/bps_pmdn/
+Bali,2023,Investasi PMDN - Nilai (Juta Rp),6950.8,Juta Rp,data/raw/bps_pmdn/
+Nusa Tenggara Barat,2022,Investasi PMDN - Nilai (Juta Rp),11031.5,Juta Rp,data/raw/bps_pmdn/
+Nusa Tenggara Barat,2023,Investasi PMDN - Nilai (Juta Rp),30766.2,Juta Rp,data/raw/bps_pmdn/
+Nusa Tenggara Timur,2022,Investasi PMDN - Nilai (Juta Rp),3459.3,Juta Rp,data/raw/bps_pmdn/
+Nusa Tenggara Timur,2023,Investasi PMDN - Nilai (Juta Rp),3407.2,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Barat,2022,Investasi PMDN - Nilai (Juta Rp),9382.9,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Barat,2023,Investasi PMDN - Nilai (Juta Rp),14892.0,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Tengah,2022,Investasi PMDN - Nilai (Juta Rp),6556.8,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Tengah,2023,Investasi PMDN - Nilai (Juta Rp),8779.5,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Selatan,2022,Investasi PMDN - Nilai (Juta Rp),12310.4,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Selatan,2023,Investasi PMDN - Nilai (Juta Rp),14909.4,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Timur,2022,Investasi PMDN - Nilai (Juta Rp),39595.6,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Timur,2023,Investasi PMDN - Nilai (Juta Rp),52171.7,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Utara,2022,Investasi PMDN - Nilai (Juta Rp),7526.4,Juta Rp,data/raw/bps_pmdn/
+Kalimantan Utara,2023,Investasi PMDN - Nilai (Juta Rp),8199.1,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Utara,2022,Investasi PMDN - Nilai (Juta Rp),5042.1,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Utara,2023,Investasi PMDN - Nilai (Juta Rp),7698.2,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Tengah,2022,Investasi PMDN - Nilai (Juta Rp),3758.6,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Tengah,2023,Investasi PMDN - Nilai (Juta Rp),4772.5,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Selatan,2022,Investasi PMDN - Nilai (Juta Rp),7528.0,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Selatan,2023,Investasi PMDN - Nilai (Juta Rp),11468.3,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Tenggara,2022,Investasi PMDN - Nilai (Juta Rp),7596.0,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Tenggara,2023,Investasi PMDN - Nilai (Juta Rp),7734.6,Juta Rp,data/raw/bps_pmdn/
+Gorontalo,2022,Investasi PMDN - Nilai (Juta Rp),1113.5,Juta Rp,data/raw/bps_pmdn/
+Gorontalo,2023,Investasi PMDN - Nilai (Juta Rp),3960.1,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Barat,2022,Investasi PMDN - Nilai (Juta Rp),1313.3,Juta Rp,data/raw/bps_pmdn/
+Sulawesi Barat,2023,Investasi PMDN - Nilai (Juta Rp),2011.1,Juta Rp,data/raw/bps_pmdn/
+Maluku,2022,Investasi PMDN - Nilai (Juta Rp),611.0,Juta Rp,data/raw/bps_pmdn/
+Maluku,2023,Investasi PMDN - Nilai (Juta Rp),1904.5,Juta Rp,data/raw/bps_pmdn/
+Maluku Utara,2022,Investasi PMDN - Nilai (Juta Rp),3414.9,Juta Rp,data/raw/bps_pmdn/
+Maluku Utara,2023,Investasi PMDN - Nilai (Juta Rp),6901.0,Juta Rp,data/raw/bps_pmdn/
+Papua Barat,2022,Investasi PMDN - Nilai (Juta Rp),2139.1,Juta Rp,data/raw/bps_pmdn/
+Papua Barat,2023,Investasi PMDN - Nilai (Juta Rp),1261.9,Juta Rp,data/raw/bps_pmdn/
+Papua Barat Daya,2023,Investasi PMDN - Nilai (Juta Rp),1708.7,Juta Rp,data/raw/bps_pmdn/
+Papua,2022,Investasi PMDN - Nilai (Juta Rp),1311.8,Juta Rp,data/raw/bps_pmdn/
+Papua,2023,Investasi PMDN - Nilai (Juta Rp),1174.1,Juta Rp,data/raw/bps_pmdn/
+Papua Selatan,2023,Investasi PMDN - Nilai (Juta Rp),152.5,Juta Rp,data/raw/bps_pmdn/
+Papua Tengah,2023,Investasi PMDN - Nilai (Juta Rp),458.8,Juta Rp,data/raw/bps_pmdn/
+Papua Pegunungan,2023,Investasi PMDN - Nilai (Juta Rp),121.8,Juta Rp,data/raw/bps_pmdn/
+Indonesia,2022,Investasi PMDN - Nilai (Juta Rp),552769.0,Juta Rp,data/raw/bps_pmdn/
+Indonesia,2023,Investasi PMDN - Nilai (Juta Rp),674923.4,Juta Rp,data/raw/bps_pmdn/
+Aceh,2016,Investasi PMDN - Jumlah Proyek,135.0,Proyek,data/raw/bps_pmdn/
+Aceh,2017,Investasi PMDN - Jumlah Proyek,154.0,Proyek,data/raw/bps_pmdn/
+Sumatera Utara,2016,Investasi PMDN - Jumlah Proyek,228.0,Proyek,data/raw/bps_pmdn/
+Sumatera Utara,2017,Investasi PMDN - Jumlah Proyek,307.0,Proyek,data/raw/bps_pmdn/
+Sumatera Barat,2016,Investasi PMDN - Jumlah Proyek,197.0,Proyek,data/raw/bps_pmdn/
+Sumatera Barat,2017,Investasi PMDN - Jumlah Proyek,192.0,Proyek,data/raw/bps_pmdn/
+Riau,2016,Investasi PMDN - Jumlah Proyek,289.0,Proyek,data/raw/bps_pmdn/
+Riau,2017,Investasi PMDN - Jumlah Proyek,285.0,Proyek,data/raw/bps_pmdn/
+Jambi,2016,Investasi PMDN - Jumlah Proyek,108.0,Proyek,data/raw/bps_pmdn/
+Jambi,2017,Investasi PMDN - Jumlah Proyek,152.0,Proyek,data/raw/bps_pmdn/
+Sumatera Selatan,2016,Investasi PMDN - Jumlah Proyek,165.0,Proyek,data/raw/bps_pmdn/
+Sumatera Selatan,2017,Investasi PMDN - Jumlah Proyek,233.0,Proyek,data/raw/bps_pmdn/
+Bengkulu,2016,Investasi PMDN - Jumlah Proyek,31.0,Proyek,data/raw/bps_pmdn/
+Bengkulu,2017,Investasi PMDN - Jumlah Proyek,45.0,Proyek,data/raw/bps_pmdn/
+Lampung,2016,Investasi PMDN - Jumlah Proyek,72.0,Proyek,data/raw/bps_pmdn/
+Lampung,2017,Investasi PMDN - Jumlah Proyek,69.0,Proyek,data/raw/bps_pmdn/
+Kep. Bangka Belitung,2016,Investasi PMDN - Jumlah Proyek,60.0,Proyek,data/raw/bps_pmdn/
+Kep. Bangka Belitung,2017,Investasi PMDN - Jumlah Proyek,58.0,Proyek,data/raw/bps_pmdn/
+Kep. Riau,2016,Investasi PMDN - Jumlah Proyek,130.0,Proyek,data/raw/bps_pmdn/
+Kep. Riau,2017,Investasi PMDN - Jumlah Proyek,198.0,Proyek,data/raw/bps_pmdn/
+Dki Jakarta,2016,Investasi PMDN - Jumlah Proyek,463.0,Proyek,data/raw/bps_pmdn/
+Dki Jakarta,2017,Investasi PMDN - Jumlah Proyek,659.0,Proyek,data/raw/bps_pmdn/
+Jawa Barat,2016,Investasi PMDN - Jumlah Proyek,1169.0,Proyek,data/raw/bps_pmdn/
+Jawa Barat,2017,Investasi PMDN - Jumlah Proyek,1211.0,Proyek,data/raw/bps_pmdn/
+Jawa Tengah,2016,Investasi PMDN - Jumlah Proyek,984.0,Proyek,data/raw/bps_pmdn/
+Jawa Tengah,2017,Investasi PMDN - Jumlah Proyek,1403.0,Proyek,data/raw/bps_pmdn/
+Di Yogyakarta,2016,Investasi PMDN - Jumlah Proyek,105.0,Proyek,data/raw/bps_pmdn/
+Di Yogyakarta,2017,Investasi PMDN - Jumlah Proyek,92.0,Proyek,data/raw/bps_pmdn/
+Jawa Timur,2016,Investasi PMDN - Jumlah Proyek,1119.0,Proyek,data/raw/bps_pmdn/
+Jawa Timur,2017,Investasi PMDN - Jumlah Proyek,1491.0,Proyek,data/raw/bps_pmdn/
+Banten,2016,Investasi PMDN - Jumlah Proyek,496.0,Proyek,data/raw/bps_pmdn/
+Banten,2017,Investasi PMDN - Jumlah Proyek,699.0,Proyek,data/raw/bps_pmdn/
+Bali,2016,Investasi PMDN - Jumlah Proyek,94.0,Proyek,data/raw/bps_pmdn/
+Bali,2017,Investasi PMDN - Jumlah Proyek,101.0,Proyek,data/raw/bps_pmdn/
+Nusa Tenggara Barat,2016,Investasi PMDN - Jumlah Proyek,33.0,Proyek,data/raw/bps_pmdn/
+Nusa Tenggara Barat,2017,Investasi PMDN - Jumlah Proyek,61.0,Proyek,data/raw/bps_pmdn/
+Nusa Tenggara Timur,2016,Investasi PMDN - Jumlah Proyek,29.0,Proyek,data/raw/bps_pmdn/
+Nusa Tenggara Timur,2017,Investasi PMDN - Jumlah Proyek,61.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Barat,2016,Investasi PMDN - Jumlah Proyek,289.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Barat,2017,Investasi PMDN - Jumlah Proyek,248.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Tengah,2016,Investasi PMDN - Jumlah Proyek,121.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Tengah,2017,Investasi PMDN - Jumlah Proyek,177.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Selatan,2016,Investasi PMDN - Jumlah Proyek,127.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Selatan,2017,Investasi PMDN - Jumlah Proyek,142.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Timur,2016,Investasi PMDN - Jumlah Proyek,239.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Timur,2017,Investasi PMDN - Jumlah Proyek,197.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Utara,2016,Investasi PMDN - Jumlah Proyek,56.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Utara,2017,Investasi PMDN - Jumlah Proyek,86.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Utara,2016,Investasi PMDN - Jumlah Proyek,74.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Utara,2017,Investasi PMDN - Jumlah Proyek,57.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Tengah,2016,Investasi PMDN - Jumlah Proyek,105.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Tengah,2017,Investasi PMDN - Jumlah Proyek,60.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Selatan,2016,Investasi PMDN - Jumlah Proyek,365.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Selatan,2017,Investasi PMDN - Jumlah Proyek,242.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Tenggara,2016,Investasi PMDN - Jumlah Proyek,109.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Tenggara,2017,Investasi PMDN - Jumlah Proyek,62.0,Proyek,data/raw/bps_pmdn/
+Gorontalo,2016,Investasi PMDN - Jumlah Proyek,20.0,Proyek,data/raw/bps_pmdn/
+Gorontalo,2017,Investasi PMDN - Jumlah Proyek,16.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Barat,2016,Investasi PMDN - Jumlah Proyek,14.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Barat,2017,Investasi PMDN - Jumlah Proyek,22.0,Proyek,data/raw/bps_pmdn/
+Maluku,2016,Investasi PMDN - Jumlah Proyek,8.0,Proyek,data/raw/bps_pmdn/
+Maluku,2017,Investasi PMDN - Jumlah Proyek,8.0,Proyek,data/raw/bps_pmdn/
+Maluku Utara,2016,Investasi PMDN - Jumlah Proyek,6.0,Proyek,data/raw/bps_pmdn/
+Maluku Utara,2017,Investasi PMDN - Jumlah Proyek,7.0,Proyek,data/raw/bps_pmdn/
+Papua Barat,2016,Investasi PMDN - Jumlah Proyek,6.0,Proyek,data/raw/bps_pmdn/
+Papua Barat,2017,Investasi PMDN - Jumlah Proyek,10.0,Proyek,data/raw/bps_pmdn/
+Papua,2016,Investasi PMDN - Jumlah Proyek,65.0,Proyek,data/raw/bps_pmdn/
+Papua,2017,Investasi PMDN - Jumlah Proyek,33.0,Proyek,data/raw/bps_pmdn/
+Indonesia,2016,Investasi PMDN - Jumlah Proyek,7511.0,Proyek,data/raw/bps_pmdn/
+Indonesia,2017,Investasi PMDN - Jumlah Proyek,8838.0,Proyek,data/raw/bps_pmdn/
+Aceh,2018,Investasi PMDN - Jumlah Proyek,242.0,Proyek,data/raw/bps_pmdn/
+Aceh,2019,Investasi PMDN - Jumlah Proyek,343.0,Proyek,data/raw/bps_pmdn/
+Sumatera Utara,2018,Investasi PMDN - Jumlah Proyek,356.0,Proyek,data/raw/bps_pmdn/
+Sumatera Utara,2019,Investasi PMDN - Jumlah Proyek,1243.0,Proyek,data/raw/bps_pmdn/
+Sumatera Barat,2018,Investasi PMDN - Jumlah Proyek,210.0,Proyek,data/raw/bps_pmdn/
+Sumatera Barat,2019,Investasi PMDN - Jumlah Proyek,471.0,Proyek,data/raw/bps_pmdn/
+Riau,2018,Investasi PMDN - Jumlah Proyek,393.0,Proyek,data/raw/bps_pmdn/
+Riau,2019,Investasi PMDN - Jumlah Proyek,756.0,Proyek,data/raw/bps_pmdn/
+Jambi,2018,Investasi PMDN - Jumlah Proyek,190.0,Proyek,data/raw/bps_pmdn/
+Jambi,2019,Investasi PMDN - Jumlah Proyek,607.0,Proyek,data/raw/bps_pmdn/
+Sumatera Selatan,2018,Investasi PMDN - Jumlah Proyek,270.0,Proyek,data/raw/bps_pmdn/
+Sumatera Selatan,2019,Investasi PMDN - Jumlah Proyek,797.0,Proyek,data/raw/bps_pmdn/
+Bengkulu,2018,Investasi PMDN - Jumlah Proyek,99.0,Proyek,data/raw/bps_pmdn/
+Bengkulu,2019,Investasi PMDN - Jumlah Proyek,171.0,Proyek,data/raw/bps_pmdn/
+Lampung,2018,Investasi PMDN - Jumlah Proyek,91.0,Proyek,data/raw/bps_pmdn/
+Lampung,2019,Investasi PMDN - Jumlah Proyek,241.0,Proyek,data/raw/bps_pmdn/
+Kep. Bangka Belitung,2018,Investasi PMDN - Jumlah Proyek,123.0,Proyek,data/raw/bps_pmdn/
+Kep. Bangka Belitung,2019,Investasi PMDN - Jumlah Proyek,374.0,Proyek,data/raw/bps_pmdn/
+Kep. Riau,2018,Investasi PMDN - Jumlah Proyek,319.0,Proyek,data/raw/bps_pmdn/
+Kep. Riau,2019,Investasi PMDN - Jumlah Proyek,759.0,Proyek,data/raw/bps_pmdn/
+Dki Jakarta,2018,Investasi PMDN - Jumlah Proyek,666.0,Proyek,data/raw/bps_pmdn/
+Dki Jakarta,2019,Investasi PMDN - Jumlah Proyek,3344.0,Proyek,data/raw/bps_pmdn/
+Jawa Barat,2018,Investasi PMDN - Jumlah Proyek,1661.0,Proyek,data/raw/bps_pmdn/
+Jawa Barat,2019,Investasi PMDN - Jumlah Proyek,3304.0,Proyek,data/raw/bps_pmdn/
+Jawa Tengah,2018,Investasi PMDN - Jumlah Proyek,1478.0,Proyek,data/raw/bps_pmdn/
+Jawa Tengah,2019,Investasi PMDN - Jumlah Proyek,2774.0,Proyek,data/raw/bps_pmdn/
+Di Yogyakarta,2018,Investasi PMDN - Jumlah Proyek,148.0,Proyek,data/raw/bps_pmdn/
+Di Yogyakarta,2019,Investasi PMDN - Jumlah Proyek,597.0,Proyek,data/raw/bps_pmdn/
+Jawa Timur,2018,Investasi PMDN - Jumlah Proyek,1679.0,Proyek,data/raw/bps_pmdn/
+Jawa Timur,2019,Investasi PMDN - Jumlah Proyek,5283.0,Proyek,data/raw/bps_pmdn/
+Banten,2018,Investasi PMDN - Jumlah Proyek,718.0,Proyek,data/raw/bps_pmdn/
+Banten,2019,Investasi PMDN - Jumlah Proyek,2389.0,Proyek,data/raw/bps_pmdn/
+Bali,2018,Investasi PMDN - Jumlah Proyek,183.0,Proyek,data/raw/bps_pmdn/
+Bali,2019,Investasi PMDN - Jumlah Proyek,814.0,Proyek,data/raw/bps_pmdn/
+Nusa Tenggara Barat,2018,Investasi PMDN - Jumlah Proyek,92.0,Proyek,data/raw/bps_pmdn/
+Nusa Tenggara Barat,2019,Investasi PMDN - Jumlah Proyek,316.0,Proyek,data/raw/bps_pmdn/
+Nusa Tenggara Timur,2018,Investasi PMDN - Jumlah Proyek,82.0,Proyek,data/raw/bps_pmdn/
+Nusa Tenggara Timur,2019,Investasi PMDN - Jumlah Proyek,298.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Barat,2018,Investasi PMDN - Jumlah Proyek,330.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Barat,2019,Investasi PMDN - Jumlah Proyek,737.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Tengah,2018,Investasi PMDN - Jumlah Proyek,195.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Tengah,2019,Investasi PMDN - Jumlah Proyek,443.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Selatan,2018,Investasi PMDN - Jumlah Proyek,170.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Selatan,2019,Investasi PMDN - Jumlah Proyek,534.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Timur,2018,Investasi PMDN - Jumlah Proyek,309.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Timur,2019,Investasi PMDN - Jumlah Proyek,1794.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Utara,2018,Investasi PMDN - Jumlah Proyek,83.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Utara,2019,Investasi PMDN - Jumlah Proyek,186.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Utara,2018,Investasi PMDN - Jumlah Proyek,82.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Utara,2019,Investasi PMDN - Jumlah Proyek,225.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Tengah,2018,Investasi PMDN - Jumlah Proyek,130.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Tengah,2019,Investasi PMDN - Jumlah Proyek,291.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Selatan,2018,Investasi PMDN - Jumlah Proyek,318.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Selatan,2019,Investasi PMDN - Jumlah Proyek,825.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Tenggara,2018,Investasi PMDN - Jumlah Proyek,54.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Tenggara,2019,Investasi PMDN - Jumlah Proyek,172.0,Proyek,data/raw/bps_pmdn/
+Gorontalo,2018,Investasi PMDN - Jumlah Proyek,30.0,Proyek,data/raw/bps_pmdn/
+Gorontalo,2019,Investasi PMDN - Jumlah Proyek,93.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Barat,2018,Investasi PMDN - Jumlah Proyek,20.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Barat,2019,Investasi PMDN - Jumlah Proyek,54.0,Proyek,data/raw/bps_pmdn/
+Maluku,2018,Investasi PMDN - Jumlah Proyek,36.0,Proyek,data/raw/bps_pmdn/
+Maluku,2019,Investasi PMDN - Jumlah Proyek,70.0,Proyek,data/raw/bps_pmdn/
+Maluku Utara,2018,Investasi PMDN - Jumlah Proyek,23.0,Proyek,data/raw/bps_pmdn/
+Maluku Utara,2019,Investasi PMDN - Jumlah Proyek,40.0,Proyek,data/raw/bps_pmdn/
+Papua Barat,2018,Investasi PMDN - Jumlah Proyek,12.0,Proyek,data/raw/bps_pmdn/
+Papua Barat,2019,Investasi PMDN - Jumlah Proyek,38.0,Proyek,data/raw/bps_pmdn/
+Papua,2018,Investasi PMDN - Jumlah Proyek,23.0,Proyek,data/raw/bps_pmdn/
+Papua,2019,Investasi PMDN - Jumlah Proyek,68.0,Proyek,data/raw/bps_pmdn/
+Indonesia,2018,Investasi PMDN - Jumlah Proyek,10815.0,Proyek,data/raw/bps_pmdn/
+Indonesia,2019,Investasi PMDN - Jumlah Proyek,30451.0,Proyek,data/raw/bps_pmdn/
+Aceh,2020,Investasi PMDN - Jumlah Proyek,1830.0,Proyek,data/raw/bps_pmdn/
+Aceh,2021,Investasi PMDN - Jumlah Proyek,2677.0,Proyek,data/raw/bps_pmdn/
+Sumatera Utara,2020,Investasi PMDN - Jumlah Proyek,4220.0,Proyek,data/raw/bps_pmdn/
+Sumatera Utara,2021,Investasi PMDN - Jumlah Proyek,4186.0,Proyek,data/raw/bps_pmdn/
+Sumatera Barat,2020,Investasi PMDN - Jumlah Proyek,1037.0,Proyek,data/raw/bps_pmdn/
+Sumatera Barat,2021,Investasi PMDN - Jumlah Proyek,1830.0,Proyek,data/raw/bps_pmdn/
+Riau,2020,Investasi PMDN - Jumlah Proyek,3382.0,Proyek,data/raw/bps_pmdn/
+Riau,2021,Investasi PMDN - Jumlah Proyek,2618.0,Proyek,data/raw/bps_pmdn/
+Jambi,2020,Investasi PMDN - Jumlah Proyek,1473.0,Proyek,data/raw/bps_pmdn/
+Jambi,2021,Investasi PMDN - Jumlah Proyek,1582.0,Proyek,data/raw/bps_pmdn/
+Sumatera Selatan,2020,Investasi PMDN - Jumlah Proyek,2103.0,Proyek,data/raw/bps_pmdn/
+Sumatera Selatan,2021,Investasi PMDN - Jumlah Proyek,1766.0,Proyek,data/raw/bps_pmdn/
+Bengkulu,2020,Investasi PMDN - Jumlah Proyek,476.0,Proyek,data/raw/bps_pmdn/
+Bengkulu,2021,Investasi PMDN - Jumlah Proyek,558.0,Proyek,data/raw/bps_pmdn/
+Lampung,2020,Investasi PMDN - Jumlah Proyek,1271.0,Proyek,data/raw/bps_pmdn/
+Lampung,2021,Investasi PMDN - Jumlah Proyek,1137.0,Proyek,data/raw/bps_pmdn/
+Kep. Bangka Belitung,2020,Investasi PMDN - Jumlah Proyek,972.0,Proyek,data/raw/bps_pmdn/
+Kep. Bangka Belitung,2021,Investasi PMDN - Jumlah Proyek,1431.0,Proyek,data/raw/bps_pmdn/
+Kep. Riau,2020,Investasi PMDN - Jumlah Proyek,2224.0,Proyek,data/raw/bps_pmdn/
+Kep. Riau,2021,Investasi PMDN - Jumlah Proyek,2659.0,Proyek,data/raw/bps_pmdn/
+Dki Jakarta,2020,Investasi PMDN - Jumlah Proyek,17667.0,Proyek,data/raw/bps_pmdn/
+Dki Jakarta,2021,Investasi PMDN - Jumlah Proyek,27119.0,Proyek,data/raw/bps_pmdn/
+Jawa Barat,2020,Investasi PMDN - Jumlah Proyek,8989.0,Proyek,data/raw/bps_pmdn/
+Jawa Barat,2021,Investasi PMDN - Jumlah Proyek,8603.0,Proyek,data/raw/bps_pmdn/
+Jawa Tengah,2020,Investasi PMDN - Jumlah Proyek,8628.0,Proyek,data/raw/bps_pmdn/
+Jawa Tengah,2021,Investasi PMDN - Jumlah Proyek,8431.0,Proyek,data/raw/bps_pmdn/
+Di Yogyakarta,2020,Investasi PMDN - Jumlah Proyek,2147.0,Proyek,data/raw/bps_pmdn/
+Di Yogyakarta,2021,Investasi PMDN - Jumlah Proyek,1827.0,Proyek,data/raw/bps_pmdn/
+Jawa Timur,2020,Investasi PMDN - Jumlah Proyek,15562.0,Proyek,data/raw/bps_pmdn/
+Jawa Timur,2021,Investasi PMDN - Jumlah Proyek,14261.0,Proyek,data/raw/bps_pmdn/
+Banten,2020,Investasi PMDN - Jumlah Proyek,5833.0,Proyek,data/raw/bps_pmdn/
+Banten,2021,Investasi PMDN - Jumlah Proyek,4403.0,Proyek,data/raw/bps_pmdn/
+Bali,2020,Investasi PMDN - Jumlah Proyek,2513.0,Proyek,data/raw/bps_pmdn/
+Bali,2021,Investasi PMDN - Jumlah Proyek,2330.0,Proyek,data/raw/bps_pmdn/
+Nusa Tenggara Barat,2020,Investasi PMDN - Jumlah Proyek,1200.0,Proyek,data/raw/bps_pmdn/
+Nusa Tenggara Barat,2021,Investasi PMDN - Jumlah Proyek,1509.0,Proyek,data/raw/bps_pmdn/
+Nusa Tenggara Timur,2020,Investasi PMDN - Jumlah Proyek,761.0,Proyek,data/raw/bps_pmdn/
+Nusa Tenggara Timur,2021,Investasi PMDN - Jumlah Proyek,751.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Barat,2020,Investasi PMDN - Jumlah Proyek,2074.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Barat,2021,Investasi PMDN - Jumlah Proyek,2173.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Tengah,2020,Investasi PMDN - Jumlah Proyek,976.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Tengah,2021,Investasi PMDN - Jumlah Proyek,863.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Selatan,2020,Investasi PMDN - Jumlah Proyek,1620.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Selatan,2021,Investasi PMDN - Jumlah Proyek,1588.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Timur,2020,Investasi PMDN - Jumlah Proyek,3823.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Timur,2021,Investasi PMDN - Jumlah Proyek,4317.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Utara,2020,Investasi PMDN - Jumlah Proyek,325.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Utara,2021,Investasi PMDN - Jumlah Proyek,405.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Utara,2020,Investasi PMDN - Jumlah Proyek,813.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Utara,2021,Investasi PMDN - Jumlah Proyek,792.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Tengah,2020,Investasi PMDN - Jumlah Proyek,812.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Tengah,2021,Investasi PMDN - Jumlah Proyek,847.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Selatan,2020,Investasi PMDN - Jumlah Proyek,1919.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Selatan,2021,Investasi PMDN - Jumlah Proyek,1994.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Tenggara,2020,Investasi PMDN - Jumlah Proyek,552.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Tenggara,2021,Investasi PMDN - Jumlah Proyek,954.0,Proyek,data/raw/bps_pmdn/
+Gorontalo,2020,Investasi PMDN - Jumlah Proyek,291.0,Proyek,data/raw/bps_pmdn/
+Gorontalo,2021,Investasi PMDN - Jumlah Proyek,364.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Barat,2020,Investasi PMDN - Jumlah Proyek,113.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Barat,2021,Investasi PMDN - Jumlah Proyek,191.0,Proyek,data/raw/bps_pmdn/
+Maluku,2020,Investasi PMDN - Jumlah Proyek,262.0,Proyek,data/raw/bps_pmdn/
+Maluku,2021,Investasi PMDN - Jumlah Proyek,713.0,Proyek,data/raw/bps_pmdn/
+Maluku Utara,2020,Investasi PMDN - Jumlah Proyek,121.0,Proyek,data/raw/bps_pmdn/
+Maluku Utara,2021,Investasi PMDN - Jumlah Proyek,347.0,Proyek,data/raw/bps_pmdn/
+Papua Barat,2020,Investasi PMDN - Jumlah Proyek,311.0,Proyek,data/raw/bps_pmdn/
+Papua Barat,2021,Investasi PMDN - Jumlah Proyek,303.0,Proyek,data/raw/bps_pmdn/
+Papua,2020,Investasi PMDN - Jumlah Proyek,323.0,Proyek,data/raw/bps_pmdn/
+Papua,2021,Investasi PMDN - Jumlah Proyek,473.0,Proyek,data/raw/bps_pmdn/
+Indonesia,2020,Investasi PMDN - Jumlah Proyek,96623.0,Proyek,data/raw/bps_pmdn/
+Indonesia,2021,Investasi PMDN - Jumlah Proyek,106002.0,Proyek,data/raw/bps_pmdn/
+Aceh,2022,Investasi PMDN - Jumlah Proyek,2710.0,Proyek,data/raw/bps_pmdn/
+Aceh,2023,Investasi PMDN - Jumlah Proyek,7171.0,Proyek,data/raw/bps_pmdn/
+Sumatera Utara,2022,Investasi PMDN - Jumlah Proyek,5356.0,Proyek,data/raw/bps_pmdn/
+Sumatera Utara,2023,Investasi PMDN - Jumlah Proyek,8253.0,Proyek,data/raw/bps_pmdn/
+Sumatera Barat,2022,Investasi PMDN - Jumlah Proyek,1820.0,Proyek,data/raw/bps_pmdn/
+Sumatera Barat,2023,Investasi PMDN - Jumlah Proyek,2334.0,Proyek,data/raw/bps_pmdn/
+Riau,2022,Investasi PMDN - Jumlah Proyek,2835.0,Proyek,data/raw/bps_pmdn/
+Riau,2023,Investasi PMDN - Jumlah Proyek,5548.0,Proyek,data/raw/bps_pmdn/
+Jambi,2022,Investasi PMDN - Jumlah Proyek,1854.0,Proyek,data/raw/bps_pmdn/
+Jambi,2023,Investasi PMDN - Jumlah Proyek,2870.0,Proyek,data/raw/bps_pmdn/
+Sumatera Selatan,2022,Investasi PMDN - Jumlah Proyek,2243.0,Proyek,data/raw/bps_pmdn/
+Sumatera Selatan,2023,Investasi PMDN - Jumlah Proyek,5667.0,Proyek,data/raw/bps_pmdn/
+Bengkulu,2022,Investasi PMDN - Jumlah Proyek,636.0,Proyek,data/raw/bps_pmdn/
+Bengkulu,2023,Investasi PMDN - Jumlah Proyek,1503.0,Proyek,data/raw/bps_pmdn/
+Lampung,2022,Investasi PMDN - Jumlah Proyek,1320.0,Proyek,data/raw/bps_pmdn/
+Lampung,2023,Investasi PMDN - Jumlah Proyek,2825.0,Proyek,data/raw/bps_pmdn/
+Kep. Bangka Belitung,2022,Investasi PMDN - Jumlah Proyek,938.0,Proyek,data/raw/bps_pmdn/
+Kep. Bangka Belitung,2023,Investasi PMDN - Jumlah Proyek,1770.0,Proyek,data/raw/bps_pmdn/
+Kep. Riau,2022,Investasi PMDN - Jumlah Proyek,2180.0,Proyek,data/raw/bps_pmdn/
+Kep. Riau,2023,Investasi PMDN - Jumlah Proyek,5353.0,Proyek,data/raw/bps_pmdn/
+Dki Jakarta,2022,Investasi PMDN - Jumlah Proyek,24950.0,Proyek,data/raw/bps_pmdn/
+Dki Jakarta,2023,Investasi PMDN - Jumlah Proyek,68704.0,Proyek,data/raw/bps_pmdn/
+Jawa Barat,2022,Investasi PMDN - Jumlah Proyek,14853.0,Proyek,data/raw/bps_pmdn/
+Jawa Barat,2023,Investasi PMDN - Jumlah Proyek,35758.0,Proyek,data/raw/bps_pmdn/
+Jawa Tengah,2022,Investasi PMDN - Jumlah Proyek,10276.0,Proyek,data/raw/bps_pmdn/
+Jawa Tengah,2023,Investasi PMDN - Jumlah Proyek,17460.0,Proyek,data/raw/bps_pmdn/
+Di Yogyakarta,2022,Investasi PMDN - Jumlah Proyek,1897.0,Proyek,data/raw/bps_pmdn/
+Di Yogyakarta,2023,Investasi PMDN - Jumlah Proyek,3906.0,Proyek,data/raw/bps_pmdn/
+Jawa Timur,2022,Investasi PMDN - Jumlah Proyek,15813.0,Proyek,data/raw/bps_pmdn/
+Jawa Timur,2023,Investasi PMDN - Jumlah Proyek,28484.0,Proyek,data/raw/bps_pmdn/
+Banten,2022,Investasi PMDN - Jumlah Proyek,7161.0,Proyek,data/raw/bps_pmdn/
+Banten,2023,Investasi PMDN - Jumlah Proyek,16488.0,Proyek,data/raw/bps_pmdn/
+Bali,2022,Investasi PMDN - Jumlah Proyek,2672.0,Proyek,data/raw/bps_pmdn/
+Bali,2023,Investasi PMDN - Jumlah Proyek,5787.0,Proyek,data/raw/bps_pmdn/
+Nusa Tenggara Barat,2022,Investasi PMDN - Jumlah Proyek,1558.0,Proyek,data/raw/bps_pmdn/
+Nusa Tenggara Barat,2023,Investasi PMDN - Jumlah Proyek,2543.0,Proyek,data/raw/bps_pmdn/
+Nusa Tenggara Timur,2022,Investasi PMDN - Jumlah Proyek,1202.0,Proyek,data/raw/bps_pmdn/
+Nusa Tenggara Timur,2023,Investasi PMDN - Jumlah Proyek,2350.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Barat,2022,Investasi PMDN - Jumlah Proyek,2681.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Barat,2023,Investasi PMDN - Jumlah Proyek,3956.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Tengah,2022,Investasi PMDN - Jumlah Proyek,1148.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Tengah,2023,Investasi PMDN - Jumlah Proyek,2404.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Selatan,2022,Investasi PMDN - Jumlah Proyek,1733.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Selatan,2023,Investasi PMDN - Jumlah Proyek,3453.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Timur,2022,Investasi PMDN - Jumlah Proyek,4219.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Timur,2023,Investasi PMDN - Jumlah Proyek,7571.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Utara,2022,Investasi PMDN - Jumlah Proyek,441.0,Proyek,data/raw/bps_pmdn/
+Kalimantan Utara,2023,Investasi PMDN - Jumlah Proyek,839.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Utara,2022,Investasi PMDN - Jumlah Proyek,1290.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Utara,2023,Investasi PMDN - Jumlah Proyek,2744.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Tengah,2022,Investasi PMDN - Jumlah Proyek,1576.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Tengah,2023,Investasi PMDN - Jumlah Proyek,2145.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Selatan,2022,Investasi PMDN - Jumlah Proyek,3328.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Selatan,2023,Investasi PMDN - Jumlah Proyek,8070.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Tenggara,2022,Investasi PMDN - Jumlah Proyek,988.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Tenggara,2023,Investasi PMDN - Jumlah Proyek,2166.0,Proyek,data/raw/bps_pmdn/
+Gorontalo,2022,Investasi PMDN - Jumlah Proyek,580.0,Proyek,data/raw/bps_pmdn/
+Gorontalo,2023,Investasi PMDN - Jumlah Proyek,996.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Barat,2022,Investasi PMDN - Jumlah Proyek,249.0,Proyek,data/raw/bps_pmdn/
+Sulawesi Barat,2023,Investasi PMDN - Jumlah Proyek,880.0,Proyek,data/raw/bps_pmdn/
+Maluku,2022,Investasi PMDN - Jumlah Proyek,1014.0,Proyek,data/raw/bps_pmdn/
+Maluku,2023,Investasi PMDN - Jumlah Proyek,1421.0,Proyek,data/raw/bps_pmdn/
+Maluku Utara,2022,Investasi PMDN - Jumlah Proyek,1709.0,Proyek,data/raw/bps_pmdn/
+Maluku Utara,2023,Investasi PMDN - Jumlah Proyek,1495.0,Proyek,data/raw/bps_pmdn/
+Papua Barat,2022,Investasi PMDN - Jumlah Proyek,598.0,Proyek,data/raw/bps_pmdn/
+Papua Barat,2023,Investasi PMDN - Jumlah Proyek,730.0,Proyek,data/raw/bps_pmdn/
+Papua Barat Daya,2023,Investasi PMDN - Jumlah Proyek,1121.0,Proyek,data/raw/bps_pmdn/
+Papua,2022,Investasi PMDN - Jumlah Proyek,754.0,Proyek,data/raw/bps_pmdn/
+Papua,2023,Investasi PMDN - Jumlah Proyek,971.0,Proyek,data/raw/bps_pmdn/
+Papua Selatan,2023,Investasi PMDN - Jumlah Proyek,346.0,Proyek,data/raw/bps_pmdn/
+Papua Tengah,2023,Investasi PMDN - Jumlah Proyek,507.0,Proyek,data/raw/bps_pmdn/
+Papua Pegunungan,2023,Investasi PMDN - Jumlah Proyek,133.0,Proyek,data/raw/bps_pmdn/
+Indonesia,2022,Investasi PMDN - Jumlah Proyek,124582.0,Proyek,data/raw/bps_pmdn/
+Indonesia,2023,Investasi PMDN - Jumlah Proyek,266722.0,Proyek,data/raw/bps_pmdn/

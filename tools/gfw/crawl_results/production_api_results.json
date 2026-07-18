@@ -1,0 +1,175 @@
+{
+  "umd-loss-gain": {
+    "url": "https://production-api.globalforestwatch.org/v1/umd-loss-gain?iso=IDN&admin1=30&thresh=30&period=2020-01-01%2C2023-12-31",
+    "status_code": 400,
+    "headers": {
+      "Connection": "keep-alive",
+      "Content-Length": "60",
+      "Content-Type": "application/json",
+      "access-control-allow-credentials": "true",
+      "x-amzn-RequestId": "b4080c00-8bae-42e8-9037-22dd4d6aa22d",
+      "access-control-allow-origin": "*",
+      "x-amzn-Remapped-Content-Length": "60",
+      "access-control-allow-headers": "upgrade-insecure-requests",
+      "x-amzn-Remapped-Connection": "keep-alive",
+      "x-amz-apigw-id": "e7QfiFQHIAMETvQ=",
+      "cache-control": "private",
+      "x-amzn-Remapped-Server": "gunicorn",
+      "access-control-allow-methods": "OPTIONS,GET,PUT,POST,PATCH,DELETE",
+      "x-amzn-Remapped-Date": "Sun, 14 Jun 2026 00:50:17 GMT",
+      "Via": "1.1 511348a08e2d7195b44bdbe3485db33c.cloudfront.net (CloudFront), 1.1 varnish",
+      "X-Amz-Cf-Pop": "SIN2-P11",
+      "X-Amz-Cf-Id": "8p1a-c8_YhCIhatQsANZBpNMJEJgKLyMidE4O5zK1X_yw38QNNt2Bg==",
+      "Accept-Ranges": "bytes",
+      "Date": "Sun, 14 Jun 2026 00:50:17 GMT",
+      "X-Served-By": "cache-sin-wsap440065-SIN",
+      "X-Cache": "Error from cloudfront, MISS",
+      "X-Cache-Hits": "0",
+      "X-Timer": "S1781398217.864367,VS0,VE747"
+    },
+    "content_type": "application/json",
+    "body_preview": "{\"errors\":[{\"detail\":\"Geostore is required\",\"status\":400}]}\n",
+    "json": {
+      "errors": [
+        {
+          "detail": "Geostore is required",
+          "status": 400
+        }
+      ]
+    },
+    "elapsed_ms": 1078.7150000000001
+  },
+  "glad-alerts": {
+    "url": "https://production-api.globalforestwatch.org/v1/glad-alerts?iso=IDN&admin1=30&dateRange=2023-01-01%2C2024-12-31",
+    "status_code": 400,
+    "headers": {
+      "Connection": "keep-alive",
+      "Content-Length": "71",
+      "Content-Type": "application/json",
+      "access-control-allow-credentials": "true",
+      "x-amzn-RequestId": "8247af5d-3a19-4027-b3e1-58130acede68",
+      "access-control-allow-origin": "*",
+      "x-amzn-Remapped-Content-Length": "71",
+      "access-control-allow-headers": "upgrade-insecure-requests",
+      "x-amzn-Remapped-Connection": "keep-alive",
+      "x-amz-apigw-id": "e7QfxEhBIAMEOUQ=",
+      "cache-control": "private",
+      "x-amzn-Remapped-Server": "gunicorn",
+      "access-control-allow-methods": "OPTIONS,GET,PUT,POST,PATCH,DELETE",
+      "x-amzn-Remapped-Date": "Sun, 14 Jun 2026 00:50:19 GMT",
+      "Via": "1.1 220478e0525c4434ce17762e6adfaedc.cloudfront.net (CloudFront), 1.1 varnish",
+      "X-Amz-Cf-Pop": "SIN2-P11",
+      "X-Amz-Cf-Id": "FShwfB10ve6rTj3j4j0ec_1VPm085w9t2GA9ePxgSZCSfZretHYFwQ==",
+      "Accept-Ranges": "bytes",
+      "Date": "Sun, 14 Jun 2026 00:50:19 GMT",
+      "X-Served-By": "cache-sin-wsat1880071-SIN",
+      "X-Cache": "Error from cloudfront, MISS",
+      "X-Cache-Hits": "0",
+      "X-Timer": "S1781398219.854643,VS0,VE274"
+    },
+    "content_type": "application/json",
+    "body_preview": "{\"errors\":[{\"detail\":\"Geostore or geojson must be set\",\"status\":400}]}\n",
+    "json": {
+      "errors": [
+        {
+          "detail": "Geostore or geojson must be set",
+          "status": 400
+        }
+      ]
+    },
+    "elapsed_ms": 510.70400000000006
+  },
+  "forest-change-admin": {
+    "url": "https://production-api.globalforestwatch.org/v1/forest-change/umd-loss-gain/admin?iso=IDN&admin1=30&thresh=30&period=2020-01-01%2C2023-12-31",
+    "status_code": 403,
+    "headers": {
+      "Connection": "keep-alive",
+      "Content-Length": "915",
+      "Content-Type": "text/html",
+      "x-amzn-Remapped-x-amzn-Remapped-Connection": "keep-alive",
+      "x-amzn-RequestId": "b8136207-10a2-4a29-bf9d-f6f167dbdb30",
+      "x-amzn-Remapped-x-amzn-RequestId": "6bbb818b-3751-48c9-bab7-ce1695599d61",
+      "x-amzn-Remapped-x-amzn-Remapped-Server": "CloudFront",
+      "x-amzn-Remapped-Content-Length": "915",
+      "x-amzn-Remapped-x-amzn-Remapped-Date": "Sun, 14 Jun 2026 00:50:20 GMT",
+      "x-amzn-Remapped-Connection": "keep-alive",
+      "x-amzn-Remapped-Date": "Sun, 14 Jun 2026 00:50:20 GMT",
+      "Via": "1.1 185e69fae2e25450e587a1fae1f63962.cloudfront.net (CloudFront), 1.1 1e54a46a2c47322a41a5f070c060e878.cloudfront.net (CloudFront), 1.1 99593f4af61be34fdb409aabe600d200.cloudfront.net (CloudFront), 1.1 varnish",
+      "x-amz-apigw-id": "e7QgCF9HoAMEHeQ=",
+      "x-amzn-Remapped-x-amzn-Remapped-Content-Length": "915",
+      "X-Amz-Cf-Pop": "IAD61-P3, IAD61-P3, SIN2-P11",
+      "X-Amz-Cf-Id": "TKM2ACuKBSlvqSlyhqHB_ytK-OHGbaK238vuK9CGWx95wHhie8oong==",
+      "Accept-Ranges": "bytes",
+      "Date": "Sun, 14 Jun 2026 00:50:20 GMT",
+      "X-Served-By": "cache-sin-wsat1880035-SIN",
+      "X-Cache": "Error from cloudfront, MISS",
+      "X-Cache-Hits": "0",
+      "X-Timer": "S1781398221.504442,VS0,VE261"
+    },
+    "content_type": "text/html",
+    "body_preview": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n<HTML><HEAD><META HTTP-EQUIV=\"Content-Type\" CONTENT=\"text/html; charset=iso-8859-1\">\n<TITLE>ERROR: The request could not be satisfied</TITLE>\n</HEAD><BODY>\n<H1>403 ERROR</H1>\n<H2>The request could not be satisfied.</H2>\n<HR noshade size=\"1px\">\nBad request.\nWe can't connect to the server for this app or website at this time. There might be too much traffic or a configuration error. Try again later, or contact the app or website owner.\n<BR clear=\"all\">\nIf you provide content to customers through CloudFront, you can find steps to troubleshoot and help prevent this error by reviewing the CloudFront documentation.\n<BR clear=\"all\">\n<HR noshade size=\"1px\">\n<PRE>\nGenerated by cloudfront (CloudFront)\nRequest ID: Jlbr8FNYAM-oTt1NyymVR8Wo2vQx4hWLF871ugnFvby2hmXHXI2G9g==\n</PRE>\n<ADDRESS>\n</ADDRESS>\n</BODY></HTML>",
+    "json": null,
+    "elapsed_ms": 537.1120000000001
+  },
+  "viirs-active-fires": {
+    "url": "https://production-api.globalforestwatch.org/v1/viirs-active-fires?iso=IDN&admin1=30",
+    "status_code": 400,
+    "headers": {
+      "Connection": "keep-alive",
+      "Content-Length": "61",
+      "Content-Type": "application/json; charset=utf-8",
+      "Access-Control-Allow-Credentials": "true",
+      "x-amzn-RequestId": "8ba8afaf-49c5-4bc5-a258-ba38b68229d3",
+      "Access-Control-Allow-Origin": "",
+      "x-amzn-Remapped-Content-Length": "61",
+      "x-amzn-Remapped-Connection": "keep-alive",
+      "x-amz-apigw-id": "e7QgVEzqIAMEurg=",
+      "x-amzn-Remapped-Date": "Sun, 14 Jun 2026 00:50:22 GMT",
+      "Via": "1.1 4a3b15cbba636a79a4bfae8a49b9417e.cloudfront.net (CloudFront), 1.1 varnish",
+      "X-Amz-Cf-Pop": "SIN2-P11",
+      "X-Amz-Cf-Id": "sg4lcb8CuaTRO6WrS5tDYrhceMCW900Au04Wn8tXh4bz5_LiTMbCqw==",
+      "Accept-Ranges": "bytes",
+      "Date": "Sun, 14 Jun 2026 00:50:22 GMT",
+      "X-Served-By": "cache-sin-wsat1880063-SIN",
+      "X-Cache": "Error from cloudfront, MISS",
+      "X-Cache-Hits": "0",
+      "X-Timer": "S1781398222.014591,VS0,VE722",
+      "Vary": "Accept-Encoding, Origin"
+    },
+    "content_type": "application/json; charset=utf-8",
+    "body_preview": "{\"errors\":[{\"status\":400,\"detail\":\"GeoJSON param required\"}]}",
+    "json": {
+      "errors": [
+        {
+          "status": 400,
+          "detail": "GeoJSON param required"
+        }
+      ]
+    },
+    "elapsed_ms": 963.178
+  },
+  "tcl-by-driver": {
+    "url": "https://data-api.globalforestwatch.org/v0/land/tree_cover_loss_by_driver?canopy_cover=30&aoi=%7B%22type%22%3A+%22admin%22%2C+%22country%22%3A+%22IDN%22%7D",
+    "status_code": 403,
+    "headers": {
+      "Content-Type": "application/json",
+      "Content-Length": "174",
+      "Connection": "keep-alive",
+      "Date": "Sun, 14 Jun 2026 00:50:24 GMT",
+      "x-amz-apigw-id": "e7QgpGtioAMEkYw=",
+      "x-amzn-RequestId": "2d95adb8-521e-4e4c-8015-55085d29bb53",
+      "x-amzn-ErrorType": "ForbiddenException",
+      "X-Cache": "Error from cloudfront",
+      "Via": "1.1 d5fc1cc93cba2e958b2e50cab03d57fc.cloudfront.net (CloudFront)",
+      "X-Amz-Cf-Pop": "SIN3-P4",
+      "X-Amz-Cf-Id": "sVKp9c5GeA4CNfoQ0e-8_SHjJnGkEAvYmez_Q2fFLJU4gOE5BJ2X7w=="
+    },
+    "content_type": "application/json",
+    "body_preview": "{\"status\":\"failed\",\"message\":\"Request is missing valid API key. Please see documentation at https://data-api.globalforestwatch.org/#tag/Authentication on how to create one.\"}",
+    "json": {
+      "status": "failed",
+      "message": "Request is missing valid API key. Please see documentation at https://data-api.globalforestwatch.org/#tag/Authentication on how to create one."
+    },
+    "elapsed_ms": 938.658
+  }
+}

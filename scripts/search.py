@@ -1,0 +1,1 @@
+import re; lines=open('pages/1_Ekspansi_Industri.py', encoding='utf-8').readlines(); print('\n'.join([f'Line {i+1}: {l.strip()}' for i,l in enumerate(lines) if 'st.subheader' in l or 'st.markdown' in l and ('1.' in l or '1 ' in l)]))

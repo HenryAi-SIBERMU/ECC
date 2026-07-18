@@ -1,0 +1,32 @@
+{
+  "Sulawesi Utara": {
+    "admin1": "31",
+    "status_code": 400,
+    "response_preview": "{\"errors\":[{\"detail\":\"Geostore is required\",\"status\":400}]}\n"
+  },
+  "Sulawesi Tengah": {
+    "admin1": "29",
+    "status_code": 400,
+    "response_preview": "{\"errors\":[{\"detail\":\"Geostore is required\",\"status\":400}]}\n"
+  },
+  "Sulawesi Selatan": {
+    "admin1": "30",
+    "status_code": 400,
+    "response_preview": "{\"errors\":[{\"detail\":\"Geostore is required\",\"status\":400}]}\n"
+  },
+  "Sulawesi Tenggara": {
+    "admin1": "32",
+    "status_code": 400,
+    "response_preview": "{\"errors\":[{\"detail\":\"Geostore is required\",\"status\":400}]}\n"
+  },
+  "Gorontalo": {
+    "admin1": "11",
+    "status_code": 400,
+    "response_preview": "{\"errors\":[{\"detail\":\"Geostore is required\",\"status\":400}]}\n"
+  },
+  "Sulawesi Barat": {
+    "admin1": "33",
+    "status_code": 400,
+    "response_preview": "{\"errors\":[{\"detail\":\"Geostore is required\",\"status\":400}]}\n"
+  }
+}

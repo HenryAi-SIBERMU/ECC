@@ -1,0 +1,39 @@
+{
+  "query": "\"Status Lingkungan Hidup Indonesia 2015\" filetype:pdf",
+  "results": [
+    {
+      "kind": "customsearch#result",
+      "title": "toksikologi lingkungan - Repository | STIKes Persada Nabire",
+      "htmlTitle": "toksikologi lingkungan - Repository | STIKes Persada Nabire",
+      "link": "https://repository.stikespersadanabire.ac.id/assets/upload/files/docs_1765530084.pdf",
+      "displayLink": "repository.stikespersadanabire.ac.id",
+      "snippet": "Nov 24, 2024 ... KLHK (2019) Laporan Status Lingkungan Hidup Indonesia 2015. Jakarta: Kementerian Kehutanan dan Lingkungan Hidup. Available at: chrome ...",
+      "htmlSnippet": "Nov 24, 2024 <b>...</b> KLHK (2019) Laporan <b>Status Lingkungan Hidup Indonesia 2015</b>. Jakarta: Kementerian Kehutanan dan Lingkungan Hidup. Available at: chrome&nbsp;...",
+      "formattedUrl": "https://repository.stikespersadanabire.ac.id/assets/.../docs_1765530084.pdf",
+      "htmlFormattedUrl": "https://repository.stikespersadanabire.ac.id/assets/.../docs_1765530084.pdf",
+      "pagemap": {
+        "cse_thumbnail": [
+          {
+            "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxHlWftSWaEwyXbCSM7r9a3vyyiAsvnPqHQz0yZdIgLIzfvWb1IDxm8ujk&s",
+            "width": "181",
+            "height": "278"
+          }
+        ],
+        "metatags": [
+          {
+            "moddate": "D:20250211033724Z",
+            "producer": "iLovePDF"
+          }
+        ],
+        "cse_image": [
+          {
+            "src": "x-raw-image:///486dbebb1f0f30238223c01e3e3a6c6abf52504f4573ea0139f56b496f4c0868"
+          }
+        ]
+      },
+      "mime": "application/pdf",
+      "fileFormat": "PDF/Adobe Acrobat"
+    }
+  ],
+  "count": 1
+}

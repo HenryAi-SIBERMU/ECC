@@ -1,0 +1,20 @@
+# Scraper Configuration
+# Default settings for all scrapers
+
+# MinerbaOne settings
+minerbaone:
+  delay: 1.0
+  max_retries: 3
+  timeout: 30
+
+# TanahKita settings  
+tanahkita_detail:
+  delay: 1.5
+  max_retries: 3
+  timeout: 30
+
+# Default settings
+default:
+  delay: 1.0
+  max_retries: 3
+  timeout: 30

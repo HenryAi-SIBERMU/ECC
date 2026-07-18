@@ -1,0 +1,45 @@
+
+A:
+Halo Hen, sama ini mumpung ingat.
+
+B:
+Jadi ada beberapa cross step atau analisis
+
+A:
+data yang itu penting untuk dipilah agar dia punya hasil yang lebih kritis. Misalkan di part beban kesehatan, soal korelasi langsung penurunan IKA versus lonjakan diare. Nah itu kayaknya ada nggak tau nih ini sementara nih ya ini usulannya itu di split antara yang merah sama yang abu-abu itu jadi korelasinya dibuat dua biar
+
+B:
+terlihat disparitasnya misalkan trennya itu catatan satu
+
+A:
+catatan kedua kayaknya coba dibuat pembanding antara
+
+B:
+daerah sentra industri dengan non centra misalkan
+
+A:
+untuk kasus ISPA itu kan sehingga kita benar-benar bisa melihat misalkan di tren historis kasus ISPA pneumonia di tabel beban kesehatan
+
+B:
+itu jumlah kasus kalau misalkan atau tolonglah
+
+A:
+dicek semua chart-chart tabel yang bagian-bagian lain
+
+B:
+yang kita buat klasifikasi lah dari seluruh
+
+A:
+provinsi di Sulawesi itu kita buat klasifikasi. Kalau daerah sentra itu gimana? Daerah non-sentra itu gimana? Sehingga tidak diindeks semua. Gimana ya maksudnya?
+
+B:
+Biar nggak diindeksasi semua, tapi kita split, sehingga kita bisa memberi perbandingan dari daerah
+
+A:
+yang sentra dan non-sentra.
+
+B:
+Terus catatan lagi begini, apakah kamu memperhatikan potensi double accounting terhadap data yang diolah?
+
+A:
+Kan kamu tuh ngambil beberapa data itu kan dari beberapa report tuh. Ada report KPA, ada report AR, ada report lembaga A, B, C, D misalkan. sangat potensial kan data ABCD yang diambil KPA yang diambil ini samplingnya
