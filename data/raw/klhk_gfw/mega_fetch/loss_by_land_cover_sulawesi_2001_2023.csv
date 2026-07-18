@@ -1,0 +1,742 @@
+umd_tree_cover_loss__year,esa_land_cover_2015__class,area__ha,province,year
+2001,Agriculture,3159.78447,Sulawesi Utara,2001.0
+2001,Forest,8.2102,Sulawesi Utara,2001.0
+2001,Grassland,12.12732,Sulawesi Utara,2001.0
+2001,Settlement,1.76851,Sulawesi Utara,2001.0
+2001,Water,23.219910000000002,Sulawesi Utara,2001.0
+2002,Agriculture,5374.563090000001,Sulawesi Utara,2002.0
+2002,Forest,39.43369,Sulawesi Utara,2002.0
+2002,Grassland,59.461710000000004,Sulawesi Utara,2002.0
+2002,Settlement,0.23067,Sulawesi Utara,2002.0
+2002,Water,30.96624,Sulawesi Utara,2002.0
+2003,Agriculture,1830.00092,Sulawesi Utara,2003.0
+2003,Forest,14.42142,Sulawesi Utara,2003.0
+2003,Grassland,30.23348,Sulawesi Utara,2003.0
+2003,Water,7.1434999999999995,Sulawesi Utara,2003.0
+2004,Agriculture,4581.8138,Sulawesi Utara,2004.0
+2004,Forest,10.508049999999999,Sulawesi Utara,2004.0
+2004,Grassland,34.63119,Sulawesi Utara,2004.0
+2004,Settlement,0.69202,Sulawesi Utara,2004.0
+2004,Water,23.056820000000002,Sulawesi Utara,2004.0
+2005,Agriculture,2255.60451,Sulawesi Utara,2005.0
+2005,Forest,13.42732,Sulawesi Utara,2005.0
+2005,Grassland,34.065690000000004,Sulawesi Utara,2005.0
+2005,Water,10.75326,Sulawesi Utara,2005.0
+2006,Agriculture,3237.1177700000003,Sulawesi Utara,2006.0
+2006,Forest,4.2935300000000005,Sulawesi Utara,2006.0
+2006,Grassland,4.30291,Sulawesi Utara,2006.0
+2006,Settlement,2.15296,Sulawesi Utara,2006.0
+2006,Water,18.0691,Sulawesi Utara,2006.0
+2007,Agriculture,2923.57893,Sulawesi Utara,2007.0
+2007,Forest,11.047,Sulawesi Utara,2007.0
+2007,Grassland,40.908739999999995,Sulawesi Utara,2007.0
+2007,Settlement,2.22986,Sulawesi Utara,2007.0
+2007,Water,25.88882,Sulawesi Utara,2007.0
+2008,Agriculture,1067.03458,Sulawesi Utara,2008.0
+2008,Forest,1.14885,Sulawesi Utara,2008.0
+2008,Grassland,10.0737,Sulawesi Utara,2008.0
+2008,Settlement,0.15378,Sulawesi Utara,2008.0
+2008,Water,9.84494,Sulawesi Utara,2008.0
+2009,Agriculture,4584.16547,Sulawesi Utara,2009.0
+2009,Forest,3.8411999999999997,Sulawesi Utara,2009.0
+2009,Grassland,25.46213,Sulawesi Utara,2009.0
+2009,Settlement,2.15296,Sulawesi Utara,2009.0
+2009,Water,43.99284,Sulawesi Utara,2009.0
+2010,Agriculture,1452.39078,Sulawesi Utara,2010.0
+2010,Forest,2.14694,Sulawesi Utara,2010.0
+2010,Grassland,14.063279999999999,Sulawesi Utara,2010.0
+2010,Settlement,0.07689,Sulawesi Utara,2010.0
+2010,Water,13.44417,Sulawesi Utara,2010.0
+2011,Agriculture,2177.46004,Sulawesi Utara,2011.0
+2011,Forest,17.250390000000003,Sulawesi Utara,2011.0
+2011,Grassland,30.46328,Sulawesi Utara,2011.0
+2011,Settlement,0.76892,Sulawesi Utara,2011.0
+2011,Water,19.96723,Sulawesi Utara,2011.0
+2012,Agriculture,1801.16675,Sulawesi Utara,2012.0
+2012,Forest,3.606,Sulawesi Utara,2012.0
+2012,Grassland,6.91451,Sulawesi Utara,2012.0
+2012,Settlement,1.99918,Sulawesi Utara,2012.0
+2012,Water,16.60499,Sulawesi Utara,2012.0
+2013,Agriculture,1326.91953,Sulawesi Utara,2013.0
+2013,Forest,1.91623,Sulawesi Utara,2013.0
+2013,Grassland,6.06773,Sulawesi Utara,2013.0
+2013,Settlement,0.76892,Sulawesi Utara,2013.0
+2013,Water,6.0724,Sulawesi Utara,2013.0
+2014,Agriculture,5369.48514,Sulawesi Utara,2014.0
+2014,Forest,13.88037,Sulawesi Utara,2014.0
+2014,Grassland,38.322680000000005,Sulawesi Utara,2014.0
+2014,Settlement,1.23027,Sulawesi Utara,2014.0
+2014,Water,42.59124,Sulawesi Utara,2014.0
+2015,Agriculture,11001.84378,Sulawesi Utara,2015.0
+2015,Forest,3.99249,Sulawesi Utara,2015.0
+2015,Grassland,40.96494,Sulawesi Utara,2015.0
+2015,Settlement,0.76892,Sulawesi Utara,2015.0
+2015,Water,46.795739999999995,Sulawesi Utara,2015.0
+2016,Agriculture,6813.72555,Sulawesi Utara,2016.0
+2016,Forest,4.29634,Sulawesi Utara,2016.0
+2016,Grassland,27.39844,Sulawesi Utara,2016.0
+2016,Settlement,0.23067,Sulawesi Utara,2016.0
+2016,Water,46.12123,Sulawesi Utara,2016.0
+2017,Agriculture,4339.50349,Sulawesi Utara,2017.0
+2017,Forest,8.522,Sulawesi Utara,2017.0
+2017,Grassland,24.964660000000002,Sulawesi Utara,2017.0
+2017,Water,13.8322,Sulawesi Utara,2017.0
+2018,Agriculture,5453.77581,Sulawesi Utara,2018.0
+2018,Forest,2.37983,Sulawesi Utara,2018.0
+2018,Grassland,20.19582,Sulawesi Utara,2018.0
+2018,Water,52.30619,Sulawesi Utara,2018.0
+2019,Agriculture,6280.803980000001,Sulawesi Utara,2019.0
+2019,Forest,26.67144,Sulawesi Utara,2019.0
+2019,Grassland,28.3461,Sulawesi Utara,2019.0
+2019,Settlement,1.61472,Sulawesi Utara,2019.0
+2019,Water,67.33735,Sulawesi Utara,2019.0
+2020,Agriculture,2205.39481,Sulawesi Utara,2020.0
+2020,Forest,16.97164,Sulawesi Utara,2020.0
+2020,Grassland,24.418039999999998,Sulawesi Utara,2020.0
+2020,Settlement,0.23067,Sulawesi Utara,2020.0
+2020,Water,17.05871,Sulawesi Utara,2020.0
+2021,Agriculture,2073.54229,Sulawesi Utara,2021.0
+2021,Forest,2.3784699999999996,Sulawesi Utara,2021.0
+2021,Grassland,8.22067,Sulawesi Utara,2021.0
+2021,Settlement,0.38446,Sulawesi Utara,2021.0
+2021,Water,19.526519999999998,Sulawesi Utara,2021.0
+2022,Agriculture,1949.48349,Sulawesi Utara,2022.0
+2022,Forest,3.22197,Sulawesi Utara,2022.0
+2022,Grassland,8.4434,Sulawesi Utara,2022.0
+2022,Settlement,0.61513,Sulawesi Utara,2022.0
+2022,Water,16.14115,Sulawesi Utara,2022.0
+2023,Agriculture,4311.7559,Sulawesi Utara,2023.0
+2023,Forest,3.30239,Sulawesi Utara,2023.0
+2023,Grassland,15.29552,Sulawesi Utara,2023.0
+2023,Settlement,0.99959,Sulawesi Utara,2023.0
+2023,Water,62.52342,Sulawesi Utara,2023.0
+2024,Agriculture,2657.1716300000003,Sulawesi Utara,2024.0
+2024,Forest,6.76532,Sulawesi Utara,2024.0
+2024,Grassland,14.743269999999999,Sulawesi Utara,2024.0
+2024,Water,329.55038,Sulawesi Utara,2024.0
+2025,Agriculture,2109.50327,Sulawesi Utara,2025.0
+2025,Forest,0.23036,Sulawesi Utara,2025.0
+2025,Grassland,6.22213,Sulawesi Utara,2025.0
+2025,Water,12.98994,Sulawesi Utara,2025.0
+null,Agriculture,966535.42822,Sulawesi Utara,
+null,Forest,5517.80058,Sulawesi Utara,
+null,Grassland,11858.78614,Sulawesi Utara,
+null,Settlement,764.30257,Sulawesi Utara,
+null,Water,20994956.28948,Sulawesi Utara,
+2001,Agriculture,19337.52831,Sulawesi Tengah,2001.0
+2001,Forest,424.31732,Sulawesi Tengah,2001.0
+2001,Grassland,230.61787,Sulawesi Tengah,2001.0
+2001,Permanent snow and ice,0.07693,Sulawesi Tengah,2001.0
+2001,Settlement,2.22811,Sulawesi Tengah,2001.0
+2001,Water,153.32999,Sulawesi Tengah,2001.0
+2002,Agriculture,38305.77349,Sulawesi Tengah,2002.0
+2002,Forest,391.51035,Sulawesi Tengah,2002.0
+2002,Grassland,1255.9332200000001,Sulawesi Tengah,2002.0
+2002,Settlement,2.76564,Sulawesi Tengah,2002.0
+2002,Water,143.46828,Sulawesi Tengah,2002.0
+2003,Agriculture,21318.92926,Sulawesi Tengah,2003.0
+2003,Forest,167.98327999999998,Sulawesi Tengah,2003.0
+2003,Grassland,1000.65578,Sulawesi Tengah,2003.0
+2003,Settlement,8.14296,Sulawesi Tengah,2003.0
+2003,Water,77.41893999999999,Sulawesi Tengah,2003.0
+2004,Agriculture,48006.2746,Sulawesi Tengah,2004.0
+2004,Forest,568.65587,Sulawesi Tengah,2004.0
+2004,Grassland,851.7886100000001,Sulawesi Tengah,2004.0
+2004,Permanent snow and ice,0.07693,Sulawesi Tengah,2004.0
+2004,Settlement,20.97325,Sulawesi Tengah,2004.0
+2004,Water,276.30123000000003,Sulawesi Tengah,2004.0
+2005,Agriculture,22321.70494,Sulawesi Tengah,2005.0
+2005,Forest,266.4198,Sulawesi Tengah,2005.0
+2005,Grassland,513.44564,Sulawesi Tengah,2005.0
+2005,Settlement,7.91261,Sulawesi Tengah,2005.0
+2005,Water,108.7293,Sulawesi Tengah,2005.0
+2006,Agriculture,35390.59719,Sulawesi Tengah,2006.0
+2006,Forest,246.60415999999998,Sulawesi Tengah,2006.0
+2006,Grassland,507.99493,Sulawesi Tengah,2006.0
+2006,Settlement,11.21791,Sulawesi Tengah,2006.0
+2006,Water,165.862,Sulawesi Tengah,2006.0
+2007,Agriculture,24300.00983,Sulawesi Tengah,2007.0
+2007,Forest,176.04401,Sulawesi Tengah,2007.0
+2007,Grassland,255.81086,Sulawesi Tengah,2007.0
+2007,Settlement,7.606389999999999,Sulawesi Tengah,2007.0
+2007,Water,136.87471,Sulawesi Tengah,2007.0
+2008,Agriculture,18495.56898,Sulawesi Tengah,2008.0
+2008,Forest,72.71258,Sulawesi Tengah,2008.0
+2008,Grassland,200.94705,Sulawesi Tengah,2008.0
+2008,Settlement,4.68776,Sulawesi Tengah,2008.0
+2008,Water,149.70766,Sulawesi Tengah,2008.0
+2009,Agriculture,60495.16853,Sulawesi Tengah,2009.0
+2009,Forest,262.02307,Sulawesi Tengah,2009.0
+2009,Grassland,902.99952,Sulawesi Tengah,2009.0
+2009,Permanent snow and ice,0.07693,Sulawesi Tengah,2009.0
+2009,Settlement,14.60409,Sulawesi Tengah,2009.0
+2009,Water,500.39989,Sulawesi Tengah,2009.0
+2010,Agriculture,24931.23586,Sulawesi Tengah,2010.0
+2010,Forest,103.26646,Sulawesi Tengah,2010.0
+2010,Grassland,237.8239,Sulawesi Tengah,2010.0
+2010,Settlement,1.61472,Sulawesi Tengah,2010.0
+2010,Water,155.16424999999998,Sulawesi Tengah,2010.0
+2011,Agriculture,29588.893949999998,Sulawesi Tengah,2011.0
+2011,Forest,172.48339,Sulawesi Tengah,2011.0
+2011,Grassland,456.10878,Sulawesi Tengah,2011.0
+2011,Permanent snow and ice,0.07693,Sulawesi Tengah,2011.0
+2011,Settlement,9.06705,Sulawesi Tengah,2011.0
+2011,Water,373.75798,Sulawesi Tengah,2011.0
+2012,Agriculture,44115.55247,Sulawesi Tengah,2012.0
+2012,Forest,152.9901,Sulawesi Tengah,2012.0
+2012,Grassland,554.7547000000001,Sulawesi Tengah,2012.0
+2012,Settlement,4.916919999999999,Sulawesi Tengah,2012.0
+2012,Water,319.52399,Sulawesi Tengah,2012.0
+2013,Agriculture,36661.2165,Sulawesi Tengah,2013.0
+2013,Forest,51.71967000000001,Sulawesi Tengah,2013.0
+2013,Grassland,331.30145,Sulawesi Tengah,2013.0
+2013,Settlement,3.14985,Sulawesi Tengah,2013.0
+2013,Water,161.77318,Sulawesi Tengah,2013.0
+2014,Agriculture,64485.09255,Sulawesi Tengah,2014.0
+2014,Forest,197.4676,Sulawesi Tengah,2014.0
+2014,Grassland,904.1120999999999,Sulawesi Tengah,2014.0
+2014,Settlement,4.7635000000000005,Sulawesi Tengah,2014.0
+2014,Water,427.79287,Sulawesi Tengah,2014.0
+2015,Agriculture,116606.51724,Sulawesi Tengah,2015.0
+2015,Forest,308.39313,Sulawesi Tengah,2015.0
+2015,Grassland,1325.4542900000001,Sulawesi Tengah,2015.0
+2015,Settlement,8.37513,Sulawesi Tengah,2015.0
+2015,Water,693.5424,Sulawesi Tengah,2015.0
+2016,Agriculture,100788.66604,Sulawesi Tengah,2016.0
+2016,Forest,183.19853,Sulawesi Tengah,2016.0
+2016,Grassland,1452.84546,Sulawesi Tengah,2016.0
+2016,Settlement,4.14851,Sulawesi Tengah,2016.0
+2016,Water,679.5224,Sulawesi Tengah,2016.0
+2017,Agriculture,52248.34546,Sulawesi Tengah,2017.0
+2017,Forest,177.55337999999998,Sulawesi Tengah,2017.0
+2017,Grassland,504.86637,Sulawesi Tengah,2017.0
+2017,Settlement,4.45558,Sulawesi Tengah,2017.0
+2017,Water,406.86688,Sulawesi Tengah,2017.0
+2018,Agriculture,51901.83413,Sulawesi Tengah,2018.0
+2018,Forest,165.35229999999999,Sulawesi Tengah,2018.0
+2018,Grassland,401.42168,Sulawesi Tengah,2018.0
+2018,Settlement,0.53774,Sulawesi Tengah,2018.0
+2018,Water,386.27495,Sulawesi Tengah,2018.0
+2019,Agriculture,64697.64148,Sulawesi Tengah,2019.0
+2019,Forest,139.15081,Sulawesi Tengah,2019.0
+2019,Grassland,508.38272,Sulawesi Tengah,2019.0
+2019,Settlement,20.434859999999997,Sulawesi Tengah,2019.0
+2019,Water,504.28254000000004,Sulawesi Tengah,2019.0
+2020,Agriculture,33695.33184,Sulawesi Tengah,2020.0
+2020,Forest,78.75934,Sulawesi Tengah,2020.0
+2020,Grassland,232.23313000000002,Sulawesi Tengah,2020.0
+2020,Settlement,1.30627,Sulawesi Tengah,2020.0
+2020,Water,264.4305,Sulawesi Tengah,2020.0
+2021,Agriculture,26759.36948,Sulawesi Tengah,2021.0
+2021,Forest,49.2556,Sulawesi Tengah,2021.0
+2021,Grassland,250.89968000000002,Sulawesi Tengah,2021.0
+2021,Settlement,2.22822,Sulawesi Tengah,2021.0
+2021,Water,237.98121,Sulawesi Tengah,2021.0
+2022,Agriculture,32223.89305,Sulawesi Tengah,2022.0
+2022,Forest,79.9915,Sulawesi Tengah,2022.0
+2022,Grassland,320.20864,Sulawesi Tengah,2022.0
+2022,Settlement,12.59918,Sulawesi Tengah,2022.0
+2022,Water,237.96003000000002,Sulawesi Tengah,2022.0
+2023,Agriculture,61584.61504,Sulawesi Tengah,2023.0
+2023,Forest,97.52781999999999,Sulawesi Tengah,2023.0
+2023,Grassland,559.80581,Sulawesi Tengah,2023.0
+2023,Settlement,6.229189999999999,Sulawesi Tengah,2023.0
+2023,Water,517.69331,Sulawesi Tengah,2023.0
+2024,Agriculture,37192.1904,Sulawesi Tengah,2024.0
+2024,Forest,58.64212,Sulawesi Tengah,2024.0
+2024,Grassland,319.44199,Sulawesi Tengah,2024.0
+2024,Settlement,0.5378499999999999,Sulawesi Tengah,2024.0
+2024,Water,200.4004,Sulawesi Tengah,2024.0
+2025,Agriculture,45270.90614,Sulawesi Tengah,2025.0
+2025,Forest,61.32545999999999,Sulawesi Tengah,2025.0
+2025,Grassland,311.43644,Sulawesi Tengah,2025.0
+2025,Settlement,5.37754,Sulawesi Tengah,2025.0
+2025,Water,246.37731,Sulawesi Tengah,2025.0
+null,Agriculture,8149523.92052,Sulawesi Tengah,
+null,Forest,30731.56033,Sulawesi Tengah,
+null,Grassland,127687.82273,Sulawesi Tengah,
+null,Permanent snow and ice,599.63427,Sulawesi Tengah,
+null,Settlement,2554.32224,Sulawesi Tengah,
+null,Water,19328398.83855,Sulawesi Tengah,
+2001,Agriculture,13300.65871,Sulawesi Selatan,2001.0
+2001,Forest,455.15094999999997,Sulawesi Selatan,2001.0
+2001,Grassland,234.40337,Sulawesi Selatan,2001.0
+2001,Settlement,3.37717,Sulawesi Selatan,2001.0
+2001,Water,116.43792,Sulawesi Selatan,2001.0
+2002,Agriculture,17207.3496,Sulawesi Selatan,2002.0
+2002,Forest,415.83168,Sulawesi Selatan,2002.0
+2002,Grassland,492.04004000000003,Sulawesi Selatan,2002.0
+2002,Settlement,6.44668,Sulawesi Selatan,2002.0
+2002,Water,139.55741,Sulawesi Selatan,2002.0
+2003,Agriculture,11567.95421,Sulawesi Selatan,2003.0
+2003,Forest,184.13697000000002,Sulawesi Selatan,2003.0
+2003,Grassland,208.88136999999998,Sulawesi Selatan,2003.0
+2003,Settlement,9.21695,Sulawesi Selatan,2003.0
+2003,Water,75.47583999999999,Sulawesi Selatan,2003.0
+2004,Agriculture,36989.67559,Sulawesi Selatan,2004.0
+2004,Forest,650.66555,Sulawesi Selatan,2004.0
+2004,Grassland,879.51452,Sulawesi Selatan,2004.0
+2004,Settlement,27.32893,Sulawesi Selatan,2004.0
+2004,Water,287.25783,Sulawesi Selatan,2004.0
+2005,Agriculture,16015.98788,Sulawesi Selatan,2005.0
+2005,Forest,242.3081,Sulawesi Selatan,2005.0
+2005,Grassland,556.30975,Sulawesi Selatan,2005.0
+2005,Settlement,9.216380000000001,Sulawesi Selatan,2005.0
+2005,Water,205.07979,Sulawesi Selatan,2005.0
+2006,Agriculture,32287.43311,Sulawesi Selatan,2006.0
+2006,Forest,231.83835,Sulawesi Selatan,2006.0
+2006,Grassland,503.74788,Sulawesi Selatan,2006.0
+2006,Settlement,11.82621,Sulawesi Selatan,2006.0
+2006,Water,213.18605,Sulawesi Selatan,2006.0
+2007,Agriculture,13650.9151,Sulawesi Selatan,2007.0
+2007,Forest,157.84428,Sulawesi Selatan,2007.0
+2007,Grassland,263.93086,Sulawesi Selatan,2007.0
+2007,Settlement,9.36674,Sulawesi Selatan,2007.0
+2007,Water,132.04909,Sulawesi Selatan,2007.0
+2008,Agriculture,11377.40515,Sulawesi Selatan,2008.0
+2008,Forest,49.762679999999996,Sulawesi Selatan,2008.0
+2008,Grassland,257.21778,Sulawesi Selatan,2008.0
+2008,Settlement,6.6749,Sulawesi Selatan,2008.0
+2008,Water,159.62647,Sulawesi Selatan,2008.0
+2009,Agriculture,31266.214060000002,Sulawesi Selatan,2009.0
+2009,Forest,284.89268000000004,Sulawesi Selatan,2009.0
+2009,Grassland,756.48604,Sulawesi Selatan,2009.0
+2009,Settlement,10.59626,Sulawesi Selatan,2009.0
+2009,Water,386.1852,Sulawesi Selatan,2009.0
+2010,Agriculture,11752.676739999999,Sulawesi Selatan,2010.0
+2010,Forest,106.75238,Sulawesi Selatan,2010.0
+2010,Grassland,257.68327999999997,Sulawesi Selatan,2010.0
+2010,Settlement,2.14773,Sulawesi Selatan,2010.0
+2010,Water,135.16925,Sulawesi Selatan,2010.0
+2011,Agriculture,23884.80799,Sulawesi Selatan,2011.0
+2011,Forest,221.14502000000002,Sulawesi Selatan,2011.0
+2011,Grassland,614.4645499999999,Sulawesi Selatan,2011.0
+2011,Settlement,11.13312,Sulawesi Selatan,2011.0
+2011,Water,501.06091,Sulawesi Selatan,2011.0
+2012,Agriculture,26508.52604,Sulawesi Selatan,2012.0
+2012,Forest,149.67657,Sulawesi Selatan,2012.0
+2012,Grassland,560.79988,Sulawesi Selatan,2012.0
+2012,Settlement,6.44806,Sulawesi Selatan,2012.0
+2012,Water,352.37847,Sulawesi Selatan,2012.0
+2013,Agriculture,19519.09613,Sulawesi Selatan,2013.0
+2013,Forest,83.35843,Sulawesi Selatan,2013.0
+2013,Grassland,248.54981,Sulawesi Selatan,2013.0
+2013,Settlement,5.2184099999999995,Sulawesi Selatan,2013.0
+2013,Water,163.17112,Sulawesi Selatan,2013.0
+2014,Agriculture,44733.99875,Sulawesi Selatan,2014.0
+2014,Forest,258.97289,Sulawesi Selatan,2014.0
+2014,Grassland,620.38319,Sulawesi Selatan,2014.0
+2014,Settlement,9.66291,Sulawesi Selatan,2014.0
+2014,Water,282.88424000000003,Sulawesi Selatan,2014.0
+2015,Agriculture,52895.1563,Sulawesi Selatan,2015.0
+2015,Forest,382.65436,Sulawesi Selatan,2015.0
+2015,Grassland,598.79294,Sulawesi Selatan,2015.0
+2015,Settlement,8.52356,Sulawesi Selatan,2015.0
+2015,Water,385.55484,Sulawesi Selatan,2015.0
+2016,Agriculture,54748.11613,Sulawesi Selatan,2016.0
+2016,Forest,304.13267,Sulawesi Selatan,2016.0
+2016,Grassland,840.6900899999999,Sulawesi Selatan,2016.0
+2016,Settlement,4.91394,Sulawesi Selatan,2016.0
+2016,Water,381.40398999999996,Sulawesi Selatan,2016.0
+2017,Agriculture,37572.090729999996,Sulawesi Selatan,2017.0
+2017,Forest,202.90394999999998,Sulawesi Selatan,2017.0
+2017,Grassland,500.62766,Sulawesi Selatan,2017.0
+2017,Settlement,7.2129900000000005,Sulawesi Selatan,2017.0
+2017,Water,199.1935,Sulawesi Selatan,2017.0
+2018,Agriculture,32043.1881,Sulawesi Selatan,2018.0
+2018,Forest,183.31011999999998,Sulawesi Selatan,2018.0
+2018,Grassland,477.58953,Sulawesi Selatan,2018.0
+2018,Settlement,4.75186,Sulawesi Selatan,2018.0
+2018,Water,212.77979,Sulawesi Selatan,2018.0
+2019,Agriculture,46237.97541,Sulawesi Selatan,2019.0
+2019,Forest,162.1955,Sulawesi Selatan,2019.0
+2019,Grassland,458.59574000000003,Sulawesi Selatan,2019.0
+2019,Settlement,28.564639999999997,Sulawesi Selatan,2019.0
+2019,Water,262.57132,Sulawesi Selatan,2019.0
+2020,Agriculture,23610.53257,Sulawesi Selatan,2020.0
+2020,Forest,94.45304,Sulawesi Selatan,2020.0
+2020,Grassland,198.62493,Sulawesi Selatan,2020.0
+2020,Settlement,3.67962,Sulawesi Selatan,2020.0
+2020,Water,174.61317,Sulawesi Selatan,2020.0
+2021,Agriculture,18453.39064,Sulawesi Selatan,2021.0
+2021,Forest,100.54853,Sulawesi Selatan,2021.0
+2021,Grassland,235.15696,Sulawesi Selatan,2021.0
+2021,Settlement,2.30337,Sulawesi Selatan,2021.0
+2021,Water,163.33347,Sulawesi Selatan,2021.0
+2022,Agriculture,24650.699810000002,Sulawesi Selatan,2022.0
+2022,Forest,86.54069,Sulawesi Selatan,2022.0
+2022,Grassland,299.8738,Sulawesi Selatan,2022.0
+2022,Settlement,14.43589,Sulawesi Selatan,2022.0
+2022,Water,191.5326,Sulawesi Selatan,2022.0
+2023,Agriculture,51017.20994,Sulawesi Selatan,2023.0
+2023,Forest,184.64616999999998,Sulawesi Selatan,2023.0
+2023,Grassland,583.53624,Sulawesi Selatan,2023.0
+2023,Settlement,42.18169,Sulawesi Selatan,2023.0
+2023,Water,467.26252,Sulawesi Selatan,2023.0
+2024,Agriculture,20456.0665,Sulawesi Selatan,2024.0
+2024,Forest,87.57087,Sulawesi Selatan,2024.0
+2024,Grassland,239.79998999999998,Sulawesi Selatan,2024.0
+2024,Settlement,7.816590000000001,Sulawesi Selatan,2024.0
+2024,Water,110.72928999999999,Sulawesi Selatan,2024.0
+2025,Agriculture,29888.363139999998,Sulawesi Selatan,2025.0
+2025,Forest,95.10391,Sulawesi Selatan,2025.0
+2025,Grassland,259.33577,Sulawesi Selatan,2025.0
+2025,Settlement,16.10668,Sulawesi Selatan,2025.0
+2025,Water,127.78163,Sulawesi Selatan,2025.0
+null,Agriculture,4842137.25093,Sulawesi Selatan,
+null,Forest,47216.27467,Sulawesi Selatan,
+null,Grassland,137079.84399,Sulawesi Selatan,
+null,Permanent snow and ice,65.06685,Sulawesi Selatan,
+null,Settlement,7872.02196,Sulawesi Selatan,
+null,Water,16307091.85951,Sulawesi Selatan,
+2001,Agriculture,9635.11455,Sulawesi Tenggara,2001.0
+2001,Forest,68.27878,Sulawesi Tenggara,2001.0
+2001,Grassland,58.82207,Sulawesi Tenggara,2001.0
+2001,Settlement,1.38084,Sulawesi Tenggara,2001.0
+2001,Water,113.79428,Sulawesi Tenggara,2001.0
+2002,Agriculture,9944.20854,Sulawesi Tenggara,2002.0
+2002,Forest,68.21435,Sulawesi Tenggara,2002.0
+2002,Grassland,65.7081,Sulawesi Tenggara,2002.0
+2002,Settlement,14.65228,Sulawesi Tenggara,2002.0
+2002,Water,104.11758999999999,Sulawesi Tenggara,2002.0
+2003,Agriculture,8640.52984,Sulawesi Tenggara,2003.0
+2003,Forest,65.13023,Sulawesi Tenggara,2003.0
+2003,Grassland,55.254960000000004,Sulawesi Tenggara,2003.0
+2003,Settlement,3.45211,Sulawesi Tenggara,2003.0
+2003,Water,78.24141,Sulawesi Tenggara,2003.0
+2004,Agriculture,26662.75328,Sulawesi Tenggara,2004.0
+2004,Forest,127.58484,Sulawesi Tenggara,2004.0
+2004,Grassland,283.14252,Sulawesi Tenggara,2004.0
+2004,Settlement,19.79208,Sulawesi Tenggara,2004.0
+2004,Water,135.32828,Sulawesi Tenggara,2004.0
+2005,Agriculture,11254.14131,Sulawesi Tenggara,2005.0
+2005,Forest,52.94686,Sulawesi Tenggara,2005.0
+2005,Grassland,311.84981,Sulawesi Tenggara,2005.0
+2005,Settlement,3.68225,Sulawesi Tenggara,2005.0
+2005,Water,84.66882000000001,Sulawesi Tenggara,2005.0
+2006,Agriculture,29978.79341,Sulawesi Tenggara,2006.0
+2006,Forest,68.81238,Sulawesi Tenggara,2006.0
+2006,Grassland,183.94693999999998,Sulawesi Tenggara,2006.0
+2006,Settlement,7.51793,Sulawesi Tenggara,2006.0
+2006,Water,171.27913999999998,Sulawesi Tenggara,2006.0
+2007,Agriculture,7190.27344,Sulawesi Tenggara,2007.0
+2007,Forest,24.25259,Sulawesi Tenggara,2007.0
+2007,Grassland,98.79086,Sulawesi Tenggara,2007.0
+2007,Water,46.1468,Sulawesi Tenggara,2007.0
+2008,Agriculture,6176.45218,Sulawesi Tenggara,2008.0
+2008,Forest,16.56703,Sulawesi Tenggara,2008.0
+2008,Grassland,73.70328,Sulawesi Tenggara,2008.0
+2008,Water,94.65014000000001,Sulawesi Tenggara,2008.0
+2009,Agriculture,19759.89644,Sulawesi Tenggara,2009.0
+2009,Forest,112.62412,Sulawesi Tenggara,2009.0
+2009,Grassland,215.76166,Sulawesi Tenggara,2009.0
+2009,Settlement,1.22742,Sulawesi Tenggara,2009.0
+2009,Water,316.89553,Sulawesi Tenggara,2009.0
+2010,Agriculture,5623.08384,Sulawesi Tenggara,2010.0
+2010,Forest,25.93469,Sulawesi Tenggara,2010.0
+2010,Grassland,80.31935999999999,Sulawesi Tenggara,2010.0
+2010,Water,53.07209,Sulawesi Tenggara,2010.0
+2011,Agriculture,15458.65124,Sulawesi Tenggara,2011.0
+2011,Forest,81.10207,Sulawesi Tenggara,2011.0
+2011,Grassland,163.32669,Sulawesi Tenggara,2011.0
+2011,Settlement,0.76713,Sulawesi Tenggara,2011.0
+2011,Water,378.98636999999997,Sulawesi Tenggara,2011.0
+2012,Agriculture,14887.21793,Sulawesi Tenggara,2012.0
+2012,Forest,43.58472,Sulawesi Tenggara,2012.0
+2012,Grassland,104.75626,Sulawesi Tenggara,2012.0
+2012,Settlement,0.7671300000000001,Sulawesi Tenggara,2012.0
+2012,Water,224.31159,Sulawesi Tenggara,2012.0
+2013,Agriculture,11726.05361,Sulawesi Tenggara,2013.0
+2013,Forest,52.395520000000005,Sulawesi Tenggara,2013.0
+2013,Grassland,98.36532,Sulawesi Tenggara,2013.0
+2013,Settlement,0.46028,Sulawesi Tenggara,2013.0
+2013,Water,152.25348,Sulawesi Tenggara,2013.0
+2014,Agriculture,30621.45393,Sulawesi Tenggara,2014.0
+2014,Forest,115.06867,Sulawesi Tenggara,2014.0
+2014,Grassland,182.85199,Sulawesi Tenggara,2014.0
+2014,Settlement,0.7671300000000001,Sulawesi Tenggara,2014.0
+2014,Water,271.80144,Sulawesi Tenggara,2014.0
+2015,Agriculture,31614.38968,Sulawesi Tenggara,2015.0
+2015,Forest,136.14379,Sulawesi Tenggara,2015.0
+2015,Grassland,221.97318,Sulawesi Tenggara,2015.0
+2015,Settlement,0.69042,Sulawesi Tenggara,2015.0
+2015,Water,286.58371,Sulawesi Tenggara,2015.0
+2016,Agriculture,28609.24765,Sulawesi Tenggara,2016.0
+2016,Forest,188.26598,Sulawesi Tenggara,2016.0
+2016,Grassland,212.02776,Sulawesi Tenggara,2016.0
+2016,Settlement,0.92056,Sulawesi Tenggara,2016.0
+2016,Water,278.35145,Sulawesi Tenggara,2016.0
+2017,Agriculture,20086.619300000002,Sulawesi Tenggara,2017.0
+2017,Forest,66.50417,Sulawesi Tenggara,2017.0
+2017,Grassland,136.49982,Sulawesi Tenggara,2017.0
+2017,Settlement,1.30413,Sulawesi Tenggara,2017.0
+2017,Water,173.36017999999999,Sulawesi Tenggara,2017.0
+2018,Agriculture,18366.37421,Sulawesi Tenggara,2018.0
+2018,Forest,56.4656,Sulawesi Tenggara,2018.0
+2018,Grassland,223.70967,Sulawesi Tenggara,2018.0
+2018,Settlement,0.84385,Sulawesi Tenggara,2018.0
+2018,Water,218.14966,Sulawesi Tenggara,2018.0
+2019,Agriculture,28390.36516,Sulawesi Tenggara,2019.0
+2019,Forest,53.86268,Sulawesi Tenggara,2019.0
+2019,Grassland,215.23693,Sulawesi Tenggara,2019.0
+2019,Settlement,1.6877,Sulawesi Tenggara,2019.0
+2019,Water,249.0446,Sulawesi Tenggara,2019.0
+2020,Agriculture,14587.87028,Sulawesi Tenggara,2020.0
+2020,Forest,35.14402,Sulawesi Tenggara,2020.0
+2020,Grassland,106.79022,Sulawesi Tenggara,2020.0
+2020,Settlement,0.53699,Sulawesi Tenggara,2020.0
+2020,Water,176.95203,Sulawesi Tenggara,2020.0
+2021,Agriculture,9353.85572,Sulawesi Tenggara,2021.0
+2021,Forest,62.44737,Sulawesi Tenggara,2021.0
+2021,Grassland,66.82536,Sulawesi Tenggara,2021.0
+2021,Water,153.42921,Sulawesi Tenggara,2021.0
+2022,Agriculture,10142.19736,Sulawesi Tenggara,2022.0
+2022,Forest,28.76585,Sulawesi Tenggara,2022.0
+2022,Grassland,116.80133000000001,Sulawesi Tenggara,2022.0
+2022,Settlement,0.61371,Sulawesi Tenggara,2022.0
+2022,Water,144.26013,Sulawesi Tenggara,2022.0
+2023,Agriculture,27164.0743,Sulawesi Tenggara,2023.0
+2023,Forest,132.86054,Sulawesi Tenggara,2023.0
+2023,Grassland,165.69908,Sulawesi Tenggara,2023.0
+2023,Settlement,1.6877,Sulawesi Tenggara,2023.0
+2023,Water,379.32054999999997,Sulawesi Tenggara,2023.0
+2024,Agriculture,13445.82195,Sulawesi Tenggara,2024.0
+2024,Forest,71.11618,Sulawesi Tenggara,2024.0
+2024,Grassland,71.48811,Sulawesi Tenggara,2024.0
+2024,Settlement,0.15343,Sulawesi Tenggara,2024.0
+2024,Water,115.53102,Sulawesi Tenggara,2024.0
+2025,Agriculture,18553.14508,Sulawesi Tenggara,2025.0
+2025,Forest,67.43145,Sulawesi Tenggara,2025.0
+2025,Grassland,72.59157,Sulawesi Tenggara,2025.0
+2025,Settlement,0.53699,Sulawesi Tenggara,2025.0
+2025,Water,110.58043,Sulawesi Tenggara,2025.0
+null,Agriculture,2347791.02305,Sulawesi Tenggara,
+null,Forest,15674.03513,Sulawesi Tenggara,
+null,Grassland,39603.0813,Sulawesi Tenggara,
+null,Settlement,283.34371999999996,Sulawesi Tenggara,
+null,Water,9341970.61776,Sulawesi Tenggara,
+2001,Agriculture,2724.53223,Gorontalo,2001.0
+2001,Forest,13.0007,Gorontalo,2001.0
+2001,Grassland,6.7696000000000005,Gorontalo,2001.0
+2001,Water,9.23127,Gorontalo,2001.0
+2002,Agriculture,5911.78178,Gorontalo,2002.0
+2002,Forest,10.84674,Gorontalo,2002.0
+2002,Grassland,3.53865,Gorontalo,2002.0
+2002,Settlement,0.07693,Gorontalo,2002.0
+2002,Water,6.69267,Gorontalo,2002.0
+2003,Agriculture,2089.11318,Gorontalo,2003.0
+2003,Forest,8.38507,Gorontalo,2003.0
+2003,Grassland,2.07704,Gorontalo,2003.0
+2003,Water,5.61569,Gorontalo,2003.0
+2004,Agriculture,4471.1653,Gorontalo,2004.0
+2004,Forest,7.154240000000001,Gorontalo,2004.0
+2004,Grassland,4.07714,Gorontalo,2004.0
+2004,Water,12.077580000000001,Gorontalo,2004.0
+2005,Agriculture,2803.84419,Gorontalo,2005.0
+2005,Forest,41.84842,Gorontalo,2005.0
+2005,Grassland,4.0002200000000006,Gorontalo,2005.0
+2005,Water,7.846579999999999,Gorontalo,2005.0
+2006,Agriculture,3316.41042,Gorontalo,2006.0
+2006,Forest,36.540440000000004,Gorontalo,2006.0
+2006,Grassland,13.539190000000001,Gorontalo,2006.0
+2006,Water,8.30814,Gorontalo,2006.0
+2007,Agriculture,2873.23256,Gorontalo,2007.0
+2007,Forest,31.23246,Gorontalo,2007.0
+2007,Grassland,14.61617,Gorontalo,2007.0
+2007,Water,12.38528,Gorontalo,2007.0
+2008,Agriculture,1146.67751,Gorontalo,2008.0
+2008,Forest,11.53909,Gorontalo,2008.0
+2008,Grassland,14.30847,Gorontalo,2008.0
+2008,Water,20.84728,Gorontalo,2008.0
+2009,Agriculture,6721.21025,Gorontalo,2009.0
+2009,Forest,23.693579999999997,Gorontalo,2009.0
+2009,Grassland,40.84837,Gorontalo,2009.0
+2009,Water,50.2335,Gorontalo,2009.0
+2010,Agriculture,981.59163,Gorontalo,2010.0
+2010,Forest,3.23095,Gorontalo,2010.0
+2010,Grassland,4.231,Gorontalo,2010.0
+2010,Water,10.76982,Gorontalo,2010.0
+2011,Agriculture,1959.0292,Gorontalo,2011.0
+2011,Forest,4.15407,Gorontalo,2011.0
+2011,Grassland,14.07768,Gorontalo,2011.0
+2011,Water,18.69332,Gorontalo,2011.0
+2012,Agriculture,2322.2796399999997,Gorontalo,2012.0
+2012,Forest,1.30776,Gorontalo,2012.0
+2012,Grassland,18.61639,Gorontalo,2012.0
+2012,Water,21.23192,Gorontalo,2012.0
+2013,Agriculture,2205.2733200000002,Gorontalo,2013.0
+2013,Forest,4.30792,Gorontalo,2013.0
+2013,Grassland,3.8463600000000002,Gorontalo,2013.0
+2013,Water,12.385290000000001,Gorontalo,2013.0
+2014,Agriculture,7031.2270499999995,Gorontalo,2014.0
+2014,Forest,8.84663,Gorontalo,2014.0
+2014,Grassland,78.38886,Gorontalo,2014.0
+2014,Water,43.31003,Gorontalo,2014.0
+2015,Agriculture,12968.01019,Gorontalo,2015.0
+2015,Forest,7.692709999999999,Gorontalo,2015.0
+2015,Grassland,33.61721,Gorontalo,2015.0
+2015,Water,47.38718,Gorontalo,2015.0
+2016,Agriculture,11111.755799999999,Gorontalo,2016.0
+2016,Forest,23.38588,Gorontalo,2016.0
+2016,Grassland,18.46255,Gorontalo,2016.0
+2016,Water,59.310900000000004,Gorontalo,2016.0
+2017,Agriculture,7843.117190000001,Gorontalo,2017.0
+2017,Forest,2.30781,Gorontalo,2017.0
+2017,Grassland,15.61623,Gorontalo,2017.0
+2017,Water,53.00287,Gorontalo,2017.0
+2018,Agriculture,7710.64847,Gorontalo,2018.0
+2018,Forest,12.76992,Gorontalo,2018.0
+2018,Grassland,12.923779999999999,Gorontalo,2018.0
+2018,Water,47.464110000000005,Gorontalo,2018.0
+2019,Agriculture,10392.0245,Gorontalo,2019.0
+2019,Forest,8.692779999999999,Gorontalo,2019.0
+2019,Grassland,24.77057,Gorontalo,2019.0
+2019,Water,135.31503,Gorontalo,2019.0
+2020,Agriculture,2884.15623,Gorontalo,2020.0
+2020,Forest,6.4618899999999995,Gorontalo,2020.0
+2020,Grassland,13.53919,Gorontalo,2020.0
+2020,Water,26.5399,Gorontalo,2020.0
+2021,Agriculture,2242.42916,Gorontalo,2021.0
+2021,Forest,2.07703,Gorontalo,2021.0
+2021,Grassland,12.76993,Gorontalo,2021.0
+2021,Water,20.231859999999998,Gorontalo,2021.0
+2022,Agriculture,2584.29384,Gorontalo,2022.0
+2022,Forest,2.84631,Gorontalo,2022.0
+2022,Grassland,3.84636,Gorontalo,2022.0
+2022,Water,30.46318,Gorontalo,2022.0
+2023,Agriculture,7203.62099,Gorontalo,2023.0
+2023,Forest,3.15402,Gorontalo,2023.0
+2023,Grassland,18.000970000000002,Gorontalo,2023.0
+2023,Water,85.69695,Gorontalo,2023.0
+2024,Agriculture,3674.5836799999997,Gorontalo,2024.0
+2024,Forest,1.61547,Gorontalo,2024.0
+2024,Grassland,4.9233400000000005,Gorontalo,2024.0
+2024,Water,30.30934,Gorontalo,2024.0
+2025,Agriculture,4041.142,Gorontalo,2025.0
+2025,Forest,0.38463,Gorontalo,2025.0
+2025,Grassland,12.00065,Gorontalo,2025.0
+2025,Water,33.77106,Gorontalo,2025.0
+null,Agriculture,867248.98047,Gorontalo,
+null,Forest,2257.1992,Gorontalo,
+null,Grassland,2941.77475,Gorontalo,
+null,Settlement,284.24617,Gorontalo,
+null,Water,1677425.40276,Gorontalo,
+2001,Agriculture,12004.935019999999,Sulawesi Barat,2001.0
+2001,Forest,1021.1243099999999,Sulawesi Barat,2001.0
+2001,Grassland,77.85697,Sulawesi Barat,2001.0
+2001,Settlement,0.07693,Sulawesi Barat,2001.0
+2001,Water,57.97143,Sulawesi Barat,2001.0
+2002,Agriculture,11356.72859,Sulawesi Barat,2002.0
+2002,Forest,1025.81617,Sulawesi Barat,2002.0
+2002,Grassland,295.08333999999996,Sulawesi Barat,2002.0
+2002,Water,13.76374,Sulawesi Barat,2002.0
+2003,Agriculture,5353.59717,Sulawesi Barat,2003.0
+2003,Forest,779.8359399999999,Sulawesi Barat,2003.0
+2003,Grassland,33.11849,Sulawesi Barat,2003.0
+2003,Water,5.07445,Sulawesi Barat,2003.0
+2004,Agriculture,14135.05013,Sulawesi Barat,2004.0
+2004,Forest,1265.02339,Sulawesi Barat,2004.0
+2004,Grassland,251.24859,Sulawesi Barat,2004.0
+2004,Settlement,0.8462,Sulawesi Barat,2004.0
+2004,Water,34.91332,Sulawesi Barat,2004.0
+2005,Agriculture,8211.56607,Sulawesi Barat,2005.0
+2005,Forest,873.11127,Sulawesi Barat,2005.0
+2005,Grassland,134.31517,Sulawesi Barat,2005.0
+2005,Water,17.30018,Sulawesi Barat,2005.0
+2006,Agriculture,11261.5463,Sulawesi Barat,2006.0
+2006,Forest,637.5096199999999,Sulawesi Barat,2006.0
+2006,Grassland,94.269,Sulawesi Barat,2006.0
+2006,Settlement,0.15385,Sulawesi Barat,2006.0
+2006,Water,17.91721,Sulawesi Barat,2006.0
+2007,Agriculture,4507.97882,Sulawesi Barat,2007.0
+2007,Forest,256.43421,Sulawesi Barat,2007.0
+2007,Grassland,30.36043,Sulawesi Barat,2007.0
+2007,Water,11.45788,Sulawesi Barat,2007.0
+2008,Agriculture,10487.513649999999,Sulawesi Barat,2008.0
+2008,Forest,882.10235,Sulawesi Barat,2008.0
+2008,Grassland,74.24182,Sulawesi Barat,2008.0
+2008,Settlement,1.23084,Sulawesi Barat,2008.0
+2008,Water,57.12573,Sulawesi Barat,2008.0
+2009,Agriculture,12330.23513,Sulawesi Barat,2009.0
+2009,Forest,962.45452,Sulawesi Barat,2009.0
+2009,Grassland,104.81693,Sulawesi Barat,2009.0
+2009,Settlement,4.15407,Sulawesi Barat,2009.0
+2009,Water,57.65878000000001,Sulawesi Barat,2009.0
+2010,Agriculture,6363.48408,Sulawesi Barat,2010.0
+2010,Forest,276.11919,Sulawesi Barat,2010.0
+2010,Grassland,30.75188,Sulawesi Barat,2010.0
+2010,Settlement,0.8462,Sulawesi Barat,2010.0
+2010,Water,26.756719999999998,Sulawesi Barat,2010.0
+2011,Agriculture,10767.45048,Sulawesi Barat,2011.0
+2011,Forest,984.6811399999999,Sulawesi Barat,2011.0
+2011,Grassland,86.92779999999999,Sulawesi Barat,2011.0
+2011,Settlement,0.23078,Sulawesi Barat,2011.0
+2011,Water,47.89387,Sulawesi Barat,2011.0
+2012,Agriculture,10622.44348,Sulawesi Barat,2012.0
+2012,Forest,2003.9628799999998,Sulawesi Barat,2012.0
+2012,Grassland,42.50296,Sulawesi Barat,2012.0
+2012,Settlement,0.15385,Sulawesi Barat,2012.0
+2012,Water,50.05804,Sulawesi Barat,2012.0
+2013,Agriculture,8129.79492,Sulawesi Barat,2013.0
+2013,Forest,578.8409100000001,Sulawesi Barat,2013.0
+2013,Grassland,27.7483,Sulawesi Barat,2013.0
+2013,Settlement,0.07693,Sulawesi Barat,2013.0
+2013,Water,13.22499,Sulawesi Barat,2013.0
+2014,Agriculture,13996.20732,Sulawesi Barat,2014.0
+2014,Forest,1169.82968,Sulawesi Barat,2014.0
+2014,Grassland,60.49044000000001,Sulawesi Barat,2014.0
+2014,Water,59.04781,Sulawesi Barat,2014.0
+2015,Agriculture,16142.75756,Sulawesi Barat,2015.0
+2015,Forest,1266.86854,Sulawesi Barat,2015.0
+2015,Grassland,112.98387,Sulawesi Barat,2015.0
+2015,Settlement,1.15391,Sulawesi Barat,2015.0
+2015,Water,101.89148,Sulawesi Barat,2015.0
+2016,Agriculture,16467.10869,Sulawesi Barat,2016.0
+2016,Forest,793.59646,Sulawesi Barat,2016.0
+2016,Grassland,225.84118,Sulawesi Barat,2016.0
+2016,Water,130.95587,Sulawesi Barat,2016.0
+2017,Agriculture,13805.1067,Sulawesi Barat,2017.0
+2017,Forest,350.32103,Sulawesi Barat,2017.0
+2017,Grassland,70.0917,Sulawesi Barat,2017.0
+2017,Water,88.51291,Sulawesi Barat,2017.0
+2018,Agriculture,15602.70474,Sulawesi Barat,2018.0
+2018,Forest,261.43221,Sulawesi Barat,2018.0
+2018,Grassland,60.87469,Sulawesi Barat,2018.0
+2018,Water,97.81729,Sulawesi Barat,2018.0
+2019,Agriculture,17196.1293,Sulawesi Barat,2019.0
+2019,Forest,319.71571,Sulawesi Barat,2019.0
+2019,Grassland,95.47681,Sulawesi Barat,2019.0
+2019,Water,68.36088000000001,Sulawesi Barat,2019.0
+2020,Agriculture,9809.80706,Sulawesi Barat,2020.0
+2020,Forest,216.75832,Sulawesi Barat,2020.0
+2020,Grassland,22.44202,Sulawesi Barat,2020.0
+2020,Water,37.90984,Sulawesi Barat,2020.0
+2021,Agriculture,10148.25389,Sulawesi Barat,2021.0
+2021,Forest,174.77575,Sulawesi Barat,2021.0
+2021,Grassland,41.51043,Sulawesi Barat,2021.0
+2021,Settlement,0.30771,Sulawesi Barat,2021.0
+2021,Water,31.21768,Sulawesi Barat,2021.0
+2022,Agriculture,10291.82057,Sulawesi Barat,2022.0
+2022,Forest,225.67886,Sulawesi Barat,2022.0
+2022,Grassland,73.35061999999999,Sulawesi Barat,2022.0
+2022,Water,44.52025,Sulawesi Barat,2022.0
+2023,Agriculture,18695.01247,Sulawesi Barat,2023.0
+2023,Forest,605.45015,Sulawesi Barat,2023.0
+2023,Grassland,103.13168999999999,Sulawesi Barat,2023.0
+2023,Settlement,2.30782,Sulawesi Barat,2023.0
+2023,Water,100.617,Sulawesi Barat,2023.0
+2024,Agriculture,9510.10004,Sulawesi Barat,2024.0
+2024,Forest,228.60024,Sulawesi Barat,2024.0
+2024,Grassland,42.12606,Sulawesi Barat,2024.0
+2024,Settlement,0.07693,Sulawesi Barat,2024.0
+2024,Water,24.07014,Sulawesi Barat,2024.0
+2025,Agriculture,12616.09362,Sulawesi Barat,2025.0
+2025,Forest,260.89619,Sulawesi Barat,2025.0
+2025,Grassland,43.65054,Sulawesi Barat,2025.0
+2025,Settlement,0.07693,Sulawesi Barat,2025.0
+2025,Water,63.05003,Sulawesi Barat,2025.0
+null,Agriculture,2122040.2278,Sulawesi Barat,
+null,Forest,13851.675319999998,Sulawesi Barat,
+null,Grassland,39119.02919,Sulawesi Barat,
+null,Settlement,1556.39208,Sulawesi Barat,
+null,Water,2630691.72228,Sulawesi Barat,

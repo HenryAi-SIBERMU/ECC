@@ -1,0 +1,55 @@
+wdpa_protected_areas__iucn_cat,area__ha,category_type,province,gfw_plantations__type
+0.0,22045856.09872,wdpa_protected_areas__iucn_cat,Sulawesi Utara,
+1.0,261774.09644,wdpa_protected_areas__iucn_cat,Sulawesi Utara,
+2.0,58671.27158,wdpa_protected_areas__iucn_cat,Sulawesi Utara,
+,261378.1456,gfw_plantations__type,Sulawesi Utara,Fruit
+,1021.05531,gfw_plantations__type,Sulawesi Utara,Fruit Mix
+,13717.485120000001,gfw_plantations__type,Sulawesi Utara,Oil palm
+0.0,27616377.62626,wdpa_protected_areas__iucn_cat,Sulawesi Tengah,
+1.0,1191986.43369,wdpa_protected_areas__iucn_cat,Sulawesi Tengah,
+2.0,1641999.01548,wdpa_protected_areas__iucn_cat,Sulawesi Tengah,
+,203306.22049,gfw_plantations__type,Sulawesi Tengah,Fruit
+,14689.32053,gfw_plantations__type,Sulawesi Tengah,Fruit Mix
+,166863.41885,gfw_plantations__type,Sulawesi Tengah,Oil palm
+,35005.12955,gfw_plantations__type,Sulawesi Tengah,Oil palm mix
+,1662.47344,gfw_plantations__type,Sulawesi Tengah,Other
+,38814.03346,gfw_plantations__type,Sulawesi Tengah,Recently cleared
+,5580.4860499999995,gfw_plantations__type,Sulawesi Tengah,Rubber
+,535.78079,gfw_plantations__type,Sulawesi Tengah,Rubber mix
+,4524.5714,gfw_plantations__type,Sulawesi Tengah,Unknown
+,3341.63282,gfw_plantations__type,Sulawesi Tengah,Wood fiber / timber
+0.0,22137897.79047,wdpa_protected_areas__iucn_cat,Sulawesi Selatan,
+1.0,815391.2745299999,wdpa_protected_areas__iucn_cat,Sulawesi Selatan,
+2.0,634622.25541,wdpa_protected_areas__iucn_cat,Sulawesi Selatan,
+,135229.18552,gfw_plantations__type,Sulawesi Selatan,Fruit
+,13245.04622,gfw_plantations__type,Sulawesi Selatan,Fruit Mix
+,53675.798200000005,gfw_plantations__type,Sulawesi Selatan,Oil palm
+,116395.49481,gfw_plantations__type,Sulawesi Selatan,Oil palm mix
+,868.77591,gfw_plantations__type,Sulawesi Selatan,Other mix
+,17011.08496,gfw_plantations__type,Sulawesi Selatan,Recently cleared
+,4938.53085,gfw_plantations__type,Sulawesi Selatan,Rubber
+,2822.25828,gfw_plantations__type,Sulawesi Selatan,Rubber mix
+,8053.2341799999995,gfw_plantations__type,Sulawesi Selatan,Unknown
+0.0,10995250.27661,wdpa_protected_areas__iucn_cat,Sulawesi Tenggara,
+1.0,902768.10983,wdpa_protected_areas__iucn_cat,Sulawesi Tenggara,
+2.0,986366.12489,wdpa_protected_areas__iucn_cat,Sulawesi Tenggara,
+,38843.88433,gfw_plantations__type,Sulawesi Tenggara,Fruit
+,1839.3600900000001,gfw_plantations__type,Sulawesi Tenggara,Fruit Mix
+,35990.264299999995,gfw_plantations__type,Sulawesi Tenggara,Oil palm
+,94094.7239,gfw_plantations__type,Sulawesi Tenggara,Oil palm mix
+,15721.96859,gfw_plantations__type,Sulawesi Tenggara,Recently cleared
+,2010.96824,gfw_plantations__type,Sulawesi Tenggara,Rubber
+0.0,2712704.4088000003,wdpa_protected_areas__iucn_cat,Gorontalo,
+1.0,138758.28602,wdpa_protected_areas__iucn_cat,Gorontalo,
+2.0,102258.38567999999,wdpa_protected_areas__iucn_cat,Gorontalo,
+,24837.80705,gfw_plantations__type,Gorontalo,Fruit
+,2707.53129,gfw_plantations__type,Gorontalo,Oil palm
+,711.19237,gfw_plantations__type,Gorontalo,Recently cleared
+0.0,5284078.444490001,wdpa_protected_areas__iucn_cat,Sulawesi Barat,
+1.0,228342.90386,wdpa_protected_areas__iucn_cat,Sulawesi Barat,
+2.0,22706.45013,wdpa_protected_areas__iucn_cat,Sulawesi Barat,
+,31135.13631,gfw_plantations__type,Sulawesi Barat,Fruit
+,6724.9244,gfw_plantations__type,Sulawesi Barat,Fruit Mix
+,86852.90593,gfw_plantations__type,Sulawesi Barat,Oil palm
+,19438.671710000002,gfw_plantations__type,Sulawesi Barat,Oil palm mix
+,5029.501200000001,gfw_plantations__type,Sulawesi Barat,Recently cleared

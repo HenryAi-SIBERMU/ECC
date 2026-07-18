@@ -1,0 +1,157 @@
+year,tree_cover_loss_ha,province
+2001.0,4140.579379999999,Sulawesi Utara
+2002.0,7110.936409999999,Sulawesi Utara
+2003.0,2617.6355,Sulawesi Utara
+2004.0,6509.2244900000005,Sulawesi Utara
+2005.0,3217.1201,Sulawesi Utara
+2006.0,4588.43172,Sulawesi Utara
+2007.0,4057.10138,Sulawesi Utara
+2008.0,1530.9402599999999,Sulawesi Utara
+2009.0,6625.03876,Sulawesi Utara
+2010.0,2004.18703,Sulawesi Utara
+2011.0,2949.79736,Sulawesi Utara
+2012.0,2483.48918,Sulawesi Utara
+2013.0,1732.95182,Sulawesi Utara
+2014.0,6968.321239999999,Sulawesi Utara
+2015.0,14568.19323,Sulawesi Utara
+2016.0,8735.14735,Sulawesi Utara
+2017.0,5658.21112,Sulawesi Utara
+2018.0,7345.12233,Sulawesi Utara
+2019.0,8883.75172,Sulawesi Utara
+2020.0,2856.6131499999997,Sulawesi Utara
+2021.0,2712.4397,Sulawesi Utara
+2022.0,2648.66808,Sulawesi Utara
+2023.0,6343.2694,Sulawesi Utara
+2024.0,3726.39578,Sulawesi Utara
+2025.0,2907.58311,Sulawesi Utara
+,22243380.317029998,Sulawesi Utara
+2001.0,28855.23554,Sulawesi Tengah
+2002.0,55988.06986,Sulawesi Tengah
+2003.0,29997.90632,Sulawesi Tengah
+2004.0,70612.82667,Sulawesi Tengah
+2005.0,31669.88416,Sulawesi Tengah
+2006.0,50844.56254,Sulawesi Tengah
+2007.0,34209.73078,Sulawesi Tengah
+2008.0,25503.96724,Sulawesi Tengah
+2009.0,87469.48234,Sulawesi Tengah
+2010.0,33739.95099,Sulawesi Tengah
+2011.0,42814.38187,Sulawesi Tengah
+2012.0,59550.8663,Sulawesi Tengah
+2013.0,48917.38196,Sulawesi Tengah
+2014.0,87699.30374999999,Sulawesi Tengah
+2015.0,154168.61833,Sulawesi Tengah
+2016.0,127999.89357,Sulawesi Tengah
+2017.0,71995.13363,Sulawesi Tengah
+2018.0,71334.51374,Sulawesi Tengah
+2019.0,92685.29062,Sulawesi Tengah
+2020.0,46924.30591,Sulawesi Tengah
+2021.0,36807.60763,Sulawesi Tengah
+2022.0,43938.90444,Sulawesi Tengah
+2023.0,87894.38647,Sulawesi Tengah
+2024.0,49868.94711,Sulawesi Tengah
+2025.0,60683.831569999995,Sulawesi Tengah
+,28918188.09223,Sulawesi Tengah
+2001.0,20828.461,Sulawesi Selatan
+2002.0,25036.52661,Sulawesi Selatan
+2003.0,16983.52718,Sulawesi Selatan
+2004.0,54774.78256,Sulawesi Selatan
+2005.0,22474.776120000002,Sulawesi Selatan
+2006.0,46745.55684,Sulawesi Selatan
+2007.0,18770.30803,Sulawesi Selatan
+2008.0,16319.43522,Sulawesi Selatan
+2009.0,46123.79751,Sulawesi Selatan
+2010.0,16157.934099999999,Sulawesi Selatan
+2011.0,34932.50819,Sulawesi Selatan
+2012.0,38654.85735,Sulawesi Selatan
+2013.0,28412.100850000003,Sulawesi Selatan
+2014.0,65784.81592,Sulawesi Selatan
+2015.0,74016.83825,Sulawesi Selatan
+2016.0,71140.99557,Sulawesi Selatan
+2017.0,53527.13072,Sulawesi Selatan
+2018.0,46670.4628,Sulawesi Selatan
+2019.0,67424.18031,Sulawesi Selatan
+2020.0,33599.30558,Sulawesi Selatan
+2021.0,25907.67155,Sulawesi Selatan
+2022.0,36235.37023,Sulawesi Selatan
+2023.0,79194.06695000001,Sulawesi Selatan
+2024.0,29207.015809999997,Sulawesi Selatan
+2025.0,43311.40519,Sulawesi Selatan
+,22575677.49001,Sulawesi Selatan
+2001.0,15367.01048,Sulawesi Tenggara
+2002.0,15563.77749,Sulawesi Tenggara
+2003.0,13151.39976,Sulawesi Tenggara
+2004.0,40398.67499,Sulawesi Tenggara
+2005.0,16314.575490000001,Sulawesi Tenggara
+2006.0,43974.30852,Sulawesi Tenggara
+2007.0,9665.36168,Sulawesi Tenggara
+2008.0,8586.18321,Sulawesi Tenggara
+2009.0,29570.15325,Sulawesi Tenggara
+2010.0,7285.587579999999,Sulawesi Tenggara
+2011.0,23092.89474,Sulawesi Tenggara
+2012.0,22934.69036,Sulawesi Tenggara
+2013.0,17870.17321,Sulawesi Tenggara
+2014.0,47611.331249999996,Sulawesi Tenggara
+2015.0,48097.23302,Sulawesi Tenggara
+2016.0,39632.87829,Sulawesi Tenggara
+2017.0,29650.55887,Sulawesi Tenggara
+2018.0,28050.4101,Sulawesi Tenggara
+2019.0,41159.92727,Sulawesi Tenggara
+2020.0,20725.81924,Sulawesi Tenggara
+2021.0,13790.03328,Sulawesi Tenggara
+2022.0,14541.82981,Sulawesi Tenggara
+2023.0,43927.19132,Sulawesi Tenggara
+2024.0,19644.77166,Sulawesi Tenggara
+2025.0,28036.20857,Sulawesi Tenggara
+,12245741.52791,Sulawesi Tenggara
+2001.0,4211.30506,Gorontalo
+2002.0,8933.560870000001,Gorontalo
+2003.0,3322.5646,Gorontalo
+2004.0,7381.015230000001,Gorontalo
+2005.0,4887.88017,Gorontalo
+2006.0,5641.8440900000005,Gorontalo
+2007.0,4710.71672,Gorontalo
+2008.0,1967.33734,Gorontalo
+2009.0,11547.62556,Gorontalo
+2010.0,1731.55534,Gorontalo
+2011.0,3310.10239,Gorontalo
+2012.0,3659.1213,Gorontalo
+2013.0,3666.04475,Gorontalo
+2014.0,10320.86679,Gorontalo
+2015.0,18520.61868,Gorontalo
+2016.0,15680.69561,Gorontalo
+2017.0,11903.02943,Gorontalo
+2018.0,11535.778760000001,Gorontalo
+2019.0,16577.43649,Gorontalo
+2020.0,4562.55486,Gorontalo
+2021.0,3438.0323900000003,Gorontalo
+2022.0,4175.99545,Gorontalo
+2023.0,11475.69858,Gorontalo
+2024.0,5220.66742,Gorontalo
+2025.0,5509.60616,Gorontalo
+,2769829.42644,Gorontalo
+2001.0,18613.59041,Sulawesi Barat
+2002.0,17048.216650000002,Sulawesi Barat
+2003.0,8372.70767,Sulawesi Barat
+2004.0,21094.81147,Sulawesi Barat
+2005.0,11982.917150000001,Sulawesi Barat
+2006.0,15225.48207,Sulawesi Barat
+2007.0,5914.628409999999,Sulawesi Barat
+2008.0,15082.41373,Sulawesi Barat
+2009.0,17443.13355,Sulawesi Barat
+2010.0,8887.98806,Sulawesi Barat
+2011.0,16585.822930000002,Sulawesi Barat
+2012.0,16524.39312,Sulawesi Barat
+2013.0,11349.04719,Sulawesi Barat
+2014.0,20884.10484,Sulawesi Barat
+2015.0,23641.99851,Sulawesi Barat
+2016.0,22866.20783,Sulawesi Barat
+2017.0,19627.035900000003,Sulawesi Barat
+2018.0,21741.28924,Sulawesi Barat
+2019.0,24489.7402,Sulawesi Barat
+2020.0,13135.724750000001,Sulawesi Barat
+2021.0,13505.43102,Sulawesi Barat
+2022.0,14573.860400000001,Sulawesi Barat
+2023.0,27140.44936,Sulawesi Barat
+2024.0,12245.574069999999,Sulawesi Barat
+2025.0,16238.23204,Sulawesi Barat
+,5120912.99789,Sulawesi Barat
