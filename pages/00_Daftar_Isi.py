@@ -18,6 +18,10 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 * { font-family: 'Inter', sans-serif; }
 
+.print-container {
+    max-width: 900px;
+}
+
 .toc-header {
     font-size: 2.8rem;
     font-weight: 800;
@@ -31,6 +35,9 @@ st.markdown("""
     font-size: 1.1rem;
     margin-bottom: 2.5rem;
 }
+.bab-container {
+    margin-bottom: 20px;
+}
 .bab-title {
     font-size: 1.35rem;
     font-weight: 700;
@@ -39,9 +46,82 @@ st.markdown("""
     border-left: 4px solid #43A047;
     padding-left: 10px;
 }
+.bab-title a {
+    color: inherit;
+    text-decoration: none;
+}
+.bab-title a:hover {
+    text-decoration: underline;
+}
+.sub-item-list {
+    list-style-type: none;
+    padding-left: 20px;
+    margin: 0;
+}
+.sub-item-list li {
+    margin-bottom: 6px;
+    position: relative;
+    padding-left: 15px;
+}
+.sub-item-list li::before {
+    content: "-";
+    position: absolute;
+    left: 0;
+    color: inherit;
+}
+.sub-item-list a {
+    color: #90CAF9;
+    text-decoration: none;
+}
+.sub-item-list a:hover {
+    text-decoration: underline;
+    color: #64B5F6;
+}
+.toc-divider {
+    border-top: 1px dashed #2A2F3B;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+/* --- Print Styles --- */
+@media print {
+    /* Sembunyikan elemen Streamlit bawaan */
+    header[data-testid="stHeader"],
+    section[data-testid="stSidebar"],
+    footer,
+    .stApp > header {
+        display: none !important;
+    }
+    
+    /* Reset background dan warna untuk print */
+    body, .stApp, .block-container, .print-container {
+        background-color: white !important;
+        color: black !important;
+    }
+    
+    .toc-header {
+        color: #2E7D32 !important;
+        border-bottom: 2px solid #2E7D32 !important;
+    }
+    .toc-desc {
+        color: #424242 !important;
+    }
+    .bab-title {
+        color: black !important;
+        border-left: 4px solid #2E7D32 !important;
+    }
+    .sub-item-list a {
+        color: #1565C0 !important;
+        text-decoration: none !important;
+    }
+    .toc-divider {
+        border-top: 1px dashed #BDBDBD !important;
+    }
+}
 </style>
 """, unsafe_allow_html=True)
 
+st.markdown('<div class="print-container">', unsafe_allow_html=True)
 st.markdown('<div class="toc-header">Daftar Isi Laporan</div>', unsafe_allow_html=True)
 st.markdown('<div class="toc-desc">Sistem Navigasi Riset Daya Dukung Lingkungan Hidup (D3TLH) Sulawesi</div>', unsafe_allow_html=True)
 
@@ -62,29 +142,31 @@ def slugify(text):
     return text.strip('-')
 
 def render_bab(title, page_path, sub_items):
-    with st.container():
-        st.markdown(f'<div class="bab-title">{title}</div>', unsafe_allow_html=True)
-        if page_path:
-            # Streamlit native link untuk Halaman Utama Bab
-            st.page_link(page_path, label="Buka Halaman Utama Bab", icon="🔗")
-            
-        if sub_items and page_path:
-            page_url = get_page_url_path(page_path)
-            
-            for item in sub_items:
-                if isinstance(item, tuple):
-                    display_text, target_text = item
-                else:
-                    display_text = item
-                    target_text = item
-                    
-                hash_id = slugify(target_text)
-                # Gunakan standard markdown link karena Streamlit frontend akan meng-intercept 
-                # link internal (dimulai dengan /) dan menangani anchor scrolling-nya secara native
-                # tanpa full page reload.
-                st.markdown(f"&nbsp;&nbsp;&nbsp;&nbsp;▪️ [{display_text}](/{page_url}#{hash_id})")
-        
-        st.markdown('<hr style="border-top:1px dashed #2A2F3B; margin-top: 15px; margin-bottom: 25px;">', unsafe_allow_html=True)
+    html_content = '<div class="bab-container">'
+    
+    if page_path:
+        page_url = get_page_url_path(page_path)
+        html_content += f'<div class="bab-title"><a href="/{page_url}" target="_self">{title}</a></div>'
+    else:
+        html_content += f'<div class="bab-title">{title}</div>'
+
+    if sub_items and page_path:
+        html_content += '<ul class="sub-item-list">'
+        for item in sub_items:
+            if isinstance(item, tuple):
+                display_text, target_text = item
+            else:
+                display_text = item
+                target_text = item
+                
+            hash_id = slugify(target_text)
+            html_content += f'<li><a href="/{page_url}#{hash_id}" target="_self">{display_text}</a></li>'
+        html_content += '</ul>'
+    
+    html_content += '<div class="toc-divider"></div>'
+    html_content += '</div>'
+    
+    st.markdown(html_content, unsafe_allow_html=True)
 
 # BAB 1
 render_bab(
@@ -193,3 +275,4 @@ render_bab("Dashboard Statistik (Summary Visual)", "pages/12_Infografis_Summary.
 render_bab("Temuan Utama (Narasi Infografis)", "pages/13_Infografis_Fakta.py", [])
 
 st.markdown("<br><br><br>", unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True) # Close print-container
