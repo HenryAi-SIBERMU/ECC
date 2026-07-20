@@ -144,6 +144,20 @@ st.markdown('<div class="print-container">', unsafe_allow_html=True)
 st.markdown('<div class="toc-header">Daftar Isi Laporan</div>', unsafe_allow_html=True)
 st.markdown('<div class="toc-desc">Sistem Navigasi Riset Daya Dukung Lingkungan Hidup (D3TLH) Sulawesi</div>', unsafe_allow_html=True)
 
+try:
+    with open("refrensi/Daftar_Isi_D3TLH.pdf", "rb") as pdf_file:
+        pdf_bytes = pdf_file.read()
+    st.download_button(
+        label="📄 Download PDF Daftar Isi",
+        data=pdf_bytes,
+        file_name="Daftar_Isi_D3TLH_Sulawesi.pdf",
+        mime="application/pdf"
+    )
+except FileNotFoundError:
+    pass
+
+st.markdown('<br>', unsafe_allow_html=True)
+
 import re
 
 def get_page_url_path(page_path):
