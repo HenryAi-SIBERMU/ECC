@@ -99,6 +99,22 @@ st.markdown("""
         color: black !important;
     }
     
+    /* Fix konten terpotong (hanya print 1 halaman) */
+    html, body, .stApp, .main, .block-container, 
+    [data-testid="stAppViewContainer"], 
+    [data-testid="stMain"], 
+    [data-testid="stMainBlockContainer"] {
+        height: auto !important;
+        min-height: auto !important;
+        overflow: visible !important;
+        position: static !important;
+    }
+    
+    /* Cegah bab terpotong di tengah halaman */
+    .bab-container {
+        page-break-inside: avoid;
+    }
+    
     .toc-header {
         color: #2E7D32 !important;
         border-bottom: 2px solid #2E7D32 !important;
