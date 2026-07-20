@@ -98,12 +98,15 @@ st.markdown("""
         background-color: white !important;
         color: black !important;
     }
-    
+
     /* Fix konten terpotong (hanya print 1 halaman) */
-    html, body, .stApp, .main, .block-container, 
-    [data-testid="stAppViewContainer"], 
-    [data-testid="stMain"], 
-    [data-testid="stMainBlockContainer"] {
+    * {
+        overflow: visible !important;
+        height: auto !important;
+        position: static !important;
+    }
+    
+    html, body, .stApp, .main, .block-container {
         height: auto !important;
         min-height: auto !important;
         overflow: visible !important;
