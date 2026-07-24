@@ -7,6 +7,9 @@ from src.components.sidebar import render_sidebar
 st.set_page_config(page_title="CELIOS ECC - Audit Forensik Metodologi D3TLH", layout="wide")
 render_sidebar()
 
+st.markdown("<h3>Halaman sedang dalam perbaikan</h3>", unsafe_allow_html=True)
+st.stop()
+
 # ── Styles (Sesuai Pedoman UI/UX CELIOS) ──
 st.markdown("""
 <style>
@@ -1115,9 +1118,36 @@ with colD2:
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
         if not df_konflik_fpic.empty:
-            df_fpic_view = df_konflik_fpic[['tahun', 'nama_perusahaan', 'indikasi_fpic', 'judul']].copy()
-            # Replace True/False strings if any, format to make it readable
-            df_fpic_view['indikasi_fpic'] = df_fpic_view['indikasi_fpic'].replace({'True': 'Terbukti Melanggar', 'False': 'Investigasi Berjalan'})
+            df_fpic_viz = df_konflik_fpic.copy()
+            df_fpic_viz['indikasi_fpic'] = df_fpic_viz['indikasi_fpic'].astype(str).replace({'True': 'Terbukti Melanggar', 'False': 'Investigasi Berjalan'})
+            df_fpic_viz['tahun'] = pd.to_numeric(df_fpic_viz['tahun'], errors='coerce')
+            
+            # Filter 5 tahun terakhir
+            if not df_fpic_viz['tahun'].isna().all():
+                max_year = df_fpic_viz['tahun'].max()
+                df_fpic_viz = df_fpic_viz[df_fpic_viz['tahun'] >= (max_year - 4)]
+            
+            col_viz1, col_viz2 = st.columns(2)
+            
+            with col_viz1:
+                df_trend = df_fpic_viz.groupby('tahun').size().reset_index(name='jumlah')
+                fig_fpic1 = px.bar(df_trend, x='tahun', y='jumlah', 
+                                   title="Tren Temuan Kasus Manipulasi FPIC",
+                                   color_discrete_sequence=['#E74C3C'])
+                fig_fpic1.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
+                st.plotly_chart(fig_fpic1, use_container_width=True, config={'displayModeBar': False})
+                
+            with col_viz2:
+                df_status = df_fpic_viz.groupby('indikasi_fpic').size().reset_index(name='jumlah')
+                fig_fpic2 = px.pie(df_status, values='jumlah', names='indikasi_fpic', hole=0.4,
+                                   title="Status Investigasi Kasus FPIC",
+                                   color='indikasi_fpic', 
+                                   color_discrete_map={'Terbukti Melanggar': '#C0392B', 'Investigasi Berjalan': '#F39C12'})
+                fig_fpic2.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
+                st.plotly_chart(fig_fpic2, use_container_width=True, config={'displayModeBar': False})
+            
+            st.markdown("<div style='margin-top: 15px;'><b>Daftar Temuan Kasus:</b></div>", unsafe_allow_html=True)
+            df_fpic_view = df_fpic_viz[['tahun', 'nama_perusahaan', 'indikasi_fpic', 'judul']].copy()
             st.dataframe(df_fpic_view, use_container_width=True, hide_index=True)
             with st.expander("Tampilkan Data Mentah FPIC (KPA/TanahKita)"):
                 st.dataframe(df_konflik_fpic, use_container_width=True)
