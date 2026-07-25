@@ -840,7 +840,7 @@ with col1:
         df_iku_disp.columns = ['Tahun', 'Rata-rata IKU Sulawesi']
         df_iku_disp['Rata-rata IKU Sulawesi'] = df_iku_disp['Rata-rata IKU Sulawesi'].round(2)
         st.dataframe(df_iku_disp, use_container_width=True, hide_index=True)
-        st.markdown("<br>📁 <b>Sumber File:</b> <code style='color:#4CAF50;'>data/processed/sulawesi_iku_2015_2024.csv</code>", unsafe_allow_html=True)
+        st.markdown("<br>📁 <b>Sumber File:</b> <code style='color:#4CAF50;'>data/processed/sulawesi_iku_2015_2024.csv</code> <i>(Diekstrak dari dokumen SLHI - KLHK)</i>", unsafe_allow_html=True)
 
 with col2:
     if fig_nasa_combined is not None:
@@ -988,7 +988,7 @@ with st.expander("Lihat Data Mentah: Kapasitas PLTU per Provinsi", expanded=Fals
 
 with st.expander("Lihat Data Mentah: Rata-rata IKU Sulawesi", expanded=False):
     st.dataframe(df_iku_avg, use_container_width=True, hide_index=True)
-    st.caption("📁 **Sumber:** `sulawesi_iku_2015_2024.csv`")
+    st.caption("📁 **Sumber:** `sulawesi_iku_2015_2024.csv` (Diekstrak dari dokumen SLHI - KLHK)")
 
 # Crosstab Section 2.2
 x_options_2_2 = {
@@ -1012,7 +1012,7 @@ _, _, df_panel_labeled_2_2 = render_spss_crosstab(df_panel_2_2, x_options_2_2, y
 
 with st.expander("Lihat Data Mentah: Panel PLTU vs IKU (Time-Series 2015-2023)", expanded=False):
     st.dataframe(df_panel_labeled_2_2[['Provinsi', 'Tahun', 'Kapasitas_PLTU_MW', 'X_Label', 'IKU', 'Y_Label']], use_container_width=True, hide_index=True)
-    st.caption("📁 **Sumber File:** `sulawesi_pltu_captive.csv` & `sulawesi_iku_2015_2024.csv`")
+    st.caption("📁 **Sumber File:** `sulawesi_pltu_captive.csv` & `sulawesi_iku_2015_2024.csv` (Diekstrak dari dokumen SLHI - KLHK)")
 
 st.markdown("---")
 st.markdown("### 2.3. Eksekusi Ruang: Ekspansi Kawasan Industri vs Tekanan Ekologis (Deforestasi)")
