@@ -7,8 +7,7 @@ from src.components.sidebar import render_sidebar
 st.set_page_config(page_title="CELIOS ECC - Audit Forensik Metodologi D3TLH", layout="wide")
 render_sidebar()
 
-st.markdown("<h3>Halaman sedang dalam perbaikan</h3>", unsafe_allow_html=True)
-st.stop()
+
 
 # ── Styles (Sesuai Pedoman UI/UX CELIOS) ──
 st.markdown("""
@@ -632,13 +631,25 @@ with colA2:
                     'South Sulawesi': 'Sulawesi Selatan', 'North Sulawesi': 'Sulawesi Utara',
                     'West Sulawesi': 'Sulawesi Barat', 'Gorontalo': 'Gorontalo'
                 }
-                df_pltu_op['Provinsi'] = df_pltu_op['Subnational unit (province, state)'].replace(prov_map)
-                df_pltu_op = df_pltu_op[(df_pltu_op['Status'].str.lower() == 'operating') & df_pltu_op['Start year'].notna()]
+                
+                # Setup data PLTU seperti di Overview Temuan
+                df_pltu_op_tab = df_pltu_op.copy()
+                df_pltu_op_tab['Provinsi'] = df_pltu_op_tab['Subnational unit (province, state)'].replace(prov_map)
+                df_pltu_op_tab = df_pltu_op_tab[(df_pltu_op_tab['Status'].str.lower() == 'operating') & df_pltu_op_tab['Start year'].notna()]
+                
+                # Tambahan data PLTU Grid (Non-Captive)
+                grid_pltu = pd.DataFrame([
+                    {'Provinsi': 'Gorontalo', 'Capacity (MW)': 100, 'Start year': 2010},
+                    {'Provinsi': 'Sulawesi Utara', 'Capacity (MW)': 220, 'Start year': 2010},
+                    {'Provinsi': 'Sulawesi Selatan', 'Capacity (MW)': 920, 'Start year': 2010},
+                    {'Provinsi': 'Sulawesi Tenggara', 'Capacity (MW)': 100, 'Start year': 2010}
+                ])
+                df_pltu_op_tab = pd.concat([df_pltu_op_tab, grid_pltu], ignore_index=True)
                 
                 panel_data_pltu = []
                 for y in years:
                     for prov in prov_map.values():
-                        cap = df_pltu_op[(df_pltu_op['Provinsi'] == prov) & (df_pltu_op['Start year'] <= y)]['Capacity (MW)'].sum()
+                        cap = df_pltu_op_tab[(df_pltu_op_tab['Provinsi'] == prov) & (df_pltu_op_tab['Start year'] <= y)]['Capacity (MW)'].sum()
                         panel_data_pltu.append({'Tahun': y, 'Provinsi': prov, 'Kapasitas_PLTU_MW': cap})
                 df_pltu_trend = pd.DataFrame(panel_data_pltu)
                 df_iku_avg = df_iku[df_iku['Tahun'].between(2010, 2024)].groupby('Tahun')['IKU'].mean().reset_index()
@@ -653,58 +664,84 @@ with colA2:
                 col3.metric("Skor Ancaman Udara", f"{skor_1:.1f} / 10", "STATUS: KRITIS", delta_color="inverse")
                 st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
                 
-                owid_colors = ['#9B5A40', '#E58872', '#5E85B4', '#A09CAE', '#82B989', '#E3D7A4']
+                pltu_colors = {
+                    'Gorontalo': '#757575',
+                    'Sulawesi Utara': '#8D6E63',
+                    'Sulawesi Selatan': '#FBC02D',
+                    'Sulawesi Tenggara': '#F57C00',
+                    'Sulawesi Tengah': '#D32F2F'
+                }
+                
+                pltu_config = []
+                for prov, color in pltu_colors.items():
+                    d_trend = df_pltu_trend[df_pltu_trend['Provinsi'] == prov]
+                    if not d_trend.empty:
+                        max_mw = d_trend['Kapasitas_PLTU_MW'].max()
+                        label = f"{prov} — PLTU max {max_mw:,.0f} MW"
+                        pltu_config.append({'prov': prov, 'color': color, 'label': label})
+
                 fig_2_2_combined = make_subplots(specs=[[{"secondary_y": True}]])
                 
-                for i, prov in enumerate(df_pltu_trend['Provinsi'].unique()):
-                    d = df_pltu_trend[df_pltu_trend['Provinsi'] == prov]
+                for cfg in pltu_config:
+                    d_trend = df_pltu_trend[df_pltu_trend['Provinsi'] == cfg['prov']]
+                    if not d_trend.empty:
+                        fig_2_2_combined.add_trace(
+                            go.Scatter(
+                                x=d_trend['Tahun'], y=d_trend['Kapasitas_PLTU_MW'], name=cfg['label'], 
+                                mode='lines', stackgroup='one', line=dict(width=1, color=cfg['color']),
+                                fillcolor=cfg['color'], hoveron='points+fills',
+                                hovertemplate=cfg['prov'] + ': %{y:,.0f} MW<extra></extra>', showlegend=True
+                            ),
+                            secondary_y=False
+                        )
+
+                def get_iku_color(val):
+                    if val < 85: return '#D32F2F'
+                    elif val < 90: return '#FBC02D'
+                    else: return '#4CAF50'
+
+                iku_colors_arr = [get_iku_color(v) for v in df_iku_avg['IKU']]
+                
+                for i in range(len(df_iku_avg)-1):
                     fig_2_2_combined.add_trace(
                         go.Scatter(
-                            x=d['Tahun'], y=d['Kapasitas_PLTU_MW'], name=prov, mode='lines', stackgroup='one',
-                            line=dict(width=0.5, color='#444444'), fillcolor=owid_colors[i % len(owid_colors)],
-                            hoveron='points+fills', hovertemplate='%{y:.0f} MW<extra></extra>'
-                        ), secondary_y=False
+                            x=df_iku_avg['Tahun'].iloc[i:i+2], y=df_iku_avg['IKU'].iloc[i:i+2],
+                            mode='lines', line=dict(color=iku_colors_arr[i+1], width=4), showlegend=False, hoverinfo='skip'
+                        ),
+                        secondary_y=True
                     )
-                
+
                 fig_2_2_combined.add_trace(
                     go.Scatter(
-                        x=df_iku_avg['Tahun'], y=df_iku_avg['IKU'], name="Rata-rata IKU Sulawesi", mode='lines+markers', 
-                        marker=dict(color='#FFFFFF', size=8, line=dict(width=2, color='#D32F2F')), 
-                        line=dict(color='#D32F2F', width=4), hovertemplate='IKU: %{y:.2f}<extra></extra>'
-                    ), secondary_y=True
+                        x=df_iku_avg['Tahun'], y=df_iku_avg['IKU'], name="Rata-rata IKU Sulawesi", 
+                        mode='markers', marker=dict(color=iku_colors_arr, size=10, line=dict(width=1, color='#FFFFFF')), 
+                        hovertemplate='Tahun %{x}<br>IKU: %{y:.1f}<extra></extra>', showlegend=False
+                    ),
+                    secondary_y=True
                 )
-                
-                # Threshold IKU = 50 (batas terbawah Sedang/awal Kurang — PermenLHK No.27/2021 Lampiran Tbl.1)
-                fig_2_2_combined.add_hline(y=50, line_dash="dot", line_color="#FF5252", secondary_y=True)
-                fig_2_2_combined.add_hline(y=70, line_dash="dash", line_color="#FFA726", secondary_y=True)
-                
-                # Manual annotations positioned ABOVE the lines
-                fig_2_2_combined.add_annotation(
-                    x=2010, y=52, yref="y2", text="IKU=50: Batas Kritis Kurang (PermenLHK 27/2021)",
-                    showarrow=False, font=dict(color="#FF5252", size=10), xanchor="left"
-                )
-                fig_2_2_combined.add_annotation(
-                    x=2010, y=72, yref="y2", text="IKU=70: Batas Bawah Baik",
-                    showarrow=False, font=dict(color="#FFA726", size=10), xanchor="left"
-                )
-                
-                fig_2_2_combined.add_vline(x=2014, line_dash="dash", line_color="rgba(255,255,255,0.3)", annotation_text="Booming Smelter Dimulai", annotation_position="top right")
-                
+
+                fig_2_2_combined.add_trace(go.Scatter(x=[None], y=[None], mode='lines', line=dict(color='#FFFFFF', width=2), name='Rata-rata IKU Sulawesi'), secondary_y=True)
+                fig_2_2_combined.add_trace(go.Scatter(x=[None], y=[None], mode='markers', marker=dict(color='#D32F2F', size=10), name='IKU buruk/kritis'), secondary_y=True)
+                fig_2_2_combined.add_trace(go.Scatter(x=[None], y=[None], mode='markers', marker=dict(color='#FBC02D', size=10), name='IKU tertekan'), secondary_y=True)
+                fig_2_2_combined.add_trace(go.Scatter(x=[None], y=[None], mode='markers', marker=dict(color='#4CAF50', size=10), name='IKU relatif baik'), secondary_y=True)
+
                 fig_2_2_combined.update_layout(
-                    title=dict(text="Ekspansi PLTU vs Penurunan Kualitas Udara (2010-2024)", font=dict(color='#ECEFF1', size=16)),
+                    title=dict(text="Semua PLTU Batubara vs Penurunan Kualitas Udara (2010-2024)", font=dict(color='#ECEFF1', size=16)),
                     plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font=dict(color='#ECEFF1', family='Arial, sans-serif'),
-                    legend=dict(orientation="v", yanchor="top", y=0.98, xanchor="left", x=0.02, bgcolor='rgba(30,30,30,0.8)', bordercolor='#555', borderwidth=1),
-                    xaxis=dict(title="", tickmode='linear', dtick=2, tickformat='d', showgrid=False, showline=True, linecolor='#555555'),
-                    yaxis=dict(title="Kapasitas PLTU Kumulatif (MW)", showgrid=True, gridcolor='rgba(255,255,255,0.1)', side='left'),
-                    yaxis2=dict(title="Indeks Kualitas Udara (IKU)", showgrid=False, overlaying='y', side='right', range=[50, 100]),
-                    hovermode="x unified", margin=dict(l=0, r=0, t=40, b=0)
+                    legend=dict(orientation="v", yanchor="top", y=0.98, xanchor="left", x=0.02, bgcolor='rgba(30,30,30,0.8)', bordercolor='#555', borderwidth=1, font=dict(size=11), traceorder='reversed'),
+                    xaxis=dict(title="", tickmode='linear', dtick=2, tickformat='d', showgrid=True, gridcolor='#2b3240', gridwidth=1, griddash='dash', showline=True, linewidth=1, linecolor='#555555', rangeslider=dict(visible=False)),
+                    yaxis=dict(title="Kapasitas PLTU Kumulatif (MW)", showgrid=True, gridcolor='#2b3240', gridwidth=1, griddash='dash', side='left', tickformat=',.1s', dtick=500, ticksuffix=' MW'),
+                    yaxis2=dict(title="Indeks Kualitas Udara (IKU)", showgrid=False, overlaying='y', side='right', dtick=2),
+                    hovermode="x unified", hoverlabel=dict(bgcolor="rgba(0, 0, 0, 0.8)", font_size=13, font_family="Arial", font_color="#FFFFFF"),
+                    margin=dict(l=0, r=0, t=40, b=0)
                 )
+
                 st.plotly_chart(fig_2_2_combined, use_container_width=True, config={'displayModeBar': False})
                 
                 with st.expander("Lihat Data Mentah: Kapasitas PLTU per Provinsi", expanded=False):
                     df_pivot_pltu = df_pltu_trend.pivot(index='Tahun', columns='Provinsi', values='Kapasitas_PLTU_MW').reset_index()
                     st.dataframe(df_pivot_pltu, use_container_width=True, hide_index=True)
-                    st.caption("Sumber: `sulawesi_pltu_captive.csv`")
+                    st.caption("Sumber: `sulawesi_pltu_captive.csv` (gabungan captive + grid)")
 
         with tab2:
             # --- 2. Tren Historis Kasus ISPA/Pneumonia ---
@@ -725,30 +762,51 @@ with colA2:
                 col3.metric("Skor Rasio Anomali", f"{skor_2:.1f} / 10", f"Rasio: {rasio_anomali:.1f}x Lipat", delta_color="inverse")
                 st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
                 
-                fig_3_3 = px.line(
-                    df_ts_agg, x='tahun', y='nilai', color='provinsi', markers=True, line_dash='Kategori',
-                    color_discrete_sequence=px.colors.qualitative.Set2
-                )
-                
-                for trace in fig_3_3.data:
-                    if trace.name in ['Sulawesi Tengah', 'Sulawesi Tenggara']:
-                        trace.line.width = 4
-                    else:
-                        trace.line.width = 2
-                        trace.opacity = 0.6
-                
-                fig_3_3.add_vline(x=2015, line_dash="dash", line_color="#FFEB3B", annotation_text="Eskalasi Pabrik Nikel", annotation_position="top left")
-                
-                fig_3_3.update_layout(
-                    title="Tren Historis Kasus ISPA/Pneumonia (2014-2024)",
-                    height=450, plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)',
-                    legend=dict(title="Provinsi", orientation="v", yanchor="top", y=1, xanchor="left", x=1.02),
-                    font=dict(color='#B0BEC5'),
-                    xaxis=dict(title="Tahun", showgrid=True, gridcolor='rgba(255,255,255,0.1)', dtick=1),
-                    yaxis=dict(title="Jumlah Kasus", showgrid=True, gridcolor='rgba(255,255,255,0.1)', zeroline=False),
-                    margin=dict(l=0, r=0, t=40, b=0)
-                )
-                st.plotly_chart(fig_3_3, use_container_width=True, config={'displayModeBar': False})
+                populasi_bps = {
+                    "Sulawesi Selatan": 9070000,
+                    "Sulawesi Tengah": 2985000,
+                    "Sulawesi Tenggara": 2624000,
+                    "Sulawesi Utara": 2621000,
+                    "Sulawesi Barat": 1419000,
+                    "Gorontalo": 1171000
+                }
+                df_ts_filtered["populasi"] = df_ts_filtered["provinsi"].map(populasi_bps)
+                df_ts_filtered["rate_per_10k"] = (df_ts_filtered["nilai"] / df_ts_filtered["populasi"]) * 10000
+
+                color_map_prov = {"Sulawesi Tengah": "#EF5350", "Sulawesi Tenggara": "#D32F2F", "Gorontalo": "#42A5F5", "Sulawesi Barat": "#1E88E5", "Sulawesi Selatan": "#1565C0", "Sulawesi Utara": "#90CAF9"}
+
+                def create_ts_chart(data, y_col, y_title, hover_format=",.0f"):
+                    fig = px.line(data, x="tahun", y=y_col, color="provinsi", markers=True, color_discrete_map=color_map_prov)
+                    for trace in fig.data:
+                        if trace.name in ['Sulawesi Tengah', 'Sulawesi Tenggara']:
+                            trace.line.width = 4
+                        else:
+                            trace.line.width = 2
+                            trace.line.dash = "dot"
+                            trace.opacity = 0.7
+                        trace.hovertemplate = f"<b>%{{fullData.name}}</b><br>Tahun: %{{x}}<br>{y_title}: %{{y:{hover_format}}}<extra></extra>"
+                    fig.update_layout(
+                        title=f"Tren Historis Kasus ISPA/Pneumonia", height=450,
+                        plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
+                        legend=dict(title="Provinsi (Merah: Sentra, Biru: Non-Sentra)", orientation="v", yanchor="top", y=1, xanchor="left", x=1.02),
+                        font=dict(color="#B0BEC5"),
+                        xaxis=dict(title="Tahun", showgrid=True, gridcolor="rgba(255,255,255,0.1)", dtick=1),
+                        yaxis=dict(title=y_title, showgrid=True, gridcolor="rgba(255,255,255,0.1)", zeroline=False),
+                        margin=dict(l=0, r=0, t=40, b=0)
+                    )
+                    return fig
+
+                tab_norm, tab_abs, tab_alt = st.tabs(["Insiden per 10.000 Penduduk", "Total Kasus Absolut", "Opsi: Stacked Bar Chart"])
+                with tab_norm:
+                    fig_norm = create_ts_chart(df_ts_filtered, "rate_per_10k", "Insiden per 10.000 Penduduk", hover_format=",.0f")
+                    st.plotly_chart(fig_norm, use_container_width=True, config={'displayModeBar': False})
+                with tab_abs:
+                    fig_abs = create_ts_chart(df_ts_filtered, "nilai", "Total Kasus (Angka Absolut)")
+                    st.plotly_chart(fig_abs, use_container_width=True, config={'displayModeBar': False})
+                with tab_alt:
+                    fig_bar = px.bar(df_ts_filtered, x="tahun", y="rate_per_10k", color="provinsi", color_discrete_map=color_map_prov, barmode="stack", title="Distribusi Kasus ISPA (per 10.000 Penduduk)")
+                    fig_bar.update_layout(height=450, plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", font=dict(color="#B0BEC5"), xaxis=dict(title="Tahun", dtick=1), yaxis=dict(title="Insiden per 10.000 Penduduk"), legend=dict(title="", orientation="v", yanchor="top", y=1, xanchor="left", x=1.02), margin=dict(l=0, r=0, t=40, b=0))
+                    st.plotly_chart(fig_bar, use_container_width=True, config={'displayModeBar': False})
                 
                 with st.expander("Lihat Data Panel: Kasus ISPA/Pneumonia (2014-2024)", expanded=False):
                     df_ts_pivot = df_ts_agg.pivot(index='tahun', columns='provinsi', values='nilai').reset_index()
@@ -914,10 +972,28 @@ with colB2:
         
         if not df_ika.empty:
             df_ika_long = df_ika.rename(columns={'Indeks Kualitas Air': 'Nilai IKA'})
-            fig_w1 = px.line(df_ika_long, x='Tahun', y='Nilai IKA', color='Provinsi', markers=True,
-                           title="Runtuhnya Indeks Kualitas Air (IKA) di Area Sentra Nikel")
+            color_map_prov = {"Sulawesi Tengah": "#EF5350", "Sulawesi Tenggara": "#D32F2F", "Gorontalo": "#42A5F5", "Sulawesi Barat": "#1E88E5", "Sulawesi Selatan": "#1565C0", "Sulawesi Utara": "#90CAF9"}
+            fig_w1 = px.line(df_ika_long, x='Tahun', y='Nilai IKA', color='Provinsi', markers=True, color_discrete_map=color_map_prov)
+            
+            for trace in fig_w1.data:
+                if trace.name in ['Sulawesi Tengah', 'Sulawesi Tenggara']:
+                    trace.line.width = 4
+                else:
+                    trace.line.width = 2
+                    trace.line.dash = "dot"
+                    trace.opacity = 0.7
+                trace.hovertemplate = f"<b>%{{fullData.name}}</b><br>Tahun: %{{x}}<br>Nilai IKA: %{{y:.1f}}<extra></extra>"
+                
             fig_w1.add_hline(y=50, line_dash="dot", annotation_text="Batas Kritis Cemar (50)", annotation_position="bottom right", line_color="#E74C3C")
-            fig_w1.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
+            fig_w1.update_layout(
+                title="Runtuhnya Indeks Kualitas Air (IKA) di Area Sentra Nikel",
+                height=450, plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
+                legend=dict(title="Provinsi (Merah: Sentra, Biru: Non-Sentra)", orientation="v", yanchor="top", y=1, xanchor="left", x=1.02),
+                font=dict(color="#B0BEC5"),
+                xaxis=dict(title="Tahun", showgrid=True, gridcolor="rgba(255,255,255,0.1)", dtick=1),
+                yaxis=dict(title="Indeks Kualitas Air", showgrid=True, gridcolor="rgba(255,255,255,0.1)", zeroline=False),
+                margin=dict(l=0, r=0, t=40, b=0)
+            )
             st.plotly_chart(fig_w1, use_container_width=True, config={'displayModeBar': False})
             
     with tab_w2:
@@ -944,11 +1020,20 @@ with colB2:
         col3.metric("Skor Konflik Ruang Air", f"{skor_air_3:.1f} / 10", "STATUS: DARURAT AGRARIA", delta_color="inverse")
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
-        if not df_konflik_air.empty and 'Tahun' in df_konflik_air.columns:
-            df_k_trend = df_konflik_air.groupby('Tahun').size().reset_index(name='Jumlah')
-            fig_w3 = px.bar(df_k_trend, x='Tahun', y='Jumlah', title="Frekuensi Letusan Konflik Pesisir & Nelayan per Tahun")
-            fig_w3.add_vline(x=2015, line_dash="dot", line_color="#E74C3C", annotation_text="Awal Eskalasi Smelter")
-            fig_w3.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
+        if not df_konflik_air.empty and 'tahun' in df_konflik_air.columns:
+            df_k_trend = df_konflik_air.groupby('tahun').size().reset_index(name='Jumlah')
+            # Filter 5 tahun terakhir
+            df_k_trend = df_k_trend[df_k_trend['tahun'] >= 2020]
+            
+            fig_w3 = px.bar(df_k_trend, x='tahun', y='Jumlah', title="Frekuensi Letusan Konflik Pesisir & Nelayan (5 Tahun Terakhir)")
+            fig_w3.update_traces(marker_color='#E91E63')
+            fig_w3.update_layout(
+                height=450, plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
+                font=dict(color="#B0BEC5"),
+                xaxis=dict(title="Tahun", showgrid=True, gridcolor="rgba(255,255,255,0.1)", dtick=1),
+                yaxis=dict(title="Jumlah Kasus", showgrid=True, gridcolor="rgba(255,255,255,0.1)"),
+                margin=dict(l=0, r=0, t=40, b=0)
+            )
             st.plotly_chart(fig_w3, use_container_width=True, config={'displayModeBar': False})
 
     with tab_w4:
@@ -1117,39 +1202,50 @@ with colD2:
         col3.metric("Skor Penipuan Publik", f"{skor_sosial_1:.1f} / 10", "STATUS: AMDAL BODONG", delta_color="inverse")
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
-        if not df_konflik_fpic.empty:
-            df_fpic_viz = df_konflik_fpic.copy()
-            df_fpic_viz['indikasi_fpic'] = df_fpic_viz['indikasi_fpic'].astype(str).replace({'True': 'Terbukti Melanggar', 'False': 'Investigasi Berjalan'})
-            df_fpic_viz['tahun'] = pd.to_numeric(df_fpic_viz['tahun'], errors='coerce')
+        if not df_konflik_fpic.empty and not df_kpa_izin.empty:
+            df_konflik_timeline = df_konflik_fpic.copy()
+            df_konflik_timeline['kategori'] = 'Konflik Pertambangan'
+            df_konflik_timeline = df_konflik_timeline.rename(columns={'tahun': 'Tahun', 'judul': 'Keterangan'})
             
-            # Filter 5 tahun terakhir
-            if not df_fpic_viz['tahun'].isna().all():
-                max_year = df_fpic_viz['tahun'].max()
-                df_fpic_viz = df_fpic_viz[df_fpic_viz['tahun'] >= (max_year - 4)]
+            df_masalah_timeline = df_kpa_izin[df_kpa_izin['lokasi'].str.contains('Sulawesi', case=False, na=False)].copy()
+            df_masalah_timeline['kategori'] = 'Masalah Izin (KPA)'
+            df_masalah_timeline['Tahun'] = df_masalah_timeline['tahun_laporan'].astype(int)
             
-            col_viz1, col_viz2 = st.columns(2)
+            df_combined_timeline = pd.concat([
+                df_konflik_timeline[['Tahun', 'kategori']],
+                df_masalah_timeline[['Tahun', 'kategori']]
+            ], ignore_index=True).sort_values('Tahun')
             
-            with col_viz1:
-                df_trend = df_fpic_viz.groupby('tahun').size().reset_index(name='jumlah')
-                fig_fpic1 = px.bar(df_trend, x='tahun', y='jumlah', 
-                                   title="Tren Temuan Kasus Manipulasi FPIC",
-                                   color_discrete_sequence=['#E74C3C'])
-                fig_fpic1.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-                st.plotly_chart(fig_fpic1, use_container_width=True, config={'displayModeBar': False})
-                
-            with col_viz2:
-                df_status = df_fpic_viz.groupby('indikasi_fpic').size().reset_index(name='jumlah')
-                fig_fpic2 = px.pie(df_status, values='jumlah', names='indikasi_fpic', hole=0.4,
-                                   title="Status Investigasi Kasus FPIC",
-                                   color='indikasi_fpic', 
-                                   color_discrete_map={'Terbukti Melanggar': '#C0392B', 'Investigasi Berjalan': '#F39C12'})
-                fig_fpic2.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-                st.plotly_chart(fig_fpic2, use_container_width=True, config={'displayModeBar': False})
+            # Filter sejak 2000
+            df_combined_timeline = df_combined_timeline[df_combined_timeline['Tahun'] >= 2000]
+            df_timeline_agg = df_combined_timeline.groupby(['Tahun', 'kategori']).size().reset_index(name='Jumlah')
             
-            st.markdown("<div style='margin-top: 15px;'><b>Daftar Temuan Kasus:</b></div>", unsafe_allow_html=True)
-            df_fpic_view = df_fpic_viz[['tahun', 'nama_perusahaan', 'indikasi_fpic', 'judul']].copy()
+            fig_s1 = px.bar(
+                df_timeline_agg,
+                x='Tahun',
+                y='Jumlah',
+                color='kategori',
+                barmode='group',
+                color_discrete_map={
+                    'Konflik Pertambangan': '#E74C3C',
+                    'Masalah Izin (KPA)': '#F39C12'
+                },
+                title='Timeline Historis: Konflik Pertambangan & Masalah Izin'
+            )
+            fig_s1.update_layout(
+                height=450, plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
+                font=dict(color="#B0BEC5"),
+                xaxis=dict(title="Tahun", showgrid=False, dtick=2),
+                yaxis=dict(title="Jumlah Kasus", showgrid=True, gridcolor="rgba(255,255,255,0.05)"),
+                legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5, title=""),
+                margin=dict(l=0, r=0, t=40, b=0)
+            )
+            st.plotly_chart(fig_s1, use_container_width=True, config={'displayModeBar': False})
+            
+            st.markdown("<div style='margin-top: 15px;'><b>Daftar Temuan Kasus (Konflik FPIC):</b></div>", unsafe_allow_html=True)
+            df_fpic_view = df_konflik_fpic[['tahun', 'nama_perusahaan', 'indikasi_fpic', 'judul']].copy()
             st.dataframe(df_fpic_view, use_container_width=True, hide_index=True)
-            with st.expander("Tampilkan Data Mentah FPIC (KPA/TanahKita)"):
+            with st.expander("Tampilkan Data Mentah FPIC & Izin (KPA/TanahKita)"):
                 st.dataframe(df_konflik_fpic, use_container_width=True)
 
     with tab_s2:
