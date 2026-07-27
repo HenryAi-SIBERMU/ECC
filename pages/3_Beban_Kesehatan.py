@@ -452,11 +452,11 @@ fig_3_1.update_layout(
 
 ispa_sentra = df_agg[
     (df_agg["indikator"] == "Kasus ISPA/Pneumonia")
-    & (df_agg["Kategori"].str.contains("Sentra Industri"))
+    & (df_agg["Kategori"].str.startswith("Sentra Industri"))
 ]["nilai"].values[0]
 ispa_non = df_agg[
     (df_agg["indikator"] == "Kasus ISPA/Pneumonia")
-    & (df_agg["Kategori"].str.contains("Non-Sentra"))
+    & (df_agg["Kategori"].str.startswith("Non-Sentra Industri"))
 ]["nilai"].values[0]
 ispa_diff = ispa_sentra / ispa_non
 

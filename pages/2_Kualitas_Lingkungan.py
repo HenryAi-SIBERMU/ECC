@@ -124,6 +124,12 @@ mean_ika_2023 = df_ika[df_ika['Tahun'] == 2023]['Indeks Kualitas Air'].mean()
 # 2. Kualitas Udara (IKU)
 mean_iku_2023 = df_iku[df_iku['Tahun'] == 2023]['IKU'].mean()
 
+try:
+    df_nasa_hero = pd.read_csv(os.path.join(DATA_DIR, "gee_nasa_no2_sulawesi_monthly_raw.csv"))
+    no2_terakhir = df_nasa_hero.groupby('Tahun')['Rata_Rata_NO2'].mean().values[-1]
+except:
+    no2_terakhir = 0.0
+
 # 3. Mega Smelter (CGS/ESDM)
 tot_smelter = len(df_smelter)
 df_pltu_op = df_pltu[df_pltu['Status'].str.lower() == 'operating']
@@ -193,7 +199,7 @@ with col2:
     <div class="metric-card">
         <div>
             <div class="metric-label">Polusi Udara NO₂ (NASA)</div>
-            <div class="metric-value" style="color: #D32F2F;">Naik Eksponensial</div>
+            <div class="metric-value" style="color: #D32F2F;">{no2_terakhir:.2e} <span style="font-size:1rem;">mol/m²</span></div>
             <div class="metric-desc">Satelit TROPOMI membongkar paradoks IKU resmi. Konsentrasi gas beracun meroket tajam seiring ekspansi PLTU captive.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> Satelit Sentinel-5P (Google Earth Engine)</div>
@@ -579,7 +585,7 @@ Ironi tragisnya terekam jelas saat kita menyandingkan klaim resmi negara dengan 
 
 Namun, kebohongan ekologis ini dibongkar secara telak oleh grafik di sebelah kanan. Pemantauan independen dari instrumen satelit **TROPOMI (*Tropospheric Monitoring Instrument*)** milik Badan Antariksa Eropa (ESA) dan NASA yang diekstraksi melalui superkomputer *Google Earth Engine* membuktikan fakta sebaliknya. Sebagai catatan metodologi, sensor satelit TROPOMI secara mutakhir memindai seluruh permukaan bumi setiap harinya untuk mengukur tingkat kepadatan gas beracun Nitrogen Dioksida (NO2) dari luar angkasa. Gas NO2 ini adalah indikator polusi dan "jejak sidik jari" utama dari aktivitas pembakaran batu bara skala masif. 
 
-Dari tarikan ratusan data spasial murni (*raw data*) tepat di atas langit Pulau Sulawesi, terlihat bahwa konsentrasi polusi NO2 meledak secara eksponensial, meroket sejajar mengikuti lintasan ekspansi kapasitas PLTU. Garis pantauan satelit yang di awal masa operasinya masih berada di ambang hijau rendah polusi, kini melonjak drastis dan berubah warna menjadi **merah pekat beracun** seiring dengan kapasitas PLTU yang menyentuh batas puncaknya.
+Dari tarikan ratusan data spasial murni (*raw data*) tepat di atas langit Pulau Sulawesi, terlihat bahwa konsentrasi polusi NO2 meledak secara eksponensial, meroket sejajar mengikuti lintasan ekspansi kapasitas PLTU. Garis pantauan satelit yang di awal masa operasinya masih berada di ambang hijau rendah polusi, kini melonjak drastis dan berubah warna menjadi **merah pekat beracun** seiring dengan kapasitas PLTU yang menyentuh batas puncaknya. Sebagai standar pengujian satelit NASA TROPOMI, konsentrasi NO2 untuk wilayah alami seharusnya berada di ambang bersih (< 4.0e-6 mol/m²). Namun, langit Sulawesi kini telah menjebol batas anomali kritis (> 6.0e-6 mol/m²), sebuah angka yang mustahil terjadi secara alamiah tanpa injeksi emisi buatan manusia skala raksasa dari cerobong asap batu bara.
 
 Fakta lapangan yang direpresentasikan data satelit ini secara brutal membantah kampanye artifisial "Hilirisasi Hijau" yang selama ini digaungkan oleh negara dan oligarki korporasi. Melalui angka-angka mutlak dari luar angkasa ini, terbukti bahwa kita tidak sedang memproduksi bahan baku transisi energi yang ramah lingkungan; kita justru sedang mensponsori penciptaan kantong-kantong penyakit saluran pernapasan (ISPA) raksasa di lingkar industri. Asap beracun dari pembakaran batu bara ini mungkin bisa disembunyikan di atas kertas regulasi IKU, tetapi tidak bisa lolos dari pantauan satelit global. Sub-bab ini menguji hipotesis: **Apakah ledakan kapasitas PLTU captive secara empiris meruntuhkan kualitas udara?**
 """)

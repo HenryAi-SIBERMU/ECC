@@ -414,25 +414,43 @@ try:
     import plotly.express as px
     df_konflik = pd.read_csv('data/processed/sulawesi_konflik_hukum.csv')
     
-    col1, col2 = st.columns([1, 2])
-    with col1:
-        st.metric(label="Total Kasus Konflik/Pelanggaran Dibiarkan (Sulawesi)", value=f"{len(df_konflik)} Kasus", delta="Bukti Impunitas Hukum", delta_color="inverse")
-        
-        # Hitung per sektor
-        sektor_counts = df_konflik['Sektor'].value_counts().reset_index()
-        sektor_counts.columns = ['Sektor (Penyebab)', 'Jumlah Kasus']
-        st.dataframe(sektor_counts, use_container_width=True, hide_index=True)
-        
-    with col2:
+    st.metric(label="Total Kasus Konflik/Pelanggaran Dibiarkan (Sulawesi)", value=f"{len(df_konflik)} Kasus", delta="Bukti Impunitas Hukum", delta_color="inverse")
+    
+    if 'Tahun' in df_konflik.columns and df_konflik['Tahun'].notna().any():
+        df_timeline = df_konflik.dropna(subset=['Tahun']).copy()
+        df_timeline['Tahun'] = df_timeline['Tahun'].astype(int)
+        # Ambil 10 tahun terakhir saja (2014 - 2024)
+        df_timeline = df_timeline[df_timeline['Tahun'] >= 2014]
+        timeline_counts = df_timeline.groupby(['Tahun', 'Provinsi']).size().reset_index(name='Jumlah Kasus')
+        # Gunakan scatter plot (bubble chart) agar lebih mudah dibaca untuk membedakan tahun & provinsi
+        fig_prov = px.scatter(timeline_counts, x='Tahun', y='Provinsi', size='Jumlah Kasus', 
+                              color='Jumlah Kasus', color_continuous_scale='Reds', 
+                              title="Timeline & Sebaran Konflik Agraria (10 Tahun Terakhir)",
+                              size_max=25)
+        fig_prov.update_xaxes(dtick=1) # Ensure every year is shown
+        fig_prov.update_yaxes(title="")
+    else:
         prov_counts = df_konflik['Provinsi'].value_counts().reset_index()
         prov_counts.columns = ['Provinsi', 'Jumlah Kasus']
-        fig_prov = px.bar(prov_counts, x='Jumlah Kasus', y='Provinsi', orientation='h', title="Sebaran Wilayah Konflik", color='Jumlah Kasus', color_continuous_scale='Reds')
-        fig_prov.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', margin=dict(l=0, r=0, t=30, b=0), height=250)
-        st.plotly_chart(fig_prov, use_container_width=True, config={'displayModeBar': False})
+        fig_prov = px.bar(prov_counts, x='Jumlah Kasus', y='Provinsi', orientation='h', title="Sebaran Wilayah Konflik (Hingga 2024)", color='Jumlah Kasus', color_continuous_scale='Reds')
+    
+    fig_prov.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', margin=dict(l=0, r=0, t=30, b=0), height=300)
+    st.plotly_chart(fig_prov, use_container_width=True, config={'displayModeBar': False})
+    
+    st.markdown("##### Sebaran Sektor Konflik")
+    # Hitung per sektor
+    sektor_counts = df_konflik['Sektor'].value_counts().reset_index()
+    sektor_counts.columns = ['Sektor (Penyebab)', 'Jumlah Kasus']
+    st.dataframe(sektor_counts, use_container_width=True, hide_index=True)
         
     with st.expander("Bongkar Data: Daftar Rekam Jejak Konflik Agraria & Pelanggaran Hak"):
-        df_konflik_show = df_konflik[['Provinsi', 'Sektor', 'Judul_Kasus', 'Deskripsi_Singkat']].copy()
-        df_konflik_show.columns = ['Provinsi', 'Sektor Industri', 'Judul/Nama Kasus', 'Deskripsi Singkat']
+        if 'Tahun' in df_konflik.columns:
+            df_konflik_show = df_konflik[['Tahun', 'Provinsi', 'Sektor', 'Judul_Kasus', 'Deskripsi_Singkat']].copy()
+            df_konflik_show['Tahun'] = df_konflik_show['Tahun'].fillna(0).astype(int).replace(0, '')
+            df_konflik_show.columns = ['Tahun', 'Provinsi', 'Sektor Industri', 'Judul/Nama Kasus', 'Deskripsi Singkat']
+        else:
+            df_konflik_show = df_konflik[['Provinsi', 'Sektor', 'Judul_Kasus', 'Deskripsi_Singkat']].copy()
+            df_konflik_show.columns = ['Provinsi', 'Sektor Industri', 'Judul/Nama Kasus', 'Deskripsi Singkat']
         st.dataframe(df_konflik_show, use_container_width=True, hide_index=True)
         st.caption("📁 **Sumber Data:** Kompilasi Konsorsium Pembaruan Agraria (KPA) / Laporan LSM")
         
@@ -476,12 +494,29 @@ try:
         total_mw = df_pltu['Capacity (MW)'].sum()
         st.metric(label="Total Kapasitas Pembangkitan Kotor", value=f"{total_mw:,.0f} MW", delta="Sangat Masif")
         
-    st.markdown("**Distribusi Kapasitas PLTU Captive per Provinsi (MW)**")
     df_pltu['Provinsi'] = df_pltu['Subnational unit (province, state)']
-    pltu_prov = df_pltu.groupby('Provinsi')['Capacity (MW)'].sum().reset_index().sort_values(by='Capacity (MW)', ascending=True)
-    fig_pltu = px.bar(pltu_prov, x='Capacity (MW)', y='Provinsi', orientation='h', color='Capacity (MW)', color_continuous_scale='YlOrRd')
-    fig_pltu.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', margin=dict(l=0, r=0, t=10, b=0), height=300)
-    st.plotly_chart(fig_pltu, use_container_width=True, config={'displayModeBar': False})
+    df_pltu['Tahun'] = df_pltu['Start year'].fillna(2025).astype(int)
+    df_timeline = df_pltu[df_pltu['Tahun'] <= 2024].groupby(['Provinsi', 'Tahun'])['Capacity (MW)'].sum().reset_index()
+    df_pivot = df_timeline.pivot(index='Tahun', columns='Provinsi', values='Capacity (MW)').fillna(0)
+    all_years = list(range(df_pivot.index.min(), 2025))
+    df_pivot = df_pivot.reindex(all_years, fill_value=0)
+    df_cum = df_pivot.cumsum().reset_index()
+    df_melt = df_cum.melt(id_vars='Tahun', value_name='Capacity (MW)')
+    
+    import altair as alt
+    
+    # Menggunakan Line chart dengan Altair
+    fig_pltu = alt.Chart(df_melt).mark_line(point=True).encode(
+        x=alt.X('Tahun:O', title='Tahun', axis=alt.Axis(labelAngle=0)),
+        y=alt.Y('Capacity (MW):Q', title='Kapasitas (MW)'),
+        color=alt.Color('Provinsi:N', scale=alt.Scale(range=['#fb6a4a', '#de2d26', '#a50f15'])),
+        tooltip=['Tahun', 'Provinsi', 'Capacity (MW)']
+    ).properties(
+        title="Timeline Pertumbuhan Kapasitas PLTU Captive (Hingga 2024)",
+        height=350
+    ).interactive()
+    
+    st.altair_chart(fig_pltu, use_container_width=True)
     
     with st.expander("Bongkar Data: Daftar Lengkap PLTU Batubara Captive di Sulawesi"):
         df_pltu_show = df_pltu.copy()

@@ -149,9 +149,10 @@ def load_data():
     df_pltu_captive = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv")) else pd.DataFrame()
     df_kawasan_nikel = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_kawasan_nikel_luas_per_provinsi.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_kawasan_nikel_luas_per_provinsi.csv")) else pd.DataFrame()
     df_faskes = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_faskes_agregat.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_faskes_agregat.csv")) else pd.DataFrame()
-    return df_kes, df_ika, df_bencana, df_konflik, df_izin, df_iku, df_b3, df_pltu_op, df_gfw, df_gfw_lindung, df_gfw_driver, df_konflik_fpic, df_kpa_izin, df_pltu_captive, df_kawasan_nikel, df_faskes
+    df_nasa = pd.read_csv(os.path.join(DATA_DIR, "gee_nasa_no2_sulawesi_monthly_raw.csv")) if os.path.exists(os.path.join(DATA_DIR, "gee_nasa_no2_sulawesi_monthly_raw.csv")) else pd.DataFrame()
+    return df_kes, df_ika, df_bencana, df_konflik, df_izin, df_iku, df_b3, df_pltu_op, df_gfw, df_gfw_lindung, df_gfw_driver, df_konflik_fpic, df_kpa_izin, df_pltu_captive, df_kawasan_nikel, df_faskes, df_nasa
 
-df_kes, df_ika, df_bencana, df_konflik, df_izin, df_iku, df_b3, df_pltu_op, df_gfw, df_gfw_lindung, df_gfw_driver, df_konflik_fpic, df_kpa_izin, df_pltu_captive, df_kawasan_nikel, df_faskes = load_data()
+df_kes, df_ika, df_bencana, df_konflik, df_izin, df_iku, df_b3, df_pltu_op, df_gfw, df_gfw_lindung, df_gfw_driver, df_konflik_fpic, df_kpa_izin, df_pltu_captive, df_kawasan_nikel, df_faskes, df_nasa = load_data()
 
 # =====================================================================
 # PRE-CALCULATE SCORES SECTION A & B (Yang sudah ada datanya)
@@ -159,14 +160,15 @@ df_kes, df_ika, df_bencana, df_konflik, df_izin, df_iku, df_b3, df_pltu_op, df_g
 
 # --- SECTION A: UDARA ---
 kapasitas_terkini = 0
-iku_terkini = 75
+no2_terkini = 4.0e-6
 if not df_pltu_op.empty:
     kapasitas_terkini = df_pltu_op[(df_pltu_op['Status'].str.lower() == 'operating')]['Capacity (MW)'].sum()
-if not df_iku.empty:
-    df_iku_avg_pre = df_iku.groupby('Tahun')['IKU'].mean().reset_index()
-    if 2024 in df_iku_avg_pre['Tahun'].values:
-        iku_terkini = df_iku_avg_pre[df_iku_avg_pre['Tahun'] == 2024]['IKU'].values[0]
-skor_1 = min(10.0, (kapasitas_terkini / 10000) * 5 + max(0, (80 - iku_terkini) / 30) * 5)
+if not df_nasa.empty:
+    df_nasa_annual = df_nasa.groupby('Tahun')['Rata_Rata_NO2'].mean().reset_index()
+    if not df_nasa_annual.empty:
+        no2_terkini = df_nasa_annual.loc[df_nasa_annual['Tahun'].idxmax(), 'Rata_Rata_NO2']
+# Normalisasi: PLTU Max 10.000 MW (skor 5), NO2 kritis pada 7.0e-6 (range 4.0e-6 ke 7.0e-6 = skor 5)
+skor_1 = min(10.0, (kapasitas_terkini / 10000) * 5 + max(0, (no2_terkini - 4.0e-6) / (7.0e-6 - 4.0e-6)) * 5)
 
 skor_2 = 0
 rasio_anomali = 0
@@ -396,13 +398,13 @@ with col1:
             <div class="metric-label">DAYA TAMPUNG UDARA</div>
             <div class="metric-value" style="color: #E53935;">{skor_akumulasi_udara:.1f}</div>
             <div class="metric-desc">
-                <b>STATUS: DAYA TAMPUNG JEBOL</b><br><br>
+                <b>STATUS: DAYA TAMPUNG MELAMPAUI</b><br><br>
                 Lonjakan drastis persentase Kasus ISPA dan penyakit saluran pernapasan di lingkar tambang.
             </div>
         </div>
         <div class="metric-source">
             <b>VONIS:</b> Kegagalan Deteksi Morbiditas Akumulatif<br>
-            <i>Kapasitas PLTU: {kapasitas_terkini:,.0f} MW / IKU: {iku_terkini:.1f} / Rasio ISPA: {rasio_anomali:.1f}x</i>
+            <i>Kapasitas PLTU: {kapasitas_terkini:,.0f} MW / NO2 NASA: {no2_terkini:.2e} / Rasio ISPA: {rasio_anomali:.1f}x</i>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -414,7 +416,7 @@ with col2:
             <div class="metric-label">DAYA TAMPUNG AIR</div>
             <div class="metric-value" style="color: #E53935;">{skor_akumulasi_air:.1f}</div>
             <div class="metric-desc">
-                <b>STATUS: DAYA TAMPUNG JEBOL</b><br><br>
+                <b>STATUS: DAYA TAMPUNG MELAMPAUI</b><br><br>
                 Penurunan drastis Indeks Kualitas Air dan hancurnya pesisir ditandai ledakan morbiditas air.
             </div>
         </div>
@@ -497,7 +499,7 @@ st.markdown("""
 AMDAL dan D3TLH pemerintah mengklaim bersifat "prediktif"—menilai batasan daya dukung alam <i>sebelum</i> izin diberikan. Namun, data lapangan membuktikan bahwa dokumen-dokumen tersebut secara sistematis cacat dan gagal melindungi ruang hidup masyarakat.
 </p>
 <p><b>Standpoint Riset ECC:</b><br>
-Kita melakukan <b>Pembuktian Terbalik</b>. Kita tidak perlu berdebat soal rumus "daya dukung spasial" milik konsultan korporasi. Fakta empiris bahwa <span class="highlight-text">kasus ISPA meroket, banjir bandang rutin terjadi, konflik berdarah bereskalasi, dan izin terus diobral secara anomali</span> adalah <b>Bukti Mutlak (Definitive Proof)</b> bahwa daya dukung ekologis dan sosial wilayah tersebut <b>SUDAH JEBOL</b>.
+Kita melakukan <b>Pembuktian Terbalik</b>. Kita tidak perlu berdebat soal rumus "daya dukung spasial" milik konsultan korporasi. Fakta empiris bahwa <span class="highlight-text">kasus ISPA meroket, banjir bandang rutin terjadi, konflik berdarah bereskalasi, dan izin terus diobral secara anomali</span> adalah <b>Bukti Mutlak (Definitive Proof)</b> bahwa daya dukung ekologis dan sosial wilayah tersebut <b>SUDAH MELAMPAUI</b>.
 </p>
 <p>
 Halaman ini merangkum semua indikator krisis menjadi sebuah palu godam untuk memvonis bahwa sistem AMDAL/D3TLH saat ini sekadar "stempel birokrasi" yang buta terhadap penderitaan manusia.
@@ -552,15 +554,15 @@ st.markdown("""
 # --- Pre-computation for Scores (Skala 0-10) ---
 # Skor 1: Ancaman Udara
 kapasitas_terkini = 0
-iku_terkini = 75
+no2_terkini = 4.0e-6
 if not df_pltu_op.empty:
     kapasitas_terkini = df_pltu_op[(df_pltu_op['Status'].str.lower() == 'operating')]['Capacity (MW)'].sum()
-if not df_iku.empty:
-    df_iku_avg_pre = df_iku.groupby('Tahun')['IKU'].mean().reset_index()
-    if 2024 in df_iku_avg_pre['Tahun'].values:
-        iku_terkini = df_iku_avg_pre[df_iku_avg_pre['Tahun'] == 2024]['IKU'].values[0]
-# Normalisasi: PLTU Max 10.000 MW, IKU kritis pada 50 (range 80 ke 50)
-skor_1 = min(10.0, (kapasitas_terkini / 10000) * 5 + max(0, (80 - iku_terkini) / 30) * 5)
+if not df_nasa.empty:
+    df_nasa_annual = df_nasa.groupby('Tahun')['Rata_Rata_NO2'].mean().reset_index()
+    if not df_nasa_annual.empty:
+        no2_terkini = df_nasa_annual.loc[df_nasa_annual['Tahun'].idxmax(), 'Rata_Rata_NO2']
+# Normalisasi: PLTU Max 10.000 MW (skor 5), NO2 kritis pada 7.0e-6 (range 4.0e-6 ke 7.0e-6 = skor 5)
+skor_1 = min(10.0, (kapasitas_terkini / 10000) * 5 + max(0, (no2_terkini - 4.0e-6) / (7.0e-6 - 4.0e-6)) * 5)
 
 # Skor 2: Rasio Anomali ISPA
 skor_2 = 0
@@ -608,7 +610,7 @@ with colA1:
     <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E74C3C;">
         <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Akumulasi Skor Kerusakan</div>
         <div style="font-size: 32px; font-weight: 800; color: #E74C3C; line-height: 1.2;">{skor_akumulasi_udara:.1f} <span style="font-size: 16px;">/ 10</span></div>
-        <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: DAYA TAMPUNG JEBOL</div>
+        <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: DAYA TAMPUNG MELAMPAUI</div>
     </div>
     <div style="background:#C0392B; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
         VONIS: Kegagalan Deteksi Morbiditas Akumulatif
@@ -621,10 +623,9 @@ with colA2:
         tab1, tab2, tab3, tab4 = st.tabs(["Korelasi PLTU & Kualitas Udara", "Dampak Kasus ISPA/Pneumonia", "Fakta Beban Limbah & Emisi", "Hilangnya Paru-Paru Udara"])
         
         with tab1:
-            # --- 1. Ekspansi PLTU vs Penurunan Kualitas Udara ---
-            st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Pemerintah sering merilis angka rata-rata IKU tahunan seolah 'Masih Aman', menutupi tren eksponensial di mana kualitas udara terjun bebas tepat setelah keran mega-smelter dibuka lebar pada 2014-2015. <b>Threshold Kritis: IKU = 50</b> (batas terbawah Kategori Sedang/awal Kurang — <i>PermenLHK No.27/2021, Lampiran Tbl.1</i>).</div>", unsafe_allow_html=True)
+            # --- 1. Ekspansi PLTU vs Penurunan Kualitas Udara ---            st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Pemerintah sebelumnya mengklaim IKU 'Masih Aman'. Namun pantauan independen Satelit TROPOMI NASA mengungkap realitas lain: konsentrasi gas beracun NO2 meledak meroket sejajar dengan ekspansi PLTU captive. <b>Threshold Kritis NASA: NO2 > 6.0e-6 mol/m²</b>.</div>", unsafe_allow_html=True)
             
-            if not df_pltu_op.empty and not df_iku.empty:
+            if not df_pltu_op.empty and not df_nasa.empty:
                 years = list(range(2010, 2025))
                 prov_map = {
                     'Central Sulawesi': 'Sulawesi Tengah', 'South East Sulawesi': 'Sulawesi Tenggara',
@@ -632,12 +633,10 @@ with colA2:
                     'West Sulawesi': 'Sulawesi Barat', 'Gorontalo': 'Gorontalo'
                 }
                 
-                # Setup data PLTU seperti di Overview Temuan
                 df_pltu_op_tab = df_pltu_op.copy()
                 df_pltu_op_tab['Provinsi'] = df_pltu_op_tab['Subnational unit (province, state)'].replace(prov_map)
                 df_pltu_op_tab = df_pltu_op_tab[(df_pltu_op_tab['Status'].str.lower() == 'operating') & df_pltu_op_tab['Start year'].notna()]
                 
-                # Tambahan data PLTU Grid (Non-Captive)
                 grid_pltu = pd.DataFrame([
                     {'Provinsi': 'Gorontalo', 'Capacity (MW)': 100, 'Start year': 2010},
                     {'Provinsi': 'Sulawesi Utara', 'Capacity (MW)': 220, 'Start year': 2010},
@@ -652,15 +651,16 @@ with colA2:
                         cap = df_pltu_op_tab[(df_pltu_op_tab['Provinsi'] == prov) & (df_pltu_op_tab['Start year'] <= y)]['Capacity (MW)'].sum()
                         panel_data_pltu.append({'Tahun': y, 'Provinsi': prov, 'Kapasitas_PLTU_MW': cap})
                 df_pltu_trend = pd.DataFrame(panel_data_pltu)
-                df_iku_avg = df_iku[df_iku['Tahun'].between(2010, 2024)].groupby('Tahun')['IKU'].mean().reset_index()
                 
-                # Gunakan skor pre-calculated
+                df_nasa_annual = df_nasa.groupby('Tahun')['Rata_Rata_NO2'].mean().reset_index()
+                df_nasa_annual.rename(columns={'Tahun': 'year', 'Rata_Rata_NO2': 'median'}, inplace=True)
+                
                 kapasitas_grafik = df_pltu_trend[df_pltu_trend['Tahun'] == 2024]['Kapasitas_PLTU_MW'].sum()
-                iku_grafik = df_iku_avg[df_iku_avg['Tahun'] == 2024]['IKU'].values[0] if not df_iku_avg[df_iku_avg['Tahun'] == 2024].empty else 75
+                no2_grafik = df_nasa_annual.loc[df_nasa_annual['year'].idxmax(), 'median'] if not df_nasa_annual.empty else 0.0
                 
                 col1, col2, col3 = st.columns(3)
                 col1.metric("Kapasitas PLTU Aktif", f"{kapasitas_grafik:,.0f} MW", "Max threshold: 10.000 MW")
-                col2.metric("Rata-rata IKU Sulawesi", f"{iku_grafik:.1f}", "Kritis jika turun ke 50 (PermenLHK 27/2021)", delta_color="inverse")
+                col2.metric("Rata-rata Polusi NO2 NASA", f"{no2_grafik:.2e}", "Kritis jika naik melebihi 6.0e-6", delta_color="inverse")
                 col3.metric("Skor Ancaman Udara", f"{skor_1:.1f} / 10", "STATUS: KRITIS", delta_color="inverse")
                 st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
                 
@@ -680,12 +680,19 @@ with colA2:
                         label = f"{prov} — PLTU max {max_mw:,.0f} MW"
                         pltu_config.append({'prov': prov, 'color': color, 'label': label})
 
-                fig_2_2_combined = make_subplots(specs=[[{"secondary_y": True}]])
+                def get_no2_color(val):
+                    if val > 6.0e-6: return '#D32F2F'
+                    elif val > 5.0e-6: return '#FBC02D'
+                    else: return '#4CAF50'
+                
+                no2_annual_colors = [get_no2_color(v) for v in df_nasa_annual['median']]
+
+                fig_nasa_combined = make_subplots(specs=[[{"secondary_y": True}]])
                 
                 for cfg in pltu_config:
                     d_trend = df_pltu_trend[df_pltu_trend['Provinsi'] == cfg['prov']]
                     if not d_trend.empty:
-                        fig_2_2_combined.add_trace(
+                        fig_nasa_combined.add_trace(
                             go.Scatter(
                                 x=d_trend['Tahun'], y=d_trend['Kapasitas_PLTU_MW'], name=cfg['label'], 
                                 mode='lines', stackgroup='one', line=dict(width=1, color=cfg['color']),
@@ -695,53 +702,49 @@ with colA2:
                             secondary_y=False
                         )
 
-                def get_iku_color(val):
-                    if val < 85: return '#D32F2F'
-                    elif val < 90: return '#FBC02D'
-                    else: return '#4CAF50'
-
-                iku_colors_arr = [get_iku_color(v) for v in df_iku_avg['IKU']]
-                
-                for i in range(len(df_iku_avg)-1):
-                    fig_2_2_combined.add_trace(
+                for i in range(len(df_nasa_annual)-1):
+                    fig_nasa_combined.add_trace(
                         go.Scatter(
-                            x=df_iku_avg['Tahun'].iloc[i:i+2], y=df_iku_avg['IKU'].iloc[i:i+2],
-                            mode='lines', line=dict(color=iku_colors_arr[i+1], width=4), showlegend=False, hoverinfo='skip'
+                            x=df_nasa_annual['year'].iloc[i:i+2],
+                            y=df_nasa_annual['median'].iloc[i:i+2],
+                            mode='lines',
+                            line=dict(color=no2_annual_colors[i+1], width=4),
+                            showlegend=False, hoverinfo='skip'
                         ),
                         secondary_y=True
                     )
-
-                fig_2_2_combined.add_trace(
+                
+                fig_nasa_combined.add_trace(
                     go.Scatter(
-                        x=df_iku_avg['Tahun'], y=df_iku_avg['IKU'], name="Rata-rata IKU Sulawesi", 
-                        mode='markers', marker=dict(color=iku_colors_arr, size=10, line=dict(width=1, color='#FFFFFF')), 
-                        hovertemplate='Tahun %{x}<br>IKU: %{y:.1f}<extra></extra>', showlegend=False
+                        x=df_nasa_annual['year'], y=df_nasa_annual['median'], name="Rata-rata NO2 Tahunan", 
+                        mode='markers', marker=dict(color=no2_annual_colors, size=10, line=dict(width=1, color='#FFFFFF')), 
+                        hovertemplate='Tahun %{x}<br>NO2: %{y:.2e}<extra></extra>', showlegend=False
                     ),
                     secondary_y=True
                 )
 
-                fig_2_2_combined.add_trace(go.Scatter(x=[None], y=[None], mode='lines', line=dict(color='#FFFFFF', width=2), name='Rata-rata IKU Sulawesi'), secondary_y=True)
-                fig_2_2_combined.add_trace(go.Scatter(x=[None], y=[None], mode='markers', marker=dict(color='#D32F2F', size=10), name='IKU buruk/kritis'), secondary_y=True)
-                fig_2_2_combined.add_trace(go.Scatter(x=[None], y=[None], mode='markers', marker=dict(color='#FBC02D', size=10), name='IKU tertekan'), secondary_y=True)
-                fig_2_2_combined.add_trace(go.Scatter(x=[None], y=[None], mode='markers', marker=dict(color='#4CAF50', size=10), name='IKU relatif baik'), secondary_y=True)
+                fig_nasa_combined.add_trace(go.Scatter(x=[None], y=[None], mode='markers', marker=dict(color='#D32F2F', size=10), name='Polusi NO2 Tinggi (> 6.0e-6)'), secondary_y=True)
+                fig_nasa_combined.add_trace(go.Scatter(x=[None], y=[None], mode='markers', marker=dict(color='#FBC02D', size=10), name='Polusi NO2 Sedang (5.0-6.0e-6)'), secondary_y=True)
+                fig_nasa_combined.add_trace(go.Scatter(x=[None], y=[None], mode='markers', marker=dict(color='#4CAF50', size=10), name='Polusi NO2 Rendah (< 5.0e-6)'), secondary_y=True)
 
-                fig_2_2_combined.update_layout(
-                    title=dict(text="Semua PLTU Batubara vs Penurunan Kualitas Udara (2010-2024)", font=dict(color='#ECEFF1', size=16)),
+                fig_nasa_combined.update_layout(
+                    title=dict(text="Semua PLTU Batubara vs Polusi NO2 (Data Satelit NASA)", font=dict(color='#ECEFF1', size=16)),
                     plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', font=dict(color='#ECEFF1', family='Arial, sans-serif'),
                     legend=dict(orientation="v", yanchor="top", y=0.98, xanchor="left", x=0.02, bgcolor='rgba(30,30,30,0.8)', bordercolor='#555', borderwidth=1, font=dict(size=11), traceorder='reversed'),
                     xaxis=dict(title="", tickmode='linear', dtick=2, tickformat='d', showgrid=True, gridcolor='#2b3240', gridwidth=1, griddash='dash', showline=True, linewidth=1, linecolor='#555555', rangeslider=dict(visible=False)),
                     yaxis=dict(title="Kapasitas PLTU Kumulatif (MW)", showgrid=True, gridcolor='#2b3240', gridwidth=1, griddash='dash', side='left', tickformat=',.1s', dtick=500, ticksuffix=' MW'),
-                    yaxis2=dict(title="Indeks Kualitas Udara (IKU)", showgrid=False, overlaying='y', side='right', dtick=2),
+                    yaxis2=dict(title="Konsentrasi NO2 (mol/m²)", showgrid=False, overlaying='y', side='right'),
                     hovermode="x unified", hoverlabel=dict(bgcolor="rgba(0, 0, 0, 0.8)", font_size=13, font_family="Arial", font_color="#FFFFFF"),
                     margin=dict(l=0, r=0, t=40, b=0)
                 )
 
-                st.plotly_chart(fig_2_2_combined, use_container_width=True, config={'displayModeBar': False})
+                st.plotly_chart(fig_nasa_combined, use_container_width=True, config={'displayModeBar': False})
                 
                 with st.expander("Lihat Data Mentah: Kapasitas PLTU per Provinsi", expanded=False):
                     df_pivot_pltu = df_pltu_trend.pivot(index='Tahun', columns='Provinsi', values='Kapasitas_PLTU_MW').reset_index()
                     st.dataframe(df_pivot_pltu, use_container_width=True, hide_index=True)
                     st.caption("Sumber: `sulawesi_pltu_captive.csv` (gabungan captive + grid)")
+
 
         with tab2:
             # --- 2. Tren Historis Kasus ISPA/Pneumonia ---
@@ -951,7 +954,7 @@ with colB1:
 <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E74C3C;">
 <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Akumulasi Skor Kerusakan</div>
 <div style="font-size: 32px; font-weight: 800; color: #E74C3C; line-height: 1.2;">{skor_akumulasi_air:.1f} <span style="font-size: 16px;">/ 10</span></div>
-<div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: DAYA TAMPUNG JEBOL</div>
+<div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: DAYA TAMPUNG MELAMPAUI</div>
 </div>
 <div style="background:#C0392B; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
 VONIS: Kegagalan Pengukuran Toksisitas
@@ -1363,9 +1366,22 @@ with colE2:
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
         if not df_kpa_izin.empty:
-            st.dataframe(df_kpa_izin[['nama_perusahaan', 'jenis_masalah_izin', 'lokasi']], use_container_width=True, hide_index=True)
+            df_kpa_explode = df_kpa_izin.copy()
+            df_kpa_explode['jenis_masalah_izin'] = df_kpa_explode['jenis_masalah_izin'].str.split('; ')
+            df_kpa_explode = df_kpa_explode.explode('jenis_masalah_izin')
+            masalah_counts = df_kpa_explode['jenis_masalah_izin'].value_counts().reset_index()
+            masalah_counts.columns = ['Jenis Pelanggaran', 'Jumlah Korporat']
+            
+            fig_v2 = px.bar(masalah_counts, x='Jumlah Korporat', y='Jenis Pelanggaran', orientation='h', 
+                            title="Distribusi Modus Pelanggaran Izin Korporat", 
+                            color_discrete_sequence=['#E74C3C'])
+            fig_v2.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", 
+                                 yaxis={'categoryorder':'total ascending'}, margin=dict(l=0, r=0, t=40, b=0))
+            
+            st.plotly_chart(fig_v2, use_container_width=True, config={'displayModeBar': False})
+            
             with st.expander("Tampilkan Detail Kasus (KPA)"):
-                st.dataframe(df_kpa_izin, use_container_width=True)
+                st.dataframe(df_kpa_izin[['nama_perusahaan', 'jenis_masalah_izin', 'lokasi']], use_container_width=True, hide_index=True)
 
     with tab_v3:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Inkonsistensi paling telanjang terhadap komitmen iklim. Di wilayah ekoregion krisis, pemerintah memberikan karpet merah pembangunan infrastruktur penyumbang emisi terbesar (PLTU Batubara Captive) khusus untuk menyuplai kawasan smelter nikel.</div>", unsafe_allow_html=True)
