@@ -629,13 +629,18 @@ Berdasarkan ekstraksi dataset secara mendalam, berikut adalah bedah anatomis dar
             korban = top_case['jiwa_num']
             pt = top_case['keterlibatan_perusahaan'] if pd.notna(top_case['keterlibatan_perusahaan']) else 'Tidak/Belum Teridentifikasi'
             narasi = str(top_case['narasi'])[:450] + "..." if pd.notna(top_case['narasi']) and str(top_case['narasi']).strip() != 'nan' else (str(top_case['deskripsi'])[:450] + "...")
-            link = top_case['detail_url'] if 'detail_url' in top_case and pd.notna(top_case['detail_url']) else '#'
+            
+            sumber_lsm = top_case['sumber'] if 'sumber' in top_case and pd.notna(top_case['sumber']) else 'Kompilasi LSM'
+            tk_link = top_case['detail_url'] if 'detail_url' in top_case and pd.notna(top_case['detail_url']) else '#'
+            import urllib.parse
+            search_query = urllib.parse.quote(f"{judul} {pt}")
+            link = f"https://www.google.com/search?q={search_query}"
             
             st.markdown(f"**Kasus Utama Pendongkrak Statistik: {judul}**")
             st.markdown(f"* **Total Korban (Kasus Ini):** {int(korban):,} Jiwa")
             st.markdown(f"* **Perusahaan Terlibat:** {pt}")
             st.markdown(f"* **Narasi Singkat:** {narasi}")
-            st.markdown(f"* **Sumber Referensi:** [Lihat Detail Kasus TanahKita]({link})")
+            st.markdown(f"* **Sumber Referensi:** Laporan {sumber_lsm} ([Telusuri Berita Kasus]({link}) | [Link Asli TanahKita]({tk_link}))")
 
     # Process and display HA Anomalies
     for i, year in enumerate(top_ha.index, 1):
@@ -653,13 +658,18 @@ Berdasarkan ekstraksi dataset secara mendalam, berikut adalah bedah anatomis dar
             luas = top_case['ha_num']
             pt = top_case['keterlibatan_perusahaan'] if pd.notna(top_case['keterlibatan_perusahaan']) else 'Tidak/Belum Teridentifikasi'
             narasi = str(top_case['narasi'])[:450] + "..." if pd.notna(top_case['narasi']) and str(top_case['narasi']).strip() != 'nan' else (str(top_case['deskripsi'])[:450] + "...")
-            link = top_case['detail_url'] if 'detail_url' in top_case and pd.notna(top_case['detail_url']) else '#'
+            
+            sumber_lsm = top_case['sumber'] if 'sumber' in top_case and pd.notna(top_case['sumber']) else 'Kompilasi LSM'
+            tk_link = top_case['detail_url'] if 'detail_url' in top_case and pd.notna(top_case['detail_url']) else '#'
+            import urllib.parse
+            search_query = urllib.parse.quote(f"{judul} {pt}")
+            link = f"https://www.google.com/search?q={search_query}"
 
             st.markdown(f"**Kasus Utama Pendongkrak Statistik: {judul}**")
             st.markdown(f"* **Total Daratan Dirampas (Kasus Ini):** {int(luas):,} Hektar")
             st.markdown(f"* **Perusahaan Terlibat:** {pt}")
             st.markdown(f"* **Narasi Singkat:** {narasi}")
-            st.markdown(f"* **Sumber Referensi:** [Lihat Detail Kasus TanahKita]({link})")
+            st.markdown(f"* **Sumber Referensi:** Laporan {sumber_lsm} ([Telusuri Berita Kasus]({link}) | [Link Asli TanahKita]({tk_link}))")
 
 st.subheader("4.3 Kriminalisasi Aktivis dan Resistensi Ruang Sipil")
 st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Analisis Agregat Kasus Represi & Pelanggaran HAM (Sumber: Database Tanah Kita)</span>', unsafe_allow_html=True)
