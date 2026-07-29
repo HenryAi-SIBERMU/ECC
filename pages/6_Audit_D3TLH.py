@@ -381,7 +381,7 @@ st.markdown("""
 <div style="background: #1E1E1E; padding: 20px; border-radius: 8px; border-left: 5px solid #F44336; margin-bottom: 30px;">
     <h3 style="color: #EF5350; margin-top: 0;">Kesimpulan Eksekutif</h3>
     <p style="color: #E0E0E0; font-size: 1.05rem; line-height: 1.6; margin-bottom: 0;">
-        D3TLH dan AMDAL telah gagal dan mati sebagai alat pelindung nyawa ruang hidup. Dokumen-dokumen perizinan tersebut telah mereduksi penderitaan manusia menjadi sekadar angka-angka spasial di atas kertas, berfungsi tak lebih dari "stempel birokrasi" untuk melegalkan pengrusakan ekologis secara sistematis.
+        Evaluasi empiris mengindikasikan perlunya perbaikan substansial dalam integrasi dokumen D3TLH dan AMDAL. Instrumen pengelolaan lingkungan perlu diperkuat agar mampu memetakan dampak akumulatif dan berfungsi sebagai pertimbangan yang lebih efektif dalam pengendalian perizinan investasi.
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -398,12 +398,12 @@ with col1:
             <div class="metric-label">DAYA TAMPUNG UDARA</div>
             <div class="metric-value" style="color: #E53935;">{skor_akumulasi_udara:.1f}</div>
             <div class="metric-desc">
-                <b>STATUS: DAYA TAMPUNG MELAMPAUI</b><br><br>
-                Lonjakan drastis persentase Kasus ISPA dan penyakit saluran pernapasan di lingkar tambang.
+                <b>STATUS: EVALUASI KUALITAS UDARA</b><br><br>
+                Analisis data menunjukkan korelasi antara aktivitas industri dan tren penyakit saluran pernapasan.
             </div>
         </div>
         <div class="metric-source">
-            <b>VONIS:</b> Kegagalan Deteksi Morbiditas Akumulatif<br>
+            <b>NOTE:</b> Perlu pengawasan lebih ketat terhadap emisi industri<br>
             <i>Kapasitas PLTU: {kapasitas_terkini:,.0f} MW / NO2 NASA: {no2_terkini:.2e} / Rasio ISPA: {rasio_anomali:.1f}x</i>
         </div>
     </div>
@@ -416,12 +416,12 @@ with col2:
             <div class="metric-label">DAYA TAMPUNG AIR</div>
             <div class="metric-value" style="color: #E53935;">{skor_akumulasi_air:.1f}</div>
             <div class="metric-desc">
-                <b>STATUS: DAYA TAMPUNG MELAMPAUI</b><br><br>
-                Penurunan drastis Indeks Kualitas Air dan hancurnya pesisir ditandai ledakan morbiditas air.
+                <b>STATUS: EVALUASI KUALITAS AIR</b><br><br>
+                Pemantauan Indeks Kualitas Air dan prevalensi penyakit berbasis air sebagai indikator lingkungan.
             </div>
         </div>
         <div class="metric-source">
-            <b>VONIS:</b> Kegagalan Pengukuran Toksisitas<br>
+            <b>NOTE:</b> Pentingnya penguatan standar pemantauan limbah<br>
             <i>IKA Sulteng: {ika_sulteng:.1f} / Kasus Diare: {kasus_diare_sentra:,.0f} / Konflik Air: {jumlah_konflik_air}</i>
         </div>
     </div>
@@ -439,12 +439,12 @@ with col3:
             <div class="metric-label">DAYA DUKUNG LAHAN</div>
             <div class="metric-value" style="color: #E53935;">{skor_akumulasi_lahan:.1f}</div>
             <div class="metric-desc">
-                <b>STATUS: KRISIS RUANG DARAT</b><br><br>
-                Hancurnya sabuk hijau memicu rentetan bencana hidrometeorologi parah.
+                <b>STATUS: EVALUASI TATA GUNA LAHAN</b><br><br>
+                Pemetaan dampak tutupan lahan terhadap risiko bencana hidrometeorologi.
             </div>
         </div>
         <div class="metric-source">
-            <b>VONIS:</b> Kegagalan Mengukur Efek Domino Lanskap<br>
+            <b>NOTE:</b> Perlu peninjauan tata ruang berbasis mitigasi bencana<br>
             <i>Bencana: {bencana_sulteng_sultra:,.0f} Kejadian / Deforestasi: {deforestasi_sentra:,.0f} Ha</i>
         </div>
     </div>
@@ -457,12 +457,12 @@ with col4:
             <div class="metric-label">DAYA DUKUNG SOSIAL</div>
             <div class="metric-value" style="color: #E53935;">{skor_akumulasi_sosial:.1f}</div>
             <div class="metric-desc">
-                <b>STATUS: DARURAT AGRARIA</b><br><br>
-                Eskalasi konflik perampasan lahan produktif dan represi aparat ke masyarakat sipil.
+                <b>STATUS: EVALUASI SOSIAL AGRARIA</b><br><br>
+                Pemantauan sengketa lahan dan dampaknya terhadap kesejahteraan masyarakat lokal.
             </div>
         </div>
         <div class="metric-source">
-            <b>VONIS:</b> Ilusi Jasa Budaya & Kedaulatan Ruang<br>
+            <b>NOTE:</b> Pentingnya pendekatan dialogis dalam kebijakan agraria<br>
             <i>Konflik Lahan: {konflik_darat} Kasus TanahKita</i>
         </div>
     </div>
@@ -475,12 +475,12 @@ with col5:
             <div class="metric-label">VETO KEBIJAKAN</div>
             <div class="metric-value" style="color: #E53935;">{skor_akumulasi_veto:.1f}</div>
             <div class="metric-desc">
-                <b>STATUS: REGULATORY CAPTURE</b><br><br>
-                Lonjakan IUP raksasa di saat indikator kesehatan & ekologi sudah menjerit merah.
+                <b>STATUS: EVALUASI PERIZINAN</b><br><br>
+                Peninjauan pemberian izin operasional industri dibandingkan dengan kapasitas ekologi.
             </div>
         </div>
         <div class="metric-source">
-            <b>VONIS:</b> Kegagalan Tata Kelola Negara<br>
+            <b>NOTE:</b> Penyelarasan izin dengan daya dukung lingkungan<br>
             <i>{izin_baru:,.0f} Izin Baru & {kapasitas_pltu/1000:,.1f} GW PLTU Captive Diloloskan</i>
         </div>
     </div>
@@ -494,15 +494,15 @@ st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=T
 # =====================================================================
 st.markdown("""
 <div class="content-box">
-<h2>1. Filosofi Audit Forensik (Sistem Alarm Rakyat)</h2>
+<h2>1. Kerangka Analisis Evaluasi D3TLH</h2>
 <p>
-AMDAL dan D3TLH pemerintah mengklaim bersifat "prediktif"—menilai batasan daya dukung alam <i>sebelum</i> izin diberikan. Namun, data lapangan membuktikan bahwa dokumen-dokumen tersebut secara sistematis cacat dan gagal melindungi ruang hidup masyarakat.
+AMDAL dan D3TLH dirancang bersifat prediktif untuk menilai batasan daya dukung lingkungan sebelum izin diterbitkan. Evaluasi empiris diperlukan untuk menilai efektivitas instrumen ini dalam meredam dampak lingkungan dan sosial di lapangan.
 </p>
 <p><b>Standpoint Riset ECC:</b><br>
-Kita melakukan <b>Pembuktian Terbalik</b>. Kita tidak perlu berdebat soal rumus "daya dukung spasial" milik konsultan korporasi. Fakta empiris bahwa <span class="highlight-text">kasus ISPA meroket, banjir bandang rutin terjadi, konflik berdarah bereskalasi, dan izin terus diobral secara anomali</span> adalah <b>Bukti Mutlak (Definitive Proof)</b> bahwa daya dukung ekologis dan sosial wilayah tersebut <b>SUDAH MELAMPAUI</b>.
+Pendekatan riset menggunakan <b>Evaluasi Berbasis Bukti Empiris</b>. Analisis menyandingkan indikator daya dukung spasial dengan indikator empiris seperti tren kesehatan masyarakat, kejadian bencana hidrometeorologi, dan dinamika sengketa lahan guna mengukur sejauh mana daya dukung ekologis dan sosial telah tertekan.
 </p>
 <p>
-Halaman ini merangkum semua indikator krisis menjadi sebuah palu godam untuk memvonis bahwa sistem AMDAL/D3TLH saat ini sekadar "stempel birokrasi" yang buta terhadap penderitaan manusia.
+Halaman ini merangkum indikator-indikator tersebut untuk memberikan rekomendasi perbaikan tata kelola lingkungan dan sistem perizinan.
 </p>
 </div>
 """, unsafe_allow_html=True)
@@ -603,17 +603,17 @@ with colA1:
     st.markdown(f"""
 <div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #E74C3C; height:100%;">
     <h4 style="color:#FFF; margin-top:0;">Audit D3TLH: Daya Tampung Udara</h4>
-    <p style="color:#BDC3C7; font-size:0.9rem;">"Daya tampung udara (berdasarkan peta tutupan lahan) diklaim masih luas dan mampu menyerap emisi."</p>
+    <p style="color:#BDC3C7; font-size:0.9rem;">"Daya tampung udara (berdasarkan peta tutupan lahan) dianalisis sebagai indikator kapasitas pemulihan emisi."</p>
     <hr style="border-color:#34495E;">
-    <h4 style="color:#E74C3C;">Fakta Forensik ECC:</h4>
-    <p style="color:#E0E0E0; font-size:0.9rem;">Lonjakan drastis persentase Kasus ISPA dan penyakit saluran pernapasan di lingkar tambang.</p>
+    <h4 style="color:#E74C3C;">Fakta Empiris:</h4>
+    <p style="color:#E0E0E0; font-size:0.9rem;">Data menunjukkan tren penyakit saluran pernapasan di sekitar kawasan industri.</p>
     <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E74C3C;">
-        <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Akumulasi Skor Kerusakan</div>
+        <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Skor Indikator Udara</div>
         <div style="font-size: 32px; font-weight: 800; color: #E74C3C; line-height: 1.2;">{skor_akumulasi_udara:.1f} <span style="font-size: 16px;">/ 10</span></div>
-        <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: DAYA TAMPUNG MELAMPAUI</div>
+        <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: PERLU PENGAWASAN</div>
     </div>
     <div style="background:#C0392B; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
-        VONIS: Kegagalan Deteksi Morbiditas Akumulatif
+        ANALISIS: Pemantauan Morbiditas Akumulatif
     </div>
 </div>
     """, unsafe_allow_html=True)
@@ -947,17 +947,17 @@ with colB1:
     st.markdown(f"""
 <div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #E74C3C; height:100%;">
 <h4 style="color:#FFF; margin-top:0;">Audit D3TLH: Daya Tampung Air</h4>
-<p style="color:#BDC3C7; font-size:0.9rem;">"Pembuangan tailing diizinkan selama beban cemaran sungai/laut masih secara teori mampu mengencerkan."</p>
+<p style="color:#BDC3C7; font-size:0.9rem;">"Daya tampung air diukur berdasarkan rasio pengenceran alami dan neraca kualitas air."</p>
 <hr style="border-color:#34495E;">
-<h4 style="color:#E74C3C;">Fakta Forensik ECC:</h4>
-<p style="color:#E0E0E0; font-size:0.9rem;">Penurunan drastis Indeks Kualitas Air dan hancurnya pesisir ditandai ledakan morbiditas air.</p>
+<h4 style="color:#E74C3C;">Fakta Empiris:</h4>
+<p style="color:#E0E0E0; font-size:0.9rem;">Indeks Kualitas Air dan prevalensi penyakit saluran pencernaan menunjukkan perlunya pengawasan kualitas air.</p>
 <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E74C3C;">
-<div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Akumulasi Skor Kerusakan</div>
+<div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Skor Indikator Air</div>
 <div style="font-size: 32px; font-weight: 800; color: #E74C3C; line-height: 1.2;">{skor_akumulasi_air:.1f} <span style="font-size: 16px;">/ 10</span></div>
-<div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: DAYA TAMPUNG MELAMPAUI</div>
+<div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: PERLU PENGAWASAN</div>
 </div>
 <div style="background:#C0392B; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
-VONIS: Kegagalan Pengukuran Toksisitas
+ANALISIS: Pemantauan Toksisitas dan Sanitasi
 </div>
 </div>
 """, unsafe_allow_html=True)
@@ -1066,17 +1066,17 @@ with colC1:
     st.markdown(f'''
     <div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #E74C3C; height:100%;">
         <h4 style="color:#FFF; margin-top:0;">Audit D3TLH: Daya Dukung Lahan</h4>
-        <p style="color:#BDC3C7; font-size:0.9rem;">"Daya dukung lahan dan tata air tanah dinilai aman secara matematis karena rasio ekoregion hutan dianggap masih mencukupi."</p>
+        <p style="color:#BDC3C7; font-size:0.9rem;">"Daya dukung lahan dianalisis berdasarkan kecukupan tutupan hutan dan batas fungsi kawasan."</p>
         <hr style="border-color:#34495E;">
-        <h4 style="color:#E74C3C;">Fakta Forensik ECC:</h4>
-        <p style="color:#E0E0E0; font-size:0.9rem;">Hancurnya sabuk hijau alam memicu rentetan bencana hidrometeorologi parah di lingkar tambang, menabrak batas fungsi kawasan lindung.</p>
+        <h4 style="color:#E74C3C;">Fakta Empiris:</h4>
+        <p style="color:#E0E0E0; font-size:0.9rem;">Perubahan tutupan lahan berpotensi memengaruhi laju bencana hidrometeorologi di kawasan industri.</p>
         <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E74C3C;">
-            <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Skor Kerusakan Lahan</div>
+            <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Skor Indikator Lahan</div>
             <div style="font-size: 32px; font-weight: 800; color: #E74C3C; line-height: 1.2;">{skor_akumulasi_lahan:.1f} <span style="font-size: 16px;">/ 10</span></div>
-            <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: KRISIS RUANG DARAT</div>
+            <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: PERLU PENGAWASAN</div>
         </div>
         <div style="background:#C0392B; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
-            VONIS: Kegagalan Menjaga Fungsi Lanskap
+            ANALISIS: Evaluasi Pengelolaan Lanskap
         </div>
     </div>
     ''', unsafe_allow_html=True)
@@ -1179,17 +1179,17 @@ with colD1:
     st.markdown(f'''
     <div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #E74C3C; height:100%;">
         <h4 style="color:#FFF; margin-top:0;">Audit D3TLH: Daya Dukung Sosial</h4>
-        <p style="color:#BDC3C7; font-size:0.9rem;">"Status kawasan dialokasikan untuk peruntukan tambang dengan klaim bahwa masyarakat telah memberikan persetujuan (FPIC) dalam sosialisasi amdal."</p>
+        <p style="color:#BDC3C7; font-size:0.9rem;">"Status kawasan dialokasikan untuk peruntukan industri dengan pelaksanaan konsultasi publik."</p>
         <hr style="border-color:#34495E;">
-        <h4 style="color:#E74C3C;">Fakta Forensik ECC:</h4>
-        <p style="color:#E0E0E0; font-size:0.9rem;">Alur penindasan terbukti jelas: Persetujuan dimanipulasi, ruang hidup jutaan hektar dirampas, dan penolakan dibungkam dengan bui.</p>
+        <h4 style="color:#E74C3C;">Fakta Empiris:</h4>
+        <p style="color:#E0E0E0; font-size:0.9rem;">Pentingnya transparansi dan pelibatan masyarakat lokal dalam penataan ruang dan perizinan.</p>
         <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E74C3C;">
-            <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Skor Kerusakan Sosial</div>
+            <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Skor Indikator Sosial</div>
             <div style="font-size: 32px; font-weight: 800; color: #E74C3C; line-height: 1.2;">{skor_akumulasi_sosial:.1f} <span style="font-size: 16px;">/ 10</span></div>
-            <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: KRISIS KEMANUSIAAN</div>
+            <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: PERLU PENGAWASAN</div>
         </div>
         <div style="background:#C0392B; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
-            VONIS: Ilusi Kedaulatan Ruang Warga
+            ANALISIS: Pelibatan Masyarakat Lokal
         </div>
     </div>
     ''', unsafe_allow_html=True)
@@ -1323,17 +1323,17 @@ with colE1:
     st.markdown(f'''
     <div style="background:#2C3E50; padding:20px; border-radius:10px; border-left:5px solid #E74C3C; height:100%;">
         <h4 style="color:#FFF; margin-top:0;">Audit D3TLH: Veto Kebijakan</h4>
-        <p style="color:#BDC3C7; font-size:0.9rem;">"Penyusunan D3TLH adalah dokumen sakti (veto) yang dapat membatasi izin eksploitasi jika daya dukung lingkungan telah terlampaui."</p>
+        <p style="color:#BDC3C7; font-size:0.9rem;">"Penyusunan D3TLH dirancang sebagai pertimbangan dalam membatasi izin eksploitasi."</p>
         <hr style="border-color:#34495E;">
-        <h4 style="color:#E74C3C;">Fakta Forensik ECC:</h4>
-        <p style="color:#E0E0E0; font-size:0.9rem;">Negara mengalami kelumpuhan tata kelola (Regulatory Capture). Izin diobral massal, perusahaan ilegal dibiarkan, dan infrastruktur energi kotor diloloskan di episentrum krisis.</p>
+        <h4 style="color:#E74C3C;">Fakta Empiris:</h4>
+        <p style="color:#E0E0E0; font-size:0.9rem;">Evaluasi menunjukkan pentingnya penguatan kepatuhan hukum dan efektivitas instrumen pengendalian perizinan.</p>
         <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E74C3C;">
-            <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Skor Kegagalan Tata Kelola</div>
+            <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Skor Pengendalian Izin</div>
             <div style="font-size: 32px; font-weight: 800; color: #E74C3C; line-height: 1.2;">{skor_akumulasi_veto:.1f} <span style="font-size: 16px;">/ 10</span></div>
-            <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: REGULATORY CAPTURE</div>
+            <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: PERLU REFORMASI</div>
         </div>
         <div style="background:#C0392B; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
-            VONIS: Kegagalan Supremasi Hukum
+            ANALISIS: Penguatan Pengawasan Kebijakan
         </div>
     </div>
     ''', unsafe_allow_html=True)

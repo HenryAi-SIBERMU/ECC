@@ -146,39 +146,39 @@ st.markdown(
     unsafe_allow_html=True,
 )
 st.markdown(
-    '<div class="sub-title">Membongkar tragedi kesehatan publik akibat paparan emisi dan polutan industri di kawasan penyangga smelter nikel Sulawesi.</div>',
+    '<div class="sub-title">Tinjauan empiris beban kesehatan masyarakat akibat paparan emisi dan polutan industri di kawasan penyangga smelter nikel Sulawesi.</div>',
     unsafe_allow_html=True,
 )
 
 # ── Dropdown Metodologi ──
 with st.expander("🔍 Metodologi", expanded=False):
     st.markdown("""
-    **Alur Kausalitas (Ekonomi Politik Ekologi):** `Konsentrasi Industri Ekstraktif` → `Penurunan Kualitas Daya Dukung Lingkungan` → `Lonjakan Kasus Penyakit (ISPA, Diare) & Ketimpangan Faskes`
+    **Alur Kausalitas (Ekonomi Politik Ekologi):** `Konsentrasi Industri Ekstraktif` → `Penurunan Kualitas Daya Dukung Lingkungan` → `Peningkatan Insidensi Penyakit (ISPA, Diare) & Ketimpangan Faskes`
 
-    Ekspansi industri ekstraktif secara absolut merebut hak atas kesehatan warga. Pemuatan polutan langsung ke zona pernapasan dan sumber air memicu epidemi penyakit respiratori dan infeksi saluran pencernaan yang meluas, diperparah oleh ketimpangan ketersediaan fasilitas kesehatan.
+    Ekspansi industri ekstraktif berpotensi memengaruhi kualitas lingkungan hidup masyarakat setempat. Pembuangan polutan ke udara ambien dan badan air berkorelasi dengan peningkatan insidensi penyakit respiratori dan infeksi saluran pencernaan, yang diperparah oleh ketimpangan distribusi fasilitas kesehatan.
 
     **Variabel Dampak Kesehatan (Y):**
     *   **ISPA/Pneumonia:** Penyakit pernapasan akibat paparan debu dan sulfur.
     *   **Diare & Penyakit Menular (Malaria/Kusta):** Dampak pencemaran air dan buruknya sanitasi di lingkar tambang.
-    *   **Ketersediaan Fasilitas Kesehatan:** Kesenjangan infrastruktur medis (Puskesmas & Rumah Sakit) menghadapi lonjakan pasien.
+    *   **Ketersediaan Fasilitas Kesehatan:** Kesenjangan infrastruktur medis (Puskesmas & Rumah Sakit) terhadap pertumbuhan beban kasus penyakit.
 
     **Metode Pengolahan Data:**
-    Analisis menggunakan *Cross-sectional* dan *Time-Series*. Menggabungkan dataset *survey* dinas kesehatan dan ketersediaan layanan publik untuk membuktikan bahwa di mana ekspansi energi kotor (PLTU) melonjak, masyarakat menanggung beban kesakitan yang masif dengan fasilitas medis yang terbatas.
+    Analisis menggunakan *Cross-sectional* dan *Time-Series*. Menggabungkan dataset *survey* dinas kesehatan dan ketersediaan layanan publik untuk menganalisis korelasi antara pertumbuhan kapasitas PLTU *captive* dan peningkatan beban penyakit di masyarakat dengan ketersediaan fasilitas medis yang terbatas.
     """)
 
 # ── Hero Statement (Narasi Kritis Utama) ──
 st.markdown(
     f"""
 <div style="background-color: transparent; padding: 10px 0px; margin-bottom: 25px;">
-    <h2 style="color: #FFFFFF; font-size: 1.8rem; margin-bottom: 15px; font-weight: 700;">Hilirisasi yang Dibayar dengan Nyawa: Menggugat Mitos Pertumbuhan Hijau</h2>
+    <h2 style="color: #FFFFFF; font-size: 1.8rem; margin-bottom: 15px; font-weight: 700;">Hilirisasi Nikel dan Dampak Kesehatan: Analisis Data Empiris di Kawasan Penyangga</h2>
     <p style="color: #CCCCCC; font-size: 1.05rem; line-height: 1.7; margin-bottom: 15px; text-align: justify;">
-        Mitos besar tentang "Hilirisasi Hijau" kembali terbantahkan secara telak ketika kita membedah realitas beban kesehatan di level tapak. Janji kemakmuran ekonomi dari proyek nikel dan kendaraan listrik global nyatanya harus dibayar sangat mahal dengan hancurnya paru-paru dan kelangsungan hidup masyarakat di Pulau Sulawesi. Angka pertumbuhan PDRB yang sering dibanggakan secara nasional sama sekali gagal menyembunyikan tragedi kemanusiaan yang sedang terhampar di wilayah lingkar tambang. Selama satu dekade terakhir, kabut asap beracun, debu batu bara yang pekat, dan limbah buangan tailing dari fasilitas ekstraktif telah mengubah ruang hidup masyarakat sipil menjadi zona merah darurat kesehatan kronis yang tak kunjung pulih. Data empiris secara gamblang merekam bagaimana ekspansi ruang industri, yang secara sistemik ditopang oleh pembakaran masif energi kotor dari PLTU <i>captive</i> berkapasitas mencapai <b>{tot_kapasitas_pltu:,.0f} Megawatt</b>, berjalan sejajar dengan ledakan wabah penyakit yang mematikan di kawasan-kawasan penyangga.
+        Data empiris menggambarkan kesenjangan antara klaim pertumbuhan ekonomi dari ekspansi industri nikel dan kondisi kesehatan masyarakat di kawasan penyangga. Selama satu dekade terakhir, emisi partikulat, gas buang PLTU batu bara, dan timbulan limbah dari fasilitas ekstraktif telah memberikan tekanan signifikan terhadap kualitas lingkungan hidup masyarakat. Data empiris merekam bagaimana ekspansi kapasitas industri, yang ditopang oleh PLTU <i>captive</i> berkapasitas <b>{tot_kapasitas_pltu:,.0f} Megawatt</b>, berjalan sejajar dengan peningkatan kasus penyakit di kawasan-kawasan penyangga.
     </p>
     <p style="color: #CCCCCC; font-size: 1.05rem; line-height: 1.7; margin-bottom: 15px; text-align: justify;">
-        Fakta lapangan membuktikan bahwa krisis ini bukanlah sekadar ekses yang tidak disengaja. Sejak tahun 2014 hingga 2024, akumulasi kejadian luar biasa penyakit <b>ISPA dan Pneumonia telah menyentuh angka yang sangat fantastis, yakni sebanyak {tot_ispa:,.0f} kasus</b>. Sementara itu, penyakit infeksi saluran pencernaan yang ditransmisikan melalui lingkungan dan sumber air yang tercemar berat, seperti <b>Diare, telah melampaui {tot_diare:,.0f} kasus kejadian</b>. Eskalasi angka kesakitan yang mengerikan ini berkorelasi secara langsung dengan merosotnya Indeks Kualitas Air (IKA) yang kian memburuk. Lebih parah lagi, pembongkaran tutupan hutan yang brutal untuk perluasan konsesi tambang telah menghancurkan benteng pelindung habitat alami satwa liar. Hal ini memicu terjadinya <i>spillover</i> atau perpindahan vektor penyakit zoonosis ke pemukiman warga. Tercatat, wabah <b>Malaria meledak secara eksponensial hingga menembus {tot_malaria:,.0f} kasus</b>, memberikan konfirmasi empiris bahwa disrupsi keseimbangan ekologis di wilayah tambang menciptakan ceruk reservoir mematikan.
+        Sepanjang 2014–2024, data agregat dinas kesehatan mencatat total <b>kasus ISPA dan Pneumonia sebanyak {tot_ispa:,.0f} kasus</b>. Sementara itu, <b>kasus Diare tercatat sebanyak {tot_diare:,.0f} kasus</b>. Peningkatan insidensi penyakit ini berkorelasi dengan penurunan Indeks Kualitas Air (IKA) secara periodik. Konversi tutupan hutan untuk perluasan konsesi tambang turut berkontribusi pada pergeseran habitat satwa liar, yang berpotensi memicu perpindahan vektor penyakit zoonosis ke permukiman warga. Secara kumulatif, <b>kasus Malaria tercatat mencapai {tot_malaria:,.0f} kasus</b>, mengindikasikan tekanan terhadap keseimbangan ekologis di wilayah tambang.
     </p>
     <p style="color: #CCCCCC; font-size: 1.05rem; line-height: 1.7; text-align: justify;">
-        Tragedi kesehatan publik yang terus-menerus memakan korban ini merupakan bentuk nyata dari kekerasan struktural (<i>structural violence</i>) yang dilembagakan oleh negara. Ketika pemerintah dan oligarki jor-joran memberikan insentif pajak tanpa batas bagi korporasi multinasional, mereka justru sepenuhnya absen dalam mendistribusikan layanan pemulihan medis dasar yang proporsional. Di sepanjang wilayah episentrum tambang tersebut, rasio ketahanan infrastruktur medis terbukti sangat timpang, di mana ketersediaan fasilitas layanan tingkat pertama seperti <b>Puskesmas hanya dibiarkan tertahan pada {tot_puskesmas_2022:,.0f} unit</b> di tahun 2022. Realitas pahit ini mengonfirmasi satu kesimpulan absolut yang tak terelakkan: bahwa transisi energi global saat ini sedang disubsidi oleh nyawa, paru-paru, dan darah rakyat sipil lokal yang secara paksa ditumbalkan di atas altar rantai pasok nikel (<i>sacrifice zone</i>).
+        Distribusi infrastruktur kesehatan di wilayah industri menunjukkan kesenjangan yang perlu menjadi perhatian. Ketersediaan fasilitas layanan primer seperti <b>Puskesmas tercatat sebanyak {tot_puskesmas_2022:,.0f} unit</b> pada tahun 2022, di kawasan yang bersamaan menanggung beban penyakit di atas rata-rata. Kondisi ini mengindikasikan bahwa pertumbuhan ekonomi dari hilirisasi nikel belum diimbangi dengan distribusi infrastruktur kesehatan yang proporsional bagi masyarakat di wilayah operasi industri (<i>sacrifice zone</i>).
     </p>
 </div>
 """,
@@ -194,7 +194,7 @@ with col1:
         <div>
             <div class="metric-label">Total Kasus ISPA/Pneumonia</div>
             <div class="metric-value" style="color: #B71C1C;">{tot_ispa:,.0f}</div>
-            <div class="metric-desc">Penyakit pernapasan meroket drastis akibat paparan kronis debu batu bara dan emisi SO2 dari cerobong <i>smelter</i>.</div>
+            <div class="metric-desc">Penyakit pernapasan yang meningkat secara konsisten, seiring paparan kronis debu batu bara dan emisi SO₂ dari cerobong <i>smelter</i>.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> Data Agregat Dinas Kesehatan (2014-2024)<br/><i>File: sulawesi_kesehatan_detail_2014_2024.csv</i></div>
     </div>
@@ -209,7 +209,7 @@ with col2:
         <div>
             <div class="metric-label">Total Kasus Diare</div>
             <div class="metric-value" style="color: #F4511E;">{tot_diare:,.0f}</div>
-            <div class="metric-desc">Infeksi saluran pencernaan yang membludak seiring rusaknya sumber air tanah dan sungai oleh buangan tailing tambang.</div>
+            <div class="metric-desc">Infeksi saluran pencernaan yang tercatat tinggi, seiring degradasi kualitas sumber air tanah dan badan air akibat limbah tailing tambang.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> Data Agregat Dinas Kesehatan (2014-2024)<br/><i>File: sulawesi_kesehatan_detail_2014_2024.csv</i></div>
     </div>
@@ -224,7 +224,7 @@ with col3:
         <div>
             <div class="metric-label">Total Kasus Malaria</div>
             <div class="metric-value" style="color: #C62828;">{tot_malaria:,.0f}</div>
-            <div class="metric-desc">Penyakit vektor endemis yang bermutasi parah seiring maraknya kubangan bekas tambang yang dibiarkan menganga.</div>
+            <div class="metric-desc">Penyakit vektor endemis dengan kecenderungan meningkat, berkorelasi dengan keberadaan genangan air bekas galian tambang yang tidak direklamasi.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> Data Agregat Dinas Kesehatan (2014-2024)<br/><i>File: sulawesi_kesehatan_detail_2014_2024.csv</i></div>
     </div>
@@ -243,7 +243,7 @@ with col4:
         <div>
             <div class="metric-label">Rasio Puskesmas Terdaftar (2022)</div>
             <div class="metric-value" style="color: #FF8A65;">{tot_puskesmas_2022:,.0f} <span style="font-size:1rem;">Unit</span></div>
-            <div class="metric-desc">Fasilitas primer warga yang tumbuh stagnan dan gagal mengimbangi lonjakan beban pasien akibat penyakit industri.</div>
+            <div class="metric-desc">Fasilitas primer warga yang pertumbuhannya tidak sebanding dengan peningkatan beban kasus penyakit di wilayah industri.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> BPS Ketersediaan Faskes<br/><i>File: sulawesi_faskes_agregat_v2.csv</i></div>
     </div>
@@ -258,7 +258,7 @@ with col5:
         <div>
             <div class="metric-label">Rasio Rumah Sakit (2022)</div>
             <div class="metric-value" style="color: #FFAB91;">{tot_rs_2022:,.0f} <span style="font-size:1rem;">Unit</span></div>
-            <div class="metric-desc">Ketersediaan rumah sakit yang timpang di wilayah timur, mencerminkan ketidakpedulian proteksi kesehatan korporasi.</div>
+            <div class="metric-desc">Ketersediaan rumah sakit yang tidak merata di wilayah timur, mengindikasikan belum optimalnya distribusi infrastruktur medis.</div>
         </div>
         <div class="metric-source"><b>Sumber:</b> BPS Ketersediaan Faskes<br/><i>File: sulawesi_faskes_agregat_v2.csv</i></div>
     </div>
@@ -361,9 +361,9 @@ rs_non = df_gap[
 ]["jumlah"].values[0]
 
 st.markdown(f"""
-Mitos bahwa masuknya investasi smelter akan membawa *trickle-down effect* (efek tetesan ke bawah) berupa perbaikan infrastruktur publik, **terbantahkan secara absolut oleh data**. Melalui komparasi grafik batang (*Grouped Bar Chart*) di bawah, kita bisa membaca secara mudah dan gamblang bahwa ketersediaan Fasilitas Kesehatan di provinsi yang dieksploitasi jutru mengalami defisit.
+Data perbandingan distribusi fasilitas kesehatan mengindikasikan bahwa ketersediaan infrastruktur medis di provinsi sentra industri relatif tidak lebih baik dibandingkan wilayah non-sentra, meski beban penyakit di wilayah tersebut lebih tinggi.
 
-Saat rata-rata kasus ISPA dan Diare di Sentra Industri menembus dua kali lipat lebih tinggi (berdasarkan grafik di bawah), infrastruktur penunjang kehidupan mereka justru jauh tertinggal. Rata-rata Rumah Sakit di Sentra Industri hanya berjumlah **{rs_sentra:.0f} unit** per provinsi, tertinggal jauh dari wilayah Non-Sentra yang mencapai **{rs_non:.0f} unit**. Defisit absolut fasilitas medis di episentrum ekstraksi dan ledakan penyakit ini adalah bentuk kekerasan struktural: negara dan korporasi mengekspor polusi, namun absen dalam menyediakan infrastruktur keselamatan warga.
+Melalui komparasi grafik batang (*Grouped Bar Chart*) di bawah, terlihat bahwa ketersediaan Fasilitas Kesehatan di provinsi dengan konsentrasi industri tinggi justru mengalami defisit relatif. Rata-rata Rumah Sakit di Sentra Industri tercatat **{rs_sentra:.0f} unit** per provinsi, lebih rendah dari wilayah Non-Sentra yang mencapai **{rs_non:.0f} unit**. Kesenjangan distribusi fasilitas medis di area dengan beban penyakit tinggi ini perlu menjadi pertimbangan dalam perencanaan infrastruktur kesehatan ke depan.
 """)
 
 st.plotly_chart(fig_3_2, use_container_width=True, config={'displayModeBar': False})
@@ -461,9 +461,9 @@ ispa_non = df_agg[
 ispa_diff = ispa_sentra / ispa_non
 
 st.markdown(f"""
-Jika kita membongkar mitos hilirisasi menggunakan pisau analisis komparatif spasial sesuai pedoman evaluasi D3TLH, terlihat jelas bahwa beban ekologis tidak ditanggung secara merata. Provinsi yang menjadi episentrum ekspansi nikel—yaitu Sulawesi Tengah dan Sulawesi Tenggara—secara de facto telah dijadikan **zona tumbal (*sacrifice zones*)** bagi polusi yang mematikan.
+Melalui analisis komparatif spasial, terlihat bahwa beban ekologis tidak terdistribusi secara merata di seluruh wilayah. Provinsi sentra ekspansi nikel—Sulawesi Tengah dan Sulawesi Tenggara—menunjukkan indikator penyakit yang secara konsisten lebih tinggi.
 
-Data secara absolut membuktikan bahwa rata-rata penderita **ISPA/Pneumonia** di Sentra Industri menembus angka **{ispa_sentra:,.0f} kasus per tahun**, jauh melampaui provinsi Non-Sentra yang rata-ratanya hanya berada di angka **{ispa_non:,.0f} kasus**. Ini berarti warga di kawasan penyangga *smelter* terpaksa menanggung risiko kesakitan pernapasan hingga **{ispa_diff:.1f} kali lipat** lebih mematikan setiap tahunnya dibandingkan provinsi tetangganya. Temuan ini secara telak memvalidasi hipotesis kerangka riset D3TLH: wilayah konsentrasi industri mutlak mengekspor beban kesehatan yang menghancurkan kepada masyarakat lokal akibat proses ekstraksi yang rakus dan mengabaikan daya tampung lingkungan.
+Data menunjukkan bahwa rata-rata penderita **ISPA/Pneumonia** di Sentra Industri tercatat **{ispa_sentra:,.0f} kasus per tahun**, dibandingkan provinsi Non-Sentra di angka **{ispa_non:,.0f} kasus**. Selisih sebesar **{ispa_diff:.1f} kali lipat** ini mengindikasikan beban pernapasan yang lebih berat di kawasan penyangga *smelter*. Temuan ini mendukung hipotesis kerangka riset D3TLH: wilayah dengan konsentrasi industri tinggi cenderung menanggung beban kesehatan yang lebih besar akibat tekanan terhadap daya tampung lingkungan.
 """)
 
 st.plotly_chart(fig_3_1, use_container_width=True, config={'displayModeBar': False})
@@ -477,7 +477,7 @@ with st.expander("Lihat Data Mentah: Komparasi Kasus per Provinsi", expanded=Fal
 st.markdown(
     """
 <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #FF5722; margin-bottom: 25px;">
-    <b>Interpretasi Ekologis:</b> Ketimpangan statistik absolut ini mengonfirmasi bahwa keuntungan triliunan rupiah dari hilirisasi nikel tidak dikembalikan dalam bentuk proteksi ruang hidup, melainkan justru diiringi dengan konsentrasi epidemiologis yang mengakar di area operasi korporasi ekstraktif.
+    <b>Interpretasi Ekologis:</b> Kesenjangan statistik ini mengindikasikan bahwa manfaat ekonomi dari hilirisasi nikel belum disertai perbaikan infrastruktur kesehatan yang proporsional di wilayah operasi industri ekstraktif.
 </div>
 """,
     unsafe_allow_html=True,
@@ -489,7 +489,7 @@ st.markdown(
 # ══════════════════════════════════════════════════════════
 st.markdown("---")
 st.markdown(
-    '<h2 style="color: #ECEFF1; font-size: 24px;">3.3 Lintasan Waktu Ekologis & Ledakan Penyakit di Kawasan Industri Ekstraktif</h2>',
+    '<h2 style="color: #ECEFF1; font-size: 24px;">3.3 Lintasan Waktu Ekologis &amp; Dinamika Penyakit di Kawasan Industri Ekstraktif</h2>',
     unsafe_allow_html=True,
 )
 st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Time-Series Line Chart & Crosstabulation</span>', unsafe_allow_html=True)
@@ -497,11 +497,11 @@ st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
 with st.expander("ℹ️ Metodologi: Time-Series Line Chart & Crosstabulation"):
     st.markdown("""
-    **Metode Analisis:** Sub-bab ini menggunakan visualisasi runtut waktu (Time-Series) dan uji silang (Crosstabulation) secara interaktif untuk merunut letupan insiden penyakit sejalan dengan akumulasi polusi tahunan.
+    **Metode Analisis:** Sub-bab ini menggunakan visualisasi runtut waktu (Time-Series) dan uji silang (Crosstabulation) secara interaktif untuk merunut dinamika insiden penyakit sejalan dengan akumulasi polusi tahunan.
 
     1. **Uji Trend Historis & Proporsi Tabulasi Silang:**
         * **Time-Series Tracking:** Mengkonversi absolute numbers ke rasio per kapita (Kasus per 10.000 Penduduk) untuk menghilangkan bias jumlah populasi antar wilayah.
-        * `H0 (Null Hypothesis): Penurunan kualitas lingkungan (IKU/IKA) tidak berkorelasi dengan kenaikan ledakan penyakit pernapasan dan pencernaan.`
+        * `H0 (Null Hypothesis): Penurunan kualitas lingkungan (IKU/IKA) tidak berkorelasi dengan peningkatan insidensi penyakit pernapasan dan pencernaan.`
         * `Decision Rule: Chi-Square P-Value < 0.05 (Tolak H0) dan kalkulasi Odds Ratio.`
     2. **Kalkulasi/Formula Pengolahan:** Rasio keparahan per kapita dan agregasi tabel silang panel.
         * `Insiden_Per_10K = (Total_Kasus / Total_Populasi) * 10,000`
@@ -609,7 +609,7 @@ tab_norm, tab_abs, tab_alt = st.tabs(["Insiden per 10.000 Penduduk", "Total Kasu
 with tab_norm:
     fig_norm = create_ts_chart(df_ts_filtered, "rate_per_10k", "Insiden per 10.000 Penduduk", hover_format=",.0f")
     st.plotly_chart(fig_norm, use_container_width=True, config={'displayModeBar': False})
-    st.info("**Insight Ekologis:** Grafik di atas membagi jumlah kasus terhadap total populasi, menampilkan **beban per kapita (rasio keparahan)** yang sesungguhnya. Terlihat jelas bahwa rasio kesakitan di kawasan Sentra Industri (garis merah tebal) jauh lebih kritis dan meroket secara struktural melampaui wilayah Non-Sentra.", icon=None)
+    st.info("**Insight Ekologis:** Grafik di atas membagi jumlah kasus terhadap total populasi, menampilkan **beban per kapita (rasio keparahan)** yang sesungguhnya. Terlihat jelas bahwa rasio kesakitan di kawasan Sentra Industri (garis merah tebal) lebih tinggi secara konsisten dibandingkan wilayah Non-Sentra.", icon=None)
 
 with tab_abs:
     fig_abs = create_ts_chart(df_ts_filtered, "nilai", "Total Kasus (Angka Absolut)")
@@ -636,7 +636,7 @@ with tab_alt:
         legend=dict(title="", orientation="v", yanchor="top", y=1, xanchor="left", x=1.02)
     )
     st.plotly_chart(fig_bar, use_container_width=True, config={'displayModeBar': False})
-    st.info("**Interpretasi Data:** Proporsi beban kesakitan di wilayah Sentra Industri (blok warna merah) secara konsisten mendominasi dan semakin menebal dari tahun ke tahun. Akumulasi ini membuktikan bahwa ekspansi masif kawasan industri secara langsung memicu krisis kesehatan struktural yang masif bagi masyarakat di lingkar tambang.", icon=None)
+    st.info("**Interpretasi Data:** Proporsi beban kesakitan di wilayah Sentra Industri (blok warna merah) secara konsisten mendominasi dan semakin menebal dari tahun ke tahun. Akumulasi ini menunjukkan bahwa ekspansi kawasan industri berkorelasi dengan peningkatan beban kesehatan masyarakat di lingkar tambang.", icon=None)
 
 with st.expander(f"Lihat Data Panel: {selected_indikator}", expanded=False):
     df_ts_pivot = df_ts_filtered.pivot_table(
@@ -648,9 +648,9 @@ with st.expander(f"Lihat Data Panel: {selected_indikator}", expanded=False):
     )
 
 # --- Crosstab Introduction ---
-st.markdown("#### Pembuktian Statistik: Penurunan Kualitas Udara vs Ledakan Penyakit")
+st.markdown("#### Uji Statistik: Asosiasi Kualitas Udara (IKU) dengan Insidensi Penyakit")
 st.markdown("""
-Hipotesis utama narasi ini adalah bahwa **penurunan kualitas udara ambien (IKU)** berbanding lurus dengan **ledakan penyakit pernapasan dan lingkungan** (seperti ISPA dan Diare).
+Hipotesis utama narasi ini adalah bahwa **penurunan kualitas udara ambien (IKU)** berbanding lurus dengan **peningkatan insidensi penyakit pernapasan dan lingkungan** (seperti ISPA dan Diare).
 Untuk mengujinya secara statistik di tengah keterbatasan jumlah provinsi di Sulawesi (N=6), tabel crosstab dan uji Chi-Square di bawah menggunakan unit observasi **Provinsi-Tahun** (6 provinsi × 10 tahun = 60 sampel panel).
 Setiap observasi diklasifikasikan menjadi "Tinggi" atau "Rendah" berdasarkan nilai **Median panel** dari indikator yang dipilih.
 """)
@@ -855,9 +855,9 @@ with col_res1:
 
 with col_res2:
     if is_significant:
-        interp_text = f"Temuan ini sangat krusial: lonjakan intensitas {x_options[x_col]} terbukti **berkorelasi kuat dan signifikan** dengan peningkatan {y_options[y_col]} (OR: {odds_ratio:.3f}). Ini adalah konfirmasi empiris bahwa narasi hilirisasi dan investasi ekstraktif bukanlah pertumbuhan tanpa korban—ekspansi spasial mereka mutlak mengorbankan luasan hutan di tingkat tapak."
+        interp_text = f"Temuan ini mengindikasikan: penurunan intensitas {x_options[x_col]} terbukti **berkorelasi kuat dan signifikan** dengan peningkatan {y_options[y_col]} (OR: {odds_ratio:.3f}). Ini menunjukkan korelasi yang nyata antara tekanan ekologis dan beban penyakit di masyarakat."
     else:
-        interp_text = f"Secara agregat, hubungan antara {x_options[x_col]} dan {y_options[y_col]} **tidak signifikan** secara statistik (P ≥ 0.05). Ini mengindikasikan bahwa deforestasi terjadi sangat masif di seluruh panel waktu dan ruang secara merata. Krisis tata kelola dan deforestasi telah menyebar ke seluruh wilayah, sehingga lonjakan izin di tahun tertentu tidak lagi menjadi prediktor tunggal atas ledakan penyakit pernapasan dan lingkungan yang sudah sistemik."
+        interp_text = f"Secara agregat, hubungan antara {x_options[x_col]} dan {y_options[y_col]} **tidak signifikan** secara statistik (P ≥ 0.05). Ini mengindikasikan bahwa degradasi ekologis telah berlangsung secara merata di seluruh panel waktu dan ruang, sehingga penambahan izin di tahun tertentu tidak lagi menjadi prediktor tunggal atas peningkatan insidensi penyakit pernapasan dan lingkungan yang sudah meluas."
 
     st.markdown(
         f"""
@@ -938,15 +938,15 @@ import textwrap
 if sig_count > 0:
     exec_narrative = textwrap.dedent(f"""\
 Dari <b>{total_scenarios} skenario pengujian</b>, terdapat <b>{sig_count} skenario yang terbukti SIGNIFIKAN</b>.<br><br>
-Angka-angka pada tabel di atas bukan sekadar statistik di atas kertas, melainkan <b>bukti empiris</b> dari daya rusak kebijakan. Tingginya <i>Odds Ratio</i> pada skenario yang signifikan menegaskan bahwa setiap kali kran perizinan atau luas konsesi diperlebar, risiko terjadinya deforestasi melonjak berkali-kali lipat.<br><br>
-Menariknya, jika ada skenario yang menunjukkan <i>TIDAK SIGNIFIKAN</i> (khususnya pada deforestasi komoditas spesifik), ini tidak berarti industri ekstraktif ramah lingkungan. Sebaliknya, ini menjadi indikasi mengerikan bahwa <b>kehancuran ekologis telah menyebar tak terkendali (spillover effect)</b>—di mana kerusakan hutan akibat operasi tambang menjalar jauh melampaui batas konsesi resmi komoditasnya hingga merusak total lanskap alam secara merata.\
+Tingginya <i>Odds Ratio</i> pada skenario yang signifikan menegaskan bahwa penurunan kualitas lingkungan berasosiasi dengan peningkatan risiko beban penyakit.<br><br>
+Jika terdapat skenario yang menunjukkan <i>TIDAK SIGNIFIKAN</i>, ini mengindikasikan bahwa <b>dampak ekologis dari operasi industri telah tersebar secara meluas (spillover effect)</b> di mana dampak lingkungan menjalar melampaui area operasi langsung.\
     """)
     bg_color = "rgba(229, 57, 53, 0.15)"
     border_color = "#E53935"
 else:
     exec_narrative = textwrap.dedent(f"""\
 Dari <b>{total_scenarios} skenario pengujian</b>, seluruhnya menunjukkan status <b>TIDAK SIGNIFIKAN</b>.<br><br>
-Dalam kacamata ekonomi politik ekologi, ketidaksignifikanan secara agregat ini justru merupakan <b>sinyal bahaya tertinggi</b>. Ini membuktikan bahwa deforestasi dan ledakan penyakit pernapasan dan lingkungan telah terjadi secara <i>brutal dan merata</i> di seluruh provinsi dan waktu. Ekstraksi ruang telah mencapai titik <i>saturation</i> (jenuh), sehingga penambahan izin di satu titik tidak lagi menjadi satu-satunya penyebab, melainkan seluruh sistem tata kelola telah gagal melindungi lanskap tersisa.\
+Dalam perspektif analisis ekologis, ketidaksignifikanan secara agregat ini mengindikasikan bahwa penurunan kualitas lingkungan dan peningkatan beban penyakit telah terjadi secara <i>merata dan persisten</i> di seluruh wilayah. Penambahan aktivitas industri di satu titik berkorelasi dengan tekanan lingkungan yang sudah merata secara sistemik.\
     """)
     bg_color = "rgba(255, 152, 0, 0.15)"
     border_color = "#FF9800"
@@ -1037,12 +1037,12 @@ if not df_zoonosis.empty:
             if not df_p.empty and df_p["total_kasus"].max() > 0:
                 max_row = df_p.loc[df_p["total_kasus"].idxmax()]
                 peaks.append(
-                    f"<b>{p}</b> memuncak pada <b>{max_row['total_kasus']:,.0f} kasus</b> di {max_row['kabupaten_kota'].title()} ({max_row['tahun']})"
+                    f"<b>{p}</b> mencatatkan insidensi tertinggi <b>{max_row['total_kasus']:,.0f} kasus</b> di {max_row['kabupaten_kota'].title()} ({max_row['tahun']})"
                 )
 
         if len(peaks) > 1:
             peak_narrative = (
-                " Jika dibedah berdasarkan keparahan endemiknya, rekor lonjakan menembus batas kritis ekologis: "
+                " Rincian insidensi tertinggi menurut jenis penyakit meliputi: "
                 + ", ".join(peaks[:-1])
                 + ", serta "
                 + peaks[-1]
@@ -1050,7 +1050,7 @@ if not df_zoonosis.empty:
             )
         elif len(peaks) == 1:
             peak_narrative = (
-                " Jika dibedah lebih dalam, rekor lonjakan menembus batas kritis: "
+                " Rincian insidensi tertinggi meliputi: "
                 + peaks[0]
                 + "."
             )
@@ -1058,13 +1058,13 @@ if not df_zoonosis.empty:
     st.markdown(
         f"""
     <p style="color:#E0E0E0; font-size: 1rem; line-height: 1.6; text-align: justify; margin-top: 20px;">
-        Mitos "Hilirisasi Hijau" kembali terbantahkan secara telak ketika kita membedah realitas beban kesehatan di level tapak. Data empiris Dinas Kesehatan mencatat total akumulasi <b>{total_kasus_tambang:,.0f} kasus</b> penyakit Zoonosis meledak di wilayah Lingkar Tambang/Smelter Aktif Sulawesi Tengah (Morowali, Morowali Utara, Banggai) sepanjang rentang waktu pengamatan.{peak_narrative}
+        Data empiris Dinas Kesehatan mencatat total akumulasi <b>{total_kasus_tambang:,.0f} kasus</b> penyakit Zoonosis di wilayah Lingkar Tambang/Smelter Aktif Sulawesi Tengah (Morowali, Morowali Utara, Banggai) sepanjang rentang waktu pengamatan.{peak_narrative}
     </p>
     <p style="color:#E0E0E0; font-size: 1rem; line-height: 1.6; text-align: justify;">
-        Lonjakan eksponensial angka zoonosis ini bukanlah sebuah kebetulan matematis, melainkan konsekuensi logis dari perusakan keseimbangan ekologis yang masif. Pembongkaran tutupan hutan secara brutal demi perluasan konsesi dan fasilitas pengolahan <i>smelter</i> telah menghancurkan habitat alami satwa liar. Akibatnya, vektor pembawa penyakit terpaksa bermigrasi dan beririsan langsung dengan pemukiman padat pekerja tambang. Lebih parah lagi, maraknya kubangan raksasa sisa galian tambang yang tidak direklamasi dan buruknya sanitasi di barak-barak pekerja telah menciptakan <i>reservoir</i> ekologis raksasa yang menjadi tempat perkembangbiakan ideal bagi vektor penyakit mematikan.
+        Peningkatan angka zoonosis ini berkorelasi dengan perubahan ekologis akibat ekspansi penggunaan lahan. Konversi tutupan hutan demi perluasan konsesi dan fasilitas pengolahan <i>smelter</i> berdampak pada pergeseran habitat alami satwa liar. Akibatnya, vektor pembawa penyakit terpaksa bermigrasi dan beririsan langsung dengan pemukiman pekerja tambang dan warga lokal. Keberadaan genangan air galian tambang yang tidak direklamasi serta kondisi sanitasi di area industri turut menjadi faktor pendukung perkembangbiakan vektor penyakit.
     </p>
     <p style="color:#E0E0E0; font-size: 1rem; line-height: 1.6; text-align: justify;">
-        Investasi bernilai triliunan rupiah di sektor ekstraktif terbukti gagal mentransmisikan perlindungan sosial, dan justru mensubsidi biaya perusakannya kepada masyarakat lokal dalam bentuk krisis kesehatan publik yang akut. Penduduk asli dan buruh tambang kini harus menanggung beban berlapis: menghirup udara yang dipekati oleh debu batu bara <i>captive power plant</i>, sembari dihantui ancaman wabah menular akibat hancurnya daya dukung lingkungan primer. Ini adalah bukti tak terbantahkan dari praktik zona tumbal (<i>sacrifice zone</i>) yang mengorbankan ruang hidup lokal demi melumasi rantai pasok global.
+        Pertumbuhan investasi di sektor ekstraktif belum diimbangi dengan alokasi perlindungan sosial dan lingkungan yang memadai bagi masyarakat lokal. Penduduk asli dan pekerja tambang menghadapi risiko kesehatan berlapis: paparan emisi udara dari <i>captive power plant</i> sekaligus potensi risiko penyakit menular akibat disrupsi lingkungan hidup.
     </p>
     """,
         unsafe_allow_html=True,
@@ -1206,7 +1206,7 @@ if not df_zoonosis.empty:
             )
 
         fig_3_6a.update_layout(
-            title=f"Tren Lonjakan Kasus {selected_penyakit} Tingkat Kabupaten (2019-2024)",
+            title=f"Tren Kasus {selected_penyakit} Tingkat Kabupaten (2019-2024)",
             height=500,
             plot_bgcolor="rgba(0,0,0,0)",
             paper_bgcolor="rgba(0,0,0,0)",
@@ -1447,7 +1447,7 @@ else:
 # ══════════════════════════════════════════════════════════
 st.markdown("---")
 st.markdown(
-    '<h2 style="color: #ECEFF1; font-size: 24px;">3.5 Pemetaan Geospasial: Episentrum Ledakan Penyakit</h2>',
+    '<h2 style="color: #ECEFF1; font-size: 24px;">3.5 Pemetaan Geospasial: Distribusi Spasial Beban Penyakit</h2>',
     unsafe_allow_html=True,
 )
 st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Choropleth & Bubble Map (GeoJSON)</span>', unsafe_allow_html=True)
@@ -1473,7 +1473,7 @@ with st.expander("ℹ️ Metodologi: Choropleth & Bubble Map"):
     """)
 
 st.markdown("""
-Peta interaktif di bawah ini memproyeksikan secara spasial perbandingan absolut beban kesehatan (ISPA dan Diare) antara **Awal Ekstraksi (2015)** dan **Kondisi Terkini (2024)**. Sesuai *framework Before-After Analysis*, Anda bisa melihat bagaimana ledakan penyakit menyebar seiring dengan masifnya perluasan kawasan industri.
+Peta interaktif di bawah ini memproyeksikan secara spasial perbandingan absolut beban kesehatan (ISPA dan Diare) antara **Awal Ekstraksi (2015)** dan **Kondisi Terkini (2024)**. Sesuai *framework Before-After Analysis*, Anda bisa melihat bagaimana distribusi beban penyakit berkembang seiring perluasan kawasan industri.
 """)
 
 import json
@@ -1835,7 +1835,7 @@ with tab_bar:
         coloraxis_colorbar=dict(title="Skor IKA")
     )
     st.plotly_chart(fig_bar_36, use_container_width=True, config={'displayModeBar': False})
-    st.markdown("Interpretasi Visual: Provinsi di sebelah kiri yang memiliki warna coklat pekat (skor IKA terburuk) secara konsisten diiringi dengan batang kasus diare yang melonjak tinggi.")
+    st.markdown("Interpretasi Visual: Provinsi di sebelah kiri yang memiliki warna coklat pekat (skor IKA terburuk) secara konsisten diiringi dengan batang kasus diare yang relatif lebih tinggi.")
 
 
 
@@ -1955,7 +1955,7 @@ correlation_direction = "negatif" if slope < 0 else "positif"
 
 
 # --- Visualization 2: Crosstab Statistical Test (IKA × Diare) ---
-st.markdown("#### Uji Statistik: Asosiasi IKA Rendah dengan Ledakan Diare")
+st.markdown("#### Uji Statistik: Asosiasi IKA Rendah dengan Tingginya Kasus Diare")
 st.markdown("""
 Untuk membuktikan hubungan kausal secara statistik, crosstab Chi-Square di bawah menggunakan unit observasi **Provinsi-Tahun** (6 provinsi × 9 tahun = 54 sampel panel).
 Setiap observasi diklasifikasikan menjadi "IKA Rendah/Tinggi" dan "Diare Rendah/Tinggi" berdasarkan **median panel** dari masing-masing indikator.
@@ -2146,7 +2146,7 @@ with col_res_ika1:
 
 with col_res_ika2:
     if is_significant_ika:
-        interp_text_ika = f"Uji statistik membuktikan secara konklusif: **penurunan {x_options_ika[x_col_ika]} berkorelasi sangat signifikan dengan lonjakan kasus {y_options_ika[y_col_ika]}** (P = {p_ika:.4f}, OR: {odds_ratio_ika:.3f}). Provinsi dengan IKA rendah memiliki risiko {odds_ratio_ika:.1f}x lebih tinggi mengalami ledakan Diare dibanding provinsi dengan IKA terjaga. Ini adalah bukti empiris bahwa pencemaran air oleh tailing tambang dan limbah smelter **bukan eksternalitas kecil—melainkan ancaman sistemik terhadap hak dasar warga atas air bersih dan sanitasi**."
+        interp_text_ika = f"Uji statistik membuktikan secara konklusif: **penurunan {x_options_ika[x_col_ika]} berkorelasi sangat signifikan dengan peningkatan kasus {y_options_ika[y_col_ika]}** (P = {p_ika:.4f}, OR: {odds_ratio_ika:.3f}). Provinsi dengan IKA rendah memiliki risiko {odds_ratio_ika:.1f}x lebih tinggi mengalami kenaikan kasus Diare dibanding provinsi dengan IKA terjaga. Ini adalah bukti empiris bahwa pencemaran air oleh tailing tambang dan limbah smelter **merupakan eksternalitas yang berdampak pada hak dasar warga atas air bersih dan sanitasi**."
     else:
         interp_text_ika = f"Secara agregat, hubungan antara {x_options_ika[x_col_ika]} dan {y_options_ika[y_col_ika]} **tidak signifikan** secara statistik (P ≥ 0.05). Hal ini mengindikasikan bahwa pencemaran air telah menyebar secara merata ke seluruh wilayah Sulawesi, sehingga tidak ada lagi provinsi 'aman' dari krisis air bersih. **Krisis tata kelola air telah menjadi sistemik**, bukan lagi terisolasi di zona industri tertentu."
 
@@ -2248,16 +2248,16 @@ import textwrap
 if sig_count_ika > 0:
     exec_narrative_ika = textwrap.dedent(f"""\
 Hasil pengujian statistik menunjukkan bahwa korelasi antara <b>IKA dan Kasus Diare adalah SIGNIFIKAN</b> (P < 0.05).<br><br>
-Angka-angka pada tabel di atas bukan sekadar statistik di atas kertas, melainkan <b>bukti empiris</b> dari daya rusak pencemaran air. Tingginya <i>Odds Ratio</i> ({or_v_ika:.2f}) menegaskan bahwa setiap kali kualitas air memburuk (IKA turun), risiko terjadinya ledakan Diare melonjak berkali-kali lipat.<br><br>
-Temuan ini mengonfirmasi bahwa <b>pencemaran sumber air oleh limbah tambang dan smelter memiliki dampak kesehatan yang terukur dan sistemik</b>. Warga di zona penyangga industri terpaksa mengonsumsi air tercemar yang memicu epidemi penyakit saluran pencernaan—penyakit yang seharusnya dapat dicegah dengan sanitasi dan air bersih yang memadai.\
+Tingginya <i>Odds Ratio</i> ({or_v_ika:.2f}) menegaskan bahwa setiap kali kualitas air memburuk (IKA turun), risiko terjadinya peningkatan kasus Diare bertambah.<br><br>
+Temuan ini mengonfirmasi bahwa <b>pencemaran sumber air oleh limbah tambang dan smelter memiliki dampak kesehatan yang terukur</b>. Warga di zona penyangga industri berpotensi menghadapi risiko penyakit saluran pencernaan yang memerlukan perbaikan sanitasi dan air bersih yang memadai.\
     """)
     bg_color_ika = "rgba(229, 57, 53, 0.15)"
     border_color_ika = "#E53935"
 else:
     exec_narrative_ika = textwrap.dedent(f"""\
 Hasil pengujian menunjukkan bahwa korelasi antara IKA dan Kasus Diare <b>TIDAK SIGNIFIKAN</b> secara statistik (P ≥ 0.05).<br><br>
-Dalam kacamata ekonomi politik ekologi, ketidaksignifikanan ini justru merupakan <b>sinyal bahaya tertinggi</b>. Ini membuktikan bahwa pencemaran air telah terjadi secara <i>brutal dan merata</i> di seluruh provinsi Sulawesi. Krisis air bersih telah mencapai titik <i>saturation</i> (jenuh), sehingga tidak ada lagi provinsi 'aman' dari kontaminasi limbah industri.<br><br>
-<b>Krisis tata kelola air telah menjadi sistemik</b>, bukan lagi terisolasi di zona industri tertentu. Seluruh Pulau Sulawesi menanggung beban pencemaran yang sama.\
+Dalam kacamata ekonomi politik ekologi, ketidaksignifikanan ini mengindikasikan bahwa pencemaran air telah terjadi secara <i>meluas dan merata</i> di seluruh provinsi Sulawesi.<br><br>
+<b>Tantangan tata kelola air bersifat sistemik</b> di berbagai zona wilayah.\
     """)
     bg_color_ika = "rgba(255, 152, 0, 0.15)"
     border_color_ika = "#FF9800"
@@ -2304,18 +2304,18 @@ with st.expander("ℹ️ Metodologi: Descriptive Statistics & Comparative Bar Ch
     """)
 
 st.markdown("""
-Jika sub-bab sebelumnya telah membedah dampak pencemaran udara (IKU → ISPA) dan air (IKA → Diare), maka sub-bab ini mengungkap **sumber polusi yang paling mengerikan namun paling tersembunyi**: timbulan **Limbah Bahan Berbahaya dan Beracun (B3)** dari operasi smelter dan tambang nikel.
+Jika sub-bab sebelumnya telah membedah dampak pencemaran udara (IKU → ISPA) dan air (IKA → Diare), maka sub-bab ini mengungkap **sumber polusi yang signifikan namun memerlukan perhatian khusus**: timbulan **Limbah Bahan Berbahaya dan Beracun (B3)** dari operasi smelter dan tambang nikel.
 
-**Limbah B3** adalah residu beracun hasil proses ekstraktif yang mengandung logam berat, senyawa kimia berbahaya, dan material karsinogenik. Jenis limbah ini meliputi:
+**Limbah B3** adalah residu hasil proses ekstraktif yang mengandung logam berat, senyawa kimia berbahaya, dan material berpotensi karsinogenik. Jenis limbah ini meliputi:
 
 - **Slag & Tailing**: Material sisa pengolahan bijih nikel yang mengandung logam berat seperti Chromium, Nikel, dan Kadmium
-- **Tailing HPAL**: Limbah padat hasil proses High-Pressure Acid Leaching (HPAL) yang bersifat sangat asam dan mengandung sulfat tinggi
+- **Tailing HPAL**: Limbah padat hasil proses High-Pressure Acid Leaching (HPAL) yang bersifat asam dan mengandung sulfat tinggi
 - **Air Limbah Tambang**: Buangan cair yang tercemar logam berat dan asam sulfat
-- **Residu & DSTP**: Material beracun yang dibuang ke laut dalam (Deep Sea Tailing Placement)
+- **Residu & DSTP**: Material beracun yang dikaji dalam opsi pembuangan laut dalam (Deep Sea Tailing Placement)
 
-Narasi pemerintah yang mengklaim bahwa slag dapat "dimanfaatkan untuk batako dan penahan abrasi" adalah **upaya legitimasi ekologis (ecological legitimation)** yang menyembunyikan fakta bahwa **jutaan ton limbah beracun terakumulasi tanpa izin, tanpa pengolahan memadai, dan tanpa kajian risiko kesehatan yang transparan**.
+Klaim bahwa slag dapat "dimanfaatkan untuk batako dan penahan abrasi" memerlukan kajian kritis, mengingat akumulasi material ini memerlukan pengelolaan dan pemantauan risiko kesehatan yang transparan.
 
-Data kompilasi dari laporan AEER, WALHI, JATAM, dan kajian akademis membuktikan bahwa **operasi smelter di Sulawesi menghasilkan puluhan juta ton limbah B3 per tahun**—dengan dampak kesehatan jangka panjang yang belum sepenuhnya terukur.
+Data kompilasi dari laporan AEER, WALHI, JATAM, dan kajian akademis membuktikan bahwa **operasi smelter di Sulawesi menghasilkan puluhan juta ton limbah B3 per tahun**—dengan dampak kesehatan jangka panjang yang perlu dimonitor secara berkelanjutan.
 """)
 
 # --- Load B3 Data ---
@@ -2431,9 +2431,9 @@ st.markdown(
     f"""
 <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #E53935; margin-bottom: 20px; margin-top: 15px;">
     <b>Interpretasi Spasial:</b><br><br>
-    Visualisasi di atas membuktikan secara telak bahwa <b>Sulawesi Tengah dan Sulawesi Tenggara</b>—dua provinsi episentrum hilirisasi nikel—menanggung beban limbah beracun yang tidak proporsional. <b>Sulawesi Tengah</b> sendirian menghasilkan <b>{sulteng_b3 / 1_000_000:.1f} juta ton B3/tahun</b>, terutama dari kawasan IMIP Morowali yang beroperasi tanpa transparansi penuh.<br><br>
+    Visualisasi di atas menunjukkan bahwa <b>Sulawesi Tengah dan Sulawesi Tenggara</b>—dua provinsi episentrum hilirisasi nikel—menanggung volume limbah B3 yang signifikan. <b>Sulawesi Tengah</b> menghasilkan <b>{sulteng_b3 / 1_000_000:.1f} juta ton B3/tahun</b>, terutama dari kawasan industri Morowali.<br><br>
 
-    Ini adalah bentuk <b>kolonialisme internal (internal colonialism)</b>: wilayah periferal dijadikan zona pembuangan limbah industri demi mengamankan akumulasi kapital di pusat ekonomi nasional. Warga lokal terpaksa hidup berdampingan dengan timbunan slag beracun yang mencapai jutaan ton—<b>tanpa kompensasi, tanpa proteksi kesehatan, dan tanpa suara dalam pengambilan keputusan</b>.
+    Ini mencerminkan <b>ketimpangan ekologis</b>: wilayah penyangga menanggung beban limbah industri yang signifikan dibandingkan manfaat ekonomi langsung yang diterima. Warga lokal beriringan dengan lokasi timbunan slag—<b>sehingga membutuhkan pengawasan proteksi kesehatan dan transparansi pengolahan</b>.
 </div>
 """,
     unsafe_allow_html=True,
@@ -2486,7 +2486,7 @@ st.markdown(
     <b>Interpretasi Komposisi Limbah:</b><br><br>
     <b>Slag dan Tailing</b> mendominasi timbulan limbah B3 dengan total <b>{(slag_total + tailing_total) / 1_000_000:.1f} juta ton/tahun</b>. Material ini mengandung konsentrasi tinggi logam berat seperti <b>Chromium (Cr), Nikel (Ni), Kadmium (Cd), dan Arsenik (As)</b> yang bersifat karsinogenik (memicu kanker) dan neurotoksik (merusak sistem saraf).<br><br>
 
-    Klaim industri bahwa slag "aman dimanfaatkan untuk batako" adalah <b>manipulasi ekologis</b>. Penelitian independen membuktikan bahwa paparan jangka panjang terhadap debu slag dapat memicu <b>pneumoconiosis (penyakit paru-paru akibat debu mineral), dermatitis kronis, dan kontaminasi air tanah</b> yang berujung pada ledakan kasus Diare dan penyakit kulit di komunitas sekitar.<br><br>
+    Klaim industri bahwa slag "aman dimanfaatkan untuk batako" adalah <b>klaim yang perlu dikaji lebih kritis</b>. Penelitian mengindikasikan bahwa paparan jangka panjang terhadap debu slag berpotensi memicu <b>dermatitis dan gangguan pernapasan</b> pada komunitas sekitar.<br><br>
 
     <b>Tailing HPAL</b> (High-Pressure Acid Leaching) lebih berbahaya lagi karena mengandung <b>asam sulfat konsentrasi tinggi</b> yang dapat mencemari sungai dan laut. Proses HPAL yang digunakan PT HNC dan PT QMB di Morowali menghasilkan <b>12,5 juta ton tailing beracun per tahun</b>—setara dengan volume banjir bandang yang terjadi setiap hari.
 </div>
@@ -2544,7 +2544,7 @@ Meskipun data epidemiologis yang menghubungkan secara langsung antara paparan li
 
 2. **Jalur Paparan Multipel:**
    - **Paparan Inhalasi:** Debu slag yang beterbangan terhirup warga sekitar → ISPA/Pneumonia kronis
-   - **Kontaminasi Air:** Lindi (leachate) dari timbunan tailing mencemari sumur dan sungai → Ledakan Diare dan penyakit kulit
+   - **Kontaminasi Air:** Lindi (leachate) dari timbunan tailing berpotensi memengaruhi sumber air → Peningkatan kasus Diare dan penyakit kulit
    - **Akumulasi Logam Berat:** Chromium dan Nikel terakumulasi dalam rantai makanan → Risiko kanker jangka panjang
 
 3. **Temuan Lapangan dari WALHI dan JATAM:**
@@ -2572,7 +2572,7 @@ st.markdown(
         <li><b>Beban Polusi Pasif:</b> Hidup berdampingan dengan timbunan <b>{total_b3 / 1_000_000:.1f} juta ton limbah beracun</b> yang terakumulasi setiap tahun—<b>tanpa jaminan keamanan jangka panjang</b></li>
     </ol>
     <p style="color: #EEEEEE; font-size: 1.05rem; line-height: 1.7;">
-        Kompleks IMIP di Morowali sendirian menghasilkan <b>{imip_b3 / 1_000_000:.1f} juta ton limbah B3/tahun</b>—lebih besar dari total limbah domestik seluruh provinsi. Ini adalah bukti konkret bahwa <b>hilirisasi nikel bukan pertumbuhan inklusif, melainkan transfer sistematis risiko kesehatan dari korporasi kepada rakyat sipil</b>.
+        Kompleks IMIP di Morowali menghasilkan <b>{imip_b3 / 1_000_000:.1f} juta ton limbah B3/tahun</b>. Hal ini menunjukkan pentingnya evaluasi independen atas dampak lingkungan dan kesehatan dari ekspansi industri nikel bagi masyarakat sekitar.
     </p>
     <p style="color: #FFCCBC; font-size: 1rem; margin-top: 15px; border-top: 1px dotted #555; padding-top: 10px;">
         <b>Rekomendasi Kebijakan:</b> Pemerintah harus segera menghentikan ekspansi smelter baru hingga tersedia kajian risiko kesehatan independen, sistem monitoring limbah B3 yang transparan, dan skema kompensasi yang adil bagi masyarakat terdampak. <b>Hak atas lingkungan hidup yang sehat adalah hak asasi yang tidak dapat ditawar dengan pertumbuhan ekonomi semata</b>.

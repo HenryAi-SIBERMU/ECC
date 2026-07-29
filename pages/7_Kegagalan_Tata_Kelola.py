@@ -98,9 +98,9 @@ with c1:
     st.markdown("""
     <div style="background:#1A1A1A; padding: 20px; border-radius: 10px; border-top: 4px solid #E74C3C; height: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
         <div style="font-size:0.8rem; color:#E74C3C; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">TEMUAN TARGET 1</div>
-        <div style="color: #fff; font-size: 1.3rem; font-weight:bold; margin-bottom:12px; line-height:1.3;">Daya Dukung Bukan Pembatas Nyata</div>
+        <div style="color: #fff; font-size: 1.3rem; font-weight:bold; margin-bottom:12px; line-height:1.3;">Fungsi Pembatas Daya Dukung</div>
         <div style="color:#B0BEC5; font-size:0.9rem; line-height:1.5;">
-            Bukti empiris menunjukkan dokumen lingkungan (AMDAL & D3TLH) hanya menjadi formalitas. Alih-alih merem penerbitan izin baru ketika daya dukung lingkungan ambruk (kritis), aparatur negara secara paradoks justru semakin agresif mengobral <b>izin eksploitasi baru</b>.
+            Data menunjukkan perlunya penguatan fungsi D3TLH sebagai instrumen pengaman. Penerbitan izin baru masih berlangsung di kawasan yang tercatat mengalami tekanan lingkungan tinggi.
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -109,15 +109,15 @@ with c2:
     st.markdown("""
     <div style="background:#1A1A1A; padding: 20px; border-radius: 10px; border-top: 4px solid #F39C12; height: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
         <div style="font-size:0.8rem; color:#F39C12; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">TEMUAN TARGET 2</div>
-        <div style="color: #fff; font-size: 1.3rem; font-weight:bold; margin-bottom:12px; line-height:1.3;">Perizinan Dominan Secara Politis</div>
+        <div style="color: #fff; font-size: 1.3rem; font-weight:bold; margin-bottom:12px; line-height:1.3;">Pengawasan & Penegakan Hukum</div>
         <div style="color:#B0BEC5; font-size:0.9rem; line-height:1.5;">
-            Faktor pembatas sebenarnya bukan batas ekologis, melainkan lobi politik. Hal ini dikonfirmasi oleh masifnya <b>impunitas</b>, di mana perusahaan dengan HGU mati dan perusak kawasan hutan dibiarkan beroperasi tanpa sanksi pencabutan izin.
+            Evaluasi menunjukkan tantangan dalam penegakan sanksi administratif dan pengawasan perizinan bagi entitas yang beroperasi tidak sesuai ketentuan.
         </div>
     </div>
     """, unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
-st.markdown('<p class="sub-title">Evaluasi terhadap kelumpuhan supremasi hukum di mana instrumen perlindungan ekologis direduksi menjadi stempel administratif.</p>', unsafe_allow_html=True)
+st.markdown('<p class="sub-title">Evaluasi instrumen perlindungan ekologis dan implementasinya dalam sistem perizinan.</p>', unsafe_allow_html=True)
 
 with st.expander("Metodologi Pendekatan & Pertanyaan Kritis", expanded=False):
     st.markdown("""
@@ -133,7 +133,7 @@ with st.expander("Metodologi Pendekatan & Pertanyaan Kritis", expanded=False):
 
 # Hero Statement
 st.markdown("""
-Secara hukum, dokumen tata ruang dan Daya Dukung Daya Tampung Lingkungan Hidup (D3TLH) dirancang sebagai **veto absolut** negara—sebuah instrumen yang memiliki otoritas untuk menolak izin investasi baru manakala beban lingkungan hidup di suatu ekoregion telah melampaui kapasitas pemulihannya. Namun, matriks forensik yang membedah *timeline* penerbitan izin di semenanjung Sulawesi membongkar skandal **Regulatory Capture**. Negara, melalui aparatus perizinannya, terbukti mendelegitimasi instrumen penyelamatannya sendiri. Dokumen AMDAL dan D3TLH diposisikan bukan sebagai garis merah hukum (*redline*), melainkan sekadar ornamen pelengkap persyaratan untuk merestui perluasan tambang dan pembangunan masif PLTU captive.
+Dokumen tata ruang dan Daya Dukung Daya Tampung Lingkungan Hidup (D3TLH) dirancang sebagai instrumen pengendalian investasi agar tidak melampaui kapasitas daya dukung lingkungan. Penelusuran *timeline* penerbitan izin di Sulawesi mengindikasikan perlunya penguatan efektivitas instrumen ini dalam proses perizinan usaha pertambangan dan infrastruktur pendukungnya.
 """)
 
 st.markdown("<br>", unsafe_allow_html=True)
@@ -145,9 +145,9 @@ with col1:
     st.markdown("""
     <div class="metric-card">
         <div>
-            <div class="metric-label">SKOR TATA KELOLA (VETO)</div>
+            <div class="metric-label">SKOR INDIKATOR PERIZINAN</div>
             <div class="metric-value" style="color: #C62828;">9.8 <span style="font-size:1rem;color:#777;">/ 10</span></div>
-            <div class="metric-desc">Tingkat keparahan kegagalan fungsi D3TLH sebagai pembatas. <b>Vonis: Regulatory Capture.</b></div>
+            <div class="metric-desc">Tingkat urgensi penguatan fungsi D3TLH sebagai instrumen pengendalian.</div>
         </div>
         <div class="metric-source">Indeks Kalkulasi Komposit Celios</div>
     </div>
@@ -157,9 +157,9 @@ with col2:
     st.markdown("""
     <div class="metric-card">
         <div>
-            <div class="metric-label">OTORITAS D3TLH</div>
-            <div class="metric-value" style="color: #D32F2F;">Nihil</div>
-            <div class="metric-desc">Instrumen lingkungan terbukti tidak mengikat dan gagal membatasi laju obral perizinan secara nyata di lapangan.</div>
+            <div class="metric-label">EFEKTIVITAS D3TLH</div>
+            <div class="metric-value" style="color: #D32F2F;">Perlu Penguatan</div>
+            <div class="metric-desc">Instrumen lingkungan memerlukan mekanisme yang lebih mengikat dalam proses perizinan.</div>
         </div>
         <div class="metric-source">Hasil Uji Crosstab Izin vs D3TLH</div>
     </div>
@@ -169,9 +169,9 @@ with col3:
     st.markdown("""
     <div class="metric-card">
         <div>
-            <div class="metric-label">STATUS PENEGAKAN HUKUM</div>
-            <div class="metric-value" style="color: #F4511E;">Pembiaran</div>
-            <div class="metric-desc">Banyaknya temuan perusahaan beroperasi secara ilegal tanpa dikenakan sanksi pencabutan izin operasi (Impunitas massal).</div>
+            <div class="metric-label">PENEGAKAN HUKUM</div>
+            <div class="metric-value" style="color: #F4511E;">Perlu Evaluasi</div>
+            <div class="metric-desc">Diperlukan pengawasan dan sanksi tegas bagi entitas yang beroperasi tidak sesuai ketentuan.</div>
         </div>
         <div class="metric-source">Rekam Jejak KPA & Tanahkita</div>
     </div>
@@ -215,13 +215,13 @@ with st.expander("ℹ️ Metodologi: Evaluasi Kepatuhan D3TLH Berdasarkan Data H
         * `data/processed/sulawesi_izin_baru_per_tahun.csv` dan `sulawesi_gfw_master_1_dekade_2014_2023.csv`
     """)
 
-st.write("""Dalih "sudah sesuai aturan" sering kali digunakan oleh pemerintah daerah maupun pusat untuk membenarkan penerbitan Izin Usaha Pertambangan (IUP) yang masif di Pulau Sulawesi. Namun, jika Daya Tampung dan Daya Dukung Lingkungan Hidup (D3TLH) benar-benar dijadikan sebagai instrumen pencegahan dan batas pengaman ekologis (*ecological safeguard*), maka secara logika hukum dan sains, laju penerbitan izin baru wajib dihentikan seketika saat sebuah wilayah telah menunjukkan gejala kerusakan ekstrem, seperti deforestasi besar-besaran. Kenyataannya, data spasial menunjukkan sebuah anomali fatal: grafik penerbitan izin justru melonjak eksponensial tepat di tahun-tahun ketika hilangnya tutupan pohon sekunder dan primer mencapai titik kritis.
+st.write("""Daya Tampung dan Daya Dukung Lingkungan Hidup (D3TLH) dirancang sebagai instrumen pencegahan dan pengatur batas pengaman ekologis (*ecological safeguard*). Secara metodologis, penerbitan izin baru sepatutnya mempertimbangkan indikator daya dukung lingkungan guna mengantisipasi degradasi ekosistem.
 
-Kami menyilangkan data deforestasi tahunan dari *Global Forest Watch* (GFW) dengan riwayat penerbitan izin pertambangan dari *Minerba One Data Indonesia* (MODI) Kementerian ESDM. Hasil irisan tersebut memperlihatkan pola *business-as-usual* yang sangat agresif. Sebagai contoh, ketika jutaan hektar hutan di Sulawesi Tengah dan Tenggara ditebang secara brutal pada periode 2014 hingga 2023 untuk membuka jalan bagi kawasan industri (smelter) dan infrastruktur pendukungnya, pemerintah secara bersamaan terus mencetak ratusan Izin Usaha Pertambangan baru di provinsi-provinsi yang sama, tanpa mempertimbangkan bahwa kapasitas hidrologis dan daya dukung lanskap di wilayah tersebut sudah ambruk total.
+Penyandingan data deforestasi tahunan dari *Global Forest Watch* (GFW) dan data perizinan pertambangan dari *Minerba One Data Indonesia* (MODI) Kementerian ESDM menunjukkan bahwa penerbitan izin usaha pertambangan baru tetap tercatat pada kurun waktu ketika perubahan tutupan hutan meningkat. Hal ini terlihat pada tren di wilayah Sulawesi Tengah dan Tenggara periode 2014-2023.
 
-Fakta bahwa perizinan konsesi tetap mengalir deras di zona-zona merah ini membuktikan kegagalan tata kelola yang sistemik. D3TLH, Analisis Mengenai Dampak Lingkungan (AMDAL), maupun instrumen Kajian Lingkungan Hidup Strategis (KLHS) telah direduksi menjadi sekadar stempel administratif formalitas belaka. Alih-alih menjadi rem darurat bagi kerusakan, dokumen-dokumen lingkungan tersebut ditundukkan oleh tekanan investasi dan target pertumbuhan produksi nikel nasional. Kegagalan otoritas dalam menggunakan data riil kerusakan lapangan sebagai dasar penghentian operasi atau moratorium izin ini pada akhirnya mempercepat laju krisis ekologis yang kini harus ditanggung sepenuhnya oleh masyarakat pesisir, petani, dan nelayan yang kehilangan ruang hidup mereka. Kehancuran ini bukan lagi kecelakaan, melainkan hasil dari kebijakan pembiaran (*state-sponsored ecocide*).
+Kondisi ini menggarisbawahi pentingnya penguatan fungsi dokumen AMDAL, D3TLH, dan KLHS agar menjadi pertimbangan utama yang mengikat dalam pengambilan keputusan perizinan, demi menjaga keberlanjutan lingkungan dan kehidupan masyarakat sekitar.
 
-Matriks Statistik di bawah ini digunakan untuk membuktikan secara kuantitatif jejak kelumpuhan tata kelola (*Governance Failure*) tersebut.""")
+Matriks Statistik di bawah ini menyajikan perbandingan indikator status ekologis dan penerbitan izin.""")
 
 col1, col2 = st.columns(2)
 with col1:
@@ -295,10 +295,10 @@ for idx, row in agg_df.iterrows():
         kenyataan = f"<span style='color: #FFE082;'>{iup_str}</span>"
         kesimpulan = "Anomali (Lampu Kuning)"
     else: # Kritis
-        kondisi = f"Sangat Parah<br><span style='font-size: 0.85rem; color: #E74C3C;'>({range_str})</span>"
-        aturan = "<span style='color: #E74C3C; font-weight: bold;'>Moratorium / Izin Dilarang!</span>"
+        kondisi = f"Tinggi<br><span style='font-size: 0.85rem; color: #E74C3C;'>({range_str})</span>"
+        aturan = "<span style='color: #E74C3C; font-weight: bold;'>Moratorium / Evaluasi Ketat</span>"
         kenyataan = f"<span style='color: #E74C3C; font-weight: bold; font-size: 1.15rem;'>{iup_str}</span><br><span style='font-size: 0.85rem; color: #E74C3C;'>(Termasuk luasan {row['Total_Luas_Ha']:,.0f} Ha)</span>"
-        kesimpulan = "<span style='color: #E74C3C; font-weight: bold;'>BUKTI PELANGGARAN FATAL</span>"
+        kesimpulan = "<span style='color: #E74C3C; font-weight: bold;'>PERLU EVALUASI</span>"
     
     table_html += f"""
 <tr>
@@ -323,11 +323,11 @@ Tabel pembuktian di bawah ini mengukur akumulasi penerbitan izin pada rentang wa
 <div style="color: #FFCDD2; font-size: 1rem; font-weight: 600; line-height: 1.6;">
 <div style="display: flex; align-items: start; margin-bottom: 8px;">
 <span style="margin-right: 10px;">-</span> 
-<span><b>Daya dukung tidak menjadi pembatas nyata</b> (Terdapat {int(total_iup_kritis)} Izin Baru yang tetap sengaja diterbitkan ketika lingkungan sudah terkonfirmasi berada di fase Kritis).</span>
+<span><b>Fungsi pembatas D3TLH perlu ditingkatkan</b> (Terdapat {int(total_iup_kritis)} Izin Baru yang terbit pada periode berstatus deforestasi tinggi).</span>
 </div>
 <div style="display: flex; align-items: start;">
 <span style="margin-right: 10px;">-</span> 
-<span><b>Keputusan perizinan tetap dominan secara politis</b> meski D3TLH menunjukkan kondisi kritis (Bukti <i>Regulatory Capture</i> mutlak).</span>
+<span><b>Diperlukan penguatan integrasi data lingkungan dalam keputusan perizinan</b>.</span>
 </div>
 </div>
 </div>
@@ -404,11 +404,11 @@ with st.expander("ℹ️ Metodologi: Pemetaan Impunitas Korporasi"):
     4. **Dataset & File:**
         * `data/processed/sulawesi_konflik_hukum.csv`
     """)
-st.write("""Konsep Daya Tampung dan Daya Dukung Lingkungan Hidup (D3TLH) secara esensial tidak hanya mengukur batas fisik daya tahan ekosistem darat, air, dan udara, tetapi juga mengukur sejauh mana ruang hidup sosial masyarakat mampu menoleransi masuknya investasi skala raksasa. Namun, realitas di lapangan menunjukkan bahwa ambang batas sosial ini telah dilanggar secara brutal dan sistematis. Berdasarkan kompilasi data laporan masyarakat sipil, Jaringan Advokasi, serta Konsorsium Pembaruan Agraria (KPA), kami menemukan bahwa ekspansi industri ekstraktif di Sulawesi—mulai dari pertambangan nikel, perkebunan monokultur, hingga pembangunan kawasan industri strategis nasional (PSN)—selalu beriringan dengan letusan konflik agraria yang memakan korban di pihak masyarakat akar rumput.
+st.write("""Konsep Daya Tampung dan Daya Dukung Lingkungan Hidup (D3TLH) mengukur kapasitas daya tahan ekosistem serta daya dukung sosial masyarakat di sekitar kawasan industri. Kompilasi laporan masyarakat sipil dan organisasi terkait mencatat adanya sengketa tanah dan dinamika sosial dalam ekspansi industri ekstraktif.
 
-Pembiaran atas pelanggaran hukum (impunitas) terlihat sangat telanjang. Perusahaan-perusahaan yang terbukti merebut lahan tanpa persetujuan bebas, diinformasikan di awal, dan tanpa paksaan atau *Free, Prior and Informed Consent* (FPIC) dari masyarakat adat maupun penduduk lokal, tetap dibiarkan beroperasi dengan leluasa. Dalam berbagai kasus, korporasi tambang maupun perkebunan yang status izin (HGU/IUP)-nya tumpang tindih dengan tanah ulayat, atau bahkan beroperasi di luar konsesi yang sah, tidak pernah mendapatkan sanksi administratif berupa pencabutan izin. Aparat penegak hukum justru kerap digunakan sebagai instrumen represi untuk membungkam protes warga, mengkriminalisasi petani yang mempertahankan kebunnya, serta menyingkirkan masyarakat yang bermukim di sekitar area lingkar tambang.
+Hal ini menunjukkan pentingnya kepatuhan perizinan dan penerapan sanksi administratif secara konsisten. Pengawasan terhadap batas wilayah perizinan (HGU/IUP) serta pelaksanaan konsultasi publik (FPIC) menjadi aspek penting dalam tata kelola pertanahan dan lingkungan.
 
-Absennya sanksi tegas dari Kementerian Lingkungan Hidup, Kementerian ESDM, maupun aparat hukum mencerminkan adanya perlindungan politik yang kuat terhadap operasi bisnis kotor ini. Konflik tenurial yang terjadi di Morowali, Konawe, hingga Wawonii membuktikan bahwa instrumen hukum yang seharusnya melindungi rakyat telah dibajak demi memfasilitasi akumulasi modal. Pembiaran ini menciptakan tabrakan hukum di mana regulasi perlindungan lingkungan hidup dan hak asasi manusia kalah secara sistemik oleh undang-undang sektoral pro-investasi seperti UU Cipta Kerja dan UU Minerba revisi terbaru. Kegagalan menegakkan hukum ini pada akhirnya mengonfirmasi bahwa negara secara sadar menoleransi kekerasan struktural dan kerusakan lingkungan sebagai harga yang wajar demi pencapaian target industri hilirisasi, mengubah wilayah-wilayah krisis tersebut menjadi zona pengorbanan (*sacrifice zones*).""")
+Penguatan koordinasi antar-instansi serta penyelesaian sengketa tenurial secara adil menjadi langkah krusial untuk memastikan kepastian hukum dan perlindungan hak masyarakat di wilayah sekitar industri.""")
 
 try:
     import plotly.express as px
@@ -478,11 +478,11 @@ with st.expander("ℹ️ Metodologi: Agregasi Beban Karbon PLTU Captive"):
     4. **Dataset & File:**
         * `data/processed/sulawesi_pltu_captive.csv`
     """)
-st.write("""Di panggung negosiasi iklim internasional, pemerintah secara retoris selalu mempromosikan komitmen Indonesia dalam transisi energi menuju target *Net Zero Emission* serta mengkampanyekan keberhasilan program "Hilirisasi Hijau" untuk mendukung rantai pasok kendaraan listrik (EV) global. Namun, ironi terbesar dan paling memalukan dari narasi transisi energi tersebut terbentang sangat nyata di pulau Sulawesi. Demi memenuhi kebutuhan listrik raksasa untuk operasional pabrik pemurnian (*smelter*) nikel, pemerintah memberikan karpet merah perizinan untuk pembangunan puluhan Pembangkit Listrik Tenaga Uap (PLTU) Batubara *Captive*. Pembangkit-pembangkit kotor ini dibangun secara mandiri di dalam kawasan industri dan berdiri di luar sistem jaringan (grid) PLN nasional, sehingga keberadaannya sering kali luput dari skema pembatasan emisi atau target penghentian batubara (*coal phase-out*).
+st.write("""Komitmen transisi energi global dan pengembangan rantai pasok industri nikel memegang peranan strategis. Di saat yang sama, pemenuhan kebutuhan energi untuk fasilitas pengolahan nikel (*smelter*) di Sulawesi masih didominasi oleh Pembangkit Listrik Tenaga Uap (PLTU) Batubara *Captive*.
 
-Ekstraksi data terbaru dari *Global Coal Plant Tracker* (GEM) membongkar skalanya yang masif dan mengerikan. Kami menemukan bahwa terdapat puluhan unit PLTU *Captive*—baik yang sudah beroperasi secara aktif, sedang dalam tahap konstruksi, maupun yang telah mendapatkan izin (*permitted/announced*)—yang tersebar di sentra-sentra industri di Sulawesi Tengah, Sulawesi Tenggara, dan provinsi lainnya. Total kapasitas kotor pembangkitan dari puluhan PLTU batubara ini mencapai belasan ribu Megawatt. Ini berarti, proses pengolahan material nikel yang diklaim sebagai bahan baku energi bersih masa depan (baterai kendaraan listrik) justru diproduksi dengan membakar jutaan metrik ton batu bara setiap tahunnya, menyemburkan polutan mematikan seperti SO2, NOx, dan PM2.5 langsung ke ruang udara pemukiman warga sekitar.
+Data dari *Global Coal Plant Tracker* (GEM) mencatat keberadaan unit PLTU *Captive* yang beroperasi maupun direncanakan di kawasan industri Sulawesi Tengah dan Sulawesi Tenggara. Pemanfaatan energi berbasis batu bara pada industri ini menghasilkan tantangan tersendiri bagi pengelolaan emisi gas rumah kaca dan kualitas udara ambien.
 
-Inkonsistensi kebijakan ini jelas menunjukkan kegagalan tata kelola iklim yang paling telanjang. Transisi energi dalam konteks hilirisasi nikel di Indonesia tidak lebih dari sekadar *greenwashing*, di mana perlindungan daya dukung udara dikorbankan demi profitabilitas ekonomi. Emisi Gas Rumah Kaca (GRK) dari Sulawesi justru meledak secara dramatis berkat kehadiran PLTU *Captive* ini. Dengan terus memberikan izin baru bagi pembangkit listrik berbahan bakar fosil terburuk di bumi ini, pemerintah tidak hanya mengkhianati komitmen penurunan emisinya sendiri, tetapi juga menjerumuskan masyarakat lokal ke dalam kondisi kerentanan kesehatan pernapasan akut yang tak terpulihkan.""")
+Kondisi ini menunjukkan perlunya strategi percepatan transisi energi bersih di sektor industri ekstraktif guna menyelaraskan target hilirisasi dengan komitmen penurunan emisi nasional.""")
 
 try:
     df_pltu = pd.read_csv('data/processed/sulawesi_pltu_captive.csv')

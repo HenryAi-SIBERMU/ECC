@@ -163,7 +163,7 @@ with c2:
     """, unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
-st.markdown('<p class="sub-title">Evaluasi terhadap kegagalan instrumen tata kelola lingkungan dalam meredam perizinan tambang di wilayah yang telah melampaui daya dukung ekologis.</p>', unsafe_allow_html=True)
+st.markdown('<p class="sub-title">Evaluasi instrumen tata kelola lingkungan dan dinamika penerbitan perizinan tambang di kawasan industri.</p>', unsafe_allow_html=True)
 
 with st.expander("Metodologi Pendekatan", expanded=False):
     st.markdown("""
@@ -180,7 +180,7 @@ with st.expander("Metodologi Pendekatan", expanded=False):
 
 # Hero Statement
 st.markdown(f"""
-Secara institusional, dokumen tata ruang dan instrumen lingkungan hidup semestinya beroperasi sebagai 'rem darurat' negara untuk menolak izin investasi baru di bentang alam yang sudah melampaui kapasitas pemulihannya. Namun, penelusuran data spasial dan waktu di semenanjung Sulawesi membongkar skandal tata kelola yang memilukan. Selama satu dekade terakhir, saat total deforestasi telah merobek **{total_deforestasi:,.1f} hektar** tutupan hutan tersisa, negara justru terus mengobral **{total_izin:,} izin tambang baru** yang merampas tambahan **{total_luas_konsesi:,.1f} hektar** ruang daratan. Ironisnya, puncak penerbitan izin tertinggi meledak pada tahun **{tahun_puncak}** ({izin_puncak} izin), tepat pada momentum di mana berbagai wilayah telah memancarkan sinyal darurat polusi dan kebangkrutan ekologis. Ini membuktikan bahwa D3TLH telah dilumpuhkan menjadi sekadar ornamen administratif semata yang tunduk pada syahwat oligarki ekstraktif.
+Dokumen tata ruang dan instrumen lingkungan hidup berfungsi sebagai pedoman pengendalian perizinan investasi di bentang alam berdasarkan kapasitas daya dukung lingkungan. Penelusuran data spasial dan temporal di Sulawesi menunjukkan dinamika penerbitan izin dan perubahan tutupan hutan. Selama satu dekade terakhir, total deforestasi tercatat sebesar **{total_deforestasi:,.1f} hektar**, sementara penerbitan **{total_izin:,} izin tambang baru** mencakup luas konsesi **{total_luas_konsesi:,.1f} hektar**. Puncak penerbitan izin tercatat pada tahun **{tahun_puncak}** ({izin_puncak} izin), mengindikasikan perlunya penguatan implementasi D3TLH dalam proses pengambilan keputusan perizinan.
 """)
 
 st.markdown("<br>", unsafe_allow_html=True)
@@ -192,9 +192,9 @@ with col1:
     st.markdown(f"""
     <div class="metric-card">
         <div>
-            <div class="metric-label">TINGKAT PENGABAIAN EKOLOGIS</div>
+            <div class="metric-label">PERIZINAN DI ERA DEFORESTASI KRITIS</div>
             <div class="metric-value" style="color: #B71C1C;">{pct_kritis:.1f}% <span style="font-size:1rem;color:#777;">({izin_kritis} IUP)</span></div>
-            <div class="metric-desc">Mayoritas mutlak izin baru justru diobral secara sengaja pada tahun-tahun di mana laju deforestasi provinsi tersebut sedang berada di zona kritis (di atas rata-rata).</div>
+            <div class="metric-desc">Proporsi izin baru yang terbit pada tahun-tahun di mana laju deforestasi provinsi berada di atas rata-rata median.</div>
         </div>
         <div class="metric-source">Sumber: Data Panel (ESDM & GFW)<br>File: sulawesi_izin_baru_per_tahun.csv</div>
     </div>
@@ -204,9 +204,9 @@ with col2:
     st.markdown(f"""
     <div class="metric-card">
         <div>
-            <div class="metric-label">ZONA BEBAS REM DARURAT</div>
+            <div class="metric-label">PROVINSI DENGAN PENERBITAN IZIN TINGGI</div>
             <div class="metric-value" style="color: #C62828;">{nama_prov_kritis} <span style="font-size:1rem;color:#777;">({jumlah_prov_kritis} IUP)</span></div>
-            <div class="metric-desc">Provinsi dengan rekor penerbitan izin tertinggi tepat pada saat daya dukung lingkungan (tutupan hutan) mereka sedang hancur lebur tanpa mitigasi.</div>
+            <div class="metric-desc">Provinsi dengan catatan penerbitan izin tertinggi pada periode laju deforestasi yang relatif tinggi.</div>
         </div>
         <div class="metric-source">Sumber: Data Panel (ESDM & GFW)<br>File: sulawesi_izin_baru_per_tahun.csv</div>
     </div>
@@ -216,9 +216,9 @@ with col3:
     st.markdown(f"""
     <div class="metric-card">
         <div>
-            <div class="metric-label">AKSELERASI IZIN PASCA-2020</div>
+            <div class="metric-label">PERBANDINGAN IZIN PASCA-2020</div>
             <div class="metric-value" style="color: #D32F2F;">{rasio_akselerasi:.1f}x <span style="font-size:1rem;color:#777;">Lipat</span></div>
-            <div class="metric-desc">Ledakan drastis penerbitan izin baru di era pasca-2020 dibandingkan periode sebelumnya, mengonfirmasi jebol dan diabaikannya instrumen D3TLH.</div>
+            <div class="metric-desc">Rasio perbandingan penerbitan izin baru pada era pasca-2020 dibandingkan periode sebelumnya.</div>
         </div>
         <div class="metric-source">Sumber: Kementerian ESDM (Minerbaone)<br>File: sulawesi_izin_baru_per_tahun.csv</div>
     </div>
@@ -266,11 +266,11 @@ from plotly.subplots import make_subplots
 
 st.markdown("""
 <div style="text-align: justify; line-height: 1.8; color: #E0E0E0; font-size: 1.05rem; margin-bottom: 25px;">
-Visualisasi <i>Dual-Axis Combo Chart</i> di bawah ini memberikan penelanjangan empiris mengenai pergeseran aktor perusak hutan dan kegagalan sistemik dari instrumen Daya Dukung dan Daya Tampung Lingkungan Hidup (D3TLH). Jika kita membedah tren historisnya, terdapat dua fase krisis ekologis yang berbeda. Pada <b>Fase 2014-2018 (Zona Kiri)</b>, tingginya angka deforestasi mayoritas digerakkan oleh ekspansi perkebunan kelapa sawit dan Hak Pengusahaan Hutan (HPH). Pada periode ini, kurva konsesi tambang mineral masih tergolong landai dan belum menjadi aktor utama. Namun, konstelasi ini berubah drastis memasuki fase berikutnya.
+Visualisasi <i>Dual-Axis Combo Chart</i> di bawah ini menggambarkan pergeseran tren penerbitan perizinan dan laju deforestasi. Penelusuran data historis menunjukkan dua fase utama. Pada <b>Fase 2014-2018 (Zona Kiri)</b>, deforestasi didominasi oleh peruntukan perkebunan dan Hak Pengusahaan Hutan (HPH). Pada periode tersebut, luas konsesi pertambangan baru masih relatif terbatas.
 <br><br>
-Memasuki <b>Era Hilirisasi Nikel Pasca-2019 (Zona Kanan)</b>, industri tambang mengambil alih estafet sebagai mesin utama deforestasi. Kurva kuning (Area Konsesi IUP Baru) melesat tajam dan bergerak secara sinkron dengan skala kerusakan ekosistem. Anomali paling fatal terjadi pasca-2020: lonjakan luas konsesi tambang mencapai rekor tertingginya tepat pada momentum ketika grafik deforestasi kembali memerah parah. Secara matematis, ratusan ribu hektar tanah yang diserahkan melalui konsesi IUP baru ini berkorelasi mutlak dengan hilangnya tutupan pohon (<i>Hektar vs Hektar</i>). Fenomena ini bukanlah kebetulan statistik, melainkan mengonfirmasi tesis <i>governance failure</i>, di mana instrumen tata ruang tidak lagi berfungsi sebagai "rem darurat".
+Memasuki <b>Era Pasca-2019 (Zona Kanan)</b>, penerbitan izin industri pertambangan mengalami peningkatan. Kurva kuning (Area Konsesi IUP Baru) meningkat beriringan dengan dinamika perubahan tutupan hutan. Pasca-2020, luas konsesi tambang mencatatkan angka yang signifikan pada periode deforestasi yang juga meningkat.
 <br><br>
-Dokumen AMDAL dan analisis daya dukung lingkungan (D3TLH) telah direduksi nilainya menjadi sekadar ornamen administratif belaka; hanya berfungsi sebagai stempel legalisasi prosedural untuk memfasilitasi kelancaran invasi spasial oligarki tambang. Negara, melalui aparatus birokrasinya, secara sadar dan sistematis mengabaikan sinyal darurat dari alam. Akibat pembiaran struktural ini, wilayah-wilayah penyangga kehidupan di semenanjung Sulawesi kini secara nyata dikorbankan menjadi zona tumbal (<i>sacrifice zones</i>) demi ilusi pertumbuhan rasio PDB nasional, yang pada akhirnya harus dibayar sangat mahal dengan ongkos kebangkrutan ekologis permanen.
+Data ini menunjukkan pentingnya penguatan efektivitas instrumen Daya Dukung dan Daya Tampung Lingkungan Hidup (D3TLH) serta analisis AMDAL agar berfungsi sebagai pertimbangan utama dalam proses perizinan investasi, guna mencegah tekanan lingkungan berlebih di wilayah penyangga.
 </div>
 """, unsafe_allow_html=True)
 
@@ -366,7 +366,7 @@ st.plotly_chart(fig_timeline, use_container_width=True, config={'displayModeBar'
 st.markdown("""
 <div style="background:#1E1E1E; padding:15px 20px; border-radius:8px; border-left:4px solid #F57C00; margin-top: 10px; margin-bottom: 25px;">
     <span style="color: #E0E0E0; font-size: 0.95rem;">
-        <b style="color:#F57C00;">Interpretasi Governance Failure:</b> Alih-alih membunyikan "rem darurat", data tren historis mengonfirmasi bahwa instrumen D3TLH hanya berakhir sebagai formalitas administratif yang secara sistematis diabaikan demi memfasilitasi ekspansi oligarki ekstraktif.
+        <b style="color:#F57C00;">Interpretasi Evaluasi Perizinan:</b> Data tren historis mengindikasikan perlunya integrasi instrumen D3TLH secara lebih mengikat dalam pertimbangan izin usaha pertambangan.
     </span>
 </div>
 """, unsafe_allow_html=True)
@@ -407,7 +407,7 @@ with st.expander("ℹ️ Metodologi: Analisis Spasial Tabrakan Tata Ruang"):
 
 
 st.markdown("""
-Dataset spasial menunjukkan obral IUP tambang tidak mempedulikan batas tata ruang. Jutaan hektar kawasan penyangga kehidupan (Hutan Produksi, Kawasan Lindung, dan Area Resapan Air) secara sistematis dirusak dan dihilangkan fungsi ekologisnya demi memuluskan ekspansi ekstraksi nikel.
+Dataset spasial menunjukkan pentingnya kepatuhan terhadap batas-batas tata ruang. Kawasan penyangga kehidupan (Hutan Produksi, Kawasan Lindung, dan Area Resapan Air) memerlukan pengawasan agar fungsi ekologisnya tetap terjaga di tengah ekspansi pertambangan.
 """)
 
 try:
@@ -495,7 +495,7 @@ try:
     st.markdown("""
     <div style="background:#1E1E1E; padding:15px 20px; border-radius:8px; border-left:4px solid #3498DB; margin-top: 10px; margin-bottom: 25px;">
         <span style="color: #E0E0E0; font-size: 0.95rem;">
-            <b style="color:#3498DB;">Fakta Lapangan:</b> Dalam dekade terakhir, total lebih dari <b>56 ribu hektar</b> kawasan livelihood (Pertanian, Peternakan, dan Perkebunan) warga yang seharusnya menjadi ruang hidup masyarakat sekitar telah dihancurkan oleh ekspansi industri ekstraktif.
+            <b style="color:#3498DB;">Fakta Spasial:</b> Dalam dekade terakhir, total lebih dari <b>56 ribu hektar</b> kawasan livelihood (Pertanian, Peternakan, dan Perkebunan) warga tercatat mengalami perubahan tutupan lahan yang beririsan dengan dinamika industri ekstraktif.
         </span>
     </div>
     """, unsafe_allow_html=True)
@@ -559,11 +559,11 @@ with st.expander("ℹ️ Metodologi: Ekstraksi Data Konflik Agraria & Pelanggara
 
 st.markdown("""
 <div style="text-align: justify; line-height: 1.8; color: #E0E0E0; font-size: 1.05rem; margin-bottom: 25px;">
-Di balik lautan angka statistik penerbitan IUP, tersembunyi realitas mengerikan: <b>mayoritas izin tambang nikel di Sulawesi terbit tanpa <i>Free, Prior, and Informed Consent</i> (FPIC) dari masyarakat adat</b>. Laporan terbaru dari <b>Climate Rights International (2024-2025)</b>, <b>Mighty Earth (2024)</b>, dan <b>Business & Human Rights Resource Centre</b> mendokumentasikan pola sistematis di mana perusahaan tambang nikel secara ilegal membabat hutan lindung dan hutan produksi di seluruh Indonesia, termasuk Sulawesi, tanpa konsultasi bermakna dengan masyarakat lokal. Dokumen AMDAL dan analisis daya dukung (D3TLH) disusun sebagai <b>formalitas prosedural belaka</b>—sekadar stempel legalisasi untuk memfasilitasi investasi raksasa tanpa pelibatan komunitas yang ruang hidupnya dirampas.
+Laporan dari <b>Climate Rights International (2024-2025)</b>, <b>Mighty Earth (2024)</b>, dan <b>Business & Human Rights Resource Centre</b> mendokumentasikan isu tata kelola perizinan dan pelaksanaan konsultasi publik (FPIC - <i>Free, Prior, and Informed Consent</i>) di sekitar kawasan industri nikel. Kajian-kajian tersebut menyoroti pentingnya keterlibatan masyarakat lokal dan transparansi dokumen AMDAL serta D3TLH agar proses perizinan berjalan inklusif dan akuntabel.
 <br><br>
-Penelusuran mendalam terhadap <b>database Konsorsium Pembaruan Agraria (KPA) CATAHU 2016-2025</b> dan <b>Tanahkita.id</b> mengungkap fakta mengejutkan: dari <b>21 kasus masalah izin perusahaan</b> yang teridentifikasi dalam 9 laporan tahunan KPA, <b>mayoritas melibatkan perusahaan tambang dengan HGU kadaluarsa, operasi ilegal tanpa izin kehutanan, dan tumpang tindih klaim lahan</b>. Di Sulawesi sendiri, tercatat <b>12 konflik pertambangan</b> dengan <b>4 kasus pelanggaran FPIC eksplisit</b> yang melibatkan penembakan warga, kriminalisasi aktivis, dan penggusuran paksa lahan adat.
+Penelusuran terhadap <b>database Konsorsium Pembaruan Agraria (KPA) CATAHU 2016-2025</b> dan <b>Tanahkita.id</b> mengidentifikasi <b>21 kasus permasalahan izin perusahaan</b>, termasuk terkait status HGU, alokasi kawasan hutan, dan penanganan klaim lahan masyarakat. Di Sulawesi, tercatat <b>12 kasus konflik pertambangan</b> dengan <b>4 kasus yang mencatatkan indikasi isu pelaksanaan FPIC</b>.
 <br><br>
-Yang paling mengkhawatirkan: perusahaan-perusahaan dengan rekam jejak konflik agraria dan pelanggaran HAM ini <b>terus beroperasi hingga hari ini</b>, bahkan beberapa di antaranya menjadi bagian dari Proyek Strategis Nasional (PSN) yang dilindungi negara. Ini membuktikan bahwa sistem perizinan tambang di Indonesia bukan hanya gagal melindungi lingkungan, tetapi juga <b>secara sistematis mengorbankan hak-hak masyarakat adat dan lokal demi kepentingan oligarki ekstraktif</b>.
+Data ini menggarisbawahi perlunya penguatan sistem evaluasi perizinan, pemantauan hukum secara berkala, dan penghormatan terhadap hak-hak komunitas lokal dalam setiap tahapan investasi ekstraktif.
 </div>
 """, unsafe_allow_html=True)
 
@@ -683,7 +683,7 @@ st.plotly_chart(fig_timeline_konflik, use_container_width=True, config={'display
 st.markdown("""
 <div style="background:#1E1E1E; padding:15px 20px; border-radius:8px; border-left:4px solid #E74C3C; margin-top: 10px; margin-bottom: 25px;">
     <span style="color: #E0E0E0; font-size: 0.95rem;">
-        <b style="color:#E74C3C;">Temuan Kunci:</b> Lonjakan konflik pertambangan terjadi pada periode 2011-2023, bersamaan dengan boom nikel di Sulawesi. Laporan KPA menunjukkan pola sistematis: mayoritas konflik melibatkan perusahaan dengan HGU kadaluarsa, operasi ilegal, dan pengabaian FPIC. Era pasca-2020 menunjukkan intensifikasi masalah izin, mengonfirmasi jebolnya instrumen tata kelola lingkungan.
+        <b style="color:#E74C3C;">Temuan Kunci:</b> Peningkatan catatan konflik pertambangan pada periode 2011-2023 beriringan dengan ekspansi industri nikel di Sulawesi. Laporan mendokumentasikan isu terkait kepatuhan perizinan dan penerapan FPIC yang memerlukan perhatian tata kelola.
     </span>
 </div>
 """, unsafe_allow_html=True)
@@ -731,7 +731,7 @@ st.plotly_chart(fig_masalah, use_container_width=True, config={'displayModeBar':
 st.markdown("""
 <div style="background:#1E1E1E; padding:15px 20px; border-radius:8px; border-left:4px solid #F39C12; margin-top: 10px; margin-bottom: 25px;">
     <span style="color: #E0E0E0; font-size: 0.95rem;">
-        <b style="color:#F39C12;">Pola Pelanggaran Dominan:</b> Tumpang tindih klaim lahan (17 kasus) dan HGU kadaluarsa (10 kasus) menjadi masalah terbanyak. Ini membuktikan lemahnya koordinasi antar-kementerian dan diabaikannya status legal lahan dalam proses penerbitan IUP baru. Operasi ilegal (3 kasus) dan IUP bermasalah (2 kasus) menunjukkan pengawasan yang sangat lemah dari otoritas berwenang.
+        <b style="color:#F39C12;">Pola Isu Dominan:</b> Sengketa klaim lahan dan penataan HGU merupakan isu yang terbanyak diidentifikasi, mengindikasikan pentingnya harmonisasi data pertanahan dan pengawasan berkala dari otoritas berwenang.
     </span>
 </div>
 """, unsafe_allow_html=True)
@@ -759,7 +759,7 @@ for idx, row in df_fpic_violations.iterrows():
 st.markdown("""
 <div style="background:#1E1E1E; padding:15px 20px; border-radius:8px; border-left:4px solid #C0392B; margin-top: 10px; margin-bottom: 25px;">
     <span style="color: #E0E0E0; font-size: 0.95rem;">
-        <b style="color:#C0392B;">Kasus Terburuk:</b> PT Gema Kreasi Perdana (GKP) di Pulau Wawonii beroperasi dengan IPPKH kadaluarsa, mengkriminalisasi puluhan warga penolak, dan menghancurkan lahan pertanian yang dikelola 30 tahun oleh 37,000+ jiwa. PT Sumber Energi Jaya di Minahasa Selatan menembaki warga pada 4 Juni 2012. PT Vale Indonesia mengubah lahan adat To Karunsi'e menjadi lapangan golf. Ini bukan kecelakaan—ini desain sistemik.
+        <b style="color:#C0392B;">Studi Kasus:</b> Kasus-kasus di Pulau Wawonii dan Minahasa Selatan menyoroti pentingnya kehati-hatian dalam proses penataan perizinan serta penyelesaian sengketa lahan masyarakat secara adil dan transparan.
     </span>
 </div>
 """, unsafe_allow_html=True)
@@ -1026,9 +1026,9 @@ with col_res1:
 
 with col_res2:
     if is_significant:
-        interp_text = f"Temuan ini sangat krusial: lonjakan intensitas {x_options[x_col]} terbukti **berkorelasi kuat dan signifikan** dengan peningkatan {y_options[y_col]} (OR: {odds_ratio:.3f}). Ini adalah konfirmasi empiris bahwa narasi hilirisasi dan investasi ekstraktif bukanlah pertumbuhan tanpa korban—ekspansi spasial mereka mutlak mengorbankan luasan hutan di tingkat tapak."
+        interp_text = f"Hasil pengujian menunjukkan: intensitas {x_options[x_col]} terbukti **berkorelasi signifikan** dengan peningkatan {y_options[y_col]} (OR: {odds_ratio:.3f}). Temuan ini menunjukkan bahwa ekspansi perizinan berasosiasi dengan dinamika luas deforestasi."
     else:
-        interp_text = f"Secara agregat, hubungan antara {x_options[x_col]} dan {y_options[y_col]} **tidak signifikan** secara statistik (P ≥ 0.05). Ini mengindikasikan bahwa deforestasi terjadi sangat masif di seluruh panel waktu dan ruang secara merata. Krisis tata kelola dan deforestasi telah menyebar ke seluruh wilayah, sehingga lonjakan izin di tahun tertentu tidak lagi menjadi prediktor tunggal atas kebangkrutan ekologis yang sudah sistemik."
+        interp_text = f"Secara agregat, hubungan antara {x_options[x_col]} dan {y_options[y_col]} **tidak signifikan** secara statistik (P ≥ 0.05). Ini mengindikasikan bahwa laju deforestasi terdistribusi secara merata di berbagai lokasi dan kurun waktu."
     
     st.markdown(f"""
     <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid {order_color}; height: 100%;">
@@ -1094,15 +1094,15 @@ import textwrap
 if sig_count > 0:
     exec_narrative = textwrap.dedent(f"""\
 Dari <b>{total_scenarios} skenario pengujian</b>, terdapat <b>{sig_count} skenario yang terbukti SIGNIFIKAN</b>.<br><br>
-Angka-angka pada tabel di atas bukan sekadar statistik di atas kertas, melainkan <b>bukti empiris</b> dari daya rusak kebijakan. Tingginya <i>Odds Ratio</i> pada skenario yang signifikan menegaskan bahwa setiap kali kran perizinan atau luas konsesi diperlebar, risiko terjadinya deforestasi melonjak berkali-kali lipat.<br><br>
-Menariknya, jika ada skenario yang menunjukkan <i>TIDAK SIGNIFIKAN</i> (khususnya pada deforestasi komoditas spesifik), ini tidak berarti industri ekstraktif ramah lingkungan. Sebaliknya, ini menjadi indikasi mengerikan bahwa <b>kehancuran ekologis telah menyebar tak terkendali (spillover effect)</b>—di mana kerusakan hutan akibat operasi tambang menjalar jauh melampaui batas konsesi resmi komoditasnya hingga merusak total lanskap alam secara merata.\
+Tingginya <i>Odds Ratio</i> pada skenario yang signifikan menegaskan bahwa peningkatan penerbitan izin berasosiasi dengan risiko laju deforestasi yang lebih tinggi.<br><br>
+Skenario yang <i>TIDAK SIGNIFIKAN</i> mengindikasikan bahwa dampak deforestasi juga dipengaruhi oleh faktor-faktor lain di luar jumlah izin baru.\
     """)
     bg_color = "rgba(229, 57, 53, 0.15)"
     border_color = "#E53935"
 else:
     exec_narrative = textwrap.dedent(f"""\
 Dari <b>{total_scenarios} skenario pengujian</b>, seluruhnya menunjukkan status <b>TIDAK SIGNIFIKAN</b>.<br><br>
-Dalam kacamata ekonomi politik ekologi, ketidaksignifikanan secara agregat ini justru merupakan <b>sinyal bahaya tertinggi</b>. Ini membuktikan bahwa deforestasi dan kebangkrutan ekologis telah terjadi secara <i>brutal dan merata</i> di seluruh provinsi dan waktu. Ekstraksi ruang telah mencapai titik <i>saturation</i> (jenuh), sehingga penambahan izin di satu titik tidak lagi menjadi satu-satunya penyebab, melainkan seluruh sistem tata kelola telah gagal melindungi lanskap tersisa.\
+Dalam kacamata analisis ekologis, ketidaksignifikanan secara agregat mengindikasikan bahwa laju deforestasi terjadi secara meluas dan konsisten di berbagai wilayah.\
     """)
     bg_color = "rgba(255, 152, 0, 0.15)"
     border_color = "#FF9800"

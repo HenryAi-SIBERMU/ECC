@@ -87,24 +87,24 @@ st.markdown("""
 # ── Header Halaman ──
 st.markdown('<div class="org-badge">CELIOS — Center of Economic and Law Studies</div>', unsafe_allow_html=True)
 st.markdown('<div class="main-title">Distribusi Manfaat vs Beban Ekologis</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-title">Membongkar Ketimpangan: Privatisasi Keuntungan Ekstraktif vs Sosialisasi Kerugian Publik</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-title">Analisis Ketimpangan: Distribusi Manfaat Ekonomi dan Dampak Lingkungan Sektor Ekstraktif</div>', unsafe_allow_html=True)
 
 with st.expander("🔍 Metodologi", expanded=False):
     st.markdown("""
-    **Alur Kausalitas (Ekonomi Politik Ekologi):** `Ekspansi Investasi Ekstraktif` → `Konsentrasi Kekayaan Oligarki` → `Sosialisasi Beban Publik (Konflik, Penyakit, Kerusakan)`
+    **Alur Analisis (Ekonomi Politik Ekologi):** `Investasi Ekstraktif` → `Konsentrasi Manfaat Ekonomi` → `Dampaknya Terhadap Beban Lingkungan & Sosial`
     
-    Bagian ini membedah mitos kesejahteraan agregat dengan membuktikan terjadinya ketimpangan struktural. Menggunakan pendekatan analisis *Crosstabulation* (tabulasi silang) antara data kekayaan ekstrem oligarki (Laporan Ketimpangan Celios 2026) dengan sebaran dampak sosial-ekologis di region ekstraktif Sulawesi.
+    Bagian ini menguji distribusi manfaat dan dampak dengan pendekatan analisis *Crosstabulation* (tabulasi silang) antara indikator akumulasi kekayaan/investasi dengan sebaran dampak sosial-ekologis di wilayah ekstraktif Sulawesi.
     """)
 
 # ── Hero Statement (Narasi Kritis Utama) ──
 st.markdown("""
 <div style="background-color: transparent; padding: 10px 0px; margin-bottom: 25px;">
-    <h2 style="color: #FFFFFF; font-size: 1.8rem; margin-bottom: 15px; font-weight: 700;">Hilirisasi & Ilusi Kesejahteraan</h2>
+    <h2 style="color: #FFFFFF; font-size: 1.8rem; margin-bottom: 15px; font-weight: 700;">Hilirisasi & Distribusi Manfaat</h2>
     <p style="color: #CCCCCC; font-size: 1.05rem; line-height: 1.7; margin-bottom: 15px; text-align: justify;">
-        Narasi <i>"Hilirisasi Hijau"</i> dan pertumbuhan kawasan industri di Sulawesi sering kali diklaim demi kesejahteraan masyarakat dan peningkatan pendapatan negara. Namun, realitas empiris di lapangan menunjukkan sebaliknya: <b>pengerukan ekologis telah menciptakan struktur ketimpangan yang sangat ekstrem</b>. 
+        Pengembangan kawasan industri nikel di Sulawesi ditujukan untuk meningkatkan nilai tambah ekonomi dan pendapatan daerah. Namun, analisis data memperlihatkan adanya dinamika ketimpangan dalam distribusi manfaat dan dampak ekologis.
     </p>
     <p style="color: #CCCCCC; font-size: 1.05rem; line-height: 1.7; text-align: justify;">
-        Bagian ini menyingkap tabir ilusi <i>trickle-down effect</i> (efek tetesan ke bawah) dengan membuktikan satu hipotesis utama: Keuntungan finansial dari ekspansi industri—berupa profit korporasi, rekor nilai ekspor, dan lonjakan investasi—mengalir deras menuju kantong segelintir konglomerasi dan oligarki. Sementara itu, <b>Beban Ekologis (sebelumnya Biaya Ekologis)</b> (seperti lonjakan penyakit mematikan, meledaknya konflik agraria, hingga hancurnya sumber daya air) ditimpakan secara paksa dan massal kepada jutaan penduduk lokal Sulawesi.
+        Bagian ini menguji sejauh mana eksternalitas ekonomi dan lingkungan terdistribusi. Analisis menyandingkan indikator arus investasi dan profitabilitas korporasi dengan indikator beban lingkungan (seperti insidensi ISPA, sengketa lahan, dan kualitas sumber daya air) yang dirasakan oleh komunitas lokal di Sulawesi.
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -138,9 +138,9 @@ with st.expander("ℹ️ Metodologi: Pemetaan Konsentrasi Kekayaan Ekstraktif"):
 
 st.markdown("""
 <div style="text-align: justify; line-height: 1.8; color: #E0E0E0; font-size: 1.05rem; margin-bottom: 25px;">
-Apabila kita membedah ujung dari rantai distribusi keuntungan finansial sektor nikel dan PLTU di Sulawesi, kita akan menemukan fakta bahwa kekayaan tersebut tidak pernah menetes secara proporsional kepada masyarakat luas (*no trickle-down effect*). Sebaliknya, ia mengalir bagaikan corong ke atas menuju ke tangan segelintir taipan yang mendominasi daftar <b>50 Orang Terkaya di Indonesia</b>.
+Analisis terhadap distribusi manfaat ekonomi sektor nikel dan PLTU di Sulawesi menunjukkan konsentrasi nilai tambah pada kelompok usaha skala besar.
 <br><br>
-Data historis dari Laporan Ketimpangan CELIOS mencatat bahwa kekayaan 50 elit superkaya di Indonesia telah meledak hingga melampaui angka <b>Rp4.651 Triliun</b>. Secara absolut, <b>58% dari akumulasi harta tersebut bersumber langsung dari bisnis ekstraktif</b> yang rakus daratan—yakni pertambangan nikel, batu bara, sawit, dan smelter energi kotor. Penguasaan ratusan ribu hektar lahan di Sulawesi oleh konsorsium perusahaan afiliasi para triliuner ini menegaskan bahwa daya rusak lingkungan berbanding lurus dengan akumulasi kekayaan privat mereka.
+Data dari Laporan Ketimpangan CELIOS mencatat bahwa akumulasi kekayaan 50 individu/kelompok usaha terbesar di Indonesia mencapai <b>Rp4.651 Triliun</b>, di mana sekitar <b>58% bersumber dari sektor berbasis sumber daya alam</b> (pertambangan nikel, batu bara, kelapa sawit, dan pemurnian logam). Hal ini mengindikasikan perlunya kebijakan redistribusi manfaat dan pengelolaan dampak lingkungan yang lebih seimbang.
 </div>
 """, unsafe_allow_html=True)
 
@@ -426,17 +426,17 @@ st.markdown("""
 st.markdown("---")
 
 # ── 8.2 Sisi Beban (Penyakit & Konflik) ──
-st.subheader("8.2 Sisi Beban: Kematian, Penyakit, dan Konflik yang Disosialisasikan")
+st.subheader("8.2 Sisi Beban: Indikator Kesehatan dan Sengketa Lahan")
 st.markdown('<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Analisis Dataset ISPA & Tanahkita (CATAHU)</span>', unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
 
 with st.expander("ℹ️ Metodologi: Kalkulasi Tren Eksternalitas Negatif"):
     st.markdown("""
-    **Metode Analisis:** Sub-bab ini menggunakan agregasi deret waktu deskriptif (*Descriptive Time-Series Aggregation*) untuk mengukur lonjakan drastis beban penyakit dan sengketa sosial seiring masifnya industrialisasi ekstraktif.
+    **Metode Analisis:** Sub-bab ini menggunakan agregasi deret waktu deskriptif (*Descriptive Time-Series Aggregation*) untuk mengukur beban penyakit dan sengketa sosial seiring masifnya industrialisasi ekstraktif.
 
     1. **Model Pelacakan Krisis Kesehatan & Agraria:**
-        * **Trend Mapping:** Melacak kurva pertumbuhan eksponensial penderita Infeksi Saluran Pernapasan Akut (ISPA) dari rentang tahun 2014 hingga 2024 secara terpusat di dua episentrum nikel utama (Sulawesi Tengah dan Tenggara).
-        * **Agregasi Kasus Kritis:** Mengumpulkan metrik kuantitatif insiden konflik mematikan dan nilai estimasi kerugian fungsi lingkungan hidup (valuasi ekologis).
+        * **Trend Mapping:** Melacak kurva penderita Infeksi Saluran Pernapasan Akut (ISPA) dari rentang tahun 2014 hingga 2024 di Sulawesi Tengah dan Tenggara.
+        * **Agregasi Kasus Kritis:** Mengumpulkan metrik kuantitatif insiden sengketa lahan dan nilai estimasi dampak lingkungan hidup.
     2. **Kalkulasi/Formula Pengolahan:**
         * `Tren_Kasus_ISPA_Sentra = SUM(Penderita_ISPA) GROUP BY Tahun WHERE Provinsi IN (Sulteng, Sultra)`
         * `Valuasi_Kerusakan_LHK = F(Luas_Deforestasi, Hilang_Fungsi_Air, Cemaran_Laut)`
@@ -450,9 +450,9 @@ with st.expander("ℹ️ Metodologi: Kalkulasi Tren Eksternalitas Negatif"):
 
 st.markdown("""
 <div style="text-align: justify; line-height: 1.8; color: #E0E0E0; font-size: 1.05rem; margin-bottom: 25px;">
-Sementara triliunan rupiah mengalir deras ke rekening segelintir elit oligarki di pusat ibu kota, beban destruktif dari aktivitas pengerukan ini sepenuhnya disosialisasikan (ditanggung) oleh masyarakat lokal di Sulawesi. Konsep <b>Eksternalitas Negatif</b> ini mewujud secara tragis dalam bentuk perampasan ruang hidup, penghancuran wilayah adat, hingga wabah penyakit pernapasan massal akibat asap hitam debu batu bara dari PLTU <i>Captive</i>.
+Aktivitas ekstraktif skala besar berpotensi menimbulkan <b>eksternalitas negatif</b> yang dirasakan oleh komunitas sekitar. Hal ini tercermin pada indikator sengketa tata guna lahan serta fluktuasi prevalensi penyakit saluran pernapasan di sekitar kawasan industri.
 <br><br>
-Berikut adalah metrik dari penderitaan publik yang menjadi "subsidi nyawa dan ruang hidup" demi mengakselerasi penumpukan kekayaan konsorsium ekstraktif:
+Berikut adalah ringkasan indikator dampak lingkungan dan sosial yang memerlukan pemantauan serta mitigasi berkesinambungan:
 </div>
 """, unsafe_allow_html=True)
 
@@ -502,21 +502,21 @@ st.markdown("<br>", unsafe_allow_html=True)
 st.markdown("---")
 
 # ── 8.3 Crosstab: Manfaat Ekonomi vs Beban Ekologis ──
-st.markdown("### 8.3. Pembuktian Statistik: Oligarki Untung, Rakyat Buntung")
+st.markdown("### 8.3 Pembuktian Statistik: Hubungan Indikator Ekonomi Makro dan Indikator Dampak")
 st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Crosstabulation & Pearson Chi-Square Test</span>', unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
 
 with st.expander("ℹ️ Metodologi: Uji Korelasi Investasi vs Ledakan Penyakit"):
     st.markdown("""
-    **Metode Analisis:** Sub-bab ini menggunakan pengujian statistik inferensial (*Crosstabulation & Chi-Square Test*) untuk membuktikan secara matematis apakah membesarnya arus investasi yang masuk (manfaat ekonomi makro) terbukti mendorong peningkatan penyakit pernapasan dan deforestasi (beban ekologis mikro).
+    **Metode Analisis:** Sub-bab ini menggunakan pengujian statistik inferensial (*Crosstabulation & Chi-Square Test*) untuk menguji apakah arus investasi yang masuk berasosiasi dengan dinamika indikator kesehatan pernapasan dan deforestasi.
 
     1. **Uji Signifikansi Statistik (Chi-Square):**
         * **Binning (Kategorisasi Data):** Data numerik investasi dan jumlah kasus penyakit dikategorikan menjadi 2 level (Tinggi & Rendah) menggunakan ambang batas Median historis. `Nilai > Median = Tinggi`, `Nilai <= Median = Rendah`.
-        * `H0 (Null Hypothesis): Tidak ada korelasi yang signifikan secara statistik antara tingginya nilai investasi PMDN/PAD dengan tingginya jumlah penderita ISPA/Deforestasi di provinsi Sulawesi pada suatu tahun tertentu.`
-        * `Decision Rule: Tolak H0 (Bukti Ketimpangan) jika nilai Asymptotic Significance (P-Value) pada uji Pearson Chi-Square < 0.05 (Alpha 5%).`
+        * `H0 (Null Hypothesis): Tidak ada korelasi yang signifikan secara statistik antara nilai investasi PMDN/PAD dengan jumlah penderita ISPA/Deforestasi di provinsi Sulawesi pada suatu tahun tertentu.`
+        * `Decision Rule: Tolak H0 jika nilai Asymptotic Significance (P-Value) pada uji Pearson Chi-Square < 0.05 (Alpha 5%).`
     2. **Kalkulasi/Formula Pengolahan:**
         * `Chi-Square (χ²) = Σ [ (O_i - E_i)² / E_i ]`
-        * `Odds Ratio (Risiko) = (Peluang Penyakit Tinggi pada Investasi Tinggi) / (Peluang Penyakit Tinggi pada Investasi Rendah)`
+        * `Odds Ratio = (Peluang Penyakit Tinggi pada Investasi Tinggi) / (Peluang Penyakit Tinggi pada Investasi Rendah)`
     3. **Variabel & Fitur Data:**
         * **Variabel Independen/Manfaat (X):** `Realisasi_Investasi_Rp` atau `PAD_Juta_Rupiah`
         * **Variabel Dependen/Beban (Y):** `Kasus_ISPA` atau `Deforestasi_Ha`
@@ -527,7 +527,7 @@ with st.expander("ℹ️ Metodologi: Uji Korelasi Investasi vs Ledakan Penyakit"
 st.markdown("""
 <div style="background:#1A1F2B; padding:15px 20px; border-radius:8px; border-left:4px solid #FBC02D; margin-bottom: 25px;">
     <span style="color: #E0E0E0; font-size: 0.95rem;">
-        Untuk menjawab pertanyaan apakah <b>Manfaat Ekonomi</b> sebanding dengan <b>Beban Ekologis</b>, kami menyilangkan (*crosstabulation*) data tersebut secara langsung. Fokus hipotesis awal: <b>"Lonjakan triliunan investasi secara empiris tidak menyejahterakan, melainkan justru berkorelasi linear dengan ledakan penyakit di tingkat tapak."</b>
+        Untuk menguji hubungan antara <b>Manfaat Ekonomi</b> dan <b>Indikator Dampak</b>, dilakukan analisis tabulasi silang (*crosstabulation*). Uji statistik ini bertujuan mengevaluasi sejauh mana peningkatan arus investasi berasosiasi dengan indikator kesehatan dan lingkungan di tingkat daerah.
     </span>
 </div>
 """, unsafe_allow_html=True)
@@ -575,15 +575,13 @@ try:
     interp_sig = "Terdapat korelasi kuat dan SIGNIFIKAN secara statistik (P < 0.05). Provinsi dengan aliran manfaat ekonomi tertinggi mutlak mencatatkan ledakan penderitaan ekologis terparah. Ini membuktikan bahwa keuntungan finansial terkonsentrasi di atas, sementara beban penyakit & pencemaran disebar (disosialisasikan) langsung ke masyarakat."
     interp_insig = "Meskipun tidak mencapai ambang signifikansi ketat (P ≥ 0.05) akibat agregasi provinsi, kecenderungan data empiris sangat jelas: provinsi yang menjadi lumbung investasi/PAD juga menjadi episentrum krisis. Distribusi kekayaan tidak pernah menetes (trickle down), tapi dampaknya merata dirasakan rakyat."
     
-    exec_sig = """<b>KESIMPULAN MUTLAK: Hilirisasi sebagai Mesin Ekstraktif Pemiskinan Ekologis</b><br><br>
-Hasil uji empiris matriks ketimpangan di atas secara definitif meruntuhkan klaim pemerintah bahwa investasi hilirisasi membawa kesejahteraan ganda (<i>trickle-down effect</i>) bagi masyarakat lokal di Sulawesi. Dari skenario yang terbukti signifikan secara statistik, kita menemukan realitas yang sangat kelam: <b>Peningkatan indikator keuntungan ekonomi makro (Investasi PMDN) bergerak lurus secara mematikan dengan jebolnya pertahanan ekologi dan kesehatan publik.</b><br><br>
-Pertama, analisis <i>Odds Ratio</i> menunjukkan bahwa provinsi yang dibanjiri oleh triliunan rupiah investasi tambang nikel dan smelter memiliki risiko hampir dua kali lipat lebih besar untuk mengalami ledakan kasus Penyakit Saluran Pernapasan (ISPA) dan hilangnya tutupan hutan primer. Uang triliunan tersebut sama sekali tidak tersirkulasi untuk membangun fasilitas kesehatan atau memulihkan lingkungan, melainkan mengalir keluar (<i>capital flight</i>) ke kantong segelintir taipan dan konsorsium multinasional.<br><br>
-Kedua, terjadi anomali tragis pada postur Pendapatan Asli Daerah (PAD). Data membuktikan bahwa provinsi dengan kerusakan ekologis paling parah justru seringkali mengalami tekanan fiskal daerah yang tidak proporsional dibandingkan skala investasinya yang raksasa. Hal ini diakibatkan oleh pemberian insentif ugal-ugalan berupa <i>Tax Holiday</i> hingga puluhan tahun kepada perusahaan smelter oligarki. Artinya, korporasi raksasa dibebaskan dari kewajiban pajak, pusat menarik dividen ekspor, sementara pemerintah daerah dan masyarakat lokal murni hanya diwarisi limbah B3, langit yang menghitam akibat debu batu bara, serta ledakan biaya perawatan fasilitas kesehatan akibat penyakit kronis. Ini bukan sekadar ketimpangan, melainkan perampasan sistematis ruang hidup rakyat yang disubsidi oleh regulasi negara."""
+    exec_sig = """<b>KESIMPULAN METODOLOGIS: Korelasi Indikator Investasi dan Dampak Lingkungan</b><br><br>
+Hasil pengujian statistik menunjukkan korelasi signifikan antara peningkatan arus investasi dan indikator dampak lingkungan di Sulawesi. Wilayah dengan pertumbuhan investasi tinggi mencatatkan tren insidensi penyakit saluran pernapasan dan deforestasi yang lebih tinggi.<br><br>
+Nilai <i>Odds Ratio</i> mengindikasikan bahwa peningkatan aktivitas industri berasosiasi dengan kenaikan risiko eksternalitas lingkungan. Temuan ini menekankan pentingnya pengalokasian anggaran yang lebih memadai untuk perlindungan kesehatan publik, rehabilitasi ekologis, dan penguatan layanan dasar masyarakat di kawasan sekitar industri ekstraktif."""
     
-    exec_insig = """<b>KESIMPULAN EMPIRIS: Ilusi Angka Makro dan Kegagalan Keadilan Ekologis</b><br><br>
-Meskipun secara matematis beberapa skenario di atas berstatus "Tidak Signifikan", hal ini sama sekali bukan berarti tidak ada dampak kerusakan yang masif. Sebaliknya, ketidaksignifikanan ini menelanjangi cacat bawaan dari instrumen negara yang mengukur kesejahteraan menggunakan <b>agregat makro level provinsi</b>—sebuah fenomena bias yang disebut <i>Dilution Effect</i> (Efek Pengenceran).<br><br>
-Tragedi ledakan kasus ISPA, pencemaran lumpur beracun, dan konflik lahan sejatinya terkonsentrasi secara ekstrem di "Zona Pengorbanan" level kecamatan atau kabupaten (seperti Bahodopi, Morosi, dan Pulau Wawonii). Namun, ketika jeritan krisis dari episentrum smelter ini dirata-ratakan dengan puluhan kabupaten lain di provinsi tersebut yang kebetulan tidak memiliki tambang, angka penderitaan itu secara artifisial tampak "terencerkan" dan mengecil dalam laporan resmi. Statistik makro provinsi secara efektif menyembunyikan penderitaan rakyat di tingkat tapak.<br><br>
-Kendati demikian, metrik <i>Odds Ratio</i> tetap menolak berbohong: provinsi dengan arus masuk investasi ekstraktif memendam kecenderungan risiko 1,4 hingga nyaris 2 kali lipat lebih mematikan untuk menanggung bencana penyakit pernapasan dan hilangnya hutan primer. Realitas ini mengukuhkan hukum besi ketimpangan oligarki: Keuntungan triliunan dari hilirisasi terpusat dan dikonsolidasikan secara eksklusif ke dalam rekening 50 Taipan Terkaya, sementara beban mematikan disosialisasikan secara paksa (<i>forced socialization of costs</i>) ke dalam paru-paru rakyat kecil dan daya dukung kas daerah."""
+    exec_insig = """<b>KESIMPULAN METODOLOGIS: Evaluasi Penyebaran Dampak dan Perlunya Presisi Data</b><br><br>
+Meskipun pengujian pada skala agregat provinsi menunjukkan hasil tidak signifikan secara statistik (P ≥ 0.05), hal ini dipengaruhi oleh <i>aggregation effect</i> pada skala data provinsi.<br><br>
+Analisis tingkat mikro mengindikasikan bahwa dampak lingkungan dan sosial terkonsentrasi di wilayah sekitar kawasan industri. Oleh karena itu, pengumpulan data pada tingkat kabupaten/kecamatan sangat diperlukan untuk memetakan dampak secara lebih presisi dan merumuskan intervensi kebijakan yang tepat sasaran."""
     
     st.markdown("<br>", unsafe_allow_html=True)
     simulate_n = st.checkbox("Aktifkan Simulasi Skala Kabupaten (Bypass Dilution Effect)", value=False, help="Centang ini untuk mengoversample (mengalikan) dataset menjadi setara dengan jumlah Kabupaten di Sulawesi. Ini akan membuktikan bahwa 'Tidak Signifikan'-nya data murni karena N-size level provinsi yang terlalu kecil.")
