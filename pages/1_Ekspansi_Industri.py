@@ -543,7 +543,7 @@ with st.expander("ℹ️ Metodologi: Analisis Spasial & Uji Tabulasi Silang"):
     1. **Analisis Profil (Chi-Square Test):** Mengukur signifikansi hubungan antara ekspansi kapasitas PLTU (X) dengan kerusakan ekologis (Y).
         * **Binning:** Data panel (Provinsi-Tahun) diklasifikasikan menjadi kategori "Tinggi" dan "Rendah" menggunakan ambang batas nilai Tengah (Median).
         * `H0 (Null Hypothesis): Tidak ada hubungan antara Penambahan Kapasitas PLTU Captive dan Laju Deforestasi.`
-        * `Decision Rule: Jika P-Value < 0.10, maka Tolak H0 (Ada Hubungan Signifikan).`
+        * `Decision Rule: Jika P-Value < 0.05, maka Tolak H0 (Ada Hubungan Signifikan).`
     2. **Kalkulasi Emisi Historis (Cumulative Sum):** Merekam jejak karbon historis PLTU dari tahun ke tahun.
         * `Kapasitas_Kumulatif_t = Kapasitas_Kumulatif_{t-1} + MW_t`
     3. **Pemetaan Zona Tumbal (Proportional Ratio):** Mengukur ketimpangan distribusi fasilitas hilirisasi.
@@ -913,7 +913,7 @@ with st.expander("ℹ️ Metodologi: Analisis Tren & Uji Tabulasi Silang"):
     1. **Analisis Profil (Chi-Square Test):** Mengukur signifikansi hubungan antara tekanan ekspansi (X) dengan kerusakan ekologis (Y).
         * **Binning:** Data panel (Provinsi-Tahun) diklasifikasikan menjadi kategori "Tinggi" dan "Rendah" menggunakan ambang batas nilai Tengah (Median).
         * `H0 (Null Hypothesis): Tidak ada hubungan antara Ekspansi Perizinan dan Laju Deforestasi.`
-        * `Decision Rule: Jika P-Value < 0.10, maka Tolak H0 (Ada Hubungan Signifikan).`
+        * `Decision Rule: Jika P-Value < 0.05, maka Tolak H0 (Ada Hubungan Signifikan).`
     2. **Formula Analisis Tren (Time-Series):** Mengukur agregasi jumlah izin baru dan tren persentase lonjakan (*Year-on-Year*).
         * `Regresi Komparatif = (IUP_t - IUP_{t-1}) / IUP_{t-1} * 100%`
     3. **Variabel & Fitur Data:**

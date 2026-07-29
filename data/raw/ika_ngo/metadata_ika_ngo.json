@@ -1,0 +1,42 @@
+[
+    {
+        "filename": "Earthworks_Tailing_Filtered_IMIP_2026.pdf",
+        "title": "Tailing yang Difilter di Indonesia",
+        "publisher": "Earthworks",
+        "year": 2026,
+        "description": "Laporan insiden jebolnya fasilitas tailing PT Huayue Nickel Cobalt (IMIP) ke Sungai Bahodopi, mencakup temuan kadar Kromium Heksavalen (Cr6+).",
+        "source_url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHrcFBSrNvQXdpWNcSLgI40GxI9Mz3y3EDvaAuUCcXt8m9CA9-8m62Mfz1air59JYdBhlyWfvqHp_2O4looTSQH2hTTAhb3RtT2Jwwkks-noSZO82s9U9N4Fg03EvuUt2DszgPymEtmL1WnQYeJJByPS_BzD2iKPj-sauPetyAqCL9rdSDK89kXaihZ0XU=",
+        "resolved_url": "https://earthworks.org/wp-content/uploads/2026/03/tailing_yang_difilter_di_indonesia.pdf",
+        "local_path": "data\\raw\\ika_ngo\\Earthworks_Tailing_Filtered_IMIP_2026.pdf"
+    },
+    {
+        "filename": "AEER_Risiko_Laut_IMIP_Cr6.pdf",
+        "title": "Kebijakan, Risiko, dan Pencegahan Dampak Pertambangan Nikel pada Laut di Indonesia",
+        "publisher": "AEER",
+        "year": 2025,
+        "description": "Hasil pemantauan lingkungan Morowali, termasuk analisis kadar Kromium Heksavalen (Cr6+) di perairan sekitar kawasan IMIP.",
+        "source_url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHR-1q0IKXzAo_0WFp-gNMoGpAKZ_gnoLKP8xt1lFei9QXzIzVzUtiNl9aEUNViwbvS5La9TrDtpDjRozmn2UmTVANPwFQ0Hl3VXdc1MRC3Xlqz49I2dXOOO9KmQDSQ6zws7AXo2qw4BG10r_quszIvnp5waJ0CUkLErRklwOeF8X3sLCP0aHfEUBenYAvGcO7oqSgIII_f75GuTKqk8lbyONqBS25rRiTcqKsv1xo8pMIrs4entSVgTIWEZbymElfHB6OFGj_cU4c3VOyLgQ==",
+        "resolved_url": "https://www.aeer.or.id/wp-content/uploads/2023/08/Kertas-Kebijakan_Kebijakan-Risiko-dan-Pencegahan-Dampak-Pertambangan-Nikel-Pada-Laut-di-Indonesia-.pdf",
+        "local_path": "data\\raw\\ika_ngo\\AEER_Risiko_Laut_IMIP_Cr6.pdf"
+    },
+    {
+        "filename": "WALHI_Sulsel_Lumbung_Polusi.pdf",
+        "title": "Policy Paper: Sulawesi Lumbung Polusi",
+        "publisher": "WALHI Sulsel",
+        "year": 2024,
+        "description": "Tinjauan pencemaran kromium heksavalen di aliran sungai dan pesisir akibat limpasan air hujan dari stockpile bijih nikel IMIP.",
+        "source_url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH-1Zlj8dzMx7yBfIGzkdi1TS8G-OWBAP5zZm4fXRQUP4DBMGOubGoC5BYAyVi8HLLenNw9kJEU7aNN55uCmEI-9q7BiB2pK1J9m-Cf5Qubo3AkptpyV4zu7AtrgG8Xdm5yA8K3tKFsdsKQ3WtehTVgeeyoNaJS6ZkB9cg_5VSCTu4-6LxL489qGVV0jnEwIwORhw==",
+        "resolved_url": "https://walhisulsel.or.id/wp-content/uploads/2025/06/POLICY-PAPER-SULAWESI-LUMBUNG-POLUSI.pdf",
+        "local_path": "data\\raw\\ika_ngo\\WALHI_Sulsel_Lumbung_Polusi.pdf"
+    },
+    {
+        "filename": "Tesis_UGM_Matarape_Morowali.pdf",
+        "title": "Analisis Kualitas Air Limpasan Tambang Nikel di Morowali",
+        "publisher": "UGM",
+        "year": 2023,
+        "description": "Penelitian akademis menguji kualitas air limpasan dari pertambangan nikel laterit di Desa Matarape, Kabupaten Morowali.",
+        "source_url": "https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGc3EbvW6IYZVtqiqXmxtv-BKKgAN24QyR2-lB_4ApIyvS30e31LLPkIkcDENnutzUf5uW2n96pCLw7c9BV5JiCgCzZMGW-oOM9_TPMQEFOgrqWz8dLP3x8uFRfWZXXb4ZXnV2zlOwp8fnfETHI2qM=",
+        "resolved_url": "https://etd.repository.ugm.ac.id/penelitian/detail/272318",
+        "local_path": "data\\raw\\ika_ngo\\Tesis_UGM_Matarape_Morowali.pdf"
+    }
+]

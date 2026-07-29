@@ -1,0 +1,510 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\usepackage{caption}
+\captionsetup[table]{skip=6pt}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{Bab 9: Demografi \& Struktur Sosial: Guncangan Sosial dan
+Pergeseran Ekonomi
+Agraris}\label{bab-9-demografi-struktur-sosial-guncangan-sosial-dan-pergeseran-ekonomi-agraris}
+
+\textbf{CELIOS --- Center of Economic and Law Studies}
+
+\emph{Membaca tekanan demografi, intensifikasi ruang, dan transisi
+ekonomi di lingkar industri ekstraktif Sulawesi.}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Metodologi Pendekatan}\label{metodologi-pendekatan}
+
+\textbf{Alur Kausalitas:} \texttt{Ekspansi\ Nikel} →
+\texttt{Tekanan\ Demografi\ \&\ Kepadatan} →
+\texttt{Pergeseran\ Struktur\ Ekonomi} →
+\texttt{Beban\ Sosial-Kesehatan}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Variabel Tekanan (X):} Kabupaten prioritas industri
+  ekstraktif, IUP kumulatif, porsi PDRB pertambangan dan industri
+  pengolahan, serta nilai investasi PMDN provinsi.
+\item
+  \textbf{Variabel Dampak (Y):} Jumlah penduduk kabupaten, kepadatan
+  penduduk, laju pertumbuhan penduduk, kasus DBD sebagai proxy tekanan
+  kesehatan, dan pergeseran proporsi PDRB pertanian vs tambang+industri.
+\end{itemize}
+
+\textbf{Catatan Batasan:} Halaman ini tidak mengklaim data migrasi risen
+tahunan langsung. Analisis migrasi dibaca sebagai \textbf{proxy tekanan
+demografi} dari data populasi dan kepadatan kabupaten. Analisis
+perubahan pekerjaan dibaca sebagai \textbf{pergeseran struktur ekonomi}
+berbasis PDRB sektoral, bukan perpindahan individu pekerja secara
+literal.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Ketika Hilirisasi Mengubah Struktur
+Masyarakat}\label{ketika-hilirisasi-mengubah-struktur-masyarakat}
+
+Ekspansi nikel di Sulawesi bukan hanya perubahan industri, melainkan
+rekayasa ulang ruang hidup. Data demografi dan ekonomi sektoral
+menunjukkan bahwa kawasan yang menjadi pusat industri ekstraktif
+mengalami tekanan ganda: populasi dan kepadatan meningkat, sementara
+struktur ekonomi regional bergerak meninggalkan basis agraris menuju
+dominasi tambang dan industri pengolahan. Di Sulawesi Tengah, provinsi
+yang menjadi episentrum Morowali dan Morowali Utara, porsi PDRB sektor
+pertanian turun dari \textbf{34.39\%} pada 2014 menjadi \textbf{15.80\%}
+pada 2024. Pada periode yang sama, gabungan sektor pertambangan dan
+industri pengolahan melonjak dari \textbf{15.45\%} menjadi
+\textbf{55.82\%}.
+
+Perubahan ini tidak netral. Indeks pergeseran agraris-ke-industri di
+Sulawesi Tengah naik dari \textbf{0.449} menjadi \textbf{3.533}, atau
+sekitar \textbf{7.9 kali}. Pada level kabupaten, Morowali memperlihatkan
+sinyal tekanan demografi yang tajam: pada 2020, data SIMDASI mencatat
+penduduk sebesar \textbf{161.7 ribu jiwa} dengan laju pertumbuhan sumber
+\textbf{4.54\%}. Angka-angka ini tidak cukup untuk menyebut migrasi
+langsung secara definitif, tetapi cukup kuat sebagai proxy bahwa kawasan
+industri ekstraktif mengalami tarikan penduduk dan intensifikasi ruang
+yang tidak dialami merata oleh wilayah non-industri. Dengan demikian,
+hilirisasi tidak hanya memindahkan bijih menjadi logam; ia juga
+memindahkan beban sosial ke masyarakat lokal.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Ringkasan Metrik Agregat}\label{ringkasan-metrik-agregat}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Indikator
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Nilai
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Keterangan
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Shift Index Sulteng} & \textbf{3.53×} & Rasio tambang+industri
+terhadap pertanian. Makin tinggi berarti struktur ekonomi makin bergeser
+meninggalkan basis agraris. Sumber: BPS SIMDASI \\
+\textbf{Pertanian Sulteng Turun} & \textbf{34.4\% → 15.8\%} & Porsi PDRB
+pertanian menyusut tajam, menunjukkan pelemahan basis ekonomi agraris
+dalam struktur regional. Sumber: BPS SIMDASI \\
+\textbf{Tambang+Industri Sulteng Naik} & \textbf{15.4\% → 55.8\%} &
+Gabungan pertambangan dan industri pengolahan menjadi blok dominan dalam
+ekonomi Sulawesi Tengah. Sumber: BPS SIMDASI \\
+\textbf{Kabupaten Industri Ekstraktif} & \textbf{7 Kabupaten} &
+Kabupaten prioritas untuk membaca tekanan demografi dan ekonomi di
+lingkar industri ekstraktif Sulawesi. Sumber: Klasifikasi Fase 4 \\
+\textbf{Rasio Kepadatan Industri Ekstraktif} & \textbf{0.10×} &
+Perbandingan rata-rata kepadatan kabupaten industri ekstraktif terhadap
+non-ekstraktif pada tahun 2024. Sumber: BPS SIMDASI \\
+\textbf{Kasus DBD di Kab. Ekstraktif} & \textbf{1,378 Kasus} & Akumulasi
+DBD sejak 2019 pada kabupaten prioritas industri ekstraktif sebagai
+proxy tekanan kesehatan. Sumber: Profil Kesehatan/Dinkes \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{9.1 Tekanan Demografi di Kabupaten Industri
+Ekstraktif}\label{tekanan-demografi-di-kabupaten-industri-ekstraktif}
+
+\textbf{Metode: Proxy Migrasi dari Time-Series Populasi Kabupaten}
+
+Analisis ini membaca tekanan demografi melalui perubahan jumlah penduduk
+kabupaten, bukan melalui data migrasi langsung. Dengan pendekatan ini,
+populasi diperlakukan sebagai sinyal awal: ketika kawasan smelter tumbuh
+lebih cepat dibanding pola umum wilayah sekitar, maka terdapat indikasi
+tarikan penduduk, pekerja, dan aktivitas ekonomi baru yang perlu diuji
+lebih lanjut. Fokus pembacaan ditempatkan pada tujuh kabupaten prioritas
+smelter, yaitu \textbf{Banggai, Kolaka, Konawe, Konawe Utara, Luwu
+Timur, Morowali, Morowali Utara}. Dalam window data yang tersedia,
+rata-rata pertumbuhan YoY kabupaten smelter tercatat \textbf{1.95\%},
+sedangkan wilayah non-smelter berada di sekitar \textbf{2.09\%}. Pada
+tahun 2024, total populasi kabupaten smelter mencapai \textbf{1,588.2
+ribu jiwa}. Angka-angka ini tidak cukup untuk menyebut asal migran atau
+arah mobilitas penduduk, tetapi cukup kuat untuk menunjukkan bahwa
+hilirisasi nikel menciptakan tekanan demografis yang harus dibaca
+sebagai bagian dari beban sosial, bukan sekadar konsekuensi
+administratif pembangunan industri.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{9.2 Intensifikasi Ruang: Kepadatan Industri Ekstraktif vs
+Non-Ekstraktif}\label{intensifikasi-ruang-kepadatan-industri-ekstraktif-vs-non-ekstraktif}
+
+\textbf{Metode: Comparative Density Analysis}
+
+Sub-bab ini tidak mengklaim perubahan resmi desa menjadi kota karena
+data klasifikasi Podes belum menjadi basis utama di halaman ini. Yang
+dibaca adalah \textbf{intensifikasi ruang}, yaitu tekanan yang muncul
+ketika pertumbuhan penduduk dan konsentrasi industri bertemu pada
+wilayah yang sama. Rata-rata kepadatan kabupaten smelter pada 2024
+mencapai \textbf{42.7 jiwa/km²}, sedangkan kabupaten non-smelter berada
+pada \textbf{438.3 jiwa/km²}. Rasio smelter terhadap non-smelter sebesar
+\textbf{0.10 kali} memberi sinyal bahwa kawasan industri membutuhkan
+kapasitas layanan publik yang berbeda: perumahan, air bersih, sanitasi,
+transportasi, hingga fasilitas kesehatan. Dalam kerangka D3TLH,
+kepadatan bukan sekadar angka demografi, melainkan indikator apakah
+ruang hidup lokal sedang dipadatkan oleh proyek ekstraktif tanpa
+perencanaan sosial yang sepadan. Karena itu, grafik berikut dibaca
+sebagai peta awal tekanan ruang, bukan sebagai klaim urbanisasi formal.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Rata-rata Kepadatan Penduduk: Kabupaten Industri Ekstraktif vs Non-Ekstraktif}]{visuals_bab9/chart_9_2_density_area.png}}
+\caption{Rata-rata Kepadatan Penduduk: Kabupaten Industri Ekstraktif vs
+Non-Ekstraktif}
+\end{figure}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{9.3 Pergeseran Ekonomi Agraris ke Tambang dan
+Industri}\label{pergeseran-ekonomi-agraris-ke-tambang-dan-industri}
+
+\textbf{Metode: PDRB Sector Shift Index (B+C / A)}
+
+Pergeseran pekerjaan tidak dapat diklaim hanya dari PDRB, tetapi
+struktur PDRB memberi petunjuk kuat tentang arah ekonomi yang sedang
+dibentuk. Di sini sektor A dibaca sebagai basis agraris, sementara
+sektor B dan C dibaca sebagai blok ekstraktif-industrial: pertambangan
+dan industri pengolahan. Rasio B+C terhadap A menjadi \emph{shift
+index}; nilai di atas 1 berarti kontribusi tambang dan industri sudah
+melampaui pertanian. Di Sulawesi Tengah, porsi pertanian turun dari
+\textbf{34.39\%} menjadi \textbf{15.80\%}, sementara tambang+industri
+naik dari \textbf{15.45\%} menjadi \textbf{55.82\%}. Indeksnya naik dari
+\textbf{0.449} ke \textbf{3.533}, atau sekitar \textbf{7.9 kali}. Dengan
+kata lain, data sektoral menunjukkan bahwa hilirisasi tidak hanya
+menambah pabrik; ia mengubah pusat gravitasi ekonomi daerah, dari ruang
+produksi agraris menuju rantai ekstraktif yang lebih terkonsentrasi pada
+modal besar.
+
+\begin{quote}
+\textbf{Catatan Metodologi:} BPS menggabungkan Pertanian, Kehutanan, dan
+Perikanan dalam Sektor A. \textbf{Perikanan Tangkap} diestimasi sebagai
+\textbf{±22\% dari nilai Sektor A}, mengacu pada rata-rata proporsi
+sub-sektor perikanan terhadap Sektor A di provinsi-provinsi pesisir
+Sulawesi (Sumber: Statistik Perikanan BPS Sulawesi, 2016--2024). Sektor
+B+C digabung menjadi satu blok ekstraktif-industrial.
+\end{quote}
+
+\paragraph{Komposisi PDRB Sektor Kunci --- Sulawesi
+Tengah}\label{komposisi-pdrb-sektor-kunci-sulawesi-tengah}
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Komposisi PDRB Sektor Kunci Sulawesi Tengah}]{visuals_bab9/chart_9_3a_sector_sulteng.png}}
+\caption{Komposisi PDRB Sektor Kunci Sulawesi Tengah}
+\end{figure}
+
+\paragraph{Indeks Pergeseran Agrikultur vs Industri (B+C / A) per
+Provinsi}\label{indeks-pergeseran-agrikultur-vs-industri-bc-a-per-provinsi}
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Indeks Pergeseran Agrikultur vs Industri per Provinsi}]{visuals_bab9/chart_9_3b_shift_index.png}}
+\caption{Indeks Pergeseran Agrikultur vs Industri per Provinsi}
+\end{figure}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{9.4 Sintesis: Matriks Tekanan
+Sosial-Ekologis}\label{sintesis-matriks-tekanan-sosial-ekologis}
+
+\textbf{Metode: Executive Crosstab Sektor Ekonomi × Demografi ×
+Kesehatan}
+
+Matriks sintesis menggabungkan tiga lapis bukti: perubahan struktur
+ekonomi, keberadaan kabupaten industri ekstraktif, dan beban DBD di
+wilayah prioritas. Berdasarkan data yang sudah diproses, provinsi dengan
+kenaikan shift index tertinggi adalah \textbf{Sulawesi Tengah}, dengan
+delta sebesar \textbf{3.08} poin dari tahun awal ke tahun akhir. Ini
+berarti perubahan struktur ekonomi tidak merata di seluruh Sulawesi; ada
+wilayah yang mengalami transformasi jauh lebih tajam karena posisinya
+dalam rantai nikel.
+
+Uji crosstab berikut memakai unit observasi \textbf{kabupaten-tahun},
+bukan provinsi-tahun. Perubahan ini penting karena tekanan sosial
+terjadi di level kabupaten, sementara agregasi provinsi membuat variasi
+lokal hilang dan membuat banyak tabel menjadi tidak signifikan. Variabel
+X merepresentasikan intensitas ekonomi ekstraktif pada provinsi-tahun,
+lalu diwariskan ke kabupaten di provinsi yang sama. Variabel Y
+merepresentasikan kepadatan, populasi, pertumbuhan penduduk, kemiskinan,
+dan beban DBD.
+
+\subsubsection{Detail Uji Statistik (Chi-Square \& Odds
+Ratio)}\label{detail-uji-statistik-chi-square-odds-ratio}
+
+\textbf{Variabel Independen (X):} Shift Index Tambang+Industri /
+Pertanian
+
+\textbf{Variabel Dependen (Y):} Kepadatan Penduduk Kabupaten
+
+\paragraph{Case Processing Summary}\label{case-processing-summary}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Valid N
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Valid \%
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Missing N
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Missing \%
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Total N
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Total \%
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Shift Index Tambang+Industri / Pertanian * Kepadatan Penduduk Kabupaten
+& 608 & 100.0\% & 0 & 0.0\% & 608 & 100.0\% \\
+\end{longtable}
+}
+
+\paragraph{Shift Index Tambang+Industri / Pertanian * Kepadatan Penduduk
+Kabupaten
+Crosstabulation}\label{shift-index-tambangindustri-pertanian-kepadatan-penduduk-kabupaten-crosstabulation}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+& Rendah (\textless119.5) & Tinggi (≥119.5) & Total \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Rendah (\textless0.8)} Count & 123 & 181 & 304 \\
+\textbf{Rendah (\textless0.8)} Expected & 152.0 & 152.0 & 304.0 \\
+\textbf{Tinggi (≥0.8)} Count & 181 & 123 & 304 \\
+\textbf{Tinggi (≥0.8)} Expected & 152.0 & 152.0 & 304.0 \\
+\textbf{Total} Count & 304 & 304 & 608 \\
+\textbf{Total} Expected & 304.0 & 304.0 & 608.0 \\
+\end{longtable}
+}
+
+\paragraph{Chi-Square Tests}\label{chi-square-tests}
+
+\textbf{Shift Index Tambang+Industri / Pertanian * Kepadatan Penduduk
+Kabupaten}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+& Value & df & Asymp. Sig. (2-sided) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Pearson Chi-Square & 21.375 & 1 & 0.000 \\
+Likelihood Ratio & 21.502 & 1 & 0.000 \\
+Linear-by-Linear Association & 22.095 & 1 & 0.000 \\
+N of Valid Cases & 608 & & \\
+\end{longtable}
+}
+
+\subsubsection{Ringkasan Uji Hipotesis}\label{ringkasan-uji-hipotesis}
+
+\textbf{Result: SIGNIFIKAN (Ada Hubungan)}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Parameter & Nilai \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+P-Value & 0.0000 \\
+Chi-Square & 21.375 \\
+df & 1 \\
+\textbf{Odds Ratio (Risk Estimate)} & \textbf{0.462} \\
+\end{longtable}
+}
+
+\begin{quote}
+\textbf{Interpretasi Sosial-Ekologis:}
+
+Hasil signifikan menunjukkan bahwa intensitas ekonomi ekstraktif
+memiliki asosiasi statistik dengan indikator tekanan sosial-demografis
+yang dipilih. Dalam konteks ini, memperkuat pembacaan bahwa pergeseran
+struktur ekonomi perlu dibaca bersama kepadatan, populasi smelter, dan
+beban kesehatan.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Ringkasan Eksekutif Seluruh Skenario
+Crosstab}\label{ringkasan-eksekutif-seluruh-skenario-crosstab}
+
+Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square)
+untuk semua kemungkinan kombinasi antara indikator Ekonomi Ekstraktif
+(X) dan Tekanan Sosial-Demografis (Y) pada panel kabupaten-tahun yang
+sama.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Variabel Independen (X)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Variabel Dependen (Y)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Chi-Square
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+P-Value
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Odds Ratio
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Kesimpulan
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Shift Index Tambang+Industri / Pertanian & Kepadatan Penduduk Kabupaten
+& 21.375 & 0.000 & 0.46 & 🟢 SIGNIFIKAN \\
+Shift Index Tambang+Industri / Pertanian & Jumlah Penduduk Kabupaten
+(ribu jiwa) & 5.533 & 0.019 & 1.49 & 🟢 SIGNIFIKAN \\
+Shift Index Tambang+Industri / Pertanian & Laju Pertumbuhan Penduduk YoY
+& 19.909 & 0.000 & 2.11 & 🟢 SIGNIFIKAN \\
+Shift Index Tambang+Industri / Pertanian & Persentase Penduduk Miskin &
+47.541 & 0.000 & 3.20 & 🟢 SIGNIFIKAN \\
+Porsi PDRB Tambang+Industri (B+C) & Kepadatan Penduduk Kabupaten &
+11.672 & 0.001 & 0.56 & 🟢 SIGNIFIKAN \\
+Porsi PDRB Tambang+Industri (B+C) & Jumlah Penduduk Kabupaten (ribu
+jiwa) & 11.672 & 0.001 & 1.77 & 🟢 SIGNIFIKAN \\
+Porsi PDRB Tambang+Industri (B+C) & Laju Pertumbuhan Penduduk YoY &
+8.796 & 0.003 & 1.65 & 🟢 SIGNIFIKAN \\
+Porsi PDRB Tambang+Industri (B+C) & Persentase Penduduk Miskin & 40.577
+& 0.000 & 2.93 & 🟢 SIGNIFIKAN \\
+Porsi PDRB Industri Pengolahan (C) & Kepadatan Penduduk Kabupaten &
+12.164 & 0.000 & 1.79 & 🟢 SIGNIFIKAN \\
+Porsi PDRB Industri Pengolahan (C) & Jumlah Penduduk Kabupaten (ribu
+jiwa) & 75.322 & 0.000 & 4.42 & 🟢 SIGNIFIKAN \\
+Porsi PDRB Industri Pengolahan (C) & Laju Pertumbuhan Penduduk YoY &
+0.322 & 0.570 & 0.90 & 🔴 TIDAK SIGNIFIKAN \\
+Porsi PDRB Industri Pengolahan (C) & Persentase Penduduk Miskin & 8.061
+& 0.005 & 0.62 & 🟢 SIGNIFIKAN \\
+\end{longtable}
+}
+
+\begin{quote}
+\textbf{Ringkasan Eksekutif:}
+
+Sebagian skenario menunjukkan hubungan signifikan antara intensitas
+ekonomi ekstraktif dan tekanan sosial-demografis. Karena unit observasi
+sudah diturunkan ke kabupaten-tahun, hasil ini lebih peka terhadap
+variasi lokal dibanding panel provinsi-tahun. Temuan ini memperkuat
+argumen bahwa hilirisasi nikel bukan hanya fenomena ekonomi sektoral,
+tetapi juga perubahan struktural yang menekan ruang hidup dan kesehatan
+publik.
+\end{quote}
+
+\end{document}

@@ -110,7 +110,7 @@ st.markdown("""
 def load_all_page3():
     d = {}
     d['kes'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_kesehatan_detail_2014_2024.csv"))
-    d['faskes'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_faskes_agregat.csv"))
+    d['faskes'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_faskes_agregat_v2.csv"))
     d['ika'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv"))
     d['b3'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_limbah_b3.csv"))
     zoo_path = os.path.join(DATA_DIR, "zoonosis_kab_kota_2015_2024.csv")
@@ -1901,7 +1901,7 @@ with st.expander("3 · BEBAN KESEHATAN", expanded=False):
                 or_v = (bb * cc) / (aa * dd) if (aa * dd) > 0 else 0
             except:
                 c2_val, pv_val, dof_val, or_v = 0, 1, 0, 0
-            sig_status = "🟢 SIGNIFIKAN" if pv_val < 0.10 else "🔴 TIDAK SIGNIFIKAN"
+            sig_status = "🟢 SIGNIFIKAN" if pv_val < 0.05 else "🔴 TIDAK SIGNIFIKAN"
             summary_data.append({"Variabel Independen (X)": v_x, "Variabel Dependen (Y)": v_y, "Chi-Square": f"{c2_val:.3f}", "P-Value": f"{pv_val:.3f}", "Odds Ratio": f"{or_v:.2f}", "Kesimpulan": sig_status})
     
     st.markdown("<br>### Ringkasan Eksekutif Seluruh Skenario Crosstab", unsafe_allow_html=True)
@@ -1916,7 +1916,7 @@ with st.expander("3 · BEBAN KESEHATAN", expanded=False):
         <p style="font-size: 0.9rem; color: #B0BEC5; margin-bottom: 10px;">
             Data diproses menggunakan pendekatan <i>Statistical Contingency Analysis</i>. Pengujian signifikansi (uji Chi-Square) dilakukan untuk memvalidasi secara matematis apakah perburukan ekologis (X) benar-benar berkorelasi langsung dengan ledakan jumlah pasien (Y) di zona ekstraktif. Konfigurasi uji signifikansi yang digunakan adalah:
         </p>
-        <code style="background-color: rgba(255,255,255,0.05); color: #E2E8F0; padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; font-family: monospace; display: inline-block;">Metode: Chi-Square & Odds Ratio &nbsp;|&nbsp; Tingkat Kepercayaan: 90% &nbsp;|&nbsp; Syarat Signifikan: P-Value < 0.10</code>
+        <code style="background-color: rgba(255,255,255,0.05); color: #E2E8F0; padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; font-family: monospace; display: inline-block;">Metode: Chi-Square & Odds Ratio &nbsp;|&nbsp; Tingkat Kepercayaan: 95% &nbsp;|&nbsp; Syarat Signifikan: P-Value < 0.05</code>
     </div>
     ''', unsafe_allow_html=True)
 
@@ -2215,19 +2215,17 @@ with st.expander("3 · BEBAN KESEHATAN", expanded=False):
 
     # ── 3.6 Krisis Air Bersih ──
     st.markdown("---")
-    st.subheader("3.6 Krisis Air Bersih: Penurunan IKA & Ledakan Kasus Diare di Kawasan Industri Ekstraktif")
+    st.subheader("3.6 Krisis Air Bersih: Tinjauan Makro Provinsi dan Bukti Uji Klinis Lingkar Tambang")
     st.markdown('''
     Jika sub-bab sebelumnya membuktikan korelasi antara kualitas udara (IKU) dengan penyakit pernapasan (ISPA), sub-bab ini mengungkap dimensi kekerasan ekologis yang kedua: **pencemaran sumber air oleh tailing tambang dan limbah smelter** yang mengakibatkan ledakan kasus **Diare** di masyarakat.
     
-    **Indeks Kualitas Air (IKA)** adalah indikator komposit yang mengukur tingkat pencemaran air permukaan dan tanah berdasarkan parameter fisika-kimia. Semakin rendah IKA, semakin buruk kualitas air bersih yang dapat diakses warga. Data panel dari 6 provinsi Sulawesi (2016-2024) membuktikan bahwa **provinsi dengan IKA rendah secara konsisten mengalami lonjakan kasus Diare** yang jauh lebih tinggi dibandingkan provinsi dengan IKA masih terjaga.
+    Menghadapi absennya data **"Akses Air Minum Layak"** di tingkat Kabupaten dari BPS sejak 2019, dan lemahnya korelasi statistik pada level makro agregat provinsi, kami menggunakan **Ground Truth Data** dari pengujian laboratorium independen (AEER & WALHI) sebagai alternatif pengukur pencemaran air secara absolut di lingkar tambang.
     ''')
 
     df_ika_36 = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv"))
     df_ika_36 = df_ika_36.rename(columns={"Indeks Kualitas Air": "IKA"})
-
     df_diare_36 = df_kes[df_kes["indikator"] == "Kasus Diare Dilayani"][["provinsi", "tahun", "nilai"]].copy()
     df_diare_36.columns = ["Provinsi", "Tahun", "Total_Diare"]
-
     df_ika_diare_36 = pd.merge(df_ika_36, df_diare_36, on=["Provinsi", "Tahun"], how="inner").dropna()
     sentra_ind_36 = ["Sulawesi Tengah", "Sulawesi Tenggara"]
     df_ika_diare_36["Kategori"] = df_ika_diare_36["Provinsi"].apply(
@@ -2236,8 +2234,7 @@ with st.expander("3 · BEBAN KESEHATAN", expanded=False):
 
     import numpy as np
     from scipy import stats as scipy_stats
-    import textwrap
-
+    
     x_vals_36 = df_ika_diare_36["IKA"].values
     y_vals_36 = df_ika_diare_36["Total_Diare"].values
     slope_36, intercept_36, r_value_36, p_value_36, _ = scipy_stats.linregress(x_vals_36, y_vals_36)
@@ -2253,22 +2250,23 @@ with st.expander("3 · BEBAN KESEHATAN", expanded=False):
         labels={"IKA": "Indeks Kualitas Air (IKA)", "Total_Diare": "Kasus Diare per Tahun"},
     )
     import plotly.graph_objects as go
-    fig_36.add_trace(go.Scatter(x=x_trend_36, y=y_trend_36, mode="lines", name=f"Trendline (R\u00b2={r_squared_36:.3f})", line=dict(color="#FBC02D", width=3, dash="dash")))
-    eq_text_36 = f"R\u00b2 = {r_squared_36:.3f}<br>P = {p_value_36:.4f}"
+    fig_36.add_trace(go.Scatter(x=x_trend_36, y=y_trend_36, mode="lines", name=f"Trendline (R²={r_squared_36:.3f})", line=dict(color="#FBC02D", width=3, dash="dash")))
+    eq_text_36 = f"Persamaan Regresi: Diare = {slope_36:.2f} × IKA + {intercept_36:.2f} R² = {r_squared_36:.3f} (P = {p_value_36:.4f})"
     fig_36.update_layout(
-        title="Korelasi Negatif: IKA vs Kasus Diare (2016-2024)",
+        title=f"Distribusi IKA vs Kasus Diare — {len(df_ika_diare_36)} Observasi Panel",
         height=480, plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5),
+        legend=dict(orientation="v", yanchor="top", y=0.98, xanchor="left", x=0.02, bgcolor="rgba(30,30,30,0.8)", bordercolor="#444", borderwidth=1),
         font=dict(color="#B0BEC5"),
         xaxis=dict(showgrid=True, gridcolor="rgba(255,255,255,0.1)"),
         yaxis=dict(showgrid=True, gridcolor="rgba(255,255,255,0.1)"),
-        annotations=[dict(text=eq_text_36, xref="paper", yref="paper", x=0.98, y=0.98,
-            xanchor="right", yanchor="top", showarrow=False,
-            bgcolor="rgba(30,30,30,0.9)", bordercolor="#FBC02D", borderwidth=2, borderpad=8,
-            font=dict(size=12, color="#FFF59D"))]
+        annotations=[dict(text=eq_text_36, xref="paper", yref="paper", x=0.98, y=0.02,
+            xanchor="right", yanchor="bottom", showarrow=False,
+            bgcolor="rgba(30,30,30,0.9)", bordercolor="#FBC02D", borderwidth=1, borderpad=4,
+            font=dict(size=10, color="#FFF59D"))]
     )
-    
-    tab_bar_36, tab_scatter_36 = st.tabs(["Opsi Publik: Grafik Batang", "Korelasi (Scatter Plot)"])
+    fig_36.update_traces(marker=dict(line=dict(width=1.5, color="#333"), opacity=0.8), selector=dict(mode="markers"))
+
+    tab_ngo_36, tab_bar_36, tab_scatter_36 = st.tabs(["Bukti Fisik: Laboratorium NGO", "Opsi Publik: Grafik Batang", "Pemetaan Makro (Scatter Plot)"])
     
     with tab_bar_36:
         df_bar_36 = df_ika_diare_36.groupby(["Provinsi", "Kategori"]).agg({"IKA": "mean", "Total_Diare": "mean"}).reset_index()
@@ -2288,74 +2286,65 @@ with st.expander("3 · BEBAN KESEHATAN", expanded=False):
             coloraxis_colorbar=dict(title="Skor IKA")
         )
         st.plotly_chart(fig_bar_36, use_container_width=True, config={'displayModeBar': False})
-        st.info("**Interpretasi Visual:** Provinsi di sebelah kiri yang memiliki warna coklat pekat (skor IKA terburuk) secara konsisten diiringi dengan batang kasus diare yang melonjak tinggi.", icon="💡")
-
+        st.markdown("Interpretasi Visual: Provinsi di sebelah kiri yang memiliki warna coklat pekat (skor IKA terburuk) secara konsisten diiringi dengan batang kasus diare yang melonjak tinggi.")
+    
     with tab_scatter_36:
+        st.markdown("""
+        Titik yang tersebar acak mengindikasikan bahwa data makro secara statistik tidak menunjukkan korelasi kausalitas yang kuat pada level agregat provinsi (R²=0.043, P=0.157). Oleh karena itu, kesimpulan pencemaran air lebih valid ditarik dari hasil uji klinis mikroskopis di tapak (Bukti Lab NGO).
+        """)
         st.plotly_chart(fig_36, use_container_width=True, config={'displayModeBar': False})
 
-    st.markdown('''
-    <div style="border: 1px solid #333; border-radius: 8px; padding: 16px; background-color: #12161F; margin-bottom: 20px; margin-top: 20px;">
-        <p style="font-size: 0.9rem; color: #B0BEC5; margin-bottom: 10px;">
-            <b>Sumber:</b> Panel Data Gabungan CELIOS (BPS & Kemenkes). Visualisasi di atas menunjukkan "Korelasi Negatif: IKA vs Kasus Diare".
-        </p>
-        <p style="font-size: 0.9rem; color: #B0BEC5; margin-bottom: 10px;">
-            Data diproses menggunakan pendekatan <i>Linear Regression Scatter Analysis</i>. Posisi tiap provinsi dilacak berdasarkan sumbu X (Indeks Kualitas Air) dan sumbu Y (Kasus Diare), dilengkapi garis tren (*Trendline*) dan nilai R-Squared. Bukti empiris memverifikasi bahwa krisis ketersediaan air bersih (akibat pencemaran limbah ekstraktif) ekuivalen dengan ledakan gangguan sanitasi di masyarakat. Persamaan regresinya dilambangkan dengan:
-        </p>
-        <code style="background-color: rgba(255,255,255,0.05); color: #E2E8F0; padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; font-family: monospace; display: inline-block;">Y_Diare = β0 + (β1 * X_IKA) + ε &nbsp;|&nbsp; Uji Korelasi: R²</code>
-    </div>
-    ''', unsafe_allow_html=True)
+        interp_text_36 = f"""
+        Hasil regresi linear (OLS) menunjukkan bahwa hubungan antara IKA dan Diare **TIDAK SIGNIFIKAN** secara statistik pada tingkat kepercayaan 95% (**R² = {r_squared_36:.3f}, P = {p_value_36:.4f} > 0.05**).
 
-    st.markdown("---")
-    st.markdown("### Ringkasan Eksekutif Crosstab: IKA vs Kasus Diare")
-    st.markdown("Tabel di bawah merangkum hasil uji statistik Chi-Square antara Indeks Kualitas Air (X) dengan tingkat penyebaran penyakit Diare (Y) pada panel data historis.")
+        Oleh karena itu, kita **tidak dapat menyimpulkan secara absolut** bahwa setiap penurunan 1 poin IKA otomatis meningkatkan jumlah kasus Diare secara proporsional. Namun secara kualitatif (visual), Provinsi Sentra Industri (titik merah) memang cenderung berkumpul di area IKA yang sangat rendah, memperlihatkan kerentanan ekologis yang patut diwaspadai.
 
-    df_ika_diare_36["IKA_med"] = df_ika_diare_36.groupby("Provinsi")["IKA"].transform("median")
-    df_ika_diare_36["Diare_med"] = df_ika_diare_36.groupby("Provinsi")["Total_Diare"].transform("median")
-    lbl_x_h36 = "Tinggi (\u2265 Median)"
-    lbl_x_l36 = "Rendah (< Median)"
-    lbl_y_h36 = "Tinggi (\u2265 Median)"
-    lbl_y_l36 = "Rendah (< Median)"
-    s_x36 = df_ika_diare_36.apply(lambda row: lbl_x_h36 if row["IKA"] >= row["IKA_med"] else lbl_x_l36, axis=1)
-    s_y36 = df_ika_diare_36.apply(lambda row: lbl_y_h36 if row["Total_Diare"] >= row["Diare_med"] else lbl_y_l36, axis=1)
-    ct36 = pd.crosstab(s_x36, s_y36).reindex(index=[lbl_x_l36, lbl_x_h36], columns=[lbl_y_l36, lbl_y_h36], fill_value=0)
-    try:
-        c2_36, pv_36, dof_36, _ = scipy_stats.chi2_contingency(ct36)
-    except:
-        c2_36, pv_36, dof_36 = 0, 1, 0
-    try:
-        aa36 = ct36.loc[lbl_x_l36, lbl_y_l36]; bb36 = ct36.loc[lbl_x_l36, lbl_y_h36]
-        cc36 = ct36.loc[lbl_x_h36, lbl_y_l36]; dd36 = ct36.loc[lbl_x_h36, lbl_y_h36]
-        or_36 = (bb36 * cc36) / (aa36 * dd36) if (aa36 * dd36) > 0 else 0
-    except:
-        or_36 = 0
-    sig36 = "\U0001f7e2 SIGNIFIKAN" if pv_36 < 0.10 else "\U0001f534 TIDAK SIGNIFIKAN"
-    df_sum36 = pd.DataFrame([{
-        "Variabel X": "Indeks Kualitas Air (IKA)",
-        "Variabel Y": "Total Kasus Diare",
-        "Chi-Square": f"{c2_36:.3f}",
-        "P-Value": f"{pv_36:.3f}",
-        "Odds Ratio": f"{or_36:.2f}",
-        "Kesimpulan": sig36,
-    }])
-    st.dataframe(df_sum36, use_container_width=True, hide_index=True)
+        **Bubble size merepresentasikan tahun:** titik besar = tahun terkini (2024). Meskipun relasi linearnya lemah, sebaran titik ini menunjukkan perlunya kehati-hatian dalam mengelola limbah yang mencemari air permukaan.
+        """
+        st.markdown(f"**Interpretasi Korelasi Statistik:**\n\n{interp_text_36}")
+    
+    with tab_ngo_36:
+        try:
+            df_ngo_cr6_36 = pd.read_csv(os.path.join(DATA_DIR, "ika_ngo_cr6_gabungan.csv"))
+            max_cr6_36 = df_ngo_cr6_36["Konsentrasi Cr6+ (mg/L)"].max()
+            max_location_36 = df_ngo_cr6_36.loc[df_ngo_cr6_36["Konsentrasi Cr6+ (mg/L)"].idxmax(), "Titik Sampling"]
+            exceed_biota_36 = len(df_ngo_cr6_36[df_ngo_cr6_36["Konsentrasi Cr6+ (mg/L)"] > 0.005])
+            total_samples_36 = len(df_ngo_cr6_36)
+            
+            st.markdown(f'''
+            Berdasarkan hasil uji klinis dari {total_samples_36} titik sampel di lingkar kawasan tambang, teridentifikasi bahwa **{exceed_biota_36} titik ({(exceed_biota_36/total_samples_36*100):.0f}%) melampaui batas aman toksisitas biota laut** (0.005 mg/L). Konsentrasi terparah ditemukan di {max_location_36} dengan kadar Kromium Heksavalen mencapai **{max_cr6_36:.3f} mg/L**, atau {(max_cr6_36/0.005):.0f} kali lipat lebih tinggi dari ambang batas aman. 
+            
+            ⚠️ **Peringatan Klinis:** Kromium Heksavalen (Cr6+) adalah logam berat karsinogenik beracun. Paparan berulang pada air yang dikonsumsi atau digunakan mencuci memicu iritasi kulit kronis, kerusakan pernapasan, pencernaan, dan potensi kanker parah di komunitas lingkar tambang. Bukti konkret di level tapak ini mengonfirmasi asimetri dampak ekologis industri ekstraktif yang gagal ditangkap oleh agregasi data makro.
+            ''')
+            
+            import altair as alt
+            bar_chart_36 = alt.Chart(df_ngo_cr6_36).mark_bar().encode(
+                x=alt.X('Titik Sampling:N', sort=None, title='Titik Sampling', axis=alt.Axis(labelAngle=0)),
+                y=alt.Y('Konsentrasi Cr6+ (mg/L):Q', title='Konsentrasi (mg/L)'),
+                color=alt.Color('Konsentrasi Cr6+ (mg/L):Q', scale=alt.Scale(range=["#ffebee", "#b71c1c"]), legend=None)
+            ).properties(
+                title=alt.TitleParams(text="Kadar Kromium Heksavalen (Cr6+) di Lingkar Tambang vs Baku Mutu", color='#ECEFF1', anchor='start'),
+                height=500
+            )
+            text_labels_36 = bar_chart_36.mark_text(align='center', baseline='bottom', dy=-5, color='white').encode(
+                text=alt.Text('Konsentrasi Cr6+ (mg/L):Q', format='.3f')
+            )
+            rule_biota_36 = alt.Chart(pd.DataFrame({'y': [0.005]})).mark_rule(strokeDash=[4, 4], color='red').encode(y='y:Q')
+            text_biota_36 = alt.Chart(pd.DataFrame({'y': [0.005], 'text': ['Batas Aman Biota Laut (0.005 mg/L)']})).mark_text(align='left', baseline='bottom', dy=-5, dx=5, color='red').encode(y='y:Q', text='text:N')
+            rule_budidaya_36 = alt.Chart(pd.DataFrame({'y': [0.050]})).mark_rule(strokeDash=[4, 4], color='orange').encode(y='y:Q')
+            text_budidaya_36 = alt.Chart(pd.DataFrame({'y': [0.050], 'text': ['Batas Aman Budidaya (0.050 mg/L)']})).mark_text(align='left', baseline='bottom', dy=-5, dx=5, color='orange').encode(y='y:Q', text='text:N')
+            
+            final_chart_36 = (bar_chart_36 + text_labels_36 + rule_biota_36 + text_biota_36 + rule_budidaya_36 + text_budidaya_36).configure(
+                background='rgba(0,0,0,0)'
+            ).configure_axis(
+                gridColor='rgba(255,255,255,0.1)', labelColor='#B0BEC5', titleColor='#B0BEC5'
+            )
+            st.altair_chart(final_chart_36, use_container_width=True)
+        except Exception as e:
+            st.error(f"Gagal memuat data NGO: {e}")
 
-    st.markdown('''
-    <div style="border: 1px solid #333; border-radius: 8px; padding: 16px; background-color: #12161F; margin-bottom: 20px; margin-top: 15px;">
-        <p style="font-size: 0.9rem; color: #B0BEC5; margin-bottom: 10px;">
-            <b>Sumber:</b> Panel Data Gabungan CELIOS (BPS & Kemenkes). Tabel di atas merangkum "Uji Signifikansi Crosstab IKA vs Diare".
-        </p>
-        <p style="font-size: 0.9rem; color: #B0BEC5; margin-bottom: 10px;">
-            Data diproses menggunakan pendekatan <i>Statistical Contingency Analysis</i>. Pengujian signifikansi matematis (uji Chi-Square) dilakukan untuk membuktikan ko-insidensi antara anjloknya kualitas air baku (X) dengan tingginya penyebaran patogen mematikan (Y) pada panel observasi historis. Konfigurasi uji signifikansi yang digunakan adalah:
-        </p>
-        <code style="background-color: rgba(255,255,255,0.05); color: #E2E8F0; padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; font-family: monospace; display: inline-block;">Metode: Chi-Square & Odds Ratio &nbsp;|&nbsp; Tingkat Kepercayaan: 90% &nbsp;|&nbsp; Syarat Signifikan: P-Value < 0.10</code>
-    </div>
-    ''', unsafe_allow_html=True)
-    bc36 = "rgba(229,57,53,0.15)" if pv_36 < 0.10 else "rgba(255,152,0,0.15)"
-    brd36 = "#E53935" if pv_36 < 0.10 else "#FF9800"
-    narr36 = (f"Uji statistik membuktikan: korelasi IKA vs Diare **SIGNIFIKAN** (P = {pv_36:.3f}, OR = {or_36:.2f}). Setiap penurunan kualitas air meningkatkan risiko ledakan Diare secara terukur."
-              if pv_36 < 0.10 else
-              f"Korelasi IKA vs Diare tidak signifikan secara agregat (P = {pv_36:.3f}). Krisis air bersih telah menyebar merata ke seluruh Sulawesi — tidak ada lagi provinsi 'aman'.")
     # Card Pembedahan dihilangkan sesuai request
+
     # ── 3.7 Beban Limbah Beracun (B3) ──
     st.markdown("---")
     st.subheader("3.7 Beban Limbah Beracun (B3): Eksternalitas Kesehatan yang Diabaikan")

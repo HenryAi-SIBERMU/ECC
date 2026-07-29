@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="ie9 gt-ie8"> <![endif]-->
+<!--[if gt IE 9]><!--> 
+<html class="gt-ie8 gt-ie9 not-ie"> <!--<![endif]-->
+	<head>
+				<title>Analisis Kualitas Air Limpasan Tambang Nikel Dengan Menggunakan Indeks Pencemaran Di Pt X Morowali Sulawesi Tengah</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="csrf-token" content=""/>
+		<meta name="csrf-name" content="ci_csrf_token"/>
+		<meta name="csrf-cookie" content="csrf_ugmfw_cookie"/>
+		
+		<meta name="keywords" content="laterite nickel, runoff water, Pollution Index, Heavy Metal Pollution Index, water quality, socioeconomic impacts.">
+		<meta name="description" content=" Perkembangan pertambangan nikel laterit di kawasan pesisir, termasuk Desa Matarape, Kecamatan Sombori Kepulauan, Kabupaten Morowali, Sulawesi Tengah, berpotensi mengubah kualitas perairan serta memengaruhi kondisi sosial ekonomi masyarakat sekitar. Penelitian ini bertujuan: mengidentifikasi kualitas air limpasan yang dihasilkan dari kegiatan pertambangan nikel laterit,  menentukan status mutu air limpasan tambang nikel laterit, dan menganalisis dampak sosial ekonomi keberadaan pertambangan nikel terhadap masyarakat Desa Matarape. Metode untuk mengindentifikasi kualitas air limpasan diukur pada tiga titik pengamatan dan dibandingkan dengan baku mutu PP No. 22 Tahun 2021 Lampiran VI Kelas II untuk parameter pH, DO, BOD, COD, TSS, dan kekeruhan, serta dibandingkan dengan Permen LH No. 09 Tahun 2006 untuk parameter logam berat Fe, Ni, dan Cr. Metode untuk menganalisis status mutu air ditentukan menggunakan metode Indeks Pencemaran (IP) berdasarkan parameter pH, DO, BOD, COD, TSS, dan kekeruhan, sedangkan beban pencemaran logam berat dihitung menggunakan Heavy Metal Pollution Index (HPI) untuk Fe, Ni, dan Cr. Metode untuk mengkaji dampak sosial ekonomi melalui survei kuesioner kepada 81 kepala keluarga yang dipilih secara purposive dan didukung observasi lapangan, kemudian dianalisis secara deskriptif. Hasil penelitian menunjukkan seluruh parameter fisik–kimia dan logam berat pada ketiga titik pengamatan masih berada di bawah ambang baku mutu yang digunakan dalam penelitian. Nilai IP pada seluruh titik menunjukkan status tercemar ringan, dengan nilai berturut-turut dari Titik 1 hingga Titik 3 sebesar 1,4; 3,8; dan 3,2. Sementara itu  nilai HPI pada masing-masing titik berturut-turut adalah 25,22; 18,93; dan 47,28; berdasarkan klasifikasi HPI, Titik 1 dan Titik 2 termasuk kategori sangat bagus (very good), sedangkan Titik 3 termasuk kategori bagus (good). Dari sisi sosial ekonomi, rata-rata pendapatan rumah tangga meningkat dari sekitar Rp 2,26 juta/bulan menjadi Rp 4,36 juta/bulan dan 91,36% responden menyatakan masyarakat lokal terserap bekerja di perusahaan. Namun, dampak sosial juga muncul berupa konflik dan ketegangan, tercermin dari 74,07% responden yang menyatakan terdapat konflik masyarakat–perusahaan, disertai kekhawatiran terhadap penurunan kualitas lingkungan serta persepsi ketidakadilan dalam distribusi manfaat.
+
+The development of laterite nickel mining in coastal areas, including Matarape Village, Sombori Kepulauan Subdistrict, Morowali Regency, Central Sulawesi, has the potential to change water quality and affect the socioeconomic conditions of the surrounding community. This study aims to: identify the quality of runoff water generated from laterite nickel mining activities, determine the quality status of laterite nickel mine runoff water, and analyze the socioeconomic impact of nickel mining on the community of Matarape Village. The method for identifying runoff water quality was measured at three observation points and compared with the quality standards of PP No. 22 of 2021 Appendix VI Class II for the parameters of pH, DO, BOD, COD, TSS, and turbidity, as well as compared with Permen LH No. 09 of 2006 for the parameters of heavy metals Fe, Ni, and Cr. The method for analyzing water quality status was determined using the Pollution Index (PI) method based on the parameters of pH, DO, BOD, COD, TSS, and turbidity, while the heavy metal pollution load was calculated using the Heavy Metal Pollution Index (HPI) for Fe, Ni, and Cr. The method used to assess the socioeconomic impact was through a questionnaire survey of 81 heads of households selected purposively and supported by field observations, which were then analyzed descriptively. The results of the study show that all physical-chemical parameters and heavy metals at the three observation points are still below the quality standards used in the study. The IP values at all points indicate a slightly polluted status, with values from Point 1 to Point 3 of 1.4, 3.8, and 3.2, respectively. Meanwhile, the HPI values at each point were 25.22, 18.93, and 47.28, respectively. Based on the HPI classification, Points 1 and 2 were categorized as very good, while Point 3 was categorized as good. From a socioeconomic perspective, the average household income increased from around IDR 2.26 million/month to IDR 4.36 million/month, and 91.36% of respondents stated that the local community was employed by the company. However, social impacts also emerged in the form of conflicts and tensions, as reflected by 74.07% of respondents who stated that there were community-company conflicts, accompanied by concerns about declining environmental quality and perceptions of unfairness in the distribution of benefits.">
+        <meta name="citation_title" content="Analisis Kualitas Air Limpasan Tambang Nikel Dengan Menggunakan Indeks Pencemaran Di Pt X Morowali Sulawesi Tengah">
+        <meta name="citation_author" content="Boy Kurniawan">
+        <!--  <meta name="citation_author" content="Prof. Dr. Ig. L. Setyawan Purnama, M.Si. ; Dr. Rika Harini, S.Si., MP."> -->
+        <meta name="citation_date" content="2025">
+        <meta name ="citation_dissertation_institution" content="Universitas Gadjah Mada">
+        
+        <meta name="DC.title" content="Analisis Kualitas Air Limpasan Tambang Nikel Dengan Menggunakan Indeks Pencemaran Di Pt X Morowali Sulawesi Tengah">
+        <meta name="DC.creator" content="Boy Kurniawan">
+        <!-- <meta name="DC.creator" content="Prof. Dr. Ig. L. Setyawan Purnama, M.Si. ; Dr. Rika Harini, S.Si., MP.">  -->
+        <meta name="DC.issued" content="2025">
+        <meta name="DC.publisher" content="Universitas Gadjah Mada">
+        <meta name="DC.description" content=" Perkembangan pertambangan nikel laterit di kawasan pesisir, termasuk Desa Matarape, Kecamatan Sombori Kepulauan, Kabupaten Morowali, Sulawesi Tengah, berpotensi mengubah kualitas perairan serta memengaruhi kondisi sosial ekonomi masyarakat sekitar. Penelitian ini bertujuan: mengidentifikasi kualitas air limpasan yang dihasilkan dari kegiatan pertambangan nikel laterit,  menentukan status mutu air limpasan tambang nikel laterit, dan menganalisis dampak sosial ekonomi keberadaan pertambangan nikel terhadap masyarakat Desa Matarape. Metode untuk mengindentifikasi kualitas air limpasan diukur pada tiga titik pengamatan dan dibandingkan dengan baku mutu PP No. 22 Tahun 2021 Lampiran VI Kelas II untuk parameter pH, DO, BOD, COD, TSS, dan kekeruhan, serta dibandingkan dengan Permen LH No. 09 Tahun 2006 untuk parameter logam berat Fe, Ni, dan Cr. Metode untuk menganalisis status mutu air ditentukan menggunakan metode Indeks Pencemaran (IP) berdasarkan parameter pH, DO, BOD, COD, TSS, dan kekeruhan, sedangkan beban pencemaran logam berat dihitung menggunakan Heavy Metal Pollution Index (HPI) untuk Fe, Ni, dan Cr. Metode untuk mengkaji dampak sosial ekonomi melalui survei kuesioner kepada 81 kepala keluarga yang dipilih secara purposive dan didukung observasi lapangan, kemudian dianalisis secara deskriptif. Hasil penelitian menunjukkan seluruh parameter fisik–kimia dan logam berat pada ketiga titik pengamatan masih berada di bawah ambang baku mutu yang digunakan dalam penelitian. Nilai IP pada seluruh titik menunjukkan status tercemar ringan, dengan nilai berturut-turut dari Titik 1 hingga Titik 3 sebesar 1,4; 3,8; dan 3,2. Sementara itu  nilai HPI pada masing-masing titik berturut-turut adalah 25,22; 18,93; dan 47,28; berdasarkan klasifikasi HPI, Titik 1 dan Titik 2 termasuk kategori sangat bagus (very good), sedangkan Titik 3 termasuk kategori bagus (good). Dari sisi sosial ekonomi, rata-rata pendapatan rumah tangga meningkat dari sekitar Rp 2,26 juta/bulan menjadi Rp 4,36 juta/bulan dan 91,36% responden menyatakan masyarakat lokal terserap bekerja di perusahaan. Namun, dampak sosial juga muncul berupa konflik dan ketegangan, tercermin dari 74,07% responden yang menyatakan terdapat konflik masyarakat–perusahaan, disertai kekhawatiran terhadap penurunan kualitas lingkungan serta persepsi ketidakadilan dalam distribusi manfaat.
+
+The development of laterite nickel mining in coastal areas, including Matarape Village, Sombori Kepulauan Subdistrict, Morowali Regency, Central Sulawesi, has the potential to change water quality and affect the socioeconomic conditions of the surrounding community. This study aims to: identify the quality of runoff water generated from laterite nickel mining activities, determine the quality status of laterite nickel mine runoff water, and analyze the socioeconomic impact of nickel mining on the community of Matarape Village. The method for identifying runoff water quality was measured at three observation points and compared with the quality standards of PP No. 22 of 2021 Appendix VI Class II for the parameters of pH, DO, BOD, COD, TSS, and turbidity, as well as compared with Permen LH No. 09 of 2006 for the parameters of heavy metals Fe, Ni, and Cr. The method for analyzing water quality status was determined using the Pollution Index (PI) method based on the parameters of pH, DO, BOD, COD, TSS, and turbidity, while the heavy metal pollution load was calculated using the Heavy Metal Pollution Index (HPI) for Fe, Ni, and Cr. The method used to assess the socioeconomic impact was through a questionnaire survey of 81 heads of households selected purposively and supported by field observations, which were then analyzed descriptively. The results of the study show that all physical-chemical parameters and heavy metals at the three observation points are still below the quality standards used in the study. The IP values at all points indicate a slightly polluted status, with values from Point 1 to Point 3 of 1.4, 3.8, and 3.2, respectively. Meanwhile, the HPI values at each point were 25.22, 18.93, and 47.28, respectively. Based on the HPI classification, Points 1 and 2 were categorized as very good, while Point 3 was categorized as good. From a socioeconomic perspective, the average household income increased from around IDR 2.26 million/month to IDR 4.36 million/month, and 91.36% of respondents stated that the local community was employed by the company. However, social impacts also emerged in the form of conflicts and tensions, as reflected by 74.07% of respondents who stated that there were community-company conflicts, accompanied by concerns about declining environmental quality and perceptions of unfairness in the distribution of benefits.">
+        
+<!-- 		<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700|Montserrat:400,700|Open+Sans:400,400i,700,700i" rel="stylesheet"> -->
+		<link rel="stylesheet" type="text/css" href="https://etd.repository.ugm.ac.id//ugmfw-assets/ugm-html/assets/css/style.css">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+		<link rel="shortcut icon" type='image/x-icon' href="https://etd.repository.ugm.ac.id//ugmfw-assets/ugm-html/assets/images/ugm_favicon.png">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+		<!-- custom css -->
+			</head>
+	<body>
+		<div style="position:fixed; bottom:10px; right:0px;padding:10px;z-index:10000">
+    	<a href="http://ugm.id/172" target="_blank" class="btn btn-warning"><i class="fa fa-comment"></i> Laporkan Masalah</a>
+	</div>
+		<header id="header" class="header-fancy">
+			
+			<!-- <header id="header"> -->
+<nav class="navbar navbar-default topbar">
+    <div class="container">
+        <div class="header-nav">
+            <button class="nav-more"><i class="ion ion-android-more-vertical"></i></button>
+            <ul class="nav navbar-nav">
+                <li><a href="http://lib.ugm.ac.id/" target="_blank">Perpustakaan UGM</a></li>
+                <li><a href="http://ezproxy.ugm.ac.id/" target="_blank">Jurnal Online</a></li>
+<!--                 <li><a href="http://ezproxy.ugm.ac.id/" target="_blank">Discovery Search</a></li> -->
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="navbar-header">
+        <a href="https://etd.repository.ugm.ac.id/" class="navbar-brand">
+            <img src="https://etd.repository.ugm.ac.id//ugmfw-assets/ugm-html/assets/images/ugm_header.png" alt="Universitas Gadjah Mada" class="img-responsive">
+            <span>Universitas Gadjah Mada</span>
+        </a>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+    </div>
+    <nav id="navbar" class="navbar navbar-collapse navbar-default collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a><span id="countdown" class="timer"></span></a></li>
+            <li><a href="https://etd.repository.ugm.ac.id/home/faq"><span class="glyphicon glyphicon-question-sign
+            "></span> FAQ</a></li>
+                            <li><a href="https://etd.repository.ugm.ac.id/signin"><span class="glyphicon glyphicon-user"></span> Masuk dan Daftar</a></li>
+                        </ul>
+        </ul>
+    </nav>
+</div>
+<!-- <div id="queue"></div> -->
+
+<!--Start Show Session Expire Warning Popup here -->
+    <div class="modal fade in" id="session-expire-warning-modal" aria-hidden="true" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-backdrop" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">                 
+                    <h4 class="modal-title">Notifikasi Sesi Pemakaian Komputer</h4>
+                </div>
+
+                <div class="modal-body">
+                    Sesi Pemakaian Komputer Anda Segera Berakhir 5 Menit Lagi Secara System, Segera Persiapkan Anda.  Terima Kasih.
+                </div>
+
+                <div class="modal-footer">
+                    <button id="btnSessionExpiredCancelled" type="button" class="btn btn-default" data-dismiss="modal"
+                    style="padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: normal; border: 1px solid transparent;
+                    border-radius: 4px; background-color: #428bca; color: #FFF;">OK Mengerti</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!--End Show Session Expire Warning Popup here -->
+
+<!--InSystem Antrian  Javascript Code Akses Private IP-->
+<!-- <div class="modal fade bs-example-modal-lg" id="modal-inactive" tabindex="-1" role="dialog" aria-labelledby="myModalLabelEmail"> -->
+<!--     <div class="modal-dialog modal-lg" role="document"> -->
+<!--         <div class="modal-content"> -->
+<!--             <div class="modal-header"> -->
+<!--                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+<!--                 <h4 class="modal-title" id="myModalLabelEmail">Confirm</h4> -->
+<!--             </div> -->
+<!--             <div class="modal-body"> -->
+<!--                 <div class="container-fluid"> -->
+<!--                     <h2>Apakah Anda Masih Disitu?</h2> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--             <div class="modal-footer"> -->
+<!--                 <button type="button" class="btn btn-primary" data-dismiss="modal">ClickMe</button> -->
+<!--             </div> -->
+<!--         </div> -->
+<!--     </div> -->
+<!-- </div> -->
+<style>
+.modal-header {
+    background-color: #003D62;
+    color: #fff;
+}
+</style>
+
+		</header>
+		<!-- content start here -->
+		<div id="body">
+			<style> 
+	.title{
+		font-size:22px;
+		font-weight:bold;
+		color:#666
+	}
+</style>
+<section id="newsfeed" class="section-page">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="https://etd.repository.ugm.ac.id/home">Home</a></li> 
+            <li><a href="#" onclick="history.back()">Hasil Pencarian</a></li>
+            <li class="active">Detail karya Akhir</li>
+        </ul>
+        <div class="row">
+            <div class="col-lg-8">
+                 
+                <p class="title">
+                Analisis Kualitas Air Limpasan Tambang Nikel Dengan Menggunakan Indeks Pencemaran Di Pt X Morowali Sulawesi Tengah                </p>
+                
+                <p class="penulis">Boy Kurniawan, Prof. Dr. Ig. L. Setyawan Purnama, M.Si. ; Dr. Rika Harini, S.Si., MP.</p>
+                <strong class="detail-karya-akhir">2025 | Tesis | S2 Ilmu Lingkungan</strong>
+            </div>
+            
+            <div class="col-lg-4">
+                
+                    <form class="form-inline" method="post" action="https://etd.repository.ugm.ac.id/home/pencarian" class="form-horizontal xhr dest_subcontent-element" autocomplete='off'>
+                    <div class="input-group input-group-lg" style="width:100%; margin-top: 20px;">
+                        <input type="text" name="keyword" class="form-control" placeholder="Search">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button"><i class="glyphicon glyphicon-search"></i> </button>
+                        </span>
+                    </div>
+                </form>
+                
+            </div>
+        </div>        
+        <br>
+        <div class="row opac-tab">
+            <div class="col-lg-12">
+            
+                <div>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#abstrak" aria-controls="home" role="tab" data-toggle="tab">Abstrak</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#filepdf" aria-controls="profile" role="tab" data-toggle="tab"> <i class="fa fa-file-pdf-o"></i> File Pdf</a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="abstrak">
+                            <div class="panel">
+                                <div class="panel-body">
+                                	
+                                    <p class="abstrak">
+                                    <p class="p1" xss=removed><span class="s1" xss=removed> </span><span class="s2" xss=removed>Perkembangan pertambangan nikel laterit di kawasan pesisir, termasuk Desa Matarape, Kecamatan Sombori Kepulauan, Kabupaten Morowali, Sulawesi Tengah, berpotensi mengubah kualitas perairan serta memengaruhi kondisi sosial ekonomi masyarakat sekitar. Penelitian ini bertujuan: mengidentifikasi kualitas air limpasan yang dihasilkan dari kegiatan pertambangan nikel laterit,  menentukan status mutu air limpasan tambang nikel laterit, dan menganalisis dampak sosial ekonomi keberadaan pertambangan nikel terhadap masyarakat Desa Matarape. Metode untuk mengindentifikasi kualitas air limpasan diukur pada tiga titik pengamatan dan dibandingkan dengan baku mutu PP No. 22 Tahun 2021 Lampiran VI Kelas II untuk parameter pH, DO, BOD, COD, TSS, dan kekeruhan, serta dibandingkan dengan Permen LH No. 09 Tahun 2006 untuk parameter logam berat Fe, Ni, dan Cr. Metode untuk menganalisis status mutu air ditentukan menggunakan metode Indeks Pencemaran (IP) berdasarkan parameter pH, DO, BOD, COD, TSS, dan kekeruhan, sedangkan beban pencemaran logam berat dihitung menggunakan Heavy Metal Pollution Index (HPI) untuk Fe, Ni, dan Cr. Metode untuk mengkaji dampak sosial ekonomi melalui survei kuesioner kepada 81 kepala keluarga yang dipilih secara purposive dan didukung observasi lapangan, kemudian dianalisis secara deskriptif. Hasil penelitian menunjukkan seluruh parameter fisik–kimia dan logam berat pada ketiga titik pengamatan masih berada di bawah ambang baku mutu yang digunakan dalam penelitian. Nilai IP pada seluruh titik menunjukkan status tercemar ringan, dengan nilai berturut-turut dari Titik 1 hingga Titik 3 sebesar 1,4; 3,8; dan 3,2. Sementara itu  nilai HPI pada masing-masing titik berturut-turut adalah 25,22; 18,93; dan 47,28; berdasarkan klasifikasi HPI, Titik 1 dan Titik 2 termasuk kategori sangat bagus (very good), sedangkan Titik 3 termasuk kategori bagus (good). Dari sisi sosial ekonomi, rata-rata pendapatan rumah tangga meningkat dari sekitar Rp 2,26 juta/bulan menjadi Rp 4,36 juta/bulan dan 91,36% responden menyatakan masyarakat lokal terserap bekerja di perusahaan. Namun, dampak sosial juga muncul berupa konflik dan ketegangan, tercermin dari 74,07% responden yang menyatakan terdapat konflik masyarakat–perusahaan, disertai kekhawatiran terhadap penurunan kualitas lingkungan serta persepsi ketidakadilan dalam distribusi manfaat.</span></p>                                    </p>
+                                    <p class="abstrak"><i><p class="p1" xss=removed><span class="s1" xss=removed>The development of laterite nickel mining in coastal areas, including Matarape Village, Sombori Kepulauan Subdistrict, Morowali Regency, Central Sulawesi, has the potential to change water quality and affect the socioeconomic conditions of the surrounding community. This study aims to: identify the quality of runoff water generated from laterite nickel mining activities, determine the quality status of laterite nickel mine runoff water, and analyze the socioeconomic impact of nickel mining on the community of Matarape Village. The method for identifying runoff water quality was measured at three observation points and compared with the quality standards of PP No. 22 of 2021 Appendix VI Class II for the parameters of pH, DO, BOD, COD, TSS, and turbidity, as well as compared with Permen LH No. 09 of 2006 for the parameters of heavy metals Fe, Ni, and Cr. The method for analyzing water quality status was determined using the Pollution Index (PI) method based on the parameters of pH, DO, BOD, COD, TSS, and turbidity, while the heavy metal pollution load was calculated using the Heavy Metal Pollution Index (HPI) for Fe, Ni, and Cr. The method used to assess the socioeconomic impact was through a questionnaire survey of 81 heads of households selected purposively and supported by field observations, which were then analyzed descriptively. The results of the study show that all physical-chemical parameters and heavy metals at the three observation points are still below the quality standards used in the study. The IP values at all points indicate a slightly polluted status, with values from Point 1 to Point 3 of 1.4, 3.8, and 3.2, respectively. Meanwhile, the HPI values at each point were 25.22, 18.93, and 47.28, respectively. Based on the HPI classification, Points 1 and 2 were categorized as very good, while Point 3 was categorized as good. From a socioeconomic perspective, the average household income increased from around IDR 2.26 million/month to IDR 4.36 million/month, and 91.36% of respondents stated that the local community was employed by the company. However, social impacts also emerged in the form of conflicts and tensions, as reflected by 74.07% of respondents who stated that there were community-company conflicts, accompanied by concerns about declining environmental quality and perceptions of unfairness in the distribution of benefits.</span></p></i></p>
+                                    
+                                    <p class="keyword">
+					                    <strong><i>Kata Kunci : laterite nickel, runoff water, Pollution Index, Heavy Metal Pollution Index, water quality, socioeconomic impacts.</i></strong>
+					                </p>
+                                </div>
+                            </div>
+                        </div>
+                          
+                        <div role="tabpanel" class="tab-pane" id="filepdf">
+                            <div class="panel">
+                            <div class="panel-body">    
+                             <div class="col-lg-12">
+                             
+                            </div>
+                            <ol class="category">
+                                                        <!-- IDE.Yarray(7) {
+  [0]=>
+  array(10) {
+    ["rank"]=>
+    NULL
+    ["FILE_ID"]=>
+    string(7) "1689204"
+    ["FILE_PEN_ID"]=>
+    string(6) "272318"
+    ["FILE_NAME"]=>
+    string(27) "S2-2025-529894-abstract.pdf"
+    ["FILE_DIR"]=>
+    string(22) "/potongan/2025/529894/"
+    ["FILE_STATUS_ID"]=>
+    string(1) "1"
+    ["FILE_STATUS_NAME"]=>
+    string(4) "Baik"
+    ["FILE_TYPE_ID"]=>
+    string(1) "2"
+    ["FILE_TYPE_NAME"]=>
+    string(11) "Bab/ Bagian"
+    ["JENIS_AKSES"]=>
+    string(1) "2"
+  }
+  [1]=>
+  array(10) {
+    ["rank"]=>
+    NULL
+    ["FILE_ID"]=>
+    string(7) "1689199"
+    ["FILE_PEN_ID"]=>
+    string(6) "272318"
+    ["FILE_NAME"]=>
+    string(31) "S2-2025-529894-bibliography.pdf"
+    ["FILE_DIR"]=>
+    string(22) "/potongan/2025/529894/"
+    ["FILE_STATUS_ID"]=>
+    string(1) "1"
+    ["FILE_STATUS_NAME"]=>
+    string(4) "Baik"
+    ["FILE_TYPE_ID"]=>
+    string(1) "2"
+    ["FILE_TYPE_NAME"]=>
+    string(11) "Bab/ Bagian"
+    ["JENIS_AKSES"]=>
+    string(1) "2"
+  }
+  [2]=>
+  array(10) {
+    ["rank"]=>
+    NULL
+    ["FILE_ID"]=>
+    string(7) "1689203"
+    ["FILE_PEN_ID"]=>
+    string(6) "272318"
+    ["FILE_NAME"]=>
+    string(33) "S2-2025-529894-tableofcontent.pdf"
+    ["FILE_DIR"]=>
+    string(22) "/potongan/2025/529894/"
+    ["FILE_STATUS_ID"]=>
+    string(1) "1"
+    ["FILE_STATUS_NAME"]=>
+    string(4) "Baik"
+    ["FILE_TYPE_ID"]=>
+    string(1) "2"
+    ["FILE_TYPE_NAME"]=>
+    string(11) "Bab/ Bagian"
+    ["JENIS_AKSES"]=>
+    string(1) "2"
+  }
+  [3]=>
+  array(10) {
+    ["rank"]=>
+    NULL
+    ["FILE_ID"]=>
+    string(7) "1689209"
+    ["FILE_PEN_ID"]=>
+    string(6) "272318"
+    ["FILE_NAME"]=>
+    string(24) "S2-2025-529894-title.pdf"
+    ["FILE_DIR"]=>
+    string(22) "/potongan/2025/529894/"
+    ["FILE_STATUS_ID"]=>
+    string(1) "1"
+    ["FILE_STATUS_NAME"]=>
+    string(4) "Baik"
+    ["FILE_TYPE_ID"]=>
+    string(1) "2"
+    ["FILE_TYPE_NAME"]=>
+    string(11) "Bab/ Bagian"
+    ["JENIS_AKSES"]=>
+    string(1) "2"
+  }
+  [4]=>
+  array(10) {
+    ["rank"]=>
+    NULL
+    ["FILE_ID"]=>
+    string(7) "1686136"
+    ["FILE_PEN_ID"]=>
+    string(6) "272318"
+    ["FILE_NAME"]=>
+    string(27) "S2-2026-529894-abstract.pdf"
+    ["FILE_DIR"]=>
+    string(22) "/potongan/2026/529894/"
+    ["FILE_STATUS_ID"]=>
+    string(1) "1"
+    ["FILE_STATUS_NAME"]=>
+    string(4) "Baik"
+    ["FILE_TYPE_ID"]=>
+    string(1) "2"
+    ["FILE_TYPE_NAME"]=>
+    string(11) "Bab/ Bagian"
+    ["JENIS_AKSES"]=>
+    string(1) "2"
+  }
+  [5]=>
+  array(10) {
+    ["rank"]=>
+    NULL
+    ["FILE_ID"]=>
+    string(7) "1686135"
+    ["FILE_PEN_ID"]=>
+    string(6) "272318"
+    ["FILE_NAME"]=>
+    string(31) "S2-2026-529894-bibliography.pdf"
+    ["FILE_DIR"]=>
+    string(22) "/potongan/2026/529894/"
+    ["FILE_STATUS_ID"]=>
+    string(1) "1"
+    ["FILE_STATUS_NAME"]=>
+    string(4) "Baik"
+    ["FILE_TYPE_ID"]=>
+    string(1) "2"
+    ["FILE_TYPE_NAME"]=>
+    string(11) "Bab/ Bagian"
+    ["JENIS_AKSES"]=>
+    string(1) "2"
+  }
+  [6]=>
+  array(10) {
+    ["rank"]=>
+    NULL
+    ["FILE_ID"]=>
+    string(7) "1688399"
+    ["FILE_PEN_ID"]=>
+    string(6) "272318"
+    ["FILE_NAME"]=>
+    string(33) "S2-2026-529894-tableofcontent.pdf"
+    ["FILE_DIR"]=>
+    string(22) "/potongan/2026/529894/"
+    ["FILE_STATUS_ID"]=>
+    string(1) "1"
+    ["FILE_STATUS_NAME"]=>
+    string(4) "Baik"
+    ["FILE_TYPE_ID"]=>
+    string(1) "2"
+    ["FILE_TYPE_NAME"]=>
+    string(11) "Bab/ Bagian"
+    ["JENIS_AKSES"]=>
+    string(1) "2"
+  }
+}
+--><!-- IDE.Y/media/psdistorage//potongan/2025/529894/S2-2025-529894-abstract.pdf--><li>S2-2025-529894-abstract.pdf
+                             <a style="text-decoration:none; color:black;" id="view_btn_file_karya1" href="https://etd.repository.ugm.ac.id/ugmfw-assets/pdfjs/web/viewer.html?file=https://etd.repository.ugm.ac.id/home/detail_pencarian_downloadfiles/1689204"
+                             class="view_btn"><i class="fa fa-search fa-1.5x" aria-hidden="true"></i>
+                             </a>
+                        	 &nbsp;	 
+                        	 <a target="_blank" href="https://etd.repository.ugm.ac.id/home/detail_pencarian_downloadfiles/1689204"
+                             data-download-hahahaha= "Analisis Kualitas Air Limpasan Tambang Nikel Dengan Menggunakan Indeks Pencemaran Di Pt X Morowali Sulawesi Tengah-Boy Kurniawan-2025-S2-2025-529894-abstract.pdf"
+                             style=""><i class="fa fa-download fa-1.5x" aria-hidden="true"></i>
+                             </a><!-- IDE.Y/media/psdistorage//potongan/2025/529894/S2-2025-529894-bibliography.pdf--><li>S2-2025-529894-bibliography.pdf
+                             <a style="text-decoration:none; color:black;" id="view_btn_file_karya2" href="https://etd.repository.ugm.ac.id/ugmfw-assets/pdfjs/web/viewer.html?file=https://etd.repository.ugm.ac.id/home/detail_pencarian_downloadfiles/1689199"
+                             class="view_btn"><i class="fa fa-search fa-1.5x" aria-hidden="true"></i>
+                             </a>
+                        	 &nbsp;	 
+                        	 <a target="_blank" href="https://etd.repository.ugm.ac.id/home/detail_pencarian_downloadfiles/1689199"
+                             data-download-hahahaha= "Analisis Kualitas Air Limpasan Tambang Nikel Dengan Menggunakan Indeks Pencemaran Di Pt X Morowali Sulawesi Tengah-Boy Kurniawan-2025-S2-2025-529894-bibliography.pdf"
+                             style=""><i class="fa fa-download fa-1.5x" aria-hidden="true"></i>
+                             </a><!-- IDE.Y/media/psdistorage//potongan/2025/529894/S2-2025-529894-tableofcontent.pdf--><li>S2-2025-529894-tableofcontent.pdf
+                             <a style="text-decoration:none; color:black;" id="view_btn_file_karya3" href="https://etd.repository.ugm.ac.id/ugmfw-assets/pdfjs/web/viewer.html?file=https://etd.repository.ugm.ac.id/home/detail_pencarian_downloadfiles/1689203"
+                             class="view_btn"><i class="fa fa-search fa-1.5x" aria-hidden="true"></i>
+                             </a>
+                        	 &nbsp;	 
+                        	 <a target="_blank" href="https://etd.repository.ugm.ac.id/home/detail_pencarian_downloadfiles/1689203"
+                             data-download-hahahaha= "Analisis Kualitas Air Limpasan Tambang Nikel Dengan Menggunakan Indeks Pencemaran Di Pt X Morowali Sulawesi Tengah-Boy Kurniawan-2025-S2-2025-529894-tableofcontent.pdf"
+                             style=""><i class="fa fa-download fa-1.5x" aria-hidden="true"></i>
+                             </a><!-- IDE.Y/media/psdistorage//potongan/2025/529894/S2-2025-529894-title.pdf--><li>S2-2025-529894-title.pdf
+                             <a style="text-decoration:none; color:black;" id="view_btn_file_karya4" href="https://etd.repository.ugm.ac.id/ugmfw-assets/pdfjs/web/viewer.html?file=https://etd.repository.ugm.ac.id/home/detail_pencarian_downloadfiles/1689209"
+                             class="view_btn"><i class="fa fa-search fa-1.5x" aria-hidden="true"></i>
+                             </a>
+                        	 &nbsp;	 
+                        	 <a target="_blank" href="https://etd.repository.ugm.ac.id/home/detail_pencarian_downloadfiles/1689209"
+                             data-download-hahahaha= "Analisis Kualitas Air Limpasan Tambang Nikel Dengan Menggunakan Indeks Pencemaran Di Pt X Morowali Sulawesi Tengah-Boy Kurniawan-2025-S2-2025-529894-title.pdf"
+                             style=""><i class="fa fa-download fa-1.5x" aria-hidden="true"></i>
+                             </a><!-- IDE.Y/media/psdistorage//potongan/2026/529894/S2-2026-529894-abstract.pdf--><li>S2-2026-529894-abstract.pdf
+                             <a style="text-decoration:none; color:black;" id="view_btn_file_karya5" href="https://etd.repository.ugm.ac.id/ugmfw-assets/pdfjs/web/viewer.html?file=https://etd.repository.ugm.ac.id/home/detail_pencarian_downloadfiles/1686136"
+                             class="view_btn"><i class="fa fa-search fa-1.5x" aria-hidden="true"></i>
+                             </a>
+                        	 &nbsp;	 
+                        	 <a target="_blank" href="https://etd.repository.ugm.ac.id/home/detail_pencarian_downloadfiles/1686136"
+                             data-download-hahahaha= "Analisis Kualitas Air Limpasan Tambang Nikel Dengan Menggunakan Indeks Pencemaran Di Pt X Morowali Sulawesi Tengah-Boy Kurniawan-2025-S2-2026-529894-abstract.pdf"
+                             style=""><i class="fa fa-download fa-1.5x" aria-hidden="true"></i>
+                             </a><!-- IDE.Y/media/psdistorage//potongan/2026/529894/S2-2026-529894-bibliography.pdf--><li>S2-2026-529894-bibliography.pdf
+                             <a style="text-decoration:none; color:black;" id="view_btn_file_karya6" href="https://etd.repository.ugm.ac.id/ugmfw-assets/pdfjs/web/viewer.html?file=https://etd.repository.ugm.ac.id/home/detail_pencarian_downloadfiles/1686135"
+                             class="view_btn"><i class="fa fa-search fa-1.5x" aria-hidden="true"></i>
+                             </a>
+                        	 &nbsp;	 
+                        	 <a target="_blank" href="https://etd.repository.ugm.ac.id/home/detail_pencarian_downloadfiles/1686135"
+                             data-download-hahahaha= "Analisis Kualitas Air Limpasan Tambang Nikel Dengan Menggunakan Indeks Pencemaran Di Pt X Morowali Sulawesi Tengah-Boy Kurniawan-2025-S2-2026-529894-bibliography.pdf"
+                             style=""><i class="fa fa-download fa-1.5x" aria-hidden="true"></i>
+                             </a><!-- IDE.Y/media/psdistorage//potongan/2026/529894/S2-2026-529894-tableofcontent.pdf--><li>S2-2026-529894-tableofcontent.pdf
+                             <a style="text-decoration:none; color:black;" id="view_btn_file_karya7" href="https://etd.repository.ugm.ac.id/ugmfw-assets/pdfjs/web/viewer.html?file=https://etd.repository.ugm.ac.id/home/detail_pencarian_downloadfiles/1688399"
+                             class="view_btn"><i class="fa fa-search fa-1.5x" aria-hidden="true"></i>
+                             </a>
+                        	 &nbsp;	 
+                        	 <a target="_blank" href="https://etd.repository.ugm.ac.id/home/detail_pencarian_downloadfiles/1688399"
+                             data-download-hahahaha= "Analisis Kualitas Air Limpasan Tambang Nikel Dengan Menggunakan Indeks Pencemaran Di Pt X Morowali Sulawesi Tengah-Boy Kurniawan-2025-S2-2026-529894-tableofcontent.pdf"
+                             style=""><i class="fa fa-download fa-1.5x" aria-hidden="true"></i>
+                             </a>                                      
+                            </ol>
+                            
+	                          	<div class="col-lg-12">	                             
+	                             <iframe id="pdf_reviewer" src="" allowfullscreen webkitallowfullscreen style="border:0px;width:100%;min-height:500px"></iframe>		
+	                            </div>                           
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+             <!-- Side Bar Hiden-->
+             <!--
+            <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <img src="https://etd.repository.ugm.ac.id//ugmfw-assets/images/pdf.png" alt="" class="img-rounded img-responsive" width="150" height="150">
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <h2>Dokumen</h2>
+                    </div>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">Cras justo odio</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Morbi leo risus</li>
+                    <li class="list-group-item">Porta ac consectetur ac</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                </ul>
+            </div>-->
+            <!-- Side Bar Hiden-->
+            
+            
+        </div>
+    </div>
+
+</section>
+<style type="text/css">
+.opac-content {
+margin-top: 40px;
+}
+.opac-content p {
+font-size: 18px;
+}
+p.penulis {
+font-size: 16px;
+color: #003E61;
+}
+p.keyword {
+font-size: 14px;
+}
+.abstrak {
+margin-top: 30px;
+
+}
+p.abstrak {
+text-indent: 4em;
+text-align: justify;
+margin-top: 10px;
+}
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+color: #073C64;
+font-weight: bold;
+}
+.nav-tabs > li.active > a{
+color: #003E61;
+font-weight: bold;
+}
+</style>
+<script type="text/javascript" src="https://etd.repository.ugm.ac.id/ugmfw-assets/opac_home/jquery.min.js"></script>
+<script src="https://etd.repository.ugm.ac.id/ugmfw-assets/pdfjs/pdf.worker.js"></script>
+<script>
+$('[data-toggle="tabajax"]').click(function(e) {
+    var $this = $(this),
+        loadurl = $this.attr('href'),
+        targ = $this.attr('data-target');
+
+    $.get(loadurl, function(data) {
+        $(targ).html(data);
+    });
+
+    $this.tab('show');
+    return false;
+});
+</script>
+<!--menampilkan  pdf file By Dedy P FISIPOL UGM -->
+<script>
+    $(document).ready(function(){
+    	$("#pdf_reviewer").css('min-height','0px');
+    	$("#pdf_reviewer").css('height','0px'); 
+        $('.view_btn').click(function(e){
+        	$("#pdf_reviewer").css('min-height','800px');                 	
+        	$("#pdf_reviewer").prop('src',$(this).attr('href'));        	
+        	return false;
+        });
+        
+        $(document.head).append('<meta name="keywords" content="laterite nickel, runoff water, Pollution Index, Heavy Metal Pollution Index, water quality, socioeconomic impacts.">')
+        $(document.head).append('<meta name="citation_title" content="Analisis Kualitas Air Limpasan Tambang Nikel Dengan Menggunakan Indeks Pencemaran Di Pt X Morowali Sulawesi Tengah">')
+        $(document.head).append('<meta name="citation_author" content="Boy Kurniawan">')
+        $(document.head).append('<meta name="citation_date" content="2025">')
+        $(document.head).append('<meta name="citation_dissertation_institution" content="Universitas Gadjah Mada">')
+        $(document.head).append('<meta name="DC.title" content="Analisis Kualitas Air Limpasan Tambang Nikel Dengan Menggunakan Indeks Pencemaran Di Pt X Morowali Sulawesi Tengah">')
+        $(document.head).append('<meta name="DC.creator" content="Boy Kurniawan">')
+        $(document.head).append('<meta name="DC.issued" content="2025">')
+        $(document.head).append('<meta name="DC.publisher" content="Universitas Gadjah Mada">')
+
+        console.log(document.head)
+});
+
+</script>		</div>
+		<footer id="footer">
+			<div class="footer-body">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4 col-sm-5 footer-brand-wrapper">
+							<a href="#" class="footer-brand"><img src="https://etd.repository.ugm.ac.id//ugmfw-assets/ugm-html/assets/images/ugm_footer.png" alt="Universitas Gadjah Mada"></a>
+							<address>
+								<strong>Perpustakaan Universitas Gadjah Mada</strong><br>
+								Bulaksumur, Kotak POS 16, Yogyakarta, 55281<br>
+								<span class="glyphicon glyphicon-earphone"></span> Telepon: <a href="#">(0274) 513163, 6492641, 6492642, 6492643, 6492632, 6492633, 6492155</a><br>
+								<span class="fa fa-fax"></span> Faks: <a href="tel:+62-274-513163">(0274) 513163</a><br>
+								<span class="glyphicon glyphicon-envelope"></span> E-mail: <a href="emailto:info@ugm.ac.id"> library@ugm.ac.id</a>
+							</address>
+						</div>
+						<div class="col-md-8 col-sm-7 footer-menu-wrapper">
+							<div class="row">
+								<div class="col-md-4 col-sm-6 widget">
+									<div class="widget-header">
+										<h3 class="widget-title">LAYANAN</h3>
+									</div>
+									<div class="menu-footer">
+										<ul class="menu">
+											<li><a href="http://lib.ugm.ac.id/ind/?page_id=22">Jam Pelayanan</a></li>
+											<li><a href="http://lib.ugm.ac.id/ind/?page_id=36">Keanggotaan</a></li>
+											<li><a href="http://lib.ugm.ac.id/ind/?page_id=32">Sirkulasi</a></li>
+											<li><a href="http://lib.ugm.ac.id/ind/?page_id=82">Layanan Referensi dan Terbitan Berkala</a></li>
+											<li><a href="http://lib.ugm.ac.id/ind/?page_id=94">Layanan Academic Resources Center (ETD & KKI)</a></li>
+											<li><a href="http://lib.ugm.ac.id/ind/?page_id=97">Koleksi Hatta dan Koleksi Langka</a></li>
+											<li><a href="http://lib.ugm.ac.id/ind/?page_id=102">Windows of the World</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-6 widget">
+									<div class="widget-header">
+										<h3 class="widget-title">E-Resources</h3>
+									</div>
+									<div class="menu-footer">
+										<ul class="menu">
+											<li><a href="http://lib.ugm.ac.id/ind/?page_id=185">Sumber Internal</a></li>
+											<li><a href="http://lib.ugm.ac.id/ind/?page_id=109">Katalog Jurnal Online Terpadu</a></li>
+											<li><a href="http://lib.ugm.ac.id/ind/?page_id=194">Database, Jurnal, dan Buku Elektronik Online</a></li>
+											<li><a href="http://lib.ugm.ac.id/ind/?page_id=199">Buku Elektronik</a></li>
+											<li><a href="http://lib.ugm.ac.id/ind/?page_id=206">Trial Akses</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-6 widget">
+									<div class="widget-header">
+										<h3 class="widget-title">Quick Access</h3>
+									</div>
+									<div class="menu-footer">
+										<ul class="menu">
+											<li><a href="https://unggah.etd.ugm.ac.id/">Unggah Mandiri UGM</a></li>
+											<li><a href="https://aimos.ugm.ac.id/">AIMOS</a></li>
+											<li><a href="http://lib.ugm.ac.id/ind/?page_id=1498">Akses E-Journal</a></li>
+											<li><a href="http://lib.ugm.ac.id/ind/?page_id=248">Skripsi, Tesis, dan Disertasi</a></li>
+											<li><a href="https://jurnal.ugm.ac.id/">Jurnal Online UGM</a></li>
+											<li><a href="http://i-lib.ugm.ac.id/">Back Issue Jurnal UGM</a></li>
+											<li><a href="http://langka.lib.ugm.ac.id/">Koleksi Langka</a></li>
+											<li><a href="http://lib.ugm.ac.id/ind/?page_id=257">Katalog Online</a></li>
+											<li><a href="http://repository.ugm.ac.id/">Repository UGM</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-3 col-sm-4"><p class="copyright">&copy; 2018 Universitas Gadjah Mada</p></div>
+						<div class="col-md-9 col-sm-8">
+							<p class="site-menu text-right">
+								<a href="#">Aturan Penggunaan</a>
+								<a href="#">Peta Situs</a>
+								<a href="#">Kontak</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<div id="switcher"></div>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		<script type="text/javascript" src="https://etd.repository.ugm.ac.id//ugmfw-assets/ugm-html/assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="https://etd.repository.ugm.ac.id//ugmfw-assets/ugm-html/assets/js/slick.min.js"></script>
+		<script type="text/javascript" src="https://etd.repository.ugm.ac.id//ugmfw-assets/ugm-html/assets/js/jquery.pin.min.js"></script>
+		<script type="text/javascript" src="https://etd.repository.ugm.ac.id//ugmfw-assets/ugm-html/assets/js/jquery.nav.js"></script>
+		<script type="text/javascript" src="https://etd.repository.ugm.ac.id//ugmfw-assets/ugm-html/assets/js/jquery.matchHeight-min.js"></script>
+		<script type="text/javascript" src="https://etd.repository.ugm.ac.id//ugmfw-assets/ugm-html/assets/js/apps.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+		<!-- custom js -->
+				<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v2.8";
+		fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+		<script type="text/javascript">
+			// rename myToken as you like
+		    window.ugmfw_csrf =  {"csrfToken":null};
+		</script>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-19343927-13"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		
+		  gtag('config', 'UA-19343927-13');
+		</script>
+				    
+
+	</body>
+</html>

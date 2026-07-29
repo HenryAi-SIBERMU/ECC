@@ -1,0 +1,473 @@
+{
+  "status": "OK",
+  "data-availability": "available",
+  "data": [
+    {
+      "page": 1,
+      "pages": 1,
+      "per_page": 1,
+      "count": 1,
+      "total": 1
+    },
+    {
+      "status": 200,
+      "condition": "OK",
+      "message": "27 Subject(s) Available",
+      "created": "2026-07-29 12:26:32",
+      "data": [
+        {
+          "id": "K1hHenQ1MWFBcmJXaHY2RVJMcTNSUT09",
+          "bab": "Pemerintahan",
+          "bab_en": "Government",
+          "subject": "Sumber Daya Manusia",
+          "subject_en": "Human Resources",
+          "mms_id": 534,
+          "mms_subject": "Keuangan Pemerintah, Fiskal dan Statistik Sektor Publik",
+          "tabel": [
+            "VlczcSt1TGlXZHh3NWdyclUrZmo4QT09",
+            "RU82T3FSUlN6UHdVR0Z5N1pRUlNxZz09",
+            "YzVEYlo5MVplU2NaM2NtT2daTzB6UT09"
+          ]
+        },
+        {
+          "id": "SnM1eUlLcDgxNDR4aEowTlJpbjh3Zz09",
+          "bab": "Pemerintahan",
+          "bab_en": "Government",
+          "subject": "Keuangan Pemerintah",
+          "subject_en": "Government Finance",
+          "mms_id": 534,
+          "mms_subject": "Keuangan Pemerintah, Fiskal dan Statistik Sektor Publik",
+          "tabel": [
+            "V3FlSUU0aWh3OHFaVzBvOEViRVlNZz09",
+            "YjZWMkl0blljQ1VHNkF0dnlXWGtkdz09",
+            "TEJrTHhZODZmSXhoblFvSGtlbkFMQT09",
+            "NzdtemNPTS95VEYzSENIYnFVb1VZZz09",
+            "ZW16TjJSZkxtZG40ME1lTUJPRHVmdz09",
+            "TlJUeGVxdWY0eTlmTHB5Y0FPd3pIQT09"
+          ]
+        },
+        {
+          "id": "aVNwM3JTd21SUFZYTUpLOFJXSEphdz09",
+          "bab": "Penduduk dan Ketenagakerjaan",
+          "bab_en": "Population and Employment",
+          "subject": "Penduduk",
+          "subject_en": "Population",
+          "mms_id": 519,
+          "mms_subject": "Kependudukan dan Migrasi",
+          "tabel": [
+            "YW40a21pdTU1cnJxOGt6dm43ZEdoZz09",
+            "aWhSR0ViS3hxc1hWZlZEbExjNVpDUT09",
+            "VHpUK3MrOVd6dTJjcHdoQ1Z6TGlmUT09",
+            "WVRlTTcySlZDa3lUcFp6czNwbHl4QT09",
+            "bmc3elVuWGROc3JRL3RPQTBrU2dadz09"
+          ]
+        },
+        {
+          "id": "Y0ZhVWFIS2VKLzRKQytGNzlSY2ZBZz09",
+          "bab": "Penduduk dan Ketenagakerjaan",
+          "bab_en": "Population and Employment",
+          "subject": "Ketenagakerjaan",
+          "subject_en": "Employment",
+          "mms_id": 520,
+          "mms_subject": "Tenaga Kerja",
+          "tabel": [
+            "WjNUbVprTDh4SjN4RXhLaUptMHZqQT09",
+            "UXBNZmtLbnJrWnV3cE5aWkw3T1ovdz09",
+            "WVFiQzIxdEdNc05oVW1HVEY4b2pjdz09",
+            "aFZiZWkvUllycnd0UGkzV1gwQ1A2QT09",
+            "cTkrS1dqUVVhZVI4a3dsR01hZ1MwZz09",
+            "TE9UUDFUV3Bpa3ovMHJJVGtuUHZVdz09",
+            "NU16V0IxVEJzQXdmTTBKOEJsWUVWQT09",
+            "Q2NJN3ZtTkZSOGpFbXg3d0wwQkhUUT09",
+            "UEJPZGxjcUxvWWdkWmFLRUpZanJQUT09",
+            "eEFEYng2dWFVUjJGUU5xZkJUcGRaZz09"
+          ]
+        },
+        {
+          "id": "SUVWcXJHbWQwMWNPd0toTHNVQlVPUT09",
+          "bab": "Sosial dan Kesejahteraan Rakyat",
+          "bab_en": "Social and Welfare",
+          "subject": "Pendidikan",
+          "subject_en": "Education",
+          "mms_id": 521,
+          "mms_subject": "Pendidikan",
+          "tabel": [
+            "ajYwZDI2cytEY3ZxQUFld203cVJLQT09",
+            "NTVUaUI4bDNBR1NpZDFLZTBISStpdz09",
+            "MU90V01YZ0RxenhmbFdsU21iUHh2Zz09",
+            "a1lFcnlHNXNYMFlueG8xL0ZOZnU0Zz09",
+            "SWhBUEVPdVhwN0dTREZWMkxCU3RzZz09",
+            "MTVRQXRzUDNYdzRJVGFnVmZWRDE0UT09",
+            "dzdoVmp3YWdGNU0yWEgraVIwbmRqZz09",
+            "UkJNaEl6ZHRVYXNaMzZhZG9BbS9ZZz09",
+            "QmZheG9BZGdza0FBVkRJakpGZENmZz09",
+            "TGtWNEN0ZERnc05mY0pyaVNJR2FNUT09",
+            "ejAwRFY4L3k3VXZpbzF2cFo0amlGZz09",
+            "RmpZME13VjBGcm1RWXo0dG5KdmJJQT09",
+            "dnF4TTdwbEcwbTFHazAwZUtOMVRBQT09",
+            "cmdTdG5vU0IwKzBFR20rQnpuZEYzdz09",
+            "NTN2WkN5cW10UkdndTJNZnI4OE9CQT09",
+            "eDUyUFFYcUdLWnIyQ0VDVkorZWlGZz09",
+            "TE9sZFVvdVErcU9Ka0VreVUrNnZEQT09",
+            "SmNxWnFzemcvcUkvdndUbTJGc2RQdz09",
+            "UE1YYmk0TnR5TnoycHlYbzNnbkFIZz09",
+            "Uys0Mk9kelpxamVmMUYrMkRHSFcyZz09"
+          ]
+        },
+        {
+          "id": "Z2I4TjdNeVZqbkMyaTFCZVhBVkE4QT09",
+          "bab": "Sosial dan Kesejahteraan Rakyat",
+          "bab_en": "Social and Welfare",
+          "subject": "Kesehatan",
+          "subject_en": "Health",
+          "mms_id": 522,
+          "mms_subject": "Kesehatan",
+          "tabel": [
+            "WUptSkZUMDlSbXNYSGJJaHpLaHVrQT09",
+            "Mzh6ZDZ3VXg3bzRtUUVtRkZOZUpZdz09",
+            "biszcFRCUnVKUXNnTDZvWnA3ZWtyUT09",
+            "dlluMytKMXJMbjBIK2VGZFpiVEtuQT09",
+            "elphU2NQeHZPQlhkRlZ5b1k2cUFwZz09",
+            "TEptbDV0QlRORVl6cjl0THhMbk02Zz09",
+            "UGRkblliSHZUa0J0VEpDZUJwdFhxQT09",
+            "OUxpRHI5dWVlT3JkcEc1K3pYOWJBUT09",
+            "a05CZmFhT0JWY0lBd2g0cW80S0xiZz09",
+            "UUROM3lMeGsxZ0czT2xFeEJsK0VWZz09",
+            "aWpHRGF4UVBjZTVEODBHMTV4R0xUUT09"
+          ]
+        },
+        {
+          "id": "NDE3ajExQWJHaGd4SHhpSDVQQWREdz09",
+          "bab": "Sosial dan Kesejahteraan Rakyat",
+          "bab_en": "Social and Welfare",
+          "subject": "Perumahan dan Lingkungan",
+          "subject_en": "Housing and Enviroment",
+          "mms_id": 525,
+          "mms_subject": "Pemukiman dan Perumahan",
+          "tabel": [
+            "cldOY0VhMHVKbmVQZWQrMmtoVGcwQT09",
+            "ME4xN1lOa1hRV3BHcXhZVFRJR1RNZz09",
+            "TkFMNjl1eC9uUlBMSVdIWmdaZE00UT09",
+            "U29xWGVBMjRYRktHZE1HdlNtTCtRZz09",
+            "UVp1SDFhN25Zek5CMDhyeWdhU1Z1QT09",
+            "cTVzZ3RCWDVnSE9pZEQvOW9XSWZpQT09",
+            "c0Z2WnJQUm5kRzVyOXE2dkJUM1dSQT09",
+            "TFNYdFJuejZQcDMzdU94bitGNG9CUT09",
+            "VklTZWpaVk4zZ3VCVGlycHRKVmxwQT09"
+          ]
+        },
+        {
+          "id": "aEZEOTVoUDV0TVN6K1dLdFpvNkgrZz09",
+          "bab": "Sosial dan Kesejahteraan Rakyat",
+          "bab_en": "Social and Welfare",
+          "subject": "Kriminalitas",
+          "subject_en": "Crime",
+          "mms_id": 526,
+          "mms_subject": "Peradilan Dan Kriminal",
+          "tabel": [
+            "VUgxYW9RNHZMS3JqN3VQekk2TFcwUT09"
+          ]
+        },
+        {
+          "id": "MlVsWUdiUXg2dENIVDJXbVNKdSs4QT09",
+          "bab": "Sosial dan Kesejahteraan Rakyat",
+          "bab_en": "Social and Welfare",
+          "subject": "Kemiskinan dan Pembangunan Manusia",
+          "subject_en": "Poverty and Human Development",
+          "mms_id": 563,
+          "mms_subject": "Kondisi Tempat Tinggal, Kemiskinan, dan Permasalahan Sosial Lintas Sektor",
+          "tabel": [
+            "ZTlwdzkycFhsYk9KbXNOYm8yQXV0dz09",
+            "bkRIV0dia0dPKzV3WUZEZllpbXdkQT09",
+            "REdXbUdSVjIzUlJTT0Z5Vy9Rd3ZmQT09",
+            "dmhsbUpvaVJRT1lrd1M5S1ljOXp0UT09",
+            "WnFhSGhLZ2xHNmlZdkRRYzRsaG5Hdz09"
+          ]
+        },
+        {
+          "id": "ekFITkFSSllEWlh5Y1RzaUZFSlFsUT09",
+          "bab": "Pertanian, Kehutanan, Peternakan, dan Perikanan",
+          "bab_en": "Agriculture, Forestry, Livestock, and Fishery",
+          "subject": "Tanaman Pangan",
+          "subject_en": "Food Crops",
+          "mms_id": 557,
+          "mms_subject": "Pertanian, Kehutanan, Perikanan",
+          "tabel": [
+            "d3ZjM280TU9FanlkdDRETUV5aVdndz09",
+            "eHNUZGIwSjlsL0lRNjB0c2VhMGowQT09",
+            "ZjZ6MXlacGJNR0JaaHBPRSs0TzNUdz09"
+          ]
+        },
+        {
+          "id": "ODhyTDFMb0FKalliamIyUUd3ci9ZUT09",
+          "bab": "Pertanian, Kehutanan, Peternakan, dan Perikanan",
+          "bab_en": "Agriculture, Forestry, Livestock, and Fishery",
+          "subject": "Hortikultura",
+          "subject_en": "Horticulture",
+          "mms_id": 557,
+          "mms_subject": "Hortikultura, Perkebunan, Peternakan",
+          "tabel": [
+            "TUx2d1hodjFkUGVxLzh1T2szZjhqZz09",
+            "MnBlci91MjhhS1Fxb1ZmS2NCVUxVZz09",
+            "U3V3MUthSzVSM3RKSEJEYk93Z2Jqdz09",
+            "SGJsZ0s5RjRyTWN1eDNyUERzbTI0Zz09",
+            "ZCtqYzNJb1ZyZ3FDMjhadldoSWwrUT09",
+            "TGxjV3pqZjBpUHNBUU53clFjTkJoQT09",
+            "YzRUNnQ0NHIyYXFBeDI5RVpRVXVyUT09",
+            "UVMzY2pGV3kyWjhLYm9UTEdtYk52Zz09",
+            "bkZ2NDZsYno2VDR2di9TZldvUUExdz09",
+            "eHEwRmg2VUZjY2lWNWNYaVhQK1h4QT09",
+            "NkZSMmVGdk1Rdzh4Qm8vL1RBS3NnUT09",
+            "bWJLbGZJZXBoaTQ1VC9LQkZRa1NzQT09",
+            "MDNRYkxNYzdGaG1XY2hrM256MlRLQT09",
+            "bXNVb1pmZndqUDhKWElUSjhZRitidz09"
+          ]
+        },
+        {
+          "id": "dktjRjNBYldCQnV6bk9pTitBTGZaQT09",
+          "bab": "Pertanian, Kehutanan, Peternakan, dan Perikanan",
+          "bab_en": "Agriculture, Forestry, Livestock, and Fishery",
+          "subject": "Perkebunan",
+          "subject_en": "Estate Crops",
+          "mms_id": 557,
+          "mms_subject": "Hortikultura, Perkebunan, Peternakan",
+          "tabel": [
+            "QjFRZTg2YnBaZXFuL3RHWW04Zjh0UT09",
+            "cHNYaFdzOVJTV1JRZ0V0a1B5ZmZXZz09",
+            "OHpDcnRSSHlqM29XRmROaUtQUHdoQT09",
+            "elJzMTFDZWI0bS9OcGptMVFWNEdhdz09"
+          ]
+        },
+        {
+          "id": "SkZiN1ZEc1JFRm1OS0RpeHZmdWFaZz09",
+          "bab": "Pertanian, Kehutanan, Peternakan, dan Perikanan",
+          "bab_en": "Agriculture, Forestry, Livestock, and Fishery",
+          "subject": "Kehutanan",
+          "subject_en": "Forestry",
+          "mms_id": 557,
+          "mms_subject": "Pertanian, Kehutanan, Perikanan",
+          "tabel": [
+            "RjhwOFhnQm9Na2piQWZrOFd5Zmp1Zz09",
+            "SUxBOHlMN0xLTVVhRU1pbFhkSUVTQT09"
+          ]
+        },
+        {
+          "id": "V3lDWXVrK21RS1lTWmk1eWpvanhaZz09",
+          "bab": "Pertanian, Kehutanan, Peternakan, dan Perikanan",
+          "bab_en": "Agriculture, Forestry, Livestock, and Fishery",
+          "subject": "Peternakan",
+          "subject_en": "Livestock",
+          "mms_id": 557,
+          "mms_subject": "Hortikultura, Perkebunan, Peternakan",
+          "tabel": [
+            "V3RrS3oyd293b2dScGJ1OGt6bnBhdz09",
+            "cHdwS041eDlldE03d1JQcjJOVWc5Zz09",
+            "NFY4KzRSUjAxMGZuTktUZ2dGb3JpZz09",
+            "WEJqcmVxcHQ0dzVvMUhwK0hYWjRmZz09",
+            "c2Z3NXhPcEVIM3p3S0RIM2k5cUo0dz09",
+            "ejBRekFBdXE5anFOVC96TmJwWGN1Zz09",
+            "dzAwMlNiT2granl4d0daTVNqbW9WQT09",
+            "cHdJRkltWU5ZeEk2UHlpL25KYlZtZz09",
+            "ckJyVXRMT05MWTNpaW9mdnVseFk0Zz09",
+            "dWhmNFl6WXYyR093R2NjTGM3NG9idz09",
+            "S2ViU1dwVTlpSXRwU1MvendHN05Cdz09"
+          ]
+        },
+        {
+          "id": "L01YNlloZ0VLNjlrVGhYU2hpaU5CZz09",
+          "bab": "Pertanian, Kehutanan, Peternakan, dan Perikanan",
+          "bab_en": "Agriculture, Forestry, Livestock, and Fishery",
+          "subject": "Perikanan",
+          "subject_en": "Fishery",
+          "mms_id": 557,
+          "mms_subject": "Pertanian, Kehutanan, Perikanan",
+          "tabel": [
+            "NTdHM1BiQXJXUHAyUUNoMXNabkRwZz09",
+            "N2dXYzJqTjJiMURlVFVxMXVqUkVqdz09",
+            "cEFETGpKdW51UWRtVHJ1bVJXZXBvUT09",
+            "ZUpFNjk2T1BxZDFoN1pVbVBBYUtUdz09",
+            "ZWloQ2FKM09vUERjQ3VYZ3lPY1FNdz09",
+            "Sm02MzFheGRKZGk1dXBLTW0vazRzZz09",
+            "NGFxSy9BUVlUN0RrVklTNjU3UnJBdz09",
+            "bGpsb0ZYRktSVFJCR2ZEV2ZLczVrZz09",
+            "Si8wS0pVcDhRUTJidGFnSzl5UDIxZz09",
+            "aERMbC9IZDZWak1reTcxd1licHhTUT09",
+            "Z1ZoK1V5dGxNUGc1cHFsdmgweitmdz09",
+            "dGpXQWRaRHRhUzhlbTE2TzNVU0pTUT09",
+            "dDZNdkh0dEUwRENsOVhnL1phWTZKUT09",
+            "QzdZSmlzeG1qc1RGLzB2YlMwTDJBZz09"
+          ]
+        },
+        {
+          "id": "OFFyMGxLdTZNb1ZWZlprTzhYWVJ5dz09",
+          "bab": "Konstruksi",
+          "bab_en": "Construction",
+          "subject": "Konstruksi",
+          "subject_en": "Construction",
+          "mms_id": 559,
+          "mms_subject": "Pertambangan, Manufaktur, Konstruksi",
+          "tabel": [
+            "cWVCVnpON0doWGYraU1qakFQWmRwZz09",
+            "SVRkeHg0UmZUL0h6N0JLRmtSbzNpdz09"
+          ]
+        },
+        {
+          "id": "MENKUHFtbHpiR1RtYlVXUnJUL0ZNZz09",
+          "bab": "Pariwisata",
+          "bab_en": "Tourism",
+          "subject": "Pariwisata",
+          "subject_en": "Tourism",
+          "mms_id": 561,
+          "mms_subject": "Pariwisata",
+          "tabel": [
+            "dGVNaWVZV01BRk90RnM3ZlB2UVNJUT09",
+            "N0VJWlZIYVpWSTJqYlU3RExiSksrQT09"
+          ]
+        },
+        {
+          "id": "RjBVSGhqT0VpYno5Nzdsai9ySCtZUT09",
+          "bab": "Transportasi dan Komunikasi",
+          "bab_en": "Transportation and Communication",
+          "subject": "Transportasi",
+          "subject_en": "Transportation",
+          "mms_id": 560,
+          "mms_subject": "Transportasi",
+          "tabel": [
+            "SENxVDdSbVprRGF2Sk91UTdGcVdTdz09",
+            "V2w4dFkwdFNLNU5mSE95Und2UDRMQT09"
+          ]
+        },
+        {
+          "id": "ZmFwK1I2L3dnSGVwRG5FVEsrN0NGdz09",
+          "bab": "Transportasi dan Komunikasi",
+          "bab_en": "Transportation and Communication",
+          "subject": "Pos dan Telekomunikasi",
+          "subject_en": "Post and Telecommunication",
+          "mms_id": 565,
+          "mms_subject": "Masyarakat Informasi",
+          "tabel": [
+            "bHBPRThLUXl0OFU3ZFdoRXRuY2dYdz09",
+            "L2lNQW9xWUo5TFhkQ0RMbEJadEdDUT09"
+          ]
+        },
+        {
+          "id": "Wm5rc3plOHV0Z1BqQjZ6QjBoZXJYQT09",
+          "bab": "Perbankan, Investasi, Utang Luar Negeri, Asuransi, Dan Koperasi",
+          "bab_en": "Banking, Investment, External Debt, Insurance, And Cooperative",
+          "subject": "Investasi",
+          "subject_en": "Investment",
+          "mms_id": 562,
+          "mms_subject": "Perbankan, Asuransi, Statistik Keuangan",
+          "tabel": [
+            "NVQ2MmdYc3ozTmo2UzhWUnhHMWQyUT09",
+            "WURnZ0FOTmd1WnhzNWdVZkNKQmlMdz09"
+          ]
+        },
+        {
+          "id": "MHd4dHczTU5xcEFmTy9EUDBVU3V1UT09",
+          "bab": "Pengeluaran Penduduk Serta Ketersediaan Dan Konsumsi Makanan",
+          "bab_en": "Population Expenditure And Food Availability, And Consumption",
+          "subject": "Pengeluaran",
+          "subject_en": "Expenditure",
+          "mms_id": 523,
+          "mms_subject": "Konsumsi dan Pendapatan",
+          "tabel": [
+            "TUZldExiWWpCdWs2L0MyK045WGJWQT09",
+            "VkVtWXVRRWNLV2F6anltMnY0dDNiQT09",
+            "WVJ1ekI3NzNYeFNqVDdaUjRoWHVjQT09",
+            "bHMrcVZYRTVMTG1YL1owMXp6Uy9Wdz09",
+            "U2ZHQmZIWVpXeWRDL2s2enowQjU3QT09"
+          ]
+        },
+        {
+          "id": "c3kxVlZ2NDE2QVJ3d05yTEc1emNidz09",
+          "bab": "Sistem Neraca Nasional/Regional",
+          "bab_en": "System of National/Regional Accounts",
+          "subject": "Pendapatan Nasional/Regional",
+          "subject_en": "National/Regional Income",
+          "mms_id": 531,
+          "mms_subject": "Konsumsi dan Pendapatan",
+          "tabel": [
+            "S1RMUWRYb0NWc0Y5L05QQkxzcWw3Zz09",
+            "OE1KOFBPSnNPY0MvUVRlR25wcytUdz09",
+            "UklLSnFZZnMzMlJiSWpMOExJODIrQT09"
+          ]
+        },
+        {
+          "id": "QWI3aFdFY21ubjc5eDJJWE01NmxYUT09",
+          "bab": "Sistem Neraca Nasional/Regional",
+          "bab_en": "System of National/Regional Accounts",
+          "subject": "Produk Domestik Regional Bruto",
+          "subject_en": "Gross Regional Domestic Product",
+          "mms_id": 531,
+          "mms_subject": "Neraca Ekonomi",
+          "tabel": [
+            "ZGU1dXVpd2poTHJIY2YxMnVmN2Rndz09",
+            "aDJqeEc4MTJlOWRaRWFOQ1Q4UE5UQT09",
+            "akhBTUg3b1NjSUNJTExVbE4xT2NMUT09",
+            "OXA5V0V0c1NhM09HUnZ4UHhnaHlWZz09",
+            "NmtlUFVIK1QzS0pxQnFmWmlZWHBqZz09",
+            "b2tXcDFla1EyRGhxR0IrcEJ4dDFjUT09",
+            "ZzBrcmpMbnAyV1RzRG1EaDNvZ3VIZz09",
+            "aTZGTG80UHorbWFkbEgyVmo5SS80QT09"
+          ]
+        },
+        {
+          "id": "R1kzWmFzSXpTT2wyRGhzOTJpYlhqQT09",
+          "bab": "Pemerintahan",
+          "bab_en": "Government",
+          "subject": "Statistik Regional dan Area Kecil",
+          "subject_en": "Regional and Small Area Statistics",
+          "mms_id": 540,
+          "mms_subject": "Statistik Regional dan Statistik Area Kecil",
+          "tabel": [
+            "KzdIWGtmbUNtMysvSXczYW1UWXZVQT09",
+            "bEVXU252SU9hTjBxWEU3Z2NpS1ZPQT09",
+            "UFpWMmJZOVZlZTJnc1pXaHhDV1hPQT09",
+            "bkMwTFBHLzZSWmwxUDR4YVN0VkZtdz09"
+          ]
+        },
+        {
+          "id": "V0tBRm02cXlIVkdxUm9XTkdvbHJPUT09",
+          "bab": "Geografi dan Iklim",
+          "bab_en": "Geography and Climate",
+          "subject": "Lingkungan",
+          "subject_en": "Environment",
+          "mms_id": 539,
+          "mms_subject": "Lingkungan",
+          "tabel": [
+            "M0RTRlVsc01DbzlnakF4Z0h2TzhJQT09",
+            "QVRkWkZ6Nnh1ZEg0bzYycW5GMkpndz09",
+            "OEF5TzREZjErRlVMMXNXRC93amorQT09",
+            "MFZ0emxUcHBxOTB2R2F4Sk5oT2hqQT09",
+            "R1lONkliWXNyUjRqMUdlL2NXK0k2dz09"
+          ]
+        },
+        {
+          "id": "Rzd5NFNDZUViOUFtVThGQS9YUG93dz09",
+          "bab": "Sosial dan Kesejahteraan Rakyat",
+          "bab_en": "Social and Welfare",
+          "subject": "Perlindungan Sosial",
+          "subject_en": "Social Security",
+          "mms_id": 524,
+          "mms_subject": "Perlindungan Sosial",
+          "tabel": [
+            "Mkt1SFdWbWdZa1hKZ2FtRU1NaHRsUT09"
+          ]
+        },
+        {
+          "id": "RU9FTGp5MGNlYnB3Q2pleWF4MVU2UT09",
+          "bab": "Sosial dan Kesejahteraan Rakyat",
+          "bab_en": "Social and Welfare",
+          "subject": "Budaya",
+          "subject_en": "Culture",
+          "mms_id": 527,
+          "mms_subject": "Budaya",
+          "tabel": [
+            "eVp0d2JDQmlzZzRVc2FESkNvZThPdz09"
+          ]
+        }
+      ]
+    }
+  ]
+}

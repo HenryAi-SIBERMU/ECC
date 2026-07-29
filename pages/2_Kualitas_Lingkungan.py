@@ -146,7 +146,7 @@ tot_limbah_b3_juta = tot_limbah_b3 / 1_000_000
 # ── Header Halaman ──
 st.markdown('<div class="org-badge">CELIOS — Center of Economic and Law Studies</div>', unsafe_allow_html=True)
 st.markdown('<div class="main-title">Kualitas Lingkungan di Kawasan Smelter</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-title">Menguji secara empiris korelasi antara intensitas ekspansi fasilitas peleburan nikel (smelter) dengan anjloknya Indeks Kualitas Air (IKA), Udara (IKU), dan laju deforestasi komoditas di Pulau Sulawesi.</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-title">Menguji secara empiris korelasi antara intensitas ekspansi fasilitas peleburan nikel (smelter) dengan anjloknya Indeks Kualitas Air (IKA), kejanggalan klaim Indeks Kualitas Udara (IKU), dan laju deforestasi komoditas di Pulau Sulawesi.</div>', unsafe_allow_html=True)
 
 # ── Dropdown Metodologi ──
 with st.expander("🔍 Metodologi", expanded=False):
@@ -176,7 +176,7 @@ st.markdown(f"""
         Pesta "Hilirisasi" nikel ternyata menagih bayaran tunai langsung ke jantung ekosistem Pulau Sulawesi. Konsentrasi <b>{tot_smelter} fasilitas mega-smelter</b> yang ditenagai oleh mesin pembakaran batu bara raksasa sebesar <b>{tot_kapasitas_pltu:,.0f} MW</b> tidak hanya mencaplok ruang spasial, tetapi telah membengkokkan kurva daya dukung lingkungan ke titik terendahnya. Di bawah bayang-bayang narasi transisi energi, kualitas hidup jutaan warga dipertaruhkan oleh penurunan masif kualitas air dan udara, ditambah ancaman ledakan limbah beracun.
     </p>
     <p style="color: #CCCCCC; font-size: 1.05rem; line-height: 1.7;">
-        Data empiris merekam kebangkrutan ini secara presisi. Operasional industri ekstraktif telah merobek <b>{tot_deforestasi:,.0f} Hektar</b> ruang hidup alami dan menumpuk lebih dari <b>{tot_limbah_b3_juta:,.1f} Juta Ton</b> limbah B3/tailing per tahun. Beban polusi ini membuat Indeks Kualitas Air (IKA) rata-rata merosot ke angka <b>{mean_ika_2023:.1f}</b>, dan Indeks Kualitas Udara (IKU) anjlok ke level <b>{mean_iku_2023:.1f}</b>. Angka ini lebih dari sekadar indikator; ia adalah bukti forensik kegagalan kebijakan perlindungan ekologis negara di hadapan invasi modal korporasi.
+        Data empiris merekam kebangkrutan ini secara presisi. Operasional industri ekstraktif telah merobek <b>{tot_deforestasi:,.0f} Hektar</b> ruang hidup alami dan menumpuk lebih dari <b>{tot_limbah_b3_juta:,.1f} Juta Ton</b> limbah B3/tailing per tahun. Beban polusi ini membuat Indeks Kualitas Air (IKA) rata-rata merosot ke angka <b>{mean_ika_2023:.1f}</b>. Ironisnya, untuk kualitas udara, data resmi administratif Indeks Kualitas Udara (IKU) justru memoles kenyataan seolah membaik di level <b>{mean_iku_2023:.1f}</b> (makin tinggi = diklaim makin baik). Namun, ini adalah fatamorgana ekologis; data tandingan dari satelit global NASA TROPOMI (NO₂) secara brutal membongkar fakta sebaliknya bahwa gas beracun mematikan justru meroket tajam di atas sentra-sentra peleburan. Angka-angka ini adalah bukti forensik kegagalan instrumen perlindungan ekologis negara di hadapan invasi modal.
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -872,7 +872,7 @@ with col2:
 
 st.markdown(f"""
 <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #D32F2F; margin-bottom: 25px;">
-    <b>Pembedahan Ekologis Visual:</b> Grafik gabungan di atas memotret korelasi temporal antara ekspansi PLTU dan penurunan kualitas udara. Tumpukan area berwarna (sumbu kiri) menunjukkan ledakan kumulatif kapasitas PLTU yang terus meroket sepanjang 1 dekade. Ironisnya, garis merah (sumbu kanan) menunjukkan rata-rata IKU se-Sulawesi yang terus tertekan ke bawah — dari <b>{awal_iku:.1f}</b> poin hingga <b>{akhir_iku:.1f}</b> poin, penurunan brutal sebesar <b>{penurunan_iku:.1f}</b> poin. Slider di bawah dapat digeser untuk melihat rincian periode tertentu.
+    <b>Pembedahan Ekologis Visual:</b> Grafik gabungan di atas memotret realitas palsu dari data administratif. Tumpukan area berwarna (sumbu kiri) menunjukkan ledakan kumulatif kapasitas PLTU yang terus meroket sepanjang 1 dekade. Ironisnya, garis merah (sumbu kanan) merepresentasikan klaim resmi IKU dari negara yang secara absurd menyebut kualitas udara justru "membaik", dengan kenaikan semu dari <b>{awal_iku:.1f}</b> poin ke <b>{akhir_iku:.1f}</b> poin. Klaim administratif yang buta terhadap jutaan ton asap batu bara ini secara telak dibantah oleh data satelit TROPOMI (NO₂) di grafik NASA sebelahnya. Slider di bawah dapat digeser untuk melihat rincian periode tertentu.
 </div>
 """, unsafe_allow_html=True)
 

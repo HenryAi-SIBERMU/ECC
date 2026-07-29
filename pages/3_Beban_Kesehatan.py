@@ -101,7 +101,7 @@ st.markdown(
 @st.cache_data
 def load_health_data(force_reload=True):
     df_kes = pd.read_csv("data/processed/sulawesi_kesehatan_detail_2014_2024.csv")
-    df_faskes = pd.read_csv("data/processed/sulawesi_faskes_agregat.csv")
+    df_faskes = pd.read_csv("data/processed/sulawesi_faskes_agregat_v2.csv")
     df_ika = pd.read_csv("data/processed/sulawesi_ika_2016_2024.csv")
     df_ika = df_ika.rename(columns={'Indeks Kualitas Air': 'IKA'})
     df_iku = pd.read_csv("data/processed/sulawesi_iku_2015_2024.csv")
@@ -245,7 +245,7 @@ with col4:
             <div class="metric-value" style="color: #FF8A65;">{tot_puskesmas_2022:,.0f} <span style="font-size:1rem;">Unit</span></div>
             <div class="metric-desc">Fasilitas primer warga yang tumbuh stagnan dan gagal mengimbangi lonjakan beban pasien akibat penyakit industri.</div>
         </div>
-        <div class="metric-source"><b>Sumber:</b> BPS Ketersediaan Faskes<br/><i>File: sulawesi_faskes_agregat.csv</i></div>
+        <div class="metric-source"><b>Sumber:</b> BPS Ketersediaan Faskes<br/><i>File: sulawesi_faskes_agregat_v2.csv</i></div>
     </div>
     """,
         unsafe_allow_html=True,
@@ -260,7 +260,7 @@ with col5:
             <div class="metric-value" style="color: #FFAB91;">{tot_rs_2022:,.0f} <span style="font-size:1rem;">Unit</span></div>
             <div class="metric-desc">Ketersediaan rumah sakit yang timpang di wilayah timur, mencerminkan ketidakpedulian proteksi kesehatan korporasi.</div>
         </div>
-        <div class="metric-source"><b>Sumber:</b> BPS Ketersediaan Faskes<br/><i>File: sulawesi_faskes_agregat.csv</i></div>
+        <div class="metric-source"><b>Sumber:</b> BPS Ketersediaan Faskes<br/><i>File: sulawesi_faskes_agregat_v2.csv</i></div>
     </div>
     """,
         unsafe_allow_html=True,
@@ -293,7 +293,7 @@ with st.expander("ℹ️ Metodologi: Grouped Horizontal Bar Chart"):
         * **Jumlah & Jenis Faskes (Dependen):** Unit Rumah Sakit dan Puskesmas terdaftar (BPS).
         * **Kategori Zona (Independen):** Lokasi wilayah (Sentra vs Non-Sentra).
     4. **Dataset & File:**
-        * Data Agregat Faskes: `data/processed/sulawesi_faskes_agregat.csv`
+        * Data Agregat Faskes: `data/processed/sulawesi_faskes_agregat_v2.csv`
     """)
 
 # Data Prep Chart
@@ -354,10 +354,10 @@ fig_3_2.update_layout(
 st.markdown("<br>", unsafe_allow_html=True)
 
 rs_sentra = df_gap[
-    (df_gap["jenis"] == "Rumah Sakit") & (df_gap["Kategori"].str.contains("Sentra"))
+    (df_gap["jenis"] == "Rumah Sakit") & (df_gap["Kategori"] == "Sentra Industri (Sulteng & Sultra)")
 ]["jumlah"].values[0]
 rs_non = df_gap[
-    (df_gap["jenis"] == "Rumah Sakit") & (df_gap["Kategori"].str.contains("Non-Sentra"))
+    (df_gap["jenis"] == "Rumah Sakit") & (df_gap["Kategori"] == "Non-Sentra Industri (Lainnya)")
 ]["jumlah"].values[0]
 
 st.markdown(f"""
@@ -370,7 +370,7 @@ st.plotly_chart(fig_3_2, use_container_width=True, config={'displayModeBar': Fal
 
 with st.expander("Lihat Data Mentah: Ketimpangan Faskes 2022", expanded=False):
     st.dataframe(df_gap, use_container_width=True, hide_index=True)
-    st.caption("📁 **Sumber File:** `data/processed/sulawesi_faskes_agregat.csv`")
+    st.caption("📁 **Sumber File:** `data/processed/sulawesi_faskes_agregat_v2.csv`")
 
 
 # ══════════════════════════════════════════════════════════
@@ -816,7 +816,7 @@ st.table(chi_df)
 
 # --- D. Hypothesis & Risk Summary ---
 st.markdown("### Ringkasan Uji Hipotesis")
-is_significant = p < 0.10
+is_significant = p < 0.05
 status_text = "SIGNIFIKAN (Ada Hubungan)" if is_significant else "TIDAK SIGNIFIKAN"
 order_color = "#4CAF50" if is_significant else "#F44336"
 bg_color = "rgba(76, 175, 80, 0.1)" if is_significant else "rgba(244, 67, 54, 0.1)"
@@ -857,7 +857,7 @@ with col_res2:
     if is_significant:
         interp_text = f"Temuan ini sangat krusial: lonjakan intensitas {x_options[x_col]} terbukti **berkorelasi kuat dan signifikan** dengan peningkatan {y_options[y_col]} (OR: {odds_ratio:.3f}). Ini adalah konfirmasi empiris bahwa narasi hilirisasi dan investasi ekstraktif bukanlah pertumbuhan tanpa korban—ekspansi spasial mereka mutlak mengorbankan luasan hutan di tingkat tapak."
     else:
-        interp_text = f"Secara agregat, hubungan antara {x_options[x_col]} dan {y_options[y_col]} **tidak signifikan** secara statistik (P ≥ 0.10). Ini mengindikasikan bahwa deforestasi terjadi sangat masif di seluruh panel waktu dan ruang secara merata. Krisis tata kelola dan deforestasi telah menyebar ke seluruh wilayah, sehingga lonjakan izin di tahun tertentu tidak lagi menjadi prediktor tunggal atas ledakan penyakit pernapasan dan lingkungan yang sudah sistemik."
+        interp_text = f"Secara agregat, hubungan antara {x_options[x_col]} dan {y_options[y_col]} **tidak signifikan** secara statistik (P ≥ 0.05). Ini mengindikasikan bahwa deforestasi terjadi sangat masif di seluruh panel waktu dan ruang secara merata. Krisis tata kelola dan deforestasi telah menyebar ke seluruh wilayah, sehingga lonjakan izin di tahun tertentu tidak lagi menjadi prediktor tunggal atas ledakan penyakit pernapasan dan lingkungan yang sudah sistemik."
 
     st.markdown(
         f"""
@@ -913,7 +913,7 @@ for k_x, v_x in x_options.items():
         except:
             or_v = 0
 
-        sig_status = "🟢 SIGNIFIKAN" if pv_val < 0.10 else "🔴 TIDAK SIGNIFIKAN"
+        sig_status = "🟢 SIGNIFIKAN" if pv_val < 0.05 else "🔴 TIDAK SIGNIFIKAN"
 
         summary_data.append(
             {
@@ -1651,36 +1651,31 @@ else:
 # ══════════════════════════════════════════════════════════
 st.markdown("---")
 st.markdown(
-    '<h2 style="color: #ECEFF1; font-size: 24px;">3.6 Krisis Air Bersih: Penurunan IKA & Ledakan Kasus Diare di Kawasan Industri Ekstraktif</h2>',
+    '<h2 style="color: #ECEFF1; font-size: 24px;">3.6 Krisis Air Bersih: Tinjauan Makro Provinsi dan Bukti Uji Klinis Lingkar Tambang</h2>',
     unsafe_allow_html=True,
 )
-st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Panel Crosstab Analysis & Scatter Plot (IKA × Diare, 2016-2024)</span>', unsafe_allow_html=True)
+st.markdown('<span style="background:#4A148C;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Data Tapak Laboratorium Independen & Analisis Data Panel BPS (2016-2024)</span>', unsafe_allow_html=True)
 st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
-with st.expander("ℹ️ Metodologi: Panel Crosstab Analysis & Scatter Plot"):
+with st.expander("ℹ️ Metodologi: Pendekatan Komplementer Dua Lensa"):
     st.markdown("""
-    **Metode Analisis:** Sub-bab ini menggunakan Regresi Linier Sederhana dan Uji Tabulasi Silang (Chi-Square) untuk menguji hipotesis korelasi negatif antara degradasi kualitas air dan wabah infeksi saluran pencernaan.
+    **Metode Analisis:** Sub-bab ini menggunakan pendekatan komplementer untuk memetakan krisis air bersih dan dampaknya terhadap penyakit Diare. Keterbatasan granularitas pada data statistik agregat tingkat provinsi memerlukan validasi lapangan melalui uji laboratorium di tingkat tapak.
 
-    1. **Uji Asosiasi Lingkungan-Kesehatan:**
-        * **Korelasi Bivariat (Scatter Plot):** Melihat tren dan kemiringan regresi antara dua variabel kontinu.
-        * `H0 (Null Hypothesis): Pencemaran mutu air tidak berimplikasi secara statistik terhadap lonjakan prevalensi penderita Diare di komunitas.`
-        * `Decision Rule: Menolak H0 jika terdapat slope (kemiringan) negatif pada trendline, atau P-Value Chi-Square < 0.05.`
-    2. **Kalkulasi/Formula Pengolahan:** Persamaan Regresi Linier OLS (Ordinary Least Squares).
-        * `Y (Diare) = α + β * X (IKA) + ε` (Slope β diproyeksikan bernilai negatif)
+    1. **Tinjauan Mikro (Bukti Fisik Laboratorium):**
+        * Memeriksa kadar Kromium Heksavalen (Cr6+) di muara pembuangan air dan *tailing* tambang menggunakan data uji lab lapangan.
+        * `Benchmark:` Membandingkan temuan sampel dengan baku mutu air laut (0.005 mg/L) untuk menilai pelanggaran toksisitas secara absolut.
+    2. **Tinjauan Makro (Analisis Panel Provinsi):**
+        * **Korelasi Bivariat (Scatter Plot):** Melihat tren distribusi antara IKA dan kasus Diare untuk melihat gambaran umum regional, terlepas dari kelemahan signifikansi OLS (Ordinary Least Squares) akibat jumlah sampel yang sangat kecil (n=6 provinsi).
     3. **Variabel & Fitur Data:**
-        * **IKA (Independen):** Skor kualitas mutu air dari titik pantau KLHK.
-        * **Total Diare (Dependen):** Insiden penularan infeksi usus yang bersumber dari sanitasi dan air bersih.
-    4. **Dataset & File:**
-        * Kualitas Air: `data/processed/sulawesi_ika_2016_2024.csv`
-        * Data Epidemiologi: `data/processed/sulawesi_kesehatan_detail_2014_2024.csv`
+        * **Kualitas Air (Mikro):** Data konsentrasi Cr6+ dari investigasi lapangan (AEER & WALHI).
+        * **IKA (Makro):** Indeks Kualitas Air (BPS/KLHK).
+        * **Diare (Makro):** Kasus infeksi saluran pencernaan yang dilayani (Kemenkes).
     """)
 
 st.markdown("""
-Jika sub-bab sebelumnya membuktikan korelasi antara kualitas udara (IKU) dengan penyakit pernapasan (ISPA), sub-bab ini mengungkap dimensi kekerasan ekologis yang kedua: **pencemaran sumber air oleh tailing tambang dan limbah smelter** yang mengakibatkan ledakan kasus **Diare** di masyarakat.
+Sub-bab ini membedah krisis air bersih melalui **dua tingkat observasi paralel**. Pertama, tinjauan mikro spesifik di kawasan padat industri menggunakan hasil uji fisik laboratorium independen. Kedua, pemetaan tren makro di tingkat provinsi yang melihat distribusi Indeks Kualitas Air (IKA) terhadap sebaran kasus Diare.
 
-**Indeks Kualitas Air (IKA)** adalah indikator komposit yang mengukur tingkat pencemaran air permukaan dan tanah berdasarkan parameter fisika-kimia seperti BOD, COD, TSS, pH, dan logam berat. Semakin rendah IKA, semakin buruk kualitas air bersih yang dapat diakses warga. Narasi pemerintah yang mengklaim bahwa hilirisasi nikel membawa "pembangunan inklusif" gagal menjelaskan mengapa justru di provinsi dengan ekspansi smelter tercepat, kualitas air ambien justru anjlok drastis.
-
-Data panel dari 6 provinsi Sulawesi (2016-2024) membuktikan bahwa **provinsi dengan IKA rendah secara konsisten mengalami lonjakan kasus Diare** yang jauh lebih tinggi dibandingkan provinsi dengan IKA masih terjaga. Ini adalah konfirmasi empiris bahwa pencemaran sumber air akibat aktivitas ekstraktif bukan sekadar eksternalitas minor—melainkan ancaman sistemik terhadap hak dasar warga atas air bersih dan sanitasi.
+Pendekatan komplementer ini sangat penting untuk dilakukan. **Indeks Kualitas Air (IKA)** dari pemerintah merupakan nilai rata-rata dari seluruh DAS (Daerah Aliran Sungai) di satu provinsi, sehingga tidak bisa mendeteksi pencemaran ekstrem secara spesifik di muara tambang (*point source*). Oleh karena itu, kita mendampingkan pemetaan statistik makro ini dengan bukti lab klinis (Kromium) di tingkat tapak untuk mendapatkan realita krisis secara utuh.
 """)
 
 # --- Load IKA Data ---
@@ -1714,7 +1709,7 @@ df_ika_diare["IKA_Non_Sentra"] = df_ika_diare.apply(
 )
 
 # --- Visualization 1: Scatter Plot with Trendline (IKA vs Diare Correlation) ---
-st.markdown("#### Korelasi Langsung: Penurunan IKA vs Lonjakan Diare")
+st.markdown("#### Pemetaan Analisis: Kualitas Air dan Kasus Diare")
 
 # Calculate regression for trendline
 import numpy as np
@@ -1760,7 +1755,7 @@ fig_34_scatter = px.scatter(
     labels={"IKA": "Indeks Kualitas Air (IKA)", "Total_Diare": "Kasus Diare per Tahun"},
 )
 
-# Add trendline
+# Always show trendline (real data)
 fig_34_scatter.add_trace(
     go.Scatter(
         x=x_trend,
@@ -1771,13 +1766,10 @@ fig_34_scatter.add_trace(
         hovertemplate=f"<b>Linear Regression</b><br>y = {slope:.2f}x + {intercept:.2f}<br>R² = {r_squared:.3f}<extra></extra>",
     )
 )
-
-# Add regression equation annotation (plain text for Plotly)
 equation_text = f"Persamaan Regresi:\nDiare = {slope:.2f} × IKA + {intercept:.2f}\nR² = {r_squared:.3f} (P = {p_value:.4f})"
-
 fig_34_scatter.update_layout(
-    title=f"Korelasi Negatif: IKA vs Kasus Diare (2016-2024) — {len(df_ika_diare)} Observasi Panel",
-    height=600,
+    title=f"Distribusi IKA vs Kasus Diare — {len(df_ika_diare)} Observasi Panel",
+    height=450,
     plot_bgcolor="rgba(0,0,0,0)",
     paper_bgcolor="rgba(0,0,0,0)",
     legend=dict(
@@ -1803,21 +1795,19 @@ fig_34_scatter.update_layout(
     annotations=[
         dict(
             text=equation_text,
-            xref="paper",
-            yref="paper",
-            x=0.98,
-            y=0.02,
-            xanchor="right",
-            yanchor="bottom",
+            xref="paper", yref="paper",
+            x=0.98, y=0.02,
+            xanchor="right", yanchor="bottom",
             showarrow=False,
             bgcolor="rgba(30,30,30,0.9)",
-            bordercolor="#FBC02D",
-            borderwidth=2,
-            borderpad=10,
-            font=dict(size=12, color="#FFF59D"),
+            bordercolor="#E53935",
+            borderwidth=2, borderpad=10,
+            font=dict(size=11, color="#EF9A9A"),
         )
     ],
 )
+
+
 
 # Update bubble sizes
 fig_34_scatter.update_traces(
@@ -1825,45 +1815,116 @@ fig_34_scatter.update_traces(
     selector=dict(mode="markers"),
 )
 
-tab_bar, tab_scatter = st.tabs(["Opsi Publik: Grafik Batang", "Korelasi (Scatter Plot)"])
+tab_ngo, tab_bar, tab_scatter = st.tabs(["Bukti Fisik: Laboratorium NGO", "Opsi Publik: Grafik Batang", "Pemetaan Makro (Scatter Plot)"])
 
 with tab_bar:
-    df_bar_korelasi = df_ika_diare.groupby(["Provinsi", "Kategori"]).agg({"IKA": "mean", "Total_Diare": "mean"}).reset_index()
-    # Urutkan dari IKA terendah (terburuk) ke tertinggi
-    df_bar_korelasi = df_bar_korelasi.sort_values("IKA", ascending=True)
+    df_bar_36 = df_ika_diare.groupby(["Provinsi", "Kategori"]).agg({"IKA": "mean", "Total_Diare": "mean"}).reset_index()
+    df_bar_36 = df_bar_36.sort_values("IKA", ascending=True)
     
-    fig_bar_korelasi = px.bar(
-        df_bar_korelasi,
-        x="Provinsi",
-        y="Total_Diare",
-        color="IKA",
-        color_continuous_scale=[
-            [0.0, '#4E342E'],   # Sangat Buruk (Coklat Pekat)
-            [0.2, '#8D6E63'],   # Buruk (Coklat)
-            [0.5, '#F57C00'],   # Sedang (Oranye)
-            [0.8, '#64B5F6'],   # Baik (Biru Muda)
-            [1.0, '#1E90FF']    # Sangat Baik (Biru Tua)
-        ],
-        range_color=[50, 100],
-        text_auto=",.0f",
+    fig_bar_36 = px.bar(
+        df_bar_36, x="Provinsi", y="Total_Diare", color="IKA",
+        color_continuous_scale=[[0.0, '#4E342E'], [0.2, '#8D6E63'], [0.5, '#F57C00'], [0.8, '#64B5F6'], [1.0, '#1E90FF']],
+        range_color=[50, 100], text_auto=",.0f",
         title="Beban Diare vs Indeks Kualitas Air (Rata-Rata per Provinsi)"
     )
-    fig_bar_korelasi.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
-    fig_bar_korelasi.update_layout(
-        height=500,
-        plot_bgcolor="rgba(0,0,0,0)",
-        paper_bgcolor="rgba(0,0,0,0)",
-        font=dict(color="#B0BEC5"),
+    fig_bar_36.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
+    fig_bar_36.update_layout(
+        height=480, plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", font=dict(color="#B0BEC5"),
         xaxis=dict(title="Provinsi (Diurutkan dari IKA terburuk di kiri ke terbaik di kanan)"),
         yaxis=dict(title="Rata-Rata Kasus Diare per Tahun", showgrid=True, gridcolor="rgba(255,255,255,0.1)"),
         coloraxis_colorbar=dict(title="Skor IKA")
     )
-    st.plotly_chart(fig_bar_korelasi, use_container_width=True, config={'displayModeBar': False})
-    st.info("**Interpretasi Visualisasi:** Grafik batang ini merupakan alternatif yang jauh lebih mudah dicerna oleh publik. Anda dapat melihat pola korelasi secara gamblang: Provinsi di sebelah kiri yang memiliki warna coklat pekat (skor IKA terburuk akibat pencemaran) secara konsisten diiringi dengan tinggi batang kasus diare yang melonjak ekstrem.", icon=None)
+    st.plotly_chart(fig_bar_36, use_container_width=True, config={'displayModeBar': False})
+    st.markdown("Interpretasi Visual: Provinsi di sebelah kiri yang memiliki warna coklat pekat (skor IKA terburuk) secara konsisten diiringi dengan batang kasus diare yang melonjak tinggi.")
+
+
 
 with tab_scatter:
-    st.plotly_chart(fig_34_scatter, use_container_width=True, config={'displayModeBar': False})
+    st.markdown("""
+    Titik yang tersebar acak mengindikasikan bahwa data makro secara statistik tidak menunjukkan korelasi kausalitas yang kuat pada level agregat provinsi (R²=0.043, P=0.157). Oleh karena itu, kesimpulan pencemaran air lebih valid ditarik dari hasil uji klinis mikroskopis di tapak (Bukti Lab NGO).
+    """)
+    st.plotly_chart(fig_34_scatter, use_container_width=True, config={"displayModeBar": False})
 
+    if p_value < 0.05:
+        interp_text_34 = f"""
+        Scatter plot di atas membuktikan secara visual dan statistik bahwa terdapat korelasi **{correlation_direction} yang {correlation_strength}** antara IKA dan kasus Diare (**R² = {r_squared:.3f}, P = {p_value:.4f}**).
+
+        Setiap **penurunan 1 poin IKA** berasosiasi dengan **peningkatan {abs(slope):,.0f} kasus Diare** per tahun. Provinsi Sentra Industri (titik merah) terkonsentrasi di kuadran kiri-atas (IKA rendah + Diare tinggi), sementara provinsi Non-Sentra (titik abu-abu) tersebar di kuadran kanan-bawah (IKA lebih baik + Diare lebih rendah).
+
+        **Bubble size merepresentasikan tahun:** titik besar = tahun terkini (2024), menunjukkan bahwa krisis air semakin memburuk seiring waktu, terutama di zona industri. Ini adalah bukti konklusif bahwa **pencemaran air oleh limbah smelter dan tailing tambang memiliki dampak kesehatan yang terukur dan sistemik**.
+        """
+    else:
+        interp_text_34 = f"""
+        Hasil regresi linear (OLS) menunjukkan bahwa hubungan antara IKA dan Diare **TIDAK SIGNIFIKAN** secara statistik pada tingkat kepercayaan 95% (**R² = {r_squared:.3f}, P = {p_value:.4f} > 0.05**).
+
+        Oleh karena itu, kita **tidak dapat menyimpulkan secara absolut** bahwa setiap penurunan 1 poin IKA otomatis meningkatkan jumlah kasus Diare secara proporsional. Namun secara kualitatif (visual), Provinsi Sentra Industri (titik merah) memang cenderung berkumpul di area IKA yang sangat rendah, memperlihatkan kerentanan ekologis yang patut diwaspadai.
+
+        **Bubble size merepresentasikan tahun:** titik besar = tahun terkini (2024). Meskipun relasi linearnya lemah, sebaran titik ini menunjukkan perlunya kehati-hatian dalam mengelola limbah yang mencemari air permukaan.
+        """
+
+    st.markdown(f"**Interpretasi Korelasi Statistik:**\n\n{interp_text_34}")
+
+
+with tab_ngo:
+    
+    try:
+        df_ngo_cr6 = pd.read_csv("data/processed/ika_ngo_cr6_gabungan.csv")
+        
+        # Calculate data-driven metrics
+        max_cr6 = df_ngo_cr6["Konsentrasi Cr6+ (mg/L)"].max()
+        max_location = df_ngo_cr6.loc[df_ngo_cr6["Konsentrasi Cr6+ (mg/L)"].idxmax(), "Titik Sampling"]
+        exceed_biota = len(df_ngo_cr6[df_ngo_cr6["Konsentrasi Cr6+ (mg/L)"] > 0.005])
+        total_samples = len(df_ngo_cr6)
+        
+        st.markdown(f"""
+        Menghadapi absennya data **"Akses Air Minum Layak"** di tingkat Kabupaten dari BPS sejak 2019, kami menggunakan **Ground Truth Data** dari pengujian laboratorium independen (AEER & WALHI) sebagai alternatif pengukur pencemaran air secara absolut.
+        
+        Berdasarkan hasil uji klinis dari {total_samples} titik sampel di lingkar kawasan tambang, teridentifikasi bahwa **{exceed_biota} titik ({(exceed_biota/total_samples*100):.0f}%) melampaui batas aman toksisitas biota laut** (0.005 mg/L). Konsentrasi terparah ditemukan di {max_location} dengan kadar Kromium Heksavalen mencapai **{max_cr6:.3f} mg/L**, atau {(max_cr6/0.005):.0f} kali lipat lebih tinggi dari ambang batas aman. 
+        
+        ⚠️ **Peringatan Klinis:** Kromium Heksavalen (Cr6+) adalah logam berat karsinogenik beracun. Paparan berulang pada air yang dikonsumsi atau digunakan mencuci memicu iritasi kulit kronis, kerusakan pernapasan, pencernaan, dan potensi kanker parah di komunitas lingkar tambang. Bukti konkret di level tapak ini mengonfirmasi asimetri dampak ekologis industri ekstraktif yang gagal ditangkap oleh agregasi data makro.
+        """)
+        
+        import altair as alt
+        
+        # Base bar chart
+        bar_chart = alt.Chart(df_ngo_cr6).mark_bar().encode(
+            x=alt.X('Titik Sampling:N', sort=None, title='Titik Sampling', axis=alt.Axis(labelAngle=0)),
+            y=alt.Y('Konsentrasi Cr6+ (mg/L):Q', title='Konsentrasi (mg/L)'),
+            color=alt.Color('Konsentrasi Cr6+ (mg/L):Q', scale=alt.Scale(range=["#ffebee", "#b71c1c"]), legend=None)
+        ).properties(
+            title=alt.TitleParams(text="Kadar Kromium Heksavalen (Cr6+) di Lingkar Tambang vs Baku Mutu", color='#ECEFF1', anchor='start'),
+            height=500
+        )
+        
+        # Text annotations on bars
+        text_labels = bar_chart.mark_text(
+            align='center',
+            baseline='bottom',
+            dy=-5,
+            color='white'
+        ).encode(
+            text=alt.Text('Konsentrasi Cr6+ (mg/L):Q', format='.3f')
+        )
+        
+        # Threshold lines
+        rule_biota = alt.Chart(pd.DataFrame({'y': [0.005]})).mark_rule(strokeDash=[4, 4], color='red').encode(y='y:Q')
+        text_biota = alt.Chart(pd.DataFrame({'y': [0.005], 'text': ['Batas Aman Biota Laut (0.005 mg/L)']})).mark_text(align='left', baseline='bottom', dy=-5, dx=5, color='red').encode(y='y:Q', text='text:N')
+        
+        rule_budidaya = alt.Chart(pd.DataFrame({'y': [0.050]})).mark_rule(strokeDash=[4, 4], color='orange').encode(y='y:Q')
+        text_budidaya = alt.Chart(pd.DataFrame({'y': [0.050], 'text': ['Batas Aman Budidaya (0.050 mg/L)']})).mark_text(align='left', baseline='bottom', dy=-5, dx=5, color='orange').encode(y='y:Q', text='text:N')
+        
+        # Combine chart
+        final_chart = (bar_chart + text_labels + rule_biota + text_biota + rule_budidaya + text_budidaya).configure(
+            background='rgba(0,0,0,0)'
+        ).configure_axis(
+            gridColor='rgba(255,255,255,0.1)',
+            labelColor='#B0BEC5',
+            titleColor='#B0BEC5'
+        )
+        
+        st.altair_chart(final_chart, use_container_width=True)
+    except Exception as e:
+        st.error(f"Gagal memuat data NGO: {e}")
 
 # Calculate key metrics for narrative
 ika_sentra_mean = df_ika_diare[df_ika_diare["Kategori"].str.contains("Sentra")][
@@ -1891,24 +1952,7 @@ correlation_strength = (
 )
 correlation_direction = "negatif" if slope < 0 else "positif"
 
-# Prepare interpretation text separately
-interp_text_34 = f"""
-Scatter plot di atas membuktikan secara visual dan statistik bahwa terdapat korelasi <b>{correlation_direction} yang {correlation_strength}</b> antara IKA dan kasus Diare (<b>R² = {r_squared:.3f}, P = {p_value:.4f}</b>).<br><br>
 
-Setiap <b>penurunan 1 poin IKA</b> berasosiasi dengan <b>peningkatan {abs(slope):,.0f} kasus Diare</b> per tahun. Provinsi Sentra Industri (titik merah) terkonsentrasi di kuadran kiri-atas (IKA rendah + Diare tinggi), sementara provinsi Non-Sentra (titik abu-abu) tersebar di kuadran kanan-bawah (IKA lebih baik + Diare lebih rendah).<br><br>
-
-<b>Bubble size merepresentasikan tahun:</b> titik besar = tahun terkini (2024), menunjukkan bahwa krisis air semakin memburuk seiring waktu, terutama di zona industri. Ini adalah bukti konklusif bahwa <b>pencemaran air oleh limbah smelter dan tailing tambang memiliki dampak kesehatan yang terukur dan sistemik</b>.
-"""
-
-st.markdown(
-    f"""
-<div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #FBC02D; margin-bottom: 20px; margin-top: 15px;">
-    <b>Interpretasi Korelasi Statistik:</b><br><br>
-    {interp_text_34}
-</div>
-""",
-    unsafe_allow_html=True,
-)
 
 # --- Visualization 2: Crosstab Statistical Test (IKA × Diare) ---
 st.markdown("#### Uji Statistik: Asosiasi IKA Rendah dengan Ledakan Diare")
@@ -2064,7 +2108,7 @@ st.table(chi_df_ika)
 
 # --- D. Hypothesis Summary ---
 st.markdown("### Ringkasan Uji Hipotesis")
-is_significant_ika = p_ika < 0.10
+is_significant_ika = p_ika < 0.05
 status_text_ika = (
     "SIGNIFIKAN (Ada Hubungan)" if is_significant_ika else "TIDAK SIGNIFIKAN"
 )
@@ -2104,7 +2148,7 @@ with col_res_ika2:
     if is_significant_ika:
         interp_text_ika = f"Uji statistik membuktikan secara konklusif: **penurunan {x_options_ika[x_col_ika]} berkorelasi sangat signifikan dengan lonjakan kasus {y_options_ika[y_col_ika]}** (P = {p_ika:.4f}, OR: {odds_ratio_ika:.3f}). Provinsi dengan IKA rendah memiliki risiko {odds_ratio_ika:.1f}x lebih tinggi mengalami ledakan Diare dibanding provinsi dengan IKA terjaga. Ini adalah bukti empiris bahwa pencemaran air oleh tailing tambang dan limbah smelter **bukan eksternalitas kecil—melainkan ancaman sistemik terhadap hak dasar warga atas air bersih dan sanitasi**."
     else:
-        interp_text_ika = f"Secara agregat, hubungan antara {x_options_ika[x_col_ika]} dan {y_options_ika[y_col_ika]} **tidak signifikan** secara statistik (P ≥ 0.10). Hal ini mengindikasikan bahwa pencemaran air telah menyebar secara merata ke seluruh wilayah Sulawesi, sehingga tidak ada lagi provinsi 'aman' dari krisis air bersih. **Krisis tata kelola air telah menjadi sistemik**, bukan lagi terisolasi di zona industri tertentu."
+        interp_text_ika = f"Secara agregat, hubungan antara {x_options_ika[x_col_ika]} dan {y_options_ika[y_col_ika]} **tidak signifikan** secara statistik (P ≥ 0.05). Hal ini mengindikasikan bahwa pencemaran air telah menyebar secara merata ke seluruh wilayah Sulawesi, sehingga tidak ada lagi provinsi 'aman' dari krisis air bersih. **Krisis tata kelola air telah menjadi sistemik**, bukan lagi terisolasi di zona industri tertentu."
 
     st.markdown(
         f"""
@@ -2177,7 +2221,7 @@ for k_x, v_x in x_options_ika.items():
         except:
             or_v = 0
 
-        sig_status = "🟢 SIGNIFIKAN" if pv_val < 0.10 else "🔴 TIDAK SIGNIFIKAN"
+        sig_status = "🟢 SIGNIFIKAN" if pv_val < 0.05 else "🔴 TIDAK SIGNIFIKAN"
 
         summary_data_ika.append(
             {
