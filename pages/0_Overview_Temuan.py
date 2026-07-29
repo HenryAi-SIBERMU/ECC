@@ -541,7 +541,7 @@ with st.expander("1 · EKSPANSI INDUSTRI EKSTRAKTIF", expanded=True):
                         "Variabel Independen (X)": v_x,
                         "Variabel Dependen (Y)": v_y,
                         "Chi-Square": f"{round(c2_val, 3)}",
-                        "P-Value": f"{round(pv_val, 3)}",
+                        "P-Value": "< 0.001" if pv_val < 0.001 else f"{pv_val:.3f}",
                         "Odds Ratio": f"{round(or_v, 2)}",
                         "Kesimpulan": sig_status
                     })
@@ -670,7 +670,7 @@ with st.expander("1 · EKSPANSI INDUSTRI EKSTRAKTIF", expanded=True):
                         "Variabel Independen (X)": v_x,
                         "Variabel Dependen (Y)": v_y,
                         "Chi-Square": f"{round(c2_val, 3)}",
-                        "P-Value": f"{round(pv_val, 3)}",
+                        "P-Value": "< 0.001" if pv_val < 0.001 else f"{pv_val:.3f}",
                         "Odds Ratio": f"{round(or_v, 2)}",
                         "Kesimpulan": sig_status
                     })
@@ -983,7 +983,7 @@ with st.expander("2 · KUALITAS LINGKUNGAN", expanded=False):
             "Variabel Independen (X)": "Kepadatan Smelter (Fasilitas)",
             "Variabel Dependen (Y)": "Indeks Kualitas Air (IKA)",
             "Chi-Square": f"{round(c2_val, 3)}",
-            "P-Value": f"{round(pv_val, 3)}",
+            "P-Value": "< 0.001" if pv_val < 0.001 else f"{pv_val:.3f}",
             "Odds Ratio": f"{round(or_v, 2)}",
             "Kesimpulan": sig_status
         }]
@@ -1247,7 +1247,7 @@ with st.expander("2 · KUALITAS LINGKUNGAN", expanded=False):
             "Variabel Independen (X)": "Kapasitas PLTU (MW)",
             "Variabel Dependen (Y)": "Indeks Kualitas Udara (IKU)",
             "Chi-Square": f"{round(c2_val2, 3)}",
-            "P-Value": f"{round(pv_val2, 3)}",
+            "P-Value": "< 0.001" if pv_val2 < 0.001 else f"{pv_val2:.3f}",
             "Odds Ratio": f"{round(or_v2, 2)}",
             "Kesimpulan": sig_status2
         }]
@@ -1470,7 +1470,7 @@ with st.expander("2 · KUALITAS LINGKUNGAN", expanded=False):
             "Variabel Independen (X)": "Luas Ekspansi Industri (Ha)",
             "Variabel Dependen (Y)": "Kehilangan Tutupan Pohon (Ha)",
             "Chi-Square": f"{round(c2_val3, 3)}",
-            "P-Value": f"{round(pv_val3, 3)}",
+            "P-Value": "< 0.001" if pv_val3 < 0.001 else f"{pv_val3:.3f}",
             "Odds Ratio": f"{round(or_v3, 2)}",
             "Kesimpulan": sig_status3
         }]
@@ -1902,7 +1902,7 @@ with st.expander("3 · BEBAN KESEHATAN", expanded=False):
             except:
                 c2_val, pv_val, dof_val, or_v = 0, 1, 0, 0
             sig_status = "🟢 SIGNIFIKAN" if pv_val < 0.05 else "🔴 TIDAK SIGNIFIKAN"
-            summary_data.append({"Variabel Independen (X)": v_x, "Variabel Dependen (Y)": v_y, "Chi-Square": f"{c2_val:.3f}", "P-Value": f"{pv_val:.3f}", "Odds Ratio": f"{or_v:.2f}", "Kesimpulan": sig_status})
+            summary_data.append({"Variabel Independen (X)": v_x, "Variabel Dependen (Y)": v_y, "Chi-Square": f"{c2_val:.3f}", "P-Value": "< 0.001" if pv_val < 0.001 else f"{pv_val:.3f}", "Odds Ratio": f"{or_v:.2f}", "Kesimpulan": sig_status})
     
     st.markdown("<br>### Ringkasan Eksekutif Seluruh Skenario Crosstab", unsafe_allow_html=True)
     st.markdown("Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square) untuk semua kemungkinan kombinasi antara indikator Ekspansi (X) dan Dampak Kesehatan (Y) pada panel data yang sama.")
@@ -2585,7 +2585,7 @@ with st.expander("4 · KONFLIK SOSIAL", expanded=False):
                 "Variabel Independen (X)": vx,
                 "Variabel Dependen (Y)": vy,
                 "Chi-Square": f"{round(c2_4, 3)}",
-                "P-Value": f"{round(p_4, 3)}",
+                "P-Value": "< 0.001" if p_4 < 0.001 else f"{p_4:.3f}",
                 "Odds Ratio": f"{round(or_4, 2)}",
                 "Kesimpulan": sig_status
             })
@@ -2597,7 +2597,7 @@ with st.expander("4 · KONFLIK SOSIAL", expanded=False):
             <b>Sumber:</b> Dataset Konsolidasi KPA & JATAM (diolah CELIOS). Tabel di atas merangkum "Uji Signifikansi Crosstab Skenario Eskalasi Konflik".
         </p>
         <p style="font-size: 0.9rem; color: #B0BEC5; margin-bottom: 10px;">
-            Data diproses menggunakan pendekatan <i>Statistical Contingency Analysis</i>. Probabilitas transisi konflik sipil diuji matematis melampaui kebetulan statistik (Uji Chi-Square). Pembuktian ini memverifikasi bahwa masuknya investasi ekstraktif dan aparatur negara berkorelasi kuat secara eksponensial terhadap peningkatan kekerasan berdarah dan represi hukum pada rakyat. Konfigurasi uji signifikansinya adalah:
+            Data diproses menggunakan pendekatan <i>Statistical Contingency Analysis</i>. Analisis menguji hubungan antara ekspansi perizinan industri ekstraktif dan dinamika sengketa lahan di daerah. Konfigurasi uji signifikansinya adalah:
         </p>
         <code style="background-color: rgba(255,255,255,0.05); color: #E2E8F0; padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; font-family: monospace; display: inline-block;">Metode: Chi-Square & Odds Ratio &nbsp;|&nbsp; Tingkat Kepercayaan: 95% &nbsp;|&nbsp; Syarat Signifikan: P-Value < 0.05</code>
     </div>
@@ -2997,7 +2997,7 @@ with st.expander("5 · POLA PENERBITAN IZIN", expanded=False):
             summary_data.append({
                 "Prediktor Ekspansi (X)": v_x,
                 "Dampak Ekologis (Y)": v_y,
-                "P-Value": f"{pv_val:.3f}",
+                "P-Value": "< 0.001" if pv_val < 0.001 else f"{pv_val:.3f}",
                 "Odds Ratio": f"{or_v:.2f}",
                 "Status": "🟢 Signifikan" if pv_val < 0.05 else "🔴 Tdk Signifikan"
             })
@@ -3011,7 +3011,7 @@ with st.expander("5 · POLA PENERBITAN IZIN", expanded=False):
             <b>Sumber:</b> Panel Data Global Forest Watch & Minerba (diolah CELIOS). Tabel di atas merangkum "Uji Signifikansi Deforestasi vs Izin Tambang".
         </p>
         <p style="font-size: 0.9rem; color: #B0BEC5; margin-bottom: 10px;">
-            Data diproses menggunakan pendekatan <i>Statistical Contingency Analysis</i>. Interseksi antara anomali lonjakan ekspansi konsesi pertambangan (X) dengan kehancuran daya dukung lingkungan (Y) dibuktikan secara absolut melalui uji Chi-Square. Bukti matematis ini menghancurkan mitos pembangunan berkelanjutan, menyingkap bahwa pemicu utama krisis ekologis adalah legalisasi konsesi korporat secara ugal-ugalan. Konfigurasi ujinya merujuk pada:
+            Data diproses menggunakan pendekatan <i>Statistical Contingency Analysis</i> untuk menguji korelasi antara penetapan konsesi pertambangan (X) dan dinamika luasan deforestasi (Y). Konfigurasi ujinya merujuk pada:
         </p>
         <code style="background-color: rgba(255,255,255,0.05); color: #E2E8F0; padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; font-family: monospace; display: inline-block;">Metode: Chi-Square & Odds Ratio &nbsp;|&nbsp; Tingkat Kepercayaan: 95% &nbsp;|&nbsp; Syarat Signifikan: P-Value < 0.05</code>
     </div>
@@ -3486,7 +3486,7 @@ with st.expander("8 · DISTRIBUSI MANFAAT", expanded=False):
                 "Variabel Independen (X)": vx,
                 "Variabel Dependen (Y)": vy,
                 "Chi-Square": f"{round(c2_8, 3)}",
-                "P-Value": f"{round(p_8, 3)}",
+                "P-Value": "< 0.001" if p_8 < 0.001 else f"{p_8:.3f}",
                 "Odds Ratio": f"{round(or_8, 2)}",
                 "Kesimpulan": sig_status
             })
@@ -3496,10 +3496,10 @@ with st.expander("8 · DISTRIBUSI MANFAAT", expanded=False):
     st.markdown('''
     <div style="border: 1px solid #333; border-radius: 8px; padding: 16px; background-color: #12161F; margin-bottom: 20px; margin-top: 15px;">
         <p style="font-size: 0.9rem; color: #B0BEC5; margin-bottom: 10px;">
-            <b>Sumber:</b> Panel Data Multi-Sumber (diolah CELIOS). Tabel Uji Signifikansi di atas merangkum "Manfaat Ekonomi Semu vs Beban Ekologis Riil".
+            <b>Sumber:</b> Panel Data Multi-Sumber (diolah CELIOS). Tabel Uji Signifikansi di atas merangkum "Manfaat Ekonomi vs Beban Ekologis".
         </p>
         <p style="font-size: 0.9rem; color: #B0BEC5; margin-bottom: 10px;">
-            Data diproses menggunakan pendekatan <i>Statistical Contingency Analysis</i>. Uji Chi-Square ini membenturkan klaim "kesejahteraan" (lonjakan investasi PMDN & Pendapatan Asli Daerah) dengan realitas "kematian" (ledakan ISPA & Deforestasi). Hasil pengujian yang sepenuhnya Signifikan memverifikasi secara matematis bahwa aliran modal investasi tidak menciptakan kemakmuran inklusif, melainkan berbanding lurus dan terikat erat dengan memburuknya daya tampung ekologis serta merosotnya derajat kesehatan masyarakat. Konfigurasi ujinya dirumuskan sebagai:
+            Data diproses menggunakan pendekatan <i>Statistical Contingency Analysis</i> untuk menyandingkan indikator pertumbuhan ekonomi makro (Investasi PMDN & PAD) dengan indikator dampak lingkungan dan kesehatan (ISPA & Deforestasi). Konfigurasi ujinya dirumuskan sebagai:
         </p>
         <code style="background-color: rgba(255,255,255,0.05); color: #E2E8F0; padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; font-family: monospace; display: inline-block;">Metode: Chi-Square & Odds Ratio &nbsp;|&nbsp; Tingkat Kepercayaan: 95% &nbsp;|&nbsp; Syarat Signifikan: P-Value < 0.05</code>
     </div>
@@ -3681,7 +3681,7 @@ with st.expander("9 · DEMOGRAFI & SOSIAL", expanded=False):
                 "Variabel Independen (X)": vx,
                 "Variabel Dependen (Y)": vy,
                 "Chi-Square": f"{round(c2_10, 3)}",
-                "P-Value": f"{round(p_10, 3)}",
+                "P-Value": "< 0.001" if p_10 < 0.001 else f"{p_10:.3f}",
                 "Odds Ratio": f"{round(or_10, 2)}",
                 "Kesimpulan": sig_status
             })
@@ -3691,10 +3691,10 @@ with st.expander("9 · DEMOGRAFI & SOSIAL", expanded=False):
     st.markdown('''
     <div style="border: 1px solid #333; border-radius: 8px; padding: 16px; background-color: #12161F; margin-bottom: 20px; margin-top: 15px;">
         <p style="font-size: 0.9rem; color: #B0BEC5; margin-bottom: 10px;">
-            <b>Sumber:</b> Panel Data Multi-Sektor (diolah CELIOS). Tabel "Matriks Tekanan Sosial-Ekologis" membenturkan ekspansi industri dengan penderitaan sosial.
+            <b>Sumber:</b> Panel Data Multi-Sektor (diolah CELIOS). Tabel "Matriks Tekanan Sosial-Ekologis" menyandingkan indikator industri dengan indikator sosial.
         </p>
         <p style="font-size: 0.9rem; color: #B0BEC5; margin-bottom: 10px;">
-            Data diproses menggunakan pendekatan <i>Statistical Contingency Analysis</i>. Uji Chi-Square ini menyajikan verifikasi akhir yang mematahkan klaim kesejahteraan hilirisasi. Hubungan eksponensial yang divalidasi antara porsi industri raksasa dengan meledaknya beban DBD, kemiskinan, dan tekanan demografis menjadi vonis bahwa kebijakan ekonomi ekstraktif ini cacat bawaan dan mensyaratkan keruntuhan sosial sebagai bayarannya.
+            Data diproses menggunakan pendekatan <i>Statistical Contingency Analysis</i> untuk menguji hubungan antara skala industri dan dinamika indikator sosial serta kesehatan masyarakat.
         </p>
         <code style="background-color: rgba(255,255,255,0.05); color: #E2E8F0; padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; font-family: monospace; display: inline-block;">Metode: Chi-Square & Odds Ratio &nbsp;|&nbsp; Tingkat Kepercayaan: 95% &nbsp;|&nbsp; Syarat Signifikan: P-Value < 0.05</code>
     </div>

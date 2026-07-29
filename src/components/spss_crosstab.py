@@ -118,10 +118,15 @@ def render_spss_crosstab(df, x_options, y_options, title, hypothesis_text, key_p
     else:
         r, p_corr, lbl_val = 0, 1.0, 0
 
+    p_fmt = "< 0.001" if p < 0.001 else f"{p:.4f}"
+    p_tbl = "< 0.001" if p < 0.001 else f"{p:.3f}"
+    p_g_tbl = "< 0.001" if p_g < 0.001 else f"{p_g:.3f}"
+    p_corr_tbl = "< 0.001" if p_corr < 0.001 else f"{p_corr:.3f}"
+
     chi_data = [
-        [f"{chi2:.3f}", str(dof), f"{p:.3f}"],
-        [f"{g:.3f}", str(dof), f"{p_g:.3f}"],
-        [f"{lbl_val:.3f}", "1", f"{p_corr:.3f}"],
+        [f"{chi2:.3f}", str(dof), p_tbl],
+        [f"{g:.3f}", str(dof), p_g_tbl],
+        [f"{lbl_val:.3f}", "1", p_corr_tbl],
         [str(valid_cases), "", ""]
     ]
     chi_df = pd.DataFrame(chi_data, index=["Pearson Chi-Square", "Likelihood Ratio", "Linear-by-Linear Association", "N of Valid Cases"], columns=["Value", "df", "Asymp. Sig. (2-sided)"])
@@ -156,7 +161,7 @@ def render_spss_crosstab(df, x_options, y_options, title, hypothesis_text, key_p
         <div style="border: 2px solid {order_color}; padding: 15px; border-radius: 5px; background-color: {bg_color}; margin-bottom: 10px;">
             <h4 style="color: {order_color}; margin: 0 0 10px 0; text-transform: uppercase;">Result: {status_text}</h4>
             <p style="margin: 0; font-family: monospace;">
-                P-Value    : {p:.4f}<br>
+                P-Value    : {p_fmt}<br>
                 Chi-Square : {chi2:.3f}<br>
                 df         : {dof}
             </p>
@@ -221,9 +226,10 @@ def render_spss_crosstab(df, x_options, y_options, title, hypothesis_text, key_p
             except:
                 or_v = 0
             sig_status = "🟢 SIGNIFIKAN" if pv_val < 0.05 else "🔴 TIDAK SIGNIFIKAN"
+            pv_disp = "< 0.001" if pv_val < 0.001 else f"{pv_val:.3f}"
             summary_data.append({
                 "X": v_x, "Y": v_y, "Chi-Square": f"{c2_val:.3f}",
-                "P-Value": f"{pv_val:.3f}", "Odds Ratio": f"{or_v:.2f}",
+                "P-Value": pv_disp, "Odds Ratio": f"{or_v:.2f}",
                 "Status": sig_status
             })
 
