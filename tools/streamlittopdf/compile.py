@@ -3,15 +3,15 @@ import os
 from pathlib import Path
 
 CHAPTERS = [
-    ("chapter_1.md", "Laporan_Bab1"),
-    ("chapter_2.md", "Laporan_Bab2"),
-    ("chapter_3.md", "Laporan_Bab3"),
-    ("chapter_4.md", "Laporan_Bab4"),
-    ("chapter_5.md", "Laporan_Bab5"),
-    ("chapter_6.md", "Laporan_Bab6"),
-    ("chapter_7.md", "Laporan_Bab7"),
-    ("chapter_8.md", "Laporan_Bab8"),
-    ("chapter_9.md", "Laporan_Bab9"),
+    ("chapter_1.md", "v2_30072026_Laporan_Bab1"),
+    ("chapter_2.md", "v2_30072026_Laporan_Bab2"),
+    ("chapter_3.md", "v2_30072026_Laporan_Bab3"),
+    ("chapter_4.md", "v2_30072026_Laporan_Bab4"),
+    ("chapter_5.md", "v2_30072026_Laporan_Bab5"),
+    ("chapter_6.md", "v2_30072026_Laporan_Bab6"),
+    ("chapter_7.md", "v2_30072026_Laporan_Bab7"),
+    ("chapter_8.md", "v2_30072026_Laporan_Bab8"),
+    ("chapter_9.md", "v2_30072026_Laporan_Bab9"),
 ]
 
 def compile_chapter(md_file: Path, out_stem: str, docs_dir: Path):

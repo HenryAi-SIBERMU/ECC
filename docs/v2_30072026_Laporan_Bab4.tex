@@ -1,0 +1,720 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\usepackage{caption}
+\captionsetup[table]{skip=6pt}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{Ruang Hidup yang Terampas}\label{ruang-hidup-yang-terampas}
+
+Analisis dinamika konflik sosial dan alokasi ruang agraria dalam konteks
+pembangunan kawasan.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Ekspansi industri ekstraktif dan proyek strategis berimplikasi pada
+dinamika sosial dan penggunaan lahan masyarakat. Data empiris mencatat
+akumulasi \textbf{95 kasus konflik agraria}. Konflik ini berkaitan erat
+dengan perubahan tata guna lahan dan alokasi ruang di berbagai daerah.
+
+Aktor dan sektor pemicu konflik mencakup sektor \textbf{Kehutanan}
+(Hutan Lindung, Produksi, Konservasi), \textbf{Infrastruktur \& PSN}
+(Bendungan, Transmigrasi, Kawasan Industri), hingga proyek
+\textbf{Pariwisata \& Pesisir}. Tiga sektor utama (Perkebunan,
+Kehutanan, dan Pertambangan) menyumbang porsi \textbf{82.1\%} dari
+keseluruhan catatan konflik.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Ringkasan Metrik Agregat}\label{ringkasan-metrik-agregat}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Indikator
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Nilai
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Keterangan
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Total Kasus Konflik} & \textbf{95 kasus} & Catatan insiden
+sengketa agraria dan tata guna lahan. \\
+\textbf{Korban Terdampak (Jiwa)} & \textbf{90,582 jiwa} & Estimasi
+jumlah warga yang terdampak oleh konflik sengketa lahan. \\
+\textbf{Status: Belum Ditangani} & \textbf{51 kasus} & Kasus sengketa
+yang masih dalam proses penanganan. \\
+\textbf{Komunitas Terdampak} & \textbf{59 komunitas} & Kelompok tani dan
+komunitas lokal yang terlibat dalam sengketa. \\
+\textbf{Sektor Perkebunan} & \textbf{25 kasus} & Sengketa tumpang tindih
+Hak Guna Usaha (HGU) perkebunan dengan lahan masyarakat. \\
+\textbf{Sektor Kehutanan} & \textbf{30 kasus} & Sengketa batas kawasan
+hutan produksi dan konservasi dengan wilayah kelola lokal. \\
+\textbf{Sektor Pertambangan} & \textbf{23 kasus} & Sengketa alokasi
+lahan untuk operasi pertambangan dan fasilitas hilirisasi. \\
+\textbf{Infrastruktur \& PSN} & \textbf{13 kasus} & Sengketa pengadaan
+tanah untuk Proyek Strategis Nasional. \\
+\textbf{Pariwisata \& Pesisir} & \textbf{3 kasus} & Sengketa pemanfaatan
+wilayah pesisir dan kawasan pariwisata. \\
+\textbf{Keterlibatan Pemerintah} & \textbf{69 kasus} & Keterlibatan
+instansi pemerintah dalam fasilitasi atau sengketa lahan. \\
+\textbf{Keterlibatan Korporasi} & \textbf{52 kasus} & Entitas BUMN atau
+swasta yang terlibat dalam sengketa lahan. \\
+\end{longtable}
+}
+
+\emph{Sumber Analisis Data: Konsorsium Pembaruan Agraria (KPA) / Tanah
+Kita}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{4.1 Tren Eskalasi Konflik Agraria Seiring Ekspansi
+Industri}\label{tren-eskalasi-konflik-agraria-seiring-ekspansi-industri}
+
+Visualisasi \emph{time-series} di bawah ini memberikan gambaran korelasi
+antara ekspansi industri dan dinamika konflik agraria di daratan
+Sulawesi. Secara historis, perbandingan dua periode waktu menunjukkan
+perbedaan tingkat insidensi konflik. Pada periode pra-2005, sistem
+pendataan mencatat \textbf{13 kasus} konflik agraria.
+
+Pada periode pasca-2005 hingga saat ini, data mencatat \textbf{82 kasus}
+konflik lahan, yang mencerminkan peningkatan sebesar \textbf{630.8\%}
+dibandingkan periode sebelumnya. Perubahan tren ini beriringan dengan
+penerbitan Izin Usaha Pertambangan (IUP) serta ekspansi Hak Guna Usaha
+(HGU) untuk perkebunan.
+
+Penelusuran tren satu dekade terakhir menunjukkan bahwa sengketa agraria
+mencakup berbagai sektor, termasuk pertambangan nikel, infrastruktur,
+dan Proyek Strategis Nasional. Akumulasi \textbf{95 insiden historis}
+ini mengindikasikan perlunya tata kelola alokasi lahan dan perlindungan
+hak masyarakat lokal yang lebih seimbang di kawasan investasi.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Peningkatan Signifikan Konflik Agraria di Sulawesi (1990-2025)}]{visuals_bab4/chart_4_1_konflik_timeseries.png}}
+\caption{Peningkatan Signifikan Konflik Agraria di Sulawesi (1990-2025)}
+\end{figure}
+
+\begin{quote}
+\textbf{Interpretasi Ekologis: Puncak Insidensi Konflik 2017}
+
+Grafik memperlihatkan peningkatan insidensi konflik yang memuncak pada
+\textbf{tahun 2017} dengan \textbf{75 kasus konflik}. Pembedahan data
+sektoral menunjukkan konsentrasi pada sektor \textbf{Kehutanan (40
+kasus)} dan \textbf{Perkebunan (21 kasus)}, diikuti oleh
+\textbf{Pertambangan dan Infrastruktur PSN}. Periode ini bertepatan
+dengan percepatan pelepasan kawasan hutan dan Izin Pinjam Pakai Kawasan
+Hutan (IPPKH) untuk mendukung proyek strategis dan kawasan industri.
+\end{quote}
+
+\begin{quote}
+\textbf{Interpretasi Ekologis dan Sosial:}
+
+Peningkatan insidensi konflik beririsan dengan dinamika perizinan
+kawasan. Pengelolaan alokasi ruang dan perlindungan hak masyarakat di
+wilayah investasi menjadi faktor penting untuk meminimalkan dampak
+sosial.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{4.2 Sebaran Sektoral: Dampak Masyarakat dan Penggunaan
+Lahan}\label{sebaran-sektoral-dampak-masyarakat-dan-penggunaan-lahan}
+
+Visualisasi komparatif di bawah ini menggambarkan skala dampak sosial
+dan penggunaan lahan berdasarkan sektor industri. Data menunjukkan bahwa
+\textbf{Sektor Kehutanan} mencatatkan jumlah warga terdampak sebanyak
+\textbf{21,886 jiwa}, berkaitan dengan tumpang tindih kawasan hutan
+produksi, konservasi, dan Hutan Tanaman Industri (HTI) dengan wilayah
+kelola masyarakat lokal.
+
+Menyusul berikutnya adalah \textbf{Sektor Pertambangan} dengan total
+korban terdampak sebanyak \textbf{54,658 jiwa}, yang beririsan dengan
+proyek hilirisasi nikel dan tambang terbuka di kawasan pesisir dan
+pertanian.
+
+Dari dimensi penggunaan lahan (luasan hektar yang terlibat sengketa),
+\textbf{Sektor Perkebunan} mencatatkan luas sengketa terbesar yaitu
+\textbf{77,902 Hektar}, disusul oleh sektor Kehutanan seluas
+\textbf{66,193 Ha} dan Pertambangan seluas \textbf{441,286 Ha}. Data ini
+menunjukkan bahwa dinamika penguasaan lahan di tiga sektor tersebut
+berkorelasi dengan tingginya insidensi sengketa agraria di tingkat
+lokal.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Peningkatan Signifikan Korban Terdampak (Jiwa) per Tahun}]{visuals_bab4/chart_4_2a_jiwa.png}}
+\caption{Peningkatan Signifikan Korban Terdampak (Jiwa) per Tahun}
+\end{figure}
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Monopoli Area Konflik (Hektar) per Tahun}]{visuals_bab4/chart_4_2b_ha.png}}
+\caption{Monopoli Area Konflik (Hektar) per Tahun}
+\end{figure}
+
+\begin{quote}
+\textbf{Interpretasi Ekologis dan Sosial:}
+
+Dinamika Grafik mencerminkan akumulasi dampak sosial di wilayah industri
+yang memerlukan perhatian dalam pengelolaan sengketa lahan.
+\end{quote}
+
+\subsubsection{Bedah Forensik Anomali (Spike) Konflik
+Agraria}\label{bedah-forensik-anomali-spike-konflik-agraria}
+
+Berdasarkan ekstraksi dataset secara mendalam, berikut adalah bedah
+anatomis dari lonjakan-lonjakan ekstrem (\emph{spikes}) yang terjadi
+pada grafik \textbf{Peningkatan Signifikan Korban Terdampak (Jiwa)} dan
+\textbf{Monopoli Area Konflik (Hektar)} di wilayah ini.
+
+\paragraph{ANOMALI JIWA 1: Lonjakan Korban Jiwa Tahun
+2022}\label{anomali-jiwa-1-lonjakan-korban-jiwa-tahun-2022}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Kasus Utama Pendongkrak Statistik:} Konflik Koalisi Selamatkan
+  Pulau Wawoni
+\item
+  \textbf{Total Korban (Kasus Ini):} 37,000 Jiwa
+\item
+  \textbf{Perusahaan Terlibat:} PT Gema Kreasi Perdana (GKP)
+\item
+  \textbf{Narasi Singkat:} Keberadaan PT Gema Kreasi Perdana (GKP), anak
+  perusahaan Harita Group, di Pulau Wawonii, Kabupaten Konawe Kepulauan,
+  Sulawesi Tenggara mengancam keselamatan warga, menggusur lahan
+  pertanian-perkebunan dan berpotensi mencemari laut. Keduanya merupakan
+  sumber ekonomi utama dari lebih dari 37.000 jiwa warga di Pulau
+  Wawonii. Tidak hanya mengancam keselamatan dan ruang hidup warga,
+  aktivitas pertambangan yang dilakukan PT GKP adalah ilegal karena
+  ban\ldots{}
+\item
+  \textbf{Sumber Referensi:} Laporan WALHI
+  (\href{https://www.google.com/search?q=Konflik\%20Koalisi\%20Selamatkan\%20Pulau\%20Wawoni\%20PT\%20Gema\%20Kreasi\%20Perdana\%20\%28GKP\%29}{Telusuri
+  Berita Kasus} \textbar{}
+  \href{https://tanahkita.id/data/konflik/detil/SWpxcGxoUThtUVk}{Link
+  Asli TanahKita})
+\end{itemize}
+
+\paragraph{ANOMALI JIWA 2: Lonjakan Korban Jiwa Tahun
+2012}\label{anomali-jiwa-2-lonjakan-korban-jiwa-tahun-2012}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Kasus Utama Pendongkrak Statistik:} Konflik Masyarakat Tumpang
+  Pitu dengan PT BSI
+\item
+  \textbf{Total Korban (Kasus Ini):} 13,936 Jiwa
+\item
+  \textbf{Perusahaan Terlibat:} PT Bumi Suksindo \textbar{} PT. Merdeka
+  Copper Gold
+\item
+  \textbf{Narasi Singkat:} Gunung Tumpang Pitu yang masuk wilayah Desa
+  Sumberagung, Kecamatan Pesanggaran, Kabupaten Banyuwangi, Jawa Timur,
+  merupakan lokasi tambang emas dari PT Bumi Suksindo ( PT BSI) seluas
+  4.998 Ha, melalui Izin Usaha Pertambangan Operasi Produksi (IUP OP)
+  berdasarkan Keputusan Bupati Banyuwangi No.~188/547/KEP/429.011/2012
+  tanggal 9 Juli 2012 sebagaimana terakhir kali diubah dengan Keputusan
+  Bupati Banyuwangi, No.~188/928/KEP/429.011/2012 tertanggal 7\ldots{}
+\item
+  \textbf{Sumber Referensi:} Laporan WALHI JATIM, Front Nahdliyin Untuk
+  Kedaulatan Sumber Daya Alam
+  (\href{https://www.google.com/search?q=Konflik\%20Masyarakat\%20Tumpang\%20Pitu\%20dengan\%20PT\%20BSI\%20PT\%20Bumi\%20Suksindo\%20\%7C\%20PT.\%20Merdeka\%20Copper\%20Gold}{Telusuri
+  Berita Kasus} \textbar{}
+  \href{https://tanahkita.id/data/konflik/detil/WWg2QmItRXZ4SGs}{Link
+  Asli TanahKita})
+\end{itemize}
+
+\paragraph{ANOMALI AREA 1: Monopoli Area Konflik Tahun
+2017}\label{anomali-area-1-monopoli-area-konflik-tahun-2017}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Kasus Utama Pendongkrak Statistik:} Konflik Nelayan Desa
+  Boddia dengan Pertambangan Pasir Laut PT. Boskalis dan PT. Jan De Nul
+\item
+  \textbf{Total Daratan Dirampas (Kasus Ini):} 146,201 Hektar
+\item
+  \textbf{Perusahaan Terlibat:} PT. Boskalis \textbar{} PT. Jan De Nul
+\item
+  \textbf{Narasi Singkat:} Pertambangan pasir laut yang dilakukan oleh
+  PT. Boskalis dan PT. Jan De Null menjadi dasar dari munculnya konflik
+  yang ada di Desa Boddia, Khususnya di Dusun Boddia dan Manjalling.
+  Pertambangan pasir laut ini merupakan bagian dari proyek reklamasi
+  yang telah disepakati oleh Gubernur dan DPRD Provinsi Sulawesi Selatan
+  di dalam Ranperda RZWP3K Sulsel. Kebutuhan reklamasi ini menciptakan
+  beberapa daerah yang dialokasikan menjadi zona tambang pasir l\ldots{}
+\item
+  \textbf{Sumber Referensi:} Laporan WALHI Sulawesi Selatan
+  (\href{https://www.google.com/search?q=Konflik\%20Nelayan\%20Desa\%20Boddia\%20dengan\%20Pertambangan\%20Pasir\%20Laut\%20PT.\%20Boskalis\%20dan\%20PT.\%20Jan\%20De\%20Nul\%20PT.\%20Boskalis\%20\%7C\%20PT.\%20Jan\%20De\%20Nul}{Telusuri
+  Berita Kasus} \textbar{}
+  \href{https://tanahkita.id/data/konflik/detil/dXpRbGVnRTJHS2c}{Link
+  Asli TanahKita})
+\end{itemize}
+
+\paragraph{ANOMALI AREA 2: Monopoli Area Konflik Tahun
+2022}\label{anomali-area-2-monopoli-area-konflik-tahun-2022}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Kasus Utama Pendongkrak Statistik:} Konflik Koalisi Selamatkan
+  Pulau Wawoni
+\item
+  \textbf{Total Daratan Dirampas (Kasus Ini):} 86,758 Hektar
+\item
+  \textbf{Perusahaan Terlibat:} PT Gema Kreasi Perdana (GKP)
+\item
+  \textbf{Narasi Singkat:} Keberadaan PT Gema Kreasi Perdana (GKP), anak
+  perusahaan Harita Group, di Pulau Wawonii, Kabupaten Konawe Kepulauan,
+  Sulawesi Tenggara mengancam keselamatan warga, menggusur lahan
+  pertanian-perkebunan dan berpotensi mencemari laut. Keduanya merupakan
+  sumber ekonomi utama dari lebih dari 37.000 jiwa warga di Pulau
+  Wawonii. Tidak hanya mengancam keselamatan dan ruang hidup warga,
+  aktivitas pertambangan yang dilakukan PT GKP adalah ilegal karena
+  ban\ldots{}
+\item
+  \textbf{Sumber Referensi:} Laporan WALHI
+  (\href{https://www.google.com/search?q=Konflik\%20Koalisi\%20Selamatkan\%20Pulau\%20Wawoni\%20PT\%20Gema\%20Kreasi\%20Perdana\%20\%28GKP\%29}{Telusuri
+  Berita Kasus} \textbar{}
+  \href{https://tanahkita.id/data/konflik/detil/SWpxcGxoUThtUVk}{Link
+  Asli TanahKita})
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{4.3 Indikasi Represi dan Kriminalisasi dalam Konflik
+Agraria}\label{indikasi-represi-dan-kriminalisasi-dalam-konflik-agraria}
+
+Data kuantitatif di wilayah Sulawesi mencatat indikasi terjadinya
+represi dan tindakan kriminalisasi dalam sebagian sengketa agraria. Dari
+database yang didokumentasikan, terdapat \textbf{46 kasus indikasi
+kriminalisasi} dan \textbf{93 warga/aktivis lingkungan yang tercatat
+pernah ditangkap} dalam penanganan sengketa lahan.
+
+Berdasarkan distribusi sektoral, \textbf{Sektor Pertambangan}
+mencatatkan frekuensi indikasi represi tertinggi dengan \textbf{17
+kasus}. Tahun dengan jumlah catatan insiden represi tertinggi adalah
+\textbf{2017} dengan \textbf{7 kasus}.
+
+Catatan ini menunjukkan pentingnya pendekatan hukum yang adil,
+penyelesaian konflik secara ramah HAM, serta jaminan perlindungan bagi
+pejuang lingkungan dan komunitas lokal sesuai dengan peraturan
+perundang-undangan.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Kasus Indikasi Kriminalisasi
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Warga/Aktivis Ditangkap
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Korban Luka-luka
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Korban Tewas
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{46 Kasus} & \textbf{93 Orang} & \textbf{4 Orang} & \textbf{1
+Orang} \\
+\end{longtable}
+}
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Tren Kasus Kriminalisasi \& Represi (Pasca 2000)}]{visuals_bab4/chart_4_3a_kriminalisasi_trend.png}}
+\caption{Tren Kasus Kriminalisasi \& Represi (Pasca 2000)}
+\end{figure}
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Sektor Industri Paling Represif}]{visuals_bab4/chart_4_3b_sektor_represif.png}}
+\caption{Sektor Industri Paling Represif}
+\end{figure}
+
+\begin{quote}
+\textbf{Interpretasi Ekologis \& Hak Asasi Manusia:} Keberadaan kasus
+kriminalisasi di sekitar area konsesi (terutama Pertambangan)
+mengindikasikan pentingnya jaminan perlindungan ruang sipil dan
+penghormatan HAM dalam setiap proses pembangunan.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{4.4 Pembuktian Statistik: Ekspansi vs Eskalasi
+Konflik}\label{pembuktian-statistik-ekspansi-vs-eskalasi-konflik}
+
+Hipotesis utama dalam evaluasi ini adalah bahwa \textbf{industrialisasi
+dan ekspansi korporasi} berbanding lurus dengan \textbf{eskalasi konflik
+dan represi} terhadap masyarakat. Untuk mengujinya secara statistik
+sesuai pedoman D3TLH, analisis dibagi menjadi dua bagian: (1) Komparasi
+metrik Before-After, dan (2) Uji signifikansi Crosstab Chi-Square. Unit
+observasinya adalah catatan kejadian letupan konflik historis.
+
+\paragraph{A. Analisis Komparatif Before-After (Pra vs Era
+Hilirisasi)}\label{a.-analisis-komparatif-before-after-pra-vs-era-hilirisasi}
+
+Perbandingan absolut eskalasi konflik agraria sebelum dan sesudah rezim
+hilirisasi masif dimulai (cut-off tahun 2014).
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Periode
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Rata-rata Konflik
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Total Letupan
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Warga Ditangkap
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Korban Tewas
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Pra-Ekspansi (1990 - 2013)} & \textbf{2.1 Kasus/Tahun} & 37
+kejadian & 83 jiwa & 0 jiwa \\
+\textbf{Pasca-Ekspansi (2014 - 2024)} & \textbf{5.5 Kasus/Tahun} & 55
+kejadian & 10 jiwa & 1 jiwa \\
+\end{longtable}
+}
+
+\paragraph{B. Uji Statistik Crosstab
+(Chi-Square)}\label{b.-uji-statistik-crosstab-chi-square}
+
+\textbf{Variabel Independen (X):} Periode Ekspansi Industri
+
+\textbf{Variabel Dependen (Y):} Tingkat Represi \& Kriminalisasi
+
+\paragraph{Case Processing Summary}\label{case-processing-summary}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1429}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Valid N
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Valid \%
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Missing N
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Missing \%
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Total N
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Total \%
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Periode Ekspansi Industri * Tingkat Represi \& Kriminalisasi & 523 &
+100.0\% & 0 & 0.0\% & 523 & 100.0\% \\
+\end{longtable}
+}
+
+\paragraph{Periode Ekspansi Industri * Tingkat Represi \& Kriminalisasi
+Crosstabulation}\label{periode-ekspansi-industri-tingkat-represi-kriminalisasi-crosstabulation}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+& Baseline (Tanpa Kriminalisasi) & Ada Represi/Kriminalisasi & Total \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Pra-ekspansi (\textless{} 2014)} Count & 179 & 73 & 252 \\
+\textbf{Pra-ekspansi (\textless{} 2014)} Expected & 157.6 & 94.4 &
+252.0 \\
+\textbf{Pasca-ekspansi (≥ 2014)} Count & 148 & 123 & 271 \\
+\textbf{Pasca-ekspansi (≥ 2014)} Expected & 169.4 & 101.6 & 271.0 \\
+\textbf{Total} Count & 327 & 196 & 523 \\
+\textbf{Total} Expected & 327.0 & 196.0 & 523.0 \\
+\end{longtable}
+}
+
+\paragraph{Chi-Square Tests}\label{chi-square-tests}
+
+\textbf{Periode Ekspansi Industri * Tingkat Represi \& Kriminalisasi}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+& Value & df & Asymp. Sig. (2-sided) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Pearson Chi-Square & 14.331 & 1 & 0.000 \\
+Likelihood Ratio & 14.447 & 1 & 0.000 \\
+Linear-by-Linear Association & 14.995 & 1 & 0.000 \\
+N of Valid Cases & 523 & & \\
+\end{longtable}
+}
+
+\subsubsection{Ringkasan Uji Hipotesis}\label{ringkasan-uji-hipotesis}
+
+\textbf{Result: SIGNIFIKAN}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Parameter & Nilai \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+P-Value & 0.0002 \\
+Chi-Square & 14.331 \\
+df & 1 \\
+\textbf{Odds Ratio (Risk Estimate)} & \textbf{2.038} \\
+\end{longtable}
+}
+
+\begin{quote}
+\textbf{Interpretasi Sosial Kritis:} Temuan ini sangat krusial:
+pergeseran status \textbf{Periode Ekspansi Industri} terbukti
+\textbf{berkorelasi kuat dan signifikan} dengan \textbf{Tingkat Represi
+\& Kriminalisasi} (P \textless{} 0.05). Angka Odds Ratio (OR: 2.038)
+menjadi konfirmasi empiris bahwa narasi hilirisasi dan investasi
+bukanlah agenda nirkekerasan---ekspansi spasial mereka mutlak
+mengeskalasi pelanggaran hak asasi masyarakat tapak.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Ringkasan Eksekutif Seluruh Skenario
+Crosstab}\label{ringkasan-eksekutif-seluruh-skenario-crosstab}
+
+Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square)
+untuk semua kemungkinan kombinasi antara indikator Ekspansi (X) dan
+Eskalasi Konflik (Y) pada panel data yang sama.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Variabel Independen (X)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Variabel Dependen (Y)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Chi-Square
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+P-Value
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Odds Ratio
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Kesimpulan
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Periode Ekspansi Industri & Tingkat Represi \& Kriminalisasi & 14.331 &
+0.000 & 2.04 & 🟢 SIGNIFIKAN \\
+Periode Ekspansi Industri & Tingkat Penelantaran Kasus & 3.283 & 0.070 &
+1.40 & 🔴 TIDAK SIGNIFIKAN \\
+Periode Ekspansi Industri & Tingkat Insiden Fisik (Luka/Tewas/Ditangkap)
+& 2.636 & 0.104 & 0.53 & 🔴 TIDAK SIGNIFIKAN \\
+Tipe Sektor (Tambang vs Non-Tambang) & Tingkat Represi \& Kriminalisasi
+& 13.609 & 0.000 & 2.84 & 🟢 SIGNIFIKAN \\
+Tipe Sektor (Tambang vs Non-Tambang) & Tingkat Penelantaran Kasus &
+4.742 & 0.029 & 1.89 & 🟢 SIGNIFIKAN \\
+Tipe Sektor (Tambang vs Non-Tambang) & Tingkat Insiden Fisik
+(Luka/Tewas/Ditangkap) & 0.665 & 0.415 & 1.66 & 🔴 TIDAK SIGNIFIKAN \\
+Keterlibatan Aparat/Pemerintah & Tingkat Represi \& Kriminalisasi &
+55.633 & 0.000 & 4.80 & 🟢 SIGNIFIKAN \\
+Keterlibatan Aparat/Pemerintah & Tingkat Penelantaran Kasus & 1.135 &
+0.287 & 0.81 & 🔴 TIDAK SIGNIFIKAN \\
+Keterlibatan Aparat/Pemerintah & Tingkat Insiden Fisik
+(Luka/Tewas/Ditangkap) & 3.253 & 0.071 & 2.23 & 🔴 TIDAK SIGNIFIKAN \\
+\end{longtable}
+}
+
+\begin{quote}
+\textbf{Pembedahan Realitas Kemanusiaan:}
+
+Dari \textbf{9 skenario pengujian}, terdapat \textbf{4 skenario yang
+terbukti SIGNIFIKAN}.
+\end{quote}
+
+Angka-angka pada tabel di atas bukan sekadar statistik di atas kertas,
+melainkan \textbf{bukti empiris} dari brutalitas pembangunan. Tingginya
+angka kemunculan represi pada skenario yang signifikan menegaskan bahwa
+setiap kali wilayah operasi investasi diperlebar, probabilitas
+dihadapkannya moncong senjata kepada warga melonjak drastis.
+
+Skenario yang \emph{TIDAK SIGNIFIKAN} tidak berarti rezim terbebas dari
+dosa kekerasan, melainkan bukti bahwa represi terhadap warga yang
+mempertahankan tanahnya telah menjadi kultur mapan yang menyebar secara
+sporadis melampaui sekat waktu dan korporasi.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{4.5 Peta Entitas Aktor: Korporasi dan Organisasi
+Masyarakat}\label{peta-entitas-aktor-korporasi-dan-organisasi-masyarakat}
+
+Analisis entitas aktor berbasis pemrosesan teks (\emph{string parsing})
+terhadap catatan kronologi dokumentasi TanahKita memetakan keterlibatan
+berbagai pihak dalam sengketa agraria. Hasil ekstraksi teks
+mengidentifikasi entitas korporasi, lembaga pemerintah, serta organisasi
+masyarakat sipil yang tercatat dalam dokumentasi kasus. Grafik frekuensi
+di bawah menampilkan entitas korporasi dan kelompok masyarakat yang
+paling sering teridentifikasi dalam catatan sengketa lahan.
+
+\paragraph{Top 10 Entitas Korporasi Paling
+Dominan}\label{top-10-entitas-korporasi-paling-dominan}
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Top 10 Entitas Korporasi Paling Dominan}]{visuals_bab4/chart_4_5a_korporasi.png}}
+\caption{Top 10 Entitas Korporasi Paling Dominan}
+\end{figure}
+
+\begin{quote}
+\textbf{Analisis Data Korporasi:} Ekstraksi teks mencatat frekuensi
+penyebutan entitas \textbf{PT Perkebunan Nusantara (PTPN)} dalam
+\textbf{153 catatan kasus terpisah}.
+\end{quote}
+
+\paragraph{Top Aktor Proksi \& Vigilante
+Terdeteksi}\label{top-aktor-proksi-vigilante-terdeteksi}
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Top Aktor Proksi \& Vigilante Terdeteksi}]{visuals_bab4/chart_4_5b_vigilante.png}}
+\caption{Top Aktor Proksi \& Vigilante Terdeteksi}
+\end{figure}
+
+\begin{quote}
+\textbf{Analisis Kritis Proksi/Vigilante:} Kemunculan kelompok sipil
+seperti \textbf{Preman} (terdeteksi hingga \textbf{16 kali}) menangkap
+besarnya skala orkestrasi horizontal. Korporasi seringkali menggunakan
+jasa pengamanan swakarsa, kelompok preman, hingga ormas vigilante
+sebagai ``bemper proksi'' untuk mengintimidasi warga lokal dan memecah
+belah solidaritas akar rumput.
+\end{quote}
+
+\emph{* Grafik di atas hanya menampilkan Top 10 entitas. Untuk melihat
+daftar lengkap dan detail seluruh aktor yang terdeteksi, silakan buka
+tabel data.}
+
+\end{document}

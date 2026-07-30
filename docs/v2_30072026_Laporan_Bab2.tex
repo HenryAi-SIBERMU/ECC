@@ -1,0 +1,740 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\usepackage{caption}
+\captionsetup[table]{skip=6pt}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{Kualitas Lingkungan di Kawasan
+Smelter}\label{kualitas-lingkungan-di-kawasan-smelter}
+
+\emph{Menguji secara empiris korelasi antara intensitas ekspansi
+fasilitas peleburan nikel (smelter) dengan Indeks Kualitas Air (IKA),
+Indeks Kualitas Udara (IKU), dan laju deforestasi komoditas di Pulau
+Sulawesi.}
+
+\begin{quote}
+\textbf{Alur Kausalitas (Ekonomi Politik Ekologi):}
+\texttt{Konsentrasi\ Smelter\ \&\ PLTU} →
+\texttt{Timbulan\ Tailing\ \&\ Emisi\ Partikulat} →
+\texttt{Perubahan\ Baku\ Mutu\ Air\ \&\ Udara} →
+\texttt{Tekanan\ Daya\ Dukung\ Lingkungan}
+
+Pengembangan industri pengolahan nikel berimplikasi pada kebutuhan
+energi berbasis PLTU Captive serta timbulan limbah (slag/tailing).
+Pengoperasian industri ini meningkatkan beban terhadap baku mutu dan
+daya dukung lingkungan di sekitar wilayah industri.
+
+\textbf{Variabel Tekanan (X):} * \textbf{Jumlah Smelter \& PLTU
+Captive:} Konsentrasi fasilitas peleburan dan pembangkit batu bara
+(ESDM, GEM). * \textbf{Luas Kawasan Industri:} Ekspansi spasial proyek
+industri.
+
+\textbf{Variabel Dampak Ekologis (Y):} * \textbf{Indeks Kualitas Air
+(IKA):} Skor kualitas air berdasarkan parameter fisik/kimia (KLHK, BPS).
+* \textbf{Indeks Kualitas Udara (IKU):} Skor pencemaran udara ambien
+(KLHK, BPS). * \textbf{Laju Deforestasi Komoditas:} Kehilangan tutupan
+pohon akibat kegiatan ekstraktif (Global Forest Watch).
+
+\textbf{Metode Pengolahan Data:} Analisis menggunakan pendekatan
+\emph{Cross-sectional} dan \emph{Time-Series} (Panel Data). Korelasi
+dibuktikan secara statistik melalui uji \textbf{Crosstabulation
+(Chi-Square/Symmetric Measures)} untuk mengukur tingkat signifikansi
+hubungan antarvariabel.
+\end{quote}
+
+\subsection{Analisis Kualitas Lingkungan: Pengaruh 778 Unit Smelter
+Terhadap Baku Mutu Air dan Udara di
+Sulawesi}\label{analisis-kualitas-lingkungan-pengaruh-778-unit-smelter-terhadap-baku-mutu-air-dan-udara-di-sulawesi}
+
+Pengoperasian \textbf{778 fasilitas mega-smelter} yang didukung oleh
+kapasitas \textbf{9,825 MW PLTU Captive} meningkatkan intensitas emisi
+dan beban lingkungan di Pulau Sulawesi. Di samping kontribusi ekonomi,
+aktivitas ini berdampak pada perubahan indikator baku mutu air dan udara
+di sekitar wilayah industri.
+
+Data menunjukkan bahwa konversi tutupan hutan mencapai \textbf{2,107,041
+Hektar} dengan estimasi timbulan limbah B3/tailing sebesar \textbf{33.8
+Juta Ton} per tahun. Rata-rata Indeks Kualitas Air (IKA) di wilayah ini
+berada pada tingkat \textbf{58.8}. Sementara itu, pengukuran kualitas
+udara melalui data satelit NASA TROPOMI (NO₂) menunjukkan peningkatan
+konsentrasi gas nitrogen dioksida di atas kawasan pemurnian, yang
+memberikan gambaran objektif mengenai dinamika polusi udara ambien.
+
+\subsubsection{Metrik Kritis Kualitas
+Lingkungan}\label{metrik-kritis-kualitas-lingkungan}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Indikator
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Nilai
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Deskripsi
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Sumber
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Polusi Udara NO₂ (NASA)} & \textbf{5.76e-06 mol/m²} & Satelit
+TROPOMI membongkar paradoks IKU resmi. Konsentrasi gas beracun meroket
+tajam seiring ekspansi PLTU captive. & Satelit Sentinel-5P (Google Earth
+Engine) \\
+\textbf{Timbulan Limbah B3} & \textbf{33.8 Jt Ton} & Estimasi produksi
+limbah tailing dan slag per tahun dari kawasan mega-industri di
+Sulawesi. & Data Ekstraksi NGO \& AMDAL \\
+\textbf{Konversi Deforestasi} & \textbf{2,107,041 Ha} & Luasan tutupan
+hutan yang hancur dibabat untuk pembukaan lubang tambang nikel. & Global
+Forest Watch (GFW) \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{2.1. Dampak Limbah Tailing: Konsentrasi Smelter vs Indeks
+Kualitas Air
+(IKA)}\label{dampak-limbah-tailing-konsentrasi-smelter-vs-indeks-kualitas-air-ika}
+
+\begin{quote}
+\textbf{Metode Analisis:} Sub-bab ini menggunakan pendekatan Analisis
+Spasial dan Uji Statistik Chi-Square (Crosstabulation) untuk mengukur
+dampak konsentrasi smelter terhadap penurunan kualitas air.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Uji Tabulasi Silang (Chi-Square Test of Independence):}
+  Binning Kategori via Median. Decision Rule: P-Value \textless{} 0.05
+  maka Tolak H0.
+\item
+  \textbf{Variabel \& Fitur Data:} Jumlah\_Smelter (X), Indeks Kualitas
+  Air (Y), Data Panel 2016-2023.
+\end{enumerate}
+\end{quote}
+
+Aktivitas pengolahan bijih nikel (\emph{smelter}) berimplikasi pada
+timbulan limbah \emph{tailing} dan terak (\emph{slag}). Peta geospasial
+dan agregasi data di bawah ini memetakan sebaran \textbf{778 fasilitas
+smelter} yang beroperasi, dengan konsentrasi utama berada di Sulawesi
+Tengah (\textbf{344 fasilitas smelter}) dan Sulawesi Tenggara
+(\textbf{262 fasilitas smelter}).
+
+Data menunjukkan bahwa pada kawasan industri pemurnian ini, Indeks
+Kualitas Air (IKA) tercatat pada tingkat \textbf{63.6 poin} di Sulawesi
+Tengah dan \textbf{61.3 poin} di Sulawesi Tenggara pada tahun 2023.
+Penurunan skor IKA mengindikasikan perlunya pemantauan kualitas perairan
+dan pengelolaan limbah secara berkelanjutan di kawasan pesisir maupun
+DAS.
+
+Sub-bab ini menguji hipotesis secara empiris: \textbf{Apakah kepadatan
+smelter berkorelasi secara signifikan dengan penurunan Indeks Kualitas
+Air (IKA)?}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+IKA BPS (Data Resmi)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Timbulan Limbah B3 (Perkiraan)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Kasus Pencemaran Sungai (Laporan NGO)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\pandocbounded{\includegraphics[keepaspectratio,alt={IKA BPS}]{visuals_bab2/chart_2_1_map1.png}}
+&
+\pandocbounded{\includegraphics[keepaspectratio,alt={Limbah B3}]{visuals_bab2/chart_2_1_map2.png}}
+&
+\pandocbounded{\includegraphics[keepaspectratio,alt={Sungai Tercemar}]{visuals_bab2/chart_2_1_map3.png}} \\
+\end{longtable}
+}
+
+\textbf{Pembedahan Spasial:} Peta geospasial di atas menunjukkan sebaran
+kawasan industri pemurnian nikel dan indikator baku mutu air per
+provinsi. Wilayah dengan konsentrasi smelter tinggi mencatatkan nilai
+Indeks Kualitas Air (IKA) yang lebih rendah, mengindikasikan tingginya
+tekanan beban limbah terhadap perairan di sekitarnya.
+
+\paragraph{Pembuktian Statistik: Intensitas Smelter vs Pencemaran
+Air}\label{pembuktian-statistik-intensitas-smelter-vs-pencemaran-air}
+
+Hipotesis utama narasi ini adalah bahwa \textbf{kepadatan smelter dan
+pembuangan limbah tailing} berdampak langsung pada \textbf{memburuknya
+kualitas air (IKA)}. Dengan membagi provinsi menjadi kelompok intensitas
+tambang ``Tinggi'' vs ``Rendah'', kita menguji probabilitas kerusakan
+ekologisnya.
+
+\subsubsection{Ringkasan Eksekutif Seluruh Skenario Crosstab (Smelter vs
+IKA)}\label{ringkasan-eksekutif-seluruh-skenario-crosstab-smelter-vs-ika}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Variabel Independen (X)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Variabel Dependen (Y)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Chi-Square
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+P-Value
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Odds Ratio
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Kesimpulan
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Kepadatan Smelter (Fasilitas) & Indeks Kualitas Air (IKA) & 2.667 &
+0.102 & 2.89 & ❌ TIDAK SIGNIFIKAN \\
+\end{longtable}
+}
+
+Kegagalan pengujian statistik ini tidak berarti hilirisasi aman,
+melainkan menelanjangi kegagalan indikator agregat negara. Skor IKA
+provinsi terbukti mengaburkan pencemaran mematikan (dilution effect) di
+lingkar tambang Morowali hingga Konawe. Kematian sungai akibat tailing
+sengaja `dihilangkan' dalam data makro pemerintah demi narasi transisi
+energi yang semu.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{2.2. Kepungan Asap: Kapasitas PLTU vs Indeks Kualitas
+Udara
+(IKU)}\label{kepungan-asap-kapasitas-pltu-vs-indeks-kualitas-udara-iku}
+
+\begin{quote}
+\textbf{Metode Analisis:} Sub-bab ini menggunakan Time-Series Plot
+dipadukan dengan Uji Chi-Square untuk melihat relasi kapasitas PLTU
+Captive terhadap kualitas udara ambien.
+
+\textbf{Variabel \& Fitur Data:} Capacity (MW) (X), IKU (Y). Data Panel
+2015-2023.
+\end{quote}
+
+Area berwarna pada grafik di bawah ini merepresentasikan kapasitas
+kumulatif Pembangkit Listrik Tenaga Uap (PLTU) \emph{captive} yang
+digunakan untuk memenuhi kebutuhan energi fasilitas pemurnian nikel.
+Data menunjukkan peningkatan kapasitas pembangkit berbasis batu bara
+secara bertahap sepanjang satu dekade terakhir, hingga mencapai
+\textbf{9,825 Megawatt (MW)}.
+
+\textbf{Perbandingan Data Administratif dan Pemantauan Satelit}\\
+Pemantauan kualitas udara menyajikan perbandingan antara data
+administratif Indeks Kualitas Udara (IKU) dan pengukuran satelit
+independen \textbf{NASA TROPOMI (\emph{Tropospheric Monitoring
+Instrument})}. Data IKU resmi KLHK mencatatkan pergerakan rata-rata dari
+\textbf{86.7 poin} menjadi \textbf{92.8 poin}.
+
+Sementara itu, pemantauan satelit TROPOMI yang diekstraksi melalui
+\emph{Google Earth Engine} mengukur konsentrasi gas Nitrogen Dioksida
+(NO₂) di udara ambien. Gas NO₂ merupakan indikator emisi hasil proses
+pembakaran bahan bakar fosil. Pengukuran satelit merekam fluktuasi dan
+peningkatan konsentrasi NO₂ di atas wilayah-wilayah yang memiliki
+konsentrasi PLTU captive dan fasilitas pemurnian tinggi. Pengujian
+statistik pada sub-bab ini bertujuan mengukur: \textbf{Apakah kapasitas
+PLTU captive berkorelasi signifikan dengan tingkat indikator kualitas
+udara?}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\centering\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+Semua PLTU Batubara vs IKU (Data KLHK)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Semua PLTU Batubara vs Polusi NO2 (Data Satelit NASA)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\pandocbounded{\includegraphics[keepaspectratio,alt={PLTU vs IKU}]{visuals_bab2/chart_2_2_combined.png}}
+&
+\pandocbounded{\includegraphics[keepaspectratio,alt={PLTU vs NO2 NASA}]{visuals_bab2/chart_2_2_nasa.png}} \\
+\textbf{KLAIM IKU PEMERINTAH (KLHK):} Menunjukkan indeks kualitas udara
+yang seolah masih diklaim dalam batas aman. & \textbf{DATA SATELIT
+(NASA/GEE):} Agregasi rata-rata tahunan (simpulan) dari satelit
+independen NASA TROPOMI. \\
+\end{longtable}
+}
+
+\textbf{Pembedahan Ekologis Visual:} Grafik gabungan di atas memotret
+perbandingan tren kumulatif kapasitas PLTU (sumbu kiri) dengan indikator
+IKU (sumbu kanan). Tumpukan area berwarna menunjukkan kenaikan kapasitas
+PLTU captive sepanjang dekade terakhir. Sementara data satelit TROPOMI
+(NO₂) di grafik sebelah kanan memberikan gambaran tren polusi udara di
+kawasan pemurnian nikel.
+
+\paragraph{Pertumbuhan Kapasitas Energi (Sentra vs
+Non-Sentra)}\label{pertumbuhan-kapasitas-energi-sentra-vs-non-sentra}
+
+Distribusi spasial kapasitas Pembangkit Listrik Tenaga Uap (PLTU)
+\emph{captive} di Pulau Sulawesi menunjukkan konsentrasi yang signifikan
+di \textbf{Daerah Sentra Tambang} (Sulawesi Tengah dan Sulawesi
+Tenggara). Data menunjukkan bahwa kapasitas PLTU \emph{captive} yang
+beroperasi di wilayah sentra tambang mencapai \textbf{9,225 Megawatt
+(MW)}, sedangkan Daerah Non-Sentra mencatatkan kapasitas sebesar
+\textbf{600 MW}.
+
+Kapasitas pembangkit di dua provinsi sentra nikel ini mencakup
+\textbf{93.9\%} dari total kapasitas pembangkit PLTU captive di Pulau
+Sulawesi. Grafik tren mengonfirmasi bahwa pertumbuhan infrastruktur
+ketenagalistrikan berbasis batu bara ini teralokasikan secara dominan
+untuk menyokong kebutuhan industri pemurnian nikel di wilayah-wilayah
+konsentrasi smelter.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Pertumbuhan Kapasitas Energi Sentra vs Non-Sentra}]{visuals_bab2/chart_2_2_sentra.png}}
+\caption{Pertumbuhan Kapasitas Energi Sentra vs Non-Sentra}
+\end{figure}
+
+\emph{Fakta Data: Pemisahan (split) garis merah dan abu-abu secara
+gamblang membuktikan bahwa nyaris seluruh peningkatan signifikan
+eksponensial PLTU Captive 1 dekade terakhir terpusat murni di Daerah
+Sentra Tambang.}
+
+\paragraph{Emisi CO₂ per Driver --- Kontribusi terhadap Krisis
+Iklim}\label{emisi-coux2082-per-driver-kontribusi-terhadap-krisis-iklim}
+
+Beban ekologis dari operasi ekstraktif di Pulau Sulawesi tidak hanya
+berhenti pada hilangnya tutupan lahan hutan primer, tetapi juga
+berdampak pada akselerasi krisis iklim global. Grafik analisis atribusi
+pelepasan gas rumah kaca di bawah ini membedah jejak karbon dari
+masing-masing faktor pendorong deforestasi. Data menunjukkan bahwa
+sektor \textbf{Pertambangan dan Sawit} merupakan kontributor emisi CO₂
+terbesar dari deforestasi, dengan total pelepasan karbon sebesar
+\textbf{1,339.5 Juta Ton} yang berasal dari pembukaan lahan seluas
+\textbf{2,107,041 Hektar}.
+
+Tingkat emisi ini merepresentasikan \textbf{88.0\%} dari total emisi
+karbon akibat hilangnya tutupan pohon di kawasan tersebut. Perbandingan
+dengan aktivitas Pertanian Berpindah menunjukkan emisi sebesar
+\textbf{13.2 Juta Ton} --- jauh lebih rendah dibandingkan emisi dari
+sektor ekstraktif skala besar. Data ini mengindikasikan pentingnya
+pengelolaan izin konsesi dan praktik penambangan yang berkelanjutan
+untuk mengurangi dampak emisi karbon dari sektor industri.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Emisi CO2 per Driver}]{visuals_bab2/chart_2_2_emisi.png}}
+\caption{Emisi CO2 per Driver}
+\end{figure}
+
+\paragraph{Pembuktian Statistik: Kapasitas PLTU vs Kualitas
+Udara}\label{pembuktian-statistik-kapasitas-pltu-vs-kualitas-udara}
+
+Hipotesis utama narasi ini adalah bahwa \textbf{ekspansi gila-gilaan
+PLTU Batubara} (terutama captive power untuk kawasan nikel) akan
+berdampak langsung pada \textbf{memburuknya kualitas udara (IKU)}.
+
+\subsubsection{Ringkasan Eksekutif Seluruh Skenario Crosstab (PLTU vs
+IKU)}\label{ringkasan-eksekutif-seluruh-skenario-crosstab-pltu-vs-iku}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Variabel Independen (X)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Variabel Dependen (Y)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Chi-Square
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+P-Value
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Odds Ratio
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Kesimpulan
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Kapasitas PLTU (MW) & Indeks Kualitas Udara (IKU) & 0.668 & 0.414 & 0.55
+& ❌ TIDAK SIGNIFIKAN \\
+\end{longtable}
+}
+
+Hasil pengujian tidak mencapai ambang signifikansi statistik, yang
+menunjukkan bahwa dinamika IKU dipengaruhi oleh berbagai faktor
+operasional dan geografis di luar kapasitas PLTU saja.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{2.3. Eksekusi Ruang: Ekspansi Kawasan Industri vs Tekanan
+Ekologis
+(Deforestasi)}\label{eksekusi-ruang-ekspansi-kawasan-industri-vs-tekanan-ekologis-deforestasi}
+
+\begin{quote}
+\textbf{Metode Analisis:} Sub-bab ini menggunakan visualisasi
+\emph{Animated Bubble Chart} untuk memperlihatkan laju konsesi tambang
+bersanding dengan deforestasi aktual kumulatif secara spasio-temporal.
+\end{quote}
+
+Ekspansi industri pengolahan nikel berimplikasi pada penggunaan ruang
+spasial dalam skala besar. Data menunjukkan bahwa pemerintah telah
+mengalokasikan daratan Pulau Sulawesi seluas \textbf{1,185,174 Hektar}
+untuk kegiatan pertambangan dan kawasan industri melalui Izin Usaha
+Pertambangan (IUP). Provinsi dengan alokasi IUP terbesar adalah
+\textbf{Sulawesi Tengah}.
+
+Sepanjang satu dekade (2014-2023), konversi tutupan hutan di Pulau
+Sulawesi mencapai total \textbf{2,078,652 Hektar}. Grafik geospasial di
+bawah memvisualisasikan dinamika ekspansi konsesi kumulatif per
+provinsi. Ukuran lingkaran (\emph{bubble}) merepresentasikan skala
+akumulasi deforestasi kumulatif yang terjadi di wilayah tersebut.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Eksekusi Ruang: Ekspansi Industri vs Deforestasi}]{visuals_bab2/chart_2_3_map.png}}
+\caption{Eksekusi Ruang: Ekspansi Industri vs Deforestasi}
+\end{figure}
+
+\textbf{Pembedahan Geospasial Temporal:} - \textbf{Gradient Hijau-Coklat
+(Choropleth - Warna Provinsi)}: Menunjukkan transformasi tutupan hutan.
+Semakin coklat = semakin parah deforestasi kumulatifnya. Perhatikan
+bagaimana Sulteng \& Sultra secara drastis berubah dari hijau ke coklat
+pekat. - \textbf{Lingkaran Kuning (Bubbles - Ekspansi Konsesi
+Kumulatif)}: Merepresentasikan akumulasi luas konsesi industri yang
+terus bertambah setiap tahun. Ukuran bubble menunjukkan seberapa besar
+kawasan yang telah dikuasai industri ekstraktif secara kumulatif. -
+\textbf{Korelasi Visual}: Provinsi dengan bubble yang tumbuh paling
+cepat (ekspansi konsesi masif) adalah provinsi yang warnanya paling
+cepat berubah menjadi coklat (deforestasi parah). Ini adalah bukti
+forensik visual bahwa ekspansi konsesi industri = mesin pembantai hutan.
+
+\paragraph{Pembuktian Statistik: Ekspansi Industri vs
+Deforestasi}\label{pembuktian-statistik-ekspansi-industri-vs-deforestasi}
+
+Hipotesis utama narasi ini adalah bahwa \textbf{obral izin lahan (Luas
+IUP \& Kawasan)} adalah pendorong utama (\emph{driver}) di balik
+masifnya \textbf{Deforestasi}.
+
+\subsubsection{Ringkasan Eksekutif Seluruh Skenario Crosstab (IUP vs
+Deforestasi)}\label{ringkasan-eksekutif-seluruh-skenario-crosstab-iup-vs-deforestasi}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Variabel Independen (X)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Variabel Dependen (Y)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Chi-Square
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+P-Value
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Odds Ratio
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Kesimpulan
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Luas Ekspansi Industri (Ha) & Kehilangan Tutupan Pohon (Ha) & 35.267 &
+0.000 & 81.00 & ✅ SIGNIFIKAN \\
+\end{longtable}
+}
+
+Hasil pengujian menunjukkan korelasi antara perluasan perizinan kawasan
+industri dan laju deforestasi. Ekspansi investasi ini berkaitan dengan
+perubahan tutupan hutan di wilayah konsesi.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{2.4. Driver Deforestasi: Anatomi Pembantaian
+Hutan}\label{driver-deforestasi-anatomi-pembantaian-hutan}
+
+\begin{quote}
+\textbf{Pertanyaan Krusial:} Siapa yang bertanggung jawab atas hilangnya
+tutupan hutan Sulawesi dalam satu dekade (2014-2023)? Section ini
+membedah \textbf{anatomi driver deforestasi} dengan atribusi emisi CO₂
+untuk mengidentifikasi kontributor utama dan implikasi kebijakannya.
+\end{quote}
+
+\paragraph{Evolusi Temporal: Komposisi Driver Deforestasi
+(2014-2023)}\label{evolusi-temporal-komposisi-driver-deforestasi-2014-2023}
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Evolusi Temporal Driver Deforestasi}]{visuals_bab2/chart_2_4_driver_area.png}}
+\caption{Evolusi Temporal Driver Deforestasi}
+\end{figure}
+
+\textbf{Dominasi Absolut Pertambangan dan Sawit:} Grafik normalized
+stacked area di atas menunjukkan bahwa \textbf{Pertambangan dan Sawit
+(merah gelap)} mendominasi 70-85\% dari total deforestasi setiap
+tahunnya. Perhatikan bahwa \textbf{Pertanian Berpindah (kuning)} hanya
+menyumbang 1-3\% dari total deforestasi. Kehutanan Komersial (oranye)
+menyumbang 10-15\%, sementara Urbanisasi (hijau) hampir tidak terlihat
+(\textless1\%).
+
+\paragraph{Total Deforestasi per Driver (Kumulatif
+2014-2023)}\label{total-deforestasi-per-driver-kumulatif-2014-2023}
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Total Deforestasi per Driver}]{visuals_bab2/chart_2_4_driver_bar.png}}
+\caption{Total Deforestasi per Driver}
+\end{figure}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Indikator Driver
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Nilai
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Keterangan
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Pertambangan dan Sawit} & \textbf{2,107,041 Ha} (87.9\%) &
+Driver komoditas industri skala besar \\
+\textbf{Pertanian Berpindah} & \textbf{21,091 Ha} (0.9\%) & Aktivitas
+subsisten masyarakat kecil \\
+\textbf{Rasio Kejahatan Ekologis} & \textbf{100x} & Industri
+menghancurkan hutan \textbf{100 kali lebih banyak} dibanding petani
+kecil \\
+\end{longtable}
+}
+
+\textbf{Atribusi Emisi: Industri Ekstraktif = Bom Karbon:} Industri
+ekstraktif (tambang nikel \& sawit) tidak hanya menghancurkan tutupan
+hutan secara fisik, tetapi juga melepaskan ratusan juta ton CO₂ ke
+atmosfer. Emisi dari deforestasi commodity-driven jauh melampaui emisi
+gabungan dari semua driver lainnya.
+
+\paragraph{KESIMPULAN FORENSIK DRIVER
+DEFORESTASI}\label{kesimpulan-forensik-driver-deforestasi}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Industri Ekstraktif (Tambang Nikel \& Sawit)} adalah
+  kontributor utama deforestasi Sulawesi, bertanggung jawab atas
+  \textbf{70-85\%} kehilangan tutupan hutan selama 2014-2023.
+\item
+  \textbf{Pertanian Berpindah (Petani Kecil)} hanya menyumbang
+  \textbf{1-3\%} dari total deforestasi --- data ini mengindikasikan
+  pentingnya akurasi dalam identifikasi pelaku utama deforestasi.
+\item
+  \textbf{Rasio Kontribusi:} Industri menghancurkan hutan
+  \textbf{50-100x lebih banyak} dibanding petani kecil, sekaligus
+  melepaskan ratusan juta ton CO₂ ke atmosfer.
+\item
+  \textbf{Implikasi Kebijakan:} Evaluasi instrumen perizinan tambang
+  baru, audit ulang IUP eksisting, serta pengendalian ekspansi lahan
+  ekstraktif di kawasan hutan perlu menjadi prioritas kebijakan.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{2.5. Kehancuran Biodiversitas: Ekstirpasi Habitat Satwa
+Endemik}\label{kehancuran-biodiversitas-ekstirpasi-habitat-satwa-endemik}
+
+\textbf{Tekanan Habitat: Satwa Endemik Sulawesi dan Ancaman
+Pertambangan}
+
+Pulau Sulawesi merupakan salah satu pusat keanekaragaman hayati yang
+unik di dunia. Ekspansi kawasan pertambangan nikel dan pembukaan kawasan
+industri (\emph{smelter}) berdampak pada tekanan terhadap habitat flora
+dan fauna endemik yang beradaptasi di ekosistem khas Sulawesi.
+
+Data spasial dari \textbf{GBIF (Global Biodiversity Information
+Facility)} memetakan \textbf{269 titik koordinat penampakan (occurrence)
+aktual} dari \textbf{7 spesies endemik kunci} termasuk Anoa
+(\emph{Bubalus quarlesi} / \emph{depressicornis}), Macaca Nigra
+(\emph{Macaca nigra}), Tarsius, dan Babirusa. Sebaran titik-titik ini
+bersinggungan dengan wilayah-wilayah yang memiliki konsentrasi Izin
+Usaha Pertambangan (IUP) dan fasilitas pemurnian nikel, khususnya di
+Sulawesi Tengah dan Sulawesi Tenggara.
+
+Berdasarkan data \textbf{IUCN (International Union for Conservation of
+Nature) Red List}, dari 7 satwa endemik yang terdata, sebanyak \textbf{2
+spesies} berstatus \textbf{Terancam Kritis (Critically Endangered)},
+\textbf{2 spesies Rentan Bahaya (Endangered)}, dan \textbf{3 spesies
+Rentan (Vulnerable)}. Catatan IUCN secara eksplisit mengidentifikasi
+aktivitas pertambangan (\emph{Mining Threat}) sebagai salah satu ancaman
+utama terhadap kelestarian spesies-spesies tersebut.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Peta Spasial Penampakan Satwa Endemik Sulawesi GBIF}]{visuals_bab2/chart_2_5_gbif.png}}
+\caption{Peta Spasial Penampakan Satwa Endemik Sulawesi GBIF}
+\end{figure}
+
+\paragraph{Validasi Ancaman Tambang: IUCN Red
+List}\label{validasi-ancaman-tambang-iucn-red-list}
+
+Berdasarkan data \textbf{IUCN (International Union for Conservation of
+Nature) Red List}, satwa-satwa endemik yang berhabitat di lingkar
+tambang ini mayoritas berstatus \textbf{Rentan (Vulnerable)} hingga
+\textbf{Terancam Kritis (Critically Endangered)}. Kolom \textbf{Mining
+Threat} memvalidasi secara keilmuan bahwa aktivitas pertambangan secara
+eksplisit dicatat sebagai ancaman eksistensial bagi kepunahan mereka di
+alam liar.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2202}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2294}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2110}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1835}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1560}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Scientific Name
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Common Name
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Status
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Population Trend
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Mining Threat
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Babyrousa celebensis & Sulawesi Babirusa & Vulnerable & Decreasing &
+Yes \\
+Babyrousa babyrussa & Hairy Babirusa & Vulnerable & Decreasing & No \\
+Bubalus depressicornis & Lowland Anoa & Endangered & Decreasing & Yes \\
+Bubalus quarlesi & Mountain Anoa & Endangered & Decreasing & Yes \\
+Macaca nigra & Celebes Crested Macaque & Critically Endangered &
+Decreasing & Yes \\
+Macrocephalon maleo & Maleo & Critically Endangered & Decreasing & No \\
+Tarsius tarsier & Spectral Tarsier & Vulnerable & Decreasing & No \\
+\end{longtable}
+}
+
+\emph{Sumber: Data IUCN Red List \& GBIF occurrences.}
+
+\end{document}

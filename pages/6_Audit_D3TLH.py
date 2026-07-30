@@ -148,7 +148,7 @@ def load_data():
     df_kpa_izin = pd.read_csv(os.path.join(DATA_DIR, "kpa_masalah_izin_perusahaan.csv")) if os.path.exists(os.path.join(DATA_DIR, "kpa_masalah_izin_perusahaan.csv")) else pd.DataFrame()
     df_pltu_captive = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv")) else pd.DataFrame()
     df_kawasan_nikel = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_kawasan_nikel_luas_per_provinsi.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_kawasan_nikel_luas_per_provinsi.csv")) else pd.DataFrame()
-    df_faskes = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_faskes_agregat_v2.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_faskes_agregat_v2.csv")) else pd.DataFrame()
+    df_faskes = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_faskes_agregat_v3.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_faskes_agregat_v3.csv")) else pd.DataFrame()
     df_nasa = pd.read_csv(os.path.join(DATA_DIR, "gee_nasa_no2_sulawesi_monthly_raw.csv")) if os.path.exists(os.path.join(DATA_DIR, "gee_nasa_no2_sulawesi_monthly_raw.csv")) else pd.DataFrame()
     return df_kes, df_ika, df_bencana, df_konflik, df_izin, df_iku, df_b3, df_pltu_op, df_gfw, df_gfw_lindung, df_gfw_driver, df_konflik_fpic, df_kpa_izin, df_pltu_captive, df_kawasan_nikel, df_faskes, df_nasa
 

@@ -580,7 +580,7 @@ k_df = load_dataset('sulawesi_kesehatan_detail_2014_2024.csv')
 z_df = load_dataset('zoonosis_kab_kota_2015_2024.csv')
 ika_df = load_dataset('sulawesi_ika_2016_2024.csv')
 limbah_df = load_dataset('sulawesi_limbah_b3.csv')
-faskes_df = load_dataset('sulawesi_faskes_agregat_v2.csv')
+faskes_df = load_dataset('sulawesi_faskes_agregat_v3.csv')
 
 # -- Data Logistik (Seksi 5)
 logistik_df = load_dataset("sulawesi_logistik_simpul_nikel.csv")

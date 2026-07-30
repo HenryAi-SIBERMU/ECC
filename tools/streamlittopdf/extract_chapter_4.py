@@ -153,7 +153,7 @@ y_order = {
 print("Rendering 4.1 Chart ...")
 df_agg = df_ts_modern.groupby(['tahun','Sektor_Grup']).size().reset_index(name='Jumlah')
 fig_ts = px.bar(df_agg, x='tahun', y='Jumlah', color='Sektor_Grup', color_discrete_map=color_map,
-                title='Ledakan Konflik Agraria di Sulawesi (1990 - 2025)',
+                title='Peningkatan Signifikan Konflik Agraria di Sulawesi (1990 - 2025)',
                 labels={'tahun':'Tahun','Jumlah':'Total Letupan Konflik','Sektor_Grup':'Sektor Pemicu'})
 fig_ts.update_layout(
     xaxis=dict(tickmode='linear', dtick=2),
@@ -186,7 +186,7 @@ df_sektor_tahun = df_dampak[df_dampak['tahun'] >= 1990].groupby(['tahun','Sektor
     {'dampak_masyarakat_jiwa':'sum','luas_ha':'sum'}).reset_index()
 
 fig_jiwa = px.bar(df_sektor_tahun, x='tahun', y='dampak_masyarakat_jiwa', color='Sektor_Grup',
-    title='Ledakan Korban Terdampak (Jiwa) per Tahun', color_discrete_map=color_map,
+    title='Peningkatan Signifikan Korban Terdampak (Jiwa) per Tahun', color_discrete_map=color_map,
     labels={'dampak_masyarakat_jiwa':'Total Korban (Jiwa)','tahun':'Tahun','Sektor_Grup':'Sektor Pemicu'}, barmode='stack')
 fig_jiwa.update_layout(showlegend=False, plot_bgcolor='white', paper_bgcolor='white',
     font=dict(color='#333'),
@@ -340,6 +340,14 @@ else:
 
 is_significant_default = p_default < 0.05
 
+# Exec summary table
+exec_header = "| Variabel Independen (X) | Variabel Dependen (Y) | Chi-Square | P-Value | Odds Ratio | Kesimpulan |"
+exec_sep    = "|---|---|---|---|---|---|"
+exec_rows   = [exec_header, exec_sep]
+for row in summary_data:
+    exec_rows.append(f"| {row['Variabel Independen (X)']} | {row['Variabel Dependen (Y)']} | {row['Chi-Square']} | {row['P-Value']} | {row['Odds Ratio']} | {row['Kesimpulan']} |")
+exec_table_md = "\n".join(exec_rows)
+
 # ─── BUILD MARKDOWN ──────────────────────────────────────────────────────────
 print("Writing 100% faithful chapter_4.md ...")
 
@@ -372,7 +380,6 @@ def fmt_crosstab_md(ct, exp_df, cx, cy):
 
 crosstab_md = fmt_crosstab_md(ct_default, exp_default, cx_def, cy_def)
 
-# Chi-square table
 try:
     g_val, p_g, dof_g, _ = stats.chi2_contingency(ct_default, lambda_="log-likelihood")
 except:
@@ -385,9 +392,9 @@ try:
 except:
     r_val, p_corr, lbl_val = 0, 1, 0
 
-status_text = "SIGNIFIKAN (Ada Hubungan)" if is_significant_default else "TIDAK SIGNIFIKAN"
+status_text = "SIGNIFIKAN" if p_default < 0.05 else "TIDAK SIGNIFIKAN"
 
-if is_significant_default:
+if p_default < 0.05:
     interp_text = (
         f"Temuan ini sangat krusial: pergeseran status **{x_lbl_ct}** terbukti **berkorelasi kuat dan signifikan** dengan **{y_lbl_ct}** "
         f"(P < 0.05). Angka Odds Ratio (OR: {or_default:.3f}) menjadi konfirmasi empiris bahwa narasi hilirisasi dan investasi bukanlah "
@@ -396,180 +403,144 @@ if is_significant_default:
 else:
     interp_text = (
         f"Secara agregat, hubungan antara **{x_lbl_ct}** dan **{y_lbl_ct}** **tidak menunjukkan perbedaan yang signifikan** secara statistik "
-        "(P ≥ 0.05). Hal ini mengindikasikan bahwa penggunaan instrumen kekerasan sudah mengakar dan sistematis di sepanjang sejarah konflik "
+        "(P >= 0.05). Hal ini mengindikasikan bahwa penggunaan instrumen kekerasan sudah mengakar dan sistematis di sepanjang sejarah konflik "
         "agraria tanpa memandang batas waktu rezim atau aktor yang terlihat."
     )
 
-# Exec summary table
-exec_header = "| Variabel Independen (X) | Variabel Dependen (Y) | Chi-Square | P-Value | Odds Ratio | Kesimpulan |"
-exec_sep    = "|---|---|---|---|---|---|"
-exec_rows   = [exec_header, exec_sep]
-for row in summary_data:
-    exec_rows.append(f"| {row['Variabel Independen (X)']} | {row['Variabel Dependen (Y)']} | {row['Chi-Square']} | {row['P-Value']} | {row['Odds Ratio']} | {row['Kesimpulan']} |")
-exec_table_md = "\n".join(exec_rows)
+# BUILD ANOMALIES JIWA
+jiwa_anomalies_md = ""
+import urllib.parse
+for i, year in enumerate(top_jiwa.index, 1):
+    jiwa_anomalies_md += f"\n#### ANOMALI JIWA {i}: Lonjakan Korban Jiwa Tahun {year}\n"
+    cases = df_konflik[df_konflik['tahun'] == year].copy()
+    cases['jiwa_num'] = pd.to_numeric(cases['dampak_masyarakat_jiwa'].astype(str).replace(',', '', regex=True).replace(' Jiwa', '', regex=True), errors='coerce').fillna(0)
+    top_case = cases.sort_values('jiwa_num', ascending=False).iloc[0] if not cases.empty else None
+    
+    if top_case is not None:
+        judul = top_case['judul']
+        korban = top_case['jiwa_num']
+        pt = top_case['keterlibatan_perusahaan'] if pd.notna(top_case['keterlibatan_perusahaan']) else 'Tidak/Belum Teridentifikasi'
+        narasi = str(top_case['narasi'])[:450] + "..." if pd.notna(top_case['narasi']) and str(top_case['narasi']).strip() != 'nan' else (str(top_case['deskripsi'])[:450] + "...")
+        sumber_lsm = top_case['sumber'] if 'sumber' in top_case and pd.notna(top_case['sumber']) else 'Kompilasi LSM'
+        tk_link = top_case['detail_url'] if 'detail_url' in top_case and pd.notna(top_case['detail_url']) else '#'
+        search_query = urllib.parse.quote(f"{judul} {pt}")
+        link = f"https://www.google.com/search?q={search_query}"
+        
+        jiwa_anomalies_md += f"- **Kasus Utama Pendongkrak Statistik:** {judul}\n"
+        jiwa_anomalies_md += f"- **Total Korban (Kasus Ini):** {int(korban):,} Jiwa\n"
+        jiwa_anomalies_md += f"- **Perusahaan Terlibat:** {pt}\n"
+        jiwa_anomalies_md += f"- **Narasi Singkat:** {narasi}\n"
+        jiwa_anomalies_md += f"- **Sumber Referensi:** Laporan {sumber_lsm} ([Telusuri Berita Kasus]({link}) | [Link Asli TanahKita]({tk_link}))\n"
 
-# ─── WRITE MD ─────────────────────────────────────────────────────────────────
-md = f"""# Bab 4: Ruang Hidup yang Terampas
+# BUILD ANOMALIES AREA
+ha_anomalies_md = ""
+for i, year in enumerate(top_ha.index, 1):
+    ha_anomalies_md += f"\n#### ANOMALI AREA {i}: Monopoli Area Konflik Tahun {year}\n"
+    cases = df_konflik[df_konflik['tahun'] == year].copy()
+    cases['ha_num'] = pd.to_numeric(cases['luas_ha'].astype(str).replace(',', '', regex=True).replace(' Ha', '', regex=True), errors='coerce').fillna(0)
+    top_case = cases.sort_values('ha_num', ascending=False).iloc[0] if not cases.empty else None
+    
+    if top_case is not None:
+        judul = top_case['judul']
+        luas = top_case['ha_num']
+        pt = top_case['keterlibatan_perusahaan'] if pd.notna(top_case['keterlibatan_perusahaan']) else 'Tidak/Belum Teridentifikasi'
+        narasi = str(top_case['narasi'])[:450] + "..." if pd.notna(top_case['narasi']) and str(top_case['narasi']).strip() != 'nan' else (str(top_case['deskripsi'])[:450] + "...")
+        sumber_lsm = top_case['sumber'] if 'sumber' in top_case and pd.notna(top_case['sumber']) else 'Kompilasi LSM'
+        tk_link = top_case['detail_url'] if 'detail_url' in top_case and pd.notna(top_case['detail_url']) else '#'
+        search_query = urllib.parse.quote(f"{judul} {pt}")
+        link = f"https://www.google.com/search?q={search_query}"
+        
+        ha_anomalies_md += f"- **Kasus Utama Pendongkrak Statistik:** {judul}\n"
+        ha_anomalies_md += f"- **Total Daratan Dirampas (Kasus Ini):** {int(luas):,} Hektar\n"
+        ha_anomalies_md += f"- **Perusahaan Terlibat:** {pt}\n"
+        ha_anomalies_md += f"- **Narasi Singkat:** {narasi}\n"
+        ha_anomalies_md += f"- **Sumber Referensi:** Laporan {sumber_lsm} ([Telusuri Berita Kasus]({link}) | [Link Asli TanahKita]({tk_link}))\n"
 
-**CELIOS — Center of Economic and Law Studies**
+md = f'''# Ruang Hidup yang Terampas
 
-*Membedah eskalasi konflik sosial dan perampasan ruang agraria di balik klaim keberhasilan pembangunan.*
+Analisis dinamika konflik sosial dan alokasi ruang agraria dalam konteks pembangunan kawasan.
 
 ---
 
-## Metodologi
+Ekspansi industri ekstraktif dan proyek strategis berimplikasi pada dinamika sosial dan penggunaan lahan masyarakat. Data empiris mencatat akumulasi **{total_konflik} kasus konflik agraria**. Konflik ini berkaitan erat dengan perubahan tata guna lahan dan alokasi ruang di berbagai daerah.
 
-**Alur Kausalitas (Ekonomi Politik Ekologi):** `Ekspansi Industri & Proyek Strategis` → `Perampasan Ruang Hidup & Lahan` → `Eskalasi Konflik Sosial/Agraria`
-
-Tesis dari analisis ini membantah narasi kesejahteraan dengan memperlihatkan bahwa agresivitas izin konsesi, proyek strategis nasional, hingga perluasan taman nasional dan pariwisata berbanding lurus dengan meningkatnya resistensi dan terdepaknya masyarakat lokal dari ruang kelolanya.
-
-**Variabel Dampak (Y):**
-*   **Jumlah Konflik:** Riwayat insiden letupan konflik agraria historis berdasarkan database independen masyarakat sipil.
-*   **Sektor Pemicu:** Tipologi konflik yang dipecah berdasarkan klasifikasi sektor penyebab dominan.
-
-**Metode Pengolahan Data:**
-Analisis menggunakan pendekatan *Trend Analysis* dan tabulasi silang (*Crosstabulation*). Menyandingkan matriks kejadian letupan konflik secara sektoral untuk mengekstraksi fakta episentrum sengketa berdarah.
+Aktor dan sektor pemicu konflik mencakup sektor **Kehutanan** (Hutan Lindung, Produksi, Konservasi), **Infrastruktur & PSN** (Bendungan, Transmigrasi, Kawasan Industri), hingga proyek **Pariwisata & Pesisir**. Tiga sektor utama (Perkebunan, Kehutanan, dan Pertambangan) menyumbang porsi **{rasio_ekstraktif:.1f}%** dari keseluruhan catatan konflik.
 
 ---
 
-## Hilirisasi & Pembangunan Berlumur Konflik
-
-Ekspansi industri ekstraktif dan proyek strategis tidak hanya menumbangkan daya dukung ekologis, tetapi secara agresif merobek tatanan kehidupan sosial masyarakat. Data empiris mencatat sejarah panjang perlawanan akar rumput dengan total terjadinya **{total_konflik} letupan konflik agraria** yang tercatat. Konflik ini bukanlah residu acak pembangunan, melainkan ekses langsung dari model ekonomi yang sangat rakus daratan.
-
-Secara mengejutkan, aktor perampas lahan utama tidak hanya didominasi oleh pertambangan dan perkebunan monokultur, namun meluas ke sekor **Kehutanan** (Hutan Lindung, Produksi, Konservasi), **Infrastruktur & PSN** (Bendungan, Transmigrasi, Kawasan Industri), hingga proyek **Pariwisata & Pesisir**. Tiga sektor utama (Perkebunan, Kehutanan, dan Pertambangan) menyumbang porsi **{rasio_ekstraktif:.1f}%** dari keseluruhan catatan konflik. Alih-alih mendapatkan kucuran kesejahteraan, warga lokal justru seringkali dikriminalisasi, direpresi, dan diusir dari atas ruang penghidupan historis mereka.
-
----
-
-## Ringkasan Metrik Agregat
+### Ringkasan Metrik Agregat
 
 | Indikator | Nilai | Keterangan |
 |---|---|---|
-| **Total Letupan Konflik** | **{total_konflik} kasus** | Insiden perampasan lahan dan sengketa agraria yang memicu perlawanan sipil. |
-| **Korban Terdampak (Jiwa)** | **{total_jiwa:,} jiwa** | Jumlah warga yang kehilangan ruang hidup, digusur, atau terpinggirkan akibat konflik lahan (bukan korban meninggal). |
-| **Status: Belum Ditangani** | **{status_belum_selesai} kasus** | Kasus yang dibiarkan terkatung-katung tanpa resolusi berkeadilan bagi warga. |
-| **Masyarakat Melawan** | **{libat_masyarakat} komunitas** | Kelompok tani dan masyarakat adat yang berjuang mempertahankan ruang hidup. |
-| **Sektor Perkebunan** | **{konflik_kebun} kasus** | Tumpang tindih Hak Guna Usaha (HGU) sawit skala masif dengan lahan rakyat. |
-| **Sektor Kehutanan** | **{konflik_hutan} kasus** | Klaim sepihak hutan produksi dan konservasi yang menggusur masyarakat lokal. |
-| **Sektor Pertambangan** | **{konflik_tambang} kasus** | Operasi pengerukan lahan dan hilirisasi untuk industri mineral serta nikel. |
-| **Infrastruktur & PSN** | **{konflik_infrastruktur} kasus** | Penggusuran proyek strategis nasional seperti bendungan dan jalan. |
-| **Pariwisata & Pesisir** | **{konflik_pariwisata} kasus** | Privatisasi pesisir dan pariwisata super-premium (KEK). |
-| **Keterlibatan Pemerintah** | **{libat_pemerintah} kasus** | Andil institusi negara dan pemerintah daerah dalam sengketa warga. |
-| **Keterlibatan Korporasi** | **{libat_perusahaan} kasus** | Perusahaan swasta asing maupun BUMN yang memonopoli ruang hidup. |
+| **Total Kasus Konflik** | **{total_konflik} kasus** | Catatan insiden sengketa agraria dan tata guna lahan. |
+| **Korban Terdampak (Jiwa)** | **{total_jiwa:,} jiwa** | Estimasi jumlah warga yang terdampak oleh konflik sengketa lahan. |
+| **Status: Belum Ditangani** | **{status_belum_selesai} kasus** | Kasus sengketa yang masih dalam proses penanganan. |
+| **Komunitas Terdampak** | **{libat_masyarakat} komunitas** | Kelompok tani dan komunitas lokal yang terlibat dalam sengketa. |
+| **Sektor Perkebunan** | **{konflik_kebun} kasus** | Sengketa tumpang tindih Hak Guna Usaha (HGU) perkebunan dengan lahan masyarakat. |
+| **Sektor Kehutanan** | **{konflik_hutan} kasus** | Sengketa batas kawasan hutan produksi dan konservasi dengan wilayah kelola lokal. |
+| **Sektor Pertambangan** | **{konflik_tambang} kasus** | Sengketa alokasi lahan untuk operasi pertambangan dan fasilitas hilirisasi. |
+| **Infrastruktur & PSN** | **{konflik_infrastruktur} kasus** | Sengketa pengadaan tanah untuk Proyek Strategis Nasional. |
+| **Pariwisata & Pesisir** | **{konflik_pariwisata} kasus** | Sengketa pemanfaatan wilayah pesisir dan kawasan pariwisata. |
+| **Keterlibatan Pemerintah** | **{libat_pemerintah} kasus** | Keterlibatan instansi pemerintah dalam fasilitasi atau sengketa lahan. |
+| **Keterlibatan Korporasi** | **{libat_perusahaan} kasus** | Entitas BUMN atau swasta yang terlibat dalam sengketa lahan. |
 
 *Sumber Analisis Data: Konsorsium Pembaruan Agraria (KPA) / Tanah Kita*
 
 ---
 
-## 4.1 Tren Eskalasi Konflik Agraria Seiring Ekspansi Industri
+### 4.1 Tren Eskalasi Konflik Agraria Seiring Ekspansi Industri
 
-**Metode: Analisis Tren Time-Series (Sumber: KPA / Tanah Kita)**
+Visualisasi *time-series* di bawah ini memberikan gambaran korelasi antara ekspansi industri dan dinamika konflik agraria di daratan Sulawesi. Secara historis, perbandingan dua periode waktu menunjukkan perbedaan tingkat insidensi konflik. Pada periode pra-2005, sistem pendataan mencatat **{pra_2005} kasus** konflik agraria.
 
-### Metodologi: Analisis Tren Time-Series
+Pada periode pasca-2005 hingga saat ini, data mencatat **{pasca_2005} kasus** konflik lahan, yang mencerminkan peningkatan sebesar **{lonjakan:,.1f}%** dibandingkan periode sebelumnya. Perubahan tren ini beriringan dengan penerbitan Izin Usaha Pertambangan (IUP) serta ekspansi Hak Guna Usaha (HGU) untuk perkebunan.
 
-**Metode Analisis:** Sub-bab ini menggunakan visualisasi tren runtun waktu (*Time-Series Trend Analysis*) untuk melacak eskalasi kasus perampasan lahan secara historis.
+Penelusuran tren satu dekade terakhir menunjukkan bahwa sengketa agraria mencakup berbagai sektor, termasuk pertambangan nikel, infrastruktur, dan Proyek Strategis Nasional. Akumulasi **{total_ts} insiden historis** ini mengindikasikan perlunya tata kelola alokasi lahan dan perlindungan hak masyarakat lokal yang lebih seimbang di kawasan investasi.
 
-1. **Model Analisis Tren Historis:**
-    * **Time-Series Tracking:** Memetakan fluktuasi dan eskalasi frekuensi letupan konflik agraria dalam rentang waktu memanjang (longitudinal).
-    * **Komparasi Periodik:** Membandingkan volume letupan konflik antara fase pra-ekspansi (sebelum hilirisasi masif) dengan fase pasca-ekspansi (era Proyek Strategis Nasional).
-    * **Pemetaan Eskalasi:** Mengidentifikasi pola lonjakan kasus perampasan lahan untuk membuktikan secara empiris relasi antara percepatan industrialisasi dengan peningkatan konflik sosial.
-2. **Kalkulasi/Formula Pengolahan:** Agregasi jumlah konflik berdasarkan periode tahun pencatatan dan sektor industri.
-    * `Total_Konflik_Tahunan = COUNT(Kasus) GROUP BY Tahun, Sektor`
-    * `Lonjakan_Eskalasi = (Kasus_Pasca - Kasus_Pra) / Kasus_Pra * 100%`
-3. **Variabel & Fitur Data:**
-    * **Waktu (Independen):** Tahun pencatatan konflik (1990 - 2025).
-    * **Frekuensi & Sektor (Dependen):** Jumlah insiden perampasan ruang dan sektor korporasi yang memicu konflik.
-4. **Dataset & File:**
-    * Catatan Konflik Agraria: `data/processed/sulawesi_konflik_agraria_tanahkita.csv`
+![Peningkatan Signifikan Konflik Agraria di Sulawesi (1990-2025)](visuals_bab4/chart_4_1_konflik_timeseries.png)
 
----
-
-Visualisasi *time-series* di bawah ini memberikan bukti empiris yang tidak dapat dibantah mengenai korelasi langsung antara ekspansi industri berskala masif dengan eskalasi letupan konflik agraria di daratan Sulawesi. Secara historis, jika kita membandingkan dua periode waktu yang berbeda, lonjakan perampasan ruang hidup masyarakat terlihat sangat drastis dan tidak proporsional. Pada periode pra-2005, sistem pendataan mencatat "hanya" terdapat **{pra_2005} kasus** letupan konflik yang tereskalasi. Angka ini secara fundamental merepresentasikan dinamika agraria tradisional sebelum keran perizinan konsesi ekstraktif dibuka secara agresif oleh pemerintah daerah pasca implementasi otonomi daerah secara penuh.
-
-Namun, narasi harmoni pembangunan ini hancur berantakan ketika memasuki periode pasca-2005 hingga saat ini. Data empiris secara mengejutkan mencatat setidaknya **{pasca_2005} kasus** perampasan lahan yang memicu perlawanan berdarah, yang ekuivalen dengan lonjakan eskalasi raksasa sebesar **{lonjakan:,.1f}%** dibandingkan era sebelumnya. Transformasi tata ruang yang sangat brutal ini didorong oleh lahirnya rezim komodifikasi daratan, di mana penerbitan Izin Usaha Pertambangan (IUP) mineral dan batubara, serta ekspansi Hak Guna Usaha (HGU) untuk perkebunan kelapa sawit monokultur menjadi panglima pembangunan yang menggusur wilayah kelola masyarakat adat dan petani gurem. Hal ini secara faktual membuktikan bahwa model pembangunan berorientasi PDB (Produk Domestik Bruto) nyatanya beroperasi di atas kerentanan ruang hidup warga.
-
-Lebih jauh lagi, jika membedah tren pada satu dekade terakhir (terutama puncak eskalasi masif pada tahun 2017 dan melesat pasca-2020), kita menemukan anomali yang sangat berbahaya. Tren letupan sengketa sosial ini tidak lagi sekadar didominasi oleh perambahan hutan lindung atau perluasan kebun sawit, melainkan telah bermutasi menjadi konflik struktural akibat narasi besar **Hilirisasi Nikel** dan pengadaan daratan secara darurat untuk **Proyek Strategis Nasional (Infrastruktur & PSN)**. Warga lokal dipaksa melepaskan hak atas tanah produktif mereka di wilayah-wilayah episentrum ekstraktif demi menggelar karpet merah bagi modal korporat transnasional. Fakta keras berupa **{total_ts} total insiden historis** ini secara definitif membantah klaim negara bahwa industrialisasi ekstraktif membawa efek kesejahteraan berganda (*trickle-down effect*). Sebaliknya, kawasan-kawasan investasi tersebut justru bermetamorfosis menjadi 'zona tumbal' (*sacrifice zones*) di mana laju akumulasi kapital segelintir elit korporasi harus dibayar sangat mahal dengan ongkos krisis ekologis permanen, represi aparat negara, serta hancurnya tatanan kedaulatan pangan maupun pranata sosial masyarakat lokal.
-
-![Ledakan Konflik Agraria di Sulawesi (1990-2025)](visuals_bab4/chart_4_1_konflik_timeseries.png)
-
-> **Interpretasi Ekologis: Anatomi Ledakan Konflik 2017**
+> **Interpretasi Ekologis: Puncak Insidensi Konflik 2017**
 >
-> Grafik di atas secara gamblang memperlihatkan anomali eskalasi ekstrem yang memuncak pada **tahun 2017** dengan rekor **75 letupan konflik**. Pembedahan data sektoral membongkar bahwa krisis ini bukanlah sekadar kebetulan; ledakan ini didominasi secara mutlak oleh sektor **Kehutanan (40 kasus)** dan **Perkebunan (21 kasus)**, yang kemudian diikuti oleh penetrasi **Pertambangan dan Infrastruktur PSN**. Tahun 2017 menandai periode kelam *(inflection point)* di mana pemerintah mengakselerasi pelepasan kawasan hutan dan Izin Pinjam Pakai Kawasan Hutan (IPPKH) secara masif guna memfasilitasi rantai pasok nikel dan megaproyek strategis nasional. Ekspansi spasial yang brutal ini secara langsung merampas wilayah kelola masyarakat adat dan merusak ekosistem penyangga, memicu gelombang perlawanan akar rumput yang direpresi. Secara empiris, narasi hilirisasi telah membuktikan dirinya beroperasi di atas ongkos perampasan ruang hidup berskala masif.
+> Grafik memperlihatkan peningkatan insidensi konflik yang memuncak pada **tahun 2017** dengan **75 kasus konflik**. Pembedahan data sektoral menunjukkan konsentrasi pada sektor **Kehutanan (40 kasus)** dan **Perkebunan (21 kasus)**, diikuti oleh **Pertambangan dan Infrastruktur PSN**. Periode ini bertepatan dengan percepatan pelepasan kawasan hutan dan Izin Pinjam Pakai Kawasan Hutan (IPPKH) untuk mendukung proyek strategis dan kawasan industri.
 
-> **Interpretasi Ekologis dan Sosial:** Loncatan drastis letupan konflik terjadi beririsan dengan agresivitas rezim perizinan. Hilirisasi Nikel dan Proyek Strategis Nasional (PSN) secara faktual telah merekayasa kawasan investasi menjadi zona tumbal yang mengorbankan kedaulatan masyarakat lokal secara permanen.
-
----
-
-## 4.2 Sebaran Sektoral: Korban Jiwa dan Monopoli Ruang
-
-**Metode: Analisis Komparatif Dampak Sosial-Ekologis (Sumber: KPA / Tanah Kita)**
-
-### Metodologi: Analisis Komparatif Dampak Sosial-Ekologis
-
-**Metode Analisis:** Sub-bab ini menggunakan agregasi komparatif (*Comparative Aggregation Analysis*) untuk membedah skala kehancuran sosial (korban terdampak) dan monopoli ruang (hektar) antar sektor.
-
-1. **Model Analisis Beban Sektoral (Sectoral Burden Analysis):**
-    * **Kategorisasi Sektoral (Profiling):** Mengklasifikasikan sumber konflik (sektor Tambang, Perkebunan, Kehutanan, dll.) sebagai basis pengelompokan (*grouping*).
-    * **Kuantifikasi Monopoli:** Menghitung total agregat luasan daratan (hektar) yang dirampas dan jumlah masyarakat (jiwa) yang terdampak per sektor industri.
-    * **Evaluasi Dominasi:** Membedah asimetri penguasaan ruang untuk mengidentifikasi sektor mana yang bertindak sebagai aktor dominan dalam praktik perampasan tanah (*land grabbing*).
-2. **Kalkulasi/Formula Pengolahan:** Perhitungan sum/agregat dari seluruh korban jiwa (bukan korban meninggal, melainkan terdampak) dan hektar.
-    * `Total_Jiwa_Terdampak = SUM(Jiwa) GROUP BY Sektor`
-    * `Total_Monopoli_Area = SUM(Hektar) GROUP BY Sektor`
-3. **Variabel & Fitur Data:**
-    * **Sektor (Independen):** Kategori proyek (Perkebunan, Kehutanan, Pertambangan, dll).
-    * **Korban Jiwa & Luas Area (Dependen):** Jumlah orang terdampak (Jiwa) dan luas sengketa (Ha).
-4. **Dataset & File:**
-    * Dampak Konflik: `data/processed/sulawesi_konflik_agraria_tanahkita.csv`
+> **Interpretasi Ekologis dan Sosial:**
+>
+> Peningkatan insidensi konflik beririsan dengan dinamika perizinan kawasan. Pengelolaan alokasi ruang dan perlindungan hak masyarakat di wilayah investasi menjadi faktor penting untuk meminimalkan dampak sosial.
 
 ---
 
-Konflik agraria bukanlah sebuah insiden terisolasi yang hanya berupa sengketa batas tanah, melainkan instrumen sistematis dari akumulasi modal yang beroperasi dengan menggusur paksa kehidupan manusia. Visualisasi komparatif di bawah ini membongkar skala kehancuran sosial dan ekologis yang diakibatkan oleh masing-masing sektor industri ekstraktif. Ketika kita membedah total jumlah korban terdampak, data menunjukkan realitas yang sangat mengerikan. **Sektor Kehutanan** menjadi penyumbang terbesar krisis kemanusiaan dengan total korban mencapai **{jiwa_kehutanan:,.0f} jiwa**. Angka ini bukan sekadar statistik; ini merepresentasikan masyarakat adat dan komunitas lokal yang ruang hidup dan wilayah adatnya direnggut atas nama legalitas izin Hutan Tanaman Industri (HTI) maupun klaim sepihak kawasan lindung oleh negara.
+### 4.2 Sebaran Sektoral: Dampak Masyarakat dan Penggunaan Lahan
 
-Menyusul di posisi kedua adalah **Sektor Pertambangan** yang telah memakan korban sebanyak **{jiwa_tambang:,.0f} jiwa**. Lonjakan korban di sektor ini berhubungan langsung dengan ambisi hilirisasi mineral kritis (terutama nikel) yang memaksa warga pesisir dan petani untuk melepaskan ruang produksi mereka demi fasilitas *smelter* dan pertambangan terbuka. Masyarakat yang melawan seringkali dihadapkan pada represi berlapis, mulai dari intimidasi preman korporasi hingga kriminalisasi oleh aparat keamanan negara yang bertindak sebagai penjaga gawang investasi.
+Visualisasi komparatif di bawah ini menggambarkan skala dampak sosial dan penggunaan lahan berdasarkan sektor industri. Data menunjukkan bahwa **Sektor Kehutanan** mencatatkan jumlah warga terdampak sebanyak **{jiwa_kehutanan:,.0f} jiwa**, berkaitan dengan tumpang tindih kawasan hutan produksi, konservasi, dan Hutan Tanaman Industri (HTI) dengan wilayah kelola masyarakat lokal.
 
-Di sisi lain, saat kita meninjau dari dimensi monopoli tata ruang (luasan hektar yang dikonflikkan), **Sektor Perkebunan**—khususnya ekspansi kelapa sawit—menjadi penguasa absolut dengan merampas lahan seluas **{ha_kebun:,.0f} Hektar**. Konsentrasi penguasaan tanah oleh segelintir korporasi perkebunan ini menghancurkan kedaulatan pangan lokal dan menciptakan ketimpangan agraria yang struktural. Disusul oleh sektor Kehutanan seluas **{ha_kehutanan:,.0f} Ha** dan Pertambangan seluas **{ha_tambang:,.0f} Ha**, trinitas sektor ekstraktif ini (Kebun, Hutan, Tambang) secara empiris membuktikan bahwa pembangunan ekonomi selama ini semata-mata bergantung pada perampasan ruang berskala masif. Tidak ada tetesan kesejahteraan (*trickle-down effect*) bagi warga tapak; yang tersisa hanyalah kemiskinan struktural, pencemaran tanah, dan hilangnya hak-hak dasar konstitusional mereka atas daratan yang telah mereka tempati secara turun-temurun.
+Menyusul berikutnya adalah **Sektor Pertambangan** dengan total korban terdampak sebanyak **{jiwa_tambang:,.0f} jiwa**, yang beririsan dengan proyek hilirisasi nikel dan tambang terbuka di kawasan pesisir dan pertanian.
 
-![Ledakan Korban Terdampak (Jiwa) per Tahun](visuals_bab4/chart_4_2a_jiwa.png)
+Dari dimensi penggunaan lahan (luasan hektar yang terlibat sengketa), **Sektor Perkebunan** mencatatkan luas sengketa terbesar yaitu **{ha_kebun:,.0f} Hektar**, disusul oleh sektor Kehutanan seluas **{ha_kehutanan:,.0f} Ha** dan Pertambangan seluas **{ha_tambang:,.0f} Ha**. Data ini menunjukkan bahwa dinamika penguasaan lahan di tiga sektor tersebut berkorelasi dengan tingginya insidensi sengketa agraria di tingkat lokal.
+
+![Peningkatan Signifikan Korban Terdampak (Jiwa) per Tahun](visuals_bab4/chart_4_2a_jiwa.png)
 
 ![Monopoli Area Konflik (Hektar) per Tahun](visuals_bab4/chart_4_2b_ha.png)
 
-> **Interpretasi Ekologis dan Sosial:** Lonjakan luar biasa pada grafik merepresentasikan titik didih ledakan demografis dari kegagalan mutlak sistem pengaman sosial di zona investasi ekstraktif.
+> **Interpretasi Ekologis dan Sosial:**
+>
+> Dinamika Grafik mencerminkan akumulasi dampak sosial di wilayah industri yang memerlukan perhatian dalam pengelolaan sengketa lahan.
 
 ### Bedah Forensik Anomali (Spike) Konflik Agraria
 
-Berdasarkan ekstraksi dataset secara mendalam, berikut adalah bedah anatomis dari lonjakan-lonjakan ekstrem (*spikes*) yang terjadi pada grafik **Ledakan Korban Terdampak (Jiwa)** dan **Monopoli Area Konflik (Hektar)** di wilayah ini.
+Berdasarkan ekstraksi dataset secara mendalam, berikut adalah bedah anatomis dari lonjakan-lonjakan ekstrem (*spikes*) yang terjadi pada grafik **Peningkatan Signifikan Korban Terdampak (Jiwa)** dan **Monopoli Area Konflik (Hektar)** di wilayah ini.
+
+{jiwa_anomalies_md}
+
+{ha_anomalies_md}
 
 ---
 
-## 4.3 Kriminalisasi Aktivis dan Resistensi Ruang Sipil
+### 4.3 Indikasi Represi dan Kriminalisasi dalam Konflik Agraria
 
-**Metode: Analisis Agregat Kasus Represi & Pelanggaran HAM (Sumber: Database Tanah Kita)**
+Data kuantitatif di wilayah Sulawesi mencatat indikasi terjadinya represi dan tindakan kriminalisasi dalam sebagian sengketa agraria. Dari database yang didokumentasikan, terdapat **{total_kriminalisasi} kasus indikasi kriminalisasi** dan **{total_ditangkap} warga/aktivis lingkungan yang tercatat pernah ditangkap** dalam penanganan sengketa lahan.
 
-### Metodologi: Analisis Agregat Kasus Represi & Pelanggaran HAM
+Berdasarkan distribusi sektoral, **Sektor {top_sektor}** mencatatkan frekuensi indikasi represi tertinggi dengan **{top_sektor_count} kasus**. Tahun dengan jumlah catatan insiden represi tertinggi adalah **{top_tahun}** dengan **{top_tahun_count} kasus**.
 
-**Metode Analisis:** Sub-bab ini menggunakan agregasi kasus indikasi pelanggaran Hak Asasi Manusia dan Kriminalisasi Pejuang Lingkungan melalui ekstraksi metrik fatalitas.
-
-1. **Pemodelan Indikator Kekerasan & Represi:**
-    * **Violence & Criminalization Tracking:** Mendokumentasikan kasus penangkapan, intimidasi, kekerasan fisik, hingga jatuhnya korban jiwa di pihak warga dan aktivis lingkungan.
-    * **Kuantifikasi Fatalitas:** Menghitung akumulasi jumlah korban kriminalisasi dan korban tewas sebagai proksi tingkat represi struktural.
-    * **Pemetaan Ruang Sipil:** Mengevaluasi sejauh mana ekspansi investasi industri ekstraktif beroperasi dengan menggunakan instrumen represi aparatur keamanan (penyempitan ruang sipil).
-2. **Kalkulasi/Formula Pengolahan:** Penghitungan jumlah insiden kriminalisasi serta total akumulasi korban represi kekerasan fisik.
-    * `Total_Kasus_Kriminalisasi = COUNT(Kasus) WHERE Indikasi_Kriminalisasi = TRUE`
-    * `Total_Korban_Tewas = SUM(Jumlah_Tewas) GROUP BY Sektor`
-3. **Variabel & Fitur Data:**
-    * **Status Represi (Dependen):** Boolean (Ya/Tidak) terjadinya indikasi kriminalisasi dalam konflik.
-    * **Kuantitas Korban (Dependen):** Angka mutlak (integer) korban tertangkap, terluka, dan meninggal.
-4. **Dataset & File:**
-    * Represi dan Kriminalisasi: `data/processed/sulawesi_konflik_agraria_tanahkita.csv`
-
----
-
-Rentetan data kuantitatif di wilayah Sulawesi secara telanjang membantah klaim arus utama yang kerap didengungkan oleh pemerintah dan oligarki korporasi, bahwa ekspansi industri ekstraktif membawa kesejahteraan dan pertumbuhan inklusif bagi masyarakat lokal. Fakta empiris justru memperlihatkan bahwa tata kelola investasi di Indonesia secara struktural dibangun di atas fondasi represi dan kekerasan terhadap ruang sipil.
-
-Dari **{total_kriminalisasi} kasus indikasi kriminalisasi** yang berhasil didokumentasikan, tercatat sebanyak **{total_ditangkap} warga dan aktivis lingkungan yang ditangkap** secara sewenang-wenang. Angka ini bukanlah statistik hampa, melainkan representasi dari hancurnya keadilan ekologis dan perampasan ruang hidup masyarakat adat, petani, dan nelayan yang dipaksa menyerahkan tanah leluhurnya demi akumulasi kapital segelintir elit industri ekstraktif.
-
-Jika kita membedah lebih dalam pada distribusi sektoral, **Sektor {top_sektor}** muncul sebagai aktor dominan yang paling sering menggunakan instrumen koersif negara, menyumbang total **{top_sektor_count} kasus represi**. Penggunaan aparat keamanan negara maupun preman korporasi untuk memuluskan perampasan tanah menunjukkan bahwa hukum seringkali ditundukkan pada kepentingan bisnis raksasa yang lapar lahan. Eskalasi konflik paling mematikan mencapai puncaknya pada tahun **{top_tahun}** dengan mencatatkan **{top_tahun_count} kasus secara bersamaan**. Dalam banyak peristiwa empiris, warga lokal yang sekadar mempertahankan hak konstitusional mereka atas lingkungan hidup yang baik dan sehat justru dilabeli sebagai provokator dan dijerat pasal pidana karet.
-
-Tragedi kemanusiaan ini menjadi semakin kelam dengan hilangnya nyawa **{total_tewas} pejuang lingkungan** yang melayang sia-sia di pusaran konflik agraria. Gugurnya pahlawan-pahlawan ruang hidup ini menggarisbawahi kegagalan mutlak instrumen pengaman ekologis - seperti D3TLH maupun dokumen AMDAL - dalam menjamin keselamatan rakyat. Selama pendekatan pembangunan eksploitatif yang bertumpu pada sekuritisasi investasi ini dipertahankan, setiap hektar hutan yang dibabat akan selalu berlumuran air mata konflik.
+Catatan ini menunjukkan pentingnya pendekatan hukum yang adil, penyelesaian konflik secara ramah HAM, serta jaminan perlindungan bagi pejuang lingkungan dan komunitas lokal sesuai dengan peraturan perundang-undangan.
 
 | Kasus Indikasi Kriminalisasi | Warga/Aktivis Ditangkap | Korban Luka-luka | Korban Tewas |
 |---|---|---|---|
@@ -579,50 +550,25 @@ Tragedi kemanusiaan ini menjadi semakin kelam dengan hilangnya nyawa **{total_te
 
 ![Sektor Industri Paling Represif](visuals_bab4/chart_4_3b_sektor_represif.png)
 
-> **Interpretasi Ekologis & Hak Asasi Manusia:** Tingginya angka kriminalisasi dan korban tewas di sekitar area konsesi (terutama {top_sektor}) membuktikan bahwa perampasan ruang selalu dibarengi dengan pendekatan represif. Ini membantah telak narasi "Hilirisasi Hijau" yang nyatanya ditebus dengan ongkos kemanusiaan yang berdarah.
-
-#### Arsip Kasus Represi dan Kekerasan Fisik Tertinggi
-
-*Menampilkan 10 kasus dengan jumlah korban penangkapan atau tewas terbanyak berdasarkan data yang berhasil didokumentasikan.*
+> **Interpretasi Ekologis & Hak Asasi Manusia:** Keberadaan kasus kriminalisasi di sekitar area konsesi (terutama {top_sektor}) mengindikasikan pentingnya jaminan perlindungan ruang sipil dan penghormatan HAM dalam setiap proses pembangunan.
 
 ---
 
-## 4.4 Pembuktian Statistik: Ekspansi vs Eskalasi Konflik
+### 4.4 Pembuktian Statistik: Ekspansi vs Eskalasi Konflik
 
-**Metode: Before-After Analysis & Crosstabulation**
-
-### Metodologi: Before-After Analysis & Crosstabulation
-
-**Metode Analisis:** Sub-bab ini menggunakan Uji Chi-Square (*Crosstabulation*) dan kalkulasi risiko peluang (*Odds Ratio*) untuk menguji validitas empiris secara akademis.
-
-1. **Uji Korelasi Variabel Kategorikal:**
-    * **Crosstabulation:** Mentabulasi silang frekuensi kemunculan dua kondisi (Contoh: Keterlibatan Perusahaan vs Adanya Kriminalisasi) untuk mencari relasi ketergantungan.
-    * `H0 (Null Hypothesis): Variabel baris (Periode/Aktor) saling bebas (independent) secara absolut terhadap variabel kolom (Represi/Kematian).`
-    * `Decision Rule: Chi-Square Asymptotic Significance (P-Value) < 0.05, maka tolak H0 (Terdapat korelasi yang signifikan).`
-2. **Kalkulasi/Formula Pengolahan:** Algoritma Uji Tabulasi Silang Chi-Square.
-    * `Chi-Square (χ²) = Σ [(Observed - Expected)² / Expected]`
-    * `Odds Ratio (OR) = (Sel A × Sel D) / (Sel B × Sel C)`
-3. **Variabel & Fitur Data:**
-    * **Matriks Ekspansi (Independen):** Dikotomi rentang waktu (Pra/Pasca 2014) dan kehadiran korporasi.
-    * **Matriks Eskalasi (Dependen):** Kehadiran status represi dan terjadinya jatuhnya korban nyawa (Boolean dikonversi ke kategori).
-4. **Dataset & File:**
-    * Base Data Cross-Section: `data/processed/sulawesi_konflik_agraria_tanahkita.csv`
-
----
-
-Hipotesis utama dalam evaluasi ini adalah bahwa **industrialisasi dan ekspansi korporasi** berbanding lurus dengan **eskalasi konflik dan represi** terhadap masyarakat.
+Hipotesis utama dalam evaluasi ini adalah bahwa **industrialisasi dan ekspansi korporasi** berbanding lurus dengan **eskalasi konflik dan represi** terhadap masyarakat. 
 Untuk mengujinya secara statistik sesuai pedoman D3TLH, analisis dibagi menjadi dua bagian: (1) Komparasi metrik Before-After, dan (2) Uji signifikansi Crosstab Chi-Square. Unit observasinya adalah catatan kejadian letupan konflik historis.
 
-### A. Analisis Komparatif Before-After (Pra vs Era Hilirisasi)
+#### A. Analisis Komparatif Before-After (Pra vs Era Hilirisasi)
 
 Perbandingan absolut eskalasi konflik agraria sebelum dan sesudah rezim hilirisasi masif dimulai (cut-off tahun 2014).
 
 | Periode | Rata-rata Konflik | Total Letupan | Warga Ditangkap | Korban Tewas |
 |---|---|---|---|---|
-| **Pra-Ekspansi (1990 – 2013)** | **{avg_pra:.1f} Kasus/Tahun** | {len(df_pra)} kejadian | {int(df_pra['jumlah_ditangkap'].sum())} jiwa | {int(df_pra['jumlah_tewas'].sum())} jiwa |
-| **Pasca-Ekspansi (2014 – 2024)** | **{avg_pasca:.1f} Kasus/Tahun** | {len(df_pasca)} kejadian | {int(df_pasca['jumlah_ditangkap'].sum())} jiwa | {int(df_pasca['jumlah_tewas'].sum())} jiwa |
+| **Pra-Ekspansi (1990 - 2013)** | **{avg_pra:.1f} Kasus/Tahun** | {len(df_pra)} kejadian | {int(df_pra['jumlah_ditangkap'].sum())} jiwa | {int(df_pra['jumlah_tewas'].sum())} jiwa |
+| **Pasca-Ekspansi (2014 - 2024)** | **{avg_pasca:.1f} Kasus/Tahun** | {len(df_pasca)} kejadian | {int(df_pasca['jumlah_ditangkap'].sum())} jiwa | {int(df_pasca['jumlah_tewas'].sum())} jiwa |
 
-### B. Uji Statistik Crosstab (Chi-Square)
+#### B. Uji Statistik Crosstab (Chi-Square)
 
 **Variabel Independen (X):** Periode Ekspansi Industri
 
@@ -676,52 +622,24 @@ Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square) untuk semua 
 
 ---
 
-## 4.5 Peta Orkestrasi Konflik: Aktor Sipil vs Aktor Ekstraktif
+### 4.5 Peta Entitas Aktor: Korporasi dan Organisasi Masyarakat
 
-**Metode: Frequency Profiling (Text Parsing NLP) pada Data TanahKita**
-
-### Metodologi: Frequency Profiling (Text Parsing NLP)
-
-**Metode Analisis:** Sub-bab ini menggunakan teknik pemrosesan teks berbasis *Natural Language Processing* (Regex Entity Extraction) untuk membedah relasi aktor (korporasi vs sipil).
-
-1. **Model Ekstraksi Aktor (Entity Parsing & Text Mining):**
-    * **Textual Pattern Matching:** Memindai ribuan korpus teks narasi historis menggunakan metode *Regular Expressions* (RegEx) untuk mendeteksi entitas korporasi (PT/CV) dan organisasi masyarakat sipil (CSO).
-    * **Token Counting (Frequency Profiling):** Menghitung frekuensi absolut penyebutan (*mentions*) dari setiap aktor spesifik di dalam dokumentasi konflik.
-    * **Pemetaan Oligarki:** Memvalidasi indikasi konsentrasi kekuasaan dan monopoli penguasaan ruang oleh segelintir konglomerasi besar melalui seberapa sering nama entitas tersebut muncul dalam sengketa tanah.
-2. **Kalkulasi/Formula Pengolahan:** Regex pattern matching and Token Counting.
-    * `Count_PT = SUM(RegEx_Match(r"\\b(?:PT|CV)\\.?\\s*[A-Z][a-zA-Z]*..."))`
-    * `Count_CSO = SUM(RegEx_Match(r"\\b(?:Walhi|Jatam|AMAN|Aliansi)..."))`
-3. **Variabel & Fitur Data:**
-    * **Teks Korpus Historis (Independen):** Penggabungan kolom `judul`, `deskripsi`, dan `narasi` dari repositori kasus.
-    * **Frekuensi Penyebutan (Dependen):** *Word counts* eksistensi entitas pada teks-teks sengketa.
-4. **Dataset & File:**
-    * Teks Bebas (*Free-Text*): `data/processed/sulawesi_konflik_agraria_tanahkita.csv`
-
----
-
-Konflik yang membara tidak hanya melibatkan negara dan aparat, melainkan memunculkan fenomena adu domba struktural (*orkestrasi konflik horizontal*).
-Pemecahan entitas (*string parsing*) terhadap catatan kronologi advokasi TanahKita menelanjangi siapa yang sesungguhnya bermain di lapangan.
-Di satu sisi, masyarakat asli sering kali didampingi oleh organisasi struktural yang solid, namun di sisi lain, mulai muncul
-ormas-ormas, lembaga swadaya buatan, hingga institusi pseudo-adat yang digunakan sebagai proksi (*buffer*) oleh korporasi.
-Grafik frekuensi ini membongkar dominasi aktor-aktor sipil dan perusahaan tambang yang paling banyak merebut ruang hidup.
+Analisis entitas aktor berbasis pemrosesan teks (*string parsing*) terhadap catatan kronologi dokumentasi TanahKita memetakan keterlibatan berbagai pihak dalam sengketa agraria. Hasil ekstraksi teks mengidentifikasi entitas korporasi, lembaga pemerintah, serta organisasi masyarakat sipil yang tercatat dalam dokumentasi kasus. Grafik frekuensi di bawah menampilkan entitas korporasi dan kelompok masyarakat yang paling sering teridentifikasi dalam catatan sengketa lahan.
 
 #### Top 10 Entitas Korporasi Paling Dominan
 
 ![Top 10 Entitas Korporasi Paling Dominan](visuals_bab4/chart_4_5a_korporasi.png)
 
-> **Analisis Kritis:** Ekstraksi presisi tinggi membuktikan dominasi absolut dari entitas **{top1_corp_name}** yang terlibat dalam **{top1_corp_freq} catatan konflik terpisah**. Konsentrasi tinggi frekuensi korporasi besar ini menegaskan bahwa represi di Sulawesi bukan sekadar residu administratif, melainkan *modus operandi* struktural para penguasa modal skala masif.
+> **Analisis Data Korporasi:** Ekstraksi teks mencatat frekuensi penyebutan entitas **{top1_corp_name}** dalam **{top1_corp_freq} catatan kasus terpisah**.
 
 #### Top Aktor Proksi & Vigilante Terdeteksi
 
 ![Top Aktor Proksi & Vigilante Terdeteksi](visuals_bab4/chart_4_5b_vigilante.png)
 
-> **Analisis Kritis:** Kemunculan kelompok sipil seperti **{top1_civ_name}** (terdeteksi hingga **{top1_civ_freq} kali**) menangkap besarnya skala orkestrasi horizontal. Korporasi seringkali menggunakan jasa pengamanan swakarsa, kelompok preman, hingga ormas vigilante sebagai "bemper proksi" untuk mengintimidasi warga lokal dan memecah belah solidaritas akar rumput.
+> **Analisis Kritis Proksi/Vigilante:** Kemunculan kelompok sipil seperti **{top1_civ_name}** (terdeteksi hingga **{top1_civ_freq} kali**) menangkap besarnya skala orkestrasi horizontal. Korporasi seringkali menggunakan jasa pengamanan swakarsa, kelompok preman, hingga ormas vigilante sebagai "bemper proksi" untuk mengintimidasi warga lokal dan memecah belah solidaritas akar rumput.
 
-*\\* Grafik di atas hanya menampilkan Top 10 entitas. Untuk melihat daftar lengkap dan detail seluruh aktor yang terdeteksi, silakan buka tabel data di bawah ini.*
-
-*Sumber File: `data/processed/sulawesi_konflik_agraria_tanahkita.csv` - Data diekstraksi secara dinamis menggunakan NLP Regex dari korpus narasi seluruh kasus agraria (Nasional, N=568 kasus) untuk memetakan orkestrasi struktural dan modus operandi aktor secara utuh.*
-"""
-
+*\\* Grafik di atas hanya menampilkan Top 10 entitas. Untuk melihat daftar lengkap dan detail seluruh aktor yang terdeteksi, silakan buka tabel data.*
+'''
 out_path = HERE / "chapter_4.md"
 out_path.write_text(md, encoding="utf-8")
 print(f"Done! 100% faithful chapter_4.md saved to {out_path}")

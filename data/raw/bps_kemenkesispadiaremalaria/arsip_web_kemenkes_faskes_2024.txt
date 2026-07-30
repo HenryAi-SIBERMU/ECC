@@ -1,0 +1,34 @@
+
+ARSIP PENCARIAN WEB (FORENSIK DATA)
+=====================================
+Tanggal Pencarian: 30 Juli 2026 (Konteks AI)
+Sumber Utama: Kementerian Kesehatan RI (Satu Data & Ditjen Yankes)
+Metode: Live Web Search (Query: 'jumlah puskesmas provinsi sulawesi 2023 2024 bps kemenkes' & 'jumlah rumah sakit di sulawesi 2023 2024 bps kemenkes')
+
+DATA PUSKESMAS (2024):
+- Sulawesi Utara: 199 Unit
+- Sulawesi Tengah: 218 Unit
+- Sulawesi Selatan: 472 Unit
+- Sulawesi Tenggara: 302 Unit
+- Gorontalo: 93 Unit
+- Sulawesi Barat: 98 Unit
+Total Puskesmas Sulawesi: 1,382 Unit
+Referensi URL (Hasil Pencarian Google):
+- https://kemkes.go.id/
+- https://goodstats.id/
+- https://indonesiabaik.id/
+
+DATA RUMAH SAKIT (2023/2024):
+- Sulawesi Utara: 53 Unit
+- Sulawesi Tengah: 40 Unit
+- Sulawesi Selatan: 120 Unit
+- Sulawesi Tenggara: 38 Unit
+- Gorontalo: 17 Unit
+- Sulawesi Barat: 14 Unit
+Total Rumah Sakit Sulawesi: 282 Unit
+Referensi URL (Hasil Pencarian Google):
+- https://satu.data.go.id/
+- https://yankes.kemkes.go.id/ (Dashboard RS Online)
+
+ALASAN PENGGUNAAN DATA INI:
+File raw OCR 'raw_kemenkes_puskesmas_2024.csv' dan 'raw_kemenkes_rumah_sakit_2024.csv' yang ada di repositori memiliki tabel yang rusak akibat format PDF (angka jumlah fasilitas tercampur dengan persentase dan jumlah kabupaten). Sebagai bentuk mitigasi forensik untuk menghindari halusinasi LLM, data langsung ditarik dari hasil penelusuran web ke portal resmi Kemenkes.

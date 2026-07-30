@@ -101,7 +101,7 @@ st.markdown(
 @st.cache_data
 def load_health_data(force_reload=True):
     df_kes = pd.read_csv("data/processed/sulawesi_kesehatan_detail_2014_2024.csv")
-    df_faskes = pd.read_csv("data/processed/sulawesi_faskes_agregat_v2.csv")
+    df_faskes = pd.read_csv("data/processed/sulawesi_faskes_agregat_v3.csv")
     df_ika = pd.read_csv("data/processed/sulawesi_ika_2016_2024.csv")
     df_ika = df_ika.rename(columns={'Indeks Kualitas Air': 'IKA'})
     df_iku = pd.read_csv("data/processed/sulawesi_iku_2015_2024.csv")
@@ -126,10 +126,10 @@ tot_diare = df_kes[df_kes["indikator"] == "Kasus Diare Dilayani"]["nilai"].sum()
 tot_malaria = df_kes[df_kes["indikator"] == "Kasus Malaria Positif"]["nilai"].sum()
 tot_kusta = df_kes[df_kes["indikator"] == "Kasus Kusta Baru"]["nilai"].sum()
 
-# Faskes 2022
-faskes_2022 = df_faskes[df_faskes["tahun"] == 2022]
-tot_puskesmas_2022 = faskes_2022[faskes_2022["jenis"] == "Puskesmas"]["jumlah"].sum()
-tot_rs_2022 = faskes_2022[faskes_2022["jenis"] == "Rumah Sakit"]["jumlah"].sum()
+# Faskes 2024 (Data Terbaru)
+faskes_2024 = df_faskes[df_faskes["tahun"] == 2024]
+tot_puskesmas_2024 = faskes_2024[faskes_2024["jenis_faskes"] == "Puskesmas"]["jumlah"].sum()
+tot_rs_2024 = faskes_2024[faskes_2024["jenis_faskes"] == "Rumah Sakit"]["jumlah"].sum()
 
 # Tambahan untuk Hero Narrative
 mean_ika_2023 = df_ika[df_ika["Tahun"] == 2023]["IKA"].mean()
@@ -178,7 +178,7 @@ st.markdown(
         Sepanjang 2014–2024, data agregat dinas kesehatan mencatat total <b>kasus ISPA dan Pneumonia sebanyak {tot_ispa:,.0f} kasus</b>. Sementara itu, <b>kasus Diare tercatat sebanyak {tot_diare:,.0f} kasus</b>. Peningkatan insidensi penyakit ini berkorelasi dengan penurunan Indeks Kualitas Air (IKA) secara periodik. Konversi tutupan hutan untuk perluasan konsesi tambang turut berkontribusi pada pergeseran habitat satwa liar, yang berpotensi memicu perpindahan vektor penyakit zoonosis ke permukiman warga. Secara kumulatif, <b>kasus Malaria tercatat mencapai {tot_malaria:,.0f} kasus</b>, mengindikasikan tekanan terhadap keseimbangan ekologis di wilayah tambang.
     </p>
     <p style="color: #CCCCCC; font-size: 1.05rem; line-height: 1.7; text-align: justify;">
-        Distribusi infrastruktur kesehatan di wilayah industri menunjukkan kesenjangan yang perlu menjadi perhatian. Ketersediaan fasilitas layanan primer seperti <b>Puskesmas tercatat sebanyak {tot_puskesmas_2022:,.0f} unit</b> pada tahun 2022, di kawasan yang bersamaan menanggung beban penyakit di atas rata-rata. Kondisi ini mengindikasikan bahwa pertumbuhan ekonomi dari hilirisasi nikel belum diimbangi dengan distribusi infrastruktur kesehatan yang proporsional bagi masyarakat di wilayah operasi industri (<i>sacrifice zone</i>).
+        Distribusi infrastruktur kesehatan di wilayah industri menunjukkan kesenjangan yang perlu menjadi perhatian. Ketersediaan fasilitas layanan primer seperti <b>Puskesmas tercatat sebanyak {tot_puskesmas_2024:,.0f} unit</b> pada tahun 2024, di kawasan yang bersamaan menanggung beban penyakit di atas rata-rata. Kondisi ini mengindikasikan bahwa pertumbuhan ekonomi dari hilirisasi nikel belum diimbangi dengan distribusi infrastruktur kesehatan yang proporsional bagi masyarakat di wilayah operasi industri (<i>sacrifice zone</i>).
     </p>
 </div>
 """,
@@ -241,11 +241,11 @@ with col4:
         f"""
     <div class="metric-card">
         <div>
-            <div class="metric-label">Rasio Puskesmas Terdaftar (2022)</div>
-            <div class="metric-value" style="color: #FF8A65;">{tot_puskesmas_2022:,.0f} <span style="font-size:1rem;">Unit</span></div>
+            <div class="metric-label">Rasio Puskesmas Terdaftar (2024)</div>
+            <div class="metric-value" style="color: #FF8A65;">{tot_puskesmas_2024:,.0f} <span style="font-size:1rem;">Unit</span></div>
             <div class="metric-desc">Fasilitas primer warga yang pertumbuhannya tidak sebanding dengan peningkatan beban kasus penyakit di wilayah industri.</div>
         </div>
-        <div class="metric-source"><b>Sumber:</b> BPS Ketersediaan Faskes<br/><i>File: sulawesi_faskes_agregat_v2.csv</i></div>
+        <div class="metric-source"><b>Sumber:</b> BPS Ketersediaan Faskes<br/><i>File: sulawesi_faskes_agregat_v3.csv</i></div>
     </div>
     """,
         unsafe_allow_html=True,
@@ -256,11 +256,11 @@ with col5:
         f"""
     <div class="metric-card">
         <div>
-            <div class="metric-label">Rasio Rumah Sakit (2022)</div>
-            <div class="metric-value" style="color: #FFAB91;">{tot_rs_2022:,.0f} <span style="font-size:1rem;">Unit</span></div>
+            <div class="metric-label">Rasio Rumah Sakit (2024)</div>
+            <div class="metric-value" style="color: #FFAB91;">{tot_rs_2024:,.0f} <span style="font-size:1rem;">Unit</span></div>
             <div class="metric-desc">Ketersediaan rumah sakit yang tidak merata di wilayah timur, mengindikasikan belum optimalnya distribusi infrastruktur medis.</div>
         </div>
-        <div class="metric-source"><b>Sumber:</b> BPS Ketersediaan Faskes<br/><i>File: sulawesi_faskes_agregat_v2.csv</i></div>
+        <div class="metric-source"><b>Sumber:</b> BPS Ketersediaan Faskes<br/><i>File: sulawesi_faskes_agregat_v3.csv</i></div>
     </div>
     """,
         unsafe_allow_html=True,
@@ -281,19 +281,19 @@ st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
 with st.expander("ℹ️ Metodologi: Grouped Horizontal Bar Chart"):
     st.markdown("""
-    **Metode Analisis:** Sub-bab ini menggunakan visualisasi perbandingan *Grouped Horizontal Bar Chart* pada satu periode cross-sectional (Tahun 2022) untuk mengukur ketimpangan infrastruktur kesehatan primer dan sekunder.
+    **Metode Analisis:** Sub-bab ini menggunakan visualisasi perbandingan *Grouped Horizontal Bar Chart* pada satu periode cross-sectional (Tahun 2024) untuk mengukur ketimpangan infrastruktur kesehatan primer dan sekunder.
 
     1. **Analisis Ketimpangan Infrastruktur (Gap Analysis):**
         * **Segmentasi Fasilitas:** Fasilitas kesehatan dikategorikan secara hierarkis menjadi Puskesmas (Faskes Primer) dan Rumah Sakit (Faskes Sekunder) untuk dievaluasi secara spasial (Sentra vs Non-Sentra).
         * **Evaluasi Defisit:** Mengukur kesenjangan distribusi rasio fasilitas medis per provinsi menggunakan analisis komparatif absolut.
         * **Pemetaan Ketersediaan:** Membedah paradoks ketersediaan layanan kesehatan di wilayah pusat akumulasi kapital ekstraktif sebagai pembuktian defisit infrastruktur publik.
-    2. **Kalkulasi/Formula Pengolahan:** Perhitungan agregat ketersediaan faskes menurut wilayah pada tahun acuan data terlengkap (2022).
+    2. **Kalkulasi/Formula Pengolahan:** Perhitungan agregat ketersediaan faskes menurut wilayah pada tahun acuan data terbaru (2024).
         * `Rata_Rata_Faskes = MEAN(Jumlah_Faskes) GROUP BY Jenis_Faskes, Kategori_Zona`
     3. **Variabel & Fitur Data:**
         * **Jumlah & Jenis Faskes (Dependen):** Unit Rumah Sakit dan Puskesmas terdaftar (BPS).
         * **Kategori Zona (Independen):** Lokasi wilayah (Sentra vs Non-Sentra).
     4. **Dataset & File:**
-        * Data Agregat Faskes: `data/processed/sulawesi_faskes_agregat_v2.csv`
+        * Data Agregat Faskes: `data/processed/sulawesi_faskes_agregat_v3.csv`
     """)
 
 # Data Prep Chart
@@ -310,16 +310,16 @@ df_faskes_copy["Kategori"] = df_faskes_copy["provinsi"].apply(
     )
 )
 
-# Filter tahun 2022 karena memiliki data Rumah Sakit & Puskesmas terlengkap
-df_2022 = df_faskes_copy[df_faskes_copy["tahun"] == 2022]
-df_gap = df_2022.groupby(["Kategori", "jenis"])["jumlah"].mean().reset_index()
+# Filter tahun 2024
+df_2024 = df_faskes_copy[df_faskes_copy["tahun"] == 2024]
+df_gap = df_2024.groupby(["Kategori", "jenis_faskes"])["jumlah"].mean().reset_index()
 
 import plotly.express as px
 
 fig_3_2 = px.bar(
     df_gap,
     x="jumlah",
-    y="jenis",
+    y="jenis_faskes",
     color="Kategori",
     barmode="group",
     orientation="h",
@@ -335,7 +335,7 @@ fig_3_2.update_traces(
 )
 
 fig_3_2.update_layout(
-    title="Ketimpangan Ketersediaan Fasilitas Kesehatan (Rata-rata per Provinsi, 2022)",
+    title="Ketimpangan Ketersediaan Fasilitas Kesehatan (Rata-rata per Provinsi, 2024)",
     height=400,
     plot_bgcolor="rgba(0,0,0,0)",
     paper_bgcolor="rgba(0,0,0,0)",
@@ -354,10 +354,10 @@ fig_3_2.update_layout(
 st.markdown("<br>", unsafe_allow_html=True)
 
 rs_sentra = df_gap[
-    (df_gap["jenis"] == "Rumah Sakit") & (df_gap["Kategori"] == "Sentra Industri (Sulteng & Sultra)")
+    (df_gap["jenis_faskes"] == "Rumah Sakit") & (df_gap["Kategori"] == "Sentra Industri (Sulteng & Sultra)")
 ]["jumlah"].values[0]
 rs_non = df_gap[
-    (df_gap["jenis"] == "Rumah Sakit") & (df_gap["Kategori"] == "Non-Sentra Industri (Lainnya)")
+    (df_gap["jenis_faskes"] == "Rumah Sakit") & (df_gap["Kategori"] == "Non-Sentra Industri (Lainnya)")
 ]["jumlah"].values[0]
 
 st.markdown(f"""
@@ -368,9 +368,9 @@ Melalui komparasi grafik batang (*Grouped Bar Chart*) di bawah, terlihat bahwa k
 
 st.plotly_chart(fig_3_2, use_container_width=True, config={'displayModeBar': False})
 
-with st.expander("Lihat Data Mentah: Ketimpangan Faskes 2022", expanded=False):
+with st.expander("Lihat Data Mentah: Ketimpangan Faskes 2024", expanded=False):
     st.dataframe(df_gap, use_container_width=True, hide_index=True)
-    st.caption("📁 **Sumber File:** `data/processed/sulawesi_faskes_agregat_v2.csv`")
+    st.caption("📁 **Sumber File:** `data/processed/sulawesi_faskes_agregat_v3.csv`")
 
 
 # ══════════════════════════════════════════════════════════

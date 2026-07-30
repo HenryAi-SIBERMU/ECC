@@ -1,0 +1,554 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\usepackage{caption}
+\captionsetup[table]{skip=6pt}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{Bab 6: Audit Forensik Metodologi
+D3TLH}\label{bab-6-audit-forensik-metodologi-d3tlh}
+
+\textbf{CELIOS --- Center of Economic and Law Studies}
+
+\emph{Fase 1: Evaluasi Kebijakan Ekstraktif - Pembuktian Terbalik}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\textbf{Kesimpulan Eksekutif}
+
+Evaluasi empiris mengindikasikan perlunya perbaikan substansial dalam
+integrasi dokumen D3TLH dan AMDAL. Instrumen pengelolaan lingkungan
+perlu diperkuat agar mampu memetakan dampak akumulatif dan berfungsi
+sebagai pertimbangan yang lebih efektif dalam pengendalian perizinan
+investasi.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Ringkasan Audit Kritis
+D3TLH}\label{ringkasan-audit-kritis-d3tlh}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Dimensi Audit
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Skor Kerusakan
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Status Vonis
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Indikator Utama
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{DAYA TAMPUNG UDARA} & \textbf{9.1 / 10} & STATUS: EVALUASI
+KUALITAS UDARA - Analisis data menunjukkan korelasi antara aktivitas
+industri dan tren penyakit saluran pernapasan. & NOTE: Perlu pengawasan
+lebih ketat terhadap emisi industri \textbar{} Kapasitas PLTU: 9,825 MW
+/ NO2 NASA: 5.76e-06 / Rasio ISPA: 2.0x \\
+\textbf{DAYA TAMPUNG AIR} & \textbf{7.4 / 10} & STATUS: EVALUASI
+KUALITAS AIR - Pemantauan Indeks Kualitas Air dan prevalensi penyakit
+berbasis air sebagai indikator lingkungan. & NOTE: Pentingnya penguatan
+standar pemantauan limbah \textbar{} IKA Sulteng: 62.1 / Kasus Diare:
+814,407 / Konflik Air: 82 \\
+\textbf{DAYA DUKUNG LAHAN} & \textbf{10.0 / 10} & STATUS: EVALUASI TATA
+GUNA LAHAN - Pemetaan dampak tutupan lahan terhadap risiko bencana
+hidrometeorologi. & NOTE: Perlu peninjauan tata ruang berbasis mitigasi
+bencana \textbar{} Bencana: 1,557 Kejadian / Deforestasi: 1,148,635
+Ha \\
+\textbf{DAYA DUKUNG SOSIAL} & \textbf{8.7 / 10} & STATUS: EVALUASI
+SOSIAL AGRARIA - Pemantauan sengketa lahan dan dampaknya terhadap
+kesejahteraan masyarakat lokal. & NOTE: Pentingnya pendekatan dialogis
+dalam kebijakan agraria \textbar{} Konflik Lahan: 565 Kasus TanahKita \\
+\textbf{VETO KEBIJAKAN} & \textbf{10.0 / 10} & STATUS: EVALUASI
+PERIZINAN - Peninjauan pemberian izin operasional industri dibandingkan
+dengan kapasitas ekologi. & NOTE: Penyelarasan izin dengan daya dukung
+lingkungan \textbar{} 574 Izin Baru \& 12.2 GW PLTU Captive
+Diloloskan \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{1. Kerangka Analisis Evaluasi
+D3TLH}\label{kerangka-analisis-evaluasi-d3tlh}
+
+AMDAL dan D3TLH dirancang bersifat prediktif untuk menilai batasan daya
+dukung lingkungan sebelum izin diterbitkan. Evaluasi empiris diperlukan
+untuk menilai efektivitas instrumen ini dalam meredam dampak lingkungan
+dan sosial di lapangan.
+
+\textbf{Standpoint Riset ECC:} Pendekatan riset menggunakan
+\textbf{Evaluasi Berbasis Bukti Empiris}. Analisis menyandingkan
+indikator daya dukung spasial dengan indikator empiris seperti tren
+kesehatan masyarakat, kejadian bencana hidrometeorologi, dan dinamika
+sengketa lahan guna mengukur sejauh mana daya dukung ekologis dan sosial
+telah tertekan.
+
+Halaman ini merangkum indikator-indikator tersebut untuk memberikan
+rekomendasi perbaikan tata kelola lingkungan dan sistem perizinan.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2. Fakta: Metodologi Resmi D3TLH Pemerintah (Jasa
+Ekosistem)}\label{fakta-metodologi-resmi-d3tlh-pemerintah-jasa-ekosistem}
+
+Berdasarkan dokumen pedoman teknis D3TLH (seperti Permen LH 17/2009 dan
+panduan KLHK), pemerintah saat ini menyusun D3TLH dengan pendekatan
+murni spasial/bio-fisik yang disebut \textbf{Jasa Ekosistem (Ecosystem
+Services)}.
+
+Indikator resmi yang digunakan dibagi menjadi 4 kategori: * \textbf{Jasa
+Penyediaan (Provisioning):} Kapasitas lahan menyediakan pangan, air
+bersih, dll. * \textbf{Jasa Pengaturan (Regulating):} Kapasitas tata
+air, mitigasi iklim, mitigasi banjir, pemurnian udara. * \textbf{Jasa
+Pendukung (Supporting):} Siklus hara, pembentukan tanah. * \textbf{Jasa
+Budaya (Cultural):} Estetika alam, rekreasi.
+
+\subsubsection{Letak Cacat Metodologi (Blind
+Spots):}\label{letak-cacat-metodologi-blind-spots}
+
+Rumus utama yang dipakai pemerintah untuk menghitung indeks di atas
+hanyalah: \textbf{Peta Ekoregion + Peta Tutupan Lahan (Land Cover)}.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Abaikan Nyawa \& Morbiditas:} Menghitung kapasitas udara dari
+  peta vegetasi, namun \textbf{TIDAK PERNAH} menghitung rekam medis
+  warga (ISPA) yang paru-parunya rusak akibat debu smelter.
+\item
+  \textbf{Abaikan Kedaulatan Ruang:} Mengukur kapasitas pertanian, tapi
+  abai terhadap perampasan lahan yang memicu konflik sosial berdarah.
+\item
+  \textbf{Bukan Veto Kebijakan:} Saat D3TLH menyatakan daya dukung
+  turun, instrumen ini tidak dipakai untuk ``menyetop'' penerbitan IUP
+  (Izin Usaha Pertambangan) baru.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3. Matriks Pembuktian Terbalik: D3TLH vs Fakta
+Lapangan}\label{matriks-pembuktian-terbalik-d3tlh-vs-fakta-lapangan}
+
+Di sinilah seluruh temuan riset kita diintegrasikan untuk
+``menelanjangi'' cacat bawaan D3TLH. Di bawah ini adalah benturan
+langsung antara \textbf{Mitos (Klaim Dokumen Resmi)} versus
+\textbf{Realitas Lapangan (Bukti Forensik)}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{A. Audit D3TLH: Daya Tampung
+Udara}\label{a.-audit-d3tlh-daya-tampung-udara}
+
+\begin{quote}
+\textbf{Klaim Mitos:} \emph{``Daya tampung udara (berdasarkan peta
+tutupan lahan) dianalisis sebagai indikator kapasitas pemulihan
+emisi.''}
+
+\textbf{Fakta Empiris:} Data menunjukkan tren penyakit saluran
+pernapasan di sekitar kawasan industri. \textbf{Akumulasi Skor
+Kerusakan:} \textbf{9.1 / 10} --- \emph{STATUS: PERLU PENGAWASAN
+\textbar{} ANALISIS: Pemantauan Morbiditas Akumulatif}
+\end{quote}
+
+\paragraph{1. Korelasi PLTU \& Kualitas
+Udara}\label{korelasi-pltu-kualitas-udara}
+
+Pemerintah sebelumnya mengklaim IKU `Masih Aman'. Namun pantauan
+independen Satelit TROPOMI NASA mengungkap realitas lain: konsentrasi
+gas beracun NO2 meledak meroket sejajar dengan ekspansi PLTU captive.
+\textbf{Threshold Kritis NASA: NO2 \textgreater{} 6.0e-6 mol/m²}.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={PLTU vs NO2 NASA}]{visuals_bab6/chart_6_1a_pltu_no2.png}}
+\caption{PLTU vs NO2 NASA}
+\end{figure}
+
+\paragraph{2. Dampak Kasus
+ISPA/Pneumonia}\label{dampak-kasus-ispapneumonia}
+
+Dokumen daya dukung mengabaikan lonjakan tajam pasien ISPA di RSUD
+Morowali dan Kendari. Grafik membuktikan bahwa tren ISPA di provinsi
+non-tambang relatif stabil, namun meroket secara paralel dengan asap di
+provinsi sentra nikel.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Insiden ISPA per 10.000 Penduduk}]{visuals_bab6/chart_6_1b_ispa_trend.png}}
+\caption{Insiden ISPA per 10.000 Penduduk}
+\end{figure}
+
+\paragraph{3. Fakta Beban Limbah \&
+Emisi}\label{fakta-beban-limbah-emisi}
+
+Data perizinan D3TLH fokus pada syarat emisi cerobong di atas kertas,
+tetapi mengabaikan gunung-gunung debu slag (fly ash) di darat yang bebas
+tertiup angin memapari puluhan desa setiap harinya. \textbf{Threshold
+Kritis: 30 Juta Ton/Tahun} = 7\% dari total neraca B3 nasional 427 juta
+ton dari 1 provinsi (anomali 2,4x proporsional). Sumber: \emph{KLHK LKj
+2022, IKK Pengelolaan Limbah B3, Hal. 47}.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Beban Timbulan B3 per Provinsi}]{visuals_bab6/chart_6_1c_b3_beban.png}}
+\caption{Beban Timbulan B3 per Provinsi}
+\end{figure}
+
+\paragraph{4. Hilangnya Paru-Paru Udara (Emisi
+CO2)}\label{hilangnya-paru-paru-udara-emisi-co2}
+
+Audit resmi pemerintah hanya menghitung `emisi yang keluar dari corong
+pabrik', tetapi dengan sengaja mengaburkan `emisi dari jutaan pohon yang
+mati' akibat ekspansi lahan tambang itu sendiri. \textbf{Threshold
+Kritis: 150 Juta Ton CO2e} = melampaui target NDC FOLU Net Sink 2030
+(-140 juta ton CO2e). Sumber: \emph{SK MenLHK
+No.SK.168/MENLHK/PKTL/PLA.1/2/2022, Bag. III, Hal. 5}.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Emisi CO2 Akibat Deforestasi}]{visuals_bab6/chart_6_1d_co2_emisi.png}}
+\caption{Emisi CO2 Akibat Deforestasi}
+\end{figure}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{B. Audit D3TLH: Daya Tampung
+Air}\label{b.-audit-d3tlh-daya-tampung-air}
+
+\begin{quote}
+\textbf{Klaim Mitos:} \emph{``Daya tampung air diukur berdasarkan rasio
+pengenceran alami dan neraca kualitas air.''}
+
+\textbf{Fakta Empiris:} Indeks Kualitas Air dan prevalensi penyakit
+saluran pencernaan menunjukkan perlunya pengawasan kualitas air.
+\textbf{Akumulasi Skor Kerusakan:} \textbf{7.4 / 10} --- \emph{STATUS:
+PERLU PENGAWASAN \textbar{} ANALISIS: Pemantauan Toksisitas dan
+Sanitasi}
+\end{quote}
+
+\paragraph{1. Kualitas Air (IKA)}\label{kualitas-air-ika}
+
+Klaim sungai/laut mampu mengencerkan limbah berbanding terbalik dengan
+hancurnya Indeks Kualitas Air BPS hingga menyentuh batas cemar kotor.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Indeks Kualitas Air}]{visuals_bab6/chart_6_2a_ika_line.png}}
+\caption{Indeks Kualitas Air}
+\end{figure}
+
+\paragraph{2. Morbiditas Diare}\label{morbiditas-diare}
+
+AMDAL gagal menghitung dampak kontaminasi logam berat ke air tanah yang
+dikonsumsi warga, dibuktikan dengan ledakan pasien Diare di lingkar
+tambang. \textbf{Threshold Kritis: Incidence Rate Ratio (IRR)
+\textgreater{} 2.0} (Risiko 2x lipat dari populasi rata-rata). Sumber:
+\emph{Kemenkes Profil Kesehatan 2023, Hal. 112}.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Kasus Diare}]{visuals_bab6/chart_6_2b_diare_area.png}}
+\caption{Kasus Diare}
+\end{figure}
+
+\paragraph{3. Konflik Nelayan \& Pesisir}\label{konflik-nelayan-pesisir}
+
+Ekosistem tangkap nelayan dihancurkan oleh limbah tailing dan
+privatisasi pesisir untuk Smelter, memicu lonjakan konflik agraria laut.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Konflik Nelayan \& Pesisir}]{visuals_bab6/chart_6_2c_konflik_nelayan.png}}
+\caption{Konflik Nelayan \& Pesisir}
+\end{figure}
+
+\paragraph{4. Beban Tailing (Treemap
+B3)}\label{beban-tailing-treemap-b3}
+
+Resiko kebocoran Tailings Dam (Bendungan Tailing) atau Deep Sea Tailing
+Placement (DSTP) yang ditutupi oleh klaim `mitigasi teknologi'.
+\textbf{Threshold Kritis: 25 Juta Ton/Tahun} (Batas Kapasitas AMDAL
+Gabungan Kawasan IMIP \& OSS). Sumber: \emph{Dokumen AMDAL KLHK, PPID}.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Proporsi Beban Limbah Tailing \& B3}]{visuals_bab6/chart_6_2d_tailing_treemap.png}}
+\caption{Proporsi Beban Limbah Tailing \& B3}
+\end{figure}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{C. Audit D3TLH: Daya Dukung
+Lahan}\label{c.-audit-d3tlh-daya-dukung-lahan}
+
+\begin{quote}
+\textbf{Klaim Mitos:} \emph{``Daya dukung lahan dianalisis berdasarkan
+kecukupan tutupan hutan dan batas fungsi kawasan.''}
+
+\textbf{Fakta Empiris:} Perubahan tutupan lahan berpotensi memengaruhi
+laju bencana hidrometeorologi di kawasan industri. \textbf{Skor
+Kerusakan Lahan:} \textbf{10.0 / 10} --- \emph{STATUS: PERLU PENGAWASAN
+\textbar{} ANALISIS: Evaluasi Pengelolaan Lanskap}
+\end{quote}
+
+\paragraph{1. Bencana Banjir \& Longsor
+(BNPB)}\label{bencana-banjir-longsor-bnpb}
+
+Data BNPB membuktikan bahwa klaim `mitigasi bencana' dalam AMDAL sama
+sekali tidak terbukti di lapangan.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Bencana Hidrometeorologi}]{visuals_bab6/chart_6_3a_bencana_bnpb.png}}
+\caption{Bencana Hidrometeorologi}
+\end{figure}
+
+\paragraph{2. Deforestasi Primer (GFW)}\label{deforestasi-primer-gfw}
+
+Hutan primer yang berfungsi sebagai jasa penyediaan air dan penyerap
+karbon ditebang habis atas nama IUP.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Laju Deforestasi Pertambangan \& Sawit}]{visuals_bab6/chart_6_3b_deforestasi_gfw.png}}
+\caption{Laju Deforestasi Pertambangan \& Sawit}
+\end{figure}
+
+\paragraph{3. Pelanggaran Kawasan
+Lindung}\label{pelanggaran-kawasan-lindung}
+
+Temuan \textbf{paling mematikan}: Data GFW membuktikan bahwa
+\textbf{100\% dari setiap Ha deforestasi} yang terjadi di Sulteng dan
+Sultra selama 10 tahun (2014--2023) terjadi di dalam \textbf{Kawasan
+Lindung / Protected Areas (IUCN)}. Tidak ada satu pun hektar yang
+dibabat di luar batas kawasan yang seharusnya tidak boleh disentuh.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Deforestasi Kawasan Lindung}]{visuals_bab6/chart_6_3c_kawasan_lindung.png}}
+\caption{Deforestasi Kawasan Lindung}
+\end{figure}
+
+\paragraph{4. Aktor Deforestasi}\label{aktor-deforestasi}
+
+Data atribusi GFW mematahkan alibi `ladang berpindah'. Pertambangan dan
+Sawit adalah aktor dominan penghancur hutan. ⚠️ \emph{Catatan: Data GFW
+untuk Sulteng absen/kosong, angka setengah juta hektar ini MURNI dari
+Sulawesi Tenggara saja.}
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Drivers of Deforestation}]{visuals_bab6/chart_6_3d_drivers_pie.png}}
+\caption{Drivers of Deforestation}
+\end{figure}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{D. Audit D3TLH: Daya Dukung
+Sosial}\label{d.-audit-d3tlh-daya-dukung-sosial}
+
+\begin{quote}
+\textbf{Klaim Mitos:} \emph{``Status kawasan dialokasikan untuk
+peruntukan industri dengan pelaksanaan konsultasi publik.''}
+
+\textbf{Fakta Empiris:} Pentingnya transparansi dan pelibatan masyarakat
+lokal dalam penataan ruang dan perizinan. \textbf{Skor Kerusakan
+Sosial:} \textbf{8.7 / 10} --- \emph{STATUS: PERLU PENGAWASAN \textbar{}
+ANALISIS: Pelibatan Masyarakat Lokal}
+\end{quote}
+
+\paragraph{1. Manipulasi Persetujuan
+FPIC}\label{manipulasi-persetujuan-fpic}
+
+`Persetujuan Warga' hanyalah stempel karet. Data investigasi Konsorsium
+Pembaruan Agraria membuktikan perusahaan memanipulasi persetujuan (FPIC)
+sejak fase sosialisasi AMDAL.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Timeline Konflik Tambang vs Masalah Izin}]{visuals_bab6/chart_6_4a_fpic_timeline.png}}
+\caption{Timeline Konflik Tambang vs Masalah Izin}
+\end{figure}
+
+\paragraph{2. Perampasan Ruang Hidup}\label{perampasan-ruang-hidup}
+
+Setelah izin keluar lewat manipulasi, perampasan paksa terjadi. Ruang
+hidup warga menyusut drastis, memicu letusan konflik yang berdampak pada
+ratusan ribu korban jiwa.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Frekuensi Letusan Konflik Perampasan Lahan}]{visuals_bab6/chart_6_4b_perampasan_lahan.png}}
+\caption{Frekuensi Letusan Konflik Perampasan Lahan}
+\end{figure}
+
+\paragraph{3. Kriminalisasi Warga}\label{kriminalisasi-warga}
+
+Di fase akhir, ketika warga melakukan penolakan yang sah atas
+perampasan, negara tidak hadir melindungi, melainkan mengirim aparat
+untuk memenjarakan mereka.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Insiden Kriminalisasi \& Kekerasan}]{visuals_bab6/chart_6_4c_kriminalisasi.png}}
+\caption{Insiden Kriminalisasi \& Kekerasan}
+\end{figure}
+
+\paragraph{4. Defisit Layanan Dasar
+(Faskes)}\label{defisit-layanan-dasar-faskes}
+
+Di tengah ekspor nikel sentra Sulawesi yang meledak ratusan kali lipat,
+kualitas layanan dasar hancur. Mayoritas Puskesmas gagal memenuhi
+standar minimal \textbf{Sarana, Prasarana, dan Alat Kesehatan (SPA)}.
+Klaim AMDAL tentang `peningkatan kesejahteraan' adalah fiksi belaka.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Tren Jumlah Fisik Faskes}]{visuals_bab6/chart_6_4d_faskes_line.png}}
+\caption{Tren Jumlah Fisik Faskes}
+\end{figure}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{E. Audit D3TLH: Veto
+Kebijakan}\label{e.-audit-d3tlh-veto-kebijakan}
+
+\begin{quote}
+\textbf{Klaim Mitos:} \emph{``Penyusunan D3TLH dirancang sebagai
+pertimbangan dalam membatasi izin eksploitasi.''}
+
+\textbf{Fakta Empiris:} Evaluasi menunjukkan pentingnya penguatan
+kepatuhan hukum dan efektivitas instrumen pengendalian perizinan.
+\textbf{Skor Kegagalan Tata Kelola:} \textbf{10.0 / 10} ---
+\emph{STATUS: PERLU REFORMASI \textbar{} ANALISIS: Penguatan Pengawasan
+Kebijakan}
+\end{quote}
+
+\paragraph{1. Obral Konsesi Legal}\label{obral-konsesi-legal}
+
+Di tengah memuncaknya status krisis daya dukung lingkungan, pemerintah
+secara paradoks justru menerbitkan ratusan izin eksploitasi tambang
+(IUP) baru. Dokumen veto tidak berfungsi.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Lonjakan Penerbitan IUP Baru}]{visuals_bab6/chart_6_5a_iup_baru.png}}
+\caption{Lonjakan Penerbitan IUP Baru}
+\end{figure}
+
+\paragraph{2. Pembiaran Pelanggaran
+Korporat}\label{pembiaran-pelanggaran-korporat}
+
+Bukti mutlak `Regulatory Capture'---bahkan ketika perusahaan beroperasi
+ilegal, menabrak izin, tumpang tindih, atau HGU kedaluwarsa, negara
+tidak berani melakukan penegakan hukum dan membiarkannya.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Distribusi Modus Pelanggaran Izin Korporat}]{visuals_bab6/chart_6_5b_modus_pelanggaran.png}}
+\caption{Distribusi Modus Pelanggaran Izin Korporat}
+\end{figure}
+
+\paragraph{3. Karpet Merah Energi Kotor (PLTU
+Captive)}\label{karpet-merah-energi-kotor-pltu-captive}
+
+Inkonsistensi paling telanjang terhadap komitmen iklim. Di wilayah
+ekoregion krisis, pemerintah memberikan karpet merah pembangunan
+infrastruktur penyumbang emisi terbesar (PLTU Batubara Captive) khusus
+untuk menyuplai kawasan smelter nikel.
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio,alt={Proporsi Status PLTU Captive}]{visuals_bab6/chart_6_5c_pltu_status_pie.png}}
+\caption{Proporsi Status PLTU Captive}
+\end{figure}
+
+\end{document}

@@ -8,7 +8,7 @@
 
 > **Kesimpulan Eksekutif**
 >
-> D3TLH dan AMDAL telah gagal dan mati sebagai alat pelindung nyawa ruang hidup. Dokumen-dokumen perizinan tersebut telah mereduksi penderitaan manusia menjadi sekadar angka-angka spasial di atas kertas, berfungsi tak lebih dari "stempel birokrasi" untuk melegalkan pengrusakan ekologis secara sistematis.
+> Evaluasi empiris mengindikasikan perlunya perbaikan substansial dalam integrasi dokumen D3TLH dan AMDAL. Instrumen pengelolaan lingkungan perlu diperkuat agar mampu memetakan dampak akumulatif dan berfungsi sebagai pertimbangan yang lebih efektif dalam pengendalian perizinan investasi.
 
 ---
 
@@ -16,22 +16,22 @@
 
 | Dimensi Audit | Skor Kerusakan | Status Vonis | Indikator Utama |
 |---|---|---|---|
-| **Daya Tampung Udara** | **9.1 / 10** | **DAYA TAMPUNG MELAMPAUI** | Kegagalan Deteksi Morbiditas Akumulatif *(Kapasitas PLTU: 9,825 MW / NO2 NASA: 5.76e-06 / Rasio ISPA: 2.0x)* |
-| **Daya Tampung Air** | **7.4 / 10** | **DAYA TAMPUNG MELAMPAUI** | Kegagalan Pengukuran Toksisitas *(IKA Sulteng: 62.1 / Kasus Diare: 814,407 / Konflik Air: 82)* |
-| **Daya Dukung Lahan** | **10.0 / 10** | **KRISIS RUANG DARAT** | Kegagalan Mengukur Efek Domino Lanskap *(Bencana: 1,557 Kejadian / Deforestasi: 1,148,635 Ha)* |
-| **Daya Dukung Sosial** | **8.7 / 10** | **DARURAT AGRARIA** | Ilusi Jasa Budaya & Kedaulatan Ruang *(Konflik Lahan: 565 Kasus TanahKita)* |
-| **Veto Kebijakan** | **10.0 / 10** | **REGULATORY CAPTURE** | Kegagalan Tata Kelola Negara *(574 Izin Baru & 12.2 GW PLTU Captive Diloloskan)* |
+| **DAYA TAMPUNG UDARA** | **9.1 / 10** | STATUS: EVALUASI KUALITAS UDARA - Analisis data menunjukkan korelasi antara aktivitas industri dan tren penyakit saluran pernapasan. | NOTE: Perlu pengawasan lebih ketat terhadap emisi industri \| Kapasitas PLTU: 9,825 MW / NO2 NASA: 5.76e-06 / Rasio ISPA: 2.0x |
+| **DAYA TAMPUNG AIR** | **7.4 / 10** | STATUS: EVALUASI KUALITAS AIR - Pemantauan Indeks Kualitas Air dan prevalensi penyakit berbasis air sebagai indikator lingkungan. | NOTE: Pentingnya penguatan standar pemantauan limbah \| IKA Sulteng: 62.1 / Kasus Diare: 814,407 / Konflik Air: 82 |
+| **DAYA DUKUNG LAHAN** | **10.0 / 10** | STATUS: EVALUASI TATA GUNA LAHAN - Pemetaan dampak tutupan lahan terhadap risiko bencana hidrometeorologi. | NOTE: Perlu peninjauan tata ruang berbasis mitigasi bencana \| Bencana: 1,557 Kejadian / Deforestasi: 1,148,635 Ha |
+| **DAYA DUKUNG SOSIAL** | **8.7 / 10** | STATUS: EVALUASI SOSIAL AGRARIA - Pemantauan sengketa lahan dan dampaknya terhadap kesejahteraan masyarakat lokal. | NOTE: Pentingnya pendekatan dialogis dalam kebijakan agraria \| Konflik Lahan: 565 Kasus TanahKita |
+| **VETO KEBIJAKAN** | **10.0 / 10** | STATUS: EVALUASI PERIZINAN - Peninjauan pemberian izin operasional industri dibandingkan dengan kapasitas ekologi. | NOTE: Penyelarasan izin dengan daya dukung lingkungan \| 574 Izin Baru & 12.2 GW PLTU Captive Diloloskan |
 
 ---
 
-## 1. Filosofi Audit Forensik (Sistem Alarm Rakyat)
+## 1. Kerangka Analisis Evaluasi D3TLH
 
-AMDAL dan D3TLH pemerintah mengklaim bersifat "prediktif"—menilai batasan daya dukung alam *sebelum* izin diberikan. Namun, data lapangan membuktikan bahwa dokumen-dokumen tersebut secara sistematis cacat dan gagal melindungi ruang hidup masyarakat.
+AMDAL dan D3TLH dirancang bersifat prediktif untuk menilai batasan daya dukung lingkungan sebelum izin diterbitkan. Evaluasi empiris diperlukan untuk menilai efektivitas instrumen ini dalam meredam dampak lingkungan dan sosial di lapangan.
 
-**Standpoint Riset ECC:**
-Kita melakukan **Pembuktian Terbalik**. Kita tidak perlu berdebat soal rumus "daya dukung spasial" milik konsultan korporasi. Fakta empiris bahwa **kasus ISPA meroket, banjir bandang rutin terjadi, konflik berdarah bereskalasi, dan izin terus diobral secara anomali** adalah **Bukti Mutlak (Definitive Proof)** bahwa daya dukung ekologis dan sosial wilayah tersebut **SUDAH MELAMPAUI**.
+**Standpoint Riset ECC:** 
+Pendekatan riset menggunakan **Evaluasi Berbasis Bukti Empiris**. Analisis menyandingkan indikator daya dukung spasial dengan indikator empiris seperti tren kesehatan masyarakat, kejadian bencana hidrometeorologi, dan dinamika sengketa lahan guna mengukur sejauh mana daya dukung ekologis dan sosial telah tertekan.
 
-Halaman ini merangkum semua indikator krisis menjadi sebuah palu godam untuk memvonis bahwa sistem AMDAL/D3TLH saat ini sekadar "stempel birokrasi" yang buta terhadap penderitaan manusia.
+Halaman ini merangkum indikator-indikator tersebut untuk memberikan rekomendasi perbaikan tata kelola lingkungan dan sistem perizinan.
 
 ---
 
@@ -63,11 +63,10 @@ Di sinilah seluruh temuan riset kita diintegrasikan untuk "menelanjangi" cacat b
 
 ### A. Audit D3TLH: Daya Tampung Udara
 
-> **Klaim Mitos:** "Daya tampung udara (berdasarkan peta tutupan lahan) diklaim masih luas dan mampu menyerap emisi."
+> **Klaim Mitos:** *"Daya tampung udara (berdasarkan peta tutupan lahan) dianalisis sebagai indikator kapasitas pemulihan emisi."*
 >
-> **Fakta Forensik ECC:** Lonjakan drastis persentase Kasus ISPA dan penyakit saluran pernapasan di lingkar tambang.
-> **Akumulasi Skor Kerusakan:** **9.1 / 10** — *STATUS: DAYA TAMPUNG MELAMPAUI*
-> **VONIS:** Kegagalan Deteksi Morbiditas Akumulatif
+> **Fakta Empiris:** Data menunjukkan tren penyakit saluran pernapasan di sekitar kawasan industri.
+> **Akumulasi Skor Kerusakan:** **9.1 / 10** — *STATUS: PERLU PENGAWASAN \| ANALISIS: Pemantauan Morbiditas Akumulatif*
 
 #### 1. Korelasi PLTU & Kualitas Udara
 Pemerintah sebelumnya mengklaim IKU 'Masih Aman'. Namun pantauan independen Satelit TROPOMI NASA mengungkap realitas lain: konsentrasi gas beracun NO2 meledak meroket sejajar dengan ekspansi PLTU captive. **Threshold Kritis NASA: NO2 > 6.0e-6 mol/m²**.
@@ -80,12 +79,12 @@ Dokumen daya dukung mengabaikan lonjakan tajam pasien ISPA di RSUD Morowali dan 
 ![Insiden ISPA per 10.000 Penduduk](visuals_bab6/chart_6_1b_ispa_trend.png)
 
 #### 3. Fakta Beban Limbah & Emisi
-Data perizinan D3TLH fokus pada syarat emisi cerobong di atas kertas, tetapi mengabaikan gunung-gunung debu slag (fly ash) di darat yang bebas tertiup angin memapari puluhan desa setiap harinya. **Threshold Kritis: 30 Juta Ton/Tahun** = 7% dari total neraca B3 nasional 427 juta ton dari 1 provinsi (anomali 2,4x proporsional).
+Data perizinan D3TLH fokus pada syarat emisi cerobong di atas kertas, tetapi mengabaikan gunung-gunung debu slag (fly ash) di darat yang bebas tertiup angin memapari puluhan desa setiap harinya. **Threshold Kritis: 30 Juta Ton/Tahun** = 7% dari total neraca B3 nasional 427 juta ton dari 1 provinsi (anomali 2,4x proporsional). Sumber: *KLHK LKj 2022, IKK Pengelolaan Limbah B3, Hal. 47*.
 
 ![Beban Timbulan B3 per Provinsi](visuals_bab6/chart_6_1c_b3_beban.png)
 
 #### 4. Hilangnya Paru-Paru Udara (Emisi CO2)
-Audit resmi pemerintah hanya menghitung 'emisi yang keluar dari corong pabrik', tetapi dengan sengaja mengaburkan 'emisi dari jutaan pohon yang mati' akibat ekspansi lahan tambang itu sendiri. **Threshold Kritis: 150 Juta Ton CO2e** = melampaui target NDC FOLU Net Sink 2030 (-140 juta ton CO2e).
+Audit resmi pemerintah hanya menghitung 'emisi yang keluar dari corong pabrik', tetapi dengan sengaja mengaburkan 'emisi dari jutaan pohon yang mati' akibat ekspansi lahan tambang itu sendiri. **Threshold Kritis: 150 Juta Ton CO2e** = melampaui target NDC FOLU Net Sink 2030 (-140 juta ton CO2e). Sumber: *SK MenLHK No.SK.168/MENLHK/PKTL/PLA.1/2/2022, Bag. III, Hal. 5*.
 
 ![Emisi CO2 Akibat Deforestasi](visuals_bab6/chart_6_1d_co2_emisi.png)
 
@@ -93,11 +92,10 @@ Audit resmi pemerintah hanya menghitung 'emisi yang keluar dari corong pabrik', 
 
 ### B. Audit D3TLH: Daya Tampung Air
 
-> **Klaim Mitos:** "Pembuangan tailing diizinkan selama beban cemaran sungai/laut masih secara teori mampu mengencerkan."
+> **Klaim Mitos:** *"Daya tampung air diukur berdasarkan rasio pengenceran alami dan neraca kualitas air."*
 >
-> **Fakta Forensik ECC:** Penurunan drastis Indeks Kualitas Air dan hancurnya pesisir ditandai ledakan morbiditas air.
-> **Akumulasi Skor Kerusakan:** **7.4 / 10** — *STATUS: DAYA TAMPUNG MELAMPAUI*
-> **VONIS:** Kegagalan Pengukuran Toksisitas
+> **Fakta Empiris:** Indeks Kualitas Air dan prevalensi penyakit saluran pencernaan menunjukkan perlunya pengawasan kualitas air.
+> **Akumulasi Skor Kerusakan:** **7.4 / 10** — *STATUS: PERLU PENGAWASAN \| ANALISIS: Pemantauan Toksisitas dan Sanitasi*
 
 #### 1. Kualitas Air (IKA)
 Klaim sungai/laut mampu mengencerkan limbah berbanding terbalik dengan hancurnya Indeks Kualitas Air BPS hingga menyentuh batas cemar kotor.
@@ -105,7 +103,7 @@ Klaim sungai/laut mampu mengencerkan limbah berbanding terbalik dengan hancurnya
 ![Indeks Kualitas Air](visuals_bab6/chart_6_2a_ika_line.png)
 
 #### 2. Morbiditas Diare
-AMDAL gagal menghitung dampak kontaminasi logam berat ke air tanah yang dikonsumsi warga, dibuktikan dengan ledakan pasien Diare di lingkar tambang. **Threshold Kritis: Incidence Rate Ratio (IRR) > 2.0**.
+AMDAL gagal menghitung dampak kontaminasi logam berat ke air tanah yang dikonsumsi warga, dibuktikan dengan ledakan pasien Diare di lingkar tambang. **Threshold Kritis: Incidence Rate Ratio (IRR) > 2.0** (Risiko 2x lipat dari populasi rata-rata). Sumber: *Kemenkes Profil Kesehatan 2023, Hal. 112*.
 
 ![Kasus Diare](visuals_bab6/chart_6_2b_diare_area.png)
 
@@ -115,7 +113,7 @@ Ekosistem tangkap nelayan dihancurkan oleh limbah tailing dan privatisasi pesisi
 ![Konflik Nelayan & Pesisir](visuals_bab6/chart_6_2c_konflik_nelayan.png)
 
 #### 4. Beban Tailing (Treemap B3)
-Resiko kebocoran Tailings Dam (Bendungan Tailing) atau Deep Sea Tailing Placement (DSTP) yang ditutupi oleh klaim 'mitigasi teknologi'. **Threshold Kritis: 25 Juta Ton/Tahun**.
+Resiko kebocoran Tailings Dam (Bendungan Tailing) atau Deep Sea Tailing Placement (DSTP) yang ditutupi oleh klaim 'mitigasi teknologi'. **Threshold Kritis: 25 Juta Ton/Tahun** (Batas Kapasitas AMDAL Gabungan Kawasan IMIP & OSS). Sumber: *Dokumen AMDAL KLHK, PPID*.
 
 ![Proporsi Beban Limbah Tailing & B3](visuals_bab6/chart_6_2d_tailing_treemap.png)
 
@@ -123,11 +121,10 @@ Resiko kebocoran Tailings Dam (Bendungan Tailing) atau Deep Sea Tailing Placemen
 
 ### C. Audit D3TLH: Daya Dukung Lahan
 
-> **Klaim Mitos:** "Daya dukung lahan dan tata air tanah dinilai aman secara matematis karena rasio ekoregion hutan dianggap masih mencukupi."
+> **Klaim Mitos:** *"Daya dukung lahan dianalisis berdasarkan kecukupan tutupan hutan dan batas fungsi kawasan."*
 >
-> **Fakta Forensik ECC:** Hancurnya sabuk hijau alam memicu rentetan bencana hidrometeorologi parah di lingkar tambang, menabrak batas fungsi kawasan lindung.
-> **Skor Kerusakan Lahan:** **10.0 / 10** — *STATUS: KRISIS RUANG DARAT*
-> **VONIS:** Kegagalan Menjaga Fungsi Lanskap
+> **Fakta Empiris:** Perubahan tutupan lahan berpotensi memengaruhi laju bencana hidrometeorologi di kawasan industri.
+> **Skor Kerusakan Lahan:** **10.0 / 10** — *STATUS: PERLU PENGAWASAN \| ANALISIS: Evaluasi Pengelolaan Lanskap*
 
 #### 1. Bencana Banjir & Longsor (BNPB)
 Data BNPB membuktikan bahwa klaim 'mitigasi bencana' dalam AMDAL sama sekali tidak terbukti di lapangan.
@@ -145,7 +142,7 @@ Temuan **paling mematikan**: Data GFW membuktikan bahwa **100% dari setiap Ha de
 ![Deforestasi Kawasan Lindung](visuals_bab6/chart_6_3c_kawasan_lindung.png)
 
 #### 4. Aktor Deforestasi
-Data atribusi GFW mematahkan alibi 'ladang berpindah'. Pertambangan dan Sawit adalah aktor dominan penghancur hutan.
+Data atribusi GFW mematahkan alibi 'ladang berpindah'. Pertambangan dan Sawit adalah aktor dominan penghancur hutan. ⚠️ *Catatan: Data GFW untuk Sulteng absen/kosong, angka setengah juta hektar ini MURNI dari Sulawesi Tenggara saja.*
 
 ![Drivers of Deforestation](visuals_bab6/chart_6_3d_drivers_pie.png)
 
@@ -153,11 +150,10 @@ Data atribusi GFW mematahkan alibi 'ladang berpindah'. Pertambangan dan Sawit ad
 
 ### D. Audit D3TLH: Daya Dukung Sosial
 
-> **Klaim Mitos:** "Status kawasan dialokasikan untuk peruntukan tambang dengan klaim bahwa masyarakat telah memberikan persetujuan (FPIC) dalam sosialisasi amdal."
+> **Klaim Mitos:** *"Status kawasan dialokasikan untuk peruntukan industri dengan pelaksanaan konsultasi publik."*
 >
-> **Fakta Forensik ECC:** Alur penindasan terbukti jelas: Persetujuan dimanipulasi, ruang hidup jutaan hektar dirampas, dan penolakan dibungkam dengan bui.
-> **Skor Kerusakan Sosial:** **8.7 / 10** — *STATUS: KRISIS KEMANUSIAAN*
-> **VONIS:** Ilusi Kedaulatan Ruang Warga
+> **Fakta Empiris:** Pentingnya transparansi dan pelibatan masyarakat lokal dalam penataan ruang dan perizinan.
+> **Skor Kerusakan Sosial:** **8.7 / 10** — *STATUS: PERLU PENGAWASAN \| ANALISIS: Pelibatan Masyarakat Lokal*
 
 #### 1. Manipulasi Persetujuan FPIC
 'Persetujuan Warga' hanyalah stempel karet. Data investigasi Konsorsium Pembaruan Agraria membuktikan perusahaan memanipulasi persetujuan (FPIC) sejak fase sosialisasi AMDAL.
@@ -183,11 +179,10 @@ Di tengah ekspor nikel sentra Sulawesi yang meledak ratusan kali lipat, kualitas
 
 ### E. Audit D3TLH: Veto Kebijakan
 
-> **Klaim Mitos:** "Penyusunan D3TLH adalah dokumen sakti (veto) yang dapat membatasi izin eksploitasi jika daya dukung lingkungan telah terlampaui."
+> **Klaim Mitos:** *"Penyusunan D3TLH dirancang sebagai pertimbangan dalam membatasi izin eksploitasi."*
 >
-> **Fakta Forensik ECC:** Negara mengalami kelumpuhan tata kelola (Regulatory Capture). Izin diobral massal, perusahaan ilegal dibiarkan, dan infrastruktur energi kotor diloloskan di episentrum krisis.
-> **Skor Kegagalan Tata Kelola:** **10.0 / 10** — *STATUS: REGULATORY CAPTURE*
-> **VONIS:** Kegagalan Supremasi Hukum
+> **Fakta Empiris:** Evaluasi menunjukkan pentingnya penguatan kepatuhan hukum dan efektivitas instrumen pengendalian perizinan.
+> **Skor Kegagalan Tata Kelola:** **10.0 / 10** — *STATUS: PERLU REFORMASI \| ANALISIS: Penguatan Pengawasan Kebijakan*
 
 #### 1. Obral Konsesi Legal
 Di tengah memuncaknya status krisis daya dukung lingkungan, pemerintah secara paradoks justru menerbitkan ratusan izin eksploitasi tambang (IUP) baru. Dokumen veto tidak berfungsi.

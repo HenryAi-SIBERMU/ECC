@@ -110,7 +110,7 @@ st.markdown("""
 def load_all_page3():
     d = {}
     d['kes'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_kesehatan_detail_2014_2024.csv"))
-    d['faskes'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_faskes_agregat_v2.csv"))
+    d['faskes'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_faskes_agregat_v3.csv"))
     d['ika'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv"))
     d['b3'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_limbah_b3.csv"))
     zoo_path = os.path.join(DATA_DIR, "zoonosis_kab_kota_2015_2024.csv")
@@ -1693,9 +1693,9 @@ with st.expander("3 · BEBAN KESEHATAN", expanded=False):
     tot_diare = df_kes[df_kes["indikator"] == "Kasus Diare Dilayani"]["nilai"].sum()
     tot_malaria = df_kes[df_kes["indikator"] == "Kasus Malaria Positif"]["nilai"].sum()
     tot_kusta = df_kes[df_kes["indikator"] == "Kasus Kusta Baru"]["nilai"].sum()
-    faskes_2022 = df_faskes[df_faskes["tahun"] == 2022]
-    tot_puskesmas_2022 = faskes_2022[faskes_2022["jenis"] == "Puskesmas"]["jumlah"].sum()
-    tot_rs_2022 = faskes_2022[faskes_2022["jenis"] == "Rumah Sakit"]["jumlah"].sum()
+    faskes_2024 = df_faskes[df_faskes["tahun"] == 2024]
+    tot_puskesmas_2024 = faskes_2024[faskes_2024["jenis_faskes"] == "Puskesmas"]["jumlah"].sum()
+    tot_rs_2024 = faskes_2024[faskes_2024["jenis_faskes"] == "Rumah Sakit"]["jumlah"].sum()
 
     st.markdown('<div class="page-block">', unsafe_allow_html=True)
     st.markdown('<div class="page-hero">Beban Kesehatan Masyarakat Terdampak</div>', unsafe_allow_html=True)
@@ -1707,8 +1707,8 @@ with st.expander("3 · BEBAN KESEHATAN", expanded=False):
         ("Diare", f"{tot_diare:,.0f}", "#F4511E"),
         ("Malaria", f"{tot_malaria:,.0f}", "#C62828"),
         ("Kusta Baru", f"{tot_kusta:,.0f}", "#D32F2F"),
-        ("Puskesmas 2022", f"{tot_puskesmas_2022:,.0f}", "#FF8A65"),
-        ("RS 2022", f"{tot_rs_2022:,.0f}", "#FFAB91"),
+        ("Puskesmas 2024", f"{tot_puskesmas_2024:,.0f}", "#FF8A65"),
+        ("RS 2024", f"{tot_rs_2024:,.0f}", "#FFAB91"),
     ])
     st.markdown("<div style='height:16px;'></div>", unsafe_allow_html=True)
 
@@ -1722,9 +1722,9 @@ with st.expander("3 · BEBAN KESEHATAN", expanded=False):
     df_faskes_c["Kategori"] = df_faskes_c["provinsi"].apply(
         lambda x: "Sentra Industri (Sulteng & Sultra)" if x in sentra else "Non-Sentra Industri (Lainnya)"
     )
-    df_gap = df_faskes_c[df_faskes_c["tahun"] == 2022].groupby(["Kategori", "jenis"])["jumlah"].mean().reset_index()
+    df_gap = df_faskes_c[df_faskes_c["tahun"] == 2024].groupby(["Kategori", "jenis_faskes"])["jumlah"].mean().reset_index()
     fig_31 = px.bar(
-        df_gap, x="jumlah", y="jenis", color="Kategori", barmode="group", orientation="h",
+        df_gap, x="jumlah", y="jenis_faskes", color="Kategori", barmode="group", orientation="h",
         color_discrete_map={
             "Sentra Industri (Sulteng & Sultra)": "#E53935",
             "Non-Sentra Industri (Lainnya)": "#546E7A",
@@ -1733,7 +1733,7 @@ with st.expander("3 · BEBAN KESEHATAN", expanded=False):
     )
     fig_31.update_traces(texttemplate="%{text:.0f}", textposition="outside", textfont_size=13)
     fig_31.update_layout(
-        title="Ketimpangan Ketersediaan Fasilitas Kesehatan (Rata-rata per Provinsi, 2022)", height=400,
+        title="Ketimpangan Ketersediaan Fasilitas Kesehatan (Rata-rata per Provinsi, 2024)", height=400,
         plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", font=dict(color="#B0BEC5"),
         legend=dict(title=None, orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
         xaxis=dict(title="Rata-Rata Jumlah Fasilitas", showgrid=True, gridcolor="rgba(255,255,255,0.1)"), yaxis=dict(title="", showgrid=False)

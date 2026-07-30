@@ -174,7 +174,7 @@ st.markdown(f"""
         Trajektori pembangunan di Pulau Sulawesi dalam satu dekade terakhir (2014-2024) dikendalikan penuh oleh ekspansi industri ekstraktif yang masif dan sistematis. Ambisi 'hilirisasi' nikel nyatanya menjadi karpet merah bagi penerbitan <b>{int(tot_izin):,} Izin Usaha Pertambangan (IUP) baru</b> yang melegitimasi pembongkaran wilayah darat dan pesisir seluas <b>{int(tot_luas_izin):,} Hektar</b>. Ironisnya, klaim transisi energi melalui pembangunan <b>{tot_smelter} unit fasilitas smelter</b> ini terbukti sangat kotor, karena operasionalnya disokong mutlak oleh <b>{int(tot_kapasitas_pltu):,} MW</b> PLTU <i>Captive</i> (pembangkit listrik batu bara <i>off-grid</i>) yang mengunci emisi karbon di tingkat lokal. 
     </p>
     <p style="color: #CCCCCC; font-size: 1.05rem; line-height: 1.7;">
-        Lebih jauh, gelombang investasi ini bukan tanpa tumbal. Meski aliran investasi domestik (PMDN) tercatat menembus angka fantastis sebesar <b>{int(tot_investasi_triliun):,} Triliun Rupiah</b>, harga yang harus dibayar adalah kebangkrutan ekologis yang permanen-ditandai dengan hilangnya <b>{int(tot_deforestasi):,} Hektar</b> wilayah tutupan hutan untuk komoditas tambang dan perkebunan. Rentetan angka ini membuktikan bahwa narasi pertumbuhan ekonomi selama ini dibangun di atas daya dukung lingkungan yang sedang kolaps.
+        Lebih jauh, gelombang investasi ini bukan tanpa terdampak. Meski aliran investasi domestik (PMDN) tercatat menembus angka fantastis sebesar <b>{int(tot_investasi_triliun):,} Triliun Rupiah</b>, harga yang harus dibayar adalah kebangkrutan ekologis yang permanen-ditandai dengan hilangnya <b>{int(tot_deforestasi):,} Hektar</b> wilayah tutupan hutan untuk komoditas tambang dan perkebunan. Rentetan angka ini membuktikan bahwa narasi pertumbuhan ekonomi selama ini dibangun di atas daya dukung lingkungan yang sedang kolaps.
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -260,7 +260,7 @@ st.markdown("---")
 st.subheader("1.1 Konteks Makro: Breakdown PDRB per Komoditas")
 
 st.markdown("""
-Sebelum membahas ledakan izin dan investasi ekstraktif secara spesifik, kita perlu membedah anatomi ekonomi makro Sulawesi. 
+Sebelum membahas peningkatan signifikan izin dan investasi ekstraktif secara spesifik, kita perlu membedah anatomi ekonomi makro Sulawesi. 
 Apakah klaim "pertumbuhan ekonomi" benar-benar dinikmati oleh masyarakat luas, atau hanya dinikmati oleh segelintir sektor padat modal?
 """)
 
@@ -375,7 +375,7 @@ for i, prov in enumerate(provinces):
 
 st.caption("Metodologi: Legal Supply-Chain Approach — Kat B+C+D = Ekstraktif (UU Minerba Ps.102-103; Perpres 112/2022 Ps.3 Ay.4)")
 
-st.markdown("#### 1.1.2 Ketimpangan Ekstraktif di Wilayah Pusat Ledakan (Kabupaten se-Sulawesi Tengah)")
+st.markdown("#### 1.1.2 Ketimpangan Ekstraktif di Wilayah Pusat Peningkatan Signifikan (Kabupaten se-Sulawesi Tengah)")
 st.markdown("""
 Jika kita menukik lebih dalam secara geografis membedah **Sulawesi Tengah**, kita dapat melihat letak pasti episentrum kerusakan ekologis. Kabupaten **Morowali** dan **Morowali Utara** memanipulasi keseluruhan kurva pertumbuhan provinsi melalui mega proyek hilirisasi dan PLTU Captive. 
 Visualisasi di bawah membandingkan komposisi ketiga sektor advokatif di seluruh 13 kabupaten/kota se-Sulawesi Tengah pada tahun terbaru.
@@ -539,7 +539,7 @@ st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
 with st.expander("ℹ️ Metodologi: Analisis Spasial & Uji Tabulasi Silang"):
     st.markdown("""
-    **Metode Analisis:** Halaman ini menggunakan pendekatan *Descriptive Spatial Analysis* dipadukan dengan Inferensial (Uji Chi-Square) untuk membongkar pemusatan infrastruktur energi kotor (*Zona Tumbal*) dan membuktikan dampaknya terhadap kerusakan ekologis secara statistik.
+    **Metode Analisis:** Halaman ini menggunakan pendekatan *Descriptive Spatial Analysis* dipadukan dengan Inferensial (Uji Chi-Square) untuk membongkar pemusatan infrastruktur energi kotor (*Zona Terdampak*) dan membuktikan dampaknya terhadap kerusakan ekologis secara statistik.
 
     1. **Analisis Profil (Chi-Square Test):** Mengukur signifikansi hubungan antara ekspansi kapasitas PLTU (X) dengan kerusakan ekologis (Y).
         * **Binning:** Data panel (Provinsi-Tahun) diklasifikasikan menjadi kategori "Tinggi" dan "Rendah" menggunakan ambang batas nilai Tengah (Median).
@@ -547,7 +547,7 @@ with st.expander("ℹ️ Metodologi: Analisis Spasial & Uji Tabulasi Silang"):
         * `Decision Rule: Jika P-Value < 0.10, maka Tolak H0 (Ada Hubungan Signifikan).`
     2. **Kalkulasi Emisi Historis (Cumulative Sum):** Merekam jejak karbon historis PLTU dari tahun ke tahun.
         * `Kapasitas_Kumulatif_t = Kapasitas_Kumulatif_{t-1} + MW_t`
-    3. **Pemetaan Zona Tumbal (Proportional Ratio):** Mengukur ketimpangan distribusi fasilitas hilirisasi.
+    3. **Pemetaan Zona Terdampak (Proportional Ratio):** Mengukur ketimpangan distribusi fasilitas hilirisasi.
         * `Rasio Dominasi Wilayah = (Fasilitas_Provinsi_X / Total_Fasilitas_Sulawesi) * 100%`
     4. **Variabel & Fitur Data PLTU (Global Energy Monitor):**
         * **Plant/Unit name, Owner/Parent:** Identitas dan kepemilikan.
@@ -595,13 +595,13 @@ Intensifikasi ekstraktif di Sulawesi sepenuhnya dikuasai oleh industri nikel (*m
 
 Mari kita bedah **temuan kritis spasial** dari grafik data di bawah ini:
 
-**Penciptaan Zona Tumbal (Bar Chart):** Grafik di bawah menampilkan ketidakadilan spasial yang ekstrem. Dari keseluruhan smelter, data membuktikan **{int(persen_smelter_2prov):,}% dari total fasilitas (tepatnya {sulteng_smelter} unit di Sulteng dan {sultra_smelter} unit di Sultra)** ditumpuk paksa hanya di dua provinsi. Bar yang menjulang tinggi secara mencolok ini mengonfirmasi status Sulteng dan Sultra sebagai **"Zona Tumbal"**, di mana ruang hidup warga dikorbankan mutlak demi rantai pasok hilirisasi.
+**Penciptaan Zona Terdampak (Bar Chart):** Grafik di bawah menampilkan ketidakadilan spasial yang ekstrem. Dari keseluruhan smelter, data membuktikan **{int(persen_smelter_2prov):,}% dari total fasilitas (tepatnya {sulteng_smelter} unit di Sulteng dan {sultra_smelter} unit di Sultra)** ditumpuk paksa hanya di dua provinsi. Bar yang menjulang tinggi secara mencolok ini mengonfirmasi status Sulteng dan Sultra sebagai **"Zona Terdampak"**, di mana ruang hidup warga dikorbankan mutlak demi rantai pasok hilirisasi.
 
 Kausalitas ekspansi industri ekstraktif ini divalidasi dengan sangat presisi oleh uji regresi **Crosstab** di bagian bawah. Tabel tersebut membuktikan secara empiris bahwa keberadaan kawasan industri ini secara kausal beroperasi penuh sebagai penyebab langsung dari musnahnya penyangga hutan alam di sekitarnya.
 """)
 
-# --- Visualisasi Tambahan Advokasi: Zona Tumbal ---
-# Zona Tumbal (Smelter Bar Chart dengan Persentase)
+# --- Visualisasi Tambahan Advokasi: Zona Terdampak ---
+# Zona Terdampak (Smelter Bar Chart dengan Persentase)
 df_smelter_prov['Persentase'] = (df_smelter_prov['jumlah_iup'] / len(df_smelter)) * 100
 
 df_smelter_prov['color_group'] = df_smelter_prov['provinsi'].apply(lambda x: x if x in ['Sulawesi Tengah', 'Sulawesi Tenggara'] else 'Lainnya')
@@ -628,7 +628,7 @@ text = bars.mark_text(
 chart_smelter = (bars + text).properties(height=350, title=alt.TitleParams(text='Monopoli 78% Smelter di 2 Provinsi (Sentra Tambang)', color='#212121', anchor='start', fontSize=16))
 
 st.altair_chart(chart_smelter, use_container_width=True)
-st.markdown("<div style='font-size:0.85rem; color:#9E9E9E; margin-top:-10px; margin-bottom:15px; padding: 0 10px; border-left: 3px solid #F57C00;'><b>Fakta Data:</b> Hampir 80% dari total 778 fasilitas smelter ditumpuk murni di Sulawesi Tengah & Tenggara. Ini membantah narasi 'pemerataan', dan menegaskan bahwa dua provinsi ini dijadikan tumbal mutlak <i>(sacrifice zones)</i>.</div>", unsafe_allow_html=True)
+st.markdown("<div style='font-size:0.85rem; color:#9E9E9E; margin-top:-10px; margin-bottom:15px; padding: 0 10px; border-left: 3px solid #F57C00;'><b>Fakta Data:</b> Hampir 80% dari total 778 fasilitas smelter ditumpuk murni di Sulawesi Tengah & Tenggara. Ini membantah narasi 'pemerataan', dan menegaskan bahwa dua provinsi ini dijadikan terdampak mutlak <i>(sacrifice zones)</i>.</div>", unsafe_allow_html=True)
 
 with st.expander("Lihat Data Detail: Daftar Izin Smelter (PT & Lokasi)", expanded=False):
     # Pilih kolom penting
@@ -642,7 +642,7 @@ with st.expander("Lihat Data Detail: Daftar Izin Smelter (PT & Lokasi)", expande
 st.markdown(f"""
 <div style="background:#FFFFFF; padding:14px; border-radius:10px; border-left:5px solid #D32F2F; margin-bottom: 20px;">
     <b style="color: #D32F2F;">Interpretasi Spasial Ekstraktif:</b><br><br>
-    Mega-Kawasan Industri memonopoli area pesisir secara ekstrem. Alih-alih transisi energi, kita menyaksikan <b>ledakan eksponensial PLTU <i>Captive</i></b> yang disedot habis untuk melayani konsentrasi masif fasilitas peleburan di dua provinsi tumbal (Sulteng & Sultra). Angka-angka ini adalah bukti empiris dari ekspansi agresif energi kotor yang berlindung di balik tameng <i>green-nickel</i>.
+    Mega-Kawasan Industri memonopoli area pesisir secara ekstrem. Alih-alih transisi energi, kita menyaksikan <b>peningkatan signifikan eksponensial PLTU <i>Captive</i></b> yang dialokasikan secara maksimal untuk melayani konsentrasi masif fasilitas peleburan di dua provinsi terdampak (Sulteng & Sultra). Angka-angka ini adalah bukti empiris dari ekspansi agresif energi kotor yang berlindung di balik tameng <i>green-nickel</i>.
 </div>
 """, unsafe_allow_html=True)
 
@@ -779,7 +779,7 @@ st.table(pd.DataFrame(chi_data_2, index=["Pearson Chi-Square", "Likelihood Ratio
 # D. Hypothesis & Risk Summary 1.2
 st.markdown("### Ringkasan Uji Hipotesis")
 is_sig_2 = p_2 < 0.05
-status_txt_2 = "SIGNIFIKAN (Ada Hubungan)" if is_sig_2 else "TIDAK SIGNIFIKAN"
+status_txt_2 = "SIGNIFIKAN" if is_sig_2 else "TIDAK SIGNIFIKAN"
 ord_col_2 = "#4CAF50" if is_sig_2 else "#F44336" 
 bg_col_2 = "rgba(76, 175, 80, 0.1)" if is_sig_2 else "rgba(244, 67, 54, 0.1)"
 
@@ -943,7 +943,7 @@ Namun, yang menjadi **temuan kritis** adalah fakta empiris *time-series* dari gr
 
 Anotasi merah pada grafik dengan tegas mencatat **lonjakan ekstrem sebesar 246% (2022-2024)**. Fakta data *time-series* yang meroket tajam ini membuktikan secara telanjang runtuhnya fungsi kontrol dan hilangnya instrumen moratorium ekologis. Di bawah kurva lonjakan tersebut, kita melihat bar warna merah muda (Sulawesi Tengah) dan ungu (Sulawesi Tenggara) mendominasi secara absolut, menunjukkan perampasan ruang dan monopoli spasial dari kehancuran obral izin tersebut.
 
-Data ledakan tahunan ini berkorelasi kuat dengan kerusakan lapangan. **Tabel Crosstabulation** menegaskan validitas kausalitasnya: wilayah yang mendominasi grafik bar (jumlah IUP tertinggi) menderita kerusakan tapak terparah. Nilai *P-Value* yang signifikan mengunci pembuktian matematis bahwa penerbitan IUP gila-gilaan inilah pemicu langsung dari lenyapnya **{int(tot_deforestasi):,} Hektar** hutan primer. Angka di tabel tersebut membantah retorika administratif dan menjadi bukti hukum kebangkrutan ekologis di Sulawesi.
+Data peningkatan signifikan tahunan ini berkorelasi kuat dengan kerusakan lapangan. **Tabel Crosstabulation** menegaskan validitas kausalitasnya: wilayah yang mendominasi grafik bar (jumlah IUP tertinggi) menderita kerusakan tapak terparah. Nilai *P-Value* yang signifikan mengunci pembuktian matematis bahwa penerbitan IUP gila-gilaan inilah pemicu langsung dari lenyapnya **{int(tot_deforestasi):,} Hektar** hutan primer. Angka di tabel tersebut membantah retorika administratif dan menjadi bukti hukum kebangkrutan ekologis di Sulawesi.
 """)
 
 # --- Bar Chart Tren Izin ---
@@ -1135,7 +1135,7 @@ st.table(chi_df)
 # --- D. Hypothesis & Risk Summary ---
 st.markdown("### Ringkasan Uji Hipotesis")
 is_significant = p < 0.05
-status_text = "SIGNIFIKAN (Ada Hubungan)" if is_significant else "TIDAK SIGNIFIKAN"
+status_text = "SIGNIFIKAN" if is_significant else "TIDAK SIGNIFIKAN"
 order_color = "#4CAF50" if is_significant else "#F44336" 
 bg_color = "rgba(76, 175, 80, 0.1)" if is_significant else "rgba(244, 67, 54, 0.1)"
 
@@ -1276,7 +1276,7 @@ with st.expander("ℹ️ Metodologi: Analisis Spasial & Uji Chi-Square (Crosstab
         * **Binning Kategori:** Variabel kontinu dikonversi menjadi data kategorikal (Biner) menggunakan nilai tengah (Median). 'Tinggi' > Median, 'Rendah' <= Median.
         * `H0 (Null Hypothesis): Tidak ada hubungan signifikan secara statistik antara tingginya arus modal PMDN dengan laju deforestasi.`
         * `Decision Rule (Alpha 5%): Jika P-Value < 0.05, maka Tolak H0 (Terbukti secara empiris bahwa kucuran investasi menjadi driver utama kehancuran hutan).`
-    2. **Kalkulasi Dual-Axis (Trend Comparison):** Membandingkan secara visual anomali ledakan investasi (Bar Chart) terhadap fluktuasi laju deforestasi komoditas (Line Chart) menggunakan skala ganda (Dual-Axis) terpisah per kategori wilayah.
+    2. **Kalkulasi Dual-Axis (Trend Comparison):** Membandingkan secara visual anomali peningkatan signifikan investasi (Bar Chart) terhadap fluktuasi laju deforestasi komoditas (Line Chart) menggunakan skala ganda (Dual-Axis) terpisah per kategori wilayah.
         * `Tahun_t (Investasi) vs Tahun_t (Deforestasi)`
     3. **Variabel & Fitur Data Investasi (BKPM):**
         * **Tahun, Provinsi:** Dimensi waktu dan lokasi.
@@ -1400,7 +1400,7 @@ except Exception as e:
 st.markdown("<br>", unsafe_allow_html=True)
 
 st.markdown(f"""
-Grafik **"Ledakan Ekspansi Tambang"** di bawah ini menelanjangi pola destruktif yang digerakkan oleh penerbitan konsesi baru.
+Grafik **"Peningkatan Signifikan Ekspansi Tambang"** di bawah ini menelanjangi pola destruktif yang digerakkan oleh penerbitan konsesi baru.
 
 Mari kita cermati temuan **fakta data time-series**-nya: pada tahun 2016, luas konsesi tambang baru yang diterbitkan di wilayah Sulawesi menyentuh angka **{int(val_izin_2016):,} Hektar**. Seiring agresifnya hilirisasi, angka ini terus meledak dan memuncak pada tahun 2023 dengan diterbitkannya konsesi baru seluas **{int(val_izin_2023):,} Hektar**. Sialnya, pada waktu yang persis sama, angka deforestasi komoditas tetap merobek rekor hingga mencapai hilangnya **{int(val_def_2023):,} Hektar** tutupan hutan dalam satu tahun tersebut.
 
@@ -1432,7 +1432,7 @@ with col_chart_n:
 
 st.markdown(f"""
 <div style="background:#FFFFFF; padding:14px; border-radius:10px; border-left:5px solid #D32F2F; margin-bottom: 20px;">
-    <b>Interpretasi Ekologis (Spasial):</b> Perbandingan grafik batang di atas mengungkap bukti empiris yang fatal terkait ekspansi wilayah Sentra Tambang (Morowali & Konawe). Di saat <b>Daerah Non-Sentra</b> mencatatkan perluasan izin yang sangat minim, <b>Daerah Sentra Tambang</b> justru mengalami ledakan raksasa penerbitan konsesi baru. Karena sumbu Y disamakan, kita dapat melihat secara transparan bahwa skala pengerukan lahan di Sentra Tambang berlipat ganda menjulang jauh melampaui wilayah lain. Ini mengonfirmasi bahwa ekspansi industri secara mutlak rakus lahan (land-hungry), mengubah jantung penyangga ekologis di zona-zona sentra menjadi daratan keruk secara legal.
+    <b>Interpretasi Ekologis (Spasial):</b> Perbandingan grafik batang di atas mengungkap bukti empiris yang fatal terkait ekspansi wilayah Sentra Tambang (Morowali & Konawe). Di saat <b>Daerah Non-Sentra</b> mencatatkan perluasan izin yang sangat minim, <b>Daerah Sentra Tambang</b> justru mengalami peningkatan signifikan raksasa penerbitan konsesi baru. Karena sumbu Y disamakan, kita dapat melihat secara transparan bahwa skala pengerukan lahan di Sentra Tambang berlipat ganda menjulang jauh melampaui wilayah lain. Ini mengonfirmasi bahwa ekspansi industri secara mutlak ekspansif terhadap lahan (land-hungry), mengubah jantung penyangga ekologis di zona-zona sentra menjadi area ekstraksi secara legal.
 </div>
 """, unsafe_allow_html=True)
 
@@ -1503,7 +1503,7 @@ try:
         x=alt.X('year:O', title='Tahun', axis=alt.Axis(labelAngle=-45, labelColor='#424242', titleColor='#424242')),
         y=alt.Y('co2_emissions_mg:Q', title='Emisi CO2 (Megagrams)', axis=alt.Axis(labelColor='#424242', titleColor='#424242', gridOpacity=0.05)),
         tooltip=['year', alt.Tooltip('co2_emissions_mg', format=',.0f')]
-    ).properties(height=350, title=alt.TitleParams(text="Ledakan Emisi Karbon (Komoditas)", color='#212121'))
+    ).properties(height=350, title=alt.TitleParams(text="Peningkatan Signifikan Emisi Karbon (Komoditas)", color='#212121'))
 
     st.markdown("---")
     st.markdown("#### Pembedahan Ekologis: Aktor, Dampak, dan Emisi")
@@ -1518,7 +1518,7 @@ Untuk melengkapi analisis kausalitas di atas, kita harus membedah anatomi kehanc
 
 **Kedua, Tragedi Hutan Primer (Bar Chart Tengah):** Kerusakan masif yang didorong oleh komoditas ini tidak terjadi di lahan kritis atau semak belukar yang terdegradasi, melainkan mengorbankan langsung jantung ekosistem bumi. Grafik batang merah muda menunjukkan bahwa secara agregat total, lebih dari **{int(tot_primary_loss):,} Hektar Hutan Primer**-ekosistem purba yang membutuhkan waktu ribuan tahun untuk terbentuk dan kaya akan keanekaragaman hayati endemik-telah ditebang habis dan musnah secara permanen tak bersisa. Lonjakan tinggi batang pada periode tertentu berkorelasi sangat erat dengan tahun-tahun puncak penerbitan IUP dan peresmian smelter baru.
 
-**Ketiga, Ledakan Emisi Karbon (Bar Chart Kanan):** Sebagai imbas langsung dari musnahnya hutan primer tersebut, pembongkaran tanah untuk tambang nikel melepaskan bom karbon ke udara terbuka. Grafik cokelat tua menelanjangi fakta bahwa ekspansi komoditas telah meledakkan total **{int(tot_co2_emissions):,} Megagrams Emisi CO2**. Fakta mematikan ini merupakan bantahan paling empiris dan telanjang terhadap narasi palsu "Hilirisasi Hijau". Melalui data ini, terbukti kita sama sekali tidak sedang memproduksi rantai pasok energi bersih; kita justru sedang mensubsidi krisis iklim global melalui emisi karbon ekstrem hasil dari pembongkaran hutan primer demi mengeruk nikel.
+**Ketiga, Peningkatan Signifikan Emisi Karbon (Bar Chart Kanan):** Sebagai imbas langsung dari musnahnya hutan primer tersebut, pembongkaran tanah untuk tambang nikel melepaskan bom karbon ke udara terbuka. Grafik cokelat tua menelanjangi fakta bahwa ekspansi komoditas telah meledakkan total **{int(tot_co2_emissions):,} Megagrams Emisi CO2**. Fakta mematikan ini merupakan bantahan paling empiris dan telanjang terhadap narasi palsu "Hilirisasi Hijau". Melalui data ini, terbukti kita sama sekali tidak sedang memproduksi rantai pasok energi bersih; kita justru sedang mensubsidi krisis iklim global melalui emisi karbon ekstrem hasil dari pembongkaran hutan primer demi mengeruk nikel.
 """)
     
     col_v1, col_v2, col_v3 = st.columns(3)
@@ -2030,7 +2030,7 @@ st.markdown("""
     <ul style="margin-top: 10px; line-height: 1.6;">
         <li><b>Dominasi Ekspor ke China:</b> Tiga raksasa kawasan industri baru (IMIP, GNI, VDNI/OSS) yang menikmati fasilitas kemudahan Proyek Strategis Nasional (PSN) mengirimkan hampir seluruh <i>output</i> barang setengah jadi (NPI, Feronikel, Matte) langsung ke sentra industri di China Timur dan Selatan.</li>
         <li><b>Absennya Interkoneksi Domestik:</b> Sangat minim jalur distribusi logistik yang menghubungkan kawasan smelter raksasa ini dengan pusat industri manufaktur di dalam negeri (seperti di Pulau Jawa). Hal ini mengonfirmasi temuan bahwa Sulawesi saat ini lebih difungsikan murni sebagai <i>extractive feeder</i> (daerah penyuplai ekstraktif) bagi mesin industrialisasi negara lain, bukan sebagai fondasi terintegrasi untuk ekosistem mobil listrik domestik.</li>
-        <li><b>Pergeseran Geopolitik:</b> Sementara pemain lama seperti PT Vale dan ANTAM memiliki rute pasokan yang mapan ke pasar otomotif tradisional di Jepang dan Korea Selatan, dominasi logistik dan tonase kini telah bergeser drastis seiring dengan ledakan pembangunan smelter baru yang terintegrasi langsung dengan pasar China.</li>
+        <li><b>Pergeseran Geopolitik:</b> Sementara pemain lama seperti PT Vale dan ANTAM memiliki rute pasokan yang mapan ke pasar otomotif tradisional di Jepang dan Korea Selatan, dominasi logistik dan tonase kini telah bergeser drastis seiring dengan peningkatan signifikan pembangunan smelter baru yang terintegrasi langsung dengan pasar China.</li>
     </ul>
 </div>
 """, unsafe_allow_html=True)

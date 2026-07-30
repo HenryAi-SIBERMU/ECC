@@ -1,0 +1,527 @@
+[
+    {
+        "tahun": 2015,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 282,
+        "file_gambar": "2015_Puskesmas_page_282.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2015_Puskesmas_page_282.png"
+    },
+    {
+        "tahun": 2015,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 283,
+        "file_gambar": "2015_Puskesmas_page_283.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2015_Puskesmas_page_283.png"
+    },
+    {
+        "tahun": 2015,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 302,
+        "file_gambar": "2015_Puskesmas_page_302.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2015_Puskesmas_page_302.png"
+    },
+    {
+        "tahun": 2015,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 351,
+        "file_gambar": "2015_Puskesmas_page_351.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2015_Puskesmas_page_351.png"
+    },
+    {
+        "tahun": 2015,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 352,
+        "file_gambar": "2015_Puskesmas_page_352.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2015_Puskesmas_page_352.png"
+    },
+    {
+        "tahun": 2016,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 295,
+        "file_gambar": "2016_Puskesmas_page_295.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2016_Puskesmas_page_295.png"
+    },
+    {
+        "tahun": 2016,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 299,
+        "file_gambar": "2016_Puskesmas_page_299.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2016_Puskesmas_page_299.png"
+    },
+    {
+        "tahun": 2016,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 300,
+        "file_gambar": "2016_Puskesmas_page_300.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2016_Puskesmas_page_300.png"
+    },
+    {
+        "tahun": 2016,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 319,
+        "file_gambar": "2016_Puskesmas_page_319.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2016_Puskesmas_page_319.png"
+    },
+    {
+        "tahun": 2016,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 367,
+        "file_gambar": "2016_Puskesmas_page_367.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2016_Puskesmas_page_367.png"
+    },
+    {
+        "tahun": 2016,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 411,
+        "file_gambar": "2016_Puskesmas_page_411.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2016_Puskesmas_page_411.png"
+    },
+    {
+        "tahun": 2017,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 23,
+        "file_gambar": "2017_Puskesmas_page_23.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2017_Puskesmas_page_23.png"
+    },
+    {
+        "tahun": 2017,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 341,
+        "file_gambar": "2017_Puskesmas_page_341.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2017_Puskesmas_page_341.png"
+    },
+    {
+        "tahun": 2017,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 345,
+        "file_gambar": "2017_Puskesmas_page_345.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2017_Puskesmas_page_345.png"
+    },
+    {
+        "tahun": 2017,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 346,
+        "file_gambar": "2017_Puskesmas_page_346.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2017_Puskesmas_page_346.png"
+    },
+    {
+        "tahun": 2017,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 370,
+        "file_gambar": "2017_Puskesmas_page_370.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2017_Puskesmas_page_370.png"
+    },
+    {
+        "tahun": 2017,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 412,
+        "file_gambar": "2017_Puskesmas_page_412.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2017_Puskesmas_page_412.png"
+    },
+    {
+        "tahun": 2017,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 422,
+        "file_gambar": "2017_Puskesmas_page_422.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2017_Puskesmas_page_422.png"
+    },
+    {
+        "tahun": 2017,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 472,
+        "file_gambar": "2017_Puskesmas_page_472.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2017_Puskesmas_page_472.png"
+    },
+    {
+        "tahun": 2018,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 36,
+        "file_gambar": "2018_Puskesmas_page_36.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2018_Puskesmas_page_36.png"
+    },
+    {
+        "tahun": 2018,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 393,
+        "file_gambar": "2018_Puskesmas_page_393.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2018_Puskesmas_page_393.png"
+    },
+    {
+        "tahun": 2018,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 397,
+        "file_gambar": "2018_Puskesmas_page_397.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2018_Puskesmas_page_397.png"
+    },
+    {
+        "tahun": 2018,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 398,
+        "file_gambar": "2018_Puskesmas_page_398.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2018_Puskesmas_page_398.png"
+    },
+    {
+        "tahun": 2018,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 417,
+        "file_gambar": "2018_Puskesmas_page_417.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2018_Puskesmas_page_417.png"
+    },
+    {
+        "tahun": 2018,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 475,
+        "file_gambar": "2018_Puskesmas_page_475.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2018_Puskesmas_page_475.png"
+    },
+    {
+        "tahun": 2018,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 476,
+        "file_gambar": "2018_Puskesmas_page_476.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2018_Puskesmas_page_476.png"
+    },
+    {
+        "tahun": 2018,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 525,
+        "file_gambar": "2018_Puskesmas_page_525.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2018_Puskesmas_page_525.png"
+    },
+    {
+        "tahun": 2018,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 527,
+        "file_gambar": "2018_Puskesmas_page_527.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2018_Puskesmas_page_527.png"
+    },
+    {
+        "tahun": 2018,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 528,
+        "file_gambar": "2018_Puskesmas_page_528.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2018_Puskesmas_page_528.png"
+    },
+    {
+        "tahun": 2019,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 321,
+        "file_gambar": "2019_Puskesmas_page_321.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2019_Puskesmas_page_321.png"
+    },
+    {
+        "tahun": 2019,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 322,
+        "file_gambar": "2019_Puskesmas_page_322.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2019_Puskesmas_page_322.png"
+    },
+    {
+        "tahun": 2019,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 323,
+        "file_gambar": "2019_Puskesmas_page_323.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2019_Puskesmas_page_323.png"
+    },
+    {
+        "tahun": 2019,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 33,
+        "file_gambar": "2019_Puskesmas_page_33.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2019_Puskesmas_page_33.png"
+    },
+    {
+        "tahun": 2019,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 332,
+        "file_gambar": "2019_Puskesmas_page_332.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2019_Puskesmas_page_332.png"
+    },
+    {
+        "tahun": 2019,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 428,
+        "file_gambar": "2019_Puskesmas_page_428.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2019_Puskesmas_page_428.png"
+    },
+    {
+        "tahun": 2019,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 470,
+        "file_gambar": "2019_Puskesmas_page_470.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2019_Puskesmas_page_470.png"
+    },
+    {
+        "tahun": 2020,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 309,
+        "file_gambar": "2020_Puskesmas_page_309.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2020_Puskesmas_page_309.png"
+    },
+    {
+        "tahun": 2020,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 310,
+        "file_gambar": "2020_Puskesmas_page_310.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2020_Puskesmas_page_310.png"
+    },
+    {
+        "tahun": 2020,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 311,
+        "file_gambar": "2020_Puskesmas_page_311.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2020_Puskesmas_page_311.png"
+    },
+    {
+        "tahun": 2020,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 312,
+        "file_gambar": "2020_Puskesmas_page_312.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2020_Puskesmas_page_312.png"
+    },
+    {
+        "tahun": 2020,
+        "jenis": "Rumah Sakit",
+        "halaman_pdf": 322,
+        "file_gambar": "2020_Rumah_Sakit_page_322.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2020_Rumah_Sakit_page_322.png"
+    },
+    {
+        "tahun": 2020,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 325,
+        "file_gambar": "2020_Puskesmas_page_325.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2020_Puskesmas_page_325.png"
+    },
+    {
+        "tahun": 2020,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 327,
+        "file_gambar": "2020_Puskesmas_page_327.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2020_Puskesmas_page_327.png"
+    },
+    {
+        "tahun": 2020,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 418,
+        "file_gambar": "2020_Puskesmas_page_418.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2020_Puskesmas_page_418.png"
+    },
+    {
+        "tahun": 2020,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 424,
+        "file_gambar": "2020_Puskesmas_page_424.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2020_Puskesmas_page_424.png"
+    },
+    {
+        "tahun": 2021,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 357,
+        "file_gambar": "2021_Puskesmas_page_357.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2021_Puskesmas_page_357.png"
+    },
+    {
+        "tahun": 2021,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 358,
+        "file_gambar": "2021_Puskesmas_page_358.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2021_Puskesmas_page_358.png"
+    },
+    {
+        "tahun": 2021,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 359,
+        "file_gambar": "2021_Puskesmas_page_359.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2021_Puskesmas_page_359.png"
+    },
+    {
+        "tahun": 2021,
+        "jenis": "Rumah Sakit",
+        "halaman_pdf": 370,
+        "file_gambar": "2021_Rumah_Sakit_page_370.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2021_Rumah_Sakit_page_370.png"
+    },
+    {
+        "tahun": 2022,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 366,
+        "file_gambar": "2022_Puskesmas_page_366.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2022_Puskesmas_page_366.png"
+    },
+    {
+        "tahun": 2022,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 367,
+        "file_gambar": "2022_Puskesmas_page_367.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2022_Puskesmas_page_367.png"
+    },
+    {
+        "tahun": 2022,
+        "jenis": "Rumah Sakit",
+        "halaman_pdf": 372,
+        "file_gambar": "2022_Rumah_Sakit_page_372.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2022_Rumah_Sakit_page_372.png"
+    },
+    {
+        "tahun": 2022,
+        "jenis": "Rumah Sakit",
+        "halaman_pdf": 373,
+        "file_gambar": "2022_Rumah_Sakit_page_373.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2022_Rumah_Sakit_page_373.png"
+    },
+    {
+        "tahun": 2022,
+        "jenis": "Rumah Sakit",
+        "halaman_pdf": 380,
+        "file_gambar": "2022_Rumah_Sakit_page_380.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2022_Rumah_Sakit_page_380.png"
+    },
+    {
+        "tahun": 2022,
+        "jenis": "Rumah Sakit",
+        "halaman_pdf": 381,
+        "file_gambar": "2022_Rumah_Sakit_page_381.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2022_Rumah_Sakit_page_381.png"
+    },
+    {
+        "tahun": 2022,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 382,
+        "file_gambar": "2022_Puskesmas_page_382.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2022_Puskesmas_page_382.png"
+    },
+    {
+        "tahun": 2022,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 383,
+        "file_gambar": "2022_Puskesmas_page_383.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2022_Puskesmas_page_383.png"
+    },
+    {
+        "tahun": 2022,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 398,
+        "file_gambar": "2022_Puskesmas_page_398.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2022_Puskesmas_page_398.png"
+    },
+    {
+        "tahun": 2022,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 399,
+        "file_gambar": "2022_Puskesmas_page_399.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2022_Puskesmas_page_399.png"
+    },
+    {
+        "tahun": 2023,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 370,
+        "file_gambar": "2023_Puskesmas_page_370.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2023_Puskesmas_page_370.png"
+    },
+    {
+        "tahun": 2023,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 371,
+        "file_gambar": "2023_Puskesmas_page_371.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2023_Puskesmas_page_371.png"
+    },
+    {
+        "tahun": 2023,
+        "jenis": "Rumah Sakit",
+        "halaman_pdf": 376,
+        "file_gambar": "2023_Rumah_Sakit_page_376.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2023_Rumah_Sakit_page_376.png"
+    },
+    {
+        "tahun": 2023,
+        "jenis": "Rumah Sakit",
+        "halaman_pdf": 377,
+        "file_gambar": "2023_Rumah_Sakit_page_377.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2023_Rumah_Sakit_page_377.png"
+    },
+    {
+        "tahun": 2023,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 382,
+        "file_gambar": "2023_Puskesmas_page_382.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2023_Puskesmas_page_382.png"
+    },
+    {
+        "tahun": 2023,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 383,
+        "file_gambar": "2023_Puskesmas_page_383.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2023_Puskesmas_page_383.png"
+    },
+    {
+        "tahun": 2023,
+        "jenis": "Rumah Sakit",
+        "halaman_pdf": 384,
+        "file_gambar": "2023_Rumah_Sakit_page_384.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2023_Rumah_Sakit_page_384.png"
+    },
+    {
+        "tahun": 2023,
+        "jenis": "Rumah Sakit",
+        "halaman_pdf": 385,
+        "file_gambar": "2023_Rumah_Sakit_page_385.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2023_Rumah_Sakit_page_385.png"
+    },
+    {
+        "tahun": 2024,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 356,
+        "file_gambar": "2024_Puskesmas_page_356.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2024_Puskesmas_page_356.png"
+    },
+    {
+        "tahun": 2024,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 357,
+        "file_gambar": "2024_Puskesmas_page_357.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2024_Puskesmas_page_357.png"
+    },
+    {
+        "tahun": 2024,
+        "jenis": "Rumah Sakit",
+        "halaman_pdf": 362,
+        "file_gambar": "2024_Rumah_Sakit_page_362.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2024_Rumah_Sakit_page_362.png"
+    },
+    {
+        "tahun": 2024,
+        "jenis": "Rumah Sakit",
+        "halaman_pdf": 363,
+        "file_gambar": "2024_Rumah_Sakit_page_363.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2024_Rumah_Sakit_page_363.png"
+    },
+    {
+        "tahun": 2024,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 368,
+        "file_gambar": "2024_Puskesmas_page_368.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2024_Puskesmas_page_368.png"
+    },
+    {
+        "tahun": 2024,
+        "jenis": "Puskesmas",
+        "halaman_pdf": 369,
+        "file_gambar": "2024_Puskesmas_page_369.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2024_Puskesmas_page_369.png"
+    },
+    {
+        "tahun": 2024,
+        "jenis": "Rumah Sakit",
+        "halaman_pdf": 370,
+        "file_gambar": "2024_Rumah_Sakit_page_370.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2024_Rumah_Sakit_page_370.png"
+    },
+    {
+        "tahun": 2024,
+        "jenis": "Rumah Sakit",
+        "halaman_pdf": 371,
+        "file_gambar": "2024_Rumah_Sakit_page_371.png",
+        "path": "tools/parsing_multimodal/output/faskes/nasional/golden_tables/2024_Rumah_Sakit_page_371.png"
+    }
+]

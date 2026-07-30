@@ -42,7 +42,7 @@ Secara institusional, dokumen tata ruang dan instrumen lingkungan hidup semestin
 |---|---|---|
 | **Tingkat Pengabaian Ekologis** | **85.3% (324 IUP)** | Mayoritas mutlak izin baru justru diobral secara sengaja pada tahun-tahun di mana laju deforestasi provinsi tersebut sedang berada di zona kritis (di atas rata-rata). Sumber: Data Panel (ESDM & GFW) |
 | **Zona Bebas Rem Darurat** | **Sulawesi Tengah (173 IUP)** | Provinsi dengan rekor penerbitan izin tertinggi tepat pada saat daya dukung lingkungan (tutupan hutan) mereka sedang hancur lebur tanpa mitigasi. Sumber: Data Panel (ESDM & GFW) |
-| **Akselerasi Izin Pasca-2020** | **4.4x Lipat** | Ledakan drastis penerbitan izin baru di era pasca-2020 dibandingkan periode sebelumnya, mengonfirmasi jebol dan diabaikannya instrumen D3TLH. Sumber: Kementerian ESDM (Minerbaone) |
+| **Akselerasi Izin Pasca-2020** | **4.4x Lipat** | Peningkatan Signifikan drastis penerbitan izin baru di era pasca-2020 dibandingkan periode sebelumnya, mengonfirmasi jebol dan diabaikannya instrumen D3TLH. Sumber: Kementerian ESDM (Minerbaone) |
 
 ---
 
@@ -74,7 +74,7 @@ Visualisasi *Dual-Axis Combo Chart* di bawah ini memberikan penelanjangan empiri
 
 Memasuki **Era Hilirisasi Nikel Pasca-2019 (Zona Kanan)**, industri tambang mengambil alih estafet sebagai mesin utama deforestasi. Kurva kuning (Area Konsesi IUP Baru) melesat tajam dan bergerak secara sinkron dengan skala kerusakan ekosistem. Anomali paling fatal terjadi pasca-2020: lonjakan luas konsesi tambang mencapai rekor tertingginya tepat pada momentum ketika grafik deforestasi kembali memerah parah. Secara matematis, ratusan ribu hektar tanah yang diserahkan melalui konsesi IUP baru ini berkorelasi mutlak dengan hilangnya tutupan pohon (*Hektar vs Hektar*). Fenomena ini bukanlah kebetulan statistik, melainkan mengonfirmasi tesis *governance failure*, di mana instrumen tata ruang tidak lagi berfungsi sebagai "rem darurat".
 
-Dokumen AMDAL dan analisis daya dukung lingkungan (D3TLH) telah direduksi nilainya menjadi sekadar ornamen administratif belaka; hanya berfungsi sebagai stempel legalisasi prosedural untuk memfasilitasi kelancaran invasi spasial oligarki tambang. Negara, melalui aparatus birokrasinya, secara sadar dan sistematis mengabaikan sinyal darurat dari alam. Akibat pembiaran struktural ini, wilayah-wilayah penyangga kehidupan di semenanjung Sulawesi kini secara nyata dikorbankan menjadi zona tumbal (*sacrifice zones*) demi ilusi pertumbuhan rasio PDB nasional, yang pada akhirnya harus dibayar sangat mahal dengan ongkos kebangkrutan ekologis permanen.
+Dokumen AMDAL dan analisis daya dukung lingkungan (D3TLH) telah direduksi nilainya menjadi sekadar ornamen administratif belaka; hanya berfungsi sebagai stempel legalisasi prosedural untuk memfasilitasi kelancaran invasi spasial oligarki tambang. Negara, melalui aparatus birokrasinya, secara sadar dan sistematis mengabaikan sinyal darurat dari alam. Akibat pembiaran struktural ini, wilayah-wilayah penyangga kehidupan di semenanjung Sulawesi kini secara nyata dikorbankan menjadi zona terdampak (*sacrifice zones*) demi ilusi pertumbuhan rasio PDB nasional, yang pada akhirnya harus dibayar sangat mahal dengan ongkos kebangkrutan ekologis permanen.
 
 #### Tren Eskalasi Bersamaan: Kerusakan Hutan (Batang) vs Penerbitan Izin (Garis)
 
@@ -293,7 +293,7 @@ Yang paling mengkhawatirkan: perusahaan-perusahaan dengan rekam jejak konflik ag
 
 ### Ringkasan Uji Hipotesis
 
-**Result: SIGNIFIKAN (Ada Hubungan)**
+**Result: SIGNIFIKAN**
 
 | Parameter | Nilai |
 |---|---|

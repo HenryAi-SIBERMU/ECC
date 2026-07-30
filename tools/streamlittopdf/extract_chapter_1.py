@@ -152,7 +152,7 @@ def generate():
     chart_1_1_3.save(str(VISUALS_DIR / "chart_1_1_3.png"))
 
     # ══════════════════════════════════════════════════
-    # CHART 1.2 — Zona Tumbal Smelter
+    # CHART 1.2 — Zona Terdampak Smelter
     # ══════════════════════════════════════════════════
     print("Chart 1.2 ...")
     df_smelter_prov = df_smelter.groupby('provinsi').size().reset_index(name='jumlah_iup')
@@ -287,7 +287,7 @@ def generate():
             chart_co2 = configure_light(alt.Chart(df_co2_agg).mark_bar(color='#5D4037').encode(
                 x=alt.X('year:O', title='Tahun', axis=alt.Axis(labelAngle=-45)),
                 y=alt.Y('co2_emissions_mg:Q', title='Emisi CO2 (Megagrams)')
-            ).properties(height=300, title='Ledakan Emisi Karbon (Komoditas)'))
+            ).properties(height=300, title='Peningkatan Signifikan Emisi Karbon (Komoditas)'))
             chart_co2.save(str(VISUALS_DIR / "chart_1_4b_co2.png"))
 
         komoditas_str = f"{area_komoditas/1e6:.1f} Mha" if area_komoditas >= 1e6 else f"{area_komoditas/1e3:.0f} kha"
@@ -388,7 +388,7 @@ def generate():
     try: chi2_2, p_2, dof_2, expected_2 = stats.chi2_contingency(crosstab_2)
     except: chi2_2, p_2, dof_2, expected_2 = 0, 1, 0, np.zeros_like(crosstab_2.values)
     is_sig_2 = p_2 < 0.05
-    status_txt_2 = "SIGNIFIKAN (Ada Hubungan)" if is_sig_2 else "TIDAK SIGNIFIKAN"
+    status_txt_2 = "SIGNIFIKAN" if is_sig_2 else "TIDAK SIGNIFIKAN"
     try:
         a2=crosstab_2.loc[lbl_x_l2, lbl_y_l2]; b2=crosstab_2.loc[lbl_x_l2, lbl_y_h2]
         c2=crosstab_2.loc[lbl_x_h2, lbl_y_l2]; d2=crosstab_2.loc[lbl_x_h2, lbl_y_h2]
@@ -414,7 +414,7 @@ def generate():
     crosstab_13 = pd.crosstab(df_panel["X_Label"], df_panel["Y_Label"]).reindex(index=cats_x_13, columns=cats_y_13, fill_value=0)
     try: chi2_13, p_13, dof_13, _ = stats.chi2_contingency(crosstab_13)
     except: chi2_13, p_13, dof_13 = 0, 1, 0
-    is_sig_13 = p_13 < 0.05; status_13 = "SIGNIFIKAN (Ada Hubungan)" if is_sig_13 else "TIDAK SIGNIFIKAN"
+    is_sig_13 = p_13 < 0.05; status_13 = "SIGNIFIKAN" if is_sig_13 else "TIDAK SIGNIFIKAN"
     valid_cases_13 = len(df_panel.dropna(subset=[x_col_13, y_col_13]))
     try:
         a13=crosstab_13.loc[lbl_xl13,lbl_yl13]; b13=crosstab_13.loc[lbl_xl13,lbl_yh13]
@@ -517,13 +517,13 @@ def generate():
     print("Generating Markdown ...")
     md = f"""# Ekspansi Industri Ekstraktif
 
-*Membaca pola pertumbuhan industri pengolahan alam (tambang, nikel, semen) di Pulau Sulawesi sebagai sumber tekanan utama terhadap daya dukung lingkungan.*
+*Analisis spasiotemporal pertumbuhan industri ekstraktif dan pengolahan nikel serta dampaknya terhadap daya dukung dan daya tampung lingkungan di Pulau Sulawesi.*
 
-## Ekspansi Masif: {tot_smelter} Fasilitas Smelter Mengunci Lanskap Ekologis Sulawesi
+## Ekspansi Industri Ekstraktif: {tot_smelter} Unit Smelter dan Ketergantungan Energi Fosil Off-Grid di Sulawesi
 
-Trajektori pembangunan di Pulau Sulawesi dalam satu dekade terakhir (2014-2024) dikendalikan penuh oleh ekspansi industri ekstraktif yang masif dan sistematis. Ambisi 'hilirisasi' nikel nyatanya menjadi karpet merah bagi penerbitan **{int(tot_izin):,} Izin Usaha Pertambangan (IUP) baru** yang melegitimasi pembongkaran wilayah darat dan pesisir seluas **{int(tot_luas_izin):,} Hektar**. Ironisnya, klaim transisi energi melalui pembangunan **{tot_smelter} unit fasilitas smelter** ini terbukti sangat kotor, karena operasionalnya disokong mutlak oleh **{int(tot_kapasitas_pltu):,} MW** PLTU *Captive* (pembangkit listrik batu bara *off-grid*) yang mengunci emisi karbon di tingkat lokal.
+Dinamika pembangunan di Pulau Sulawesi periode 2014–2024 ditandai oleh akselerasi industri berbasis komoditas alam. Kebijakan hilirisasi nikel mendorong penerbitan **{int(tot_izin):,} Izin Usaha Pertambangan (IUP) baru** dengan total luas konsesi mencapai **{int(tot_luas_izin):,} Hektar**. Pengoperasian **{tot_smelter} unit fasilitas pemurnian (smelter)** didukung oleh kapasitas **{int(tot_kapasitas_pltu):,} MW PLTU Captive** (pembangkit listrik batu bara *off-grid*), yang meningkatkan intensitas emisi karbon pada zona-zona industri pesisir.
 
-Lebih jauh, gelombang investasi ini bukan tanpa tumbal. Meski aliran investasi domestik (PMDN) tercatat menembus angka fantastis sebesar **{int(tot_investasi_triliun):,} Triliun Rupiah**, harga yang harus dibayar adalah kebangkrutan ekologis yang permanen-ditandai dengan hilangnya **{int(tot_deforestasi):,} Hektar** wilayah tutupan hutan untuk komoditas tambang dan perkebunan. Rentetan angka ini membuktikan bahwa narasi pertumbuhan ekonomi selama ini dibangun di atas daya dukung lingkungan yang sedang kolaps.
+Secara bersamaan, kucuran realisasi Penanaman Modal Dalam Negeri (PMDN) yang mencapai **{int(tot_investasi_triliun):,} Triliun Rupiah** berbanding lurus dengan akumulasi konversi tutupan hutan sebesar **{int(tot_deforestasi):,} Hektar** untuk aktivitas pertambangan dan perkebunan. Data ini mengindikasikan bahwa pertumbuhan indikator makroekonomi berjalan seiring dengan peningkatan beban terhadap daya dukung dan daya tampung lingkungan hidup.
 
 ### Metrik Ekstraktif
 
@@ -540,7 +540,7 @@ Lebih jauh, gelombang investasi ini bukan tanpa tumbal. Meski aliran investasi d
 
 ## 1.1 Konteks Makro: Breakdown PDRB per Komoditas
 
-Sebelum membahas ledakan izin dan investasi ekstraktif secara spesifik, kita perlu membedah anatomi ekonomi makro Sulawesi. Apakah klaim "pertumbuhan ekonomi" benar-benar dinikmati oleh masyarakat luas, atau hanya dinikmati oleh segelintir sektor padat modal?
+Grafik di bawah ini menyederhanakan 17 sektor PDRB menjadi **3 klasifikasi makro advokatif** berdasarkan *Legal Supply-Chain Approach* (Metodologi CELIOS/ECC).
 
 ### 1.1.1 Dominasi Ekstraktif vs Ekonomi Akar Rumput (2016-2024)
 
@@ -554,9 +554,9 @@ Grafik di bawah ini menyederhanakan 17 sektor PDRB menjadi **3 klasifikasi makro
 
 *Metodologi: Legal Supply-Chain Approach — Kat B+C+D = Ekstraktif (UU Minerba Ps.102-103; Perpres 112/2022 Ps.3 Ay.4)*
 
-### 1.1.2 Ketimpangan Ekstraktif di Wilayah Pusat Ledakan (Kabupaten se-Sulawesi Tengah)
+### 1.1.2 Pemusatan Sektor Ekstraktif di Kabupaten se-Sulawesi Tengah
 
-Jika kita menukik lebih dalam secara geografis membedah **Sulawesi Tengah**, kita dapat melihat letak pasti episentrum kerusakan ekologis. Kabupaten **Morowali** dan **Morowali Utara** memanipulasi keseluruhan kurva pertumbuhan provinsi melalui mega proyek hilirisasi dan PLTU Captive. Visualisasi di bawah membandingkan komposisi ketiga sektor advokatif di seluruh 13 kabupaten/kota se-Sulawesi Tengah pada tahun terbaru.
+Visualisasi di bawah membandingkan komposisi ketiga sektor advokatif di seluruh 13 kabupaten/kota se-Sulawesi Tengah pada tahun terbaru.
 
 ![1.1.2](visuals/chart_1_1_2.png)
 
@@ -566,25 +566,26 @@ Visualisasi Small Multiples ini membandingkan komposisi 17 sektor komoditas seca
 
 ![1.1.3](visuals/chart_1_1_3.png)
 
-**Interpretasi Ekstraktif:** Jika kita membedah seluruh komoditas tanpa agregasi, terlihat jelas bahwa di Sulawesi Tengah, 'Industri Pengolahan' dan 'Pertambangan' memuncaki klasemen secara absolut, sangat jomplang dibandingkan sektor lainnya. Sementara di Sulawesi Selatan dan Gorontalo, struktur ekonominya masih konvensional di mana 'Pertanian' dan 'Perdagangan' mendominasi.
-
 ---
 
-## 1.2 Agresivitas Ekspansi Kawasan Industri & PLTU Captive
+## 1.2 Konsentrasi Kawasan Industri & PLTU Captive
 
-Intensifikasi ekstraktif di Sulawesi sepenuhnya dikuasai oleh industri nikel (*mega-smelter*). Total **{tot_smelter} fasilitas smelter** yang mengepung pulau ini sangat rakus energi kotor. Konsentrasi pabrik ini disokong kapasitas batu bara yang menembus **{int(tot_kapasitas_pltu):,} MW dari PLTU Captive**. Berbeda dengan PLTU PLN, pembangkit ini murni membakar batu bara secara eksklusif demi korporasi.
+Intensifikasi industri pengolahan nikel di Sulawesi berpusat pada fasilitas mega-smelter. Pengoperasian **{tot_smelter} fasilitas smelter** didukung oleh kapasitas energi batu bara **{int(tot_kapasitas_pltu):,} MW dari PLTU Captive**. Berbeda dengan sistem kelistrikan umum PLN, pembangkit ini dikembangkan secara internal untuk menyokong operasi kawasan industri.
 
-Mari kita bedah **temuan kritis spasial** dari grafik data di bawah ini:
+Berikut adalah **temuan konsentrasi spasial** berdasarkan data agregat:
 
-**Penciptaan Zona Tumbal (Bar Chart):** Grafik di bawah menampilkan ketidakadilan spasial yang ekstrem. Dari keseluruhan smelter, data membuktikan **{int(persen_smelter_2prov):,}% dari total fasilitas (tepatnya {sulteng_smelter} unit di Sulteng dan {sultra_smelter} unit di Sultra)** ditumpuk paksa hanya di dua provinsi. Bar yang menjulang tinggi secara mencolok ini mengonfirmasi status Sulteng dan Sultra sebagai **"Zona Tumbal"**, di mana ruang hidup warga dikorbankan mutlak demi rantai pasok hilirisasi.
+**Pemusatan Spasial Fasilitas Smelter (Bar Chart):** Data menunjukkan bahwa **{int(persen_smelter_2prov):,}% dari total fasilitas ({sulteng_smelter} unit di Sulawesi Tengah dan {sultra_smelter} unit di Sulawesi Tenggara)** terkonsentrasi di dua provinsi tersebut. Pola ini mengonfirmasi adanya pemusatan beban ekologis dan emisi pada zona sentra pemurnian nikel.
+
+Korelasi antara pembangunan kawasan industri dan perubahan tutupan lahan diuji menggunakan **Crosstabulation (Tabulasi Silang)** pada bagian bawah sub-bab ini.
 
 ![1.2](visuals/chart_1_2.png)
 
-**Fakta Data:** Hampir 80% dari total {tot_smelter} fasilitas smelter ditumpuk murni di Sulawesi Tengah & Tenggara. Ini membantah narasi 'pemerataan', dan menegaskan bahwa dua provinsi ini dijadikan tumbal mutlak *(sacrifice zones)*.
+**Fakta Data:** Sebesar 78% dari total {tot_smelter} fasilitas smelter terkonsentrasi di Sulawesi Tengah & Sulawesi Tenggara, menunjukkan adanya pemusatan beban lingkungan di wilayah sentra tersebut.
 
 ### Pembuktian Statistik: Ekspansi PLTU Captive vs Deforestasi
 
 Untuk menguji apakah keberadaan PLTU *Captive* berkorelasi secara spasial dan temporal dengan laju deforestasi, kita menggunakan tabel crosstab pada level observasi **Provinsi-Tahun**.
+Mengingat ekspansi PLTU sangat terpusat pada tahun dan provinsi tertentu (menghasilkan banyak nilai nol pada panel), klasifikasi "Tinggi" diartikan sebagai *ada penambahan kapasitas (>0)*, dan "Rendah" sebagai *tidak ada penambahan (=0)*.
 
 **Case Processing Summary**
 
@@ -603,11 +604,11 @@ Untuk menguji apakah keberadaan PLTU *Captive* berkorelasi secara spasial dan te
 
 *{interp_txt_2}*
 
-**Interpretasi Spasial Ekstraktif:** Mega-Kawasan Industri memonopoli area pesisir secara ekstrem. Alih-alih transisi energi, kita menyaksikan **ledakan eksponensial PLTU *Captive*** yang disedot habis untuk melayani konsentrasi masif fasilitas peleburan di dua provinsi tumbal (Sulteng & Sultra). Angka-angka ini adalah bukti empiris dari ekspansi agresif energi kotor yang berlindung di balik tameng *green-nickel*.
+**Interpretasi Spasial Industri:** Kawasan industri pengolahan terkonsentrasi di area pesisir secara signifikan. Pertumbuhan PLTU Captive mengindikasikan tingginya ketergantungan pada energi berbasis batu bara untuk mendukung kebutuhan energi fasilitas pemurnian di Sulawesi Tengah dan Sulawesi Tenggara.
 
-### Ringkasan Eksekutif Seluruh Skenario Crosstab (Ekspansi PLTU vs Deforestasi)
+### Ringkasan Eksekutif Seluruh Skenario Crosstab
 
-Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square) untuk semua kemungkinan kombinasi antara indikator Ekspansi PLTU Captive (X) dan Dampak Ekologis (Y) pada panel data yang sama.
+Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square) untuk semua kemungkinan kombinasi indikator antara penambahan PLTU Captive dan Dampak Ekologis pada panel data 1 dekade.
 
 | Variabel Independen (X) | Variabel Dependen (Y) | Chi-Square | P-Value | Odds Ratio | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -618,19 +619,23 @@ Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square) untuk semua 
 
 ## 1.3 Tren Pertumbuhan Izin Tambang Baru & Uji Signifikansi
 
-Pola tata kelola perizinan ekstraktif di Pulau Sulawesi selama satu dekade terakhir mencerminkan eksploitasi yang brutal. Berdasarkan data agregat *Minerbaone*, tercatat **{int(tot_izin):,} Izin Usaha Pertambangan (IUP) baru** sepanjang 2014-2024, menjarah lahan dan pesisir mencapai **{int(tot_luas_izin):,} Hektar**.
+Pola perizinan pertambangan di Pulau Sulawesi selama satu dekade terakhir menunjukkan peningkatan alokasi ruang yang signifikan. Berdasarkan data agregat *Minerbaone*, tercatat **{int(tot_izin):,} Izin Usaha Pertambangan (IUP) baru** sepanjang 2014-2024, dengan total luas konsesi mencapai **{int(tot_luas_izin):,} Hektar**.
 
-Namun, yang menjadi **temuan kritis** adalah fakta empiris *time-series* dari grafik **"Lonjakan Penerbitan Izin Tambang"** di bawah ini. Penerbitan izin pada awal periode di tahun 2014 hanya berada di angka **{int(val_izin_2014):,} IUP**. Malapetaka eksponensial baru terjadi secara anomali pada periode pasca-pandemi: dari angka yang sudah naik ke **{int(val_izin_2022):,} IUP di tahun 2022**, penerbitan izin meledak tak terkendali menjadi **{int(val_izin_2023):,} IUP di tahun 2023**, hingga menembus rekor puncak **{int(val_izin_2024):,} IUP baru di tahun 2024** saja.
+Berdasarkan analisis tren time-series pada grafik **"Penerbitan Izin Tambang"** di bawah, penerbitan izin pada periode awal (2014) tercatat sebanyak **{int(val_izin_2014):,} IUP**. Peningkatan signifikan terjadi pada periode 2022–2024, di mana penerbitan meningkat dari **{int(val_izin_2022):,} IUP di tahun 2022** menjadi **{int(val_izin_2023):,} IUP pada 2023**, dan mencapai **{int(val_izin_2024):,} IUP baru pada 2024**.
 
-Anotasi merah pada grafik dengan tegas mencatat **lonjakan ekstrem sebesar 246% (2022-2024)**. Fakta data *time-series* yang meroket tajam ini membuktikan secara telanjang runtuhnya fungsi kontrol dan hilangnya instrumen moratorium ekologis.
+Anotasi pada grafik mencatat kenaikan sebesar **246% pada periode 2022–2024**. Data ini mengindikasikan perlunya evaluasi terhadap instrumen pengendalian perizinan dan tata ruang. Distribusi perizinan tertinggi berada di Sulawesi Tengah dan Sulawesi Tenggara, yang selaras dengan kawasan pengembangan industri pemurnian nikel.
+
+Uji **Crosstabulation** pada bagian bawah mengukur hubungan antara laju penerbitan perizinan dan indikator deforestasi di wilayah tersebut.
 
 ![1.3](visuals/chart_1_3.png)
 
-**Interpretasi Ekologis:** Semakin banyak izin baru diterbitkan di wilayah timur, semakin besar deforestasi yang terlegitimasi. Pola perizinan ini menunjukkan absennya rem ekologis (moratorium nyata) di Sulawesi.
+**Interpretasi Sektoral:** Peningkatan penerbitan IUP di kawasan timur Sulawesi berbanding lurus dengan perluasan area konversi hutan. Pola perizinan ini menunjukkan pentingnya penerapan instrumen tata ruang dan evaluasi lingkungan secara ketat.
 
 ### Pembuktian Statistik: Intensitas Ekspansi vs Deforestasi
 
-Hipotesis utama narasi ini adalah bahwa **lonjakan ekspansi ekstraktif** berbanding lurus dengan **kebangkrutan ekologis** (deforestasi). Untuk mengujinya secara statistik, tabel crosstab dan uji Chi-Square di bawah menggunakan unit observasi **Provinsi-Tahun** (6 provinsi x 10 tahun = 60 sampel panel).
+Hipotesis utama narasi ini adalah bahwa **lonjakan ekspansi ekstraktif** berbanding lurus dengan **kebangkrutan ekologis** (deforestasi).
+Untuk mengujinya secara statistik di tengah keterbatasan jumlah provinsi di Sulawesi (N=6), tabel crosstab dan uji Chi-Square di bawah menggunakan unit observasi **Provinsi-Tahun** (6 provinsi x 10 tahun = 60 sampel panel).
+Setiap observasi diklasifikasikan menjadi "Tinggi" atau "Rendah" berdasarkan nilai **Median panel** dari indikator yang dipilih.
 
 **Chi-Square Tests (Jumlah Izin Baru IUP * Deforestasi Komoditas)**
 
@@ -643,7 +648,7 @@ Hipotesis utama narasi ini adalah bahwa **lonjakan ekspansi ekstraktif** berband
 
 *{interp_13}*
 
-### Ringkasan Eksekutif Seluruh Skenario Crosstab (Ekspansi Izin vs Deforestasi)
+### Ringkasan Eksekutif Seluruh Skenario Crosstab
 
 Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square) untuk semua kemungkinan kombinasi antara indikator Ekspansi (X) dan Dampak Ekologis (Y) pada panel data yang sama.
 
@@ -654,15 +659,15 @@ Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square) untuk semua 
 
 ---
 
-## 1.4 Paradoks Industri: Ekspansi Izin Tambang vs Kebangkrutan Ekologis
+## 1.4 Analisis Realisasi Investasi PMDN dan Dampak Terhadap Tutupan Hutan
 
-Grafik **"Ledakan Ekspansi Tambang"** di bawah ini menelanjangi pola destruktif yang digerakkan oleh penerbitan konsesi baru.
+Grafik di bawah ini memetakan dinamika penerbitan konsesi tambang baru dan dampaknya terhadap tutupan hutan. Pada tahun 2016, luas konsesi tambang baru yang diterbitkan di Sulawesi mencakup **{int(val_izin_2016):,} Hektar**, dan meningkat signifikan hingga mencapai **{int(val_izin_2023_ha):,} Hektar** pada tahun 2023. Pada periode yang sama, angka deforestasi komoditas mencatatkan luasan sebesar **{int(val_def_2023):,} Hektar**.
 
-Mari kita cermati temuan **fakta data time-series**-nya: pada tahun 2016, luas konsesi tambang baru yang diterbitkan di wilayah Sulawesi menyentuh angka **{int(val_izin_2016):,} Hektar**. Seiring agresifnya hilirisasi, angka ini terus meledak dan memuncak pada tahun 2023 dengan diterbitkannya konsesi baru seluas **{int(val_izin_2023_ha):,} Hektar**. Sialnya, pada waktu yang persis sama, angka deforestasi komoditas tetap merobek rekor hingga mencapai hilangnya **{int(val_def_2023):,} Hektar** tutupan hutan dalam satu tahun tersebut.
+Data ini mengindikasikan bahwa akselerasi penerbitan konsesi berbanding lurus dengan laju konversi hutan alam (akumulasi deforestasi sebesar **{int(tot_deforestasi):,} Hektar**). Hal ini menegaskan pentingnya pertimbangan daya dukung ekologis dalam setiap kebijakan alokasi konsesi pertambangan.
 
 ![1.4](visuals/chart_1_4.png)
 
-**Interpretasi Ekologis (Spasial):** Perbandingan grafik batang di atas mengungkap bukti empiris yang fatal terkait ekspansi wilayah Sentra Tambang (Morowali & Konawe). Di saat **Daerah Non-Sentra** mencatatkan perluasan izin yang sangat minim, **Daerah Sentra Tambang** justru mengalami ledakan raksasa penerbitan konsesi baru. Ini mengonfirmasi bahwa ekspansi industri secara mutlak rakus lahan (land-hungry), mengubah jantung penyangga ekologis di zona-zona sentra menjadi daratan keruk secara legal.
+**Interpretasi Spasial:** Perbandingan grafik batang di atas menunjukkan bahwa tingkat alokasi konsesi di Daerah Sentra Tambang (Morowali & Konawe) jauh lebih tinggi dibanding wilayah non-sentra, yang berdampak langsung pada konsentrasi perubahan tutupan hutan.
 
 ### Pembuktian Statistik: Arus Investasi PMDN vs Deforestasi
 
@@ -685,21 +690,6 @@ Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square) untuk semua 
 | :--- | :--- | :--- | :--- | :--- | :--- |
 {''.join([row + chr(10) for row in exec_rows_14])}
 {exec_narr_14}
-### Pembedahan Ekologis: Aktor, Dampak, dan Emisi
-
-Untuk melengkapi analisis kausalitas di atas, kita harus membedah anatomi kehancuran ekologis secara spesifik melalui 3 metrik forensik pada dasbor **Pembedahan Ekologis** di bawah ini. Ketiga grafik ini mengonfirmasi siapa dalang utama di balik hilangnya hutan dan seberapa parah kerusakan absolut yang telah ditimbulkan terhadap masa depan lingkungan Sulawesi.
-
-**Pertama, Aktor Utama Deforestasi (Donut Chart):** Visualisasi cincin di bawah ini membongkar siapa aktor penjahat ekologis sesungguhnya. Mayoritas absolut dari hilangnya tutupan lahan tidak disebabkan oleh masyarakat adat atau pertanian warga, melainkan dipicu secara mutlak oleh **Ekspansi Komoditas (Tambang & Perkebunan monokultur)** yang melahap dengan rakus hingga **{int(area_komoditas):,} Hektar** ({komoditas_str}). Dominasi warna merah yang pekat pada grafik tersebut membuktikan bahwa perampasan ruang ini dimonopoli oleh kekuatan modal industri raksasa, sekaligus membantah klaim bahwa deforestasi didorong oleh kebutuhan subsisten masyarakat lokal.
-
-**Kedua, Tragedi Hutan Primer:** Kerusakan masif yang didorong oleh komoditas ini tidak terjadi di lahan kritis atau semak belukar yang terdegradasi, melainkan mengorbankan langsung jantung ekosistem bumi. Grafik batang menunjukkan bahwa secara agregat total, lebih dari **{int(tot_primary_loss):,} Hektar Hutan Primer**—ekosistem purba yang membutuhkan waktu ribuan tahun untuk terbentuk dan kaya akan keanekaragaman hayati endemik—telah ditebang habis dan musnah secara permanen tak bersisa.
-
-**Ketiga, Ledakan Emisi Karbon:** Sebagai imbas langsung dari musnahnya hutan primer tersebut, pembongkaran tanah untuk tambang nikel melepaskan bom karbon ke udara terbuka. Grafik cokelat tua menelanjangi fakta bahwa ekspansi komoditas telah meledakkan total **{int(tot_co2_emissions):,} Megagrams Emisi CO2**. Fakta mematikan ini merupakan bantahan paling empiris dan telanjang terhadap narasi palsu "Hilirisasi Hijau".
-
-![Aktor Utama Deforestasi](visuals/chart_1_4b_donut.png)
-
-![Tragedi Hutan Primer Sulawesi](visuals/chart_1_4b_primary.png)
-
-![Ledakan Emisi Karbon Komoditas](visuals/chart_1_4b_co2.png)
 
 ---
 
@@ -735,7 +725,7 @@ Peta rute logistik maritim ini mengilustrasikan realitas geopolitik dari ambisi 
 **Ketergantungan Struktural Rantai Pasok:**
 - **Dominasi Ekspor ke China:** Tiga raksasa kawasan industri baru (IMIP, GNI, VDNI/OSS) yang menikmati fasilitas kemudahan Proyek Strategis Nasional (PSN) mengirimkan hampir seluruh *output* barang setengah jadi (NPI, Feronikel, Matte) langsung ke sentra industri di China Timur dan Selatan.
 - **Absennya Interkoneksi Domestik:** Sangat minim jalur distribusi logistik yang menghubungkan kawasan smelter raksasa ini dengan pusat industri manufaktur di dalam negeri (seperti di Pulau Jawa). Hal ini mengonfirmasi temuan bahwa Sulawesi saat ini lebih difungsikan murni sebagai *extractive feeder* (daerah penyuplai ekstraktif) bagi mesin industrialisasi negara lain, bukan sebagai fondasi terintegrasi untuk ekosistem mobil listrik domestik.
-- **Pergeseran Geopolitik:** Sementara pemain lama seperti PT Vale dan ANTAM memiliki rute pasokan yang mapan ke pasar otomotif tradisional di Jepang dan Korea Selatan, dominasi logistik dan tonase kini telah bergeser drastis seiring dengan ledakan pembangunan smelter baru yang terintegrasi langsung dengan pasar China.
+- **Pergeseran Geopolitik:** Sementara pemain lama seperti PT Vale dan ANTAM memiliki rute pasokan yang mapan ke pasar otomotif tradisional di Jepang dan Korea Selatan, dominasi logistik dan tonase kini telah bergeser drastis seiring dengan peningkatan signifikan pembangunan smelter baru yang terintegrasi langsung dengan pasar China.
 """
 
     md_path = OUT_DIR / "chapter_1.md"

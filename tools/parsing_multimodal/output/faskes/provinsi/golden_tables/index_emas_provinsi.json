@@ -1,0 +1,23 @@
+[
+    {
+        "dokumen": "Profil_Kesehatan_Gorontalo_2020",
+        "jenis": "Faskes Gabungan",
+        "halaman_pdf": 102,
+        "file_gambar": "Profil_Kesehatan_Gorontalo_2020_Faskes_Gabungan_page_102.png",
+        "path": "tools/parsing_multimodal/output/faskes/provinsi/golden_tables/Profil_Kesehatan_Gorontalo_2020_Faskes_Gabungan_page_102.png"
+    },
+    {
+        "dokumen": "Profil_Kesehatan_Gorontalo_2020",
+        "jenis": "Faskes Gabungan",
+        "halaman_pdf": 173,
+        "file_gambar": "Profil_Kesehatan_Gorontalo_2020_Faskes_Gabungan_page_173.png",
+        "path": "tools/parsing_multimodal/output/faskes/provinsi/golden_tables/Profil_Kesehatan_Gorontalo_2020_Faskes_Gabungan_page_173.png"
+    },
+    {
+        "dokumen": "Profil_Kesehatan_Gorontalo_2020",
+        "jenis": "Puskesmas",
+        "halaman_pdf": 26,
+        "file_gambar": "Profil_Kesehatan_Gorontalo_2020_Puskesmas_page_26.png",
+        "path": "tools/parsing_multimodal/output/faskes/provinsi/golden_tables/Profil_Kesehatan_Gorontalo_2020_Puskesmas_page_26.png"
+    }
+]
