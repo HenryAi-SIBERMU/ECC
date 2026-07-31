@@ -1889,8 +1889,8 @@ with tab_ngo:
         # Base bar chart
         bar_chart = alt.Chart(df_ngo_cr6).mark_bar().encode(
             x=alt.X('Titik Sampling:N', sort=None, title='Titik Sampling', axis=alt.Axis(labelAngle=0)),
-            y=alt.Y('Konsentrasi Cr6+ (mg/L):Q', title='Konsentrasi (mg/L)'),
-            color=alt.Color('Konsentrasi Cr6+ (mg/L):Q', scale=alt.Scale(range=["#ffebee", "#b71c1c"]), legend=None)
+            y=alt.Y('Konsentrasi Cr6+ (mg/L):Q', title='Konsentrasi (mg/L)', scale=alt.Scale(type="symlog", constant=0.01)),
+            color=alt.Color('Konsentrasi Cr6+ (mg/L):Q', scale=alt.Scale(domain=[0, 0.1], range=["#ffebee", "#b71c1c"], clamp=True), legend=None)
         ).properties(
             title=alt.TitleParams(text="Kadar Kromium Heksavalen (Cr6+) di Lingkar Tambang vs Baku Mutu", color='#ECEFF1', anchor='start'),
             height=500

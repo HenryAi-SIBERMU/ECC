@@ -144,7 +144,7 @@ wilayah tambang.
 Distribusi infrastruktur kesehatan di wilayah industri menunjukkan
 kesenjangan yang perlu menjadi perhatian. Ketersediaan fasilitas layanan
 primer seperti \textbf{Puskesmas tercatat sebanyak 28,780 unit} pada
-tahun 2022, di kawasan yang bersamaan menanggung beban penyakit di atas
+tahun 2024, di kawasan yang bersamaan menanggung beban penyakit di atas
 rata-rata. Kondisi ini mengindikasikan bahwa pertumbuhan ekonomi dari
 hilirisasi nikel belum diimbangi dengan distribusi infrastruktur
 kesehatan yang proporsional bagi masyarakat di wilayah operasi industri
@@ -175,8 +175,8 @@ Sumber
 \endlastfoot
 \textbf{Total Kasus ISPA/Pneumonia} & \textbf{233,687} & Penyakit
 pernapasan yang meningkat secara konsisten, seiring paparan kronis debu
-batu bara dan emisi SO₂ dari cerobong \emph{smelter}. & Data Agregat
-Dinas Kesehatan (2014-2024) \\
+batu bara dan emisi SO₂ dari cerobong smelter. & Data Agregat Dinas
+Kesehatan (2014-2024) \\
 \textbf{Total Kasus Diare} & \textbf{2,286,607} & Infeksi saluran
 pencernaan yang tercatat tinggi, seiring degradasi kualitas sumber air
 tanah dan badan air akibat limbah tailing tambang. & Data Agregat Dinas
@@ -185,14 +185,12 @@ Kesehatan (2014-2024) \\
 dengan kecenderungan meningkat, berkorelasi dengan keberadaan genangan
 air bekas galian tambang yang tidak direklamasi. & Data Agregat Dinas
 Kesehatan (2014-2024) \\
-\textbf{Rasio Puskesmas Terdaftar (2022)} & \textbf{28,780 Unit} &
+\textbf{Rasio Puskesmas Terdaftar (2024)} & \textbf{28,780 Unit} &
 Fasilitas primer warga yang pertumbuhannya tidak sebanding dengan
 peningkatan beban kasus penyakit di wilayah industri. & BPS Ketersediaan
-Faskes (2022) \\
-\textbf{Rasio Rumah Sakit (2022)} & \textbf{9,760 Unit} & Ketersediaan
-rumah sakit yang tidak merata di wilayah timur, mengindikasikan belum
-optimalnya distribusi infrastruktur medis. & BPS Ketersediaan Faskes
-(2022) \\
+Faskes (2024) \\
+\textbf{Rasio Rumah Sakit (2024)} & \textbf{9,760 Unit} & Ketersediaan
+rumah sakit di wilayah industri. & BPS Ketersediaan Faskes (2024) \\
 \end{longtable}
 }
 
@@ -204,20 +202,63 @@ Ekstraktif}\label{kesenjangan-fasilitas-kesehatan-di-kawasan-ekstraktif}
 \begin{quote}
 \textbf{Metode Analisis:} Sub-bab ini menggunakan visualisasi
 perbandingan \emph{Grouped Horizontal Bar Chart} pada satu periode
-cross-sectional (Tahun 2022) untuk mengukur ketimpangan infrastruktur
-kesehatan primer dan sekunder. 1. Analisis Ketimpangan Infrastruktur
-(Gap Analysis): - Segmentasi Fasilitas: Fasilitas kesehatan
-dikategorikan secara hierarkis menjadi Puskesmas (Faskes Primer) dan
-Rumah Sakit (Faskes Sekunder) untuk dievaluasi secara spasial (Sentra vs
-Non-Sentra). - Evaluasi Defisit: Mengukur kesenjangan distribusi rasio
-fasilitas medis per provinsi menggunakan analisis komparatif absolut. -
-Pemetaan Ketersediaan: Membedah paradoks ketersediaan layanan kesehatan
-di wilayah pusat akumulasi kapital ekstraktif sebagai pembuktian defisit
-infrastruktur publik. 2. Kalkulasi/Formula Pengolahan: Perhitungan
-agregat ketersediaan faskes menurut wilayah pada tahun acuan data
-terlengkap (2022). 3. Variabel \& Fitur Data: Jumlah \& Jenis Faskes
-(Dependen), Kategori Zona (Independen). 4. Dataset \& File: Data Agregat
-Faskes: \texttt{data/processed/sulawesi\_faskes\_agregat\_v2.csv}
+cross-sectional (Tahun 2024) untuk mengukur ketimpangan infrastruktur
+kesehatan primer dan sekunder.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Analisis Ketimpangan Infrastruktur (Gap Analysis):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Segmentasi Fasilitas:} Fasilitas kesehatan dikategorikan
+    secara hierarkis menjadi Puskesmas (Faskes Primer) dan Rumah Sakit
+    (Faskes Sekunder) untuk dievaluasi secara spasial (Sentra vs
+    Non-Sentra).
+  \item
+    \textbf{Evaluasi Defisit:} Mengukur kesenjangan distribusi rasio
+    fasilitas medis per provinsi menggunakan analisis komparatif
+    absolut.
+  \item
+    \textbf{Pemetaan Ketersediaan:} Membedah paradoks ketersediaan
+    layanan kesehatan di wilayah pusat akumulasi kapital ekstraktif
+    sebagai pembuktian defisit infrastruktur publik.
+  \end{itemize}
+\item
+  \textbf{Kalkulasi/Formula Pengolahan:} Perhitungan agregat
+  ketersediaan faskes menurut wilayah pada tahun acuan data terbaru
+  (2024).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{Rata\_Rata\_Faskes\ =\ MEAN(Jumlah\_Faskes)\ GROUP\ BY\ Jenis\_Faskes,\ Kategori\_Zona}
+  \end{itemize}
+\item
+  \textbf{Variabel \& Fitur Data:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Jumlah \& Jenis Faskes (Dependen):} Unit Rumah Sakit dan
+    Puskesmas terdaftar (BPS).
+  \item
+    \textbf{Kategori Zona (Independen):} Lokasi wilayah (Sentra vs
+    Non-Sentra).
+  \end{itemize}
+\item
+  \textbf{Dataset \& File:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Data Agregat Faskes:
+    \texttt{data/processed/sulawesi\_faskes\_agregat\_v3.csv}
+  \end{itemize}
+\end{enumerate}
 \end{quote}
 
 Data perbandingan distribusi fasilitas kesehatan mengindikasikan bahwa
@@ -228,7 +269,7 @@ di wilayah tersebut lebih tinggi.
 Melalui komparasi grafik batang (\emph{Grouped Bar Chart}) di bawah,
 terlihat bahwa ketersediaan Fasilitas Kesehatan di provinsi dengan
 konsentrasi industri tinggi justru mengalami defisit relatif. Rata-rata
-Rumah Sakit di Sentra Industri tercatat \textbf{72 unit} per provinsi,
+Rumah Sakit di Sentra Industri tercatat \textbf{59 unit} per provinsi,
 lebih rendah dari wilayah Non-Sentra yang mencapai \textbf{72 unit}.
 Kesenjangan distribusi fasilitas medis di area dengan beban penyakit
 tinggi ini perlu menjadi pertimbangan dalam perencanaan infrastruktur
@@ -236,8 +277,8 @@ kesehatan ke depan.
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Ketimpangan Faskes 2022}]{visuals_bab3/chart_3_1_faskes.png}}
-\caption{Ketimpangan Faskes 2022}
+\pandocbounded{\includegraphics[keepaspectratio,alt={Ketimpangan Faskes 2024}]{visuals_bab3/chart_3_1_faskes.png}}
+\caption{Ketimpangan Faskes 2024}
 \end{figure}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -249,19 +290,62 @@ Non-Sentra}\label{ketimpangan-beban-penyakit-sentra-industri-vs-non-sentra}
 \textbf{Metode Analisis:} Sub-bab ini menggunakan analisis komparatif
 spasial (\emph{Comparative Spatial Analysis}) untuk membandingkan
 rata-rata beban penyakit antara provinsi sentra ekstraktif dan
-non-sentra. 1. Model Komparasi Spasial (Comparative Analysis): -
-Segmentasi Wilayah (Binning): Provinsi secara sistematis dibagi menjadi
-dua zona: Sentra Industri (Sulteng \& Sultra) dan Non-Sentra (Sulsel,
-Sulut, Gorontalo, Sulbar). - Kuantifikasi Kesenjangan: Menghitung
-rata-rata absolut beban kesakitan (disease burden) per zona untuk
-mengukur ketimpangan kesehatan struktural antar wilayah. - Pemetaan
-Pola: Mengidentifikasi secara analitik apakah konsentrasi fasilitas
-tambang berkorespondensi langsung dengan akumulasi masif kasus
-epidemiologis. 2. Kalkulasi/Formula Pengolahan: Perhitungan rata-rata
-absolut beban penyakit tahunan berdasarkan klasifikasi wilayah. 3.
-Variabel \& Fitur Data: Kategori Zona (Independen), Kasus ISPA/Pneumonia
-\& Diare (Dependen). 4. Dataset \& File: Data Agregasi Kesehatan:
-\texttt{data/processed/sulawesi\_kesehatan\_detail\_2014\_2024.csv}
+non-sentra.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Model Komparasi Spasial (Comparative Analysis):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Segmentasi Wilayah (Binning):} Provinsi secara sistematis
+    dibagi menjadi dua zona: Sentra Industri (Sulteng \& Sultra) dan
+    Non-Sentra (Sulsel, Sulut, Gorontalo, Sulbar).
+  \item
+    \textbf{Kuantifikasi Kesenjangan:} Menghitung rata-rata absolut
+    beban kesakitan (\emph{disease burden}) per zona untuk mengukur
+    ketimpangan kesehatan struktural antar wilayah.
+  \item
+    \textbf{Pemetaan Pola:} Mengidentifikasi secara analitik apakah
+    konsentrasi fasilitas tambang berkorespondensi langsung dengan
+    akumulasi masif kasus epidemiologis.
+  \end{itemize}
+\item
+  \textbf{Kalkulasi/Formula Pengolahan:} Perhitungan rata-rata absolut
+  beban penyakit tahunan berdasarkan klasifikasi wilayah.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{Rata\_Rata\_Kasus\_Zona\ =\ MEAN(Jumlah\_Kasus)\ GROUP\ BY\ Kategori\_Zona}
+  \item
+    \texttt{Disparitas\_Beban\ =\ Rata\_Rata\_Kasus\_Sentra\ /\ Rata\_Rata\_Kasus\_Non\_Sentra}
+  \end{itemize}
+\item
+  \textbf{Variabel \& Fitur Data:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Kategori Zona (Independen):} Labeling spasial (Sentra vs
+    Non-Sentra).
+  \item
+    \textbf{Kasus ISPA/Pneumonia \& Diare (Dependen):} Total prevalensi
+    historis penyakit per tahun dari fasilitas kesehatan primer.
+  \end{itemize}
+\item
+  \textbf{Dataset \& File:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Data Agregasi Kesehatan:
+    \texttt{data/processed/sulawesi\_kesehatan\_detail\_2014\_2024.csv}
+  \end{itemize}
+\end{enumerate}
 \end{quote}
 
 Melalui analisis komparatif spasial, terlihat bahwa beban ekologis tidak
@@ -270,9 +354,9 @@ nikel---Sulawesi Tengah dan Sulawesi Tenggara---menunjukkan indikator
 penyakit yang secara konsisten lebih tinggi.
 
 Data menunjukkan bahwa rata-rata penderita \textbf{ISPA/Pneumonia} di
-Sentra Industri tercatat \textbf{2,634 kasus per tahun}, dibandingkan
+Sentra Industri tercatat \textbf{5,353 kasus per tahun}, dibandingkan
 provinsi Non-Sentra di angka \textbf{2,634 kasus}. Selisih sebesar
-\textbf{1.0 kali lipat} ini mengindikasikan beban pernapasan yang lebih
+\textbf{2.0 kali lipat} ini mengindikasikan beban pernapasan yang lebih
 berat di kawasan penyangga \emph{smelter}. Temuan ini mendukung
 hipotesis kerangka riset D3TLH: wilayah dengan konsentrasi industri
 tinggi cenderung menanggung beban kesehatan yang lebih besar akibat
@@ -284,11 +368,6 @@ tekanan terhadap daya tampung lingkungan.
 \caption{Rata-Rata Kasus ISPA \& Diare per Tahun}
 \end{figure}
 
-\textbf{Interpretasi Ekologis:} Kesenjangan statistik ini
-mengindikasikan bahwa manfaat ekonomi dari hilirisasi nikel belum
-disertai perbaikan infrastruktur kesehatan yang proporsional di wilayah
-operasi industri ekstraktif.
-
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \subsubsection{3.3 Lintasan Waktu Ekologis \& Dinamika Penyakit di
@@ -297,22 +376,65 @@ Ekstraktif}\label{lintasan-waktu-ekologis-dinamika-penyakit-di-kawasan-industri-
 
 \begin{quote}
 \textbf{Metode Analisis:} Sub-bab ini menggunakan visualisasi runtut
-waktu (\emph{Time-Series}) dan uji silang (\emph{Crosstabulation})
-secara interaktif untuk merunut dinamika insiden penyakit sejalan dengan
-akumulasi polusi tahunan. 1. Uji Trend Historis \& Proporsi Tabulasi
-Silang: - Time-Series Tracking: Mengkonversi absolute numbers ke rasio
-per kapita (Kasus per 10.000 Penduduk) untuk menghilangkan bias jumlah
-populasi antar wilayah. - H0 (Null Hypothesis): Penurunan kualitas
-lingkungan (IKU/IKA) tidak berkorelasi dengan peningkatan insidensi
-penyakit pernapasan dan pencernaan. - Decision Rule: Chi-Square P-Value
-\textless{} 0.05 (Tolak H0) dan kalkulasi Odds Ratio. 2.
-Kalkulasi/Formula Pengolahan: Rasio keparahan per kapita dan agregasi
-tabel silang panel. 3. Variabel \& Fitur Data: Indikator Kualitas
-Lingkungan (X), Total Insiden Penyakit (Y), Waktu (Time). 4. Dataset \&
-File: Data Lingkungan \& Penyakit:
-\texttt{data/processed/sulawesi\_kesehatan\_detail\_2014\_2024.csv},
-\texttt{data/processed/sulawesi\_ika\_2016\_2024.csv},
-\texttt{data/processed/sulawesi\_iku\_2015\_2024.csv}
+waktu (Time-Series) dan uji silang (Crosstabulation) secara interaktif
+untuk merunut dinamika insiden penyakit sejalan dengan akumulasi polusi
+tahunan.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Uji Trend Historis \& Proporsi Tabulasi Silang:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Time-Series Tracking:} Mengkonversi absolute numbers ke
+    rasio per kapita (Kasus per 10.000 Penduduk) untuk menghilangkan
+    bias jumlah populasi antar wilayah.
+  \item
+    \texttt{H0\ (Null\ Hypothesis):\ Penurunan\ kualitas\ lingkungan\ (IKU/IKA)\ tidak\ berkorelasi\ dengan\ peningkatan\ insidensi\ penyakit\ pernapasan\ dan\ pencernaan.}
+  \item
+    \texttt{Decision\ Rule:\ Chi-Square\ P-Value\ \textless{}\ 0.05\ (Tolak\ H0)\ dan\ kalkulasi\ Odds\ Ratio.}
+  \end{itemize}
+\item
+  \textbf{Kalkulasi/Formula Pengolahan:} Rasio keparahan per kapita dan
+  agregasi tabel silang panel.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{Insiden\_Per\_10K\ =\ (Total\_Kasus\ /\ Total\_Populasi)\ *\ 10,000}
+  \item
+    \texttt{Odds\_Ratio\ =\ (A\ *\ D)\ /\ (B\ *\ C)}
+  \end{itemize}
+\item
+  \textbf{Variabel \& Fitur Data:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Indikator Kualitas Lingkungan (X):} IKU/IKA sebagai matriks
+    tekanan lingkungan.
+  \item
+    \textbf{Total Insiden Penyakit (Y):} Angka absolut \& insiden per
+    kapita dari beragam penyakit lingkungan (ISPA, Diare, Malaria,
+    Kusta).
+  \item
+    \textbf{Waktu (Time):} Periode longitudinal 2014-2024.
+  \end{itemize}
+\item
+  \textbf{Dataset \& File:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Data Lingkungan \& Penyakit:
+    \texttt{data/processed/sulawesi\_kesehatan\_detail\_2014\_2024.csv},
+    \texttt{data/processed/sulawesi\_ika\_2016\_2024.csv},
+    \texttt{data/processed/sulawesi\_iku\_2015\_2024.csv}
+  \end{itemize}
+\end{enumerate}
 \end{quote}
 
 Meskipun secara akumulatif kawasan Sentra Industri menanggung beban yang
@@ -345,24 +467,10 @@ Distribusi Stacked Bar
 \end{longtable}
 }
 
-\textbf{Insight Ekologis (Insiden per 10k):} Grafik membagi jumlah kasus
-terhadap total populasi, menampilkan beban per kapita (rasio keparahan)
-yang sesungguhnya. Terlihat jelas bahwa rasio kesakitan di kawasan
-Sentra Industri (garis merah tebal) lebih tinggi secara konsisten
+\textbf{Insight Ekologis:} Grafik per kapita membagi jumlah kasus
+terhadap total populasi, menampilkan beban per kapita yang sesungguhnya.
+Terlihat bahwa rasio kesakitan di kawasan Sentra Industri lebih tinggi
 dibandingkan wilayah Non-Sentra.
-
-\textbf{Catatan Analitis (Total Kasus Absolut):} Tingginya garis biru
-(contoh: Sulsel) pada grafik absolut ini merupakan anomali karena
-perbedaan populasi. Penduduk Sulsel (9 juta jiwa) 3x lebih besar dari
-Sulteng (3 juta jiwa). Ketersediaan rumah sakit rujukan yang baik di
-Sulsel juga meminimalisir \emph{under-reporting} (kasus tak tercatat)
-yang banyak luput di lingkar tambang.
-
-\textbf{Interpretasi Data (Stacked Bar Chart):} Proporsi beban kesakitan
-di wilayah Sentra Industri (blok warna merah) secara konsisten
-mendominasi dan semakin menebal dari tahun ke tahun. Akumulasi ini
-menunjukkan bahwa ekspansi kawasan industri berkorelasi dengan
-peningkatan beban kesehatan masyarakat di lingkar tambang.
 
 \paragraph{Uji Statistik: Asosiasi Kualitas Udara (IKU) dengan Insidensi
 Penyakit}\label{uji-statistik-asosiasi-kualitas-udara-iku-dengan-insidensi-penyakit}
@@ -413,9 +521,11 @@ IKU Wilayah Non-Sentra & Total Kasus ISPA/Pneumonia & 1.044 & 0.307 &
 \end{longtable}
 }
 
-Dari skenario pengujian, terbukti secara SIGNIFIKAN bahwa penurunan
-kualitas udara di wilayah sentra tambang berkorelasi mutlak dengan
-lonjakan ISPA.
+\begin{quote}
+\textbf{Pembedahan Realitas Ekologis:} Dari skenario pengujian, terbukti
+secara SIGNIFIKAN bahwa penurunan kualitas udara di wilayah sentra
+tambang berkorelasi mutlak dengan lonjakan ISPA.
+\end{quote}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -426,31 +536,73 @@ Sulteng)}\label{anomali-zoonosis-dampak-kritis-ekspansi-industri-di-level-tapak-
 \begin{quote}
 \textbf{Metode Analisis:} Sub-bab ini menggunakan studi kasus mendalam
 (\emph{Deep Dive Case Study}) berbasis deret waktu di tingkat distrik
-(Kabupaten/Kota) khusus untuk endemik Sulawesi Tengah. 1. Model Anomali
-Ekologis Spesifik Distrik: - Analisis Komparatif Zoonosis: Mengisolasi
-zona episentrum ekstraktif (Morowali, Morowali Utara, Banggai) dan
-membandingkannya secara absolut dengan kabupaten agraris/non-tambang
-yang difungsikan sebagai daerah kontrol. - Korelasi Ekologis: Merunut
-pola peningkatan prevalensi penyakit infeksi yang ditransmisikan oleh
-vektor di kawasan perluasan pembukaan lahan (land clearing). - Pemetaan
-Risiko: Mengukur eskalasi kerentanan populasi terhadap ancaman wabah
-malaria dan DBD akibat hancurnya perlindungan habitat alami. 2.
-Kalkulasi/Formula Pengolahan: Akumulasi tren tahunan infeksi Zoonosis
-per Kategori Wilayah (Tambang vs Non-Tambang). 3. Variabel \& Fitur
-Data: Kategori Wilayah Distrik, Total Kasus Penyakit. 4. Dataset \&
-File: Data Zoonosis:
-\texttt{data/processed/zoonosis\_kab\_kota\_2015\_2024.csv}
+(Kabupaten/Kota) khusus untuk endemik Sulawesi Tengah.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Model Anomali Ekologis Spesifik Distrik:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Analisis Komparatif Zoonosis:} Mengisolasi zona episentrum
+    ekstraktif (Morowali, Morowali Utara, Banggai) dan membandingkannya
+    secara absolut dengan kabupaten agraris/non-tambang yang difungsikan
+    sebagai daerah kontrol.
+  \item
+    \textbf{Korelasi Ekologis:} Merunut pola peningkatan prevalensi
+    penyakit infeksi yang ditransmisikan oleh vektor di kawasan
+    perluasan pembukaan lahan (\emph{land clearing}).
+  \item
+    \textbf{Pemetaan Risiko:} Mengukur eskalasi kerentanan populasi
+    terhadap ancaman wabah malaria dan DBD akibat hancurnya perlindungan
+    habitat alami.
+  \end{itemize}
+\item
+  \textbf{Kalkulasi/Formula Pengolahan:} Akumulasi tren tahunan infeksi
+  Zoonosis per Kategori Wilayah (Tambang vs Non-Tambang).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{Tren\_Zoonosis\_Distrik\ =\ Σ(Total\_Kasus)\ GROUP\ BY\ Kategori\_Wilayah,\ Tahun}
+  \end{itemize}
+\item
+  \textbf{Variabel \& Fitur Data:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Kategori Wilayah Distrik:} Label dikotomi daerah ring 1
+    tambang vs daerah penyangga luar ring.
+  \item
+    \textbf{Total Kasus Penyakit:} Angka infeksi yang ditransmisikan
+    vektor (Malaria, Rabies, Gigitan Hewan).
+  \end{itemize}
+\item
+  \textbf{Dataset \& File:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Data Zoonosis:
+    \texttt{data/processed/zoonosis\_kab\_kota\_2015\_2024.csv}
+  \end{itemize}
+\end{enumerate}
 \end{quote}
 
 Data empiris Dinas Kesehatan mencatat total akumulasi \textbf{3,111
 kasus} penyakit Zoonosis di wilayah Lingkar Tambang/Smelter Aktif
 Sulawesi Tengah (Morowali, Morowali Utara, Banggai) sepanjang rentang
-waktu pengamatan. Rincian insidensi tertinggi menurut jenis penyakit
-meliputi: DBD mencatatkan insidensi tertinggi 431 kasus di Morowali
-Utara (2024), FILARIASIS mencatatkan insidensi tertinggi 16 kasus di
-Banggai (2019), RABIES mencatatkan insidensi tertinggi 2 kasus di
-Banggai (2019), serta MALARIA mencatatkan insidensi tertinggi 355 kasus
-di Morowali Utara (2024).
+waktu pengamatan.** Rincian insidensi tertinggi menurut jenis penyakit
+meliputi: \textbf{DBD} mencatatkan insidensi tertinggi \textbf{431
+kasus} di Morowali Utara (2024), \textbf{FILARIASIS} mencatatkan
+insidensi tertinggi \textbf{16 kasus} di Banggai (2019), \textbf{RABIES}
+mencatatkan insidensi tertinggi \textbf{2 kasus} di Banggai (2019),
+serta \textbf{MALARIA} mencatatkan insidensi tertinggi \textbf{355
+kasus} di Morowali Utara (2024).**
 
 Peningkatan angka zoonosis ini berkorelasi dengan perubahan ekologis
 akibat ekspansi penggunaan lahan. Konversi tutupan hutan demi perluasan
@@ -487,21 +639,14 @@ Rata-rata Kasus per Tahun
 \end{longtable}
 }
 
-\textbf{Keterangan pembacaan grafik tren:} garis merah solid menandai
-kabupaten \textbf{Ekstraktif/Smelter} (Morowali, Morowali Utara,
-Banggai). Gradasi merah mengikuti puncak kasus pada penyakit yang
-dipilih: merah paling kuat = puncak tertinggi. Garis abu-abu putus-putus
-menandai wilayah \textbf{Non-Ekstraktif/Kontrol}. Angka di setiap titik
-menunjukkan total kasus absolut pada tahun tersebut.
-
-\textbf{Interpretasi Spesifik Zoonosis:} Perbandingan grafik rata-rata
-di atas menunjukkan bahwa beban absolut kasus Zoonosis di wilayah
-Lingkar Tambang/Smelter Aktif mencapai \textbf{115.5 kasus/tahun} vs
-\textbf{88.5 kasus/tahun} di wilayah kontrol. Meskipun populasi area
-tambang seringkali lebih terkonsentrasi, angka ini memberikan sinyal
-kuat bahwa degradasi lingkungan di sekitar smelter menciptakan ceruk
-ekologis baru (seperti genangan air galian) yang mempercepat siklus
-penularan penyakit.
+\textbf{Interpretasi Spesifik (per Penyakit):} Perbandingan grafik
+rata-rata di samping menunjukkan bahwa beban absolut kasus penyakit
+zoonosis utama di wilayah Lingkar Tambang/Smelter Aktif mencapai
+\textbf{115.5 kasus/tahun} vs \textbf{88.5 kasus/tahun} di wilayah
+kontrol. Meskipun populasi area tambang seringkali lebih terkonsentrasi,
+angka ini memberikan sinyal kuat bahwa degradasi lingkungan di sekitar
+smelter menciptakan ceruk ekologis baru (seperti genangan air galian)
+yang mempercepat siklus penularan.
 
 \paragraph{Analisis Tambahan: Proxy Zoonosis (DBD) dan Tekanan
 Populasi}\label{analisis-tambahan-proxy-zoonosis-dbd-dan-tekanan-populasi}
@@ -545,19 +690,63 @@ Penyakit}\label{pemetaan-geospasial-distribusi-spasial-beban-penyakit}
 \textbf{Metode Analisis:} Sub-bab ini menggunakan visualisasi WebGIS
 (Choropleth dan Point/Bubble Mapping) berbasis Leaflet/Folium untuk
 menganalisis pergeseran geospasial beban penyakit secara komparatif
-(\emph{Before-After Analysis}). 1. Pemetaan Spasial Komparatif: -
-Poligon (Choropleth): Intensitas warna area mewakili tingkatan total
-insiden ISPA. Semakin gelap, semakin rentan. - Titik (Bubble):
-Ukuran/radius lingkaran merepresentasikan volume kasus Diare secara
-proporsional. - Identifikasi Episentrum (Clustering): Menganalisis
-pemusatan visual beban ganda penyakit pada koordinat geografis yang
-beririsan langsung dengan zona perluasan industri. 2. Kalkulasi/Formula
-Pengolahan: Komparasi absolut lintas dekade (2015 vs 2024) dan
-standarisasi radius bubble. 3. Variabel \& Fitur Data: Titik
-Koordinat/Poligon (GeoJSON), Warna \& Ukuran (Total ISPA dan Total
-Diare). 4. Dataset \& File: Data Spasial:
-\texttt{indonesia-prov.geojson}, Data Penyakit:
-\texttt{sulawesi\_kesehatan\_detail\_2014\_2024.csv}
+(\emph{Before-After Analysis}).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Pemetaan Spasial Komparatif:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Poligon (Choropleth):} Intensitas warna area mewakili
+    tingkatan total insiden ISPA. Semakin gelap, semakin rentan.
+  \item
+    \textbf{Titik (Bubble):} Ukuran/radius lingkaran merepresentasikan
+    volume kasus Diare secara proporsional.
+  \item
+    \textbf{Identifikasi Episentrum (Clustering):} Menganalisis
+    pemusatan visual beban ganda penyakit pada koordinat geografis yang
+    beririsan langsung dengan zona perluasan industri.
+  \end{itemize}
+\item
+  \textbf{Kalkulasi/Formula Pengolahan:} Komparasi absolut lintas dekade
+  (2015 vs 2024) dan standarisasi radius bubble.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{Radius\_Bubble\ =\ SQRT(Kasus\_Diare)\ /\ K} (K = konstanta
+    penyesuaian visual)
+  \item
+    \texttt{Growth\_Rate\ =\ ((Kasus\_2024\ -\ Kasus\_2015)\ /\ Kasus\_2015)\ *\ 100\%}
+  \end{itemize}
+\item
+  \textbf{Variabel \& Fitur Data:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Titik Koordinat/Poligon:} Polygon Provinsi Sulawesi
+    (GeoJSON).
+  \item
+    \textbf{Warna \& Ukuran (Visual Encode):} Total ISPA dan Total Diare
+    (Data Kesehatan).
+  \end{itemize}
+\item
+  \textbf{Dataset \& File:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Data Spasial: \texttt{data/raw/indonesia-prov.geojson}
+  \item
+    Data Penyakit:
+    \texttt{data/processed/sulawesi\_kesehatan\_detail\_2014\_2024.csv}
+  \end{itemize}
+\end{enumerate}
 \end{quote}
 
 Peta interaktif di bawah ini memproyeksikan secara spasial perbandingan
@@ -587,10 +776,8 @@ Tahun 2024 (Kondisi Terkini)
 }
 
 \textbf{Before-After Geospasial:} Warna merah (\emph{Choropleth})
-menunjukkan keparahan absolut ISPA, sedangkan lingkaran biru
-(\emph{Bubble}) merepresentasikan skala Diare. Skala legenda disamakan
-agar komparasi antar-tahun lebih adil. Sumber: Dinas Kesehatan 2015 \&
-2024.
+menunjukkan tingkat absolut ISPA, sedangkan lingkaran biru
+(\emph{Bubble}) merepresentasikan skala Diare.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -600,13 +787,53 @@ Tambang}\label{krisis-air-bersih-tinjauan-makro-provinsi-dan-bukti-uji-klinis-li
 
 \begin{quote}
 \textbf{Metode Analisis:} Sub-bab ini membedah krisis air bersih melalui
-dua tingkat observasi paralel. Pendekatan komplementer dua lensa. 1.
-Tinjauan Mikro (Bukti Fisik Laboratorium): Memeriksa kadar Kromium
-Heksavalen (Cr6+) di muara pembuangan air dan tailing tambang
-menggunakan data uji lab lapangan. 2. Tinjauan Makro (Analisis Panel
-Provinsi): Korelasi Bivariat (Scatter Plot) untuk melihat tren
-distribusi antara IKA dan kasus Diare. 3. Variabel \& Fitur Data:
-Kualitas Air (Mikro), IKA (Makro), Diare (Makro).
+dua tingkat observasi paralel. Pertama, tinjauan mikro spesifik di
+kawasan padat industri menggunakan hasil uji fisik laboratorium
+independen. Kedua, pemetaan tren makro di tingkat provinsi menggunakan
+Regresi Linier Sederhana dan Uji Tabulasi Silang (Chi-Square).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Tinjauan Mikro (Bukti Fisik Laboratorium):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Memeriksa kadar Kromium Heksavalen (Cr6+) di muara pembuangan air
+    dan \emph{tailing} tambang menggunakan data uji lab lapangan.
+  \item
+    \texttt{Benchmark:} Membandingkan temuan sampel dengan baku mutu air
+    laut (0.005 mg/L) untuk menilai pelanggaran toksisitas secara
+    absolut.
+  \end{itemize}
+\item
+  \textbf{Tinjauan Makro (Analisis Panel Provinsi):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Korelasi Bivariat (Scatter Plot):} Melihat tren distribusi
+    antara IKA dan kasus Diare untuk melihat gambaran umum regional,
+    terlepas dari kelemahan signifikansi OLS (Ordinary Least Squares)
+    akibat jumlah sampel yang sangat kecil (n=6 provinsi).
+  \end{itemize}
+\item
+  \textbf{Variabel \& Fitur Data:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Kualitas Air (Mikro):} Data konsentrasi Cr6+ dari
+    investigasi lapangan (AEER \& WALHI).
+  \item
+    \textbf{IKA (Makro):} Indeks Kualitas Air (BPS/KLHK).
+  \item
+    \textbf{Diare (Makro):} Kasus infeksi saluran pencernaan yang
+    dilayani (Kemenkes).
+  \end{itemize}
+\end{enumerate}
 \end{quote}
 
 Sub-bab ini membedah krisis air bersih melalui \textbf{dua tingkat
@@ -632,33 +859,42 @@ Diare}\label{pemetaan-analisis-kualitas-air-dan-kasus-diare}
   >{\centering\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
-Bukti Fisik: Laboratorium NGO
+Beban Diare vs IKA (Bar)
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Pemetaan Makro (Scatter Plot)
+Korelasi Negatif: IKA vs Diare (Scatter Plot \& OLS)
 \end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-\pandocbounded{\includegraphics[keepaspectratio,alt={Kadar Kromium Heksavalen (Cr6+) di Lingkar Tambang}]{visuals_bab3/chart_3_6_ngo.png}}
+\pandocbounded{\includegraphics[keepaspectratio,alt={Beban Diare vs IKA}]{visuals_bab3/chart_3_6a_bar_korelasi.png}}
 &
-\pandocbounded{\includegraphics[keepaspectratio,alt={Distribusi IKA vs Kasus Diare}]{visuals_bab3/chart_3_6b_scatter.png}} \\
-\pandocbounded{\includegraphics[keepaspectratio,alt={Beban Diare vs IKA (Bar)}]{visuals_bab3/chart_3_6a_bar_korelasi.png}}
-& \\
+\pandocbounded{\includegraphics[keepaspectratio,alt={Scatter IKA vs Diare}]{visuals_bab3/chart_3_6b_scatter.png}} \\
 \end{longtable}
 }
 
-\textbf{Bukti Fisik (Laboratorium NGO):} Menghadapi absennya data
-\textbf{``Akses Air Minum Layak''} di tingkat Kabupaten dari BPS sejak
-2019, kami menggunakan \textbf{Ground Truth Data} dari pengujian
-laboratorium independen (AEER \& WALHI) sebagai alternatif pengukur
-pencemaran air secara absolut.
+Titik yang tersebar acak mengindikasikan bahwa data makro secara
+statistik tidak menunjukkan korelasi kausalitas yang kuat pada level
+agregat provinsi (R²=0.043, P=0.157). Oleh karena itu, kesimpulan
+pencemaran air lebih valid ditarik dari hasil uji klinis mikroskopis di
+tapak (Bukti Lab NGO).
 
-Berdasarkan hasil uji klinis independen di lingkar kawasan tambang,
-teridentifikasi bahwa sebagian besar titik sampel melampaui batas aman
-toksisitas biota laut (0.005 mg/L). Konsentrasi terparah ditemukan
-dengan kadar Kromium Heksavalen yang jauh lebih tinggi dari ambang batas
-aman.
+\textbf{Interpretasi Korelasi Statistik:} Scatter plot di atas
+menunjukkan korelasi OLS, namun secara statistik pada panel provinsi,
+korelasi ini lemah. Karena itu kita gunakan crosstab untuk membuktikan
+hubungan kausal.
+
+Menghadapi absennya data \textbf{``Akses Air Minum Layak''} di tingkat
+Kabupaten dari BPS sejak 2019, kami menggunakan \textbf{Ground Truth
+Data} dari pengujian laboratorium independen (AEER \& WALHI) sebagai
+alternatif pengukur pencemaran air secara absolut.
+
+Berdasarkan hasil uji klinis dari \textbf{40} titik sampel di lingkar
+kawasan tambang, teridentifikasi bahwa \textbf{35 titik (88\%) melampaui
+batas aman toksisitas biota laut} (0.005 mg/L). Konsentrasi terparah
+ditemukan di \textbf{Sungai Makarti} dengan kadar Kromium Heksavalen
+mencapai \textbf{0.052 mg/L}, atau \textbf{10 kali lipat} lebih tinggi
+dari ambang batas aman.
 
 ⚠️ \textbf{Peringatan Klinis:} Kromium Heksavalen (Cr6+) adalah logam
 berat karsinogenik beracun. Paparan berulang pada air yang dikonsumsi
@@ -668,30 +904,14 @@ tambang. Bukti konkret di level tapak ini mengonfirmasi asimetri dampak
 ekologis industri ekstraktif yang gagal ditangkap oleh agregasi data
 makro.
 
-\textbf{Pemetaan Makro (Scatter Plot):} Titik yang tersebar acak
-mengindikasikan bahwa data makro secara statistik tidak menunjukkan
-korelasi kausalitas yang kuat pada level agregat provinsi (R²=0.043,
-P=0.157). Oleh karena itu, kesimpulan pencemaran air lebih valid ditarik
-dari hasil uji klinis mikroskopis di tapak (Bukti Lab NGO).
-
-\begin{verbatim}
-    Hasil regresi linear (OLS) menunjukkan bahwa hubungan antara IKA dan Diare **TIDAK SIGNIFIKAN** secara statistik pada tingkat kepercayaan 95% (**R² = 0.043, P = 0.1565 > 0.05**).
-
-    Oleh karena itu, kita **tidak dapat menyimpulkan secara absolut** bahwa setiap penurunan 1 poin IKA otomatis meningkatkan jumlah kasus Diare secara proporsional. Namun secara kualitatif (visual), Provinsi Sentra Industri (titik merah) memang cenderung berkumpul di area IKA yang sangat rendah, memperlihatkan kerentanan ekologis yang patut diwaspadai.
-
-    **Bubble size merepresentasikan tahun:** titik besar = tahun terkini (2024). Meskipun relasi linearnya lemah, sebaran titik ini menunjukkan perlunya kehati-hatian dalam mengelola limbah yang mencemari air permukaan.
-    
-\end{verbatim}
-
-\textbf{Opsi Publik (Grafik Batang):} Interpretasi Visual: Provinsi di
-sebelah kiri yang memiliki warna coklat pekat (skor IKA terburuk) secara
-konsisten diiringi dengan batang kasus diare yang relatif lebih tinggi.
-
 \paragraph{Uji Statistik: Asosiasi IKA Rendah dengan Tingginya Kasus
 Diare}\label{uji-statistik-asosiasi-ika-rendah-dengan-tingginya-kasus-diare}
 
 Untuk membuktikan hubungan kausal secara statistik, crosstab Chi-Square
-di bawah menggunakan unit observasi Provinsi-Tahun.
+di bawah menggunakan unit observasi \textbf{Provinsi-Tahun} (6 provinsi
+× 9 tahun = 54 sampel panel). Setiap observasi diklasifikasikan menjadi
+``IKA Rendah/Tinggi'' dan ``Diare Rendah/Tinggi'' berdasarkan
+\textbf{median panel} dari masing-masing indikator.
 
 \subsubsection{Ringkasan Eksekutif Seluruh Skenario Crosstab (IKA vs
 Diare)}\label{ringkasan-eksekutif-seluruh-skenario-crosstab-ika-vs-diare}
@@ -729,10 +949,12 @@ TIDAK SIGNIFIKAN \\
 \end{longtable}
 }
 
-Hasil pengujian menunjukkan bahwa korelasi antara IKA dan Kasus Diare
-TIDAK SIGNIFIKAN secara statistik (P ≥ 0.10). Ini membuktikan bahwa
-pencemaran air telah terjadi secara brutal dan merata di seluruh
-provinsi.
+\begin{quote}
+\textbf{Pembedahan Realitas Ekologis:} Hasil pengujian menunjukkan bahwa
+korelasi antara IKA dan Kasus Diare TIDAK SIGNIFIKAN secara statistik (P
+≥ 0.10). Ini membuktikan bahwa pencemaran air telah terjadi secara
+brutal dan merata di seluruh provinsi.
+\end{quote}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -743,18 +965,62 @@ Diabaikan}\label{beban-limbah-beracun-b3-eksternalitas-kesehatan-yang-diabaikan}
 \begin{quote}
 \textbf{Metode Analisis:} Sub-bab ini menggunakan agregasi statistik
 deskriptif dan komparasi grafik batang (\emph{Bar Chart}) untuk merunut
-skala penumpukan limbah B3. 1. Agregasi Limpasan Limbah Industri: -
-Statistik Deskriptif: Melakukan pemeringkatan dan profiling komposisi
-buangan B3 absolut dari setiap fasilitas peleburan logam berat yang
-beroperasi. - Audit Defisit Pengelolaan: Mengkomparasikan kapasitas
-pengolahan yang dilaporkan dengan estimasi empiris total emisi limbah. -
-Pemetaan Toksisitas: Mengidentifikasi sumber dan skala ancaman racun
-lingkungan berdasarkan jenis tailing dan material B3 yang dominan. 2.
-Kalkulasi/Formula Pengolahan: Penjumlahan agregat produksi limbah kotor
-dari level pabrik hingga ke level regional. 3. Variabel \& Fitur Data:
-Timbulan (Ton/Tahun) (Dependen), Kawasan \& Jenis Limbah (Independen).
-4. Dataset \& File: Data Audit LSM \& KLHK:
-\texttt{data/processed/sulawesi\_limbah\_b3.csv}
+skala penumpukan limbah B3 sebagai pemicu (driver) racun ekosistem.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Agregasi Limpasan Limbah Industri:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Statistik Deskriptif:} Melakukan pemeringkatan dan
+    \emph{profiling} komposisi buangan B3 absolut dari setiap fasilitas
+    peleburan logam berat yang beroperasi.
+  \item
+    \textbf{Audit Defisit Pengelolaan:} Mengkomparasikan kapasitas
+    pengolahan yang dilaporkan dengan estimasi empiris total emisi
+    limbah.
+  \item
+    \textbf{Pemetaan Toksisitas:} Mengidentifikasi sumber dan skala
+    ancaman racun lingkungan berdasarkan jenis tailing dan material B3
+    yang dominan.
+  \end{itemize}
+\item
+  \textbf{Kalkulasi/Formula Pengolahan:} Penjumlahan agregat produksi
+  limbah kotor dari level pabrik hingga ke level regional.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{Total\_B3\_Provinsi\ =\ Σ(Timbulan\_Ton)\ GROUP\ BY\ Provinsi}
+  \item
+    \texttt{Total\_B3\_Jenis\ =\ Σ(Timbulan\_Ton)\ GROUP\ BY\ Jenis\_Limbah}
+  \end{itemize}
+\item
+  \textbf{Variabel \& Fitur Data:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Timbulan (Ton/Tahun):} Estimasi absolut volume buangan
+    limbah (Dependen).
+  \item
+    \textbf{Kawasan \& Jenis Limbah:} Klasifikasi operasi dan karakter
+    residu seperti Slag/Tailing/Air Asam Tambang (Independen).
+  \end{itemize}
+\item
+  \textbf{Dataset \& File:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Data Audit LSM \& KLHK:
+    \texttt{data/processed/sulawesi\_limbah\_b3.csv}
+  \end{itemize}
+\end{enumerate}
 \end{quote}
 
 Jika sub-bab sebelumnya telah membedah dampak pencemaran udara (IKU →
@@ -765,39 +1031,41 @@ dan tambang nikel.
 
 \textbf{Limbah B3} adalah residu hasil proses ekstraktif yang mengandung
 logam berat, senyawa kimia berbahaya, dan material berpotensi
-karsinogenik. Jenis limbah ini meliputi: - \textbf{Slag \& Tailing}:
-Material sisa pengolahan bijih nikel yang mengandung logam berat seperti
-Chromium, Nikel, dan Kadmium - \textbf{Tailing HPAL}: Limbah padat hasil
-proses High-Pressure Acid Leaching (HPAL) yang bersifat asam dan
-mengandung sulfat tinggi - \textbf{Air Limbah Tambang}: Buangan cair
-yang tercemar logam berat dan asam sulfat - \textbf{Residu \& DSTP}:
-Material beracun yang dikaji dalam opsi pembuangan laut dalam (Deep Sea
-Tailing Placement)
+karsinogenik. Jenis limbah ini meliputi:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Slag \& Tailing}: Material sisa pengolahan bijih nikel yang
+  mengandung logam berat seperti Chromium, Nikel, dan Kadmium
+\item
+  \textbf{Tailing HPAL}: Limbah padat hasil proses High-Pressure Acid
+  Leaching (HPAL) yang bersifat asam dan mengandung sulfat tinggi
+\item
+  \textbf{Air Limbah Tambang}: Buangan cair yang tercemar logam berat
+  dan asam sulfat
+\item
+  \textbf{Residu \& DSTP}: Material beracun yang dikaji dalam opsi
+  pembuangan laut dalam (Deep Sea Tailing Placement)
+\end{itemize}
 
 Klaim bahwa slag dapat ``dimanfaatkan untuk batako dan penahan abrasi''
 memerlukan kajian kritis, mengingat akumulasi material ini memerlukan
 pengelolaan dan pemantauan risiko kesehatan yang transparan.
 
 Data kompilasi dari laporan AEER, WALHI, JATAM, dan kajian akademis
-membuktikan bahwa \textbf{operasi smelter di Sulawesi menghasilkan
-puluhan juta ton limbah B3 per tahun}---dengan dampak kesehatan jangka
-panjang yang perlu dimonitor secara berkelanjutan.
+membuktikan bahwa \textbf{operasi smelter di Sulawesi menghasilkan lebih
+dari 32.8 juta ton limbah B3 per tahun}. Angka ini setara dengan
+menimbun \textbf{32,800 gedung bertingkat} dengan material beracun
+setiap tahunnya.
 
-\textbf{Skala Ancaman Limbah Beracun:} Data komprehensif dari berbagai
-sumber (AEER, WALHI, JATAM, BPLH) membuktikan bahwa industri nikel di
-Sulawesi menghasilkan \textbf{lebih dari 32.8 juta ton limbah B3 per
-tahun}. Angka ini setara dengan menimbun \textbf{32,800 gedung
-bertingkat} dengan material beracun setiap tahunnya. Provinsi
-\textbf{Sulawesi Tengah} menanggung beban terbesar dengan \textbf{25.3
-juta ton} limbah B3 per tahun, didominasi oleh operasi IMIP (Indonesia
-Morowali Industrial Park) yang menghasilkan slag dan tailing HPAL tanpa
-izin formal yang memadai. Catatan Kritis: Angka resmi ini kemungkinan
-besar \emph{underestimate} (meremehkan) karena banyak fasilitas yang
-tidak melaporkan timbulan limbah secara transparan. Estimasi independen
-menyebutkan angka sebenarnya bisa 2-3 kali lipat lebih tinggi.
+Provinsi \textbf{Sulawesi Tengah} menanggung beban terbesar dengan
+\textbf{25.3 juta ton} limbah B3 per tahun, didominasi oleh operasi
+\textbf{IMIP (Indonesia Morowali Industrial Park)} yang menghasilkan
+slag dan tailing HPAL tanpa izin formal yang memadai.
 
-\paragraph{Distribusi Limbah B3 per Provinsi \&
-Komposisi}\label{distribusi-limbah-b3-per-provinsi-komposisi}
+\paragraph{Distribusi Limbah B3 per
+Provinsi}\label{distribusi-limbah-b3-per-provinsi}
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
@@ -823,28 +1091,32 @@ Komposisi Limbah B3 Berdasarkan Jenis
 \textbf{Sulawesi Tengah dan Sulawesi Tenggara}---dua provinsi episentrum
 hilirisasi nikel---menanggung volume limbah B3 yang signifikan.
 \textbf{Sulawesi Tengah} menghasilkan \textbf{25.3 juta ton B3/tahun},
-terutama dari kawasan industri Morowali. Ini mencerminkan
-\textbf{ketimpangan ekologis}: wilayah penyangga menanggung beban limbah
-industri yang signifikan dibandingkan manfaat ekonomi langsung yang
-diterima. Warga lokal beriringan dengan lokasi timbunan
-slag---\textbf{sehingga membutuhkan pengawasan proteksi kesehatan dan
-transparansi pengolahan}.
+terutama dari kawasan industri Morowali.
+
+Ini mencerminkan \textbf{ketimpangan ekologis}: wilayah penyangga
+menanggung beban limbah industri yang signifikan dibandingkan manfaat
+ekonomi langsung yang diterima. Warga lokal beriringan dengan lokasi
+timbunan slag---\textbf{sehingga membutuhkan pengawasan proteksi
+kesehatan dan transparansi pengolahan}.
 
 \textbf{Interpretasi Komposisi Limbah:} \textbf{Slag dan Tailing}
 mendominasi timbulan limbah B3 dengan total \textbf{44.0 juta
 ton/tahun}. Material ini mengandung konsentrasi tinggi logam berat
 seperti \textbf{Chromium (Cr), Nikel (Ni), Kadmium (Cd), dan Arsenik
 (As)} yang bersifat karsinogenik (memicu kanker) dan neurotoksik
-(merusak sistem saraf). Klaim industri bahwa slag ``aman dimanfaatkan
-untuk batako'' adalah \textbf{klaim yang perlu dikaji lebih kritis}.
-Penelitian mengindikasikan bahwa paparan jangka panjang terhadap debu
-slag berpotensi memicu \textbf{dermatitis dan gangguan pernapasan} pada
-komunitas sekitar. \textbf{Tailing HPAL} (High-Pressure Acid Leaching)
-lebih berbahaya lagi karena mengandung \textbf{asam sulfat konsentrasi
-tinggi} yang dapat mencemari sungai dan laut. Proses HPAL yang digunakan
-PT HNC dan PT QMB di Morowali menghasilkan \textbf{12,5 juta ton tailing
-beracun per tahun}---setara dengan volume banjir bandang yang terjadi
-setiap hari.
+(merusak sistem saraf).
+
+Klaim industri bahwa slag ``aman dimanfaatkan untuk batako'' adalah
+\textbf{klaim yang perlu dikaji lebih kritis}. Penelitian
+mengindikasikan bahwa paparan jangka panjang terhadap debu slag
+berpotensi memicu \textbf{dermatitis dan gangguan pernapasan} pada
+komunitas sekitar.
+
+\textbf{Tailing HPAL} (High-Pressure Acid Leaching) lebih berbahaya lagi
+karena mengandung \textbf{asam sulfat konsentrasi tinggi} yang dapat
+mencemari sungai dan laut. Proses HPAL yang digunakan PT HNC dan PT QMB
+di Morowali menghasilkan \textbf{12,5 juta ton tailing beracun per
+tahun}---setara dengan volume banjir bandang yang terjadi setiap hari.
 
 \paragraph{Fasilitas Penghasil Limbah B3 Terbesar (Top
 10)}\label{fasilitas-penghasil-limbah-b3-terbesar-top-10}
@@ -872,18 +1144,18 @@ Sumber Referensi
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Sulawesi Tengah & IMIP (Morowali) & Slag \& Tailing HPAL & 12,000,000 &
+Sulawesi Tengah & IMIP (Morowali) & Slag \& Tailing HPAL & 1.2e+07 &
 Temuan KLH/BPLH \& Laporan AEER (2024-2025) \\
 Sulawesi Tengah & PT Huayue Nickel Cobalt (HNC) - Morowali & Tailing
-HPAL & 7,000,000 & AEER HPAL Report (2024) \\
+HPAL & 7e+06 & AEER HPAL Report (2024) \\
 Sulawesi Tenggara & VDNI (Konawe) \& Sekitarnya & Slag Feronikel &
-6,500,000 & Data Produksi VDNI \& Kajian WALHI \\
+6.5e+06 & Data Produksi VDNI \& Kajian WALHI \\
 Sulawesi Tengah & PT QMB New Energy Materials - Morowali & Tailing HPAL
-& 5,500,000 & AEER HPAL Report (2024) \\
-Sulawesi Selatan & Huadi Nickel Alloy (Bantaeng) & Slag EAF & 1,000,000
-& Kajian JATAM \& Akademis (Unhas/BRIN) \\
+& 5.5e+06 & AEER HPAL Report (2024) \\
+Sulawesi Selatan & Huadi Nickel Alloy (Bantaeng) & Slag EAF & 1e+06 &
+Kajian JATAM \& Akademis (Unhas/BRIN) \\
 Sulawesi Tengah & PT SCM (Sulawesi Cahaya Mineral) & Air Limbah Tambang
-& 800,000 & AEER HPAL Report (2024) \\
+& 800000 & AEER HPAL Report (2024) \\
 \end{longtable}
 }
 
@@ -893,25 +1165,53 @@ Masyarakat}\label{kaitan-dengan-beban-kesehatan-masyarakat}
 Meskipun data epidemiologis yang menghubungkan secara langsung antara
 paparan limbah B3 dengan penyakit spesifik masih terbatas (karena
 keengganan industri untuk melakukan kajian kesehatan independen),
-\textbf{bukti-bukti tidak langsung sangat kuat}: 1. \textbf{Korelasi
-Geografis:} Provinsi dengan timbulan B3 tertinggi (Sulteng \& Sultra)
-adalah provinsi yang sama dengan beban ISPA dan Diare tertinggi
-(terbukti di sub-bab 3.1 dan 3.5) 2. \textbf{Jalur Paparan Multipel:} -
-\textbf{Paparan Inhalasi:} Debu slag yang beterbangan terhirup warga
-sekitar → ISPA/Pneumonia kronis - \textbf{Kontaminasi Air:} Lindi
-(leachate) dari timbunan tailing berpotensi memengaruhi sumber air →
-Peningkatan kasus Diare dan penyakit kulit - \textbf{Akumulasi Logam
-Berat:} Chromium dan Nikel terakumulasi dalam rantai makanan → Risiko
-kanker jangka panjang 3. \textbf{Temuan Lapangan dari WALHI dan JATAM:}
-- Warga Morowali melaporkan peningkatan kasus gatal-gatal kulit dan
-iritasi mata sejak operasi IMIP dimulai - Air sumur warga di sekitar
-kawasan smelter berubah warna menjadi kemerahan dan berbau logam - Ikan
-hasil tangkapan nelayan lokal mengalami penurunan kualitas dan kuantitas
-drastis 4. \textbf{Perbandingan Internasional:} Kasus pencemaran slag di
-Filipina (Zambales) dan Kaledonia Baru (New Caledonia) membuktikan bahwa
-komunitas yang hidup di sekitar fasilitas pengolahan nikel mengalami
-peningkatan signifikan kasus penyakit pernapasan, kanker paru-paru, dan
-gangguan reproduksi.
+\textbf{bukti-bukti tidak langsung sangat kuat}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Korelasi Geografis:} Provinsi dengan timbulan B3 tertinggi
+  (Sulteng \& Sultra) adalah provinsi yang sama dengan beban ISPA dan
+  Diare tertinggi (terbukti di sub-bab 3.1 dan 3.5)
+\item
+  \textbf{Jalur Paparan Multipel:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Paparan Inhalasi:} Debu slag yang beterbangan terhirup warga
+    sekitar → ISPA/Pneumonia kronis
+  \item
+    \textbf{Kontaminasi Air:} Lindi (leachate) dari timbunan tailing
+    berpotensi memengaruhi sumber air → Peningkatan kasus Diare dan
+    penyakit kulit
+  \item
+    \textbf{Akumulasi Logam Berat:} Chromium dan Nikel terakumulasi
+    dalam rantai makanan → Risiko kanker jangka panjang
+  \end{itemize}
+\item
+  \textbf{Temuan Lapangan dari WALHI dan JATAM:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Warga Morowali melaporkan peningkatan kasus gatal-gatal kulit dan
+    iritasi mata sejak operasi IMIP dimulai
+  \item
+    Air sumur warga di sekitar kawasan smelter berubah warna menjadi
+    kemerahan dan berbau logam
+  \item
+    Ikan hasil tangkapan nelayan lokal mengalami penurunan kualitas dan
+    kuantitas drastis
+  \end{itemize}
+\item
+  \textbf{Perbandingan Internasional:} Kasus pencemaran slag di Filipina
+  (Zambales) dan Kaledonia Baru (New Caledonia) membuktikan bahwa
+  komunitas yang hidup di sekitar fasilitas pengolahan nikel mengalami
+  peningkatan signifikan kasus penyakit pernapasan, kanker paru-paru,
+  dan gangguan reproduksi.
+\end{enumerate}
 
 \paragraph{Kesimpulan Kritis: Beban Ganda Masyarakat
 Terdampak}\label{kesimpulan-kritis-beban-ganda-masyarakat-terdampak}

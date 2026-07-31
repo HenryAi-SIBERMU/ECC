@@ -3,15 +3,15 @@ import os
 from pathlib import Path
 
 CHAPTERS = [
-    ("chapter_1.md", "v2_30072026_Laporan_Bab1"),
-    ("chapter_2.md", "v2_30072026_Laporan_Bab2"),
-    ("chapter_3.md", "v2_30072026_Laporan_Bab3"),
-    ("chapter_4.md", "v2_30072026_Laporan_Bab4"),
-    ("chapter_5.md", "v2_30072026_Laporan_Bab5"),
-    ("chapter_6.md", "v2_30072026_Laporan_Bab6"),
-    ("chapter_7.md", "v2_30072026_Laporan_Bab7"),
-    ("chapter_8.md", "v2_30072026_Laporan_Bab8"),
-    ("chapter_9.md", "v2_30072026_Laporan_Bab9"),
+    ("chapter_1.md", "v2_31072026_Laporan_Bab1"),
+    ("chapter_2.md", "v2_31072026_Laporan_Bab2"),
+    ("chapter_3.md", "v2_31072026_Laporan_Bab3"),
+    ("chapter_4.md", "v2_31072026_Laporan_Bab4"),
+    ("chapter_5.md", "v2_31072026_Laporan_Bab5"),
+    ("chapter_6.md", "v2_31072026_Laporan_Bab6"),
+    ("chapter_7.md", "v2_31072026_Laporan_Bab7"),
+    ("chapter_8.md", "v2_31072026_Laporan_Bab8"),
+    ("chapter_9.md", "v2_31072026_Laporan_Bab9"),
 ]
 
 def compile_chapter(md_file: Path, out_stem: str, docs_dir: Path):
@@ -53,7 +53,7 @@ def main():
     target = sys.argv[1].lower() if len(sys.argv) > 1 else "all"
 
     for md_name, stem in CHAPTERS:
-        bab_key = stem.lower().replace("laporan_", "")  # e.g. "bab1"
+        bab_key = stem.lower().split("_")[-1]  # e.g. "bab1"
         if target != "all" and target != bab_key:
             continue
         compile_chapter(here / md_name, stem, docs_dir)

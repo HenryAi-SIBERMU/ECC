@@ -1,0 +1,310 @@
+
+    **Alur Kausalitas (Ekonomi Politik Ekologi):** `Konsentrasi Industri Ekstraktif` → `Penurunan Kualitas Daya Dukung Lingkungan` → `Peningkatan Insidensi Penyakit (ISPA, Diare) & Ketimpangan Faskes`
+
+    Ekspansi industri ekstraktif berpotensi memengaruhi kualitas lingkungan hidup masyarakat setempat. Pembuangan polutan ke udara ambien dan badan air berkorelasi dengan peningkatan insidensi penyakit respiratori dan infeksi saluran pencernaan, yang diperparah oleh ketimpangan distribusi fasilitas kesehatan.
+
+    **Variabel Dampak Kesehatan (Y):**
+    *   **ISPA/Pneumonia:** Penyakit pernapasan akibat paparan debu dan sulfur.
+    *   **Diare & Penyakit Menular (Malaria/Kusta):** Dampak pencemaran air dan buruknya sanitasi di lingkar tambang.
+    *   **Ketersediaan Fasilitas Kesehatan:** Kesenjangan infrastruktur medis (Puskesmas & Rumah Sakit) terhadap pertumbuhan beban kasus penyakit.
+
+    **Metode Pengolahan Data:**
+    Analisis menggunakan *Cross-sectional* dan *Time-Series*. Menggabungkan dataset *survey* dinas kesehatan dan ketersediaan layanan publik untuk menganalisis korelasi antara pertumbuhan kapasitas PLTU *captive* dan peningkatan beban penyakit di masyarakat dengan ketersediaan fasilitas medis yang terbatas.
+    
+---
+<br><br>
+---
+---
+---
+
+    **Metode Analisis:** Sub-bab ini menggunakan visualisasi perbandingan *Grouped Horizontal Bar Chart* pada satu periode cross-sectional (Tahun 2024) untuk mengukur ketimpangan infrastruktur kesehatan primer dan sekunder.
+
+    1. **Analisis Ketimpangan Infrastruktur (Gap Analysis):**
+        * **Segmentasi Fasilitas:** Fasilitas kesehatan dikategorikan secara hierarkis menjadi Puskesmas (Faskes Primer) dan Rumah Sakit (Faskes Sekunder) untuk dievaluasi secara spasial (Sentra vs Non-Sentra).
+        * **Evaluasi Defisit:** Mengukur kesenjangan distribusi rasio fasilitas medis per provinsi menggunakan analisis komparatif absolut.
+        * **Pemetaan Ketersediaan:** Membedah paradoks ketersediaan layanan kesehatan di wilayah pusat akumulasi kapital ekstraktif sebagai pembuktian defisit infrastruktur publik.
+    2. **Kalkulasi/Formula Pengolahan:** Perhitungan agregat ketersediaan faskes menurut wilayah pada tahun acuan data terbaru (2024).
+        * `Rata_Rata_Faskes = MEAN(Jumlah_Faskes) GROUP BY Jenis_Faskes, Kategori_Zona`
+    3. **Variabel & Fitur Data:**
+        * **Jumlah & Jenis Faskes (Dependen):** Unit Rumah Sakit dan Puskesmas terdaftar (BPS).
+        * **Kategori Zona (Independen):** Lokasi wilayah (Sentra vs Non-Sentra).
+    4. **Dataset & File:**
+        * Data Agregat Faskes: `data/processed/sulawesi_faskes_agregat_v3.csv`
+    
+---
+<br>
+---
+
+Data perbandingan distribusi fasilitas kesehatan mengindikasikan bahwa ketersediaan infrastruktur medis di provinsi sentra industri relatif tidak lebih baik dibandingkan wilayah non-sentra, meski beban penyakit di wilayah tersebut lebih tinggi.
+
+Melalui komparasi grafik batang (*Grouped Bar Chart*) di bawah, terlihat bahwa ketersediaan Fasilitas Kesehatan di provinsi dengan konsentrasi industri tinggi justru mengalami defisit relatif. Rata-rata Rumah Sakit di Sentra Industri tercatat **{rs_sentra} unit** per provinsi, lebih rendah dari wilayah Non-Sentra yang mencapai **{rs_non} unit**. Kesenjangan distribusi fasilitas medis di area dengan beban penyakit tinggi ini perlu menjadi pertimbangan dalam perencanaan infrastruktur kesehatan ke depan.
+
+---
+---
+---
+3.2 Ketimpangan Beban Penyakit: Sentra Industri vs Non-Sentra
+---
+
+    **Metode Analisis:** Sub-bab ini menggunakan analisis komparatif spasial (*Comparative Spatial Analysis*) untuk membandingkan rata-rata beban penyakit antara provinsi sentra ekstraktif dan non-sentra.
+
+    1. **Model Komparasi Spasial (Comparative Analysis):**
+        * **Segmentasi Wilayah (Binning):** Provinsi secara sistematis dibagi menjadi dua zona: Sentra Industri (Sulteng & Sultra) dan Non-Sentra (Sulsel, Sulut, Gorontalo, Sulbar).
+        * **Kuantifikasi Kesenjangan:** Menghitung rata-rata absolut beban kesakitan (*disease burden*) per zona untuk mengukur ketimpangan kesehatan struktural antar wilayah.
+        * **Pemetaan Pola:** Mengidentifikasi secara analitik apakah konsentrasi fasilitas tambang berkorespondensi langsung dengan akumulasi masif kasus epidemiologis.
+    2. **Kalkulasi/Formula Pengolahan:** Perhitungan rata-rata absolut beban penyakit tahunan berdasarkan klasifikasi wilayah.
+        * `Rata_Rata_Kasus_Zona = MEAN(Jumlah_Kasus) GROUP BY Kategori_Zona`
+        * `Disparitas_Beban = Rata_Rata_Kasus_Sentra / Rata_Rata_Kasus_Non_Sentra`
+    3. **Variabel & Fitur Data:**
+        * **Kategori Zona (Independen):** Labeling spasial (Sentra vs Non-Sentra).
+        * **Kasus ISPA/Pneumonia & Diare (Dependen):** Total prevalensi historis penyakit per tahun dari fasilitas kesehatan primer.
+    4. **Dataset & File:**
+        * Data Agregasi Kesehatan: `data/processed/sulawesi_kesehatan_detail_2014_2024.csv`
+    
+---
+
+Melalui analisis komparatif spasial, terlihat bahwa beban ekologis tidak terdistribusi secara merata di seluruh wilayah. Provinsi sentra ekspansi nikel—Sulawesi Tengah dan Sulawesi Tenggara—menunjukkan indikator penyakit yang secara konsisten lebih tinggi.
+
+Data menunjukkan bahwa rata-rata penderita **ISPA/Pneumonia** di Sentra Industri tercatat **{ispa_sentra} kasus per tahun**, dibandingkan provinsi Non-Sentra di angka **{ispa_non} kasus**. Selisih sebesar **{ispa_diff} kali lipat** ini mengindikasikan beban pernapasan yang lebih berat di kawasan penyangga *smelter*. Temuan ini mendukung hipotesis kerangka riset D3TLH: wilayah dengan konsentrasi industri tinggi cenderung menanggung beban kesehatan yang lebih besar akibat tekanan terhadap daya tampung lingkungan.
+
+---
+---
+---
+
+    **Metode Analisis:** Sub-bab ini menggunakan visualisasi runtut waktu (Time-Series) dan uji silang (Crosstabulation) secara interaktif untuk merunut dinamika insiden penyakit sejalan dengan akumulasi polusi tahunan.
+
+    1. **Uji Trend Historis & Proporsi Tabulasi Silang:**
+        * **Time-Series Tracking:** Mengkonversi absolute numbers ke rasio per kapita (Kasus per 10.000 Penduduk) untuk menghilangkan bias jumlah populasi antar wilayah.
+        * `H0 (Null Hypothesis): Penurunan kualitas lingkungan (IKU/IKA) tidak berkorelasi dengan peningkatan insidensi penyakit pernapasan dan pencernaan.`
+        * `Decision Rule: Chi-Square P-Value < 0.05 (Tolak H0) dan kalkulasi Odds Ratio.`
+    2. **Kalkulasi/Formula Pengolahan:** Rasio keparahan per kapita dan agregasi tabel silang panel.
+        * `Insiden_Per_10K = (Total_Kasus / Total_Populasi) * 10,000`
+        * `Odds_Ratio = (A * D) / (B * C)`
+    3. **Variabel & Fitur Data:**
+        * **Indikator Kualitas Lingkungan (X):** IKU/IKA sebagai matriks tekanan lingkungan.
+        * **Total Insiden Penyakit (Y):** Angka absolut & insiden per kapita dari beragam penyakit lingkungan (ISPA, Diare, Malaria, Kusta).
+        * **Waktu (Time):** Periode longitudinal 2014-2024.
+    4. **Dataset & File:**
+        * Data Lingkungan & Penyakit: `data/processed/sulawesi_kesehatan_detail_2014_2024.csv`, `data/processed/sulawesi_ika_2016_2024.csv`, `data/processed/sulawesi_iku_2015_2024.csv`
+    
+---
+
+Meskipun secara akumulatif kawasan Sentra Industri menanggung beban yang lebih berat, penelusuran data secara *time-series* (historis) dari 2014 hingga 2024 memberikan wawasan tambahan mengenai fluktuasi kasus penyakit dari tahun ke tahun. Anda dapat memilih indikator penyakit pada menu di bawah untuk melihat jejak ekologis secara spesifik.
+
+---
+#### Uji Statistik: Asosiasi Kualitas Udara (IKU) dengan Insidensi Penyakit
+---
+
+Hipotesis utama narasi ini adalah bahwa **penurunan kualitas udara ambien (IKU)** berbanding lurus dengan **peningkatan insidensi penyakit pernapasan dan lingkungan** (seperti ISPA dan Diare).
+Untuk mengujinya secara statistik di tengah keterbatasan jumlah provinsi di Sulawesi (N=6), tabel crosstab dan uji Chi-Square di bawah menggunakan unit observasi **Provinsi-Tahun** (6 provinsi × 10 tahun = 60 sampel panel).
+Setiap observasi diklasifikasikan menjadi "Tinggi" atau "Rendah" berdasarkan nilai **Median panel** dari indikator yang dipilih.
+
+---
+##### Variabel Independen (X) - Faktor Lingkungan & Spasial
+---
+##### Variabel Dependen (Y) - Dampak Kesehatan
+---
+### Detail Uji Statistik (Chi-Square & Odds Ratio)
+---
+##### Case Processing Summary
+---
+##### {interaction_label} Crosstabulation
+---
+##### Chi-Square Tests
+---
+**{interaction_label}**
+---
+### Ringkasan Uji Hipotesis
+---
+**Odds Ratio (Risk Estimate):** `{odds_ratio}`
+---
+---
+---
+### Ringkasan Eksekutif Seluruh Skenario Crosstab
+---
+Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square) untuk semua kemungkinan kombinasi antara indikator Ekspansi (X) dan Dampak Kesehatan (Y) pada panel data yang sama.
+---
+---
+---
+
+        **Metode Analisis:** Sub-bab ini menggunakan studi kasus mendalam (*Deep Dive Case Study*) berbasis deret waktu di tingkat distrik (Kabupaten/Kota) khusus untuk endemik Sulawesi Tengah.
+
+        1. **Model Anomali Ekologis Spesifik Distrik:**
+            * **Analisis Komparatif Zoonosis:** Mengisolasi zona episentrum ekstraktif (Morowali, Morowali Utara, Banggai) dan membandingkannya secara absolut dengan kabupaten agraris/non-tambang yang difungsikan sebagai daerah kontrol.
+            * **Korelasi Ekologis:** Merunut pola peningkatan prevalensi penyakit infeksi yang ditransmisikan oleh vektor di kawasan perluasan pembukaan lahan (*land clearing*).
+            * **Pemetaan Risiko:** Mengukur eskalasi kerentanan populasi terhadap ancaman wabah malaria dan DBD akibat hancurnya perlindungan habitat alami.
+        2. **Kalkulasi/Formula Pengolahan:** Akumulasi tren tahunan infeksi Zoonosis per Kategori Wilayah (Tambang vs Non-Tambang).
+            * `Tren_Zoonosis_Distrik = Σ(Total_Kasus) GROUP BY Kategori_Wilayah, Tahun`
+        3. **Variabel & Fitur Data:**
+            * **Kategori Wilayah Distrik:** Label dikotomi daerah ring 1 tambang vs daerah penyangga luar ring.
+            * **Total Kasus Penyakit:** Angka infeksi yang ditransmisikan vektor (Malaria, Rabies, Gigitan Hewan).
+        4. **Dataset & File:**
+            * Data Zoonosis: `data/processed/zoonosis_kab_kota_2015_2024.csv`
+        
+---
+<br>
+---
+---
+---
+Analisis Tambahan: Proxy Zoonosis (DBD) dan Tekanan Populasi: Tekanan Populasi dan Beban Kesehatan
+---
+<br>
+---
+#### Lintasan Waktu Kasus Malaria
+---
+---
+---
+
+    **Metode Analisis:** Sub-bab ini menggunakan visualisasi WebGIS (Choropleth dan Point/Bubble Mapping) berbasis Leaflet/Folium untuk menganalisis pergeseran geospasial beban penyakit secara komparatif (*Before-After Analysis*).
+
+    1. **Pemetaan Spasial Komparatif:**
+        * **Poligon (Choropleth):** Intensitas warna area mewakili tingkatan total insiden ISPA. Semakin gelap, semakin rentan.
+        * **Titik (Bubble):** Ukuran/radius lingkaran merepresentasikan volume kasus Diare secara proporsional.
+        * **Identifikasi Episentrum (Clustering):** Menganalisis pemusatan visual beban ganda penyakit pada koordinat geografis yang beririsan langsung dengan zona perluasan industri.
+    2. **Kalkulasi/Formula Pengolahan:** Komparasi absolut lintas dekade (2015 vs 2024) dan standarisasi radius bubble.
+        * `Radius_Bubble = SQRT(Kasus_Diare) / K` (K = konstanta penyesuaian visual)
+        * `Growth_Rate = ((Kasus_2024 - Kasus_2015) / Kasus_2015) * 100%`
+    3. **Variabel & Fitur Data:**
+        * **Titik Koordinat/Poligon:** Polygon Provinsi Sulawesi (GeoJSON).
+        * **Warna & Ukuran (Visual Encode):** Total ISPA dan Total Diare (Data Kesehatan).
+    4. **Dataset & File:**
+        * Data Spasial: `data/raw/indonesia-prov.geojson`
+        * Data Penyakit: `data/processed/sulawesi_kesehatan_detail_2014_2024.csv`
+    
+---
+
+Peta interaktif di bawah ini memproyeksikan secara spasial perbandingan absolut beban kesehatan (ISPA dan Diare) antara **Awal Ekstraksi (2015)** dan **Kondisi Terkini (2024)**. Sesuai *framework Before-After Analysis*, Anda bisa melihat bagaimana distribusi beban penyakit berkembang seiring perluasan kawasan industri.
+
+---
+---
+---
+
+    **Metode Analisis:** Sub-bab ini menggunakan pendekatan komplementer untuk memetakan krisis air bersih dan dampaknya terhadap penyakit Diare. Keterbatasan granularitas pada data statistik agregat tingkat provinsi memerlukan validasi lapangan melalui uji laboratorium di tingkat tapak.
+
+    1. **Tinjauan Mikro (Bukti Fisik Laboratorium):**
+        * Memeriksa kadar Kromium Heksavalen (Cr6+) di muara pembuangan air dan *tailing* tambang menggunakan data uji lab lapangan.
+        * `Benchmark:` Membandingkan temuan sampel dengan baku mutu air laut (0.005 mg/L) untuk menilai pelanggaran toksisitas secara absolut.
+    2. **Tinjauan Makro (Analisis Panel Provinsi):**
+        * **Korelasi Bivariat (Scatter Plot):** Melihat tren distribusi antara IKA dan kasus Diare untuk melihat gambaran umum regional, terlepas dari kelemahan signifikansi OLS (Ordinary Least Squares) akibat jumlah sampel yang sangat kecil (n=6 provinsi).
+    3. **Variabel & Fitur Data:**
+        * **Kualitas Air (Mikro):** Data konsentrasi Cr6+ dari investigasi lapangan (AEER & WALHI).
+        * **IKA (Makro):** Indeks Kualitas Air (BPS/KLHK).
+        * **Diare (Makro):** Kasus infeksi saluran pencernaan yang dilayani (Kemenkes).
+    
+---
+
+Sub-bab ini membedah krisis air bersih melalui **dua tingkat observasi paralel**. Pertama, tinjauan mikro spesifik di kawasan padat industri menggunakan hasil uji fisik laboratorium independen. Kedua, pemetaan tren makro di tingkat provinsi yang melihat distribusi Indeks Kualitas Air (IKA) terhadap sebaran kasus Diare.
+
+Pendekatan komplementer ini sangat penting untuk dilakukan. **Indeks Kualitas Air (IKA)** dari pemerintah merupakan nilai rata-rata dari seluruh DAS (Daerah Aliran Sungai) di satu provinsi, sehingga tidak bisa mendeteksi pencemaran ekstrem secara spesifik di muara tambang (*point source*). Oleh karena itu, kita mendampingkan pemetaan statistik makro ini dengan bukti lab klinis (Kromium) di tingkat tapak untuk mendapatkan realita krisis secara utuh.
+
+---
+#### Pemetaan Analisis: Kualitas Air dan Kasus Diare
+---
+Interpretasi Visual: Provinsi di sebelah kiri yang memiliki warna coklat pekat (skor IKA terburuk) secara konsisten diiringi dengan batang kasus diare yang relatif lebih tinggi.
+---
+
+    Titik yang tersebar acak mengindikasikan bahwa data makro secara statistik tidak menunjukkan korelasi kausalitas yang kuat pada level agregat provinsi (R²=0.043, P=0.157). Oleh karena itu, kesimpulan pencemaran air lebih valid ditarik dari hasil uji klinis mikroskopis di tapak (Bukti Lab NGO).
+    
+---
+**Interpretasi Korelasi Statistik:**
+
+{interp_text_34}
+---
+
+        Menghadapi absennya data **"Akses Air Minum Layak"** di tingkat Kabupaten dari BPS sejak 2019, kami menggunakan **Ground Truth Data** dari pengujian laboratorium independen (AEER & WALHI) sebagai alternatif pengukur pencemaran air secara absolut.
+        
+        Berdasarkan hasil uji klinis dari {total_samples} titik sampel di lingkar kawasan tambang, teridentifikasi bahwa **{exceed_biota} titik ({...}%) melampaui batas aman toksisitas biota laut** (0.005 mg/L). Konsentrasi terparah ditemukan di {max_location} dengan kadar Kromium Heksavalen mencapai **{max_cr6} mg/L**, atau {...} kali lipat lebih tinggi dari ambang batas aman. 
+        
+        ⚠️ **Peringatan Klinis:** Kromium Heksavalen (Cr6+) adalah logam berat karsinogenik beracun. Paparan berulang pada air yang dikonsumsi atau digunakan mencuci memicu iritasi kulit kronis, kerusakan pernapasan, pencernaan, dan potensi kanker parah di komunitas lingkar tambang. Bukti konkret di level tapak ini mengonfirmasi asimetri dampak ekologis industri ekstraktif yang gagal ditangkap oleh agregasi data makro.
+        
+---
+#### Uji Statistik: Asosiasi IKA Rendah dengan Tingginya Kasus Diare
+---
+
+Untuk membuktikan hubungan kausal secara statistik, crosstab Chi-Square di bawah menggunakan unit observasi **Provinsi-Tahun** (6 provinsi × 9 tahun = 54 sampel panel).
+Setiap observasi diklasifikasikan menjadi "IKA Rendah/Tinggi" dan "Diare Rendah/Tinggi" berdasarkan **median panel** dari masing-masing indikator.
+
+---
+##### Variabel Independen (X) - Faktor Lingkungan
+---
+##### Variabel Dependen (Y) - Dampak Kesehatan
+---
+### Detail Uji Statistik (Chi-Square & Odds Ratio)
+---
+##### Case Processing Summary
+---
+##### {interaction_label_ika} Crosstabulation
+---
+##### Chi-Square Tests
+---
+**{interaction_label_ika}**
+---
+### Ringkasan Uji Hipotesis
+---
+**Odds Ratio (Risk Estimate):** `{odds_ratio_ika}`
+---
+---
+---
+### Ringkasan Eksekutif Seluruh Skenario Crosstab
+---
+Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square) untuk indikator IKA terhadap Kasus Diare pada panel data yang sama.
+---
+---
+---
+
+    **Metode Analisis:** Sub-bab ini menggunakan agregasi statistik deskriptif dan komparasi grafik batang (*Bar Chart*) untuk merunut skala penumpukan limbah B3 sebagai pemicu (driver) racun ekosistem.
+
+    1. **Agregasi Limpasan Limbah Industri:**
+        * **Statistik Deskriptif:** Melakukan pemeringkatan dan *profiling* komposisi buangan B3 absolut dari setiap fasilitas peleburan logam berat yang beroperasi.
+        * **Audit Defisit Pengelolaan:** Mengkomparasikan kapasitas pengolahan yang dilaporkan dengan estimasi empiris total emisi limbah.
+        * **Pemetaan Toksisitas:** Mengidentifikasi sumber dan skala ancaman racun lingkungan berdasarkan jenis tailing dan material B3 yang dominan.
+    2. **Kalkulasi/Formula Pengolahan:** Penjumlahan agregat produksi limbah kotor dari level pabrik hingga ke level regional.
+        * `Total_B3_Provinsi = Σ(Timbulan_Ton) GROUP BY Provinsi`
+        * `Total_B3_Jenis = Σ(Timbulan_Ton) GROUP BY Jenis_Limbah`
+    3. **Variabel & Fitur Data:**
+        * **Timbulan (Ton/Tahun):** Estimasi absolut volume buangan limbah (Dependen).
+        * **Kawasan & Jenis Limbah:** Klasifikasi operasi dan karakter residu seperti Slag/Tailing/Air Asam Tambang (Independen).
+    4. **Dataset & File:**
+        * Data Audit LSM & KLHK: `data/processed/sulawesi_limbah_b3.csv`
+    
+---
+
+Jika sub-bab sebelumnya telah membedah dampak pencemaran udara (IKU → ISPA) dan air (IKA → Diare), maka sub-bab ini mengungkap **sumber polusi yang signifikan namun memerlukan perhatian khusus**: timbulan **Limbah Bahan Berbahaya dan Beracun (B3)** dari operasi smelter dan tambang nikel.
+
+**Limbah B3** adalah residu hasil proses ekstraktif yang mengandung logam berat, senyawa kimia berbahaya, dan material berpotensi karsinogenik. Jenis limbah ini meliputi:
+
+- **Slag & Tailing**: Material sisa pengolahan bijih nikel yang mengandung logam berat seperti Chromium, Nikel, dan Kadmium
+- **Tailing HPAL**: Limbah padat hasil proses High-Pressure Acid Leaching (HPAL) yang bersifat asam dan mengandung sulfat tinggi
+- **Air Limbah Tambang**: Buangan cair yang tercemar logam berat dan asam sulfat
+- **Residu & DSTP**: Material beracun yang dikaji dalam opsi pembuangan laut dalam (Deep Sea Tailing Placement)
+
+Klaim bahwa slag dapat "dimanfaatkan untuk batako dan penahan abrasi" memerlukan kajian kritis, mengingat akumulasi material ini memerlukan pengelolaan dan pemantauan risiko kesehatan yang transparan.
+
+Data kompilasi dari laporan AEER, WALHI, JATAM, dan kajian akademis membuktikan bahwa **operasi smelter di Sulawesi menghasilkan puluhan juta ton limbah B3 per tahun**—dengan dampak kesehatan jangka panjang yang perlu dimonitor secara berkelanjutan.
+
+---
+#### Distribusi Limbah B3 per Provinsi
+---
+#### Komposisi Limbah B3 Berdasarkan Jenis
+---
+#### Fasilitas Penghasil Limbah B3 Terbesar
+---
+#### Kaitan dengan Beban Kesehatan Masyarakat
+---
+
+Meskipun data epidemiologis yang menghubungkan secara langsung antara paparan limbah B3 dengan penyakit spesifik masih terbatas (karena keengganan industri untuk melakukan kajian kesehatan independen), **bukti-bukti tidak langsung sangat kuat**:
+
+1. **Korelasi Geografis:** Provinsi dengan timbulan B3 tertinggi (Sulteng & Sultra) adalah provinsi yang sama dengan beban ISPA dan Diare tertinggi (terbukti di sub-bab 3.1 dan 3.5)
+
+2. **Jalur Paparan Multipel:**
+   - **Paparan Inhalasi:** Debu slag yang beterbangan terhirup warga sekitar → ISPA/Pneumonia kronis
+   - **Kontaminasi Air:** Lindi (leachate) dari timbunan tailing berpotensi memengaruhi sumber air → Peningkatan kasus Diare dan penyakit kulit
+   - **Akumulasi Logam Berat:** Chromium dan Nikel terakumulasi dalam rantai makanan → Risiko kanker jangka panjang
+
+3. **Temuan Lapangan dari WALHI dan JATAM:**
+   - Warga Morowali melaporkan peningkatan kasus gatal-gatal kulit dan iritasi mata sejak operasi IMIP dimulai
+   - Air sumur warga di sekitar kawasan smelter berubah warna menjadi kemerahan dan berbau logam
+   - Ikan hasil tangkapan nelayan lokal mengalami penurunan kualitas dan kuantitas drastis
+
+4. **Perbandingan Internasional:** Kasus pencemaran slag di Filipina (Zambales) dan Kaledonia Baru (New Caledonia) membuktikan bahwa komunitas yang hidup di sekitar fasilitas pengolahan nikel mengalami peningkatan signifikan kasus penyakit pernapasan, kanker paru-paru, dan gangguan reproduksi.
+
+---
