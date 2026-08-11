@@ -269,29 +269,66 @@ def generate():
     df_map_2024 = df_kes[df_kes["tahun"] == 2024].groupby(["provinsi", "indikator"])["nilai"].sum().unstack().reset_index().fillna(0)
 
     provinsi_coords = {"Sulawesi Selatan": [-4.1449, 119.9289], "Sulawesi Tengah": [-1.4300, 121.4456], "Sulawesi Tenggara": [-4.1449, 122.1746], "Sulawesi Utara": [0.6247, 123.9750], "Gorontalo": [0.6999, 122.4467], "Sulawesi Barat": [-2.8441, 119.2321]}
-        p = r["provinsi"]
-        if p in provinsi_coords:
-            lats.append(provinsi_coords[p][0]); lons.append(provinsi_coords[p][1])
-            diare = r.get("Kasus Diare Dilayani", 0)
-            sizes.append(max((math.sqrt(diare) / 15), 5))
-            texts.append(f"{p}")
-    fig_map_2015.add_trace(go.Scattermapbox(lat=lats, lon=lons, mode="markers+text", marker=dict(size=sizes, color="#00E5FF", opacity=0.65), text=texts, textposition="top center"))
-    fig_map_2015.update_layout(title=dict(text="Pemetaan Geospasial ISPA & Diare (2015 - Kondisi Awal)", font=dict(color='#ECEFF1', size=16)), paper_bgcolor='#11151c', plot_bgcolor='#11151c', font=dict(color='#ECEFF1'), height=450, margin=dict(l=0,r=0,t=40,b=0))
-    save_plotly(fig_map_2015, VIS / "chart_3_5_map2015.png", w=700, h=450)
+
+    # Shared color scale max so both maps are comparable
+    all_ispa = pd.concat([df_map_2015, df_map_2024])
+    ispa_max = all_ispa["Kasus ISPA/Pneumonia"].max() if "Kasus ISPA/Pneumonia" in all_ispa.columns else 15000
+
+    df_map_2015["prov_upper"] = df_map_2015["provinsi"].str.upper()
+    df_map_2024["prov_upper"] = df_map_2024["provinsi"].str.upper()
+
+    def build_geo_map(df_map, title_text):
+        """Build static choropleth map using px.choropleth (no internet/mapbox needed)."""
+        fig = px.choropleth(
+            df_map, geojson=geojson_data,
+            locations="prov_upper", featureidkey="properties.Propinsi",
+            color="Kasus ISPA/Pneumonia",
+            color_continuous_scale="YlOrRd",
+            range_color=[0, ispa_max],
+            labels={"Kasus ISPA/Pneumonia": "ISPA"},
+        )
+        fig.update_geos(
+            fitbounds="locations", visible=True,
+            showland=True, landcolor="#1a1a2e",
+            showocean=True, oceancolor="#0d1117",
+            showcoastlines=True, coastlinecolor="#555",
+            showcountries=False, bgcolor="#11151c",
+        )
+        fig.update_traces(marker_line_width=0.6, marker_line_color="#555555")
+        # Bubble layer for Diare
+        lats, lons, sizes, names, diares = [], [], [], [], []
+        for _, r in df_map.iterrows():
+            p = r["provinsi"]
+            if p in provinsi_coords:
+                lat, lon = provinsi_coords[p]
+                diare = float(r.get("Kasus Diare Dilayani", 0) or 0)
+                lats.append(lat); lons.append(lon)
+                sizes.append(max(math.sqrt(diare) / 12, 5))
+                names.append(p); diares.append(diare)
+        fig.add_trace(go.Scattergeo(
+            lat=lats, lon=lons, mode="markers+text",
+            marker=dict(size=sizes, color="#00E5FF", opacity=0.65,
+                        line=dict(width=0.5, color="#005577")),
+            text=names, textposition="top center",
+            textfont=dict(color="#ECEFF1", size=9),
+            name="Diare (Bubble)", showlegend=False,
+        ))
+        fig.update_layout(
+            title=dict(text=title_text, font=dict(color="#ECEFF1", size=15), x=0.5, xanchor="center"),
+            paper_bgcolor="#11151c", geo=dict(bgcolor="#11151c"),
+            font=dict(color="#ECEFF1"), height=500,
+            margin=dict(l=0, r=0, t=50, b=10),
+            coloraxis_colorbar=dict(title=dict(text="ISPA", font=dict(color="#ECEFF1")), tickfont=dict(color="#ECEFF1"), len=0.6),
+        )
+        return fig
+
+    # Map 2015
+    fig_map_2015 = build_geo_map(df_map_2015, "Pemetaan Geospasial ISPA & Diare (2015 – Kondisi Awal)")
+    save_plotly(fig_map_2015, VIS / "chart_3_5_map2015.png", w=720, h=500)
 
     # Map 2024
-    fig_map_2024 = px.choropleth_mapbox(df_map_2024, geojson=geojson_data, locations="provinsi", featureidkey="properties.Propinsi", color="Kasus ISPA/Pneumonia", color_continuous_scale="YlOrRd", zoom=4.2, center={"lat": -1.8, "lon": 120.5}, opacity=0.75, mapbox_style="carto-darkmatter")
-    lats, lons, sizes, texts = [], [], [], []
-    for _, r in df_map_2024.iterrows():
-        p = r["provinsi"]
-        if p in provinsi_coords:
-            lats.append(provinsi_coords[p][0]); lons.append(provinsi_coords[p][1])
-            diare = r.get("Kasus Diare Dilayani", 0)
-            sizes.append(max((math.sqrt(diare) / 15), 5))
-            texts.append(f"{p}")
-    fig_map_2024.add_trace(go.Scattermapbox(lat=lats, lon=lons, mode="markers+text", marker=dict(size=sizes, color="#00E5FF", opacity=0.65), text=texts, textposition="top center"))
-    fig_map_2024.update_layout(title=dict(text="Pemetaan Geospasial ISPA & Diare (2024 - Kondisi Terkini)", font=dict(color='#ECEFF1', size=16)), paper_bgcolor='#11151c', plot_bgcolor='#11151c', font=dict(color='#ECEFF1'), height=450, margin=dict(l=0,r=0,t=40,b=0))
-    save_plotly(fig_map_2024, VIS / "chart_3_5_map2024.png", w=700, h=450)
+    fig_map_2024 = build_geo_map(df_map_2024, "Pemetaan Geospasial ISPA & Diare (2024 – Kondisi Terkini)")
+    save_plotly(fig_map_2024, VIS / "chart_3_5_map2024.png", w=720, h=500)
 
     # ══════════════════════════════════════════════════
     # RENDER CHARTS 3.6: IKA vs Diare

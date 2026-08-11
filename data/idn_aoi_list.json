@@ -1,0 +1,332 @@
+[
+    {
+        "id": 1,
+        "name": "Aceh",
+        "hash": "4b5ea9b537878d37c5368f3ec04c6394",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "1"
+        }
+    },
+    {
+        "id": 2,
+        "name": "Bali",
+        "hash": "640ca60a5ee0f6d97b726e81c502edea",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "2"
+        }
+    },
+    {
+        "id": 3,
+        "name": "Bangka Belitung",
+        "hash": "3999d461016a2847c239dc5cd66fc171",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "3"
+        }
+    },
+    {
+        "id": 4,
+        "name": "Banten",
+        "hash": "73a3c06c96ed1f08915384f6f8ede52c",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "4"
+        }
+    },
+    {
+        "id": 5,
+        "name": "Bengkulu",
+        "hash": "07e96ce52bf4be9e0188d581758db0f8",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "5"
+        }
+    },
+    {
+        "id": 6,
+        "name": "Gorontalo",
+        "hash": "8d998ed751ba37bf689febf729f30304",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "6"
+        }
+    },
+    {
+        "id": 7,
+        "name": "Jakarta Raya",
+        "hash": "be6d1857d192540cd37492d787769df6",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "7"
+        }
+    },
+    {
+        "id": 8,
+        "name": "Jambi",
+        "hash": "bd353af5e1a2ad7a9b0ac1b48af61c86",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "8"
+        }
+    },
+    {
+        "id": 9,
+        "name": "Jawa Barat",
+        "hash": "2ceb5f7b7ef63de3be2f93f536cd8f61",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "9"
+        }
+    },
+    {
+        "id": 10,
+        "name": "Jawa Tengah",
+        "hash": "10d48ca6694ddb3ede3066fda9dac69a",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "10"
+        }
+    },
+    {
+        "id": 11,
+        "name": "Jawa Timur",
+        "hash": "3d7b7f21746f220f0b5c485e1cfaf8cf",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "11"
+        }
+    },
+    {
+        "id": 12,
+        "name": "Kalimantan Barat",
+        "hash": "a69c8779241c59cf0d75d528275f71bd",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "12"
+        }
+    },
+    {
+        "id": 13,
+        "name": "Kalimantan Selatan",
+        "hash": "b2f923499eb2ee3d8ea5ff7c552e29e8",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "13"
+        }
+    },
+    {
+        "id": 14,
+        "name": "Kalimantan Tengah",
+        "hash": "ae4490471d2448fa7bc6b887d30cb425",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "14"
+        }
+    },
+    {
+        "id": 15,
+        "name": "Kalimantan Timur",
+        "hash": "60db77729f10392924cfdfc8cf5ad19b",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "15"
+        }
+    },
+    {
+        "id": 16,
+        "name": "Kepulauan Riau",
+        "hash": "23a0c11b3273d7358ec9e9d7c5e0ce7d",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "16"
+        }
+    },
+    {
+        "id": 17,
+        "name": "Lampung",
+        "hash": "cd3fc238ab84f36c8e331b60e00e07e1",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "17"
+        }
+    },
+    {
+        "id": 18,
+        "name": "Maluku Utara",
+        "hash": "895661ccad605b5002b8d4ec2101ff1c",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "18"
+        }
+    },
+    {
+        "id": 19,
+        "name": "Maluku",
+        "hash": "32eca3bb3b9470640420be44d56c49de",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "19"
+        }
+    },
+    {
+        "id": 20,
+        "name": "Nusa Tenggara Barat",
+        "hash": "8ac49c4f9d679ef01a0de8a2659c935b",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "20"
+        }
+    },
+    {
+        "id": 21,
+        "name": "Nusa Tenggara Timur",
+        "hash": "bcf07156665c174aba17e0e710f488e0",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "21"
+        }
+    },
+    {
+        "id": 22,
+        "name": "Papua Barat",
+        "hash": "57ee4f48d33e2028283a93d176f49a54",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "22"
+        }
+    },
+    {
+        "id": 23,
+        "name": "Papua",
+        "hash": "731aee882ea9b259efea1b7ccfea72bc",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "23"
+        }
+    },
+    {
+        "id": 24,
+        "name": "Riau",
+        "hash": "8bec56e0cb4d6c64073c35b61facb7db",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "24"
+        }
+    },
+    {
+        "id": 25,
+        "name": "Sulawesi Barat",
+        "hash": "796e2f453e81e409e183d833c586ff34",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "25"
+        }
+    },
+    {
+        "id": 26,
+        "name": "Sulawesi Selatan",
+        "hash": "33c45193c87f0505647dfae91a796b67",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "26"
+        }
+    },
+    {
+        "id": 27,
+        "name": "Sulawesi Tengah",
+        "hash": "70415db2d291955e71d4b08466cd6136",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "27"
+        }
+    },
+    {
+        "id": 28,
+        "name": "Sulawesi Tenggara",
+        "hash": "3c79929a54bff963e7bf3a4762b803e9",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "28"
+        }
+    },
+    {
+        "id": 29,
+        "name": "Sulawesi Utara",
+        "hash": "b779acdc5c7617db5a10ffcebde6a2e9",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "29"
+        }
+    },
+    {
+        "id": 30,
+        "name": "Sumatera Barat",
+        "hash": "fffe0bc9bf50602a392935a6a4a4a514",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "30"
+        }
+    },
+    {
+        "id": 31,
+        "name": "Sumatera Selatan",
+        "hash": "246f76f462c9b841fc5de0f25b7816d2",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "31"
+        }
+    },
+    {
+        "id": 32,
+        "name": "Sumatera Utara",
+        "hash": "257fd3d6def414646f34a49108ad2c6c",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "32"
+        }
+    },
+    {
+        "id": 33,
+        "name": "Yogyakarta",
+        "hash": "38aa04da4815a0c259e9faab50f6e241",
+        "aoi_payload": {
+            "type": "admin",
+            "country": "IDN",
+            "region": "33"
+        }
+    }
+]

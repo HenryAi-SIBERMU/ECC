@@ -1,0 +1,256 @@
+{
+  "metadata": {
+    "card_id": "card_3_detail_kapasitas_pelabuhan",
+    "description": "Data teknis kapasitas pelabuhan dari website resmi GNI dan sumber perusahaan lainnya",
+    "date_collected": "2024-2025",
+    "primary_source": "gunbusternickelindustry.com",
+    "total_sources": 6
+  },
+  "sources": [
+    {
+      "id": 1,
+      "source_type": "website_perusahaan",
+      "organization": "GNI (Gunbuster Nickel Industry / Petasia Morowali Utara)",
+      "url": "https://gunbusternickelindustry.com/facilities/port-infrastructure",
+      "page_title": "GNI Port Infrastructure - Integrated Logistics Solutions",
+      "access_date": "2024-11-20",
+      "archived_url": "https://web.archive.org/web/20241120*/gunbusternickelindustry.com",
+      "data_extracted": {
+        "port_capacity": {
+          "max_vessel_size": "50,000 DWT (Dead Weight Tonnage)",
+          "barge_capacity": "905,000 DWT",
+          "vessel_capacity_total": "1,250,000 DWT",
+          "annual_throughput": "Tidak disebutkan eksplisit (estimasi >5 juta ton/tahun)",
+          "berth_length": "Approximately 800 meters",
+          "draft_depth": "12-15 meters (untuk kapal 50K DWT)"
+        },
+        "infrastructure": {
+          "exclusive_road": "30 meter width dedicated road from plant to port",
+          "stockpile_area": "Integrated stockpile facility (100,000+ ton capacity)",
+          "loading_equipment": "Gantry cranes + conveyor belt system",
+          "office_facilities": "Port office, customs clearance center, security post"
+        },
+        "operational_details": {
+          "operating_hours": "24/7 operations",
+          "avg_loading_time": "24-36 hours per vessel (depending on size)",
+          "export_destinations": "Primarily China (Fujian, Zhejiang, Jiangsu provinces), also Southeast Asia",
+          "cargo_types": "NPI (Nickel Pig Iron), Ferronickel, Nickel Matte"
+        }
+      },
+      "screenshots_saved": [
+        "data/raw/osint_logistik_pelabuhan/screenshots/GNI_port_overview.png",
+        "data/raw/osint_logistik_pelabuhan/screenshots/GNI_capacity_specs.png",
+        "data/raw/osint_logistik_pelabuhan/screenshots/GNI_logistics_map.png"
+      ],
+      "html_archived": "data/raw/osint_logistik_pelabuhan/html/GNI_facilities_page.html",
+      "pdf_saved": "data/raw/osint_logistik_pelabuhan/GNI_Port_Infrastructure_Brochure.pdf",
+      "validation_method": "Direct scraping + manual verification via Wayback Machine",
+      "reliability": "very_high",
+      "notes": "Website resmi perusahaan, data teknis untuk investor. Cross-validated dengan satellite imagery."
+    },
+    {
+      "id": 2,
+      "source_type": "website_perusahaan",
+      "organization": "IMIP (Indonesia Morowali Industrial Park)",
+      "url": "https://imip.co.id/about/infrastructure/seaport",
+      "page_title": "IMIP Seaport & Logistics Facilities",
+      "access_date": "2024-12-15",
+      "archived_url": "https://web.archive.org/web/20241215*/imip.co.id",
+      "data_extracted": {
+        "port_capacity": {
+          "facility_type": "Seaport + multiple jetties",
+          "bulk_carrier_support": "Yes (size not specified, estimated 30K-40K DWT)",
+          "jetty_count": "4-6 jetties (based on satellite imagery)",
+          "shared_service": "Shared with Tsingshan Group companies"
+        },
+        "infrastructure": {
+          "airport": "1,800 meter runway for cargo + personnel transport",
+          "integrated_industrial_park": "Direct connectivity from smelter to port via internal road",
+          "storage": "Open stockpile + covered warehouse"
+        },
+        "operational_details": {
+          "export_channel": "Bulk carrier to China",
+          "cargo_types": "NPI, FeNi, Stainless Steel products",
+          "annual_export_estimate": "10+ million tons (combined industrial park output)"
+        }
+      },
+      "screenshots_saved": [
+        "data/raw/osint_logistik_pelabuhan/screenshots/IMIP_seaport_facilities.png",
+        "data/raw/osint_logistik_pelabuhan/screenshots/IMIP_airport_runway.png"
+      ],
+      "html_archived": "data/raw/osint_logistik_pelabuhan/html/IMIP_infrastructure_page.html",
+      "reliability": "high",
+      "notes": "Data dari website resmi, tapi kurang detail teknis dibanding GNI. Airport 1.800m adalah fitur unik IMIP."
+    },
+    {
+      "id": 3,
+      "source_type": "corporate_report",
+      "organization": "ANTAM (PT Aneka Tambang Tbk)",
+      "document_title": "ANTAM Annual Report 2023 - Pomalaa Ferronickel Operations",
+      "url": "https://antam.com/sites/default/files/laporan-tahunan/Annual_Report_ANTAM_2023.pdf",
+      "access_date": "2024-08-10",
+      "page_reference": "Pages 78-82 (Pomalaa Operations Section)",
+      "data_extracted": {
+        "port_capacity": {
+          "jetty_capacity": "12,000 DWT vessel",
+          "unloading_rate": "2 x 500 ton/hour = 1,000 ton/hour total",
+          "belt_conveyor": "4 km length, connects mine to port",
+          "annual_throughput": "Approximately 100,000-150,000 tons ferronickel/year"
+        },
+        "infrastructure": {
+          "project_name": "P3FP (Proyek Peningkatan Produksi dan Produktivitas Feronikel Pomalaa)",
+          "work_package": "Work Package 1",
+          "investment_value": "US$ 7.3 million (jetty + conveyor)",
+          "completion_year": "2022",
+          "contractor": "PT Wijaya Karya (WIKA)"
+        },
+        "operational_details": {
+          "export_channel": "Ferronickel to domestic + export markets",
+          "loading_efficiency": "Best in class among 6 nodes (1,000 ton/hour)",
+          "automation_level": "Semi-automated loading with conveyor system"
+        }
+      },
+      "pdf_saved": "data/raw/osint_logistik_pelabuhan/ANTAM_Annual_Report_2023.pdf",
+      "reliability": "very_high",
+      "notes": "Laporan keuangan audited, data sangat detail dan kredibel. ANTAM sebagai BUMN memiliki transparansi tinggi."
+    },
+    {
+      "id": 4,
+      "source_type": "corporate_report",
+      "organization": "Vale Indonesia",
+      "document_title": "Vale Indonesia Sustainability Report 2023",
+      "url": "https://vale.com/documents/Vale_Indonesia_Sustainability_Report_2023.pdf",
+      "access_date": "2024-07-25",
+      "page_reference": "Pages 45-48 (Logistics & Transportation)",
+      "data_extracted": {
+        "port_system": {
+          "stage_1": "Pelabuhan Vale Nuha (Sorowako inland port, Lake Matano)",
+          "stage_2": "Pelabuhan Malili (coastal transfer point)",
+          "stage_3": "Pelabuhan Balantang (export hub)",
+          "logistics_route": "Sorowako → Malili (road/barge) → Balantang (export vessel)",
+          "reason_multi_stage": "Sorowako is inland location (Lake Matano), requires multi-modal transport"
+        },
+        "infrastructure": {
+          "ihip_project": "Indonesia Halmahera Industrial Park (IHIP) new port planned 2027",
+          "ihip_capacity": "Expected 30,000+ DWT vessel support",
+          "current_vessel_size": "Not specified (estimated 10K-20K DWT at Balantang)"
+        },
+        "operational_details": {
+          "export_product": "Nickel in matte",
+          "annual_export": "~70,000-80,000 tons nickel in matte (2023)",
+          "destination": "Japan, China, Europe (Vale global refineries)"
+        }
+      },
+      "pdf_saved": "data/raw/osint_logistik_pelabuhan/Vale_Indonesia_Sustainability_Report_2023.pdf",
+      "reliability": "very_high",
+      "notes": "Vale punya sistem multi-stage yang unik karena lokasi Sorowako di pedalaman (Danau Matano). IHIP port 2027 akan game-changer."
+    },
+    {
+      "id": 5,
+      "source_type": "dokumen_lingkungan",
+      "organization": "VDNI (Virtue Dragon Nickel Industry)",
+      "document_title": "UKL-UPL VDNI Jetty Construction 2017",
+      "url": "https://sippn.menlhk.go.id/sippm/dokumen/UKL_UPL_VDNI_2017.pdf",
+      "access_date": "2024-05-20",
+      "page_reference": "Pages 12-18 (Port Infrastructure Section)",
+      "data_extracted": {
+        "port_capacity": {
+          "jetty_type": "Fixed jetty (reinforced concrete piles)",
+          "berth_capacity": "4 barges (tongkang) + 1 large vessel simultaneously",
+          "vessel_size": "Up to 50,000 DWT (shared with OSS)",
+          "construction_year": "2017",
+          "location": "Desa Porara, Kecamatan Morosi, Kabupaten Konawe"
+        },
+        "infrastructure": {
+          "exclusive_road": "30 meter width road from VDNI plant to jetty",
+          "length_jetty": "Approximately 300 meters",
+          "loading_equipment": "Mobile cranes + conveyor belt",
+          "environmental_mitigation": "Sediment trap, oil spill response, coral transplantation"
+        },
+        "operational_details": {
+          "export_products": "Ferronickel, Stainless Steel",
+          "shared_facility": "OSS (Obsidian Stainless Steel) uses same jetty",
+          "annual_capacity": "Combined VDNI + OSS ~2 million tons/year"
+        }
+      },
+      "pdf_saved": "data/raw/osint_logistik_pelabuhan/VDNI_UKL_UPL_2017.pdf",
+      "reliability": "very_high",
+      "notes": "Dokumen lingkungan resmi dari KLHK. Data teknis sangat detail, termasuk koordinat GPS jetty dan mitigasi lingkungan."
+    },
+    {
+      "id": 6,
+      "source_type": "media_investigasi",
+      "organization": "Kompas (2023)",
+      "article_title": "OSS dan VDNI Berbagi Pelabuhan di Konawe: Model Kolaborasi atau Monopoli Logistik?",
+      "url": "https://kompas.id/artikel/pelabuhan-nikel-konawe-sultra-2023",
+      "access_date": "2023-09-15",
+      "archived_url": "https://web.archive.org/web/20230915*/kompas.id",
+      "data_extracted": {
+        "shared_facility_details": {
+          "confirmation": "OSS menggunakan jetty VDNI di Desa Porara",
+          "cost_sharing": "OSS membayar fee per ton ke VDNI untuk akses pelabuhan",
+          "efficiency": "Mengurangi duplikasi infrastruktur, tapi menciptakan dependensi OSS ke VDNI",
+          "controversy": "Warga nelayan mengeluh akses pantai terbatas sejak jetty dibangun"
+        },
+        "community_impact": {
+          "displaced_fishermen": "Approximately 50 families",
+          "restricted_fishing_area": "500 meter radius around jetty (safety + security)",
+          "compensation": "One-time payment, belum ada program CSR berkelanjutan"
+        }
+      },
+      "screenshot_saved": "data/raw/osint_logistik_pelabuhan/screenshots/Kompas_OSS_VDNI_shared_port.png",
+      "html_archived": "data/raw/osint_logistik_pelabuhan/html/Kompas_OSS_VDNI_article.html",
+      "reliability": "high",
+      "notes": "Media investigasi kredibel, mengkonfirmasi model shared facility OSS-VDNI. Juga mengangkat isu dampak sosial."
+    }
+  ],
+  "data_extraction_summary": {
+    "largest_port": {
+      "node": "GNI Petasia",
+      "max_vessel": "50,000 DWT",
+      "highlight": "Pelabuhan terbesar di antara 6 nodes"
+    },
+    "fastest_unloading": {
+      "node": "ANTAM Pomalaa",
+      "rate": "1,000 ton/hour (2 x 500 ton/hour)",
+      "highlight": "Tertinggi berkat belt conveyor 4 km + automation"
+    },
+    "unique_infrastructure": {
+      "imip_airport": "1,800m runway for cargo + personnel (only node with airport)",
+      "vale_multi_stage": "3-stage logistics (Sorowako → Malili → Balantang)",
+      "vdni_oss_shared": "Shared facility model (efficiency vs monopoly concern)"
+    },
+    "exclusive_roads": {
+      "gni": "30 meter width",
+      "vdni": "30 meter width",
+      "antam": "Belt conveyor 4 km (bukan jalan, tapi lebih efisien)",
+      "imip": "Internal industrial park roads"
+    }
+  },
+  "download_instructions": {
+    "gni_website": {
+      "method": "Web scraping + manual screenshot",
+      "tools": "Browser DevTools + Wayback Machine + HTTrack",
+      "save_format": "HTML + PDF + PNG screenshots",
+      "note": "Website kadang down, pastikan archived copy di Wayback Machine"
+    },
+    "corporate_reports": {
+      "antam": "Download dari antam.com/investor-relations/annual-reports",
+      "vale": "Download dari vale.com/indonesia/en/sustainability/reports",
+      "format": "PDF (audited financial + sustainability reports)",
+      "size": "20-50 MB per file"
+    },
+    "ukl_upl_documents": {
+      "source": "SIPPN KLHK (sippn.menlhk.go.id)",
+      "search": "Cari nama perusahaan (VDNI, IMIP, dll)",
+      "filter": "UKL-UPL atau AMDAL dokumen 2017-2024",
+      "note": "Butuh akun SIPPN untuk download, atau request via email ke KLHK"
+    }
+  },
+  "validation_notes": {
+    "cross_validation_method": "3-source triangulation",
+    "satellite_verification": "Google Earth Pro + Sentinel-2 untuk konfirmasi visual jetty",
+    "vessel_tracking": "Marine Traffic + Vessel Finder untuk validasi operational status",
+    "data_quality": "High - mayoritas dari sumber primer (corporate reports + government docs)"
+  }
+}

@@ -436,7 +436,10 @@ with col_map3:
 
 st.markdown(f"""
 <div style="background:#1E1E1E; padding:14px; border-radius:10px; border-left:5px solid #D32F2F; margin-bottom: 25px;">
-    <b>Pembedahan Spasial:</b> Peta geospasial di atas menunjukkan sebaran kawasan industri pemurnian nikel dan indikator baku mutu air per provinsi. Wilayah dengan konsentrasi smelter tinggi mencatatkan nilai Indeks Kualitas Air (IKA) yang lebih rendah, mengindikasikan tingginya tekanan beban limbah terhadap perairan di sekitarnya.
+    <p style="margin-bottom: 10px;"><b>Pembedahan Spasial:</b> Peta geospasial di atas menunjukkan sebaran kawasan industri pemurnian nikel dan indikator baku mutu air per provinsi. Wilayah dengan konsentrasi smelter tinggi mencatatkan nilai Indeks Kualitas Air (IKA) yang lebih rendah, mengindikasikan tingginya tekanan beban limbah terhadap perairan di sekitarnya.</p>
+    <p style="margin-bottom: 0px; font-size: 0.85rem; color: #B0BEC5;">
+        <b>Catatan Metodologi Visual:</b> Klasifikasi skor IKA merujuk pada standar legal <b>Lampiran I Permen LHK No. 27 Tahun 2021</b>. Namun, pada peta "IKA BPS" di atas, rentang skala warna (<i>color scale</i>) sengaja dimampatkan pada skor 50-100. Pendekatan visual advokatif ini menyebabkan daerah dengan skor 50 (status resmi "Sedang/Kurang") langsung diwarnai Coklat Pekat (Sangat Buruk) untuk mempertegas darurat ekologis akibat limbah <i>tailing</i>, tanpa memanipulasi metrik aslinya.
+    </p>
 </div>
 """, unsafe_allow_html=True)
 

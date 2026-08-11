@@ -1036,3 +1036,60 @@ All raw API responses are saved in `tools/gfw/crawl_results/`:
 *Documentation generated: 14 Juni 2026*
 *Crawler script: `tools/gfw/crawl_gfw_api.py`*
 *CELIOS ECC Intelligence System*
+
+
+## Daftar Geostore Hash dan AOI (GADM 3.6 IDN)
+
+Berikut adalah daftar resmi ID Wilayah (AOI) dan Hash Geostore untuk seluruh provinsi di Indonesia (GADM 3.6). Data ini didapatkan langsung dari API GFW menggunakan script `tools/gfw/get_list_aoi.py`.
+
+ID GADM (Admin 1) ini digunakan pada parameter `aoi` di **Beta Land API** (`{"type": "admin", "country": "IDN", "region": "ID"}`).
+Geostore Hash digunakan pada **Zonal Analysis API**.
+
+| Nama Provinsi | ID GADM (Region AOI) | Geostore Hash |
+| :--- | :--- | :--- |
+| Aceh | 1 | `4b5ea9b537878d37c5368f3ec04c6394` |
+| Bali | 2 | `640ca60a5ee0f6d97b726e81c502edea` |
+| Bangka Belitung | 3 | `3999d461016a2847c239dc5cd66fc171` |
+| Banten | 4 | `73a3c06c96ed1f08915384f6f8ede52c` |
+| Bengkulu | 5 | `07e96ce52bf4be9e0188d581758db0f8` |
+| **Gorontalo** | **6** | `8d998ed751ba37bf689febf729f30304` |
+| Jakarta Raya | 7 | `be6d1857d192540cd37492d787769df6` |
+| Jambi | 8 | `bd353af5e1a2ad7a9b0ac1b48af61c86` |
+| Jawa Barat | 9 | `2ceb5f7b7ef63de3be2f93f536cd8f61` |
+| Jawa Tengah | 10 | `10d48ca6694ddb3ede3066fda9dac69a` |
+| Jawa Timur | 11 | `3d7b7f21746f220f0b5c485e1cfaf8cf` |
+| Kalimantan Barat | 12 | `a69c8779241c59cf0d75d528275f71bd` |
+| Kalimantan Selatan | 13 | `b2f923499eb2ee3d8ea5ff7c552e29e8` |
+| Kalimantan Tengah | 14 | `ae4490471d2448fa7bc6b887d30cb425` |
+| Kalimantan Timur | 15 | `60db77729f10392924cfdfc8cf5ad19b` |
+| Kepulauan Riau | 16 | `23a0c11b3273d7358ec9e9d7c5e0ce7d` |
+| Lampung | 17 | `cd3fc238ab84f36c8e331b60e00e07e1` |
+| Maluku Utara | 18 | `895661ccad605b5002b8d4ec2101ff1c` |
+| Maluku | 19 | `32eca3bb3b9470640420be44d56c49de` |
+| Nusa Tenggara Barat | 20 | `8ac49c4f9d679ef01a0de8a2659c935b` |
+| Nusa Tenggara Timur | 21 | `bcf07156665c174aba17e0e710f488e0` |
+| Papua Barat | 22 | `57ee4f48d33e2028283a93d176f49a54` |
+| Papua | 23 | `731aee882ea9b259efea1b7ccfea72bc` |
+| Riau | 24 | `8bec56e0cb4d6c64073c35b61facb7db` |
+| **Sulawesi Barat** | **25** | `796e2f453e81e409e183d833c586ff34` |
+| **Sulawesi Selatan** | **26** | `33c45193c87f0505647dfae91a796b67` |
+| **Sulawesi Tengah** | **27** | `70415db2d291955e71d4b08466cd6136` |
+| **Sulawesi Tenggara** | **28** | `3c79929a54bff963e7bf3a4762b803e9` |
+| **Sulawesi Utara** | **29** | `b779acdc5c7617db5a10ffcebde6a2e9` |
+| Sumatera Barat | 30 | `fffe0bc9bf50602a392935a6a4a4a514` |
+| Sumatera Selatan | 31 | `246f76f462c9b841fc5de0f25b7816d2` |
+| Sumatera Utara | 32 | `257fd3d6def414646f34a49108ad2c6c` |
+| Yogyakarta | 33 | `38aa04da4815a0c259e9faab50f6e241` |
+
+### Catatan Penting: Kesalahan Mapping V1/V2
+
+Sebelumnya, script pipeline `V1/V2` milik Celios memiliki kesalahan fatal dalam pemetaan ID (menggunakan ID yang salah sasaran), sehingga data yang ditarik adalah milik provinsi lain. Berikut adalah rekam jejak kesalahan ID lama agar tidak terulang:
+
+*   **Gorontalo** sebelumnya dipetakan ke ID `11` *(Ternyata menarik data **Jawa Timur**)*
+*   **Sulawesi Tengah** sebelumnya dipetakan ke ID `29` *(Ternyata menarik data **Sulawesi Utara**)*
+*   **Sulawesi Selatan** sebelumnya dipetakan ke ID `30` *(Ternyata menarik data **Sumatera Barat**)*
+*   **Sulawesi Utara** sebelumnya dipetakan ke ID `31` *(Ternyata menarik data **Sumatera Selatan**)*
+*   **Sulawesi Tenggara** sebelumnya dipetakan ke ID `32` *(Ternyata menarik data **Sumatera Utara**)*
+*   **Sulawesi Barat** sebelumnya dipetakan ke ID `33` *(Ternyata menarik data **Yogyakarta**)*
+
+Mulai versi **V3**, semua pipeline sudah di-update untuk menggunakan ID asli dari tabel GADM 3.6 di atas.

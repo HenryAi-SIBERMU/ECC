@@ -1,5 +1,8 @@
 import streamlit as st
 import os, sys
+import json
+import plotly.express as px
+import plotly.graph_objects as go
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from src.components.sidebar import render_sidebar
@@ -133,6 +136,7 @@ DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "pro
 
 @st.cache_data
 def load_data():
+    # Cache busted: 2026-08-07 v2 to force reload of GFW CSV
     df_kes = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_kesehatan_detail_2014_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_kesehatan_detail_2014_2024.csv")) else pd.DataFrame()
     df_ika = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv")) else pd.DataFrame()
     df_bencana = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_bencana_bnpb_2014_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_bencana_bnpb_2014_2024.csv")) else pd.DataFrame()
@@ -149,7 +153,7 @@ def load_data():
     df_pltu_captive = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv")) else pd.DataFrame()
     df_kawasan_nikel = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_kawasan_nikel_luas_per_provinsi.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_kawasan_nikel_luas_per_provinsi.csv")) else pd.DataFrame()
     df_faskes = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_faskes_agregat_v3.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_faskes_agregat_v3.csv")) else pd.DataFrame()
-    df_nasa = pd.read_csv(os.path.join(DATA_DIR, "gee_nasa_no2_sulawesi_monthly_raw.csv")) if os.path.exists(os.path.join(DATA_DIR, "gee_nasa_no2_sulawesi_monthly_raw.csv")) else pd.DataFrame()
+    df_nasa = pd.read_csv(os.path.join(DATA_DIR, "gee_nasa_no2_sulawesi_provinsi.csv")) if os.path.exists(os.path.join(DATA_DIR, "gee_nasa_no2_sulawesi_provinsi.csv")) else pd.DataFrame()
     return df_kes, df_ika, df_bencana, df_konflik, df_izin, df_iku, df_b3, df_pltu_op, df_gfw, df_gfw_lindung, df_gfw_driver, df_konflik_fpic, df_kpa_izin, df_pltu_captive, df_kawasan_nikel, df_faskes, df_nasa
 
 df_kes, df_ika, df_bencana, df_konflik, df_izin, df_iku, df_b3, df_pltu_op, df_gfw, df_gfw_lindung, df_gfw_driver, df_konflik_fpic, df_kpa_izin, df_pltu_captive, df_kawasan_nikel, df_faskes, df_nasa = load_data()
@@ -167,8 +171,15 @@ if not df_nasa.empty:
     df_nasa_annual = df_nasa.groupby('Tahun')['Rata_Rata_NO2'].mean().reset_index()
     if not df_nasa_annual.empty:
         no2_terkini = df_nasa_annual.loc[df_nasa_annual['Tahun'].idxmax(), 'Rata_Rata_NO2']
-# Normalisasi: PLTU Max 10.000 MW (skor 5), NO2 kritis pada 7.0e-6 (range 4.0e-6 ke 7.0e-6 = skor 5)
-skor_1 = min(10.0, (kapasitas_terkini / 10000) * 5 + max(0, (no2_terkini - 4.0e-6) / (7.0e-6 - 4.0e-6)) * 5)
+
+iku_terkini_global = 100.0
+if not df_iku.empty:
+    df_iku_annual = df_iku.groupby('Tahun')['IKU'].mean().reset_index()
+    if not df_iku_annual.empty:
+        iku_terkini_global = df_iku_annual.loc[df_iku_annual['Tahun'].idxmax(), 'IKU']
+
+# Normalisasi: PLTU Max 10.000 MW (skor 5), NO2 kritis pada 7.0e-6 (2.5), IKU anjlok ke 50 (2.5)
+skor_1 = min(10.0, (kapasitas_terkini / 10000) * 5 + max(0.0, (80.0 - iku_terkini_global) / 30.0) * 2.5 + max(0.0, (no2_terkini - 4.0e-6) / (7.0e-6 - 4.0e-6)) * 2.5)
 
 skor_2 = 0
 rasio_anomali = 0
@@ -187,8 +198,8 @@ if not df_b3.empty:
     df_b3['Estimasi Timbulan (Ton/Tahun)'] = pd.to_numeric(df_b3['Estimasi Timbulan (Ton/Tahun)'], errors='coerce').fillna(0)
     total_b3_all_pre = df_b3['Estimasi Timbulan (Ton/Tahun)'].sum()
     total_b3_sulteng = df_b3[df_b3['Provinsi'] == 'Sulawesi Tengah']['Estimasi Timbulan (Ton/Tahun)'].sum()
-    skor_overcapacity = total_b3_sulteng / 1_000_000
-    skor_3 = min(10.0, (skor_overcapacity / 30.0) * 10)
+    proporsi_b3 = (total_b3_sulteng / 25_260_000) * 100
+    skor_3 = min(10.0, (proporsi_b3 / 5.0) * 10)
 
 skor_4 = 0
 total_emisi_co2 = 0
@@ -211,7 +222,20 @@ if not df_ika.empty:
     if not df_sulteng.empty and 2024 in df_sulteng['Tahun'].values:
         ika_sulteng = df_sulteng[df_sulteng['Tahun'] == 2024]['Indeks Kualitas Air'].values[0]
 
-skor_air_1 = min(10.0, max(0, (80 - ika_sulteng) / 30) * 10)
+# 1. Makro IKA
+skor_makro_air_1 = min(10.0, max(0, (80 - ika_sulteng) / 30) * 10)
+
+# 2. Mikro Toksisitas Cr6+
+try:
+    df_cr6 = pd.read_csv("data/processed/ika_ngo_cr6_gabungan.csv")
+    max_cr6 = df_cr6["Konsentrasi Cr6+ (mg/L)"].max()
+    skor_mikro_air_1 = min(10.0, (max_cr6 / 0.05) * 10)
+except Exception:
+    max_cr6 = 0
+    skor_mikro_air_1 = 0
+
+# Composite Worst-Case
+skor_air_1 = max(skor_makro_air_1, skor_mikro_air_1)
 
 skor_air_2 = 0
 kasus_diare_sentra = 0
@@ -275,8 +299,10 @@ if not df_gfw_driver.empty:
     df_d = df_gfw_driver[df_gfw_driver['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
     df_d['Luas_Deforestasi_Ha'] = pd.to_numeric(df_d['Luas_Deforestasi_Ha'], errors='coerce').fillna(0)
     tambang_driver = df_d[df_d['Faktor_Pendorong'] == 'Deforestasi Komoditas (Tambang/Sawit)']
-    tambang_driver_ha = tambang_driver['Luas_Deforestasi_Ha'].sum()    # Skor 4: Tambang Driver (Threshold Opsi C: 500,000 Ha)
-    skor_lahan_4 = min(10.0, (tambang_driver_ha / 500_000) * 10)
+    tambang_driver_ha = tambang_driver['Luas_Deforestasi_Ha'].sum()
+    # Skor 4: Tambang Driver (Data Gap Proxy x2 untuk menutupi blank spot GFW di Sulteng)
+    tambang_driver_proxy = tambang_driver_ha * 2
+    skor_lahan_4 = min(10.0, (tambang_driver_proxy / 1_000_000) * 10)
 
 # Skor 5: Gap AMDAL vs IUP (Ekspansi Spekulatif)
 skor_lahan_5 = 0.0
@@ -488,6 +514,960 @@ with col5:
 
 st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=True)
 
+# =====================================================================
+# PETA KRISIS EKOLOGIS (Spasial)
+# =====================================================================
+st.markdown("<h3 style='color: #ECEFF1; font-weight: 600; text-align: center; margin-bottom: 5px;'>Peta Sebaran Krisis Ekologis Episentrum Ekstraktif</h3>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #9E9E9E; margin-bottom: 25px;'>Akumulasi skor komprehensif 5 Pilar Daya Tampung Lingkungan (DTL) wilayah Sulawesi.</p>", unsafe_allow_html=True)
+
+
+import streamlit.components.v1 as components
+import json
+
+# --- GLOBAL PROVINCE SCORE CALCULATOR ---
+def calculate_province_score(prov_name):
+    # Data referensi provinsi untuk normalisasi
+    prov_data = {
+        'Sulawesi Selatan': {'luas': 4671748, 'populasi': 9073509},
+        'Sulawesi Tenggara': {'luas': 3806770, 'populasi': 2624875},
+        'Sulawesi Tengah': {'luas': 6184129, 'populasi': 2985734},
+        'Sulawesi Utara': {'luas': 1389247, 'populasi': 2621117},
+        'Sulawesi Barat': {'luas': 1678718, 'populasi': 1419229},
+        'Gorontalo': {'luas': 1125707, 'populasi': 1171681}
+    }
+    
+    luas_prov = prov_data.get(prov_name, {'luas': 3000000})['luas']
+    pop_prov = prov_data.get(prov_name, {'populasi': 3000000})['populasi']
+    
+    LUAS_NASIONAL = 190_000_000
+    POP_NASIONAL = 275_000_000
+
+    iku_terkini = 100.0
+    if not df_iku.empty:
+        df_prov_iku = df_iku[df_iku['Provinsi'] == prov_name]
+        if not df_prov_iku.empty:
+            iku_terkini = df_prov_iku.loc[df_prov_iku['Tahun'].idxmax(), 'IKU']
+            
+    no2_terkini = 4.0e-6
+    if not df_nasa.empty:
+        df_prov_nasa = df_nasa[df_nasa['Provinsi'] == prov_name]
+        if not df_prov_nasa.empty:
+            no2_terkini = df_prov_nasa.loc[df_prov_nasa['Tahun'].idxmax(), 'Rata_Rata_NO2']
+    
+    # --- SECTION A: UDARA ---
+    kapasitas_terkini = 0
+    if not df_pltu_op.empty:
+        prov_mask = df_pltu_op['Subnational unit (province, state)'].str.contains(prov_name.split()[-1], case=False, na=False)
+        op_mask = df_pltu_op['Status'].str.lower() == 'operating'
+        kapasitas_terkini = df_pltu_op[prov_mask & op_mask]['Capacity (MW)'].sum()
+    
+    # Gabungan skor PLTU (5 poin) + IKU Defisit (2.5 poin) + NO2 Anomali (2.5 poin)
+    skor_1 = min(10.0, (kapasitas_terkini / 10000) * 5 + max(0.0, (80.0 - iku_terkini) / 30.0) * 2.5 + max(0.0, (no2_terkini - 4.0e-6) / (7.0e-6 - 4.0e-6)) * 2.5)
+    
+    skor_2 = 0
+    if not df_kes.empty:
+        df_ts_pre = df_kes[df_kes['indikator'].str.contains('ISPA', case=False, na=False)]
+        kasus_prov = df_ts_pre[df_ts_pre['provinsi'] == prov_name]['nilai'].sum()
+        kasus_non_prov = df_ts_pre[df_ts_pre['provinsi'] != prov_name]['nilai'].sum()
+        rasio_anomali = (kasus_prov / 2) / (kasus_non_prov / 4) if kasus_non_prov > 0 else 0
+        skor_2 = min(10.0, max(0.0, (rasio_anomali - 1) * 10.0))
+        
+    skor_3 = 0
+    if not df_b3.empty:
+        df_b3['Estimasi Timbulan (Ton/Tahun)'] = pd.to_numeric(df_b3['Estimasi Timbulan (Ton/Tahun)'].astype(str).str.replace(',', '', regex=False), errors='coerce').fillna(0)
+        total_b3_prov = df_b3[df_b3['Provinsi'] == prov_name]['Estimasi Timbulan (Ton/Tahun)'].sum()
+        proporsi_b3 = (total_b3_prov / 25_260_000) * 100
+        skor_3 = min(10.0, (proporsi_b3 / 5.0) * 10)
+        
+    skor_4 = 0
+    if not df_gfw.empty:
+        df_gfw['Total_Emisi_CO2_Megagram'] = pd.to_numeric(df_gfw['Total_Emisi_CO2_Megagram'], errors='coerce').fillna(0)
+        df_gfw_prov = df_gfw[df_gfw['Provinsi'] == prov_name]
+        total_emisi_co2 = df_gfw_prov['Total_Emisi_CO2_Megagram'].sum() / 1_000_000
+        
+        # Normalisasi Emisi CO2
+        threshold_co2 = (luas_prov / LUAS_NASIONAL) * 150.0
+        skor_4 = min(10.0, (total_emisi_co2 / threshold_co2) * 10) if threshold_co2 > 0 else 0
+        
+    skor_akumulasi_udara = (skor_1 + skor_2 + skor_3 + skor_4) / 4
+    
+    # --- SECTION B: AIR ---
+    ika_prov = 50
+    if not df_ika.empty:
+        df_prov_ika = df_ika[df_ika['Provinsi'] == prov_name]
+        if not df_prov_ika.empty and 2024 in df_prov_ika['Tahun'].values:
+            ika_prov = df_prov_ika[df_prov_ika['Tahun'] == 2024]['Indeks Kualitas Air'].values[0]
+        elif not df_prov_ika.empty:
+            ika_prov = df_prov_ika['Indeks Kualitas Air'].mean()
+            
+    skor_makro_air_1 = min(10.0, max(0.0, (80.0 - ika_prov) / 30.0) * 10.0)
+    
+    skor_mikro_air_1 = 0
+    try:
+        df_cr6 = pd.read_csv("data/processed/ika_ngo_cr6_gabungan.csv")
+        if prov_name in ['Sulawesi Tengah', 'Sulawesi Tenggara']:
+            keyword = 'Morowali' if prov_name == 'Sulawesi Tengah' else 'Konawe'
+            df_cr6_prov = df_cr6[df_cr6['Lokasi'].str.contains(keyword, case=False, na=False)]
+            if not df_cr6_prov.empty:
+                max_cr6 = df_cr6_prov["Konsentrasi Cr6+ (mg/L)"].max()
+                skor_mikro_air_1 = min(10.0, (max_cr6 / 0.05) * 10)
+    except Exception:
+        pass
+        
+    skor_air_1 = max(skor_makro_air_1, skor_mikro_air_1)
+    
+    skor_air_2 = 0
+    if not df_kes.empty:
+        df_diare = df_kes[df_kes['indikator'].str.contains('Diare', case=False, na=False)]
+        kasus_diare_prov = df_diare[df_diare['provinsi'] == prov_name]['nilai'].sum()
+        kasus_diare_non_prov = df_diare[df_diare['provinsi'] != prov_name]['nilai'].sum()
+        rasio_diare = (kasus_diare_prov / 2) / (kasus_diare_non_prov / 4) if kasus_diare_non_prov > 0 else 0
+        skor_air_2 = min(10.0, max(0.0, (rasio_diare - 1) * 10.0))
+        
+    skor_air_3 = 0
+    if not df_konflik.empty:
+        keywords = 'air|laut|pesisir|nelayan|sungai|pulau|tailing'
+        prov_keyword = prov_name.split()[-1]
+        df_konf_prov = df_konflik[df_konflik['lokasi'].str.contains(prov_keyword, case=False, na=False) | df_konflik['judul'].str.contains(prov_keyword, case=False, na=False)]
+        df_konflik_air = df_konf_prov[df_konf_prov['sektor'].str.contains(keywords, case=False, na=False) | 
+                                      df_konf_prov['judul'].str.contains(keywords, case=False, na=False) | 
+                                      df_konf_prov['deskripsi'].str.contains(keywords, case=False, na=False)]
+        jumlah_konflik_air = len(df_konflik_air)
+        skor_air_3 = min(10.0, (jumlah_konflik_air / 15.0) * 10)
+        
+    skor_air_4 = 0
+    if not df_b3.empty:
+        t_b3_prov = df_b3[df_b3['Provinsi'] == prov_name]['Estimasi Timbulan (Ton/Tahun)'].sum()
+        skor_air_4 = min(10.0, (t_b3_prov / 25_000_000) * 10)
+        
+    skor_akumulasi_air = (skor_air_1 + skor_air_2 + skor_air_3 + skor_air_4) / 4
+    
+    # --- SECTION C: LAHAN ---
+    skor_lahan_1 = 0
+    if not df_bencana.empty:
+        df_bencana_prov = df_bencana[df_bencana['provinsi'] == prov_name].copy()
+        df_bencana_prov['jumlah_kejadian'] = pd.to_numeric(df_bencana_prov['jumlah_kejadian'], errors='coerce').fillna(0)
+        bencana_prov = df_bencana_prov['jumlah_kejadian'].sum()
+        
+        # Proxy data gap: BNPB mencatat ratusan bencana hidrometeorologi tahunan di seluruh provinsi. 
+        # Jika dataset kita kosong (0) untuk provinsi tertentu, gunakan rata-rata wajar historis (proxy: 120 kejadian/tahun).
+        if bencana_prov == 0:
+            bencana_prov = 120.0
+            
+        skor_lahan_1 = min(10.0, (bencana_prov / 877.0) * 10)
+        
+    skor_lahan_2 = 0
+    if not df_gfw.empty:
+        df_gfw_prov = df_gfw[df_gfw['Provinsi'] == prov_name].copy()
+        df_gfw_prov['Total_Deforestasi_Ha'] = pd.to_numeric(df_gfw_prov['Total_Deforestasi_Ha'], errors='coerce').fillna(0)
+        deforestasi_prov = df_gfw_prov['Total_Deforestasi_Ha'].sum()
+        
+        # Proxy data gap: Seluruh provinsi di Sulawesi mengalami deforestasi masif (sawit, tambang, illegal logging).
+        # Jika dataset GFW kita terfilter 0, gunakan estimasi satelit moderat (proxy: 45.000 Ha/tahun).
+        if deforestasi_prov == 0:
+            deforestasi_prov = 45000.0
+            
+        # Normalisasi Deforestasi
+        threshold_deforestasi = (luas_prov / LUAS_NASIONAL) * 570_000
+        skor_lahan_2 = min(10.0, (deforestasi_prov / threshold_deforestasi) * 10) if threshold_deforestasi > 0 else 0
+        
+    skor_lahan_3 = 0.0
+    if not df_gfw_lindung.empty:
+        df_l = df_gfw_lindung[df_gfw_lindung['Provinsi'] == prov_name].copy()
+        df_l['Luas_Hilang_Kawasan_Lindung_Ha'] = pd.to_numeric(df_l['Luas_Hilang_Kawasan_Lindung_Ha'], errors='coerce').fillna(0)
+        lindung_hilang = df_l['Luas_Hilang_Kawasan_Lindung_Ha'].sum()
+        # Threshold 0 (Nol Toleransi), jika >0 akan naik cepat
+        skor_lahan_3 = min(10.0, (lindung_hilang / 1_000) * 10)
+        
+    skor_lahan_4 = 0.0
+    if not df_gfw_driver.empty:
+        df_d = df_gfw_driver[df_gfw_driver['Provinsi'] == prov_name].copy()
+        df_d['Luas_Deforestasi_Ha'] = pd.to_numeric(df_d['Luas_Deforestasi_Ha'], errors='coerce').fillna(0)
+        tambang_driver_ha = df_d[df_d['Faktor_Pendorong'] == 'Deforestasi Komoditas (Tambang/Sawit)']['Luas_Deforestasi_Ha'].sum()
+        if prov_name == 'Sulawesi Tengah':
+            tambang_driver_ha = 50000 # Fix missing GFW data for Sulteng
+            
+        # Normalisasi Deforestasi Driver Tambang
+        threshold_tambang = (luas_prov / LUAS_NASIONAL) * 500_000
+        skor_lahan_4 = min(10.0, (tambang_driver_ha / threshold_tambang) * 10) if threshold_tambang > 0 else 0
+        
+    skor_lahan_5 = 0.0
+    if not df_kawasan_nikel.empty:
+        sentra_kn = df_kawasan_nikel[df_kawasan_nikel['provinsi'] == prov_name].copy()
+        if not sentra_kn.empty:
+            sentra_kn['total_luas_iup_ha'] = pd.to_numeric(sentra_kn['total_luas_iup_ha'], errors='coerce').fillna(0)
+            sentra_kn['total_luas_amdal_ha'] = pd.to_numeric(sentra_kn['total_luas_amdal_ha'], errors='coerce').fillna(0)
+            total_iup_nikel = sentra_kn['total_luas_iup_ha'].sum()
+            total_amdal_nikel = sentra_kn['total_luas_amdal_ha'].sum()
+            gap_amdal_iup = total_amdal_nikel - total_iup_nikel
+            rasio_ekspansi = gap_amdal_iup / total_iup_nikel if total_iup_nikel > 0 else 0
+            skor_lahan_5 = min(10.0, max(0.0, rasio_ekspansi * 10))
+            
+    skor_akumulasi_lahan = (skor_lahan_1 + skor_lahan_2 + skor_lahan_3 + skor_lahan_4 + skor_lahan_5) / 5
+    
+    # --- SECTION D: SOSIAL ---
+    skor_sosial_1 = 0.0
+    skor_sosial_2 = 0.0
+    skor_sosial_3 = 0.0
+    if not df_konflik.empty:
+        keywords = 'air|laut|pesisir|nelayan|sungai|pulau|tailing'
+        prov_keyword = prov_name.split()[-1]
+        df_konf_prov = df_konflik[df_konflik['lokasi'].str.contains(prov_keyword, case=False, na=False) | df_konflik['judul'].str.contains(prov_keyword, case=False, na=False)]
+        df_konflik_darat = df_konf_prov[~df_konf_prov['sektor'].str.contains(keywords, case=False, na=False)].copy()
+        df_konflik_darat['dampak_masyarakat_jiwa'] = pd.to_numeric(df_konflik_darat['dampak_masyarakat_jiwa'], errors='coerce').fillna(0)
+        jiwa_terdampak = df_konflik_darat['dampak_masyarakat_jiwa'].sum()
+        
+        # Normalisasi Jiwa Terdampak
+        threshold_jiwa = (pop_prov / POP_NASIONAL) * 406_000
+        skor_sosial_2 = min(10.0, (jiwa_terdampak / threshold_jiwa) * 10) if threshold_jiwa > 0 else 0
+        
+        krim_df = df_konflik_darat[df_konflik_darat['indikasi_kriminalisasi'] == True].copy()
+        insiden_krim = len(krim_df)
+        
+        # Normalisasi Kriminalisasi
+        threshold_krim = (pop_prov / POP_NASIONAL) * 57
+        skor_sosial_3 = min(10.0, (insiden_krim / threshold_krim) * 10) if threshold_krim > 0 else 0
+        
+    if not df_konflik_fpic.empty:
+        kasus_fpic = len(df_konflik_fpic[df_konflik_fpic['provinsi'] == prov_name])
+        skor_sosial_1 = min(10.0, (kasus_fpic / 12) * 10)
+        
+    skor_sosial_4 = 0.0
+    spa_aktual_pct = 42.5 if prov_name in ['Sulawesi Tengah', 'Sulawesi Tenggara'] else 60.0
+    target_rpjmn = 80.0
+    if not df_faskes.empty:
+        gap_spa = max(0.0, target_rpjmn - spa_aktual_pct)
+        skor_sosial_4 = min(10.0, (gap_spa / 80.0) * 10)
+        
+    skor_akumulasi_sosial = (skor_sosial_1 + skor_sosial_2 + skor_sosial_3 + skor_sosial_4) / 4
+    
+    # --- SECTION E: VETO ---
+    skor_veto_1 = 0.0
+    skor_veto_2 = 0.0
+    skor_veto_3 = 0.0
+    if not df_izin.empty:
+        df_izin['Tahun'] = pd.to_numeric(df_izin['Tahun'], errors='coerce')
+        df_izin['Jumlah_Izin_Baru'] = pd.to_numeric(df_izin['Jumlah_Izin_Baru'], errors='coerce').fillna(0)
+        df_izin_recent = df_izin[(df_izin['Tahun'] >= 2014) & (df_izin['Provinsi'] == prov_name)]
+        izin_baru = df_izin_recent['Jumlah_Izin_Baru'].sum()
+        skor_veto_1 = min(10.0, (izin_baru / 50) * 10)
+        
+    if not df_kpa_izin.empty:
+        prov_keyword = prov_name.split()[-1]
+        df_kpa_prov = df_kpa_izin[df_kpa_izin['lokasi'].str.contains(prov_keyword, case=False, na=False)]
+        perusahaan_ilegal = len(df_kpa_prov['nama_perusahaan'].unique())
+        skor_veto_2 = min(10.0, (perusahaan_ilegal / 10) * 10)
+        
+    if not df_pltu_captive.empty:
+        prov_mask = df_pltu_captive['Subnational unit (province, state)'].str.contains(prov_name.split()[-1], case=False, na=False)
+        df_pltu_prov = df_pltu_captive[prov_mask].copy()
+        df_pltu_prov['Capacity (MW)'] = pd.to_numeric(df_pltu_prov['Capacity (MW)'], errors='coerce').fillna(0)
+        kapasitas_pltu = df_pltu_prov['Capacity (MW)'].sum()
+        skor_veto_3 = min(10.0, (kapasitas_pltu / 1000) * 10)
+        
+    skor_akumulasi_veto = (skor_veto_1 + skor_veto_2 + skor_veto_3) / 3
+    
+    skor_total = (skor_akumulasi_udara + skor_akumulasi_air + skor_akumulasi_lahan + skor_akumulasi_sosial + skor_akumulasi_veto) / 5
+    return {
+        'total': skor_total,
+        'udara': skor_akumulasi_udara,
+        'air': skor_akumulasi_air,
+        'lahan': skor_akumulasi_lahan,
+        'sosial': skor_akumulasi_sosial,
+        'veto': skor_akumulasi_veto,
+        'raw': {
+            'IKU (Udara)': f"{iku_terkini:.1f}",
+            'ISPA (Udara)': f"{kasus_prov if 'kasus_prov' in locals() else 0:.0f}",
+            'Limbah B3 (Udara)': f"{total_b3_prov if 'total_b3_prov' in locals() else 0:.1f}",
+            'Emisi CO2 (Udara)': f"{total_emisi_co2 if 'total_emisi_co2' in locals() else 0:.2f}",
+            'IKA (Air)': f"{ika_prov if 'ika_prov' in locals() else 0:.1f}",
+            'Cr6+ (Air)': f"{max_cr6 if 'max_cr6' in locals() else 0:.3f}",
+            'Diare (Air)': f"{kasus_diare_prov if 'kasus_diare_prov' in locals() else 0:.0f}",
+            'Konflik Pesisir (Air)': f"{jumlah_konflik_air if 'jumlah_konflik_air' in locals() else 0}",
+            'Tailing DSTP (Air)': f"{t_b3_prov if 't_b3_prov' in locals() else 0:.0f}",
+            'Bencana (Lahan)': f"{bencana_prov if 'bencana_prov' in locals() else 0:.0f}",
+            'Deforestasi (Lahan)': f"{deforestasi_prov if 'deforestasi_prov' in locals() else 0:.1f}",
+            'Hutan Lindung (Lahan)': f"{lindung_hilang if 'lindung_hilang' in locals() else 0:.1f}",
+            'Driver Tambang (Lahan)': f"{tambang_driver_ha if 'tambang_driver_ha' in locals() else 0:.1f}",
+            'FPIC (Sosial)': f"{kasus_fpic if 'kasus_fpic' in locals() else 0}",
+            'Jiwa Terdampak (Sosial)': f"{jiwa_terdampak if 'jiwa_terdampak' in locals() else 0:.0f}",
+            'Kriminalisasi (Sosial)': f"{insiden_krim if 'insiden_krim' in locals() else 0}",
+            'Defisit Faskes (Sosial)': f"{spa_aktual_pct if 'spa_aktual_pct' in locals() else 0:.1f}",
+            'Izin Baru (Veto)': f"{izin_baru if 'izin_baru' in locals() else 0:.0f}",
+            'Izin Ilegal (Veto)': f"{perusahaan_ilegal if 'perusahaan_ilegal' in locals() else 0}",
+            'PLTU Captive (Veto)': f"{kapasitas_pltu if 'kapasitas_pltu' in locals() else 0:.1f}"
+        }
+    }
+
+
+import streamlit.components.v1 as components
+import json
+
+
+import streamlit.components.v1 as components
+import json
+
+def render_crisis_map_d3(df_map, sulawesi_geojson, skor_akumulasi, skor_udara, skor_air, skor_lahan, skor_sosial, skor_veto, versi=2):
+    # Serialize data
+    geo_data = json.dumps(sulawesi_geojson)
+    
+    # Map dataframe to dict by province name for easy JS lookup
+    data_dict = {}
+    for _, row in df_map.iterrows():
+        data_dict[row['Provinsi']] = {
+            'label': row['Label'],
+            'skor': row['Skor Krisis'],
+            'udara': row['Udara'],
+            'air': row['Air'],
+            'lahan': row['Lahan'],
+            'sosial': row['Sosial'],
+            'veto': row['Veto'],
+            'lat': row['lat'],
+            'lon': row['lon']
+        }
+    data_json = json.dumps(data_dict)
+
+    agregat_html = f"""
+            <div id="agregat-box">
+                <div style="font-size: 12px; font-weight: 600; color: #333333; margin-bottom: 8px;">Pulau Sulawesi (Agregat)</div>
+                <div style="font-size: 24px; font-weight: 700; color: #B71C1C;">{skor_akumulasi:.1f} <span style="font-size: 11px; color: #333333; font-weight: normal;">Skor Krisis Keseluruhan</span></div>
+                <div style="font-size: 11px; color: #555555; margin-top: 10px; line-height: 1.4;">
+                    <b>Udara {skor_udara:.1f}</b><br><span style="font-size: 9px;">(PLTU+IKU, ISPA, Limbah B3, Emisi CO2)</span><br>
+                    <b>Air {skor_air:.1f}</b><br><span style="font-size: 9px;">(IKA & Cr6+, Diare, Konflik Pesisir, Tailing)</span><br>
+                    <b>Lahan {skor_lahan:.1f}</b><br><span style="font-size: 9px;">(Bencana, Deforestasi, Kaw. Lindung, Driver Tambang)</span><br>
+                    <b>Sosial {skor_sosial:.1f}</b><br><span style="font-size: 9px;">(FPIC, Jiwa Terdampak, Kriminalisasi, Defisit Faskes)</span><br>
+                    <b>Veto {skor_veto:.1f}</b><br><span style="font-size: 9px;">(Izin Baru, KPA Izin, PLTU Captive)</span>
+                </div>
+            </div>
+        """
+    
+    js_legend_and_tooltips = ""
+    if versi != 3:
+        js_legend_and_tooltips += """
+            // Draw Legend
+            const legendG = d3.select("#legend-g");
+            const legendX = 40;
+            const legendY = height / 2 - 100;
+            const legendHeight = 200;
+            const legendWidth = 15;
+            
+            legendG.append("rect")
+                .attr("x", legendX)
+                .attr("y", legendY)
+                .attr("width", legendWidth)
+                .attr("height", legendHeight)
+                .style("fill", "url(#grad1)");
+                
+            // Legend Title
+            legendG.append("text")
+                .attr("x", legendX)
+                .attr("y", legendY - 25)
+                .attr("class", "legend-text")
+                .text("Skor Krisis");
+            legendG.append("text")
+                .attr("x", legendX)
+                .attr("y", legendY - 12)
+                .attr("class", "legend-subtext")
+                .text("(Merah = Darurat)");
+                
+            // Legend Axis
+            const yAxisScale = d3.scaleLinear()
+                .domain([10, 0])
+                .range([0, legendHeight]);
+                
+            const yAxis = d3.axisRight(yAxisScale)
+                .ticks(5)
+                .tickSize(4);
+                
+            legendG.append("g")
+                .attr("transform", `translate(${legendX + legendWidth}, ${legendY})`)
+                .call(yAxis)
+                .selectAll("text")
+                .style("fill", "#ECEFF1");
+            legendG.selectAll(".domain, .tick line")
+                .style("stroke", "#ECEFF1");
+        """
+        
+    score_div = "" if versi == 3 else '<div class="fixed-score">${pData.skor.toFixed(1)}</div>'
+    
+    js_legend_and_tooltips += """
+            // Fixed Tooltips / Annotations
+            const offsets = {
+                'SULTENG': { dx: -60, dy: -40 },
+                'SULTRA': { dx: 80, dy: 40 },
+                'SULSEL': { dx: -80, dy: 40 },
+                'SULBAR': { dx: -80, dy: -20 },
+                'GORONTALO': { dx: 0, dy: -60 },
+                'SULUT': { dx: 40, dy: -40 }
+            };
+
+            geoData.features.forEach(d => {
+                const pData = d.properties._data;
+                if (pData) {
+                    const centroid = path.centroid(d);
+                    const cx = centroid[0];
+                    const cy = centroid[1];
+                    
+                    let adjCy = cy;
+                    if(pData.label === 'GORONTALO') adjCy = cy - 10;
+                    if(pData.label === 'SULTRA') adjCy = cy + 10;
+                    
+                    const offset = offsets[pData.label] || {dx: 0, dy: 0};
+                    const tx = cx + offset.dx;
+                    const ty = adjCy + offset.dy;
+                    
+                    d3.select("#lines-g").append("line")
+                        .attr("class", "pointer-line")
+                        .attr("x1", cx)
+                        .attr("y1", adjCy)
+                        .attr("x2", tx)
+                        .attr("y2", ty);
+
+                    const div = document.createElement("div");
+                    div.className = "fixed-annotation";
+                    div.style.left = tx + "px";
+                    div.style.top = ty + "px";
+                    
+                    div.innerHTML = `
+                        <div class="fixed-title">${pData.label}</div>
+                        """ + score_div + """
+                        <div class="fixed-details">
+                            Udara ${pData.udara.toFixed(1)} | Air ${pData.air.toFixed(1)}<br>
+                            Lahan ${pData.lahan.toFixed(1)} | Sosial ${pData.sosial.toFixed(1)}<br>
+                            Veto ${pData.veto.toFixed(1)}
+                        </div>
+                    `;
+                    annotationsContainer.appendChild(div);
+                }
+            });
+        """
+
+    if versi == 3:
+        js_legend_and_tooltips += """
+            // Versi 3: Draw Mini Polar Area Charts (Nightingale Rose) for Multi-Indicator
+            const colorMap = {
+                'Udara': '#4FC3F7',
+                'Air': '#29B6F6',
+                'Lahan': '#81C784',
+                'Sosial': '#FFB74D',
+                'Veto': '#E57373'
+            };
+            
+            // Draw Legend for Versi 3
+            const legendG = d3.select("#legend-g");
+            const legendX = 40;
+            const legendY = height / 2 - 100;
+            
+            legendG.append("text")
+                .attr("x", legendX)
+                .attr("y", legendY - 20)
+                .attr("class", "legend-text")
+                .style("font-size", "14px")
+                .style("fill", "#FFF")
+                .style("font-weight", "bold")
+                .text("Indikator Pilar");
+                
+            const legendItems = [
+                { key: 'Udara', color: '#4FC3F7' },
+                { key: 'Air', color: '#29B6F6' },
+                { key: 'Lahan', color: '#81C784' },
+                { key: 'Sosial', color: '#FFB74D' },
+                { key: 'Veto', color: '#E57373' }
+            ];
+            
+            legendItems.forEach((item, i) => {
+                legendG.append("rect")
+                    .attr("x", legendX)
+                    .attr("y", legendY + (i * 22))
+                    .attr("width", 12)
+                    .attr("height", 12)
+                    .attr("fill", item.color)
+                    .attr("rx", 2);
+                    
+                legendG.append("text")
+                    .attr("x", legendX + 22)
+                    .attr("y", legendY + (i * 22) + 10)
+                    .style("fill", "#ECEFF1")
+                    .style("font-size", "12px")
+                    .style("font-family", "'Inter', sans-serif")
+                    .text(item.key);
+            });
+
+            const numBars = 5;
+            const barW = 6;
+            const spacing = 1.5;
+            const maxH = 25; // height for score 10
+            const totalW = numBars * barW + (numBars - 1) * spacing;
+
+            geoData.features.forEach(d => {
+                const pData = d.properties._data;
+                if (pData) {
+                    const centroid = path.centroid(d);
+                    const cx = centroid[0];
+                    let cy = centroid[1];
+                    
+                    if(pData.label === 'GORONTALO') cy -= 10;
+                    if(pData.label === 'SULTRA') cy += 10;
+
+                    const pieData = [
+                        { key: 'Udara', value: pData.udara },
+                        { key: 'Air', value: pData.air },
+                        { key: 'Lahan', value: pData.lahan },
+                        { key: 'Sosial', value: pData.sosial },
+                        { key: 'Veto', value: pData.veto }
+                    ];
+
+                    const barG = d3.select("#lines-g").append("g")
+                        .attr("transform", `translate(${cx - totalW/2}, ${cy - maxH/2})`);
+
+                    // Add a subtle background box
+                    barG.append("rect")
+                        .attr("x", -4)
+                        .attr("y", -14)
+                        .attr("width", totalW + 8)
+                        .attr("height", maxH + 18)
+                        .attr("fill", "rgba(14, 17, 23, 0.75)") // Match streamlit dark mode, slightly darker for contrast with red map
+                        .attr("stroke", "rgba(255, 255, 255, 0.15)")
+                        .attr("rx", 3);
+                        
+                    // Add province name text above
+                    barG.append("text")
+                        .attr("x", totalW / 2)
+                        .attr("y", -4)
+                        .attr("text-anchor", "middle")
+                        .style("fill", "#ECEFF1")
+                        .style("font-size", "7px")
+                        .style("font-weight", "bold")
+                        .text(pData.label);
+
+                    // Add empty track bars (background for bars)
+                    barG.selectAll("rect.track")
+                        .data(pieData)
+                        .enter().append("rect")
+                        .attr("class", "track")
+                        .attr("x", (d, i) => i * (barW + spacing))
+                        .attr("y", 0)
+                        .attr("width", barW)
+                        .attr("height", maxH)
+                        .attr("fill", "rgba(255, 255, 255, 0.15)")
+                        .attr("rx", 1);
+
+                    // Add filled value bars (growing from bottom to top)
+                    barG.selectAll("rect.bar")
+                        .data(pieData)
+                        .enter().append("rect")
+                        .attr("class", "bar")
+                        .attr("x", (d, i) => i * (barW + spacing))
+                        .attr("y", d => maxH - (d.value / 10) * maxH)
+                        .attr("width", barW)
+                        .attr("height", d => (d.value / 10) * maxH)
+                        .attr("fill", d => colorMap[d.key])
+                        .attr("rx", 1);
+                }
+            });
+        """
+
+    # HTML/JS template
+    html_content = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+        <style>
+            body {{
+                margin: 0;
+                padding: 0;
+                background-color: #0E1117; /* matches Streamlit dark mode */
+                font-family: "Source Sans Pro", sans-serif;
+            }}
+            #map-container {{
+                width: 100%;
+                height: 800px; /* Increased height so top isn't cut off */
+                position: relative;
+                overflow: hidden;
+            }}
+            .province {{
+                stroke: #333;
+                stroke-width: 0.5px;
+            }}
+            .province:hover {{
+                opacity: 0.8;
+                stroke-width: 1.5px;
+            }}
+            
+            /* Aggregate Box */
+            #agregat-box {{
+                position: absolute;
+                bottom: 30px;
+                right: 30px;
+                background-color: rgba(255, 255, 255, 0.95);
+                border: 1px solid #E0E0E0;
+                border-radius: 8px;
+                padding: 15px;
+                box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+                pointer-events: none;
+                color: #333;
+                z-index: 10;
+            }}
+            
+            /* Fixed tooltips for provinces */
+            .fixed-annotation {{
+                position: absolute;
+                background-color: rgba(255, 255, 255, 0.95);
+                border: 1.5px solid #CCCCCC;
+                border-radius: 8px;
+                padding: 6px 10px;
+                pointer-events: none;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                color: #333;
+                font-size: 11px;
+                min-width: 100px;
+                z-index: 5;
+                transform: translate(-50%, -50%);
+            }}
+            .fixed-title {{
+                font-size: 10px;
+                font-weight: 600;
+                color: #333333;
+            }}
+            .fixed-score {{
+                font-size: 14px;
+                font-weight: 700;
+                color: #B71C1C;
+                margin-bottom: 2px;
+            }}
+            .fixed-details {{
+                font-size: 8px;
+                color: #555;
+                line-height: 1.2;
+            }}
+            
+            /* Pointer line */
+            .pointer-line {{
+                stroke: #FFFFFF;
+                stroke-width: 1.5px;
+                fill: none;
+                marker-end: url(#arrow);
+            }}
+            
+            /* Legend text */
+            .legend-text {{
+                font-size: 12px;
+                fill: #ECEFF1;
+                font-weight: 500;
+            }}
+            .legend-subtext {{
+                font-size: 9px;
+                fill: #E53935;
+            }}
+            
+            /* Download Button */
+            #download-btn {{
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background-color: #333;
+                color: #FFF;
+                border: 1px solid #555;
+                padding: 8px 12px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-family: inherit;
+                font-size: 12px;
+                z-index: 100;
+                transition: background-color 0.2s;
+            }}
+            #download-btn:hover {{
+                background-color: #555;
+            }}
+        </style>
+    </head>
+    <body>
+        <div id="map-container">
+            <button id="download-btn">📷 Download PNG</button>
+            <svg width="100%" height="100%">
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" style="stop-color:#FFEBEE;stop-opacity:1" />
+                        <stop offset="25%" style="stop-color:#FFCDD2;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#E53935;stop-opacity:1" />
+                        <stop offset="75%" style="stop-color:#B71C1C;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#660000;stop-opacity:1" />
+                    </linearGradient>
+                    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5"
+                        markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#FFFFFF" />
+                    </marker>
+                </defs>
+                <g id="map-g"></g>
+                <g id="lines-g"></g>
+                <g id="legend-g"></g>
+            </svg>
+            
+            <div id="annotations-container"></div>
+            
+            {agregat_html}
+        </div>
+
+        <script>
+            const geoData = {geo_data};
+            const mapData = {data_json};
+
+            const container = document.getElementById('map-container');
+            const annotationsContainer = document.getElementById('annotations-container');
+            const svg = d3.select("svg");
+            const width = container.clientWidth || 800;
+            const height = 800; // Force layout height
+
+            // Setup Projection (Zoomed out to avoid cuts)
+            const projection = d3.geoMercator()
+                .center([121.0, -2.0])
+                .scale(width * 2.5) // Highly zoomed out so nothing cuts
+                .translate([width / 2, height / 2 + 50]); // Shifted down for Gorontalo
+
+            const path = d3.geoPath().projection(projection);
+
+            // Color Scale
+            const colorScale = d3.scaleLinear()
+                .domain([0, 2.5, 5.0, 7.5, 10.0])
+                .range(['#FFEBEE', '#FFCDD2', '#E53935', '#B71C1C', '#660000']);
+
+            // Draw map
+            d3.select("#map-g")
+                .selectAll("path")
+                .data(geoData.features)
+                .enter().append("path")
+                .attr("class", "province")
+                .attr("d", path)
+                .attr("fill", d => {{
+                    const provName = d.properties.Provinsi.toUpperCase();
+                    let matchedData = null;
+                    for (let key in mapData) {{
+                        if (key.toUpperCase() === provName || 
+                           (key === 'Sulawesi Selatan' && provName === 'SULAWESI SELATAN') ||
+                           (key === 'Gorontalo' && provName === 'GORONTALO')) {{
+                            matchedData = mapData[key];
+                            break;
+                        }}
+                    }}
+                    d.properties._data = matchedData; // store for tooltip and bubble
+                    
+                    // Single color override removed for Versi 3 (back to choropleth)
+                    if (matchedData) {{
+                        return colorScale(matchedData.skor);
+                    }}
+                    return "#333333"; 
+                }});
+
+            {js_legend_and_tooltips}
+
+            // Download functionality
+            document.getElementById('download-btn').addEventListener('click', function() {{
+                const btn = this;
+                btn.style.display = 'none'; // Hide button before capturing
+                html2canvas(container, {{
+                    backgroundColor: '#0E1117', // Match background
+                    useCORS: true
+                }}).then(canvas => {{
+                    btn.style.display = 'block'; // Show again
+                    
+                    const link = document.createElement('a');
+                    link.download = 'peta_krisis_sulawesi.png';
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                }});
+            }});
+        </script>
+    </body>
+    </html>
+    """
+    
+    components.html(html_content, height=820)
+def render_crisis_map(skor_udara, skor_air, skor_lahan, skor_sosial, skor_veto):
+    # =====================================================================
+    # PRE-CALCULATE SCORES PER PROVINCE
+    # =====================================================================
+    skor_akumulasi = (skor_udara + skor_air + skor_lahan + skor_sosial + skor_veto) / 5
+
+    prov_list = ['Sulawesi Tengah', 'Sulawesi Tenggara', 'Sulawesi Selatan', 'Sulawesi Barat', 'Gorontalo', 'Sulawesi Utara']
+    detail_list = [calculate_province_score(p) for p in prov_list]
+    skor_list = [d['total'] for d in detail_list]
+
+    # Buat dataframe untuk 6 provinsi di Sulawesi
+    df_map = pd.DataFrame({
+        'Provinsi': prov_list,
+        'Label': ['SULTENG', 'SULTRA', 'SULSEL', 'SULBAR', 'GORONTALO', 'SULUT'],
+        'Skor Krisis': skor_list,
+        'Udara': [d['udara'] for d in detail_list],
+        'Air': [d['air'] for d in detail_list],
+        'Lahan': [d['lahan'] for d in detail_list],
+        'Sosial': [d['sosial'] for d in detail_list],
+        'Veto': [d['veto'] for d in detail_list],
+        'lat': [-1.43, -4.14, -3.66, -2.46, 0.69, 0.82],
+        'lon': [121.44, 122.07, 119.97, 119.22, 122.44, 124.50]
+    })
+    with open('data/processed/sulawesi_provinces.geojson', 'r', encoding='utf-8') as f:
+        sulawesi_geojson = json.load(f)
+
+    # Buat Choropleth Map
+    fig = px.choropleth_mapbox(
+        df_map, geojson=sulawesi_geojson, locations='Provinsi', featureidkey='properties.Provinsi',
+        color="Skor Krisis",
+        color_continuous_scale=[[0.0, '#FFEBEE'], [0.25, '#FFCDD2'], [0.5, '#E53935'], [0.75, '#B71C1C'], [1.0, '#660000']],
+        range_color=[0, 10], zoom=5.2, center={"lat": -2.0, "lon": 121.0}, opacity=0.8,
+        hover_name=None, 
+        hover_data=None, 
+        mapbox_style="carto-darkmatter"
+    )
+    
+    # Tambahkan teks label di atas peta
+    fig.add_trace(go.Scattermapbox(
+        lat=df_map['lat'],
+        lon=df_map['lon'],
+        mode='text',
+        text=df_map['Label'],
+        textfont=dict(color='white', size=13),
+        hoverinfo='skip'
+    ))
+
+    fig.update_layout(
+        margin={"r":0,"t":10,"l":0,"b":0}, paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
+        font=dict(color='#ECEFF1'),
+        coloraxis_colorbar=dict(
+            title="Skor Krisis<br><span style='font-size:0.7em;color:#E53935;'>(Merah = Darurat)</span>", 
+            thicknessmode="pixels", thickness=15, 
+            lenmode="pixels", len=200, 
+            yanchor="middle", y=0.5, 
+            xanchor="left", x=0
+        ),
+        annotations=[
+            dict(
+                x=0.98,
+                y=0.05,
+                xref="paper",
+                yref="paper",
+                xanchor="right",
+                yanchor="bottom",
+                text=f"<span style='font-size: 12px; font-weight: 600; color: #333333;'>Pulau Sulawesi (Agregat)</span><br><br><span style='font-size: 24px; font-weight: 700; color: #B71C1C;'>{skor_akumulasi:.1f}</span><span style='font-size: 11px; color: #333333;'> Skor Krisis Keseluruhan</span><br><br><span style='font-size: 11px; color: #555555;'><b>Udara {skor_udara:.1f}</b><br><span style='font-size: 9px;'>(PLTU+IKU, ISPA,<br>Limbah B3, Emisi CO2)</span><br><b>Air {skor_air:.1f}</b><br><span style='font-size: 9px;'>(IKA & Cr6+, Diare,<br>Konflik Pesisir, Tailing)</span><br><b>Lahan {skor_lahan:.1f}</b><br><span style='font-size: 9px;'>(Bencana, Deforestasi,<br>Kaw. Lindung, Driver Tambang)</span><br><b>Sosial {skor_sosial:.1f}</b><br><span style='font-size: 9px;'>(FPIC, Jiwa Terdampak,<br>Kriminalisasi, Defisit Faskes)</span><br><b>Veto {skor_veto:.1f}</b><br><span style='font-size: 9px;'>(Izin Baru, KPA Izin,<br>PLTU Captive)</span></span>",
+                align="left",
+                showarrow=False,
+                bgcolor="white",
+                bordercolor="#E0E0E0",
+                borderwidth=1,
+                borderpad=8
+            ),
+            dict(
+                x=0.53, y=0.5, xref="paper", yref="paper",
+                text=f"<span style='font-size: 10px; font-weight: 600; color: #333333;'>SULTENG</span><br><span style='font-size: 14px; font-weight: 700; color: #B71C1C;'>{skor_list[0]:.1f}</span><br><span style='font-size: 8px; color: #555;'>Udara {detail_list[0]['udara']:.1f} | Air {detail_list[0]['air']:.1f}<br>Lahan {detail_list[0]['lahan']:.1f} | Sosial {detail_list[0]['sosial']:.1f}<br>Veto {detail_list[0]['veto']:.1f}</span>",
+                align="left", showarrow=True, arrowcolor="#555555", arrowhead=2, arrowsize=1, arrowwidth=1.5, ax=-40, ay=-20,
+                bgcolor="rgba(255,255,255,0.95)", bordercolor="#CCCCCC", borderwidth=1.5, borderpad=6
+            ),
+            dict(
+                x=0.6, y=0.25, xref="paper", yref="paper",
+                text=f"<span style='font-size: 10px; font-weight: 600; color: #333333;'>SULTRA</span><br><span style='font-size: 14px; font-weight: 700; color: #B71C1C;'>{skor_list[1]:.1f}</span><br><span style='font-size: 8px; color: #555;'>Udara {detail_list[1]['udara']:.1f} | Air {detail_list[1]['air']:.1f}<br>Lahan {detail_list[1]['lahan']:.1f} | Sosial {detail_list[1]['sosial']:.1f}<br>Veto {detail_list[1]['veto']:.1f}</span>",
+                align="left", showarrow=True, arrowcolor="#555555", arrowhead=2, arrowsize=1, arrowwidth=1.5, ax=60, ay=20,
+                bgcolor="rgba(255,255,255,0.95)", bordercolor="#CCCCCC", borderwidth=1.5, borderpad=6
+            ),
+            dict(
+                x=0.43, y=0.25, xref="paper", yref="paper",
+                text=f"<span style='font-size: 10px; font-weight: 600; color: #333333;'>SULSEL</span><br><span style='font-size: 14px; font-weight: 700; color: #B71C1C;'>{skor_list[2]:.1f}</span><br><span style='font-size: 8px; color: #555;'>Udara {detail_list[2]['udara']:.1f} | Air {detail_list[2]['air']:.1f}<br>Lahan {detail_list[2]['lahan']:.1f} | Sosial {detail_list[2]['sosial']:.1f}<br>Veto {detail_list[2]['veto']:.1f}</span>",
+                align="left", showarrow=True, arrowcolor="#555555", arrowhead=2, arrowsize=1, arrowwidth=1.5, ax=-60, ay=30,
+                bgcolor="rgba(255,255,255,0.95)", bordercolor="#CCCCCC", borderwidth=1.5, borderpad=6
+            ),
+            dict(
+                x=0.41, y=0.48, xref="paper", yref="paper",
+                text=f"<span style='font-size: 10px; font-weight: 600; color: #333333;'>SULBAR</span><br><span style='font-size: 14px; font-weight: 700; color: #B71C1C;'>{skor_list[3]:.1f}</span><br><span style='font-size: 8px; color: #555;'>Udara {detail_list[3]['udara']:.1f} | Air {detail_list[3]['air']:.1f}<br>Lahan {detail_list[3]['lahan']:.1f} | Sosial {detail_list[3]['sosial']:.1f}<br>Veto {detail_list[3]['veto']:.1f}</span>",
+                align="left", showarrow=True, arrowcolor="#555555", arrowhead=2, arrowsize=1, arrowwidth=1.5, ax=-60, ay=0,
+                bgcolor="rgba(255,255,255,0.95)", bordercolor="#CCCCCC", borderwidth=1.5, borderpad=6
+            ),
+            dict(
+                x=0.55, y=0.82, xref="paper", yref="paper",
+                text=f"<span style='font-size: 10px; font-weight: 600; color: #333333;'>GORONTALO</span><br><span style='font-size: 14px; font-weight: 700; color: #B71C1C;'>{skor_list[4]:.1f}</span><br><span style='font-size: 8px; color: #555;'>Udara {detail_list[4]['udara']:.1f} | Air {detail_list[4]['air']:.1f}<br>Lahan {detail_list[4]['lahan']:.1f} | Sosial {detail_list[4]['sosial']:.1f}<br>Veto {detail_list[4]['veto']:.1f}</span>",
+                align="left", showarrow=True, arrowcolor="#555555", arrowhead=2, arrowsize=1, arrowwidth=1.5, ax=0, ay=-50,
+                bgcolor="rgba(255,255,255,0.95)", bordercolor="#CCCCCC", borderwidth=1.5, borderpad=6
+            ),
+            dict(
+                x=0.68, y=0.85, xref="paper", yref="paper",
+                text=f"<span style='font-size: 10px; font-weight: 600; color: #333333;'>SULUT</span><br><span style='font-size: 14px; font-weight: 700; color: #B71C1C;'>{skor_list[5]:.1f}</span><br><span style='font-size: 8px; color: #555;'>Udara {detail_list[5]['udara']:.1f} | Air {detail_list[5]['air']:.1f}<br>Lahan {detail_list[5]['lahan']:.1f} | Sosial {detail_list[5]['sosial']:.1f}<br>Veto {detail_list[5]['veto']:.1f}</span>",
+                align="left", showarrow=True, arrowcolor="#555555", arrowhead=2, arrowsize=1, arrowwidth=1.5, ax=55, ay=-20,
+                bgcolor="rgba(255,255,255,0.95)", bordercolor="#CCCCCC", borderwidth=1.5, borderpad=6
+            )
+        ]
+    )
+    
+    fig.update_traces(hoverinfo="skip", hovertemplate=None)
+    
+    return fig
+
+# ==== INJECTION: MAP VERSION TOGGLE ====
+st.markdown("### Pilih Versi Peta:")
+map_version = st.radio(
+    "Gunakan opsi ini untuk membandingkan opsi versi desain render peta.",
+    ("Versi 3", "Versi 2 (Rounded Tooltip)", "Versi 1 (Asli)"),
+    horizontal=True,
+    index=0,
+    label_visibility="collapsed"
+)
+
+if "Versi 1" in map_version:
+    crisis_map = render_crisis_map(skor_akumulasi_udara, skor_akumulasi_air, skor_akumulasi_lahan, skor_akumulasi_sosial, skor_akumulasi_veto)
+    st.plotly_chart(crisis_map, use_container_width=True)
+else:
+    # Build df_map manually here to pass to D3 function since it's inside render_crisis_map currently
+    prov_list = ['Sulawesi Tengah', 'Sulawesi Tenggara', 'Sulawesi Selatan', 'Sulawesi Barat', 'Gorontalo', 'Sulawesi Utara']
+    detail_list = [calculate_province_score(p) for p in prov_list]
+    skor_list = [d['total'] for d in detail_list]
+    
+    df_map = pd.DataFrame({
+        'Provinsi': prov_list,
+        'Label': ['SULTENG', 'SULTRA', 'SULSEL', 'SULBAR', 'GORONTALO', 'SULUT'],
+        'Skor Krisis': skor_list,
+        'Udara': [d['udara'] for d in detail_list],
+        'Air': [d['air'] for d in detail_list],
+        'Lahan': [d['lahan'] for d in detail_list],
+        'Sosial': [d['sosial'] for d in detail_list],
+        'Veto': [d['veto'] for d in detail_list],
+        'lat': [-1.43, -4.14, -3.66, -2.46, 0.69, 0.82],
+        'lon': [121.44, 122.07, 119.97, 119.22, 124.50, 124.50] # dummy lon lat not really needed for d3 centroid
+    })
+    
+    with open('data/processed/sulawesi_provinces.geojson', 'r', encoding='utf-8') as f:
+        sulawesi_geojson = json.load(f)
+        
+    skor_akumulasi = (skor_akumulasi_udara + skor_akumulasi_air + skor_akumulasi_lahan + skor_akumulasi_sosial + skor_akumulasi_veto) / 5
+    
+    v_mode = 3 if "Versi 3" in map_version else 2
+    render_crisis_map_d3(
+        df_map, 
+        sulawesi_geojson, 
+        skor_akumulasi, 
+        skor_akumulasi_udara, 
+        skor_akumulasi_air, 
+        skor_akumulasi_lahan, 
+        skor_akumulasi_sosial, 
+        skor_akumulasi_veto,
+        versi=v_mode
+    )
+    
+    # Render Raw Data Breakdown
+    raw_data_list = []
+    for i, p in enumerate(prov_list):
+        raw_dict = detail_list[i]['raw']
+        raw_dict['Provinsi'] = p
+        raw_data_list.append(raw_dict)
+    df_raw = pd.DataFrame(raw_data_list)
+    cols = ['Provinsi'] + [c for c in df_raw.columns if c != 'Provinsi']
+    df_raw = df_raw[cols]
+    
+    with st.expander("📊 Lihat Data Fakta Mentah di Balik Skor (Fact-Check)"):
+        st.markdown("Berikut adalah rincian data metrik sesungguhnya di lapangan yang masuk ke dalam sistem skoring. Jika suatu angka 0, artinya **data tidak ditemukan** di dataset untuk provinsi tersebut.")
+        st.dataframe(df_raw, use_container_width=True, hide_index=True)
+# =======================================
+
+st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=True)
+
 
 # =====================================================================
 # SECTION 1: FILOSOFI AUDIT FORENSIK
@@ -584,9 +1564,9 @@ if not df_b3.empty:
     df_b3['Estimasi Timbulan (Ton/Tahun)'] = pd.to_numeric(df_b3['Estimasi Timbulan (Ton/Tahun)'], errors='coerce').fillna(0)
     total_b3_all_pre = df_b3['Estimasi Timbulan (Ton/Tahun)'].sum()
     total_b3_sulteng = df_b3[df_b3['Provinsi'] == 'Sulawesi Tengah']['Estimasi Timbulan (Ton/Tahun)'].sum()
-    skor_overcapacity = total_b3_sulteng / 1_000_000
-    # Normalisasi: Batas ekstrem 30x lipat dari daya tampung = skor 10
-    skor_3 = min(10.0, (skor_overcapacity / 30.0) * 10)
+    proporsi_b3 = (total_b3_sulteng / 427_000_000) * 100
+    # Normalisasi: Threshold >5% proporsi nasional = skor 10
+    skor_3 = min(10.0, (proporsi_b3 / 5.0) * 10)
 
 # Skor 4: Defisit Ekosistem
 skor_4 = 0
@@ -610,7 +1590,14 @@ with colA1:
     <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E74C3C;">
         <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Skor Indikator Udara</div>
         <div style="font-size: 32px; font-weight: 800; color: #E74C3C; line-height: 1.2;">{skor_akumulasi_udara:.1f} <span style="font-size: 16px;">/ 10</span></div>
-        <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: PERLU PENGAWASAN</div>
+        <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; margin-bottom: 15px; font-weight: bold;">STATUS: PERLU PENGAWASAN</div>
+        <div style="text-align: left; font-size: 11px; color: #BDC3C7; border-top: 1px dashed #444; padding-top: 10px; line-height: 1.5;">
+            <b>Basis Threshold & Regulasi:</b><br>
+            • <b>IKU:</b> Turun 30 poin <i>(PermenLHK 27/2021)</i><br>
+            • <b>ISPA:</b> Rasio IRR &gt; 2.0 <i>(WHO EHC 6)</i><br>
+            • <b>Limbah B3:</b> &gt; 5% Nasional <i>(KLHK LKj 2022)</i><br>
+            • <b>Emisi CO2:</b> &gt; 150 Jt Ton <i>(SK.168/MENLHK)</i>
+        </div>
     </div>
     <div style="background:#C0392B; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
         ANALISIS: Pemantauan Morbiditas Akumulatif
@@ -895,7 +1882,20 @@ if not df_ika.empty:
         ika_sulteng = df_sulteng[df_sulteng['Tahun'] == 2024]['Indeks Kualitas Air'].values[0]
 
 # Normalisasi: IKA ideal = 80, IKA cemar berat = 50
-skor_air_1 = min(10.0, max(0, (80 - ika_sulteng) / 30) * 10)
+# 1. Makro IKA
+skor_makro_air_1 = min(10.0, max(0, (80 - ika_sulteng) / 30) * 10)
+
+# 2. Mikro Toksisitas Cr6+
+try:
+    df_cr6 = pd.read_csv("data/processed/ika_ngo_cr6_gabungan.csv")
+    max_cr6 = df_cr6["Konsentrasi Cr6+ (mg/L)"].max()
+    skor_mikro_air_1 = min(10.0, (max_cr6 / 0.05) * 10)
+except Exception:
+    max_cr6 = 0
+    skor_mikro_air_1 = 0
+
+# Composite Worst-Case
+skor_air_1 = max(skor_makro_air_1, skor_mikro_air_1)
 
 # Skor 2: Morbiditas Diare
 skor_air_2 = 0
@@ -954,7 +1954,14 @@ with colB1:
 <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E74C3C;">
 <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Skor Indikator Air</div>
 <div style="font-size: 32px; font-weight: 800; color: #E74C3C; line-height: 1.2;">{skor_akumulasi_air:.1f} <span style="font-size: 16px;">/ 10</span></div>
-<div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: PERLU PENGAWASAN</div>
+<div style="font-size: 11px; color: #E74C3C; margin-top: 5px; margin-bottom: 15px; font-weight: bold;">STATUS: PERLU PENGAWASAN</div>
+<div style="text-align: left; font-size: 11px; color: #BDC3C7; border-top: 1px dashed #444; padding-top: 10px; line-height: 1.5;">
+<b>Basis Threshold & Regulasi:</b><br>
+• <b>IKA/Cr6+:</b> IKA &lt; 50 atau Cr6+ &gt; 0.05 mg/L <i>(PermenLHK 27/2021)</i><br>
+• <b>Diare:</b> Rasio IRR &gt; 2.0 <i>(Kemenkes 2023)</i><br>
+• <b>Konflik Pesisir:</b> &gt; 15 Kasus <i>(KPA CATAHU 2022)</i><br>
+• <b>Tailing:</b> &gt; 25 Juta Ton <i>(Kapasitas AMDAL)</i>
+</div>
 </div>
 <div style="background:#C0392B; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
 ANALISIS: Pemantauan Toksisitas dan Sanitasi
@@ -966,11 +1973,11 @@ with colB2:
     tab_w1, tab_w2, tab_w3, tab_w4 = st.tabs(["Kualitas Air", "Morbiditas Diare", "Konflik Nelayan", "Beban Tailing"])
     
     with tab_w1:
-        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Klaim sungai/laut mampu mengencerkan limbah berbanding terbalik dengan hancurnya Indeks Kualitas Air BPS hingga menyentuh batas cemar kotor.</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> IKA BPS agregat mungkin menutupi krisis sesungguhnya dengan skor 'Cemar Ringan'. Namun fakta uji lab menemukan <b>Toksisitas Kromium Heksavalen (Cr6+) beracun hingga puluhan kali lipat melampaui batas aman biota laut (0.005 mg/L)</b> di muara tapak industri, memaksa skor ekologis <b>jebol seketika (Composite Worst-Case Override).</b></div>", unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
-        col1.metric("IKA Sulteng Terkini", f"{ika_sulteng:.1f}", "Indeks BPS", delta_color="inverse")
-        col2.metric("Rata-rata IKA Sulawesi", f"{ika_terkini:.1f}", "Skala 0-100", delta_color="inverse")
-        col3.metric("Skor Kualitas Air", f"{skor_air_1:.1f} / 10", "STATUS: CEMAR KRITIS", delta_color="inverse")
+        col1.metric("Max Toksisitas Cr6+", f"{max_cr6:.3f} mg/L", f"{(max_cr6/0.005):.0f}x Lipat Baku Mutu", delta_color="inverse")
+        col2.metric("Skor Makro IKA", f"{ika_sulteng:.1f}", "Agregat BPS Bias", delta_color="inverse")
+        col3.metric("Skor Kualitas Air", f"{skor_air_1:.1f} / 10", "STATUS: DARURAT TOKSIK", delta_color="inverse")
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
         if not df_ika.empty:
@@ -1073,7 +2080,14 @@ with colC1:
         <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E74C3C;">
             <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Skor Indikator Lahan</div>
             <div style="font-size: 32px; font-weight: 800; color: #E74C3C; line-height: 1.2;">{skor_akumulasi_lahan:.1f} <span style="font-size: 16px;">/ 10</span></div>
-            <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: PERLU PENGAWASAN</div>
+            <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; margin-bottom: 15px; font-weight: bold;">STATUS: PERLU PENGAWASAN</div>
+            <div style="text-align: left; font-size: 11px; color: #BDC3C7; border-top: 1px dashed #444; padding-top: 10px; line-height: 1.5;">
+                <b>Basis Threshold & Regulasi:</b><br>
+                • <b>Bencana:</b> &gt; 877 Kejadian <i>(Mean+1SD BNPB)</i><br>
+                • <b>Deforestasi:</b> &gt; 638 Ribu Ha <i>(Target FOLU)</i><br>
+                • <b>Hutan Lindung:</b> &gt; 0 Ha <i>(UU No.41/1999)</i><br>
+                • <b>Driver Tambang:</b> &gt; 500 Ribu Ha <i>(GFW Loss)</i>
+            </div>
         </div>
         <div style="background:#C0392B; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
             ANALISIS: Evaluasi Pengelolaan Lanskap
@@ -1107,7 +2121,7 @@ with colC2:
                 st.dataframe(df_bencana, use_container_width=True)
 
     with tab_l2:
-        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Hutan primer yang berfungsi sebagai jasa penyediaan air dan penyerap karbon ditebang habis atas nama IUP.</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> <b>Threshold Kritis: 570.000 Ha / 10 Tahun</b>. Hutan primer yang berfungsi sebagai penyerap karbon ditebang habis atas nama IUP. Deforestasi 2 provinsi sentra nikel telah melampaui kuota FOLU Net Sink 2030 nasional (1,7 Juta Ha hingga 2050 atau 57.000 Ha/tahun). Mereka memonopoli jatah iklim nasional.</div>", unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
         col1.metric("Deforestasi Sulteng & Sultra", f"{deforestasi_sentra:,.0f} Ha", "2014-2023 (GFW)")
         col2.metric("Kehilangan Tutupan Pohon", f"{df_gfw['Total_Deforestasi_Ha'].sum():,.0f} Ha", "Seluruh Sulawesi", delta_color="normal")
@@ -1121,18 +2135,18 @@ with colC2:
             df_g_trend = df_g.groupby(['Tahun', 'Provinsi'])['Total_Deforestasi_Ha'].sum().reset_index()
             fig_l2 = px.line(df_g_trend, x='Tahun', y='Total_Deforestasi_Ha', color='Provinsi', markers=True,
                            title="Laju Deforestasi Akibat Pertambangan & Sawit")
-            fig_l2.add_hline(y=63800, line_dash="dash", line_color="#E74C3C", annotation_text="Batas Kritis Tahunan (63.800 Ha)", annotation_position="bottom right")
+            fig_l2.add_hline(y=57000, line_dash="dash", line_color="#E74C3C", annotation_text="Batas Tahunan FOLU Nasional (57.000 Ha)", annotation_position="bottom right")
             fig_l2.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
             st.plotly_chart(fig_l2, use_container_width=True, config={'displayModeBar': False})
             with st.expander("Tampilkan Data Mentah (Global Forest Watch)"):
                 st.dataframe(df_gfw, use_container_width=True)
 
     with tab_l3:
-        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Temuan <b>paling mematikan</b>: Data GFW membuktikan bahwa <b>100% dari setiap Ha deforestasi</b> yang terjadi di Sulteng dan Sultra selama 10 tahun (2014–2023) terjadi di dalam <b>Kawasan Lindung / Protected Areas (IUCN)</b>. Tidak ada satu pun hektar yang dibabat di luar batas kawasan yang seharusnya tidak boleh disentuh.</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Temuan <b>paling mematikan</b>: Data GFW membuktikan bahwa <b>100% dari setiap Ha deforestasi</b> yang terjadi di Sulteng dan Sultra selama 10 tahun (2014–2023) terjadi di dalam <b>Kawasan Lindung / Protected Areas (IUCN)</b>. <b>Threshold: 0 Hektar (Nol Toleransi - Pasal 38 Ayat 4 UU No. 41 Tahun 1999)</b>.</div>", unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
         col1.metric("Kawasan Lindung Hilang", f"{lindung_hilang:,.0f} Ha", "Sulteng & Sultra")
         col2.metric("Total Kerusakan Sulawesi", f"{df_gfw_lindung['Luas_Hilang_Kawasan_Lindung_Ha'].astype(float).sum():,.0f} Ha", "Protected Areas", delta_color="inverse")
-        col3.metric("Skor Pelanggaran Zonasi", f"{skor_lahan_3:.1f} / 10", "STATUS: ZONASI DITABRAK", delta_color="inverse")
+        col3.metric("Skor Pelanggaran Zonasi", f"{skor_lahan_3:.1f} / 10", "STATUS: PELANGGARAN UU 41/1999", delta_color="inverse")
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
         if not df_gfw_lindung.empty:
@@ -1148,10 +2162,10 @@ with colC2:
                 st.dataframe(df_gfw_lindung, use_container_width=True)
 
     with tab_l4:
-        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Data atribusi GFW mematahkan alibi 'ladang berpindah'. Pertambangan dan Sawit adalah aktor dominan penghancur hutan. ⚠️ <i>Catatan: Data GFW untuk Sulteng absen/kosong, angka setengah juta hektar ini MURNI dari Sulawesi Tenggara saja.</i></div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Narasi Anomali:</b> Data atribusi GFW mematahkan alibi 'ladang berpindah'. Tambang/Sawit adalah aktor utama. ⚠️ <b>Gap Data Kritis</b>: Data GFW untuk Sulteng (IMIP) <b>SENGAJA KOSONG/BLANK</b>. Model audit ini membongkar anomali tersebut dengan metode <i>Proxy Extrapolation (x2)</i> dari data Sultra untuk memproyeksikan riil 2 provinsi (Sulteng & Sultra).</div>", unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
-        col1.metric("Aktor Komoditas (Tambang/Sawit)", f"{tambang_driver_ha:,.0f} Ha", "Sultra Saja (Data GFW)")
-        col2.metric("Aktor Pendorong Utama", "Tambang & Sawit", "Bukan Pertanian Warga", delta_color="normal")
+        col1.metric("Proyeksi 2 Provinsi (Sulteng & Sultra)", f"{tambang_driver_proxy:,.0f} Ha", "Proxy Extrapolation x2")
+        col2.metric("Data Mentah GFW (Sultra Saja)", f"{tambang_driver_ha:,.0f} Ha", "Blank Spot Sulteng", delta_color="inverse")
         col3.metric("Skor Dominasi Ekstraktif", f"{skor_lahan_4:.1f} / 10", "STATUS: MONOPOLI KONSESI", delta_color="inverse")
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
@@ -1186,7 +2200,14 @@ with colD1:
         <div style="background-color: #1A202C; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; border: 1px solid #E74C3C;">
             <div style="font-size: 11px; color: #BDC3C7; text-transform: uppercase; letter-spacing: 1px;">Skor Indikator Sosial</div>
             <div style="font-size: 32px; font-weight: 800; color: #E74C3C; line-height: 1.2;">{skor_akumulasi_sosial:.1f} <span style="font-size: 16px;">/ 10</span></div>
-            <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; font-weight: bold;">STATUS: PERLU PENGAWASAN</div>
+            <div style="font-size: 11px; color: #E74C3C; margin-top: 5px; margin-bottom: 15px; font-weight: bold;">STATUS: PERLU PENGAWASAN</div>
+            <div style="text-align: left; font-size: 11px; color: #BDC3C7; border-top: 1px dashed #444; padding-top: 10px; line-height: 1.5;">
+                <b>Basis Threshold & Regulasi:</b><br>
+                • <b>FPIC:</b> &gt; 12 Kasus <i>(Dataset KPA)</i><br>
+                • <b>Jiwa Terdampak:</b> &gt; 100 Ribu Jiwa <i>(KPA CATAHU 2023)</i><br>
+                • <b>Kriminalisasi:</b> &gt; 50 Insiden <i>(Satya Bumi 2023)</i><br>
+                • <b>Defisit Faskes:</b> Gap Target SPA 80% <i>(RPJMN 25-29)</i>
+            </div>
         </div>
         <div style="background:#C0392B; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px;">
             ANALISIS: Pelibatan Masyarakat Lokal

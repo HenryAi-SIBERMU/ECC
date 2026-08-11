@@ -14,13 +14,17 @@ CHAPTERS = [
     ("chapter_9.md", "v2_31072026_Laporan_Bab9"),
 ]
 
+import time
+
 def compile_chapter(md_file: Path, out_stem: str, docs_dir: Path):
     if not md_file.exists():
         print(f"  SKIP: {md_file.name} not found")
         return
 
-    docx_out = docs_dir / f"{out_stem}.docx"
-    tex_out  = docs_dir / f"{out_stem}.tex"
+    # Add a timestamp to bypass file locks and caching
+    ts = int(time.time())
+    docx_out = docs_dir / f"{out_stem}_{ts}.docx"
+    tex_out  = docs_dir / f"{out_stem}_{ts}.tex"
 
     print(f"Compiling {md_file.name} to DOCX...")
     pypandoc.convert_file(

@@ -867,7 +867,7 @@ with st.expander("2 · KUALITAS LINGKUNGAN", expanded=False):
         df_b3 = pd.read_csv('data/processed/sulawesi_limbah_b3_ngo_proxy.csv')
     df_b3_ngo_prov = df_b3.groupby('Provinsi').agg({
         'Estimasi Timbulan (Ton/Tahun)': 'sum',
-        'Kawasan/Perusahaan': lambda x: ' & '.join(x)
+        'Kawasan/Perusahaan': lambda x: ' & '.join(x.dropna().astype(str))
     }).reset_index()
     
     df_sungai = pd.read_csv('data/processed/sulawesi_sungai_tercemar.csv')

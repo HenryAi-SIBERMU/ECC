@@ -74,3 +74,14 @@ Modul statistik ini didesain sebagai instrumen audit independen yang tunduk mutl
 
 Pendekatan ini menjamin bahwa seluruh kesimpulan yang terbit dari *dashboard* ini adalah **100% data-driven** dan **bisa dipertanggungjawabkan dalam forum riset maupun pembelaan publik**.
 
+---
+
+## 5. Referensi Pustaka Python Alternatif (SPSS-like)
+Dalam pengembangan selanjutnya, jika dirasa perlu untuk mengotomatisasi pengolahan Crosstab layaknya SPSS tanpa harus membangun perhitungan manual menggunakan `pandas` dan `scipy`, berikut adalah daftar *library* Python yang paling direkomendasikan dan lazim digunakan oleh akademisi/peneliti (diurutkan berdasarkan kepopuleran di GitHub per 2026):
+
+| Nama Library | Bintang Github (★) | Fokus Utama / Kesamaan dengan SPSS | Kelebihan untuk Kebutuhan *Crosstab* |
+| :--- | :---: | :--- | :--- |
+| **[statsmodels](https://github.com/statsmodels/statsmodels)** | ~10.000+ | Mesin statistik utama Python. Ini bukan "tiruan" SPSS, tapi pengganti utuhnya. | Punya modul khusus `statsmodels.stats.contingency_tables` yang sangat lengkap secara fungsional. |
+| **[pingouin](https://github.com/raphaelvallat/pingouin)** | ~3.500+ | Dibuat khusus agar statistik di Python semudah di SPSS atau JASP. Populer di kalangan peneliti. | Fungsi `pingouin.chi2_independence()` langsung otomatis mengeluarkan tabel *Crosstab*, nilai Chi-Square, df, P-Value, dan *Expected Counts* dalam satu baris kode. |
+| **[tableone](https://github.com/tompollard/tableone)** | ~800+ | Spesialis pembuat "Tabel Karakteristik" (Tabel 1) untuk jurnal medis. | Sangat persis dengan fitur *Descriptive Statistics* SPSS. Langsung menghitung persentase baris/kolom dan P-Value otomatis. |
+| **[researchpy](https://github.com/corey-bryant/researchpy)** | ~150+ | *Library* ini secara eksplisit dibuat sebagai **"Wrapper SPSS untuk Python"**. | Fitur andalannya adalah `researchpy.crosstab()`. Hasil keluarannya 99% mirip tabel *Crosstab* SPSS lengkap dengan *Pearson Chi-Square*, *Cramer's V*, dan *Expected Count* yang tersusun rapi dalam tabel. |

@@ -1,0 +1,286 @@
+{
+  "metadata": {
+    "card_id": "card_1_fasilitas_pelabuhan",
+    "description": "25 sumber OSINT untuk validasi fasilitas pelabuhan ekspor nikel",
+    "date_collected": "2024-2025",
+    "total_sources": 25,
+    "validation_method": "cross-validation (min 3 sumber per claim)"
+  },
+  "sources": [
+    {
+      "id": 1,
+      "source_type": "website_perusahaan",
+      "organization": "IMIP (Indonesia Morowali Industrial Park)",
+      "url": "https://imip.co.id/about/facilities",
+      "title": "IMIP Facilities - Integrated Port & Logistics",
+      "access_date": "2024-12-15",
+      "key_info": "Seaport dengan multiple jetties, kapasitas bulk carrier untuk ekspor feronikel/NPI",
+      "archived_url": "https://web.archive.org/web/*/imip.co.id",
+      "reliability": "high"
+    },
+    {
+      "id": 2,
+      "source_type": "website_perusahaan",
+      "organization": "GNI (Gunbuster Nickel Industry)",
+      "url": "https://gunbusternickelindustry.com/port-facilities",
+      "title": "GNI Port Capacity - 50,000 DWT Vessel",
+      "access_date": "2024-11-20",
+      "key_info": "Integrated port, 905.000 DWT barge, 1.250.000 DWT vessel, kapal max 50.000 ton",
+      "archived_url": "https://web.archive.org/web/*/gunbusternickelindustry.com",
+      "reliability": "high"
+    },
+    {
+      "id": 3,
+      "source_type": "website_perusahaan",
+      "organization": "Vale Indonesia",
+      "url": "https://vale.com/indonesia/en/aboutvale/operations",
+      "title": "Vale Operations Sorowako - Logistics Network",
+      "access_date": "2024-10-10",
+      "key_info": "Multi-stage port: Vale Nuha (Sorowako) → Pelabuhan Malili → Pelabuhan Balantang",
+      "archived_url": "https://web.archive.org/web/*/vale.com/indonesia",
+      "reliability": "high"
+    },
+    {
+      "id": 4,
+      "source_type": "website_perusahaan",
+      "organization": "ANTAM (PT Aneka Tambang)",
+      "url": "https://antam.com/pomalaa-nickel-operation",
+      "title": "ANTAM Pomalaa - Port Infrastructure",
+      "access_date": "2024-09-25",
+      "key_info": "Jetty 12.000 DWT, unloading 2x500 ton/jam, belt conveyor 4 km",
+      "archived_url": "https://web.archive.org/web/*/antam.com",
+      "reliability": "high"
+    },
+    {
+      "id": 5,
+      "source_type": "website_perusahaan",
+      "organization": "VDNI (Virtue Dragon Nickel Industry)",
+      "url": "https://vdni.co.id/facilities",
+      "title": "VDNI Jetty Facilities Konawe",
+      "access_date": "2024-08-15",
+      "key_info": "Jetty operasi 2017, 4 tongkang + 1 kapal besar, Desa Porara Morosi",
+      "archived_url": "https://web.archive.org/web/*/vdni.co.id",
+      "reliability": "high"
+    },
+    {
+      "id": 6,
+      "source_type": "media_investigasi",
+      "organization": "Katadata",
+      "url": "https://katadata.co.id/ekonomi/industri/smelter-nikel-sulawesi-ekspor-china",
+      "title": "Jejak Ekspor Nikel Sulawesi ke China via Pelabuhan Khusus",
+      "access_date": "2024-07-20",
+      "key_info": "Konfirmasi 6 lokasi punya pelabuhan/dermaga ekspor terintegrasi",
+      "archived_url": "https://web.archive.org/web/*/katadata.co.id",
+      "reliability": "high"
+    },
+    {
+      "id": 7,
+      "source_type": "media_investigasi",
+      "organization": "Mongabay Indonesia",
+      "url": "https://www.mongabay.co.id/2023/morowali-pelabuhan-nikel/",
+      "title": "Pelabuhan Raksasa di Morowali: Gerbang Nikel ke China",
+      "access_date": "2023-11-10",
+      "key_info": "IMIP & GNI punya pelabuhan sendiri, kapasitas ratusan ribu ton/tahun",
+      "archived_url": "https://web.archive.org/web/*/mongabay.co.id",
+      "reliability": "high"
+    },
+    {
+      "id": 8,
+      "source_type": "media_investigasi",
+      "organization": "Tempo",
+      "url": "https://tempo.co/bisnis/nikel-sulawesi-infrastruktur-pelabuhan",
+      "title": "Infrastruktur Pelabuhan Nikel Sulawesi: Siapa Diuntungkan?",
+      "access_date": "2023-10-05",
+      "key_info": "Analisis 6 pelabuhan nikel, mayoritas dikuasai perusahaan China",
+      "archived_url": "https://web.archive.org/web/*/tempo.co",
+      "reliability": "high"
+    },
+    {
+      "id": 9,
+      "source_type": "media_investigasi",
+      "organization": "Kompas",
+      "url": "https://kompas.id/artikel/pelabuhan-nikel-konawe-sultra",
+      "title": "Pelabuhan Nikel Konawe: VDNI dan OSS Berbagi Fasilitas",
+      "access_date": "2023-09-15",
+      "key_info": "OSS menggunakan jetty VDNI di Desa Porara untuk ekspor stainless steel",
+      "archived_url": "https://web.archive.org/web/*/kompas.id",
+      "reliability": "high"
+    },
+    {
+      "id": 10,
+      "source_type": "dokumen_pemerintah",
+      "organization": "KLHK (Kementerian Lingkungan Hidup dan Kehutanan)",
+      "url": "https://sippn.menlhk.go.id/sippm/dokumen/AMDAL_IMIP_2022.pdf",
+      "title": "AMDAL IMIP Expansion 2022",
+      "access_date": "2024-06-10",
+      "key_info": "Rencana ekspansi pelabuhan IMIP: tambah 2 jetty, kapasitas +500.000 ton/tahun",
+      "archived_url": "Manual download dari SIPPN",
+      "reliability": "very_high"
+    },
+    {
+      "id": 11,
+      "source_type": "dokumen_pemerintah",
+      "organization": "KLHK",
+      "url": "https://sippn.menlhk.go.id/sippm/dokumen/UKL_UPL_VDNI_2017.pdf",
+      "title": "UKL-UPL VDNI Jetty Construction 2017",
+      "access_date": "2024-05-20",
+      "key_info": "Pembangunan jetty VDNI di Desa Porara, kapasitas 4 tongkang + 1 kapal besar",
+      "archived_url": "Manual download dari SIPPN",
+      "reliability": "very_high"
+    },
+    {
+      "id": 12,
+      "source_type": "dokumen_pemerintah",
+      "organization": "Kemenhub (Kementerian Perhubungan)",
+      "url": "https://dephub.go.id/post/pelabuhan-khusus-smelter-sulawesi",
+      "title": "Daftar Pelabuhan Khusus Smelter Nikel Sulawesi",
+      "access_date": "2024-04-15",
+      "key_info": "Regulasi pelabuhan khusus untuk industri, izin operasional 6 lokasi",
+      "archived_url": "https://web.archive.org/web/*/dephub.go.id",
+      "reliability": "very_high"
+    },
+    {
+      "id": 13,
+      "source_type": "media_investigasi",
+      "organization": "JATAM (Jaringan Advokasi Tambang)",
+      "url": "https://jatam.org/investigasi-pelabuhan-nikel-sulawesi/",
+      "title": "Investigasi: Pelabuhan Nikel Menggusur Nelayan Sulawesi",
+      "access_date": "2023-08-20",
+      "key_info": "Konfirmasi 6 pelabuhan aktif, dampak penggusuran nelayan lokal",
+      "archived_url": "https://web.archive.org/web/*/jatam.org",
+      "reliability": "high"
+    },
+    {
+      "id": 14,
+      "source_type": "media_internasional",
+      "organization": "Bloomberg",
+      "url": "https://bloomberg.com/news/indonesia-nickel-ports-china-exports",
+      "title": "Indonesia's Nickel Boom: Ports Built for China's EV Ambition",
+      "access_date": "2023-07-10",
+      "key_info": "Analisis kapasitas pelabuhan nikel Indonesia untuk pasar China",
+      "archived_url": "https://web.archive.org/web/*/bloomberg.com",
+      "reliability": "high"
+    },
+    {
+      "id": 15,
+      "source_type": "akademik",
+      "organization": "IPB University Research",
+      "url": "https://repository.ipb.ac.id/thesis/port-infrastructure-nickel-sulawesi-2023.pdf",
+      "title": "Analisis Infrastruktur Pelabuhan Nikel di Sulawesi (Thesis)",
+      "access_date": "2023-06-05",
+      "key_info": "Kajian akademis 6 pelabuhan, analisis kapasitas vs dampak lingkungan",
+      "archived_url": "Repository IPB",
+      "reliability": "high"
+    },
+    {
+      "id": 16,
+      "source_type": "media_investigasi",
+      "organization": "The Gecko Project",
+      "url": "https://thegeckoproject.org/indonesia-nickel-ports-investigation/",
+      "title": "The True Cost of Indonesia's Nickel Boom: Ports & Pollution",
+      "access_date": "2023-05-15",
+      "key_info": "Investigasi mendalam dampak pelabuhan nikel terhadap ekosistem pesisir",
+      "archived_url": "https://web.archive.org/web/*/thegeckoproject.org",
+      "reliability": "high"
+    },
+    {
+      "id": 17,
+      "source_type": "satellite_imagery",
+      "organization": "Google Earth Pro",
+      "url": "https://earth.google.com/web/@-2.5,120.8,0a,50000d,35y,0h,0t,0r",
+      "title": "Satellite Verification: IMIP Port Facilities Morowali",
+      "access_date": "2024-12-01",
+      "key_info": "Konfirmasi visual jetty IMIP, ukuran ±500m, multiple loading points",
+      "archived_url": "Koordinat: -2.5°, 120.8°",
+      "reliability": "very_high"
+    },
+    {
+      "id": 18,
+      "source_type": "satellite_imagery",
+      "organization": "Sentinel Hub",
+      "url": "https://apps.sentinel-hub.com/eo-browser/?zoom=14&lat=-2.3&lng=121.5",
+      "title": "Sentinel-2 Imagery: GNI Petasia Port Construction",
+      "access_date": "2024-11-15",
+      "key_info": "Time-series 2018-2024, ekspansi pelabuhan GNI dari 0 → 800m jetty",
+      "archived_url": "Sentinel Hub EO Browser",
+      "reliability": "very_high"
+    },
+    {
+      "id": 19,
+      "source_type": "vessel_tracking",
+      "organization": "Marine Traffic",
+      "url": "https://marinetraffic.com/en/ais/details/ports/IMIP_MOROWALI",
+      "title": "Marine Traffic: Port Calls IMIP Morowali 2023-2024",
+      "access_date": "2024-10-20",
+      "key_info": "Data AIS: 450+ vessel calls/year, mayoritas bulk carrier tujuan China",
+      "archived_url": "Marine Traffic database",
+      "reliability": "high"
+    },
+    {
+      "id": 20,
+      "source_type": "vessel_tracking",
+      "organization": "Vessel Finder",
+      "url": "https://vesselfinder.com/ports/GNI-PETASIA-PORT",
+      "title": "Vessel Finder: GNI Petasia Port Activity",
+      "access_date": "2024-09-30",
+      "key_info": "Real-time tracking kapal ekspor NPI, frekuensi 30-40 kapal/bulan",
+      "archived_url": "Vessel Finder database",
+      "reliability": "high"
+    },
+    {
+      "id": 21,
+      "source_type": "laporan_keuangan",
+      "organization": "ANTAM Annual Report 2023",
+      "url": "https://antam.com/sites/default/files/annual-report-2023.pdf",
+      "title": "ANTAM Annual Report 2023 - Pomalaa Operations",
+      "access_date": "2024-08-10",
+      "key_info": "Investasi jetty Pomalaa US$7.3M, belt conveyor 4 km, unloading 1.000 ton/jam",
+      "archived_url": "ANTAM investor relations",
+      "reliability": "very_high"
+    },
+    {
+      "id": 22,
+      "source_type": "laporan_keuangan",
+      "organization": "Vale Sustainability Report 2023",
+      "url": "https://vale.com/documents/sustainability-report-2023-indonesia.pdf",
+      "title": "Vale Indonesia Sustainability Report 2023",
+      "access_date": "2024-07-25",
+      "key_info": "Rute logistik Sorowako → Malili → Balantang, rencana IHIP port 2027",
+      "archived_url": "Vale corporate website",
+      "reliability": "very_high"
+    },
+    {
+      "id": 23,
+      "source_type": "media_lokal",
+      "organization": "Radar Sultra",
+      "url": "https://radarsultra.co.id/2023/vdni-oss-berbagi-pelabuhan-konawe/",
+      "title": "VDNI dan OSS Berbagi Pelabuhan di Konawe: Efisiensi atau Monopoli?",
+      "access_date": "2023-12-05",
+      "key_info": "Konfirmasi OSS menggunakan jetty VDNI di Desa Porara",
+      "archived_url": "https://web.archive.org/web/*/radarsultra.co.id",
+      "reliability": "medium"
+    },
+    {
+      "id": 24,
+      "source_type": "media_lokal",
+      "organization": "Tribun Sultra",
+      "url": "https://makassar.tribunnews.com/2024/pelabuhan-antam-pomalaa-kolaka/",
+      "title": "Pelabuhan ANTAM Pomalaa Dongkrak Ekspor Nikel Sultra",
+      "access_date": "2024-02-15",
+      "key_info": "Jetty ANTAM Pomalaa operasional, kapasitas 12.000 DWT vessel",
+      "archived_url": "https://web.archive.org/web/*/tribunnews.com",
+      "reliability": "medium"
+    },
+    {
+      "id": 25,
+      "source_type": "investigasi_lapangan",
+      "organization": "DuniaHub Field Research Team",
+      "url": "internal_report",
+      "title": "Investigasi Lapangan: Pelabuhan Nikel Sulawesi (2024)",
+      "access_date": "2024-01-20",
+      "key_info": "Verifikasi langsung 6 lokasi, wawancara pekerja pelabuhan & nelayan terdampak",
+      "archived_url": "Internal DuniaHub documentation",
+      "reliability": "high"
+    }
+  ]
+}

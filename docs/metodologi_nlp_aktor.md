@@ -33,5 +33,39 @@ Algoritma ini menggunakan *Stopword Cutoff* dengan tahapan berikut:
 - Iterasi menabrak kata "yang" (*Stopword*) -> **Cut-off Aktif**
 - Hasil Ekstraksi Otomatis: **"Oknum Aparat Brimob"**
 
+### Flowchart Algoritma Stopword Cutoff
+
+```mermaid
+graph TD
+    A[Mulai: Korpus Teks Konflik] --> B(Pindai dgn Regex Trigger Keywords);
+    
+    B --> C{Trigger Ditemukan?};
+    C -->|Tidak| D[Abaikan Baris];
+    C -->|Ya| E[Potong teks dari Trigger<br>hingga menabrak Tanda Baca];
+    
+    E --> F[Pecah teks per kata berdasarkan Spasi];
+    F --> G(Iterasi ke depan kata per kata);
+    
+    G --> H{Apakah kata == Stopword?};
+    H -->|Tidak| I[Simpan Kata];
+    I --> G;
+    
+    H -->|Ya| J[CUT-OFF AKTIF<br>Hentikan iterasi];
+    
+    J --> K[Gabungkan kata-kata yg tersimpan];
+    K --> L[Format Title Case];
+    L --> M[Output: Frasa Entitas Aktor Dinamis];
+    
+    classDef process fill:#1E1E1E,stroke:#4CAF50,stroke-width:2px,color:#fff;
+    classDef decision fill:#37474F,stroke:#F57C00,stroke-width:2px,color:#fff;
+    classDef drop fill:#B71C1C,stroke:#FF5252,stroke-width:2px,color:#fff;
+    classDef endpoint fill:#0D47A1,stroke:#64B5F6,stroke-width:2px,color:#fff;
+    
+    class A,B,E,F,G,I,K,L process;
+    class C,H decision;
+    class D drop;
+    class M endpoint;
+```
+
 ## 4. Keunggulan Metodologi
 Dengan algoritma ini, Celios dapat menyajikan data intelijen sosial yang bebas tebakan manual (*hardcoding*). Apapun frasa kejahatan struktural yang ditulis oleh para peneliti TanahKita di dalam laporan kronologinya, akan otomatis tersedot dan terpetakan dengan presisi tinggi di layar pengguna.
