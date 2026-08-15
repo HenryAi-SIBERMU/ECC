@@ -767,8 +767,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Degradasi Kualitas Udara**: Penurunan IKU sebesar 4.5 poin membuktikan memburuknya kualitas udara ambien akibat pembukaan lahan dan transportasi material.
 
 ##### 📌 **TL;DR Indikator #29:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (97.0 Poin vs 92.5 Poin).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Sesuai dengan publikasi IKU KLHK).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 97.0 Poin (2015) | 92.5 Poin (2024) | ▼ -4.5 Poin |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -785,8 +788,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Kehilangan Tutupan Pohon Total**: 1.39 Juta Ha kawasan hutan terkelupas dalam 10 tahun, memicu krisis ekologi berskala kepulauan.
 
 ##### 📌 **TL;DR Indikator #30:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (161,164 Ha vs 1,386,055 Ha).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Total akumulasi kehilangan tutupan pohon regional Sulawesi).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 158,688 Ha (2014) | 1,386,055 Ha (Kumulatif) | ▲ 773% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -805,8 +811,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Polusi Abu Batubara & Debu Smelter**: Lonjakan 674% kasus ISPA berkejaran dengan pengoperasian puluhan unit PLTU captive yang menyemburkan debu beracun ke permukiman warga.
 
 ##### 📌 **TL;DR Indikator #31:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (30,195 Kasus vs 233,687 Kasus).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Beban ISPA akibat abu pembakaran PLTU & smelter).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 30,195 Kasus (2014) | 233,687 Kasus (Kumulatif) | ▲ 674% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -823,8 +832,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Pencemaran Sedimen Tambang**: Sungai-sungai di sentra nikel (Sungai Karama, Sungai Larona, Sungai Bahodopi) mengalami pendangkalan dan pencemaran logam berat.
 
 ##### 📌 **TL;DR Indikator #32:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (46.7 Poin vs 62.1 Poin).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Pencemaran DAS & pesisir oleh limbah tambang).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 46.7 Poin (2016) | 62.1 Poin (2024) | ▲ 33.0% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -841,8 +853,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Kerusakan Sumber Air Bersih**: Hancurnya jaringan air bersih desa akibat penambangan hulu memaksa warga mengonsumsi air terkontaminasi.
 
 ##### 📌 **TL;DR Indikator #33:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (231,924 Kasus vs 2,286,607 Kasus).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Wabah diare akibat rusaknya sanitasi komunal).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 231,924 Kasus (2014) | 2,286,607 Kasus (Kumulatif) | ▲ 886% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
