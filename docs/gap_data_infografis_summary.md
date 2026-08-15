@@ -959,8 +959,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Pelabuhan Khusus (Tersus/TUKS)**: Morowali, Konawe, Bantaeng, Weda/Halmahera-Korridor, Luwu Timur, & Pomalaa.
 
 ##### 📌 **TL;DR Indikator #38:**
-* **Kode & CSV**: 🟢 **Diperbaiki Bebas Bug UI** (6 Simpul Utama vs 6 Node).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Klaster dermaga khusus pengapalan ore/NPI).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 6 Simpul Utama | 6 Node | Terkonfirmasi |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -976,8 +979,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Fasilitas Privilese Hukum**: Penetapan Proyek Strategis Nasional (PSN) memudahkan pembebasan tanah dan pengesampingan izin tata ruang daerah.
 
 ##### 📌 **TL;DR Indikator #39:**
-* **Kode & CSV**: 🟢 **Diperbaiki Bebas Bug UI** (6 Simpul Utama vs 4 Node).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Status PSN melindungi pengusutan AMDAL).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 6 Simpul Utama | 4 Node (Berstatus PSN) | PSN |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -993,8 +999,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Pasokan Listrik Pesisir**: 9.27 GW daya PLTU disuapkan murni untuk industri pengolahan nikel di simpul pelabuhan.
 
 ##### 📌 **TL;DR Indikator #40:**
-* **Kode & CSV**: 🟢 **Diperbaiki Bebas Bug UI** (6 Simpul Logistik vs 9,275 MW - Operating).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Kapasitas PLTU penopang logistik nikel).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 6 Simpul Logistik | 9,275 MW | Operating |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -1010,8 +1019,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Konektivitas Hulu-Hilir**: 124 IUP hulu secara langsung mengalirkan ore nikel menuju 6 simpul pelabuhan.
 
 ##### 📌 **TL;DR Indikator #41:**
-* **Kode & CSV**: 🟢 **Diperbaiki Bebas Bug UI** (329 IUP Nikel vs 124 IUP - Suplai Hulu).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Rantai pasok 124 konsesi nikel hulu).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 329 IUP Nikel | 124 IUP | Suplai Hulu |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -1027,8 +1039,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Tujuan Ekspor Konsentrat**: Pengapalan NPI, ferronickel, & matte mengalir mutlak ke industri baja & baterai Tiongkok dan Asia Timur.
 
 ##### 📌 **TL;DR Indikator #42:**
-* **Kode & CSV**: 🟢 **Diperbaiki Bebas Bug UI** (6 Komoditas Olahan vs 6 Kanal).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Monopoli tujuan ekspor nikel ke China/Asia).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 6 Komoditas Olahan | 6 Kanal | China/Asia |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -1044,8 +1059,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Enclave Industri**: Kawasan industri Morowali, IWIP, Bantaeng, Konawe, Kolaka, Sorowako berdiri sebagai zona eksklusif.
 
 ##### 📌 **TL;DR Indikator #43:**
-* **Kode & CSV**: 🟢 **Diperbaiki Bebas Bug UI** (6 Simpul Logistik vs 6 Estate - Terintegrasi).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (6 mega-estate hilirisasi nikel Sulawesi).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 6 Simpul Logistik | 6 Estate | Terintegrasi |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -1061,15 +1079,12 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Wilayah Tapak Pesisir**: 5 kabupaten kunci pesisir (Morowali, Morowali Utara, Konawe, Bantaeng, Luwu Timur) menjadi tapak infrastruktur logistik.
 
 ##### 📌 **TL;DR Indikator #44:**
-* **Kode & CSV**: 🟢 **Diperbaiki Bebas Bug UI** (6 Simpul Logistik vs 5 Kabupaten - Pesisir).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (5 Kabupaten tapak pesisir industri).
 
-##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Tekanan Pesisir Kabupaten**: 5 kabupaten pesisir menanggung seluruh eksternalitas negatif limbah dan kapal angkut ore.
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 6 Simpul Logistik | 5 Kabupaten | Pesisir |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
-##### 📌 **TL;DR Indikator #44:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** ("6 node" vs 5 Kabupaten).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Sebaran tapak di 5 kabupaten kunci).
 
 ---
 
