@@ -640,8 +640,8 @@ insight_kusta = f"Kenaikan tajam {kusta_pct:,.0f}% ({kusta_total:,.0f} kasus) in
 faskes_2014 = faskes_df[faskes_df["tahun"] == 2014]["jumlah"].sum() if not faskes_df.empty else 8273
 faskes_2024 = faskes_df[faskes_df["tahun"] == 2024]["jumlah"].sum() if not faskes_df.empty else 2944
 faskes_pct = ((faskes_2024 - faskes_2014) / faskes_2014 * 100) if faskes_2014 > 0 else 0
-delta_faskes = f"▼ {faskes_pct:,.0f}%"
-insight_faskes = f"Rasio kolaps drastis dari {faskes_2014:,.0f} ke {faskes_2024:,.0f} unit. Fasilitas kesehatan gagal menyangga gelombang penyakit tambang."
+delta_faskes = f"▲ +{faskes_pct:,.0f}%"
+insight_faskes = f"Faskes hanya tumbuh {faskes_pct:,.0f}% ({faskes_2014:,.0f} ke {faskes_2024:,.0f} unit), gagal total menyangga beban penyakit ISPA & Diare yang meledak +800%."
 
 # Insight Seksi 3
 insight_limbah = f"Aktivitas smelter membuang {limbah_b3_terkini/1_000_000:,.1f} Juta ton (estimasi berdasar temuan AEER/KLH 2024-2025) limbah B3/slag nikel tanpa pengawasan ketat, mencemari laut."

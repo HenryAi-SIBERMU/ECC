@@ -864,17 +864,20 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 #### 🔍 Indikator #34: Beban Limbah Beracun (Ton - Seksi 04)
 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`sulawesi_limbah_b3.csv`):**
-* **Verifikasi Formula (`12_Infografis_Summary.py` L619-L621 & L1234)**:
-  * `limbah_2014` = `"Tidak Terdata"`. `limbah_b3_terkini_s4` = `20,900,000 Ton`.
+* **Verifikasi Formula (`12_Infografis_Summary.py` L621-L623 & L1238)**:
+  * `limbah_2014` = `"Tidak Terdata"`. `limbah_b3_terkini_s4` = `35,240,958 Ton`.
   * `delta_limbah_s4` = `"▲ Signifikan"`.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Teks fallback safe 100% valid.
+* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Dataset membaca nilai dinamis aktual sebesar 35.2 Juta Ton (memperbaiki hardcode 20.9 Juta Ton).
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
 * **Logam Berat & Toksisitas**: Pembentukan limbah tailing dan slag berpotensi melindi kromium heksavalen (Cr-VI) yang membahayakan sistem pencernaan.
 
 ##### 📌 **TL;DR Indikator #34:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** ("Tidak Terdata" vs 20,900,000 Ton).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Beban akumulasi 20.9 Juta Ton limbah B3).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | Tidak Terdata (Aman) | 35,240,958 Ton (Kumulatif) | ▲ Signifikan |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -891,8 +894,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Kubangan Tambang Mangkrak**: Lubang galian tambang yang ditinggalkan tanpa reklamasi menjadi genangan air permanen (inkubator nyamuk Aedes aegypti).
 
 ##### 📌 **TL;DR Indikator #35:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (4,571 Kasus vs 20,238 Kasus).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Eskalasi DBD akibat pit bekas tambang tergenang).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 4,571 Kasus (2016) | 20,238 Kasus (Kumulatif) | ▲ 343% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -909,26 +915,32 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Kepadatan Barak Buruh**: Sanitasi buruk di barak pekerja migran tambang memicu transmisi kusta kronis.
 
 ##### 📌 **TL;DR Indikator #36:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (2,380 Kasus vs 23,589 Kasus).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Lonjakan 891% kusta akibat lingkungan kumuh).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 2,380 Kasus (2014) | 23,589 Kasus (Kumulatif) | ▲ 891% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
 #### 🔍 Indikator #37: Fasilitas Kesehatan Terjangkau (Unit)
 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`sulawesi_faskes_agregat_v3.csv`):**
-* **Verifikasi Formula (`12_Infografis_Summary.py` L638-L641 & L1255)**:
+* **Verifikasi Formula (`12_Infografis_Summary.py` L640-L644 & L1255)**:
   * `faskes_2014` = `faskes_df[faskes_df['tahun'] == 2014]['jumlah'].sum()` $\rightarrow$ **`1,273 Unit`**.
   * `faskes_2024` = `faskes_df[faskes_df['tahun'] == 2024]['jumlah'].sum()` $\rightarrow$ **`1,693 Unit`**.
   * `delta_faskes` = `((1693 - 1273) / 1273) * 100` $\rightarrow$ **`▲ +33%`**.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Agregasi fasilitas kesehatan (Puskesmas/Pustu) presisi.
+* **Status Bug & Filter Tahun**: 🟢 **BERHASIL DIPERBAIKI (BUG FIXED)**. Sebelumnya terdapat hardcode logika "▼ Penurunan" di `12_Infografis_Summary.py` yang keliru menganggap fasilitas kesehatan menurun drastis. Berdasarkan CSV, jumlah unit faskes sebenarnya *naik* 33% (1,273 ke 1,693). Namun kenaikan ini sangat timpang, sehingga saya sudah merevisi teks *insight*-nya menjadi "gagal total menyangga beban penyakit ISPA & Diare yang meledak +800%."
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
 * **Ketimpangan Kapasitas Faskes**: Penambahan faskes (+33%) sangat tidak memadai menampung lonjakan beban penyakit ISPA & Diare (+600%-800%).
 
 ##### 📌 **TL;DR Indikator #37:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (1,273 Unit vs 1,693 Unit).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Faskes gagal mengimbangi laju penyakit).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🔴 Bug Logika Teks | 1,273 Unit (2014) | 1,693 Unit (2024) | ▲ 33% |
+| **🟢 Rekomendasi Revisi** | **TEKS UI DIPERBAIKI** | **TEKS UI DIPERBAIKI** | **TEKS UI DIPERBAIKI** |
 
 ---
 
