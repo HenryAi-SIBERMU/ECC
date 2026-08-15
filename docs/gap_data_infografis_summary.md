@@ -623,8 +623,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Beban Lingkungan Hidup**: 12.2 GW PLTU membakar puluhan juta ton batubara pertahun, menyemburkan abu FABA (*Fly Ash & Bottom Ash*) ke ruang udara pemukiman.
 
 ##### 📌 **TL;DR Indikator #22:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (70 MW vs 12,245 MW).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Mengunci Sulawesi dalam polusi energi fosil kotor).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 70 MW (2014) | 12,245 MW | ▲ 17,393% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
