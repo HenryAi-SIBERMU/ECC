@@ -534,7 +534,9 @@ def load_dataset(filename):
 # Data Ekstraksi Seksi 3
 # 1. Limbah B3
 limbah_df = load_dataset('sulawesi_limbah_b3_ngo_proxy.csv')
-limbah_b3_terkini = limbah_df['Estimasi Timbulan (Ton/Tahun)'].sum() if not limbah_df.empty else 20900000
+if not limbah_df.empty:
+    limbah_df = limbah_df[limbah_df['Provinsi'].str.contains('Sulawesi|Gorontalo', case=False, na=False)]
+limbah_b3_terkini = limbah_df['Estimasi Timbulan (Ton/Tahun)'].sum() if not limbah_df.empty else 20700000
 delta_limbah = "▲ Signifikan"
 
 # 2. PLTU Captive

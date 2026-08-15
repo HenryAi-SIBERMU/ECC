@@ -391,8 +391,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Tata Kelola Obrak-Abrik**: Memperlihatkan obral konsesi minerba oleh pemerintah daerah dan pusat yang melampaui batas daya dukung wilayah kepulauan.
 
 ##### 📌 **TL;DR Indikator #11:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (26 IUP vs 574 IUP).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Refleksi obral perizinan 1 dekade).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 26 IUP (2014) | 574 IUP | ▲ 2,108% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -408,8 +411,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Pencaplokan Spasial**: 819.5 Ribu Ha konsesi legal tambang merambah wilayah tangkapan air, kawasan perkebunan rakyat, dan zona pesisir.
 
 ##### 📌 **TL;DR Indikator #12:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (49,518 Ha vs 819,453 Ha).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Pencaplokan 819.5k Ha lahan komunal).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 49,518 Ha (2014) | 819,453 Ha | ▲ 1,555% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -425,9 +431,12 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
 * **Dampak UU Cipta Kerja (UU No. 11/2020 & UU Minerba No. 3/2020)**: Sentralisasi kewenangan perizinan tambang ke Jakarta melucuti analisis lingkungan pemda dan memicu ledakan 468 IUP baru (naik 342%) pasca-2020.
 
-##### 📌 **TL;DR Indikator #13:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (106 IUP Pra-2020 vs 468 IUP Pasca-2020).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Bukti empiris deregulasi lingkungan akibat Omnibus Law).
+##### 📌 **TL;DR Indikator #13 Opsi Perbaikan:**
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| ❌ Bug Formula | 106 IUP (Pra-2020) | 468 IUP (Pasca-2020) | ▲ 601% |
+| **🟢 Rekomendasi Revisi** | **106 IUP** | **468 IUP** | **▲ 342%** |
 
 ---
 
@@ -444,10 +453,15 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Kegagalan Rem D3TLH**: Bukti langsung bahwa instrumen Daya Dukung & Daya Tampung Lingkungan Hidup tidak digunakan sebagai pertimbangan pembatasan perizinan.
 
 ##### 📌 **TL;DR Indikator #14:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (25 IUP vs 330 IUP).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Mengonfirmasi 330 konsesi di kawasan deforestasi kritis).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 25 IUP (2014) | 330 IUP | ▲ 1,220% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
+
+
 
 #### 🔍 Indikator #15: Kawasan Lindung Musnah (Hektare Hilang)
 
@@ -462,8 +476,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Kebobolan Hukum Konservasi**: 41.8 Ribu Ha hutan lindung musnah akibat tambang ilegal, penetapan IPPKH yang tidak selektif, dan perambahan jalan angkut ore.
 
 ##### 📌 **TL;DR Indikator #15:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (3,740 Ha vs 41,785 Ha).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Menggambarkan kerusakan 41.8k Ha Kawasan Lindung).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 3,740 Ha (2014) | 41,785 Ha | ▲ 1,017% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -480,8 +497,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Puncak Fase Eksploitasi**: 486 IUP (84.7%) berstatus Operasi Produksi, mengindikasikan pulau Sulawesi tidak lagi berada dalam tahap eksplorasi tetapi berada di puncak pengerukan mineral.
 
 ##### 📌 **TL;DR Indikator #16:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (88 Eksplorasi vs 486 Op. Produksi).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (84.7% perizinan sudah tahap eksekusi pengerukan).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 88 IUP (Eksplorasi) | 486 IUP (Operasi Produksi) | ▲ 452% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -498,8 +518,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Monokultur Ekstraktif**: 175 IUP khusus nikel mencerminkan hilirisasi buta yang mengorbankan diversifikasi ekonomi lokal agraris-kebun demi pasokan komoditas tunggal nikel.
 
 ##### 📌 **TL;DR Indikator #17:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (17 IUP vs 175 IUP).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Monopoli 175 konsesi nikel sentralisasi Sulawesi).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 17 IUP (2014) | 175 IUP | ▲ 929% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -516,8 +539,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Impunitas Hukum**: 53 korporasi terbukti beroperasi tanpa IPPKH lengkap, mencemari sungai, atau tumpang tindih kawasan hutan namun tetap berproduksi bebas penindakan pidana.
 
 ##### 📌 **TL;DR Indikator #18:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (5 Korporasi vs 53 Korporasi).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Fenomena impunitas korporasi tambang bermasalah).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 5 Kasus (2014) | 53 Kasus (Akumulasi) | ▲ 960% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -534,8 +560,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Pelanggaran FPIC (*Free, Prior and Informed Consent*)**: Kasus bentrokan adat di Sangihe, Wawonii, Morowali, dan Luwu memperlihatkan perizinan diterbitkan tanpa konsensus warga lokal.
 
 ##### 📌 **TL;DR Indikator #19:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (7 Kasus vs 12 Kasus).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Buktinya penetapan konsesi tanpa FPIC di tanah adat).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 7 Kasus (2014) | 12 Kasus (Mega-Konflik) | ▲ 71% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -552,8 +581,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Shadow Economy & Calo Lahan**: Keberadaan 12 izin hantu mengonfirmasi praktik pencucian izin dan spekulasi lahan oleh aktor oligarki lokal.
 
 ##### 📌 **TL;DR Indikator #20:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (2 Laporan vs 12 Temuan).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Terverifikasi oleh CATAHU KPA 2025).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 2 Kasus (2014) | 12 Kasus (Izin Hantu) | ▲ 500% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
