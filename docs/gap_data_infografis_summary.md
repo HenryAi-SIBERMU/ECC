@@ -596,16 +596,18 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`sulawesi_limbah_b3_ngo_proxy.csv`):**
 * **Verifikasi Formula (`12_Infografis_Summary.py` L536-L538 & L1265)**:
   * `limbah_2014` = `"Tidak Terdata"` *(Absen data pra-hilirisasi)*.
-  * `limbah_b3_terkini` = `limbah_df['Estimasi Timbulan (Ton/Tahun)'].sum()` $\rightarrow$ **`20,900,000 Ton/Tahun`** *(20.9 Juta Ton)*.
-  * `delta_limbah` = `"▲ Signifikan"`.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Estimasi proxy NGO/AEER 20.9 Juta Ton slag nikel & limbah B3 smelting terekam presisi.
+  * `limbah_b3_terkini` = `limbah_df['Estimasi Timbulan (Ton/Tahun)'].sum()`.
+* **Status Bug & Kebocoran Data (Data Leakage)**: 🛠️ **DIREVISI (Bug Data Luar Pulau)**. Saat diaudit mendalam, ditemukan ada 1 baris data bocor dari **Sumatera Utara** sebesar 200.000 Ton di dalam dataset proxy ini. Kode lama mem-`sum()` seluruh kolom sehingga nilainya menggelembung jadi 20.9 Juta Ton. Kini telah ditambahkan regex filter `df['Provinsi'].str.contains('Sulawesi|Gorontalo')` sehingga nilai murni Sulawesi terkoreksi menjadi **20.7 Juta Ton/Tahun**.
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Akumulasi Slag & Tailing**: Proses RKEF menghasilkan ~6-8 ton slag nikel per ton ferronickel. Angka 20.9 Juta ton/tahun sangat masuk akal mengingat produksi jutaan ton NPI/ferronickel harian.
+* **Volume Limbah Raksasa**: Produksi 20,7 Juta Ton limbah B3 (slag & tailing) per tahun ini setara dengan mengubur seluruh wilayah administratif Jakarta Selatan dengan tumpukan limbah padat setinggi 1 meter setiap tahunnya. Akibat tingginya curah hujan di Sulawesi, limbah yang menggunung rentan meluap dan mencemari sistem hidrologi pesisir.
 
-##### 📌 **TL;DR Indikator #21:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** ("Tidak Terdata" vs 20,900,000 Ton).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Sesuai rasio pembentukan slag limbah B3 pengolahan nikel).
+##### 📌 **TL;DR Indikator #21 Opsi Perbaikan:**
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| ❌ Bug Data Leakage (Sumut) | Tidak Terdata | 20.9 Juta Ton | ▲ Signifikan |
+| **🟢 Rekomendasi Revisi** | **Tidak Terdata** | **20.7 Juta Ton** | **▲ Signifikan** |
 
 ---
 
