@@ -643,8 +643,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Krisis Iklim Regional**: 804 Megaton CO2e menjadikan Sulawesi kontributor emisi deforestasi nasional terbesar dari sektor ekstraksi mineral.
 
 ##### 📌 **TL;DR Indikator #23:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (93 Mt vs 804 Mt).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Pelepasan emisi karbon akumulatif 1 dekade).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 93 Juta Ton (2014) | 804 Juta Ton (Kumulatif) | ▲ 765% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -660,8 +663,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Kehilangan Keanekaragaman Hayati**: Pembabatan 481.1k Ha hutan primer menghilangkan tempat tinggal spesies endemik Anoa, Babirusa, dan Tarsius.
 
 ##### 📌 **TL;DR Indikator #24:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (53,369 Ha vs 481,096 Ha).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Hilangnya 481.1k Ha hutan purba Sulawesi).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 53,369 Ha (2014) | 481,096 Ha (Kumulatif) | ▲ 801% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -677,8 +683,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Kerusakan Bentang Alam**: 1.0 Juta Ha tutupan pohon musnah akibat penetrasi konsesi tambang dan kebun sawit komersial.
 
 ##### 📌 **TL;DR Indikator #25:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (117,414 Ha vs 1,001,654 Ha).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Kehilangan 1.0M Ha tutupan pohon komoditas).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 117,414 Ha (2014) | 1,001,654 Ha (Kumulatif) | ▲ 753% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -695,8 +704,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Hilangnya Resapan Air**: Hilangnya vegetasi hutan di hulu sungai Morowali dan Konawe memicu banjir bandang tahunan yang merendam pemukiman dan kawasan industri.
 
 ##### 📌 **TL;DR Indikator #26:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (39 Kejadian vs 1,557 Kejadian).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Sesuai dengan catatan rekapitulasi DIBI BNPB).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 39 Kejadian (2014) | 1,557 Kejadian (Kumulatif) | ▲ 3,892% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -713,8 +725,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Pengungsi Iklim Lokal**: 1.24 Juta jiwa mengungsi dan kehilangan tempat tinggal akibat banjir bandang berulang di koridor tambang.
 
 ##### 📌 **TL;DR Indikator #27:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (23,000 Jiwa vs 1,235,000 Jiwa).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Terverifikasi data dampak korban bencana BNPB).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 23,000 Jiwa (2014) | 1,235,000 Jiwa (Kumulatif) | ▲ 5,270% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
@@ -731,8 +746,11 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Daftar Merah IUCN**: Spesies endemik seperti Anoa *(Bubalus depressicornis)* dan Maleo terdesak akibat fragmentasi tutupan pohon konsesi.
 
 ##### 📌 **TL;DR Indikator #28:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** ("Status Aman" vs 4 Spesies).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Evaluasi status ancaman kepunahan biodiversitas IUCN).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | Tidak Terdata (Aman) | 4 Spesies Terancam | ▲ Signifikan |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
