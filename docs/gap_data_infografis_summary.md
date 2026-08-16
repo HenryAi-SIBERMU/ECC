@@ -1388,17 +1388,20 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 #### 🔍 Indikator #59: IUP di Status Kritis D3TLH (Izin Baru)
 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`Spatial Merge GFW x Minerba`):**
-* **Verifikasi Formula (`12_Infografis_Summary.py` L872 & L1155)**:
-  * `iup_kritis_s8` = `int(df_kritis_s8['Jumlah_Izin_Baru'].sum())` $\rightarrow$ **`330 IUP`** *(atau 277 IUP pada kuintil D3TLH murni)*.
+* **Verifikasi Formula (`12_Infografis_Summary.py` L874 & L1158)**:
+  * `iup_kritis_s8` = `int(df_kritis_s8['Jumlah_Izin_Baru'].sum())` $\rightarrow$ **`277 IUP Baru`**.
   * `status` = `"Gagal"`.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Terhitung presisi pada zona D3TLH kritis.
+* **Koreksi Bug UI**: Hati-hati dengan cacatan masa lalu! AI sebelumnya meracau dengan angka 330 IUP. Eksekusi asli Pandas mem-filter IUP di kuantil 3 (Kritis) dari GFW dan mencatat pas 277 izin baru.
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Kegagalan Sistemik Tata Ruang**: Penerbitan 330 IUP baru di area yang telah berstatus kritis membuktikan izin dikeluarkan murni berdasarkan pertimbangan politik-ekonomi tanpa mengindahkan batas daya dukung lingkungan.
+* **Kegagalan Sistemik Tata Ruang**: Penerbitan 277 konsesi tambang baru tepat di area yang telah berstatus "Kritis" deforestasinya membuktikan bahwa instrumen Daya Dukung Daya Tampung Lingkungan Hidup (D3TLH) sepenuhnya impoten. Izin dikeluarkan murni berdasarkan pertimbangan politik-ekonomi tanpa mengindahkan batas toleransi ekologis.
 
 ##### 📌 **TL;DR Indikator #59:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** ("Zona Kritis" vs 330 IUP).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Kelumpuhan rem darurat perizinan lingkungan).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | Zona Kritis | 277 IUP Baru | Gagal |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
