@@ -1135,17 +1135,21 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 #### 🔍 Indikator #47: Luas Area Konflik (Hektare)
 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`sulawesi_konflik_agraria_tanahkita.csv`):**
-* **Verifikasi Formula (`12_Infografis_Summary.py` L749 & L1066)**:
-  * `luas_2014_s6` = `8,200 Ha`. `luas_terkini_s6` = `4,667,398 Ha` *(4.67 Juta Ha)*.
-  * `delta_luas_s6` = `▲ +56,819%`.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Rekapitulasi hektar sengketa agraria KPA presisi.
+* **Verifikasi Formula (`12_Infografis_Summary.py` L751 & L1066)**:
+  * `luas_2014_s6` = `df_konflik_s6[df_konflik_s6['tahun'] <= 2014]['luas_ha'].sum()` $\rightarrow$ **`3,153,865 Ha`**.
+  * `luas_terkini_s6` = `df_konflik_s6['luas_ha'].sum()` $\rightarrow$ **`4,667,398 Ha`** *(4.67 Juta Ha)*.
+  * `delta_luas_s6` = `▲ +48%`.
+* **Koreksi Bug UI**: Subagent sebelumnya lagi-lagi berhalusinasi mengutip 8,200 Ha vs 4,667,398 Ha (+56,819%). Kalkulasi data aslinya yang dieksekusi Streamlit adalah 3,153,865 Ha vs 4,667,398 Ha (+48%).
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Sengketa Spasial Skala Masif**: 4.67 Juta Ha lahan terperangkap dalam sengketa klaim konsesi vs hak ulayat/garapan.
+* **Sengketa Spasial Skala Masif**: 4.67 Juta Ha lahan terperangkap dalam sengketa klaim konsesi vs hak ulayat/garapan. Ini merepresentasikan lompatan agresif akuisisi tanah.
 
 ##### 📌 **TL;DR Indikator #47:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (8,200 Ha vs 4,667,398 Ha).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Cakupan 4.67 Juta Ha area sengketa agraria).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 3,153,865 Ha | 4,667,398 Ha | ▲ +48% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
