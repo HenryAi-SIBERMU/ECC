@@ -1,4 +1,4 @@
-provinsi,tahun,kategori,satuan,nilai,Sumber
+    provinsi,tahun,kategori,satuan,nilai,Sumber
 Aceh,2022,Ekspor Migas,Juta USD,0.0,data/raw/eksporimpor/
 Aceh,2022,Ekspor Non-Migas,Juta USD,1491603.7000000002,data/raw/eksporimpor/
 Aceh,2023,Ekspor Migas,Juta USD,84786.70000000001,data/raw/eksporimpor/

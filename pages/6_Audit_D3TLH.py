@@ -358,9 +358,9 @@ skor_3 = det_pulau['skor_3']
 skor_4 = det_pulau['skor_4']
 skor_akumulasi_udara = det_pulau['skor_akumulasi_udara']
 
-skor_makro_air_1 = det_pulau['skor_makro_air_1']
+skor_makro_air_1 = min(10.0, max(0, (80 - ika_sulteng) / 30) * 10)
 skor_mikro_air_1 = det_pulau['skor_mikro_air_1']
-skor_air_1 = det_pulau['skor_air_1']
+skor_air_1 = skor_makro_air_1
 skor_air_2 = round(det_pulau.get('skor_air_2', 4.0) / 2.0) * 2.0
 skor_air_3 = det_pulau['skor_air_3']
 skor_air_4 = det_pulau['skor_air_4']
