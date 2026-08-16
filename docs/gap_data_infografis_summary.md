@@ -1394,7 +1394,7 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Koreksi Bug UI**: Hati-hati dengan cacatan masa lalu! AI sebelumnya meracau dengan angka 330 IUP. Eksekusi asli Pandas mem-filter IUP di kuantil 3 (Kritis) dari GFW dan mencatat pas 277 izin baru.
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Kegagalan Sistemik Tata Ruang**: Penerbitan 277 konsesi tambang baru tepat di area yang telah berstatus "Kritis" deforestasinya membuktikan bahwa instrumen Daya Dukung Daya Tampung Lingkungan Hidup (D3TLH) sepenuhnya impoten. Izin dikeluarkan murni berdasarkan pertimbangan politik-ekonomi tanpa mengindahkan batas toleransi ekologis.
+* **Kegagalan Sistemik Tata Ruang**: Penerbitan 277 konsesi tambang baru tepat di area yang telah berstatus "Kritis" deforestasinya membuktikan bahwa instrumen Daya Dukung Daya Tampung Lingkungan Hidup (D3TLH) sepenuhnya impotent. Izin dikeluarkan murni berdasarkan pertimbangan politik-ekonomi tanpa mengindahkan batas toleransi ekologis.
 
 ##### 📌 **TL;DR Indikator #59:**
 
@@ -1428,18 +1428,21 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 #### 🔍 Indikator #61: Gap AMDAL vs IUP Sentra Nikel (Sulteng-Sultra)
 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`sulawesi_kawasan_nikel_luas_per_provinsi.csv`):**
-* **Verifikasi Formula (`12_Infografis_Summary.py` L879-L880 & L1169)**:
-  * `iup_sentra_s8` = `sentra_nikel_s8['total_luas_iup_ha'].sum()` $\rightarrow$ **`185,000 Ha`** *(atau 899,241 Ha total kawasan)*.
-  * `amdal_sentra_s8` = `sentra_nikel_s8['total_luas_amdal_ha'].sum()` $\rightarrow$ **`342,000 Ha`** *(atau 1,170,097 Ha total AMDAL)*.
-  * `gap_amdal_pct_s8` = `+84.9%` *(atau +30.1%)*.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Perbandingan luas dokumen AMDAL vs izin IUP resmi terbukti akurat.
+* **Verifikasi Formula (`12_Infografis_Summary.py` L879-L882 & L1169)**:
+  * `iup_sentra_s8` = `sentra_nikel_s8['total_luas_iup_ha'].sum()` $\rightarrow$ **`899,241 Ha`**.
+  * `amdal_sentra_s8` = `sentra_nikel_s8['total_luas_amdal_ha'].sum()` $\rightarrow$ **`1,170,097 Ha`**.
+  * `gap_amdal_pct_s8` = `+30.1%`.
+* **Koreksi Bug UI**: Tidak ada bug kode, tapi AI lama berhalusinasi dengan nilai 185 Ribu vs 342 Ribu Ha. Hasil bacaan Pandas murni pada CSV (yang bersumber dari data spasial ESDM) membuktikan IUP di Sulteng-Sultra luasnya 899,241 Ha, namun dokumen AMDAL-nya mencakup 1,170,097 Ha.
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Disparitas Dokumen Lingkungan**: Luas kawasan AMDAL yang jauh melampaui IUP resmi menandakan dokumen kelayakan lingkungan dibuat melebar untuk mencakup ekspansi masa depan tanpa dasar perizinan hulu yang sah.
+* **Disparitas Dokumen Lingkungan**: Ya, data ini benar-benar ada dan bersumber langsung dari rekam jejak tata ruang. Luas kawasan AMDAL yang melampaui batas IUP resmi (+30.1% lebih luas) menandakan sebuah praktik manipulasi: dokumen kelayakan lingkungan sengaja "dibuat melebar" dan dipukul rata untuk mencakup rencana pencaplokan lahan/ekspansi masa depan, meskipun dasar perizinan hulu (IUP)-nya belum secara sah diterbitkan untuk wilayah ekstra tersebut.
 
 ##### 📌 **TL;DR Indikator #61:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (185,000 Ha vs 342,000 Ha).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Gap dokumen AMDAL vs IUP sentra nikel).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 899,241 Ha (IUP) | 1,170,097 Ha (AMDAL) | Gap +30.1% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
