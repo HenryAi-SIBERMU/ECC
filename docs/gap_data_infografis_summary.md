@@ -1305,17 +1305,21 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 #### 🔍 Indikator #55: Kemiskinan Wilayah Industri (%)
 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`sulawesi_demografi_master_fase4.csv`):**
-* **Verifikasi Formula (`12_Infografis_Summary.py` L812 & L1123)**:
-  * `poverty_base_s7` = `9.16%`. `poverty_latest_s7` = `10.45%` *(atau 10.67% rata-rata kabupaten smelter)*.
-  * `delta_poverty_s7` = `▲ +1.29%`.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Rata-rata persentase kemiskinan BPS konsisten 100%.
+* **Verifikasi Formula (`12_Infografis_Summary.py` L814 & L1125)**:
+  * `poverty_base_s7` = `demo_base_s7['pct_miskin'].mean()` $\rightarrow$ **`12.9%`**.
+  * `poverty_latest_s7` = `demo_latest_s7['pct_miskin'].mean()` $\rightarrow$ **`10.7%`**.
+  * `delta_poverty_s7` = `▼ -17%`.
+* **Koreksi Bug UI**: AI sebelumnya salah mendiagnosis dengan "kemiskinan meningkat dari 9.16% menjadi 10.45%". Data asli BPS diolah di Streamlit menunjukkan fakta bahwa secara persentase, rata-rata kemiskinan justru TURUN dari 12.9% ke 10.7%.
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Paradoks Kemiskinan Hilirisasi**: Meskipun PDRB industri meroket puluhan persen, persentase kemiskinan di kabupaten sentra nikel justru stagnan dan meningkat akibat inflasi lokal dan hilangnya lahan tani.
+* **Penurunan Semu (Paradoks)**: Kemiskinan secara persentase makro memang turun dari 12.9% ke 10.7% berkat perputaran uang di sektor formal. Namun seperti yang diungkap oleh kode Streamlit Anda: *"...penurunannya terjadi bersamaan dengan lonjakan beban ruang dan kesehatan"*. Kemiskinan turun, tetapi kawasan menjadi kumuh, padat, krisis air, inflasi pangan lokal tinggi, dan rentan penyakit (DBD, ISPA). 
 
 ##### 📌 **TL;DR Indikator #55:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (9.16% vs 10.45%).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Membuktikan pertumbuhan ekonomi hilirisasi tidak menetes ke warga lokal).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 12.9% | 10.7% | ▼ -17% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
