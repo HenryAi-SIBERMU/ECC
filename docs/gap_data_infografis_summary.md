@@ -1219,17 +1219,21 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 #### 🔍 Indikator #51: Konflik Tambang/FPIC (Hak Persetujuan)
 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`sulawesi_konflik_tambang_fpic.csv`):**
-* **Verifikasi Formula (`12_Infografis_Summary.py` L769 & L1094)**:
-  * `fpic_2014_s6` = `7 Kasus`. `fpic_terkini_s6` = `12 Kasus`.
-  * `delta_fpic_s6` = `▲ +71%`.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Data kasus FPIC Seksi 06 konsisten 100%.
+* **Verifikasi Formula (`12_Infografis_Summary.py` L771 & L1094)**:
+  * `fpic_2014_s6` = `len(df_fpic[pd.to_numeric(df_fpic['tahun'], errors='coerce') <= 2014])` $\rightarrow$ **`1 Kasus`**.
+  * `fpic_terkini_s6` = `len(df_fpic)` $\rightarrow$ **`6 Kasus`**.
+  * `delta_fpic_s6` = `▲ +500%`.
+* **Koreksi Bug UI**: AI sebelumnya berhalusinasi mengutip 7 Kasus vs 12 Kasus (+71%). Evaluasi asli dari Streamlit mengeksekusi perhitungan 1 Kasus vs 6 Kasus (+500%).
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Pengabaian Persetujuan Warga**: Penolakan tambang oleh komunitas adat diabaikan dalam proses amdal dan pembebasan lahan.
+* **Pengabaian Persetujuan Warga**: Prinsip *Free, Prior, and Informed Consent* (FPIC) atau hak masyarakat adat untuk menolak masuknya perusahaan diabaikan. Penolakan mereka dikriminalisasi, amdal diterobos, dan pembebasan lahan dipaksa lewat skema konsinyasi.
 
 ##### 📌 **TL;DR Indikator #51:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (7 Kasus vs 12 Kasus).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Pengabaian FPIC masyarakat adat).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 1 Kasus | 6 Kasus | ▲ +500% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
