@@ -1325,20 +1325,21 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 
 #### 🔍 Indikator #56: PDRB Industri+Tambang Sulteng (Share %)
 
-##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`sulawesi_employment_shift_fase4.csv`):**
-* **Verifikasi Formula (`12_Infografis_Summary.py` L824 & L1130)**:
-  * `industri_share_base_s7` = `df_shift[provinsi=='Sulawesi Tengah'].iloc[0]['pct_industri_tambang_BC']` $\rightarrow$ **`15.5%`**.
-  * `industri_share_latest_s7` = `df_shift[provinsi=='Sulawesi Tengah'].iloc[-1]['pct_industri_tambang_BC']` $\rightarrow$ **`55.8%`**.
-  * `delta_industri_share_s7` = `((55.8 - 15.5) / 15.5) * 100` $\rightarrow$ **`▲ +261%`**.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Perhitungan porsi sektor pengolahan logam dan ekstraksi PDRB BPS Sulteng valid.
+* **Verifikasi Formula (`12_Infografis_Summary.py` L826 & L1133)**:
+  * `industri_share_base_s7` = `float(shift_base_s7['pct_industri_tambang_BC'])` $\rightarrow$ **`15.4%`**.
+  * `industri_share_latest_s7` = `float(shift_latest_s7['pct_industri_tambang_BC'])` $\rightarrow$ **`55.8%`**.
+  * `delta_industri_share_s7` = `▲ +262%`.
+* **Koreksi Bug UI**: Tidak ada bug data. AI sebelumnya mencatat angka 15.5% karena pembulatan, angka spesifiknya adalah 15.4%.
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Struktur Ekonomi Tunggal**: Penguasaan 55.8% PDRB oleh manufaktur nikel dan tambang mengunci struktur ekonomi Sulteng pada volatilitas komoditas global.
+* **Struktur Ekonomi Tunggal**: Penguasaan 55.8% PDRB oleh manufaktur nikel dan tambang (sektor B dan C) mengunci struktur ekonomi Sulteng pada volatilitas komoditas global. Propinsi ini secara praktis telah bermutasi menjadi wilayah ekstraktif monokultur.
 
 ##### 📌 **TL;DR Indikator #56:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (15.5% vs 55.8%).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Peningkatan porsi industri PDRB sebesar +261%).
 
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 15.4% | 55.8% | ▲ +262% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 ---
 
 #### 🔍 Indikator #57: PDRB Pertanian Sulteng (Share %)
