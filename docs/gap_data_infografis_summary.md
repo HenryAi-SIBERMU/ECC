@@ -1199,16 +1199,20 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`sulawesi_konflik_agraria_tanahkita.csv`):**
 * **Verifikasi Formula (`12_Infografis_Summary.py` L762 & L1087)**:
-  * `hutan_2014_s6` = `2 Kasus`. `hutan_terkini_s6` = `163 Kasus` *(atau 30 kasus besar)*.
-  * `delta_hutan_s6` = `▲ +8,050%`.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Categorization sektor kehutanan valid.
+  * `hutan_2014_s6` = `count_sector_s6('Kehutanan', 2014)` $\rightarrow$ **`87 Kasus`**.
+  * `hutan_terkini_s6` = `count_sector_s6('Kehutanan')` $\rightarrow$ **`163 Kasus`**.
+  * `delta_hutan_s6` = `▲ +87%`.
+* **Koreksi Bug UI**: Jejak halusinasi subagent lama kembali dibabat (2 vs 163 kasus, lonjakan 8,050%). Evaluasi _real_ Streamlit menunjukkan lonjakan 87 Kasus menjadi 163 Kasus (+87%).
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Klaim Kawasan Hutan Negara**: Alih fungsi kawasan hutan menjadi APL meminggirkan pemanfaat hutan tradisional.
+* **Klaim Kawasan Hutan Negara**: Alih fungsi kawasan hutan besar-besaran (Pelepasan Kawasan Hutan) untuk tambang meminggirkan dan mengkriminalisasi masyarakat adat atau pemanfaat hutan tradisional yang dituduh "merambah" hutan negara.
 
 ##### 📌 **TL;DR Indikator #50:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (2 Kasus vs 163 Kasus).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Pergeseran batas kawasan hutan negara).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 87 Kasus | 163 Kasus | ▲ +87% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
