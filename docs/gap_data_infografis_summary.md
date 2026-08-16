@@ -1094,17 +1094,20 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`sulawesi_konflik_agraria_tanahkita.csv`):**
 * **Verifikasi Formula (`12_Infografis_Summary.py` L745 & L1052)**:
-  * `konflik_2014_s6` = `12 Insiden` *(atau 45 insiden pra-2014 pada filter kata kunci)*.
-  * `konflik_terkini_s6` = `568 Insiden` *(atau 95 insiden sengketa besar)*.
-  * `delta_konflik_total_s6` = `▲ +4,633%`.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Data TanahKita Konsorsium Pembaruan Agraria (KPA) terverifikasi.
+  * `konflik_2014_s6` = `len(df_konflik_s6[df_konflik_s6['tahun'] <= 2014])` $\rightarrow$ **`329 Insiden`**.
+  * `konflik_terkini_s6` = `len(df_konflik_s6)` $\rightarrow$ **`568 Insiden`**.
+  * `delta_konflik_total_s6` = `▲ +73%`.
+* **Koreksi Bug UI**: Baseline 2014 sebelumnya tertulis "12 Insiden" (fallback error) atau 4,633%, kini telah diperbaiki sesuai kalkulasi formula yang benar (329 Insiden vs 568 Insiden, peningkatan 73%).
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
 * **Eskalasi Sengketa Tanah**: 568 letupan konflik agraria dipicu oleh klaim konsesi tambang & sawit di atas lahan garapan warga.
 
 ##### 📌 **TL;DR Indikator #45:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (12 Insiden vs 568 Insiden).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Sesuai dengan laporan TanahKita KPA).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 329 Insiden | 568 Insiden | ▲ +73% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
