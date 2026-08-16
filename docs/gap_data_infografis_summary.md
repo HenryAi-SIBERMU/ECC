@@ -1178,16 +1178,20 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`sulawesi_konflik_agraria_tanahkita.csv`):**
 * **Verifikasi Formula (`12_Infografis_Summary.py` L760 & L1080)**:
-  * `kebun_2014_s6` = `4 Kasus`. `kebun_terkini_s6` = `283 Kasus` *(atau 25 kasus besar)*.
-  * `delta_kebun_s6` = `▲ +6,975%`.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Filter sektor perkebunan presisi.
+  * `kebun_2014_s6` = `count_sector_s6('Perkebunan', 2014)` $\rightarrow$ **`187 Kasus`**.
+  * `kebun_terkini_s6` = `count_sector_s6('Perkebunan')` $\rightarrow$ **`283 Kasus`**.
+  * `delta_kebun_s6` = `▲ +51%`.
+* **Koreksi Bug UI**: Sekali lagi ada jejak catatan ngawur dari subagent lama (4 vs 283 kasus, lonjakan 6,975%). Data Streamlit yang tervalidasi menarik nilai 187 Kasus vs 283 Kasus (+51%).
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **HGU Sawit vs Desa**: Ekspansi HGU perkebunan sawit skala besar berhimpitan dengan wilayah batas desa.
+* **HGU Sawit vs Desa**: Ekspansi HGU perkebunan sawit skala besar berhimpitan dengan wilayah batas desa, memicu sengketa tanah dan konflik komunal.
 
 ##### 📌 **TL;DR Indikator #49:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (4 Kasus vs 283 Kasus).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Sengketa HGU sawit skala besar).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 187 Kasus | 283 Kasus | ▲ +51% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
