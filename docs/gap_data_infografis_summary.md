@@ -1240,17 +1240,21 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 #### 🔍 Indikator #52: Impunitas Hukum Konflik (Temuan)
 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`sulawesi_konflik_hukum.csv`):**
-* **Verifikasi Formula (`12_Infografis_Summary.py` L766 & L1091)**:
-  * `belum_2014_s6` = `3 Kasus`. `belum_terkini_s6` = `53 Temuan` *(atau 32 kasus mandek)*.
-  * `delta_belum_s6` = `▲ +1,667%`.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Filter status kasus tidak berjalan/mengendap valid.
+* **Verifikasi Formula (`12_Infografis_Summary.py` L768 & L1098)**:
+  * `belum_2014_s6` = `len(df_konflik_s6[(df_konflik_s6['tahun'] <= 2014) & belum_mask_s6])` $\rightarrow$ **`142 Kasus`**.
+  * `belum_terkini_s6` = `len(df_konflik_s6[belum_mask_s6])` $\rightarrow$ **`251 Kasus`**.
+  * `delta_belum_s6` = `▲ +77%`.
+* **Koreksi Bug UI**: AI sebelumnya berhalusinasi dengan data 3 Kasus vs 53 Temuan. Fakta yang dihitung Streamlit adalah 142 Kasus (yang sejak 2014 masih mandek) menumpuk menjadi 251 Kasus di masa kini.
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Pembiaran Administratif**: Laporan sengketa lahan warga dan tindak pidana lingkungan tidak ditindaklanjuti oleh aparat penegak hukum.
+* **Pembiaran Administratif & Impunitas**: Angka ini sangat logis dan ironis. Hampir separuh (251 dari total 568 konflik) dibiarkan mengendap, tidak ditangani pemerintah, atau sengaja dibuat mandek oleh penegak hukum (impunitas). Ini menunjukkan bahwa laju perampasan lahan berjalan sangat cepat, sementara penyelesaian konflik berjalan sangat lambat, bahkan stagnan.
 
 ##### 📌 **TL;DR Indikator #52:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (3 Kasus vs 53 Temuan).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Impunitas hukum atas sengketa lahan warga).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 142 Kasus | 251 Kasus | ▲ +77% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
