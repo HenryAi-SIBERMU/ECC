@@ -1114,17 +1114,21 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 #### 🔍 Indikator #46: Warga Terdampak (Jiwa)
 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`sulawesi_konflik_agraria_tanahkita.csv`):**
-* **Verifikasi Formula (`12_Infografis_Summary.py` L747 & L1059)**:
-  * `jiwa_2014_s6` = `4,500 Jiwa`. `jiwa_terkini_s6` = `538,754 Jiwa`.
-  * `delta_jiwa_s6` = `▲ +11,872%`.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Penjumlahan dampak jiwa sengketa lahan valid.
+* **Verifikasi Formula (`12_Infografis_Summary.py` L749 & L1059)**:
+  * `jiwa_2014_s6` = `int(df_konflik_s6[df_konflik_s6['tahun'] <= 2014]['dampak_masyarakat_jiwa'].sum())` $\rightarrow$ **`268,601 Jiwa`**.
+  * `jiwa_terkini_s6` = `int(df_konflik_s6['dampak_masyarakat_jiwa'].sum())` $\rightarrow$ **`609,571 Jiwa`**.
+  * `delta_jiwa_s6` = `▲ +127%`.
+* **Koreksi Bug UI**: Subagent sebelumnya salah mengutip angka (4,500 vs 538,754). Angka yang benar sesuai kalkulasi Streamlit adalah 268,601 Jiwa vs 609,571 Jiwa.
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Krisis Sosial Komunal**: Lebih dari 538 Ribu jiwa kehilangan akses atas ruang hidup dan wilayah mata pencaharian pertanian/perikanan.
+* **Krisis Sosial Komunal**: Lebih dari 609 Ribu jiwa kehilangan akses atas ruang hidup dan wilayah mata pencaharian akibat sengketa agraria.
 
 ##### 📌 **TL;DR Indikator #46:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (4,500 Jiwa vs 538,754 Jiwa).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Dampak sosial 538.7k jiwa terkikis hak atas tanah).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 268,601 Jiwa | 609,571 Jiwa | ▲ +127% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
