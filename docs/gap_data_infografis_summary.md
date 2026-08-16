@@ -1284,17 +1284,21 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 #### 🔍 Indikator #54: Kepadatan Wilayah Industri (Jiwa/km²)
 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`sulawesi_demografi_master_fase4.csv`):**
-* **Verifikasi Formula (`12_Infografis_Summary.py` L808 & L1116)**:
-  * `density_base_s7` = `519.5 Jiwa/km²`. `density_latest_s7` = `403.7 Jiwa/km²` *(atau 42.7 Jiwa/km² rata-rata kabupaten industri)*.
-  * `delta_density_s7` = `▼ -22.3%`.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Perhitungan kepadatan rata-rata wilayah terverifikasi.
+* **Verifikasi Formula (`12_Infografis_Summary.py` L810 & L1118)**:
+  * `density_base_s7` = `demo_base_s7['kepadatan_per_km2'].mean()` $\rightarrow$ **`39.1 Jiwa/km²`**.
+  * `density_latest_s7` = `demo_latest_s7['kepadatan_per_km2'].mean()` $\rightarrow$ **`42.7 Jiwa/km²`**.
+  * `delta_density_s7` = `▲ +9.1%`.
+* **Koreksi Bug UI**: AI sebelumnya benar-benar nge-fly dengan menulis kepadatan turun dari 519.5 menjadi 403.7. Analisis Streamlit menggunakan _mean_ kepadatan BPS yang akurat: naik dari 39.1 Jiwa/km² ke 42.7 Jiwa/km².
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Intensifikasi Permukiman Kumuh**: Konsentrasi tempat tinggal buruh terdesak di sekitar lingkar tambang, sementara wilayah pertanian ditinggalkan.
+* **Intensifikasi Permukiman Kumuh**: Peningkatan kepadatan sebesar +9.1% merata di kawasan industri nikel. Konsentrasi tempat tinggal buruh terdesak di sekitar lingkar tambang, memicu pertumbuhan permukiman kumuh, krisis sanitasi, dan kepadatan di area spesifik pesisir.
 
 ##### 📌 **TL;DR Indikator #54:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (519.5 vs 403.7 Jiwa/km²).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Pergeseran pola spasial hunian di wilayah industri).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 39.1 Jiwa/km² | 42.7 Jiwa/km² | ▲ +9.1% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
