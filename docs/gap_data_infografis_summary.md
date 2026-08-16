@@ -1408,17 +1408,20 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 #### 🔍 Indikator #60: Luas Konsesi di Zona Kritis (Hektare)
 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`Spatial Merge GFW x Minerba`):**
-* **Verifikasi Formula (`12_Infografis_Summary.py` L873 & L1162)**:
-  * `luas_kritis_s8` = `df_kritis_s8['Total_Luas_Konsesi_Baru_Ha'].sum()` $\rightarrow$ **`472,150 Ha`** *(atau 440,998 Ha pada kuintil D3TLH)*.
+* **Verifikasi Formula (`12_Infografis_Summary.py` L875 & L1165)**:
+  * `luas_kritis_s8` = `df_kritis_s8['Total_Luas_Konsesi_Baru_Ha'].sum()` $\rightarrow$ **`440,998 Ha`**.
   * `status` = `"Anomali"`.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Penjumlahan hektar konsesi di zona kritis valid.
+* **Koreksi Bug UI**: AI sebelumnya berhalusinasi dengan nilai 472,150 Ha. Hasil eksekusi `sum()` dari 277 konsesi tambang di zona merah pada Streamlit menghasilkan angka 440,998 Hektare.
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Pencaplokan Lahan Kritis**: 472.1 Ribu Ha konsesi diterbitkan di atas kawasan resapan air yang telah terdegradasi.
+* **Pencaplokan Lahan Kritis**: 440,998 Hektare bukanlah angka yang kecil (nyaris setara dengan luas 6 kali wilayah DKI Jakarta). Konsesi seluas ini diterbitkan tepat di atas kawasan resapan air yang secara historis tutupan hutannya telah terdegradasi. Ini merupakan sebuah "Anomali" luar biasa dalam tata kelola lingkungan; izin eksploitasi diobral di atas ruang hidup yang sedang sekarat.
 
 ##### 📌 **TL;DR Indikator #60:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** ("Zona Kritis" vs 472,150 Ha).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Anomali tata ruang di 472.1k Ha lahan kritis).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | Zona Kritis | 440,998 Ha | Anomali |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
