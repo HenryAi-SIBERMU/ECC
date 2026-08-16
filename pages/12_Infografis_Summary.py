@@ -1,5 +1,11 @@
 import streamlit as st
 import pandas as pd
+
+# ---- HEADER VARIABLES ----
+col_hdr_left = "Baseline 2014"
+col_hdr_right = "Akumulasi 2024"
+# --------------------------
+
 import numpy as np
 import os
 import sys
@@ -390,8 +396,8 @@ if SHOW_WEB_DASHBOARD:
     render_infographic_row(
         icon="📄", key_indicator="Total Izin Baru (IUP)", 
         title="Periode 2014-2024", unit="IUP",
-        label_start="Tahun 2014", val_start=f"{iup_2014:,.0f}",
-        label_end="Tahun 2024", val_end=f"{iup_terkini:,.0f}",
+        label_start=col_hdr_left, val_start=f"{iup_2014:,.0f}",
+        label_end=col_hdr_right, val_end=f"{iup_terkini:,.0f}",
         delta_pct=delta_iup,
         recommendation=insight_iup,
         color_theme="purple", reverse_delta=True
@@ -401,8 +407,8 @@ if SHOW_WEB_DASHBOARD:
     render_infographic_row(
         icon="🗺️", key_indicator="Luas Konsesi", 
         title="Eksploitasi Ruang", unit="Ha",
-        label_start="Tahun 2014", val_start=f"{luas_2014:,.0f}",
-        label_end="Tahun 2024", val_end=f"{luas_terkini:,.0f}",
+        label_start=col_hdr_left, val_start=f"{luas_2014:,.0f}",
+        label_end=col_hdr_right, val_end=f"{luas_terkini:,.0f}",
         delta_pct=delta_luas,
         recommendation=insight_luas,
         color_theme="purple", reverse_delta=True
@@ -412,8 +418,8 @@ if SHOW_WEB_DASHBOARD:
     render_infographic_row(
         icon="🌲", key_indicator="Deforestasi Komoditas", 
         title="Kehilangan Tutupan Hutan", unit="Ha",
-        label_start="Tahun 2014", val_start=f"{def_2014:,.0f}",
-        label_end="Tahun 2024", val_end=f"{def_terkini:,.0f}",
+        label_start=col_hdr_left, val_start=f"{def_2014:,.0f}",
+        label_end=col_hdr_right, val_end=f"{def_terkini:,.0f}",
         delta_pct=delta_def,
         recommendation=insight_def,
         color_theme="purple", reverse_delta=True
@@ -423,8 +429,8 @@ if SHOW_WEB_DASHBOARD:
     render_infographic_row(
         icon="🏭", key_indicator="Fasilitas Smelter", 
         title="Pusat Hilirisasi", unit="Unit",
-        label_start="Tahun 2014", val_start="Tidak Terdata",
-        label_end="Tahun 2024", val_end=f"{smelter_terkini:,.0f}",
+        label_start=col_hdr_left, val_start="Tidak Terdata",
+        label_end=col_hdr_right, val_end=f"{smelter_terkini:,.0f}",
         delta_pct=delta_smelter,
         recommendation=insight_smelter,
         color_theme="purple", reverse_delta=True
@@ -434,8 +440,8 @@ if SHOW_WEB_DASHBOARD:
     render_infographic_row(
         icon="⚡", key_indicator="PLTU Captive", 
         title="Operating", unit="MW",
-        label_start="Tahun 2014", val_start=f"{pltu_2014:,.0f}",
-        label_end="Tahun 2024", val_end=f"{pltu_terkini:,.0f}",
+        label_start=col_hdr_left, val_start=f"{pltu_2014:,.0f}",
+        label_end=col_hdr_right, val_end=f"{pltu_terkini:,.0f}",
         delta_pct=delta_pltu,
         recommendation=insight_pltu,
         color_theme="purple", reverse_delta=True
@@ -446,7 +452,7 @@ if SHOW_WEB_DASHBOARD:
         icon="💰", key_indicator="Investasi PMDN", 
         title="Aliran Modal", unit="Triliun Rp",
         label_start="Tahun 2016", val_start=f"{inv_2016/1000:,.1f}",
-        label_end="Tahun 2024", val_end=f"{inv_terkini/1000:,.1f}",
+        label_end=col_hdr_right, val_end=f"{inv_terkini/1000:,.1f}",
         delta_pct=delta_inv,
         recommendation=insight_inv,
         color_theme="purple", reverse_delta=True
@@ -457,7 +463,7 @@ if SHOW_WEB_DASHBOARD:
         icon="🏛️", key_indicator="Total PAD Sulawesi", 
         title="Ketergantungan Ekstraktif", unit="Triliun Rp",
         label_start="Tahun 2016", val_start=f"{pad_2016/1_000_000:,.1f}",
-        label_end="Tahun 2024", val_end=f"{pad_terkini/1_000_000:,.1f}",
+        label_end=col_hdr_right, val_end=f"{pad_terkini/1_000_000:,.1f}",
         delta_pct=delta_pad,
         recommendation=insight_pad,
         color_theme="purple", reverse_delta=False
@@ -467,8 +473,8 @@ if SHOW_WEB_DASHBOARD:
     render_infographic_row(
         icon="🌳", key_indicator="Hutan Primer Hilang", 
         title="Ekosistem Purba", unit="Ha",
-        label_start="Tahun 2014", val_start=f"{prim_2014:,.0f}",
-        label_end="Tahun 2024", val_end=f"{prim_terkini:,.0f}",
+        label_start=col_hdr_left, val_start=f"{prim_2014:,.0f}",
+        label_end=col_hdr_right, val_end=f"{prim_terkini:,.0f}",
         delta_pct=delta_prim,
         recommendation=insight_prim,
         color_theme="purple", reverse_delta=True
@@ -478,7 +484,7 @@ if SHOW_WEB_DASHBOARD:
     render_infographic_row(
         icon="☁️", key_indicator="Emisi CO2 Deforestasi", 
         title="Dampak Iklim", unit="Megaton",
-        label_start="Tahun 2014", val_start=f"{co2_2014/1_000_000:,.1f}",
+        label_start=col_hdr_left, val_start=f"{co2_2014/1_000_000:,.1f}",
         label_end=f"Tahun {max_year_co2}", val_end=f"{co2_terkini/1_000_000:,.1f}",
         delta_pct=f"{delta_co2:.1f}",
         recommendation=insight_co2,
@@ -489,8 +495,8 @@ if SHOW_WEB_DASHBOARD:
     render_infographic_row(
         icon="🚢", key_indicator="Simpul Logistik Nikel", 
         title="Infrastruktur Khusus", unit="Titik",
-        label_start="Tahun 2014", val_start="Tidak Terdata",
-        label_end="Tahun 2024", val_end=f"{log_terkini:,.0f}",
+        label_start=col_hdr_left, val_start="Tidak Terdata",
+        label_end=col_hdr_right, val_end=f"{log_terkini:,.0f}",
         delta_pct=delta_log,
         recommendation=insight_log,
         color_theme="purple", reverse_delta=True
@@ -505,16 +511,16 @@ if SHOW_WEB_DASHBOARD:
     # ── Seksi 2: POLA PENERBITAN IZIN ──
     st.markdown('<div class="sector-badge" style="background-color: #D32F2F;">02 POLA PENERBITAN IZIN</div>', unsafe_allow_html=True)
 
-    render_infographic_row("📜", "Total Ekspansi IUP", "Obral Konsesi", "IUP", "Tahun 2014", f"{izin_2014:,.0f}", "Tahun 2024", f"{izin_terkini:,.0f}", delta_izin, insight_izin_tot, "red", False)
-    render_infographic_row("🗺️", "Luas Pencaplokan", "Ekspansi Spasial", "Ha", "Tahun 2014", f"{luas_izin_2014:,.0f}", "Tahun 2024", f"{luas_izin_terkini:,.0f}", delta_luas_izin, insight_izin_luas, "red", False)
+    render_infographic_row("📜", "Total Ekspansi IUP", "Obral Konsesi", "IUP", col_hdr_left, f"{izin_2014:,.0f}", col_hdr_right, f"{izin_terkini:,.0f}", delta_izin, insight_izin_tot, "red", False)
+    render_infographic_row("🗺️", "Luas Pencaplokan", "Ekspansi Spasial", "Ha", col_hdr_left, f"{luas_izin_2014:,.0f}", col_hdr_right, f"{luas_izin_terkini:,.0f}", delta_luas_izin, insight_izin_luas, "red", False)
     render_infographic_row("🚀", "Akselerasi Omnibus Law", "Eskalasi Izin", "IUP", "Pra-2020", f"{pra_2020:,.0f}", "Pasca-2020", f"{pasca_2020:,.0f}", delta_akselerasi, insight_aksel, "red", False)
-    render_infographic_row("🚨", "Izin di Zona Kritis", "Governance Failure", "IUP", "Tahun 2014", f"{kritis_2014:,.0f}", "Tahun 2024", f"{izin_kritis:,.0f}", delta_kritis, insight_kritis, "red", False)
-    render_infographic_row("🛡️", "Kawasan Lindung Musnah", "Pelanggaran Spasial", "Ha", "Tahun 2014", f"{lindung_2014:,.0f}", "Tahun 2024", f"{lindung_terkini:,.0f}", delta_lindung, insight_lindung, "red", False)
+    render_infographic_row("🚨", "Izin di Zona Kritis", "Governance Failure", "IUP", col_hdr_left, f"{kritis_2014:,.0f}", col_hdr_right, f"{izin_kritis:,.0f}", delta_kritis, insight_kritis, "red", False)
+    render_infographic_row("🛡️", "Kawasan Lindung Musnah", "Pelanggaran Spasial", "Ha", col_hdr_left, f"{lindung_2014:,.0f}", col_hdr_right, f"{lindung_terkini:,.0f}", delta_lindung, insight_lindung, "red", False)
     render_infographic_row("⛏️", "Dominasi Operasi Produksi", "Panen Ekstraktif", "IUP", "Eksplorasi", f"{eksplorasi_count:,.0f}", "Op. Produksi", f"{op_count:,.0f}", delta_op, insight_op, "red", False)
-    render_infographic_row("🔋", "Monopoli Komoditas Nikel", "Hilirisasi Buta", "IUP", "Tahun 2014", f"{nikel_2014:,.0f}", "Tahun 2024", f"{nikel_count:,.0f}", delta_nikel, insight_nikel, "red", False)
-    render_infographic_row("⚖️", "Operasi Bermasalah Hukum", "Impunitas Ekstraktif", "Korporasi", "Tahun 2014", f"{ilegal_2014}", "Tahun 2024", f"{ilegal_count}", delta_ilegal, insight_ilegal, "red", False)
-    render_infographic_row("✊", "Perampasan Hak Adat", "Tanpa FPIC", "Kasus", "Tahun 2014", f"{fpic_2014}", "Tahun 2024", f"{fpic_count}", delta_fpic, insight_fpic, "red", False)
-    render_infographic_row("👻", "Sindikasi Izin Hantu", "Shadow Economy", "Laporan", "Tahun 2014", f"{sindikasi_2014}", "Tahun 2024", f"{sindikasi_count}", delta_sindikasi, insight_sindikasi, "red", False)
+    render_infographic_row("🔋", "Monopoli Komoditas Nikel", "Hilirisasi Buta", "IUP", col_hdr_left, f"{nikel_2014:,.0f}", col_hdr_right, f"{nikel_count:,.0f}", delta_nikel, insight_nikel, "red", False)
+    render_infographic_row("⚖️", "Operasi Bermasalah Hukum", "Impunitas Ekstraktif", "Korporasi", col_hdr_left, f"{ilegal_2014}", col_hdr_right, f"{ilegal_count}", delta_ilegal, insight_ilegal, "red", False)
+    render_infographic_row("✊", "Perampasan Hak Adat", "Tanpa FPIC", "Kasus", col_hdr_left, f"{fpic_2014}", col_hdr_right, f"{fpic_count}", delta_fpic, insight_fpic, "red", False)
+    render_infographic_row("👻", "Sindikasi Izin Hantu", "Shadow Economy", "Laporan", col_hdr_left, f"{sindikasi_2014}", col_hdr_right, f"{sindikasi_count}", delta_sindikasi, insight_sindikasi, "red", False)
 
     render_insight_box(
         title="Insight: Kelumpuhan Rem Darurat Ekologis",
@@ -553,14 +559,15 @@ gfw_def_terkini = gfw_df['Total_Deforestasi_Ha'].sum() if not gfw_df.empty else 
 gfw_def_2014 = gfw_df[gfw_df['Tahun'] == 2014]['Total_Deforestasi_Ha'].sum() if not gfw_df.empty else 239268
 gfw_primer_terkini = gfw_df['Deforestasi_Hutan_Primer_Ha'].sum() if not gfw_df.empty else 2078652
 gfw_primer_2014 = gfw_df[gfw_df['Tahun'] == 2014]['Deforestasi_Hutan_Primer_Ha'].sum() if not gfw_df.empty else 239268
-co2_terkini_s3 = (gfw_df['Total_Emisi_CO2_Megagram'].sum() / 1_000_000) if not gfw_df.empty else 1521
-co2_2014_s3 = (gfw_df[gfw_df['Tahun'] == 2014]['Total_Emisi_CO2_Megagram'].sum() / 1_000_000) if not gfw_df.empty else 181
+co2_terkini_s3 = (gfw_df[gfw_df['Tahun'] == 2023]['Total_Emisi_CO2_Megagram'].sum() / 1_000_000) if not gfw_df.empty else 88.6
+co2_2014_s3 = (gfw_df[gfw_df['Tahun'] == 2014]['Total_Emisi_CO2_Megagram'].sum() / 1_000_000) if not gfw_df.empty else 93.3
+co2_kumulatif_s3 = (gfw_df['Total_Emisi_CO2_Megagram'].sum() / 1_000_000) if not gfw_df.empty else 804.1
 tambang_def_terkini = gfw_df['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'].sum() if not gfw_df.empty else 2107041
 tambang_def_2014 = gfw_df[gfw_df['Tahun'] == 2014]['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'].sum() if not gfw_df.empty else 248031
 
 delta_gfw_def = f"▲ +{((gfw_def_terkini - gfw_def_2014)/gfw_def_2014 * 100):,.0f}%"
 delta_gfw_primer = f"▲ +{((gfw_primer_terkini - gfw_primer_2014)/gfw_primer_2014 * 100):,.0f}%"
-delta_co2_s3 = f"▲ +{((co2_terkini_s3 - co2_2014_s3)/co2_2014_s3 * 100):,.0f}%"
+delta_co2_s3 = f"▼ {((co2_terkini_s3 - co2_2014_s3)/co2_2014_s3 * 100):,.1f}%"
 delta_tambang_def = f"▲ +{((tambang_def_terkini - tambang_def_2014)/tambang_def_2014 * 100):,.0f}%"
 
 # 6, 7. Bencana Ekologis BNPB
@@ -646,7 +653,7 @@ insight_faskes = f"Faskes hanya tumbuh {faskes_pct:,.0f}% ({faskes_2014:,.0f} ke
 # Insight Seksi 3
 insight_limbah = f"Aktivitas smelter membuang {limbah_b3_terkini/1_000_000:,.1f} Juta ton (estimasi berdasar temuan AEER/KLH 2024-2025) limbah B3/slag nikel tanpa pengawasan ketat, mencemari laut."
 insight_pltu_s3 = f"Ketergantungan pada {pltu_unit} PLTU Captive batu bara ({pltu_mw:,.0f} MW, naik {pltu_pct:,.0f}%) mengunci Sulawesi dalam era karbon tinggi di tengah krisis iklim."
-insight_co2_s3 = f"Pelepasan emisi CO2 mencapai {co2_terkini_s3:,.0f} Megaton (naik {((co2_terkini_s3 - co2_2014_s3)/co2_2014_s3*100):,.0f}%) dari deforestasi tambang, menjadikan Sulawesi titik nol pendidihan global."
+insight_co2_s3 = f"Secara tahunan emisi turun semu (-5.0%), namun FAKTA EKOLOGIS mencatat akumulasi 1 dekade mencapai {co2_kumulatif_s3:,.1f} Megaton karbon, mengeliminasi seluruh klaim transisi energi hijau."
 insight_primer = f"Menghilangnya {gfw_primer_terkini/1_000_000:,.2f} Juta Ha tutupan hutan primer (naik {((gfw_primer_terkini - gfw_primer_2014)/gfw_primer_2014*100):,.0f}%) membunuh keanekaragaman hayati secara permanen."
 insight_tambang = f"Ekspansi tambang & sawit meledak merangsek {tambang_def_terkini/1_000_000:,.1f} Juta Hektare (naik {((tambang_def_terkini - tambang_def_2014)/tambang_def_2014*100):,.0f}%), menghapus daya lentur ekosistem."
 insight_bencana = f"Frekuensi bencana ekologis (banjir/longsor) meroket tajam {((bencana_terkini - bencana_2014)/bencana_2014*100):,.0f}% menjadi {bencana_terkini:,.0f} insiden (Data BNPB)."
@@ -656,16 +663,16 @@ insight_iku = f"Parameter IKU anjlok menjadi {iku_terkini:,.1f} dari baseline {i
 insight_def_s3 = f"Kehilangan tutupan pohon seluas {gfw_def_terkini/1_000_000:,.2f} Juta Ha (naik {((gfw_def_terkini - gfw_def_2014)/gfw_def_2014*100):,.0f}%) meniadakan fungsi perlindungan spasial kawasan."
 
 if SHOW_WEB_DASHBOARD:
-    render_infographic_row("☢️", "Timbunan Limbah B3", "Toksisitas", "Ton", "Pra-Hilirisasi", "0", "Tahun 2024", f"{limbah_b3_terkini:,.0f}", delta_limbah, insight_limbah, "blue", False)
-    render_infographic_row("🏭", "Kapasitas PLTU Captive", "Pembangkit", "MW", "Pra-Hilirisasi", "0", "Tahun 2024", f"{pltu_mw:,.0f}", delta_pltu_s3, insight_pltu_s3, "blue", False)
-    render_infographic_row("☁️", "Emisi Karbon Deforestasi", "Jejak Emisi", "Megaton", "Tahun 2014", f"{co2_2014_s3:,.0f}", "Tahun 2024", f"{co2_terkini_s3:,.0f}", delta_co2_s3, insight_co2_s3, "blue", False)
-    render_infographic_row("🌳", "Hutan Primer Musnah", "Ekosistem", "Ha", "Tahun 2014", f"{gfw_primer_2014:,.0f}", "Tahun 2024", f"{gfw_primer_terkini:,.0f}", delta_gfw_primer, insight_primer, "blue", False)
-    render_infographic_row("🚜", "Deforestasi (Tambang/Sawit)", "Perambahan", "Ha", "Tahun 2014", f"{tambang_def_2014:,.0f}", "Tahun 2024", f"{tambang_def_terkini:,.0f}", delta_tambang_def, insight_tambang, "blue", False)
-    render_infographic_row("🌊", "Ledakan Bencana Ekologis", "Kejadian", "Insiden", "Tahun 2014", f"{bencana_2014:,.0f}", "Tahun 2024", f"{bencana_terkini:,.0f}", delta_bencana, insight_bencana, "blue", False)
-    render_infographic_row("🏃", "Korban Bencana Alam", "Pengungsi Iklim", "Jiwa", "Tahun 2014", f"{korban_2014:,.0f}", "Tahun 2024", f"{korban_terkini:,.0f}", delta_korban, insight_korban, "blue", False)
+    render_infographic_row("☢️", "Timbunan Limbah B3", "Toksisitas", "Ton", col_hdr_left, "0", col_hdr_right, f"{limbah_b3_terkini:,.0f}", delta_limbah, insight_limbah, "blue", False)
+    render_infographic_row("🏭", "Kapasitas PLTU Captive", "Pembangkit", "MW", col_hdr_left, "0", col_hdr_right, f"{pltu_mw:,.0f}", delta_pltu_s3, insight_pltu_s3, "blue", False)
+    render_infographic_row("☁️", "Emisi Karbon Deforestasi", "Jejak Emisi", "Megaton", col_hdr_left, f"{co2_2014_s3:,.1f}", col_hdr_right, f"{co2_terkini_s3:,.1f}", delta_co2_s3, insight_co2_s3, "blue", False)
+    render_infographic_row("🌳", "Hutan Primer Musnah", "Ekosistem", "Ha", col_hdr_left, f"{gfw_primer_2014:,.0f}", col_hdr_right, f"{gfw_primer_terkini:,.0f}", delta_gfw_primer, insight_primer, "blue", False)
+    render_infographic_row("🚜", "Deforestasi (Tambang/Sawit)", "Perambahan", "Ha", col_hdr_left, f"{tambang_def_2014:,.0f}", col_hdr_right, f"{tambang_def_terkini:,.0f}", delta_tambang_def, insight_tambang, "blue", False)
+    render_infographic_row("🌊", "Ledakan Bencana Ekologis", "Kejadian", "Insiden", col_hdr_left, f"{bencana_2014:,.0f}", col_hdr_right, f"{bencana_terkini:,.0f}", delta_bencana, insight_bencana, "blue", False)
+    render_infographic_row("🏃", "Korban Bencana Alam", "Pengungsi Iklim", "Jiwa", col_hdr_left, f"{korban_2014:,.0f}", col_hdr_right, f"{korban_terkini:,.0f}", delta_korban, insight_korban, "blue", False)
     render_infographic_row("🦧", "Ancaman Kepunahan Spesies", "Biodiversitas", "Taxa", "Status Aman", "0", "Krisis Tambang", f"{spesies_terkini:,.0f}", delta_spesies, insight_spesies, "blue", False)
-    render_infographic_row("😷", "Penurunan IKU (Sulbar)", "Polusi Udara", "Poin", "Tahun 2015", f"{iku_2015:,.1f}", "Tahun 2024", f"{iku_terkini:,.1f}", delta_iku, insight_iku, "blue", False)
-    render_infographic_row("🔥", "Total Deforestasi Regional", "Deforestasi", "Ha", "Tahun 2014", f"{gfw_def_2014:,.0f}", "Tahun 2024", f"{gfw_def_terkini:,.0f}", delta_gfw_def, insight_def_s3, "blue", False)
+    render_infographic_row("😷", "Penurunan IKU (Sulbar)", "Polusi Udara", "Poin", col_hdr_left, f"{iku_2015:,.1f}", col_hdr_right, f"{iku_terkini:,.1f}", delta_iku, insight_iku, "blue", False)
+    render_infographic_row("🔥", "Total Deforestasi Regional", "Deforestasi", "Ha", col_hdr_left, f"{gfw_def_2014:,.0f}", col_hdr_right, f"{gfw_def_terkini:,.0f}", delta_gfw_def, insight_def_s3, "blue", False)
 
     render_insight_box(
         title="Insight: Ecosida yang Dilegalkan",
@@ -998,50 +1005,50 @@ row_02_html = f"""
 row_05_html = f"""
                 <div class="data-row">
                     <div class="cell-indicator">Total Pelabuhan Ekspor<br/><span class="unit">Klaster Fasilitas</span></div>
-                    <div class="cell-val v-gray"><span class="num">6 Simpul Utama</span></div>
-                    <div class="cell-val v-red"><span class="num">{n_lokasi} Node</span></div>
+                    <div class="cell-val v-gray"><span class="num">Total: 6 Kawasan Industri</span></div>
+                    <div class="cell-val v-red"><span class="num">Terbangun: {n_lokasi} Pelabuhan</span></div>
                     <div><span class="badge badge-bad">Terkonfirmasi</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_lokasi}</div>
                 </div>
                 <div class="data-row">
                     <div class="cell-indicator">Status PSN Nasional<br/><span class="unit">Tameng Hukum</span></div>
-                    <div class="cell-val v-gray"><span class="num">6 Simpul Utama</span></div>
-                    <div class="cell-val v-red"><span class="num">{n_psn} Node</span></div>
+                    <div class="cell-val v-gray"><span class="num">Total: 6 Kawasan Industri</span></div>
+                    <div class="cell-val v-red"><span class="num">Berstatus PSN: {n_psn} Lokasi</span></div>
                     <div><span class="badge badge-bad">PSN</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_psn}</div>
                 </div>
                 <div class="data-row">
                     <div class="cell-indicator">PLTU Batubara Captive<br/><span class="unit">Kapasitas Pembangkit</span></div>
-                    <div class="cell-val v-gray"><span class="num">6 Simpul Logistik</span></div>
-                    <div class="cell-val v-red"><span class="num">{total_pltu:,.0f} MW</span></div>
+                    <div class="cell-val v-gray"><span class="num">Total: 6 Kawasan Industri</span></div>
+                    <div class="cell-val v-red"><span class="num">Kapasitas: {total_pltu:,.0f} MW</span></div>
                     <div><span class="badge badge-bad">Operating</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_pltu_s5}</div>
                 </div>
                 <div class="data-row">
                     <div class="cell-indicator">Izin Tambang Terlayani<br/><span class="unit">Suplai Hulu</span></div>
-                    <div class="cell-val v-gray"><span class="num">329 IUP Nikel</span></div>
-                    <div class="cell-val v-red"><span class="num">{total_izin} IUP</span></div>
+                    <div class="cell-val v-gray"><span class="num">Total se-Sulawesi: 329 IUP</span></div>
+                    <div class="cell-val v-red"><span class="num">Terhubung: {total_izin} IUP</span></div>
                     <div><span class="badge badge-bad">Suplai Hulu</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_izin_s5}</div>
                 </div>
                 <div class="data-row">
                     <div class="cell-indicator">Kanal Ekspor Teridentifikasi<br/><span class="unit">Rantai Pasok</span></div>
-                    <div class="cell-val v-gray"><span class="num">6 Komoditas Olahan</span></div>
-                    <div class="cell-val v-red"><span class="num">{n_export_channel} Kanal</span></div>
+                    <div class="cell-val v-gray"><span class="num">Total: 6 Jenis Produk Olahan</span></div>
+                    <div class="cell-val v-red"><span class="num">Terlacak: {n_export_channel} Jalur Ekspor</span></div>
                     <div><span class="badge badge-bad">China/Asia</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_ekspor}</div>
                 </div>
                 <div class="data-row">
                     <div class="cell-indicator">Kawasan Industri Nikel<br/><span class="unit">Estate/Cluster</span></div>
-                    <div class="cell-val v-gray"><span class="num">6 Simpul Logistik</span></div>
-                    <div class="cell-val v-red"><span class="num">{n_kawasan} Estate</span></div>
+                    <div class="cell-val v-gray"><span class="num">Total: 6 Lokasi Utama</span></div>
+                    <div class="cell-val v-red"><span class="num">Resmi Beroperasi: {n_kawasan} Kawasan</span></div>
                     <div><span class="badge badge-bad">Terintegrasi</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_kawasan_s5}</div>
                 </div>
                 <div class="data-row">
                     <div class="cell-indicator">Sebaran Kabupaten Simpul<br/><span class="unit">Wilayah Tapak</span></div>
-                    <div class="cell-val v-gray"><span class="num">6 Simpul Logistik</span></div>
-                    <div class="cell-val v-red"><span class="num">{n_kabupaten_logistik} Kabupaten</span></div>
+                    <div class="cell-val v-gray"><span class="num">Total: 6 Lokasi Utama</span></div>
+                    <div class="cell-val v-red"><span class="num">Berdampak ke: {n_kabupaten_logistik} Kabupaten</span></div>
                     <div><span class="badge badge-bad">Pesisir</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_kabupaten_s5}</div>
                 </div>
@@ -1108,42 +1115,42 @@ row_06_html = f"""
 
 row_07_html = f"""
                 <div class="data-row">
-                    <div class="cell-indicator">Populasi Kabupaten Industri<br/><span class="unit">Ribu Jiwa</span></div>
+                    <div class="cell-indicator">Populasi Kabupaten Industri<br/><span class="unit">Ribu Jiwa | Basis: {demo_base_year_s7}</span></div>
                     <div class="cell-val v-gray"><span class="num">{pop_base_s7:,.1f}</span></div>
                     <div class="cell-val v-red"><span class="num">{pop_latest_s7:,.1f}</span></div>
                     <div><span class="badge badge-bad">{delta_pop_s7}</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_pop_s7}</div>
                 </div>
                 <div class="data-row">
-                    <div class="cell-indicator">Kepadatan Wilayah Industri<br/><span class="unit">Jiwa/km²</span></div>
+                    <div class="cell-indicator">Kepadatan Wilayah Industri<br/><span class="unit">Jiwa/km² | Basis: {demo_base_year_s7}</span></div>
                     <div class="cell-val v-gray"><span class="num">{density_base_s7:,.1f}</span></div>
                     <div class="cell-val v-red"><span class="num">{density_latest_s7:,.1f}</span></div>
                     <div><span class="badge badge-bad">{delta_density_s7}</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_density_s7}</div>
                 </div>
                 <div class="data-row">
-                    <div class="cell-indicator">Kemiskinan Wilayah Industri<br/><span class="unit">Rata-rata %</span></div>
+                    <div class="cell-indicator">Kemiskinan Wilayah Industri<br/><span class="unit">Rata-rata % | Basis: {demo_base_year_s7}</span></div>
                     <div class="cell-val v-gray"><span class="num">{poverty_base_s7:,.1f}%</span></div>
                     <div class="cell-val v-red"><span class="num">{poverty_latest_s7:,.1f}%</span></div>
                     <div><span class="badge badge-up">{delta_poverty_s7}</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_poverty_s7}</div>
                 </div>
                 <div class="data-row">
-                    <div class="cell-indicator">PDRB Industri+Tambang Sulteng<br/><span class="unit">Share PDRB</span></div>
+                    <div class="cell-indicator">PDRB Industri+Tambang Sulteng<br/><span class="unit">Share PDRB | Basis: {shift_base_year_s7}</span></div>
                     <div class="cell-val v-gray"><span class="num">{industri_share_base_s7:,.1f}%</span></div>
                     <div class="cell-val v-red"><span class="num">{industri_share_latest_s7:,.1f}%</span></div>
                     <div><span class="badge badge-bad">{delta_industri_share_s7}</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_industri_share_s7}</div>
                 </div>
                 <div class="data-row">
-                    <div class="cell-indicator">PDRB Pertanian Sulteng<br/><span class="unit">Share PDRB</span></div>
+                    <div class="cell-indicator">PDRB Pertanian Sulteng<br/><span class="unit">Share PDRB | Basis: {shift_base_year_s7}</span></div>
                     <div class="cell-val v-gray"><span class="num">{pertanian_share_base_s7:,.1f}%</span></div>
                     <div class="cell-val v-red"><span class="num">{pertanian_share_latest_s7:,.1f}%</span></div>
                     <div><span class="badge badge-bad">{delta_pertanian_share_s7}</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_pertanian_share_s7}</div>
                 </div>
                 <div class="data-row">
-                    <div class="cell-indicator">Indeks Pergeseran Agraris-Industri<br/><span class="unit">Sulteng</span></div>
+                    <div class="cell-indicator">Indeks Pergeseran Agraris-Industri<br/><span class="unit">Sulteng | Basis: {shift_base_year_s7}</span></div>
                     <div class="cell-val v-gray"><span class="num">{shift_index_base_s7:,.3f}</span></div>
                     <div class="cell-val v-red"><span class="num">{shift_index_latest_s7:,.3f}</span></div>
                     <div><span class="badge badge-bad">{delta_shift_index_s7}</span></div>
@@ -1154,57 +1161,51 @@ row_07_html = f"""
 row_08_html = f"""
                 <div class="data-row">
                     <div class="cell-indicator">IUP di Status Kritis D3TLH<br/><span class="unit">Izin Baru</span></div>
-                    <div class="cell-val v-gray"><span class="num">Zona Kritis</span></div>
-                    <div class="cell-val v-red"><span class="num">{iup_kritis_s8:,.0f}</span></div>
+                    <div class="cell-val v-gray"><span class="num">Batas Ekologis: Zona Kritis</span></div>
+                    <div class="cell-val v-red"><span class="num">Izin Baru: {iup_kritis_s8:,.0f} IUP</span></div>
                     <div><span class="badge badge-bad">Gagal</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_iup_kritis_s8}</div>
                 </div>
                 <div class="data-row">
                     <div class="cell-indicator">Luas Konsesi di Zona Kritis<br/><span class="unit">Hektare</span></div>
-                    <div class="cell-val v-gray"><span class="num">Zona Kritis</span></div>
-                    <div class="cell-val v-red"><span class="num">{luas_kritis_s8:,.0f}</span></div>
+                    <div class="cell-val v-gray"><span class="num">Batas Ekologis: Zona Kritis</span></div>
+                    <div class="cell-val v-red"><span class="num">Konsesi: {luas_kritis_s8:,.0f} Ha</span></div>
                     <div><span class="badge badge-bad">Anomali</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_luas_kritis_s8}</div>
                 </div>
-                <div class="data-row">
-                    <div class="cell-indicator">Gap AMDAL vs IUP Sentra Nikel<br/><span class="unit">Sulteng-Sultra</span></div>
-                    <div class="cell-val v-gray"><span class="num">{iup_sentra_s8:,.0f}</span></div>
-                    <div class="cell-val v-red"><span class="num">{amdal_sentra_s8:,.0f}</span></div>
-                    <div><span class="badge badge-bad">+{gap_amdal_pct_s8:,.0f}%</span></div>
-                    <div class="cell-insight" style="text-align: left;">{insight_gap_amdal_s8}</div>
-                </div>
+
                 <div class="data-row">
                     <div class="cell-indicator">Temuan Izin Bermasalah KPA<br/><span class="unit">Perusahaan/Temuan</span></div>
-                    <div class="cell-val v-gray"><span class="num">KPA</span></div>
-                    <div class="cell-val v-red"><span class="num">{kpa_masalah_s8:,.0f}</span></div>
+                    <div class="cell-val v-gray"><span class="num">Sumber Data: Laporan KPA</span></div>
+                    <div class="cell-val v-red"><span class="num">Tercatat: {kpa_masalah_s8:,.0f} Perusahaan</span></div>
                     <div><span class="badge badge-bad">Bermasalah</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_kpa_s8}</div>
                 </div>
                 <div class="data-row">
                     <div class="cell-indicator">Konflik/Operasi Bermasalah Hukum<br/><span class="unit">Kasus</span></div>
-                    <div class="cell-val v-gray"><span class="num">Data Hukum</span></div>
-                    <div class="cell-val v-red"><span class="num">{hukum_s8:,.0f}</span></div>
+                    <div class="cell-val v-gray"><span class="num">Sumber Data: Catatan Hukum</span></div>
+                    <div class="cell-val v-red"><span class="num">Tercatat: {hukum_s8:,.0f} Kasus</span></div>
                     <div><span class="badge badge-bad">Impunitas</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_hukum_s8}</div>
                 </div>
                 <div class="data-row">
                     <div class="cell-indicator">Temuan Izin Ilegal Sulawesi<br/><span class="unit">CATAHU KPA 2025</span></div>
-                    <div class="cell-val v-gray"><span class="num">KPA 2025</span></div>
-                    <div class="cell-val v-red"><span class="num">{ilegal_sul_tambang_s8:,.0f}</span></div>
+                    <div class="cell-val v-gray"><span class="num">Sumber Data: CATAHU KPA 2025</span></div>
+                    <div class="cell-val v-red"><span class="num">Tercatat: {ilegal_sul_tambang_s8:,.0f} Temuan</span></div>
                     <div><span class="badge badge-bad">Ilegal</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_ilegal_s8}</div>
                 </div>
                 <div class="data-row">
                     <div class="cell-indicator">Rasio Investasi PMDN terhadap PAD<br/><span class="unit">2016-2024</span></div>
-                    <div class="cell-val v-gray"><span class="num">{pad_total_s8:,.1f} T</span></div>
-                    <div class="cell-val v-red"><span class="num">{inv_total_s8:,.1f} T</span></div>
+                    <div class="cell-val v-gray"><span class="num">Total PAD: {pad_total_s8:,.1f} T</span></div>
+                    <div class="cell-val v-red"><span class="num">Total PMDN: {inv_total_s8:,.1f} T</span></div>
                     <div><span class="badge badge-bad">{rasio_inv_pad_s8:,.2f}x</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_inv_pad_s8}</div>
                 </div>
                 <div class="data-row">
                     <div class="cell-indicator">Konsentrasi Ekspor Nikel<br/><span class="unit">Nilai Ekspor</span></div>
-                    <div class="cell-val v-gray"><span class="num">Total</span></div>
-                    <div class="cell-val v-red"><span class="num">{share_ekspor_nikel_s8:,.1f}%</span></div>
+                    <div class="cell-val v-gray"><span class="num">Dari: Total Ekspor</span></div>
+                    <div class="cell-val v-red"><span class="num">Porsi Nikel: {share_ekspor_nikel_s8:,.1f}%</span></div>
                     <div><span class="badge badge-bad">Terkonsentrasi</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_ekspor_nikel_s8}</div>
                 </div>
@@ -1279,8 +1280,8 @@ row_03_html = f"""
                 </div>
                 <div class="data-row">
                     <div class="cell-indicator">Emisi Karbon Deforestasi<br/><span class="unit">Jejak Emisi</span></div>
-                    <div class="cell-val v-gray"><span class="num">{co2_2014_s3:,.0f}</span></div>
-                    <div class="cell-val v-red"><span class="num">{co2_terkini_s3:,.0f}</span></div>
+                    <div class="cell-val v-gray"><span class="num">{co2_2014_s3:,.1f} Megaton (2014)</span></div>
+                    <div class="cell-val v-red"><span class="num">{co2_terkini_s3:,.1f} Megaton (2023)</span></div>
                     <div><span class="badge badge-bad">{delta_co2_s3}</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_co2_s3}</div>
                 </div>
@@ -1488,6 +1489,8 @@ poster_html = f"""<!DOCTYPE html>
 </body>
 </html>
 """
+col_hdr_left = "Baseline 2014"
+col_hdr_right = "Akumulasi 2024"
 
 poster_html_v2 = f"""<!DOCTYPE html>
 <html lang="id">
@@ -1582,8 +1585,8 @@ poster_html_v2 = f"""<!DOCTYPE html>
             <div class="data-area tint-s1">
                 <div class="col-header">
                     <div>Indikator</div>
-                    <div class="ch-center">Tahun 2014</div>
-                    <div class="ch-center">Tahun 2024</div>
+                    <div class="ch-center">{col_hdr_left}</div>
+                    <div class="ch-center">{col_hdr_right}</div>
                     <div class="ch-center">Delta</div>
                     <div>Temuan & Implikasi</div>
                 </div>
@@ -1667,8 +1670,8 @@ poster_html_v2 = f"""<!DOCTYPE html>
             <div class="data-area tint-s2">
                 <div class="col-header">
                     <div>Indikator Perizinan</div>
-                    <div class="ch-center">Data 2014</div>
-                    <div class="ch-center">Data 2024</div>
+                    <div class="ch-center">{col_hdr_left}</div>
+                    <div class="ch-center">{col_hdr_right}</div>
                     <div class="ch-center">Delta</div>
                     <div>Temuan & Implikasi</div>
                 </div>
@@ -1683,8 +1686,8 @@ poster_html_v2 = f"""<!DOCTYPE html>
             <div class="data-area" style="background: #fcfcff;">
                 <div class="col-header">
                     <div>Indikator Ekologis</div>
-                    <div class="ch-center">Data 2014</div>
-                    <div class="ch-center">Data 2024</div>
+                    <div class="ch-center">{col_hdr_left}</div>
+                    <div class="ch-center">{col_hdr_right}</div>
                     <div class="ch-center">Delta</div>
                     <div>Temuan & Implikasi</div>
                 </div>
@@ -1702,8 +1705,8 @@ poster_html_v2 = f"""<!DOCTYPE html>
                 <!-- Column Headers -->
                 <div class="col-header">
                     <div>Indikator Kesehatan</div>
-                    <div class="ch-center">Data 2014</div>
-                    <div class="ch-center">Data 2024</div>
+                    <div class="ch-center">{col_hdr_left}</div>
+                    <div class="ch-center">{col_hdr_right}</div>
                     <div class="ch-center">Delta</div>
                     <div>Temuan & Implikasi</div>
                 </div>
@@ -1714,12 +1717,12 @@ poster_html_v2 = f"""<!DOCTYPE html>
     </div>
     <div class="table-container">
         <div class="section-grid">
-            <div class="sidebar-cell bg-s5" style="background: #00796B; color: white;"><span class="num">05</span><span class="label">KORIDOR<br/>LOGISTIK</span></div>
+            <div class="sidebar-cell bg-s5" style="background: #00796B; color: white;"><span class="num">05</span><span class="label">KORIDOR<br/>LOGISTIK<br/><span style="font-size: 5pt; font-weight: normal; opacity: 0.85;">(Inventaris 2024)</span></span></div>
             <div class="data-area" style="background: #f0fdf4;">
                 <div class="col-header">
                     <div>Indikator Logistik</div>
-                    <div class="ch-center">Cakupan Data</div>
-                    <div class="ch-center">Nilai Terkini</div>
+                    <div class="ch-center">Konteks Data (Populasi 2024)</div>
+                    <div class="ch-center">Kondisi Eksisting (2024)</div>
                     <div class="ch-center">Status</div>
                     <div>Temuan & Implikasi</div>
                 </div>
@@ -1733,8 +1736,8 @@ poster_html_v2 = f"""<!DOCTYPE html>
             <div class="data-area" style="background: #fff7f2;">
                 <div class="col-header">
                     <div>Indikator Konflik</div>
-                    <div class="ch-center">Data 2014</div>
-                    <div class="ch-center">Data 2024</div>
+                    <div class="ch-center">{col_hdr_left}</div>
+                    <div class="ch-center">{col_hdr_right}</div>
                     <div class="ch-center">Delta</div>
                     <div>Temuan & Implikasi</div>
                 </div>
@@ -1748,8 +1751,8 @@ poster_html_v2 = f"""<!DOCTYPE html>
             <div class="data-area" style="background: #fffaf6;">
                 <div class="col-header">
                     <div>Indikator Sosial</div>
-                    <div class="ch-center">Data Awal</div>
-                    <div class="ch-center">Data 2024</div>
+                    <div class="ch-center">{col_hdr_left}</div>
+                    <div class="ch-center">{col_hdr_right}</div>
                     <div class="ch-center">Delta</div>
                     <div>Temuan & Implikasi</div>
                 </div>

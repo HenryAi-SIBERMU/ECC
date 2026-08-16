@@ -553,7 +553,7 @@ try:
     df_ispa_agg = df_kes[df_kes['indikator'] == 'Kasus ISPA/Pneumonia'].groupby(['provinsi', 'tahun'])['nilai'].sum().reset_index()
     df_ispa_agg.rename(columns={'nilai': 'Kasus_ISPA'}, inplace=True)
     
-    df_def = pd.read_csv('data/processed/sulawesi_gfw_master_1_dekade_2014_2023.csv')
+    df_def = pd.read_csv('data/processed/sulawesi_gfw_master_1_dekade_2014_2023_v3.csv')
     df_def.rename(columns={'Provinsi': 'provinsi', 'Tahun': 'tahun', 'Total_Deforestasi_Ha': 'Deforestasi_Ha'}, inplace=True)
     
     # Merge Data (Outer Join untuk mengumpulkan semua panel)

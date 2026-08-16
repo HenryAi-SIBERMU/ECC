@@ -124,10 +124,10 @@ def load_all_page2():
     d = {}
     d['ika'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv"))
     d['iku'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_iku_2015_2024.csv"))
-    d['gfw'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_master_1_dekade_2014_2023.csv"))
+    d['gfw'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_master_1_dekade_2014_2023_v3.csv"))
     d['pltu'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv"))
     d['b3'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_limbah_b3.csv"))
-    d['driver'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_loss_by_driver_2014_2023.csv"))
+    d['driver'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_loss_by_driver_2014_2023_v3.csv"))
     return d
 
 
@@ -148,8 +148,8 @@ def load_biodiv():
 def load_all_page5():
     d = {}
     d['izin'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_izin_baru_per_tahun.csv"))
-    d['gfw'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_master_1_dekade_2014_2023.csv"))
-    d['kawasan'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_kawasan_lindung_loss_2014_2023.csv"))
+    d['gfw'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_master_1_dekade_2014_2023_v3.csv"))
+    d['kawasan'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_kawasan_lindung_loss_2014_2023_v3.csv"))
     d['konflik'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_konflik_tambang_fpic.csv"))
     d['masalah'] = pd.read_csv(os.path.join(DATA_DIR, "kpa_masalah_izin_perusahaan.csv"))
     return d
@@ -170,7 +170,7 @@ def load_all_page4():
 def load_all_page7():
     d = {}
     d['izin'] = pd.read_csv(os.path.join(DATA_DIR, 'sulawesi_izin_baru_per_tahun.csv'))
-    d['gfw'] = pd.read_csv(os.path.join(DATA_DIR, 'sulawesi_gfw_master_1_dekade_2014_2023.csv'))
+    d['gfw'] = pd.read_csv(os.path.join(DATA_DIR, 'sulawesi_gfw_master_1_dekade_2014_2023_v3.csv'))
     d['hukum'] = pd.read_csv(os.path.join(DATA_DIR, 'sulawesi_konflik_hukum.csv'))
     d['pltu'] = pd.read_csv(os.path.join(DATA_DIR, 'sulawesi_pltu_captive.csv'))
     return d
@@ -202,7 +202,7 @@ def load_all_page1():
     d['izin'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_izin_baru_per_tahun.csv"))
     d['pltu'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv"))
     d['smelter'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_esdm_nikel.csv"))
-    d['gfw'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_master_1_dekade_2014_2023.csv"))
+    d['gfw'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_master_1_dekade_2014_2023_v3.csv"))
     d['inv'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_investasi_pmdn_2016_2024.csv"))
     d['pad_bd'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pad_breakdown_2016_2024.csv"))
     d['pad_tot'] = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pad_2016_2024.csv"))
@@ -1270,7 +1270,7 @@ with st.expander("2 · KUALITAS LINGKUNGAN", expanded=False):
 
     # Data Loading & Prep
     df_luas = pd.read_csv('data/processed/sulawesi_kawasan_nikel_luas.csv')
-    df_gfw_raw = pd.read_csv('data/processed/sulawesi_gfw_master_1_dekade_2014_2023.csv')
+    df_gfw_raw = pd.read_csv('data/processed/sulawesi_gfw_master_1_dekade_2014_2023_v3.csv')
 
     df_luas_prov = df_luas.groupby('provinsi')['total_luas_ha'].sum().reset_index()
     df_luas_prov.rename(columns={'provinsi': 'Provinsi', 'total_luas_ha': 'Luas_IUP_Kawasan_Ha'}, inplace=True)
@@ -2772,7 +2772,7 @@ with st.expander("5 · POLA PENERBITAN IZIN", expanded=False):
     st.markdown("---")
     st.subheader("5.2 Fakta Spasial: Tabrakan Tata Ruang di Kawasan Konservasi")
     
-    df_kawasan = pd.read_csv(os.path.join(DATA_DIR, 'sulawesi_gfw_kawasan_lindung_loss_2014_2023.csv'))
+    df_kawasan = pd.read_csv(os.path.join(DATA_DIR, 'sulawesi_gfw_kawasan_lindung_loss_2014_2023_v3.csv'))
     df_kawasan = df_kawasan[(df_kawasan['wdpa_protected_areas__iucn_cat'].astype(str) != '0') & (df_kawasan['Tahun'] <= 2023)]
     
     df_pivot_chart = pd.pivot_table(
@@ -3444,7 +3444,7 @@ with st.expander("8 · DISTRIBUSI MANFAAT", expanded=False):
     df_ispa_agg = df_kes[df_kes['indikator'] == 'Kasus ISPA/Pneumonia'].groupby(['provinsi', 'tahun'])['nilai'].sum().reset_index()
     df_ispa_agg.rename(columns={'nilai': 'Kasus_ISPA'}, inplace=True)
     
-    df_def = pd.read_csv(os.path.join(DATA_DIR, 'sulawesi_gfw_master_1_dekade_2014_2023.csv'))
+    df_def = pd.read_csv(os.path.join(DATA_DIR, 'sulawesi_gfw_master_1_dekade_2014_2023_v3.csv'))
     df_def.rename(columns={'Provinsi': 'provinsi', 'Tahun': 'tahun', 'Total_Deforestasi_Ha': 'Deforestasi_Ha'}, inplace=True)
     
     dfs = [df_inv_agg, df_pad, df_ispa_agg, df_def[['provinsi', 'tahun', 'Deforestasi_Ha']]]

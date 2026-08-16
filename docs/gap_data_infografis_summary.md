@@ -155,12 +155,12 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 | **58** | 07. Demografi Sosial | Indeks Pergeseran Agraris-Industri | 🛠️ **Direvisi (Fix Shift Index)** | `0.449` | `3.533` | `▲ +687%` | Pergeseran ekstrem struktur pencarian nafkah dari petani/nelayan menjadi buruh tambang dan industri. | `sulawesi_employment_shift_fase4.csv` |
 | **59** | 08. Tata Kelola Manfaat | IUP di Status Kritis D3TLH | 🟢 **100% Valid Spatial** | `Zona Kritis` | `330 IUP` | `Gagal` | Pada status ekologis Kritis, pemerintah tetap menerbitkan 330 IUP baru; D3TLH tidak bekerja sebagai rem perizinan. | Spatial Merge GFW x Minerba |
 | **60** | 08. Tata Kelola Manfaat | Luas Konsesi di Zona Kritis | 🟢 **100% Valid Spatial** | `Zona Kritis` | `472,150 Ha` | `Anomali` | Konsesi seluas 472 Ribu Ha tetap keluar pada fase kritis, menunjukkan keputusan izin mengalahkan status daya dukung. | Spatial Merge GFW x Minerba |
-| **61** | 08. Tata Kelola Manfaat | Gap AMDAL vs IUP Sentra Nikel | 🟢 **100% Valid Spatial** | `185,000 Ha` | `342,000 Ha` | `+84.9%` | Di sentra nikel Sulteng-Sultra, luas AMDAL (342 Ribu Ha) melampaui IUP (185 Ribu Ha) dengan gap signifikan. | `sulawesi_kawasan_nikel_luas...` |
-| **62** | 08. Tata Kelola Manfaat | Temuan Izin Bermasalah KPA | 🟢 **100% Valid KPA** | `KPA` | `24 Perusahaan` | `Bermasalah` | KPA mencatat 24 perusahaan/temuan izin bermasalah dengan luasan terdampak signifikan. | `kpa_masalah_izin_perusahaan.csv` |
-| **63** | 08. Tata Kelola Manfaat | Konflik/Operasi Bermasalah Hukum| 🟢 **100% Valid Hukum** | `Data Hukum` | `53 Temuan` | `Impunitas` | Terdapat 53 konflik/operasi bermasalah hukum yang memperlihatkan impunitas dan pembiaran administratif. | `sulawesi_konflik_hukum.csv` |
-| **64** | 08. Tata Kelola Manfaat | Temuan Izin Ilegal Sulawesi | 🟢 **100% Valid CATAHU** | `KPA 2025` | `12 Temuan` | `Ilegal` | Catatan KPA 2025 memuat 12 temuan terkait Sulawesi dan pertambangan, menandai risiko izin ilegal. | `kpa_catahu_2025_izin_ilegal...` |
+| **61** | 08. Tata Kelola Manfaat | Gap AMDAL vs IUP Sentra Nikel | 🔴 **INVALID / FLAWED METHODOLOGY** | `899,241 Ha` (IUP) | `1,170,097 Ha` (AMDAL) | `Gap +30.1%` | Angka luas AMDAL terbukti cacat karena bersumber dari hasil *Google Dorking* tanpa kurasi (menarik PDF disertasi & laporan nyasar). Metrik ini tidak valid digunakan. | `amdal_dork_results.csv` (Cacat) |
+| **62** | 08. Tata Kelola Manfaat | Temuan Izin Bermasalah KPA | 🟡 **Valid (Dengan Catatan)** | `KPA` | `21 Temuan` | `Bermasalah` | KPA mencatat 21 temuan izin bermasalah di Sulawesi (meski ekstraksi NLP sempat menarik entitas provinsi lain dari paragraf yang sama). | `kpa_masalah_izin_perusahaan.csv` |
+| **63** | 08. Tata Kelola Manfaat | Konflik/Operasi Bermasalah Hukum| 🟢 **100% Valid Hukum** | `Data Hukum` | `32 Temuan` | `Impunitas` | Terdapat 32 konflik/operasi bermasalah hukum yang memperlihatkan impunitas dan pembiaran administratif di Sulawesi. | `sulawesi_konflik_hukum.csv` |
+| **64** | 08. Tata Kelola Manfaat | Temuan Izin Ilegal Sulawesi | 🟢 **100% Valid CATAHU** | `KPA 2025` | `11 Temuan` | `Ilegal` | Catatan KPA 2025 memuat 11 temuan terkait Sulawesi dan pertambangan, menandai risiko izin ilegal. | `kpa_catahu_2025_izin_ilegal...` |
 | **65** | 08. Tata Kelola Manfaat | Rasio Investasi PMDN terhadap PAD | 🟢 **100% Valid Rasio** | `161.0 T` | `219.0 T` | `1.36x` | Investasi PMDN terakumulasi 219.0 Triliun Rp, sementara PAD hanya 161.0 Triliun Rp; rasio manfaat fiskal lokal tertinggal 1.36x. | PMDN & PAD CSVs |
-| **66** | 08. Tata Kelola Manfaat | Konsentrasi Ekspor Nikel | 🟢 **100% Valid Ekspor** | `Total` | `84.2%` | `Terkonsentrasi` | Komoditas nikel/ferronickel/matte/stainless menyumbang 84.2% nilai ekspor teridentifikasi, menunjukkan manfaat ekspor sangat terkonsentrasi pada rantai nikel. | `sulawesi_ekspor_komoditas_2020_2026.csv` |
+| **66** | 08. Tata Kelola Manfaat | Konsentrasi Ekspor Nikel | 🟢 **100% Valid Ekspor** | `Total` | `79.5%` | `Terkonsentrasi` | Komoditas nikel/ferronickel/matte/stainless menyumbang 79.5% nilai ekspor teridentifikasi, menunjukkan manfaat ekspor sangat terkonsentrasi pada rantai nikel. | `sulawesi_ekspor_komoditas_2020_2026.csv` |
 
 ---
 
@@ -1432,35 +1432,37 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
   * `iup_sentra_s8` = `sentra_nikel_s8['total_luas_iup_ha'].sum()` $\rightarrow$ **`899,241 Ha`**.
   * `amdal_sentra_s8` = `sentra_nikel_s8['total_luas_amdal_ha'].sum()` $\rightarrow$ **`1,170,097 Ha`**.
   * `gap_amdal_pct_s8` = `+30.1%`.
-* **Koreksi Bug UI**: Tidak ada bug kode, tapi AI lama berhalusinasi dengan nilai 185 Ribu vs 342 Ribu Ha. Hasil bacaan Pandas murni pada CSV (yang bersumber dari data spasial ESDM) membuktikan IUP di Sulteng-Sultra luasnya 899,241 Ha, namun dokumen AMDAL-nya mencakup 1,170,097 Ha.
+* **Koreksi Status Validasi**: 🔴 **METODOLOGI CACAT / INVALID**. Walaupun secara kode tidak ada bug dan angka 1,170,097 Ha memang ada di dalam CSV, namun *sumber data asalnya* (`amdal_dork_results.csv`) terbukti memuat *False Positives* yang sangat fatal.
 
-##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Disparitas Dokumen Lingkungan**: Ya, data ini benar-benar ada dan bersumber langsung dari rekam jejak tata ruang. Luas kawasan AMDAL yang melampaui batas IUP resmi (+30.1% lebih luas) menandakan sebuah praktik manipulasi: dokumen kelayakan lingkungan sengaja "dibuat melebar" dan dipukul rata untuk mencakup rencana pencaplokan lahan/ekspansi masa depan, meskipun dasar perizinan hulu (IUP)-nya belum secara sah diterbitkan untuk wilayah ekstra tersebut.
+##### 2. 💡 **Logika & Reasoning Lapangan (FLAWED):**
+* **Cacat Ekstraksi Dorking OSINT**: Setelah dilakukan audit forensik terhadap raw PDF hasil ekstraksi OSINT, ditemukan fakta bahwa dokumen yang ditangkap bukanlah dokumen resmi AMDAL, melainkan bercampur baur dengan **Disertasi/Skripsi Mahasiswa**, **Jurnal Ilmiah**, dan **Prospektus Bursa Efek** yang hanya kebetulan memuat *keyword* "AMDAL" dan "Nama PT".
+* Akibatnya, nilai `luas_amdal_ha` yang diekstrak dari *snippet* PDF tersebut sama sekali tidak merepresentasikan luasan izin lingkungan yang sesungguhnya. **Kesimpulan: Indikator ini cacat sejak fase pengumpulan data dan TIDAK LAYAK ditampilkan di Infografis Utama tanpa ada verifikasi ulang manual.**
 
 ##### 📌 **TL;DR Indikator #61:**
 
 | Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
 | :--- | :--- | :--- | :--- |
-| 🟢 Valid | 899,241 Ha (IUP) | 1,170,097 Ha (AMDAL) | Gap +30.1% |
-| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
+| 🔴 INVALID (Metodologi Cacat) | 899,241 Ha (IUP) | 1,170,097 Ha (Data Sampah) | Gap +30.1% (Palsu) |
+| **🔴 Rekomendasi Revisi** | **HAPUS / SEMBUNYIKAN METRIK INI** | **HAPUS / SEMBUNYIKAN METRIK INI** | **HAPUS / SEMBUNYIKAN METRIK INI** |
 
 ---
 
-#### 🔍 Indikator #62: Temuan Izin Bermasalah KPA (Perusahaan)
+#### 🔍 Indikator #62: Temuan Izin Bermasalah KPA (Perusahaan/Temuan)
 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`kpa_masalah_izin_perusahaan.csv`):**
 * **Verifikasi Formula (`12_Infografis_Summary.py` L882-L883 & L1176)**:
-  * `kpa_masalah_s8` = `len(df_kpa)` $\rightarrow$ **`24 Perusahaan / Temuan`** *(atau 21 temuan bersih)*.
+  * `kpa_masalah_s8` = `len(df_kpa)` $\rightarrow$ **`21 Temuan`** *(Koreksi dari log lama yang mencatat 24)*.
   * `kpa_luas_s8` = `pd.to_numeric(df_kpa['luas_ha'], errors='coerce').sum()` $\rightarrow$ **`151,596 Ha`**.
   * `status` = `"Bermasalah"`.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Temuan audit perizinan KPA tercatat presisi.
+* **Koreksi Status Bug**: 🟡 **CUKUP VALID**. Secara agregasi `len(df_kpa)` menampilkan 21 temuan baris dengan benar di Streamlit. Namun, ekstraksi NLP dari laporan CATAHU KPA menghasilkan anomali di kolom nama perusahaan.
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Pelanggaran Hak Atas Lahan**: 24 perusahaan terbukti menguasai lahan tanpa melengkapi hak guna atau prosedur persetujuan masyarakat.
+* **Kelemahan Ekstraksi NLP**: Karena Laporan CATAHU KPA bersifat nasional, *script* penarik data berbasis kata kunci "Sulawesi" turut menangkap nama-nama perusahaan dari provinsi lain (seperti Toba Pulp Lestari, Agro Jawa Barat) yang kebetulan disebut dalam satu paragraf komparatif yang sama dengan kasus Sulawesi.
+* **Validitas Jumlah Temuan**: Meskipun daftar perusahaannya tercampur (*dirty column*), angka representasi **21 insiden/temuan** izin bermasalah di regional Sulawesi sepanjang 2019-2025 tetap mencerminkan rasio konflik agraria yang logis dan moderat dari KPA.
 
 ##### 📌 **TL;DR Indikator #62:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** ("KPA" vs 24 Perusahaan).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Temuan 24 korporasi perizinan bermasalah KPA).
+* **Kode & CSV**: 🟡 **Cukup Valid** (21 Temuan baris, merender otomatis di UI).
+* **Logika Lapangan**: 🟡 **Valid dengan Catatan** (Angka 21 insiden logis dari KPA, namun *raw data* nama perusahaannya agak kotor akibat kelemahan NLP. Tidak separah kasus AMDAL).
 
 ---
 
@@ -1476,7 +1478,7 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Impunitas Hukum**: Keberadaan 53 kasus hukum tanpa eksekusi sanksi administratif/pidana mencerminkan pembiaran negara terhadap tindak pidana lingkungan.
 
 ##### 📌 **TL;DR Indikator #63:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** ("Data Hukum" vs 53 Temuan).
+* **Kode & CSV**: 🟢 **100% Bebas Bug** ("Data Hukum" vs 32 Kasus).
 * **Logika Lapangan**: 🟢 **Sangat Logis** (Bukti pembiaran tindak pidana lingkungan).
 
 ---
@@ -1484,13 +1486,13 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 #### 🔍 Indikator #64: Temuan Izin Ilegal Sulawesi (CATAHU KPA 2025)
 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`kpa_catahu_2025_izin_ilegal_sulawesi.csv`):**
-* **Verifikasi Formula (`12_Infografis_Summary.py` L885 & L1190)**:
-  * `ilegal_sul_tambang_s8` = `len(df_ilegal[(df_ilegal['has_sulawesi'] == True) & (df_ilegal['has_pertambangan'] == True)])` $\rightarrow$ **`12 Temuan`** *(atau 11 temuan spesifik tambang)*.
+* **Verifikasi Formula (`12_Infografis_Summary.py` L887 & L1190)**:
+  * `ilegal_sul_tambang_s8` = `len(df_ilegal[(df_ilegal['has_sulawesi'] == True) & (df_ilegal['has_pertambangan'] == True)])` $\rightarrow$ **`11 Temuan`** *(Bukan 12 seperti catatan lama)*.
   * `status` = `"Ilegal"`.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Filtering laporan CATAHU KPA 2025 presisi.
+* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Proses *filtering* boolean di Pandas (has_sulawesi == True & has_pertambangan == True) berjalan sempurna.
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Suburnya Shadow Economy**: 12 temuan CATAHU KPA 2025 menguraikan jaringan perizinan ilegal yang meloloskan tambang tanpa jaminan reklamasi dan bayar royalti.
+* **Suburnya Shadow Economy**: 11 temuan dari Laporan CATAHU KPA 2025 menguraikan sindikat perizinan ilegal yang meloloskan tambang tanpa amdal/izin sah di Sulawesi. Laporan tahun 2025 adalah *baseline* paling *up-to-date*.
 
 ##### 📌 **TL;DR Indikator #64:**
 * **Kode & CSV**: 🟢 **100% Bebas Bug** ("KPA 2025" vs 12 Temuan).
@@ -1522,14 +1524,14 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 * **Verifikasi Formula (`12_Infografis_Summary.py` L891-L896 & L1204)**:
   * `ekspor_total_s8` = `df_ekspor['nilai_usd'].sum()`.
   * `ekspor_nikel_s8` = `df_ekspor[df_ekspor['deskripsi'].str.contains('nickel|ferronickel|matte|stainless', case=False, na=False)]['nilai_usd'].sum()`.
-  * `share_ekspor_nikel_s8` = `(ekspor_nikel_s8 / ekspor_total_s8) * 100` $\rightarrow$ **`84.2%`** *(atau 79.5% - 84.2% porsi ekspor nikel)*.
+  * `share_ekspor_nikel_s8` = `(ekspor_nikel_s8 / ekspor_total_s8) * 100` $\rightarrow$ **`79.5%`**.
   * `status` = `"Terkonsentrasi"`.
 * **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Calculation share nikel terhadap total nilai ekspor regional Sulawesi valid.
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Kerentanan Ekspor Karbon-Tinggi**: 84.2% nilai ekspor Sulawesi disumbang murni oleh produk nikel/ferronickel/matte. Hal ini membuat perekonomian Sulawesi sangat rentan terhadap kebijakan *CBAM (Carbon Border Adjustment Mechanism)* Uni Eropa dan fluktuasi harga nikel global.
+* **Kerentanan Ekspor Karbon-Tinggi**: 79.5% nilai ekspor Sulawesi disumbang murni oleh produk nikel/ferronickel/matte. Hal ini membuat perekonomian Sulawesi sangat rentan terhadap kebijakan *CBAM (Carbon Border Adjustment Mechanism)* Uni Eropa dan fluktuasi harga nikel global.
 
 ##### 📌 **TL;DR Indikator #66:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** ("Total" vs 84.2%).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Konsentrasi mutlak 84.2% ekspor regional pada komoditas nikel).
+* **Kode & CSV**: 🟢 **100% Bebas Bug** ("Total" vs 79.5%).
+* **Logika Lapangan**: 🟢 **Sangat Logis** (Konsentrasi mutlak 79.5% ekspor regional pada komoditas nikel).
 

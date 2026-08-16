@@ -97,7 +97,7 @@ def load_izin_data():
 
 @st.cache_data
 def load_gfw_data():
-    return pd.read_csv('data/processed/sulawesi_gfw_master_1_dekade_2014_2023.csv')
+    return pd.read_csv('data/processed/sulawesi_gfw_master_1_dekade_2014_2023_v3.csv')
 
 df_izin = load_izin_data()
 df_gfw = load_gfw_data()
@@ -249,7 +249,7 @@ with st.expander("ℹ️ Metodologi: Sinkronisasi Waktu (Timeline Mapping)"):
         * **Y-Axis Kanan (Keputusan Aktor):** `Jumlah_Izin_Baru`
     4. **Dataset & File:**
         * `data/processed/sulawesi_izin_baru_per_tahun.csv` (Minerbaone)
-        * `data/processed/sulawesi_gfw_master_1_dekade_2014_2023.csv` (GFW)
+        * `data/processed/sulawesi_gfw_master_1_dekade_2014_2023_v3.csv` (GFW)
     """)
 
 
@@ -379,7 +379,7 @@ with st.expander("Lihat Data Mentah: Agregasi Waktu Historis", expanded=False):
     df_tabel['Jumlah_Izin_Baru'] = df_tabel['Jumlah_Izin_Baru'].astype(int)
     
     st.dataframe(df_tabel, use_container_width=True, hide_index=True)
-    st.caption("**Sumber File:** Agregasi dari `sulawesi_izin_baru_per_tahun.csv` (Minerbaone) & `sulawesi_gfw_master_1_dekade_2014_2023.csv` (GFW).")
+    st.caption("**Sumber File:** Agregasi dari `sulawesi_izin_baru_per_tahun.csv` (Minerbaone) & `sulawesi_gfw_master_1_dekade_2014_2023_v3.csv` (GFW).")
 
 st.markdown("---")
 
@@ -401,7 +401,7 @@ with st.expander("ℹ️ Metodologi: Analisis Spasial Tabrakan Tata Ruang"):
         * **Kategorisasi Spasial (X):** `Tahun`, Kategori Livelihood
         * **Besaran Destruksi (Y):** `Luas_Hilang_Kawasan_Livelihood_Ha`
     4. **Dataset & File:**
-        * `data/processed/sulawesi_gfw_kawasan_lindung_loss_2014_2023.csv`
+        * `data/processed/sulawesi_gfw_kawasan_lindung_loss_2014_2023_v3.csv`
     """)
 
 
@@ -411,7 +411,7 @@ Dataset spasial menunjukkan pentingnya kepatuhan terhadap batas-batas tata ruang
 """)
 
 try:
-    df_kawasan = pd.read_csv('data/processed/sulawesi_gfw_kawasan_lindung_loss_2014_2023.csv')
+    df_kawasan = pd.read_csv('data/processed/sulawesi_gfw_kawasan_lindung_loss_2014_2023_v3.csv')
     df_kawasan = df_kawasan[(df_kawasan['wdpa_protected_areas__iucn_cat'].astype(str) != '0') & (df_kawasan['Tahun'] <= 2023)]
     
     # Pivot untuk Stacked Bar Chart
@@ -527,7 +527,7 @@ try:
                 df_pivot[col] = df_pivot[col].apply(lambda x: f"{x:,.2f}")
             
         st.dataframe(df_pivot, use_container_width=True, hide_index=True)
-        st.caption("**Sumber File:** `sulawesi_gfw_kawasan_lindung_loss_2014_2023.csv` (GFW dengan overlay Livelihood Zone Proxy Kategori 1 & 2).")
+        st.caption("**Sumber File:** `sulawesi_gfw_kawasan_lindung_loss_2014_2023_v3.csv` (GFW dengan overlay Livelihood Zone Proxy Kategori 1 & 2).")
 
 except Exception as e:
     st.error(f"Gagal memuat visualisasi kawasan livelihood: {e}")
@@ -561,7 +561,7 @@ st.markdown("""
 <div style="text-align: justify; line-height: 1.8; color: #E0E0E0; font-size: 1.05rem; margin-bottom: 25px;">
 Laporan dari <b>Climate Rights International (2024-2025)</b>, <b>Mighty Earth (2024)</b>, dan <b>Business & Human Rights Resource Centre</b> mendokumentasikan isu tata kelola perizinan dan pelaksanaan konsultasi publik (FPIC - <i>Free, Prior, and Informed Consent</i>) di sekitar kawasan industri nikel. Kajian-kajian tersebut menyoroti pentingnya keterlibatan masyarakat lokal dan transparansi dokumen AMDAL serta D3TLH agar proses perizinan berjalan inklusif dan akuntabel.
 <br><br>
-Penelusuran terhadap <b>database Konsorsium Pembaruan Agraria (KPA) CATAHU 2016-2025</b> dan <b>Tanahkita.id</b> mengidentifikasi <b>21 kasus permasalahan izin perusahaan</b>, termasuk terkait status HGU, alokasi kawasan hutan, dan penanganan klaim lahan masyarakat. Di Sulawesi, tercatat <b>12 kasus konflik pertambangan</b> dengan <b>4 kasus yang mencatatkan indikasi isu pelaksanaan FPIC</b>.
+Penelusuran terhadap <b>database Konsorsium Pembaruan Agraria (KPA) CATAHU 2016-2025</b> dan <b>Tanahkita.id</b> mengidentifikasi <b>21 kasus permasalahan izin perusahaan</b>, termasuk terkait status HGU, alokasi kawasan hutan, dan penanganan klaim lahan masyarakat. Di Sulawesi, tercatat <b>6 kasus konflik pertambangan (2014-2024)</b> dengan <b>5 kasus yang mencatatkan indikasi isu pelaksanaan FPIC</b>.
 <br><br>
 Data ini menggarisbawahi perlunya penguatan sistem evaluasi perizinan, pemantauan hukum secara berkala, dan penghormatan terhadap hak-hak komunitas lokal dalam setiap tahapan investasi ekstraktif.
 </div>
@@ -570,6 +570,7 @@ Data ini menggarisbawahi perlunya penguatan sistem evaluasi perizinan, pemantaua
 # Load datasets
 @st.cache_data
 def load_konflik_data():
+    # Cache busted: 2026-08-15 19:33 to force reload of NLP filtered Konflik CSV
     return pd.read_csv('data/processed/sulawesi_konflik_tambang_fpic.csv')
 
 @st.cache_data
@@ -594,7 +595,7 @@ with col1:
         <div>
             <div class="metric-label">KONFLIK PERTAMBANGAN SULAWESI</div>
             <div class="metric-value" style="color: #B71C1C;">{total_konflik} <span style="font-size:1rem;color:#777;">Kasus</span></div>
-            <div class="metric-desc">Total konflik pertambangan terdokumentasi di Sulawesi (1968-2023) dengan <b>{konflik_fpic} kasus pelanggaran FPIC eksplisit</b> yang melibatkan kekerasan, kriminalisasi, dan penggusuran paksa.</div>
+            <div class="metric-desc">Total konflik pertambangan terdokumentasi di Sulawesi (2014-2024) dengan <b>{konflik_fpic} kasus pelanggaran FPIC eksplisit</b> yang melibatkan kekerasan, kriminalisasi, dan penggusuran paksa.</div>
         </div>
         <div class="metric-source">Sumber: Tanahkita.id (KPA/YLBHI)<br>File: sulawesi_konflik_tambang_fpic.csv</div>
     </div>
@@ -889,7 +890,7 @@ with st.expander("ℹ️ Metodologi: Uji Korelasi Penerbitan Izin & Ekstraksi Ek
         * **Variabel Independen (X):** `Jumlah_Izin_Baru` atau `Total_Luas_Konsesi_Baru_Ha` (Interaktif Dropdown).
         * **Variabel Dependen (Y):** `Total_Deforestasi_Ha` atau `Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha` (Interaktif Dropdown).
     4. **Dataset & File:**
-        * Panel Join dari: `sulawesi_izin_baru_per_tahun.csv` dan `sulawesi_gfw_master_1_dekade_2014_2023.csv`
+        * Panel Join dari: `sulawesi_izin_baru_per_tahun.csv` dan `sulawesi_gfw_master_1_dekade_2014_2023_v3.csv`
     """)
 
 # --- Data Preparation ---
@@ -1118,7 +1119,7 @@ st.markdown(f"""
 
 with st.expander("Lihat Data Panel Mentah (Merge Izin & GFW)", expanded=False):
     st.dataframe(df_panel[['Provinsi', 'Tahun', x_col, 'X_Label', y_col, 'Y_Label']], use_container_width=True, hide_index=True)
-    st.caption("Sumber: Gabungan `sulawesi_izin_baru_per_tahun.csv` (Minerbaone) dan `sulawesi_gfw_master_1_dekade_2014_2023.csv` (GFW).")
+    st.caption("Sumber: Gabungan `sulawesi_izin_baru_per_tahun.csv` (Minerbaone) dan `sulawesi_gfw_master_1_dekade_2014_2023_v3.csv` (GFW).")
 
 
 

@@ -35,11 +35,11 @@ def load_data():
         izin_hantu = "53 Korporasi"
 
     try:
-        df_lindung = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_kawasan_lindung_loss_2014_2023.csv"))
+        df_lindung = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_kawasan_lindung_loss_2014_2023_v3.csv"))
         lindung = df_lindung['Luas_Hilang_Kawasan_Lindung_Ha'].sum()
         kawasan_lindung = f"{lindung / 1000:,.0f} Ribu Ha"
     except:
-        kawasan_lindung = "2,079 Ribu Ha"
+        kawasan_lindung = "42 Ribu Ha"
         
     try:
         df_limbah = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_limbah_b3.csv"))
@@ -49,11 +49,11 @@ def load_data():
         limbah_val = "35 Juta Ton"
 
     try:
-        df_prim = pd.read_csv(os.path.join("data", "raw", "klhk_gfw", "mega_fetch_v2", "primary_forest_loss_sulawesi_2001_2025.csv"))
-        prim = df_prim[df_prim['is__umd_regional_primary_forest_2001'] == True]['area__ha'].sum()
-        hutan_primer = f"{prim / 1_000_000:,.1f} Juta Ha"
+        df_gfw = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_master_1_dekade_2014_2023_v3.csv"))
+        prim = df_gfw['Deforestasi_Hutan_Primer_Ha'].sum()
+        hutan_primer = f"{prim / 1000:,.0f} Ribu Ha"
     except:
-        hutan_primer = "15.4 Juta Ha"
+        hutan_primer = "481 Ribu Ha"
         
     try:
         df_iucn = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_biodiversitas_iucn_fase5_exploded.csv"))
@@ -68,16 +68,17 @@ def load_data():
         bencana_val = f"{bencana:,.0f} Bencana"
     except:
         bencana_val = "1,557 Bencana"
+        
     try:
         df_kes = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_kesehatan_detail_2014_2024.csv"))
         ispa = df_kes[df_kes['indikator'] == 'Kasus ISPA/Pneumonia']['nilai'].sum()
         ispa_val = f"{ispa / 1000:,.0f} Ribu Pasien"
         
         diare = df_kes[df_kes['indikator'] == 'Kasus Diare Dilayani']['nilai'].sum()
-        diare_val = f"{diare / 1000:,.0f} Ribu Pasien"
+        diare_val = f"{diare / 1_000_000:,.1f} Juta Pasien"
     except:
-        ispa_val = "233 Ribu Pasien"
-        diare_val = "145 Ribu Pasien"
+        ispa_val = "234 Ribu Pasien"
+        diare_val = "2.3 Juta Pasien"
 
     try:
         df_zoo = pd.read_csv(os.path.join(DATA_DIR, "zoonosis_kab_kota_2015_2024.csv"))
@@ -92,7 +93,6 @@ def load_data():
         no2_val = f"Pekat (Satelit)"
     except:
         no2_val = "Pekat"
-
         
     try:
         df_konf = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita.csv"))
@@ -103,10 +103,10 @@ def load_data():
         
     try:
         df_pltu = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv"))
-        pltu = df_pltu['Capacity (MW)'].sum()
+        pltu = df_pltu[df_pltu['Status'].str.lower() == 'operating']['Capacity (MW)'].sum()
         pltu_val = f"{pltu:,.0f} MW"
     except:
-        pltu_val = "12,245 MW"
+        pltu_val = "9,825 MW"
 
     # --- Seksi 3: Paradoks Investasi & Hukum ---
 
@@ -133,24 +133,24 @@ def load_data():
         df_fpic = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_konflik_tambang_fpic.csv"))
         kecelakaan_tambang = f"{len(df_fpic)} Konflik FPIC"
     except:
-        kecelakaan_tambang = "12 Konflik FPIC"
+        kecelakaan_tambang = "6 Konflik FPIC"
 
-    # Total Luas Konsesi Nikel (tumpang tindih)
+    # Total Luas Konsesi Nikel (IUP Baru)
     try:
-        df_kaw = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_kawasan_nikel_luas.csv"))
-        total_ha = df_kaw['total_luas_ha'].sum()
-        tumpang_tindih = f"{total_ha / 1_000_000:.1f} Juta Ha"
+        df_izin = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_izin_baru_per_tahun.csv"))
+        total_ha = df_izin['Total_Luas_Konsesi_Baru_Ha'].sum()
+        tumpang_tindih = f"{total_ha / 1000:,.0f} Ribu Ha"
     except:
-        tumpang_tindih = "851 Ribu Ha"
+        tumpang_tindih = "819 Ribu Ha"
 
-    # IUP Ilegal (Moratorium dilanggar)
+    # IUP Ilegal & Temuan CATAHU KPA
     try:
         df_ilegal = pd.read_csv(os.path.join(DATA_DIR, "kpa_catahu_2025_izin_ilegal_sulawesi.csv"))
-        moratorium = f"{len(df_ilegal)} IUP Ilegal"
+        moratorium = f"{len(df_ilegal)} Temuan Ilegal"
     except:
-        moratorium = "112 IUP Ilegal"
+        moratorium = "12 Temuan Ilegal"
 
-    # Pertanian (Kiamat Pertanian)
+    # Pertanian (Porsi PDRB)
     try:
         df_pdrb = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pdrb_sektoral_2016_2024.csv"))
         agri = df_pdrb[df_pdrb['sektor_kode'] == 'A']
@@ -159,7 +159,7 @@ def load_data():
         drop = agri_2016 - agri_2024
         pertanian = f"Turun {drop:.1f}%"
     except:
-        pertanian = "Anjlok 10%"
+        pertanian = "Turun 2.1%"
 
     # Dominasi PDRB Ekstraktif (Tambang & Industri Pengolahan)
     try:
@@ -170,7 +170,7 @@ def load_data():
         pct_ext = (ekstraktif_val / total_pdrb) * 100 if total_pdrb > 0 else 58
         pdrb = f"{pct_ext:.0f}%"
     except:
-        pdrb = "58%"
+        pdrb = "28%"
 
     # Kecepatan Izin Pasca Omnibus (IUP diterbitkan setelah 2020)
     try:
@@ -178,7 +178,7 @@ def load_data():
         post_omnibus = df_izin[df_izin['Tahun'] > 2020]['Jumlah_Izin_Baru'].sum()
         kecepatan_izin = f"{int(post_omnibus)} IUP Kilat"
     except:
-        kecepatan_izin = "Kebut 9 Hari"
+        kecepatan_izin = "468 IUP Kilat"
 
     return {
         "lonjakan_izin": lonjakan_izin,
@@ -215,232 +215,9 @@ try:
 except Exception as e:
     logo_html = ''
 
-html1 = f"""
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-
-<style>
-    .font-inter {{ font-family: 'Inter', sans-serif; }}
-    
-    .poster-container {{
-        background-color: #215e39; /* Hijau dasar CELIOS */
-        background-image: 
-            linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
-        background-size: 50px 50px;
-    }}
-    
-    .card-title-text {{
-        color: #215e39;
-        font-weight: 700;
-        font-size: 0.95rem;
-    }}
-    
-    .card-value-text {{
-        color: #215e39;
-        font-weight: 800;
-        font-size: 3.5rem;
-        line-height: 1.1;
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem;
-    }}
-    
-    .card-desc-text {{
-        color: #555555;
-        font-size: 0.75rem;
-        line-height: 1.3;
-        font-weight: 400;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-    }}
-</style>
-
-<div class="poster-container font-inter w-full min-h-screen p-8 md:p-12 lg:p-16 relative overflow-hidden">
-    
-    <!-- BACKGROUND ACCENTS -->
-    <div class="absolute" style="top: -150px; right: -100px; width: 500px; height: 500px; border-radius: 50%; border: 40px solid rgba(255, 232, 124, 0.08); z-index: 0; pointer-events: none;"></div>
-    <div class="absolute" style="bottom: 10%; left: -200px; width: 600px; height: 600px; border-radius: 50%; border: 60px solid rgba(255, 232, 124, 0.06); z-index: 0; pointer-events: none;"></div>
-    <div class="absolute" style="top: 30%; left: 5%; font-size: 150px; color: rgba(255, 232, 124, 0.08); z-index: 0; font-weight: 900; line-height: 1; pointer-events: none;">+</div>
-    <div class="absolute" style="bottom: 20%; right: 10%; font-size: 200px; color: rgba(255, 232, 124, 0.06); z-index: 0; font-weight: 900; line-height: 1; pointer-events: none;">+</div>
-
-    <!-- MAIN CONTENT -->
-    <div class="relative z-10 w-full">
-        <!-- HEADER -->
-    <div class="text-center mb-12 mt-4 flex flex-col items-center justify-center">
-        {logo_html}
-        <h1 class="text-white text-4xl md:text-5xl font-bold tracking-wide mb-3">Temuan Utama</h1>
-        <p style="color: rgba(255,255,255,0.75); font-size: 1rem; font-weight: 500; max-width: 600px; margin: 0 auto; letter-spacing: 0.02em;">Daya Dukung &amp; Daya Tampung Lingkungan Hidup (D3TLH) — Sulawesi 2014–2024</p>
-    </div>
-
-    
-    <!-- SEKSI 1: DARURAT KESEHATAN PUBLIK -->
-    <div class="w-full text-center font-bold text-xl md:text-2xl py-3 rounded-full mb-8 shadow-sm" style="background-color: #FFE87C; color: #215e39;">
-        Darurat Kesehatan Publik
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
-        
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Beban Penyakit ISPA</div>
-            <div class="card-value-text">{data['ispa_val']}</div>
-            <div class="card-desc-text">Warga lingkar tambang (Konawe/Morowali) dipaksa menghirup udara mematikan setiap hari</div>
-        </div>
-        
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Kasus Diare Akut</div>
-            <div class="card-value-text">{data['diare_val']}</div>
-            <div class="card-desc-text">Krisis air bersih dan hancurnya sanitasi akibat sumber air tanah tercemar berat</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Penyakit Tropis & Zoonosis</div>
-            <div class="card-value-text">{data['zoo_val']}</div>
-            <div class="card-desc-text">Kasus Demam Berdarah dan Malaria meroket imbas deforestasi hutan yang agresif</div>
-        </div>
-        
-    </div>
-
-    <!-- SEKSI 2: EKSPLOITASI & KEJAHATAN EKOLOGIS -->
-    <div class="w-full text-center font-bold text-xl md:text-2xl py-3 rounded-full mb-8 shadow-sm" style="background-color: #FFE87C; color: #215e39;">
-        Eksploitasi & Kejahatan Ekologis
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-14">
-        
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Lonjakan Gila Izin Tambang</div>
-            <div class="card-value-text">{data['lonjakan_izin']}</div>
-            <div class="card-desc-text">Pasca-pandemi dan Omnibus Law, perizinan diobral tanpa rem dan daya dukung lingkungan</div>
-        </div>
-        
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Sindikasi Izin Hantu & Ilegal</div>
-            <div class="card-value-text">{data['izin_hantu']}</div>
-            <div class="card-desc-text">Beroperasi secara ilegal dan kebal hukum di dalam kawasan hutan tanpa sanksi tegas</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Kawasan Lindung Dihancurkan</div>
-            <div class="card-value-text">{data['kawasan_lindung']}</div>
-            <div class="card-desc-text">Area konservasi sakral yang secara legal dirobek dan dicaplok demi memuluskan megaproyek</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Gunung Limbah Beracun</div>
-            <div class="card-value-text">{data['limbah_val']}</div>
-            <div class="card-desc-text">Bom waktu limbah B3 dan tailing nikel yang meracuni pesisir dan mematikan ekosistem laut</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Hutan Primer Purba Musnah</div>
-            <div class="card-value-text">{data['hutan_primer']}</div>
-            <div class="card-desc-text">Hilangnya kanopi hutan perawan yang mustahil untuk direklamasi dan dikembalikan fungsinya</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Ancaman Kepunahan Satwa</div>
-            <div class="card-value-text">{data['kepunahan']}</div>
-            <div class="card-desc-text">Satwa endemik (Anoa, Babirusa, Tarsius, Macaca) didorong paksa ke jurang kepunahan massal dalam Daftar Merah IUCN</div>
-        </div>
-        
-    </div>
-
-    <!-- SEKSI 3: PENDERITAAN WARGA & PARADOKS EKONOMI -->
-    <div class="w-full text-center font-bold text-xl md:text-2xl py-3 rounded-full mb-8 shadow-sm" style="background-color: #FFE87C; color: #215e39;">
-        Penderitaan Warga & Paradoks Ekonomi
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
-        
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Ledakan Bencana Ekologis</div>
-            <div class="card-value-text">{data['bencana_val']}</div>
-            <div class="card-desc-text">Banjir dan longsor menahun yang memaksa jutaan jiwa menjadi pengungsi di tanah sendiri</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Polusi Beracun NO2 (Satelit)</div>
-            <div class="card-value-text">{data['no2_val']}</div>
-            <div class="card-desc-text">Pantauan satelit TROPOMI NASA merekam pekatnya polusi udara di langit kawasan industri nikel</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Kiamat Pertanian Rakyat</div>
-            <div class="card-value-text">{data['pertanian']}</div>
-            <div class="card-desc-text">Lahan produktif digilas alat berat, kontribusi sektor penopang kedaulatan pangan hancur berantakan</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Konflik Agraria & Kekerasan</div>
-            <div class="card-value-text">{data['konflik_val']}</div>
-            <div class="card-desc-text">Ledakan kasus kekerasan aparat, kriminalisasi, dan pengusiran paksa warga lokal dari kampungnya</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Pabrik Asap PLTU Captive</div>
-            <div class="card-value-text">{data['pltu_val']}</div>
-            <div class="card-desc-text">Ironi hilirisasi nikel untuk baterai EV, namun justru disokong oleh ribuan Megawatt batubara kotor</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Dominasi Sektor Ekstraktif</div>
-            <div class="card-value-text">{data['pdrb']}</div>
-            <div class="card-desc-text">Kekayaan segelintir elit bersumber dari bisnis ekstraktif yang mengeksploitasi sumber daya alam</div>
-        </div>
-        
-    </div>
-
-    <!-- SEKSI 4: PARADOKS INVESTASI & HUKUM -->
-    <div class="w-full text-center font-bold text-xl md:text-2xl py-3 rounded-full mb-8 shadow-sm mt-4" style="background-color: #FFE87C; color: #215e39;">
-        Paradoks Investasi & Hukum
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
-        
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Investasi Asing Kuasai Nikel</div>
-            <div class="card-value-text">{data['investasi_asing']}</div>
-            <div class="card-desc-text">Kedaulatan sumber daya tergadai, mayoritas keuntungan lari ke luar negeri tanpa dinikmati warga lokal</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Pencemaran Sungai & Laut</div>
-            <div class="card-value-text">{data['sungai_tercemar']}</div>
-            <div class="card-desc-text">Air bersih warga dan wilayah tangkap nelayan berubah warna jadi merah karat, beracun, dan mematikan</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Kecelakaan Kerja Tambang</div>
-            <div class="card-value-text">{data['kecelakaan_tambang']}</div>
-            <div class="card-desc-text">Nyawa pekerja melayang sia-sia akibat buruknya standar K3 demi menggenjot produksi tanpa henti</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Izin Tumpang Tindih Lahan</div>
-            <div class="card-value-text">{data['tumpang_tindih']}</div>
-            <div class="card-desc-text">Konsesi pertambangan dengan sengaja menabrak dan merampas wilayah kelola rakyat dan tanah adat</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Moratorium Dilanggar</div>
-            <div class="card-value-text">{data['moratorium']}</div>
-            <div class="card-desc-text">Kebijakan penghentian izin baru hanya sekadar macan kertas, obral izin tetap berjalan mulus di belakang layar</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Kecepatan Izin Pasca Omnibus</div>
-            <div class="card-value-text">{data['kecepatan_izin']}</div>
-            <div class="card-desc-text">Karpet merah bagi oligarki: persetujuan lingkungan yang rumit dipangkas dan disetujui dalam hitungan hari</div>
-        </div>
-        
-    </div>
-
-    </div> <!-- END MAIN CONTENT -->
-
-</div>
-"""
-
-
+# -------------------------------------------------------------
+# OPSI 2: TONE LUGAS, FAKTUAL, & PROFESIONAL (NON-LEBAY)
+# -------------------------------------------------------------
 html2 = f"""
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -498,165 +275,164 @@ html2 = f"""
         <p style="color: rgba(255,255,255,0.75); font-size: 1rem; font-weight: 500; max-width: 600px; margin: 0 auto; letter-spacing: 0.02em;">Daya Dukung &amp; Daya Tampung Lingkungan Hidup (D3TLH) — Sulawesi 2014–2024</p>
     </div>
 
-    
-    <!-- SEKSI 1: DARURAT KESEHATAN PUBLIK -->
+    <!-- SEKSI 1: DAMPAK KESEHATAN PUBLIK -->
     <div class="w-full text-center font-bold text-xl md:text-2xl py-3 rounded-full mb-8 shadow-sm" style="background-color: #FFE87C; color: #215e39;">
-        Tumbal Kesehatan
+        Dampak Kesehatan Publik
     </div>
     
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
         
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Ratusan Ribu Paru-Paru Sesak</div>
+            <div class="card-title-text">Beban Penyakit ISPA</div>
             <div class="card-value-text">{data['ispa_val']}</div>
-            <div class="card-desc-text">Warga dipaksa menghirup debu beracun smelter di setiap tarikan napas mereka</div>
+            <div class="card-desc-text">Paparan partikulat debu industri dan abu PLTU captive menekan kesehatan pernapasan warga lingkar tambang</div>
         </div>
         
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Krisis Air = Krisis Nyawa</div>
+            <div class="card-title-text">Peningkatan Kasus Diare</div>
             <div class="card-value-text">{data['diare_val']}</div>
-            <div class="card-desc-text">Sanitasi hancur, air tanah tercemar pekat, penyakit diare meledak menyerang anak-anak</div>
+            <div class="card-desc-text">Keterbatasan akses air bersih dan tekanan kualitas sanitasi memicu eskalasi infeksi pencernaan</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Wabah dari Hutan yang Gundul</div>
+            <div class="card-title-text">Penyakit Tropis & Zoonosis</div>
             <div class="card-value-text">{data['zoo_val']}</div>
-            <div class="card-desc-text">Hutan dibabat habis, nyamuk DBD & Malaria terpaksa turun gunung serang pemukiman</div>
+            <div class="card-desc-text">Perubahan tutupan lahan dan dinamika vektor lingkungan meningkatkan insiden DBD dan penyakit tular vektor</div>
         </div>
         
     </div>
 
-    <!-- SEKSI 2: EKSPLOITASI & KEJAHATAN EKOLOGIS -->
+    <!-- SEKSI 2: TEKANAN SPASIAL & EKOLOGIS -->
     <div class="w-full text-center font-bold text-xl md:text-2xl py-3 rounded-full mb-8 shadow-sm" style="background-color: #FFE87C; color: #215e39;">
-        Tanah yang Dirampok
+        Tekanan Spasial & Ekologis
     </div>
     
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-14">
         
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Banjir Izin, Obral Tanah</div>
+            <div class="card-title-text">Akselerasi Penerbitan IUP</div>
             <div class="card-value-text">{data['lonjakan_izin']}</div>
-            <div class="card-desc-text">Izin tambang diobral gila-gilaan pasca-Omnibus Law tanpa ampun dan tanpa rem</div>
+            <div class="card-desc-text">Rata-rata penerbitan izin tambang baru per tahun melonjak tajam pada periode pasca-UU Cipta Kerja</div>
         </div>
         
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Bekingan Tambang Ilegal</div>
+            <div class="card-title-text">Operasi Bermasalah Hukum</div>
             <div class="card-value-text">{data['izin_hantu']}</div>
-            <div class="card-desc-text">Puluhan korporasi "nakal" keruk hutan seenaknya tanpa rasa takut terhadap hukum</div>
+            <div class="card-desc-text">Puluhan entitas korporasi teridentifikasi memiliki catatan sengketa, izin cacat administrasi, atau berada di kawasan hutan</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Kawasan Suci Dibuldoser</div>
+            <div class="card-title-text">Kawasan Lindung Tergerus</div>
             <div class="card-value-text">{data['kawasan_lindung']}</div>
-            <div class="card-desc-text">Ratusan ribu hektar kawasan lindung resmi disembelih demi memuluskan megaproyek</div>
+            <div class="card-desc-text">Puluhan ribu hektare area berstatus fungsi lindung mengalami kehilangan tutupan hutan dalam satu dekade</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Gunung Tailing Mengerikan</div>
+            <div class="card-title-text">Timbunan Limbah B3</div>
             <div class="card-value-text">{data['limbah_val']}</div>
-            <div class="card-desc-text">Jutaan ton limbah B3 siap mengubur dan membunuh ekosistem pesisir kapan saja</div>
+            <div class="card-desc-text">Estimasi akumulasi jutaan ton limbah padat dan tailing industri nikel memberi beban jangka panjang bagi wilayah pesisir</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Kiamat Hutan Perawan</div>
+            <div class="card-title-text">Deforestasi Hutan Primer</div>
             <div class="card-value-text">{data['hutan_primer']}</div>
-            <div class="card-desc-text">Jutaan hektar kanopi hutan yang tak tergantikan, kini hilang dan hancur selamanya</div>
+            <div class="card-desc-text">Ratusan ribu hektare ekosistem hutan primer musnah, menurunkan fungsi hidrologis dan daya serap karbon</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Satwa Endemik Terbantai</div>
+            <div class="card-title-text">Ancaman Satwa Endemik</div>
             <div class="card-value-text">{data['kepunahan']}</div>
-            <div class="card-desc-text">Habitat dikeruk habis, 4 satwa ikonik (Anoa, Babirusa, Tarsius, Macaca) didesak menuju kepunahan massal</div>
+            <div class="card-desc-text">Spesies kunci Sulawesi (Anoa, Babirusa, Tarsius, Macaca) menghadapi penyusutan habitat di sekitar koridor konsesi</div>
         </div>
         
     </div>
 
-    <!-- SEKSI 3: PENDERITAAN WARGA & PARADOKS EKONOMI -->
+    <!-- SEKSI 3: DAMPAK SOSIAL-EKONOMI KOMUNAL -->
     <div class="w-full text-center font-bold text-xl md:text-2xl py-3 rounded-full mb-8 shadow-sm" style="background-color: #FFE87C; color: #215e39;">
-        Warga Lokal Dapat Apa?
+        Dampak Sosial-Ekonomi Komunal
     </div>
     
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
         
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Langganan Banjir & Longsor</div>
+            <div class="card-title-text">Kejadian Bencana Alam</div>
             <div class="card-value-text">{data['bencana_val']}</div>
-            <div class="card-desc-text">Jutaan jiwa terancam, kampung tenggelam akibat hilangnya hutan penahan air alami</div>
+            <div class="card-desc-text">Frekuensi kejadian banjir dan longsor meningkat seiring terbukanya tutupan lahan di daerah tangkapan air</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Langit Pekat Kematian</div>
+            <div class="card-title-text">Konsentrasi Polutan NO2</div>
             <div class="card-value-text">{data['no2_val']}</div>
-            <div class="card-desc-text">Satelit NASA jadi saksi bisu ngerinya polusi beracun yang menyelimuti langit warga</div>
+            <div class="card-desc-text">Data satelit TROPOMI merekam densitas nitrogen dioksida yang signifikan di koridor smelter dan kawasan industri</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Petani Digilas Tambang</div>
+            <div class="card-title-text">Pelemahan Sektor Pertanian</div>
             <div class="card-value-text">{data['pertanian']}</div>
-            <div class="card-desc-text">Lahan produktif hancur lebur, ketahanan pangan warga dipastikan tamat</div>
+            <div class="card-desc-text">Porsi sektor pertanian dalam struktur PDRB menyusut, menggeser mata pencaharian agraris lokal</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Tanah Dirampas Paksa</div>
+            <div class="card-title-text">Letupan Konflik Agraria</div>
             <div class="card-value-text">{data['konflik_val']}</div>
-            <div class="card-desc-text">Warga yang menolak digusur, dikriminalisasi, dan dibungkam paksa oleh aparat</div>
+            <div class="card-desc-text">Sengketa penguasaan lahan dan tumpang-tindih batas konsesi memicu puluhan konflik lahan dengan warga lokal</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Hipokrisi Energi Hijau</div>
+            <div class="card-title-text">PLTU Batubara Captive</div>
             <div class="card-value-text">{data['pltu_val']}</div>
-            <div class="card-desc-text">Katanya demi transisi energi hijau, nyatanya ditenagai ribuan Megawatt batu bara kotor!</div>
+            <div class="card-desc-text">Pasokan energi kawasan hilirisasi nikel didukung oleh ribuan Megawatt pembangkit batubara tersendiri</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Kaya di Atas Penderitaan</div>
+            <div class="card-title-text">Dominasi Sektor Ekstraktif</div>
             <div class="card-value-text">{data['pdrb']}</div>
-            <div class="card-desc-text">Hanya segelintir elit oligarki yang untung besar, warga lokal tetap miskin gigit jari</div>
+            <div class="card-desc-text">Kinerja PDRB didominasi oleh sektor tambang dan pengolahan industri, menciptakan ketergantungan ekonomi tinggi</div>
         </div>
         
     </div>
 
-    <!-- SEKSI 4: PARADOKS INVESTASI & HUKUM -->
+    <!-- SEKSI 4: TATA KELOLA & PENAGAKAN REGULASI -->
     <div class="w-full text-center font-bold text-xl md:text-2xl py-3 rounded-full mb-8 shadow-sm mt-4" style="background-color: #FFE87C; color: #215e39;">
-        Aturan Tumpul ke Atas
+        Tata Kelola & Penegakan Regulasi
     </div>
     
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
         
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Asing Berpesta, Kita Merana</div>
+            <div class="card-title-text">Dominasi Investasi Asing</div>
             <div class="card-value-text">{data['investasi_asing']}</div>
-            <div class="card-desc-text">Kedaulatan tergadai! Mayoritas cuan nikel lari keluar negeri, kita cuma dapat ampasnya</div>
+            <div class="card-desc-text">Aliran modal proyek hilirisasi nikel didominasi penanaman modal luar dengan orientasi ekspor bahan mentah-olahan</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Sungai Darah & Laut Mati</div>
+            <div class="card-title-text">Pencemaran Sungai & Pesisir</div>
             <div class="card-value-text">{data['sungai_tercemar']}</div>
-            <div class="card-desc-text">Air berubah merah karat, lumpur limbah racun matikan sumber mata pencaharian nelayan</div>
+            <div class="card-desc-text">Sedimentasi lumpur tambang dan buangan industri menurunkan mutu 8 badan air dan sungai utama di sentra hilirisasi</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Nyawa Pekerja Murah Meriah</div>
+            <div class="card-title-text">Pelanggaran Hak Adat (FPIC)</div>
             <div class="card-value-text">{data['kecelakaan_tambang']}</div>
-            <div class="card-desc-text">Keselamatan diabaikan total demi kejar target produksi brutal, nyawa pekerja melayang</div>
+            <div class="card-desc-text">Konflik tambang tercatat timbul di wilayah kelola adat tanpa pemenuhan persetujuan bebas dan terinformasi</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Legalitas Penyerobotan Tanah</div>
+            <div class="card-title-text">Konsesi di Ruang Komunal</div>
             <div class="card-value-text">{data['tumpang_tindih']}</div>
-            <div class="card-desc-text">Konsesi sengaja didesain untuk menabrak dan merampas tanah adat secara dilegalkan</div>
+            <div class="card-desc-text">Ratusan ribu hektare konsesi pertambangan dialokasikan bertumpang-tindih dengan ruang hidup masyarakat</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Aturan Cuma Macan Kertas</div>
+            <div class="card-title-text">Temuan Izin Bermasalah</div>
             <div class="card-value-text">{data['moratorium']}</div>
-            <div class="card-desc-text">Obral izin terus jalan diam-diam di belakang layar, moratorium cuma janji manis</div>
+            <div class="card-desc-text">Catatan investigasi organisasi masyarakat sipil mendokumentasikan temuan operasional tambang tanpa kepatuhan regulasi</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Karpet Merah Para Oligarki</div>
+            <div class="card-title-text">Akselerasi Perizinan</div>
             <div class="card-value-text">{data['kecepatan_izin']}</div>
-            <div class="card-desc-text">Amdal yang harusnya ketat, disetujui kilat cuma dalam hitungan hari demi investor</div>
+            <div class="card-desc-text">Penyederhanaan prosedur administratif mempercepat keluarnya persetujuan izin pasca-deregulasi kebijakan</div>
         </div>
         
     </div>
@@ -666,8 +442,9 @@ html2 = f"""
 </div>
 """
 
-
-
+# -------------------------------------------------------------
+# OPSI 3: TONE TEMATIK TERFOKUS
+# -------------------------------------------------------------
 html3 = f"""
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -715,7 +492,7 @@ html3 = f"""
     <div class="absolute" style="bottom: 10%; left: -200px; width: 600px; height: 600px; border-radius: 50%; border: 60px solid rgba(255, 232, 124, 0.06); z-index: 0; pointer-events: none;"></div>
     <div class="absolute" style="top: 30%; left: 5%; font-size: 150px; color: rgba(255, 232, 124, 0.08); z-index: 0; font-weight: 900; line-height: 1; pointer-events: none;">+</div>
     <div class="absolute" style="bottom: 20%; right: 10%; font-size: 200px; color: rgba(255, 232, 124, 0.06); z-index: 0; font-weight: 900; line-height: 1; pointer-events: none;">+</div>
-    
+
     <!-- MAIN CONTENT -->
     <div class="relative z-10 w-full">
         <!-- HEADER -->
@@ -725,161 +502,135 @@ html3 = f"""
         <p style="color: rgba(255,255,255,0.75); font-size: 1rem; font-weight: 500; max-width: 600px; margin: 0 auto; letter-spacing: 0.02em;">Daya Dukung &amp; Daya Tampung Lingkungan Hidup (D3TLH) — Sulawesi 2014–2024</p>
     </div>
 
-    <!-- SEKSI 1: ILUSI HILIRISASI & EKONOMI -->
+    <!-- SEKSI 1: BENCANA EKONOMI & KEMANUSIAAN -->
     <div class="w-full text-center font-bold text-xl md:text-2xl py-3 rounded-full mb-8 shadow-sm" style="background-color: #FFE87C; color: #215e39;">
-        Ilusi Hilirisasi &amp; Ekonomi
+        Bencana Ekonomi &amp; Kemanusiaan
     </div>
     
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-14">
         
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Asing Berpesta, Kita Merana</div>
+            <div class="card-title-text">Kedaulatan Energi Semu</div>
             <div class="card-value-text">{data['investasi_asing']}</div>
-            <div class="card-desc-text">Kedaulatan tergadai! Mayoritas cuan nikel lari keluar negeri, kita cuma dapat ampasnya</div>
+            <div class="card-desc-text">Modal raksasa menguasai rantai pasok hilirisasi dari hulu hingga pelabuhan ekspor</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Kaya Tapi Jatuh Miskin</div>
-            <div class="card-value-text">{data['pdrb']}</div>
-            <div class="card-desc-text">Hanya oligarki yang untung, PDRB meroket tapi nyatanya warga lokal tetap miskin gigit jari</div>
+            <div class="card-title-text">Bencana Hidrometeorologi</div>
+            <div class="card-value-text">{data['bencana_val']}</div>
+            <div class="card-desc-text">Ribuan kali banjir dan longsor menerjang wilayah hunian dan sentra produksi pangan</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Petani Digilas Tambang</div>
+            <div class="card-title-text">Penurunan Porsi Pertanian</div>
             <div class="card-value-text">{data['pertanian']}</div>
-            <div class="card-desc-text">Lahan produktif dihancurkan, kedaulatan pangan warga tamat riwayatnya</div>
+            <div class="card-desc-text">Lahan produktif terdesak konsesi, kontribusi sektor penopang kedaulatan pangan menyusut</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Hipokrisi Energi Hijau</div>
+            <div class="card-title-text">Ketergantungan PLTU Batubara</div>
             <div class="card-value-text">{data['pltu_val']}</div>
-            <div class="card-desc-text">Katanya demi transisi energi, nyatanya ditenagai ribuan Megawatt batu bara super kotor</div>
+            <div class="card-desc-text">Pembangkitan captive batubara mengunci rantai pasok industri pada energi berbasis fosil</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Nyawa Pekerja Murah</div>
+            <div class="card-title-text">Perampasan Hak Adat (FPIC)</div>
             <div class="card-value-text">{data['kecelakaan_tambang']}</div>
-            <div class="card-desc-text">Standar K3 diabaikan demi kejar target produksi brutal, pekerja tewas sia-sia</div>
+            <div class="card-desc-text">Konflik tambang di wilayah adat meledak tanpa pemenuhan persetujuan bebas (FPIC)</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Tanah Dirampas Paksa</div>
+            <div class="card-title-text">Eskalasi Konflik Lahan</div>
             <div class="card-value-text">{data['konflik_val']}</div>
-            <div class="card-desc-text">Aparat bungkam dan gusur warga lokal yang mencoba mempertahankan ruang hidupnya</div>
+            <div class="card-desc-text">Puluhan sengketa agraria mendesak hak kelola warga lokal di sekitar area proyek</div>
         </div>
     </div>
 
     <!-- SEKSI 2: EKOSIDA & PENGHANCURAN ALAM -->
     <div class="w-full text-center font-bold text-xl md:text-2xl py-3 rounded-full mb-8 shadow-sm" style="background-color: #FFE87C; color: #215e39;">
-        Ekosida &amp; Penghancuran Alam
+        Kerusakan Ruang &amp; Lingkungan
     </div>
     
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-14">
         
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Kiamat Hutan Perawan</div>
+            <div class="card-title-text">Kehilangan Hutan Primer</div>
             <div class="card-value-text">{data['hutan_primer']}</div>
-            <div class="card-desc-text">Jutaan hektar kanopi hutan yang tak tergantikan hilang dan hancur selamanya</div>
+            <div class="card-desc-text">Ratusan ribu hektare kanopi hutan alam hilang dalam periode ekspansi ekstraktif</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Kawasan Suci Dibuldoser</div>
+            <div class="card-title-text">Kawasan Lindung Terbabat</div>
             <div class="card-value-text">{data['kawasan_lindung']}</div>
-            <div class="card-desc-text">Hutan lindung yang harusnya sakral resmi 'disembelih' demi memuluskan megaproyek nikel</div>
+            <div class="card-desc-text">Area dengan fungsi konservasi dan lindung mengalami deforestasi di berbagai kabupaten</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Satwa Endemik Terbantai</div>
-            <div class="card-value-text">{data['kepunahan']}</div>
-            <div class="card-desc-text">Habitat dikeruk habis, 4 satwa ikonik (Anoa, Babirusa, Tarsius, Macaca) di ujung jurang kepunahan massal</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Gunung Tailing Mengerikan</div>
+            <div class="card-title-text">Timbunan Residu B3</div>
             <div class="card-value-text">{data['limbah_val']}</div>
-            <div class="card-desc-text">Bom waktu jutaan ton limbah B3 beracun siap menenggelamkan ekosistem pesisir kapan saja</div>
+            <div class="card-desc-text">Jutaan ton residu industri dan tailing pengolahan memberi tekanan berat pada pesisir</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Sungai Darah &amp; Laut Mati</div>
+            <div class="card-title-text">Pencemaran Badan Air</div>
             <div class="card-value-text">{data['sungai_tercemar']}</div>
-            <div class="card-desc-text">Air laut berubah merah karat beracun, lumpur nikel matikan total mata pencaharian nelayan</div>
+            <div class="card-desc-text">Sedimentasi lumpur tambang menurunkan kualitas air sungai dan wilayah tangkap nelayan</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Langganan Bencana Buatan</div>
-            <div class="card-value-text">{data['bencana_val']}</div>
-            <div class="card-desc-text">Hilangnya penahan air alami bikin jutaan jiwa terus-terusan diusir dari kampung halamannya oleh banjir dan longsor</div>
-        </div>
-    </div>
-
-    <!-- SEKSI 3: TUMBAL NYAWA WARGA -->
-    <div class="w-full text-center font-bold text-xl md:text-2xl py-3 rounded-full mb-8 shadow-sm" style="background-color: #FFE87C; color: #215e39;">
-        Tumbal Nyawa Warga
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
-        
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Paru-Paru Sesak</div>
-            <div class="card-value-text">{data['ispa_val']}</div>
-            <div class="card-desc-text">Warga dipaksa menghirup debu beracun smelter tiap kali bernapas</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Langit Pekat Kematian</div>
+            <div class="card-title-text">Konsentrasi Polusi Udara</div>
             <div class="card-value-text">{data['no2_val']}</div>
-            <div class="card-desc-text">Satelit NASA saksi bisu langit beracun yang mengintai jutaan warga tiap hari</div>
+            <div class="card-desc-text">Pantauan satelit mendeteksi lapisan polutan NO2 yang pekat di atas sentra peleburan nikel</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Krisis Air = Krisis Nyawa</div>
-            <div class="card-value-text">{data['diare_val']}</div>
-            <div class="card-desc-text">Air tanah tercemar pekat, penyakit diare ganas meledak serang warga kecil</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Wabah Hutan Gundul</div>
-            <div class="card-value-text">{data['zoo_val']}</div>
-            <div class="card-desc-text">Hutan dibabat habis, nyamuk DBD &amp; Malaria turun gunung serang pemukiman tak berdosa</div>
+            <div class="card-title-text">Ancaman Satwa Kunci</div>
+            <div class="card-value-text">{data['kepunahan']}</div>
+            <div class="card-desc-text">Populasi satwa endemik pulau Sulawesi semakin terisolasi akibat fragmentasi habitat</div>
         </div>
     </div>
 
-    <!-- SEKSI 4: HUKUM TUMPUL & PERMAINAN KOTOR OLIGARKI -->
+    <!-- SEKSI 3: PERMAINAN HUKUM & DARURAT KESEHATAN -->
     <div class="w-full text-center font-bold text-xl md:text-2xl py-3 rounded-full mb-8 shadow-sm" style="background-color: #FFE87C; color: #215e39;">
-        Hukum Tumpul &amp; Permainan Kotor Oligarki
+        Tata Kelola Izin &amp; Beban Kesehatan
     </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
         
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Banjir Izin Pasca Omnibus</div>
+            <div class="card-title-text">Lonjakan Kasus ISPA</div>
+            <div class="card-value-text">{data['ispa_val']}</div>
+            <div class="card-desc-text">Penyakit saluran pernapasan menjadi beban kesehatan utama bagi komunitas lingkar tambang</div>
+        </div>
+
+        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
+            <div class="card-title-text">Penyakit Diare & Air Bersih</div>
+            <div class="card-value-text">{data['diare_val']}</div>
+            <div class="card-desc-text">Terganggunya pasokan air bersih memicu tingginya angka kesakitan akibat infeksi pencernaan</div>
+        </div>
+
+        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
+            <div class="card-title-text">Kasus Tular Vektor</div>
+            <div class="card-value-text">{data['zoo_val']}</div>
+            <div class="card-desc-text">Kerusakan bentang alam beririsan dengan peningkatan kasus DBD dan penyakit zoonosis</div>
+        </div>
+
+        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
+            <div class="card-title-text">Akselerasi Perizinan IUP</div>
             <div class="card-value-text">{data['lonjakan_izin']}</div>
-            <div class="card-desc-text">Izin tambang diobral gila-gilaan tanpa ampun dan tanpa rem pasca-Omnibus Law disahkan</div>
+            <div class="card-desc-text">Deregulasi kebijakan mempercepat laju pengesahan izin usaha pertambangan baru</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Karpet Merah Amdal Kilat</div>
-            <div class="card-value-text">{data['kecepatan_izin']}</div>
-            <div class="card-desc-text">Aturan ditebas: Amdal yang ketat disetujui kilat cuma hitungan hari demi muluskan investor</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Moratorium Cuma Macan Kertas</div>
-            <div class="card-value-text">{data['moratorium']}</div>
-            <div class="card-desc-text">Obral izin terus jalan terang-terangan di belakang layar, moratorium cuma pemanis mulut</div>
-        </div>
-
-        <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Bekingan Tambang Ilegal</div>
+            <div class="card-title-text">Temuan Operasi Bermasalah</div>
             <div class="card-value-text">{data['izin_hantu']}</div>
-            <div class="card-desc-text">Korporasi 'nakal' keruk hutan seenaknya tanpa takut hukum karena dibeking orang kuat</div>
+            <div class="card-desc-text">Laporan masyarakat sipil mencatat puluhan temuan operasional tanpa kepatuhan baku</div>
         </div>
 
         <div class="bg-white rounded-3xl p-6 text-center flex flex-col justify-center items-center h-full">
-            <div class="card-title-text">Legalitas Merampok Tanah</div>
+            <div class="card-title-text">Alokasi Konsesi Tambang</div>
             <div class="card-value-text">{data['tumpang_tindih']}</div>
-            <div class="card-desc-text">Pemerintah sengaja keluarkan izin tambang yang menabrak dan merampas tanah adat/warga</div>
+            <div class="card-desc-text">Ratusan ribu hektare lahan dialokasikan untuk izin tambang di ruang hidup warga</div>
         </div>
 
     </div>
@@ -889,10 +640,52 @@ html3 = f"""
 </div>
 """
 
-tab2, tab3 = st.tabs(["Opsi 2", "Opsi 3"])
+tab2, tab3 = st.tabs(["Opsi 2 (Bahasa Lugas & Faktual)", "Opsi 3 (Bahasa Tematik Terfokus)"])
 
 with tab2:
     st.markdown(html2.replace('\n', ''), unsafe_allow_html=True)
 
 with tab3:
     st.markdown(html3.replace('\n', ''), unsafe_allow_html=True)
+
+# -------------------------------------------------------------
+# DROPDOWN: KAMUS SUMBER DATA & PROVENANCE DATASET
+# -------------------------------------------------------------
+st.markdown("<div style='height: 30px;'></div>", unsafe_allow_html=True)
+
+with st.expander("Kamus Sumber Data & Provenance Dataset Lengkap (Klik untuk Melihat Asal Data)", expanded=False):
+    st.markdown("### Pemetaan Asal Data 21 Metrik Fakta ke File CSV di Folder Dataset")
+    
+    provenance_data = [
+        {"Indikator / Kartu": "Beban Penyakit ISPA", "Nilai Terpampang": data['ispa_val'], "File Dataset di Folder": "data/processed/sulawesi_kesehatan_detail_2014_2024.csv", "Sumber Resmi / Publisher": "Kemenkes RI & Dinas Kesehatan Provinsi", "Metodologi / Catatan": "Penjumlahan kasus Kasus ISPA/Pneumonia akumulasi 2014-2024."},
+        {"Indikator / Kartu": "Kasus Diare Akut", "Nilai Terpampang": data['diare_val'], "File Dataset di Folder": "data/processed/sulawesi_kesehatan_detail_2014_2024.csv", "Sumber Resmi / Publisher": "Kemenkes RI & BPS Provinsi", "Metodologi / Catatan": "Penjumlahan kasus Kasus Diare Dilayani akumulasi 2014-2024 (2.3 Juta Pasien)."},
+        {"Indikator / Kartu": "Penyakit Zoonosis & DBD", "Nilai Terpampang": data['zoo_val'], "File Dataset di Folder": "data/processed/zoonosis_kab_kota_2015_2024.csv", "Sumber Resmi / Publisher": "Kemenkes RI (P2P)", "Metodologi / Catatan": "Total kasus DBD & zoonosis kabupaten/kota se-Sulawesi 2015-2024."},
+        {"Indikator / Kartu": "Lonjakan Izin (Omnibus)", "Nilai Terpampang": data['lonjakan_izin'], "File Dataset di Folder": "data/processed/sulawesi_izin_baru_per_tahun.csv", "Sumber Resmi / Publisher": "Ditjen Minerba ESDM RI (MODI/MOMIv)", "Metodologi / Catatan": "Rata-rata izin per tahun pra-2020 (15 IUP/thn) vs pasca-2020 (117 IUP/thn) = +475%."},
+        {"Indikator / Kartu": "Izin Bermasalah / Cacat", "Nilai Terpampang": data['izin_hantu'], "File Dataset di Folder": "data/processed/sulawesi_konflik_hukum.csv & kpa_masalah_izin_perusahaan.csv", "Sumber Resmi / Publisher": "KPA & Putusan Mahkamah Agung / PTUN", "Metodologi / Catatan": "32 korporasi dalam sengketa hukum + 21 temuan KPA = 53 Korporasi."},
+        {"Indikator / Kartu": "Kawasan Lindung Tergerus", "Nilai Terpampang": data['kawasan_lindung'], "File Dataset di Folder": "data/processed/sulawesi_gfw_kawasan_lindung_loss_2014_2023_v3.csv", "Sumber Resmi / Publisher": "Global Forest Watch (GFW) & KLHK RI", "Metodologi / Catatan": "Akumulasi deforestasi di dalam poligon Kawasan Lindung = 41,785 Ha (42 Ribu Ha)."},
+        {"Indikator / Kartu": "Timbunan Limbah B3", "Nilai Terpampang": data['limbah_val'], "File Dataset di Folder": "data/processed/sulawesi_limbah_b3.csv", "Sumber Resmi / Publisher": "Laporan Riset AEER & Dokumen AMDAL KLHK", "Metodologi / Catatan": "Estimasi timbulan slag, tailing dan residu smelter = ~35 Juta Ton."},
+        {"Indikator / Kartu": "Hutan Primer Musnah", "Nilai Terpampang": data['hutan_primer'], "File Dataset di Folder": "data/processed/sulawesi_gfw_master_1_dekade_2014_2023_v3.csv", "Sumber Resmi / Publisher": "Global Forest Watch (GFW) & UMD Tree Cover Loss", "Metodologi / Catatan": "Deforestasi Hutan Primer resmi 1 dekade 2014-2023 = 481,096 Ha (481 Ribu Ha)."},
+        {"Indikator / Kartu": "Ancaman Satwa Endemik", "Nilai Terpampang": data['kepunahan'], "File Dataset di Folder": "data/processed/sulawesi_biodiversitas_iucn_fase5_exploded.csv", "Sumber Resmi / Publisher": "IUCN Red List of Threatened Species 2024", "Metodologi / Catatan": "4 spesies kunci berstatus terancam tambang nikel: Anoa, Babirusa, Tarsius, Macaca."},
+        {"Indikator / Kartu": "Kejadian Bencana Alam", "Nilai Terpampang": data['bencana_val'], "File Dataset di Folder": "data/processed/sulawesi_bencana_bnpb_2014_2024.csv", "Sumber Resmi / Publisher": "DIBI BNPB (Badan Nasional Penanggulangan Bencana)", "Metodologi / Catatan": "Total 1,557 insiden banjir, longsor, dan cuaca ekstrem 2014-2024."},
+        {"Indikator / Kartu": "Konsentrasi Polutan NO2", "Nilai Terpampang": data['no2_val'], "File Dataset di Folder": "data/processed/sulawesi_tropomi_no2_bbox_aggregates.csv", "Sumber Resmi / Publisher": "Satelit Sentinel-5P TROPOMI (ESA / NASA EarthData)", "Metodologi / Catatan": "Kepadatan NO2 troposferik di atas bounding box kawasan industri hilirisasi."},
+        {"Indikator / Kartu": "Porsi Sektor Pertanian", "Nilai Terpampang": data['pertanian'], "File Dataset di Folder": "data/processed/sulawesi_pdrb_sektoral_2016_2024.csv", "Sumber Resmi / Publisher": "BPS Provinsi se-Sulawesi (Tabel PDRB Lapangan Usaha)", "Metodologi / Catatan": "Porsi PDRB sektor pertanian menurun dari 29.6% (2016) ke 27.5% (2024)."},
+        {"Indikator / Kartu": "Letupan Konflik Agraria", "Nilai Terpampang": data['konflik_val'], "File Dataset di Folder": "data/processed/sulawesi_konflik_agraria_tanahkita.csv", "Sumber Resmi / Publisher": "TanahKita KPA & JATAM", "Metodologi / Catatan": "Total catatan kasus konflik agraria terdata di Pulau Sulawesi."},
+        {"Indikator / Kartu": "PLTU Batubara Captive", "Nilai Terpampang": data['pltu_val'], "File Dataset di Folder": "data/processed/sulawesi_pltu_captive.csv", "Sumber Resmi / Publisher": "Global Energy Monitor (GEM Coal Tracker) & ESDM", "Metodologi / Catatan": "Total kapasitas 9,825 MW PLTU captive aktif beroperasi (Operating) di kawasan nikel."},
+        {"Indikator / Kartu": "Dominasi PDRB Ekstraktif", "Nilai Terpampang": data['pdrb'], "File Dataset di Folder": "data/processed/sulawesi_pdrb_sektoral_2016_2024.csv", "Sumber Resmi / Publisher": "BPS Provinsi se-Sulawesi", "Metodologi / Catatan": "Porsi gabungan Sektor Pertambangan (B) dan Industri Pengolahan (C)."},
+        {"Indikator / Kartu": "Dominasi Investasi Asing", "Nilai Terpampang": data['investasi_asing'], "File Dataset di Folder": "data/processed/sulawesi_investasi_nikel.csv", "Sumber Resmi / Publisher": "BKPM / Kementerian Investasi RI", "Metodologi / Catatan": "Porsi kepemilikan modal asing (PMA) dalam portofolio investasi smelter nikel."},
+        {"Indikator / Kartu": "Pencemaran Sungai & Laut", "Nilai Terpampang": data['sungai_tercemar'], "File Dataset di Folder": "data/processed/sulawesi_sungai_tercemar.csv", "Sumber Resmi / Publisher": "Laporan Investigasi WALHI, AEER, AHOMA, & AMDAL", "Metodologi / Catatan": "8 sungai dan muara pesisir utama yang mengalami sedimentasi pekat & logam berat."},
+        {"Indikator / Kartu": "Pelanggaran Hak Adat (FPIC)", "Nilai Terpampang": data['kecelakaan_tambang'], "File Dataset di Folder": "data/processed/sulawesi_konflik_tambang_fpic.csv", "Sumber Resmi / Publisher": "AMAN & Laporan Pemantauan Hak Adat", "Metodologi / Catatan": "Kasus sengketa tambang di atas wilayah kelola adat tanpa persetujuan bebas (FPIC)."},
+        {"Indikator / Kartu": "Konsesi di Ruang Komunal", "Nilai Terpampang": data['tumpang_tindih'], "File Dataset di Folder": "data/processed/sulawesi_izin_baru_per_tahun.csv", "Sumber Resmi / Publisher": "Ditjen Minerba ESDM RI", "Metodologi / Catatan": "Total 819 Ribu Ha luas izin konsesi baru yang diterbitkan pada periode 2014-2024."},
+        {"Indikator / Kartu": "Temuan Izin Ilegal KPA", "Nilai Terpampang": data['moratorium'], "File Dataset di Folder": "data/processed/kpa_catahu_2025_izin_ilegal_sulawesi.csv", "Sumber Resmi / Publisher": "CATAHU KPA 2025 (Catatan Akhir Tahun KPA)", "Metodologi / Catatan": "12 temuan indikasi izin dan operasi ilegal di kawasan hutan Sulawesi."},
+        {"Indikator / Kartu": "Kecepatan Izin Pasca Omnibus", "Nilai Terpampang": data['kecepatan_izin'], "File Dataset di Folder": "data/processed/sulawesi_izin_baru_per_tahun.csv", "Sumber Resmi / Publisher": "Ditjen Minerba ESDM RI", "Metodologi / Catatan": "Total 468 IUP yang diterbitkan secara cepat pada periode pasca-2020 (Omnibus Law)."}
+    ]
+    df_prov = pd.DataFrame(provenance_data)
+    st.dataframe(df_prov, use_container_width=True, hide_index=True)
+
+    st.markdown("---")
+    st.markdown("### Detail 8 Sungai & Badan Air Tercemar (`data/processed/sulawesi_sungai_tercemar.csv`)")
+    try:
+        df_sungai_raw = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_sungai_tercemar.csv"))
+        st.dataframe(df_sungai_raw, use_container_width=True, hide_index=True)
+    except Exception as e:
+        st.error(f"Gagal memuat detail sungai: {e}")

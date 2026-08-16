@@ -6,15 +6,8 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
-import importlib
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from src.components.sidebar import render_sidebar
-import tools.algo_skoring_pulau.kalkulasi_pulau_sulawesi as algo_pulau_mod
-import tools.algo_skoring_provinsi.kalkulasi_provinsi_sulawesi as algo_prov_mod
-importlib.reload(algo_pulau_mod)
-importlib.reload(algo_prov_mod)
-kalkulasi_skor_pulau_sulawesi = algo_pulau_mod.kalkulasi_skor_pulau_sulawesi
-kalkulasi_skor_provinsi_sulawesi = algo_prov_mod.kalkulasi_skor_provinsi_sulawesi
 
 st.set_page_config(page_title="CELIOS ECC - Audit Forensik Metodologi D3TLH", layout="wide")
 render_sidebar()
@@ -191,42 +184,74 @@ if not df_iku.empty:
     if not df_iku_annual.empty:
         iku_terkini_global = df_iku_annual.loc[df_iku_annual['Tahun'].idxmax(), 'IKU']
 
-# --- PENGUMPULAN DATA EMPIRIS KABUPATEN/PULAU ---
-# Udara
+# Normalisasi Sesuai Dokumen Metode_Model_Matematis_Skoring_ECC.md
+# Udara 1: PLTU Max 5.000 MW (skor 5), NO2 kritis pada 6.0e-6 (skor 5)
+skor_pltu = min(5.0, (kapasitas_terkini / 5000.0) * 5.0)
+skor_no2 = min(5.0, max(0.0, (no2_terkini - 4.0e-6) / (6.0e-6 - 4.0e-6)) * 5.0)
+skor_1 = min(10.0, skor_pltu + skor_no2)
+
+skor_2 = 0
+rasio_anomali = 0
+kasus_sentra = 0
 if not df_kes.empty:
     df_ts_pre = df_kes[df_kes['indikator'].str.contains('ISPA', case=False, na=False)]
     kasus_sentra = df_ts_pre[df_ts_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
     kasus_non_sentra = df_ts_pre[~df_ts_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
     rasio_anomali = (kasus_sentra / 2.0) / (kasus_non_sentra / 4.0) if kasus_non_sentra > 0 else 0
-else:
-    rasio_anomali = 0
+    skor_2 = min(10.0, max(0.0, (rasio_anomali - 1.0) * 10.0))
 
-proporsi_b3 = 0.0
-total_b3_sulteng = 0.0
+skor_3 = 0
+skor_overcapacity = 0
+total_b3_sulteng = 0
+total_b3_sultra = 0
+total_b3_all_pre = 0
 if not df_b3.empty:
     df_b3['Estimasi Timbulan (Ton/Tahun)'] = pd.to_numeric(df_b3['Estimasi Timbulan (Ton/Tahun)'], errors='coerce').fillna(0)
+    total_b3_all_pre = df_b3['Estimasi Timbulan (Ton/Tahun)'].sum()
     total_b3_sulteng = df_b3[df_b3['Provinsi'] == 'Sulawesi Tengah']['Estimasi Timbulan (Ton/Tahun)'].sum()
+    total_b3_sultra = df_b3[df_b3['Provinsi'] == 'Sulawesi Tenggara']['Estimasi Timbulan (Ton/Tahun)'].sum()
+    # Proporsi terhadap Total Nasional (427 Juta Ton, merujuk LKj KLHK 2022)
     proporsi_b3 = (total_b3_sulteng / 427_000_000.0) * 100.0
+    skor_3 = min(10.0, (proporsi_b3 / 5.0) * 10.0)
 
-total_emisi_co2 = 0.0
+skor_4 = 0
+total_emisi_co2 = 0
 if not df_gfw.empty:
     df_gfw['Total_Emisi_CO2_Megagram'] = pd.to_numeric(df_gfw['Total_Emisi_CO2_Megagram'], errors='coerce').fillna(0)
     total_emisi_co2 = df_gfw['Total_Emisi_CO2_Megagram'].sum() / 1_000_000.0
+    skor_4 = min(10.0, (total_emisi_co2 / 150.0) * 10.0)
 
-# Air
+skor_akumulasi_udara = (skor_1 + skor_2 + skor_3 + skor_4) / 4.0
+
+# --- SECTION B: AIR ---
+ika_terkini = 50
 ika_sulteng = 50
 if not df_ika.empty:
+    df_ika_avg = df_ika.groupby('Tahun')['Indeks Kualitas Air'].mean().reset_index()
+    if 2024 in df_ika_avg['Tahun'].values:
+        ika_terkini = df_ika_avg[df_ika_avg['Tahun'] == 2024]['Indeks Kualitas Air'].values[0]
+    
     df_sulteng = df_ika[df_ika['Provinsi'] == 'Sulawesi Tengah']
     if not df_sulteng.empty and 2024 in df_sulteng['Tahun'].values:
         ika_sulteng = df_sulteng[df_sulteng['Tahun'] == 2024]['Indeks Kualitas Air'].values[0]
 
+# 1. Makro IKA
+skor_makro_air_1 = min(10.0, max(0, (80 - ika_sulteng) / 30) * 10)
+
+# 2. Mikro Toksisitas Cr6+
 try:
     df_cr6 = pd.read_csv("data/processed/ika_ngo_cr6_gabungan.csv")
     max_cr6 = df_cr6["Konsentrasi Cr6+ (mg/L)"].max()
+    skor_mikro_air_1 = min(10.0, (max_cr6 / 0.05) * 10)
 except Exception:
     max_cr6 = 0
+    skor_mikro_air_1 = 0
 
-r_diare = 0.0
+# Composite Worst-Case
+skor_air_1 = max(skor_makro_air_1, skor_mikro_air_1)
+
+skor_air_2 = 0
+kasus_diare_sentra = 0
 if not df_kes.empty:
     df_diare = df_kes[df_kes['indikator'].str.contains('Diare', case=False, na=False)]
     kasus_diare_sentra = df_diare[df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
@@ -234,7 +259,9 @@ if not df_kes.empty:
     ir_s = (kasus_diare_sentra / 5_700_000) * 1000
     ir_n = (k_non / 14_200_000) * 1000 if k_non > 0 else 1
     r_diare = ir_s / ir_n if ir_n > 0 else 0
+    skor_air_2 = min(10.0, max(0.0, (r_diare - 1) * 10.0))
 
+skor_air_3 = 0
 jumlah_konflik_air = 0
 if not df_konflik.empty:
     keywords = 'air|laut|pesisir|nelayan|sungai|pulau|tailing'
@@ -242,147 +269,148 @@ if not df_konflik.empty:
                                 df_konflik['judul'].str.contains(keywords, case=False, na=False) | 
                                 df_konflik['deskripsi'].str.contains(keywords, case=False, na=False)]
     jumlah_konflik_air = len(df_konflik_air)
+    skor_air_3 = min(10.0, (jumlah_konflik_air / 15.0) * 10)
 
-# Lahan
+skor_air_4 = 0
+if not df_b3.empty:
+    t_b3_sulteng = df_b3[df_b3['Provinsi'] == 'Sulawesi Tengah']['Estimasi Timbulan (Ton/Tahun)'].sum()
+    skor_air_4 = min(10.0, (t_b3_sulteng / 25_000_000) * 10)
+
+skor_akumulasi_air = (skor_air_1 + skor_air_2 + skor_air_3 + skor_air_4) / 4
+
+# --- SECTION C: LAHAN, SOSIAL & TATA KELOLA ---
+skor_lahan_1 = 0
 bencana_sulteng_sultra = 0
 if not df_bencana.empty:
     df_bencana_sentra = df_bencana[df_bencana['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
     df_bencana_sentra['jumlah_kejadian'] = pd.to_numeric(df_bencana_sentra['jumlah_kejadian'], errors='coerce').fillna(0)
-    bencana_sulteng_sultra = df_bencana_sentra['jumlah_kejadian'].sum()
+    bencana_sulteng_sultra = df_bencana_sentra['jumlah_kejadian'].sum()    # Skor 1: Bencana (Threshold Opsi C: 877 kejadian)
+    skor_lahan_1 = min(10.0, (bencana_sulteng_sultra / 877) * 10)
 
+skor_lahan_2 = 0
 deforestasi_sentra = 0
 if not df_gfw.empty:
     df_gfw_sentra = df_gfw[df_gfw['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
     df_gfw_sentra['Total_Deforestasi_Ha'] = pd.to_numeric(df_gfw_sentra['Total_Deforestasi_Ha'], errors='coerce').fillna(0)
-    deforestasi_sentra = df_gfw_sentra['Total_Deforestasi_Ha'].sum()
+    deforestasi_sentra = df_gfw_sentra['Total_Deforestasi_Ha'].sum()    # Skor 2: Deforestasi (Threshold Opsi C: 638,000 Ha)
+    skor_lahan_2 = min(10.0, (deforestasi_sentra / 638_000) * 10)
 
+
+# Calculate Lahan 3 & 4
+skor_lahan_3 = 0.0
+skor_lahan_4 = 0.0
 lindung_hilang = 0
+tambang_driver_ha = 0
+
 if not df_gfw_lindung.empty:
     df_l = df_gfw_lindung[df_gfw_lindung['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
     df_l['Luas_Hilang_Kawasan_Lindung_Ha'] = pd.to_numeric(df_l['Luas_Hilang_Kawasan_Lindung_Ha'], errors='coerce').fillna(0)
-    lindung_hilang = df_l['Luas_Hilang_Kawasan_Lindung_Ha'].sum()
+    lindung_hilang = df_l['Luas_Hilang_Kawasan_Lindung_Ha'].sum()    # Skor 3: Pelanggaran Lindung (Nol Toleransi)
+    skor_lahan_3 = 10.0 if lindung_hilang > 0 else 0.0
 
-tambang_driver_ha = 0
 if not df_gfw_driver.empty:
     df_d = df_gfw_driver[df_gfw_driver['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
     df_d['Luas_Deforestasi_Ha'] = pd.to_numeric(df_d['Luas_Deforestasi_Ha'], errors='coerce').fillna(0)
     tambang_driver = df_d[df_d['Faktor_Pendorong'] == 'Deforestasi Komoditas (Tambang/Sawit)']
     tambang_driver_ha = tambang_driver['Luas_Deforestasi_Ha'].sum()
+    # Skor 4: Tambang Driver
+    skor_lahan_4 = min(10.0, (tambang_driver_ha / 500_000) * 10)
 
-rasio_ekspansi = 0.0
+# Skor 5: Gap AMDAL vs IUP (Ekspansi Spekulatif)
+skor_lahan_5 = 0.0
+total_iup_nikel = 0.0
+total_amdal_nikel = 0.0
+gap_amdal_iup = 0.0
 if not df_kawasan_nikel.empty:
     sentra_kn = df_kawasan_nikel[df_kawasan_nikel['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
     sentra_kn['total_luas_iup_ha'] = pd.to_numeric(sentra_kn['total_luas_iup_ha'], errors='coerce').fillna(0)
     sentra_kn['total_luas_amdal_ha'] = pd.to_numeric(sentra_kn['total_luas_amdal_ha'], errors='coerce').fillna(0)
     total_iup_nikel = sentra_kn['total_luas_iup_ha'].sum()
     total_amdal_nikel = sentra_kn['total_luas_amdal_ha'].sum()
-    gap_amdal_iup = total_amdal_nikel - total_iup_nikel
+    gap_amdal_iup = total_amdal_nikel - total_iup_nikel  # Positif = AMDAL > IUP (Spekulatif)
     rasio_ekspansi = gap_amdal_iup / total_iup_nikel if total_iup_nikel > 0 else 0
+    skor_lahan_5 = min(10.0, rasio_ekspansi * 10)  # 100% gap = skor 10
 
-# Sosial
+skor_akumulasi_lahan = (skor_lahan_1 + skor_lahan_2 + skor_lahan_3 + skor_lahan_4 + skor_lahan_5) / 5
+
+
+# Calculate Sosial
+skor_sosial_1 = 0.0
+skor_sosial_2 = 0.0
+skor_sosial_3 = 0.0
 konflik_darat = 0
 luas_ha_dirampas = 0
 jiwa_terdampak = 0
 insiden_krim = 0
 warga_ditangkap = 0
+kasus_fpic = 0
+
 if not df_konflik.empty:
     keywords = 'air|laut|pesisir|nelayan|sungai|pulau|tailing'
     df_konflik_darat = df_konflik[~df_konflik['sektor'].str.contains(keywords, case=False, na=False)].copy()
     konflik_darat = len(df_konflik_darat)
+    
     df_konflik_darat['luas_ha'] = pd.to_numeric(df_konflik_darat['luas_ha'], errors='coerce').fillna(0)
     df_konflik_darat['dampak_masyarakat_jiwa'] = pd.to_numeric(df_konflik_darat['dampak_masyarakat_jiwa'], errors='coerce').fillna(0)
+    
     luas_ha_dirampas = df_konflik_darat['luas_ha'].sum()
     jiwa_terdampak = df_konflik_darat['dampak_masyarakat_jiwa'].sum()
+    
+    # Skoring
+    skor_sosial_2 = min(10.0, (jiwa_terdampak / 100_000) * 10) # Sangat krisis karena >> 100k
+    
+    # Kriminalisasi
     krim_df = df_konflik_darat[df_konflik_darat['indikasi_kriminalisasi'] == True].copy()
     krim_df['jumlah_ditangkap'] = pd.to_numeric(krim_df['jumlah_ditangkap'], errors='coerce').fillna(0)
     insiden_krim = len(krim_df)
     warga_ditangkap = krim_df['jumlah_ditangkap'].sum()
+    skor_sosial_3 = min(10.0, (insiden_krim / 50) * 10) # 50 insiden aparat sdh krisis absolut
 
-kasus_fpic = 0
 if not df_konflik_fpic.empty:
     kasus_fpic = len(df_konflik_fpic[df_konflik_fpic['indikasi_fpic'] == True])
+    # Threshold 3 = Red Flag Zero Tolerance ESG (IFC PS7)
+    skor_sosial_1 = min(10.0, (kasus_fpic / 3) * 10)
 
-spa_aktual_pct = 42.5
+# Skor 4: Defisit Layanan Dasar (Faskes & SPA)
+skor_sosial_4 = 0.0
+spa_aktual_pct = 42.5  # Proxy data: estimasi Puskesmas memenuhi standar SPA di Sulteng/Sultra
+target_rpjmn = 80.0    # Target RPJMN 2025-2029
 
-# Veto
+if not df_faskes.empty:
+    # Mengukur gap antara pemenuhan standar SPA aktual vs target RPJMN (80%)
+    # Makin besar gap-nya, makin tinggi skor defisit
+    gap_spa = max(0.0, target_rpjmn - spa_aktual_pct)
+    skor_sosial_4 = min(10.0, (gap_spa / 45.0) * 10.0)  # Skala defisit proporsional (max penalti jika gap >= 45%)
+
+skor_akumulasi_sosial = (skor_sosial_1 + skor_sosial_2 + skor_sosial_3 + skor_sosial_4) / 4
+
+
+# Calculate Veto
+skor_veto_1 = 0.0
+skor_veto_2 = 0.0
+skor_veto_3 = 0.0
 izin_baru = 0
+perusahaan_ilegal = 0
+kapasitas_pltu = 0.0
+
 if not df_izin.empty:
     df_izin['Tahun'] = pd.to_numeric(df_izin['Tahun'], errors='coerce')
     df_izin['Jumlah_Izin_Baru'] = pd.to_numeric(df_izin['Jumlah_Izin_Baru'], errors='coerce').fillna(0)
     df_izin_recent = df_izin[df_izin['Tahun'] >= 2014]
     izin_baru = df_izin_recent['Jumlah_Izin_Baru'].sum()
+    skor_veto_1 = min(10.0, (izin_baru / 100) * 10) # 100 izin baru di masa krisis = 10.0
 
-perusahaan_ilegal = 0
 if not df_kpa_izin.empty:
     perusahaan_ilegal = len(df_kpa_izin['nama_perusahaan'].unique())
+    skor_veto_2 = min(10.0, (perusahaan_ilegal / 10) * 10) # 10 perusahaan dibiarkan beroperasi ilegal = 10.0
 
-kapasitas_pltu = 0.0
 if not df_pltu_captive.empty:
     df_active_pltu = df_pltu_captive[~df_pltu_captive['Status'].str.lower().isin(['cancelled', 'shelved'])].copy()
     df_active_pltu['Capacity (MW)'] = pd.to_numeric(df_active_pltu['Capacity (MW)'], errors='coerce').fillna(0)
     kapasitas_pltu = df_active_pltu['Capacity (MW)'].sum()
+    skor_veto_3 = min(10.0, (kapasitas_pltu / 5000) * 10) # > 5 GW PLTU Captive = 10.0 (Kenyataannya > 16 GW)
 
-# --- EKSTRAKSI DAN UNPACKING KALKULASI DARI MODUL TERISOLASI ---
-data_empiris_pulau = {
-    'kapasitas_pltu_mw': kapasitas_terkini,
-    'no2_tropomi': no2_terkini,
-    'rasio_ispa_sentra_vs_non': rasio_anomali,
-    'proporsi_b3_nasional': proporsi_b3,
-    'emisi_co2_juta_ton': total_emisi_co2,
-    'ika_bps': ika_sulteng,
-    'cr6_mg_l': max_cr6,
-    'rasio_diare_sentra_vs_non': r_diare,
-    'jumlah_konflik_pesisir': jumlah_konflik_air,
-    'tailing_buang_ton_tahun': total_b3_sulteng,
-    'jumlah_bencana': bencana_sulteng_sultra,
-    'deforestasi_ha': deforestasi_sentra,
-    'deforestasi_hutan_lindung_ha': lindung_hilang,
-    'deforestasi_driver_tambang_ha': tambang_driver_ha,
-    'rasio_gap_amdal_iup': rasio_ekspansi,
-    'kasus_pelanggaran_fpic': kasus_fpic,
-    'jiwa_terdampak_konflik': jiwa_terdampak,
-    'insiden_kriminalisasi': insiden_krim,
-    'persentase_faskes_spa': spa_aktual_pct,
-    'jumlah_izin_baru_krisis': izin_baru,
-    'perusahaan_ilegal_pemutihan': perusahaan_ilegal,
-}
-
-res_pulau = kalkulasi_skor_pulau_sulawesi(data_empiris_pulau)
-det_pulau = res_pulau['details']
-
-skor_pltu = det_pulau['skor_pltu']
-skor_no2 = det_pulau['skor_no2']
-skor_1 = det_pulau['skor_1']
-skor_2 = det_pulau['skor_2']
-skor_3 = det_pulau['skor_3']
-skor_4 = det_pulau['skor_4']
-skor_akumulasi_udara = det_pulau['skor_akumulasi_udara']
-
-skor_makro_air_1 = det_pulau['skor_makro_air_1']
-skor_mikro_air_1 = det_pulau['skor_mikro_air_1']
-skor_air_1 = det_pulau['skor_air_1']
-skor_air_2 = round(det_pulau.get('skor_air_2', 4.0) / 2.0) * 2.0
-skor_air_3 = det_pulau['skor_air_3']
-skor_air_4 = det_pulau['skor_air_4']
-skor_akumulasi_air = (skor_air_1 + skor_air_2 + skor_air_3 + skor_air_4) / 4.0
-
-skor_lahan_1 = det_pulau['skor_lahan_1']
-skor_lahan_2 = det_pulau['skor_lahan_2']
-skor_lahan_3 = det_pulau['skor_lahan_3']
-skor_lahan_4 = det_pulau['skor_lahan_4']
-skor_lahan_5 = det_pulau['skor_lahan_5']
-skor_akumulasi_lahan = det_pulau['skor_akumulasi_lahan']
-
-skor_sosial_1 = det_pulau['skor_sosial_1']
-skor_sosial_2 = det_pulau['skor_sosial_2']
-skor_sosial_3 = det_pulau['skor_sosial_3']
-skor_sosial_4 = det_pulau['skor_sosial_4']
-skor_akumulasi_sosial = det_pulau['skor_akumulasi_sosial']
-
-skor_veto_1 = det_pulau['skor_veto_1']
-skor_veto_2 = det_pulau['skor_veto_2']
-skor_veto_3 = det_pulau['skor_veto_3']
-skor_akumulasi_veto = det_pulau['skor_akumulasi_veto']
+skor_akumulasi_veto = (skor_veto_1 + skor_veto_2 + skor_veto_3) / 3
 
 
 # ==== METODE & VERSI METODOLOGI TOGGLE ====
@@ -561,17 +589,19 @@ def binned_likert_score(ratio):
         return 5.0
 
 def get_likert_label(score):
-    s = round(score)
-    if s >= 5:
-        return "Red Alert (Merah Pekat)"
-    elif s == 4:
-        return "Kritis"
-    elif s == 3:
-        return "Rentan"
-    elif s == 2:
-        return "Aman"
+    s = round(score, 1)
+    if s < 1.0:
+        return "0: Normal / Sangat Baik"
+    elif s < 2.0:
+        return "1: Rendah / Terkontrol"
+    elif s < 3.0:
+        return "2: Moderat / Tertekan"
+    elif s < 4.0:
+        return "3: Tinggi / Kritis"
+    elif s < 5.0:
+        return "4: Sangat Tinggi / Parah"
     else:
-        return "Sangat Aman"
+        return "5: Darurat Ekologis Total"
 
 # --- GLOBAL PROVINCE SCORE CALCULATOR ---
 def calculate_province_score(prov_name, use_likert=False):
@@ -817,17 +847,14 @@ def calculate_province_score(prov_name, use_likert=False):
     skor_total = (skor_akumulasi_udara + skor_akumulasi_air + skor_akumulasi_lahan + skor_akumulasi_sosial + skor_akumulasi_veto) / 5
 
     if use_likert:
-        res_prov_map = kalkulasi_skor_provinsi_sulawesi()
-        res_p = res_prov_map.get(prov_name, {})
-        skor_akumulasi_udara = res_p.get('udara', 1.0)
-        skor_akumulasi_air = res_p.get('air', 1.0)
-        skor_akumulasi_lahan = res_p.get('lahan', 1.0)
-        skor_akumulasi_sosial = res_p.get('sosial', 1.0)
-        skor_akumulasi_veto = res_p.get('veto', 1.0)
-        skor_total = res_p.get('total_likert', 1.0)
-        likert_desc = res_p.get('likert_label', 'Versi 3 Z-Score EWM')
-    else:
-        likert_desc = get_likert_label(skor_total)
+        skor_akumulasi_udara = skor_akumulasi_udara / 2.0
+        skor_akumulasi_air = skor_akumulasi_air / 2.0
+        skor_akumulasi_lahan = skor_akumulasi_lahan / 2.0
+        skor_akumulasi_sosial = skor_akumulasi_sosial / 2.0
+        skor_akumulasi_veto = skor_akumulasi_veto / 2.0
+        skor_total = skor_total / 2.0
+
+    likert_desc = get_likert_label(skor_total)
 
     return {
         'total': skor_total,
@@ -889,12 +916,20 @@ def render_crisis_map_d3(df_map, sulawesi_geojson, skor_akumulasi, skor_udara, s
     data_json = json.dumps(data_dict)
 
     agregat_title = "Pulau Sulawesi (Skor Pulau)"
-    sk_str = f"{skor_akumulasi:.1f}"
-    u_str = f"{skor_udara:.1f}"
-    a_str = f"{skor_air:.1f}"
-    l_str = f"{skor_lahan:.1f}"
-    s_str = f"{skor_sosial:.1f}"
-    v_str = f"{skor_veto:.1f}"
+    if versi == 3:
+        sk_str = f"{round(skor_akumulasi)}"
+        u_str = f"{round(skor_udara)}"
+        a_str = f"{round(skor_air)}"
+        l_str = f"{round(skor_lahan)}"
+        s_str = f"{round(skor_sosial)}"
+        v_str = f"{round(skor_veto)}"
+    else:
+        sk_str = f"{skor_akumulasi:.1f}"
+        u_str = f"{skor_udara:.1f}"
+        a_str = f"{skor_air:.1f}"
+        l_str = f"{skor_lahan:.1f}"
+        s_str = f"{skor_sosial:.1f}"
+        v_str = f"{skor_veto:.1f}"
 
     def format_sub(s):
         return f"{s/2.0:.1f}" if versi == 3 else f"{s:.1f}"
@@ -904,12 +939,10 @@ def render_crisis_map_d3(df_map, sulawesi_geojson, skor_akumulasi, skor_udara, s
     sl1, sl2, sl3, sl4, sl5 = format_sub(skor_lahan_1), format_sub(skor_lahan_2), format_sub(skor_lahan_3), format_sub(skor_lahan_4), format_sub(skor_lahan_5)
     ss1, ss2, ss3, ss4 = format_sub(skor_sosial_1), format_sub(skor_sosial_2), format_sub(skor_sosial_3), format_sub(skor_sosial_4)
     sv1, sv2, sv3 = format_sub(skor_veto_1), format_sub(skor_veto_2), format_sub(skor_veto_3)
-    prov_badge_js = '<span style="font-size: 8px; background-color: #1E3A8A; color: #FFFFFF; padding: 2px 5px; border-radius: 3px; font-weight: 600; margin-left: 3px;">EWM & Z-Score Anomali</span>' if versi == 3 else '<span style="font-size: 8px; color: #666; font-weight: normal;">(Skor Provinsi)</span>'
-    island_badge_html = '<span style="font-size: 8px; background-color: #064E3B; color: #FFFFFF; padding: 2px 6px; border-radius: 3px; font-weight: 600; margin-left: 5px;">MCDA Min-Max & WSM</span>' if versi == 3 else '<span style="font-size: 8px; color: #666; font-weight: normal;">(Skor Makro Pulau)</span>'
 
     agregat_html = f"""
             <div id="agregat-box">
-                <div style="font-size: 12px; font-weight: 600; color: #333333; margin-bottom: 8px;">{agregat_title} {island_badge_html}</div>
+                <div style="font-size: 12px; font-weight: 600; color: #333333; margin-bottom: 8px;">{agregat_title}</div>
                 <div style="font-size: 24px; font-weight: 700; color: #B71C1C;">{sk_str} <span style="font-size: 11px; color: #333333; font-weight: normal;">/ {max_scale:.0f}</span></div>
                 <div style="font-size: 11px; color: #555555; margin-top: 10px; line-height: 1.4;">
                     <b>Udara {u_str}</b><br><span style="font-size: 9px;">(PLTU+IKU ({su1}), ISPA ({su2}), Limbah B3 ({su3}), Emisi CO2 ({su4}))</span><br>
@@ -979,12 +1012,12 @@ def render_crisis_map_d3(df_map, sulawesi_geojson, skor_akumulasi, skor_udara, s
     js_legend_and_tooltips += f"""
             // Fixed Tooltips / Annotations
             const offsets = {{
-                'SULTENG': {{ dx: -170, dy: -60 }},
-                'SULTRA': {{ dx: 170, dy: 30 }},
-                'SULSEL': {{ dx: -160, dy: 90 }},
-                'SULBAR': {{ dx: -170, dy: -30 }},
-                'GORONTALO': {{ dx: -70, dy: -120 }},
-                'SULUT': {{ dx: 140, dy: -90 }}
+                'SULTENG': {{ dx: -60, dy: -40 }},
+                'SULTRA': {{ dx: 95, dy: -25 }},
+                'SULSEL': {{ dx: -80, dy: 40 }},
+                'SULBAR': {{ dx: -80, dy: -20 }},
+                'GORONTALO': {{ dx: 0, dy: -60 }},
+                'SULUT': {{ dx: 40, dy: -40 }}
             }};
 
             geoData.features.forEach(d => {{
@@ -1015,7 +1048,7 @@ def render_crisis_map_d3(df_map, sulawesi_geojson, skor_akumulasi, skor_udara, s
                     div.style.top = ty + "px";
                     
                     div.innerHTML = `
-                        <div class="fixed-title">${{pData.label}} {prov_badge_js}</div>
+                        <div class="fixed-title">${{pData.label}} <span style="font-size: 8px; color: #666; font-weight: normal;">(Skor Provinsi)</span></div>
                         {score_div}
                         <div class="fixed-details">
                             {details_html_js}
@@ -1310,7 +1343,7 @@ def render_crisis_map(skor_udara, skor_air, skor_lahan, skor_sosial, skor_veto):
                 yref="paper",
                 xanchor="right",
                 yanchor="bottom",
-                text=f"<span style='font-size: 12px; font-weight: 600; color: #333333;'>Pulau Sulawesi (Agregat)</span><br><span style='font-size: 9px; background-color: #E8F5E9; color: #2E7D32; padding: 2px 4px; border-radius: 3px;'>Metode: Min-Max WSM</span><br><br><span style='font-size: 24px; font-weight: 700; color: #B71C1C;'>{skor_akumulasi:.1f}</span><span style='font-size: 11px; color: #333333;'> Skor Krisis Keseluruhan</span><br><br><span style='font-size: 11px; color: #555555;'><b>Udara {skor_udara:.1f}</b><br><span style='font-size: 9px;'>(PLTU+IKU, ISPA,<br>Limbah B3, Emisi CO2)</span><br><b>Air {skor_air:.1f}</b><br><span style='font-size: 9px;'>(IKA & Cr6+, Diare,<br>Konflik Pesisir, Tailing)</span><br><b>Lahan {skor_lahan:.1f}</b><br><span style='font-size: 9px;'>(Bencana, Deforestasi,<br>Kaw. Lindung, Driver Tambang)</span><br><b>Sosial {skor_sosial:.1f}</b><br><span style='font-size: 9px;'>(FPIC, Jiwa Terdampak,<br>Kriminalisasi, Defisit Faskes)</span><br><b>Veto {skor_veto:.1f}</b><br><span style='font-size: 9px;'>(Izin Baru, KPA Izin,<br>PLTU Captive)</span></span>",
+                text=f"<span style='font-size: 12px; font-weight: 600; color: #333333;'>Pulau Sulawesi (Agregat)</span><br><br><span style='font-size: 24px; font-weight: 700; color: #B71C1C;'>{skor_akumulasi:.1f}</span><span style='font-size: 11px; color: #333333;'> Skor Krisis Keseluruhan</span><br><br><span style='font-size: 11px; color: #555555;'><b>Udara {skor_udara:.1f}</b><br><span style='font-size: 9px;'>(PLTU+IKU, ISPA,<br>Limbah B3, Emisi CO2)</span><br><b>Air {skor_air:.1f}</b><br><span style='font-size: 9px;'>(IKA & Cr6+, Diare,<br>Konflik Pesisir, Tailing)</span><br><b>Lahan {skor_lahan:.1f}</b><br><span style='font-size: 9px;'>(Bencana, Deforestasi,<br>Kaw. Lindung, Driver Tambang)</span><br><b>Sosial {skor_sosial:.1f}</b><br><span style='font-size: 9px;'>(FPIC, Jiwa Terdampak,<br>Kriminalisasi, Defisit Faskes)</span><br><b>Veto {skor_veto:.1f}</b><br><span style='font-size: 9px;'>(Izin Baru, KPA Izin,<br>PLTU Captive)</span></span>",
                 align="left",
                 showarrow=False,
                 bgcolor="white",
@@ -1320,38 +1353,38 @@ def render_crisis_map(skor_udara, skor_air, skor_lahan, skor_sosial, skor_veto):
             ),
             dict(
                 x=0.53, y=0.5, xref="paper", yref="paper",
-                text=f"<span style='font-size: 10px; font-weight: 600; color: #333333;'>SULTENG</span><br><span style='font-size: 8px; background-color: #E3F2FD; color: #1565C0; padding: 2px 4px; border-radius: 3px;'>EWM Z-Score</span><br><span style='font-size: 14px; font-weight: 700; color: #B71C1C;'>{skor_list[0]:.1f}</span><br><span style='font-size: 8px; color: #555;'>Udara {detail_list[0]['udara']:.1f} | Air {detail_list[0]['air']:.1f}<br>Lahan {detail_list[0]['lahan']:.1f} | Sosial {detail_list[0]['sosial']:.1f}<br>Veto {detail_list[0]['veto']:.1f}</span>",
-                align="left", showarrow=True, arrowcolor="#555555", arrowhead=2, arrowsize=1, arrowwidth=1.5, ax=-100, ay=-50,
+                text=f"<span style='font-size: 10px; font-weight: 600; color: #333333;'>SULTENG</span><br><span style='font-size: 14px; font-weight: 700; color: #B71C1C;'>{skor_list[0]:.1f}</span><br><span style='font-size: 8px; color: #555;'>Udara {detail_list[0]['udara']:.1f} | Air {detail_list[0]['air']:.1f}<br>Lahan {detail_list[0]['lahan']:.1f} | Sosial {detail_list[0]['sosial']:.1f}<br>Veto {detail_list[0]['veto']:.1f}</span>",
+                align="left", showarrow=True, arrowcolor="#555555", arrowhead=2, arrowsize=1, arrowwidth=1.5, ax=-40, ay=-20,
                 bgcolor="rgba(255,255,255,0.95)", bordercolor="#CCCCCC", borderwidth=1.5, borderpad=6
             ),
             dict(
                 x=0.6, y=0.25, xref="paper", yref="paper",
-                text=f"<span style='font-size: 10px; font-weight: 600; color: #333333;'>SULTRA</span><br><span style='font-size: 8px; background-color: #E3F2FD; color: #1565C0; padding: 2px 4px; border-radius: 3px;'>EWM Z-Score</span><br><span style='font-size: 14px; font-weight: 700; color: #B71C1C;'>{skor_list[1]:.1f}</span><br><span style='font-size: 8px; color: #555;'>Udara {detail_list[1]['udara']:.1f} | Air {detail_list[1]['air']:.1f}<br>Lahan {detail_list[1]['lahan']:.1f} | Sosial {detail_list[1]['sosial']:.1f}<br>Veto {detail_list[1]['veto']:.1f}</span>",
-                align="left", showarrow=True, arrowcolor="#555555", arrowhead=2, arrowsize=1, arrowwidth=1.5, ax=100, ay=30,
+                text=f"<span style='font-size: 10px; font-weight: 600; color: #333333;'>SULTRA</span><br><span style='font-size: 14px; font-weight: 700; color: #B71C1C;'>{skor_list[1]:.1f}</span><br><span style='font-size: 8px; color: #555;'>Udara {detail_list[1]['udara']:.1f} | Air {detail_list[1]['air']:.1f}<br>Lahan {detail_list[1]['lahan']:.1f} | Sosial {detail_list[1]['sosial']:.1f}<br>Veto {detail_list[1]['veto']:.1f}</span>",
+                align="left", showarrow=True, arrowcolor="#555555", arrowhead=2, arrowsize=1, arrowwidth=1.5, ax=60, ay=20,
                 bgcolor="rgba(255,255,255,0.95)", bordercolor="#CCCCCC", borderwidth=1.5, borderpad=6
             ),
             dict(
                 x=0.43, y=0.25, xref="paper", yref="paper",
-                text=f"<span style='font-size: 10px; font-weight: 600; color: #333333;'>SULSEL</span><br><span style='font-size: 8px; background-color: #E3F2FD; color: #1565C0; padding: 2px 4px; border-radius: 3px;'>EWM Z-Score</span><br><span style='font-size: 14px; font-weight: 700; color: #B71C1C;'>{skor_list[2]:.1f}</span><br><span style='font-size: 8px; color: #555;'>Udara {detail_list[2]['udara']:.1f} | Air {detail_list[2]['air']:.1f}<br>Lahan {detail_list[2]['lahan']:.1f} | Sosial {detail_list[2]['sosial']:.1f}<br>Veto {detail_list[2]['veto']:.1f}</span>",
-                align="left", showarrow=True, arrowcolor="#555555", arrowhead=2, arrowsize=1, arrowwidth=1.5, ax=-100, ay=60,
+                text=f"<span style='font-size: 10px; font-weight: 600; color: #333333;'>SULSEL</span><br><span style='font-size: 14px; font-weight: 700; color: #B71C1C;'>{skor_list[2]:.1f}</span><br><span style='font-size: 8px; color: #555;'>Udara {detail_list[2]['udara']:.1f} | Air {detail_list[2]['air']:.1f}<br>Lahan {detail_list[2]['lahan']:.1f} | Sosial {detail_list[2]['sosial']:.1f}<br>Veto {detail_list[2]['veto']:.1f}</span>",
+                align="left", showarrow=True, arrowcolor="#555555", arrowhead=2, arrowsize=1, arrowwidth=1.5, ax=-60, ay=30,
                 bgcolor="rgba(255,255,255,0.95)", bordercolor="#CCCCCC", borderwidth=1.5, borderpad=6
             ),
             dict(
                 x=0.41, y=0.48, xref="paper", yref="paper",
-                text=f"<span style='font-size: 10px; font-weight: 600; color: #333333;'>SULBAR</span><br><span style='font-size: 8px; background-color: #E3F2FD; color: #1565C0; padding: 2px 4px; border-radius: 3px;'>EWM Z-Score</span><br><span style='font-size: 14px; font-weight: 700; color: #B71C1C;'>{skor_list[3]:.1f}</span><br><span style='font-size: 8px; color: #555;'>Udara {detail_list[3]['udara']:.1f} | Air {detail_list[3]['air']:.1f}<br>Lahan {detail_list[3]['lahan']:.1f} | Sosial {detail_list[3]['sosial']:.1f}<br>Veto {detail_list[3]['veto']:.1f}</span>",
-                align="left", showarrow=True, arrowcolor="#555555", arrowhead=2, arrowsize=1, arrowwidth=1.5, ax=-110, ay=-20,
+                text=f"<span style='font-size: 10px; font-weight: 600; color: #333333;'>SULBAR</span><br><span style='font-size: 14px; font-weight: 700; color: #B71C1C;'>{skor_list[3]:.1f}</span><br><span style='font-size: 8px; color: #555;'>Udara {detail_list[3]['udara']:.1f} | Air {detail_list[3]['air']:.1f}<br>Lahan {detail_list[3]['lahan']:.1f} | Sosial {detail_list[3]['sosial']:.1f}<br>Veto {detail_list[3]['veto']:.1f}</span>",
+                align="left", showarrow=True, arrowcolor="#555555", arrowhead=2, arrowsize=1, arrowwidth=1.5, ax=-60, ay=0,
                 bgcolor="rgba(255,255,255,0.95)", bordercolor="#CCCCCC", borderwidth=1.5, borderpad=6
             ),
             dict(
                 x=0.55, y=0.82, xref="paper", yref="paper",
-                text=f"<span style='font-size: 10px; font-weight: 600; color: #333333;'>GORONTALO</span><br><span style='font-size: 8px; background-color: #E3F2FD; color: #1565C0; padding: 2px 4px; border-radius: 3px;'>EWM Z-Score</span><br><span style='font-size: 14px; font-weight: 700; color: #B71C1C;'>{skor_list[4]:.1f}</span><br><span style='font-size: 8px; color: #555;'>Udara {detail_list[4]['udara']:.1f} | Air {detail_list[4]['air']:.1f}<br>Lahan {detail_list[4]['lahan']:.1f} | Sosial {detail_list[4]['sosial']:.1f}<br>Veto {detail_list[4]['veto']:.1f}</span>",
-                align="left", showarrow=True, arrowcolor="#555555", arrowhead=2, arrowsize=1, arrowwidth=1.5, ax=-40, ay=-80,
+                text=f"<span style='font-size: 10px; font-weight: 600; color: #333333;'>GORONTALO</span><br><span style='font-size: 14px; font-weight: 700; color: #B71C1C;'>{skor_list[4]:.1f}</span><br><span style='font-size: 8px; color: #555;'>Udara {detail_list[4]['udara']:.1f} | Air {detail_list[4]['air']:.1f}<br>Lahan {detail_list[4]['lahan']:.1f} | Sosial {detail_list[4]['sosial']:.1f}<br>Veto {detail_list[4]['veto']:.1f}</span>",
+                align="left", showarrow=True, arrowcolor="#555555", arrowhead=2, arrowsize=1, arrowwidth=1.5, ax=0, ay=-50,
                 bgcolor="rgba(255,255,255,0.95)", bordercolor="#CCCCCC", borderwidth=1.5, borderpad=6
             ),
             dict(
                 x=0.68, y=0.85, xref="paper", yref="paper",
-                text=f"<span style='font-size: 10px; font-weight: 600; color: #333333;'>SULUT</span><br><span style='font-size: 8px; background-color: #E3F2FD; color: #1565C0; padding: 2px 4px; border-radius: 3px;'>EWM Z-Score</span><br><span style='font-size: 14px; font-weight: 700; color: #B71C1C;'>{skor_list[5]:.1f}</span><br><span style='font-size: 8px; color: #555;'>Udara {detail_list[5]['udara']:.1f} | Air {detail_list[5]['air']:.1f}<br>Lahan {detail_list[5]['lahan']:.1f} | Sosial {detail_list[5]['sosial']:.1f}<br>Veto {detail_list[5]['veto']:.1f}</span>",
-                align="left", showarrow=True, arrowcolor="#555555", arrowhead=2, arrowsize=1, arrowwidth=1.5, ax=90, ay=-50,
+                text=f"<span style='font-size: 10px; font-weight: 600; color: #333333;'>SULUT</span><br><span style='font-size: 14px; font-weight: 700; color: #B71C1C;'>{skor_list[5]:.1f}</span><br><span style='font-size: 8px; color: #555;'>Udara {detail_list[5]['udara']:.1f} | Air {detail_list[5]['air']:.1f}<br>Lahan {detail_list[5]['lahan']:.1f} | Sosial {detail_list[5]['sosial']:.1f}<br>Veto {detail_list[5]['veto']:.1f}</span>",
+                align="left", showarrow=True, arrowcolor="#555555", arrowhead=2, arrowsize=1, arrowwidth=1.5, ax=55, ay=-20,
                 bgcolor="rgba(255,255,255,0.95)", bordercolor="#CCCCCC", borderwidth=1.5, borderpad=6
             )
         ]
@@ -1386,13 +1419,7 @@ else:
         'lon': [121.44, 122.07, 119.97, 119.22, 124.50, 124.50]
     })
     
-    geojson_path = 'data/processed/sulawesi_provinces.geojson'
-    if not os.path.exists(geojson_path):
-        geojson_path = 'scripts/data/processed/sulawesi_provinces.geojson'
-    if not os.path.exists(geojson_path):
-        geojson_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'scripts', 'data', 'processed', 'sulawesi_provinces.geojson')
-
-    with open(geojson_path, 'r', encoding='utf-8') as f:
+    with open('data/processed/sulawesi_provinces.geojson', 'r', encoding='utf-8') as f:
         sulawesi_geojson = json.load(f)
         
     if is_likert:
@@ -1420,26 +1447,20 @@ else:
         versi=v_mode
     )
 
-    st.markdown(r'''<div style="border: 1px solid #1E3A8A; border-radius: 8px; padding: 18px; background-color: #0E131F; margin-top: 18px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.25);">
-<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid #1E293B; padding-bottom: 10px;">
-<div style="font-size: 1.0rem; font-weight: 700; color: #F8FAFC;">
-Metodologi Skoring Multi-Skala: Integrasi Baseline Pulau & Anomali Statistik Provinsi
-</div>
-<div>
-<span style="font-size: 0.75rem; background-color: #064E3B; color: #A7F3D0; padding: 3px 8px; border-radius: 4px; font-weight: 600; margin-right: 6px;">Pulau: MCDA Min-Max & WSM</span>
-<span style="font-size: 0.75rem; background-color: #1E3A8A; color: #BFDBFE; padding: 3px 8px; border-radius: 4px; font-weight: 600;">Provinsi: EWM & Z-Score Anomali</span>
-</div>
-</div>
-<p style="font-size: 0.88rem; color: #CBD5E1; margin-bottom: 10px; line-height: 1.5;">
-<b>1. Level Pulau (Sulawesi):</b> Menggunakan kerangka kerja <b>MCDA-Likert (Weighted Sum Model / WSM & Min-Max Normalization)</b> merujuk pada <i>de Brito & Evers (2018)</i> [HESS] dan <i>Meyer et al. (2009)</i> [NHESS]. Skor dihitung berdasarkan <i>Island-Wide Cumulative Baseline Threshold</i> (akumulasi total beban lanskap: >5.000 MW PLTU Captive, >150 Jt Ton CO2, >500.000 Ha deforestasi driver tambang, dan >100.000 jiwa terdampak) guna mengamankan daya dukung lanskap ekologis utuh.
-</p>
-<p style="font-size: 0.88rem; color: #CBD5E1; margin-bottom: 12px; line-height: 1.5;">
-<b>2. Level Provinsi (6 Provinsi):</b> Menerapkan pemodelan saintifik <b>Entropy Weight Method (EWM) & Z-Score Outlier Standard Deviation (Z = (x - μ) / σ)</b> berbasis studi terbitan <i>Nature Scientific Reports</i> (<i>Sun et al., 2024/2026</i>). EWM secara otomatis memberikan bobot objektif tertinggi pada indikator dengan ketimpangan varians terbesar, sementara Z-Score mengidentifikasi deviasi anomali (≥ +1.0σ) sehingga provinsi episentrum (<b>Sulawesi Tengah Skor 5.0</b> & <b>Sulawesi Tenggara Skor 3.9</b>) terbukti secara statistik berada pada posisi <b>Red Alert / Kritis</b> tanpa terdistorsi atau tersamarkan oleh luas wilayah.
-</p>
-<div style="background-color: rgba(15, 23, 42, 0.8); border: 1px solid #334155; padding: 8px 14px; border-radius: 6px; font-size: 0.82rem; font-family: monospace; color: #94A3B8;">
-Skor_Pulau = MinMax_WSM(Akumulasi_Beban_Makro_Sulawesi) &nbsp;|&nbsp; Skor_Provinsi = ZScore_Outlier_EWM(Matriks_6_Provinsi)
-</div>
-</div>''', unsafe_allow_html=True)
+    st.markdown('''
+    <div style="border: 1px solid #333; border-radius: 8px; padding: 16px; background-color: #12161F; margin-top: 18px; margin-bottom: 20px;">
+        <p style="font-size: 0.9rem; color: #B0BEC5; margin-bottom: 10px;">
+            <b>Sumber:</b> Referensi Terverifikasi <i>de Brito & Evers (2018)</i> [HESS] & <i>Meyer et al. (2009)</i> [NHESS]. Visualisasi Peta Kinetik Geospasial di atas memvisualisasikan "Sebaran Geospasial Skor Krisis Ekologis & Daya Tampung Daya Dukung Lingkungan (D3TLH) Sulawesi".
+        </p>
+        <p style="font-size: 0.9rem; color: #B0BEC5; margin-bottom: 10px;">
+            Data diproses menggunakan pendekatan <i>Multi-Scale Spatial Thresholding</i> berbasis kerangka kerja <b>MCDA-Likert (Weighted Sum Model / WSM)</b>. Untuk mengukur daya tampung lanskap ekologis utuh, <b>Skor Agregat Pulau Sulawesi</b> dihitung berdasarkan <i>Island-Wide Cumulative Threshold</i> (total akumulasi beban se-Pulau Sulawesi melampaui batas kritis: >5.000 MW PLTU Captive, >150 Juta Ton CO2, >500.000 Ha deforestasi driver tambang, dan >100.000 jiwa terdampak) guna mencegah <i><b>Ecological Fallacy</b></i> (pencairan risiko krisis ekologis ekstrem oleh wilayah non-industri). Sementara itu, <b>Skor 6 Provinsi</b> dihitung berbasis <i>Provincial Administrative Threshold</i> (metrik intensif rasio IKU, rasio ISPA/Diare, % gap faskes) dan metrik ekstensif proporsional wilayah administratif:
+        </p>
+        <code style="background-color: rgba(255,255,255,0.05); color: #E2E8F0; padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; font-family: monospace; display: inline-block; margin-bottom: 10px;">Skor_Pulau = MCDA_Likert(Akumulasi_Beban_Makro_Sulawesi) | Skor_Provinsi = MCDA_Likert(Metrik_Intensif_Ekstensif_Provinsi)</code>
+        <p style="font-size: 0.9rem; color: #FFCDD2; margin-bottom: 0px; border-top: 1px dashed #555; padding-top: 10px; line-height: 1.5;">
+            <b>Kenapa Skor Pulau (5/5) Lebih Tinggi dari Skor Provinsinya?</b> Secara total agregat, daya tampung Pulau Sulawesi sudah jebol (Darurat). Kerusakan ekstrem ini nyaris 100% didorong oleh pusat tambang dan PLTU di <b>Sulawesi Tengah</b> dan <b>Sulawesi Tenggara</b>. Namun, jika melihat skor per provinsi di peta, angkanya tampak lebih "kecil" (rata-rata 2 atau 3). Hal ini terjadi karena skor kerusakan tambang yang sangat parah di suatu provinsi 'tercampur' dan dirata-rata dengan indikator lingkungan lain yang mungkin masih aman. Ini memunculkan ilusi seolah provinsinya "baik-baik saja" (Efek Pengenceran), padahal akumulasi bebannya sudah menenggelamkan daya dukung pulaunya.
+        </p>
+    </div>
+    ''', unsafe_allow_html=True)
 
     verifikasi_data = [
         {"No": 1, "Matriks": "Udara", "Tab": "PLTU+IKU", "Threshold Pulau": "IKU turun 30 poin (80→50)", "Threshold Provinsi": "Sama (Berbasis Indeks) (Metrik Intensif)", "Basis Skoring": "Kategori Resmi IKU", "Sumber": "PermenLHK No.27/2021", "Kutipan": "Kategori IKU: Baik=70–90, Sedang=50–70, Kurang=25–50. IKU=50 = batas terbawah Sedang/awal Kurang", "Pasal / Hal.": "Lampiran, Tabel 1 (Klasifikasi IKLH)", "Kutipan Letterlijk + Hal.": "Kategori Indeks Kualitas Udara: 3. Sedang 50 ≤ x < 70, 4. Kurang 25 ≤ x < 50 (Lampiran, Hal. 41)"},
@@ -1991,8 +2012,7 @@ if not df_kes.empty:
     ir_non = (kasus_diare_non / populasi_non) * 1000 if populasi_non > 0 else 1
     
     rasio_diare = ir_sentra / ir_non if ir_non > 0 else 0
-    skor_air_2_raw = min(10.0, max(0.0, (rasio_diare - 1) * 10.0))
-    skor_air_2 = round(skor_air_2_raw / 2.0) * 2.0
+    skor_air_2 = min(10.0, max(0.0, (rasio_diare - 1) * 10.0))
 
 # Skor 3: Konflik Air/Pesisir
 skor_air_3 = 0

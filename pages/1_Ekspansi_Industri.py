@@ -106,7 +106,7 @@ def load_all_data_v2():
     df_izin = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_izin_baru_per_tahun.csv"))
     df_smelter = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_esdm_nikel.csv"))
     df_pltu = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv"))
-    df_gfw = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_master_1_dekade_2014_2023.csv"))
+    df_gfw = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_master_1_dekade_2014_2023_v3.csv"))
     df_inv = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_investasi_pmdn_2016_2024.csv"))
     df_pdrb = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pdrb_sektoral_2016_2024.csv"))
     df_pdrb_kab = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pdrb_sektoral_kabupaten_2016_2024.csv"))
@@ -235,7 +235,7 @@ with col5:
             <div class="metric-value" style="color: #B71C1C;">{int(tot_deforestasi):,} <span style="font-size:1rem;">Ha</span></div>
             <div class="metric-desc">Luas tutupan hutan alam yang dikonversi akibat aktivitas industri pertambangan dan perkebunan monokultur.</div>
         </div>
-        <div class="metric-source"><b>Sumber:</b> Global Forest Watch (GFW)<br/><i>File: sulawesi_gfw_master_1_dekade_2014_2023.csv</i></div>
+        <div class="metric-source"><b>Sumber:</b> Global Forest Watch (GFW)<br/><i>File: sulawesi_gfw_master_1_dekade_2014_2023_v3.csv</i></div>
     </div>
     """, unsafe_allow_html=True)
 with col6:
@@ -898,7 +898,7 @@ st.markdown(f"""
 
 with st.expander("Lihat Data Panel Mentah (Merge PLTU & GFW)", expanded=False):
     st.dataframe(df_panel_1_2[['Provinsi', 'Tahun', x_col_2, 'X_Label', y_col_2, 'Y_Label']], use_container_width=True, hide_index=True)
-    st.caption("Sumber: Gabungan `sulawesi_pltu_captive.csv` (GEM) dan `sulawesi_gfw_master_1_dekade_2014_2023.csv` (GFW).")
+    st.caption("Sumber: Gabungan `sulawesi_pltu_captive.csv` (GEM) dan `sulawesi_gfw_master_1_dekade_2014_2023_v3.csv` (GFW).")
 
 
 # ══════════════════════════════════════════════════════════
@@ -1255,7 +1255,7 @@ st.markdown(f"""
 
 with st.expander("Lihat Data Panel Mentah (Merge Izin & GFW)", expanded=False):
     st.dataframe(df_panel[['Provinsi', 'Tahun', x_col, 'X_Label', y_col, 'Y_Label']], use_container_width=True, hide_index=True)
-    st.caption("Sumber: Gabungan `sulawesi_izin_baru_per_tahun.csv` (Minerbaone) dan `sulawesi_gfw_master_1_dekade_2014_2023.csv` (GFW).")
+    st.caption("Sumber: Gabungan `sulawesi_izin_baru_per_tahun.csv` (Minerbaone) dan `sulawesi_gfw_master_1_dekade_2014_2023_v3.csv` (GFW).")
 
 
 # ══════════════════════════════════════════════════════════
@@ -1286,7 +1286,7 @@ with st.expander("ℹ️ Metodologi: Analisis Spasial & Uji Chi-Square (Crosstab
         * **Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha:** Deforestasi khusus komoditas ekstraktif.
     5. **Dataset & File:**
         * Investasi: `data/processed/sulawesi_investasi_pmdn_2016_2024.csv`
-        * Deforestasi: `data/processed/sulawesi_gfw_master_1_dekade_2014_2023.csv`
+        * Deforestasi: `data/processed/sulawesi_gfw_master_1_dekade_2014_2023_v3.csv`
     """)
 
 # --- Variabel Time Series Investasi & Deforestasi (Split Sentra vs Non-Sentra) ---
@@ -1443,14 +1443,14 @@ with st.expander("Lihat Data Mentah: Ekspansi Konsesi vs Deforestasi", expanded=
     })
     
     st.dataframe(df_table_1_3, use_container_width=True, hide_index=True)
-    st.caption("📁 **Sumber File:** `sulawesi_izin_baru_per_tahun.csv` & `sulawesi_gfw_master_1_dekade_2014_2023.csv` - Data Kementerian ESDM (Izin) dan GFW.")
+    st.caption("📁 **Sumber File:** `sulawesi_izin_baru_per_tahun.csv` & `sulawesi_gfw_master_1_dekade_2014_2023_v3.csv` - Data Kementerian ESDM (Izin) dan GFW.")
 
 
 # Memuat data tambahan untuk 3 Dashboard Cards GFW
 try:
     import os
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    path_driver = os.path.join(base_dir, 'data', 'raw', 'klhk_gfw', 'land_api_fetch', 'loss_by_driver_sulawesi_2001_2025.csv')
+    path_driver = os.path.join(base_dir, 'data', 'raw', 'klhk_gfw', 'land_api_fetch', 'loss_by_driver_sulawesi_2001_2025_v3.csv')
     path_primary = os.path.join(base_dir, 'data', 'raw', 'klhk_gfw', 'mega_fetch_v2', 'primary_forest_loss_sulawesi_2001_2025.csv')
     
     df_driver_gfw = pd.read_csv(path_driver)
@@ -1796,8 +1796,8 @@ st.markdown(f"""
 
 with st.expander("Lihat Data Panel Mentah (Merge Investasi & GFW)", expanded=False):
     st.dataframe(df_panel_1_3[['Provinsi', 'Tahun', x_col_3, 'X_Label', y_col_3, 'Y_Label']], use_container_width=True, hide_index=True)
-    st.caption("Sumber: Gabungan `sulawesi_investasi_pmdn_2016_2024.csv` (BKPM) dan `sulawesi_gfw_master_1_dekade_2014_2023.csv` (GFW).")
-    st.caption("📁 **Sumber File:** `data/processed/sulawesi_gfw_master_1_dekade_2014_2023.csv` - Data dari Global Forest Watch.")
+    st.caption("Sumber: Gabungan `sulawesi_investasi_pmdn_2016_2024.csv` (BKPM) dan `sulawesi_gfw_master_1_dekade_2014_2023_v3.csv` (GFW).")
+    st.caption("📁 **Sumber File:** `data/processed/sulawesi_gfw_master_1_dekade_2014_2023_v3.csv` - Data dari Global Forest Watch.")
 
 with st.expander("Lihat Data Mentah: Realisasi Investasi PMDN (BKPM)", expanded=False):
     st.dataframe(df_inv, use_container_width=True, hide_index=True)
@@ -1826,55 +1826,63 @@ st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 import pandas as pd
 import os
 
-@st.cache_data
 def load_logistik_simpul():
     base_dir = os.path.dirname(os.path.dirname(__file__))
-    return pd.read_csv(os.path.join(base_dir, 'data', 'processed', 'sulawesi_logistik_simpul_nikel.csv'))
+    df = pd.read_csv(os.path.join(base_dir, 'data', 'processed', 'sulawesi_logistik_simpul_nikel.csv'))
+    return df
 
 df_logistik = load_logistik_simpul()
 
+# Dynamic calculation from verified CSV
+total_simpul = len(df_logistik)
+psn_confirmed_count = len(df_logistik[df_logistik['psn_status'] == 'terkonfirmasi'])
+
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.markdown("""
+    st.markdown(f"""
     <div style="background-color: #262730; padding: 20px; border-radius: 10px; border: 1px solid #333;">
-        <div style="color: #A0AEC0; font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; text-align: center;">Pelabuhan Nikel Terkonfirmasi</div>
-        <div style="color: #48BB78; font-size: 2.5rem; font-weight: bold; text-align: center; margin-bottom: 15px;">6</div>
-        <div style="color: #A0AEC0; font-size: 0.85rem; margin-bottom: 20px; text-align: left;">Seluruh lokasi industri nikel besar di Sulawesi terbukti memiliki pelabuhan atau dermaga ekspor.</div>
-        <div style="color: #718096; font-size: 0.75rem; border-top: 1px solid #333; padding-top: 10px;">Sumber: Situs perusahaan, dokumen pemerintah, media (25 sumber)<br>File: sulawesi_logistik_simpul_nikel.csv</div>
+        <div style="color: #A0AEC0; font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; text-align: center;">Simpul Logistik Terverifikasi</div>
+        <div style="color: #48BB78; font-size: 2.5rem; font-weight: bold; text-align: center; margin-bottom: 15px;">{total_simpul}</div>
+        <div style="color: #A0AEC0; font-size: 0.85rem; margin-bottom: 20px; text-align: left;">Seluruh 6 lokasi industri nikel utama di Sulawesi terkonfirmasi memiliki terminal khusus / pelabuhan ekspor.</div>
+        <div style="color: #718096; font-size: 0.75rem; border-top: 1px solid #333; padding-top: 10px;"><b>Audit PDF:</b> ANTAM AR 2024 (Hal. 73), Vale SR 2024, AEER 2024, Perpres 109/2020<br>File: <code>data/processed/sulawesi_logistik_simpul_nikel.csv</code></div>
     </div>
     """, unsafe_allow_html=True)
 with col2:
-    st.markdown("""
+    st.markdown(f"""
     <div style="background-color: #262730; padding: 20px; border-radius: 10px; border: 1px solid #333;">
-        <div style="color: #A0AEC0; font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; text-align: center;">Berlabel Proyek Strategis Nasional</div>
-        <div style="color: #ECC94B; font-size: 2.5rem; font-weight: bold; text-align: center; margin-bottom: 15px;">4 <span style="font-size: 1.2rem; color: #718096;">/ 6</span></div>
-        <div style="color: #A0AEC0; font-size: 0.85rem; margin-bottom: 20px; text-align: left;">Label PSN mempercepat perizinan dan memudahkan pembebasan lahan warga sekitar.</div>
-        <div style="color: #718096; font-size: 0.75rem; border-top: 1px solid #333; padding-top: 10px;">Sumber: KPPIP, Perpres 58/2017, Perpres 12/2025</div>
+        <div style="color: #A0AEC0; font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; text-align: center;">Status Proyek Strategis Nasional (PSN)</div>
+        <div style="color: #ECC94B; font-size: 2.5rem; font-weight: bold; text-align: center; margin-bottom: 15px;">{psn_confirmed_count} <span style="font-size: 1.2rem; color: #718096;">/ {total_simpul} Simpul</span></div>
+        <div style="color: #A0AEC0; font-size: 0.85rem; margin-bottom: 20px; text-align: left;">Morowali (No. 97), Konawe (No. 98 - VDNI & OSS), dan Pomalaa berstatus PSN. GNI & Sorowako non-PSN (IUI & KK).</div>
+        <div style="color: #718096; font-size: 0.75rem; border-top: 1px solid #333; padding-top: 10px;"><b>Rujukan Legal:</b> Lampiran Perpres No. 109/2020 Hal. 14 Sektor Kawasan Industri Poin 97 & 98</div>
     </div>
     """, unsafe_allow_html=True)
 with col3:
     st.markdown("""
     <div style="background-color: #262730; padding: 20px; border-radius: 10px; border: 1px solid #333;">
-        <div style="color: #A0AEC0; font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; text-align: center;">Pelabuhan Terbesar</div>
-        <div style="color: #63B3ED; font-size: 2.5rem; font-weight: bold; text-align: center; margin-bottom: 15px;">50.000 <span style="font-size: 1.2rem; color: #718096;">ton</span></div>
-        <div style="color: #A0AEC0; font-size: 0.85rem; margin-bottom: 20px; text-align: left;">GNI Petasia memiliki pelabuhan yang mampu menampung kapal pengangkut berkapasitas hingga 50.000 ton.</div>
-        <div style="color: #718096; font-size: 0.75rem; border-top: 1px solid #333; padding-top: 10px;">Sumber: gunbusternickelindustry.com</div>
+        <div style="color: #A0AEC0; font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; text-align: center;">Kapasitas Bobot Mati Kapal (DWT)</div>
+        <div style="color: #63B3ED; font-size: 2.5rem; font-weight: bold; text-align: center; margin-bottom: 15px;">52.378 <span style="font-size: 1.2rem; color: #718096;">DWT</span></div>
+        <div style="color: #A0AEC0; font-size: 0.85rem; margin-bottom: 20px; text-align: left;">Pelabuhan Morowali dan Pelabuhan Morosi (Konawe) melayani kapal curah (bulk carrier) muatan 51.500 WMT bijih nikel.</div>
+        <div style="color: #718096; font-size: 0.75rem; border-top: 1px solid #333; padding-top: 10px;"><b>Laporan Resmi Pemerintah:</b> KNKT Kemenhub RI (2019) Hal. 19 & 21<br>File: <code>KNKT_Laporan_Akhir_MV_Nur_Allya_Morowali_Morosi.pdf</code></div>
     </div>
     """, unsafe_allow_html=True)
 
 st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
 
+card1_cols = [c for c in ['node_label', 'port_facility', 'export_channel', 'dokumen_pdf_resmi', 'kutipan_lengkap_letterlijk'] if c in df_logistik.columns]
+card2_cols = [c for c in ['node_label', 'psn_status', 'psn_detail', 'dokumen_pdf_resmi', 'kutipan_lengkap_letterlijk'] if c in df_logistik.columns]
+card3_cols = [c for c in ['node_label', 'kapasitas_dwt_max', 'spesifikasi_logistik_khusus', 'dokumen_pdf_resmi', 'kutipan_lengkap_letterlijk'] if c in df_logistik.columns]
+
 with st.expander("Lihat Data Mentah: Fasilitas Pelabuhan Ekspor (Card 1)"):
-    st.dataframe(df_logistik[['node_label', 'port_facility', 'export_channel']], use_container_width=True, hide_index=True)
-    st.caption("📁 **Sumber File:** `data/processed/sulawesi_logistik_simpul_nikel.csv` - Ekstraksi data OSINT fasilitas pelabuhan.")
+    st.dataframe(df_logistik[card1_cols], use_container_width=True, hide_index=True)
+    st.caption("📁 **Sumber File:** `data/processed/sulawesi_logistik_simpul_nikel.csv` - Ekstraksi data resmi dokumen PDF & kutipan letterlijk lengkap.")
 
 with st.expander("Lihat Data Mentah: Status PSN (Card 2)"):
-    st.dataframe(df_logistik[['node_label', 'psn_status', 'psn_detail']], use_container_width=True, hide_index=True)
-    st.caption("📁 **Sumber File:** `data/processed/sulawesi_logistik_simpul_nikel.csv` - Ekstraksi data status Proyek Strategis Nasional.")
+    st.dataframe(df_logistik[card2_cols], use_container_width=True, hide_index=True)
+    st.caption("📁 **Sumber File:** `data/processed/sulawesi_logistik_simpul_nikel.csv` - Landasan hukum Perpres PSN & peraturan pemerintah.")
 
 with st.expander("Lihat Data Mentah: Detail Kapasitas Pelabuhan (Card 3)"):
-    st.dataframe(df_logistik[['node_label', 'port_detail']], use_container_width=True, hide_index=True)
-    st.caption("📁 **Sumber File:** `data/processed/sulawesi_logistik_simpul_nikel.csv` - Ekstraksi spesifikasi teknis dan kapasitas pelabuhan.")
+    st.dataframe(df_logistik[card3_cols], use_container_width=True, hide_index=True)
+    st.caption("📁 **Sumber File:** `data/processed/sulawesi_logistik_simpul_nikel.csv` - Spesifikasi teknis (DWT / Conveyor) & kutipan letterlijk terverifikasi dari PDF.")
 
 st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=True)
 st.subheader("1.6 Peta Jalur Distribusi Logistik Nikel Sulawesi")
@@ -1944,12 +1952,12 @@ fig_map.update_geos(
 )
 
 hover_details = {
-    "IMIP": "<b>IMIP (Morowali)</b><br>Pelabuhan: Seaport + Jetties Bulk Carrier<br>Komoditas: NPI/Feronikel",
-    "GNI": "<b>GNI (Morowali Utara)</b><br>Pelabuhan: 2x50.000 DWT Vessel<br>Komoditas: NPI",
-    "VDNI": "<b>VDNI (Konawe)</b><br>Pelabuhan: Kapasitas 50.000 Ton<br>Komoditas: Feronikel & Stainless Steel",
-    "OSS": "<b>OSS (Konawe)</b><br>Pelabuhan: Berbagi Jetty Porara<br>Komoditas: Stainless Steel",
-    "ANTAM": "<b>ANTAM (Kolaka)</b><br>Pelabuhan: Jetty 12.000 DWT, Conveyor 4km<br>Komoditas: Feronikel",
-    "PT Vale": "<b>PT Vale (Luwu Timur)</b><br>Pelabuhan: Pelabuhan Balantang Malili<br>Komoditas: Nickel in Matte"
+    "IMIP": "<b>IMIP (Morowali)</b><br>Pelabuhan: Seaport + Jetties Bulk Carrier<br>Komoditas: NPI/Feronikel/Matte<br><i>Sumber: Perpres 109/2020 (PSN No. 97) & Laporan AEER 2024</i>",
+    "GNI": "<b>GNI (Morowali Utara)</b><br>Pelabuhan: Terminal Khusus Teluk Tomori<br>Komoditas: NPI<br><i>Sumber: Laporan Riset Publikasi Resmi AEER 2024</i>",
+    "VDNI": "<b>VDNI (Konawe)</b><br>Pelabuhan: Jetty Porara / Sampara 50.000 DWT<br>Komoditas: Feronikel<br><i>Sumber: Perpres 109/2020 (PSN No. 98) & Perpres 58/2017</i>",
+    "OSS": "<b>OSS (Konawe)</b><br>Pelabuhan: Shared Terminal Khusus Konawe 50.000 DWT<br>Komoditas: Stainless Steel Slab/Billet<br><i>Sumber: Perpres 109/2020 (PSN No. 98)</i>",
+    "ANTAM": "<b>ANTAM (Kolaka)</b><br>Pelabuhan: Jetty Pomalaa 12.000 DWT & Conveyor 4km<br>Komoditas: Feronikel<br><i>Sumber: Laporan Tahunan Resmi ANTAM 2024</i>",
+    "PT Vale": "<b>PT Vale (Luwu Timur)</b><br>Pelabuhan: Pelabuhan Balantang Malili (Green Port)<br>Komoditas: Nickel in Matte<br><i>Sumber: Sustainability Report PT Vale 2024 & Laporan Tahunan 2023</i>"
 }
 
 # Add curved lines for routes
@@ -2033,7 +2041,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+
+map_raw_cols = [c for c in ["node_label", "export_channel", "port_detail", "dokumen_pdf_resmi", "kutipan_pdf_asli"] if c in df_logistik.columns]
 with st.expander("Lihat Data Mentah: Jalur Distribusi Logistik Nikel Sulawesi", expanded=False):
-    df_logistik_map = pd.DataFrame(MAP_ROUTES, columns=["Nama Smelter", "Lon Origin", "Lat Origin", "Lon Dest", "Lat Dest", "Color", "Offset"])
-    st.dataframe(df_logistik_map[["Nama Smelter", "Lon Origin", "Lat Origin", "Lon Dest", "Lat Dest"]], use_container_width=True, hide_index=True)
+    st.dataframe(df_logistik[map_raw_cols], use_container_width=True, hide_index=True)
     st.caption("ℹ️ **Sumber File:** data/processed/sulawesi_logistik_simpul_nikel.csv - Pemetaan koordinat smelter dan pelabuhan tujuan akhir (agregasi spasial).")

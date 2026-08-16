@@ -189,7 +189,7 @@ def load_compliance_data():
     base_dir = os.path.dirname(os.path.dirname(__file__))
     data_dir = os.path.join(base_dir, 'data', 'processed')
     df_izin = pd.read_csv(os.path.join(data_dir, 'sulawesi_izin_baru_per_tahun.csv'))
-    df_gfw = pd.read_csv(os.path.join(data_dir, 'sulawesi_gfw_master_1_dekade_2014_2023.csv'))
+    df_gfw = pd.read_csv(os.path.join(data_dir, 'sulawesi_gfw_master_1_dekade_2014_2023_v3.csv'))
     df_panel = pd.merge(df_gfw, df_izin, on=['Provinsi', 'Tahun'], how='left').fillna({'Jumlah_Izin_Baru': 0, 'Total_Luas_Konsesi_Baru_Ha': 0})
     return df_panel
 
@@ -212,7 +212,7 @@ with st.expander("ℹ️ Metodologi: Evaluasi Kepatuhan D3TLH Berdasarkan Data H
         * **Variabel Konteks Lingkungan:** `Total_Deforestasi_Ha` atau `Deforestasi_Driver_Komoditas...` (sebagai basis status wilayah)
         * **Variabel Keputusan Aktor:** `Jumlah_Izin_Baru` dan `Total_Luas_Konsesi_Baru_Ha`
     4. **Dataset & File:**
-        * `data/processed/sulawesi_izin_baru_per_tahun.csv` dan `sulawesi_gfw_master_1_dekade_2014_2023.csv`
+        * `data/processed/sulawesi_izin_baru_per_tahun.csv` dan `sulawesi_gfw_master_1_dekade_2014_2023_v3.csv`
     """)
 
 st.write("""Daya Tampung dan Daya Dukung Lingkungan Hidup (D3TLH) dirancang sebagai instrumen pencegahan dan pengatur batas pengaman ekologis (*ecological safeguard*). Secara metodologis, penerbitan izin baru sepatutnya mempertimbangkan indikator daya dukung lingkungan guna mengantisipasi degradasi ekosistem.
