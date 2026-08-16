@@ -1365,18 +1365,21 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 #### 🔍 Indikator #58: Indeks Pergeseran Agraris-Industri (Shift Index)
 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`sulawesi_employment_shift_fase4.csv`):**
-* **Verifikasi Formula (`12_Infografis_Summary.py` L828 & L1144)**:
-  * `shift_index_base_s7` = `df_shift[provinsi=='Sulawesi Tengah'].iloc[0]['agriculture_to_industry_shift_index']` $\rightarrow$ **`0.449`**.
-  * `shift_index_latest_s7` = `df_shift[provinsi=='Sulawesi Tengah'].iloc[-1]['agriculture_to_industry_shift_index']` $\rightarrow$ **`3.533`**.
-  * `delta_shift_index_s7` = `((3.533 - 0.449) / 0.449) * 100` $\rightarrow$ **`▲ +687%`**.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Formulasi Indeks Pergeseran Tenaga Kerja & PDRB terverifikasi 100%.
+* **Verifikasi Formula (`12_Infografis_Summary.py` L830 & L1146)**:
+  * `shift_index_base_s7` = `float(shift_base_s7['agriculture_to_industry_shift_index'])` $\rightarrow$ **`0.449`**.
+  * `shift_index_latest_s7` = `float(shift_latest_s7['agriculture_to_industry_shift_index'])` $\rightarrow$ **`3.533`**.
+  * `delta_shift_index_s7` = `▲ +687%`.
+* **Koreksi Bug UI**: Tidak ada bug data. Data Shift Index diproses Streamlit secara presisi.
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Transformasi Struktural Ekstrem**: Lonjakan indeks dari 0.449 ke 3.533 (+687%) membuktikan perubahan radikal mata pencaharian dari petani/nelayan mandiri menjadi buruh kasar tambang.
+* **Transformasi Struktural Ekstrem**: Indeks *Shift* ini secara matematis mengukur kecepatan perpindahan suatu daerah dari agraris ke industri. Lonjakan indeks dari 0.449 ke 3.533 (+687%) hanya dalam 10 tahun membuktikan terjadinya perubahan radikal dan paksaan struktural: mata pencaharian warga "dicabut" dari basis kemandirian (petani/nelayan) menjadi ketergantungan upah (buruh kasar tambang).
 
 ##### 📌 **TL;DR Indikator #58:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (0.449 vs 3.533).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Bukti kuantitatif pergeseran struktur mata pencaharian warga).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 0.449 | 3.533 | ▲ +687% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
