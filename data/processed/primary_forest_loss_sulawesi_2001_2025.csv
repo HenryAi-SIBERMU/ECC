@@ -1,0 +1,313 @@
+umd_tree_cover_loss__year,is__umd_regional_primary_forest_2001,area__ha,province,year
+2001,false,3385.48053,Sulawesi Utara,2001.0
+2001,true,755.09888,Sulawesi Utara,2001.0
+2002,false,3984.4257900000002,Sulawesi Utara,2002.0
+2002,true,3126.51062,Sulawesi Utara,2002.0
+2003,false,833.0904,Sulawesi Utara,2003.0
+2003,true,1784.54511,Sulawesi Utara,2003.0
+2004,false,3153.2857400000003,Sulawesi Utara,2004.0
+2004,true,3355.93876,Sulawesi Utara,2004.0
+2005,false,1495.82871,Sulawesi Utara,2005.0
+2005,true,1721.29139,Sulawesi Utara,2005.0
+2006,false,2570.68178,Sulawesi Utara,2006.0
+2006,true,2017.7499500000001,Sulawesi Utara,2006.0
+2007,false,2280.19812,Sulawesi Utara,2007.0
+2007,true,1776.9032699999998,Sulawesi Utara,2007.0
+2008,false,929.7723,Sulawesi Utara,2008.0
+2008,true,601.16796,Sulawesi Utara,2008.0
+2009,false,4607.80789,Sulawesi Utara,2009.0
+2009,true,2017.23084,Sulawesi Utara,2009.0
+2010,false,1298.67408,Sulawesi Utara,2010.0
+2010,true,705.51293,Sulawesi Utara,2010.0
+2011,false,2015.43237,Sulawesi Utara,2011.0
+2011,true,934.36501,Sulawesi Utara,2011.0
+2012,false,1818.5034899999998,Sulawesi Utara,2012.0
+2012,true,664.98568,Sulawesi Utara,2012.0
+2013,false,1079.0408499999999,Sulawesi Utara,2013.0
+2013,true,653.91098,Sulawesi Utara,2013.0
+2014,false,4789.60392,Sulawesi Utara,2014.0
+2014,true,2178.71734,Sulawesi Utara,2014.0
+2015,false,7290.97823,Sulawesi Utara,2015.0
+2015,true,7277.21502,Sulawesi Utara,2015.0
+2016,false,4451.8632,Sulawesi Utara,2016.0
+2016,true,4283.2841499999995,Sulawesi Utara,2016.0
+2017,false,3543.81412,Sulawesi Utara,2017.0
+2017,true,2114.39701,Sulawesi Utara,2017.0
+2018,false,5450.06665,Sulawesi Utara,2018.0
+2018,true,1895.05568,Sulawesi Utara,2018.0
+2019,false,7397.326440000001,Sulawesi Utara,2019.0
+2019,true,1486.4252900000001,Sulawesi Utara,2019.0
+2020,false,1936.99265,Sulawesi Utara,2020.0
+2020,true,919.62049,Sulawesi Utara,2020.0
+2021,false,2175.99169,Sulawesi Utara,2021.0
+2021,true,536.44803,Sulawesi Utara,2021.0
+2022,false,2145.17519,Sulawesi Utara,2022.0
+2022,true,503.49289,Sulawesi Utara,2022.0
+2023,false,5800.83335,Sulawesi Utara,2023.0
+2023,true,542.43606,Sulawesi Utara,2023.0
+2024,false,2971.0254800000002,Sulawesi Utara,2024.0
+2024,true,755.3703,Sulawesi Utara,2024.0
+2025,false,2376.11053,Sulawesi Utara,2025.0
+2025,true,531.47258,Sulawesi Utara,2025.0
+null,false,21724068.03354,Sulawesi Utara,
+null,true,519312.2835,Sulawesi Utara,
+2001,false,22194.12956,Sulawesi Tengah,2001.0
+2001,true,6661.10596,Sulawesi Tengah,2001.0
+2002,false,28448.67902,Sulawesi Tengah,2002.0
+2002,true,27539.39083,Sulawesi Tengah,2002.0
+2003,false,11274.90687,Sulawesi Tengah,2003.0
+2003,true,18722.99944,Sulawesi Tengah,2003.0
+2004,false,33931.555380000005,Sulawesi Tengah,2004.0
+2004,true,36681.27129,Sulawesi Tengah,2004.0
+2005,false,13504.1468,Sulawesi Tengah,2005.0
+2005,true,18165.73735,Sulawesi Tengah,2005.0
+2006,false,25426.293700000002,Sulawesi Tengah,2006.0
+2006,true,25418.26881,Sulawesi Tengah,2006.0
+2007,false,17126.46312,Sulawesi Tengah,2007.0
+2007,true,17083.26765,Sulawesi Tengah,2007.0
+2008,false,12782.388289999999,Sulawesi Tengah,2008.0
+2008,true,12721.57893,Sulawesi Tengah,2008.0
+2009,false,51339.75204,Sulawesi Tengah,2009.0
+2009,true,36129.7303,Sulawesi Tengah,2009.0
+2010,false,17839.94999,Sulawesi Tengah,2010.0
+2010,true,15900.00096,Sulawesi Tengah,2010.0
+2011,false,24420.14577,Sulawesi Tengah,2011.0
+2011,true,18394.23612,Sulawesi Tengah,2011.0
+2012,false,28034.08814,Sulawesi Tengah,2012.0
+2012,true,31516.778150000002,Sulawesi Tengah,2012.0
+2013,false,23637.20543,Sulawesi Tengah,2013.0
+2013,true,25280.17651,Sulawesi Tengah,2013.0
+2014,false,49565.93261,Sulawesi Tengah,2014.0
+2014,true,38133.37111,Sulawesi Tengah,2014.0
+2015,false,70096.35722,Sulawesi Tengah,2015.0
+2015,true,84072.26109,Sulawesi Tengah,2015.0
+2016,false,53293.49989,Sulawesi Tengah,2016.0
+2016,true,74706.39368000001,Sulawesi Tengah,2016.0
+2017,false,44651.38315,Sulawesi Tengah,2017.0
+2017,true,27343.75044,Sulawesi Tengah,2017.0
+2018,false,45625.58842,Sulawesi Tengah,2018.0
+2018,true,25708.9253,Sulawesi Tengah,2018.0
+2019,false,62047.142250000004,Sulawesi Tengah,2019.0
+2019,true,30638.14837,Sulawesi Tengah,2019.0
+2020,false,29136.327980000002,Sulawesi Tengah,2020.0
+2020,true,17787.97793,Sulawesi Tengah,2020.0
+2021,false,22561.2715,Sulawesi Tengah,2021.0
+2021,true,14246.33614,Sulawesi Tengah,2021.0
+2022,false,26643.911509999998,Sulawesi Tengah,2022.0
+2022,true,17294.99294,Sulawesi Tengah,2022.0
+2023,false,61655.44723,Sulawesi Tengah,2023.0
+2023,true,26238.93922,Sulawesi Tengah,2023.0
+2024,false,28095.623340000002,Sulawesi Tengah,2024.0
+2024,true,21773.32376,Sulawesi Tengah,2024.0
+2025,false,32966.53126,Sulawesi Tengah,2025.0
+2025,true,27717.30034,Sulawesi Tengah,2025.0
+null,false,22126579.16596,Sulawesi Tengah,
+null,true,6791608.92624,Sulawesi Tengah,
+2001,false,17616.33335,Sulawesi Selatan,2001.0
+2001,true,3212.12763,Sulawesi Selatan,2001.0
+2002,false,15624.16626,Sulawesi Selatan,2002.0
+2002,true,9412.360340000001,Sulawesi Selatan,2002.0
+2003,false,8092.71093,Sulawesi Selatan,2003.0
+2003,true,8890.81625,Sulawesi Selatan,2003.0
+2004,false,29468.83352,Sulawesi Selatan,2004.0
+2004,true,25305.94904,Sulawesi Selatan,2004.0
+2005,false,12101.326939999999,Sulawesi Selatan,2005.0
+2005,true,10373.4492,Sulawesi Selatan,2005.0
+2006,false,28672.988210000003,Sulawesi Selatan,2006.0
+2006,true,18072.56865,Sulawesi Selatan,2006.0
+2007,false,10159.10956,Sulawesi Selatan,2007.0
+2007,true,8611.19847,Sulawesi Selatan,2007.0
+2008,false,11325.453580000001,Sulawesi Selatan,2008.0
+2008,true,4993.98163,Sulawesi Selatan,2008.0
+2009,false,32443.81978,Sulawesi Selatan,2009.0
+2009,true,13679.97773,Sulawesi Selatan,2009.0
+2010,false,10147.21168,Sulawesi Selatan,2010.0
+2010,true,6010.722390000001,Sulawesi Selatan,2010.0
+2011,false,24449.62165,Sulawesi Selatan,2011.0
+2011,true,10482.88654,Sulawesi Selatan,2011.0
+2012,false,24345.224560000002,Sulawesi Selatan,2012.0
+2012,true,14309.63278,Sulawesi Selatan,2012.0
+2013,false,18936.013440000002,Sulawesi Selatan,2013.0
+2013,true,9476.0874,Sulawesi Selatan,2013.0
+2014,false,45966.452769999996,Sulawesi Selatan,2014.0
+2014,true,19818.363149999997,Sulawesi Selatan,2014.0
+2015,false,43185.148199999996,Sulawesi Selatan,2015.0
+2015,true,30831.69006,Sulawesi Selatan,2015.0
+2016,false,34428.44942,Sulawesi Selatan,2016.0
+2016,true,36712.54614,Sulawesi Selatan,2016.0
+2017,false,35401.66201,Sulawesi Selatan,2017.0
+2017,true,18125.46872,Sulawesi Selatan,2017.0
+2018,false,34335.53762,Sulawesi Selatan,2018.0
+2018,true,12334.925179999998,Sulawesi Selatan,2018.0
+2019,false,48067.02298,Sulawesi Selatan,2019.0
+2019,true,19357.157339999998,Sulawesi Selatan,2019.0
+2020,false,22431.21985,Sulawesi Selatan,2020.0
+2020,true,11168.08575,Sulawesi Selatan,2020.0
+2021,false,16939.15951,Sulawesi Selatan,2021.0
+2021,true,8968.512030000002,Sulawesi Selatan,2021.0
+2022,false,27297.172319999998,Sulawesi Selatan,2022.0
+2022,true,8938.19788,Sulawesi Selatan,2022.0
+2023,false,67043.71164,Sulawesi Selatan,2023.0
+2023,true,12150.35535,Sulawesi Selatan,2023.0
+2024,false,20639.25592,Sulawesi Selatan,2024.0
+2024,true,8567.75989,Sulawesi Selatan,2024.0
+2025,false,31341.23977,Sulawesi Selatan,2025.0
+2025,true,11970.165420000001,Sulawesi Selatan,2025.0
+null,false,19880980.31812,Sulawesi Selatan,
+null,true,2694697.17187,Sulawesi Selatan,
+2001,false,13356.227719999999,Sulawesi Tenggara,2001.0
+2001,true,2010.78274,Sulawesi Tenggara,2001.0
+2002,false,10621.09965,Sulawesi Tenggara,2002.0
+2002,true,4942.67782,Sulawesi Tenggara,2002.0
+2003,false,6730.033130000001,Sulawesi Tenggara,2003.0
+2003,true,6421.36664,Sulawesi Tenggara,2003.0
+2004,false,20733.98689,Sulawesi Tenggara,2004.0
+2004,true,19664.68809,Sulawesi Tenggara,2004.0
+2005,false,8598.388060000001,Sulawesi Tenggara,2005.0
+2005,true,7716.187449999999,Sulawesi Tenggara,2005.0
+2006,false,27398.51067,Sulawesi Tenggara,2006.0
+2006,true,16575.79782,Sulawesi Tenggara,2006.0
+2007,false,4225.40754,Sulawesi Tenggara,2007.0
+2007,true,5439.95414,Sulawesi Tenggara,2007.0
+2008,false,4894.06823,Sulawesi Tenggara,2008.0
+2008,true,3692.1149600000003,Sulawesi Tenggara,2008.0
+2009,false,19041.22566,Sulawesi Tenggara,2009.0
+2009,true,10528.92755,Sulawesi Tenggara,2009.0
+2010,false,3355.37936,Sulawesi Tenggara,2010.0
+2010,true,3930.20823,Sulawesi Tenggara,2010.0
+2011,false,16186.438170000001,Sulawesi Tenggara,2011.0
+2011,true,6906.45658,Sulawesi Tenggara,2011.0
+2012,false,14964.02138,Sulawesi Tenggara,2012.0
+2012,true,7970.66897,Sulawesi Tenggara,2012.0
+2013,false,12005.85313,Sulawesi Tenggara,2013.0
+2013,true,5864.3200799999995,Sulawesi Tenggara,2013.0
+2014,false,36003.33205,Sulawesi Tenggara,2014.0
+2014,true,11607.9992,Sulawesi Tenggara,2014.0
+2015,false,32797.13399,Sulawesi Tenggara,2015.0
+2015,true,15300.09905,Sulawesi Tenggara,2015.0
+2016,false,20200.80774,Sulawesi Tenggara,2016.0
+2016,true,19432.07052,Sulawesi Tenggara,2016.0
+2017,false,19369.39837,Sulawesi Tenggara,2017.0
+2017,true,10281.16049,Sulawesi Tenggara,2017.0
+2018,false,20284.70962,Sulawesi Tenggara,2018.0
+2018,true,7765.70046,Sulawesi Tenggara,2018.0
+2019,false,27586.19716,Sulawesi Tenggara,2019.0
+2019,true,13573.73012,Sulawesi Tenggara,2019.0
+2020,false,12793.45466,Sulawesi Tenggara,2020.0
+2020,true,7932.3646,Sulawesi Tenggara,2020.0
+2021,false,9087.57321,Sulawesi Tenggara,2021.0
+2021,true,4702.46007,Sulawesi Tenggara,2021.0
+2022,false,9786.38487,Sulawesi Tenggara,2022.0
+2022,true,4755.444939999999,Sulawesi Tenggara,2022.0
+2023,false,36950.032640000005,Sulawesi Tenggara,2023.0
+2023,true,6977.1586800000005,Sulawesi Tenggara,2023.0
+2024,false,13990.94153,Sulawesi Tenggara,2024.0
+2024,true,5653.83014,Sulawesi Tenggara,2024.0
+2025,false,20864.421909999997,Sulawesi Tenggara,2025.0
+2025,true,7171.786660000001,Sulawesi Tenggara,2025.0
+null,false,10520223.20633,Sulawesi Tenggara,
+null,true,1725518.32158,Sulawesi Tenggara,
+2001,false,3695.73866,Gorontalo,2001.0
+2001,true,515.56639,Gorontalo,2001.0
+2002,false,5474.758110000001,Gorontalo,2002.0
+2002,true,3458.80276,Gorontalo,2002.0
+2003,false,1323.91787,Gorontalo,2003.0
+2003,true,1998.64673,Gorontalo,2003.0
+2004,false,4294.77112,Gorontalo,2004.0
+2004,true,3086.24411,Gorontalo,2004.0
+2005,false,2332.81868,Gorontalo,2005.0
+2005,true,2555.06149,Gorontalo,2005.0
+2006,false,3227.02097,Gorontalo,2006.0
+2006,true,2414.82312,Gorontalo,2006.0
+2007,false,2680.99138,Gorontalo,2007.0
+2007,true,2029.72534,Gorontalo,2007.0
+2008,false,1223.98939,Gorontalo,2008.0
+2008,true,743.3479600000001,Gorontalo,2008.0
+2009,false,8279.140800000001,Gorontalo,2009.0
+2009,true,3268.4847499999996,Gorontalo,2009.0
+2010,false,1205.91148,Gorontalo,2010.0
+2010,true,525.64386,Gorontalo,2010.0
+2011,false,2199.58069,Gorontalo,2011.0
+2011,true,1110.5217,Gorontalo,2011.0
+2012,false,2553.1383100000003,Gorontalo,2012.0
+2012,true,1105.98299,Gorontalo,2012.0
+2013,false,2519.8288199999997,Gorontalo,2013.0
+2013,true,1146.21594,Gorontalo,2013.0
+2014,false,6411.19346,Gorontalo,2014.0
+2014,true,3909.67333,Gorontalo,2014.0
+2015,false,10664.50079,Gorontalo,2015.0
+2015,true,7856.1178899999995,Gorontalo,2015.0
+2016,false,9756.83624,Gorontalo,2016.0
+2016,true,5923.85937,Gorontalo,2016.0
+2017,false,8744.31985,Gorontalo,2017.0
+2017,true,3158.70957,Gorontalo,2017.0
+2018,false,8303.52674,Gorontalo,2018.0
+2018,true,3232.25202,Gorontalo,2018.0
+2019,false,13372.57057,Gorontalo,2019.0
+2019,true,3204.86592,Gorontalo,2019.0
+2020,false,3086.78261,Gorontalo,2020.0
+2020,true,1475.77225,Gorontalo,2020.0
+2021,false,2756.84166,Gorontalo,2021.0
+2021,true,681.19075,Gorontalo,2021.0
+2022,false,3464.8030799999997,Gorontalo,2022.0
+2022,true,711.19237,Gorontalo,2022.0
+2023,false,10077.69977,Gorontalo,2023.0
+2023,true,1397.99881,Gorontalo,2023.0
+2024,false,3493.11231,Gorontalo,2024.0
+2024,true,1727.55513,Gorontalo,2024.0
+2025,false,2989.46963,Gorontalo,2025.0
+2025,true,2520.13653,Gorontalo,2025.0
+null,false,2068326.1170299998,Gorontalo,
+null,true,701503.30941,Gorontalo,
+2001,false,12912.87882,Sulawesi Barat,2001.0
+2001,true,5700.7116,Sulawesi Barat,2001.0
+2002,false,9578.402689999999,Sulawesi Barat,2002.0
+2002,true,7469.81398,Sulawesi Barat,2002.0
+2003,false,3727.2917899999998,Sulawesi Barat,2003.0
+2003,true,4645.41589,Sulawesi Barat,2003.0
+2004,false,11402.68044,Sulawesi Barat,2004.0
+2004,true,9692.13102,Sulawesi Barat,2004.0
+2005,false,5615.22148,Sulawesi Barat,2005.0
+2005,true,6367.69567,Sulawesi Barat,2005.0
+2006,false,7514.2112,Sulawesi Barat,2006.0
+2006,true,7711.27088,Sulawesi Barat,2006.0
+2007,false,2787.14305,Sulawesi Barat,2007.0
+2007,true,3127.48536,Sulawesi Barat,2007.0
+2008,false,8770.52678,Sulawesi Barat,2008.0
+2008,true,6311.88695,Sulawesi Barat,2008.0
+2009,false,10591.75154,Sulawesi Barat,2009.0
+2009,true,6851.38201,Sulawesi Barat,2009.0
+2010,false,5082.75976,Sulawesi Barat,2010.0
+2010,true,3805.2283,Sulawesi Barat,2010.0
+2011,false,11510.16221,Sulawesi Barat,2011.0
+2011,true,5075.66072,Sulawesi Barat,2011.0
+2012,false,10141.37449,Sulawesi Barat,2012.0
+2012,true,6383.0186300000005,Sulawesi Barat,2012.0
+2013,false,7362.950339999999,Sulawesi Barat,2013.0
+2013,true,3986.09683,Sulawesi Barat,2013.0
+2014,false,15070.48529,Sulawesi Barat,2014.0
+2014,true,5813.61954,Sulawesi Barat,2014.0
+2015,false,17268.96616,Sulawesi Barat,2015.0
+2015,true,6373.0323499999995,Sulawesi Barat,2015.0
+2016,false,15946.264299999999,Sulawesi Barat,2016.0
+2016,true,6919.94355,Sulawesi Barat,2016.0
+2017,false,14538.76539,Sulawesi Barat,2017.0
+2017,true,5088.2705000000005,Sulawesi Barat,2017.0
+2018,false,15440.53952,Sulawesi Barat,2018.0
+2018,true,6300.74971,Sulawesi Barat,2018.0
+2019,false,18527.70313,Sulawesi Barat,2019.0
+2019,true,5962.03707,Sulawesi Barat,2019.0
+2020,false,9800.1605,Sulawesi Barat,2020.0
+2020,true,3335.56427,Sulawesi Barat,2020.0
+2021,false,8936.24465,Sulawesi Barat,2021.0
+2021,true,4569.18636,Sulawesi Barat,2021.0
+2022,false,10611.72553,Sulawesi Barat,2022.0
+2022,true,3962.13487,Sulawesi Barat,2022.0
+2023,false,21631.5251,Sulawesi Barat,2023.0
+2023,true,5508.92428,Sulawesi Barat,2023.0
+2024,false,7245.57514,Sulawesi Barat,2024.0
+2024,true,4999.99893,Sulawesi Barat,2024.0
+2025,false,9502.83613,Sulawesi Barat,2025.0
+2025,true,6735.39591,Sulawesi Barat,2025.0
+null,false,3650636.09527,Sulawesi Barat,
+null,true,1470276.90261,Sulawesi Barat,

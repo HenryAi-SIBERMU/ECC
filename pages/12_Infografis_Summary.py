@@ -182,8 +182,15 @@ def load_infografis_data():
     
     df_pad = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pad_2016_2024.csv"))
     df_log = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_logistik_simpul_nikel.csv"))
-    df_prim = pd.read_csv(os.path.join("data", "raw", "klhk_gfw", "mega_fetch_v2", "primary_forest_loss_sulawesi_2001_2025.csv"))
-    df_driver = pd.read_csv(os.path.join("data", "raw", "klhk_gfw", "land_api_fetch", "loss_by_driver_sulawesi_2001_2025_v3.csv"))
+    prim_path = os.path.join(DATA_DIR, "primary_forest_loss_sulawesi_2001_2025.csv")
+    if not os.path.exists(prim_path):
+        prim_path = os.path.join(BASE_DIR, "data", "raw", "klhk_gfw", "mega_fetch_v2", "primary_forest_loss_sulawesi_2001_2025.csv")
+    df_prim = pd.read_csv(prim_path) if os.path.exists(prim_path) else pd.DataFrame()
+
+    driver_path = os.path.join(DATA_DIR, "loss_by_driver_sulawesi_2001_2025_v3.csv")
+    if not os.path.exists(driver_path):
+        driver_path = os.path.join(BASE_DIR, "data", "raw", "klhk_gfw", "land_api_fetch", "loss_by_driver_sulawesi_2001_2025_v3.csv")
+    df_driver = pd.read_csv(driver_path) if os.path.exists(driver_path) else pd.DataFrame()
     
     df_izin_raw = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_izin_raw_details.csv"))
     df_lindung = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_kawasan_lindung_loss_2014_2023_v3.csv"))
