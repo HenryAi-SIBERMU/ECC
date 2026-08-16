@@ -1263,18 +1263,21 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 #### 🔍 Indikator #53: Populasi Kabupaten Industri (Ribu Jiwa)
 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`sulawesi_demografi_master_fase4.csv`):**
-* **Verifikasi Formula (`12_Infografis_Summary.py` L806 & L1109)**:
-  * `pop_base_s7` = `2.38 Juta Jiwa` *(atau 1,588 Ribu Jiwa pada kabupaten smelter murni)*.
-  * `pop_latest_s7` = `20.4 Juta Jiwa` *(atau 1,588.2 Ribu Jiwa)*.
-  * `delta_pop_s7` = `▲ +757%`.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Penjumlahan estimasi demografi BPS 6 provinsi/kabupaten industri terverifikasi.
+* **Verifikasi Formula (`12_Infografis_Summary.py` L808 & L1112)**:
+  * `pop_base_s7` = `demo_base_s7['jumlah_penduduk_rb'].sum()` $\rightarrow$ **`1,450.5 Ribu Jiwa`**. (Tahun dasar 2017)
+  * `pop_latest_s7` = `demo_latest_s7['jumlah_penduduk_rb'].sum()` $\rightarrow$ **`1,588.2 Ribu Jiwa`**. (Tahun terkini 2024)
+  * `delta_pop_s7` = `▲ +9.5%`.
+* **Koreksi Bug UI**: Hati-hati dengan cacatan masa lalu! AI sebelumnya mengarang bebas dengan angka 2.38 Juta vs 20.4 Juta (+757%). Eksekusi asli Pandas Streamlit membaca populasi secara akurat dari BPS: 1,450.5 Ribu menjadi 1,588.2 Ribu (+9.5%).
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Migrasi Tenaga Kerja**: Arus masuk puluhan ribu pencari kerja dan buruh migran memicu lonjakan populasi di kawasan sekitar smelter.
+* **Tekanan Demografi**: Pertumbuhan nyaris 10% di kabupaten pesisir/industri dalam waktu singkat memberi tekanan luar biasa pada daya dukung lingkungan, fasilitas publik, tata ruang, dan pasokan pangan lokal akibat membeludaknya buruh/pendatang.
 
 ##### 📌 **TL;DR Indikator #53:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (2.38 Juta vs 20.4 Juta Jiwa).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Ledakan migrasi tenaga kerja hilirisasi nikel).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 1,450.5 Ribu Jiwa | 1,588.2 Ribu Jiwa | ▲ +9.5% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
