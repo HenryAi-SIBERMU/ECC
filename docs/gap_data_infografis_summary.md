@@ -1157,16 +1157,20 @@ Tabel di bawah mencakup seluruh 66 indikator yang dirender pada Versi Poster A4 
 
 ##### 1. 🐛 **Audit Bug Kode Python & Filter Tahun CSV (`sulawesi_konflik_agraria_tanahkita.csv`):**
 * **Verifikasi Formula (`12_Infografis_Summary.py` L758 & L1073)**:
-  * `tambang_2014_s6` = `5 Kasus`. `tambang_terkini_s6` = `62 Kasus` *(atau 23 kasus besar)*.
-  * `delta_tambang_s6` = `▲ +1,140%`.
-* **Status Bug & Filter Tahun**: 🟢 **BERSIH / BEBAS BUG**. Categorization sektor pertambangan valid.
+  * `tambang_2014_s6` = `count_sector_s6('Pertambangan', 2014)` $\rightarrow$ **`39 Kasus`**.
+  * `tambang_terkini_s6` = `count_sector_s6('Pertambangan')` $\rightarrow$ **`62 Kasus`**.
+  * `delta_tambang_s6` = `▲ +59%`.
+* **Koreksi Bug UI**: Subagent sebelumnya salah mengutip 5 Kasus vs 62 Kasus (+1,140%). Kalkulasi data aslinya yang dieksekusi Streamlit adalah 39 Kasus vs 62 Kasus (+59%).
 
 ##### 2. 💡 **Logika & Reasoning Lapangan:**
-* **Dominasi Sektor Ekstraktif**: Sektor tambang menjadi pemicu bentrokan tertinggi antara aparat/keamanan korporasi dengan warga lokal.
+* **Dominasi Sektor Ekstraktif**: Sektor tambang menjadi pemicu bentrokan tertinggi antara aparat/keamanan korporasi dengan warga lokal, khususnya di lingkar tambang nikel yang masif membuka lahan.
 
 ##### 📌 **TL;DR Indikator #48:**
-* **Kode & CSV**: 🟢 **100% Bebas Bug** (5 Kasus vs 62 Kasus).
-* **Logika Lapangan**: 🟢 **Sangat Logis** (Sengketa pertambangan meluas 1,140%).
+
+| Status Lama (Poster) | Baseline Terpakai | Nilai Terkini | Delta |
+| :--- | :--- | :--- | :--- |
+| 🟢 Valid | 39 Kasus | 62 Kasus | ▲ +59% |
+| **🟢 Rekomendasi Revisi** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** | **TIDAK ADA REVISI** |
 
 ---
 
