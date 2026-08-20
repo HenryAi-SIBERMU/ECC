@@ -380,3 +380,56 @@ Ini adalah daftar LENGKAP seluruh dataset/layer yang berhasil ditarik dari API G
 | 374 | wur_radd_coverage |
 | 375 | wwf_terrestrial_ecoregions |
 | 376 | wwf_tiger_conservation_landscapes |
+
+---
+
+# REFERENSI KEMAMPUAN BREAKDOWN & KOMODITAS GFW
+
+*Bagian ini ditambahkan untuk menjawab batasan GFW dalam melakukan breakdown komoditas (seperti Buah, Kayu, Pertanian, dll) di Indonesia.*
+
+## 1. Kemampuan Klasifikasi Detail (Data yang BISA di-breakdown)
+Variabel di bawah ini sifatnya pasti, detail, dan bisa dijadikan sumbu X atau Y dalam grafik (bisa dibelah per potongannya).
+
+| Variabel Detail yang Bisa Disajikan | Satuan | Isi Data di File Excel | Endpoint / Layer GFW yang Dipakai |
+| :--- | :--- | :--- | :--- |
+| **Luas Hutan Hilang** | Hektar (ha) | Angka luas pasti (Contoh: 1.542,45 ha) | umd_tree_cover_loss (Layer No. 301) - Parameter rea__ha |
+| **Tahun Kejadian Deforestasi** | Tahun | 2016 s/d 2025 | umd_tree_cover_loss (Layer No. 301) - Parameter umd_tree_cover_loss__year |
+| **Wilayah Administrasi / Spasial** | Provinsi | Papua, Papua Barat, Pegunungan, Selatan, Tengah, Barat Daya | Memakai endpoint Zonal Analysis API yang dicocokkan dengan *Geostore ID* provinsi. |
+
+## 2. Kategori Umum (Data yang MENTOK di label besar)
+Variabel komoditas atau jenis lahan di bawah ini **TIDAK BISA** di-breakdown lagi ke jenis tanaman spesifik. Sifatnya hanya menempel sebagai label kategori besar.
+
+| Kategori Umum yang Bisa Disajikan | Satuan | Isi Data (Mentok di Label Ini Saja) | Endpoint / Layer GFW yang Dipakai |
+| :--- | :--- | :--- | :--- |
+| **Komoditas / Tipe Konsesi Penyebab** | Label Teks | *Oil palm, Rubber, Wood fiber, Fruit, Other* | gfw_plantations (Layer No. 170) - Parameter gfw_plantations__type |
+| **Status Tutupan Lahan Sebelum Hilang** | Label Teks | *Agriculture, Forest, Grassland, Shrubland, Wetland, Water, Settlement, Bare* | esa_land_cover_2015 (Layer No. 35) - Parameter esa_land_cover_2015__class |
+
+### 3. Ketersediaan Spesifik Komoditas di GFW
+Tabel ini memetakan komoditas mana saja yang memiliki peta mandiri di GFW dan mana yang sama sekali tidak ada (terutama untuk konteks Indonesia).
+
+| Komoditas / Kategori Lahan | Status Ketersediaan Peta / Breakdown di GFW | Detail Jenis Data yang Bisa Diambil | Layer / Endpoint GFW yang Dipakai | Penjelasan Detail & Cakupan Area |
+| :--- | :--- | :--- | :--- | :--- |
+| **Kelapa Sawit** (*Oil Palm*) | ✅ ADA | 1. Luas hilang (Ha)<br>2. Poligon konsesi (GeoJSON)<br>3. Emisi Gas Rumah Kaca (Megaton) | `gfw_oil_palm` (No. 166)<br>`rspo_oil_palm` (No. 263) | Mencakup Global & Indonesia. Paling lengkap dipantau oleh satelit GFW. |
+| **Kedelai** (*Soybean*) | ❌ TIDAK ADA DI INDONESIA | Luas lahan tanam (Ha) | `umd_soy_planted_area` (No. 292) | Hanya memetakan benua Amerika Selatan. **Tidak ada untuk Indonesia**. |
+| **Kakao / Cokelat** (*Cocoa*) | ❌ TIDAK ADA DI INDONESIA | 1. Risiko deforestasi (%)<br>2. Kepadatan kebun (Indeks) | `gfw_west_africa_cocoa_...` (No. 185, 186) | Hanya memetakan benua Afrika Barat. **Tidak ada untuk Indonesia**. |
+| **Karet** (*Rubber*) | ⚠️ MENTOK DI KATEGORI UMUM | Luas deforestasi (Ha) | `gfw_plantations` (No. 170) | Tidak ada peta mandiri. Hanya menumpang sebagai salah satu kategori dasar di dalam layer Konsesi Umum (*Plantations*). |
+| **Kayu HTI / Industri** (*Wood fiber / timber*) | ⚠️ MENTOK DI KATEGORI UMUM | Luas deforestasi (Ha) | `gfw_plantations` (No. 170) | **Tidak bisa di-breakdown**. Tidak bisa dilacak jenis kayunya (Akasia, Eukaliptus, Mahoni). Mentok hanya muncul kata "Wood fiber". |
+| **Buah-buahan** (*Fruit*) | ⚠️ MENTOK DI KATEGORI UMUM | Luas deforestasi (Ha) | `gfw_plantations` (No. 170) | **Tidak bisa di-breakdown**. Tidak bisa dilacak jenis buahnya (Pisang, Jeruk, Mangga). Mentok hanya muncul kata "Fruit". |
+| **Pertanian Umum** (*Agriculture / Cropland*) | ⚠️ MENTOK DI KATEGORI UMUM | Status lahan (Label Teks) | `esa_land_cover_2015` (No. 35) | **Tidak bisa di-breakdown**. Satelit murni hanya melihat sepetak tanah sebagai "Lahan Pertanian", tapi buta terhadap tanaman apa yang ditanam di sana. |
+| **Tebu & Kopi** | ❌ TIDAK ADA PETA SPASIAL | Estimasi panen (Ton/Ha) | `mapspam_yield_...` (No. 252, 256) | Hanya ada data tabel estimasi jumlah panen (tonase) dari petani. **BUKAN** peta spasial konsesi/deforestasi. |
+| **Kelapa, Cengkeh, Lada, Rempah, dll** | ❌ TIDAK ADA SAMA SEKALI | - | - | Satelit GFW sama sekali tidak memantau atau memiliki data spasial untuk komoditas ini. |
+
+### 3.1. Versi Tabel Tanpa Ikon (Untuk Laporan Resmi)
+Tabel yang sama seperti di atas, namun diformat lebih formal tanpa ikon emoji dan menyesuaikan konteks wilayah Indonesia, cocok untuk disalin ke laporan atau presentasi formal.
+
+| Komoditas / Kategori Lahan | Status Ketersediaan Peta / Breakdown di GFW | Detail Jenis Data yang Bisa Diambil | Layer / Endpoint GFW yang Dipakai | Penjelasan Detail & Cakupan Area |
+| :--- | :--- | :--- | :--- | :--- |
+| **Kelapa Sawit** (*Oil Palm*) | ADA | 1. Luas hilang (Ha)<br>2. Poligon konsesi (GeoJSON)<br>3. Emisi Gas Rumah Kaca (Megaton) | `gfw_oil_palm` (No. 166)<br>`rspo_oil_palm` (No. 263) | Mencakup Global & Indonesia. Paling lengkap dipantau oleh satelit GFW. |
+| **Kedelai** (*Soybean*) | TIDAK ADA DI INDONESIA | Luas lahan tanam (Ha) | `umd_soy_planted_area` (No. 292) | Hanya memetakan benua Amerika Selatan. **Tidak ada untuk Indonesia**. |
+| **Kakao / Cokelat** (*Cocoa*) | TIDAK ADA DI INDONESIA | 1. Risiko deforestasi (%)<br>2. Kepadatan kebun (Indeks) | `gfw_west_africa_cocoa_...` (No. 185, 186) | Hanya memetakan benua Afrika Barat. **Tidak ada untuk Indonesia**. |
+| **Karet** (*Rubber*) | MENTOK DI KATEGORI UMUM | Luas deforestasi (Ha) | `gfw_plantations` (No. 170) | Tidak ada peta mandiri. Hanya menumpang sebagai salah satu kategori dasar di dalam layer Konsesi Umum (*Plantations*). |
+| **Kayu HTI / Industri** (*Wood fiber / timber*) | MENTOK DI KATEGORI UMUM | Luas deforestasi (Ha) | `gfw_plantations` (No. 170) | **Tidak bisa di-breakdown**. Tidak bisa dilacak jenis kayunya (Akasia, Eukaliptus, Mahoni). Mentok hanya muncul kata "Wood fiber". |
+| **Buah-buahan** (*Fruit*) | MENTOK DI KATEGORI UMUM | Luas deforestasi (Ha) | `gfw_plantations` (No. 170) | **Tidak bisa di-breakdown**. Tidak bisa dilacak jenis buahnya (Pisang, Jeruk, Mangga). Mentok hanya muncul kata "Fruit". |
+| **Pertanian Umum** (*Agriculture / Cropland*) | MENTOK DI KATEGORI UMUM | Status lahan (Label Teks) | `esa_land_cover_2015` (No. 35) | **Tidak bisa di-breakdown**. Satelit murni hanya melihat sepetak tanah sebagai "Lahan Pertanian", tapi buta terhadap tanaman apa yang ditanam di sana. |
+| **Tebu & Kopi** | TIDAK ADA PETA SPASIAL | Estimasi panen (Ton/Ha) | `mapspam_yield_...` (No. 252, 256) | Hanya ada data tabel estimasi jumlah panen (tonase) dari petani. **BUKAN** peta spasial konsesi/deforestasi. |
+| **Kelapa, Cengkeh, Lada, Rempah, dll** | TIDAK ADA SAMA SEKALI | - | - | Satelit GFW sama sekali tidak memantau atau memiliki data spasial untuk komoditas ini. |ial untuk komoditas ini. |

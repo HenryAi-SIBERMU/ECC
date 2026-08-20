@@ -1154,7 +1154,7 @@ with st.expander("2 · KUALITAS LINGKUNGAN", expanded=False):
         'Urbanisasi': 'Urbanisasi & Infrastruktur',
         'Tidak Diketahui': 'Tidak Teridentifikasi'
     })
-    df_emisi_agg = df_emisi[df_emisi['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara', 'Sulawesi Utara', 'Sulawesi Selatan', 'Gorontalo'])].groupby('Faktor_Pendorong').agg({
+    df_emisi_agg = df_emisi[df_emisi['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara', 'Sulawesi Utara', 'Sulawesi Selatan', 'Gorontalo', 'Sulawesi Barat'])].groupby('Faktor_Pendorong').agg({
         'Luas_Deforestasi_Ha': 'sum',
         'Emisi_CO2_Megagram': 'sum'
     }).reset_index().sort_values('Luas_Deforestasi_Ha', ascending=False)
@@ -1499,7 +1499,7 @@ with st.expander("2 · KUALITAS LINGKUNGAN", expanded=False):
     }
     df_driver_clean = df_driver.copy()
     df_driver_clean['Faktor_Pendorong'] = df_driver_clean['Faktor_Pendorong'].replace(driver_mapping)
-    focus_provinces = ['Sulawesi Tengah', 'Sulawesi Tenggara', 'Sulawesi Utara', 'Sulawesi Selatan', 'Gorontalo']
+    focus_provinces = ['Sulawesi Tengah', 'Sulawesi Tenggara', 'Sulawesi Utara', 'Sulawesi Selatan', 'Gorontalo', 'Sulawesi Barat']
     df_driver_focus = df_driver_clean[df_driver_clean['Provinsi'].isin(focus_provinces)]
     df_driver_temporal = df_driver_focus.groupby(['Tahun', 'Faktor_Pendorong'])['Luas_Deforestasi_Ha'].sum().reset_index()
     

@@ -924,7 +924,7 @@ df_emisi['Faktor_Pendorong'] = df_emisi['Faktor_Pendorong'].replace({
     'Urbanisasi': 'Urbanisasi & Infrastruktur',
     'Tidak Diketahui': 'Tidak Teridentifikasi'
 })
-df_emisi_agg = df_emisi[df_emisi['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara', 'Sulawesi Utara', 'Sulawesi Selatan', 'Gorontalo'])].groupby('Faktor_Pendorong').agg({
+df_emisi_agg = df_emisi[df_emisi['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara', 'Sulawesi Utara', 'Sulawesi Selatan', 'Gorontalo', 'Sulawesi Barat'])].groupby('Faktor_Pendorong').agg({
     'Luas_Deforestasi_Ha': 'sum',
     'Emisi_CO2_Megagram': 'sum'
 }).reset_index().sort_values('Luas_Deforestasi_Ha', ascending=False)
@@ -1464,14 +1464,17 @@ df_driver_pct = df_driver_total.copy()
 total_per_prov = df_driver_pct.groupby('Provinsi')['Luas_Deforestasi_Ha'].transform('sum')
 df_driver_pct['Persentase'] = (df_driver_pct['Luas_Deforestasi_Ha'] / total_per_prov * 100).round(2)
 
-# Focus provinces (exclude Sulbar due to minimal data)
-focus_provinces = ['Sulawesi Tengah', 'Sulawesi Tenggara', 'Sulawesi Utara', 'Sulawesi Selatan', 'Gorontalo']
+# Focus provinces (seluruh 6 provinsi untuk konsistensi data agregat)
+focus_provinces = ['Sulawesi Tengah', 'Sulawesi Tenggara', 'Sulawesi Utara', 'Sulawesi Selatan', 'Gorontalo', 'Sulawesi Barat']
 df_driver_focus = df_driver_clean[df_driver_clean['Provinsi'].isin(focus_provinces)]
 
-pertanyaan_text = """
+total_deforestasi_fokus = df_driver_focus['Luas_Deforestasi_Ha'].sum()
+teks_juta = f"{total_deforestasi_fokus/1e6:.2f}".replace('.', ',')
+
+pertanyaan_text = f"""
 <div style="background:linear-gradient(135deg, #1A1F2B, #232B3B);padding:20px;border-left:4px solid #D32F2F;border-radius:8px;margin-bottom:25px;">
     <p style="color:#ECEFF1;font-size:1rem;line-height:1.7;margin:0;">
-        <b style="color:#EF5350;">Fokus Analisis:</b> Membedah kontribusi masing-masing sektor pendorong terhadap <b>1,6+ juta hektar deforestasi di Sulawesi</b> sepanjang dekade 2014–2023. 
+        <b style="color:#EF5350;">Fokus Analisis:</b> Membedah kontribusi masing-masing sektor pendorong terhadap <b>{teks_juta}+ juta hektar deforestasi di Sulawesi</b> sepanjang dekade 2014–2023. 
         Section ini menyajikan atribusi kuantitatif antara aktivitas industri ekstraktif komoditas (tambang/sawit) dan sektor pertanian masyarakat.
     </p>
 </div>

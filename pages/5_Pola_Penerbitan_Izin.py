@@ -492,10 +492,13 @@ try:
     st.markdown("<h4 style='margin-bottom: 10px;'>Akumulasi Kehancuran Total: Livelihood Warga (Pertanian, Peternakan, Perkebunan) 2014-2023</h4>", unsafe_allow_html=True)
     st.plotly_chart(fig_kawasan, use_container_width=True, config={'displayModeBar': False})
     
-    st.markdown("""
+    # Dapatkan nilai akumulasi tertinggi (Total kumulatif)
+    total_kehancuran = df_pivot_chart['Total'].max()
+    
+    st.markdown(f"""
     <div style="background:#1E1E1E; padding:15px 20px; border-radius:8px; border-left:4px solid #3498DB; margin-top: 10px; margin-bottom: 25px;">
         <span style="color: #E0E0E0; font-size: 0.95rem;">
-            <b style="color:#3498DB;">Fakta Spasial:</b> Dalam dekade terakhir, total lebih dari <b>56 ribu hektar</b> kawasan livelihood (Pertanian, Peternakan, dan Perkebunan) warga tercatat mengalami perubahan tutupan lahan yang beririsan dengan dinamika industri ekstraktif.
+            <b style="color:#3498DB;">Fakta Spasial:</b> Dalam dekade terakhir, total lebih dari <b>{total_kehancuran/1000:,.1f} ribu hektar</b> kawasan livelihood (Pertanian, Peternakan, dan Perkebunan) warga tercatat mengalami perubahan tutupan lahan yang beririsan dengan dinamika industri ekstraktif.
         </span>
     </div>
     """, unsafe_allow_html=True)

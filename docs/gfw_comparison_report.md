@@ -236,7 +236,7 @@ Tabel-tabel di bawah ini merupakan hasil audit **baris demi baris** dari seluruh
 
 ### 📍 Page 0 (`0_Overview_Temuan.py`)
 
-| Posisi UI di Page 0 (`0_Overview_Temuan.py`) | Kutipan Teks Harfiah di Layar Dasbor | Angka Lama (Sebelum V3) | Angka API V3 (Akurat Sekarang) |
+| Posisi UI di Page 0 (`0_Overview_Temuan.py`) | Kutipan Teks Harfiah di Layar Dasbor | Angka Lama (Sebelum V3) | Angka API V3 (Sekarang) |
 | :--- | :--- | :---: | :---: |
 | **1. Kartu Strip Expander 1** | Kartu Metrik Ringkasan Page 1: `Deforestasi` | **2,107,041 Ha** | **1,001,654 Ha** |
 | **2. Kartu Strip Expander 2** | Kartu Metrik Ringkasan Page 2: `Deforestasi` | **2,107,041 Ha** | **1,001,654 Ha** |
@@ -249,54 +249,55 @@ Tabel-tabel di bawah ini merupakan hasil audit **baris demi baris** dari seluruh
 
 ### 📍 Page 1 (`1_Ekspansi_Industri.py`)
 
-| Posisi UI di Page 1 (`1_Ekspansi_Industri.py`) | Kutipan Teks Harfiah di Layar Dasbor | Angka Lama (Sebelum V3) | Angka API V3 (Akurat Sekarang) |
+| Posisi UI di Page 1 (`1_Ekspansi_Industri.py`) | Kutipan Teks Harfiah di Layar Dasbor | Angka Lama (Sebelum V3) | Angka API V3 (Sekarang) |
 | :--- | :--- | :---: | :---: |
 | **1. Bento Card KPI** | `<div class="metric-label">Luas Deforestasi Komoditas</div>` | **2,107,041 Ha** | **1,001,654 Ha** |
 | **2. Hero Statement Narasi** | *"Secara bersamaan, kucuran realisasi PMDN... berbanding lurus dengan akumulasi konversi tutupan hutan sebesar **{angka} Hektar**..."* | **2,107,041 Hektar** | **1,001,654 Hektar** |
 | **3. Pembedahan Ekologis (Poin 1)** | *"1. Aktor Utama Deforestasi (Donut Chart): Konversi tutupan hutan terbesar didominasi oleh Ekspansi Komoditas (Tambang & Perkebunan Monokultur) yang mencapai **{angka} Hektar** ({mha}),..."* | **4,931,210 Hektar**<br>(4.9 Mha) | **1,890,659 Hektar**<br>(1.9 Mha) |
 | **4. Pembedahan Ekologis (Poin 3)** | *"3. Estimasi Emisi Karbon (Bar Chart Kanan): Konversi hutan alam untuk aktivitas komoditas melepaskan estimasi emisi sebesar **{angka} Megagrams CO2**,..."* | **3,371,872,868**<br>Megagrams CO2 | **1,282,195,705**<br>Megagrams CO2 |
 | **5. Panel Indikator Donut Chart** | Label Teks Merah Samping Donut Chart: **Ekspansi Komoditas** | **4.9 Mha** | **1.9 Mha** |
-| **6. Dropdown Crosstab (Variabel Y)** | Menu Dropdown: **"Deforestasi Komoditas Tambang/Sawit (Hektar)"** | Median Panel:<br>**3,114 Ha** | Median Panel:<br>**1,387 Ha** |
+| **6. Dropdown Crosstab (Variabel Y)** | *Parameter Perhitungan Filter:*<br>**"Batas Median Data"** | **3,114 Ha**<br>*(Tidak Tampil di UI)* | **1,387 Ha**<br>*(Tidak Tampil di UI)* |
 
 ---
 
 ### 📍 Page 2 (`2_Kualitas_Lingkungan.py`)
 
-| Posisi UI di Page 2 (`2_Kualitas_Lingkungan.py`) | Kutipan Teks Harfiah di Layar Dasbor | Angka Lama (Sebelum V3) | Angka API V3 (Akurat Sekarang) |
+| Posisi UI di Page 2 (`2_Kualitas_Lingkungan.py`) | Kutipan Teks Harfiah di Layar Dasbor | Angka Lama (Sebelum V3) | Angka API V3 (Sekarang) |
 | :--- | :--- | :---: | :---: |
 | **1. Bento Card KPI** | `<div class="metric-label">Konversi Deforestasi</div>` | **2,107,041 Ha** | **1,001,654 Ha** |
 | **2. Hero Statement Narasi** | *"Data menunjukkan bahwa konversi tutupan hutan mencapai **{angka} Hektar**..."* | **2,107,041 Hektar** | **1,001,654 Hektar** |
 | **3. Sub-Bab 2.4 Narasi Emisi Tambang** | *"Data menunjukkan bahwa sektor Pertambangan dan Sawit mencatatkan estimasi emisi CO₂ sebesar **{emisi} Juta Ton** dari konversi lahan seluas **{luas} Hektar**."* | **1,339.5 Juta Ton**<br>(dari 2,107,041 Ha) | **597.8 Juta Ton**<br>(dari 902,068 Ha) |
 | **4. Sub-Bab 2.4 Narasi Porsi Emisi** | *"Tingkat emisi ini mencakup **{pct}%** dari total emisi karbon akibat hilangnya tutupan pohon..."* | **88.0%** | **82.9%** |
 | **5. Sub-Bab 2.4 Narasi Emisi Petani** | *"...berbanding dengan aktivitas Pertanian Berpindah yang melepaskan emisi sebesar **{emisi} Juta Ton**."* | **13.2 Juta Ton** | **35.6 Juta Ton** |
-| **6. Dropdown Crosstab (2.3)** | Menu Dropdown: **"Total Deforestasi Alam (Hektar)"** | Filter Median:<br>**3,114 Ha** | Filter Median:<br>**2,763 Ha** |
+| **6. Dropdown Crosstab (2.3)** | *Parameter Perhitungan Filter:*<br>**"Batas Median Data"** | **3,114 Ha**<br>*(Tidak Tampil di UI)* | **2,763 Ha**<br>*(Tidak Tampil di UI)* |
 
 ---
 
 ### 📍 Page 5 (`5_Pola_Penerbitan_Izin.py`)
 
-| Posisi UI di Page 5 (`5_Pola_Penerbitan_Izin.py`) | Kutipan Teks Harfiah di Layar Dasbor | Angka Lama (Sebelum V3) | Angka API V3 (Akurat Sekarang) |
+| Posisi UI di Page 5 (`5_Pola_Penerbitan_Izin.py`) | Kutipan Teks Harfiah di Layar Dasbor | Angka Lama (Sebelum V3) | Angka API V3 (Sekarang) |
 | :--- | :--- | :---: | :---: |
 | **1. Hero Statement Narasi** | *"Selama satu dekade terakhir, total deforestasi tercatat sebesar **{angka} hektar**..."* | **2,078,652.3 Hektar** | **1,386,055.4 Hektar** |
 | **2. Sub-Bab 5.2 Fakta Spasial** | *"Dalam dekade terakhir, total lebih dari **{angka} hektar** kawasan livelihood (Pertanian, Peternakan, dan Perkebunan) warga tercatat mengalami perubahan tutupan lahan..."* | **56,720 Hektar** | **41,785 Hektar** |
-| **3. Sub-Bab 5.1 Dual-Axis Chart** | Kurva Batang: **Total Deforestasi (Hektar)** | Agregat Siluman | Agregat V3 Akurat |
-| **4. Dropdown Uji Crosstab (5.4)** | Menu Dropdown: **"Total Deforestasi Alam (Hektar)"** vs **"Deforestasi Komoditas Tambang/Sawit (Hektar)"** | Menu Variabel Y | Menu Variabel Y |
+| **3. Sub-Bab 5.1 Dual-Axis Chart** | Kurva Batang: **Total Deforestasi (Hektar)** | **Bentuk Grafik Salah**<br>*(Bukan Angka Teks di UI)* | **Bentuk Grafik Akurat**<br>*(Bukan Angka Teks di UI)* |
+| **4. Dropdown Uji Crosstab (5.4)** | Hasil Uji: **"Total Deforestasi Alam (Hektar)"** vs **"Deforestasi Komoditas"** | **TIDAK SIGNIFIKAN**<br>*(Salah data Sulteng-Sulut)* | **SIGNIFIKAN SEMUA**<br>*(Pola data akurat)* |
 
 ---
 
 ### 📍 Page 7 (`7_Kegagalan_Tata_Kelola.py`) & Page 8 (`8_Distribusi_Manfaat.py`)
 
-| Posisi UI di Page 7 & Page 8 | Kutipan Teks Harfiah di Layar Dasbor | Angka Lama (Sebelum V3) | Angka API V3 (Akurat Sekarang) |
+| Posisi UI di Page 7 & Page 8 | Parameter Logika di Balik Layar (Persentil) | Data Lama (Sebelum V3) | Data API V3 (Sekarang) |
 | :--- | :--- | :---: | :---: |
-| **1. Dropdown Crosstab (Page 7)** | Menu Dropdown: **"Total Deforestasi Alam (Hektar)"** | **2,078,652 Ha** | **1,386,055 Ha** |
-| **2. Dropdown Crosstab (Page 7)** | Menu Dropdown: **"Deforestasi Komoditas Tambang/Sawit (Hektar)"** | **2,107,041 Ha** | **1,001,654 Ha** |
-| **3. Dropdown Crosstab (Page 8)** | Menu Dropdown: **"Total Deforestasi Alam (Hektar)"** | **2,078,652 Ha** | **1,386,055 Ha** |
+| **1. Matriks Crosstab (Total Deforestasi Alam)** | **Ambang Batas "Kritis"** *(Percentile 66%)* | **> 39.633 Ha**<br>*(Threshold Terlalu Tinggi)* | **> 26.526 Ha**<br>*(Threshold Akurat)* |
+| **2. Matriks Crosstab (Total Deforestasi Alam)** | **Jumlah Izin di Zona "Kritis"** *(Efek Perubahan Threshold)* | **260 Izin Baru Keluar** | **277 Izin Baru Keluar** |
+| **3. Matriks Crosstab (Deforestasi Komoditas)** | **Ambang Batas "Kritis"** *(Percentile 66%)* | **> 40.041 Ha**<br>*(Threshold Terlalu Tinggi)* | **> 19.334 Ha**<br>*(Threshold Akurat)* |
+| **4. Matriks Crosstab (Deforestasi Komoditas)** | **Jumlah Izin di Zona "Kritis"** *(Efek Perubahan Threshold)* | **260 Izin Baru Keluar** | **277 Izin Baru Keluar** |
 
 ---
 
 ### 📍 Page 12 (`12_Infografis_Summary.py`) & Page 13 (`13_Infografis_Fakta.py`)
 
-| Posisi UI di Page 12 & Page 13 | Kutipan Teks Harfiah di Layar Dasbor | Angka Lama (Sebelum V3) | Angka API V3 (Akurat Sekarang) |
+| Posisi UI di Page 12 & Page 13 | Kutipan Teks Harfiah di Layar Dasbor | Angka Lama (Sebelum V3) | Angka API V3 (Sekarang) |
 | :--- | :--- | :---: | :---: |
 | **1. Panel Kartu Summary (Page 12)** | Label Panel: **Kehilangan Tutupan Pohon** | **2,078,652 Ha** | **1,386,055 Ha** |
 | **2. Panel Kartu Summary (Page 12)** | Label Panel: **Deforestasi (Tambang/Sawit)** | **2,107,041 Ha** | **1,001,654 Ha** |

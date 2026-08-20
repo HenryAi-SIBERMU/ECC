@@ -663,7 +663,7 @@ prov_map = {
 }
 df_pltu_panel = df_pltu[df_pltu['Status'].isin(['operating'])].copy()
 df_pltu_panel = df_pltu_panel[df_pltu_panel['captive_flag'] == True]
-df_pltu_panel['Provinsi'] = df_pltu_panel['Subnational unit (province, state)'].map(prov_map)
+df_pltu_panel['Provinsi'] = df_pltu_panel['Subnational unit (province, state)'].replace(prov_map)
 df_pltu_panel['Tahun'] = pd.to_numeric(df_pltu_panel['Start year'], errors='coerce')
 df_pltu_agg2 = df_pltu_panel.groupby(['Provinsi', 'Tahun'])['Capacity (MW)'].sum().reset_index()
 

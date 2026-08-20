@@ -655,6 +655,11 @@ Setiap indikator tunggal $x_i$ pada seluruh matriks dipetakan ke skor Likert dis
 | **4** | **Buruk / Kerentanan Tinggi** | Indikator mengalami defisit parah/degradasi signifikan. Ancaman nyata terhadap keberlanjutan ekosistem dan masyarakat lokal. |
 | **5** | **Sangat Buruk / Kerentanan Ekstrem** | Indikator berada pada tingkat krisis/kerusakan maksimum (misal: IKU $< 25$, operasional DSTP laut dalam, kriminalisasi tinggi). *Red Alert*. |
 
+> **Catatan Pembaruan UI Peta (Agustus 2026 - Permintaan Mas Saleh SIBERMU)**: 
+> Meskipun kalkulasi matematis di *backend* tetap menggunakan skala pembobotan 1-5 (Likert/Z-Score) agar presisi saintifik tidak rusak, pelabelan akhir (*binning*) yang ditampilkan kepada pengguna di Dasbor (UI Peta) disederhanakan menjadi 3 kategori istilah:
+> 1. **Melampaui Batas** (Mewakili skor akhir 4 dan 5 / Merah)
+> 2. **Mendekati Batas** (Mewakili skor akhir 3 / Kuning)
+> 3. **Tidak Melampaui Batas** (Mewakili skor akhir 1 dan 2 / Hijau)
 ---
 
 ### B. Formula Normalisasi (Min-Max) & Agregasi WSM (Level Pulau)

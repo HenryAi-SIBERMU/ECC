@@ -246,32 +246,32 @@ if not df_konflik.empty:
 # Lahan
 bencana_sulteng_sultra = 0
 if not df_bencana.empty:
-    df_bencana_sentra = df_bencana[df_bencana['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
+    df_bencana_sentra = df_bencana.copy()
     df_bencana_sentra['jumlah_kejadian'] = pd.to_numeric(df_bencana_sentra['jumlah_kejadian'], errors='coerce').fillna(0)
     bencana_sulteng_sultra = df_bencana_sentra['jumlah_kejadian'].sum()
 
 deforestasi_sentra = 0
 if not df_gfw.empty:
-    df_gfw_sentra = df_gfw[df_gfw['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
-    df_gfw_sentra['Total_Deforestasi_Ha'] = pd.to_numeric(df_gfw_sentra['Total_Deforestasi_Ha'], errors='coerce').fillna(0)
-    deforestasi_sentra = df_gfw_sentra['Total_Deforestasi_Ha'].sum()
+    df_gfw_sentra = df_gfw.copy()
+    df_gfw_sentra['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'] = pd.to_numeric(df_gfw_sentra['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'], errors='coerce').fillna(0)
+    deforestasi_sentra = df_gfw_sentra['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'].sum()
 
 lindung_hilang = 0
 if not df_gfw_lindung.empty:
-    df_l = df_gfw_lindung[df_gfw_lindung['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
+    df_l = df_gfw_lindung.copy()
     df_l['Luas_Hilang_Kawasan_Lindung_Ha'] = pd.to_numeric(df_l['Luas_Hilang_Kawasan_Lindung_Ha'], errors='coerce').fillna(0)
     lindung_hilang = df_l['Luas_Hilang_Kawasan_Lindung_Ha'].sum()
 
 tambang_driver_ha = 0
 if not df_gfw_driver.empty:
-    df_d = df_gfw_driver[df_gfw_driver['Provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
+    df_d = df_gfw_driver.copy()
     df_d['Luas_Deforestasi_Ha'] = pd.to_numeric(df_d['Luas_Deforestasi_Ha'], errors='coerce').fillna(0)
     tambang_driver = df_d[df_d['Faktor_Pendorong'] == 'Deforestasi Komoditas (Tambang/Sawit)']
     tambang_driver_ha = tambang_driver['Luas_Deforestasi_Ha'].sum()
 
 rasio_ekspansi = 0.0
 if not df_kawasan_nikel.empty:
-    sentra_kn = df_kawasan_nikel[df_kawasan_nikel['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])].copy()
+    sentra_kn = df_kawasan_nikel.copy()
     sentra_kn['total_luas_iup_ha'] = pd.to_numeric(sentra_kn['total_luas_iup_ha'], errors='coerce').fillna(0)
     sentra_kn['total_luas_amdal_ha'] = pd.to_numeric(sentra_kn['total_luas_amdal_ha'], errors='coerce').fillna(0)
     total_iup_nikel = sentra_kn['total_luas_iup_ha'].sum()
@@ -562,16 +562,13 @@ def binned_likert_score(ratio):
 
 def get_likert_label(score):
     s = round(score)
-    if s >= 5:
-        return "Red Alert (Merah Pekat)"
-    elif s == 4:
-        return "Kritis"
+    # Sesuai Permintaan Mas Saleh SIBERMU
+    if s >= 4:
+        return "Melampaui Batas"
     elif s == 3:
-        return "Rentan"
-    elif s == 2:
-        return "Aman"
+        return "Mendekati Batas"
     else:
-        return "Sangat Aman"
+        return "Tidak Melampaui Batas"
 
 # --- GLOBAL PROVINCE SCORE CALCULATOR ---
 def calculate_province_score(prov_name, use_likert=False):
@@ -2343,10 +2340,10 @@ with colC2:
         skl2_str = f"{(skor_lahan_2 / 2.0):.1f}" if is_likert_mode else f"{skor_lahan_2:.1f}"
         
         help_skorl2 = f"Kalkulasi Total (Lahan 2):\nmin(10.0, ({deforestasi_sentra:,.0f} / 638,000) * 10) = {skor_lahan_2:.1f}/10" + (f" (Likert: {(skor_lahan_2 / 2.0):.1f}/5)" if is_likert_mode else "")
-        help_lahan2 = f"Data GFW:\n- Deforestasi Sulteng & Sultra: {deforestasi_sentra:,.0f} Ha (2014-2023)\n\nKalkulasi Threshold FOLU Net Sink 2030:\n- Kuota Maksimal Nasional: 1.700.000 Ha / 30 Tahun\n- Rata-rata Kuota Nasional: ~58.000 Ha / Tahun\n- Rentang Observasi GFW: 11 Tahun (2014-2024)\n- Threshold: 58.000 Ha * 11 Tahun = 638.000 Ha\n\n{help_skorl2}"
+        help_lahan2 = f"Data GFW:\n- Deforestasi Komoditas (Tambang & Sawit) Pulau Sulawesi: {deforestasi_sentra:,.0f} Ha (2014-2023)\n\nKalkulasi Threshold FOLU Net Sink 2030:\n- Kuota Maksimal Nasional: 1.700.000 Ha / 30 Tahun\n- Rata-rata Kuota Nasional: ~58.000 Ha / Tahun\n- Rentang Observasi GFW: 11 Tahun (2014-2024)\n- Threshold: 58.000 Ha * 11 Tahun = 638.000 Ha\n\n{help_skorl2}"
         
         col1, col2 = st.columns(2)
-        col1.metric(f"Total Deforestasi Hutan (Skor: {skl2_str})", f"{deforestasi_sentra:,.0f} Ha", col1_delta, delta_color=col1_color, help=help_lahan2)
+        col1.metric(f"Total Deforestasi Komoditas (Skor: {skl2_str})", f"{deforestasi_sentra:,.0f} Ha", col1_delta, delta_color=col1_color, help=help_lahan2)
         col2.metric("Skor Deforestasi Primer (Lahan 2)", f"{skl2_str} / {card_denom}", col2_delta, delta_color=col2_color, help=help_skorl2)
         
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)

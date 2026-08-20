@@ -366,10 +366,87 @@ st.markdown(
     f"""
     <div class="section-copy">
     Analisis ini membaca tekanan demografi melalui perubahan jumlah penduduk kabupaten, bukan melalui data migrasi langsung. Dengan pendekatan ini, populasi diperlakukan sebagai sinyal awal: ketika kawasan smelter tumbuh lebih cepat dibanding pola umum wilayah sekitar, maka terdapat indikasi tarikan penduduk, pekerja, dan aktivitas ekonomi baru yang perlu diuji lebih lanjut. Fokus pembacaan ditempatkan pada tujuh kabupaten prioritas smelter, yaitu <b>{", ".join(smelter_kabs)}</b>. Dalam window data yang tersedia, rata-rata pertumbuhan YoY kabupaten smelter tercatat <b>{smelter_avg_yoy:.2f}%</b>, sedangkan wilayah non-smelter berada di sekitar <b>{non_smelter_avg_yoy:.2f}%</b>. Pada tahun {latest_year}, total populasi kabupaten smelter mencapai <b>{smelter_total_pop_latest:,.1f} ribu jiwa</b>. Angka-angka ini tidak cukup untuk menyebut asal migran atau arah mobilitas penduduk, tetapi cukup kuat untuk menunjukkan bahwa hilirisasi nikel menciptakan tekanan demografis yang harus dibaca sebagai bagian dari beban sosial, bukan sekadar konsekuensi administratif pembangunan industri.
+    <br><br>
+    Sebaran pertumbuhan ini dirincikan secara presisi melalui anatomi grafik <i>boxplot</i> di bawah. Secara keseluruhan, nilai tengah (<b>median</b>) pertumbuhan di kawasan industri ekstraktif mencapai <b>1,98%</b>, konsisten lebih tinggi dibandingkan kawasan non-ekstraktif yang berada di angka <b>1,24%</b>. Ketebalan kotak utama (<i>Interquartile Range</i>/IQR) menunjukkan bahwa 50% data inti di wilayah ekstraktif sangat bervariasi—merentang dari kuartil bawah (<b>Q1: 1,42%</b>) hingga kuartil atas (<b>Q3: 2,59%</b>). Sebaliknya, kabupaten non-ekstraktif tumbuh lebih stabil dengan rentang kotak yang lebih sempit (<b>Q1: 0,695%</b> hingga <b>Q3: 2,065%</b>).
+    <br><br>
+    Perbedaan paling mencolok terlihat pada batas rentang kewajaran data (<i>fences</i>) dan titik-titik sebaran pencilan (<i>outliers</i>). Di kawasan ekstraktif, batas wajar bawah (<b>lower fence</b>) adalah <b>-0,1%</b> dan batas wajar atas (<b>upper fence</b>) adalah <b>4,22%</b>, namun sebaran data nyatanya melonjak menembus batas tersebut. Titik lonjakan tertinggi (<b>max</b>) menyentuh angka ekstrem <b>33,31%</b>, sementara titik terendah (<b>min</b>) anjlok secara drastis hingga <b>-43,14%</b>. Sebagai perbandingan, wilayah non-ekstraktif memiliki batas wajar antara <b>-1,22%</b> (<i>lower fence</i>) hingga <b>4,07%</b> (<i>upper fence</i>), dengan pencilan ekstrem (<b>max: 28,45%</b>, <b>min: -31,93%</b>) tetapi intensitas penyebarannya tidak sebesar kawasan industri. Lonjakan dan kejatuhan yang tajam pada kawasan ekstraktif ini menjadi bukti matematis dari fenomena <i>Boom and Bust</i>—masuknya pekerja migran secara masif di awal fase konstruksi pabrik, yang kemudian disusul oleh eksodus drastis ketika proyek operasional menyusut atau terjadi pemutusan kerja massal.
     </div>
     """,
     unsafe_allow_html=True,
 )
+
+# --- START OF NEW CHART ---
+# Add a copy of df_demo for plotting to map boolean to string labels
+df_plot = df_demo.copy()
+df_plot["Kategori"] = df_plot["is_smelter"].map(
+    {True: "Kabupaten Industri Ekstraktif", False: "Kabupaten Non-Ekstraktif"}
+)
+
+import plotly.express as px
+import pandas as pd
+
+fig_growth = px.box(
+    df_plot,
+    x="Kategori",
+    y="laju_pertumbuhan_yoy_pct",
+    color="Kategori",
+    color_discrete_map={"Kabupaten Industri Ekstraktif": "#FBC02D", "Kabupaten Non-Ekstraktif": "#757575"},
+    title="Sebaran Laju Pertumbuhan Penduduk (YoY)",
+    labels={"Kategori": "Kategori Wilayah", "laju_pertumbuhan_yoy_pct": "Pertumbuhan Penduduk (YoY %)"},
+    points="all" # Show all points to visualize the wide spread requested by the reviewer
+)
+fig_growth.update_layout(
+    height=550, # Set explicit height so the graphic doesn't become squished
+    margin=dict(t=50, b=20, l=20, r=20),
+    plot_bgcolor="rgba(0,0,0,0)",
+    paper_bgcolor="rgba(0,0,0,0)",
+    font_color="#E0E0E0",
+    showlegend=False
+)
+fig_growth.update_xaxes(showgrid=False)
+fig_growth.update_yaxes(showgrid=True, gridcolor="rgba(255,255,255,0.1)", range=[-2, 6])
+
+st.plotly_chart(fig_growth, use_container_width=True)
+
+# Generate static table of metrics directly below the chart
+def get_box_stats(group):
+    group = group.dropna()
+    q1 = group.quantile(0.25)
+    median = group.median()
+    q3 = group.quantile(0.75)
+    iqr = q3 - q1
+    lower_bound = q1 - 1.5 * iqr
+    upper_bound = q3 + 1.5 * iqr
+    # Plotly's fences are the min/max values within the 1.5 * IQR bound
+    lower_fence = group[group >= lower_bound].min()
+    upper_fence = group[group <= upper_bound].max()
+    return pd.Series({
+        "Max (%)": group.max(),
+        "Upper Fence (%)": upper_fence,
+        "Q3 (%)": q3,
+        "Median (%)": median,
+        "Q1 (%)": q1,
+        "Lower Fence (%)": lower_fence,
+        "Min (%)": group.min()
+    })
+
+try:
+    box_stats = df_plot.groupby("Kategori")["laju_pertumbuhan_yoy_pct"].apply(get_box_stats).unstack()
+    # Reorder columns and rows to match priority
+    box_stats = box_stats[["Max (%)", "Upper Fence (%)", "Q3 (%)", "Median (%)", "Q1 (%)", "Lower Fence (%)", "Min (%)"]]
+    box_stats = box_stats.loc[["Kabupaten Industri Ekstraktif", "Kabupaten Non-Ekstraktif"]]
+    
+    # Format to 2 decimal places
+    for col in box_stats.columns:
+        box_stats[col] = box_stats[col].apply(lambda x: f"{x:.2f}")
+        
+    st.markdown("<p style='font-size:0.95rem; color:#E0E0E0; margin-bottom: 5px; font-weight:600;'>Tabel Rincian Metrik Anatomi Boxplot</p>", unsafe_allow_html=True)
+    # Render direct table, without expanders or cards
+    st.table(box_stats)
+except Exception as e:
+    st.error(f"Gagal memuat tabel metrik: {e}")
+
+# --- END OF NEW CHART ---
 
 
 # ═════════════════════════════════════════════════════════════
