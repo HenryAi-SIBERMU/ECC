@@ -10,7 +10,7 @@ import importlib
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from src.components.sidebar import render_sidebar
 import tools.algo_skoring_pulau.kalkulasi_pulau_sulawesi as algo_pulau_mod
-import tools.algo_skoring_provinsi.kalkulasi_provinsi_sulawesi as algo_prov_mod
+import tools.algo_skoring_provinsi_ZscoreEWM.kalkulasi_provinsi_sulawesi as algo_prov_mod
 importlib.reload(algo_pulau_mod)
 importlib.reload(algo_prov_mod)
 kalkulasi_skor_pulau_sulawesi = algo_pulau_mod.kalkulasi_skor_pulau_sulawesi
@@ -149,7 +149,7 @@ def load_data():
     df_kes = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_kesehatan_detail_2014_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_kesehatan_detail_2014_2024.csv")) else pd.DataFrame()
     df_ika = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv")) else pd.DataFrame()
     df_bencana = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_bencana_bnpb_2014_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_bencana_bnpb_2014_2024.csv")) else pd.DataFrame()
-    df_konflik = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita.csv")) else pd.DataFrame()
+    df_konflik = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita_v2.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita_v2.csv")) else pd.DataFrame()
     if not df_konflik.empty and 'tahun' in df_konflik.columns:
         df_konflik['tahun'] = pd.to_numeric(df_konflik['tahun'], errors='coerce')
         df_konflik = df_konflik[df_konflik['tahun'] >= 2014]
@@ -194,19 +194,18 @@ if not df_iku.empty:
 # --- PENGUMPULAN DATA EMPIRIS KABUPATEN/PULAU ---
 # Udara
 if not df_kes.empty:
-    df_ts_pre = df_kes[df_kes['indikator'].str.contains('ISPA', case=False, na=False)]
-    kasus_sentra = df_ts_pre[df_ts_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
-    kasus_non_sentra = df_ts_pre[~df_ts_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
-    rasio_anomali = (kasus_sentra / 2.0) / (kasus_non_sentra / 4.0) if kasus_non_sentra > 0 else 0
+    hasil_algo_prov = kalkulasi_skor_provinsi_sulawesi()
+    rasio_anomali = max([v['raw_absolut']['ispa_irr'] for v in hasil_algo_prov.values()]) if hasil_algo_prov else 0.0
 else:
     rasio_anomali = 0
 
 proporsi_b3 = 0.0
-total_b3_sulteng = 0.0
+total_b3_sulawesi = 0.0
 if not df_b3.empty:
-    df_b3['Estimasi Timbulan (Ton/Tahun)'] = pd.to_numeric(df_b3['Estimasi Timbulan (Ton/Tahun)'], errors='coerce').fillna(0)
-    total_b3_sulteng = df_b3[df_b3['Provinsi'] == 'Sulawesi Tengah']['Estimasi Timbulan (Ton/Tahun)'].sum()
-    proporsi_b3 = (total_b3_sulteng / 427_000_000.0) * 100.0
+    df_b3_clean = df_b3.copy()
+    df_b3_clean['Estimasi Timbulan (Ton/Tahun)'] = pd.to_numeric(df_b3_clean['Estimasi Timbulan (Ton/Tahun)'].astype(str).str.replace(',', '', regex=False), errors='coerce').fillna(0)
+    total_b3_sulawesi = df_b3_clean['Estimasi Timbulan (Ton/Tahun)'].sum()
+    proporsi_b3 = (total_b3_sulawesi / 427_000_000.0) * 100.0
 
 total_emisi_co2 = 0.0
 if not df_gfw.empty:
@@ -244,40 +243,39 @@ if not df_konflik.empty:
     jumlah_konflik_air = len(df_konflik_air)
 
 # Lahan
-bencana_sulteng_sultra = 0
+total_bencana_sulawesi = 0
 if not df_bencana.empty:
-    df_bencana_sentra = df_bencana.copy()
-    df_bencana_sentra['jumlah_kejadian'] = pd.to_numeric(df_bencana_sentra['jumlah_kejadian'], errors='coerce').fillna(0)
-    bencana_sulteng_sultra = df_bencana_sentra['jumlah_kejadian'].sum()
+    df_bencana_sulawesi = df_bencana.copy()
+    df_bencana_sulawesi['jumlah_kejadian'] = pd.to_numeric(df_bencana_sulawesi['jumlah_kejadian'], errors='coerce').fillna(0)
+    total_bencana_sulawesi = df_bencana_sulawesi['jumlah_kejadian'].sum()
 
-deforestasi_sentra = 0
+total_deforestasi_sulawesi = 0
 if not df_gfw.empty:
-    df_gfw_sentra = df_gfw.copy()
-    df_gfw_sentra['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'] = pd.to_numeric(df_gfw_sentra['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'], errors='coerce').fillna(0)
-    deforestasi_sentra = df_gfw_sentra['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'].sum()
+    df_gfw_sulawesi = df_gfw.copy()
+    df_gfw_sulawesi['Total_Deforestasi_Ha'] = pd.to_numeric(df_gfw_sulawesi['Total_Deforestasi_Ha'], errors='coerce').fillna(0)
+    total_deforestasi_sulawesi = df_gfw_sulawesi['Total_Deforestasi_Ha'].sum()
 
-lindung_hilang = 0
+total_lindung_hilang_sulawesi = 0
 if not df_gfw_lindung.empty:
     df_l = df_gfw_lindung.copy()
     df_l['Luas_Hilang_Kawasan_Lindung_Ha'] = pd.to_numeric(df_l['Luas_Hilang_Kawasan_Lindung_Ha'], errors='coerce').fillna(0)
-    lindung_hilang = df_l['Luas_Hilang_Kawasan_Lindung_Ha'].sum()
+    total_lindung_hilang_sulawesi = df_l['Luas_Hilang_Kawasan_Lindung_Ha'].sum()
 
-tambang_driver_ha = 0
+total_tambang_driver_sulawesi = 0
 if not df_gfw_driver.empty:
     df_d = df_gfw_driver.copy()
     df_d['Luas_Deforestasi_Ha'] = pd.to_numeric(df_d['Luas_Deforestasi_Ha'], errors='coerce').fillna(0)
     tambang_driver = df_d[df_d['Faktor_Pendorong'] == 'Deforestasi Komoditas (Tambang/Sawit)']
-    tambang_driver_ha = tambang_driver['Luas_Deforestasi_Ha'].sum()
+    total_tambang_driver_sulawesi = tambang_driver['Luas_Deforestasi_Ha'].sum()
 
 rasio_ekspansi = 0.0
+total_iup_nikel = 0.0
+luas_daratan_total = 18906621.0
 if not df_kawasan_nikel.empty:
     sentra_kn = df_kawasan_nikel.copy()
     sentra_kn['total_luas_iup_ha'] = pd.to_numeric(sentra_kn['total_luas_iup_ha'], errors='coerce').fillna(0)
-    sentra_kn['total_luas_amdal_ha'] = pd.to_numeric(sentra_kn['total_luas_amdal_ha'], errors='coerce').fillna(0)
     total_iup_nikel = sentra_kn['total_luas_iup_ha'].sum()
-    total_amdal_nikel = sentra_kn['total_luas_amdal_ha'].sum()
-    gap_amdal_iup = total_amdal_nikel - total_iup_nikel
-    rasio_ekspansi = gap_amdal_iup / total_iup_nikel if total_iup_nikel > 0 else 0
+    rasio_ekspansi = total_iup_nikel / luas_daratan_total
 
 # Sosial
 konflik_darat = 0
@@ -286,8 +284,12 @@ jiwa_terdampak = 0
 insiden_krim = 0
 warga_ditangkap = 0
 if not df_konflik.empty:
+    df_konflik_clean = df_konflik.copy()
+    df_konflik_clean['tahun'] = pd.to_numeric(df_konflik_clean['tahun'], errors='coerce')
+    df_konflik_recent = df_konflik_clean[df_konflik_clean['tahun'] >= 2014]
+    
     keywords = 'air|laut|pesisir|nelayan|sungai|pulau|tailing'
-    df_konflik_darat = df_konflik[~df_konflik['sektor'].str.contains(keywords, case=False, na=False)].copy()
+    df_konflik_darat = df_konflik_recent[~df_konflik_recent['sektor'].str.contains(keywords, case=False, na=False)].copy()
     konflik_darat = len(df_konflik_darat)
     df_konflik_darat['luas_ha'] = pd.to_numeric(df_konflik_darat['luas_ha'], errors='coerce').fillna(0)
     df_konflik_darat['dampak_masyarakat_jiwa'] = pd.to_numeric(df_konflik_darat['dampak_masyarakat_jiwa'], errors='coerce').fillna(0)
@@ -299,8 +301,12 @@ if not df_konflik.empty:
     warga_ditangkap = krim_df['jumlah_ditangkap'].sum()
 
 kasus_fpic = 0
+df_fpic_recent = pd.DataFrame()
 if not df_konflik_fpic.empty:
-    kasus_fpic = len(df_konflik_fpic[df_konflik_fpic['indikasi_fpic'] == True])
+    df_fpic_clean = df_konflik_fpic.copy()
+    df_fpic_clean['tahun'] = pd.to_numeric(df_fpic_clean['tahun'], errors='coerce')
+    df_fpic_recent = df_fpic_clean[(df_fpic_clean['tahun'] >= 2014) & (df_fpic_clean['indikasi_fpic'] == True)]
+    kasus_fpic = len(df_fpic_recent)
 
 spa_aktual_pct = 42.5
 
@@ -333,12 +339,12 @@ data_empiris_pulau = {
     'cr6_mg_l': max_cr6,
     'rasio_diare_sentra_vs_non': r_diare,
     'jumlah_konflik_pesisir': jumlah_konflik_air,
-    'tailing_buang_ton_tahun': total_b3_sulteng,
-    'jumlah_bencana': bencana_sulteng_sultra,
-    'deforestasi_ha': deforestasi_sentra,
-    'deforestasi_hutan_lindung_ha': lindung_hilang,
-    'deforestasi_driver_tambang_ha': tambang_driver_ha,
-    'rasio_gap_amdal_iup': rasio_ekspansi,
+    'tailing_buang_ton_tahun': total_b3_sulawesi,
+    'jumlah_bencana': total_bencana_sulawesi,
+    'deforestasi_ha': total_deforestasi_sulawesi,
+    'deforestasi_hutan_lindung_ha': total_lindung_hilang_sulawesi,
+    'deforestasi_driver_tambang_ha': total_tambang_driver_sulawesi,
+    'rasio_kepadatan_iup': rasio_ekspansi,
     'kasus_pelanggaran_fpic': kasus_fpic,
     'jiwa_terdampak_konflik': jiwa_terdampak,
     'insiden_kriminalisasi': insiden_krim,
@@ -492,7 +498,7 @@ with col3:
         </div>
         <div class="metric-source">
             <b>NOTE:</b> Perlu peninjauan tata ruang berbasis mitigasi bencana<br>
-            <i>Bencana: {bencana_sulteng_sultra:,.0f} Kejadian / Deforestasi: {deforestasi_sentra:,.0f} Ha</i>
+            <i>Bencana: {total_bencana_sulawesi:,.0f} Kejadian / Deforestasi: {total_deforestasi_sulawesi:,.0f} Ha</i>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -770,7 +776,10 @@ def calculate_province_score(prov_name, use_likert=False):
         
     kasus_fpic = 0
     if not df_konflik_fpic.empty:
-        kasus_fpic = len(df_konflik_fpic[(df_konflik_fpic['provinsi'] == prov_name) & (df_konflik_fpic['indikasi_fpic'] == True)])
+        df_konflik_fpic_clean = df_konflik_fpic.copy()
+        df_konflik_fpic_clean['tahun'] = pd.to_numeric(df_konflik_fpic_clean['tahun'], errors='coerce')
+        df_fpic_recent = df_konflik_fpic_clean[df_konflik_fpic_clean['tahun'] >= 2014]
+        kasus_fpic = len(df_fpic_recent[(df_fpic_recent['provinsi'] == prov_name) & (df_fpic_recent['indikasi_fpic'] == True)])
         skor_sosial_1 = min(10.0, (kasus_fpic / 4) * 10)
         
     skor_sosial_4 = 0.0
@@ -1465,19 +1474,178 @@ Skor_Pulau = MinMax_WSM(Akumulasi_Beban_Makro_Sulawesi) &nbsp;|&nbsp; Skor_Provi
         st.markdown("### Tabel Verifikasi Threshold (Lengkap dengan Kutipan)")
         st.dataframe(pd.DataFrame(verifikasi_data), use_container_width=True, hide_index=True)
     
-    # Render Raw Data Breakdown
-    raw_data_list = []
-    for i, p in enumerate(prov_list):
-        raw_dict = detail_list[i]['raw']
-        raw_dict['Provinsi'] = p
-        raw_data_list.append(raw_dict)
-    df_raw = pd.DataFrame(raw_data_list)
-    cols = ['Provinsi'] + [c for c in df_raw.columns if c != 'Provinsi']
-    df_raw = df_raw[cols]
+    # Render Raw Data Breakdown (Dynamic Fact-Check)
+    hasil_algo_provinsi = algo_prov_mod.kalkulasi_skor_provinsi_sulawesi()
+    table_data = []
+    for prov, val in hasil_algo_provinsi.items():
+        raw = val.get('raw_absolut', {})
+        row = {
+            'Provinsi': prov,
+            '[Udara 1] Korelasi PLTU & Kualitas Udara': raw.get('no2', 0),
+            '[Udara 2] Dampak Kasus ISPA/Pneumonia': round(raw.get('ispa_irr', 0), 1),
+            '[Udara 3] Fakta Beban Limbah B3 (Juta Ton)': round(raw.get('b3_ton', 0), 1),
+            '[Udara 4] Hilangnya Paru-Paru Udara (CO2)': round(raw.get('co2_mton', 0), 2),
+            '[Air 1] Kualitas Air (IKA)': round(raw.get('ika', 0), 1),
+            '[Air 2] Morbiditas Diare': round(raw.get('diare_irr', 0), 1),
+            '[Air 3] Konflik Nelayan': raw.get('konflik_pesisir', 0),
+            '[Air 4] Beban Tailing (Juta Ton)': round(raw.get('tailing_ton', 0), 1),
+            '[Lahan 1] Bencana Banjir & Longsor': raw.get('bencana', 0),
+            '[Lahan 2] Deforestasi Primer': round(raw.get('deforestasi_ha', 0), 1),
+            '[Lahan 3] Pelanggaran Kawasan Lindung': round(raw.get('lindung_ha', 0), 1),
+            '[Lahan 4] Aktor Deforestasi': raw.get('driver_ha', 0),
+            '[Lahan 5] Kepadatan Tambang': f"{raw.get('gap_amdal', 0) * 100:.1f}%",
+            '[Sosial 1] Manipulasi Persetujuan FPIC': raw.get('fpic', 0),
+            '[Sosial 2] Perampasan Ruang Hidup': raw.get('jiwa_terdampak', 0),
+            '[Sosial 3] Kriminalisasi Warga': raw.get('kriminalisasi', 0),
+            '[Sosial 4] Rasio Pasien (ISPA+Diare) per Faskes': round(raw.get('gap_spa', 0)),
+            '[Veto 1] Obral Konsesi Legal (Izin Baru)': raw.get('izin_baru', 0),
+            '[Veto 2] Pembiaran Pelanggaran (Izin Ilegal)': raw.get('ilegal', 0),
+            '[Veto 3] Karpet Merah Energi Kotor (PLTU)': round(raw.get('pltu_mw', 0), 1)
+        }
+        table_data.append(row)
+    df_raw = pd.DataFrame(table_data)
     
-    with st.expander("📊 Lihat Data Fakta Mentah di Balik Skor (Fact-Check)"):
-        st.markdown("Berikut adalah rincian data metrik sesungguhnya di lapangan yang masuk ke dalam sistem skoring. Jika suatu angka 0, artinya **data tidak ditemukan** di dataset untuk provinsi tersebut.")
-        st.dataframe(df_raw, use_container_width=True, hide_index=True)
+    with st.expander("📊 Lihat Data Fakta Mentah di Balik Skor (Fact-Check) & Head-to-Head"):
+        tab1, tab2, tab3 = st.tabs(["Tabel Semua Provinsi", "Head-to-Head Provinsi", "Bedah Matematika Z-Score + EWM per Provinsi"])
+        
+        with tab1:
+            st.markdown("Berikut adalah rincian data metrik sesungguhnya di lapangan yang masuk ke dalam sistem skoring. Data ditarik dinamis dari algoritma Z-Score EWM.")
+            st.dataframe(df_raw, use_container_width=True, hide_index=True)
+            
+        with tab2:
+            st.markdown("Bandingkan data metrik riil antara dua provinsi secara langsung.")
+            col_p1, col_p2 = st.columns(2)
+            prov_options = df_raw['Provinsi'].tolist()
+            
+            with col_p1:
+                p1 = st.selectbox("Pilih Provinsi 1", prov_options, index=prov_options.index("Sulawesi Tenggara") if "Sulawesi Tenggara" in prov_options else 0)
+            with col_p2:
+                p2 = st.selectbox("Pilih Provinsi 2", prov_options, index=prov_options.index("Sulawesi Selatan") if "Sulawesi Selatan" in prov_options else 1)
+                
+            if p1 and p2:
+                row_p1 = df_raw[df_raw['Provinsi'] == p1].iloc[0]
+                row_p2 = df_raw[df_raw['Provinsi'] == p2].iloc[0]
+                
+                h2h_data = []
+                for col in df_raw.columns:
+                    if col == 'Provinsi': continue
+                    
+                    val1 = row_p1[col]
+                    val2 = row_p2[col]
+                    
+                    # Convert to float for comparison
+                    def parse_val(v):
+                        if isinstance(v, str):
+                            return float(v.replace('%', '').strip())
+                        return float(v)
+                        
+                    num1 = parse_val(val1)
+                    num2 = parse_val(val2)
+                    
+                    if '[Air 1]' in col:
+                        # Lower is worse
+                        if num1 < num2:
+                            worse = p1
+                        elif num2 < num1:
+                            worse = p2
+                        else:
+                            worse = "Sama"
+                    else:
+                        # Higher is worse
+                        if num1 > num2:
+                            worse = p1
+                        elif num2 > num1:
+                            worse = p2
+                        else:
+                            worse = "Sama"
+                            
+                    h2h_data.append({
+                        'Indikator': col,
+                        f'{p1} (Kiri)': val1,
+                        f'{p2} (Kanan)': val2,
+                        'Krisis Tertinggi': worse
+                    })
+                    
+                df_h2h = pd.DataFrame(h2h_data)
+                df_h2h.set_index('Indikator', inplace=True)
+                
+                def highlight_worse(row):
+                    style = [''] * len(row)
+                    worse_prov = row['Krisis Tertinggi']
+                    if worse_prov == p1:
+                        style[0] = 'background-color: #6b1b1b; color: white;'
+                    elif worse_prov == p2:
+                        style[1] = 'background-color: #6b1b1b; color: white;'
+                    # Make Krisis Tertinggi column bold
+                    style[2] = 'font-weight: bold;'
+                    return style
+                    
+                st.dataframe(df_h2h.style.apply(highlight_worse, axis=1), use_container_width=True)
+                
+        with tab3:
+            st.markdown("Di sini Anda bisa melihat persis bagaimana angka Fakta Lapangan ditransformasi oleh fungsi *Machine Learning* (Z-Score & Bobot EWM) menjadi Skor Likert (0-5).")
+            prov_options = df_raw['Provinsi'].tolist()
+            p_bedah = st.selectbox("Pilih Provinsi untuk Dibedah Kalkulasinya", prov_options, index=prov_options.index("Sulawesi Tengah") if "Sulawesi Tengah" in prov_options else 0)
+            
+            if p_bedah:
+                math_details = hasil_algo_provinsi[p_bedah].get('math_details', {})
+                if not math_details:
+                    st.warning("Data bedah matematika tidak tersedia untuk provinsi ini.")
+                else:
+                    matriks_columns = {
+                        'Udara': ['pltu_mw', 'no2', 'ispa_irr', 'b3_ton', 'co2_mton'],
+                        'Air': ['ika', 'cr6', 'diare_irr', 'konflik_pesisir', 'tailing_ton'],
+                        'Lahan': ['bencana', 'deforestasi_ha', 'lindung_ha', 'driver_ha', 'gap_amdal'],
+                        'Sosial': ['fpic', 'jiwa_terdampak', 'kriminalisasi', 'gap_spa'],
+                        'Veto': ['izin_baru', 'ilegal'] # pltu_mw di Udara agar tidak duplikat di tabel
+                    }
+                    def get_pilar(col):
+                        for p, cols in matriks_columns.items():
+                            if col in cols: return p
+                        return 'Lainnya'
+                        
+                    raw_absolut = hasil_algo_provinsi[p_bedah]['raw_absolut']
+                    raw_zscores = hasil_algo_provinsi[p_bedah]['raw_zscores']
+                    
+                    table_math = []
+                    for col, val_a in raw_absolut.items():
+                        pilar = get_pilar(col)
+                        val_b = math_details['mean'].get(col, 0)
+                        val_c = math_details['std'].get(col, 0)
+                        z_score = raw_zscores.get(col, 0)
+                        bobot = math_details['ewm_weights'].get(col, 0)
+                        likert = math_details['likert'].get(col, 0)
+                        
+                        table_math.append({
+                            'Pilar': pilar,
+                            'Indikator (Kolom)': col,
+                            'Fakta Mentah (A)': float(val_a) if isinstance(val_a, (int, float)) else 0.0,
+                            'Rata-rata Sulawesi (B)': float(val_b) if not pd.isna(val_b) else 0.0,
+                            'Deviasi (C)': float(val_c) if not pd.isna(val_c) else 0.0,
+                            'Z-Score [(A-B)/C]': float(z_score) if not pd.isna(z_score) else 0.0,
+                            'Bobot EWM': float(bobot) if not pd.isna(bobot) else 0.0,
+                            'Skor Likert (0-5)': float(likert) if not pd.isna(likert) else 0.0
+                        })
+                        
+                    df_math = pd.DataFrame(table_math)
+                    st.dataframe(df_math.style.background_gradient(subset=['Skor Likert (0-5)'], cmap='Reds').format(precision=2), use_container_width=True, hide_index=True)
+                    
+                    st.markdown("<h4 style='margin-top:20px; margin-bottom:10px;'>Agregasi Skor Pilar (EWM Weighted Average per Pilar)</h4>", unsafe_allow_html=True)
+                    
+                    c1, c2, c3, c4, c5 = st.columns(5)
+                    def render_pilar(col_obj, title, score):
+                        col_obj.markdown(f"<div style='font-size: 13px; font-weight: bold;'>{title}</div><div style='font-size: 26px; font-weight: bold;'>{score:.2f} / 5</div>", unsafe_allow_html=True)
+                        
+                    render_pilar(c1, "Pilar Udara", hasil_algo_provinsi[p_bedah]['udara'])
+                    render_pilar(c2, "Pilar Air", hasil_algo_provinsi[p_bedah]['air'])
+                    render_pilar(c3, "Pilar Lahan", hasil_algo_provinsi[p_bedah]['lahan'])
+                    render_pilar(c4, "Pilar Sosial", hasil_algo_provinsi[p_bedah]['sosial'])
+                    render_pilar(c5, "Pilar Veto", hasil_algo_provinsi[p_bedah]['veto'])
+                    
+                    st.markdown("<br>", unsafe_allow_html=True)
+                    total = hasil_algo_provinsi[p_bedah]['total_likert']
+                    label = hasil_algo_provinsi[p_bedah]['likert_label']
+                    st.info(f"**Skor Total (EWM Z-Score): {total:.2f} / 5 ➔ Status: {label}**")
 # =======================================
 
 # =====================================================================
@@ -1560,24 +1728,20 @@ skor_1 = min(10.0, skor_pltu_UI + skor_no2_UI)
 # Skor 2: Rasio Anomali ISPA
 skor_2 = 0
 rasio_anomali = 0
-kasus_sentra = 0
 if not df_kes.empty:
-    df_ts_pre = df_kes[df_kes['indikator'].str.contains('ISPA', case=False, na=False)]
-    kasus_sentra = df_ts_pre[df_ts_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
-    kasus_non_sentra = df_ts_pre[~df_ts_pre['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
-    rasio_anomali = (kasus_sentra / 2) / (kasus_non_sentra / 4) if kasus_non_sentra > 0 else 0
+    hasil_algo_prov = kalkulasi_skor_provinsi_sulawesi()
+    rasio_anomali = max([v['raw_absolut']['ispa_irr'] for v in hasil_algo_prov.values()]) if hasil_algo_prov else 0.0
     # Normalisasi: Rasio 2x lipat = skor 10
     skor_2 = min(10.0, max(0.0, (rasio_anomali - 1.0) * 10.0))
 
 # Skor 3: Over-Capacity B3
 skor_3 = 0
-skor_overcapacity = 0
-total_b3_sulteng = 0
+total_b3_sulawesi = 0
 if not df_b3.empty:
-    df_b3['Estimasi Timbulan (Ton/Tahun)'] = pd.to_numeric(df_b3['Estimasi Timbulan (Ton/Tahun)'], errors='coerce').fillna(0)
-    total_b3_all_pre = df_b3['Estimasi Timbulan (Ton/Tahun)'].sum()
-    total_b3_sulteng = df_b3[df_b3['Provinsi'] == 'Sulawesi Tengah']['Estimasi Timbulan (Ton/Tahun)'].sum()
-    proporsi_b3 = (total_b3_sulteng / 427_000_000.0) * 100.0
+    df_b3_clean = df_b3.copy()
+    df_b3_clean['Estimasi Timbulan (Ton/Tahun)'] = pd.to_numeric(df_b3_clean['Estimasi Timbulan (Ton/Tahun)'].astype(str).str.replace(',', '', regex=False), errors='coerce').fillna(0)
+    total_b3_sulawesi = df_b3_clean['Estimasi Timbulan (Ton/Tahun)'].sum()
+    proporsi_b3 = (total_b3_sulawesi / 427_000_000.0) * 100.0
     # Normalisasi: Threshold >5% proporsi nasional = skor 10
     skor_3 = min(10.0, (proporsi_b3 / 5.0) * 10.0)
 
@@ -1656,14 +1820,6 @@ with colA2:
                 df_pltu_op_tab = df_pltu_op.copy()
                 df_pltu_op_tab['Provinsi'] = df_pltu_op_tab['Subnational unit (province, state)'].replace(prov_map)
                 df_pltu_op_tab = df_pltu_op_tab[(df_pltu_op_tab['Status'].str.lower() == 'operating') & df_pltu_op_tab['Start year'].notna()]
-                
-                grid_pltu = pd.DataFrame([
-                    {'Provinsi': 'Gorontalo', 'Capacity (MW)': 100, 'Start year': 2010},
-                    {'Provinsi': 'Sulawesi Utara', 'Capacity (MW)': 220, 'Start year': 2010},
-                    {'Provinsi': 'Sulawesi Selatan', 'Capacity (MW)': 920, 'Start year': 2010},
-                    {'Provinsi': 'Sulawesi Tenggara', 'Capacity (MW)': 100, 'Start year': 2010}
-                ])
-                df_pltu_op_tab = pd.concat([df_pltu_op_tab, grid_pltu], ignore_index=True)
                 
                 panel_data_pltu = []
                 for y in years:
@@ -1789,13 +1945,29 @@ with colA2:
                 df_ts_agg = df_ts_filtered.groupby(['tahun', 'provinsi', 'Kategori'])['nilai'].sum().reset_index()
                 
                 # Gunakan skor pre-calculated
-                kasus_sentra_grafik = df_ts_filtered[df_ts_filtered['Kategori'] == 'Sentra Industri (Sulteng & Sultra)']['nilai'].sum()
-                kasus_non_sentra_grafik = df_ts_filtered[df_ts_filtered['Kategori'] == 'Non-Sentra Industri (Lainnya)']['nilai'].sum()
                 sk2_str = f"{(skor_2 / 2.0):.1f}" if is_likert_mode else f"{skor_2:.1f}"
-                avg_sentra = kasus_sentra_grafik / 2.0
-                avg_non = kasus_non_sentra_grafik / 4.0
                 
-                col1_d = f"Rata-rata Prov: {avg_sentra:,.0f} (Sentra) vs {avg_non:,.0f} (Non)"
+                # Dynamic calculation for the tooltip breakdown
+                populasi_bps_dinamis = {
+                    "Sulawesi Selatan": 9073509, "Sulawesi Tengah": 2985734, 
+                    "Sulawesi Tenggara": 2624875, "Sulawesi Utara": 2621117, 
+                    "Sulawesi Barat": 1419229, "Gorontalo": 1171681
+                }
+                
+                m_irr = 0; m_p = ""; m_c = 0; m_pop = 0; m_ir = 0
+                o_c = 0; o_pop = 0; o_ir = 0
+                for p, pop in populasi_bps_dinamis.items():
+                    c_p = df_ts_filtered[df_ts_filtered['provinsi'] == p]['nilai'].sum()
+                    c_o = df_ts_filtered[df_ts_filtered['provinsi'] != p]['nilai'].sum()
+                    pop_o = sum([v for k, v in populasi_bps_dinamis.items() if k != p])
+                    ir_p = (c_p / pop) * 10000
+                    ir_o = (c_o / pop_o) * 10000 if pop_o > 0 else 1
+                    irr = ir_p / ir_o if ir_o > 0 else 0
+                    if irr > m_irr:
+                        m_irr, m_p, m_c, m_pop, m_ir = irr, p, c_p, pop, ir_p
+                        o_c, o_pop, o_ir = c_o, pop_o, ir_o
+                
+                col1_d = f"Puncak Anomali: Provinsi {m_p}"
                 col1_c = "inverse" if rasio_anomali > 2.0 else "normal"
 
                 col2_d = f"STATUS: KRITIS" if (skor_2 >= 6.0 or is_likert_mode) else f"STATUS: AMAN"
@@ -1803,9 +1975,9 @@ with colA2:
 
                 col1, col2 = st.columns(2)
                 
-                help_skor2 = f"Kalkulasi Total (Udara 2):\nmin(10.0, ({rasio_anomali:.1f} / 2.0) * 10) = {skor_2:.1f}/10\n" + (f"Konversi Likert: {skor_2:.1f} / 2 = {(skor_2 / 2.0):.1f}/5" if is_likert_mode else "")
-                help_irr = f"Incidence Rate Ratio (IRR):\nRasio rata-rata kumulatif kasus per provinsi:\n- Sentra (2 Prov): {kasus_sentra_grafik:,.0f} / 2 = {avg_sentra:,.0f}\n- Non-Sentra (4 Prov): {kasus_non_sentra_grafik:,.0f} / 4 = {avg_non:,.0f}\n- Rasio IRR: {avg_sentra:,.0f} / {avg_non:,.0f} = {rasio_anomali:.1f}x Lipat\n(Threshold > 2.0x Darurat Medis)\n\n{help_skor2}"
-                col1.metric(f"Incidence Rate Ratio (Skor: {sk2_str})", f"{rasio_anomali:.1f}x Lipat", col1_d, delta_color=col1_c, help=help_irr)
+                help_skor2 = f"Kalkulasi Total (Udara 2):\nmin(10.0, ({rasio_anomali:.1f} - 1.0) * 10.0) = {skor_2:.1f}/10\n" + (f"Konversi Likert: {skor_2:.1f} / 2 = {(skor_2 / 2.0):.1f}/5" if is_likert_mode else "")
+                help_irr = f"Incidence Rate Ratio (IRR) Dinamis:\nPencarian algoritma menemukan rasio morbiditas ISPA terekstrem di {m_p}:\n\n1. Insiden Rate (IR) {m_p}:\n   ({m_c:,} Kasus ÷ {m_pop:,} Jiwa) × 10.000 = {m_ir:.2f} kasus per 10rb jiwa\n\n2. Insiden Rate (IR) 5 Provinsi Lainnya (Kontrol):\n   ({o_c:,} Kasus ÷ {o_pop:,} Jiwa) × 10.000 = {o_ir:.2f} kasus per 10rb jiwa\n\n3. Rasio IRR (Perbandingan):\n   {m_ir:.2f} ÷ {o_ir:.2f} = {m_irr:.2f}x Lipat\n(Threshold > 2.0x Darurat Medis)\n\n*Catatan: \"Kasus\" merujuk pada agregat kumulatif pasien ISPA & Pneumonia (2014-2024).\nSumber data: sulawesi_kesehatan_detail_2014_2024.csv\n\n{help_skor2}"
+                col1.metric(f"Max Incidence Rate Ratio (Skor: {sk2_str})", f"{rasio_anomali:.1f}x Lipat", col1_d, delta_color=col1_c, help=help_irr)
                 col2.metric("Skor Morbiditas ISPA (Udara 2)", f"{sk2_str} / {card_denom}", col2_d, delta_color=col2_c, help=help_skor2)
                 st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
                 
@@ -1865,20 +2037,19 @@ with colA2:
             st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Udara 3):</b><br>• <b>Ketidakadilan Lingkungan (Limbah B3):</b> Proporsi limbah daerah > 5% dari total timbulan nasional 427 Juta Ton. (<i>Sumber: Laporan Kinerja KLHK 2022, Hal. 10</i>).</div>", unsafe_allow_html=True)
             # Gunakan nilai pre-calculated
             sk3_str = f"{(skor_3 / 2.0):.1f}" if is_likert_mode else f"{skor_3:.1f}"
-            proporsi_sulteng = (total_b3_sulteng / 427_000_000.0) * 100.0
             
-            col_f1_d = f"Threshold > 5.0% (Environmental Injustice)" if proporsi_sulteng > 5.0 else f"Aman (≤ 5.0%)"
-            col_f1_c = "inverse" if proporsi_sulteng > 5.0 else "normal"
+            col_f1_d = f"Threshold > 5.0% (Environmental Injustice)" if proporsi_b3 > 5.0 else f"Aman (≤ 5.0%)"
+            col_f1_c = "inverse" if proporsi_b3 > 5.0 else "normal"
 
             col_f2_d = f"STATUS: OVERCAPACITY" if (skor_3 >= 6.0 or is_likert_mode) else f"STATUS: AMAN"
             col_f2_c = "inverse" if (skor_3 >= 6.0 or is_likert_mode) else "normal"
 
-            help_skor3 = f"Kalkulasi Total (Udara 3):\nmin(10.0, (Proporsi B3 Sulteng {proporsi_sulteng:.1f}% / 5.0%) * 10.0) = {skor_3:.1f}/10\n" + (f"Konversi Likert: {skor_3:.1f} / 2 = {(skor_3 / 2.0):.1f}/5" if is_likert_mode else "")
+            help_skor3 = f"Kalkulasi Total (Udara 3):\nmin(10.0, (Proporsi B3 Sulawesi {proporsi_b3:.1f}% / 5.0%) * 10.0) = {skor_3:.1f}/10\n" + (f"Konversi Likert: {skor_3:.1f} / 2 = {(skor_3 / 2.0):.1f}/5" if is_likert_mode else "")
             
-            help_proporsi_b3 = f"Proporsi Limbah B3 Sulteng terhadap Nasional:\n- Total B3 Sulteng: {total_b3_sulteng/1_000_000:.1f} Juta Ton\n- Total B3 Nasional (2022): 427.0 Juta Ton\n- Proporsi: ({total_b3_sulteng/1_000_000:.1f} / 427.0) * 100% = {proporsi_sulteng:.1f}%\n(Threshold Kritis > 5% Nasional)\n\n{help_skor3}"
+            help_proporsi_b3 = f"Proporsi Limbah B3 Sulawesi terhadap Nasional:\n- Total B3 Sulawesi: {total_b3_sulawesi/1_000_000:.1f} Juta Ton\n- Total B3 Nasional (2022): 427.0 Juta Ton\n- Proporsi: ({total_b3_sulawesi/1_000_000:.1f} / 427.0) * 100% = {proporsi_b3:.1f}%\n(Threshold Kritis > 5% Nasional)\n\n{help_skor3}"
 
             col_f1, col_f2 = st.columns(2)
-            col_f1.metric(f"Proporsi B3 Sulteng (Skor: {sk3_str})", f"{proporsi_sulteng:.1f}% Nasional", col_f1_d, delta_color=col_f1_c, help=help_proporsi_b3)
+            col_f1.metric(f"Proporsi B3 Sulawesi (Skor: {sk3_str})", f"{proporsi_b3:.1f}% Nasional", col_f1_d, delta_color=col_f1_c, help=help_proporsi_b3)
             col_f2.metric("Skor Over-Capacity B3 (Udara 3)", f"{sk3_str} / {card_denom}", col_f2_d, delta_color=col_f2_c, help=help_skor3)
             
             st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
@@ -1952,43 +2123,67 @@ st.markdown("<br>", unsafe_allow_html=True)
 # ---------------------------------------------------------
 # --- Pre-computation for Water Scores (Skala 0-10) ---
 # Skor 1: IKA 
-ika_terkini = 50
-ika_sulteng = 50
+ika_avg = 50.0
 if not df_ika.empty:
     df_ika_avg = df_ika.groupby('Tahun')['Indeks Kualitas Air'].mean().reset_index()
     if 2024 in df_ika_avg['Tahun'].values:
-        ika_terkini = df_ika_avg[df_ika_avg['Tahun'] == 2024]['Indeks Kualitas Air'].values[0]
-    
-    df_sulteng = df_ika[df_ika['Provinsi'] == 'Sulawesi Tengah']
-    if not df_sulteng.empty and 2024 in df_sulteng['Tahun'].values:
-        ika_sulteng = df_sulteng[df_sulteng['Tahun'] == 2024]['Indeks Kualitas Air'].values[0]
+        ika_avg = df_ika_avg[df_ika_avg['Tahun'] == 2024]['Indeks Kualitas Air'].values[0]
+    else:
+        ika_avg = df_ika_avg['Indeks Kualitas Air'].mean()
 
 # Normalisasi: IKA ideal = 80, IKA cemar berat = 50
-skor_makro_air_1 = min(10.0, max(0, (80 - ika_sulteng) / 30) * 10)
+skor_makro_air_1 = min(10.0, max(0.0, (80.0 - ika_avg) / 30.0) * 10.0)
 
 # Murni Menggunakan IKA untuk Skor Air 1
 skor_air_1 = skor_makro_air_1
 
 # Skor 2: Morbiditas Diare
 skor_air_2 = 0
-kasus_diare_sentra = 0
-kasus_diare_non = 0
 rasio_diare = 0
-
-# Exact BPS Population Data
-populasi_sentra = 2985000 + 2624000  # Sulteng + Sultra = 5,609,000
-populasi_non = 9070000 + 2621000 + 1419000 + 1171000  # Sulsel + Sulut + Sulbar + Gorontalo = 14,281,000
+m_p_diare = "Tidak Diketahui"
+m_c_diare = 0
+m_pop_diare = 1
+m_ir_diare = 0
+o_c_diare = 0
+o_pop_diare = 1
+o_ir_diare = 1
+m_irr_diare = 0
 
 if not df_kes.empty:
     df_diare = df_kes[df_kes['indikator'].str.contains('Diare', case=False, na=False)]
-    kasus_diare_sentra = df_diare[df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
-    kasus_diare_non = df_diare[~df_diare['provinsi'].isin(['Sulawesi Tengah', 'Sulawesi Tenggara'])]['nilai'].sum()
+    populasi_bps = {
+        'Sulawesi Selatan': 9073509,
+        'Sulawesi Tenggara': 2624875,
+        'Sulawesi Tengah': 2985734,
+        'Sulawesi Utara': 2621117,
+        'Sulawesi Barat': 1419229,
+        'Gorontalo': 1171681
+    }
     
-    ir_sentra = (kasus_diare_sentra / populasi_sentra) * 1000
-    ir_non = (kasus_diare_non / populasi_non) * 1000 if populasi_non > 0 else 1
+    max_irr_diare = 0
     
-    rasio_diare = ir_sentra / ir_non if ir_non > 0 else 0
-    skor_air_2_raw = min(10.0, max(0.0, (rasio_diare - 1) * 10.0))
+    for prov, pop in populasi_bps.items():
+        prov_cases = df_diare[df_diare['provinsi'] == prov]['nilai'].sum()
+        other_cases = df_diare[df_diare['provinsi'] != prov]['nilai'].sum()
+        other_pop = sum([p for k, p in populasi_bps.items() if k != prov])
+        
+        ir_prov = (prov_cases / pop) * 10000
+        ir_other = (other_cases / other_pop) * 10000 if other_pop > 0 else 1
+        irr = ir_prov / ir_other if ir_other > 0 else 0
+        
+        if irr > max_irr_diare:
+            max_irr_diare = irr
+            m_p_diare = prov
+            m_c_diare = prov_cases
+            m_pop_diare = pop
+            m_ir_diare = ir_prov
+            o_c_diare = other_cases
+            o_pop_diare = other_pop
+            o_ir_diare = ir_other
+            m_irr_diare = irr
+            
+    rasio_diare = max_irr_diare
+    skor_air_2_raw = min(10.0, max(0.0, (rasio_diare - 1.0) * 10.0))
     skor_air_2 = round(skor_air_2_raw / 2.0) * 2.0
 
 # Skor 3: Konflik Air/Pesisir
@@ -2018,10 +2213,19 @@ if not df_konflik.empty:
 
 # Skor 4: Beban Tailing (Proxy B3)
 skor_air_4 = 0
-total_tailing_sulteng = 0
+total_tailing_sulawesi = 0.0
+df_b3_tailing = pd.DataFrame()
 if not df_b3.empty:
-    total_tailing_sulteng = df_b3[df_b3['Provinsi'] == 'Sulawesi Tengah']['Estimasi Timbulan (Ton/Tahun)'].sum()
-    skor_air_4 = min(10.0, (total_tailing_sulteng / 25_000_000) * 10)
+    df_b3_clean = df_b3.copy()
+    if df_b3_clean['Estimasi Timbulan (Ton/Tahun)'].dtype == object:
+        df_b3_clean['Estimasi Timbulan (Ton/Tahun)'] = pd.to_numeric(df_b3_clean['Estimasi Timbulan (Ton/Tahun)'].astype(str).str.replace(',', '', regex=False), errors='coerce').fillna(0)
+    else:
+        df_b3_clean['Estimasi Timbulan (Ton/Tahun)'] = pd.to_numeric(df_b3_clean['Estimasi Timbulan (Ton/Tahun)'], errors='coerce').fillna(0)
+    
+    # Air 4 strictly filters for Tailing, Slag, and DSTP
+    df_b3_tailing = df_b3_clean[df_b3_clean['Jenis Limbah B3'].str.contains('tailing|slag|dstp', case=False, na=False)]
+    total_tailing_sulawesi = df_b3_tailing['Estimasi Timbulan (Ton/Tahun)'].sum()
+    skor_air_4 = min(10.0, (total_tailing_sulawesi / 25_000_000.0) * 10.0)
 
 skor_akumulasi_air = (skor_air_1 + skor_air_2 + skor_air_3 + skor_air_4) / 4
 
@@ -2080,13 +2284,13 @@ with colB2:
         
         sk1_air_str = f"{(skor_air_1 / 2.0):.1f}" if is_likert_mode else f"{skor_air_1:.1f}"
         
-        help_skor_makro = f"Skor Makro IKA: min(10.0, max(0, (80 - {ika_sulteng:.1f}) / 30) * 10) = {skor_makro_air_1:.1f}/10" + (f" (Likert: {(skor_makro_air_1 / 2.0):.1f}/5)" if is_likert_mode else "")
+        help_skor_makro = f"Kalkulasi Total (Air 1):\nmin(10.0, max(0.0, (80.0 - {ika_avg:.1f}) / 30.0) * 10.0) = {skor_makro_air_1:.1f}/10\n" + (f"Konversi Likert: {skor_makro_air_1:.1f} / 2 = {(skor_makro_air_1 / 2.0):.1f}/5" if is_likert_mode else "")
         
-        help_air_1 = f"Kalkulasi Kualitas Air (Air 1):\n- {help_skor_makro}"
+        help_air_1 = f"Indeks Kualitas Air (IKA) Dinamis:\nPencarian algoritma menemukan rata-rata agregat kualitas air se-Sulawesi:\n- Nilai IKA Rata-Rata: {ika_avg:.2f}\n- Target Aman Nasional: 80.0\n- Defisit Kualitas Air: {80.0 - ika_avg:.2f} poin\n\n{help_skor_makro}"
         
         skor_makro_str = f"{(skor_makro_air_1 / 2.0):.1f}" if is_likert_mode else f"{skor_makro_air_1:.1f}"
         
-        if ika_sulteng < 50:
+        if ika_avg < 50:
             col1_delta = "- Jatuh ke Kategori Kurang (< 50)"
         else:
             col1_delta = "Secara Agregat 'Aman' (> 50)"
@@ -2096,8 +2300,8 @@ with colB2:
         col2_color = "inverse" if skor_air_1 >= 6.0 else "normal"
         
         col1, col2 = st.columns(2)
-        col1.metric(f"Indeks Kualitas Air (Skor: {skor_makro_str})", f"{ika_sulteng:.1f}", col1_delta, delta_color=col1_color, help=help_skor_makro)
-        col2.metric("Skor Kualitas Air (Air 1)", f"{sk1_air_str} / {card_denom}", col2_delta, delta_color=col2_color, help=help_air_1)
+        col1.metric(f"Rata-Rata IKA Sulawesi (Skor: {skor_makro_str})", f"{ika_avg:.2f}", col1_delta, delta_color=col1_color, help=help_air_1)
+        col2.metric("Skor Kualitas Air (Air 1)", f"{sk1_air_str} / {card_denom}", col2_delta, delta_color=col2_color, help=help_skor_makro)
         
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
@@ -2155,18 +2359,18 @@ with colB2:
         
         sk2_str = f"{(skor_air_2 / 2.0):.1f}" if is_likert_mode else f"{skor_air_2:.1f}"
         
-        help_skor2 = f"Kalkulasi Total (Air 2):\nmin(10.0, max(0.0, ({rasio_diare:.1f} - 1) * 10.0)) = {skor_air_2:.1f}/10" + (f" (Likert: {(skor_air_2 / 2.0):.1f}/5)" if is_likert_mode else "")
-        help_irr = f"Data Kemenkes 2023:\n- Kasus Sentra (2 Prov): {kasus_diare_sentra:,.0f} jiwa\n- Kasus Non-Sentra (4 Prov): {kasus_diare_non:,.0f} jiwa\n\nKalkulasi IRR:\n({kasus_diare_sentra:,.0f} / {populasi_sentra:,.0f}) / ({kasus_diare_non:,.0f} / {populasi_non:,.0f}) = {rasio_diare:.1f}x Lipat\n(Threshold > 2.0x Darurat Medis)\n\n{help_skor2}"
+        help_skor2 = f"Kalkulasi Total (Air 2):\nmin(10.0, max(0.0, ({rasio_diare:.1f} - 1.0) * 10.0)) = {skor_air_2:.1f}/10\n" + (f"Konversi Likert: {skor_air_2:.1f} / 2 = {(skor_air_2 / 2.0):.1f}/5" if is_likert_mode else "")
+        help_irr = f"Incidence Rate Ratio (IRR) Dinamis:\nPencarian algoritma menemukan rasio morbiditas Diare terekstrem di {m_p_diare}:\n\n1. Insiden Rate (IR) {m_p_diare}:\n   ({m_c_diare:,} Kasus ÷ {m_pop_diare:,} Jiwa) × 10.000 = {m_ir_diare:.2f} kasus per 10rb jiwa\n\n2. Insiden Rate (IR) 5 Provinsi Lainnya (Kontrol):\n   ({o_c_diare:,} Kasus ÷ {o_pop_diare:,} Jiwa) × 10.000 = {o_ir_diare:.2f} kasus per 10rb jiwa\n\n3. Rasio IRR (Perbandingan):\n   {m_ir_diare:.2f} ÷ {o_ir_diare:.2f} = {m_irr_diare:.2f}x Lipat\n(Threshold > 2.0x Darurat Medis)\n\n*Catatan: \"Kasus\" merujuk pada agregat kumulatif pasien Diare (2014-2024).\nSumber data: sulawesi_kesehatan_detail_2014_2024.csv\n\n{help_skor2}"
         
         col1, col2 = st.columns(2)
-        col1.metric(f"Incidence Rate Ratio (Skor: {sk2_str})", f"{rasio_diare:.1f}x", col1_delta, delta_color=col1_color, help=help_irr)
-        col2.metric("Skor Beban Penyakit (Air 2)", f"{sk2_str} / {card_denom}", col2_delta, delta_color=col2_color, help=help_skor2)
+        col1.metric(f"Max Incidence Rate Ratio (Skor: {sk2_str})", f"{rasio_diare:.1f}x Lipat", col1_delta, delta_color=col1_color, help=help_irr)
+        col2.metric("Skor Morbiditas Diare (Air 2)", f"{sk2_str} / {card_denom}", col2_delta, delta_color=col2_color, help=help_skor2)
         
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
         if not df_kes.empty:
             df_diare_trend = df_diare.copy()
-            df_diare_trend['Kategori'] = df_diare_trend['provinsi'].apply(lambda x: 'Sentra Tambang' if x in ['Sulawesi Tengah', 'Sulawesi Tenggara'] else 'Non-Sentra')
+            df_diare_trend['Kategori'] = df_diare_trend['provinsi'].apply(lambda x: f'Provinsi Terekstrem ({m_p_diare})' if x == m_p_diare else '5 Provinsi Lainnya (Kontrol)')
             df_d_agg = df_diare_trend.groupby(['tahun', 'Kategori'])['nilai'].sum().reset_index()
             fig_w2 = px.area(df_d_agg, x='tahun', y='nilai', color='Kategori', title="Ledakan Kasus Diare (Indikator Kualitas Air Tanah)")
             fig_w2.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
@@ -2206,40 +2410,40 @@ with colB2:
             )
             st.plotly_chart(fig_w3, use_container_width=True, config={'displayModeBar': False})
             
-            with st.expander("Lihat Data Mentah: Rincian 44 Kasus Konflik Pesisir/Nelayan (1 Dekade)", expanded=False):
+            with st.expander(f"Lihat Data Mentah: Rincian {jumlah_konflik_air} Kasus Konflik Pesisir/Nelayan (1 Dekade)", expanded=False):
                 st.dataframe(df_konflik_air, use_container_width=True, hide_index=True)
-                st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita.csv` (Di-filter berdasarkan keyword: air, laut, pesisir, nelayan, tailing, dll)")
+                st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita_v2.csv` (Di-filter berdasarkan keyword: air, laut, pesisir, nelayan, tailing, dll dan direduksi khusus wilayah Sulawesi menggunakan NLP NER)")
 
     with tab_w4:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Air 4):</b><br>• <b>Timbulan Tailing/Slag:</b> > 25 Juta Ton/Tahun (Batas Kapasitas maksimal DSTP/Tailing Dam).<br>• <b>Regulasi:</b> Dokumen AMDAL KLHK (PT HPI - IMIP) & Laporan AEER 2020 (Hal. 36).</div>", unsafe_allow_html=True)
         
-        col1_delta = f"↑ {total_tailing_sulteng/1_000_000:.1f} Jt Ton (Kritis > 25 Jt)" if total_tailing_sulteng > 25_000_000 else f"Normal (≤ 25 Jt)"
-        col1_color = "inverse" if total_tailing_sulteng > 25_000_000 else "normal"
+        col1_delta = f"↑ {total_tailing_sulawesi/1_000_000:.1f} Jt Ton (Kritis > 25 Jt)" if total_tailing_sulawesi > 25_000_000 else f"Normal (≤ 25 Jt)"
+        col1_color = "inverse" if total_tailing_sulawesi > 25_000_000 else "normal"
         
         col2_delta = f"STATUS: DARURAT LIMBAH" if skor_air_4 >= 6.0 else f"STATUS: TERKENDALI"
         col2_color = "inverse" if skor_air_4 >= 6.0 else "normal"
         
         sk4_str = f"{(skor_air_4 / 2.0):.1f}" if is_likert_mode else f"{skor_air_4:.1f}"
         
-        help_skor4 = f"Kalkulasi Total (Air 4):\nmin(10.0, ({total_tailing_sulteng/1_000_000:.1f} / 25.0) * 10) = {skor_air_4:.1f}/10" + (f" (Likert: {(skor_air_4 / 2.0):.1f}/5)" if is_likert_mode else "")
-        help_tailing = f"Data Limbah B3 KLHK:\n- Total Timbulan B3/Tailing (Sulteng): {total_tailing_sulteng/1_000_000:.1f} Juta Ton\n\nThreshold 25 Juta Ton/Tahun ditetapkan berdasarkan batas absolut daya dukung maksimum kapasitas pembuangan laut dalam (DSTP) dan bendungan tailing di Morowali.\n\n{help_skor4}"
+        help_skor4 = f"Kalkulasi Total (Air 4):\nmin(10.0, ({total_tailing_sulawesi/1_000_000:.1f} / 25.0) * 10.0) = {skor_air_4:.1f}/10\n" + (f"Konversi Likert: {skor_air_4:.1f} / 2 = {(skor_air_4 / 2.0):.1f}/5" if is_likert_mode else "")
+        help_tailing = f"Beban Limbah Tailing & B3 Dinamis:\nPencarian algoritma menjumlahkan total estimasi timbulan limbah seluruh kawasan tambang/smelter di Sulawesi:\n- Total Akumulasi 6 Provinsi: {total_tailing_sulawesi/1_000_000:.2f} Juta Ton/Tahun\n\nThreshold 25 Juta Ton/Tahun ditetapkan berdasarkan batas absolut daya dukung maksimum kapasitas pembuangan laut dalam (DSTP) dan bendungan tailing di Morowali.\n\n{help_skor4}"
         
         col1, col2 = st.columns(2)
-        col1.metric(f"Total Timbulan Tailing (Skor: {sk4_str})", f"{total_tailing_sulteng/1_000_000:.1f} Jt Ton", col1_delta, delta_color=col1_color, help=help_tailing)
+        col1.metric(f"Total Beban Tailing & B3 (Skor: {sk4_str})", f"{total_tailing_sulawesi/1_000_000:.2f} Jt Ton", col1_delta, delta_color=col1_color, help=help_tailing)
         col2.metric("Skor Ancaman Tailing (Air 4)", f"{sk4_str} / {card_denom}", col2_delta, delta_color=col2_color, help=help_skor4)
         
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
-        if not df_b3.empty:
-            fig_w4 = px.treemap(df_b3, path=['Provinsi', 'Kawasan/Perusahaan'], values='Estimasi Timbulan (Ton/Tahun)', 
+        if not df_b3_tailing.empty:
+            fig_w4 = px.treemap(df_b3_tailing, path=['Provinsi', 'Kawasan/Perusahaan'], values='Estimasi Timbulan (Ton/Tahun)', 
                                 color='Estimasi Timbulan (Ton/Tahun)', color_continuous_scale='Blues',
-                                title="Proporsi Beban Limbah Tailing & B3 ke Ekosistem Air")
+                                title="Proporsi Beban Limbah Tailing & Slag ke Ekosistem Air")
             fig_w4.update_layout(template="plotly_dark", margin=dict(l=0, r=0, t=40, b=0))
             st.plotly_chart(fig_w4, use_container_width=True, config={'displayModeBar': False})
             
-            with st.expander("Lihat Data Mentah: Rincian Limbah B3/Tailing", expanded=False):
-                st.dataframe(df_b3, use_container_width=True, hide_index=True)
-                st.caption("Sumber: `sulawesi_limbah_b3.csv` (Data KLHK yang diekstraksi ke level Perusahaan/Kawasan)")
+            with st.expander("Lihat Data Mentah: Rincian Limbah Tailing & Slag", expanded=False):
+                st.dataframe(df_b3_tailing, use_container_width=True, hide_index=True)
+                st.caption("Sumber: `sulawesi_limbah_b3.csv` (Data direduksi khusus jenis limbah Tailing, Slag, dan DSTP)")
 
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -2262,6 +2466,7 @@ skl1_str = f"{(skor_lahan_1 / 2.0):.1f}" if is_likert_mode else f"{skor_lahan_1:
 skl2_str = f"{(skor_lahan_2 / 2.0):.1f}" if is_likert_mode else f"{skor_lahan_2:.1f}"
 skl3_str = f"{(skor_lahan_3 / 2.0):.1f}" if is_likert_mode else f"{skor_lahan_3:.1f}"
 skl4_str = f"{(skor_lahan_4 / 2.0):.1f}" if is_likert_mode else f"{skor_lahan_4:.1f}"
+skl5_str = f"{(skor_lahan_5 / 2.0):.1f}" if is_likert_mode else f"{skor_lahan_5:.1f}"
 
 colC1, colC2 = st.columns([1, 2])
 with colC1:
@@ -2281,7 +2486,8 @@ with colC1:
                 • <b>Lahan 1 (Bencana Alam):</b> {skl1_str} / {card_denom}<br>
                 • <b>Lahan 2 (Deforestasi Primer):</b> {skl2_str} / {card_denom}<br>
                 • <b>Lahan 3 (Kawasan Lindung):</b> {skl3_str} / {card_denom}<br>
-                • <b>Lahan 4 (Aktor Deforestasi):</b> {skl4_str} / {card_denom}
+                • <b>Lahan 4 (Aktor Deforestasi):</b> {skl4_str} / {card_denom}<br>
+                • <b>Lahan 5 (Kepadatan Spasial):</b> {skl5_str} / {card_denom}
             </div>
         </div>
         <div style="background:{status_color_lahan}; color:white; padding:5px 10px; border-radius:5px; font-weight:bold; text-align:center; margin-top:15px; opacity:0.9;">
@@ -2291,24 +2497,24 @@ with colC1:
     ''', unsafe_allow_html=True)
 
 with colC2:
-    tab_l1, tab_l2, tab_l3, tab_l4 = st.tabs(["(Lahan 1) Bencana Banjir & Longsor", "(Lahan 2) Deforestasi Primer", "(Lahan 3) Pelanggaran Kawasan Lindung", "(Lahan 4) Aktor Deforestasi"])
+    tab_l1, tab_l2, tab_l3, tab_l4, tab_l5 = st.tabs(["(Lahan 1) Bencana Banjir & Longsor", "(Lahan 2) Deforestasi Primer", "(Lahan 3) Pelanggaran Kawasan Lindung", "(Lahan 4) Aktor Deforestasi", "(Lahan 5) Kepadatan Tambang"])
     
     with tab_l1:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Lahan 1):</b><br>• <b>Bencana Hidrometeorologi:</b> > 877 Kejadian (Batas Deviasi Outlier Statistik: Mean + 1 SD).<br>• <b>Regulasi/Data:</b> Dataset Historis BNPB (2014-2024).</div>", unsafe_allow_html=True)
         
-        col1_delta = f"↑ {bencana_sulteng_sultra:,.0f} Kejadian (Kritis > 877)" if bencana_sulteng_sultra > 877 else f"Normal (≤ 877)"
-        col1_color = "inverse" if bencana_sulteng_sultra > 877 else "normal"
+        col1_delta = f"↑ {total_bencana_sulawesi:,.0f} Kejadian (Kritis > 877)" if total_bencana_sulawesi > 877 else f"Normal (≤ 877)"
+        col1_color = "inverse" if total_bencana_sulawesi > 877 else "normal"
         
         col2_delta = f"STATUS: DARURAT BENCANA" if skor_lahan_1 >= 6.0 else f"STATUS: TERKENDALI"
         col2_color = "inverse" if skor_lahan_1 >= 6.0 else "normal"
         
         skl1_str = f"{(skor_lahan_1 / 2.0):.1f}" if is_likert_mode else f"{skor_lahan_1:.1f}"
         
-        help_skorl1 = f"Kalkulasi Total (Lahan 1):\nmin(10.0, ({bencana_sulteng_sultra:,.0f} / 877) * 10) = {skor_lahan_1:.1f}/10" + (f" (Likert: {(skor_lahan_1 / 2.0):.1f}/5)" if is_likert_mode else "")
-        help_lahan1 = f"Data BNPB:\n- Bencana Sulteng & Sultra: {bencana_sulteng_sultra:,.0f} Kejadian\n\nThreshold 877 kejadian didapat dari batas deviasi outlier statistik (rata-rata historis (Mean) + 1 Standar Deviasi (SD)) untuk seluruh Sulawesi dalam rentang 1 dekade.\n\n{help_skorl1}"
+        help_skorl1 = f"Kalkulasi Total (Lahan 1):\nmin(10.0, ({total_bencana_sulawesi:,.0f} / 877) * 10) = {skor_lahan_1:.1f}/10" + (f" (Likert: {(skor_lahan_1 / 2.0):.1f}/5)" if is_likert_mode else "")
+        help_lahan1 = f"Data BNPB (Dinamis):\nPencarian algoritma menjumlahkan seluruh kejadian bencana hidrometeorologi (Banjir & Longsor) se-Sulawesi (6 Provinsi):\n- Bencana Sulawesi: {total_bencana_sulawesi:,.0f} Kejadian\n\nThreshold 877 kejadian didapat dari batas deviasi outlier statistik (rata-rata historis (Mean) + 1 Standar Deviasi (SD)) untuk seluruh Sulawesi dalam rentang 1 dekade.\n\n{help_skorl1}"
         
         col1, col2 = st.columns(2)
-        col1.metric(f"Total Bencana Banjir & Longsor (Skor: {skl1_str})", f"{bencana_sulteng_sultra:,.0f} Kasus", col1_delta, delta_color=col1_color, help=help_lahan1)
+        col1.metric(f"Total Bencana Sulawesi (Skor: {skl1_str})", f"{total_bencana_sulawesi:,.0f} Kasus", col1_delta, delta_color=col1_color, help=help_lahan1)
         col2.metric("Skor Bencana Lahan (Lahan 1)", f"{skl1_str} / {card_denom}", col2_delta, delta_color=col2_color, help=help_skorl1)
         
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
@@ -2330,20 +2536,20 @@ with colC2:
     with tab_l2:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Lahan 2):</b><br>• <b>Deforestasi Hutan:</b> > 638.000 Ha / 10 Tahun (Proporsi Spasial Target FOLU Net Sink Nasional).<br>• <b>Regulasi:</b> Dokumen Rencana Operasional FOLU Net Sink 2030 KLHK (Hal. 128).</div>", unsafe_allow_html=True)
         
-        os_ratio_l2 = (deforestasi_sentra / 638000) * 100
-        col1_delta = f"↑ Overshoot {os_ratio_l2:.1f}% dari ambang batas" if deforestasi_sentra > 638000 else f"Aman (≤ 638 Ribu Ha)"
-        col1_color = "inverse" if deforestasi_sentra > 638000 else "normal"
+        os_ratio_l2 = (total_deforestasi_sulawesi / 638000) * 100
+        col1_delta = f"↑ Overshoot {os_ratio_l2:.1f}% dari ambang batas" if total_deforestasi_sulawesi > 638000 else f"Aman (≤ 638 Ribu Ha)"
+        col1_color = "inverse" if total_deforestasi_sulawesi > 638000 else "normal"
         
-        col2_delta = f"STATUS: DARURAT DEFORESTASI" if skor_lahan_2 >= 6.0 else f"STATUS: TERKENDALI"
+        col2_delta = f"STATUS: OVERCAPACITY LAHAN" if skor_lahan_2 >= 6.0 else f"STATUS: TERKENDALI"
         col2_color = "inverse" if skor_lahan_2 >= 6.0 else "normal"
         
         skl2_str = f"{(skor_lahan_2 / 2.0):.1f}" if is_likert_mode else f"{skor_lahan_2:.1f}"
         
-        help_skorl2 = f"Kalkulasi Total (Lahan 2):\nmin(10.0, ({deforestasi_sentra:,.0f} / 638,000) * 10) = {skor_lahan_2:.1f}/10" + (f" (Likert: {(skor_lahan_2 / 2.0):.1f}/5)" if is_likert_mode else "")
-        help_lahan2 = f"Data GFW:\n- Deforestasi Komoditas (Tambang & Sawit) Pulau Sulawesi: {deforestasi_sentra:,.0f} Ha (2014-2023)\n\nKalkulasi Threshold FOLU Net Sink 2030:\n- Kuota Maksimal Nasional: 1.700.000 Ha / 30 Tahun\n- Rata-rata Kuota Nasional: ~58.000 Ha / Tahun\n- Rentang Observasi GFW: 11 Tahun (2014-2024)\n- Threshold: 58.000 Ha * 11 Tahun = 638.000 Ha\n\n{help_skorl2}"
+        help_skorl2 = f"Kalkulasi Total (Lahan 2):\nmin(10.0, ({total_deforestasi_sulawesi:,.0f} / 638,000) * 10) = {skor_lahan_2:.1f}/10" + (f" (Likert: {(skor_lahan_2 / 2.0):.1f}/5)" if is_likert_mode else "")
+        help_lahan2 = f"Data GFW (Dinamis):\nPencarian algoritma menjumlahkan total kehilangan tutupan pohon se-Sulawesi (6 Provinsi):\n- Deforestasi Sulawesi: {total_deforestasi_sulawesi:,.0f} Ha (2014-2023)\n\nKalkulasi Threshold FOLU Net Sink 2030:\n- Kuota Maksimal Nasional: 1.700.000 Ha / 30 Tahun\n- Rata-rata Kuota Nasional: ~58.000 Ha / Tahun\n- Rentang Observasi GFW: 11 Tahun (2014-2024)\n- Threshold: 58.000 Ha * 11 Tahun = 638.000 Ha\n\n{help_skorl2}"
         
         col1, col2 = st.columns(2)
-        col1.metric(f"Total Deforestasi Komoditas (Skor: {skl2_str})", f"{deforestasi_sentra:,.0f} Ha", col1_delta, delta_color=col1_color, help=help_lahan2)
+        col1.metric(f"Total Deforestasi Sulawesi (Skor: {skl2_str})", f"{total_deforestasi_sulawesi:,.0f} Ha", col1_delta, delta_color=col1_color, help=help_lahan2)
         col2.metric("Skor Deforestasi Primer (Lahan 2)", f"{skl2_str} / {card_denom}", col2_delta, delta_color=col2_color, help=help_skorl2)
         
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
@@ -2364,19 +2570,19 @@ with colC2:
     with tab_l3:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Lahan 3):</b><br>• <b>Kawasan Lindung:</b> 0 Hektar / Nol Toleransi.<br>• <b>Regulasi:</b> Pasal 38 Ayat 4 UU No. 41 Tahun 1999 tentang Kehutanan (Tindak Pidana Kehutanan).</div>", unsafe_allow_html=True)
         
-        col1_delta = f"↑ {lindung_hilang:,.0f} Ha (Kritis > 0 Ha)" if lindung_hilang > 0 else f"Aman (0 Ha)"
-        col1_color = "inverse" if lindung_hilang > 0 else "normal"
+        col1_delta = f"↑ {total_lindung_hilang_sulawesi:,.0f} Ha (Kritis > 0 Ha)" if total_lindung_hilang_sulawesi > 0 else f"Aman (0 Ha)"
+        col1_color = "inverse" if total_lindung_hilang_sulawesi > 0 else "normal"
         
         col2_delta = f"STATUS: PELANGGARAN HUKUM" if skor_lahan_3 >= 10.0 else f"STATUS: TERKENDALI"
         col2_color = "inverse" if skor_lahan_3 >= 10.0 else "normal"
         
         skl3_str = f"{(skor_lahan_3 / 2.0):.1f}" if is_likert_mode else f"{skor_lahan_3:.1f}"
         
-        help_skorl3 = f"Kalkulasi Total (Lahan 3):\nJika Luas Hilang > 0 Ha, maka Skor = 10.0 (Pelanggaran Hukum).\nAktual = 10.0/10" + (f" (Likert: 5.0/5)" if is_likert_mode else "") if lindung_hilang > 0 else f"Kalkulasi Total (Lahan 3):\nSkor = 0.0/10" + (f" (Likert: 0.0/5)" if is_likert_mode else "")
-        help_lahan3 = f"Data GFW (Protected Areas):\n- Deforestasi Kawasan Lindung Sulteng & Sultra: {lindung_hilang:,.0f} Ha\n\nKalkulasi Threshold (Nol Toleransi):\n- Ambang Batas: 0 Hektar\n- Regulasi: Pasal 38 UU Kehutanan melarang penambangan terbuka di kawasan hutan lindung.\n- Status: {'Pelanggaran Hukum Mutlak' if lindung_hilang > 0 else 'Aman'}\n\n{help_skorl3}"
+        help_skorl3 = f"Kalkulasi Total (Lahan 3):\nJika Luas Hilang > 0 Ha, maka Skor = 10.0 (Pelanggaran Hukum).\nAktual = 10.0/10" + (f" (Likert: 5.0/5)" if is_likert_mode else "") if total_lindung_hilang_sulawesi > 0 else f"Kalkulasi Total (Lahan 3):\nSkor = 0.0/10" + (f" (Likert: 0.0/5)" if is_likert_mode else "")
+        help_lahan3 = f"Data GFW (Protected Areas Dinamis):\nPencarian algoritma menjumlahkan deforestasi pada kawasan lindung di seluruh 6 Provinsi Sulawesi:\n- Deforestasi Kawasan Lindung Sulawesi: {total_lindung_hilang_sulawesi:,.0f} Ha\n\nKalkulasi Threshold (Nol Toleransi):\n- Ambang Batas: 0 Hektar\n- Regulasi: Pasal 38 UU Kehutanan melarang penambangan terbuka di kawasan hutan lindung.\n- Status: {'Pelanggaran Hukum Mutlak' if total_lindung_hilang_sulawesi > 0 else 'Aman'}\n\n{help_skorl3}"
         
         col1, col2 = st.columns(2)
-        col1.metric(f"Total Kehancuran Kawasan Lindung (Skor: {skl3_str})", f"{lindung_hilang:,.0f} Ha", col1_delta, delta_color=col1_color, help=help_lahan3)
+        col1.metric(f"Total Kehancuran Lindung Sulawesi (Skor: {skl3_str})", f"{total_lindung_hilang_sulawesi:,.0f} Ha", col1_delta, delta_color=col1_color, help=help_lahan3)
         col2.metric("Skor Pelanggaran Zonasi (Lahan 3)", f"{skl3_str} / {card_denom}", col2_delta, delta_color=col2_color, help=help_skorl3)
         
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
@@ -2396,20 +2602,20 @@ with colC2:
     with tab_l4:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Lahan 4):</b><br>• <b>Deforestasi Konsesi:</b> > 500.000 Ha / 1 Dekade (Batas Kritis Daya Dukung Ekologis Pulau).<br>• <b>Keterangan Data:</b> Menggunakan data empiris satelit GFW untuk deforestasi yang murni didorong oleh ekspansi konsesi komersial (Tambang/Sawit).</div>", unsafe_allow_html=True)
         
-        os_ratio_l4 = (tambang_driver_ha / 500000) * 100
-        col1_delta = f"↑ Overshoot {os_ratio_l4:.1f}% dari ambang batas" if tambang_driver_ha > 500000 else f"Aman (≤ 500 Ribu Ha)"
-        col1_color = "inverse" if tambang_driver_ha > 500000 else "normal"
+        os_ratio_l4 = (total_tambang_driver_sulawesi / 500000) * 100
+        col1_delta = f"↑ Overshoot {os_ratio_l4:.1f}% dari ambang batas" if total_tambang_driver_sulawesi > 500000 else f"Aman (≤ 500 Ribu Ha)"
+        col1_color = "inverse" if total_tambang_driver_sulawesi > 500000 else "normal"
         
         col2_delta = f"STATUS: MONOPOLI KONSESI" if skor_lahan_4 >= 6.0 else f"STATUS: TERKENDALI"
         col2_color = "inverse" if skor_lahan_4 >= 6.0 else "normal"
         
         skl4_str = f"{(skor_lahan_4 / 2.0):.1f}" if is_likert_mode else f"{skor_lahan_4:.1f}"
         
-        help_skorl4 = f"Kalkulasi Total (Lahan 4):\nmin(10.0, ({tambang_driver_ha:,.0f} / 500,000) * 10) = {skor_lahan_4:.1f}/10" + (f" (Likert: {(skor_lahan_4 / 2.0):.1f}/5)" if is_likert_mode else "")
-        help_lahan4 = f"Data GFW (Drivers of Deforestation):\n- Total Deforestasi Komoditas (Tambang/Sawit): {tambang_driver_ha:,.0f} Ha\n\nKalkulasi Threshold Daya Dukung Ekologis:\n- Ambang Batas Pulau: 500.000 Ha\n- Threshold ini tercapai apabila konsesi industri (tambang/sawit) memonopoli laju perubahan tutupan lahan melebihi 500 ribu hektar dalam satu dekade.\n\n{help_skorl4}"
+        help_skorl4 = f"Kalkulasi Total (Lahan 4):\nmin(10.0, ({total_tambang_driver_sulawesi:,.0f} / 500,000) * 10) = {skor_lahan_4:.1f}/10" + (f" (Likert: {(skor_lahan_4 / 2.0):.1f}/5)" if is_likert_mode else "")
+        help_lahan4 = f"Data GFW (Drivers of Deforestation Dinamis):\nPencarian algoritma menjumlahkan aktor deforestasi se-Sulawesi (6 Provinsi):\n- Total Deforestasi Komoditas (Tambang/Sawit) Sulawesi: {total_tambang_driver_sulawesi:,.0f} Ha\n\nKalkulasi Threshold Daya Dukung Ekologis:\n- Ambang Batas Pulau: 500.000 Ha\n- Threshold ini tercapai apabila konsesi industri (tambang/sawit) memonopoli laju perubahan tutupan lahan melebihi 500 ribu hektar dalam satu dekade.\n\n{help_skorl4}"
         
         col1, col2 = st.columns(2)
-        col1.metric(f"Total Deforestasi Konsesi (Skor: {skl4_str})", f"{tambang_driver_ha:,.0f} Ha", col1_delta, delta_color=col1_color, help=help_lahan4)
+        col1.metric(f"Total Deforestasi Konsesi Sulawesi (Skor: {skl4_str})", f"{total_tambang_driver_sulawesi:,.0f} Ha", col1_delta, delta_color=col1_color, help=help_lahan4)
         col2.metric("Skor Aktor Deforestasi (Lahan 4)", f"{skl4_str} / {card_denom}", col2_delta, delta_color=col2_color, help=help_skorl4)
         
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
@@ -2426,6 +2632,55 @@ with colC2:
             st.plotly_chart(fig_l4, use_container_width=True, config={'displayModeBar': False})
             with st.expander("Tampilkan Data Mentah Drivers (GFW)"):
                 st.dataframe(df_gfw_driver, use_container_width=True)
+
+    with tab_l5:
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Lahan 5):</b><br>• <b>Kepadatan Spasial (Konsesi IUP):</b> Mengukur rasio konsentrasi luas konsesi ekstraktif dibandingkan total luas daratan pulau/provinsi.<br>• <b>Keterangan Data:</b> Total Luas IUP Aktif se-Sulawesi dibandingkan dengan Luas Daratan Sulawesi (18,9 Juta Ha). Batas kritis jika ekspansi melampaui 10% luas daratan.</div>", unsafe_allow_html=True)
+        
+        col1_delta = f"↑ {rasio_ekspansi*100:.1f}% Kepadatan Ekstrem" if rasio_ekspansi > 0 else f"Aman (Rasio Normal)"
+        col1_color = "inverse" if (rasio_ekspansi*100) >= 10.0 else "normal"
+        
+        col2_delta = f"STATUS: OVERCAPACITY" if skor_lahan_5 >= 6.0 else f"STATUS: TERKENDALI"
+        col2_color = "inverse" if skor_lahan_5 >= 6.0 else "normal"
+        
+        skl5_str = f"{(skor_lahan_5 / 2.0):.1f}" if is_likert_mode else f"{skor_lahan_5:.1f}"
+        
+        help_skorl5 = f"Kalkulasi Total (Lahan 5):\nmin(10.0, max(0.0, ({rasio_ekspansi:.3f} / 0.10) * 10)) = {skor_lahan_5:.1f}/10" + (f" (Likert: {(skor_lahan_5 / 2.0):.1f}/5)" if is_likert_mode else "")
+        help_lahan5 = f"Data Profil Kepadatan Sulawesi:\n- Total Luas IUP Nikel: {total_iup_nikel:,.0f} Ha\n- Luas Daratan Provinsi: {luas_daratan_total:,.0f} Ha\n- Rasio Ekspansi Kepadatan: {rasio_ekspansi*100:.1f}%\n- Threshold: 10% Luas Daratan\n\n{help_skorl5}"
+        
+        col1, col2 = st.columns(2)
+        col1.metric(f"Rasio Kepadatan Spasial (Skor: {skl5_str})", f"{rasio_ekspansi*100:.1f}%", col1_delta, delta_color=col1_color, help=help_lahan5)
+        col2.metric("Skor Kepadatan Spasial (Lahan 5)", f"{skl5_str} / {card_denom}", col2_delta, delta_color=col2_color, help=help_skorl5)
+        
+        st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
+        
+        if not df_kawasan_nikel.empty:
+            df_kn_chart = df_kawasan_nikel.copy()
+            df_kn_chart['provinsi'] = df_kn_chart['provinsi'].fillna('Unknown')
+            df_kn_chart['total_luas_iup_ha'] = pd.to_numeric(df_kn_chart['total_luas_iup_ha'], errors='coerce').fillna(0)
+            
+            # Map Luas Daratan to chart
+            luas_daratan_map = {
+                'Gorontalo': 1125707.0,
+                'Sulawesi Barat': 1678718.0,
+                'Sulawesi Selatan': 4671748.0,
+                'Sulawesi Tengah': 6184129.0,
+                'Sulawesi Tenggara': 3806770.0,
+                'Sulawesi Utara': 1389247.0
+            }
+            df_kn_chart['luas_daratan'] = df_kn_chart['provinsi'].map(luas_daratan_map).fillna(1.0)
+            
+            fig_l5 = go.Figure(data=[
+                go.Bar(name='Total IUP (Ha)', x=df_kn_chart['provinsi'], y=df_kn_chart['total_luas_iup_ha'], marker_color='#e74c3c')
+            ])
+            fig_l5.update_layout(
+                barmode='group',
+                title="Total Ekspansi IUP Nikel per Provinsi",
+                template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0)
+            )
+            st.plotly_chart(fig_l5, use_container_width=True, config={'displayModeBar': False})
+            
+            with st.expander("Tampilkan Data Mentah Kawasan IUP"):
+                st.dataframe(df_kawasan_nikel, use_container_width=True)
 
 
 st.markdown("<br>", unsafe_allow_html=True)
@@ -2490,14 +2745,15 @@ with colD2:
         
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
-        if not df_konflik_fpic.empty and not df_kpa_izin.empty:
-            df_konflik_timeline = df_konflik_fpic.copy()
+        if not df_fpic_recent.empty and not df_kpa_izin.empty:
+            df_konflik_timeline = df_fpic_recent.copy()
             df_konflik_timeline['kategori'] = 'Konflik Pertambangan'
             df_konflik_timeline = df_konflik_timeline.rename(columns={'tahun': 'Tahun', 'judul': 'Keterangan'})
             
             df_masalah_timeline = df_kpa_izin[df_kpa_izin['lokasi'].str.contains('Sulawesi', case=False, na=False)].copy()
+            df_masalah_timeline['Tahun'] = pd.to_numeric(df_masalah_timeline['tahun_laporan'], errors='coerce')
+            df_masalah_timeline = df_masalah_timeline[df_masalah_timeline['Tahun'] >= 2014]
             df_masalah_timeline['kategori'] = 'Masalah Izin (KPA)'
-            df_masalah_timeline['Tahun'] = df_masalah_timeline['tahun_laporan'].astype(int)
             
             df_combined_timeline = pd.concat([
                 df_konflik_timeline[['Tahun', 'kategori']],
@@ -2530,12 +2786,13 @@ with colD2:
             )
             st.plotly_chart(fig_s1, use_container_width=True, config={'displayModeBar': False})
             
-            st.markdown("<div style='margin-top: 15px;'><b>Daftar Temuan Kasus (Konflik FPIC):</b></div>", unsafe_allow_html=True)
-            df_fpic_view = df_konflik_fpic[['tahun', 'nama_perusahaan', 'indikasi_fpic', 'judul']].copy()
-            st.dataframe(df_fpic_view, use_container_width=True, hide_index=True)
+            st.markdown("<div style='margin-top: 15px;'><b>Daftar Temuan Kasus (Konflik FPIC Era 2014-2024):</b></div>", unsafe_allow_html=True)
+            if not df_fpic_recent.empty:
+                df_fpic_view = df_fpic_recent[['tahun', 'nama_perusahaan', 'indikasi_fpic', 'judul']].copy()
+                st.dataframe(df_fpic_view, use_container_width=True, hide_index=True)
             with st.expander("Tampilkan Data Mentah FPIC & Izin (JATAM/Walhi)"):
-                st.dataframe(df_konflik_fpic, use_container_width=True)
-                st.caption("Sumber: `sulawesi_konflik_tambang_fpic.csv` (JATAM & Walhi)")
+                st.dataframe(df_fpic_recent if not df_fpic_recent.empty else df_konflik_fpic, use_container_width=True)
+                st.caption("Sumber: `sulawesi_konflik_tambang_fpic.csv` (JATAM & Walhi, Filtered >= 2014)")
 
     with tab_s2:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Sosial 2):</b><br>• <b>Jiwa Terdampak Konflik:</b> > 100.000 Jiwa (Tingkat Pulau).<br>• <b>Keterangan Data:</b> Menggunakan dataset letusan konflik agraria akibat perampasan ruang hidup (KPA & TanahKita). Threshold darurat kemanusiaan ditetapkan sebesar 100.000 jiwa, merepresentasikan 24,5% proporsi ekuivalensi beban konflik agraria nasional (CATAHU KPA 2023).</div>", unsafe_allow_html=True)
@@ -2565,7 +2822,7 @@ with colD2:
                 st.plotly_chart(fig_s1, use_container_width=True, config={'displayModeBar': False})
                 with st.expander("Tampilkan Data Indikasi Perampasan Lahan & Korban"):
                     st.dataframe(df_k_darat[['tahun', 'judul', 'sektor', 'dampak_masyarakat_jiwa']], use_container_width=True)
-                    st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita.csv` (Konsorsium Pembaruan Agraria & YLBHI)")
+                    st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita_v2.csv` (Konsorsium Pembaruan Agraria & YLBHI, Filtered >= 2014)")
 
     with tab_s3:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Sosial 3):</b><br>• <b>Kriminalisasi & HAM:</b> > 50 Insiden (Tingkat Pulau).<br>• <b>Keterangan Data:</b> Menggunakan metrik insiden kekerasan/kriminalisasi (berbasis metodologi Satya Bumi & Protection International). Threshold darurat HAM ditetapkan maksimal 50 insiden se-Sulawesi, merepresentasikan rasio ekuivalensi dominan (87,7%) dari total beban perlindungan HAM lingkungan hidup nasional (57 insiden).</div>", unsafe_allow_html=True)
@@ -2595,7 +2852,7 @@ with colD2:
                 st.plotly_chart(fig_s2, use_container_width=True, config={'displayModeBar': False})
                 with st.expander("Tampilkan Data Indikasi Kriminalisasi"):
                     st.dataframe(krim_df[['tahun', 'judul', 'sektor', 'jumlah_ditangkap', 'jumlah_luka']], use_container_width=True)
-                    st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita.csv` (Konsorsium Pembaruan Agraria & YLBHI)")
+                    st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita_v2.csv` (Konsorsium Pembaruan Agraria & YLBHI, Filtered >= 2014)")
 
     with tab_s4:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Sosial 4):</b><br>• <b>Defisit Layanan Faskes:</b> Gap Target SPA 80%.<br>• <b>Keterangan Data:</b> Menggunakan metrik proporsi Puskesmas yang memenuhi standar Sarana, Prasarana, dan Alat Kesehatan (SPA). Target nasional ditetapkan minimal 80% (RPJMN 2025–2029, Bab IV & Permenkes 6/2024).</div>", unsafe_allow_html=True)
@@ -2754,4 +3011,5 @@ with colE2:
                 st.caption("Sumber: `sulawesi_pltu_captive.csv` (Global Energy Monitor 2023)")
 
 st.markdown("<br>", unsafe_allow_html=True)
+
 
