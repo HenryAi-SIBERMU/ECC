@@ -175,7 +175,7 @@ def load_infografis_data():
     df_pltu = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv"))
     df_gfw = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_master_1_dekade_2014_2023_v3.csv"))
     df_kes = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_kesehatan_detail_2014_2024.csv"))
-    df_konf = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita_v3.csv"))
+    df_konf = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita_v2.csv"))
     df_ika = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv"))
     df_smelter = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_esdm_nikel.csv"))
     df_inv = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_investasi_pmdn_2016_2024.csv"))
@@ -210,12 +210,12 @@ def_tambang_total = df_gfw['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'].sum(
 # 2. ISPA/Diare
 ispa_total = df_kes[df_kes['indikator'] == 'Kasus ISPA/Pneumonia']['nilai'].sum()
 
-# 3. Konflik Agraria — filter pakai provinsi_ner_llm (v3, lebih akurat)
+# 3. Konflik Agraria — filter pakai provinsi_ner (v3, lebih akurat)
 _SULAWESI_PROVS = ['Sulawesi Tengah','Sulawesi Tenggara','Sulawesi Selatan','Sulawesi Utara','Sulawesi Barat','Gorontalo']
 df_konf['tahun'] = pd.to_numeric(df_konf['tahun'], errors='coerce')
-if 'provinsi_ner_llm' in df_konf.columns:
+if 'provinsi_ner' in df_konf.columns:
     df_konf_sul = df_konf[
-        df_konf['provinsi_ner_llm'].isin(_SULAWESI_PROVS) &
+        df_konf['provinsi_ner'].isin(_SULAWESI_PROVS) &
         (df_konf['tahun'] >= 2014)
     ].copy()
 else:
@@ -1802,34 +1802,6 @@ with poster_container:
         help="Download file ini, buka di Chrome/Edge, lalu tekan Ctrl+P untuk Simpan sebagai PDF."
     )
     components.html(poster_html_v2, height=1000, scrolling=True)
-
-st.markdown("---")
-
-with st.expander("Kamus Sumber Data & Provenance Dataset Lengkap (Klik untuk Melihat Asal Data)", expanded=False):
-    st.markdown("### Pemetaan Asal Data Ekstraktif Infografis D3TLH ke Folder Dataset Lokal")
-    
-    provenance_data = [
-        {"Sektor": "Ekspansi Industri", "Indikator / Kartu": "Izin & Konsesi Tambang", "File Dataset di Folder": "data/processed/sulawesi_izin_tambang_v2.csv", "Sumber Resmi / Publisher": "Ditjen Minerba ESDM RI", "Metodologi / Catatan": "Data spasial & tabuler izin tambang aktif periode 2014-2024."},
-        {"Sektor": "Ekspansi Industri", "Indikator / Kartu": "PLTU Captive", "File Dataset di Folder": "data/processed/sulawesi_pltu_captive.csv", "Sumber Resmi / Publisher": "Global Energy Monitor (GEM) & ESDM", "Metodologi / Catatan": "Kapasitas PLTU captive beroperasi di kawasan industri Sulawesi."},
-        {"Sektor": "Ekspansi Industri", "Indikator / Kartu": "Smelter Nikel", "File Dataset di Folder": "data/processed/sulawesi_esdm_nikel.csv", "Sumber Resmi / Publisher": "Kementerian ESDM & Laporan Kinerja", "Metodologi / Catatan": "Badan usaha smelter nikel konstruksi dan beroperasi."},
-        {"Sektor": "Ekspansi Industri", "Indikator / Kartu": "Investasi & PAD", "File Dataset di Folder": "data/processed/sulawesi_investasi_pmdn_2016_2024.csv & sulawesi_pad_ketergantungan_tambang.csv", "Sumber Resmi / Publisher": "Kementerian Investasi/BKPM & Kemenkeu/BPS", "Metodologi / Catatan": "Aliran PMDN dan Porsi PAD Ekstraktif (Pajak Daerah)."},
-        {"Sektor": "Logistik", "Indikator / Kartu": "Simpul Logistik & Pelabuhan", "File Dataset di Folder": "data/processed/sulawesi_logistik_simpul_nikel.csv", "Sumber Resmi / Publisher": "Kemenhub & OSINT Pelabuhan Tersus", "Metodologi / Catatan": "Klaster industri nikel dengan fasilitas terminal khusus pesisir."},
-        {"Sektor": "Lingkungan Ekologis", "Indikator / Kartu": "Deforestasi & Hutan Primer", "File Dataset di Folder": "data/processed/sulawesi_gfw_master_1_dekade_2014_2023_v3.csv", "Sumber Resmi / Publisher": "Global Forest Watch (GFW)", "Metodologi / Catatan": "Total loss tutupan pohon & hutan primer (v3)."},
-        {"Sektor": "Lingkungan Ekologis", "Indikator / Kartu": "Kawasan Lindung", "File Dataset di Folder": "data/processed/sulawesi_gfw_kawasan_lindung_loss_2014_2023_v3.csv", "Sumber Resmi / Publisher": "GFW & KLHK", "Metodologi / Catatan": "Loss tutupan pohon di dalam poligon Kawasan Lindung."},
-        {"Sektor": "Lingkungan Ekologis", "Indikator / Kartu": "Emisi Karbon", "File Dataset di Folder": "data/processed/sulawesi_gfw_master_1_dekade_2014_2023_v3.csv", "Sumber Resmi / Publisher": "GFW", "Metodologi / Catatan": "Estimasi emisi gas rumah kaca di atas tutupan hilang (Megagram CO2)."},
-        {"Sektor": "Lingkungan Ekologis", "Indikator / Kartu": "Bencana Alam", "File Dataset di Folder": "data/processed/sulawesi_bencana_bnpb_2014_2024.csv", "Sumber Resmi / Publisher": "DIBI BNPB", "Metodologi / Catatan": "Insiden banjir, longsor, dan korban mengungsi di Sulawesi."},
-        {"Sektor": "Lingkungan Ekologis", "Indikator / Kartu": "Keanekaragaman Hayati", "File Dataset di Folder": "data/processed/sulawesi_biodiversitas_iucn_fase5_exploded.csv", "Sumber Resmi / Publisher": "IUCN Red List 2024", "Metodologi / Catatan": "Satwa kunci endemik Sulawesi terancam oleh Mining/Quarrying."},
-        {"Sektor": "Kesehatan Publik", "Indikator / Kartu": "ISPA, Diare, Kusta", "File Dataset di Folder": "data/processed/sulawesi_kesehatan_detail_2014_2024.csv", "Sumber Resmi / Publisher": "Kemenkes RI & Dinkes", "Metodologi / Catatan": "Kasus penyakit menular berbasis puskesmas/RS kabupaten."},
-        {"Sektor": "Kesehatan Publik", "Indikator / Kartu": "Zoonosis & DBD", "File Dataset di Folder": "data/processed/zoonosis_kab_kota_2015_2024.csv", "Sumber Resmi / Publisher": "Kemenkes RI", "Metodologi / Catatan": "Kasus DBD dan infeksi tular vektor akibat perubahan tutupan lahan."},
-        {"Sektor": "Kesehatan Publik", "Indikator / Kartu": "Fasilitas Kesehatan", "File Dataset di Folder": "data/processed/sulawesi_faskes_agregat_v3.csv", "Sumber Resmi / Publisher": "Kemenkes RI (SIRS)", "Metodologi / Catatan": "Total faskes puskesmas/RS/Klinik di kabupaten se-Sulawesi."},
-        {"Sektor": "Tata Kelola Hutan & Izin", "Indikator / Kartu": "Konflik Hukum & Izin Ilegal", "File Dataset di Folder": "data/processed/sulawesi_konflik_hukum.csv & kpa_catahu_2025_izin_ilegal_sulawesi.csv", "Sumber Resmi / Publisher": "Mahkamah Agung, PTUN, & KPA", "Metodologi / Catatan": "Rekam jejak sengketa hukum korporasi dan operasi non-prosedural."},
-        {"Sektor": "Sosial Agraria", "Indikator / Kartu": "Konflik Agraria Umum", "File Dataset di Folder": "data/processed/sulawesi_konflik_agraria_tanahkita_v3.csv", "Sumber Resmi / Publisher": "TanahKita KPA & JATAM", "Metodologi / Catatan": "Ledakan insiden sengketa lahan, jiwa terdampak, dan luasan (v3)."},
-        {"Sektor": "Sosial Agraria", "Indikator / Kartu": "Pelanggaran Hak Adat (FPIC)", "File Dataset di Folder": "data/processed/sulawesi_konflik_tambang_fpic.csv", "Sumber Resmi / Publisher": "AMAN & CSO Lokal", "Metodologi / Catatan": "Insiden di wilayah adat tanpa Free, Prior, and Informed Consent."},
-        {"Sektor": "Kesehatan Lingkungan", "Indikator / Kartu": "Timbunan Limbah B3", "File Dataset di Folder": "data/processed/sulawesi_limbah_b3.csv", "Sumber Resmi / Publisher": "AEER & KLHK", "Metodologi / Catatan": "Estimasi timbulan slag, tailing dari smelter HPAL/RKEF."},
-        {"Sektor": "Kesehatan Lingkungan", "Indikator / Kartu": "Penurunan Kualitas Air", "File Dataset di Folder": "data/processed/sulawesi_ika_2016_2024.csv", "Sumber Resmi / Publisher": "KLHK RI", "Metodologi / Catatan": "Indeks Kualitas Air (IKA) dari sungai-sungai utama provinsi."}
-    ]
-    df_prov = pd.DataFrame(provenance_data)
-    st.dataframe(df_prov, use_container_width=True, hide_index=True)
 
 st.markdown("---")
 st.markdown("""

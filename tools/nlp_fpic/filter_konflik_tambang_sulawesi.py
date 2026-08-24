@@ -8,23 +8,15 @@ Date: 2026-06-15
 import pandas as pd
 import re
 
-# Load data konflik agraria
-df = pd.read_csv('data/processed/nasional_konflik_agraria_tanahkita.csv')
+# Load data konflik agraria yang sudah di-filter LLM v3
+df = pd.read_csv('data/processed/sulawesi_konflik_agraria_tanahkita_v3.csv')
 
-print(f"Total konflik dalam database: {len(df)}")
+print(f"Total konflik dalam database v3: {len(df)}")
 print(f"Columns: {df.columns.tolist()}")
 
-# Filter 1: Konflik di Sulawesi (cek di deskripsi dan judul)
-sulawesi_keywords = ['Sulawesi', 'Sulteng', 'Sultra', 'Sulsel', 'Sulbar', 'Sulut', 'Gorontalo',
-                     'Morowali', 'Kolaka', 'Konawe', 'Palu', 'Donggala', 'Makassar', 
-                     'Luwu', 'Bone', 'Mamuju', 'Banggai', 'Tojo Una-Una', 'Bitung', 
-                     'Enrekang', 'Sorowako']
-
-mask_sulawesi = (df['deskripsi'].str.contains('|'.join(sulawesi_keywords), case=False, na=False)) | \
-                (df['judul'].str.contains('|'.join(sulawesi_keywords), case=False, na=False))
-
-df_sulawesi = df[mask_sulawesi]
-print(f"\nKonflik di Sulawesi: {len(df_sulawesi)}")
+# Filter 1: Tidak diperlukan lagi karena v3.csv sudah 100% Sulawesi
+df_sulawesi = df.copy()
+print(f"\nKonflik di Sulawesi (Pre-filtered by LLM): {len(df_sulawesi)}")
 
 # Filter 2: Sektor Pertambangan
 mining_keywords = ['Pertambangan', 'Tambang', 'Mining', 'Nikel', 'Nickel', 'Emas', 'Gold', 
@@ -84,28 +76,8 @@ def extract_company_names(row):
 
 df_output_all['nama_perusahaan'] = df_output_all.apply(extract_company_names, axis=1)
 
-# Extract lokasi provinsi dari deskripsi
-def extract_provinsi(text):
-    """Extract Sulawesi province from text"""
-    if pd.isna(text):
-        return 'Sulawesi (unspecified)'
-    text = str(text)
-    if 'Sulawesi Utara' in text or 'Sulut' in text or 'Minahasa' in text or 'Manado' in text:
-        return 'Sulawesi Utara'
-    elif 'Sulawesi Tengah' in text or 'Sulteng' in text or 'Palu' in text or 'Morowali' in text or 'Donggala' in text or 'Banggai' in text or 'Tojo Una-Una' in text:
-        return 'Sulawesi Tengah'
-    elif 'Sulawesi Tenggara' in text or 'Sultra' in text or 'Kolaka' in text or 'Konawe' in text or 'Kendari' in text or 'Wawonii' in text:
-        return 'Sulawesi Tenggara'
-    elif 'Sulawesi Selatan' in text or 'Sulsel' in text or 'Makassar' in text or 'Luwu' in text or 'Bone' in text or 'Enrekang' in text or 'Sorowako' in text:
-        return 'Sulawesi Selatan'
-    elif 'Sulawesi Barat' in text or 'Sulbar' in text or 'Mamuju' in text:
-        return 'Sulawesi Barat'
-    elif 'Gorontalo' in text:
-        return 'Gorontalo'
-    return 'Sulawesi (unspecified)'
-
-df_output_all['provinsi'] = df_output_all['deskripsi'].apply(extract_provinsi) + ' | ' + df_output_all['judul'].apply(extract_provinsi)
-df_output_all['provinsi'] = df_output_all['provinsi'].apply(lambda x: x.split(' | ')[0] if 'unspecified' not in x else x.split(' | ')[1])
+# Extract lokasi provinsi dari LLM NER column
+df_output_all['provinsi'] = df_output_all['provinsi_ner_llm']
 
 # Create output dataset
 output_columns = ['tahun', 'judul', 'deskripsi', 'provinsi', 'lokasi', 'status', 'nama_perusahaan', 'indikasi_fpic', 'detail_url']

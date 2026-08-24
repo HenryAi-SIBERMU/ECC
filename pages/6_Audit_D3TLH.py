@@ -165,7 +165,7 @@ def load_data():
     df_kes = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_kesehatan_detail_2014_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_kesehatan_detail_2014_2024.csv")) else pd.DataFrame()
     df_ika = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv")) else pd.DataFrame()
     df_bencana = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_bencana_bnpb_2014_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_bencana_bnpb_2014_2024.csv")) else pd.DataFrame()
-    df_konflik = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita_v3.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita_v3.csv")) else pd.DataFrame()
+    df_konflik = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita_v2.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita_v2.csv")) else pd.DataFrame()
     if not df_konflik.empty:
         df_konflik['tahun'] = pd.to_numeric(df_konflik['tahun'], errors='coerce')
         df_konflik = df_konflik[df_konflik['tahun'] >= 2014]
@@ -2479,7 +2479,7 @@ with colB2:
             
             with st.expander(f"Lihat Data Mentah: Rincian {jumlah_konflik_air} Kasus Konflik Pesisir/Nelayan (1 Dekade)", expanded=False):
                 st.dataframe(df_konflik_air, use_container_width=True, hide_index=True)
-                st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita_v3.csv` (Di-filter berdasarkan keyword: air, laut, pesisir, nelayan, tailing, dll dan direduksi khusus wilayah Sulawesi menggunakan NLP NER)")
+                st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita_v2.csv` (Di-filter berdasarkan keyword: air, laut, pesisir, nelayan, tailing, dll dan direduksi khusus wilayah Sulawesi menggunakan NLP NER)")
 
     with tab_w4:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Air 4):</b><br>• <b>Timbulan Tailing/Slag:</b> > 25 Juta Ton/Tahun (Batas Kapasitas maksimal DSTP/Tailing Dam).<br>• <b>Regulasi:</b> Dokumen AMDAL KLHK (PT HPI - IMIP) & Laporan AEER 2020 (Hal. 36).</div>", unsafe_allow_html=True)
@@ -2889,7 +2889,7 @@ with colD2:
                 st.plotly_chart(fig_s1, use_container_width=True, config={'displayModeBar': False})
                 with st.expander("Tampilkan Data Indikasi Perampasan Lahan & Korban"):
                     st.dataframe(df_k_darat[['tahun', 'judul', 'sektor', 'dampak_masyarakat_jiwa']], use_container_width=True)
-                    st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita_v3.csv` (Konsorsium Pembaruan Agraria & YLBHI, Filtered >= 2014)")
+                    st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita_v2.csv` (Konsorsium Pembaruan Agraria & YLBHI, Filtered >= 2014)")
 
     with tab_s3:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Sosial 3):</b><br>• <b>Kriminalisasi & HAM:</b> > 10 Insiden (Tingkat Pulau).<br>• <b>Keterangan Data:</b> Menggunakan metrik insiden kekerasan/kriminalisasi (berbasis metodologi Satya Bumi & Protection International). Threshold ditetapkan menggunakan metode <b>Mean + 1 SD dari 6 Provinsi Sulawesi</b> (Mean=5.67, SD=3.90 &rarr; Threshold=10), konsisten dengan metodologi Lahan 1 (Bencana BNPB). Aktual 34 insiden = 3.4&times; di atas outlier.</div>", unsafe_allow_html=True)
@@ -2919,7 +2919,7 @@ with colD2:
                 st.plotly_chart(fig_s2, use_container_width=True, config={'displayModeBar': False})
                 with st.expander("Tampilkan Data Indikasi Kriminalisasi"):
                     st.dataframe(krim_df[['tahun', 'judul', 'sektor', 'jumlah_ditangkap', 'jumlah_luka']], use_container_width=True)
-                    st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita_v3.csv` (Konsorsium Pembaruan Agraria & YLBHI, Filtered >= 2014)")
+                    st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita_v2.csv` (Konsorsium Pembaruan Agraria & YLBHI, Filtered >= 2014)")
 
     with tab_s4:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Sosial 4):</b><br>• <b>Defisit Layanan Faskes:</b> Gap Target SPA 80%.<br>• <b>Keterangan Data:</b> Menggunakan metrik proporsi Puskesmas yang memenuhi standar Sarana, Prasarana, dan Alat Kesehatan (SPA). Target nasional ditetapkan minimal 80% (RPJMN 2025–2029, Bab IV & Permenkes 6/2024).</div>", unsafe_allow_html=True)

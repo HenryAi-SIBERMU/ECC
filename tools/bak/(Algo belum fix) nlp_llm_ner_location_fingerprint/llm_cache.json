@@ -1,0 +1,2274 @@
+{
+    "2": {
+        "provinsi": "Bengkulu",
+        "kabupaten": "Kabupaten Lebong"
+    },
+    "8": {
+        "provinsi": "Maluku",
+        "kabupaten": "Kab. Maluku Tengah"
+    },
+    "9": {
+        "provinsi": "Lampung",
+        "kabupaten": "Kab. Lampung Barat"
+    },
+    "5": {
+        "provinsi": "Riau",
+        "kabupaten": "Kab. Kampar"
+    },
+    "4": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kabupaten Deli Serdang"
+    },
+    "0": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kab. Lebak"
+    },
+    "6": {
+        "provinsi": "Kalimantan Selatan",
+        "kabupaten": "Kab. Hulu Sungai Tengah"
+    },
+    "3": {
+        "provinsi": "Bali",
+        "kabupaten": "Kab. Buleleng"
+    },
+    "1": {
+        "provinsi": "Sumatera Selatan",
+        "kabupaten": "Kab. Kaur"
+    },
+    "13": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Sigi"
+    },
+    "10": {
+        "provinsi": "Papua",
+        "kabupaten": "Kab. Sorong"
+    },
+    "11": {
+        "provinsi": "Papua Barat Daya",
+        "kabupaten": "Kab. Tambrauw"
+    },
+    "15": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kab. Boyolali"
+    },
+    "14": {
+        "provinsi": "Maluku",
+        "kabupaten": "Kabupaten Maluku Tengah"
+    },
+    "16": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "12": {
+        "provinsi": "Nusa Tenggara Timur",
+        "kabupaten": "Kab. Timor Tengah Selatan"
+    },
+    "18": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kab. Kediri"
+    },
+    "17": {
+        "provinsi": "Riau",
+        "kabupaten": "Kab. Siak"
+    },
+    "7": {
+        "provinsi": "Riau",
+        "kabupaten": "Kabupaten Pelalawan"
+    },
+    "23": {
+        "provinsi": "Riau",
+        "kabupaten": "Kab. Rokan Hulu"
+    },
+    "19": {
+        "provinsi": "Sulawesi Utara",
+        "kabupaten": "Kota Bitung"
+    },
+    "22": {
+        "provinsi": "Riau",
+        "kabupaten": "Kab. Pelalawan"
+    },
+    "21": {
+        "provinsi": "Riau",
+        "kabupaten": "Kabupaten Pelalawan"
+    },
+    "20": {
+        "provinsi": "Sulawesi Utara",
+        "kabupaten": "Kab. Sangihe"
+    },
+    "25": {
+        "provinsi": "Riau",
+        "kabupaten": "Kabupaten Pelalawan"
+    },
+    "28": {
+        "provinsi": "Riau",
+        "kabupaten": "Kab. Siak"
+    },
+    "27": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kab. Gresik"
+    },
+    "26": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Pinrang"
+    },
+    "29": {
+        "provinsi": "Riau",
+        "kabupaten": "Kab. Siak"
+    },
+    "30": {
+        "provinsi": "Riau",
+        "kabupaten": "Kab. Siak"
+    },
+    "31": {
+        "provinsi": "Jambi",
+        "kabupaten": "Kab. Tanjung Jabung Timur"
+    },
+    "32": {
+        "provinsi": "Kepulauan Bangka Belitung",
+        "kabupaten": "Kab. Bangka Selatan"
+    },
+    "33": {
+        "provinsi": "Papua Barat",
+        "kabupaten": "Kab. Manokwari"
+    },
+    "24": {
+        "provinsi": "Riau",
+        "kabupaten": "Kabupaten Indragiri Hilir"
+    },
+    "34": {
+        "provinsi": "Bali",
+        "kabupaten": "Kab. Buleleng"
+    },
+    "36": {
+        "provinsi": "Papua",
+        "kabupaten": "Kabupaten Nabire"
+    },
+    "37": {
+        "provinsi": "Sulawesi Barat",
+        "kabupaten": "Kab. Mamuju Tengah"
+    },
+    "35": {
+        "provinsi": "Kepulauan Bangka Belitung",
+        "kabupaten": "Kabupaten Bangka"
+    },
+    "38": {
+        "provinsi": "Gorontalo",
+        "kabupaten": "Kab. Bone Bolango"
+    },
+    "39": {
+        "provinsi": "Gorontalo",
+        "kabupaten": "Kab. Boalemo"
+    },
+    "44": {
+        "provinsi": "Nusa Tenggara Timur",
+        "kabupaten": "Kab. Flores Timur"
+    },
+    "43": {
+        "provinsi": "Gorontalo",
+        "kabupaten": "Kab. Gorontalo Utara"
+    },
+    "41": {
+        "provinsi": "Kalimantan Timur",
+        "kabupaten": "Kabupaten Kutai Barat"
+    },
+    "45": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kota Surabaya"
+    },
+    "46": {
+        "provinsi": "Bengkulu",
+        "kabupaten": "Kab. Mukomuko"
+    },
+    "47": {
+        "provinsi": "Lampung",
+        "kabupaten": "Kabupaten Tulang Bawang"
+    },
+    "40": {
+        "provinsi": "Bali",
+        "kabupaten": "Kab. Gianyar"
+    },
+    "49": {
+        "provinsi": "Lampung",
+        "kabupaten": "Lampung Tengah"
+    },
+    "42": {
+        "provinsi": "Kalimantan Timur",
+        "kabupaten": "Kab. Penajam Paser Utara"
+    },
+    "50": {
+        "provinsi": "DKI Jakarta",
+        "kabupaten": "Kota Jakarta Selatan"
+    },
+    "48": {
+        "provinsi": "Lampung",
+        "kabupaten": "Kabupaten Tulang Bawang"
+    },
+    "52": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Enrekang"
+    },
+    "51": {
+        "provinsi": "Jambi",
+        "kabupaten": "Kab. Muaro Jambi"
+    },
+    "54": {
+        "provinsi": "Lampung",
+        "kabupaten": "Kab. Tulang Bawang"
+    },
+    "56": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kota Semarang"
+    },
+    "53": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kab. Cilacap"
+    },
+    "55": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kab. Cianjur"
+    },
+    "57": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kabupaten Semarang"
+    },
+    "58": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kota Surabaya"
+    },
+    "59": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Banggai"
+    },
+    "60": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kab. Deli Serdang"
+    },
+    "62": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kab. Deli Serdang"
+    },
+    "61": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kabupaten Pemalang"
+    },
+    "63": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kab. Bandung Barat"
+    },
+    "64": {
+        "provinsi": "Lampung",
+        "kabupaten": "Kabupaten Way Kanan"
+    },
+    "65": {
+        "provinsi": "Jambi",
+        "kabupaten": "Kab. Tanjung Jabung Timur"
+    },
+    "66": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kab. Blora"
+    },
+    "69": {
+        "provinsi": "Sumatera Barat",
+        "kabupaten": "Kab. Pasaman Barat"
+    },
+    "68": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Parigi Moutong"
+    },
+    "72": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Landak"
+    },
+    "67": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kab. Simalungun"
+    },
+    "71": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kota Bandung"
+    },
+    "73": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kabupaten Blitar"
+    },
+    "74": {
+        "provinsi": "Sumatera Selatan",
+        "kabupaten": "Kab. Ogan Komering Ilir"
+    },
+    "77": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kab. Garut"
+    },
+    "75": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kabupaten Konawe Selatan"
+    },
+    "76": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Morowali Utara"
+    },
+    "81": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kab. Malang"
+    },
+    "79": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kota Pematang Siantar"
+    },
+    "80": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kab. Padang Lawas"
+    },
+    "78": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kabupaten Bekasi"
+    },
+    "70": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kab. Langkat"
+    },
+    "82": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Enrekang"
+    },
+    "88": {
+        "provinsi": "Kalimantan Selatan",
+        "kabupaten": "Kab. Banjar"
+    },
+    "87": {
+        "provinsi": "Kalimantan Timur",
+        "kabupaten": "Kab. Kutai Timur"
+    },
+    "91": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kab. Simalungun"
+    },
+    "84": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kota Surakarta"
+    },
+    "85": {
+        "provinsi": "Maluku Utara",
+        "kabupaten": "Kab. Halmahera Tengah"
+    },
+    "89": {
+        "provinsi": "Kalimantan Selatan",
+        "kabupaten": "Kab. Barito Kuala"
+    },
+    "90": {
+        "provinsi": "Nusa Tenggara Timur",
+        "kabupaten": "Kab. Manggarai Barat"
+    },
+    "93": {
+        "provinsi": "DKI Jakarta",
+        "kabupaten": "Kota Jakarta Utara"
+    },
+    "94": {
+        "provinsi": "Riau",
+        "kabupaten": "Kab. Kampar"
+    },
+    "92": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kab. Deli Serdang"
+    },
+    "96": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kab. Tuban"
+    },
+    "83": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kab. Magelang"
+    },
+    "97": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kab. Labuhanbatu"
+    },
+    "98": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kab. Konawe Selatan"
+    },
+    "101": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kab. Konawe Selatan"
+    },
+    "86": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kab. Lamandau"
+    },
+    "100": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kab. Konawe Selatan"
+    },
+    "102": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kab. Konawe Selatan"
+    },
+    "95": {
+        "provinsi": "Nusa Tenggara Timur",
+        "kabupaten": "Kabupaten Manggarai Barat"
+    },
+    "99": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kabupaten Konawe Selatan"
+    },
+    "105": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kab. Konawe Selatan"
+    },
+    "106": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kab. Konawe Selatan"
+    },
+    "104": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kab. Konawe Selatan"
+    },
+    "107": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kab. Konawe Selatan"
+    },
+    "103": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kab. Konawe Selatan"
+    },
+    "111": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kab. Konawe Selatan"
+    },
+    "110": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kab. Konawe Selatan"
+    },
+    "112": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Sanggau"
+    },
+    "108": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "114": {
+        "provinsi": "Jambi",
+        "kabupaten": "Kab. Batanghari"
+    },
+    "113": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kab. Banyuwangi"
+    },
+    "109": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kab. Konawe Selatan"
+    },
+    "115": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Sintang"
+    },
+    "119": {
+        "provinsi": "Nusa Tenggara Timur",
+        "kabupaten": "Kabupaten Nagekeo"
+    },
+    "117": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kabupaten Konawe Kepulauan"
+    },
+    "120": {
+        "provinsi": "Nusa Tenggara Timur",
+        "kabupaten": "Kabupaten Manggarai Timur"
+    },
+    "118": {
+        "provinsi": "Nusa Tenggara Timur",
+        "kabupaten": "Kabupaten Manggarai Barat"
+    },
+    "116": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kab. Konawe"
+    },
+    "122": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kabupaten Malang"
+    },
+    "125": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kabupaten Banyuwangi"
+    },
+    "121": {
+        "provinsi": "Bali",
+        "kabupaten": "Kabupaten Jembrana"
+    },
+    "124": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kabupaten Cilacap"
+    },
+    "123": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kab. Cilacap"
+    },
+    "127": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kab. Temanggung"
+    },
+    "126": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kab. Trenggalek"
+    },
+    "129": {
+        "provinsi": "Kepulauan Bangka Belitung",
+        "kabupaten": "Kabupaten Bangka Barat"
+    },
+    "131": {
+        "provinsi": "Kepulauan Bangka Belitung",
+        "kabupaten": "Kabupaten Bangka Selatan"
+    },
+    "128": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kab. Banyuwangi"
+    },
+    "134": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kab. Banyuwangi"
+    },
+    "130": {
+        "provinsi": "Kepulauan Bangka Belitung",
+        "kabupaten": "Kab. Bangka Selatan"
+    },
+    "133": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kab. Cilacap"
+    },
+    "135": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kab. Magelang"
+    },
+    "136": {
+        "provinsi": "Bengkulu",
+        "kabupaten": "Kab. Bengkulu Utara"
+    },
+    "138": {
+        "provinsi": "Riau",
+        "kabupaten": "Kabupaten Indragiri Hulu"
+    },
+    "132": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kab. Purworejo"
+    },
+    "141": {
+        "provinsi": "Jambi",
+        "kabupaten": "Kabupaten Sarolangun"
+    },
+    "140": {
+        "provinsi": "Maluku",
+        "kabupaten": "Kab. Seram Bagian Timur"
+    },
+    "142": {
+        "provinsi": "Bangka Belitung",
+        "kabupaten": "Kabupaten Bangka"
+    },
+    "139": {
+        "provinsi": "Papua",
+        "kabupaten": "Kab. Boven Digoel"
+    },
+    "143": {
+        "provinsi": "Papua",
+        "kabupaten": "Kota Jayapura"
+    },
+    "144": {
+        "provinsi": "Maluku Utara",
+        "kabupaten": "Kab. Halmahera Utara"
+    },
+    "146": {
+        "provinsi": "Maluku Utara",
+        "kabupaten": "Kab. Halmahera Timur"
+    },
+    "145": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Sanggau"
+    },
+    "147": {
+        "provinsi": "Sumatera Barat",
+        "kabupaten": "Kab. Mentawai"
+    },
+    "148": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kab. Konawe Kepulauan"
+    },
+    "149": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kab. Lamandau"
+    },
+    "150": {
+        "provinsi": "Jambi",
+        "kabupaten": "Kabupaten Tebo"
+    },
+    "151": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kab. Kotawaringin Timur"
+    },
+    "153": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kabupaten Kotawaringin Timur"
+    },
+    "152": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kab. Subang"
+    },
+    "154": {
+        "provinsi": "Sumatera Selatan",
+        "kabupaten": "Kab. Banyuasin"
+    },
+    "155": {
+        "provinsi": "Sumatera Selatan",
+        "kabupaten": "Kabupaten Lahat"
+    },
+    "137": {
+        "provinsi": "Riau",
+        "kabupaten": "Kabupaten Bengkalis"
+    },
+    "156": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kota Bandung"
+    },
+    "158": {
+        "provinsi": "Nusa Tenggara Timur",
+        "kabupaten": "Kab. Manggarai Barat"
+    },
+    "157": {
+        "provinsi": "Nusa Tenggara Timur",
+        "kabupaten": "Kab. Manggarai Barat"
+    },
+    "161": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Takalar"
+    },
+    "160": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Takalar"
+    },
+    "159": {
+        "provinsi": "Nusa Tenggara Timur",
+        "kabupaten": "Kab. Ende"
+    },
+    "162": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Takalar"
+    },
+    "163": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Takalar"
+    },
+    "165": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Takalar"
+    },
+    "167": {
+        "provinsi": "Jambi",
+        "kabupaten": "Kab. Tebo"
+    },
+    "164": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kota Makassar"
+    },
+    "168": {
+        "provinsi": "Jambi",
+        "kabupaten": "Kab. Tebo"
+    },
+    "170": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kab. Asahan"
+    },
+    "166": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kab. Deli Serdang"
+    },
+    "169": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kab. Langkat"
+    },
+    "171": {
+        "provinsi": "Riau",
+        "kabupaten": "Kab. Tebo"
+    },
+    "172": {
+        "provinsi": "Jambi",
+        "kabupaten": "Kab. Tanjung Jabung Timur"
+    },
+    "173": {
+        "provinsi": "Jambi",
+        "kabupaten": "Kabupaten Tebo"
+    },
+    "174": {
+        "provinsi": "Aceh",
+        "kabupaten": "Kab. Nagan Raya"
+    },
+    "175": {
+        "provinsi": "Aceh",
+        "kabupaten": "Kab. Aceh Tamiang"
+    },
+    "177": {
+        "provinsi": "Aceh",
+        "kabupaten": "Kabupaten Aceh Barat"
+    },
+    "176": {
+        "provinsi": "Aceh",
+        "kabupaten": "Kab. Aceh Timur"
+    },
+    "179": {
+        "provinsi": "Sulawesi Utara",
+        "kabupaten": "Kab. Minahasa Selatan"
+    },
+    "180": {
+        "provinsi": "Sulawesi Utara",
+        "kabupaten": "Kab. Minahasa Selatan"
+    },
+    "178": {
+        "provinsi": "Sulawesi Utara",
+        "kabupaten": "Kab. Minahasa Utara"
+    },
+    "181": {
+        "provinsi": "Aceh",
+        "kabupaten": "Kab. Aceh Jaya"
+    },
+    "182": {
+        "provinsi": "Aceh",
+        "kabupaten": "Kabupaten Nagan Raya"
+    },
+    "185": {
+        "provinsi": "Kalimantan Timur",
+        "kabupaten": "Kab. Malinau"
+    },
+    "191": {
+        "provinsi": "Lampung",
+        "kabupaten": "Kab. Lampung Tengah"
+    },
+    "188": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kota Baubau"
+    },
+    "189": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kabupaten Kolaka"
+    },
+    "186": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kab. Muna"
+    },
+    "192": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "187": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kab. Konawe Selatan"
+    },
+    "184": {
+        "provinsi": "Maluku",
+        "kabupaten": "Kab. Maluku Barat Daya"
+    },
+    "183": {
+        "provinsi": "Kalimantan Timur",
+        "kabupaten": "Kab. Malinau"
+    },
+    "190": {
+        "provinsi": "Kalimantan Timur",
+        "kabupaten": "Kabupaten Mahakam Ulu"
+    },
+    "193": {
+        "provinsi": "Bengkulu",
+        "kabupaten": "Kab. Seluma"
+    },
+    "195": {
+        "provinsi": "Sumatera Selatan",
+        "kabupaten": "Kab. Ogan Komering Ulu"
+    },
+    "194": {
+        "provinsi": "Lampung",
+        "kabupaten": "Kab. Muara Enim"
+    },
+    "197": {
+        "provinsi": "Sumatera Selatan",
+        "kabupaten": "Kabupaten Ogan Komering Ilir"
+    },
+    "196": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Luwu Utara"
+    },
+    "200": {
+        "provinsi": "Sumatera Barat",
+        "kabupaten": "Kab. Pasaman Barat"
+    },
+    "198": {
+        "provinsi": "Sumatera Barat",
+        "kabupaten": "Kab. Pasaman Barat"
+    },
+    "201": {
+        "provinsi": "Sumatera Barat",
+        "kabupaten": "Kab. Dharmasraya"
+    },
+    "199": {
+        "provinsi": "Sumatera Barat",
+        "kabupaten": "Kab. Solok Selatan"
+    },
+    "202": {
+        "provinsi": "Sumatera Barat",
+        "kabupaten": "Kota Padang"
+    },
+    "203": {
+        "provinsi": "Sumatera Barat",
+        "kabupaten": "Kab. Tanah Datar"
+    },
+    "204": {
+        "provinsi": "Sumatera Barat",
+        "kabupaten": "Kab. Pesisir Selatan"
+    },
+    "209": {
+        "provinsi": "Bangka Belitung",
+        "kabupaten": "Kabupaten Bangka Barat"
+    },
+    "205": {
+        "provinsi": "Sumatera Barat",
+        "kabupaten": "Kab. Pesisir Selatan"
+    },
+    "210": {
+        "provinsi": "Bali",
+        "kabupaten": "Kota Denpasar"
+    },
+    "211": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kab. Garut"
+    },
+    "206": {
+        "provinsi": "Sumatera Barat",
+        "kabupaten": "Kabupaten Solok"
+    },
+    "207": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Melawi"
+    },
+    "212": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kab. Bogor"
+    },
+    "214": {
+        "provinsi": "Aceh",
+        "kabupaten": "Kab. Aceh Tamiang"
+    },
+    "208": {
+        "provinsi": "Bangka Belitung",
+        "kabupaten": "Kabupaten Bangka Barat"
+    },
+    "215": {
+        "provinsi": "Aceh",
+        "kabupaten": "Kab. Aceh Jaya"
+    },
+    "216": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kab. Samosir"
+    },
+    "213": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kab. Bogor"
+    },
+    "217": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kabupaten Simalungun"
+    },
+    "218": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kab. Malang"
+    },
+    "220": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kabupaten Pulang Pisau"
+    },
+    "219": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kab. Tapanuli Utara"
+    },
+    "221": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kabupaten Tapanuli Utara"
+    },
+    "222": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kabupaten Humbang Hasundutan"
+    },
+    "223": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kab. Samosir"
+    },
+    "224": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kab. Tapanuli Utara"
+    },
+    "226": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kab. Samosir"
+    },
+    "228": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Mempawah"
+    },
+    "232": {
+        "provinsi": "Kalimantan Selatan",
+        "kabupaten": "Kab. Tanah Bumbu"
+    },
+    "227": {
+        "provinsi": "Jambi",
+        "kabupaten": "Kab. Muaro Jambi"
+    },
+    "233": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kab. Kotawaringin Barat"
+    },
+    "230": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Ketapang"
+    },
+    "231": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Ketapang"
+    },
+    "225": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kabupaten Humbang Hasundutan"
+    },
+    "229": {
+        "provinsi": "Kalimantan Timur",
+        "kabupaten": "Kab. Kutai Barat"
+    },
+    "234": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "235": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "236": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "237": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "238": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "240": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "242": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Donggala"
+    },
+    "243": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kabupaten Kebumen"
+    },
+    "241": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Luwu Utara"
+    },
+    "245": {
+        "provinsi": "DI Yogyakarta",
+        "kabupaten": "Kab. Gunung Kidul"
+    },
+    "244": {
+        "provinsi": "Daerah Istimewa Yogyakarta",
+        "kabupaten": "Kab. Kulon Progo"
+    },
+    "249": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Kubu Raya"
+    },
+    "248": {
+        "provinsi": "Lampung",
+        "kabupaten": "Kab. Mesuji"
+    },
+    "250": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kabupaten Kubu Raya"
+    },
+    "247": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kabupaten Banyuwangi"
+    },
+    "251": {
+        "provinsi": "Aceh",
+        "kabupaten": "Kab. Aceh Jaya"
+    },
+    "252": {
+        "provinsi": "Aceh",
+        "kabupaten": "Kab. Aceh Jaya"
+    },
+    "246": {
+        "provinsi": "DI Yogyakarta",
+        "kabupaten": "Kab. Kulon Progo"
+    },
+    "239": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "253": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Luwu Timur"
+    },
+    "254": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "256": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kabupaten Wajo"
+    },
+    "257": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Takalar"
+    },
+    "255": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Sidenreng Rappang"
+    },
+    "259": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "258": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kabupaten Sinjai"
+    },
+    "260": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Kapuas Hulu"
+    },
+    "263": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Bengkayang"
+    },
+    "261": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Kapuas Hulu"
+    },
+    "264": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Sintang"
+    },
+    "262": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Bengkayang"
+    },
+    "265": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "266": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Sambas"
+    },
+    "268": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kab. Pati"
+    },
+    "272": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "269": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": ""
+    },
+    "267": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kab. Pati"
+    },
+    "271": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "270": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Sintang"
+    },
+    "273": {
+        "provinsi": "Nusa Tenggara Barat",
+        "kabupaten": "Kab. Sumbawa"
+    },
+    "274": {
+        "provinsi": "Nusa Tenggara Timur",
+        "kabupaten": "Kab. Nagekeo"
+    },
+    "279": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kab. Sukabumi"
+    },
+    "277": {
+        "provinsi": "Kalimantan Selatan",
+        "kabupaten": "Kab. Balangan"
+    },
+    "282": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "275": {
+        "provinsi": "Nusa Tenggara Timur",
+        "kabupaten": "Kabupaten Sikka"
+    },
+    "281": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "280": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "284": {
+        "provinsi": "Bengkulu",
+        "kabupaten": "Kab. Lebong"
+    },
+    "283": {
+        "provinsi": "Maluku",
+        "kabupaten": "Kab. Maluku Tenggara Barat"
+    },
+    "276": {
+        "provinsi": "Maluku",
+        "kabupaten": "Kab. Maluku Tengah"
+    },
+    "278": {
+        "provinsi": "Maluku",
+        "kabupaten": "Kabupaten Buru"
+    },
+    "286": {
+        "provinsi": "Bengkulu",
+        "kabupaten": "Kab. Seluma"
+    },
+    "287": {
+        "provinsi": "Maluku",
+        "kabupaten": "Kabupaten Kepulauan Aru"
+    },
+    "285": {
+        "provinsi": "Kalimantan Timur",
+        "kabupaten": "Kab. Kutai Barat"
+    },
+    "288": {
+        "provinsi": "Maluku",
+        "kabupaten": "Kabupaten Maluku Tengah"
+    },
+    "289": {
+        "provinsi": "Bengkulu",
+        "kabupaten": "Kabupaten Bengkulu Utara"
+    },
+    "293": {
+        "provinsi": "Maluku",
+        "kabupaten": "Kab. Kepulauan Aru"
+    },
+    "292": {
+        "provinsi": "Bengkulu",
+        "kabupaten": "Kab. Rejang Lebong"
+    },
+    "291": {
+        "provinsi": "Bengkulu",
+        "kabupaten": "Kab. Selupu Lebong"
+    },
+    "294": {
+        "provinsi": "Maluku Utara",
+        "kabupaten": "Kab. Halmahera Tengah"
+    },
+    "290": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "297": {
+        "provinsi": "Banten",
+        "kabupaten": "Kab. Lebak"
+    },
+    "296": {
+        "provinsi": "Bengkulu",
+        "kabupaten": "Kab. Lebong"
+    },
+    "298": {
+        "provinsi": "Banten",
+        "kabupaten": "Kabupaten Lebak"
+    },
+    "301": {
+        "provinsi": "Nusa Tenggara Timur",
+        "kabupaten": "Kab. Manggarai Barat"
+    },
+    "299": {
+        "provinsi": "Banten",
+        "kabupaten": "Kab. Serang"
+    },
+    "302": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kota Palopo"
+    },
+    "300": {
+        "provinsi": "Banten",
+        "kabupaten": "Kab. Pandeglang"
+    },
+    "303": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kab. Malang"
+    },
+    "295": {
+        "provinsi": "Bengkulu",
+        "kabupaten": "Kab. Bengkulu Selatan"
+    },
+    "305": {
+        "provinsi": "Sumatera Selatan",
+        "kabupaten": "Kabupaten Ogan Ilir"
+    },
+    "304": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kab. Jember"
+    },
+    "306": {
+        "provinsi": "Kalimantan Timur",
+        "kabupaten": "Kab. Kutai Kartanegara"
+    },
+    "307": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kab. Blitar"
+    },
+    "308": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kab. Karawang"
+    },
+    "312": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kabupaten Labuhanbatu Utara"
+    },
+    "310": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kab. Jember"
+    },
+    "309": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kabupaten Batang"
+    },
+    "314": {
+        "provinsi": "Jambi",
+        "kabupaten": "Kabupaten Kerinci"
+    },
+    "313": {
+        "provinsi": "Lampung",
+        "kabupaten": "Kabupaten Lampung Selatan"
+    },
+    "311": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kabupaten Batang"
+    },
+    "315": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kabupaten Indramayu"
+    },
+    "317": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kab. Garut"
+    },
+    "318": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kab. Batang"
+    },
+    "319": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Bulukumba"
+    },
+    "316": {
+        "provinsi": "Sumatera Barat",
+        "kabupaten": "Kabupaten Lima Puluh Kota"
+    },
+    "320": {
+        "provinsi": "Nusa Tenggara Timur",
+        "kabupaten": "Kabupaten Timur Tengah Selatan"
+    },
+    "321": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kabupaten Cirebon"
+    },
+    "322": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Tojo Una-Una"
+    },
+    "325": {
+        "provinsi": "Papua",
+        "kabupaten": "Kab. Nabire"
+    },
+    "324": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Luwu Utara"
+    },
+    "323": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kab. Gunung Mas"
+    },
+    "328": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kab. Cianjur"
+    },
+    "326": {
+        "provinsi": "Riau",
+        "kabupaten": "Kab. Siak"
+    },
+    "327": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kab. Bogor"
+    },
+    "329": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Sinjai"
+    },
+    "330": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kab. Bogor"
+    },
+    "331": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "332": {
+        "provinsi": "Papua",
+        "kabupaten": "Kab. Merauke"
+    },
+    "333": {
+        "provinsi": "Papua",
+        "kabupaten": "Kab. Keerom"
+    },
+    "335": {
+        "provinsi": "Maluku",
+        "kabupaten": "Kabupaten Maluku Tengah"
+    },
+    "334": {
+        "provinsi": "Nusa Tenggara Barat",
+        "kabupaten": "Kab. Sumbawa"
+    },
+    "338": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kabupaten Luwu Timur"
+    },
+    "336": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Morowali"
+    },
+    "337": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Sinjai"
+    },
+    "339": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Bengkayang"
+    },
+    "340": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kab. Barito Timur"
+    },
+    "341": {
+        "provinsi": "DKI Jakarta",
+        "kabupaten": "Kepulauan Seribu"
+    },
+    "345": {
+        "provinsi": "Papua",
+        "kabupaten": "Kab. Merauke"
+    },
+    "342": {
+        "provinsi": "DKI Jakarta",
+        "kabupaten": "Kota Administrasi Jakarta Utara"
+    },
+    "343": {
+        "provinsi": "Sulawesi Tenggara",
+        "kabupaten": "Kab. Wakatobi"
+    },
+    "344": {
+        "provinsi": "Jawa Timur",
+        "kabupaten": "Kab. Lumajang"
+    },
+    "347": {
+        "provinsi": "Papua",
+        "kabupaten": "Kab. Keerom"
+    },
+    "346": {
+        "provinsi": "Papua",
+        "kabupaten": "Kab. Nabire"
+    },
+    "348": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kabupaten Bengkayang"
+    },
+    "349": {
+        "provinsi": "Banten",
+        "kabupaten": "Kabupaten Lebak"
+    },
+    "351": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Morowali"
+    },
+    "350": {
+        "provinsi": "Jawa Barat",
+        "kabupaten": "Kab. Lebak"
+    },
+    "355": {
+        "provinsi": "Riau",
+        "kabupaten": "Kabupaten Indragiri Hulu"
+    },
+    "353": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "354": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Banggai"
+    },
+    "356": {
+        "provinsi": "Aceh",
+        "kabupaten": "Kab. Aceh Barat"
+    },
+    "352": {
+        "provinsi": "Banten",
+        "kabupaten": "Kabupaten Lebak"
+    },
+    "357": {
+        "provinsi": "Bengkulu",
+        "kabupaten": "Kabupaten Kaur"
+    },
+    "358": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kab. Humbang Hasundutan"
+    },
+    "361": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "359": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Banggai"
+    },
+    "363": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Enrekang"
+    },
+    "360": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "362": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "366": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "364": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Enrekang"
+    },
+    "365": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "367": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "372": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "369": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "370": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "371": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "374": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "375": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "373": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "376": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "368": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "377": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "379": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "382": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "380": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "384": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "381": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "385": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kab. Kotawaringin Barat"
+    },
+    "383": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "378": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "386": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": "Kab. Kotawaringin Barat"
+    },
+    "389": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "390": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "391": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "388": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "387": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "394": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "392": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "393": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "395": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "399": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "400": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "401": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "398": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "396": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kab. Seruyan"
+    },
+    "397": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": "Kab. Seruyan"
+    },
+    "403": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "402": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "405": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "406": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "411": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "408": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "407": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kab. Kotawaringin Timur"
+    },
+    "409": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "413": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "412": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "410": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "404": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "419": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "417": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "415": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "418": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "414": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "420": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "416": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "421": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kab. Kotawaringin Timur"
+    },
+    "422": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "424": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "425": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "423": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "427": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "428": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "426": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "429": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kab. Langkat"
+    },
+    "435": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "432": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "431": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "436": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "433": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "437": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "438": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "439": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": "Kab. Kapuas Hulu"
+    },
+    "430": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "434": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "442": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kab. Pulang Pisau"
+    },
+    "448": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "444": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "449": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "446": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "445": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kab. Gunung Mas"
+    },
+    "447": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kab. Kotawaringin Timur"
+    },
+    "441": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "440": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "450": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "451": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kab. Gunung Mas"
+    },
+    "456": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "452": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "455": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "454": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "453": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "458": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "457": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "443": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "459": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "460": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "463": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "461": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "465": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "464": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kab. Barito Utara"
+    },
+    "467": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "462": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "468": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "469": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "471": {
+        "provinsi": "Aceh",
+        "kabupaten": "Kab. Aceh Tamiang"
+    },
+    "472": {
+        "provinsi": "Aceh",
+        "kabupaten": "Kab. Aceh Selatan"
+    },
+    "473": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "474": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kab. Kotawaringin Timur"
+    },
+    "466": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "475": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "470": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Sinjai"
+    },
+    "476": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "478": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "477": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "479": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "482": {
+        "provinsi": "Maluku Utara",
+        "kabupaten": "Kab. Halmahera Utara"
+    },
+    "480": {
+        "provinsi": "Maluku",
+        "kabupaten": "Kab. Maluku Barat Daya"
+    },
+    "483": {
+        "provinsi": "Nusa Tenggara Barat",
+        "kabupaten": "Kab. Sumbawa"
+    },
+    "481": {
+        "provinsi": "Maluku Utara",
+        "kabupaten": "Kab. Halmahera Tengah"
+    },
+    "485": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": ""
+    },
+    "484": {
+        "provinsi": "Nusa Tenggara Timur",
+        "kabupaten": "Kab. Manggarai Timur"
+    },
+    "486": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Sanggau"
+    },
+    "487": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Donggala"
+    },
+    "488": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kota Palu"
+    },
+    "489": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Morowali Utara"
+    },
+    "491": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Enrekang"
+    },
+    "493": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "490": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "494": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Enrekang"
+    },
+    "495": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "496": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "497": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Enrekang"
+    },
+    "498": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "500": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "499": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "502": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "501": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kab. Barito Timur"
+    },
+    "503": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Enrekang"
+    },
+    "504": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "505": {
+        "provinsi": "Kalimantan Timur",
+        "kabupaten": "Kab. Kutai Barat"
+    },
+    "506": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "509": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kota Palu"
+    },
+    "508": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "507": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "510": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "514": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "513": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Sigi"
+    },
+    "512": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "511": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "515": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "518": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "516": {
+        "provinsi": "Riau",
+        "kabupaten": "Kab. Indragiri Hulu"
+    },
+    "517": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Bengkayang"
+    },
+    "520": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "522": {
+        "provinsi": "Aceh",
+        "kabupaten": "Kab. Aceh Barat"
+    },
+    "519": {
+        "provinsi": "Kalimantan Selatan",
+        "kabupaten": "Kab. Tanah Bumbu"
+    },
+    "521": {
+        "provinsi": "Jambi",
+        "kabupaten": "Kab. Tanjung Jabung Barat"
+    },
+    "523": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Gowa"
+    },
+    "524": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Banggai"
+    },
+    "526": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Banggai"
+    },
+    "527": {
+        "provinsi": "Maluku",
+        "kabupaten": "Kabupaten Kepulauan Aru"
+    },
+    "525": {
+        "provinsi": "Kalimantan Tengah",
+        "kabupaten": "Kab. Barito Selatan"
+    },
+    "530": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Sigi"
+    },
+    "529": {
+        "provinsi": "Nusa Tenggara Timur",
+        "kabupaten": "Kab. Manggarai"
+    },
+    "528": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "531": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Donggala"
+    },
+    "532": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "533": {
+        "provinsi": "Maluku Utara",
+        "kabupaten": "Kab. Halmahera Utara"
+    },
+    "534": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "535": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "538": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "536": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "539": {
+        "provinsi": "Papua",
+        "kabupaten": "Kab. Merauke"
+    },
+    "537": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "540": {
+        "provinsi": "Kalimantan Utara",
+        "kabupaten": "Kab. Bulungan"
+    },
+    "541": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Gowa"
+    },
+    "542": {
+        "provinsi": "Nusa Tenggara Barat",
+        "kabupaten": "Kab. Lombok Timur"
+    },
+    "543": {
+        "provinsi": "Nusa Tenggara Barat",
+        "kabupaten": "Kabupaten Sumbawa"
+    },
+    "544": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kota Palopo"
+    },
+    "545": {
+        "provinsi": "Sulawesi Selatan",
+        "kabupaten": "Kab. Luwu"
+    },
+    "548": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "546": {
+        "provinsi": "Maluku Utara",
+        "kabupaten": "Kabupaten Halmahera Timur"
+    },
+    "547": {
+        "provinsi": "Banten",
+        "kabupaten": "Kabupaten Lebak"
+    },
+    "549": {
+        "provinsi": "Sumatera Selatan",
+        "kabupaten": "Kabupaten Musi Rawas"
+    },
+    "551": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "550": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "553": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Donggala"
+    },
+    "552": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "554": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Tolitoli"
+    },
+    "559": {
+        "provinsi": "Kalimantan Barat",
+        "kabupaten": "Kab. Melawi"
+    },
+    "560": {
+        "provinsi": "Lampung",
+        "kabupaten": "Kabupaten Pesisir Barat"
+    },
+    "556": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Parigi Moutong"
+    },
+    "562": {
+        "provinsi": "Sumatera Utara",
+        "kabupaten": "Kab. Humbang Hasundutan"
+    },
+    "561": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Poso"
+    },
+    "557": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Banggai"
+    },
+    "563": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "555": {
+        "provinsi": "Sulawesi Tengah",
+        "kabupaten": "Kab. Tolitoli"
+    },
+    "558": {
+        "provinsi": "Banten",
+        "kabupaten": "Kabupaten Lebak"
+    },
+    "564": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kab. Banjarnegara"
+    },
+    "565": {
+        "provinsi": "Jawa Tengah",
+        "kabupaten": "Kab. Sragen"
+    },
+    "566": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "492": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    },
+    "567": {
+        "provinsi": "LUAR_SULAWESI",
+        "kabupaten": ""
+    }
+}

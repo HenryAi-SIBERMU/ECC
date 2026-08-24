@@ -1,0 +1,30 @@
+Line 2396: with tab_l4:
+Line 2397: st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Lahan 4):</b><br>• <b>Deforestasi Konsesi:</b> > 500.000 Ha / 1 Dekade (Batas Kritis Daya Dukung Ekologis Pulau).<br>• <b>Keterangan Data:</b> Menggunakan data empiris satelit GFW untuk deforestasi yang murni didorong oleh ekspansi konsesi komersial (Tambang/Sawit).</div>", unsafe_allow_html=True)
+Line 2398: 
+Line 2399: os_ratio_l4 = (tambang_driver_ha / 500000) * 100
+Line 2400: col1_delta = f"↑ Overshoot {os_ratio_l4:.1f}% dari ambang batas" if tambang_driver_ha > 500000 else f"Aman (≤ 500 Ribu Ha)"
+Line 2401: col1_color = "inverse" if tambang_driver_ha > 500000 else "normal"
+Line 2402: 
+Line 2403: col2_delta = f"STATUS: MONOPOLI KONSESI" if skor_lahan_4 >= 6.0 else f"STATUS: TERKENDALI"
+Line 2404: col2_color = "inverse" if skor_lahan_4 >= 6.0 else "normal"
+Line 2405: 
+Line 2406: skl4_str = f"{(skor_lahan_4 / 2.0):.1f}" if is_likert_mode else f"{skor_lahan_4:.1f}"
+Line 2407: 
+Line 2408: help_skorl4 = f"Kalkulasi Total (Lahan 4):\nmin(10.0, ({tambang_driver_ha:,.0f} / 500,000) * 10) = {skor_lahan_4:.1f}/10" + (f" (Likert: {(skor_lahan_4 / 2.0):.1f}/5)" if is_likert_mode else "")
+Line 2409: help_lahan4 = f"Data GFW (Drivers of Deforestation):\n- Total Deforestasi Komoditas (Tambang/Sawit): {tambang_driver_ha:,.0f} Ha\n\nKalkulasi Threshold Daya Dukung Ekologis:\n- Ambang Batas Pulau: 500.000 Ha\n- Threshold ini tercapai apabila konsesi industri (tambang/sawit) memonopoli laju perubahan tutupan lahan melebihi 500 ribu hektar dalam satu dekade.\n\n{help_skorl4}"
+Line 2410: 
+Line 2411: col1, col2 = st.columns(2)
+Line 2412: col1.metric(f"Total Deforestasi Konsesi (Skor: {skl4_str})", f"{tambang_driver_ha:,.0f} Ha", col1_delta, delta_color=col1_color, help=help_lahan4)
+Line 2413: col2.metric("Skor Aktor Deforestasi (Lahan 4)", f"{skl4_str} / {card_denom}", col2_delta, delta_color=col2_color, help=help_skorl4)
+Line 2414: 
+Line 2415: st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
+Line 2416: 
+Line 2417: if not df_gfw_driver.empty:
+Line 2418: df_gd = df_gfw_driver.copy()
+Line 2419: df_gd['Luas_Deforestasi_Ha'] = pd.to_numeric(df_gd['Luas_Deforestasi_Ha'], errors='coerce').fillna(0)
+Line 2420: df_gd_agg = df_gd.groupby('Faktor_Pendorong')['Luas_Deforestasi_Ha'].sum().reset_index()
+Line 2421: fig_l4 = px.pie(df_gd_agg, values='Luas_Deforestasi_Ha', names='Faktor_Pendorong', hole=0.3,
+Line 2422: title="Penyebab Utama Kehilangan Hutan (Drivers of Deforestation)",
+Line 2423: color_discrete_sequence=px.colors.qualitative.Bold)
+Line 2424: fig_l4.update_traces(textposition='inside', textinfo='percent+label')
+Line 2425: fig_l4.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))

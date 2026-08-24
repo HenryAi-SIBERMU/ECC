@@ -1,3 +1,7 @@
+"""
+LEGACY SCRIPT: NLP Regex / Lexicon Based
+Digunakan sebagai fallback/perbandingan. Untuk ekstraksi utama, gunakan extract_korban_ner_llm.py
+"""
 import pandas as pd
 import re
 import os
