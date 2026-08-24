@@ -408,6 +408,14 @@ fig_growth.update_yaxes(showgrid=True, gridcolor="rgba(255,255,255,0.1)", range=
 
 st.plotly_chart(fig_growth, use_container_width=True)
 
+# Tambahan: Dropdown tabel dataset seperti request
+with st.expander("Lihat Data Mentah: Detail Demografi per Kabupaten"):
+    cols_to_show = ['provinsi', 'kabupaten', 'tahun', 'Kategori', 'jumlah_penduduk_rb', 'kepadatan_per_km2', 'laju_pertumbuhan_yoy_pct']
+    # If some columns don't exist in df_plot, just show what is available
+    cols_available = [c for c in cols_to_show if c in df_plot.columns]
+    st.dataframe(df_plot[cols_available].sort_values(by=['tahun', 'provinsi', 'kabupaten']), use_container_width=True, hide_index=True)
+    st.caption("Sumber File: `data/processed/sulawesi_demografi_master_fase4.csv` - Detail kependudukan level kabupaten/kota.")
+
 # Generate static table of metrics directly below the chart
 def get_box_stats(group):
     group = group.dropna()
