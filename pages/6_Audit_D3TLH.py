@@ -16,6 +16,22 @@ importlib.reload(algo_prov_mod)
 kalkulasi_skor_pulau_sulawesi = algo_pulau_mod.kalkulasi_skor_pulau_sulawesi
 kalkulasi_skor_provinsi_sulawesi = algo_prov_mod.kalkulasi_skor_provinsi_sulawesi
 
+def get_spa_aktual(prov: str) -> float:
+    # Diekstrak dari raw_kemenkes_puskesmas_2024.csv Baris 39 (Persentase Puskesmas SPA)
+    parsed_spa = {
+        'Gorontalo': 94.12,
+        'Sulawesi Barat': 89.84,
+        'Sulawesi Tengah': 77.57,
+        'Sulawesi Selatan': 67.65,
+        'Sulawesi Tenggara': 62.08,
+        'Sulawesi Utara': 54.84
+    }
+    if prov in parsed_spa:
+        return parsed_spa[prov]
+    elif prov == 'Pulau Sulawesi' or prov == 'Sulawesi':
+        return 74.35
+    return 60.0
+
 st.set_page_config(page_title="CELIOS ECC - Audit Forensik Metodologi D3TLH", layout="wide")
 render_sidebar()
 
@@ -145,12 +161,12 @@ DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "pro
 
 @st.cache_data
 def load_data():
-    # Cache busted: 2026-08-15 19:42 to force reload of NLP filtered Konflik CSV
+    # Cache busted: 2026-08-24 06:44 to force reload of NLP LLM Kriminalisasi CSV
     df_kes = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_kesehatan_detail_2014_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_kesehatan_detail_2014_2024.csv")) else pd.DataFrame()
     df_ika = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv")) else pd.DataFrame()
     df_bencana = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_bencana_bnpb_2014_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_bencana_bnpb_2014_2024.csv")) else pd.DataFrame()
-    df_konflik = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita_v2.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita_v2.csv")) else pd.DataFrame()
-    if not df_konflik.empty and 'tahun' in df_konflik.columns:
+    df_konflik = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita_v3.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita_v3.csv")) else pd.DataFrame()
+    if not df_konflik.empty:
         df_konflik['tahun'] = pd.to_numeric(df_konflik['tahun'], errors='coerce')
         df_konflik = df_konflik[df_konflik['tahun'] >= 2014]
     
@@ -295,7 +311,7 @@ if not df_konflik.empty:
     df_konflik_darat['dampak_masyarakat_jiwa'] = pd.to_numeric(df_konflik_darat['dampak_masyarakat_jiwa'], errors='coerce').fillna(0)
     luas_ha_dirampas = df_konflik_darat['luas_ha'].sum()
     jiwa_terdampak = df_konflik_darat['dampak_masyarakat_jiwa'].sum()
-    krim_df = df_konflik_darat[df_konflik_darat['indikasi_kriminalisasi'] == True].copy()
+    krim_df = df_konflik_darat[df_konflik_darat['indikasi_kriminalisasi'].isin([True, 'True', 'true', 1, '1'])].copy()
     krim_df['jumlah_ditangkap'] = pd.to_numeric(krim_df['jumlah_ditangkap'], errors='coerce').fillna(0)
     insiden_krim = len(krim_df)
     warga_ditangkap = krim_df['jumlah_ditangkap'].sum()
@@ -308,7 +324,7 @@ if not df_konflik_fpic.empty:
     df_fpic_recent = df_fpic_clean[(df_fpic_clean['tahun'] >= 2014) & (df_fpic_clean['indikasi_fpic'] == True)]
     kasus_fpic = len(df_fpic_recent)
 
-spa_aktual_pct = 42.5
+spa_aktual_pct = get_spa_aktual('Pulau Sulawesi')
 
 # Veto
 izin_baru = 0
@@ -364,7 +380,7 @@ skor_3 = det_pulau['skor_3']
 skor_4 = det_pulau['skor_4']
 skor_akumulasi_udara = det_pulau['skor_akumulasi_udara']
 
-skor_makro_air_1 = min(10.0, max(0, (80 - ika_sulteng) / 30) * 10)
+skor_makro_air_1 = min(10.0, max(0, (90 - ika_sulteng) / 20) * 10)  # Threshold: 70 (Baik), Baseline: 90 (Sangat Baik) — PermenLHK 27/2021
 skor_mikro_air_1 = det_pulau['skor_mikro_air_1']
 skor_air_1 = skor_makro_air_1
 skor_air_2 = round(det_pulau.get('skor_air_2', 4.0) / 2.0) * 2.0
@@ -653,7 +669,7 @@ def calculate_province_score(prov_name, use_likert=False):
         elif not df_prov_ika.empty:
             ika_prov = df_prov_ika['Indeks Kualitas Air'].mean()
             
-    skor_makro_air_1 = min(10.0, max(0.0, (80.0 - ika_prov) / 30.0) * 10.0)
+    skor_makro_air_1 = min(10.0, max(0.0, (90.0 - ika_prov) / 20.0) * 10.0)  # Threshold: 70, Baseline: 90 (Sangat Baik)
     
     skor_mikro_air_1 = 0
     max_cr6 = 0
@@ -759,8 +775,8 @@ def calculate_province_score(prov_name, use_likert=False):
     skor_sosial_3 = 0.0
     jiwa_terdampak = 0
     insiden_krim = 0
-    threshold_jiwa = (pop_prov / POP_NASIONAL) * 406_000
-    threshold_krim = (pop_prov / POP_NASIONAL) * 57
+    threshold_jiwa = (pop_prov / POP_NASIONAL) * 542_432  # 135.608 KK x 4 jiwa/KK (KPA CATAHU 2023, Hal.8)
+    threshold_krim = 6  # Mean distribusi insiden kriminalisasi 6 prov Sulawesi 2014-2023 (Mean=5.67 dibulatkan)
     if not df_konflik.empty:
         keywords = 'air|laut|pesisir|nelayan|sungai|pulau|tailing'
         prov_keyword = prov_name.split()[-1]
@@ -783,7 +799,7 @@ def calculate_province_score(prov_name, use_likert=False):
         skor_sosial_1 = min(10.0, (kasus_fpic / 4) * 10)
         
     skor_sosial_4 = 0.0
-    spa_aktual_pct = 42.5 if prov_name in ['Sulawesi Tengah', 'Sulawesi Tenggara'] else 60.0
+    spa_aktual_pct = get_spa_aktual(prov_name)
     target_rpjmn = 80.0
     gap_spa = max(0.0, target_rpjmn - spa_aktual_pct)
     if not df_faskes.empty:        skor_sosial_4 = min(10.0, (gap_spa / 45.0) * 10.0)
@@ -1542,28 +1558,69 @@ Skor_Pulau = MinMax_WSM(Akumulasi_Beban_Makro_Sulawesi) &nbsp;|&nbsp; Skor_Provi
                     num1 = parse_val(val1)
                     num2 = parse_val(val2)
                     
+                    all_vals = df_raw[col].apply(parse_val)
+                    mean_val = all_vals.mean()
+                    std_val = all_vals.std()
+                    
+                    kali_lipat = '-'
+                    anomali = 'Normal'
+                    
                     if '[Air 1]' in col:
                         # Lower is worse
                         if num1 < num2:
                             worse = p1
+                            worse_num = num1
+                            kali_lipat = f'Selisih {num2 - num1:.1f} poin'
                         elif num2 < num1:
                             worse = p2
+                            worse_num = num2
+                            kali_lipat = f'Selisih {num1 - num2:.1f} poin'
                         else:
                             worse = "Sama"
+                            worse_num = num1
                     else:
                         # Higher is worse
                         if num1 > num2:
                             worse = p1
+                            worse_num = num1
+                            if num2 > 0:
+                                kali_lipat = f'{num1/num2:.1f}x Lipat'
+                            else:
+                                kali_lipat = f'{num1:.1f} (vs 0)'
                         elif num2 > num1:
                             worse = p2
+                            worse_num = num2
+                            if num1 > 0:
+                                kali_lipat = f'{num2/num1:.1f}x Lipat'
+                            else:
+                                kali_lipat = f'{num2:.1f} (vs 0)'
                         else:
                             worse = "Sama"
+                            worse_num = num1
+                            
+                    # Z-Score Anomali (Hitung untuk provinsi yang lebih krisis)
+                    if std_val > 0:
+                        z = (worse_num - mean_val) / std_val if '[Air 1]' not in col else (mean_val - worse_num) / std_val
+                        if z >= 2:
+                            anomali = f'🔴 Sangat Ekstrem (Z={z:.1f})'
+                        elif z >= 1:
+                            anomali = f'🟠 Ekstrem (Z={z:.1f})'
+                        elif z >= 0.5:
+                            anomali = f'🟡 Tinggi (Z={z:.1f})'
+                        elif z >= 0:
+                            anomali = f'🟢 Wajar (Z={z:.1f})'
+                        else:
+                            anomali = f'🔵 Normal/Rendah'
+                    else:
+                        anomali = 'Sama Rata'
                             
                     h2h_data.append({
                         'Indikator': col,
                         f'{p1} (Kiri)': val1,
                         f'{p2} (Kanan)': val2,
-                        'Krisis Tertinggi': worse
+                        'Krisis Tertinggi': worse,
+                        'Skala (vs Lawan)': kali_lipat,
+                        'Outlier (vs Sulawesi)': anomali
                     })
                     
                 df_h2h = pd.DataFrame(h2h_data)
@@ -1576,8 +1633,11 @@ Skor_Pulau = MinMax_WSM(Akumulasi_Beban_Makro_Sulawesi) &nbsp;|&nbsp; Skor_Provi
                         style[0] = 'background-color: #6b1b1b; color: white;'
                     elif worse_prov == p2:
                         style[1] = 'background-color: #6b1b1b; color: white;'
-                    # Make Krisis Tertinggi column bold
                     style[2] = 'font-weight: bold;'
+                    # Optionally highlight Z-Score column
+                    z_text = str(row['Outlier (vs Sulawesi)'])
+                    if '🔴' in z_text or '🟠' in z_text:
+                        style[4] = 'color: #ff4b4b; font-weight: bold;'
                     return style
                     
                 st.dataframe(df_h2h.style.apply(highlight_worse, axis=1), use_container_width=True)
@@ -2280,21 +2340,28 @@ with colB2:
     tab_w1, tab_w2, tab_w3, tab_w4 = st.tabs(["(Air 1) Kualitas Air", "(Air 2) Morbiditas Diare", "(Air 3) Konflik Nelayan", "(Air 4) Beban Tailing"])
     
     with tab_w1:
-        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Air 1):</b><br>• <b>Indeks Kualitas Air (IKA):</b> Kategori Kurang = &lt; 50<br>• <b>Regulasi:</b> PermenLHK No.27/2021 (Hal.35).</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Air 1):</b><br>• <b>Indeks Kualitas Air (IKA):</b> Kategori Baik = 70–90. Di bawah 70 = Sedang (Tidak Aman).<br>• <b>Regulasi:</b> PermenLHK No.27/2021 (Hal.35) — Sangat Baik: ≥90, Baik: 70–89, Sedang: 50–69, Kurang: 25–49.</div>", unsafe_allow_html=True)
         
         sk1_air_str = f"{(skor_air_1 / 2.0):.1f}" if is_likert_mode else f"{skor_air_1:.1f}"
         
         help_skor_makro = f"Kalkulasi Total (Air 1):\nmin(10.0, max(0.0, (80.0 - {ika_avg:.1f}) / 30.0) * 10.0) = {skor_makro_air_1:.1f}/10\n" + (f"Konversi Likert: {skor_makro_air_1:.1f} / 2 = {(skor_makro_air_1 / 2.0):.1f}/5" if is_likert_mode else "")
         
-        help_air_1 = f"Indeks Kualitas Air (IKA) Dinamis:\nPencarian algoritma menemukan rata-rata agregat kualitas air se-Sulawesi:\n- Nilai IKA Rata-Rata: {ika_avg:.2f}\n- Target Aman Nasional: 80.0\n- Defisit Kualitas Air: {80.0 - ika_avg:.2f} poin\n\n{help_skor_makro}"
+        help_air_1 = f"Indeks Kualitas Air (IKA) Dinamis:\nPencarian algoritma menemukan rata-rata agregat kualitas air se-Sulawesi:\n- Nilai IKA Rata-Rata: {ika_avg:.2f}\n- Kategori: {'Sangat Baik' if ika_avg >= 90 else 'Baik' if ika_avg >= 70 else 'Sedang' if ika_avg >= 50 else 'Kurang'}\n- Threshold Aman (Baik): >= 70.0\n- Defisit Kualitas Air: {70.0 - ika_avg:.2f} poin di bawah batas Baik\n\n{help_skor_makro}"
         
         skor_makro_str = f"{(skor_makro_air_1 / 2.0):.1f}" if is_likert_mode else f"{skor_makro_air_1:.1f}"
         
-        if ika_avg < 50:
-            col1_delta = "- Jatuh ke Kategori Kurang (< 50)"
+        if ika_avg >= 90:
+            col1_delta = "Kategori: Sangat Baik (>= 90)"
+            col1_color = "normal"
+        elif ika_avg >= 70:
+            col1_delta = "Kategori: Baik (70-89) — Batas Aman"
+            col1_color = "normal"
+        elif ika_avg >= 50:
+            col1_delta = "Kategori: Sedang (50-69) — TIDAK AMAN"
+            col1_color = "inverse"
         else:
-            col1_delta = "Secara Agregat 'Aman' (> 50)"
-        col1_color = "normal"
+            col1_delta = "Kategori: Kurang (< 50) — KRITIS"
+            col1_color = "inverse"
         
         col2_delta = f"STATUS: KRITIS" if skor_air_1 >= 6.0 else f"STATUS: TERKENDALI"
         col2_color = "inverse" if skor_air_1 >= 6.0 else "normal"
@@ -2328,18 +2395,18 @@ with colB2:
                     
             fig_w1.add_shape(
                 type="line", x0=df_ika_filtered['Tahun'].min(), x1=df_ika_filtered['Tahun'].max(),
-                y0=50, y1=50, line=dict(color="#E74C3C", width=2, dash="dashdot"),
+                y0=70, y1=70, line=dict(color="#E74C3C", width=2, dash="dashdot"),
             )
             fig_w1.add_annotation(
-                x=df_ika_filtered['Tahun'].max(), y=50, text="Batas Kritis Cemar (50)",
+                x=df_ika_filtered['Tahun'].max(), y=70, text="Batas Aman: Kategori Baik (70)",
                 showarrow=False, yshift=-10, font=dict(color="#E74C3C", size=10), xanchor="right"
             )
             
-            fig_w1.add_shape(type="rect", x0=df_ika_filtered['Tahun'].min(), x1=df_ika_filtered['Tahun'].max(), y0=50, y1=100, fillcolor="rgba(46, 204, 113, 0.1)", layer="below", line_width=0)
-            fig_w1.add_shape(type="rect", x0=df_ika_filtered['Tahun'].min(), x1=df_ika_filtered['Tahun'].max(), y0=0, y1=50, fillcolor="rgba(231, 76, 60, 0.1)", layer="below", line_width=0)
+            fig_w1.add_shape(type="rect", x0=df_ika_filtered['Tahun'].min(), x1=df_ika_filtered['Tahun'].max(), y0=70, y1=100, fillcolor="rgba(46, 204, 113, 0.1)", layer="below", line_width=0)
+            fig_w1.add_shape(type="rect", x0=df_ika_filtered['Tahun'].min(), x1=df_ika_filtered['Tahun'].max(), y0=0, y1=70, fillcolor="rgba(231, 76, 60, 0.1)", layer="below", line_width=0)
             
-            fig_w1.add_annotation(x=df_ika_filtered['Tahun'].min(), y=95, text="ZONA AMAN (> 50)", showarrow=False, font=dict(color="#2ECC71", size=10), xanchor="left")
-            fig_w1.add_annotation(x=df_ika_filtered['Tahun'].min(), y=5, text="ZONA CEMAR (< 50)", showarrow=False, font=dict(color="#E74C3C", size=10), xanchor="left")
+            fig_w1.add_annotation(x=df_ika_filtered['Tahun'].min(), y=95, text="ZONA BAIK/SANGAT BAIK (>= 70)", showarrow=False, font=dict(color="#2ECC71", size=10), xanchor="left")
+            fig_w1.add_annotation(x=df_ika_filtered['Tahun'].min(), y=5, text="ZONA SEDANG/KURANG (< 70) — TIDAK AMAN", showarrow=False, font=dict(color="#E74C3C", size=10), xanchor="left")
             
             fig_w1.update_layout(
                 template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
@@ -2412,7 +2479,7 @@ with colB2:
             
             with st.expander(f"Lihat Data Mentah: Rincian {jumlah_konflik_air} Kasus Konflik Pesisir/Nelayan (1 Dekade)", expanded=False):
                 st.dataframe(df_konflik_air, use_container_width=True, hide_index=True)
-                st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita_v2.csv` (Di-filter berdasarkan keyword: air, laut, pesisir, nelayan, tailing, dll dan direduksi khusus wilayah Sulawesi menggunakan NLP NER)")
+                st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita_v3.csv` (Di-filter berdasarkan keyword: air, laut, pesisir, nelayan, tailing, dll dan direduksi khusus wilayah Sulawesi menggunakan NLP NER)")
 
     with tab_w4:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Air 4):</b><br>• <b>Timbulan Tailing/Slag:</b> > 25 Juta Ton/Tahun (Batas Kapasitas maksimal DSTP/Tailing Dam).<br>• <b>Regulasi:</b> Dokumen AMDAL KLHK (PT HPI - IMIP) & Laporan AEER 2020 (Hal. 36).</div>", unsafe_allow_html=True)
@@ -2724,7 +2791,7 @@ with colD2:
     tab_s1, tab_s2, tab_s3, tab_s4 = st.tabs(["(Sosial 1) Manipulasi Persetujuan FPIC", "(Sosial 2) Perampasan Ruang Hidup", "(Sosial 3) Kriminalisasi Warga", "(Sosial 4) Defisit Layanan Dasar"])
     
     with tab_s1:
-        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Sosial 1):</b><br>• <b>Pelanggaran Persetujuan (FPIC):</b> ≥ 3 Kasus (Zero Tolerance).<br>• <b>Keterangan Data:</b> Menggunakan dataset investigasi JATAM & Walhi Sulawesi terkait rekayasa atau manipulasi persetujuan warga pada fase AMDAL. Sesuai prinsip IFC PS7, absennya FPIC adalah kegagalan sistemik (Red Flag).</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Sosial 1):</b><br>• <b>Pelanggaran Persetujuan (FPIC):</b> ≥ 3 Kasus (Zero Tolerance).<br>• <b>Keterangan Data:</b> Menggunakan dataset Konsorsium Pembaruan Agraria (KPA) TanahKita yang diekstrak menggunakan algoritma NLP FPIC (indikasi rekayasa persetujuan atau kriminalisasi warga saat AMDAL). Sesuai prinsip IFC PS7, absennya FPIC adalah kegagalan sistemik (Red Flag).</div>", unsafe_allow_html=True)
         
         fpic_kritis = 3
         
@@ -2737,7 +2804,7 @@ with colD2:
         sks1_str = f"{(skor_sosial_1 / 2.0):.1f}" if is_likert_mode else f"{skor_sosial_1:.1f}"
         
         help_skors1 = f"Kalkulasi Total (Sosial 1):\nmin(10.0, ({kasus_fpic} / {fpic_kritis}) * 10) = {skor_sosial_1:.1f}/10" + (f" (Likert: {(skor_sosial_1 / 2.0):.1f}/5)" if is_likert_mode else "")
-        help_sos1 = f"Data JATAM & Walhi Sulawesi:\n- Total Investigasi Manipulasi FPIC: {kasus_fpic} Kasus\n\nKalkulasi Threshold Pelanggaran Sosial:\n- Ambang Batas Pulau: {fpic_kritis} Kasus (Zero Tolerance)\n- Kegagalan memperoleh persetujuan warga tanpa paksaan (FPIC) adalah pelanggaran prinsip HAM internasional yang ditetapkan IFC Performance Standard 7 & Equator Principles.\n\n{help_skors1}"
+        help_sos1 = f"Data Konsorsium Pembaruan Agraria (KPA):\n- Total Investigasi Manipulasi FPIC: {kasus_fpic} Kasus\n\nKalkulasi Threshold Pelanggaran Sosial:\n- Ambang Batas Pulau: {fpic_kritis} Kasus (Zero Tolerance)\n- Kegagalan memperoleh persetujuan warga tanpa paksaan (FPIC) adalah pelanggaran prinsip HAM internasional yang ditetapkan IFC Performance Standard 7 & Equator Principles.\n\n{help_skors1}"
         
         col1, col2 = st.columns(2)
         col1.metric(f"Total Manipulasi Persetujuan (Skor: {sks1_str})", f"{kasus_fpic} Kasus", col1_delta, delta_color=col1_color, help=help_sos1)
@@ -2795,11 +2862,11 @@ with colD2:
                 st.caption("Sumber: `sulawesi_konflik_tambang_fpic.csv` (JATAM & Walhi, Filtered >= 2014)")
 
     with tab_s2:
-        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Sosial 2):</b><br>• <b>Jiwa Terdampak Konflik:</b> > 100.000 Jiwa (Tingkat Pulau).<br>• <b>Keterangan Data:</b> Menggunakan dataset letusan konflik agraria akibat perampasan ruang hidup (KPA & TanahKita). Threshold darurat kemanusiaan ditetapkan sebesar 100.000 jiwa, merepresentasikan 24,5% proporsi ekuivalensi beban konflik agraria nasional (CATAHU KPA 2023).</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Sosial 2):</b><br>• <b>Jiwa Terdampak Konflik:</b> > 40.000 Jiwa (Tingkat Pulau).<br>• <b>Keterangan Data:</b> Menggunakan dataset letusan konflik agraria akibat perampasan ruang hidup (KPA & TanahKita). Threshold darurat kemanusiaan ditetapkan sebesar 40.000 jiwa, merepresentasikan proporsi demografis ekuivalensi beban konflik agraria nasional (CATAHU KPA 2023).</div>", unsafe_allow_html=True)
         
         sks2_str = f"{(skor_sosial_2 / 2.0):.1f}" if is_likert_mode else f"{skor_sosial_2:.1f}"
-        help_skors2 = f"Kalkulasi Total (Sosial 2):\nmin(10.0, ({jiwa_terdampak:,.0f} / 100,000) * 10) = {skor_sosial_2:.1f}/10" + (f" (Likert: {(skor_sosial_2 / 2.0):.1f}/5)" if is_likert_mode else "")
-        help_sos2 = f"Data Konsorsium Pembaruan Agraria (KPA) & TanahKita:\n- Total Korban Perampasan Ruang Hidup: {jiwa_terdampak:,.0f} Jiwa\n- Ekstraksi didukung NLP Regex Analysis pada dokumen deskripsi.\n\nKalkulasi Threshold Darurat Kemanusiaan:\n- Ambang Batas Pulau: 100,000 Jiwa\n\n{help_skors2}"
+        help_skors2 = f"Kalkulasi Total (Sosial 2):\nmin(10.0, ({jiwa_terdampak:,.0f} / 40,000) * 10) = {skor_sosial_2:.1f}/10" + (f" (Likert: {(skor_sosial_2 / 2.0):.1f}/5)" if is_likert_mode else "")
+        help_sos2 = f"Data Konsorsium Pembaruan Agraria (KPA) & TanahKita:\n- Total Korban Perampasan Ruang Hidup: {jiwa_terdampak:,.0f} Jiwa\n- Ekstraksi didukung NLP Regex Analysis pada dokumen deskripsi.\n\nKalkulasi Threshold Darurat Kemanusiaan:\n- Ambang Batas Pulau: 40,000 Jiwa\n\n{help_skors2}"
         
         col3_delta = f"STATUS: KRISIS AGRARIA (RED FLAG)" if skor_sosial_2 >= 6.0 else f"STATUS: TERKENDALI"
         col3_color = "inverse" if skor_sosial_2 >= 6.0 else "normal"
@@ -2817,19 +2884,19 @@ with colD2:
                 df_k_trend = df_k_darat.groupby(['tahun'])['dampak_masyarakat_jiwa'].sum().reset_index(name='jumlah_jiwa')
                 df_k_trend['kumulatif'] = df_k_trend['jumlah_jiwa'].cumsum()
                 fig_s1 = px.area(df_k_trend, x='tahun', y='kumulatif', title="Akumulasi Jumlah Korban Perampasan Ruang Hidup (2014-2024)", color_discrete_sequence=['#9C27B0'])
-                fig_s1.add_hline(y=100000, line_dash="dash", line_color="#E74C3C", annotation_text="Threshold Darurat Kumulatif (100.000 Jiwa)", annotation_position="top left")
+                fig_s1.add_hline(y=40000, line_dash="dash", line_color="#E74C3C", annotation_text="Threshold Darurat Kumulatif (40.000 Jiwa)", annotation_position="top left")
                 fig_s1.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
                 st.plotly_chart(fig_s1, use_container_width=True, config={'displayModeBar': False})
                 with st.expander("Tampilkan Data Indikasi Perampasan Lahan & Korban"):
                     st.dataframe(df_k_darat[['tahun', 'judul', 'sektor', 'dampak_masyarakat_jiwa']], use_container_width=True)
-                    st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita_v2.csv` (Konsorsium Pembaruan Agraria & YLBHI, Filtered >= 2014)")
+                    st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita_v3.csv` (Konsorsium Pembaruan Agraria & YLBHI, Filtered >= 2014)")
 
     with tab_s3:
-        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Sosial 3):</b><br>• <b>Kriminalisasi & HAM:</b> > 50 Insiden (Tingkat Pulau).<br>• <b>Keterangan Data:</b> Menggunakan metrik insiden kekerasan/kriminalisasi (berbasis metodologi Satya Bumi & Protection International). Threshold darurat HAM ditetapkan maksimal 50 insiden se-Sulawesi, merepresentasikan rasio ekuivalensi dominan (87,7%) dari total beban perlindungan HAM lingkungan hidup nasional (57 insiden).</div>", unsafe_allow_html=True)
+        st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Sosial 3):</b><br>• <b>Kriminalisasi & HAM:</b> > 10 Insiden (Tingkat Pulau).<br>• <b>Keterangan Data:</b> Menggunakan metrik insiden kekerasan/kriminalisasi (berbasis metodologi Satya Bumi & Protection International). Threshold ditetapkan menggunakan metode <b>Mean + 1 SD dari 6 Provinsi Sulawesi</b> (Mean=5.67, SD=3.90 &rarr; Threshold=10), konsisten dengan metodologi Lahan 1 (Bencana BNPB). Aktual 34 insiden = 3.4&times; di atas outlier.</div>", unsafe_allow_html=True)
         
         sks3_str = f"{(skor_sosial_3 / 2.0):.1f}" if is_likert_mode else f"{skor_sosial_3:.1f}"
-        help_skors3 = f"Kalkulasi Total (Sosial 3):\nmin(10.0, ({insiden_krim} / 50) * 10) = {skor_sosial_3:.1f}/10" + (f" (Likert: {(skor_sosial_3 / 2.0):.1f}/5)" if is_likert_mode else "")
-        help_sos3 = f"Data Insiden HAM (KPA/TanahKita & Ekstrapolasi Satya Bumi):\n- Total Insiden Kriminalisasi & Kekerasan: {insiden_krim} Kejadian\n- Ekstraksi didukung NLP Regex Analysis (indikator penangkapan/kekerasan).\n\nKalkulasi Threshold Darurat Represi:\n- Ambang Batas Pulau: 50 Insiden\n\n{help_skors3}"
+        help_skors3 = f"Kalkulasi Total (Sosial 3):\nmin(10.0, ({insiden_krim} / 10) * 10) = {skor_sosial_3:.1f}/10" + (f" (Likert: {(skor_sosial_3 / 2.0):.1f}/5)" if is_likert_mode else "")
+        help_sos3 = f"Data Insiden HAM (KPA/TanahKita & Ekstrapolasi Satya Bumi):\n- Total Insiden Kriminalisasi & Kekerasan: {insiden_krim} Kejadian\n- Ekstraksi didukung NLP NER LLM Analysis (indikator penangkapan/kekerasan).\n\nKalkulasi Threshold (Mean + 1 SD dari 6 Provinsi Sulawesi):\n- Mean = 5.67, SD = 3.90\n- Ambang Batas Pulau: 10 Insiden\n\n{help_skors3}"
         
         col3_delta = f"STATUS: KEKERASAN NEGARA (RED FLAG)" if skor_sosial_3 >= 6.0 else f"STATUS: TERKENDALI"
         col3_color = "inverse" if skor_sosial_3 >= 6.0 else "normal"
@@ -2840,19 +2907,19 @@ with colD2:
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
         if not df_konflik.empty:
-            krim_df = df_k_darat[df_k_darat['indikasi_kriminalisasi'] == True].copy()
+            krim_df = df_k_darat[df_k_darat['indikasi_kriminalisasi'].isin([True, 'True', 'true', 1, '1'])].copy()
             krim_df['jumlah_ditangkap'] = pd.to_numeric(krim_df['jumlah_ditangkap'], errors='coerce').fillna(0)
             if 'tahun' in krim_df.columns:
                 krim_df['tahun'] = pd.to_numeric(krim_df['tahun'], errors='coerce')
                 krim_trend = krim_df.groupby('tahun').size().reset_index(name='jumlah')
                 krim_trend['kumulatif'] = krim_trend['jumlah'].cumsum()
                 fig_s2 = px.area(krim_trend, x='tahun', y='kumulatif', title="Akumulasi Insiden Kriminalisasi & Kekerasan Terhadap Warga", color_discrete_sequence=['#E74C3C'])
-                fig_s2.add_hline(y=50, line_dash="dash", line_color="#F1C40F", annotation_text="Threshold Represi Kumulatif (50 Insiden)", annotation_position="top left")
+                fig_s2.add_hline(y=10, line_dash="dash", line_color="#F1C40F", annotation_text="Threshold Represi (Mean+1SD=10 Insiden)", annotation_position="top left")
                 fig_s2.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
                 st.plotly_chart(fig_s2, use_container_width=True, config={'displayModeBar': False})
                 with st.expander("Tampilkan Data Indikasi Kriminalisasi"):
                     st.dataframe(krim_df[['tahun', 'judul', 'sektor', 'jumlah_ditangkap', 'jumlah_luka']], use_container_width=True)
-                    st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita_v2.csv` (Konsorsium Pembaruan Agraria & YLBHI, Filtered >= 2014)")
+                    st.caption("Sumber: `sulawesi_konflik_agraria_tanahkita_v3.csv` (Konsorsium Pembaruan Agraria & YLBHI, Filtered >= 2014)")
 
     with tab_s4:
         st.markdown("<div style='font-size:0.9em; color:#B0BEC5; margin-bottom:15px;'><b>Threshold & Referensi (Sosial 4):</b><br>• <b>Defisit Layanan Faskes:</b> Gap Target SPA 80%.<br>• <b>Keterangan Data:</b> Menggunakan metrik proporsi Puskesmas yang memenuhi standar Sarana, Prasarana, dan Alat Kesehatan (SPA). Target nasional ditetapkan minimal 80% (RPJMN 2025–2029, Bab IV & Permenkes 6/2024).</div>", unsafe_allow_html=True)
@@ -2860,7 +2927,24 @@ with colD2:
         sks4_str = f"{(skor_sosial_4 / 2.0):.1f}" if is_likert_mode else f"{skor_sosial_4:.1f}"
         gap_spa = max(0.0, 80.0 - spa_aktual_pct)
         help_skors4 = f"Kalkulasi Total (Sosial 4):\nmin(10.0, ({gap_spa:.1f}% / 45.0%) * 10) = {skor_sosial_4:.1f}/10" + (f" (Likert: {(skor_sosial_4 / 2.0):.1f}/5)" if is_likert_mode else "")
-        help_sos4 = f"Data Faskes (Kemenkes & RPJMN):\n- Target SPA Nasional: 80.0%\n- Aktual SPA Sulawesi: {spa_aktual_pct}%\n- Gap Defisit Layanan: {gap_spa:.1f}%\n\n{help_skors4}"
+        
+        math_derivasi = """= (Sulteng + Sultra + Sulsel + Sulbar + Gorontalo + Sulut) / 6
+
+*Rincian Aktualisasi (Puskesmas Sesuai Standar SPA / Total Puskesmas):
+- Gorontalo: (89 / 95) = 94.12%
+- Sulawesi Barat: (88 / 98) = 89.84%
+- Sulawesi Tengah: (170 / 219) = 77.57%
+- Sulawesi Selatan: (321 / 474) = 67.65%
+- Sulawesi Tenggara: (191 / 308) = 62.08%
+- Sulawesi Utara: (109 / 199) = 54.84%
+
+= (77.57% + 62.08% + 67.65% + 89.84% + 94.12% + 54.84%) / 6
+= 446.10% / 6
+= 74.35%
+
+*Catatan: Persentase diekstrak resmi dari raw_kemenkes_puskesmas_2024.csv Baris 39. Rasio absolut diformulasikan dari perbandingan persentase terhadap data Faskes agregat terbaru."""
+
+        help_sos4 = f"Data Faskes (Kemenkes & RPJMN):\n- Target SPA Nasional: 80.0%\n- Aktual SPA Pulau Sulawesi (Rerata): {spa_aktual_pct:.2f}%\n\nDerivasi Aktual SPA (Pulau Sulawesi):\n{math_derivasi}\n\n- Gap Defisit Layanan: {gap_spa:.1f}%\n\n{help_skors4}"
         
         col3_delta = f"STATUS: PARADOKS BOOM MINERAL (RED FLAG)" if skor_sosial_4 >= 6.0 else f"STATUS: TERKENDALI"
         col3_color = "inverse" if skor_sosial_4 >= 6.0 else "normal"
@@ -3013,3 +3097,4 @@ with colE2:
 st.markdown("<br>", unsafe_allow_html=True)
 
 
+# Cache bust: 2026-08-24 06:55

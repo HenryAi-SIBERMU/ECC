@@ -7,6 +7,21 @@
 # Kalkulasi ini BUKAN dibagi rata wilayah (seperti provinsi), melainkan 
 # murni berpatokan pada Threshold Absolut Regional/Nasional (Metode Baseline).
 
+def get_spa_aktual(prov: str) -> float:
+    # Diekstrak dari raw_kemenkes_puskesmas_2024.csv Baris 39 (Persentase Puskesmas SPA)
+    parsed_spa = {
+        'Gorontalo': 94.12,
+        'Sulawesi Barat': 89.84,
+        'Sulawesi Tengah': 77.57,
+        'Sulawesi Selatan': 67.65,
+        'Sulawesi Tenggara': 62.08,
+        'Sulawesi Utara': 54.84
+    }
+    if prov in parsed_spa:
+        return parsed_spa[prov]
+    elif prov == 'Pulau Sulawesi' or prov == 'Sulawesi':
+        return sum(parsed_spa.values()) / len(parsed_spa)
+    return 60.0
 def kalkulasi_skor_pulau_sulawesi(data_empiris):
     """
     Simulasi logika algoritma yang persis digunakan di dalam 6_Audit_D3TLH.py
@@ -44,7 +59,7 @@ def kalkulasi_skor_pulau_sulawesi(data_empiris):
     # ---------------------------------------------------------
     # 2A. IKA & Toksisitas (Composite Worst-Case)
     ika_bps = data_empiris.get('ika_bps', 45)
-    skor_makro_air = min(10.0, max(0.0, (80 - ika_bps) / 30.0) * 10.0)
+    skor_makro_air = min(10.0, max(0.0, (90 - ika_bps) / 20.0) * 10.0)  # Baseline: 90 (Sangat Baik), Threshold Kritis: 70 (batas Baik) — PermenLHK 27/2021
     
     cr6_level = data_empiris.get('cr6_mg_l', 0.1) # mg/L
     skor_mikro_air = min(10.0, (cr6_level / 0.05) * 10.0) # Baku Mutu: 0.05 mg/L
@@ -85,8 +100,8 @@ def kalkulasi_skor_pulau_sulawesi(data_empiris):
     skor_lahan_4 = min(10.0, (driver_tambang / 500_000.0) * 10.0)
     
     # 3E. Ekspansi Spekulatif (Gap AMDAL vs IUP)
-    rasio_ekspansi = data_empiris.get('rasio_gap_amdal_iup', 0.8) # 80% belum ada AMDAL
-    skor_lahan_5 = min(10.0, rasio_ekspansi * 10.0)
+    rasio_ekspansi = data_empiris.get('rasio_kepadatan_iup', 0.0)
+    skor_lahan_5 = min(10.0, max(0.0, (rasio_ekspansi / 0.10) * 10.0)) # Threshold: 10% Luas Daratan
     
     skor_akumulasi_lahan = (skor_lahan_1 + skor_lahan_2 + skor_lahan_3 + skor_lahan_4 + skor_lahan_5) / 5.0
 
@@ -97,13 +112,13 @@ def kalkulasi_skor_pulau_sulawesi(data_empiris):
     skor_sosial_1 = min(10.0, (fpic / 3.0) * 10.0) # Threshold IFC PS7 (Zero Tolerance Red Flag)
     
     jiwa_terdampak = data_empiris.get('jiwa_terdampak_konflik', 177_738)
-    skor_sosial_2 = min(10.0, (jiwa_terdampak / 100_000.0) * 10.0)
+    skor_sosial_2 = min(10.0, (jiwa_terdampak / 40_000.0) * 10.0)
     
     kriminalisasi = data_empiris.get('insiden_kriminalisasi', 60)
-    skor_sosial_3 = min(10.0, (kriminalisasi / 50.0) * 10.0)
+    skor_sosial_3 = min(10.0, (kriminalisasi / 10.0) * 10.0)  # Threshold: Mean+1SD (6 Prov Sulawesi)
     
     # Defisit Faskes SPA (Target RPJMN 80%)
-    spa_aktual = data_empiris.get('persentase_faskes_spa', 42.5)
+    spa_aktual = data_empiris.get('persentase_faskes_spa', get_spa_aktual('Pulau Sulawesi'))
     gap_spa = max(0.0, 80.0 - spa_aktual)
     skor_sosial_4 = min(10.0, (gap_spa / 45.0) * 10.0)
     
