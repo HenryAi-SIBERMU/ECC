@@ -1286,13 +1286,6 @@ row_03_html = f"""
                     <div class="cell-insight" style="text-align: left;">{insight_limbah}</div>
                 </div>
                 <div class="data-row">
-                    <div class="cell-indicator">Kapasitas PLTU Captive<br/><span class="unit">Pembangkit</span></div>
-                    <div class="cell-val v-gray"><span class="num">{pltu_2014_s3:,.0f}</span></div>
-                    <div class="cell-val v-red"><span class="num">{pltu_mw:,.0f}</span></div>
-                    <div><span class="badge badge-bad">{delta_pltu_s3}</span></div>
-                    <div class="cell-insight" style="text-align: left;">{insight_pltu_s3}</div>
-                </div>
-                <div class="data-row">
                     <div class="cell-indicator">Emisi Karbon Deforestasi<br/><span class="unit">Jejak Emisi</span></div>
                     <div class="cell-val v-gray"><span class="num">{co2_2014_s3:,.1f} Megaton (2014)</span></div>
                     <div class="cell-val v-red"><span class="num">{co2_terkini_s3:,.1f} Megaton (2023)</span></div>
