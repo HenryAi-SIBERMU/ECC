@@ -175,7 +175,7 @@ def load_infografis_data():
     df_pltu = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv"))
     df_gfw = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_gfw_master_1_dekade_2014_2023_v3.csv"))
     df_kes = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_kesehatan_detail_2014_2024.csv"))
-    df_konf = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita.csv"))
+    df_konf = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita_v3.csv"))
     df_ika = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv"))
     df_smelter = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_esdm_nikel.csv"))
     df_inv = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_investasi_pmdn_2016_2024.csv"))
@@ -210,14 +210,21 @@ def_tambang_total = df_gfw['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'].sum(
 # 2. ISPA/Diare
 ispa_total = df_kes[df_kes['indikator'] == 'Kasus ISPA/Pneumonia']['nilai'].sum()
 
-# 3. Konflik Agraria (filter sulawesi keywords)
-keywords = r'\b(sulawesi|sulsel|sulteng|sultra|sulut|sulbar|gorontalo|morowali|konawe|kolaka|bombana|poso|donggala|makassar|manado|minahasa|sangihe|mamuju|majene|polewali|halmahera|maluku utara|weda|obi|soroako|luwu|bantaeng|buton|muna|wakatobi|banggai|buol|toli-toli|parigi|luwuk|kendari|baubau|palu|bitung|tomohon|kotamobagu|gowa|takalar|jeneponto|bulukumba|sinjai|bone|maros|pangkep|barru|pinrang|enrekang|toraja|palopo)\b'
-mask = df_konf['judul'].str.contains(keywords, case=False, na=False, regex=True) | \
-       df_konf['deskripsi'].str.contains(keywords, case=False, na=False, regex=True) | \
-       df_konf['lokasi'].str.contains(keywords, case=False, na=False, regex=True)
-if 'narasi' in df_konf.columns:
-    mask = mask | df_konf['narasi'].str.contains(keywords, case=False, na=False, regex=True)
-df_konf_sul = df_konf[mask]
+# 3. Konflik Agraria — filter pakai provinsi_ner_llm (v3, lebih akurat)
+_SULAWESI_PROVS = ['Sulawesi Tengah','Sulawesi Tenggara','Sulawesi Selatan','Sulawesi Utara','Sulawesi Barat','Gorontalo']
+df_konf['tahun'] = pd.to_numeric(df_konf['tahun'], errors='coerce')
+if 'provinsi_ner_llm' in df_konf.columns:
+    df_konf_sul = df_konf[
+        df_konf['provinsi_ner_llm'].isin(_SULAWESI_PROVS) &
+        (df_konf['tahun'] >= 2014)
+    ].copy()
+else:
+    # Fallback: regex keyword lama
+    keywords = r'\b(sulawesi|sulsel|sulteng|sultra|sulut|sulbar|gorontalo|morowali|konawe|kolaka|bombana|poso|donggala|makassar|manado|minahasa|sangihe|mamuju|majene|polewali|halmahera|maluku utara|weda|obi|soroako|luwu|bantaeng|buton|muna|wakatobi|banggai|buol|toli-toli|parigi|luwuk|kendari|baubau|palu|bitung|tomohon|kotamobagu|gowa|takalar|jeneponto|bulukumba|sinjai|bone|maros|pangkep|barru|pinrang|enrekang|toraja|palopo)\b'
+    mask = df_konf['judul'].str.contains(keywords, case=False, na=False, regex=True) | \
+           df_konf['deskripsi'].str.contains(keywords, case=False, na=False, regex=True) | \
+           df_konf['lokasi'].str.contains(keywords, case=False, na=False, regex=True)
+    df_konf_sul = df_konf[mask].copy()
 konflik_total = len(df_konf_sul)
 korban_jiwa = pd.to_numeric(df_konf_sul['dampak_masyarakat_jiwa'], errors='coerce').sum()
 

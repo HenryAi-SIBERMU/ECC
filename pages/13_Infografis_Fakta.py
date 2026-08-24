@@ -95,11 +95,18 @@ def load_data():
         no2_val = "Pekat"
         
     try:
-        df_konf = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita.csv"))
-        konflik = len(df_konf)
+        df_konf = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_konflik_agraria_tanahkita_v3.csv"))
+        # Filter akurat pakai kolom NER (v3)
+        _sul_provs = ['Sulawesi Tengah','Sulawesi Tenggara','Sulawesi Selatan','Sulawesi Utara','Sulawesi Barat','Gorontalo']
+        if 'provinsi_ner_llm' in df_konf.columns:
+            df_konf['tahun'] = pd.to_numeric(df_konf['tahun'], errors='coerce')
+            df_sul = df_konf[df_konf['provinsi_ner_llm'].isin(_sul_provs) & (df_konf['tahun'] >= 2014)]
+        else:
+            df_sul = df_konf
+        konflik = len(df_sul)
         konflik_val = f"{konflik} Kasus"
     except:
-        konflik_val = "84 Kasus"
+        konflik_val = "69 Kasus"
         
     try:
         df_pltu = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_pltu_captive.csv"))
