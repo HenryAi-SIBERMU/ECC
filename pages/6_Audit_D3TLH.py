@@ -161,7 +161,7 @@ DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "pro
 
 @st.cache_data
 def load_data():
-    # Cache busted: 2026-08-24 06:44 to force reload of NLP LLM Kriminalisasi CSV
+    # Cache busted: 2026-08-24 10:35 to force reload of GFW CSV
     df_kes = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_kesehatan_detail_2014_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_kesehatan_detail_2014_2024.csv")) else pd.DataFrame()
     df_ika = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_ika_2016_2024.csv")) else pd.DataFrame()
     df_bencana = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_bencana_bnpb_2014_2024.csv")) if os.path.exists(os.path.join(DATA_DIR, "sulawesi_bencana_bnpb_2014_2024.csv")) else pd.DataFrame()
@@ -2162,7 +2162,7 @@ with colA2:
                 df_emisi_trend = df_emisi_trend.sort_values(by=['Provinsi', 'Tahun'])
                 df_emisi_trend['Kumulatif_Emisi_CO2'] = df_emisi_trend.groupby('Provinsi')['Total_Emisi_CO2_Megagram'].cumsum()
                 
-                fig_emisi = px.area(df_emisi_trend, x='Tahun', y='Kumulatif_Emisi_CO2', color='Provinsi',
+                fig_emisi = px.line(df_emisi_trend, x='Tahun', y='Kumulatif_Emisi_CO2', color='Provinsi', markers=True,
                                    title="Akumulasi Emisi Karbon Deforestasi (2014-2023)")
                 # Threshold CO2 = 150 Juta Ton (>NDC FOLU -140 juta ton — SK.168/MENLHK Bag.III Hal.5)
                 fig_emisi.add_hline(y=150_000_000, line_dash="dot", line_color="#FF5252",
@@ -2659,7 +2659,7 @@ with colC2:
             df_gl['Tahun'] = pd.to_numeric(df_gl['Tahun'], errors='coerce')
             df_gl['Luas_Hilang_Kawasan_Lindung_Ha'] = pd.to_numeric(df_gl['Luas_Hilang_Kawasan_Lindung_Ha'], errors='coerce').fillna(0)
             df_gl_trend = df_gl.groupby(['Tahun', 'Provinsi'])['Luas_Hilang_Kawasan_Lindung_Ha'].sum().reset_index()
-            fig_l3 = px.area(df_gl_trend, x='Tahun', y='Luas_Hilang_Kawasan_Lindung_Ha', color='Provinsi',
+            fig_l3 = px.line(df_gl_trend, x='Tahun', y='Luas_Hilang_Kawasan_Lindung_Ha', color='Provinsi', markers=True,
                            title="Tren Perambahan Deforestasi di Kawasan Lindung (Protected Areas)")
             fig_l3.update_layout(template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
             st.plotly_chart(fig_l3, use_container_width=True, config={'displayModeBar': False})

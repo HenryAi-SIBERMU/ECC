@@ -1,51 +1,61 @@
 umd_tree_cover_loss__year,is__umd_regional_primary_forest_2001,Luas_Hilang_Hutan_Primer_Ha,Provinsi,Tahun
-2014.0,True,592.20584,Gorontalo,2014.0
-2015.0,True,161.99711000000002,Gorontalo,2015.0
-2016.0,True,468.41673,Gorontalo,2016.0
-2017.0,True,151.91545,Gorontalo,2017.0
-2018.0,True,185.22617,Gorontalo,2018.0
-2019.0,True,439.4319,Gorontalo,2019.0
-2020.0,True,976.12819,Gorontalo,2020.0
-2021.0,True,149.87684,Gorontalo,2021.0
-2022.0,True,110.33497,Gorontalo,2022.0
-2023.0,True,189.10765,Gorontalo,2023.0
-2014.0,True,2357.5055,Sulawesi Tengah,2014.0
-2015.0,True,8127.03334,Sulawesi Tengah,2015.0
-2016.0,True,4409.75645,Sulawesi Tengah,2016.0
-2017.0,True,2189.40407,Sulawesi Tengah,2017.0
-2018.0,True,2047.37995,Sulawesi Tengah,2018.0
-2019.0,True,1618.97159,Sulawesi Tengah,2019.0
-2020.0,True,1004.08686,Sulawesi Tengah,2020.0
-2021.0,True,565.8348,Sulawesi Tengah,2021.0
-2022.0,True,521.26293,Sulawesi Tengah,2022.0
-2023.0,True,566.74739,Sulawesi Tengah,2023.0
-2014.0,True,14600.79618,Sulawesi Selatan,2014.0
-2015.0,True,11012.30714,Sulawesi Selatan,2015.0
-2016.0,True,16975.29463,Sulawesi Selatan,2016.0
-2017.0,True,22250.00829,Sulawesi Selatan,2017.0
-2018.0,True,16138.25403,Sulawesi Selatan,2018.0
-2019.0,True,11745.94064,Sulawesi Selatan,2019.0
-2020.0,True,7934.53233,Sulawesi Selatan,2020.0
-2021.0,True,10992.732,Sulawesi Selatan,2021.0
-2022.0,True,13779.59139,Sulawesi Selatan,2022.0
-2023.0,True,11951.88097,Sulawesi Selatan,2023.0
-2014.0,True,11729.3516,Sulawesi Utara,2014.0
-2015.0,True,15917.8203,Sulawesi Utara,2015.0
-2016.0,True,57424.377250000005,Sulawesi Utara,2016.0
-2017.0,True,5838.9604500000005,Sulawesi Utara,2017.0
-2018.0,True,6385.46558,Sulawesi Utara,2018.0
-2019.0,True,5303.94761,Sulawesi Utara,2019.0
-2020.0,True,7238.98757,Sulawesi Utara,2020.0
-2021.0,True,3253.89658,Sulawesi Utara,2021.0
-2022.0,True,2397.85614,Sulawesi Utara,2022.0
-2023.0,True,2858.9445,Sulawesi Utara,2023.0
-2014.0,True,27988.60075,Sulawesi Tenggara,2014.0
-2015.0,True,13696.54672,Sulawesi Tenggara,2015.0
-2016.0,True,13597.8916,Sulawesi Tenggara,2016.0
-2017.0,True,15904.34102,Sulawesi Tenggara,2017.0
-2018.0,True,8416.34864,Sulawesi Tenggara,2018.0
-2019.0,True,7087.98128,Sulawesi Tenggara,2019.0
-2020.0,True,6271.00285,Sulawesi Tenggara,2020.0
-2021.0,True,7873.72827,Sulawesi Tenggara,2021.0
-2022.0,True,8318.47319,Sulawesi Tenggara,2022.0
-2023.0,True,9504.60103,Sulawesi Tenggara,2023.0
+2014.0,True,6289.956119999999,Gorontalo,2014.0
+2015.0,True,6555.73975,Gorontalo,2015.0
+2016.0,True,5448.67978,Gorontalo,2016.0
+2017.0,True,2623.75752,Gorontalo,2017.0
+2018.0,True,2942.7748,Gorontalo,2018.0
+2019.0,True,2867.23225,Gorontalo,2019.0
+2020.0,True,1330.30283,Gorontalo,2020.0
+2021.0,True,639.72696,Gorontalo,2021.0
+2022.0,True,800.04334,Gorontalo,2022.0
+2023.0,True,2530.29092,Gorontalo,2023.0
+2014.0,True,3985.01001,Sulawesi Barat,2014.0
+2015.0,True,4336.92571,Sulawesi Barat,2015.0
+2016.0,True,4083.4834,Sulawesi Barat,2016.0
+2017.0,True,3125.52191,Sulawesi Barat,2017.0
+2018.0,True,2991.32729,Sulawesi Barat,2018.0
+2019.0,True,2396.99154,Sulawesi Barat,2019.0
+2020.0,True,1970.00317,Sulawesi Barat,2020.0
+2021.0,True,3590.93941,Sulawesi Barat,2021.0
+2022.0,True,2884.6692,Sulawesi Barat,2022.0
+2023.0,True,4149.46458,Sulawesi Barat,2023.0
+2014.0,True,7767.94103,Sulawesi Selatan,2014.0
+2015.0,True,13924.43992,Sulawesi Selatan,2015.0
+2016.0,True,16719.46925,Sulawesi Selatan,2016.0
+2017.0,True,7755.82813,Sulawesi Selatan,2017.0
+2018.0,True,4043.58339,Sulawesi Selatan,2018.0
+2019.0,True,3419.63376,Sulawesi Selatan,2019.0
+2020.0,True,3561.51445,Sulawesi Selatan,2020.0
+2021.0,True,2414.29107,Sulawesi Selatan,2021.0
+2022.0,True,2670.61595,Sulawesi Selatan,2022.0
+2023.0,True,3374.1982000000003,Sulawesi Selatan,2023.0
+2014.0,True,20894.33809,Sulawesi Tengah,2014.0
+2015.0,True,54455.03369,Sulawesi Tengah,2015.0
+2016.0,True,46244.46622,Sulawesi Tengah,2016.0
+2017.0,True,14733.9803,Sulawesi Tengah,2017.0
+2018.0,True,15594.93303,Sulawesi Tengah,2018.0
+2019.0,True,17203.394210000002,Sulawesi Tengah,2019.0
+2020.0,True,10655.90067,Sulawesi Tengah,2020.0
+2021.0,True,9431.7076,Sulawesi Tengah,2021.0
+2022.0,True,10192.30453,Sulawesi Tengah,2022.0
+2023.0,True,15523.42116,Sulawesi Tengah,2023.0
+2014.0,True,12074.48662,Sulawesi Tenggara,2014.0
+2015.0,True,16975.19857,Sulawesi Tenggara,2015.0
+2016.0,True,21049.11869,Sulawesi Tenggara,2016.0
+2017.0,True,11153.88463,Sulawesi Tenggara,2017.0
+2018.0,True,8224.580899999999,Sulawesi Tenggara,2018.0
+2019.0,True,14222.58478,Sulawesi Tenggara,2019.0
+2020.0,True,8289.84209,Sulawesi Tenggara,2020.0
+2021.0,True,5252.89206,Sulawesi Tenggara,2021.0
+2022.0,True,5806.584,Sulawesi Tenggara,2022.0
+2023.0,True,8515.43358,Sulawesi Tenggara,2023.0
+2014.0,True,2357.5055,Sulawesi Utara,2014.0
+2015.0,True,8127.03334,Sulawesi Utara,2015.0
+2016.0,True,4409.75645,Sulawesi Utara,2016.0
+2017.0,True,2189.40407,Sulawesi Utara,2017.0
+2018.0,True,2047.37995,Sulawesi Utara,2018.0
+2019.0,True,1618.97159,Sulawesi Utara,2019.0
+2020.0,True,1004.08686,Sulawesi Utara,2020.0
+2021.0,True,565.8348,Sulawesi Utara,2021.0
+2022.0,True,521.26293,Sulawesi Utara,2022.0
+2023.0,True,566.74739,Sulawesi Utara,2023.0
