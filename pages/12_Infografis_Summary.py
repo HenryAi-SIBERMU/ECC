@@ -679,11 +679,11 @@ insight_def_s3 = f"Kehilangan tutupan pohon seluas {gfw_def_terkini/1_000_000:,.
 if SHOW_WEB_DASHBOARD:
     render_infographic_row("☢️", "Timbunan Limbah B3", "Toksisitas", "Ton", col_hdr_left, "0", col_hdr_right, f"{limbah_b3_terkini:,.0f}", delta_limbah, insight_limbah, "blue", False)
     render_infographic_row("🏭", "Kapasitas PLTU Captive", "Pembangkit", "MW", col_hdr_left, "0", col_hdr_right, f"{pltu_mw:,.0f}", delta_pltu_s3, insight_pltu_s3, "blue", False)
-    render_infographic_row("☁️", "Emisi Karbon Deforestasi", "Jejak Emisi", "Megaton", col_hdr_left, f"{co2_2014_s3:,.1f}", col_hdr_right, f"{co2_terkini_s3:,.1f}", delta_co2_s3, insight_co2_s3, "blue", False)
+    render_infographic_row("☁️", "Emisi Karbon Deforestasi", "Jejak Emisi", "Megaton", col_hdr_left, f"{co2_2014_s3:,.1f}", "Snapshot 2023", f"{co2_terkini_s3:,.1f}", delta_co2_s3, insight_co2_s3, "blue", False)
     render_infographic_row("🌳", "Hutan Primer Musnah", "Ekosistem", "Ha", col_hdr_left, f"{gfw_primer_2014:,.0f}", col_hdr_right, f"{gfw_primer_terkini:,.0f}", delta_gfw_primer, insight_primer, "blue", False)
     render_infographic_row("🚜", "Deforestasi (Tambang/Sawit)", "Perambahan", "Ha", col_hdr_left, f"{tambang_def_2014:,.0f}", col_hdr_right, f"{tambang_def_terkini:,.0f}", delta_tambang_def, insight_tambang, "blue", False)
-    render_infographic_row("🌊", "Ledakan Bencana Ekologis", "Kejadian", "Insiden", col_hdr_left, f"{bencana_2014:,.0f}", col_hdr_right, f"{bencana_terkini:,.0f}", delta_bencana, insight_bencana, "blue", False)
-    render_infographic_row("🏃", "Korban Bencana Alam", "Pengungsi Iklim", "Jiwa", col_hdr_left, f"{korban_2014:,.0f}", col_hdr_right, f"{korban_terkini:,.0f}", delta_korban, insight_korban, "blue", False)
+    render_infographic_row("🌊", "Ledakan Bencana Ekologis", "Kejadian", "Insiden", col_hdr_left, "Tidak Terdata" if bencana_2014 == 0 else f"{bencana_2014:,.0f}", col_hdr_right, f"{bencana_terkini:,.0f}", delta_bencana, insight_bencana, "blue", False)
+    render_infographic_row("🏃", "Korban Bencana Alam", "Pengungsi Iklim", "Jiwa", col_hdr_left, "Tidak Terdata" if korban_2014 == 0 else f"{korban_2014:,.0f}", col_hdr_right, f"{korban_terkini:,.0f}", delta_korban, insight_korban, "blue", False)
     render_infographic_row("🦧", "Ancaman Kepunahan Spesies", "Biodiversitas", "Taxa", "Status Aman", "0", "Krisis Tambang", f"{spesies_terkini:,.0f}", delta_spesies, insight_spesies, "blue", False)
     render_infographic_row("😷", "Penurunan IKU (Sulbar)", "Polusi Udara", "Poin", col_hdr_left, f"{iku_2015:,.1f}", col_hdr_right, f"{iku_terkini:,.1f}", delta_iku, insight_iku, "blue", False)
     render_infographic_row("🔥", "Total Deforestasi Regional", "Deforestasi", "Ha", col_hdr_left, f"{gfw_def_2014:,.0f}", col_hdr_right, f"{gfw_def_terkini:,.0f}", delta_gfw_def, insight_def_s3, "blue", False)
@@ -1308,14 +1308,14 @@ row_03_html = f"""
                 </div>
                 <div class="data-row">
                     <div class="cell-indicator">Ledakan Bencana Ekologis<br/><span class="unit">Kejadian</span></div>
-                    <div class="cell-val v-gray"><span class="num">{bencana_2014:,.0f}</span></div>
+                    <div class="cell-val v-gray"><span class="num">{'Tidak Terdata' if bencana_2014 == 0 else f'{bencana_2014:,.0f}'}</span></div>
                     <div class="cell-val v-red"><span class="num">{bencana_terkini:,.0f}</span></div>
                     <div><span class="badge badge-bad">{delta_bencana}</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_bencana}</div>
                 </div>
                 <div class="data-row">
                     <div class="cell-indicator">Korban Bencana Alam<br/><span class="unit">Pengungsi Iklim</span></div>
-                    <div class="cell-val v-gray"><span class="num">{korban_2014:,.0f}</span></div>
+                    <div class="cell-val v-gray"><span class="num">{'Tidak Terdata' if korban_2014 == 0 else f'{korban_2014:,.0f}'}</span></div>
                     <div class="cell-val v-red"><span class="num">{korban_terkini:,.0f}</span></div>
                     <div><span class="badge badge-bad">{delta_korban}</span></div>
                     <div class="cell-insight" style="text-align: left;">{insight_korban}</div>
