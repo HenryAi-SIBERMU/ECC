@@ -138,9 +138,15 @@ def load_data():
     # Konflik FPIC / Pelanggaran Hak Adat
     try:
         df_fpic = pd.read_csv(os.path.join(DATA_DIR, "sulawesi_konflik_tambang_fpic.csv"))
-        kecelakaan_tambang = f"{len(df_fpic)} Konflik FPIC"
+        df_fpic['tahun'] = pd.to_numeric(df_fpic['tahun'], errors='coerce')
+        # Filter: konflik yang terkonfirmasi FPIC (indikasi_fpic == True) + 2014+
+        if 'indikasi_fpic' in df_fpic.columns:
+            df_fpic_valid = df_fpic[(df_fpic['indikasi_fpic'] == True) & (df_fpic['tahun'] >= 2014)]
+        else:
+            df_fpic_valid = df_fpic[df_fpic['tahun'] >= 2014]
+        kecelakaan_tambang = f"{len(df_fpic_valid)} Konflik FPIC"
     except:
-        kecelakaan_tambang = "6 Konflik FPIC"
+        kecelakaan_tambang = "8 Konflik FPIC"
 
     # Total Luas Konsesi Nikel (IUP Baru)
     try:
