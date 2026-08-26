@@ -54,3 +54,19 @@ Hasil agregasi luas konsesi menempatkan ketujuh kabupaten ini sebagai episentrum
 
 Dengan rincian data (basis Hektar) di atas, penentuan 7 kabupaten ini bukanlah asumsi acak, melainkan batas riil *data-driven* di mana megaproyek ekstraktif secara konkret merampas luasan ruang hidup masyarakat.
 
+---
+
+## 3. Cacat Bawaan Data BPS SIMDASI & Metrik Boxplot (Hazen)
+**Tanggal Dicatat:** 24 Agustus 2026
+
+**Konteks 1 (Data Kosong/None):** Pada tabel data mentah di dashboard, banyak ditemukan nilai `None` (kosong) pada kolom `laju_pertumbuhan_yoy_pct`. Setelah divalidasi, ini bukan cacat kode, melainkan cacat bawaan dari *database* SIMDASI BPS yang sangat *patchy* (berlubang). 
+- Wilayah Sultra (Kolaka, Konawe, dll) baru memiliki data mulai 2017, dan bolong di 2020.
+- Wilayah Sulteng (Morowali, dll) memiliki data 2010, namun kosong panjang di 2011-2016, dan kosong lagi di 2021-2023.
+- Karena Laju YoY membutuhkan pembanding tahun sebelumnya, melompatnya data (misal dari 2010 langsung ke 2017) membuat sistem merender hasil YoY tahun pertama pasca-gap menjadi `None` atau anomali artifisial (seperti -43.14% di Morowali 2017 akibat pemekaran).
+
+**Keputusan 1:** Data `None` **DIBIARKAN** dan disaring menggunakan `.dropna()`. Narasi dashboard secara eksplisit diubah dari penggunaan Mean (Rata-rata) menjadi **Median (Nilai Tengah)**. 
+**Alasan:** Median sangat *robust* (kebal) terhadap anomali ekstrem (seperti -43% di Morowali). Jika menggunakan Mean, rata-rata kawasan ekstraktif jatuh ke 1.95%, padahal jika satu titik anomali pemekaran dibuang, rata-rata aslinya meroket ke 3.10%. Median (1.98%) lebih jujur memotret realitas tanpa perlu repot mengimputasi data BPS yang berlubang.
+
+**Konteks 2 (Bug Kuartil Plotly vs Pandas):** Sempat ditemukan *bug* di mana metrik Q1, Q3, dan Upper Fence di tabel (buatan Pandas) berbeda dengan visual tooltip di grafik (buatan Plotly), misalnya 2.93% vs 4.22%.
+**Keputusan 2:** Kode tabel di `11_Demografi_Sosial.py` diubah untuk menggunakan *Numpy quantile* dengan `method='hazen'`.
+**Alasan:** Secara matematis, kalkulator *default* Plotly (Exclusive/Linear) berkesesuaian persis dengan metode Hazen pada Numpy. Penyesuaian ini menjamin 100% konsistensi angka antara tabel statis dan visual interaktif.

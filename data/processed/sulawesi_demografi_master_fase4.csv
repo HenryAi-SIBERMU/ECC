@@ -1,37 +1,37 @@
 provinsi,kabupaten,tahun,jumlah_penduduk_rb,kepadatan_per_km2,laju_pertumbuhan_sumber_pct,laju_pertumbuhan_yoy_pct,anomali_pertumbuhan_flag,is_smelter,iup_kumulatif,pct_miskin,dbd_kasus,dbd_meninggal,pmdn_nilai_juta_rp
-Gorontalo,Boalemo,2018,162.6,94.0,2.83,25.75,False,False,1.0,20.33,0,0,2666.8
-Gorontalo,Boalemo,2019,167.024,110.0,2.74,2.72,False,False,1.0,18.87,176,0,844.4
-Gorontalo,Boalemo,2020,145.9,96.0,1.18,-12.65,True,False,1.0,18.57,163,0,683.6
-Gorontalo,Boalemo,2021,147.0,97.0,1.07,0.75,False,False,2.0,19.0,41,0,1004.3
-Gorontalo,Boalemo,2022,148.5,81.0,1.04,1.02,False,False,3.0,18.74,120,2,1113.5
+Gorontalo,Boalemo,2018,,94.0,2.83,,False,False,1.0,20.33,0,0,2666.8
+Gorontalo,Boalemo,2019,,110.0,2.74,,False,False,1.0,18.87,176,0,844.4
+Gorontalo,Boalemo,2020,,96.0,1.18,,False,False,1.0,18.57,163,0,683.6
+Gorontalo,Boalemo,2021,,97.0,1.07,,False,False,2.0,19.0,41,0,1004.3
+Gorontalo,Boalemo,2022,148.5,81.0,1.04,,False,False,3.0,18.74,120,2,1113.5
 Gorontalo,Boalemo,2023,151.3,83.0,1.23,1.89,False,False,4.0,18.38,152,0,3960.1
 Gorontalo,Boalemo,2024,153.3,84.0,1.25,1.32,False,False,7.0,17.83,435,0,
 Gorontalo,Bone Bolango,2018,159.2,84.0,1.39,12.19,False,False,1.0,17.4,0,0,2666.8
 Gorontalo,Bone Bolango,2019,161.236,81.0,1.28,1.28,False,False,1.0,16.12,225,3,844.4
-Gorontalo,Bone Bolango,2020,162.8,82.0,1.34,0.97,True,False,1.0,15.81,180,0,683.6
+Gorontalo,Bone Bolango,2020,162.8,82.0,1.34,0.97,False,False,1.0,15.81,180,0,683.6
 Gorontalo,Bone Bolango,2021,164.3,83.0,1.23,0.92,False,False,2.0,16.3,144,4,1004.3
 Gorontalo,Bone Bolango,2022,166.2,88.0,1.2,1.16,False,False,3.0,16.05,89,2,1113.5
 Gorontalo,Bone Bolango,2023,168.6,89.0,1.17,1.44,False,False,4.0,15.51,142,0,3960.1
 Gorontalo,Bone Bolango,2024,170.7,90.0,1.19,1.25,False,False,7.0,14.8,664,8,
 Gorontalo,Gorontalo Utara,2018,114.0,53.0,1.08,9.51,False,False,1.0,18.54,0,0,2666.8
 Gorontalo,Gorontalo Utara,2019,115.072,69.0,0.91,0.94,False,False,1.0,16.95,0,0,844.4
-Gorontalo,Gorontalo Utara,2020,125.0,75.0,1.78,8.63,True,False,1.0,16.88,0,0,683.6
+Gorontalo,Gorontalo Utara,2020,125.0,75.0,1.78,8.63,False,False,1.0,16.88,0,0,683.6
 Gorontalo,Gorontalo Utara,2021,126.5,75.0,1.67,1.2,False,False,2.0,17.23,0,0,1004.3
 Gorontalo,Gorontalo Utara,2022,128.6,75.0,1.64,1.66,False,False,3.0,17.24,0,0,1113.5
 Gorontalo,Gorontalo Utara,2023,130.7,77.0,1.51,1.63,False,False,4.0,17.03,0,0,3960.1
 Gorontalo,Gorontalo Utara,2024,132.8,78.0,1.53,1.61,False,False,7.0,16.86,0,0,
-Gorontalo,Kota Gorontalo,2018,215.1,3261.0,2.18,19.43,False,False,1.0,5.57,0,0,2666.8
-Gorontalo,Kota Gorontalo,2019,219.399,2757.0,2.01,2.0,False,False,1.0,5.45,0,0,844.4
-Gorontalo,Kota Gorontalo,2020,198.5,2495.0,0.95,-9.53,True,False,1.0,5.59,0,0,683.6
-Gorontalo,Kota Gorontalo,2021,199.8,2510.0,0.84,0.65,False,False,2.0,5.93,0,0,1004.3
-Gorontalo,Kota Gorontalo,2022,201.4,2839.0,0.81,0.8,False,False,3.0,5.73,0,0,1113.5
+Gorontalo,Kota Gorontalo,2018,,3261.0,2.18,,False,False,1.0,5.57,0,0,2666.8
+Gorontalo,Kota Gorontalo,2019,,2757.0,2.01,,False,False,1.0,5.45,0,0,844.4
+Gorontalo,Kota Gorontalo,2020,,2495.0,0.95,,False,False,1.0,5.59,0,0,683.6
+Gorontalo,Kota Gorontalo,2021,,2510.0,0.84,,False,False,2.0,5.93,0,0,1004.3
+Gorontalo,Kota Gorontalo,2022,201.4,2839.0,0.81,,False,False,3.0,5.73,0,0,1113.5
 Gorontalo,Kota Gorontalo,2023,205.4,2896.0,1.14,1.99,False,False,4.0,5.64,0,0,3960.1
 Gorontalo,Kota Gorontalo,2024,207.8,2930.0,1.15,1.17,False,False,7.0,5.74,0,0,
-Gorontalo,Pohuwato,2018,157.6,35.0,2.48,22.36,False,False,1.0,19.4,0,0,2666.8
-Gorontalo,Pohuwato,2019,161.373,38.0,2.43,2.39,False,False,1.0,18.16,309,6,844.4
-Gorontalo,Pohuwato,2020,146.4,35.0,1.25,-9.28,True,False,1.0,17.62,87,0,683.6
-Gorontalo,Pohuwato,2021,147.7,35.0,1.15,0.89,False,False,2.0,18.08,136,0,1004.3
-Gorontalo,Pohuwato,2022,149.3,34.0,1.11,1.08,False,False,3.0,17.87,169,15,1113.5
+Gorontalo,Pohuwato,2018,,35.0,2.48,,False,False,1.0,19.4,0,0,2666.8
+Gorontalo,Pohuwato,2019,,38.0,2.43,,False,False,1.0,18.16,309,6,844.4
+Gorontalo,Pohuwato,2020,,35.0,1.25,,False,False,1.0,17.62,87,0,683.6
+Gorontalo,Pohuwato,2021,,35.0,1.15,,False,False,2.0,18.08,136,0,1004.3
+Gorontalo,Pohuwato,2022,149.3,34.0,1.11,,False,False,3.0,17.87,169,15,1113.5
 Gorontalo,Pohuwato,2023,151.9,35.0,1.22,1.74,False,False,4.0,17.64,155,0,3960.1
 Gorontalo,Pohuwato,2024,153.8,35.0,1.23,1.25,False,False,7.0,17.11,391,0,
 Sulawesi Barat,Majene,2017,169.1,178.0,1.6,11.91,False,False,0.0,13.94,0,0,660.2
@@ -50,28 +50,28 @@ Sulawesi Barat,Mamasa,2021,164.8,55.0,0.87,0.86,False,False,2.0,13.77,0,0,395.3
 Sulawesi Barat,Mamasa,2022,166.5,55.0,1.08,1.03,False,False,5.0,14.51,0,0,1313.3
 Sulawesi Barat,Mamasa,2023,170.4,56.0,1.53,2.34,False,False,11.0,14.31,0,0,2011.1
 Sulawesi Barat,Mamasa,2024,172.9,57.0,1.52,1.47,False,False,27.0,14.2,0,0,
-Sulawesi Barat,Mamuju,2017,279.4,56.0,2.7,20.8,False,False,0.0,6.88,0,0,660.2
-Sulawesi Barat,Mamuju,2018,286.4,57.0,2.5,2.51,False,False,0.0,7.18,0,0,3144.2
-Sulawesi Barat,Mamuju,2019,293.3,59.0,2.65,2.41,False,False,0.0,7.06,0,0,1187.2
-Sulawesi Barat,Mamuju,2020,278.8,56.0,1.82,-4.94,False,False,0.0,6.92,0,0,252.9
-Sulawesi Barat,Mamuju,2021,281.9,56.0,1.11,1.11,False,False,2.0,7.46,0,0,395.3
-Sulawesi Barat,Mamuju,2022,285.6,58.0,1.4,1.31,False,False,5.0,7.63,0,0,1313.3
+Sulawesi Barat,Mamuju,2017,,56.0,2.7,,False,False,0.0,6.88,0,0,660.2
+Sulawesi Barat,Mamuju,2018,,57.0,2.5,,False,False,0.0,7.18,0,0,3144.2
+Sulawesi Barat,Mamuju,2019,,59.0,2.65,,False,False,0.0,7.06,0,0,1187.2
+Sulawesi Barat,Mamuju,2020,,56.0,1.82,,False,False,0.0,6.92,0,0,252.9
+Sulawesi Barat,Mamuju,2021,,56.0,1.11,,False,False,2.0,7.46,0,0,395.3
+Sulawesi Barat,Mamuju,2022,285.6,58.0,1.4,,False,False,5.0,7.63,0,0,1313.3
 Sulawesi Barat,Mamuju,2023,292.4,59.0,1.69,2.38,False,False,11.0,7.57,0,0,2011.1
 Sulawesi Barat,Mamuju,2024,297.1,60.0,1.67,1.61,False,False,27.0,7.15,0,0,
-Sulawesi Barat,Mamuju Tengah,2017,127.6,42.0,2.7,20.72,False,False,0.0,6.95,0,0,660.2
-Sulawesi Barat,Mamuju Tengah,2018,130.8,43.0,2.53,2.51,False,False,0.0,7.14,0,0,3144.2
-Sulawesi Barat,Mamuju Tengah,2019,134.0,44.0,2.65,2.45,False,False,0.0,6.87,0,0,1187.2
-Sulawesi Barat,Mamuju Tengah,2020,135.3,45.0,2.42,0.97,False,False,0.0,6.79,0,0,252.9
-Sulawesi Barat,Mamuju Tengah,2021,137.4,46.0,1.55,1.55,False,False,2.0,7.13,0,0,395.3
-Sulawesi Barat,Mamuju Tengah,2022,140.0,51.0,1.99,1.89,False,False,5.0,7.17,0,0,1313.3
+Sulawesi Barat,Mamuju Tengah,2017,,42.0,2.7,,False,False,0.0,6.95,0,0,660.2
+Sulawesi Barat,Mamuju Tengah,2018,,43.0,2.53,,False,False,0.0,7.14,0,0,3144.2
+Sulawesi Barat,Mamuju Tengah,2019,,44.0,2.65,,False,False,0.0,6.87,0,0,1187.2
+Sulawesi Barat,Mamuju Tengah,2020,,45.0,2.42,,False,False,0.0,6.79,0,0,252.9
+Sulawesi Barat,Mamuju Tengah,2021,,46.0,1.55,,False,False,2.0,7.13,0,0,395.3
+Sulawesi Barat,Mamuju Tengah,2022,140.0,51.0,1.99,,False,False,5.0,7.17,0,0,1313.3
 Sulawesi Barat,Mamuju Tengah,2023,142.5,52.0,1.92,1.79,False,False,11.0,7.32,0,0,2011.1
 Sulawesi Barat,Mamuju Tengah,2024,145.1,53.0,1.91,1.82,False,False,27.0,7.72,0,0,
-Sulawesi Barat,Pasangkayu,2017,165.2,54.0,2.96,22.92,False,False,0.0,,0,0,660.2
-Sulawesi Barat,Pasangkayu,2018,170.2,56.0,3.01,3.03,False,False,0.0,,0,0,3144.2
-Sulawesi Barat,Pasangkayu,2019,174.5,57.0,2.92,2.53,False,False,0.0,,0,0,1187.2
-Sulawesi Barat,Pasangkayu,2020,188.9,62.0,3.35,8.25,True,False,0.0,,0,0,252.9
-Sulawesi Barat,Pasangkayu,2021,193.1,63.0,2.24,2.22,False,False,2.0,,0,0,395.3
-Sulawesi Barat,Pasangkayu,2022,198.6,68.0,2.92,2.85,True,False,5.0,,0,0,1313.3
+Sulawesi Barat,Pasangkayu,2017,,54.0,2.96,,False,False,0.0,,0,0,660.2
+Sulawesi Barat,Pasangkayu,2018,,56.0,3.01,,False,False,0.0,,0,0,3144.2
+Sulawesi Barat,Pasangkayu,2019,,57.0,2.92,,False,False,0.0,,0,0,1187.2
+Sulawesi Barat,Pasangkayu,2020,,62.0,3.35,,False,False,0.0,,0,0,252.9
+Sulawesi Barat,Pasangkayu,2021,,63.0,2.24,,False,False,2.0,,0,0,395.3
+Sulawesi Barat,Pasangkayu,2022,198.6,68.0,2.92,,False,False,5.0,,0,0,1313.3
 Sulawesi Barat,Pasangkayu,2023,199.1,69.0,1.95,0.25,False,False,11.0,,0,0,2011.1
 Sulawesi Barat,Pasangkayu,2024,202.9,70.0,1.93,1.91,False,False,27.0,,0,0,
 Sulawesi Barat,Polewali Mandar,2017,432.7,214.0,1.25,9.24,False,False,0.0,16.05,0,0,660.2
@@ -153,13 +153,13 @@ Sulawesi Selatan,Kota Makassar,2020,1423.9,8101.0,0.6,-6.73,False,False,14.0,4.5
 Sulawesi Selatan,Kota Makassar,2021,1427.6,7161.0,0.2,0.26,False,False,22.0,4.82,0,0,12075.4
 Sulawesi Selatan,Kota Makassar,2023,1455.0,8227.0,0.79,1.92,False,False,51.0,5.07,0,0,11468.3
 Sulawesi Selatan,Kota Makassar,2024,1464.6,8282.0,0.76,0.66,False,False,105.0,4.97,0,0,
-Sulawesi Selatan,Kota Palopo,2016,172.9,2.0,94.89,16.51,True,False,1.0,8.74,0,0,3334.6
-Sulawesi Selatan,Kota Palopo,2017,176.9,715.0,2.34,2.31,True,False,6.0,8.78,0,0,1969.4
-Sulawesi Selatan,Kota Palopo,2018,143.71,1447.0,1.14,-18.76,False,False,11.0,7.94,0,0,3275.9
-Sulawesi Selatan,Kota Palopo,2019,184.6,746.0,2.46,28.45,True,False,14.0,7.82,0,0,5672.6
-Sulawesi Selatan,Kota Palopo,2020,184.7,746.0,2.17,0.05,False,False,14.0,7.85,0,0,9142.0
-Sulawesi Selatan,Kota Palopo,2021,187.3,740.0,1.07,1.41,False,False,22.0,8.14,0,0,12075.4
-Sulawesi Selatan,Kota Palopo,2023,192.8,705.0,1.57,2.94,False,False,51.0,7.69,0,0,11468.3
+Sulawesi Selatan,Kota Palopo,2016,,2.0,94.89,,False,False,1.0,8.74,0,0,3334.6
+Sulawesi Selatan,Kota Palopo,2017,,715.0,2.34,,False,False,6.0,8.78,0,0,1969.4
+Sulawesi Selatan,Kota Palopo,2018,,1447.0,1.14,,False,False,11.0,7.94,0,0,3275.9
+Sulawesi Selatan,Kota Palopo,2019,,746.0,2.46,,False,False,14.0,7.82,0,0,5672.6
+Sulawesi Selatan,Kota Palopo,2020,,746.0,2.17,,False,False,14.0,7.85,0,0,9142.0
+Sulawesi Selatan,Kota Palopo,2021,,740.0,1.07,,False,False,22.0,8.14,0,0,12075.4
+Sulawesi Selatan,Kota Palopo,2023,192.8,705.0,1.57,,False,False,51.0,7.69,0,0,11468.3
 Sulawesi Selatan,Kota Palopo,2024,195.7,716.0,1.55,1.5,False,False,105.0,7.35,0,0,
 Sulawesi Selatan,Kota Parepare,2016,140.4,2.0,96.67,8.25,False,False,1.0,5.73,0,0,3334.6
 Sulawesi Selatan,Kota Parepare,2017,142.1,1431.0,1.22,1.21,False,False,6.0,5.7,0,0,1969.4
@@ -249,13 +249,13 @@ Sulawesi Selatan,Takalar,2020,300.9,531.0,1.07,0.74,False,False,14.0,8.44,0,0,91
 Sulawesi Selatan,Takalar,2021,302.7,534.0,0.46,0.6,False,False,22.0,8.25,0,0,12075.4
 Sulawesi Selatan,Takalar,2023,312.8,563.0,1.43,3.34,False,False,51.0,8.29,0,0,11468.3
 Sulawesi Selatan,Takalar,2024,317.0,571.0,1.41,1.34,False,False,105.0,7.75,0,0,
-Sulawesi Selatan,Tana Toraja,2016,230.2,3.0,102.3,3.79,False,False,1.0,12.36,28,0,3334.6
-Sulawesi Selatan,Tana Toraja,2017,231.5,113.0,0.55,0.56,False,False,6.0,12.62,2,0,1969.4
-Sulawesi Selatan,Tana Toraja,2018,232.821,113.0,0.56,0.57,False,False,11.0,12.75,17,0,3275.9
-Sulawesi Selatan,Tana Toraja,2019,234.0,114.0,0.6,0.51,False,False,14.0,12.35,0,0,5672.6
-Sulawesi Selatan,Tana Toraja,2020,280.8,137.0,2.34,20.0,True,False,14.0,12.1,0,0,9142.0
-Sulawesi Selatan,Tana Toraja,2021,285.2,143.0,1.17,1.57,True,False,22.0,12.27,0,0,12075.4
-Sulawesi Selatan,Tana Toraja,2023,289.5,142.0,1.11,1.51,False,False,51.0,12.48,0,0,11468.3
+Sulawesi Selatan,Tana Toraja,2016,,3.0,102.3,,False,False,1.0,12.36,28,0,3334.6
+Sulawesi Selatan,Tana Toraja,2017,,113.0,0.55,,False,False,6.0,12.62,2,0,1969.4
+Sulawesi Selatan,Tana Toraja,2018,,113.0,0.56,,False,False,11.0,12.75,17,0,3275.9
+Sulawesi Selatan,Tana Toraja,2019,,114.0,0.6,,False,False,14.0,12.35,0,0,5672.6
+Sulawesi Selatan,Tana Toraja,2020,,137.0,2.34,,False,False,14.0,12.1,0,0,9142.0
+Sulawesi Selatan,Tana Toraja,2021,,143.0,1.17,,False,False,22.0,12.27,0,0,12075.4
+Sulawesi Selatan,Tana Toraja,2023,289.5,142.0,1.11,,False,False,51.0,12.48,0,0,11468.3
 Sulawesi Selatan,Tana Toraja,2024,292.4,143.0,1.09,1.0,False,False,105.0,10.79,0,0,
 Sulawesi Selatan,Toraja Utara,2016,227.0,3.0,100.76,4.37,False,False,1.0,14.57,319,0,3334.6
 Sulawesi Selatan,Toraja Utara,2017,228.4,198.0,0.64,0.62,False,False,6.0,14.41,111,0,1969.4
@@ -278,21 +278,21 @@ Sulawesi Tengah,Banggai,2018,371.3,38.0,1.67,1.56,False,True,28.0,9.12,0,0,8488.
 Sulawesi Tengah,Banggai,2019,376.8,39.0,1.65,1.48,False,True,30.0,7.8,54,0,4438.8
 Sulawesi Tengah,Banggai,2020,362.3,44.0,1.1,-3.85,True,True,42.0,7.39,15,0,5261.3
 Sulawesi Tengah,Banggai,2024,377.6,46.0,1.11,4.22,False,True,260.0,6.56,51,0,
-Sulawesi Tengah,Banggai Kepulauan,2017,116.8,47.0,0.89,-31.93,False,False,21.0,15.92,0,0,1929.7
-Sulawesi Tengah,Banggai Kepulauan,2018,117.6,47.0,0.87,0.68,False,False,28.0,15.65,0,0,8488.9
-Sulawesi Tengah,Banggai Kepulauan,2019,118.4,48.0,0.84,0.68,False,False,30.0,14.84,3,0,4438.8
-Sulawesi Tengah,Banggai Kepulauan,2020,120.1,50.0,0.91,1.44,True,False,42.0,14.04,6,0,5261.3
-Sulawesi Tengah,Banggai Kepulauan,2024,124.6,52.0,0.97,3.75,False,False,260.0,12.32,48,0,
+Sulawesi Tengah,Banggai Kepulauan,2017,,47.0,0.89,,False,False,21.0,15.92,0,0,1929.7
+Sulawesi Tengah,Banggai Kepulauan,2018,,47.0,0.87,,False,False,28.0,15.65,0,0,8488.9
+Sulawesi Tengah,Banggai Kepulauan,2019,,48.0,0.84,,False,False,30.0,14.84,3,0,4438.8
+Sulawesi Tengah,Banggai Kepulauan,2020,,50.0,0.91,,False,False,42.0,14.04,6,0,5261.3
+Sulawesi Tengah,Banggai Kepulauan,2024,124.6,52.0,0.97,,False,False,260.0,12.32,48,0,
 Sulawesi Tengah,Banggai Laut,2017,72.3,100.0,2.1,,False,False,21.0,16.17,0,0,1929.7
 Sulawesi Tengah,Banggai Laut,2018,73.7,102.0,2.08,1.94,False,False,28.0,16.32,0,0,8488.9
 Sulawesi Tengah,Banggai Laut,2019,75.0,103.0,2.05,1.76,False,False,30.0,15.34,47,0,4438.8
 Sulawesi Tengah,Banggai Laut,2020,70.4,102.0,1.2,-6.13,True,False,42.0,14.6,151,0,5261.3
 Sulawesi Tengah,Banggai Laut,2024,74.0,108.0,1.33,5.11,False,False,260.0,13.78,27,0,
-Sulawesi Tengah,Buol,2017,155.6,38.0,2.26,17.61,False,False,21.0,16.65,0,0,1929.7
-Sulawesi Tengah,Buol,2018,158.8,39.0,2.24,2.06,False,False,28.0,16.08,0,0,8488.9
-Sulawesi Tengah,Buol,2019,162.2,40.0,2.23,2.14,False,False,30.0,15.19,50,0,4438.8
-Sulawesi Tengah,Buol,2020,145.3,39.0,0.91,-10.42,False,False,42.0,13.93,34,0,5261.3
-Sulawesi Tengah,Buol,2024,152.4,41.0,1.28,4.89,False,False,260.0,13.08,97,0,
+Sulawesi Tengah,Buol,2017,,38.0,2.26,,False,False,21.0,16.65,0,0,1929.7
+Sulawesi Tengah,Buol,2018,,39.0,2.24,,False,False,28.0,16.08,0,0,8488.9
+Sulawesi Tengah,Buol,2019,,40.0,2.23,,False,False,30.0,15.19,50,0,4438.8
+Sulawesi Tengah,Buol,2020,,39.0,0.91,,False,False,42.0,13.93,34,0,5261.3
+Sulawesi Tengah,Buol,2024,152.4,41.0,1.28,,False,False,260.0,13.08,97,0,
 Sulawesi Tengah,Donggala,2017,299.2,70.0,1.02,7.78,False,False,21.0,18.17,0,0,1929.7
 Sulawesi Tengah,Donggala,2018,301.6,71.0,1.0,0.8,False,False,28.0,18.03,0,0,8488.9
 Sulawesi Tengah,Donggala,2019,304.1,71.0,0.98,0.83,False,False,30.0,18.4,181,0,4438.8
@@ -303,26 +303,26 @@ Sulawesi Tengah,Kota Palu,2018,385.6,976.0,1.66,1.53,False,False,28.0,6.58,0,0,8
 Sulawesi Tengah,Kota Palu,2019,391.4,991.0,1.64,1.5,False,False,30.0,6.83,0,0,4438.8
 Sulawesi Tengah,Kota Palu,2020,373.2,1047.0,1.01,-4.65,True,False,42.0,6.8,0,0,5261.3
 Sulawesi Tengah,Kota Palu,2024,392.5,1101.0,1.35,5.17,False,False,260.0,5.94,0,0,
-Sulawesi Tengah,Morowali,2017,117.3,39.0,1.92,-43.14,False,True,21.0,14.55,0,0,1929.7
-Sulawesi Tengah,Morowali,2018,119.3,39.0,1.89,1.71,False,True,28.0,14.34,0,0,8488.9
+Sulawesi Tengah,Morowali,2017,,39.0,1.92,,False,True,21.0,14.55,0,0,1929.7
+Sulawesi Tengah,Morowali,2018,119.3,39.0,1.89,,False,True,28.0,14.34,0,0,8488.9
 Sulawesi Tengah,Morowali,2019,121.3,40.0,1.87,1.68,False,True,30.0,13.75,96,0,4438.8
-Sulawesi Tengah,Morowali,2020,161.7,36.0,4.54,33.31,True,True,42.0,13.43,24,0,5261.3
-Sulawesi Tengah,Morowali,2024,173.3,39.0,1.86,7.17,False,True,260.0,11.55,394,0,
+Sulawesi Tengah,Morowali,2020,,36.0,4.54,,False,True,42.0,13.43,24,0,5261.3
+Sulawesi Tengah,Morowali,2024,173.3,39.0,1.86,,False,True,260.0,11.55,394,0,
 Sulawesi Tengah,Morowali Utara,2017,123.0,12.0,2.34,,False,True,21.0,15.73,0,0,1929.7
 Sulawesi Tengah,Morowali Utara,2018,125.6,13.0,2.31,2.11,False,True,28.0,15.53,0,0,8488.9
 Sulawesi Tengah,Morowali Utara,2019,128.3,13.0,2.29,2.15,False,True,30.0,15.08,266,0,4438.8
 Sulawesi Tengah,Morowali Utara,2020,120.8,14.0,1.45,-5.85,True,True,42.0,14.1,47,0,5261.3
 Sulawesi Tengah,Morowali Utara,2024,127.9,15.0,1.53,5.88,False,True,260.0,11.95,431,4,
-Sulawesi Tengah,Parigi Moutong,2017,474.3,93.0,1.92,14.68,False,False,21.0,17.55,0,0,1929.7
-Sulawesi Tengah,Parigi Moutong,2018,482.8,95.0,1.9,1.79,False,False,28.0,17.41,0,0,8488.9
-Sulawesi Tengah,Parigi Moutong,2019,490.9,96.0,1.88,1.68,False,False,30.0,16.64,124,0,4438.8
-Sulawesi Tengah,Parigi Moutong,2020,440.0,76.0,0.6,-10.37,False,False,42.0,15.85,62,0,5261.3
-Sulawesi Tengah,Parigi Moutong,2024,459.8,79.0,1.18,4.5,False,False,260.0,14.2,106,0,
-Sulawesi Tengah,Poso,2017,246.0,35.0,2.27,17.59,False,False,21.0,17.16,0,0,1929.7
-Sulawesi Tengah,Poso,2018,251.2,35.0,2.25,2.11,False,False,28.0,16.71,0,0,8488.9
-Sulawesi Tengah,Poso,2019,256.4,36.0,2.23,2.07,False,False,30.0,15.65,103,0,4438.8
-Sulawesi Tengah,Poso,2020,244.9,32.0,1.53,-4.49,True,False,42.0,15.45,77,0,5261.3
-Sulawesi Tengah,Poso,2024,254.1,34.0,0.99,3.76,False,False,260.0,14.23,284,0,
+Sulawesi Tengah,Parigi Moutong,2017,,93.0,1.92,,False,False,21.0,17.55,0,0,1929.7
+Sulawesi Tengah,Parigi Moutong,2018,,95.0,1.9,,False,False,28.0,17.41,0,0,8488.9
+Sulawesi Tengah,Parigi Moutong,2019,,96.0,1.88,,False,False,30.0,16.64,124,0,4438.8
+Sulawesi Tengah,Parigi Moutong,2020,,76.0,0.6,,False,False,42.0,15.85,62,0,5261.3
+Sulawesi Tengah,Parigi Moutong,2024,459.8,79.0,1.18,,False,False,260.0,14.2,106,0,
+Sulawesi Tengah,Poso,2017,,35.0,2.27,,False,False,21.0,17.16,0,0,1929.7
+Sulawesi Tengah,Poso,2018,,35.0,2.25,,False,False,28.0,16.71,0,0,8488.9
+Sulawesi Tengah,Poso,2019,,36.0,2.23,,False,False,30.0,15.65,103,0,4438.8
+Sulawesi Tengah,Poso,2020,,32.0,1.53,,False,False,42.0,15.45,77,0,5261.3
+Sulawesi Tengah,Poso,2024,254.1,34.0,0.99,,False,False,260.0,14.23,284,0,
 Sulawesi Tengah,Sigi,2017,234.6,45.0,1.2,9.12,False,False,21.0,12.66,0,0,1929.7
 Sulawesi Tengah,Sigi,2018,237.0,46.0,1.18,1.02,False,False,28.0,12.6,0,0,8488.9
 Sulawesi Tengah,Sigi,2019,239.4,46.0,1.16,1.01,False,False,30.0,12.91,148,0,4438.8
@@ -338,123 +338,123 @@ Sulawesi Tengah,Toli-Toli,2018,233.4,57.0,1.2,1.04,False,False,28.0,13.66,0,0,84
 Sulawesi Tengah,Toli-Toli,2019,235.8,58.0,1.18,1.03,False,False,30.0,13.09,0,0,4438.8
 Sulawesi Tengah,Toli-Toli,2020,225.2,61.0,0.62,-4.5,True,False,42.0,12.85,0,0,5261.3
 Sulawesi Tengah,Toli-Toli,2024,233.9,63.0,1.02,3.86,False,False,260.0,12.45,0,0,
-Sulawesi Tenggara,Bombana,2017,175.497,58.0,3.22,,False,False,36.0,12.36,0,0,3148.7
-Sulawesi Tenggara,Bombana,2018,180.0,58.0,3.26,2.57,False,False,46.0,11.05,0,0,1603.4
-Sulawesi Tenggara,Bombana,2019,184.57,62.0,3.11,2.54,False,False,56.0,10.56,0,0,3827.1
-Sulawesi Tenggara,Bombana,2021,151.91,51.0,1.07,-17.7,False,False,82.0,10.76,0,0,4334.2
-Sulawesi Tenggara,Bombana,2022,153.304,47.0,0.98,0.92,False,False,93.0,10.26,0,0,7596.0
+Sulawesi Tenggara,Bombana,2017,,58.0,3.22,,False,False,36.0,12.36,0,0,3148.7
+Sulawesi Tenggara,Bombana,2018,,58.0,3.26,,False,False,46.0,11.05,0,0,1603.4
+Sulawesi Tenggara,Bombana,2019,,62.0,3.11,,False,False,56.0,10.56,0,0,3827.1
+Sulawesi Tenggara,Bombana,2021,,51.0,1.07,,False,False,82.0,10.76,0,0,4334.2
+Sulawesi Tenggara,Bombana,2022,153.304,47.0,0.98,,False,False,93.0,10.26,0,0,7596.0
 Sulawesi Tenggara,Bombana,2023,158.1,48.0,1.76,3.13,False,False,131.0,10.73,0,0,7734.6
 Sulawesi Tenggara,Bombana,2024,160.7,49.0,1.72,1.64,False,False,160.0,10.54,0,0,
-Sulawesi Tenggara,Buton,2017,100.44,83.0,1.1,,False,False,36.0,13.46,0,0,3148.7
+Sulawesi Tenggara,Buton,2017,100.44,83.0,1.1,6.85,False,False,36.0,13.46,0,0,3148.7
 Sulawesi Tenggara,Buton,2018,102.0,84.0,0.93,1.55,False,False,46.0,13.67,0,0,1603.4
 Sulawesi Tenggara,Buton,2019,102.641,85.0,0.9,0.63,False,False,56.0,13.65,0,0,3827.1
 Sulawesi Tenggara,Buton,2021,117.04,96.0,2.13,14.03,True,False,82.0,13.92,0,0,4334.2
 Sulawesi Tenggara,Buton,2022,119.353,72.0,2.04,1.98,False,False,93.0,13.27,0,0,7596.0
 Sulawesi Tenggara,Buton,2023,120.2,72.0,1.56,0.71,False,False,131.0,13.77,0,0,7734.6
 Sulawesi Tenggara,Buton,2024,122.0,73.0,1.55,1.5,False,False,160.0,13.99,0,0,
-Sulawesi Tenggara,Buton Selatan,2017,79.053,155.0,1.07,,False,False,36.0,15.99,0,0,3148.7
-Sulawesi Tenggara,Buton Selatan,2018,80.0,156.0,0.81,1.2,False,False,46.0,14.82,0,0,1603.4
-Sulawesi Tenggara,Buton Selatan,2019,80.784,158.0,0.79,0.98,False,False,56.0,14.66,0,0,3827.1
-Sulawesi Tenggara,Buton Selatan,2021,95.472,187.0,0.3,18.18,True,False,82.0,14.62,0,0,4334.2
-Sulawesi Tenggara,Buton Selatan,2022,95.613,185.0,0.21,0.15,False,False,93.0,14.41,0,0,7596.0
+Sulawesi Tenggara,Buton Selatan,2017,,155.0,1.07,,False,False,36.0,15.99,0,0,3148.7
+Sulawesi Tenggara,Buton Selatan,2018,,156.0,0.81,,False,False,46.0,14.82,0,0,1603.4
+Sulawesi Tenggara,Buton Selatan,2019,,158.0,0.79,,False,False,56.0,14.66,0,0,3827.1
+Sulawesi Tenggara,Buton Selatan,2021,,187.0,0.3,,False,False,82.0,14.62,0,0,4334.2
+Sulawesi Tenggara,Buton Selatan,2022,95.613,185.0,0.21,,False,False,93.0,14.41,0,0,7596.0
 Sulawesi Tenggara,Buton Selatan,2023,99.6,192.0,1.63,4.17,True,False,131.0,14.76,0,0,7734.6
 Sulawesi Tenggara,Buton Selatan,2024,101.2,195.0,1.62,1.61,False,False,160.0,14.28,0,0,
-Sulawesi Tenggara,Buton Tengah,2017,91.099,95.0,1.04,,False,False,36.0,18.35,0,0,3148.7
-Sulawesi Tenggara,Buton Tengah,2018,92.0,96.0,0.82,0.99,False,False,46.0,14.88,0,0,1603.4
-Sulawesi Tenggara,Buton Tengah,2019,93.091,97.0,0.8,1.19,False,False,56.0,15.77,0,0,3827.1
-Sulawesi Tenggara,Buton Tengah,2021,116.599,122.0,2.13,25.25,True,False,82.0,15.8,0,0,4334.2
-Sulawesi Tenggara,Buton Tengah,2022,118.904,142.0,2.04,1.98,False,False,93.0,14.9,0,0,7596.0
+Sulawesi Tenggara,Buton Tengah,2017,,95.0,1.04,,False,False,36.0,18.35,0,0,3148.7
+Sulawesi Tenggara,Buton Tengah,2018,,96.0,0.82,,False,False,46.0,14.88,0,0,1603.4
+Sulawesi Tenggara,Buton Tengah,2019,,97.0,0.8,,False,False,56.0,15.77,0,0,3827.1
+Sulawesi Tenggara,Buton Tengah,2021,,122.0,2.13,,False,False,82.0,15.8,0,0,4334.2
+Sulawesi Tenggara,Buton Tengah,2022,118.904,142.0,2.04,,False,False,93.0,14.9,0,0,7596.0
 Sulawesi Tenggara,Buton Tengah,2023,119.5,143.0,1.47,0.5,False,False,131.0,15.43,0,0,7734.6
 Sulawesi Tenggara,Buton Tengah,2024,121.3,145.0,1.48,1.51,False,False,160.0,14.4,0,0,
-Sulawesi Tenggara,Buton Utara,2017,62.088,33.0,1.58,,False,False,36.0,15.58,0,0,3148.7
+Sulawesi Tenggara,Buton Utara,2017,62.088,33.0,1.58,12.89,False,False,36.0,15.58,0,0,3148.7
 Sulawesi Tenggara,Buton Utara,2018,63.0,33.0,1.79,1.47,False,False,46.0,14.93,0,0,1603.4
 Sulawesi Tenggara,Buton Utara,2019,64.072,34.0,1.71,1.7,False,False,56.0,14.38,0,0,3827.1
-Sulawesi Tenggara,Buton Utara,2021,67.714,36.0,2.13,5.68,True,False,82.0,14.89,0,0,4334.2
+Sulawesi Tenggara,Buton Utara,2021,67.714,36.0,2.13,5.68,False,False,82.0,14.89,0,0,4334.2
 Sulawesi Tenggara,Buton Utara,2022,69.051,39.0,2.04,1.97,False,False,93.0,14.26,0,0,7596.0
 Sulawesi Tenggara,Buton Utara,2023,69.0,39.0,1.24,-0.07,False,False,131.0,14.06,0,0,7734.6
 Sulawesi Tenggara,Buton Utara,2024,69.8,40.0,1.24,1.16,False,False,160.0,14.09,0,0,
-Sulawesi Tenggara,Kolaka,2017,251.52,77.0,1.86,,False,True,36.0,13.78,0,0,3148.7
+Sulawesi Tenggara,Kolaka,2017,251.52,77.0,1.86,20.34,False,True,36.0,13.78,0,0,3148.7
 Sulawesi Tenggara,Kolaka,2018,257.0,78.0,2.62,2.18,False,True,46.0,12.51,0,0,1603.4
 Sulawesi Tenggara,Kolaka,2019,261.664,80.0,2.47,1.81,False,True,56.0,11.92,0,0,3827.1
 Sulawesi Tenggara,Kolaka,2021,241.366,74.0,2.13,-7.76,False,True,82.0,12.43,0,0,4334.2
 Sulawesi Tenggara,Kolaka,2022,246.137,83.0,2.04,1.98,False,True,93.0,11.51,0,0,7596.0
 Sulawesi Tenggara,Kolaka,2023,245.9,83.0,1.26,-0.1,False,True,131.0,11.8,0,0,7734.6
 Sulawesi Tenggara,Kolaka,2024,248.8,84.0,1.23,1.18,False,True,160.0,11.67,0,0,
-Sulawesi Tenggara,Kolaka Timur,2017,128.154,35.0,1.82,,False,False,36.0,15.64,0,0,3148.7
-Sulawesi Tenggara,Kolaka Timur,2018,131.0,36.0,2.62,2.22,False,False,46.0,13.82,0,0,1603.4
-Sulawesi Tenggara,Kolaka Timur,2019,133.324,37.0,2.47,1.77,False,False,56.0,13.71,0,0,3827.1
-Sulawesi Tenggara,Kolaka Timur,2021,120.966,33.0,0.3,-9.27,False,False,82.0,14.35,0,0,4334.2
-Sulawesi Tenggara,Kolaka Timur,2022,121.145,30.0,0.21,0.15,False,False,93.0,13.57,0,0,7596.0
+Sulawesi Tenggara,Kolaka Timur,2017,,35.0,1.82,,False,False,36.0,15.64,0,0,3148.7
+Sulawesi Tenggara,Kolaka Timur,2018,,36.0,2.62,,False,False,46.0,13.82,0,0,1603.4
+Sulawesi Tenggara,Kolaka Timur,2019,,37.0,2.47,,False,False,56.0,13.71,0,0,3827.1
+Sulawesi Tenggara,Kolaka Timur,2021,,33.0,0.3,,False,False,82.0,14.35,0,0,4334.2
+Sulawesi Tenggara,Kolaka Timur,2022,121.145,30.0,0.21,,False,False,93.0,13.57,0,0,7596.0
 Sulawesi Tenggara,Kolaka Timur,2023,125.8,32.0,1.51,3.84,True,False,131.0,14.04,0,0,7734.6
 Sulawesi Tenggara,Kolaka Timur,2024,127.6,32.0,1.48,1.43,False,False,160.0,13.71,0,0,
-Sulawesi Tenggara,Kolaka Utara,2017,144.681,43.0,1.45,,False,False,36.0,16.24,0,0,3148.7
-Sulawesi Tenggara,Kolaka Utara,2018,148.0,43.0,2.5,2.29,False,False,46.0,14.3,0,0,1603.4
-Sulawesi Tenggara,Kolaka Utara,2019,150.831,44.0,2.39,1.91,False,False,56.0,13.19,0,0,3827.1
-Sulawesi Tenggara,Kolaka Utara,2021,139.234,41.0,1.53,-7.69,False,False,82.0,13.79,0,0,4334.2
-Sulawesi Tenggara,Kolaka Utara,2022,141.151,48.0,1.44,1.38,False,False,93.0,13.08,0,0,7596.0
+Sulawesi Tenggara,Kolaka Utara,2017,,43.0,1.45,,False,False,36.0,16.24,0,0,3148.7
+Sulawesi Tenggara,Kolaka Utara,2018,,43.0,2.5,,False,False,46.0,14.3,0,0,1603.4
+Sulawesi Tenggara,Kolaka Utara,2019,,44.0,2.39,,False,False,56.0,13.19,0,0,3827.1
+Sulawesi Tenggara,Kolaka Utara,2021,,41.0,1.53,,False,False,82.0,13.79,0,0,4334.2
+Sulawesi Tenggara,Kolaka Utara,2022,141.151,48.0,1.44,,False,False,93.0,13.08,0,0,7596.0
 Sulawesi Tenggara,Kolaka Utara,2023,145.6,50.0,2.07,3.15,False,False,131.0,13.57,0,0,7734.6
 Sulawesi Tenggara,Kolaka Utara,2024,148.5,51.0,2.04,1.99,False,False,160.0,13.51,0,0,
-Sulawesi Tenggara,Konawe,2017,244.324,55.0,2.63,,False,True,36.0,15.65,0,0,3148.7
+Sulawesi Tenggara,Konawe,2017,244.324,55.0,2.63,14.71,False,True,36.0,15.65,0,0,3148.7
 Sulawesi Tenggara,Konawe,2018,249.0,55.0,1.97,1.91,False,True,46.0,13.48,0,0,1603.4
 Sulawesi Tenggara,Konawe,2019,254.695,57.0,1.95,2.29,False,True,56.0,12.34,0,0,3827.1
 Sulawesi Tenggara,Konawe,2021,261.116,59.0,2.14,2.52,False,True,82.0,13.03,0,0,4334.2
 Sulawesi Tenggara,Konawe,2022,266.299,50.0,2.05,1.98,False,True,93.0,12.75,0,0,7596.0
 Sulawesi Tenggara,Konawe,2023,269.5,50.0,1.74,1.2,False,True,131.0,13.02,0,0,7734.6
 Sulawesi Tenggara,Konawe,2024,274.1,51.0,1.73,1.71,False,True,160.0,13.25,0,0,
-Sulawesi Tenggara,Konawe Kepulauan,2017,33.212,38.0,2.8,,False,False,36.0,18.1,0,0,3148.7
+Sulawesi Tenggara,Konawe Kepulauan,2017,33.212,38.0,2.8,14.52,False,False,36.0,18.1,0,0,3148.7
 Sulawesi Tenggara,Konawe Kepulauan,2018,34.0,38.0,1.91,2.37,False,False,46.0,17.48,0,0,1603.4
 Sulawesi Tenggara,Konawe Kepulauan,2019,34.219,39.0,1.81,0.64,False,False,56.0,17.18,0,0,3827.1
 Sulawesi Tenggara,Konawe Kepulauan,2021,37.639,43.0,2.13,9.99,True,False,82.0,17.81,0,0,4334.2
 Sulawesi Tenggara,Konawe Kepulauan,2022,38.383,54.0,2.04,1.98,False,False,93.0,16.15,0,0,7596.0
 Sulawesi Tenggara,Konawe Kepulauan,2023,39.0,55.0,1.88,1.61,False,False,131.0,15.9,0,0,7734.6
 Sulawesi Tenggara,Konawe Kepulauan,2024,39.7,56.0,1.85,1.79,False,False,160.0,15.54,0,0,
-Sulawesi Tenggara,Konawe Selatan,2017,304.214,53.0,1.43,,False,False,36.0,11.14,0,0,3148.7
+Sulawesi Tenggara,Konawe Selatan,2017,304.214,53.0,1.43,14.8,False,False,36.0,11.14,0,0,3148.7
 Sulawesi Tenggara,Konawe Selatan,2018,309.0,53.0,1.97,1.57,False,False,46.0,10.95,0,0,1603.4
 Sulawesi Tenggara,Konawe Selatan,2019,314.785,54.0,1.89,1.87,False,False,56.0,10.81,0,0,3827.1
 Sulawesi Tenggara,Konawe Selatan,2021,312.674,54.0,1.8,-0.67,False,False,82.0,11.34,0,0,4334.2
 Sulawesi Tenggara,Konawe Selatan,2022,317.826,75.0,1.71,1.65,False,False,93.0,11.08,0,0,7596.0
 Sulawesi Tenggara,Konawe Selatan,2023,323.8,76.0,1.77,1.88,False,False,131.0,11.26,0,0,7734.6
 Sulawesi Tenggara,Konawe Selatan,2024,329.2,78.0,1.75,1.67,False,False,160.0,11.2,0,0,
-Sulawesi Tenggara,Konawe Utara,2017,60.884,12.0,2.03,,False,True,36.0,13.93,0,0,3148.7
+Sulawesi Tenggara,Konawe Utara,2017,60.884,12.0,2.03,17.08,False,True,36.0,13.93,0,0,3148.7
 Sulawesi Tenggara,Konawe Utara,2018,62.0,12.0,2.42,1.83,False,True,46.0,14.22,0,0,1603.4
 Sulawesi Tenggara,Konawe Utara,2019,63.814,13.0,2.34,2.93,False,True,56.0,13.66,0,0,3827.1
 Sulawesi Tenggara,Konawe Utara,2021,68.95,14.0,2.13,8.05,True,True,82.0,14.32,0,0,4334.2
 Sulawesi Tenggara,Konawe Utara,2022,70.314,17.0,2.04,1.98,False,True,93.0,13.72,0,0,7596.0
 Sulawesi Tenggara,Konawe Utara,2023,72.3,17.0,2.3,2.82,False,True,131.0,13.48,0,0,7734.6
 Sulawesi Tenggara,Konawe Utara,2024,73.8,18.0,2.27,2.07,False,True,160.0,13.17,0,0,
-Sulawesi Tenggara,Kota Baubau,2017,162.78,737.0,2.85,,False,False,36.0,8.39,0,0,3148.7
-Sulawesi Tenggara,Kota Baubau,2018,168.0,739.0,2.55,3.21,False,False,46.0,7.57,0,0,1603.4
-Sulawesi Tenggara,Kota Baubau,2019,171.802,777.0,2.49,2.26,False,False,56.0,7.27,0,0,3827.1
-Sulawesi Tenggara,Kota Baubau,2021,161.354,730.0,1.77,-6.08,False,False,82.0,7.78,0,0,4334.2
-Sulawesi Tenggara,Kota Baubau,2022,163.963,557.0,1.68,1.62,False,False,93.0,7.31,0,0,7596.0
+Sulawesi Tenggara,Kota Baubau,2017,,737.0,2.85,,False,False,36.0,8.39,0,0,3148.7
+Sulawesi Tenggara,Kota Baubau,2018,,739.0,2.55,,False,False,46.0,7.57,0,0,1603.4
+Sulawesi Tenggara,Kota Baubau,2019,,777.0,2.49,,False,False,56.0,7.27,0,0,3827.1
+Sulawesi Tenggara,Kota Baubau,2021,,730.0,1.77,,False,False,82.0,7.78,0,0,4334.2
+Sulawesi Tenggara,Kota Baubau,2022,163.963,557.0,1.68,,False,False,93.0,7.31,0,0,7596.0
 Sulawesi Tenggara,Kota Baubau,2023,166.2,565.0,1.55,1.36,False,False,131.0,7.53,0,0,7734.6
 Sulawesi Tenggara,Kota Baubau,2024,168.5,573.0,1.52,1.38,False,False,160.0,7.4,0,0,
-Sulawesi Tenggara,Kota Kendari,2017,370.728,1232.0,3.16,,False,False,36.0,5.01,0,0,3148.7
-Sulawesi Tenggara,Kota Kendari,2018,382.0,1237.0,3.49,3.04,False,False,46.0,4.69,0,0,1603.4
-Sulawesi Tenggara,Kota Kendari,2019,392.83,1306.0,3.36,2.84,False,False,56.0,4.44,0,0,3827.1
-Sulawesi Tenggara,Kota Kendari,2021,350.267,1164.0,2.0,-10.83,False,False,82.0,4.87,0,0,4334.2
-Sulawesi Tenggara,Kota Kendari,2022,356.747,1342.0,1.91,1.85,False,False,93.0,4.57,0,0,7596.0
+Sulawesi Tenggara,Kota Kendari,2017,,1232.0,3.16,,False,False,36.0,5.01,0,0,3148.7
+Sulawesi Tenggara,Kota Kendari,2018,,1237.0,3.49,,False,False,46.0,4.69,0,0,1603.4
+Sulawesi Tenggara,Kota Kendari,2019,,1306.0,3.36,,False,False,56.0,4.44,0,0,3827.1
+Sulawesi Tenggara,Kota Kendari,2021,,1164.0,2.0,,False,False,82.0,4.87,0,0,4334.2
+Sulawesi Tenggara,Kota Kendari,2022,356.747,1342.0,1.91,,False,False,93.0,4.57,0,0,7596.0
 Sulawesi Tenggara,Kota Kendari,2023,364.2,1370.0,1.98,2.09,False,False,131.0,4.59,0,0,7734.6
 Sulawesi Tenggara,Kota Kendari,2024,370.8,1395.0,1.93,1.81,False,False,160.0,4.23,0,0,
-Sulawesi Tenggara,Muna,2017,218.68,114.0,1.5,,False,False,36.0,14.85,0,0,3148.7
+Sulawesi Tenggara,Muna,2017,218.68,114.0,1.5,11.01,False,False,36.0,14.85,0,0,3148.7
 Sulawesi Tenggara,Muna,2018,221.0,115.0,1.49,1.06,False,False,46.0,13.19,0,0,1603.4
 Sulawesi Tenggara,Muna,2019,224.099,117.0,1.41,1.4,False,False,56.0,12.85,0,0,3827.1
 Sulawesi Tenggara,Muna,2021,218.956,114.0,2.13,-2.29,False,False,82.0,13.54,0,0,4334.2
 Sulawesi Tenggara,Muna,2022,223.283,120.0,2.04,1.98,False,False,93.0,13.41,0,0,7596.0
 Sulawesi Tenggara,Muna,2023,224.7,121.0,1.53,0.63,False,False,131.0,14.07,0,0,7734.6
 Sulawesi Tenggara,Muna,2024,228.0,123.0,1.51,1.47,False,False,160.0,13.78,0,0,
-Sulawesi Tenggara,Muna Barat,2017,79.649,78.0,1.49,,False,False,36.0,16.24,0,0,3148.7
+Sulawesi Tenggara,Muna Barat,2017,79.649,78.0,1.49,10.62,False,False,36.0,16.24,0,0,3148.7
 Sulawesi Tenggara,Muna Barat,2018,81.0,79.0,1.49,1.7,False,False,46.0,14.17,0,0,1603.4
 Sulawesi Tenggara,Muna Barat,2019,81.624,80.0,1.42,0.77,False,False,56.0,13.84,0,0,3827.1
 Sulawesi Tenggara,Muna Barat,2021,84.777,83.0,0.29,3.86,False,False,82.0,13.96,0,0,4334.2
 Sulawesi Tenggara,Muna Barat,2022,84.902,104.0,0.21,0.15,False,False,93.0,13.85,0,0,7596.0
 Sulawesi Tenggara,Muna Barat,2023,89.3,109.0,1.98,5.18,True,False,131.0,14.03,0,0,7734.6
 Sulawesi Tenggara,Muna Barat,2024,91.0,111.0,1.95,1.9,False,False,160.0,13.38,0,0,
-Sulawesi Tenggara,Wakatobi,2017,95.386,170.0,0.19,,False,False,36.0,16.19,0,0,3148.7
-Sulawesi Tenggara,Wakatobi,2018,96.0,181.0,0.36,0.64,False,False,46.0,14.85,0,0,1603.4
-Sulawesi Tenggara,Wakatobi,2019,95.892,171.0,0.31,-0.11,False,False,56.0,14.75,0,0,3827.1
-Sulawesi Tenggara,Wakatobi,2021,113.122,202.0,2.06,17.97,True,False,82.0,14.91,0,0,4334.2
-Sulawesi Tenggara,Wakatobi,2022,115.286,256.0,1.98,1.91,False,False,93.0,14.55,0,0,7596.0
+Sulawesi Tenggara,Wakatobi,2017,,170.0,0.19,,False,False,36.0,16.19,0,0,3148.7
+Sulawesi Tenggara,Wakatobi,2018,,181.0,0.36,,False,False,46.0,14.85,0,0,1603.4
+Sulawesi Tenggara,Wakatobi,2019,,171.0,0.31,,False,False,56.0,14.75,0,0,3827.1
+Sulawesi Tenggara,Wakatobi,2021,,202.0,2.06,,False,False,82.0,14.91,0,0,4334.2
+Sulawesi Tenggara,Wakatobi,2022,115.286,256.0,1.98,,False,False,93.0,14.55,0,0,7596.0
 Sulawesi Tenggara,Wakatobi,2023,116.5,259.0,1.62,1.05,False,False,131.0,14.81,0,0,7734.6
 Sulawesi Tenggara,Wakatobi,2024,118.3,263.0,1.61,1.55,False,False,160.0,14.36,0,0,
 Sulawesi Utara,Bolaang Mongondow,2014,229.6,76.0,1.7,1.68,False,False,1.0,8.59,0,0,
@@ -481,13 +481,13 @@ Sulawesi Utara,Bolaang Mongondow Selatan,2023,72.1,84.0,1.18,0.87,False,False,10
 Sulawesi Utara,Bolaang Mongondow Selatan,2024,72.9,41.0,1.17,1.11,False,False,15.0,11.33,0,0,
 Sulawesi Utara,Bolaang Mongondow Timur,2014,67.8,75.0,1.55,1.5,False,False,1.0,6.61,0,0,
 Sulawesi Utara,Bolaang Mongondow Timur,2015,68.7,76.0,1.28,1.33,False,False,2.0,6.9,0,0,
-Sulawesi Utara,Bolaang Mongondow Timur,2016,69.7,77.0,1.49,1.46,False,False,2.0,6.77,0,0,5069.6
-Sulawesi Utara,Bolaang Mongondow Timur,2017,70.6,78.0,1.43,1.29,False,False,3.0,6.2,0,0,1488.2
-Sulawesi Utara,Bolaang Mongondow Timur,2018,71.5,79.0,1.41,1.27,False,False,3.0,6.03,0,0,4320.1
-Sulawesi Utara,Bolaang Mongondow Timur,2019,72.4,79.0,1.4,1.26,False,False,5.0,6.1,0,0,8259.6
-Sulawesi Utara,Bolaang Mongondow Timur,2020,88.2,97.0,3.21,21.82,True,False,8.0,5.88,0,0,3005.6
-Sulawesi Utara,Bolaang Mongondow Timur,2021,89.981,99.0,2.64,2.02,True,False,8.0,6.1,0,0,3480.0
-Sulawesi Utara,Bolaang Mongondow Timur,2022,92.299,107.0,2.6,2.58,True,False,8.0,5.85,0,0,5042.1
+Sulawesi Utara,Bolaang Mongondow Timur,2016,,77.0,1.49,,False,False,2.0,6.77,0,0,5069.6
+Sulawesi Utara,Bolaang Mongondow Timur,2017,,78.0,1.43,,False,False,3.0,6.2,0,0,1488.2
+Sulawesi Utara,Bolaang Mongondow Timur,2018,,79.0,1.41,,False,False,3.0,6.03,0,0,4320.1
+Sulawesi Utara,Bolaang Mongondow Timur,2019,,79.0,1.4,,False,False,5.0,6.1,0,0,8259.6
+Sulawesi Utara,Bolaang Mongondow Timur,2020,,97.0,3.21,,False,False,8.0,5.88,0,0,3005.6
+Sulawesi Utara,Bolaang Mongondow Timur,2021,,99.0,2.64,,False,False,8.0,6.1,0,0,3480.0
+Sulawesi Utara,Bolaang Mongondow Timur,2022,92.299,107.0,2.6,,False,False,8.0,5.85,0,0,5042.1
 Sulawesi Utara,Bolaang Mongondow Timur,2023,91.2,51.0,1.2,-1.19,False,False,10.0,5.8,0,0,7698.2
 Sulawesi Utara,Bolaang Mongondow Timur,2024,92.2,107.0,1.18,1.1,False,False,15.0,5.87,0,0,
 Sulawesi Utara,Bolaang Mongondow Utara,2014,75.3,39.0,1.42,1.48,False,False,1.0,9.27,0,0,
@@ -617,7 +617,7 @@ Sulawesi Utara,Siau Tagulandang Biaro,2016,65.8,302.0,0.38,0.3,False,False,2.0,1
 Sulawesi Utara,Siau Tagulandang Biaro,2017,66.0,239.0,0.43,0.3,False,False,3.0,10.33,0,0,1488.2
 Sulawesi Utara,Siau Tagulandang Biaro,2018,66.2,240.0,0.43,0.3,False,False,3.0,9.87,0,0,4320.1
 Sulawesi Utara,Siau Tagulandang Biaro,2019,66.4,72.0,0.41,0.3,False,False,5.0,9.56,0,0,8259.6
-Sulawesi Utara,Siau Tagulandang Biaro,2020,71.8,260.0,1.15,8.13,False,False,8.0,8.94,0,0,3005.6
+Sulawesi Utara,Siau Tagulandang Biaro,2020,71.8,260.0,1.15,8.13,True,False,8.0,8.94,0,0,3005.6
 Sulawesi Utara,Siau Tagulandang Biaro,2021,72.135,261.0,0.59,0.47,False,False,8.0,8.94,0,0,3480.0
 Sulawesi Utara,Siau Tagulandang Biaro,2022,72.517,332.0,0.56,0.53,False,False,8.0,8.2,0,0,5042.1
 Sulawesi Utara,Siau Tagulandang Biaro,2023,73.4,45.0,0.79,1.22,False,False,10.0,8.76,0,0,7698.2

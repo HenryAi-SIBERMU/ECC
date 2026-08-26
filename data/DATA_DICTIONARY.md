@@ -45,7 +45,7 @@ Dokumen ini memetakan **seluruh dataset di folder `data/processed`** ke sumber a
 | 38 | `sulawesi_kawasan_nikel_luas_per_provinsi.csv` | `sulawesi_esdm_nikel.csv` | Reshape | Agregasi | Bab 6, 12 | Luas per provinsi. |
 | 39 | `sulawesi_izin_raw_details.csv` | Minerbaone | Data Sekunder | - | Bab 7.1 | Detail raw data IUP. |
 | 40 | `sulawesi_konflik_hukum.csv` | `data/raw/konflik_kpa_ylbhi_tanahkita/` | Web Scraping | - | Bab 7.2 | Data konflik dari ranah hukum. |
-| 41 | `sulawesi_demografi_master_fase4.csv` | Data Kependudukan BPS | Agregasi & Cleaning | - | Bab 9.1, 9.2, 9.4 | Data master demografi untuk membaca kepadatan dan jumlah penduduk. |
+| 41 | `sulawesi_demografi_master_fase4.csv` | API BPS SIMDASI (via `fetch_simdasi_populasi_kab.py`) | Agregasi & Cleaning | - | Bab 9.1, 9.2, 9.4 | Data master demografi. Raw data (JSON) ditarik via API langsung ke `processed/sulawesi_populasi_kab_simdasi.csv` tanpa file CSV mentah. |
 | 42 | `sulawesi_employment_shift_fase4.csv` | BPS SIMDASI | Transformasi Shift Index | - | Bab 9.3, 9.4 | Data index pergeseran proporsi lapangan kerja dan struktur ekonomi. |
 | 43 | `nasional_ekspor_2022_2026.csv` | `data/raw/eksporimpor/` | API BPS | - | Master Data (ETL) | Data agregat ekspor nasional. |
 | 44 | `nasional_gfn_historis_1_dekade.csv` | `data/raw/klhk_gfn/` | Data Sekunder GFN | - | Master Data (ETL) | Jejak ekologi (Global Footprint Network) nasional. |

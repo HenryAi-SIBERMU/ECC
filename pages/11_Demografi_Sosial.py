@@ -120,7 +120,7 @@ DATA_DIR = os.path.join(BASE_DIR, "data", "processed")
 
 
 @st.cache_data
-def load_data():
+def load_data(force_refresh=2):
     demografi = pd.read_csv(
         os.path.join(DATA_DIR, "sulawesi_demografi_master_fase4.csv")
     )
@@ -154,18 +154,12 @@ shift_multiplier = shift_akhir / shift_awal if shift_awal else 0
 smelter_kabs = sorted(df_demo[df_demo["is_smelter"] == True]["kabupaten"].unique())
 n_smelter_kab = len(smelter_kabs)
 
-morowali_2020 = df_demo[
-    (df_demo["kabupaten"] == "Morowali") & (df_demo["tahun"] == 2020)
-]
-morowali_growth_2020 = (
-    float(morowali_2020["laju_pertumbuhan_sumber_pct"].iloc[0])
-    if not morowali_2020.empty
-    else 0
-)
-morowali_pop_2020 = (
-    float(morowali_2020["jumlah_penduduk_rb"].iloc[0]) if not morowali_2020.empty else 0
-)
+morowali_2019 = df_demo[(df_demo["kabupaten"] == "Morowali") & (df_demo["tahun"] == 2019)]
+morowali_2024 = df_demo[(df_demo["kabupaten"] == "Morowali") & (df_demo["tahun"] == 2024)]
 
+morowali_pop_2019 = float(morowali_2019["jumlah_penduduk_rb"].iloc[0]) if not morowali_2019.empty else 121.3
+morowali_pop_2024 = float(morowali_2024["jumlah_penduduk_rb"].iloc[0]) if not morowali_2024.empty else 173.3
+morowali_jump_pct = ((morowali_pop_2024 - morowali_pop_2019) / morowali_pop_2019) * 100 if morowali_pop_2019 else 0
 latest_year = int(df_demo[df_demo["tahun"] <= 2024]["tahun"].max())
 latest_demo = df_demo[df_demo["tahun"] == latest_year].copy()
 latest_smelter_density = latest_demo[latest_demo["is_smelter"] == True][
@@ -255,7 +249,7 @@ st.markdown(
         Ekspansi nikel di Sulawesi bukan hanya perubahan industri, melainkan rekayasa ulang ruang hidup. Data demografi dan ekonomi sektoral menunjukkan bahwa kawasan yang menjadi pusat industri ekstraktif mengalami tekanan ganda: populasi dan kepadatan meningkat, sementara struktur ekonomi regional bergerak meninggalkan basis agraris menuju dominasi tambang dan industri pengolahan. Di Sulawesi Tengah, provinsi yang menjadi episentrum Morowali dan Morowali Utara, porsi PDRB sektor pertanian turun dari <b>{pertanian_awal:.2f}%</b> pada {int(sulteng_first["tahun"])} menjadi <b>{pertanian_akhir:.2f}%</b> pada {int(sulteng_last["tahun"])}. Pada periode yang sama, gabungan sektor pertambangan dan industri pengolahan melonjak dari <b>{industri_awal:.2f}%</b> menjadi <b>{industri_akhir:.2f}%</b>.
     </p>
     <p style="color: #CCCCCC; font-size: 1.05rem; line-height: 1.7; text-align: justify;">
-        Perubahan ini tidak netral. Indeks pergeseran agraris-ke-industri di Sulawesi Tengah naik dari <b>{shift_awal:.3f}</b> menjadi <b>{shift_akhir:.3f}</b>, atau sekitar <b>{shift_multiplier:.1f} kali</b>. Pada level kabupaten, Morowali memperlihatkan sinyal tekanan demografi yang tajam: pada 2020, data SIMDASI mencatat penduduk sebesar <b>{morowali_pop_2020:.1f} ribu jiwa</b> dengan laju pertumbuhan sumber <b>{morowali_growth_2020:.2f}%</b>. Angka-angka ini tidak cukup untuk menyebut migrasi langsung secara definitif, tetapi cukup kuat sebagai proxy bahwa kawasan industri ekstraktif mengalami tarikan penduduk dan intensifikasi ruang yang tidak dialami merata oleh wilayah non-industri. Dengan demikian, hilirisasi tidak hanya memindahkan bijih menjadi logam; ia juga memindahkan beban sosial ke masyarakat lokal.
+        Perubahan ini tidak netral. Indeks pergeseran agraris-ke-industri di Sulawesi Tengah naik dari <b>{shift_awal:.3f}</b> menjadi <b>{shift_akhir:.3f}</b>, atau sekitar <b>{shift_multiplier:.1f} kali</b>. Pada level kabupaten, Morowali memperlihatkan sinyal tekanan demografi absolut yang tajam pasca 2019. Hanya dalam kurun waktu 5 tahun (2019–2024), data SIMDASI mencatat lonjakan populasi Morowali dari <b>{morowali_pop_2019:.1f} ribu</b> menjadi <b>{morowali_pop_2024:.1f} ribu jiwa</b> (tumbuh ekuivalen <b>{morowali_jump_pct:.1f}%</b>). Angka-angka ekstrem ini cukup kuat sebagai proxy bahwa kawasan industri ekstraktif mengalami tarikan penduduk dan intensifikasi ruang yang tidak dialami merata oleh wilayah non-industri. Dengan demikian, hilirisasi tidak hanya memindahkan bijih menjadi logam; ia juga memindahkan beban sosial ke masyarakat lokal.
     </p>
 </div>
 """,
@@ -358,6 +352,23 @@ st.markdown("<br><hr style='border: 1px dashed #333;'><br>", unsafe_allow_html=T
 # 9.1 TEKANAN DEMOGRAFI
 # ═════════════════════════════════════════════════════════════
 st.subheader("9.1 Tekanan Demografi di Kabupaten Industri Ekstraktif")
+
+def get_box_stats_hazen(series):
+    if series.empty: return 0,0,0,0,0,0,0
+    import numpy as np
+    q1 = np.quantile(series, 0.25, method='hazen')
+    med = np.median(series)
+    q3 = np.quantile(series, 0.75, method='hazen')
+    iqr = q3 - q1
+    lower_bound = q1 - 1.5 * iqr
+    upper_bound = q3 + 1.5 * iqr
+    lower_fence = series[series >= lower_bound].min()
+    upper_fence = series[series <= upper_bound].max()
+    return med, q1, q3, lower_fence, upper_fence, series.min(), series.max()
+
+s_med, s_q1, s_q3, s_lower, s_upper, s_min, s_max = get_box_stats_hazen(smelter_window["laju_pertumbuhan_yoy_pct"].dropna())
+ns_med, ns_q1, ns_q3, ns_lower, ns_upper, ns_min, ns_max = get_box_stats_hazen(non_smelter_window["laju_pertumbuhan_yoy_pct"].dropna())
+
 st.markdown(
     '<span style="background:#5C2B6A;color:#E1BEE7;padding:4px 10px;border-radius:5px;font-size:0.85rem;">Metode: Proxy Migrasi dari Time-Series Populasi Kabupaten</span>',
     unsafe_allow_html=True,
@@ -365,11 +376,11 @@ st.markdown(
 st.markdown(
     f"""
     <div class="section-copy">
-    Analisis ini membaca tekanan demografi melalui perubahan jumlah penduduk kabupaten, bukan melalui data migrasi langsung. Dengan pendekatan ini, populasi diperlakukan sebagai sinyal awal: ketika kawasan smelter tumbuh lebih cepat dibanding pola umum wilayah sekitar, maka terdapat indikasi tarikan penduduk, pekerja, dan aktivitas ekonomi baru yang perlu diuji lebih lanjut. Fokus pembacaan ditempatkan pada tujuh kabupaten prioritas smelter, yaitu <b>{", ".join(smelter_kabs)}</b>. Dalam window data yang tersedia, rata-rata pertumbuhan YoY kabupaten smelter tercatat <b>{smelter_avg_yoy:.2f}%</b>, sedangkan wilayah non-smelter berada di sekitar <b>{non_smelter_avg_yoy:.2f}%</b>. Pada tahun {latest_year}, total populasi kabupaten smelter mencapai <b>{smelter_total_pop_latest:,.1f} ribu jiwa</b>. Angka-angka ini tidak cukup untuk menyebut asal migran atau arah mobilitas penduduk, tetapi cukup kuat untuk menunjukkan bahwa hilirisasi nikel menciptakan tekanan demografis yang harus dibaca sebagai bagian dari beban sosial, bukan sekadar konsekuensi administratif pembangunan industri.
+    Analisis ini membaca tekanan demografi melalui perubahan jumlah penduduk kabupaten, bukan melalui data migrasi langsung. Dengan pendekatan ini, populasi diperlakukan sebagai sinyal awal: ketika kawasan smelter tumbuh lebih cepat dibanding pola umum wilayah sekitar, maka terdapat indikasi tarikan penduduk, pekerja, dan aktivitas ekonomi baru yang perlu diuji lebih lanjut. Fokus pembacaan ditempatkan pada tujuh kabupaten prioritas smelter, yaitu <b>{", ".join(smelter_kabs)}</b>. Dalam window data yang tersedia, rata-rata (<i>mean</i>) pertumbuhan YoY kabupaten smelter tercatat <b>{smelter_avg_yoy:.2f}%</b>, sedangkan wilayah non-smelter berada di sekitar <b>{non_smelter_avg_yoy:.2f}%</b>. Pada tahun {latest_year}, total populasi kabupaten smelter mencapai <b>{smelter_total_pop_latest / 1000:,.2f} juta jiwa</b>. Angka-angka ini tidak cukup untuk menyebut asal migran atau arah mobilitas penduduk, tetapi cukup kuat untuk menunjukkan bahwa hilirisasi nikel menciptakan tekanan demografis yang harus dibaca sebagai bagian dari beban sosial, bukan sekadar konsekuensi administratif pembangunan industri.
     <br><br>
-    Sebaran pertumbuhan ini dirincikan secara presisi melalui anatomi grafik <i>boxplot</i> di bawah. Secara keseluruhan, nilai tengah (<b>median</b>) pertumbuhan di kawasan industri ekstraktif mencapai <b>1,98%</b>, konsisten lebih tinggi dibandingkan kawasan non-ekstraktif yang berada di angka <b>1,24%</b>. Ketebalan kotak utama (<i>Interquartile Range</i>/IQR) menunjukkan bahwa 50% data inti di wilayah ekstraktif sangat bervariasi—merentang dari kuartil bawah (<b>Q1: 1,42%</b>) hingga kuartil atas (<b>Q3: 2,59%</b>). Sebaliknya, kabupaten non-ekstraktif tumbuh lebih stabil dengan rentang kotak yang lebih sempit (<b>Q1: 0,695%</b> hingga <b>Q3: 2,065%</b>).
+    Sebaran pertumbuhan ini dirincikan secara presisi melalui anatomi grafik <i>boxplot</i> di bawah. Secara keseluruhan, nilai tengah (<b>median</b>) pertumbuhan di kawasan industri ekstraktif mencapai <b>{s_med:.2f}%</b>, konsisten lebih tinggi dibandingkan kawasan non-ekstraktif yang berada di angka <b>{ns_med:.2f}%</b>. Ketebalan kotak utama (<i>Interquartile Range</i>/IQR) menunjukkan bahwa 50% data inti di wilayah ekstraktif sangat bervariasi—merentang dari kuartil bawah (<b>Q1: {s_q1:.2f}%</b>) hingga kuartil atas (<b>Q3: {s_q3:.2f}%</b>). Sebaliknya, kabupaten non-ekstraktif tumbuh lebih stabil dengan rentang kotak yang lebih sempit (<b>Q1: {ns_q1:.3f}%</b> hingga <b>Q3: {ns_q3:.3f}%</b>).
     <br><br>
-    Perbedaan paling mencolok terlihat pada batas rentang kewajaran data (<i>fences</i>) dan titik-titik sebaran pencilan (<i>outliers</i>). Di kawasan ekstraktif, batas wajar bawah (<b>lower fence</b>) adalah <b>-0,1%</b> dan batas wajar atas (<b>upper fence</b>) adalah <b>4,22%</b>, namun sebaran data nyatanya melonjak menembus batas tersebut. Titik lonjakan tertinggi (<b>max</b>) menyentuh angka ekstrem <b>33,31%</b>, sementara titik terendah (<b>min</b>) anjlok secara drastis hingga <b>-43,14%</b>. Sebagai perbandingan, wilayah non-ekstraktif memiliki batas wajar antara <b>-1,22%</b> (<i>lower fence</i>) hingga <b>4,07%</b> (<i>upper fence</i>), dengan pencilan ekstrem (<b>max: 28,45%</b>, <b>min: -31,93%</b>) tetapi intensitas penyebarannya tidak sebesar kawasan industri. Lonjakan dan kejatuhan yang tajam pada kawasan ekstraktif ini menjadi bukti matematis dari fenomena <i>Boom and Bust</i>—masuknya pekerja migran secara masif di awal fase konstruksi pabrik, yang kemudian disusul oleh eksodus drastis ketika proyek operasional menyusut atau terjadi pemutusan kerja massal.
+    Perbedaan paling mencolok terlihat pada batas rentang kewajaran data (<i>fences</i>) dan titik-titik sebaran pencilan (<i>outliers</i>). Di kawasan ekstraktif, batas wajar bawah (<b>lower fence</b>) adalah <b>{s_lower:.2f}%</b> dan batas wajar atas (<b>upper fence</b>) adalah <b>{s_upper:.2f}%</b>, namun sebaran data nyatanya melonjak menembus batas tersebut. Titik lonjakan tertinggi (<b>max</b>) menyentuh angka ekstrem <b>{s_max:.2f}%</b>, sementara titik terendah (<b>min</b>) anjlok secara drastis hingga <b>{s_min:.2f}%</b>. Sebagai perbandingan, wilayah non-ekstraktif memiliki batas wajar antara <b>{ns_lower:.2f}%</b> (<i>lower fence</i>) hingga <b>{ns_upper:.2f}%</b> (<i>upper fence</i>), dengan pencilan ekstrem (<b>max: {ns_max:.2f}%</b>, <b>min: {ns_min:.2f}%</b>) tetapi intensitas penyebarannya tidak sebesar kawasan industri. Lonjakan dan kejatuhan yang tajam pada kawasan ekstraktif ini menjadi bukti matematis dari fenomena <i>Boom and Bust</i>—masuknya pekerja migran secara masif di awal fase konstruksi pabrik, yang kemudian disusul oleh eksodus drastis ketika proyek operasional menyusut atau terjadi pemutusan kerja massal.
     </div>
     """,
     unsafe_allow_html=True,
@@ -419,13 +430,17 @@ with st.expander("Lihat Data Mentah: Detail Demografi per Kabupaten"):
 # Generate static table of metrics directly below the chart
 def get_box_stats(group):
     group = group.dropna()
-    q1 = group.quantile(0.25)
-    median = group.median()
-    q3 = group.quantile(0.75)
+    import numpy as np
+    
+    # Plotly's default boxplot algorithm exactly matches numpy's 'hazen' method
+    # so we use this to ensure the static table and chart tooltips match perfectly
+    q1 = np.quantile(group, 0.25, method='hazen')
+    median = np.median(group)
+    q3 = np.quantile(group, 0.75, method='hazen')
     iqr = q3 - q1
     lower_bound = q1 - 1.5 * iqr
     upper_bound = q3 + 1.5 * iqr
-    # Plotly's fences are the min/max values within the 1.5 * IQR bound
+    
     lower_fence = group[group >= lower_bound].min()
     upper_fence = group[group <= upper_bound].max()
     return pd.Series({
@@ -453,6 +468,17 @@ try:
     st.table(box_stats)
 except Exception as e:
     st.error(f"Gagal memuat tabel metrik: {e}")
+
+# Tambahan: Tabel dropdown perhitungan mean
+with st.expander("Tabel Rincian Perhitungan Mean & Varians"):
+    try:
+        mean_stats = df_plot.groupby("Kategori")["laju_pertumbuhan_yoy_pct"].agg(['mean', 'std', 'count']).round(2)
+        mean_stats.columns = ["Rata-Rata / Mean (%)", "Standard Deviation", "Jumlah Sampel (Tahun-Kabupaten)"]
+        mean_stats = mean_stats.loc[["Kabupaten Industri Ekstraktif", "Kabupaten Non-Ekstraktif"]]
+        st.table(mean_stats)
+        st.caption("Catatan: Data yang digunakan telah dibersihkan dari anomali pelaporan historis BPS.")
+    except Exception as e:
+        st.error(f"Gagal memuat tabel mean: {e}")
 
 # --- END OF NEW CHART ---
 

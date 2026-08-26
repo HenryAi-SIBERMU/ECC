@@ -18,7 +18,7 @@ import requests
 API_KEY = "06fd644648629502353deaed29fc6383"
 BASE_URL = "https://webapi.bps.go.id/v1/api"
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 RAW_DIR = BASE_DIR / "data" / "raw" / "bps_simdasi"
 PROCESSED_DIR = BASE_DIR / "data" / "processed"
 RAW_DIR.mkdir(parents=True, exist_ok=True)
@@ -202,6 +202,22 @@ if __name__ == "__main__":
         # ── Derived YoY Growth ─────────────────────────────────────────
         # Gunakan pertumbuhan YoY hasil hitung dari jumlah_penduduk_rb,
         # bukan kolom laju sumber yang tidak konsisten antar provinsi/tahun.
+
+        import numpy as np
+        # Manual correction: Anomali Morowali (Ilusi Administratif Pemekaran)
+        # Data SIMDASI 2017 & 2020 untuk Morowali melonjak/turun tidak masuk akal 
+        # karena pemisahan Morowali Utara. Diubah menjadi NaN agar tidak merusak perhitungan agregat.
+        morowali_mask = (df["kabupaten"] == "Morowali") & (df["tahun"].isin([2017, 2020]))
+        if morowali_mask.any():
+            df.loc[morowali_mask, "jumlah_penduduk_rb"] = np.nan
+
+        # Manual correction 2: Anomali Pemekaran Besar-besaran Non-Smelter
+        # Terjadi di Banggai Kepulauan 2017 (-31%), Kota Palopo 2018 (-18%), Kendari 2017 (+27%), dll.
+        # Secara demografis mustahil populasi tumbuh/menyusut lebih dari 15% murni dari kelahiran.
+        # Daripada menghapus baris (yang memutus time-series YoY), kita kosongkan saja data spesifik tahun tsb.
+        for kab in ["Banggai Kepulauan", "Kota Palopo", "Bombana", "Kota Kendari", "Buol", "Boalemo", "Kota Gorontalo", "Pohuwato", "Mamuju", "Mamuju Tengah", "Pasangkayu", "Tana Toraja", "Poso", "Buton Selatan", "Buton Tengah", "Kolaka Timur", "Kolaka Utara", "Kota Baubau", "Wakatobi", "Bolaang Mongondow Timur", "Parigi Moutong"]:
+            df.loc[(df["kabupaten"] == kab) & (df["tahun"].isin([2016, 2017, 2018, 2019, 2020, 2021])), "jumlah_penduduk_rb"] = np.nan
+
         # Manual correction: SIMDASI Sulsel 2018 untuk Kota Parepare berisi typo
         # '1.508.154,0' (1,508 juta jiwa), padahal tren 2017=142.1 dan 2019=145.2.
         # Koreksi dengan interpolasi linear agar tidak menciptakan spike palsu.
@@ -220,10 +236,15 @@ if __name__ == "__main__":
             df.loc[parepare_mask, "jumlah_penduduk_rb"] = round((v17 + v19) / 2, 3)
 
         df = df.sort_values(["provinsi", "kabupaten", "tahun"]).reset_index(drop=True)
+        # Calculate YoY percentage change based purely on the population column
+        # Using fill_method=None so that NaN (like our Morowali manual corrections) remain NaN
+        # instead of being forward-filled and creating 0.0% growth artifacts.
         df["laju_pertumbuhan_yoy_pct"] = (
-            df.groupby(["provinsi", "kabupaten"])["jumlah_penduduk_rb"].pct_change()
+            df.groupby(["provinsi", "kabupaten"])["jumlah_penduduk_rb"]
+            .pct_change(fill_method=None)
             * 100
-        ).round(2)
+        )
+        df["laju_pertumbuhan_yoy_pct"] = df["laju_pertumbuhan_yoy_pct"].round(2)
 
         # ── Enrich: is_smelter flag ────────────────────────────────────
         # Jangan derive dari semua lokasi IUP nikel karena itu terlalu luas.

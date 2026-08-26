@@ -48,6 +48,34 @@ only on desktop
 
 The BPS APIs provides programmatic access to read BPS data. User can read about Publication, Press Release, BPS Event, and a lot of various kinds of data presented in the static table and dynamic tables. The BPS API identifies user with key token. User can get the key token from API-Portal website. Every user can get two until three key token to access the API. Responses are available in JSON.
 
+---
+
+## Kamus Kategori Layanan API BPS (WebAPI Sidebar)
+
+Berikut adalah ringkasan fungsi dan deskripsi dari setiap menu layanan (endpoint) yang tersedia di pangkalan data BPS:
+
+| Kategori Menu BPS | Deskripsi / Fungsi Data |
+| :--- | :--- |
+| **Domain** | Mengembalikan daftar Master Wilayah (Kode Provinsi, Kabupaten, dll) beserta ID uniknya. |
+| **Subject** | Mengembalikan daftar Master Subjek Statistik (contoh: Kependudukan, Kemiskinan, Inflasi). |
+| **Subject Categories** | Mengembalikan daftar kategori yang mengelompokkan subjek-subjek statistik. |
+| **Dynamic Data** | *Endpoint* klasik untuk menarik *database* mentah deret waktu (*time-series*). Strukturnya terpisah menjadi Data, Variabel, Satuan, dan Periode. |
+| **Census Data** | Berisi data khusus dari hasil sensus skala besar (seperti Sensus Penduduk 10 tahunan, Sensus Pertanian, dan Sensus Ekonomi). |
+| **SIMDASI** | (*Sistem Informasi Manajemen Data Statistik Terintegrasi*). Gudang data (*Data Warehouse*) modern BPS yang sudah distandardisasi. Tabel JSON sangat terstruktur dan siap olah. |
+| **Static Table** | Mengembalikan laporan tabel dalam bentuk statis/mati (biasanya dirender ke Excel/HTML) untuk konsumsi mata manusia, bukan analisis mesin. |
+| **CSA Subject** | *Current Statistics Analysis* (Analisis Statistik Terkini). Mengembalikan kategori subjek analisis khusus. |
+| **Press Release** | Mengembalikan teks Berita Resmi Statistik (BRS) seperti pengumuman inflasi bulanan atau angka pengangguran. |
+| **Publication** | Mengembalikan *metadata* dan *link download* resmi untuk buku publikasi digital PDF (seperti "Provinsi Dalam Angka"). |
+| **Strategic Indicator** | Berisi ringkasan Indikator Strategis Utama (contoh: persentase kemiskinan makro, IPM, rasio gini). |
+| **Infographic** | Mengembalikan pustaka gambar/media infografis visual yang dirilis oleh BPS. |
+| **Glosarium** | Kamus istilah resmi statistik yang digunakan oleh BPS. |
+| **Foreign Trade Data** | Data khusus untuk statistik kegiatan Ekspor dan Impor (Perdagangan Luar Negeri). |
+| **Sustainable Development Goals** | Data khusus yang memonitor pencapaian target SDGs (*Tujuan Pembangunan Berkelanjutan*) PBB. |
+| **SDDS** | *Special Data Dissemination Standard*, standar pelaporan data ekonomi dan finansial dari IMF. |
+| **Statistical Classifications** | Daftar Klasifikasi Baku (contoh: KBLI untuk industri, KBJI untuk jabatan). |
+| **News** | Kumpulan teks berita umum, rilis pers, dan artikel seputar kegiatan institusi BPS. |
+
+---
 [Learn More](#domain)
 
 ![](https://webapi.bps.go.id/documentation/assets/img/home.gif)
