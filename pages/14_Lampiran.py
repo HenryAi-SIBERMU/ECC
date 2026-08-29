@@ -1,8 +1,14 @@
 import streamlit as st
 import pandas as pd
 import os
+import sys
+
+# Ensure src can be imported
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+from src.components.sidebar import render_sidebar
 
 st.set_page_config(page_title="Lampiran", layout="wide")
+render_sidebar()
 
 st.title("Lampiran Data & Metodologi")
 st.markdown("Halaman ini berisi tabel referensi, metodologi kalkulasi, dan data mentah yang digunakan sebagai landasan (*ground truth*) dalam ECC Intelligence System.")
