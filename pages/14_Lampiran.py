@@ -174,16 +174,29 @@ st.write("---")
 
 base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
+@st.cache_data
+def load_csv_data(path):
+    df = pd.read_csv(path)
+    df = df.fillna("")
+    for col in df.columns:
+        df[col] = df[col].apply(str)
+    return df
+
+@st.cache_data
+def load_excel_data(path):
+    df = pd.read_excel(path, sheet_name='Units')
+    df = df.fillna("")
+    for col in df.columns:
+        df[col] = df[col].apply(str)
+    return df
+
 # Dropdown dataset 1 (Filtered)
 with st.expander("Lihat Data Mentah: sulawesi_pltu_captive.csv", expanded=False):
     st.markdown("Tabel di bawah ini memuat langsung isi dari file CSV murni khusus untuk PLTU Captive di Sulawesi. Anda dapat mencocokkan nomor baris (*index*) yang tertera pada **Lampiran 1** dengan data mentah di bawah.")
     
     data_path = os.path.join(base_dir, 'data', 'processed', 'sulawesi_pltu_captive.csv')
     try:
-        df = pd.read_csv(data_path)
-        df = df.fillna("")
-        for col in df.columns:
-            df[col] = df[col].apply(str)
+        df = load_csv_data(data_path)
         st.dataframe(df, use_container_width=True)
         st.caption("Sumber: `sulawesi_pltu_captive.csv` (Global Energy Monitor 2023)")
     except Exception as e:
@@ -195,10 +208,7 @@ with st.expander("Lihat Data Mentah: Global Energy Monitor (Raw Dataset)", expan
     
     raw_gem_path = os.path.join(base_dir, 'data', 'raw', 'izin_ESDM', 'gem-data', 'Global-Coal-Plant-Tracker-January-2026.xlsx')
     try:
-        df_gem_raw = pd.read_excel(raw_gem_path, sheet_name='Units')
-        df_gem_raw = df_gem_raw.fillna("")
-        for col in df_gem_raw.columns:
-            df_gem_raw[col] = df_gem_raw[col].apply(str)
+        df_gem_raw = load_excel_data(raw_gem_path)
         st.dataframe(df_gem_raw, use_container_width=True)
     except Exception as e:
         st.error(f"Gagal memuat raw dataset GEM: {e}")
