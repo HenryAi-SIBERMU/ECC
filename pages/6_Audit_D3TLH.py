@@ -1993,7 +1993,7 @@ with colA2:
                 with st.expander("Lihat Data Mentah: Kapasitas PLTU per Provinsi", expanded=False):
                     df_pivot_pltu = df_pltu_trend.pivot(index='Tahun', columns='Provinsi', values='Kapasitas_PLTU_MW').reset_index()
                     st.dataframe(df_pivot_pltu, use_container_width=True, hide_index=True)
-                    st.caption("Sumber: `sulawesi_pltu_captive.csv` (gabungan captive + grid)")
+                    st.caption("Sumber: `sulawesi_pltu_captive.csv` (murni captive industri)")
 
 
         with tab2:
