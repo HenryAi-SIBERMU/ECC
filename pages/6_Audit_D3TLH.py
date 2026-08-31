@@ -1301,7 +1301,7 @@ def render_crisis_map(skor_udara, skor_air, skor_lahan, skor_sosial, skor_veto):
         range_color=[0, 10], zoom=5.2, center={"lat": -2.0, "lon": 121.0}, opacity=0.8,
         hover_name=None, 
         hover_data=None, 
-        mapbox_style="carto-darkmatter"
+        mapbox_style="white-bg"
     )
     
     # Tambahkan teks label di atas peta
@@ -1315,6 +1315,7 @@ def render_crisis_map(skor_udara, skor_air, skor_lahan, skor_sosial, skor_veto):
     ))
 
     fig.update_layout(
+        mapbox_layers=[{"below": 'traces', "sourcetype": "raster", "sourceattribution": "Esri", "source": ["https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"]}],
         margin={"r":0,"t":10,"l":0,"b":0}, paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
         font=dict(color='#ECEFF1'),
         coloraxis_colorbar=dict(

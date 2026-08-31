@@ -119,10 +119,12 @@ except Exception as e:
 
 # ── Pra-Kalkulasi Variabel Kritis (Data-Driven) ──
 # 1. Kualitas Air (IKA)
-mean_ika_2023 = df_ika[df_ika['Tahun'] == 2023]['Indeks Kualitas Air'].mean()
+max_yr_ika = df_ika['Tahun'].max() if 'Tahun' in df_ika.columns and not df_ika.empty else 2023
+mean_ika_2023 = df_ika[df_ika['Tahun'] == max_yr_ika]['Indeks Kualitas Air'].mean() if pd.notna(max_yr_ika) else 0
 
 # 2. Kualitas Udara (IKU)
-mean_iku_2023 = df_iku[df_iku['Tahun'] == 2023]['IKU'].mean()
+max_yr_iku = df_iku['Tahun'].max() if 'Tahun' in df_iku.columns and not df_iku.empty else 2023
+mean_iku_2023 = df_iku[df_iku['Tahun'] == max_yr_iku]['IKU'].mean() if pd.notna(max_yr_iku) else 0
 
 try:
     df_nasa_hero = pd.read_csv(os.path.join(DATA_DIR, "gee_nasa_no2_sulawesi_monthly_raw.csv"))
@@ -268,8 +270,16 @@ df_ika_panel = df_ika.groupby(['Provinsi', 'Tahun'])['Indeks Kualitas Air'].mean
 df_panel_2_1 = pd.merge(df_ika_panel, df_smelter_prov, on='Provinsi', how='left').fillna({'Jumlah_Smelter': 0})
 df_panel_2_1.dropna(subset=['Indeks Kualitas Air'], inplace=True)
 
-# Untuk Peta, kita tetap gunakan df_panel_2_1 yang di-filter 2023 saja
-df_panel_map_2_1 = df_panel_2_1[df_panel_2_1['Tahun'] == 2023].copy()
+# Untuk Peta, kita tetap gunakan df_panel_2_1 yang di-filter tahun terbaru saja
+df_panel_2_1['Tahun'] = pd.to_numeric(df_panel_2_1['Tahun'], errors='coerce')
+max_year_21 = df_panel_2_1['Tahun'].max()
+if pd.isna(max_year_21):
+    max_year_21 = 2023
+df_panel_map_2_1 = df_panel_2_1[df_panel_2_1['Tahun'] == max_year_21].copy()
+
+# Fallback aman jika kosong (mencegah plotly AttributeError)
+if df_panel_map_2_1.empty:
+    df_panel_map_2_1 = pd.DataFrame({'Provinsi': ['Sulawesi Tengah'], 'Indeks Kualitas Air': [0]})
 
 sulteng_smelter_21 = df_smelter_prov[df_smelter_prov['Provinsi'] == 'Sulawesi Tengah']['Jumlah_Smelter'].values[0] if not df_smelter_prov[df_smelter_prov['Provinsi'] == 'Sulawesi Tengah'].empty else 0
 sultra_smelter_21 = df_smelter_prov[df_smelter_prov['Provinsi'] == 'Sulawesi Tenggara']['Jumlah_Smelter'].values[0] if not df_smelter_prov[df_smelter_prov['Provinsi'] == 'Sulawesi Tenggara'].empty else 0
@@ -325,9 +335,10 @@ fig_map1 = px.choropleth_mapbox(
     opacity=0.75,
     hover_name="Provinsi",
     hover_data={"Provinsi": False, "Indeks Kualitas Air": ':.1f'},
-    mapbox_style="carto-darkmatter"
+    mapbox_style="white-bg"
 )
 fig_map1.update_layout(
+    mapbox_layers=[{"below": 'traces', "sourcetype": "raster", "sourceattribution": "Esri", "source": ["https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"]}],
     margin={"r":0,"t":10,"l":0,"b":0},
     paper_bgcolor='rgba(0,0,0,0)',
     plot_bgcolor='rgba(0,0,0,0)',
@@ -365,9 +376,10 @@ fig_map2 = px.choropleth_mapbox(
         "Estimasi Timbulan (Ton/Tahun)": ':,.0f',
         "Kawasan/Perusahaan": True
     },
-    mapbox_style="carto-darkmatter"
+    mapbox_style="white-bg"
 )
 fig_map2.update_layout(
+    mapbox_layers=[{"below": 'traces', "sourcetype": "raster", "sourceattribution": "Esri", "source": ["https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"]}],
     margin={"r":0,"t":10,"l":0,"b":0},
     paper_bgcolor='rgba(0,0,0,0)',
     plot_bgcolor='rgba(0,0,0,0)',
@@ -407,9 +419,10 @@ fig_map3 = px.choropleth_mapbox(
         "Jumlah_Sungai_Tercemar": ':.0f',
         "Daftar_Sungai": True
     },
-    mapbox_style="carto-darkmatter"
+    mapbox_style="white-bg"
 )
 fig_map3.update_layout(
+    mapbox_layers=[{"below": 'traces', "sourcetype": "raster", "sourceattribution": "Esri", "source": ["https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"]}],
     margin={"r":0,"t":10,"l":0,"b":0},
     paper_bgcolor='rgba(0,0,0,0)',
     plot_bgcolor='rgba(0,0,0,0)',
@@ -1276,9 +1289,10 @@ fig_2_3 = go.Figure(
             font=dict(color='#ECEFF1', size=20)
         ),
         mapbox=dict(
-            style="carto-darkmatter",
+            style="white-bg",
             center=dict(lat=-2.0, lon=120.8),
-            zoom=5.2
+            zoom=5.2,
+            layers=[{"below": 'traces', "sourcetype": "raster", "sourceattribution": "Esri", "source": ["https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"]}]
         ),
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
@@ -1714,7 +1728,8 @@ try:
         title="Peta Spasial Penampakan Satwa Endemik Sulawesi (Data GBIF)"
     )
     fig_biodiv.update_layout(
-        mapbox_style="carto-darkmatter",
+        mapbox_style="white-bg",
+        mapbox_layers=[{"below": 'traces', "sourcetype": "raster", "sourceattribution": "Esri", "source": ["https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}"]}],
         margin={"r":0,"t":40,"l":0,"b":0},
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
