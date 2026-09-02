@@ -649,27 +649,27 @@ def generate_all_bab2():
     empirical_23 = pd.merge(empirical_23, def_kum_prov, on="Provinsi", how="left")
     empirical_23 = empirical_23.fillna(0).sort_values("Luas_IUP_Kawasan_Ha", ascending=False)
 
-    df_driver = pd.read_csv(data_dir / "loss_by_driver_sulawesi_2001_2025_v3.csv")
-    df_driver_focus = df_driver[(df_driver['year'] >= focus_start_year) & (df_driver['year'] <= focus_end_year)].copy()
+    df_driver = pd.read_csv(data_dir / "sulawesi_gfw_loss_by_driver_2014_2023_v3.csv")
     
     driver_map = {
-        'Commodity driven deforestation': 'Pertambangan dan Sawit',
-        'Forestry': 'Kehutanan Komersial',
-        'Shifting agriculture': 'Pertanian Berpindah',
-        'Urbanization': 'Urbanisasi & Infrastruktur',
-        'Unknown': 'Tidak Teridentifikasi'
+        'Deforestasi Komoditas (Tambang/Sawit)': 'Pertambangan dan Sawit',
+        'Kehutanan': 'Kehutanan Komersial',
+        'Pertanian Berpindah': 'Pertanian Berpindah (Masyarakat)',
+        'Urbanisasi': 'Urbanisasi & Infrastruktur',
+        'Tidak Diketahui': 'Tidak Teridentifikasi'
     }
-    df_driver_focus['driver'] = df_driver_focus['driver'].replace(driver_map)
-    df_driver_agg = df_driver_focus.groupby('driver').agg({
-        'area_ha': 'sum',
-        'co2_emissions_mg': 'sum'
-    }).reset_index().sort_values('area_ha', ascending=False)
+    df_driver['Faktor_Pendorong'] = df_driver['Faktor_Pendorong'].replace(driver_map)
+    df_driver_agg = df_driver.groupby('Faktor_Pendorong').agg({
+        'Luas_Deforestasi_Ha': 'sum',
+        'Emisi_CO2_Megagram': 'sum'
+    }).reset_index().sort_values('Luas_Deforestasi_Ha', ascending=False)
     
     empirical_rows_driver = []
     for _, row in df_driver_agg.iterrows():
         empirical_rows_driver.append([
-            row["driver"],
-            f"{row['co2_emissions_mg']/1_000_000:,.1f}"
+            row["Faktor_Pendorong"],
+            f"{row['Luas_Deforestasi_Ha']:,.4f}",
+            f"{row['Emisi_CO2_Megagram']/1_000_000:,.4f}"
         ])
 
     empirical_rows_23 = []
@@ -1080,7 +1080,7 @@ def generate_all_bab2():
         (" berikut:", False, False),
     ])
     add_caption(doc, "Tabel 2.4: Rincian Empiris Deforestasi dan Emisi CO₂ per Faktor Pendorong (2014-2023)")
-    add_table_1col(doc, ["Faktor Pendorong Utama", "Estimasi Emisi CO₂ (Juta Ton)"], empirical_rows_driver, [7.0, 7.0], ["L", "C"])
+    add_table_1col(doc, ["Faktor Pendorong Utama", "Total Deforestasi (Ha)", "Estimasi Emisi CO₂ (Juta Ton)"], empirical_rows_driver, [4.5, 4.5, 5.0], ["L", "C", "C"])
 
     add_p(doc, [
         (f"Penerapan pengujian statistik tabulasi silang pada data panel (total {valid_cases_22} observasi valid) disajikan secara ringkas pada ", False, False),
@@ -1443,7 +1443,7 @@ h4 {{ color: #A5D6A7; }}
 {html_table(["Provinsi", "Kapasitas PLTU (Captive & Grid) (MW)", "IKU", "NASA TROPOMI NO₂ (mol/m²)"], empirical_rows_22_html)}
 <p>Selain analisis polusi udara, atribusi pelepasan gas rumah kaca membedah estimasi jejak karbon dari masing-masing faktor pendorong deforestasi pada <strong>Tabel 2.4</strong> berikut:</p>
 <div class="table-caption">Tabel 2.4: Rincian Empiris Deforestasi dan Emisi CO₂ per Faktor Pendorong (2014-2023)</div>
-{html_table(["Faktor Pendorong Utama", "Estimasi Emisi CO₂ (Juta Ton)"], empirical_rows_driver)}
+{html_table(["Faktor Pendorong Utama", "Total Deforestasi (Ha)", "Estimasi Emisi CO₂ (Juta Ton)"], empirical_rows_driver)}
 <p>Penerapan pengujian statistik tabulasi silang pada data panel (total {valid_cases_22} observasi valid) disajikan secara ringkas pada <strong>Tabel 2.5</strong> berikut:</p>
 <div class="table-caption">Tabel 2.5: Ringkasan Eksekutif Skenario Crosstab Kapasitas PLTU vs IKU Bab 2</div>
 {html_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (&chi;&sup2;)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_22)}
@@ -1612,7 +1612,7 @@ h4 {{ color: #A5D6A7; }}
         "Selain analisis polusi udara, atribusi pelepasan gas rumah kaca membedah estimasi jejak karbon dari masing-masing faktor pendorong deforestasi pada **Tabel 2.4** berikut:",
         "",
         "##### Tabel 2.4: Rincian Empiris Deforestasi dan Emisi CO₂ per Faktor Pendorong (2014-2023)",
-        markdown_table(["Faktor Pendorong Utama", "Estimasi Emisi CO₂ (Juta Ton)"], empirical_rows_driver),
+        markdown_table(["Faktor Pendorong Utama", "Total Deforestasi (Ha)", "Estimasi Emisi CO₂ (Juta Ton)"], empirical_rows_driver),
         "",
         f"Penerapan pengujian statistik tabulasi silang pada data panel (total {valid_cases_22} observasi valid) disajikan secara ringkas pada **Tabel 2.5** berikut:",
         "",

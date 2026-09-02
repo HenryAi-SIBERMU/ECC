@@ -142,12 +142,12 @@ Akumulasi kapasitas total PLTU (Captive dan Grid) yang beroperasi, beserta kondi
 Selain analisis polusi udara, atribusi pelepasan gas rumah kaca membedah estimasi jejak karbon dari masing-masing faktor pendorong deforestasi pada **Tabel 2.4** berikut:
 
 ##### Tabel 2.4: Rincian Empiris Deforestasi dan Emisi CO₂ per Faktor Pendorong (2014-2023)
-| Faktor Pendorong Utama | Estimasi Emisi CO₂ (Juta Ton) |
-| :--- | :--- |
-| Pertambangan dan Sawit | 482.7 |
-| Kehutanan Komersial | 64.1 |
-| Pertanian Berpindah | 29.1 |
-| Tidak Teridentifikasi | 10.3 |
+| Faktor Pendorong Utama | Total Deforestasi (Ha) | Estimasi Emisi CO₂ (Juta Ton) |
+| :--- | :--- | :--- |
+| Pertambangan dan Sawit | 1,001,654.2585 | 664.4729 |
+| Kehutanan Komersial | 134,637.3514 | 87.1380 |
+| Pertanian Berpindah (Masyarakat) | 55,905.1723 | 38.2156 |
+| Tidak Teridentifikasi | 25,737.8929 | 14.2253 |
 
 Penerapan pengujian statistik tabulasi silang pada data panel (total 54 observasi valid) disajikan secara ringkas pada **Tabel 2.5** berikut:
 
