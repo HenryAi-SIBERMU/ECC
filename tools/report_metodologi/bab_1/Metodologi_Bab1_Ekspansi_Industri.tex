@@ -1009,13 +1009,13 @@ Komoditas
 
 {\def\LTcaptype{none} % do not increment counter
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1250}}
-  >{\centering\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1562}}
-  >{\centering\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1562}}
-  >{\centering\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1562}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1250}}
-  >{\centering\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1562}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1250}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1290}}
+  >{\centering\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1613}}
+  >{\centering\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1613}}
+  >{\centering\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1613}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1290}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1290}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1290}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Kategori Kapasitas PLTU (X)
@@ -1027,7 +1027,7 @@ Deforestasi Tinggi (≥10,961 Ha)
 Total Kasus
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Parameter Statistik Uji
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Nilai / df
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Signifikansi / Kesimpulan
@@ -1121,208 +1121,8 @@ izin tambang diilustrasikan pada \textbf{Bagan Alur 1.5} berikut. Adapun
 untuk tahapan analisis inferensial (Uji Chi-Square), alur logikanya
 merujuk secara penuh pada \textbf{Bagan Alur 1.4} (di sub-bab
 sebelumnya) dengan penyesuaian konfigurasi variabel spesifik sesuai
-Tabel Asumsi Dasar di bawah gambar.
-
-Persamaan Formulasi Kurva Parametrik Alur Pelayaran Maritim:
-
-Kurva(t) = (1 - t)\^{}2 * Titik\_Asal + 2 * (1 - t) * t * Titik\_Kontrol
-+ t\^{}2 * Titik\_Tujuan, t dalam rentang {[}0, 1{]}
-
-Keterangan Variabel:
-
-• Kurva(t): Vektor posisi koordinat geografis lintasan kapal pada
-parameter waktu t.
-
-• Titik\_Asal: Titik koordinat geografis pelabuhan muat khusus di
-pesisir Sulawesi.
-
-• Titik\_Kontrol: Titik koordinat jangkar pemandu kurva lengkung di
-perairan internasional.
-
-• Titik\_Tujuan: Titik koordinat geografis pelabuhan bongkar di negara
-tujuan ekspor.
-
-• t: Parameter interpolasi waktu dan pergerakan lintasan dalam rentang
-kontinu {[}0, 1{]}.
-
-SUB-BAB 1.6: Matriks Indikator dan Sumber Data Resmi Bab 1
-
-Seluruh variabel kuantitatif, kategori analisis, satuan ukur, periode
-tahun observasi, dan institusi penyedia data primer resmi yang digunakan
-dalam Bab 1 dikompilasikan pada Tabel 1.8 berikut:
-
-Tabel 1.8: Matriks Indikator dan Sumber Data Primer Resmi Bab 1
-(Ekspansi Industri Ekstraktif)
-
-No
-
-Nama Indikator
-
-Kategori Analisis
-
-Satuan Ukur
-
-Cakupan Tahun
-
-Institusi \& Sumber Data Resmi
-
-1
-
-Izin Usaha Pertambangan (IUP) Baru
-
-Faktor Tekanan Ekstraktif
-
-Unit Izin
-
-2014--2024
-
-Kementerian ESDM (Minerbaone)
-
-2
-
-Luas Wilayah Konsesi Tambang Baru
-
-Faktor Tekanan Ekstraktif
-
-Hektar (Ha)
-
-2014--2024
-
-Kementerian ESDM (Minerbaone)
-
-3
-
-Kapasitas Terpasang PLTU Captive
-
-Infrastruktur Energi Khusus
-
-Megawatt (MW)
-
-2014--2024
-
-Global Energy Monitor (GEM)
-
-4
-
-Fasilitas Pengolahan \& Pemurnian (Smelter)
-
-Fasilitas Industri Hilir
-
-Unit Fasilitas
-
-2014--2024
-
-Kementerian ESDM \& Studi Industri
-
-5
-
-Realisasi Investasi PMDN
-
-Arus Modal Domestik
-
-Triliun Rupiah
-
-2016--2024
-
-Kementerian Investasi / BKPM
-
-6
-
-PDRB Menurut 17 Lapangan Usaha
-
-Struktur Ekonomi Makro
-
-Triliun Rupiah
-
-2016--2024
-
-Badan Pusat Statistik (BPS)
-
-7
-
-PDRB Kabupaten Sentra Tambang
-
-Struktur Ekonomi Daerah
-
-Triliun Rupiah
-
-2016--2024
-
-BPS Kabupaten se-Sulteng
-
-8
-
-Luas Kehilangan Hutan Komoditas
-
-Dampak Tutupan Lahan
-
-Hektar (Ha)
-
-2014--2023
-
-Global Forest Watch (GFW)
-
-9
-
-Simpul Dermaga \& Terminal Khusus Ekspor
-
-Infrastruktur Rantai Pasok
-
-Titik Koordinat \& DWT
-
-2014--2024
-
-KNKT, Perpres PSN, Lap. Terbuka
-
-SUB-BAB 1.7: Bagan Alur Kerangka Kerja Riset Bab 1
-
-Keseluruhan struktur metodologis riset Bab 1 dioperasionalkan melalui
-empat fase kerja berurutan sebagaimana disajikan pada Tabel 1.9 berikut:
-
-Tabel 1.9: Matriks Tahapan dan Alur Kerangka Kerja Riset Bab 1
-
-Tahapan Riset
-
-Fokus Metodologis
-
-Bahan \& Sumber Data
-
-Keluaran / Hasil Analisis
-
-Fase I: Pengumpulan Data
-
-Kurasi data resmi lintas kementerian dan lembaga
-
-Publikasi BPS, Minerbaone, BKPM, GEM, dan GFW
-
-Basis Data Tabular Panel Provinsi (2014--2024)
-
-Fase II: Reklasifikasi Hukum
-
-Penyusunan kerangka rantai pasok hukum terintegrasi
-
-UU No.~3/2020, PP No.~96/2021, Perpres No.~112/2022
-
-3 Klaster Makro (Ekstraktif, Akar Rumput, Jasa)
-
-Fase III: Pengujian Statistik
-
-Uji signifikansi hubungan dan rasio peluang
-
-Tabel Kontinjensi, Uji Chi-Square, Odds Ratio
-
-Bukti Kausalitas Signifikan Tekanan vs Deforestasi
-
-Fase IV: Pemetaan Rantai Pasok
-
-Triangulasi data logistik dan pemodelan maritim
-
-Laporan KNKT, Perpres PSN, Kurva Parametrik Bézier
-
-Peta Alur Rantai Pasok Ekspor \& Konsentrasi Spasial 78\%
-
-\subparagraph{Bagan Alur 1.5: Alur Logika Tren Pertumbuhan Izin Tambang
-Baru}\label{bagan-alur-1.5-alur-logika-tren-pertumbuhan-izin-tambang-baru}
+Tabel Asumsi Dasar di bawah gambar. \#\#\#\#\# Bagan Alur 1.5: Alur
+Logika Tren Pertumbuhan Izin Tambang Baru
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1864,31 +1664,8 @@ publik adalah sebagai berikut:
   maritim.
 \end{enumerate}
 
-\paragraph{C. Formulasi Matematis: Kurva Parametrik Alur
-Pelayaran}\label{c.-formulasi-matematis-kurva-parametrik-alur-pelayaran}
-
-Pemetaan alur pelayaran internasional dimodelkan menggunakan formulasi
-kurva parametrik lengkung (\emph{Bézier Curve}) untuk merepresentasikan
-alur laut kepulauan dan rute maritim internasional secara realistis:
-
-\textbf{Persamaan Formulasi Kurva Parametrik Alur Pelayaran Maritim:}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{Kurva(t) = (1 {-} t)\^{}2 * Titik\_Asal + 2 * (1 {-} t) * t * Titik\_Kontrol + t\^{}2 * Titik\_Tujuan}
-\end{Highlighting}
-\end{Shaded}
-
-\emph{Keterangan Variabel:} - \texttt{Kurva(t)}: Vektor posisi koordinat
-geografis lintasan kapal pada parameter waktu t (rentang kontinu {[}0,
-1{]}). - \texttt{Titik\_Asal}: Titik koordinat geografis pelabuhan muat
-khusus di pesisir Sulawesi. - \texttt{Titik\_Kontrol}: Titik koordinat
-jangkar pemandu kurva lengkung di perairan internasional. -
-\texttt{Titik\_Tujuan}: Titik koordinat geografis pelabuhan bongkar di
-negara tujuan ekspor.
-
-\paragraph{D. Matriks Hasil Uji Empiris: Inventarisasi 6 Simpul
-Pelabuhan}\label{d.-matriks-hasil-uji-empiris-inventarisasi-6-simpul-pelabuhan}
+\paragraph{C. Matriks Hasil Uji Empiris: Inventarisasi 6 Simpul
+Pelabuhan}\label{c.-matriks-hasil-uji-empiris-inventarisasi-6-simpul-pelabuhan}
 
 Berdasarkan protokol validasi silang tersebut, profil komprehensif enam
 simpul pelabuhan dan terminal khusus utama di Pulau Sulawesi dipetakan
@@ -1945,8 +1722,36 @@ Skandinavia \\
 \end{longtable}
 }
 
-\paragraph{E. Interpretasi Spasial Industri: Rantai Pasok
-Global}\label{e.-interpretasi-spasial-industri-rantai-pasok-global}
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{1.6 Peta Jalur Distribusi Logistik Nikel
+Sulawesi}\label{peta-jalur-distribusi-logistik-nikel-sulawesi}
+
+\paragraph{A. Formulasi Matematis: Kurva Parametrik Alur
+Pelayaran}\label{a.-formulasi-matematis-kurva-parametrik-alur-pelayaran}
+
+Pemetaan alur pelayaran internasional dimodelkan menggunakan formulasi
+kurva parametrik lengkung (\emph{Bézier Curve}) untuk merepresentasikan
+alur laut kepulauan dan rute maritim internasional secara realistis:
+
+\textbf{Persamaan Formulasi Kurva Parametrik Alur Pelayaran Maritim:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Kurva(t) = (1 {-} t)\^{}2 * Titik\_Asal + 2 * (1 {-} t) * t * Titik\_Kontrol + t\^{}2 * Titik\_Tujuan}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{Keterangan Variabel:} - \texttt{Kurva(t)}: Vektor posisi koordinat
+geografis lintasan kapal pada parameter waktu t (rentang kontinu {[}0,
+1{]}). - \texttt{Titik\_Asal}: Titik koordinat geografis pelabuhan muat
+khusus di pesisir Sulawesi. - \texttt{Titik\_Kontrol}: Titik koordinat
+jangkar pemandu kurva lengkung di perairan internasional. -
+\texttt{Titik\_Tujuan}: Titik koordinat geografis pelabuhan bongkar di
+negara tujuan ekspor.
+
+\paragraph{B. Interpretasi Spasial Industri: Rantai Pasok
+Global}\label{b.-interpretasi-spasial-industri-rantai-pasok-global}
 
 Visualisasi jalur pelayaran ini mengonfirmasi temuan struktural pada
 sub-bab sebelumnya, di mana eksploitasi ekstraktif sepenuhnya
@@ -1967,23 +1772,9 @@ berorientasi ekspor:
   tangkap tradisional.
 \end{enumerate}
 
-\begin{itemize}
-\tightlist
-\item
-  \texttt{Titik\_Asal}: Titik koordinat geografis pelabuhan muat khusus.
-\item
-  \texttt{Titik\_Kontrol}: Titik koordinat jangkar pemandu kurva
-  lengkung.
-\item
-  \texttt{Titik\_Tujuan}: Titik koordinat geografis pelabuhan bongkar
-  negara tujuan.
-\item
-  \texttt{t}: Parameter interpolasi waktu (rentang 0-1).
-\end{itemize}
-
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\subsection{1.6 Matriks Indikator dan Sumber Data Resmi Bab
+\subsection{1.7 Matriks Indikator dan Sumber Data Resmi Bab
 1}\label{matriks-indikator-dan-sumber-data-resmi-bab-1}
 
 Seluruh variabel kuantitatif, kategori analisis, satuan ukur, periode
@@ -2045,7 +1836,7 @@ Terbuka \\
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\subsection{1.7 Bagan Alur Kerangka Kerja Riset Bab
+\subsection{1.8 Bagan Alur Kerangka Kerja Riset Bab
 1}\label{bagan-alur-kerangka-kerja-riset-bab-1}
 
 Keseluruhan struktur metodologis riset Bab 1 dioperasionalkan melalui

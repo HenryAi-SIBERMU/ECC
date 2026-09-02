@@ -719,6 +719,15 @@ def generate_all_bab1():
     mermaid_png_path_1_5 = str(tool_dir / "mermaid_flowchart_1_5.png")
     download_success_1_5 = download_mermaid_png(mermaid_str_1_5, mermaid_png_path_1_5)
 
+    mermaid_str_1_6 = """flowchart LR
+    A["Ekstraksi Koordinat<br/>Origin (Sulawesi)"] --> B["Penentuan Titik<br/>Tujuan (China/Jepang)"]
+    B --> C["Kalkulasi Kurva<br/>Parametrik (Bézier)"]
+    C --> D["Plotting Spasial<br/>(Plotly Scattergeo)"]
+    D --> E["Peta Jalur Distribusi<br/>Logistik Maritim"]
+"""
+    mermaid_png_path_1_6 = tool_dir / "mermaid_flowchart_1_6.png"
+    download_success_1_6 = download_mermaid_png(mermaid_str_1_6, mermaid_png_path_1_6)
+
     # 2. Inisiasi Pembuatan Dokumen DOCX 1-Kolom Penuh
     print("[2/5] Membangun Metodologi_Bab1_Ekspansi_Industri.docx (Format Publik)...")
     doc = Document()
@@ -1704,9 +1713,34 @@ def generate_all_bab1():
     # ═══════════════════════════════════════════════════════════
     add_h2(doc, "1.6 Peta Jalur Distribusi Logistik Nikel Sulawesi")
     
-    add_h4(doc, "A. Formulasi Matematis: Kurva Parametrik Alur Pelayaran")
+    add_h4(doc, "A. Pengantar & Kerangka Narasi")
     add_p(doc, [
-        ("Pemetaan alur pelayaran internasional dimodelkan menggunakan formulasi kurva parametrik lengkung (*Bézier Curve*) untuk merepresentasikan alur laut kepulauan dan rute maritim internasional secara realistis:", False, False),
+        ("Metode analisis pada tahapan ini difokuskan pada ", False, False),
+        ("Pemetaan Kausalitas (Spasial)", True, False),
+        (" untuk membedah asimetri penguasaan ruang antara wilayah hulu (origin: sumber ekstraksi di Sulawesi) dan hilir (destination: pusat industrialisasi luar negeri). Garis diplot menggunakan rute pelayaran untuk merepresentasikan jarak tempuh aktual kapal logistik di permukaan bumi.", False, False),
+    ])
+
+    add_h4(doc, "B. Alur Logika Metodologis (Flowchart Analisis Spasial)")
+    add_p(doc, [
+        ("Rangkaian proses ekstraksi koordinat hingga visualisasi spasial menggunakan pustaka *Scattergeo* direpresentasikan pada ", False, False),
+        ("Bagan Alur 1.6", True, False),
+        (" berikut:", False, False),
+    ])
+    
+    add_caption(doc, "Bagan Alur 1.6: Alur Logika Metodologis Pemetaan Jalur Logistik Maritim (Bézier Curve)")
+    if download_success_1_6:
+        try:
+            p_img_16 = doc.add_paragraph()
+            p_img_16.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            run_img_16 = p_img_16.add_run()
+            run_img_16.add_picture(str(mermaid_png_path_1_6), width=Cm(15))
+        except Exception as e:
+            p_err_16 = doc.add_paragraph()
+            run(p_err_16, "[Gambar Flowchart Gagal Dimuat]", color=C_RED, pt=9)
+            
+    add_h4(doc, "C. Formulasi Matematis: Kurva Parametrik Alur Pelayaran")
+    add_p(doc, [
+        ("Pemetaan alur pelayaran internasional dimodelkan menggunakan formulasi kurva parametrik lengkung (*Bézier Curve*) untuk merepresentasikan alur laut kepulauan secara realistis:", False, False),
     ])
     add_formula(doc, "Formulasi Kurva Parametrik Alur Pelayaran Maritim", "Kurva(t) = (1 - t)^2 * Titik_Asal + 2 * (1 - t) * t * Titik_Kontrol + t^2 * Titik_Tujuan",
                 var_desc=[
@@ -1716,13 +1750,21 @@ def generate_all_bab1():
                     ("Titik_Tujuan", "Titik koordinat geografis pelabuhan bongkar di negara tujuan ekspor."),
                 ])
 
-    add_h4(doc, "B. Interpretasi Spasial Industri: Rantai Pasok Global")
+    add_h4(doc, "D. Matriks Hasil Pemetaan Spasial")
     add_p(doc, [
-        ("Visualisasi jalur pelayaran ini mengonfirmasi temuan struktural pada sub-bab sebelumnya, di mana eksploitasi ekstraktif sepenuhnya berorientasi ekspor:", False, False)
+        ("Agregasi titik asal (Origin) dan tujuan akhir (Destination) di-render langsung ke dalam proyeksi spasial. Struktur data logistik yang menggerakkan pemetaan ini memetakan pelabuhan asal menuju pasar utama, yaitu ", False, False),
+        ("Tiongkok, Jepang, dan Korea Selatan", True, False),
+        (".", False, False)
+    ])
+
+    add_h4(doc, "E. Interpretasi Spasial Industri (Anatomi Rantai Pasok)")
+    add_p(doc, [
+        ("Peta rute logistik maritim mengilustrasikan alur distribusi produk olahan nikel dari kawasan industri di Sulawesi:", False, False)
     ])
     add_p(doc, [
-        ("1. ", True, False), ("Infrastruktur Raksasa Penunjang Ekspor: ", True, False), ("Keenam simpul pelabuhan melayani kapal dengan kapasitas hingga 50.000 DWT, memastikan arus bahan baku mentah (raw materials) terus mengalir ke pusat-pusat industri global, terutama Tiongkok.\n", False, False),
-        ("2. ", True, False), ("Eksternalitas bagi Ekosistem Pesisir: ", True, False), ("Pembangunan pelabuhan samudera di pesisir Morowali dan Konawe memicu fragmentasi ekosistem laut, perusakan terumbu karang, dan konflik ruang dengan nelayan tangkap tradisional.", False, False)
+        ("1. ", True, False), ("Orientasi Ekspor: ", True, False), ("Kawasan industri utama yang berstatus Proyek Strategis Nasional (PSN) mengalirkan produk olahan ke sentra-sentra industri manufaktur di pasar internasional.\n", False, False),
+        ("2. ", True, False), ("Integrasi Rantai Pasok: ", True, False), ("Mayoritas rute pengapalan terhubung langsung dengan pelabuhan ekspor tujuan, yang mengindikasikan posisi kawasan pemurnian di Sulawesi sebagai pemasok bahan baku setengah jadi pada rantai pasok global.\n", False, False),
+        ("3. ", True, False), ("Dinamika Rute Maritim: ", True, False), ("Peta rute mencerminkan diversifikasi pasar ekspor (Asia Timur) dan jaringan logistik kawasan.", False, False)
     ])
 
     # ═══════════════════════════════════════════════════════════
@@ -2601,6 +2643,22 @@ Emisi_CO2_Total = &sum;(Area_Loss_c * Faktor_Emisi_Biomassa_c)</p>
 </table>
 
 <h2>SUB-BAB 1.6: Peta Jalur Distribusi Logistik Nikel Sulawesi</h2>
+
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>
+  Metode analisis pada tahapan ini difokuskan pada <strong>Pemetaan Kausalitas (Spasial)</strong> untuk membedah asimetri penguasaan ruang antara wilayah hulu (origin: sumber ekstraksi di Sulawesi) dan hilir (destination: pusat industrialisasi luar negeri). Garis diplot menggunakan rute pelayaran untuk merepresentasikan jarak tempuh aktual kapal logistik di permukaan bumi.
+</p>
+
+<h4>B. Alur Logika Metodologis (Flowchart Analisis Spasial)</h4>
+<p>
+  Rangkaian proses ekstraksi koordinat hingga visualisasi spasial direpresentasikan pada <strong>Bagan Alur 1.6</strong> berikut:
+</p>
+<div class="table-caption">Bagan Alur 1.6: Alur Logika Metodologis Pemetaan Jalur Logistik Maritim (Bézier Curve)</div>
+<div style="text-align: center; margin: 20px 0;">
+  <img src="mermaid_flowchart_1_6.png" alt="Bagan Alur 1.6" style="max-width: 100%; border: 1px solid #ddd; padding: 10px; background-color: #fcfcfc;">
+</div>
+
+<h4>C. Formulasi Matematis: Kurva Parametrik Alur Pelayaran</h4>
 <div class="formula-title">Persamaan Formulasi Kurva Parametrik Alur Pelayaran Maritim:</div>
 <div class="formula">Kurva(t) = (1 - t)^2 * Titik_Asal + 2 * (1 - t) * t * Titik_Kontrol + t^2 * Titik_Tujuan,   t dalam rentang [0, 1]</div>
 <div class="var-desc">
@@ -2613,6 +2671,19 @@ Emisi_CO2_Total = &sum;(Area_Loss_c * Faktor_Emisi_Biomassa_c)</p>
     <li>• <strong>t</strong>: Parameter interpolasi waktu dan pergerakan lintasan dalam rentang kontinu [0, 1].</li>
   </ul>
 </div>
+
+<h4>D. Matriks Hasil Pemetaan Spasial</h4>
+<p>
+  Agregasi titik asal (Origin) dan tujuan akhir (Destination) di-render langsung ke dalam proyeksi spasial. Struktur data logistik yang menggerakkan pemetaan ini memetakan pelabuhan asal menuju pasar utama, yaitu <strong>Tiongkok, Jepang, dan Korea Selatan</strong>.
+</p>
+
+<h4>E. Interpretasi Spasial Industri (Anatomi Rantai Pasok)</h4>
+<p>Peta rute logistik maritim mengilustrasikan alur distribusi produk olahan nikel dari kawasan industri di Sulawesi:</p>
+<ul style="margin-left: 20px; margin-bottom: 15px;">
+  <li style="margin-bottom: 6px;"><strong>1. Orientasi Ekspor:</strong> Kawasan industri utama yang berstatus Proyek Strategis Nasional (PSN) mengalirkan produk olahan ke sentra-sentra industri manufaktur di pasar internasional.</li>
+  <li style="margin-bottom: 6px;"><strong>2. Integrasi Rantai Pasok:</strong> Mayoritas rute pengapalan terhubung langsung dengan pelabuhan ekspor tujuan, yang mengindikasikan posisi kawasan pemurnian di Sulawesi sebagai pemasok bahan baku setengah jadi.</li>
+  <li style="margin-bottom: 6px;"><strong>3. Dinamika Rute Maritim:</strong> Peta rute mencerminkan diversifikasi pasar ekspor (Asia Timur) dan jaringan logistik kawasan.</li>
+</ul>
 
 <h2>SUB-BAB 1.7: Matriks Indikator dan Sumber Data Resmi Bab 1</h2>
 <p>
@@ -3177,9 +3248,18 @@ Emisi_CO2_Total = &sum;(Area_Loss_c * Faktor_Emisi_Biomassa_c)</p>
         "---",
         "",
         "## 1.6 Peta Jalur Distribusi Logistik Nikel Sulawesi",
-        "#### A. Formulasi Matematis: Kurva Parametrik Alur Pelayaran",
-        "Pemetaan alur pelayaran internasional dimodelkan menggunakan formulasi kurva parametrik lengkung (*Bézier Curve*) untuk merepresentasikan alur laut kepulauan dan rute maritim internasional secara realistis:",
+        "#### A. Pengantar & Kerangka Narasi",
+        "Metode analisis pada tahapan ini difokuskan pada **Pemetaan Kausalitas (Spasial)** untuk membedah asimetri penguasaan ruang antara wilayah hulu (origin: sumber ekstraksi di Sulawesi) dan hilir (destination: pusat industrialisasi luar negeri). Garis diplot menggunakan rute pelayaran untuk merepresentasikan jarak tempuh aktual kapal logistik di permukaan bumi.",
         "",
+        "#### B. Alur Logika Metodologis (Flowchart Analisis Spasial)",
+        "Rangkaian proses ekstraksi koordinat hingga visualisasi spasial direpresentasikan pada **Bagan Alur 1.6** berikut:",
+        "",
+        "##### Bagan Alur 1.6: Alur Logika Metodologis Pemetaan Jalur Logistik Maritim (Bézier Curve)",
+        "```mermaid",
+        f"{mermaid_str_1_6}",
+        "```",
+        "",
+        "#### C. Formulasi Matematis: Kurva Parametrik Alur Pelayaran",
         "**Persamaan Formulasi Kurva Parametrik Alur Pelayaran Maritim:**",
         "```text",
         "Kurva(t) = (1 - t)^2 * Titik_Asal + 2 * (1 - t) * t * Titik_Kontrol + t^2 * Titik_Tujuan",
@@ -3190,11 +3270,15 @@ Emisi_CO2_Total = &sum;(Area_Loss_c * Faktor_Emisi_Biomassa_c)</p>
         "- `Titik_Kontrol`: Titik koordinat jangkar pemandu kurva lengkung di perairan internasional.",
         "- `Titik_Tujuan`: Titik koordinat geografis pelabuhan bongkar di negara tujuan ekspor.",
         "",
-        "#### B. Interpretasi Spasial Industri: Rantai Pasok Global",
-        "Visualisasi jalur pelayaran ini mengonfirmasi temuan struktural pada sub-bab sebelumnya, di mana eksploitasi ekstraktif sepenuhnya berorientasi ekspor:",
+        "#### D. Matriks Hasil Pemetaan Spasial",
+        "Agregasi titik asal (Origin) dan tujuan akhir (Destination) di-render langsung ke dalam proyeksi spasial. Struktur data logistik yang menggerakkan pemetaan ini memetakan pelabuhan asal menuju pasar utama, yaitu **Tiongkok, Jepang, dan Korea Selatan**.",
         "",
-        "1. **Infrastruktur Raksasa Penunjang Ekspor:** Keenam simpul pelabuhan melayani kapal dengan kapasitas hingga 50.000 DWT, memastikan arus bahan baku mentah (raw materials) terus mengalir ke pusat-pusat industri global, terutama Tiongkok.",
-        "2. **Eksternalitas bagi Ekosistem Pesisir:** Pembangunan pelabuhan samudera di pesisir Morowali dan Konawe memicu fragmentasi ekosistem laut, perusakan terumbu karang, dan konflik ruang dengan nelayan tangkap tradisional.",
+        "#### E. Interpretasi Spasial Industri (Anatomi Rantai Pasok)",
+        "Peta rute logistik maritim mengilustrasikan alur distribusi produk olahan nikel dari kawasan industri di Sulawesi:",
+        "",
+        "1. **Orientasi Ekspor:** Kawasan industri utama yang berstatus Proyek Strategis Nasional (PSN) mengalirkan produk olahan ke sentra-sentra industri manufaktur di pasar internasional.",
+        "2. **Integrasi Rantai Pasok:** Mayoritas rute pengapalan terhubung langsung dengan pelabuhan ekspor tujuan, yang mengindikasikan posisi kawasan pemurnian di Sulawesi sebagai pemasok bahan baku setengah jadi.",
+        "3. **Dinamika Rute Maritim:** Peta rute mencerminkan diversifikasi pasar ekspor (Asia Timur) dan jaringan logistik kawasan.",
         "",
         "---",
         "",

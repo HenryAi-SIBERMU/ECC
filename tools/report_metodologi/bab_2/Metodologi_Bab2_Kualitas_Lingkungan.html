@@ -114,5 +114,61 @@ h4 { color: #A5D6A7; }
 </table>
 <h4>E. Analisis Temuan Empiris</h4>
 <p>Kegagalan pengujian statistik ini membongkar fakta krusial bahwa Indeks Kualitas Udara (IKU) level provinsi adalah metrik agregat yang mengencerkan pencemaran udara lokal di tapak industri. Kualitas udara yang buruk di sekitar PLTU tertutupi oleh wilayah yang masih bersih.</p>
+
+<h2>2.3. Eksekusi Ruang: Ekspansi Kawasan Industri vs Tekanan Ekologis (Deforestasi)</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Data Izin Konsesi: <code>data/processed/sulawesi_izin_baru_per_tahun.csv</code> dan <code>data/processed/sulawesi_kawasan_nikel_luas.csv</code>; Data Deforestasi: <code>data/processed/sulawesi_gfw_master_1_dekade_2014_2023_v3.csv</code>. Visualisasi dashboard menampilkan Animated Bubble Chart (Hans Rosling-style) berlapis peta choropleth deforestasi kumulatif serta pengujian Chi-Square tabulasi silang (Crosstabulation).</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Pengembangan kawasan industri pemurnian nikel dan perizinan tambang berimplikasi pada alokasi ruang dan perubahan tutupan lahan. Data menunjukkan bahwa alokasi konsesi perizinan (IUP) dan Kawasan Industri mencakup total luasan <strong>1,185,174 Hektar</strong> di Pulau Sulawesi, dengan alokasi terbesar berada di <strong>Sulawesi Tengah</strong>. Sepanjang periode 2014-2023, data Global Forest Watch (GFW) merekam akumulasi kehilangan tutupan pohon sebesar <strong>1,386,055 Hektar</strong>, dengan akumulasi terbesar berada di Sulawesi Tengah. Sub-bab ini menguji hipotesis secara empiris: <strong>apakah luasan ekspansi kawasan industri dan perizinan tambang berbanding lurus dengan laju deforestasi?</strong></p>
+<h4>B. Alur Logika Metodologis Analisis Ekspansi Industri vs Deforestasi</h4>
+<div class="mermaid">flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Izin Konsesi Minerbaone<br/><i>Provinsi, Tahun, Luas Konsesi Baru (Ha)</i>"] --> C
+        B["Data Kawasan & IUP Nikel<br/><i>Provinsi, Total Luas IUP-Kawasan (Ha)</i>"] --> C
+        D["Data Deforestasi GFW 2014-2023<br/><i>Provinsi, Tahun, Total Deforestasi (Ha)</i>"] --> C
+    end
+    subgraph Panel_Processing["2. Pembentukan Panel 2.3"]
+        C["Agregasi Luas IUP-Kawasan per Provinsi"] --> F["Merge dengan Panel Deforestasi Provinsi-Tahun"]
+        F --> G["CUMSUM Konsesi & Deforestasi<br/>per Provinsi (2014-2023)"]
+    end
+    subgraph Statistical_Test["3. Animated Bubble & Crosstabulation"]
+        G --> H["Animated Bubble Chart<br/>Choropleth deforestasi kumulatif; bubble konsesi kumulatif"]
+        G --> I["Binning Median<br/>IUP Tinggi/Rendah; Deforestasi Tinggi-Parah/Rendah"]
+        I --> J["Uji Chi-Square Pearson"]
+        J --> K["Odds Ratio<br/>Risiko deforestasi parah pada kelompok IUP tinggi"]
+    end
+    H --> L["Pembacaan empiris eksekusi ruang kawasan industri"]
+    K --> L</div>
+<h4>C. Formulasi Matematis: Akumulasi Konsesi, Deforestasi, dan Uji Crosstabulation</h4>
+<p>Parameterisasi tekanan ruang dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:</p>
+<div class="formula">Luas_IUP_Kawasan_Provinsi = SUM(total_luas_ha) GROUP BY Provinsi</div>
+<div class="formula">Kumulatif_Luas_Konsesi_Ha = CUMSUM(Total_Luas_Konsesi_Baru_Ha) OVER (ORDER BY Tahun)</div>
+<div class="formula">Kumulatif_Deforestasi_Ha = CUMSUM(Total_Deforestasi_Ha) OVER (ORDER BY Tahun)</div>
+<div class="formula">Kategori = IF(Nilai &gt;= Median(Seluruh Panel), 'Tinggi/Parah', 'Rendah')</div>
+<div class="formula">Chi_Square (&chi;&sup2;) = Jumlah [ (Frekuensi_Observasi - Frekuensi_Harapan)^2 / Frekuensi_Harapan ]</div>
+<div class="formula">Odds_Ratio (OR) = ( a * d ) / ( b * c )</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<p>Akumulasi alokasi ruang konsesi IUP-Kawasan Industri dan deforestasi kumulatif dekade 2014-2023 pada masing-masing provinsi dapat dilihat secara empiris pada <strong>Tabel 2.4</strong> berikut:</p>
+<div class="table-caption">Tabel 2.4: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif per Provinsi (2014-2023)</div>
+<table>
+<thead><tr><th class="data-th">Provinsi</th><th class="data-th">Luas IUP & Kawasan (Ha)</th><th class="data-th">Konsesi Baru Kumulatif 2014-2023 (Ha)</th><th class="data-th">Deforestasi Kumulatif 2014-2023 (Ha)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Sulawesi Tengah</td><td class="data-td">453,216</td><td class="data-td">387,124</td><td class="data-td">481,908</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Tenggara</td><td class="data-td">446,025</td><td class="data-td">212,717</td><td class="data-td">337,434</td></tr>
+<tr><td class="data-td">Sulawesi Selatan</td><td class="data-td">181,469</td><td class="data-td">123,065</td><td class="data-td">261,147</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Utara</td><td class="data-td">94,829</td><td class="data-td">89,170</td><td class="data-td">74,240</td></tr>
+<tr><td class="data-td">Gorontalo</td><td class="data-td">5,212</td><td class="data-td">5,212</td><td class="data-td">98,063</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Barat</td><td class="data-td">4,424</td><td class="data-td">2,163</td><td class="data-td">133,263</td></tr>
+</tbody>
+</table>
+<p>Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total 60 observasi valid) disajikan secara ringkas pada <strong>Tabel 2.5</strong> berikut:</p>
+<div class="table-caption">Tabel 2.5: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2</div>
+<table>
+<thead><tr><th class="data-th">Variabel Independen (X)</th><th class="data-th">Variabel Dependen (Y)</th><th class="data-th">Chi-Square (&chi;&sup2;)</th><th class="data-th">P-Value</th><th class="data-th">Odds Ratio</th><th class="data-th">Kesimpulan</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Luas Ekspansi Industri (Ha)</td><td class="data-td">Kehilangan Tutupan Pohon (Ha)</td><td class="data-td">35.267</td><td class="data-td">p < 0.001</td><td class="data-td">81.0</td><td class="data-td">SIGNIFIKAN</td></tr>
+</tbody>
+</table>
+<h4>E. Analisis Temuan Empiris</h4>
+<p>Hasil pengujian mengonfirmasi secara SIGNIFIKAN bahwa perluasan kawasan industri dan izin pertambangan baru memiliki korelasi positif dengan tingkat deforestasi. Temuan statistik mengonfirmasi bahwa peningkatan luasan Ekspansi Industri berkorelasi signifikan dengan kenaikan tingkat Deforestasi.</p>
 </body>
 </html>

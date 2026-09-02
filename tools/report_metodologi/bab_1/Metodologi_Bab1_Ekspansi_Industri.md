@@ -401,7 +401,7 @@ Penerapan sistem pengujian statistik tabulasi silang pada data panel 6 provinsi 
 
 ##### Tabel 1.5: Matriks Tabulasi Silang 2×2, Uji Chi-Square (χ²), dan Estimasi Odds Ratio Panel PLTU Captive vs Deforestasi Komoditas (2014–2023)
 | Kategori Kapasitas PLTU (X) | Deforestasi Rendah (<10,961 Ha) | Deforestasi Tinggi (≥10,961 Ha) | Total Kasus | Parameter Statistik Uji | Nilai / df | Signifikansi / Kesimpulan |
-| :--- | :---: | :---: | :---: | :--- | :---: | :--- |
+| :--- | :---: | :---: | :---: | :--- | :--- | :--- |
 | **Rendah (≤0 MW)** | 27 [Exp: 18.5] | 10 [Exp: 18.5] | 37 (100%) | **Pearson Chi-Square (χ²)** | **18.049** (df=1) | p < 0.0001 (Signifikan) |
 | **Tinggi (>0 MW)** | 3 [Exp: 11.5] | 20 [Exp: 11.5] | 23 (100%) | **Likelihood Ratio** | **19.420** (df=1) | p < 0.0001 (Signifikan) |
 | **Total Observasi Panel** | **30** [Exp: 30.0] | **30** [Exp: 30.0] | **60** (100%) | **Linear-by-Linear Association** | **20.036** (df=1) | p < 0.0001 (Signifikan) |
@@ -427,76 +427,6 @@ Uji **Crosstabulation** pada analisis ini digunakan untuk mengukur hubungan anta
 
 #### B. Alur Logika Metodologis (Flowchart)
 Pendekatan statistik Time-Series untuk mengidentifikasi tren pertumbuhan izin tambang diilustrasikan pada **Bagan Alur 1.5** berikut. Adapun untuk tahapan analisis inferensial (Uji Chi-Square), alur logikanya merujuk secara penuh pada **Bagan Alur 1.4** (di sub-bab sebelumnya) dengan penyesuaian konfigurasi variabel spesifik sesuai Tabel Asumsi Dasar di bawah gambar.
-
-
-<div class="formula-title">Persamaan Formulasi Kurva Parametrik Alur Pelayaran Maritim:</div>
-<div class="formula">Kurva(t) = (1 - t)^2 * Titik_Asal + 2 * (1 - t) * t * Titik_Kontrol + t^2 * Titik_Tujuan,   t dalam rentang [0, 1]</div>
-<div class="var-desc">
-  <div class="var-desc-title">Keterangan Variabel:</div>
-  <ul>
-    <li>• <strong>Kurva(t)</strong>: Vektor posisi koordinat geografis lintasan kapal pada parameter waktu t.</li>
-    <li>• <strong>Titik_Asal</strong>: Titik koordinat geografis pelabuhan muat khusus di pesisir Sulawesi.</li>
-    <li>• <strong>Titik_Kontrol</strong>: Titik koordinat jangkar pemandu kurva lengkung di perairan internasional.</li>
-    <li>• <strong>Titik_Tujuan</strong>: Titik koordinat geografis pelabuhan bongkar di negara tujuan ekspor.</li>
-    <li>• <strong>t</strong>: Parameter interpolasi waktu dan pergerakan lintasan dalam rentang kontinu [0, 1].</li>
-  </ul>
-</div>
-
-<h2>SUB-BAB 1.6: Matriks Indikator dan Sumber Data Resmi Bab 1</h2>
-<p>
-  Seluruh variabel kuantitatif, kategori analisis, satuan ukur, periode tahun observasi, dan institusi penyedia data primer resmi yang digunakan dalam Bab 1 dikompilasikan pada <strong>Tabel 1.8</strong> berikut:
-</p>
-
-<div class="table-caption">Tabel 1.8: Matriks Indikator dan Sumber Data Primer Resmi Bab 1 (Ekspansi Industri Ekstraktif)</div>
-<table>
-  <thead>
-    <tr>
-      <th class="data-th" style="width:6%;">No</th>
-      <th class="data-th" style="width:26%;">Nama Indikator</th>
-      <th class="data-th" style="width:20%;">Kategori Analisis</th>
-      <th class="data-th" style="width:12%;">Satuan Ukur</th>
-      <th class="data-th" style="width:12%;">Cakupan Tahun</th>
-      <th class="data-th" style="width:24%;">Institusi & Sumber Data Resmi</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td class="data-td" style="text-align:center;">1</td><td class="data-td">Izin Usaha Pertambangan (IUP) Baru</td><td class="data-td">Faktor Tekanan Ekstraktif</td><td class="data-td">Unit Izin</td><td class="data-td">2014–2024</td><td class="data-td">Kementerian ESDM (Minerbaone)</td></tr>
-    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">2</td><td class="data-td">Luas Wilayah Konsesi Tambang Baru</td><td class="data-td">Faktor Tekanan Ekstraktif</td><td class="data-td">Hektar (Ha)</td><td class="data-td">2014–2024</td><td class="data-td">Kementerian ESDM (Minerbaone)</td></tr>
-    <tr><td class="data-td" style="text-align:center;">3</td><td class="data-td">Kapasitas Terpasang PLTU Captive</td><td class="data-td">Infrastruktur Energi Khusus</td><td class="data-td">Megawatt (MW)</td><td class="data-td">2014–2024</td><td class="data-td">Global Energy Monitor (GEM)</td></tr>
-    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">4</td><td class="data-td">Fasilitas Pengolahan & Pemurnian (Smelter)</td><td class="data-td">Fasilitas Industri Hilir</td><td class="data-td">Unit Fasilitas</td><td class="data-td">2014–2024</td><td class="data-td">Kementerian ESDM & Studi Industri</td></tr>
-    <tr><td class="data-td" style="text-align:center;">5</td><td class="data-td">Realisasi Investasi PMDN</td><td class="data-td">Arus Modal Domestik</td><td class="data-td">Triliun Rupiah</td><td class="data-td">2016–2024</td><td class="data-td">Kementerian Investasi / BKPM</td></tr>
-    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">6</td><td class="data-td">PDRB Menurut 17 Lapangan Usaha</td><td class="data-td">Struktur Ekonomi Makro</td><td class="data-td">Triliun Rupiah</td><td class="data-td">2016–2024</td><td class="data-td">Badan Pusat Statistik (BPS)</td></tr>
-    <tr><td class="data-td" style="text-align:center;">7</td><td class="data-td">PDRB Kabupaten Sentra Tambang</td><td class="data-td">Struktur Ekonomi Daerah</td><td class="data-td">Triliun Rupiah</td><td class="data-td">2016–2024</td><td class="data-td">BPS Kabupaten se-Sulteng</td></tr>
-    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">8</td><td class="data-td">Luas Kehilangan Hutan Komoditas</td><td class="data-td">Dampak Tutupan Lahan</td><td class="data-td">Hektar (Ha)</td><td class="data-td">2014–2023</td><td class="data-td">Global Forest Watch (GFW)</td></tr>
-    <tr><td class="data-td" style="text-align:center;">9</td><td class="data-td">Simpul Dermaga & Terminal Khusus Ekspor</td><td class="data-td">Infrastruktur Rantai Pasok</td><td class="data-td">Titik Koordinat & DWT</td><td class="data-td">2014–2024</td><td class="data-td">KNKT, Perpres PSN, Lap. Terbuka</td></tr>
-  </tbody>
-</table>
-
-<h2>SUB-BAB 1.7: Bagan Alur Kerangka Kerja Riset Bab 1</h2>
-<p>
-  Keseluruhan struktur metodologis riset Bab 1 dioperasionalkan melalui empat fase kerja berurutan sebagaimana disajikan pada <strong>Tabel 1.9</strong> berikut:
-</p>
-
-<div class="table-caption">Tabel 1.9: Matriks Tahapan dan Alur Kerangka Kerja Riset Bab 1</div>
-<table>
-  <thead>
-    <tr>
-      <th class="data-th" style="width:20%;">Tahapan Riset</th>
-      <th class="data-th" style="width:26%;">Fokus Metodologis</th>
-      <th class="data-th" style="width:28%;">Bahan & Sumber Data</th>
-      <th class="data-th" style="width:26%;">Keluaran / Hasil Analisis</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td class="data-td"><strong>Fase I: Pengumpulan Data</strong></td><td class="data-td">Kurasi data resmi lintas kementerian dan lembaga</td><td class="data-td">Publikasi BPS, Minerbaone, BKPM, GEM, dan GFW</td><td class="data-td">Basis Data Tabular Panel Provinsi (2014–2024)</td></tr>
-    <tr class="data-tr-even"><td class="data-td"><strong>Fase II: Reklasifikasi Hukum</strong></td><td class="data-td">Penyusunan kerangka rantai pasok hukum terintegrasi</td><td class="data-td">UU No. 3/2020, PP No. 96/2021, Perpres No. 112/2022</td><td class="data-td">3 Klaster Makro (Ekstraktif, Akar Rumput, Jasa)</td></tr>
-    <tr><td class="data-td"><strong>Fase III: Pengujian Statistik</strong></td><td class="data-td">Uji signifikansi hubungan dan rasio peluang</td><td class="data-td">Tabel Kontinjensi, Uji Chi-Square, Odds Ratio</td><td class="data-td">Bukti Kausalitas Signifikan Tekanan vs Deforestasi</td></tr>
-    <tr class="data-tr-even"><td class="data-td"><strong>Fase IV: Pemetaan Rantai Pasok</strong></td><td class="data-td">Triangulasi data logistik dan pemodelan maritim</td><td class="data-td">Laporan KNKT, Perpres PSN, Kurva Parametrik Bézier</td><td class="data-td">Peta Alur Rantai Pasok Ekspor & Konsentrasi Spasial 78%</td></tr>
-  </tbody>
-</table>
-
-</body>
-
 ##### Bagan Alur 1.5: Alur Logika Tren Pertumbuhan Izin Tambang Baru
 ```mermaid
 flowchart TD
@@ -725,7 +655,23 @@ Detail dari keempat sumber informasi validasi silang (triangulasi) publik adalah
 3. **Laporan Keberlanjutan & Tahunan Korporasi Terbuka:** Laporan resmi PT Vale Indonesia Tbk dan PT ANTAM Tbk mengenai fasilitas pelabuhan khusus.
 4. **Laporan Audit Lembaga Riset Independen:** Publikasi riset independen mengenai rantai pasok dan operasional terminal khusus maritim.
 
-#### C. Formulasi Matematis: Kurva Parametrik Alur Pelayaran
+
+#### C. Matriks Hasil Uji Empiris: Inventarisasi 6 Simpul Pelabuhan
+Berdasarkan protokol validasi silang tersebut, profil komprehensif enam simpul pelabuhan dan terminal khusus utama di Pulau Sulawesi dipetakan pada **Tabel 1.7** berikut:
+
+##### Tabel 1.7: Inventarisasi Enam Simpul Pelabuhan dan Terminal Khusus Ekspor Nikel di Pulau Sulawesi
+| Simpul Kawasan Industri | Wilayah Administrasi | Fasilitas Pelabuhan / Terminal | Status Regulasi | Kapasitas Kapal | Tujuan Utama Ekspor |
+| :--- | :--- | :--- | :---: | :---: | :--- |
+| **IMIP Morowali** | Morowali, Sulawesi Tengah | Pelabuhan Samudera & Dermaga Curah | PSN (Perpres 109/2020) | Hingga 52.378 DWT | Pasar Global (Tiongkok) |
+| **GNI Morowali Utara** | Morowali Utara, Sulteng | Terminal Khusus Pesisir Tomori | Izin Industri Mandiri | Hingga 30.000 DWT | Pasar Global (Tiongkok) |
+| **VDNI Konawe** | Konawe, Sulawesi Tenggara | Dermaga Khusus Curah & Kargo | PSN (Perpres 109/2020) | Hingga 50.000 DWT | Pasar Global (Tiongkok) |
+| **OSS Konawe** | Konawe, Sulawesi Tenggara | Dermaga Terintegrasi Konawe | PSN (Perpres 109/2020) | Hingga 50.000 DWT | Pasar Global (Tiongkok) |
+| **Pomalaa (ANTAM)** | Kolaka, Sulawesi Tenggara | Dermaga Pomalaa & Konveyor | Kawasan BUMN Industri | Hingga 12.000 DWT | Jepang & Korsel |
+| **Sorowako (Vale)** | Luwu Timur, Sulawesi Selatan | Pelabuhan Balantang Malili | Kontrak Karya Tambang | Hingga 15.000 DWT | Jepang & Skandinavia |
+---
+
+## 1.6 Peta Jalur Distribusi Logistik Nikel Sulawesi
+#### A. Formulasi Matematis: Kurva Parametrik Alur Pelayaran
 Pemetaan alur pelayaran internasional dimodelkan menggunakan formulasi kurva parametrik lengkung (*Bézier Curve*) untuk merepresentasikan alur laut kepulauan dan rute maritim internasional secara realistis:
 
 **Persamaan Formulasi Kurva Parametrik Alur Pelayaran Maritim:**
@@ -738,32 +684,15 @@ Kurva(t) = (1 - t)^2 * Titik_Asal + 2 * (1 - t) * t * Titik_Kontrol + t^2 * Titi
 - `Titik_Kontrol`: Titik koordinat jangkar pemandu kurva lengkung di perairan internasional.
 - `Titik_Tujuan`: Titik koordinat geografis pelabuhan bongkar di negara tujuan ekspor.
 
-#### D. Matriks Hasil Uji Empiris: Inventarisasi 6 Simpul Pelabuhan
-Berdasarkan protokol validasi silang tersebut, profil komprehensif enam simpul pelabuhan dan terminal khusus utama di Pulau Sulawesi dipetakan pada **Tabel 1.7** berikut:
-
-##### Tabel 1.7: Inventarisasi Enam Simpul Pelabuhan dan Terminal Khusus Ekspor Nikel di Pulau Sulawesi
-| Simpul Kawasan Industri | Wilayah Administrasi | Fasilitas Pelabuhan / Terminal | Status Regulasi | Kapasitas Kapal | Tujuan Utama Ekspor |
-| :--- | :--- | :--- | :---: | :---: | :--- |
-| **IMIP Morowali** | Morowali, Sulawesi Tengah | Pelabuhan Samudera & Dermaga Curah | PSN (Perpres 109/2020) | Hingga 52.378 DWT | Pasar Global (Tiongkok) |
-| **GNI Morowali Utara** | Morowali Utara, Sulteng | Terminal Khusus Pesisir Tomori | Izin Industri Mandiri | Hingga 30.000 DWT | Pasar Global (Tiongkok) |
-| **VDNI Konawe** | Konawe, Sulawesi Tenggara | Dermaga Khusus Curah & Kargo | PSN (Perpres 109/2020) | Hingga 50.000 DWT | Pasar Global (Tiongkok) |
-| **OSS Konawe** | Konawe, Sulawesi Tenggara | Dermaga Terintegrasi Konawe | PSN (Perpres 109/2020) | Hingga 50.000 DWT | Pasar Global (Tiongkok) |
-| **Pomalaa (ANTAM)** | Kolaka, Sulawesi Tenggara | Dermaga Pomalaa & Konveyor | Kawasan BUMN Industri | Hingga 12.000 DWT | Jepang & Korsel |
-| **Sorowako (Vale)** | Luwu Timur, Sulawesi Selatan | Pelabuhan Balantang Malili | Kontrak Karya Tambang | Hingga 15.000 DWT | Jepang & Skandinavia |
-
-#### E. Interpretasi Spasial Industri: Rantai Pasok Global
+#### B. Interpretasi Spasial Industri: Rantai Pasok Global
 Visualisasi jalur pelayaran ini mengonfirmasi temuan struktural pada sub-bab sebelumnya, di mana eksploitasi ekstraktif sepenuhnya berorientasi ekspor:
 
 1. **Infrastruktur Raksasa Penunjang Ekspor:** Keenam simpul pelabuhan melayani kapal dengan kapasitas hingga 50.000 DWT, memastikan arus bahan baku mentah (raw materials) terus mengalir ke pusat-pusat industri global, terutama Tiongkok.
 2. **Eksternalitas bagi Ekosistem Pesisir:** Pembangunan pelabuhan samudera di pesisir Morowali dan Konawe memicu fragmentasi ekosistem laut, perusakan terumbu karang, dan konflik ruang dengan nelayan tangkap tradisional.
-- `Titik_Asal`: Titik koordinat geografis pelabuhan muat khusus.
-- `Titik_Kontrol`: Titik koordinat jangkar pemandu kurva lengkung.
-- `Titik_Tujuan`: Titik koordinat geografis pelabuhan bongkar negara tujuan.
-- `t`: Parameter interpolasi waktu (rentang 0-1).
 
 ---
 
-## 1.6 Matriks Indikator dan Sumber Data Resmi Bab 1
+## 1.7 Matriks Indikator dan Sumber Data Resmi Bab 1
 Seluruh variabel kuantitatif, kategori analisis, satuan ukur, periode tahun observasi, dan institusi penyedia data primer resmi yang digunakan dalam Bab 1 dikompilasikan pada **Tabel 1.8** berikut:
 
 ##### Tabel 1.8: Matriks Indikator dan Sumber Data Primer Resmi Bab 1
@@ -781,7 +710,7 @@ Seluruh variabel kuantitatif, kategori analisis, satuan ukur, periode tahun obse
 
 ---
 
-## 1.7 Bagan Alur Kerangka Kerja Riset Bab 1
+## 1.8 Bagan Alur Kerangka Kerja Riset Bab 1
 Keseluruhan struktur metodologis riset Bab 1 dioperasionalkan melalui empat fase kerja berurutan sebagaimana disajikan pada **Tabel 1.9** berikut:
 
 ##### Tabel 1.9: Matriks Tahapan dan Alur Kerangka Kerja Riset Bab 1
