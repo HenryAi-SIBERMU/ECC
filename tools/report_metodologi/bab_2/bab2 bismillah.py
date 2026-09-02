@@ -595,6 +595,24 @@ def generate_all_bab2():
     mermaid_png_path_2_2 = str(tool_dir / "mermaid_flowchart_2_2.png")
     download_success_2_2 = download_mermaid_png(mermaid_str_2_2, mermaid_png_path_2_2)
 
+    df_no2 = pd.read_csv(data_dir / "gee_nasa_no2_sulawesi_provinsi.csv")
+    df_no2_2023 = df_no2[df_no2["Tahun"] == focus_end_year].copy()
+    
+    df_iku_2023 = df_iku[df_iku["Tahun"] == focus_end_year].groupby("Provinsi")["IKU"].mean().reset_index()
+    
+    empirical_22 = pd.merge(df_pltu_prov, df_iku_2023, on="Provinsi", how="left").fillna({'Kapasitas_PLTU_MW': 0})
+    empirical_22 = pd.merge(empirical_22, df_no2_2023[["Provinsi", "Rata_Rata_NO2"]], on="Provinsi", how="left")
+    empirical_22 = empirical_22.sort_values("Kapasitas_PLTU_MW", ascending=False)
+    
+    empirical_rows_22 = []
+    for _, row in empirical_22.iterrows():
+        empirical_rows_22.append([
+            row["Provinsi"],
+            f"{row['Kapasitas_PLTU_MW']:,.0f}",
+            f"{row['IKU']:.1f}" if pd.notna(row['IKU']) else "-",
+            f"{row['Rata_Rata_NO2']:.2e}" if pd.notna(row['Rata_Rata_NO2']) else "-",
+        ])
+
     print("[2.7/4] Mengekstraksi dataset empiris Bab 2 sub-bab 2.3...")
     df_luas = pd.read_csv(data_dir / "sulawesi_kawasan_nikel_luas.csv")
     df_izin = pd.read_csv(data_dir / "sulawesi_izin_baru_per_tahun.csv")
@@ -847,13 +865,21 @@ def generate_all_bab2():
         ("IKU", "Indeks Kualitas Udara dari data KLHK."),
     ])
 
-    add_h4(doc, "D. Matriks Hasil Uji Empiris: Crosstabulation PLTU vs IKU")
+    add_h4(doc, "D. Matriks Hasil Uji Empiris: Kapasitas PLTU, IKU, dan Konsentrasi NO2 NASA")
     add_p(doc, [
-        (f"Penerapan pengujian statistik tabulasi silang pada data panel (total {valid_cases_22} observasi valid) disajikan secara ringkas pada ", False, False),
+        ("Akumulasi kapasitas PLTU captive yang beroperasi, beserta kondisi mutu udara melalui pengukuran IKU dan satelit NASA TROPOMI (NO₂) dapat dilihat secara empiris pada ", False, False),
         ("Tabel 2.3", True, False),
         (" berikut:", False, False),
     ])
-    add_caption(doc, "Tabel 2.3: Ringkasan Eksekutif Skenario Crosstab Kapasitas PLTU vs IKU Bab 2")
+    add_caption(doc, f"Tabel 2.3: Rincian Empiris Kapasitas PLTU Captive, IKU, dan Konsentrasi NO₂ NASA ({focus_end_year})")
+    add_table_1col(doc, ["Provinsi", "Kapasitas PLTU Captive (MW)", "IKU", "NASA TROPOMI NO₂ (mol/m²)\n*Batas Kritis: 6.00e-06"], empirical_rows_22, [3.5, 4.0, 2.0, 4.5], ["L", "C", "C", "C"])
+
+    add_p(doc, [
+        (f"Penerapan pengujian statistik tabulasi silang pada data panel (total {valid_cases_22} observasi valid) disajikan secara ringkas pada ", False, False),
+        ("Tabel 2.4", True, False),
+        (" berikut:", False, False),
+    ])
+    add_caption(doc, "Tabel 2.4: Ringkasan Eksekutif Skenario Crosstab Kapasitas PLTU vs IKU Bab 2")
     add_table_1col(doc, ["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (χ²)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_22, [3.0, 3.5, 2.0, 2.0, 2.0, 2.5], ["L", "L", "C", "C", "C", "C"])
 
     add_h4(doc, "E. Analisis Temuan Empiris: Efek Pengenceran Udara Ambien")
@@ -934,18 +960,18 @@ def generate_all_bab2():
     add_h4(doc, "D. Matriks Hasil Uji Empiris: Alokasi Ruang Konsesi vs Deforestasi Kumulatif")
     add_p(doc, [
         ("Akumulasi alokasi ruang konsesi IUP-Kawasan Industri dan deforestasi kumulatif dekade 2014-2023 pada masing-masing provinsi dapat dilihat secara empiris pada ", False, False),
-        ("Tabel 2.4", True, False),
+        ("Tabel 2.5", True, False),
         (" berikut:", False, False),
     ])
-    add_caption(doc, "Tabel 2.4: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif per Provinsi (2014-2023)")
+    add_caption(doc, "Tabel 2.5: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif per Provinsi (2014-2023)")
     add_table_1col(doc, ["Provinsi", "Luas IUP & Kawasan (Ha)", "Konsesi Baru Kumulatif 2014-2023 (Ha)", "Deforestasi Kumulatif 2014-2023 (Ha)"], empirical_rows_23, [3.4, 3.6, 4.5, 4.5], ["L", "C", "C", "C"])
 
     add_p(doc, [
         (f"Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total {valid_cases_23} observasi valid) disajikan secara ringkas pada ", False, False),
-        ("Tabel 2.5", True, False),
+        ("Tabel 2.6", True, False),
         (" berikut:", False, False),
     ])
-    add_caption(doc, "Tabel 2.5: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2")
+    add_caption(doc, "Tabel 2.6: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2")
     add_table_1col(doc, ["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (χ²)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_23, [3.0, 3.5, 2.0, 2.0, 2.0, 2.5], ["L", "L", "C", "C", "C", "C"])
 
     add_h4(doc, "E. Analisis Temuan Empiris: Eksekusi Ruang dan Laju Deforestasi")
@@ -1020,7 +1046,11 @@ h4 {{ color: #A5D6A7; }}
 <div class="formula">Kapasitas_PLTU_Provinsi = SUM(Kapasitas_i) GROUP BY Provinsi</div>
 <div class="formula">Rata_Rata_IKU_Provinsi_Tahun = MEAN(IKU) GROUP BY Provinsi, Tahun</div>
 <h4>D. Matriks Hasil Uji Empiris</h4>
-<div class="table-caption">Tabel 2.3: Ringkasan Eksekutif Skenario Crosstab Kapasitas PLTU vs IKU Bab 2</div>
+<p>Akumulasi kapasitas PLTU captive yang beroperasi, beserta kondisi mutu udara melalui pengukuran IKU dan satelit NASA TROPOMI (NO₂) dapat dilihat secara empiris pada <strong>Tabel 2.3</strong> berikut:</p>
+<div class="table-caption">Tabel 2.3: Rincian Empiris Kapasitas PLTU Captive, IKU, dan Konsentrasi NO₂ NASA ({focus_end_year})</div>
+{html_table(["Provinsi", "Kapasitas PLTU Captive (MW)", "IKU", "NASA TROPOMI NO₂ (mol/m²)"], empirical_rows_22)}
+<p>Penerapan pengujian statistik tabulasi silang pada data panel (total {valid_cases_22} observasi valid) disajikan secara ringkas pada <strong>Tabel 2.4</strong> berikut:</p>
+<div class="table-caption">Tabel 2.4: Ringkasan Eksekutif Skenario Crosstab Kapasitas PLTU vs IKU Bab 2</div>
 {html_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (&chi;&sup2;)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_22)}
 <h4>E. Analisis Temuan Empiris</h4>
 <p>{finding_22}</p>
@@ -1040,11 +1070,11 @@ h4 {{ color: #A5D6A7; }}
 <div class="formula">Chi_Square (&chi;&sup2;) = Jumlah [ (Frekuensi_Observasi - Frekuensi_Harapan)^2 / Frekuensi_Harapan ]</div>
 <div class="formula">Odds_Ratio (OR) = ( a * d ) / ( b * c )</div>
 <h4>D. Matriks Hasil Uji Empiris</h4>
-<p>Akumulasi alokasi ruang konsesi IUP-Kawasan Industri dan deforestasi kumulatif dekade 2014-2023 pada masing-masing provinsi dapat dilihat secara empiris pada <strong>Tabel 2.4</strong> berikut:</p>
-<div class="table-caption">Tabel 2.4: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif per Provinsi (2014-2023)</div>
+<p>Akumulasi alokasi ruang konsesi IUP-Kawasan Industri dan deforestasi kumulatif dekade 2014-2023 pada masing-masing provinsi dapat dilihat secara empiris pada <strong>Tabel 2.5</strong> berikut:</p>
+<div class="table-caption">Tabel 2.5: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif per Provinsi (2014-2023)</div>
 {html_table(["Provinsi", "Luas IUP & Kawasan (Ha)", "Konsesi Baru Kumulatif 2014-2023 (Ha)", "Deforestasi Kumulatif 2014-2023 (Ha)"], empirical_rows_23)}
-<p>Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total {valid_cases_23} observasi valid) disajikan secara ringkas pada <strong>Tabel 2.5</strong> berikut:</p>
-<div class="table-caption">Tabel 2.5: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2</div>
+<p>Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total {valid_cases_23} observasi valid) disajikan secara ringkas pada <strong>Tabel 2.6</strong> berikut:</p>
+<div class="table-caption">Tabel 2.6: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2</div>
 {html_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (&chi;&sup2;)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_23)}
 <h4>E. Analisis Temuan Empiris</h4>
 <p>{finding_23}</p>
@@ -1127,9 +1157,14 @@ h4 {{ color: #A5D6A7; }}
         "```",
         "",
         "#### D. Matriks Hasil Uji Empiris",
-        f"Penerapan pengujian statistik tabulasi silang pada data panel (total {valid_cases_22} observasi valid) disajikan secara ringkas pada **Tabel 2.3** berikut:",
+        "Akumulasi kapasitas PLTU captive yang beroperasi, beserta kondisi mutu udara melalui pengukuran IKU dan satelit NASA TROPOMI (NO₂) dapat dilihat secara empiris pada **Tabel 2.3** berikut:",
         "",
-        "##### Tabel 2.3: Ringkasan Eksekutif Skenario Crosstab Kapasitas PLTU vs IKU Bab 2",
+        f"##### Tabel 2.3: Rincian Empiris Kapasitas PLTU Captive, IKU, dan Konsentrasi NO₂ NASA ({focus_end_year})",
+        markdown_table(["Provinsi", "Kapasitas PLTU Captive (MW)", "IKU", "NASA TROPOMI NO₂ (mol/m²)"], empirical_rows_22),
+        "",
+        f"Penerapan pengujian statistik tabulasi silang pada data panel (total {valid_cases_22} observasi valid) disajikan secara ringkas pada **Tabel 2.4** berikut:",
+        "",
+        "##### Tabel 2.4: Ringkasan Eksekutif Skenario Crosstab Kapasitas PLTU vs IKU Bab 2",
         markdown_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (χ²)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_22),
         "",
         "#### E. Analisis Temuan Empiris: Efek Pengenceran Udara Ambien",
@@ -1160,14 +1195,14 @@ h4 {{ color: #A5D6A7; }}
         "```",
         "",
         "#### D. Matriks Hasil Uji Empiris",
-        "Akumulasi alokasi ruang konsesi IUP-Kawasan Industri dan deforestasi kumulatif dekade 2014-2023 pada masing-masing provinsi dapat dilihat secara empiris pada **Tabel 2.4** berikut:",
+        "Akumulasi alokasi ruang konsesi IUP-Kawasan Industri dan deforestasi kumulatif dekade 2014-2023 pada masing-masing provinsi dapat dilihat secara empiris pada **Tabel 2.5** berikut:",
         "",
-        "##### Tabel 2.4: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif per Provinsi (2014-2023)",
+        "##### Tabel 2.5: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif per Provinsi (2014-2023)",
         markdown_table(["Provinsi", "Luas IUP & Kawasan (Ha)", "Konsesi Baru Kumulatif 2014-2023 (Ha)", "Deforestasi Kumulatif 2014-2023 (Ha)"], empirical_rows_23),
         "",
-        f"Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total {valid_cases_23} observasi valid) disajikan secara ringkas pada **Tabel 2.5** berikut:",
+        f"Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total {valid_cases_23} observasi valid) disajikan secara ringkas pada **Tabel 2.6** berikut:",
         "",
-        "##### Tabel 2.5: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2",
+        "##### Tabel 2.6: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2",
         markdown_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (χ²)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_23),
         "",
         "#### E. Analisis Temuan Empiris: Eksekusi Ruang dan Laju Deforestasi",

@@ -121,9 +121,18 @@ Rata_Rata_IKU_Provinsi_Tahun = MEAN(IKU) GROUP BY Provinsi, Tahun
 ```
 
 #### D. Matriks Hasil Uji Empiris
-Penerapan pengujian statistik tabulasi silang pada data panel (total 54 observasi valid) disajikan secara ringkas pada **Tabel 2.3** berikut:
+Akumulasi kapasitas PLTU captive yang beroperasi, beserta kondisi mutu udara melalui pengukuran IKU dan satelit NASA TROPOMI (NO₂) dapat dilihat secara empiris pada **Tabel 2.3** berikut:
 
-##### Tabel 2.3: Ringkasan Eksekutif Skenario Crosstab Kapasitas PLTU vs IKU Bab 2
+##### Tabel 2.3: Rincian Empiris Kapasitas PLTU Captive, IKU, dan Konsentrasi NO₂ NASA (2024)
+| Provinsi | Kapasitas PLTU Captive (MW) | IKU | NASA TROPOMI NO₂ (mol/m²) |
+| :--- | :--- | :--- | :--- |
+| Sulawesi Tengah | 9,365 | 92.9 | 6.50e-06 |
+| Sulawesi Tenggara | 2,280 | 93.0 | 6.62e-06 |
+| Sulawesi Selatan | 600 | 91.5 | 6.40e-06 |
+
+Penerapan pengujian statistik tabulasi silang pada data panel (total 54 observasi valid) disajikan secara ringkas pada **Tabel 2.4** berikut:
+
+##### Tabel 2.4: Ringkasan Eksekutif Skenario Crosstab Kapasitas PLTU vs IKU Bab 2
 | Variabel Independen (X) | Variabel Dependen (Y) | Chi-Square (χ²) | P-Value | Odds Ratio | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Kapasitas PLTU (MW) | Indeks Kualitas Udara (IKU) | 0.000 | 1.000 | 0.00 | TIDAK SIGNIFIKAN |
@@ -173,9 +182,9 @@ Odds_Ratio (OR) = ( a * d ) / ( b * c )
 ```
 
 #### D. Matriks Hasil Uji Empiris
-Akumulasi alokasi ruang konsesi IUP-Kawasan Industri dan deforestasi kumulatif dekade 2014-2023 pada masing-masing provinsi dapat dilihat secara empiris pada **Tabel 2.4** berikut:
+Akumulasi alokasi ruang konsesi IUP-Kawasan Industri dan deforestasi kumulatif dekade 2014-2023 pada masing-masing provinsi dapat dilihat secara empiris pada **Tabel 2.5** berikut:
 
-##### Tabel 2.4: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif per Provinsi (2014-2023)
+##### Tabel 2.5: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif per Provinsi (2014-2023)
 | Provinsi | Luas IUP & Kawasan (Ha) | Konsesi Baru Kumulatif 2014-2023 (Ha) | Deforestasi Kumulatif 2014-2023 (Ha) |
 | :--- | :--- | :--- | :--- |
 | Sulawesi Tengah | 453,216 | 387,124 | 481,908 |
@@ -185,9 +194,9 @@ Akumulasi alokasi ruang konsesi IUP-Kawasan Industri dan deforestasi kumulatif d
 | Gorontalo | 5,212 | 5,212 | 98,063 |
 | Sulawesi Barat | 4,424 | 2,163 | 133,263 |
 
-Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total 60 observasi valid) disajikan secara ringkas pada **Tabel 2.5** berikut:
+Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total 60 observasi valid) disajikan secara ringkas pada **Tabel 2.6** berikut:
 
-##### Tabel 2.5: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2
+##### Tabel 2.6: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2
 | Variabel Independen (X) | Variabel Dependen (Y) | Chi-Square (χ²) | P-Value | Odds Ratio | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Luas Ekspansi Industri (Ha) | Kehilangan Tutupan Pohon (Ha) | 35.267 | p < 0.001 | 81.0 | SIGNIFIKAN |
