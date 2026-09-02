@@ -825,8 +825,10 @@ with st.expander("2 · KUALITAS LINGKUNGAN", expanded=False):
     d2 = load_all_page2()
     df_ika, df_iku, df_gfw2, df_pltu2, df_b3, df_driver = d2['ika'], d2['iku'], d2['gfw'], d2['pltu'], d2['b3'], d2['driver']
 
-    mean_ika_2023 = df_ika[df_ika['Tahun'] == 2023]['Indeks Kualitas Air'].mean()
-    mean_iku_2023 = df_iku[df_iku['Tahun'] == 2023]['IKU'].mean()
+    max_yr_ika = df_ika['Tahun'].max() if 'Tahun' in df_ika.columns and not df_ika.empty else 2023
+    mean_ika_2023 = df_ika[df_ika['Tahun'] == max_yr_ika]['Indeks Kualitas Air'].mean() if pd.notna(max_yr_ika) else 0
+    max_yr_iku = df_iku['Tahun'].max() if 'Tahun' in df_iku.columns and not df_iku.empty else 2023
+    mean_iku_2023 = df_iku[df_iku['Tahun'] == max_yr_iku]['IKU'].mean() if pd.notna(max_yr_iku) else 0
     df_b3['Estimasi Timbulan (Ton/Tahun)'] = pd.to_numeric(df_b3['Estimasi Timbulan (Ton/Tahun)'], errors='coerce')
     tot_limbah_b3_juta = df_b3['Estimasi Timbulan (Ton/Tahun)'].sum() / 1_000_000
     tot_deforestasi2 = df_gfw2['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'].sum()
@@ -857,7 +859,15 @@ with st.expander("2 · KUALITAS LINGKUNGAN", expanded=False):
     
     df_ika_panel = df_ika.groupby(['Provinsi', 'Tahun'])['Indeks Kualitas Air'].mean().reset_index()
     df_panel_2_1 = pd.merge(df_ika_panel, df_smelter_prov, on='Provinsi', how='left').fillna({'Jumlah_Smelter': 0})
-    df_panel_map_2_1 = df_panel_2_1[df_panel_2_1['Tahun'] == 2023].copy()
+    
+    df_panel_2_1['Tahun'] = pd.to_numeric(df_panel_2_1['Tahun'], errors='coerce')
+    max_year_21 = df_panel_2_1['Tahun'].max()
+    if pd.isna(max_year_21):
+        max_year_21 = 2023
+    df_panel_map_2_1 = df_panel_2_1[df_panel_2_1['Tahun'] == max_year_21].copy()
+    
+    if df_panel_map_2_1.empty:
+        df_panel_map_2_1 = pd.DataFrame({'Provinsi': ['Sulawesi Tengah'], 'Indeks Kualitas Air': [0]})
     
     with open('data/processed/sulawesi_provinces.geojson', 'r') as f:
         sulawesi_geojson = json.load(f)
