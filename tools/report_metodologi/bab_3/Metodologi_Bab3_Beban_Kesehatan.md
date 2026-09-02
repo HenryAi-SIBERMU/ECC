@@ -248,15 +248,6 @@ flowchart LR
     end
 ```
 
-##### Tabel 3.4a: Konfigurasi Variabel Analisis Zoonosis (Sub-bab 3.4)
-| Komponen Analisis | Definisi Variabel (Sub-bab 3.4) |
-| :--- | :--- |
-| Kategori Wilayah Distrik | Label dikotomi daerah ring 1 tambang/smelter aktif vs daerah penyangga luar ring. |
-| Total Kasus Penyakit | Angka infeksi yang ditransmisikan vektor, seperti Malaria, DBD, Rabies, dan Gigitan Hewan. |
-| Model Analisis | Deep Dive Case Study berbasis deret waktu tingkat kabupaten/kota khusus Sulawesi Tengah. |
-| Episentrum Ekstraktif | Morowali, Morowali Utara, dan Banggai. |
-| Dataset & File | data/processed/zoonosis_kab_kota_2015_2024.csv |
-
 #### C. Formulasi Matematis: Tren Zoonosis Distrik dan Komparasi Wilayah
 ```text
 Z_{w,t,d} = Σ C_{r,t,d}, untuk setiap distrik r yang termasuk wilayah w

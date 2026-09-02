@@ -549,22 +549,20 @@ def generate_all_bab3():
 
     mermaid_str_3_3 = """flowchart LR
     subgraph Data_Input["1. Input Data Dashboard"]
-        A["Data Kesehatan Detail<br/><i>provinsi, tahun, indikator, nilai</i>"] --> C
-        B["Data IKU KLHK & IKA<br/><i>Provinsi, Tahun, indeks kualitas</i>"] --> C
-        P["Populasi Proxy BPS 2020<br/><i>normalisasi per kapita</i>"] --> D
+        A["Data Kesehatan Detail<br/><i>provinsi, tahun, indikator, nilai</i>"]
+        B["Data IKU KLHK & IKA<br/><i>Provinsi, Tahun, indeks kualitas</i>"]
+        P["Populasi Proxy BPS 2020<br/><i>denominator per kapita</i>"]
     end
-    subgraph Panel_Processing["2. Pembentukan Panel 3.3"]
-        C["Merge Panel Provinsi-Tahun<br/>ISPA, Diare, IKA, IKU"] --> D["Rasio Insiden per 10.000 Penduduk"]
-        C --> E["Segmentasi IKU Sentra vs Non-Sentra"]
+    subgraph Panel_Processing["2. Pembentukan Panel & Normalisasi"]
+        A --> C["Merge Panel Provinsi-Tahun<br/>ISPA, Diare, IKA, IKU"]
+        B --> C
+        P --> D["Rasio Insiden per 10.000 Penduduk"]
+        C --> D
     end
-    subgraph Statistical_Test["3. Time-Series & Crosstabulation"]
-        D --> F["Time-Series Line Chart<br/>per kapita & absolut 2014-2024"]
-        E --> G["Binning Median per-Provinsi<br/>Tinggi/Rendah"]
-        G --> H["Uji Chi-Square Pearson"]
-        H --> I["Odds Ratio<br/>Risiko insiden tinggi saat IKU rendah"]
-    end
-    F --> J["Pembacaan lintasan waktu beban kesehatan"]
-    I --> J"""
+    subgraph Visual_Output["3. Time-Series Line Chart"]
+        D --> E["Tren per kapita & absolut 2014-2024<br/>Sentra (merah) vs Non-Sentra (biru)"]
+        E --> F["Pembacaan lintasan waktu beban kesehatan"]
+    end"""
     mermaid_png_path_3_3 = str(tool_dir / "mermaid_flowchart_3_3.png")
     download_success_3_3 = download_mermaid_png(mermaid_str_3_3, mermaid_png_path_3_3)
 
@@ -614,15 +612,6 @@ def generate_all_bab3():
     avg_rows_34 = []
     for _, row in df_zoo_bar_34.sort_values("Kategori_Wilayah").iterrows():
         avg_rows_34.append([selected_penyakit_34, row["Kategori_Wilayah"], f"{row['total_kasus']:,.1f}"])
-
-    konf_headers_34 = ["Komponen Analisis", "Definisi Variabel (Sub-bab 3.4)"]
-    konf_rows_34 = [
-        ["Kategori Wilayah Distrik", "Label dikotomi daerah ring 1 tambang/smelter aktif vs daerah penyangga luar ring."],
-        ["Total Kasus Penyakit", "Angka infeksi yang ditransmisikan vektor, seperti Malaria, DBD, Rabies, dan Gigitan Hewan."],
-        ["Model Analisis", "Deep Dive Case Study berbasis deret waktu tingkat kabupaten/kota khusus Sulawesi Tengah."],
-        ["Episentrum Ekstraktif", "Morowali, Morowali Utara, dan Banggai."],
-        ["Dataset & File", "data/processed/zoonosis_kab_kota_2015_2024.csv"],
-    ]
 
     mermaid_str_3_4 = """flowchart LR
     subgraph Data_Input["1. Input Data Dashboard"]
@@ -825,11 +814,11 @@ def generate_all_bab3():
 
     add_h4(doc, "B. Alur Logika Metodologis Time-Series Line Chart & Crosstabulation")
     add_p(doc, [
-        ("Kerangka penelusuran runtut waktu insiden penyakit sejalan dengan akumulasi polusi tahunan, beserta tahapan uji silang statistiknya, diilustrasikan pada ", False, False),
+        ("Pendekatan penelusuran runtut waktu insiden penyakit sejalan dengan akumulasi polusi tahunan diilustrasikan pada ", False, False),
         ("Bagan Alur 3.3", True, False),
-        (" berikut, dengan konfigurasi variabel pengujian dirinci pada Tabel 3.3a di bawah gambar.", False, False),
+        (" berikut. Adapun untuk tahapan analisis inferensial (Uji Chi-Square), alur logikanya diringkas melalui tabel konfigurasi variabel di bawah gambar.", False, False),
     ])
-    add_caption(doc, "Bagan Alur 3.3: Alur Logika Metodologis Time-Series Line Chart & Crosstabulation Beban Kesehatan")
+    add_caption(doc, "Bagan Alur 3.3: Alur Logika Analisis Time-Series Beban Kesehatan")
     if download_success_3_3:
         try:
             p_img = doc.add_paragraph()
@@ -921,9 +910,6 @@ def generate_all_bab3():
     else:
         p_err = doc.add_paragraph()
         run(p_err, "[Gambar Flowchart Gagal Diunduh, silakan periksa koneksi internet saat generate]", color=C_RED, pt=9)
-
-    add_caption(doc, "Tabel 3.4a: Konfigurasi Variabel Analisis Zoonosis (Sub-bab 3.4)")
-    add_table_1col(doc, konf_headers_34, konf_rows_34, [4.5, 11.0], ["L", "L"])
 
     add_h4(doc, "C. Formulasi Matematis: Tren Zoonosis Distrik dan Komparasi Wilayah")
     add_p(doc, [("Akumulasi tren tahunan infeksi zoonosis dan rasio komparatif wilayah dihitung menggunakan sistem formulasi matematis berikut:", False, False)])
@@ -1062,8 +1048,6 @@ h4 {{ color: #A5D6A7; }}
 <p>Data empiris Dinas Kesehatan mencatat total akumulasi <strong>{total_kasus_tambang_34:,.0f} kasus</strong> penyakit zoonosis di wilayah Lingkar Tambang/Smelter Aktif Sulawesi Tengah (Morowali, Morowali Utara, Banggai) sepanjang rentang waktu pengamatan {tahun_min_34}-{tahun_max_34}. Peningkatan angka zoonosis ini dibaca bersama perubahan ekologis akibat ekspansi penggunaan lahan, konversi tutupan hutan, pergeseran habitat alami satwa liar, genangan air galian tambang yang tidak direklamasi, serta kondisi sanitasi di area industri.</p>
 <h4>B. Alur Logika Metodologis Time-Series & Komparasi Spasial Wilayah</h4>
 <div class="mermaid">{mermaid_str_3_4}</div>
-<div class="table-caption">Tabel 3.4a: Konfigurasi Variabel Analisis Zoonosis (Sub-bab 3.4)</div>
-{html_table(konf_headers_34, konf_rows_34)}
 <h4>C. Formulasi Matematis: Tren Zoonosis Distrik dan Komparasi Wilayah</h4>
 <div class="formula">Z_{{w,t,d}} = Σ C_{{r,t,d}}, untuk setiap distrik r yang termasuk wilayah w</div>
 <div class="formula">Z̄_w = [ Σ_t Z_{{w,t,d}} ] / N_w</div>
@@ -1220,9 +1204,6 @@ h4 {{ color: #A5D6A7; }}
         "```mermaid",
         mermaid_str_3_4,
         "```",
-        "",
-        "##### Tabel 3.4a: Konfigurasi Variabel Analisis Zoonosis (Sub-bab 3.4)",
-        markdown_table(konf_headers_34, konf_rows_34),
         "",
         "#### C. Formulasi Matematis: Tren Zoonosis Distrik dan Komparasi Wilayah",
         "```text",
