@@ -46,6 +46,15 @@ flowchart LR
 9. Skor Komposit Total: (Udara + Air + Lahan + Sosial + Veto) / 5.0
 ```
 
+```text
+Contoh Persamaan Substitusi Riil (Indikator PLTU Captive & Komposit Sulteng):
+1. Substitusi Z-Score: Z = (7.325 MW - 1.637,50 MW) / 2.882,26 MW = +1,97σ
+2. Substitusi EWM Shannon: r_sulteng = 1,000 ; P_sulteng = 0,745 -> Ej = 0,3948 -> Dj = 0,6052 -> W_pltu = 0,6052 / 7,8331 = 0,0773 (7,73%)
+3. Substitusi Likert Diskret: Z = +1,97σ >= +1,0σ -> Skor Likert = 5,0 / 5 (Melampaui Batas / Red Alert)
+4. Substitusi Pilar Udara: Skor = [(5,0*0,0773) + (4,0*0,0224) + (5,0*0,0461) + (5,0*0,0829) + (5,0*0,0395)] / 0,2682 = 4,92 / 5
+5. Substitusi Komposit Total: Skor = (4,92 + 3,30 + 4,70 + 2,50 + 4,40) / 5 = 3,96 / 5,0 -> WSM: 7,92 / 10.0 (Melampaui Batas)
+```
+
 ##### Tabel 6.12: Matriks Parameter Regional Se-Sulawesi (Rata-rata, Deviasi Standar, dan Bobot Objektif EWM 20 Indikator Empiris)
 | Pilar | Indikator Empiris | Rata-rata (B) | Deviasi (C) | Entropi (Ej) | Divergensi (Dj) | Bobot EWM (Wj) |
 | :---: | :--- | :---: | :---: | :---: | :---: | :--- |

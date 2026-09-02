@@ -649,6 +649,24 @@ def generate_bab6_skoring_provinsi():
         ]
     )
 
+    add_formula_box(
+        doc,
+        "Contoh Persamaan Substitusi Riil: Indikator Kapasitas PLTU Captive & Komposit Sulteng",
+        "1. Substitusi Z-Score: Z = (7.325 MW - 1.637,50 MW) / 2.882,26 MW = +1,97σ\n"
+        "2. Substitusi EWM Shannon: Min-Max r_sulteng = (7.325 - 0) / 7.325 = 1,000 ; Proporsi P_sulteng = 1,000 / 1,341 = 0,745\n"
+        "   Entropi Ej = -0,5581 * SUM(P * ln P) = 0,3948  -->  Dj = 1 - 0,3948 = 0,6052  -->  W_pltu = 0,6052 / 7,8331 = 0,0773 (7,73%)\n"
+        "3. Substitusi Likert Diskret: Z = +1,97σ >= +1,0σ  -->  Skor Likert = 5,0 / 5 (Melampaui Batas / Red Alert)\n"
+        "4. Substitusi Pilar Udara: Skor = [(5,0*0,0773) + (4,0*0,0224) + (5,0*0,0461) + (5,0*0,0829) + (5,0*0,0395)] / 0,2682 = 4,92 / 5\n"
+        "5. Substitusi Komposit Total: Skor = (4,92 + 3,30 + 4,70 + 2,50 + 4,40) / 5 = 3,96 / 5,0  -->  WSM = 7,92 / 10.0 (Melampaui Batas)",
+        [
+            ("Substitusi Z-Score", "Nilai aktual 7.325 MW milik Sulteng diselisihkan terhadap rerata 6 provinsi (1.637,50 MW), lalu dibagi standar deviasi regional (2.882,26 MW), menghasilkan deviasi anomali Z = +1,97σ."),
+            ("Substitusi EWM", "Tingginya disparitas PLTU se-Sulawesi (Sulteng 7.325 MW, Sultra 1.900 MW, Sulsel 600 MW, 3 provinsi lain 0 MW) menghasilkan divergensi Dj = 0,6052 sehingga indikator ini memperoleh bobot objektif tertinggi W = 0,0773 (7,73%)."),
+            ("Substitusi Likert", "Karena nilai Z = +1,97σ melampaui ambang batas atas regional (+1,0σ), maka langsung dipetakan ke skor tertinggi yaitu 5,0 (Krisis Parah / Melampaui Batas)."),
+            ("Substitusi Pilar", "Total bobot kelima indikator pilar udara adalah 0,2682. Hasil agregasi tertimbang menghasilkan Skor Pilar Udara sebesar 4,92 / 5 (dibulatkan 4,9 / 5)."),
+            ("Substitusi Komposit", "Rata-rata unweighted 5 pilar menghasilkan Skor Komposit 3,96 / 5,0 (dibulatkan 4,0 / 5) atau WSM 7,92 / 10.0 dengan vonis status Melampaui Batas (RED ALERT).")
+        ]
+    )
+
     add_caption(doc, "Tabel 6.12: Matriks Parameter Regional Se-Sulawesi (Rata-rata, Deviasi Standar, dan Bobot Objektif EWM 20 Indikator Empiris)")
     add_table_styled(
         doc,
@@ -839,6 +857,14 @@ def generate_bab6_skoring_provinsi():
 <div class="formula">Tahap 2: r_ij = (x_ij - min(x_j)) / (max(x_j) - min(x_j)) &nbsp;➔&nbsp; P_ij = r_ij / &Sigma;r_ij &nbsp;➔&nbsp; E_j = -k * &Sigma;(P_ij * ln(P_ij)) &nbsp;➔&nbsp; W_j = (1 - E_j) / &Sigma;(1 - E_j)</div>
 <div class="formula">Tahap 3: L_ij = 5.0 (Z &ge; +1.0) ; 4.0 (0.5 &le; Z < 1.0) ; 3.0 (0.0 &le; Z < 0.5) ; 2.0 (-0.5 &le; Z < 0.0) ; 1.0 (-1.0 &le; Z < -0.5) ; 0.0 (Z < -1.0)</div>
 <div class="formula">Tahap 4 & 5: Skor_Pilar = &Sigma;(L_ij * W_j) / &Sigma;W_j &nbsp;&nbsp;|&nbsp;&nbsp; Skor_Komposit = (Udara + Air + Lahan + Sosial + Veto) / 5.0</div>
+<div class="formula" style="background-color: #EEF4F8; border-left: 4px solid #143642; margin-top: 15px;">
+  <strong>Contoh Persamaan Substitusi Riil (Indikator PLTU Captive & Komposit Sulteng):</strong><br>
+  1. Substitusi Z-Score: Z = (7.325 MW - 1.637,50 MW) / 2.882,26 MW = +1,97&sigma;<br>
+  2. Substitusi EWM Shannon: r_sulteng = 1,000 ; P_sulteng = 0,745 &nbsp;➔&nbsp; E_pltu = 0,3948 &nbsp;➔&nbsp; D_pltu = 0,6052 &nbsp;➔&nbsp; W_pltu = 0,0773 (7,73%)<br>
+  3. Substitusi Likert: Z = +1,97&sigma; &ge; +1,0&sigma; &nbsp;➔&nbsp; Skor Likert = 5,0 / 5 (Melampaui Batas / Red Alert)<br>
+  4. Substitusi Pilar Udara: Skor = [(5,0*0,0773) + (4,0*0,0224) + (5,0*0,0461) + (5,0*0,0829) + (5,0*0,0395)] / 0,2682 = 4,92 / 5<br>
+  5. Substitusi Komposit Total: Skor = (4,92 + 3,30 + 4,70 + 2,50 + 4,40) / 5 = 3,96 / 5,0 &nbsp;➔&nbsp; WSM: 7,92 / 10.0 (Melampaui Batas)
+</div>
 
 <div class="table-caption">Tabel 6.12: Matriks Parameter Regional Se-Sulawesi (Rata-rata, Deviasi Standar, dan Bobot Objektif EWM 20 Indikator Empiris)</div>
 {html_table(["Pilar", "Indikator Empiris", "Rata-rata (B)", "Deviasi (C)", "Entropi (Ej)", "Divergensi (Dj)", "Bobot EWM (Wj)"], table_regional_meta)}
@@ -938,6 +964,15 @@ def generate_bab6_skoring_provinsi():
         "7. Mapping Likert Diskret: Z >= 1.0 -> 5.0 ; 0.5 <= Z < 1.0 -> 4.0 ; 0.0 <= Z < 0.5 -> 3.0 ; -0.5 <= Z < 0.0 -> 2.0 ; -1.0 <= Z < -0.5 -> 1.0 ; Z < -1.0 -> 0.0",
         "8. EWM Weighted Average Pilar: Skor_Pilar = SUM(L_ij * W_j) / SUM(W_j)",
         "9. Skor Komposit Total: (Udara + Air + Lahan + Sosial + Veto) / 5.0",
+        "```",
+        "",
+        "```text",
+        "Contoh Persamaan Substitusi Riil (Indikator PLTU Captive & Komposit Sulteng):",
+        "1. Substitusi Z-Score: Z = (7.325 MW - 1.637,50 MW) / 2.882,26 MW = +1,97σ",
+        "2. Substitusi EWM Shannon: r_sulteng = 1,000 ; P_sulteng = 0,745 -> Ej = 0,3948 -> Dj = 0,6052 -> W_pltu = 0,6052 / 7,8331 = 0,0773 (7,73%)",
+        "3. Substitusi Likert Diskret: Z = +1,97σ >= +1,0σ -> Skor Likert = 5,0 / 5 (Melampaui Batas / Red Alert)",
+        "4. Substitusi Pilar Udara: Skor = [(5,0*0,0773) + (4,0*0,0224) + (5,0*0,0461) + (5,0*0,0829) + (5,0*0,0395)] / 0,2682 = 4,92 / 5",
+        "5. Substitusi Komposit Total: Skor = (4,92 + 3,30 + 4,70 + 2,50 + 4,40) / 5 = 3,96 / 5,0 -> WSM: 7,92 / 10.0 (Melampaui Batas)",
         "```",
         "",
         "##### Tabel 6.12: Matriks Parameter Regional Se-Sulawesi (Rata-rata, Deviasi Standar, dan Bobot Objektif EWM 20 Indikator Empiris)",

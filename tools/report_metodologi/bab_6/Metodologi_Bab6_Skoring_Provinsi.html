@@ -73,6 +73,14 @@ flowchart LR
 <div class="formula">Tahap 2: r_ij = (x_ij - min(x_j)) / (max(x_j) - min(x_j)) &nbsp;➔&nbsp; P_ij = r_ij / &Sigma;r_ij &nbsp;➔&nbsp; E_j = -k * &Sigma;(P_ij * ln(P_ij)) &nbsp;➔&nbsp; W_j = (1 - E_j) / &Sigma;(1 - E_j)</div>
 <div class="formula">Tahap 3: L_ij = 5.0 (Z &ge; +1.0) ; 4.0 (0.5 &le; Z < 1.0) ; 3.0 (0.0 &le; Z < 0.5) ; 2.0 (-0.5 &le; Z < 0.0) ; 1.0 (-1.0 &le; Z < -0.5) ; 0.0 (Z < -1.0)</div>
 <div class="formula">Tahap 4 & 5: Skor_Pilar = &Sigma;(L_ij * W_j) / &Sigma;W_j &nbsp;&nbsp;|&nbsp;&nbsp; Skor_Komposit = (Udara + Air + Lahan + Sosial + Veto) / 5.0</div>
+<div class="formula" style="background-color: #EEF4F8; border-left: 4px solid #143642; margin-top: 15px;">
+  <strong>Contoh Persamaan Substitusi Riil (Indikator PLTU Captive & Komposit Sulteng):</strong><br>
+  1. Substitusi Z-Score: Z = (7.325 MW - 1.637,50 MW) / 2.882,26 MW = +1,97&sigma;<br>
+  2. Substitusi EWM Shannon: r_sulteng = 1,000 ; P_sulteng = 0,745 &nbsp;➔&nbsp; E_pltu = 0,3948 &nbsp;➔&nbsp; D_pltu = 0,6052 &nbsp;➔&nbsp; W_pltu = 0,0773 (7,73%)<br>
+  3. Substitusi Likert: Z = +1,97&sigma; &ge; +1,0&sigma; &nbsp;➔&nbsp; Skor Likert = 5,0 / 5 (Melampaui Batas / Red Alert)<br>
+  4. Substitusi Pilar Udara: Skor = [(5,0*0,0773) + (4,0*0,0224) + (5,0*0,0461) + (5,0*0,0829) + (5,0*0,0395)] / 0,2682 = 4,92 / 5<br>
+  5. Substitusi Komposit Total: Skor = (4,92 + 3,30 + 4,70 + 2,50 + 4,40) / 5 = 3,96 / 5,0 &nbsp;➔&nbsp; WSM: 7,92 / 10.0 (Melampaui Batas)
+</div>
 
 <div class="table-caption">Tabel 6.12: Matriks Parameter Regional Se-Sulawesi (Rata-rata, Deviasi Standar, dan Bobot Objektif EWM 20 Indikator Empiris)</div>
 <div class="table-container"><table>
