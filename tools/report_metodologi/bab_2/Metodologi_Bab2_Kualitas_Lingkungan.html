@@ -143,12 +143,12 @@ h4 { color: #A5D6A7; }
 <p>Selain analisis polusi udara, atribusi pelepasan gas rumah kaca membedah estimasi jejak karbon dari masing-masing faktor pendorong deforestasi pada <strong>Tabel 2.4</strong> berikut:</p>
 <div class="table-caption">Tabel 2.4: Rincian Empiris Deforestasi dan Emisi CO₂ per Faktor Pendorong (2014-2023)</div>
 <table>
-<thead><tr><th class="data-th">Faktor Pendorong Utama</th><th class="data-th">Total Deforestasi (Ha)</th><th class="data-th">Estimasi Emisi CO₂ (Juta Ton)</th></tr></thead>
+<thead><tr><th class="data-th">Faktor Pendorong Utama</th><th class="data-th">Estimasi Emisi CO₂ (Juta Ton)</th></tr></thead>
 <tbody>
-<tr><td class="data-td">Pertambangan dan Sawit</td><td class="data-td">726,565</td><td class="data-td">482.7</td></tr>
-<tr class="data-tr-even"><td class="data-td">Kehutanan Komersial</td><td class="data-td">97,936</td><td class="data-td">64.1</td></tr>
-<tr><td class="data-td">Pertanian Berpindah</td><td class="data-td">43,002</td><td class="data-td">29.1</td></tr>
-<tr class="data-tr-even"><td class="data-td">Tidak Teridentifikasi</td><td class="data-td">18,199</td><td class="data-td">10.3</td></tr>
+<tr><td class="data-td">Pertambangan dan Sawit</td><td class="data-td">482.7</td></tr>
+<tr class="data-tr-even"><td class="data-td">Kehutanan Komersial</td><td class="data-td">64.1</td></tr>
+<tr><td class="data-td">Pertanian Berpindah</td><td class="data-td">29.1</td></tr>
+<tr class="data-tr-even"><td class="data-td">Tidak Teridentifikasi</td><td class="data-td">10.3</td></tr>
 </tbody>
 </table>
 <p>Penerapan pengujian statistik tabulasi silang pada data panel (total 54 observasi valid) disajikan secara ringkas pada <strong>Tabel 2.5</strong> berikut:</p>
@@ -198,15 +198,15 @@ h4 { color: #A5D6A7; }
 </table>
 <h4>C. Formulasi Matematis: Akumulasi Konsesi, Deforestasi, dan Uji Crosstabulation</h4>
 <p>Parameterisasi tekanan ruang dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:</p>
-<div class="formula">Luas_IUP_Kawasan_Provinsi = SUM(total_luas_ha) GROUP BY Provinsi</div>
-<div class="formula">Kumulatif_Luas_Konsesi_Ha = CUMSUM(Total_Luas_Konsesi_Baru_Ha) OVER (ORDER BY Tahun)</div>
-<div class="formula">Kumulatif_Deforestasi_Ha = CUMSUM(Total_Deforestasi_Ha) OVER (ORDER BY Tahun)</div>
-<div class="formula">Kategori = IF(Nilai &gt;= Median(Seluruh Panel), 'Tinggi/Parah', 'Rendah')</div>
-<div class="formula">Chi_Square (&chi;&sup2;) = Jumlah [ (Frekuensi_Observasi - Frekuensi_Harapan)^2 / Frekuensi_Harapan ]</div>
-<div class="formula">Odds_Ratio (OR) = ( a * d ) / ( b * c )</div>
+<div class="formula">Luas_IUP_Kawasan_p = Σ ( Luas_Izin_i )   ;   untuk seluruh entitas izin i pada provinsi p</div>
+<div class="formula">Kumulatif_Luas_Konsesi_p(T) = Σ ( Konsesi_Baru_p,t )   ;   untuk t = 2014 s.d. T</div>
+<div class="formula">Kumulatif_Deforestasi_p(T) = Σ ( Deforestasi_p,t )   ;   untuk t = 2014 s.d. T</div>
+<div class="formula">Kategori(x) = 'Tinggi/Parah' , jika x ≥ Median(Panel)   |   'Rendah' , jika x &lt; Median(Panel)</div>
+<div class="formula">&chi;&sup2; = Σ [ ( O_ij - E_ij )² / E_ij ]   ;   dengan E_ij = ( Total_Baris_i × Total_Kolom_j ) / N</div>
+<div class="formula">Odds_Ratio (OR) = ( a × d ) / ( b × c )</div>
 <h4>D. Matriks Hasil Uji Empiris</h4>
-<p>Akumulasi alokasi ruang konsesi IUP-Kawasan Industri dan deforestasi kumulatif dekade 2014-2023 pada masing-masing provinsi dapat dilihat secara empiris pada <strong>Tabel 2.5</strong> berikut:</p>
-<div class="table-caption">Tabel 2.5: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif per Provinsi (2014-2023)</div>
+<p>Akumulasi alokasi ruang konsesi IUP-Kawasan Industri dan deforestasi kumulatif dekade 2014-2023 pada masing-masing provinsi dapat dilihat secara empiris pada <strong>Tabel 2.6</strong> berikut:</p>
+<div class="table-caption">Tabel 2.6: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif per Provinsi (2014-2023)</div>
 <table>
 <thead><tr><th class="data-th">Provinsi</th><th class="data-th">Luas IUP & Kawasan (Ha)</th><th class="data-th">Konsesi Baru Kumulatif 2014-2023 (Ha)</th><th class="data-th">Deforestasi Kumulatif 2014-2023 (Ha)</th></tr></thead>
 <tbody>
@@ -218,8 +218,8 @@ h4 { color: #A5D6A7; }
 <tr class="data-tr-even"><td class="data-td">Sulawesi Barat</td><td class="data-td">4,424</td><td class="data-td">2,163</td><td class="data-td">133,263</td></tr>
 </tbody>
 </table>
-<p>Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total 60 observasi valid) disajikan secara ringkas pada <strong>Tabel 2.6</strong> berikut:</p>
-<div class="table-caption">Tabel 2.6: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2</div>
+<p>Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total 60 observasi valid) disajikan secara ringkas pada <strong>Tabel 2.7</strong> berikut:</p>
+<div class="table-caption">Tabel 2.7: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2</div>
 <table>
 <thead><tr><th class="data-th">Variabel Independen (X)</th><th class="data-th">Variabel Dependen (Y)</th><th class="data-th">Chi-Square (&chi;&sup2;)</th><th class="data-th">P-Value</th><th class="data-th">Odds Ratio</th><th class="data-th">Kesimpulan</th></tr></thead>
 <tbody>
@@ -260,14 +260,14 @@ h4 { color: #A5D6A7; }
 <tr class="data-tr-even"><td class="data-td">Variabel Dependen (Y1)</td><td class="data-td">Luas Deforestasi (Ha): kehilangan tutupan pohon per faktor pendorong</td></tr>
 <tr><td class="data-td">Variabel Dependen (Y2)</td><td class="data-td">Emisi CO2 (Megagram): kuantitas karbon dioksida ekuivalen yang terlepas ke atmosfer</td></tr>
 <tr class="data-tr-even"><td class="data-td">Periode & Cakupan Observasi</td><td class="data-td">2014-2023 pada 6 provinsi se-Sulawesi</td></tr>
-<tr><td class="data-td">Metode Atribusi</td><td class="data-td">Agregasi tabular GROUP BY Faktor_Pendorong dengan kuantifikasi proporsi absolut (tanpa uji inferensial)</td></tr>
+<tr><td class="data-td">Metode Atribusi</td><td class="data-td">Agregasi tabular per kelompok Faktor Pendorong dengan kuantifikasi proporsi absolut (tanpa uji inferensial)</td></tr>
 </tbody>
 </table>
 <h4>C. Formulasi Matematis: Agregasi Driver, Proporsi, dan Atribusi Emisi</h4>
 <p>Kuantifikasi atribusi kausalitas dan jejak karbon dihitung menggunakan sistem formulasi matematis berikut:</p>
-<div class="formula">Total_Deforestasi = SUM(Luas_Deforestasi_Ha) GROUP BY Faktor_Pendorong</div>
-<div class="formula">Total_Emisi = SUM(Emisi_CO2_Megagram) GROUP BY Faktor_Pendorong</div>
-<div class="formula">Persentase_Driver (%) = ( Total_Deforestasi_Driver / Total_Deforestasi_Kumulatif ) * 100</div>
+<div class="formula">Total_Deforestasi_k = Σ ( Luas_Deforestasi_i )   ;   untuk seluruh observasi i dengan Faktor_Pendorong k</div>
+<div class="formula">Total_Emisi_k = Σ ( Emisi_CO2_i )   ;   untuk seluruh observasi i dengan Faktor_Pendorong k</div>
+<div class="formula">Persentase_Driver_k (%) = ( Total_Deforestasi_k / Total_Deforestasi_Kumulatif ) × 100</div>
 <div class="formula">Rasio_Perbandingan = Total_Pertambangan_Sawit / Total_Pertanian_Berpindah</div>
 <h4>D. Matriks Hasil Uji Empiris</h4>
 <p>Akumulasi total deforestasi, proporsi kontribusi, dan atribusi emisi CO2 masing-masing faktor pendorong pada periode 2014-2023 dapat dilihat secara empiris pada <strong>Tabel 2.8</strong> berikut:</p>
@@ -283,5 +283,75 @@ h4 { color: #A5D6A7; }
 </table>
 <h4>E. Analisis Temuan Empiris</h4>
 <p><strong>1. Dominasi Sektor Pertambangan dan Sawit:</strong> mencakup 1,001,654 Ha atau <strong>82.2%</strong> dari total kehilangan tutupan hutan periode 2014-2023, dengan proporsi tahunan konsisten pada rentang 78-85%. <strong>2. Porsi Minor Pertanian Berpindah:</strong> 4.6% (55,905 Ha); deforestasi komoditas tambang dan sawit 18 kali lebih besar dibanding pertanian berpindah. <strong>3. Atribusi Emisi CO2:</strong> sektor pertambangan dan sawit melepaskan 664,472,885 Megagram CO2 (82.6% dari total). <strong>4. Implikasi Kebijakan:</strong> pengendalian deforestasi memerlukan evaluasi tata ruang perizinan pertambangan dan pengawasan ketat terhadap pembukaan lahan komoditas di wilayah tutupan hutan.</p>
+
+<h2>2.5. Kehancuran Biodiversitas: Dampak Terhadap Habitat Satwa Endemik</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Data Perjumpaan GBIF: <code>data/raw/gbif_sulawesi_occurrences.csv</code>; Data Status IUCN: <code>data/processed/sulawesi_biodiversitas_iucn_fase5_exploded.csv</code>. Visualisasi dashboard menampilkan peta spasial titik occurrence GBIF dan tabel validasi ancaman IUCN Red List.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Pulau Sulawesi merupakan wilayah yang memiliki keanekaragaman hayati endemik yang khas di kawasan Wallacea. Perubahan tutupan lahan akibat ekspansi pertambangan nikel dan kawasan industri berimplikasi pada fragmentasi habitat flora dan fauna endemik. Data spasial dari <strong>GBIF</strong> memetakan sebanyak <strong>269 titik koordinat keberadaan (occurrence)</strong> dari <strong>7 spesies endemik kunci</strong>. Berdasarkan <strong>IUCN Red List</strong>, tercatat <strong>2 spesies Critically Endangered</strong>, <strong>2 spesies Endangered</strong>, dan <strong>3 spesies Vulnerable</strong>.</p>
+<p>Catatan IUCN menunjukkan <strong>4 dari 7 spesies</strong> memiliki penanda <strong>Mining Threat</strong>. Sub-bab ini menggunakan Spatial Mapping (GBIF) dan Analisis IUCN Red List, bukan uji inferensial Chi-Square.</p>
+<h4>B. Alur Logika Metodologis Spatial Mapping GBIF &amp; Analisis IUCN Red List</h4>
+<p>Kerangka pemetaan titik koordinat perjumpaan satwa dan sintesis status konservasi internasional diilustrasikan pada <strong>Bagan Alur 2.5</strong> berikut. Konfigurasi variabel analisis dirinci pada Tabel 2.5a di bawah gambar.</p>
+<div class="table-caption">Bagan Alur 2.5: Alur Logika Metodologis Spatial Mapping GBIF &amp; Analisis IUCN Red List</div>
+<div class="mermaid">flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Perjumpaan GBIF<br/><i>Scientific Name, Latitude, Longitude, Province, Year</i>"]
+        B["Data IUCN Red List<br/><i>Status, Population Trend, Mining Threat</i>"]
+    end
+
+    subgraph Spatial_Model["2. Spatial Mapping & Overlay"]
+        A --> C["Pemetaan titik koordinat occurrence"]
+        C --> D["Overlay dengan konteks wilayah industri dan konsesi"]
+    end
+
+    subgraph Conservation_Model["3. Analisis Status Konservasi"]
+        B --> E["Klasifikasi CR, EN, VU"]
+        B --> F["Identifikasi penanda Mining Threat"]
+    end
+
+    D --> G["Pembacaan keterancaman habitat satwa endemik"]
+    E --> G
+    F --> G</div>
+<div class="table-caption">Tabel 2.5a: Konfigurasi Variabel Analisis Spatial Mapping &amp; IUCN Red List (Sub-bab 2.5)</div>
+<table>
+<thead><tr><th class="data-th">Komponen Analisis</th><th class="data-th">Definisi Variabel (Sub-bab 2.5)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Variabel Lokasi</td><td class="data-td">Titik Koordinat (Lat, Lon): lokasi perjumpaan aktual satwa endemik.</td></tr>
+<tr class="data-tr-even"><td class="data-td">Identitas Taksonomi</td><td class="data-td">Scientific Name dan Common Name: identitas spesies dari GBIF/IUCN.</td></tr>
+<tr><td class="data-td">Status Konservasi</td><td class="data-td">Status: level ancaman IUCN Red List (Critically Endangered, Endangered, Vulnerable).</td></tr>
+<tr class="data-tr-even"><td class="data-td">Ancaman Utama</td><td class="data-td">Mining Threat: penanda apakah aktivitas pertambangan tercatat sebagai ancaman spesies.</td></tr>
+<tr><td class="data-td">Cakupan Data</td><td class="data-td">269 titik GBIF, 7 spesies endemik kunci, 6 provinsi observasi.</td></tr>
+</tbody>
+</table>
+<h4>C. Formulasi Matematis: Occurrence, Status Keterancaman, dan Mining Threat</h4>
+<p>Kuantifikasi sebaran titik perjumpaan, komposisi status konservasi, dan ancaman pertambangan dihitung menggunakan sistem formulasi matematis berikut:</p>
+<div class="formula">O_s = Σ o_i, untuk setiap titik occurrence i yang memiliki spesies s</div>
+<div class="formula">P_k (%) = ( N_k / N_total ) × 100</div>
+<div class="formula">R_m (%) = ( N_m / N_total ) × 100</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<p>Rincian status konservasi, tren populasi, penanda ancaman pertambangan, dan jumlah titik occurrence GBIF per spesies disajikan pada <strong>Tabel 2.9</strong> berikut:</p>
+<div class="table-caption">Tabel 2.9: Matriks Spesies Endemik, Status IUCN, Mining Threat, dan Titik Occurrence GBIF</div>
+<table>
+<thead><tr><th class="data-th">Scientific Name</th><th class="data-th">Common Name</th><th class="data-th">Status</th><th class="data-th">Population Trend</th><th class="data-th">Mining Threat</th><th class="data-th">Titik GBIF</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Macaca nigra</td><td class="data-td">Celebes Crested Macaque</td><td class="data-td">Critically Endangered</td><td class="data-td">Decreasing</td><td class="data-td">Yes</td><td class="data-td">87</td></tr>
+<tr class="data-tr-even"><td class="data-td">Macrocephalon maleo</td><td class="data-td">Maleo</td><td class="data-td">Critically Endangered</td><td class="data-td">Decreasing</td><td class="data-td">No</td><td class="data-td">95</td></tr>
+<tr><td class="data-td">Bubalus depressicornis</td><td class="data-td">Lowland Anoa</td><td class="data-td">Endangered</td><td class="data-td">Decreasing</td><td class="data-td">Yes</td><td class="data-td">18</td></tr>
+<tr class="data-tr-even"><td class="data-td">Bubalus quarlesi</td><td class="data-td">Mountain Anoa</td><td class="data-td">Endangered</td><td class="data-td">Decreasing</td><td class="data-td">Yes</td><td class="data-td">10</td></tr>
+<tr><td class="data-td">Babyrousa celebensis</td><td class="data-td">Sulawesi Babirusa</td><td class="data-td">Vulnerable</td><td class="data-td">Decreasing</td><td class="data-td">Yes</td><td class="data-td">33</td></tr>
+<tr class="data-tr-even"><td class="data-td">Babyrousa babyrussa</td><td class="data-td">Hairy Babirusa</td><td class="data-td">Vulnerable</td><td class="data-td">Decreasing</td><td class="data-td">No</td><td class="data-td">14</td></tr>
+<tr><td class="data-td">Tarsius tarsier</td><td class="data-td">Spectral Tarsier</td><td class="data-td">Vulnerable</td><td class="data-td">Decreasing</td><td class="data-td">No</td><td class="data-td">12</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 2.10: Ringkasan Status Konservasi IUCN Spesies Endemik Kunci</div>
+<table>
+<thead><tr><th class="data-th">Status IUCN</th><th class="data-th">Jumlah Spesies</th><th class="data-th">Proporsi</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Critically Endangered</td><td class="data-td">2</td><td class="data-td">28.6%</td></tr>
+<tr class="data-tr-even"><td class="data-td">Endangered</td><td class="data-td">2</td><td class="data-td">28.6%</td></tr>
+<tr><td class="data-td">Vulnerable</td><td class="data-td">3</td><td class="data-td">42.9%</td></tr>
+</tbody>
+</table>
+<h4>E. Analisis Temuan Empiris</h4>
+<p>Pembacaan spatial mapping GBIF dan validasi IUCN Red List menunjukkan bahwa ekspansi industri ekstraktif tidak hanya menekan kualitas air, udara, dan tutupan hutan, tetapi juga mempersempit ruang hidup spesies endemik Wallacea. Titik occurrence GBIF memberikan bukti spasial keberadaan satwa, sedangkan status IUCN dan penanda Mining Threat memperkuat pembacaan bahwa tekanan pertambangan masuk dalam daftar ancaman konservasi spesies.</p>
 </body>
 </html>

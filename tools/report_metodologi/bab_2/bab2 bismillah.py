@@ -669,7 +669,6 @@ def generate_all_bab2():
     for _, row in df_driver_agg.iterrows():
         empirical_rows_driver.append([
             row["driver"],
-            f"{row['area_ha']:,.0f}",
             f"{row['co2_emissions_mg']/1_000_000:,.1f}"
         ])
 
@@ -784,7 +783,7 @@ def generate_all_bab2():
         ["Variabel Dependen (Y1)", "Luas Deforestasi (Ha): kehilangan tutupan pohon per faktor pendorong"],
         ["Variabel Dependen (Y2)", "Emisi CO2 (Megagram): kuantitas karbon dioksida ekuivalen yang terlepas ke atmosfer"],
         ["Periode & Cakupan Observasi", f"{tahun_min_24}-{tahun_max_24} pada {jml_prov_24} provinsi se-Sulawesi"],
-        ["Metode Atribusi", "Agregasi tabular GROUP BY Faktor_Pendorong dengan kuantifikasi proporsi absolut (tanpa uji inferensial)"],
+        ["Metode Atribusi", "Agregasi tabular per kelompok Faktor Pendorong dengan kuantifikasi proporsi absolut (tanpa uji inferensial)"],
     ]
 
     mermaid_str_2_4 = """flowchart LR
@@ -805,6 +804,86 @@ def generate_all_bab2():
     J --> K"""
     mermaid_png_path_2_4 = str(tool_dir / "mermaid_flowchart_2_4.png")
     download_success_2_4 = download_mermaid_png(mermaid_str_2_4, mermaid_png_path_2_4)
+
+    print("[2.85/4] Mengekstraksi dataset empiris Bab 2 sub-bab 2.5...")
+    df_gbif_25 = pd.read_csv(base_dir / "data" / "raw" / "gbif_sulawesi_occurrences.csv")
+    df_iucn_25 = pd.read_csv(data_dir / "sulawesi_biodiversitas_iucn_fase5_exploded.csv")
+    df_iucn_unique_25 = df_iucn_25.drop_duplicates(subset=["Scientific Name"]).copy()
+
+    tot_titik_25 = len(df_gbif_25)
+    tot_spesies_25 = len(df_iucn_unique_25)
+    tot_cr_25 = len(df_iucn_unique_25[df_iucn_unique_25["Status"] == "Critically Endangered"])
+    tot_en_25 = len(df_iucn_unique_25[df_iucn_unique_25["Status"] == "Endangered"])
+    tot_vu_25 = len(df_iucn_unique_25[df_iucn_unique_25["Status"] == "Vulnerable"])
+    tot_mining_yes_25 = df_iucn_unique_25["Mining Threat"].astype(str).str.lower().eq("yes").sum()
+    tahun_valid_25 = pd.to_numeric(df_gbif_25["Year"], errors="coerce").dropna()
+    tahun_min_25 = int(tahun_valid_25.min())
+    tahun_max_25 = int(tahun_valid_25.max())
+    prov_count_25 = df_gbif_25["Province"].nunique()
+
+    occurrence_counts_25 = df_gbif_25.groupby("Scientific_Name").size().reset_index(name="Jumlah_Titik_GBIF")
+    species_rows_df_25 = pd.merge(
+        df_iucn_unique_25,
+        occurrence_counts_25,
+        left_on="Scientific Name",
+        right_on="Scientific_Name",
+        how="left",
+    ).fillna({"Jumlah_Titik_GBIF": 0})
+    species_rows_df_25["Jumlah_Titik_GBIF"] = species_rows_df_25["Jumlah_Titik_GBIF"].astype(int)
+    species_rows_df_25 = species_rows_df_25.sort_values(["Status", "Mining Threat", "Jumlah_Titik_GBIF"], ascending=[True, False, False])
+
+    species_rows_25 = []
+    for _, row in species_rows_df_25.iterrows():
+        species_rows_25.append([
+            row["Scientific Name"],
+            row["Common Name"],
+            row["Status"],
+            row["Population Trend"],
+            row["Mining Threat"],
+            f"{row['Jumlah_Titik_GBIF']:,}",
+        ])
+
+    status_rows_25 = []
+    status_order_25 = ["Critically Endangered", "Endangered", "Vulnerable"]
+    for status in status_order_25:
+        count_status = int((df_iucn_unique_25["Status"] == status).sum())
+        status_rows_25.append([status, count_status, f"{count_status / tot_spesies_25 * 100:.1f}%"])
+
+    prov_occ_rows_25 = []
+    prov_occ_25 = df_gbif_25.groupby("Province").size().reset_index(name="Titik_GBIF").sort_values("Titik_GBIF", ascending=False)
+    for _, row in prov_occ_25.iterrows():
+        prov_occ_rows_25.append([row["Province"], f"{int(row['Titik_GBIF']):,}"])
+
+    konf_headers_25 = ["Komponen Analisis", "Definisi Variabel (Sub-bab 2.5)"]
+    konf_rows_25 = [
+        ["Variabel Lokasi", "Titik Koordinat (Lat, Lon): lokasi perjumpaan aktual satwa endemik."],
+        ["Identitas Taksonomi", "Scientific Name dan Common Name: identitas spesies dari GBIF/IUCN."],
+        ["Status Konservasi", "Status: level ancaman IUCN Red List (Critically Endangered, Endangered, Vulnerable)."],
+        ["Ancaman Utama", "Mining Threat: penanda apakah aktivitas pertambangan tercatat sebagai ancaman spesies."],
+        ["Cakupan Data", f"{tot_titik_25:,} titik GBIF, {tot_spesies_25} spesies endemik kunci, {prov_count_25} provinsi observasi."],
+    ]
+
+    mermaid_str_2_5 = """flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Perjumpaan GBIF<br/><i>Scientific Name, Latitude, Longitude, Province, Year</i>"]
+        B["Data IUCN Red List<br/><i>Status, Population Trend, Mining Threat</i>"]
+    end
+
+    subgraph Spatial_Model["2. Spatial Mapping & Overlay"]
+        A --> C["Pemetaan titik koordinat occurrence"]
+        C --> D["Overlay dengan konteks wilayah industri dan konsesi"]
+    end
+
+    subgraph Conservation_Model["3. Analisis Status Konservasi"]
+        B --> E["Klasifikasi CR, EN, VU"]
+        B --> F["Identifikasi penanda Mining Threat"]
+    end
+
+    D --> G["Pembacaan keterancaman habitat satwa endemik"]
+    E --> G
+    F --> G"""
+    mermaid_png_path_2_5 = str(tool_dir / "mermaid_flowchart_2_5.png")
+    download_success_2_5 = download_mermaid_png(mermaid_str_2_5, mermaid_png_path_2_5)
 
     print("[2.9/4] Membangun DOCX Metodologi_Bab2_Kualitas_Lingkungan.docx...")
     doc = Document()
@@ -1001,7 +1080,7 @@ def generate_all_bab2():
         (" berikut:", False, False),
     ])
     add_caption(doc, "Tabel 2.4: Rincian Empiris Deforestasi dan Emisi CO₂ per Faktor Pendorong (2014-2023)")
-    add_table_1col(doc, ["Faktor Pendorong Utama", "Total Deforestasi (Ha)", "Estimasi Emisi CO₂ (Juta Ton)"], empirical_rows_driver, [4.5, 4.5, 5.0], ["L", "C", "C"])
+    add_table_1col(doc, ["Faktor Pendorong Utama", "Estimasi Emisi CO₂ (Juta Ton)"], empirical_rows_driver, [7.0, 7.0], ["L", "C"])
 
     add_p(doc, [
         (f"Penerapan pengujian statistik tabulasi silang pada data panel (total {valid_cases_22} observasi valid) disajikan secara ringkas pada ", False, False),
@@ -1088,12 +1167,12 @@ def generate_all_bab2():
         ("Kategori Deforestasi", f"Deforestasi Tinggi/Parah jika Total_Deforestasi_Ha >= median panel ({stats_23['y_threshold']:,.1f} Ha); selain itu Deforestasi Rendah."),
         ("Median(Seluruh Panel)", f"Ambang batas dari seluruh observasi panel valid N={valid_cases_23}."),
     ])
-    add_formula(doc, "Persamaan Uji Independensi Chi-Square Pearson (χ² Kontinjensi 2x2)", "Chi_Square (χ²) = Jumlah [ (Frekuensi_Observasi - Frekuensi_Harapan)^2 / Frekuensi_Harapan ]", [
-        ("Chi_Square (χ²)", f"Nilai statistik uji kecocokan Pearson untuk membuktikan ada tidaknya hubungan ketergantungan antara luasan ekspansi industri dan kehilangan tutupan pohon pada panel spasiotemporal N={valid_cases_23}."),
-        ("Frekuensi_Observasi (O)", "Jumlah kasus aktual yang tercatat pada sel tabel kontinjensi 2x2."),
-        ("Frekuensi_Harapan (E)", "Jumlah kasus teoretis jika ekspansi industri dan deforestasi saling independen: E = (Total Baris * Total Kolom) / N."),
+    add_formula(doc, "Persamaan Uji Independensi Chi-Square Pearson (χ² Kontinjensi 2x2)", "χ² = Σ [ ( O_ij - E_ij )² / E_ij ]   ;   dengan E_ij = ( Total_Baris_i × Total_Kolom_j ) / N", [
+        ("χ²", f"Nilai statistik uji kecocokan Pearson untuk membuktikan ada tidaknya hubungan ketergantungan antara luasan ekspansi industri dan kehilangan tutupan pohon pada panel spasiotemporal N={valid_cases_23}."),
+        ("O_ij", "Frekuensi Observasi: jumlah kasus aktual yang tercatat pada sel baris i kolom j tabel kontinjensi 2x2."),
+        ("E_ij", "Frekuensi Harapan: jumlah kasus teoretis jika ekspansi industri dan deforestasi saling independen, E_ij = ( Total_Baris_i × Total_Kolom_j ) / N."),
     ])
-    add_formula(doc, "Persamaan Rasio Keunggulan Risiko Deforestasi Parah (Risk Odds Ratio / OR)", "Odds_Ratio (OR) = ( a * d ) / ( b * c )", [
+    add_formula(doc, "Persamaan Rasio Keunggulan Risiko Deforestasi Parah (Risk Odds Ratio / OR)", "Odds_Ratio (OR) = ( a × d ) / ( b × c )", [
         ("Odds_Ratio (OR)", "Ukuran kelipatan peluang munculnya Deforestasi Tinggi/Parah pada kelompok IUP Tinggi dibandingkan kelompok IUP Rendah."),
         ("a", f"Jumlah observasi panel pada kelompok IUP Tinggi dan Deforestasi Tinggi/Parah ({stats_23['a']} kasus)."),
         ("b", f"Jumlah observasi panel pada kelompok IUP Tinggi dan Deforestasi Rendah ({stats_23['b']} kasus)."),
@@ -1104,18 +1183,18 @@ def generate_all_bab2():
     add_h4(doc, "D. Matriks Hasil Uji Empiris: Alokasi Ruang Konsesi vs Deforestasi Kumulatif")
     add_p(doc, [
         ("Akumulasi alokasi ruang konsesi IUP-Kawasan Industri dan deforestasi kumulatif dekade 2014-2023 pada masing-masing provinsi dapat dilihat secara empiris pada ", False, False),
-        ("Tabel 2.5", True, False),
+        ("Tabel 2.6", True, False),
         (" berikut:", False, False),
     ])
-    add_caption(doc, "Tabel 2.5: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif per Provinsi (2014-2023)")
+    add_caption(doc, "Tabel 2.6: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif per Provinsi (2014-2023)")
     add_table_1col(doc, ["Provinsi", "Luas IUP & Kawasan (Ha)", "Konsesi Baru Kumulatif 2014-2023 (Ha)", "Deforestasi Kumulatif 2014-2023 (Ha)"], empirical_rows_23, [3.4, 3.6, 4.5, 4.5], ["L", "C", "C", "C"])
 
     add_p(doc, [
         (f"Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total {valid_cases_23} observasi valid) disajikan secara ringkas pada ", False, False),
-        ("Tabel 2.6", True, False),
+        ("Tabel 2.7", True, False),
         (" berikut:", False, False),
     ])
-    add_caption(doc, "Tabel 2.6: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2")
+    add_caption(doc, "Tabel 2.7: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2")
     add_table_1col(doc, ["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (χ²)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_23, [3.0, 3.5, 2.0, 2.0, 2.0, 2.5], ["L", "L", "C", "C", "C", "C"])
 
     add_h4(doc, "E. Analisis Temuan Empiris: Eksekusi Ruang dan Laju Deforestasi")
@@ -1171,20 +1250,20 @@ def generate_all_bab2():
     add_p(doc, [
         ("Kuantifikasi atribusi kausalitas dan jejak karbon dihitung menggunakan sistem formulasi matematis berikut:", False, False),
     ])
-    add_formula(doc, "Agregasi Total Deforestasi per Faktor Pendorong", "Total_Deforestasi = SUM(Luas_Deforestasi_Ha) GROUP BY Faktor_Pendorong", [
-        ("Total_Deforestasi", "Total kehilangan tutupan pohon (Ha) yang diatribusikan pada faktor pendorong observasi."),
-        ("Luas_Deforestasi_Ha", "Variabel Dependen (Y1): kehilangan tutupan pohon per hektar."),
-        ("Faktor_Pendorong", "Variabel Independen (X): kategori aktivitas penyebab hilangnya hutan."),
+    add_formula(doc, "Persamaan Agregasi Total Deforestasi per Faktor Pendorong", "Total_Deforestasi_k = Σ ( Luas_Deforestasi_i )   ;   untuk seluruh observasi i dengan Faktor_Pendorong k", [
+        ("Total_Deforestasi_k", "Total kehilangan tutupan pohon (Ha) yang diatribusikan pada faktor pendorong k."),
+        ("Luas_Deforestasi_i", "Variabel Dependen (Y1): kehilangan tutupan pohon (Ha) pada observasi provinsi-tahun ke-i."),
+        ("k", "Variabel Independen (X): indeks kelompok faktor pendorong / kategori aktivitas penyebab hilangnya hutan."),
     ])
-    add_formula(doc, "Agregasi Total Emisi per Faktor Pendorong", "Total_Emisi = SUM(Emisi_CO2_Megagram) GROUP BY Faktor_Pendorong", [
-        ("Total_Emisi", "Total pelepasan gas rumah kaca dari konversi biomasa per faktor pendorong."),
-        ("Emisi_CO2_Megagram", "Variabel Dependen (Y2): kuantitas karbon dioksida ekuivalen yang terlepas ke atmosfer."),
+    add_formula(doc, "Persamaan Agregasi Total Emisi per Faktor Pendorong", "Total_Emisi_k = Σ ( Emisi_CO2_i )   ;   untuk seluruh observasi i dengan Faktor_Pendorong k", [
+        ("Total_Emisi_k", "Total pelepasan gas rumah kaca (Megagram CO2) dari konversi biomasa yang diatribusikan pada faktor pendorong k."),
+        ("Emisi_CO2_i", "Variabel Dependen (Y2): kuantitas karbon dioksida ekuivalen yang terlepas ke atmosfer pada observasi ke-i."),
     ])
-    add_formula(doc, "Kuantifikasi Proporsi Kontribusi Driver", "Persentase_Driver (%) = ( Total_Deforestasi_Driver / Total_Deforestasi_Kumulatif ) * 100", [
-        ("Persentase_Driver (%)", "Rasio kontribusi absolut luasan deforestasi faktor pendorong terhadap total kumulatif deforestasi."),
+    add_formula(doc, "Persamaan Kuantifikasi Proporsi Kontribusi Driver", "Persentase_Driver_k (%) = ( Total_Deforestasi_k / Total_Deforestasi_Kumulatif ) × 100", [
+        ("Persentase_Driver_k (%)", "Rasio kontribusi absolut luasan deforestasi faktor pendorong k terhadap total kumulatif deforestasi."),
         ("Total_Deforestasi_Kumulatif", f"Total seluruh deforestasi {jml_prov_24} provinsi periode {tahun_min_24}-{tahun_max_24} ({tot_luas_24:,.0f} Ha)."),
     ])
-    add_formula(doc, "Rasio Perbandingan Industri Ekstraktif vs Pertanian Masyarakat", "Rasio_Perbandingan = Total_Pertambangan_Sawit / Total_Pertanian_Berpindah", [
+    add_formula(doc, "Persamaan Rasio Perbandingan Industri Ekstraktif vs Pertanian Masyarakat", "Rasio_Perbandingan = Total_Pertambangan_Sawit / Total_Pertanian_Berpindah", [
         ("Rasio_Perbandingan", f"Kelipatan luasan deforestasi komoditas tambang dan sawit dibandingkan pertanian berpindah ({rasio_24:.0f}x)."),
         ("Total_Pertambangan_Sawit", f"Akumulasi deforestasi driver Pertambangan dan Sawit ({industri_total_24:,.0f} Ha)."),
         ("Total_Pertanian_Berpindah", f"Akumulasi deforestasi driver Pertanian Berpindah/Masyarakat ({petani_total_24:,.0f} Ha)."),
@@ -1212,6 +1291,81 @@ def generate_all_bab2():
         (f"Deforestasi yang didorong oleh komoditas pertambangan dan perkebunan berkontribusi terhadap pelepasan {emisi_industri_24:,.0f} Megagram CO2 atau {emisi_industri_pct_24:.1f}% dari total agregat pelepasan karbon perubahan tutupan lahan di Pulau Sulawesi.\n", False, False),
         ("4. ", True, False), ("Implikasi Kebijakan: ", True, False),
         ("Pengendalian deforestasi memerlukan evaluasi tata ruang perizinan pertambangan dan pengawasan ketat terhadap pembukaan lahan komoditas di wilayah tutupan hutan.", False, False),
+    ])
+
+    add_h2(doc, "2.5. Kehancuran Biodiversitas: Dampak Terhadap Habitat Satwa Endemik")
+    add_note_box(doc, "Sumber Data Resmi & Deskripsi Visualisasi", "Data Perjumpaan GBIF: data/raw/gbif_sulawesi_occurrences.csv; Data Status IUCN: data/processed/sulawesi_biodiversitas_iucn_fase5_exploded.csv. Visualisasi dashboard menampilkan peta spasial titik occurrence GBIF dan tabel validasi ancaman IUCN Red List.")
+
+    add_h4(doc, "A. Pengantar & Kerangka Narasi")
+    add_p(doc, [
+        ("Pulau Sulawesi merupakan wilayah yang memiliki keanekaragaman hayati endemik yang khas di kawasan Wallacea. Perubahan tutupan lahan akibat ekspansi pertambangan nikel dan kawasan industri berimplikasi pada fragmentasi habitat flora dan fauna endemik. ", False, False),
+        (f"Data spasial dari GBIF memetakan sebanyak {tot_titik_25:,.0f} titik koordinat keberadaan (occurrence) dari {tot_spesies_25} spesies endemik kunci. ", False, False),
+        (f"Berdasarkan IUCN Red List, tercatat {tot_cr_25} spesies berstatus Terancam Kritis (Critically Endangered), {tot_en_25} spesies Rentan Bahaya (Endangered), dan {tot_vu_25} spesies Rentan (Vulnerable).", False, False),
+    ])
+    add_p(doc, [
+        (f"Catatan IUCN menunjukkan {tot_mining_yes_25} dari {tot_spesies_25} spesies endemik kunci memiliki penanda Mining Threat. Dengan demikian, sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan Spatial Mapping (GBIF) dan Analisis IUCN Red List untuk membaca irisan antara habitat satwa endemik, status keterancaman, dan tekanan pertambangan.", False, False),
+    ])
+
+    add_h4(doc, "B. Alur Logika Metodologis Spatial Mapping GBIF & Analisis IUCN Red List")
+    add_p(doc, [
+        ("Kerangka pemetaan titik koordinat perjumpaan satwa dan sintesis status konservasi internasional diilustrasikan pada ", False, False),
+        ("Bagan Alur 2.5", True, False),
+        (" berikut. Konfigurasi variabel analisis dirinci pada Tabel 2.5a di bawah gambar.", False, False),
+    ])
+    add_caption(doc, "Bagan Alur 2.5: Alur Logika Metodologis Spatial Mapping GBIF & Analisis IUCN Red List")
+    if download_success_2_5:
+        try:
+            p_img = doc.add_paragraph()
+            p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p_img.add_run().add_picture(mermaid_png_path_2_5, width=Cm(15))
+        except Exception as exc:
+            print(f"[WARN] Gagal memasukkan gambar Mermaid 2.5 ke DOCX: {exc}")
+            p_err = doc.add_paragraph()
+            run(p_err, "[Gambar Flowchart Gagal Dimuat]", color=C_RED, pt=9)
+    else:
+        p_err = doc.add_paragraph()
+        run(p_err, "[Gambar Flowchart Gagal Diunduh, silakan periksa koneksi internet saat generate]", color=C_RED, pt=9)
+
+    p_spacer_25 = doc.add_paragraph()
+    p_spacer_25.paragraph_format.space_before = Pt(2)
+    p_spacer_25.paragraph_format.space_after = Pt(4)
+    add_caption(doc, "Tabel 2.5a: Konfigurasi Variabel Analisis Spatial Mapping & IUCN Red List (Sub-bab 2.5)")
+    add_table_1col(doc, konf_headers_25, konf_rows_25, [4.5, 11.0], ["L", "L"])
+
+    add_h4(doc, "C. Formulasi Matematis: Occurrence, Status Keterancaman, dan Mining Threat")
+    add_p(doc, [
+        ("Kuantifikasi sebaran titik perjumpaan, komposisi status konservasi, dan ancaman pertambangan dihitung menggunakan sistem formulasi matematis berikut:", False, False),
+    ])
+    add_formula(doc, "Agregasi Titik Perjumpaan GBIF per Spesies", "O_s = Σ o_i, untuk setiap titik occurrence i yang memiliki spesies s", [
+        ("O_s", "Jumlah titik koordinat perjumpaan GBIF untuk spesies s."),
+        ("o_i", "Indikator titik perjumpaan ke-i yang terasosiasi dengan spesies s."),
+        ("s", "Spesies endemik kunci yang dianalisis."),
+    ])
+    add_formula(doc, "Proporsi Status Konservasi IUCN", "P_k (%) = ( N_k / N_total ) × 100", [
+        ("P_k (%)", "Persentase spesies pada kategori status konservasi k."),
+        ("N_k", "Jumlah spesies pada kategori Critically Endangered, Endangered, atau Vulnerable."),
+        ("N_total", f"Total spesies endemik kunci yang dianalisis ({tot_spesies_25} spesies)."),
+    ])
+    add_formula(doc, "Rasio Spesies dengan Mining Threat", "R_m (%) = ( N_m / N_total ) × 100", [
+        ("R_m (%)", "Persentase spesies yang memiliki penanda ancaman pertambangan dalam data IUCN."),
+        ("N_m", f"Jumlah spesies dengan Mining Threat = Yes ({tot_mining_yes_25} spesies)."),
+    ])
+
+    add_h4(doc, "D. Matriks Hasil Uji Empiris: Occurrence GBIF dan Status IUCN")
+    add_p(doc, [
+        ("Rincian status konservasi, tren populasi, penanda ancaman pertambangan, dan jumlah titik occurrence GBIF per spesies disajikan pada ", False, False),
+        ("Tabel 2.9", True, False),
+        (" berikut:", False, False),
+    ])
+    add_caption(doc, "Tabel 2.9: Matriks Spesies Endemik, Status IUCN, Mining Threat, dan Titik Occurrence GBIF")
+    add_table_1col(doc, ["Scientific Name", "Common Name", "Status", "Population Trend", "Mining Threat", "Titik GBIF"], species_rows_25, [3.2, 3.0, 2.8, 2.4, 2.0, 1.6], ["L", "L", "C", "C", "C", "C"])
+
+    add_caption(doc, "Tabel 2.10: Ringkasan Status Konservasi IUCN Spesies Endemik Kunci")
+    add_table_1col(doc, ["Status IUCN", "Jumlah Spesies", "Proporsi"], status_rows_25, [5.0, 3.0, 3.0], ["L", "C", "C"])
+
+    add_h4(doc, "E. Analisis Temuan Empiris: Fragmentasi Habitat dan Ancaman Kepunahan")
+    add_p(doc, [
+        ("Pembacaan spatial mapping GBIF dan validasi IUCN Red List menunjukkan bahwa ekspansi industri ekstraktif tidak hanya menekan kualitas air, udara, dan tutupan hutan, tetapi juga mempersempit ruang hidup spesies endemik Wallacea. Titik occurrence GBIF memberikan bukti spasial keberadaan satwa, sedangkan status IUCN dan penanda Mining Threat memperkuat pembacaan bahwa tekanan pertambangan masuk dalam daftar ancaman konservasi spesies.", False, False),
     ])
 
     docx_path = tool_dir / "Metodologi_Bab2_Kualitas_Lingkungan.docx"
@@ -1289,7 +1443,7 @@ h4 {{ color: #A5D6A7; }}
 {html_table(["Provinsi", "Kapasitas PLTU (Captive & Grid) (MW)", "IKU", "NASA TROPOMI NO₂ (mol/m²)"], empirical_rows_22_html)}
 <p>Selain analisis polusi udara, atribusi pelepasan gas rumah kaca membedah estimasi jejak karbon dari masing-masing faktor pendorong deforestasi pada <strong>Tabel 2.4</strong> berikut:</p>
 <div class="table-caption">Tabel 2.4: Rincian Empiris Deforestasi dan Emisi CO₂ per Faktor Pendorong (2014-2023)</div>
-{html_table(["Faktor Pendorong Utama", "Total Deforestasi (Ha)", "Estimasi Emisi CO₂ (Juta Ton)"], empirical_rows_driver)}
+{html_table(["Faktor Pendorong Utama", "Estimasi Emisi CO₂ (Juta Ton)"], empirical_rows_driver)}
 <p>Penerapan pengujian statistik tabulasi silang pada data panel (total {valid_cases_22} observasi valid) disajikan secara ringkas pada <strong>Tabel 2.5</strong> berikut:</p>
 <div class="table-caption">Tabel 2.5: Ringkasan Eksekutif Skenario Crosstab Kapasitas PLTU vs IKU Bab 2</div>
 {html_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (&chi;&sup2;)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_22)}
@@ -1308,18 +1462,18 @@ h4 {{ color: #A5D6A7; }}
 {html_table(konf_headers_23, konf_rows_23)}
 <h4>C. Formulasi Matematis: Akumulasi Konsesi, Deforestasi, dan Uji Crosstabulation</h4>
 <p>Parameterisasi tekanan ruang dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:</p>
-<div class="formula">Luas_IUP_Kawasan_Provinsi = SUM(total_luas_ha) GROUP BY Provinsi</div>
-<div class="formula">Kumulatif_Luas_Konsesi_Ha = CUMSUM(Total_Luas_Konsesi_Baru_Ha) OVER (ORDER BY Tahun)</div>
-<div class="formula">Kumulatif_Deforestasi_Ha = CUMSUM(Total_Deforestasi_Ha) OVER (ORDER BY Tahun)</div>
-<div class="formula">Kategori = IF(Nilai &gt;= Median(Seluruh Panel), 'Tinggi/Parah', 'Rendah')</div>
-<div class="formula">Chi_Square (&chi;&sup2;) = Jumlah [ (Frekuensi_Observasi - Frekuensi_Harapan)^2 / Frekuensi_Harapan ]</div>
-<div class="formula">Odds_Ratio (OR) = ( a * d ) / ( b * c )</div>
+<div class="formula">Luas_IUP_Kawasan_p = Σ ( Luas_Izin_i )   ;   untuk seluruh entitas izin i pada provinsi p</div>
+<div class="formula">Kumulatif_Luas_Konsesi_p(T) = Σ ( Konsesi_Baru_p,t )   ;   untuk t = 2014 s.d. T</div>
+<div class="formula">Kumulatif_Deforestasi_p(T) = Σ ( Deforestasi_p,t )   ;   untuk t = 2014 s.d. T</div>
+<div class="formula">Kategori(x) = 'Tinggi/Parah' , jika x ≥ Median(Panel)   |   'Rendah' , jika x &lt; Median(Panel)</div>
+<div class="formula">&chi;&sup2; = Σ [ ( O_ij - E_ij )² / E_ij ]   ;   dengan E_ij = ( Total_Baris_i × Total_Kolom_j ) / N</div>
+<div class="formula">Odds_Ratio (OR) = ( a × d ) / ( b × c )</div>
 <h4>D. Matriks Hasil Uji Empiris</h4>
-<p>Akumulasi alokasi ruang konsesi IUP-Kawasan Industri dan deforestasi kumulatif dekade 2014-2023 pada masing-masing provinsi dapat dilihat secara empiris pada <strong>Tabel 2.5</strong> berikut:</p>
-<div class="table-caption">Tabel 2.5: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif per Provinsi (2014-2023)</div>
+<p>Akumulasi alokasi ruang konsesi IUP-Kawasan Industri dan deforestasi kumulatif dekade 2014-2023 pada masing-masing provinsi dapat dilihat secara empiris pada <strong>Tabel 2.6</strong> berikut:</p>
+<div class="table-caption">Tabel 2.6: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif per Provinsi (2014-2023)</div>
 {html_table(["Provinsi", "Luas IUP & Kawasan (Ha)", "Konsesi Baru Kumulatif 2014-2023 (Ha)", "Deforestasi Kumulatif 2014-2023 (Ha)"], empirical_rows_23)}
-<p>Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total {valid_cases_23} observasi valid) disajikan secara ringkas pada <strong>Tabel 2.6</strong> berikut:</p>
-<div class="table-caption">Tabel 2.6: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2</div>
+<p>Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total {valid_cases_23} observasi valid) disajikan secara ringkas pada <strong>Tabel 2.7</strong> berikut:</p>
+<div class="table-caption">Tabel 2.7: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2</div>
 {html_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (&chi;&sup2;)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_23)}
 <h4>E. Analisis Temuan Empiris</h4>
 <p>{finding_23}</p>
@@ -1336,9 +1490,9 @@ h4 {{ color: #A5D6A7; }}
 {html_table(konf_headers_24, konf_rows_24)}
 <h4>C. Formulasi Matematis: Agregasi Driver, Proporsi, dan Atribusi Emisi</h4>
 <p>Kuantifikasi atribusi kausalitas dan jejak karbon dihitung menggunakan sistem formulasi matematis berikut:</p>
-<div class="formula">Total_Deforestasi = SUM(Luas_Deforestasi_Ha) GROUP BY Faktor_Pendorong</div>
-<div class="formula">Total_Emisi = SUM(Emisi_CO2_Megagram) GROUP BY Faktor_Pendorong</div>
-<div class="formula">Persentase_Driver (%) = ( Total_Deforestasi_Driver / Total_Deforestasi_Kumulatif ) * 100</div>
+<div class="formula">Total_Deforestasi_k = Σ ( Luas_Deforestasi_i )   ;   untuk seluruh observasi i dengan Faktor_Pendorong k</div>
+<div class="formula">Total_Emisi_k = Σ ( Emisi_CO2_i )   ;   untuk seluruh observasi i dengan Faktor_Pendorong k</div>
+<div class="formula">Persentase_Driver_k (%) = ( Total_Deforestasi_k / Total_Deforestasi_Kumulatif ) × 100</div>
 <div class="formula">Rasio_Perbandingan = Total_Pertambangan_Sawit / Total_Pertanian_Berpindah</div>
 <h4>D. Matriks Hasil Uji Empiris</h4>
 <p>Akumulasi total deforestasi, proporsi kontribusi, dan atribusi emisi CO2 masing-masing faktor pendorong pada periode {tahun_min_24}-{tahun_max_24} dapat dilihat secara empiris pada <strong>Tabel 2.8</strong> berikut:</p>
@@ -1346,6 +1500,31 @@ h4 {{ color: #A5D6A7; }}
 {html_table(["Faktor Pendorong", "Total Deforestasi (Ha)", "Proporsi (%)", "Emisi CO2 (Megagram)"], driver_rows_24)}
 <h4>E. Analisis Temuan Empiris</h4>
 <p><strong>1. Dominasi Sektor Pertambangan dan Sawit:</strong> mencakup {industri_total_24:,.0f} Ha atau <strong>{industri_pct_24:.1f}%</strong> dari total kehilangan tutupan hutan periode {tahun_min_24}-{tahun_max_24}, dengan proporsi tahunan konsisten pada rentang {share_ind_min_24:.0f}-{share_ind_max_24:.0f}%. <strong>2. Porsi Minor Pertanian Berpindah:</strong> {petani_pct_24:.1f}% ({petani_total_24:,.0f} Ha); deforestasi komoditas tambang dan sawit {rasio_24:.0f} kali lebih besar dibanding pertanian berpindah. <strong>3. Atribusi Emisi CO2:</strong> sektor pertambangan dan sawit melepaskan {emisi_industri_24:,.0f} Megagram CO2 ({emisi_industri_pct_24:.1f}% dari total). <strong>4. Implikasi Kebijakan:</strong> pengendalian deforestasi memerlukan evaluasi tata ruang perizinan pertambangan dan pengawasan ketat terhadap pembukaan lahan komoditas di wilayah tutupan hutan.</p>
+
+<h2>2.5. Kehancuran Biodiversitas: Dampak Terhadap Habitat Satwa Endemik</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Data Perjumpaan GBIF: <code>data/raw/gbif_sulawesi_occurrences.csv</code>; Data Status IUCN: <code>data/processed/sulawesi_biodiversitas_iucn_fase5_exploded.csv</code>. Visualisasi dashboard menampilkan peta spasial titik occurrence GBIF dan tabel validasi ancaman IUCN Red List.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Pulau Sulawesi merupakan wilayah yang memiliki keanekaragaman hayati endemik yang khas di kawasan Wallacea. Perubahan tutupan lahan akibat ekspansi pertambangan nikel dan kawasan industri berimplikasi pada fragmentasi habitat flora dan fauna endemik. Data spasial dari <strong>GBIF</strong> memetakan sebanyak <strong>{tot_titik_25:,.0f} titik koordinat keberadaan (occurrence)</strong> dari <strong>{tot_spesies_25} spesies endemik kunci</strong>. Berdasarkan <strong>IUCN Red List</strong>, tercatat <strong>{tot_cr_25} spesies Critically Endangered</strong>, <strong>{tot_en_25} spesies Endangered</strong>, dan <strong>{tot_vu_25} spesies Vulnerable</strong>.</p>
+<p>Catatan IUCN menunjukkan <strong>{tot_mining_yes_25} dari {tot_spesies_25} spesies</strong> memiliki penanda <strong>Mining Threat</strong>. Sub-bab ini menggunakan Spatial Mapping (GBIF) dan Analisis IUCN Red List, bukan uji inferensial Chi-Square.</p>
+<h4>B. Alur Logika Metodologis Spatial Mapping GBIF &amp; Analisis IUCN Red List</h4>
+<p>Kerangka pemetaan titik koordinat perjumpaan satwa dan sintesis status konservasi internasional diilustrasikan pada <strong>Bagan Alur 2.5</strong> berikut. Konfigurasi variabel analisis dirinci pada Tabel 2.5a di bawah gambar.</p>
+<div class="table-caption">Bagan Alur 2.5: Alur Logika Metodologis Spatial Mapping GBIF &amp; Analisis IUCN Red List</div>
+<div class="mermaid">{mermaid_str_2_5}</div>
+<div class="table-caption">Tabel 2.5a: Konfigurasi Variabel Analisis Spatial Mapping &amp; IUCN Red List (Sub-bab 2.5)</div>
+{html_table(konf_headers_25, konf_rows_25)}
+<h4>C. Formulasi Matematis: Occurrence, Status Keterancaman, dan Mining Threat</h4>
+<p>Kuantifikasi sebaran titik perjumpaan, komposisi status konservasi, dan ancaman pertambangan dihitung menggunakan sistem formulasi matematis berikut:</p>
+<div class="formula">O_s = Σ o_i, untuk setiap titik occurrence i yang memiliki spesies s</div>
+<div class="formula">P_k (%) = ( N_k / N_total ) × 100</div>
+<div class="formula">R_m (%) = ( N_m / N_total ) × 100</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<p>Rincian status konservasi, tren populasi, penanda ancaman pertambangan, dan jumlah titik occurrence GBIF per spesies disajikan pada <strong>Tabel 2.9</strong> berikut:</p>
+<div class="table-caption">Tabel 2.9: Matriks Spesies Endemik, Status IUCN, Mining Threat, dan Titik Occurrence GBIF</div>
+{html_table(["Scientific Name", "Common Name", "Status", "Population Trend", "Mining Threat", "Titik GBIF"], species_rows_25)}
+<div class="table-caption">Tabel 2.10: Ringkasan Status Konservasi IUCN Spesies Endemik Kunci</div>
+{html_table(["Status IUCN", "Jumlah Spesies", "Proporsi"], status_rows_25)}
+<h4>E. Analisis Temuan Empiris</h4>
+<p>Pembacaan spatial mapping GBIF dan validasi IUCN Red List menunjukkan bahwa ekspansi industri ekstraktif tidak hanya menekan kualitas air, udara, dan tutupan hutan, tetapi juga mempersempit ruang hidup spesies endemik Wallacea. Titik occurrence GBIF memberikan bukti spasial keberadaan satwa, sedangkan status IUCN dan penanda Mining Threat memperkuat pembacaan bahwa tekanan pertambangan masuk dalam daftar ancaman konservasi spesies.</p>
 </body>
 </html>
 """
@@ -1433,7 +1612,7 @@ h4 {{ color: #A5D6A7; }}
         "Selain analisis polusi udara, atribusi pelepasan gas rumah kaca membedah estimasi jejak karbon dari masing-masing faktor pendorong deforestasi pada **Tabel 2.4** berikut:",
         "",
         "##### Tabel 2.4: Rincian Empiris Deforestasi dan Emisi CO₂ per Faktor Pendorong (2014-2023)",
-        markdown_table(["Faktor Pendorong Utama", "Total Deforestasi (Ha)", "Estimasi Emisi CO₂ (Juta Ton)"], empirical_rows_driver),
+        markdown_table(["Faktor Pendorong Utama", "Estimasi Emisi CO₂ (Juta Ton)"], empirical_rows_driver),
         "",
         f"Penerapan pengujian statistik tabulasi silang pada data panel (total {valid_cases_22} observasi valid) disajikan secara ringkas pada **Tabel 2.5** berikut:",
         "",
@@ -1465,23 +1644,23 @@ h4 {{ color: #A5D6A7; }}
         "Parameterisasi tekanan ruang dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:",
         "",
         "```text",
-        "Luas_IUP_Kawasan_Provinsi = SUM(total_luas_ha) GROUP BY Provinsi",
-        "Kumulatif_Luas_Konsesi_Ha = CUMSUM(Total_Luas_Konsesi_Baru_Ha) OVER (ORDER BY Tahun)",
-        "Kumulatif_Deforestasi_Ha = CUMSUM(Total_Deforestasi_Ha) OVER (ORDER BY Tahun)",
-        "Kategori = IF(Nilai >= Median(Seluruh Panel), 'Tinggi/Parah', 'Rendah')",
-        "Chi_Square (χ²) = Jumlah [ (Frekuensi_Observasi - Frekuensi_Harapan)^2 / Frekuensi_Harapan ]",
-        "Odds_Ratio (OR) = ( a * d ) / ( b * c )",
+        "Luas_IUP_Kawasan_p = Σ ( Luas_Izin_i )   ;   untuk seluruh entitas izin i pada provinsi p",
+        "Kumulatif_Luas_Konsesi_p(T) = Σ ( Konsesi_Baru_p,t )   ;   untuk t = 2014 s.d. T",
+        "Kumulatif_Deforestasi_p(T) = Σ ( Deforestasi_p,t )   ;   untuk t = 2014 s.d. T",
+        "Kategori(x) = 'Tinggi/Parah' , jika x ≥ Median(Panel)   |   'Rendah' , jika x < Median(Panel)",
+        "χ² = Σ [ ( O_ij - E_ij )² / E_ij ]   ;   dengan E_ij = ( Total_Baris_i × Total_Kolom_j ) / N",
+        "Odds_Ratio (OR) = ( a × d ) / ( b × c )",
         "```",
         "",
         "#### D. Matriks Hasil Uji Empiris",
-        "Akumulasi alokasi ruang konsesi IUP-Kawasan Industri dan deforestasi kumulatif dekade 2014-2023 pada masing-masing provinsi dapat dilihat secara empiris pada **Tabel 2.5** berikut:",
+        "Akumulasi alokasi ruang konsesi IUP-Kawasan Industri dan deforestasi kumulatif dekade 2014-2023 pada masing-masing provinsi dapat dilihat secara empiris pada **Tabel 2.6** berikut:",
         "",
-        "##### Tabel 2.5: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif per Provinsi (2014-2023)",
+        "##### Tabel 2.6: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif per Provinsi (2014-2023)",
         markdown_table(["Provinsi", "Luas IUP & Kawasan (Ha)", "Konsesi Baru Kumulatif 2014-2023 (Ha)", "Deforestasi Kumulatif 2014-2023 (Ha)"], empirical_rows_23),
         "",
-        f"Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total {valid_cases_23} observasi valid) disajikan secara ringkas pada **Tabel 2.6** berikut:",
+        f"Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total {valid_cases_23} observasi valid) disajikan secara ringkas pada **Tabel 2.7** berikut:",
         "",
-        "##### Tabel 2.6: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2",
+        "##### Tabel 2.7: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2",
         markdown_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (χ²)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_23),
         "",
         "#### E. Analisis Temuan Empiris: Eksekusi Ruang dan Laju Deforestasi",
@@ -1509,9 +1688,9 @@ h4 {{ color: #A5D6A7; }}
         "Kuantifikasi atribusi kausalitas dan jejak karbon dihitung menggunakan sistem formulasi matematis berikut:",
         "",
         "```text",
-        "Total_Deforestasi = SUM(Luas_Deforestasi_Ha) GROUP BY Faktor_Pendorong",
-        "Total_Emisi = SUM(Emisi_CO2_Megagram) GROUP BY Faktor_Pendorong",
-        "Persentase_Driver (%) = ( Total_Deforestasi_Driver / Total_Deforestasi_Kumulatif ) * 100",
+        "Total_Deforestasi_k = Σ ( Luas_Deforestasi_i )   ;   untuk seluruh observasi i dengan Faktor_Pendorong k",
+        "Total_Emisi_k = Σ ( Emisi_CO2_i )   ;   untuk seluruh observasi i dengan Faktor_Pendorong k",
+        "Persentase_Driver_k (%) = ( Total_Deforestasi_k / Total_Deforestasi_Kumulatif ) × 100",
         "Rasio_Perbandingan = Total_Pertambangan_Sawit / Total_Pertanian_Berpindah",
         "```",
         "",
@@ -1526,6 +1705,47 @@ h4 {{ color: #A5D6A7; }}
         f"2. **Porsi Minor Pertanian Berpindah:** {petani_pct_24:.1f}% ({petani_total_24:,.0f} Ha) dari total deforestasi kumulatif; deforestasi komoditas tambang dan sawit {rasio_24:.0f} kali lebih besar dibanding pertanian berpindah.",
         f"3. **Atribusi Emisi CO2:** sektor pertambangan dan sawit melepaskan {emisi_industri_24:,.0f} Megagram CO2 ({emisi_industri_pct_24:.1f}% dari total agregat pelepasan karbon).",
         "4. **Implikasi Kebijakan:** pengendalian deforestasi memerlukan evaluasi tata ruang perizinan pertambangan dan pengawasan ketat terhadap pembukaan lahan komoditas di wilayah tutupan hutan.",
+        "",
+        "## 2.5. Kehancuran Biodiversitas: Dampak Terhadap Habitat Satwa Endemik",
+        "",
+        "> **Sumber Data Resmi & Deskripsi Visualisasi:** Data Perjumpaan GBIF: `data/raw/gbif_sulawesi_occurrences.csv`; Data Status IUCN: `data/processed/sulawesi_biodiversitas_iucn_fase5_exploded.csv`. Visualisasi dashboard menampilkan peta spasial titik occurrence GBIF dan tabel validasi ancaman IUCN Red List.",
+        "",
+        "#### A. Pengantar & Kerangka Narasi",
+        f"Pulau Sulawesi merupakan wilayah yang memiliki keanekaragaman hayati endemik yang khas di kawasan Wallacea. Perubahan tutupan lahan akibat ekspansi pertambangan nikel dan kawasan industri berimplikasi pada fragmentasi habitat flora dan fauna endemik. Data spasial dari **GBIF** memetakan sebanyak **{tot_titik_25:,.0f} titik koordinat keberadaan (occurrence)** dari **{tot_spesies_25} spesies endemik kunci**.",
+        "",
+        f"Berdasarkan **IUCN Red List**, tercatat **{tot_cr_25} spesies Critically Endangered**, **{tot_en_25} spesies Endangered**, dan **{tot_vu_25} spesies Vulnerable**. Catatan IUCN menunjukkan **{tot_mining_yes_25} dari {tot_spesies_25} spesies** memiliki penanda **Mining Threat**.",
+        "",
+        "#### B. Alur Logika Metodologis Spatial Mapping GBIF & Analisis IUCN Red List",
+        "Kerangka pemetaan titik koordinat perjumpaan satwa dan sintesis status konservasi internasional diilustrasikan pada **Bagan Alur 2.5** berikut. Konfigurasi variabel analisis dirinci pada Tabel 2.5a di bawah gambar.",
+        "",
+        "##### Bagan Alur 2.5: Alur Logika Metodologis Spatial Mapping GBIF & Analisis IUCN Red List",
+        "```mermaid",
+        mermaid_str_2_5,
+        "```",
+        "",
+        "##### Tabel 2.5a: Konfigurasi Variabel Analisis Spatial Mapping & IUCN Red List (Sub-bab 2.5)",
+        markdown_table(konf_headers_25, konf_rows_25),
+        "",
+        "#### C. Formulasi Matematis: Occurrence, Status Keterancaman, dan Mining Threat",
+        "Kuantifikasi sebaran titik perjumpaan, komposisi status konservasi, dan ancaman pertambangan dihitung menggunakan sistem formulasi matematis berikut:",
+        "",
+        "```text",
+        "O_s = Σ o_i, untuk setiap titik occurrence i yang memiliki spesies s",
+        "P_k (%) = ( N_k / N_total ) × 100",
+        "R_m (%) = ( N_m / N_total ) × 100",
+        "```",
+        "",
+        "#### D. Matriks Hasil Uji Empiris",
+        "Rincian status konservasi, tren populasi, penanda ancaman pertambangan, dan jumlah titik occurrence GBIF per spesies disajikan pada **Tabel 2.9** berikut:",
+        "",
+        "##### Tabel 2.9: Matriks Spesies Endemik, Status IUCN, Mining Threat, dan Titik Occurrence GBIF",
+        markdown_table(["Scientific Name", "Common Name", "Status", "Population Trend", "Mining Threat", "Titik GBIF"], species_rows_25),
+        "",
+        "##### Tabel 2.10: Ringkasan Status Konservasi IUCN Spesies Endemik Kunci",
+        markdown_table(["Status IUCN", "Jumlah Spesies", "Proporsi"], status_rows_25),
+        "",
+        "#### E. Analisis Temuan Empiris: Fragmentasi Habitat dan Ancaman Kepunahan",
+        "Pembacaan spatial mapping GBIF dan validasi IUCN Red List menunjukkan bahwa ekspansi industri ekstraktif tidak hanya menekan kualitas air, udara, dan tutupan hutan, tetapi juga mempersempit ruang hidup spesies endemik Wallacea. Titik occurrence GBIF memberikan bukti spasial keberadaan satwa, sedangkan status IUCN dan penanda Mining Threat memperkuat pembacaan bahwa tekanan pertambangan masuk dalam daftar ancaman konservasi spesies.",
         "",
     ]
     md_path = tool_dir / "Metodologi_Bab2_Kualitas_Lingkungan.md"
