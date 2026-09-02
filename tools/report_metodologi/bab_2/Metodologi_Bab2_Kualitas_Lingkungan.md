@@ -213,9 +213,19 @@ Akumulasi alokasi ruang konsesi IUP-Kawasan Industri dan deforestasi kumulatif d
 | Gorontalo | 5,212 | 5,212 | 98,063 |
 | Sulawesi Barat | 4,424 | 2,163 | 133,263 |
 
-Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total 60 observasi valid) disajikan secara ringkas pada **Tabel 2.6** berikut:
+Selain alokasi konsesi spasial, analisis atribusi pelepasan gas rumah kaca membedah estimasi jejak karbon dari masing-masing faktor pendorong deforestasi pada **Tabel 2.6** berikut:
 
-##### Tabel 2.6: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2
+##### Tabel 2.6: Rincian Empiris Deforestasi dan Emisi CO₂ per Faktor Pendorong (2014-2023)
+| Faktor Pendorong Utama | Total Deforestasi (Ha) | Estimasi Emisi CO₂ (Juta Ton) |
+| :--- | :--- | :--- |
+| Pertambangan dan Sawit | 726,565 | 482.7 |
+| Kehutanan Komersial | 97,936 | 64.1 |
+| Pertanian Berpindah | 43,002 | 29.1 |
+| Tidak Teridentifikasi | 18,199 | 10.3 |
+
+Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total 60 observasi valid) disajikan secara ringkas pada **Tabel 2.7** berikut:
+
+##### Tabel 2.7: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2
 | Variabel Independen (X) | Variabel Dependen (Y) | Chi-Square (χ²) | P-Value | Odds Ratio | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Luas Ekspansi Industri (Ha) | Kehilangan Tutupan Pohon (Ha) | 35.267 | p < 0.001 | 81.0 | SIGNIFIKAN |

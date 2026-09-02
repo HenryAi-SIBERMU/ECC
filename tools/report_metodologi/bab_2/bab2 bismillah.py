@@ -649,6 +649,30 @@ def generate_all_bab2():
     empirical_23 = pd.merge(empirical_23, def_kum_prov, on="Provinsi", how="left")
     empirical_23 = empirical_23.fillna(0).sort_values("Luas_IUP_Kawasan_Ha", ascending=False)
 
+    df_driver = pd.read_csv(data_dir / "loss_by_driver_sulawesi_2001_2025_v3.csv")
+    df_driver_focus = df_driver[(df_driver['year'] >= focus_start_year) & (df_driver['year'] <= focus_end_year)].copy()
+    
+    driver_map = {
+        'Commodity driven deforestation': 'Pertambangan dan Sawit',
+        'Forestry': 'Kehutanan Komersial',
+        'Shifting agriculture': 'Pertanian Berpindah',
+        'Urbanization': 'Urbanisasi & Infrastruktur',
+        'Unknown': 'Tidak Teridentifikasi'
+    }
+    df_driver_focus['driver'] = df_driver_focus['driver'].replace(driver_map)
+    df_driver_agg = df_driver_focus.groupby('driver').agg({
+        'area_ha': 'sum',
+        'co2_emissions_mg': 'sum'
+    }).reset_index().sort_values('area_ha', ascending=False)
+    
+    empirical_rows_driver = []
+    for _, row in df_driver_agg.iterrows():
+        empirical_rows_driver.append([
+            row["driver"],
+            f"{row['area_ha']:,.0f}",
+            f"{row['co2_emissions_mg']/1_000_000:,.1f}"
+        ])
+
     empirical_rows_23 = []
     for _, row in empirical_23.iterrows():
         empirical_rows_23.append([
@@ -998,11 +1022,19 @@ def generate_all_bab2():
     add_table_1col(doc, ["Provinsi", "Luas IUP & Kawasan (Ha)", "Konsesi Baru Kumulatif 2014-2023 (Ha)", "Deforestasi Kumulatif 2014-2023 (Ha)"], empirical_rows_23, [3.4, 3.6, 4.5, 4.5], ["L", "C", "C", "C"])
 
     add_p(doc, [
-        (f"Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total {valid_cases_23} observasi valid) disajikan secara ringkas pada ", False, False),
+        ("Selain alokasi konsesi spasial, analisis atribusi pelepasan gas rumah kaca membedah estimasi jejak karbon dari masing-masing faktor pendorong deforestasi pada ", False, False),
         ("Tabel 2.6", True, False),
         (" berikut:", False, False),
     ])
-    add_caption(doc, "Tabel 2.6: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2")
+    add_caption(doc, "Tabel 2.6: Rincian Empiris Deforestasi dan Emisi CO₂ per Faktor Pendorong (2014-2023)")
+    add_table_1col(doc, ["Faktor Pendorong Utama", "Total Deforestasi (Ha)", "Estimasi Emisi CO₂ (Juta Ton)"], empirical_rows_driver, [4.5, 4.5, 5.0], ["L", "C", "C"])
+
+    add_p(doc, [
+        (f"Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total {valid_cases_23} observasi valid) disajikan secara ringkas pada ", False, False),
+        ("Tabel 2.7", True, False),
+        (" berikut:", False, False),
+    ])
+    add_caption(doc, "Tabel 2.7: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2")
     add_table_1col(doc, ["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (χ²)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_23, [3.0, 3.5, 2.0, 2.0, 2.0, 2.5], ["L", "L", "C", "C", "C", "C"])
 
     add_h4(doc, "E. Analisis Temuan Empiris: Eksekusi Ruang dan Laju Deforestasi")
@@ -1108,8 +1140,11 @@ h4 {{ color: #A5D6A7; }}
 <p>Akumulasi alokasi ruang konsesi IUP-Kawasan Industri dan deforestasi kumulatif dekade 2014-2023 pada masing-masing provinsi dapat dilihat secara empiris pada <strong>Tabel 2.5</strong> berikut:</p>
 <div class="table-caption">Tabel 2.5: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif per Provinsi (2014-2023)</div>
 {html_table(["Provinsi", "Luas IUP & Kawasan (Ha)", "Konsesi Baru Kumulatif 2014-2023 (Ha)", "Deforestasi Kumulatif 2014-2023 (Ha)"], empirical_rows_23)}
-<p>Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total {valid_cases_23} observasi valid) disajikan secara ringkas pada <strong>Tabel 2.6</strong> berikut:</p>
-<div class="table-caption">Tabel 2.6: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2</div>
+<p>Selain alokasi konsesi spasial, analisis atribusi pelepasan gas rumah kaca membedah estimasi jejak karbon dari masing-masing faktor pendorong deforestasi pada <strong>Tabel 2.6</strong> berikut:</p>
+<div class="table-caption">Tabel 2.6: Rincian Empiris Deforestasi dan Emisi CO₂ per Faktor Pendorong (2014-2023)</div>
+{html_table(["Faktor Pendorong Utama", "Total Deforestasi (Ha)", "Estimasi Emisi CO₂ (Juta Ton)"], empirical_rows_driver)}
+<p>Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total {valid_cases_23} observasi valid) disajikan secara ringkas pada <strong>Tabel 2.7</strong> berikut:</p>
+<div class="table-caption">Tabel 2.7: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2</div>
 {html_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (&chi;&sup2;)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_23)}
 <h4>E. Analisis Temuan Empiris</h4>
 <p>{finding_23}</p>
@@ -1241,9 +1276,14 @@ h4 {{ color: #A5D6A7; }}
         "##### Tabel 2.5: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif per Provinsi (2014-2023)",
         markdown_table(["Provinsi", "Luas IUP & Kawasan (Ha)", "Konsesi Baru Kumulatif 2014-2023 (Ha)", "Deforestasi Kumulatif 2014-2023 (Ha)"], empirical_rows_23),
         "",
-        f"Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total {valid_cases_23} observasi valid) disajikan secara ringkas pada **Tabel 2.6** berikut:",
+        "Selain alokasi konsesi spasial, analisis atribusi pelepasan gas rumah kaca membedah estimasi jejak karbon dari masing-masing faktor pendorong deforestasi pada **Tabel 2.6** berikut:",
         "",
-        "##### Tabel 2.6: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2",
+        "##### Tabel 2.6: Rincian Empiris Deforestasi dan Emisi CO₂ per Faktor Pendorong (2014-2023)",
+        markdown_table(["Faktor Pendorong Utama", "Total Deforestasi (Ha)", "Estimasi Emisi CO₂ (Juta Ton)"], empirical_rows_driver),
+        "",
+        f"Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun periode 2014-2023 (total {valid_cases_23} observasi valid) disajikan secara ringkas pada **Tabel 2.7** berikut:",
+        "",
+        "##### Tabel 2.7: Ringkasan Eksekutif Skenario Crosstab Ekspansi Industri vs Deforestasi Bab 2",
         markdown_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (χ²)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_23),
         "",
         "#### E. Analisis Temuan Empiris: Eksekusi Ruang dan Laju Deforestasi",
