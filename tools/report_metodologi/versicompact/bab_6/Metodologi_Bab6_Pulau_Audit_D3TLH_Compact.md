@@ -38,7 +38,7 @@ Merujuk pada Tabel Verifikasi Threshold model evaluasi D3TLH, seluruh parameter 
 | 5 | Kualitas Air IKA & Cr6+ (Air 1) | Status Mutu Air Sungai & Paparan Logam Berat | Poin & mg/L | Ditjen PPKL KLHK & Uji Lab AEER |
 | 6 | Rasio Morbiditas Diare (Air 2) | Anomali Morbiditas Saluran Pencernaan (IRR) | Rasio Peluang (IRR) | Kemenkes RI & Profil Kesehatan 2023 |
 | 7 | Konflik Ruang Air Pesisir (Air 3) | Letupan Sengketa Ruang Tangkap Nelayan | Kasus | Konsorsium Pembaruan Agraria (KPA) |
-| 8 | Beban Residu Tailing & Slag (Air 4) | Akumulasi Timbulan Tailing Dam vs AMDAL | Juta Ton / Tahun | Amdal PT HPI-IMIP & AEER 2020 |
+| 8 | Beban Residu Tailing & Slag (Air 4) | Akumulasi Timbulan Tailing Dam & Slag | Juta Ton / Tahun | PT HPI-IMIP & AEER 2020 |
 | 9 | Bencana Hidrometeorologi (Lahan 1) | Frekuensi Kejadian Banjir & Tanah Longsor | Kejadian | Data Informasi Bencana Indonesia BNPB |
 | 10 | Deforestasi Hutan Primer (Lahan 2) | Kehilangan Tutupan vs Kuota FOLU Net Sink | Hektar (Ha) | GFW Hansen & Renops FOLU 2030 |
 | 11 | Perambahan Hutan Lindung (Lahan 3) | Pelanggaran Kawasan Lindung (Nol Toleransi) | Hektar (Ha) | GFW Overlay & UU No. 41/1999 |
