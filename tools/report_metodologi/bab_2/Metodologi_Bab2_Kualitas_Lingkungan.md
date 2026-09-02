@@ -129,6 +129,9 @@ Akumulasi kapasitas PLTU captive yang beroperasi, beserta kondisi mutu udara mel
 | Sulawesi Tengah | 9,365 | 92.9 | 6.50e-06 |
 | Sulawesi Tenggara | 2,280 | 93.0 | 6.62e-06 |
 | Sulawesi Selatan | 600 | 91.5 | 6.40e-06 |
+| Gorontalo | 0 | 93.5 | 3.76e-06 |
+| Sulawesi Barat | 0 | 92.5 | 6.00e-06 |
+| Sulawesi Utara | 0 | 93.4 | 4.09e-06 |
 
 Penerapan pengujian statistik tabulasi silang pada data panel (total 54 observasi valid) disajikan secara ringkas pada **Tabel 2.4** berikut:
 

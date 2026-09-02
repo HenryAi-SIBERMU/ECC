@@ -600,7 +600,7 @@ def generate_all_bab2():
     
     df_iku_2023 = df_iku[df_iku["Tahun"] == focus_end_year].groupby("Provinsi")["IKU"].mean().reset_index()
     
-    empirical_22 = pd.merge(df_pltu_prov, df_iku_2023, on="Provinsi", how="left").fillna({'Kapasitas_PLTU_MW': 0})
+    empirical_22 = pd.merge(df_iku_2023, df_pltu_prov, on="Provinsi", how="left").fillna({'Kapasitas_PLTU_MW': 0})
     empirical_22 = pd.merge(empirical_22, df_no2_2023[["Provinsi", "Rata_Rata_NO2"]], on="Provinsi", how="left")
     empirical_22 = empirical_22.sort_values("Kapasitas_PLTU_MW", ascending=False)
     
