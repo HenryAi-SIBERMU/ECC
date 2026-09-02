@@ -309,7 +309,7 @@ def generate_bab1_compact():
     # ── D. KERANGKA ANALISIS & FORMULASI MATEMATIS ──────────────
     add_h2(doc, "D", "Kerangka Analisis & Formulasi Matematis")
 
-    add_h3(doc, "D.1 Reklasifikasi Rantai Pasok Hukum & Pangsa Sektoral (PDRB)")
+    add_h3(doc, "1.1 Konteks Makro: Breakdown PDRB per Komoditas")
     add_body(doc, [
         ("Tujuh belas sektor KBLI 2020 direklasifikasi menjadi tiga klaster makro berdasarkan relasi hukum hilirisasi nikel (UU No. 3/2020 jo. PP No. 96/2021): ", False, False),
         ("Klaster Ekstraktif", True, False), (" (Pertambangan B, Industri Logam C24, dan Pengadaan Listrik D), ", False, False),
@@ -318,26 +318,22 @@ def generate_bab1_compact():
         (". Konfigurasi reklasifikasi ini dirancang untuk mengisolasi porsi kontribusi murni sektor industri hilirisasi terhadap total struktur perekonomian daerah:", False, False)
     ])
     add_formula(doc, "Pangsa Sektor Ekstraktif (%) = [ PDRB Ekstraktif (B + C24 + D) / Total PDRB ] × 100")
-
-    add_h3(doc, "D.2 Dekomposisi Spasial & Rasio Ketimpangan Kabupaten")
     add_body(doc, [
         ("Untuk membongkar ilusi agregat provinsi, PDRB didekomposisi ke seluruh kabupaten/kota sentra nikel guna mengukur derajat polarisasi ekonomi industri ekstraktif terhadap basis mata pencaharian pertanian-perikanan lokal:", False, False)
     ])
     add_formula(doc, "Rasio Kesenjangan Spasial = PDRB Sektor Ekstraktif (Kabupaten) / PDRB Pertanian Rakyat (Kabupaten)")
 
-    add_h3(doc, "D.3 Konsentrasi Spasial Kawasan Industri & PLTU Captive Off-Grid")
+    add_h3(doc, "1.2 Konsentrasi Kawasan Industri & PLTU Captive")
     add_body(doc, [
         ("Derajat konsentrasi fasilitas pengolahan nikel dan kapasitas pembangkit listrik captive batubara diukur menggunakan rasio aglomerasi spasial untuk memetakan pemusatan beban energi dan lingkungan antar-wilayah:", False, False)
     ])
     add_formula(doc, "Porsi Konsentrasi Sentra (%) = [ Kapasitas Sentra Industri (MW) / Total Kapasitas Se-Sulawesi (MW) ] × 100")
 
-    add_h3(doc, "D.4 Deret Waktu Perizinan & Laju Alih Ruang Harian")
+    add_h3(doc, "1.3 Tren Pertumbuhan Izin Tambang Baru & Uji Signifikansi Statistik")
     add_body(doc, [
         ("Akumulasi izin konsesi tambang baru dievaluasi laju pertumbuhannya dan dinormalisasi ke dalam unit waktu harian untuk mengukur kecepatan konversi bentang lahan alami menjadi kawasan pertambangan:", False, False)
     ])
     add_formula(doc, "Laju Alih Ruang Harian (Ha/Hari) = Total Luas Konsesi Tambang Baru (Ha) / Jumlah Hari Observasi (t)")
-
-    add_h3(doc, "D.5 Analisis Tabulasi Silang, Uji Chi-Square & Odds Ratio (OR)")
     add_body(doc, [
         ("Pengujian inferensial menggunakan desain matriks kontinjensi 2×2 berbasis ", False, False),
         ("ambang median panel provinsi-tahun (N = 60)", True, False),
@@ -377,9 +373,14 @@ def generate_bab1_compact():
         alignments=['L', 'L', 'L']
     )
 
-    add_h3(doc, "D.6 Pemodelan Alur Rantai Pasok Maritim Ekspor (Kurva Bézier)")
+    add_h3(doc, "1.4 Analisis Realisasi Investasi PMDN dan Dampak Terhadap Tutupan Hutan")
     add_body(doc, [
-        ("Simpul logistik pelabuhan ekspor diverifikasi melalui triangulasi laporan investigasi keselamatan transportasi maritim, penetapan regulasi Proyek Strategis Nasional (PSN), dan laporan operasional korporasi. Alur pelayaran pengangkutan curah nikel menuju pasar internasional dimodelkan secara spasial menggunakan persamaan kurva Bézier kuadratik di atas koordinat bola bumi guna memetakan jalur lalu lintas maritim yang rentan kecelakaan tongkang.", False, False)
+        ("Analisis arus modal investasi PMDN mengevaluasi elastisitas suntikan modal terhadap laju alih fungsi hutan dan emisi komoditas. Formulasi pengujian inferensial dan parameter kategorisasi tabulasi silang disinkronkan secara terpadu pada matriks konfigurasi di atas dengan evaluasi efek jeda waktu (time-lag) ekspansi fisik di lapangan.", False, False)
+    ])
+
+    add_h3(doc, "1.5 Pelabuhan Ekspor & Peta Jalur Distribusi Logistik Nikel Sulawesi")
+    add_body(doc, [
+        ("Simpul logistik pelabuhan ekspor diverifikasi melalui triangulasi laporan investigasi keselamatan transportasi maritim (KNKT), penetapan regulasi Proyek Strategis Nasional (PSN), dan laporan operasional korporasi. Alur pelayaran pengangkutan curah nikel menuju pasar internasional dimodelkan secara spasial menggunakan persamaan kurva Bézier kuadratik di atas koordinat bola bumi guna memetakan jalur lalu lintas maritim yang rentan kecelakaan tongkang.", False, False)
     ])
 
     # ── E. KORESPONDENSI METODOLOGI TERHADAP SUB-BAB LAPORAN ────
@@ -497,27 +498,25 @@ Seluruh variabel kuantitatif, kategori analisis, satuan ukur, periode observasi,
 
 ## D. Kerangka Analisis & Formulasi Matematis
 
-### D.1 Reklasifikasi Rantai Pasok Hukum & Pangsa Sektoral (PDRB)
+### 1.1 Konteks Makro: Breakdown PDRB per Komoditas
 Tujuh belas sektor KBLI 2020 direklasifikasi menjadi tiga klaster makro berdasarkan relasi hukum hilirisasi nikel (UU No. 3/2020 jo. PP No. 96/2021): **Klaster Ekstraktif** (Pertambangan B, Industri Logam C24, dan Pengadaan Listrik D), **Klaster Akar Rumput** (Pertanian, Kehutanan & Perikanan A), serta **Klaster Jasa & Manufaktur Lain**. Konfigurasi reklasifikasi ini dirancang untuk mengisolasi porsi kontribusi murni sektor industri hilirisasi terhadap total struktur perekonomian daerah:
 
 > `Pangsa Sektor Ekstraktif (%) = [ PDRB Ekstraktif (B + C24 + D) / Total PDRB ] × 100`
 
-### D.2 Dekomposisi Spasial & Rasio Ketimpangan Kabupaten
 Untuk membongkar ilusi agregat provinsi, PDRB didekomposisi ke seluruh kabupaten/kota sentra nikel guna mengukur derajat polarisasi ekonomi industri ekstraktif terhadap basis mata pencaharian pertanian-perikanan lokal:
 
 > `Rasio Kesenjangan Spasial = PDRB Sektor Ekstraktif (Kabupaten) / PDRB Pertanian Rakyat (Kabupaten)`
 
-### D.3 Konsentrasi Spasial Kawasan Industri & PLTU Captive Off-Grid
+### 1.2 Konsentrasi Kawasan Industri & PLTU Captive
 Derajat konsentrasi fasilitas pengolahan nikel dan kapasitas pembangkit listrik captive batubara diukur menggunakan rasio aglomerasi spasial untuk memetakan pemusatan beban energi dan lingkungan antar-wilayah:
 
 > `Porsi Konsentrasi Sentra (%) = [ Kapasitas Sentra Industri (MW) / Total Kapasitas Se-Sulawesi (MW) ] × 100`
 
-### D.4 Deret Waktu Perizinan & Laju Alih Ruang Harian
+### 1.3 Tren Pertumbuhan Izin Tambang Baru & Uji Signifikansi Statistik
 Akumulasi izin konsesi tambang baru dievaluasi laju pertumbuhannya dan dinormalisasi ke dalam unit waktu harian untuk mengukur kecepatan konversi bentang lahan alami menjadi kawasan pertambangan:
 
 > `Laju Alih Ruang Harian (Ha/Hari) = Total Luas Konsesi Tambang Baru (Ha) / Jumlah Hari Observasi (t)`
 
-### D.5 Analisis Tabulasi Silang, Uji Chi-Square & Odds Ratio (OR)
 Pengujian inferensial menggunakan desain matriks kontinjensi 2×2 berbasis **ambang median panel provinsi-tahun (N = 60)**. Uji Chi-Square independensi (α = 5%, df = 1) diterapkan untuk menguji signifikansi hubungan bivariat, sedangkan rasio peluang (Odds Ratio) mengukur magnitudo kelipatan risiko dampak ekologis:
 
 > `χ² = Σ [ (O_ij - E_ij)² / E_ij ]   |   Odds Ratio (OR) = (a × d) / (b × c)`
@@ -533,8 +532,11 @@ Pengujian inferensial menggunakan desain matriks kontinjensi 2×2 berbasis **amb
 | **Threshold Kategori (Median)** | Nilai Median Data Panel (N=60): X ≥ 2,0 izin; Y ≥ 10.961,8 Ha (Kategori High vs. Low). | Nilai Median Data Panel (N=48): X > Rp3.146,4 Miliar; Y ≥ 10.451,7 Ha (Kategori High vs. Low). |
 | **Orientasi Odds Ratio (OR)** | OR = (a × d) / (b × c) dengan a = Izin Tinggi & Deforestasi Tinggi; mengukur risiko deforestasi tinggi pada kelompok penerbitan izin tinggi. | OR = (a × d) / (b × c) dengan a = Investasi Tinggi & Deforestasi Tinggi; mengukur risiko deforestasi tinggi pada kelompok realisasi investasi tinggi. |
 
-### D.6 Pemodelan Alur Rantai Pasok Maritim Ekspor (Kurva Bézier)
-Simpul logistik pelabuhan ekspor diverifikasi melalui triangulasi laporan investigasi keselamatan transportasi maritim, penetapan regulasi Proyek Strategis Nasional (PSN), dan laporan operasional korporasi. Alur pelayaran pengangkutan curah nikel menuju pasar internasional dimodelkan secara spasial menggunakan persamaan kurva Bézier kuadratik di atas koordinat bola bumi guna memetakan jalur lalu lintas maritim yang rentan kecelakaan tongkang.
+### 1.4 Analisis Realisasi Investasi PMDN dan Dampak Terhadap Tutupan Hutan
+Analisis arus modal investasi PMDN mengevaluasi elastisitas suntikan modal terhadap laju alih fungsi hutan dan emisi komoditas. Formulasi pengujian inferensial dan parameter kategorisasi tabulasi silang disinkronkan secara terpadu pada matriks konfigurasi di atas dengan evaluasi efek jeda waktu (time-lag) ekspansi fisik di lapangan.
+
+### 1.5 Pelabuhan Ekspor & Peta Jalur Distribusi Logistik Nikel Sulawesi
+Simpul logistik pelabuhan ekspor diverifikasi melalui triangulasi laporan investigasi keselamatan transportasi maritim (KNKT), penetapan regulasi Proyek Strategis Nasional (PSN), dan laporan operasional korporasi. Alur pelayaran pengangkutan curah nikel menuju pasar internasional dimodelkan secara spasial menggunakan persamaan kurva Bézier kuadratik di atas koordinat bola bumi guna memetakan jalur lalu lintas maritim yang rentan kecelakaan tongkang.
 
 ---
 
