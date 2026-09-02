@@ -25,21 +25,32 @@ Kajian audit bioregion pulau mengintegrasikan enam klaster data resmi kementeria
 ---
 
 ## C. Operasionalisasi Variabel & Indikator Riset
-Seluruh parameter bio-fisik cerobong, neraca kualitas perairan, kerusakan tutupan lahan, kerentanan hak sosial, hingga instrumen pembatasan izin dioperasionalkan secara terstruktur ke dalam **indikator riset empiris** sebagaimana dirangkum pada matriks operasional berikut:
+Merujuk pada Tabel Verifikasi Threshold model evaluasi D3TLH, seluruh parameter bio-fisik cerobong, neraca perairan, kerusakan tutupan lahan, kerentanan hak sosial, hingga instrumen veto perizinan dioperasionalkan secara terstruktur ke dalam **20 indikator riset empiris terverifikasi** sebagaimana dirangkum pada matriks operasional berikut:
 
 ##### Matriks Operasionalisasi Variabel dan Sumber Data Resmi Bab 6 (Level Pulau)
 | No | Indikator Riset | Fokus Pengukuran | Satuan | Sumber Data Primer Resmi |
 | :-: | :--- | :--- | :-: | :--- |
-| 1 | Kapasitas Emisi PLTU Captive | Beban Pembakaran Batubara Industri Off-Grid | Megawatt (MW) | Global Energy Monitor (GEM) |
-| 2 | Densitas Polutan NO2 Satelit | Konsentrasi Troposferik Gas NO2 Atmosfer | µmol / m² | Satelit Sentinel-5P TROPOMI |
-| 3 | Rasio Morbiditas ISPA (IRR) | Anomali Morbiditas Saluran Pernapasan Warga | Rasio Peluang (IRR) | Kemenkes RI & Profil Dinkes |
-| 4 | Status Mutu Air Sungai (IKA) | Kondisi Baku Mutu Perairan Regional Pulau | Poin Indeks (0–100) | Ditjen PPKL KLHK (IKLH) |
-| 5 | Beban Timbulan Tailing & Slag B3 | Akumulasi Limbah Pirometalurgi & HPAL | Juta Ton / Tahun | Amdal KLHK, AEER & WALHI |
-| 6 | Laju Deforestasi & Bencana Lahan | Kehilangan Hutan Primer & Kejadian Banjir | Ha & Kejadian | GFW Hansen & DIBI BNPB |
-| 7 | Pelanggaran Hutan Lindung (Zero Tol) | Perambahan Kawasan Lindung dan Konservasi | Hektar (Ha) | GFW Overlay Kawasan Lindung |
-| 8 | Skala Pelanggaran Persetujuan FPIC | Manipulasi Konsultasi Masyarakat Adat/Lokal | Kasus | KPA, JATAM & WALHI |
-| 9 | Defisit Sarana-Prasarana Faskes | Kesenjangan Standar SPA Puskesmas Tapak | Persen Kesenjangan (%) | ASPAK Kemenkes RI |
-| 10 | Obral Perizinan Baru & Impunitas | Penerbitan IUP Baru & Pembiaran Korporasi | Unit Izin & Korporasi | ESDM MODI & CATAHU KPA |
+| 1a | Kapasitas PLTU Captive (Udara 1a) | Beban Pembakaran Batubara Industri Off-Grid | Megawatt (MW) | Global Energy Monitor (GEM 2023) |
+| 1b | Polusi NO2 Satelit TROPOMI (Udara 1b) | Densitas Kolom Troposferik Gas NO2 Atmosfer | µmol / m² | Copernicus Sentinel-5P (NASA/ESA) |
+| 2 | Rasio Morbiditas ISPA (Udara 2) | Anomali Morbiditas Saluran Pernapasan (IRR) | Rasio Peluang (IRR) | Kemenkes RI & WHO EHC 6 |
+| 3 | Proporsi Timbulan Limbah B3 (Udara 3) | Beban Residu B3 terhadap Agregat Nasional | Persen (%) | Laporan Kinerja Ditjen PSLB3 KLHK |
+| 4 | Defisit Emisi Karbon CO2 (Udara 4) | Pelepasan Karbon Deforestasi vs Target NDC | Juta Ton CO2e | GFW & SK MenLHK 168/2022 (FOLU) |
+| 5 | Kualitas Air IKA & Cr6+ (Air 1) | Status Mutu Air Sungai & Paparan Logam Berat | Poin & mg/L | Ditjen PPKL KLHK & Uji Lab AEER |
+| 6 | Rasio Morbiditas Diare (Air 2) | Anomali Morbiditas Saluran Pencernaan (IRR) | Rasio Peluang (IRR) | Kemenkes RI & Profil Kesehatan 2023 |
+| 7 | Konflik Ruang Air Pesisir (Air 3) | Letupan Sengketa Ruang Tangkap Nelayan | Kasus | Konsorsium Pembaruan Agraria (KPA) |
+| 8 | Beban Residu Tailing & Slag (Air 4) | Akumulasi Timbulan Tailing Dam vs AMDAL | Juta Ton / Tahun | Amdal PT HPI-IMIP & AEER 2020 |
+| 9 | Bencana Hidrometeorologi (Lahan 1) | Frekuensi Kejadian Banjir & Tanah Longsor | Kejadian | Data Informasi Bencana Indonesia BNPB |
+| 10 | Deforestasi Hutan Primer (Lahan 2) | Kehilangan Tutupan vs Kuota FOLU Net Sink | Hektar (Ha) | GFW Hansen & Renops FOLU 2030 |
+| 11 | Perambahan Hutan Lindung (Lahan 3) | Pelanggaran Kawasan Lindung (Nol Toleransi) | Hektar (Ha) | GFW Overlay & UU No. 41/1999 |
+| 12 | Aktor Tambang & Sawit (Lahan 4) | Deforestasi Akibat Komoditas Ekstraktif | Hektar (Ha) | GFW Dominant Drivers of Loss |
+| 13 | Kepadatan Konsesi Tambang (Lahan 5) | Rasio Konsesi IUP terhadap Luas Daratan | Persen (%) | Ditjen Minerba ESDM & BPS |
+| 14 | Pelanggaran Asas FPIC (Sosial 1) | Manipulasi Persetujuan Bebas Awal Warga | Kasus | Koalisi Sipil (JATAM, WALHI, AMAN) |
+| 15 | Masyarakat Terdampak (Sosial 2) | Korban Penggusuran & Perampasan Ruang | Jiwa | CATAHU KPA 2023 |
+| 16 | Kriminalisasi Pembela HAM (Sosial 3) | Serangan & Penuntutan Hukum Warga/Aktivis | Insiden | Laporan Satya Bumi & KPA |
+| 17 | Defisit Sarana Faskes SPA (Sosial 4) | Kesenjangan Pemenuhan Standar Puskesmas | Persen Kesenjangan (%) | ASPAK Kemenkes & Permenkes 6/2024 |
+| 18 | Obral Perizinan IUP Baru (Veto 1) | Penerbitan IUP Baru di Zona Kritis Ekologis | Unit Izin | Data Registry Ditjen Minerba ESDM |
+| 19 | Impunitas Tambang Ilegal (Veto 2) | Pembiaran Korporasi Pelanggar Tata Ruang | Korporasi | Catatan Akhir Tahun (CATAHU) KPA |
+| 20 | Ekspansi PLTU Captive (Veto 3) | Pemberian Izin PLTU Batubara Off-Grid | Megawatt (MW) | Global Energy Monitor (GEM 2023) |
 
 ---
 
