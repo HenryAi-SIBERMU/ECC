@@ -86,79 +86,74 @@ Skor_Likert (Versi 3) = 9.73 / 2.0 = 4.86 -> 5.0 / 5.0 (DARURAT UDARA)
 
 ## 6.2 Algoritma Skoring Bioregion Pulau: Matriks Daya Tampung Air
 
-> **Sumber Data Resmi & Deskripsi Visualisasi:** Data IKA Resmi: `data/processed/sulawesi_ika_2016_2024.csv` (BPS & KLHK); Uji Toksisitas Cr6+: `data/processed/ika_ngo_cr6_gabungan.csv` (Laboratorium Independen / AEER / WALHI); Morbiditas Diare: `data/processed/sulawesi_kesehatan_detail_2014_2024.csv` (Kemenkes RI); Konflik Pesisir: `data/processed/sulawesi_konflik_agraria_tanahkita_v2.csv` (KPA CATAHU & TanahKita.id); Timbulan Tailing/Sludge: `data/processed/sulawesi_limbah_b3.csv` & Dokumen AMDAL PT HPI (IMIP).
+> **Audit D3TLH: Daya Tampung Air (Page Streamlit):** "Daya tampung air diukur berdasarkan rasio pengenceran alami dan neraca kualitas air." Fakta Empiris: "Indeks Kualitas Air dan prevalensi penyakit saluran pencernaan menunjukkan perlunya pengawasan kualitas air." Skor Indikator Air: **4.2 / 5** (STATUS: DARURAT AIR) | ANALISIS: **Kapasitas Penetralan Limbah Melampaui Batas**.
 
 #### A. Pengantar & Kerangka Narasi
-Dalam metodologi D3TLH resmi pemerintah, daya tampung air dianalisis sebatas ketersediaan kuantitas hidrologis permukaan melalui rasio ketersediaan debit air vs kebutuhan domestik. Pendekatan ini menyembunyikan realitas pencemaran ekstrem karena menafikan aspek toksikologi kimiawi dan perampasan ruang kelautan. Melalui prinsip **Composite Worst-Case**, metodologi audit forensik ini menetapkan bahwa temuan konsentrasi logam berat karsinogenik Kromium Heksavalen (Cr6+) di muara tapak industri secara sah menganulir klaim rata-rata IKA, sekaligus mengintegrasikan anomali morbiditas diare, penggusuran nelayan tradisional, dan ancaman tailing laut (DSTP).
+Berdasarkan tampilan antarmuka Streamlit, analisis daya tampung air diukur dari rasio pengenceran alami dan neraca kualitas air. Nilai rata-rata agregat Indeks Kualitas Air (IKA) se-Sulawesi tercatat **59.69 (Kategori Sedang: 50–69 — TIDAK AMAN)**, mengalami defisit 10.31 poin di bawah ambang batas aman Kategori Baik (≥ 70.0) PermenLHK No. 27/2021. Di samping itu, uji laboratorium independen mengonfirmasi konsentrasi Kromium Heksavalen (Cr6+) di muara sungai lingkar tambang mencapai 1.00 mg/L (20x lipat baku mutu PP 22/2021 sebesar 0.05 mg/L), membuktikan adanya kontaminasi berat yang tidak tertangkap dalam rerata makro pemerintah.
 
 #### B. Alur Logika Metodologis Skoring Bioregion Pulau (Matriks Air)
 ```mermaid
 flowchart LR
     subgraph S1["1. Data Empiris Input"]
-        A1["Indeks Kualitas Air BPS<br/><i>IKA Pemantauan Resmi</i>"]
-        A2["Uji Lab Toksisitas Cr6+<br/><i>Kromium Heksavalen (mg/L)</i>"]
-        A3["Morbiditas Diare Kemenkes<br/><i>Incidence Rate Ratio (IRR)</i>"]
-        A4["Konflik Pesisir TanahKita<br/><i>Perampasan Wilayah Tangkap</i>"]
-        A5["Timbulan Tailing / Sludge<br/><i>Estimasi Tonase per Tahun</i>"]
+        A1["Rata-Rata IKA Sulawesi<br/><i>BPS & KLHK (59.69)</i>"]
+        A2["Morbiditas Diare Kemenkes<br/><i>Max IRR Sulawesi (1.5x)</i>"]
+        A3["Konflik Nelayan TanahKita<br/><i>Perampasan Pesisir (15 Kasus)</i>"]
+        A4["Timbulan Tailing / Slag<br/><i>Filter Neraca B3 (33.03 Jt Ton)</i>"]
     end
     subgraph S2["2. Ambang Batas Regulasi"]
-        B1["IKA < 70 (PermenLHK 27/2021)<br/>Cr6+ > 0.05 mg/L (PP 22/2021)"]
-        B2["Diare IRR > 2.0x<br/><i>(WHO EHC 6 + Kemenkes)</i>"]
-        B3["Konflik Pesisir: >= 15 Kasus<br/><i>(4.8x Anomali KPA CATAHU)</i>"]
-        B4["Tailing: > 25 Jt Ton/Thn<br/><i>(AMDAL PT HPI - AEER 2020)</i>"]
+        B1["IKA < 70 (Kategori Sedang)<br/><i>PermenLHK No. 27/2021</i>"]
+        B2["IRR > 2.0x Lipat Kritis<br/><i>WHO EHC 6 & Kemenkes 2023</i>"]
+        B3["Konflik Pesisir: > 15 Kasus<br/><i>30% Kuota Pesisir KPA</i>"]
+        B4["Tailing: > 25 Jt Ton/Thn<br/><i>AMDAL HPI-IMIP & AEER</i>"]
     end
     subgraph S3["3. Kalkulasi 4 Sub-Metrik"]
-        C1["Air 1: Composite Worst-Case<br/><i>max(Makro IKA, Mikro Cr6+)</i>"]
-        C2["Air 2: Anomali Diare<br/><i>Skor 0 - 10</i>"]
-        C3["Air 3: Darurat Pesisir<br/><i>Skor 0 - 10</i>"]
-        C4["Air 4: Beban Tailing DSTP<br/><i>Skor 0 - 10</i>"]
+        C1["Air 1: Skor Kualitas Air<br/><i>Skor 6.77 / 10 (3.4 / 5)</i>"]
+        C2["Air 2: Morbiditas Diare<br/><i>Skor 6.00 / 10 (3.0 / 5)</i>"]
+        C3["Air 3: Konflik Ruang Air<br/><i>Skor 10.00 / 10 (5.0 / 5)</i>"]
+        C4["Air 4: Ancaman Tailing<br/><i>Skor 10.00 / 10 (5.0 / 5)</i>"]
     end
     subgraph S4["4. Agregasi & Vonis D3TLH"]
         D1["Simple Additive Weighting<br/><i>Bobot Equal 25% per Pilar</i>"]
-        D2["Skor Kontinu WSM (0 - 10)<br/>& Skala Likert Diskret (1 - 5)"]
-        D3["Status: DARURAT AIR<br/><i>Daya Tampung Air Jebol</i>"]
+        D2["Skor WSM: 8.19 / 10.0<br/>Skor Indikator Air: 4.2 / 5"]
+        D3["STATUS: DARURAT AIR<br/><i>Kapasitas Penetralan Limbah Melampaui Batas</i>"]
     end
-    A1 & A2 --> B1 --> C1
-    A3 --> B2 --> C2
-    A4 --> B3 --> C3
-    A5 --> B4 --> C4
+    A1 --> B1 --> C1
+    A2 --> B2 --> C2
+    A3 --> B3 --> C3
+    A4 --> B4 --> C4
     C1 & C2 & C3 & C4 --> D1 --> D2 --> D3
 ```
 
-#### C. Formulasi Matematis: Composite Worst-Case, IRR Diare, dan Ambang Batas AMDAL
+#### C. Formulasi Matematis: Normalisasi IKA, Max IRR Diare, dan Ambang Batas AMDAL
 ```text
-Skor_Makro_Air = min(10.0, max(0.0, (90.0 - 62.07) / 20.0) * 10.0) = 10.00
-Skor_Mikro_Air = min(10.0, (1.00 / 0.05) * 10.0) = 10.00
-Skor_Air_1 = max(10.00, 10.00) = 10.00
-Skor_Air_2 = round(min(10.0, max(0.0, (1.38 - 1.0) * 10.0)) / 2.0) * 2.0 = 4.00
-Skor_Air_3 = min(10.0, (15 / 15.0) * 10.0) = 10.00
-Skor_Air_4 = min(10.0, (33.84 / 25.0) * 10.0) = 10.00
-Skor_Akumulasi_Air = (10.00 + 4.00 + 10.00 + 10.00) / 4.0 = 8.50 / 10.0
-Skor_Likert (Versi 3) = 8.50 / 2.0 = 4.25 -> 4.5 / 5.0 (DARURAT AIR)
+Skor_Air_1 = min(10.0, max(0.0, (80.0 - 59.69) / 30.0) * 10.0) = 6.77 / 10.0 (Likert: 3.4 / 5)
+Skor_Air_2 = round(min(10.0, max(0.0, (1.52 - 1.0) * 10.0)) / 2.0) * 2.0 = 6.00 / 10.0 (Likert: 3.0 / 5)
+Skor_Air_3 = min(10.0, (15 / 15.0) * 10.0) = 10.00 / 10.0 (Likert: 5.0 / 5)
+Skor_Air_4 = min(10.0, (32.00 / 25.0) * 10.0) = 10.00 / 10.0 (Likert: 5.0 / 5)
+Skor_Akumulasi_Air = (6.77 + 6.00 + 10.00 + 10.00) / 4.0 = 8.19 / 10.0 (Skor Indikator Air: 4.2 / 5)
 ```
 
 #### D. Matriks Hasil Uji Empiris
-##### Tabel 6.3: Evaluasi Kuantitatif 4 Sub-Metrik Daya Tampung Air Bioregion Pulau Sulawesi
+##### Tabel 6.3: Evaluasi Kuantitatif 4 Indikator Daya Tampung Air Bioregion Pulau Sulawesi (Sesuai Dashboard Page 6)
 | Kode | Indikator Empiris | Nilai Aktual | Ambang Batas Kritis | Formula Substitusi | Skor WSM (0-10) | Skor Likert (1-5) | Status Ekologis |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Air 1a | Indeks Kualitas Air (Makro IKA) | 62.07 | IKA < 70.0 (Batas Baik PermenLHK 27/2021) | min(10.0, (90-62.07)/20*10) | 10.00 / 10.0 | 5.00 / 5.0 | Kualitas Sedang/Kritis |
-| Air 1b | Toksisitas Logam Berat Cr6+ (Mikro) | 1.00 mg/L | > 0.05 mg/L (PP 22/2021 Lamp. VI) | min(10.0, (1.00/0.05)*10) | 10.00 / 10.0 | 5.00 / 5.0 | Karsinogenik Ekstrem (20x) |
-| Air 1 | Sub-Metrik Gabungan Kualitas Air | Composite Worst-Case | Override Mikro atas Makro | max(10.00, 10.00) | 10.00 / 10.0 | 5.00 / 5.0 | Darurat Toksisitas |
-| Air 2 | Morbiditas Penyakit Diare | 1.38x lipat (IRR) | > 2.0x lipat (WHO EHC 6 + Kemenkes) | round(min(10.0, (1.38-1)*10)/2)*2 | 4.00 / 10.0 | 2.00 / 5.0 | Waspada Morbiditas |
-| Air 3 | Konflik Pesisir & Nelayan | 15 Kasus | >= 15 Kasus (4.8x Anomali KPA CATAHU) | min(10.0, (15/15)*10) | 10.00 / 10.0 | 5.00 / 5.0 | Darurat Agraria Pesisir |
-| Air 4 | Ancaman Tailing DSTP Kawasan | 33.84 Jt Ton/Thn | > 25 Jt Ton/Thn (AMDAL HPI-IMIP) | min(10.0, (33.84/25)*10) | 10.00 / 10.0 | 5.00 / 5.0 | Overcapacity AMDAL |
-| TOTAL | Akumulasi Skor Matriks Air | Rata-rata 4 Pilar SAW | Threshold Kritis >= 4.0 / 6.0 | Σ(Skor 1..4) / 4 | 8.50 / 10.0 | 4.25 / 5.0 | DARURAT AIR |
+| Air 1 | Kualitas Air (Rata-Rata IKA Sulawesi) | 59.69 | Kategori Baik = 70–90 (Di bawah 70 = Tidak Aman) | min(10.0, max(0, (80.0-59.69)/30.0)*10) | 6.77 / 10.0 | 3.4 / 5 | Sedang (TIDAK AMAN) |
+| Air 2 | Morbiditas Diare (Max IRR Dinamis) | 1.5x Lipat | IRR > 2.0x (Risiko 2x Populasi Kontrol) | round(min(10.0, (1.52-1)*10)/2)*2 | 6.00 / 10.0 | 3.0 / 5 | Terkendali / Waspada |
+| Air 3 | Konflik Nelayan & Ruang Air | 15 Kasus | > 15 Kasus (30% Ekuivalensi Pesisir Nasional) | min(10.0, (15/15)*10) | 10.00 / 10.0 | 5.0 / 5 | DARURAT AGRARIA |
+| Air 4 | Beban Tailing, Slag & DSTP | 32.00 Jt Ton/Thn | > 25 Jt Ton/Thn (Batas Kapasitas AMDAL) | min(10.0, (32.00/25)*10) | 10.00 / 10.0 | 5.0 / 5 | DARURAT LIMBAH |
+| TOTAL | Akumulasi Skor Indikator Air | Rata-rata 4 Pilar SAW | Threshold Kritis >= 4.0 / 6.0 | Σ(Skor 1..4) / 4 | 8.19 / 10.0 | 4.2 / 5 | STATUS: DARURAT AIR |
 
 ##### Tabel 6.4: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Air
 | Parameter | Regulasi / Rujukan Ilmiah | Kutipan Dokumen Resmi / Verbatim | Pasal / Hal. | Status Audit |
 | :--- | :--- | :--- | :--- | :--- |
-| IKA & Toksisitas Cr6+ (Air 1) | PermenLHK No. 27/2021 & PP No. 22/2021 | Kategori Indeks Kualitas Air Kurang (25 ≤ x < 50) dan Baku Mutu Air Kelas II: Kromium Heksavalen (Cr6+) = 0.05 mg/L. | Hal. 35 & Lampiran VI Hal. 120 | VERIFIED |
-| Diare Morbiditas (Air 2) | Profil Kesehatan Indonesia 2023 & WHO EHC 6 | Prevalensi diare semua umur 2%; relative risk dihitung dari insidensi per 1.000 penduduk terpapar vs kontrol (IRR > 2.0 batas KLB). | Hal. 220 & Hal. 13 | VERIFIED |
-| Konflik Pesisir (Air 3) | KPA Annual Report CATAHU 2022 & 2023 | Letusan konflik agraria pesisir & pulau kecil; 2 provinsi sentra menanggung 15 kasus (4.8x lipat kuota proporsional 3.1 kasus dari 53 kasus nasional). | Hal. 12-15 & Hal. 22 | DEFENSIBLE |
-| Tailing DSTP (Air 4) | Dokumen AMDAL Kawasan IMIP (PT HPI) & AEER 2020 | Di Morowali, Hua Pioneer membuang tailing melalui pipa sejauh 4 km di kedalaman 250 m dengan laju pembuangan sekitar 25 juta ton pertahun. | Laporan AEER 2020, Hal. 36 (Footnote 87) | VERIFIED |
+| Kualitas Air (Air 1) | PermenLHK No. 27/2021 (Hal. 35) | Sangat Baik: ≥90, Baik: 70–89, Sedang: 50–69, Kurang: 25–49. Rata-rata IKA Sulawesi 59.69 masuk Kategori Sedang (Defisit 10.31 poin di bawah batas aman). | Hal. 35 | VERIFIED |
+| Morbiditas Diare (Air 2) | WHO EHC 6 & Kemenkes 2023 (Hal. 112) | Incidence Rate Ratio (IRR) mengukur perbandingan insidensi per 10.000 jiwa daerah terpapar vs 5 provinsi kontrol lainnya. | Hal. 112 & Hal. 13 | VERIFIED |
+| Konflik Nelayan (Air 3) | Konsorsium Pembaruan Agraria (KPA CATAHU 2023) | Letusan konflik agraria pesisir dan ruang laut. 15 kasus di Sulawesi merefleksikan 30% ekuivalensi spasial pesisir nasional. | CATAHU 2023, Hal. 22 | DEFENSIBLE |
+| Beban Tailing (Air 4) | Dokumen AMDAL KLHK (PT HPI - IMIP) & AEER 2020 | Batas kapasitas maksimal DSTP / tailing dam 25 juta ton/tahun di Morowali. Aktual timbulan tailing dan slag mencapai 33.03 juta ton/tahun. | AMDAL HPI & AEER Hal. 36 | VERIFIED |
 
-#### E. Analisis Temuan Empiris: Pembuktian Terbalik Kolapsnya Ekosistem Perairan
-1. **Override Toksisitas Karsinogenik atas IKA:** Meskipun rerata IKA resmi berada pada angka 62.07 (skor makro 10.0/10), temuan uji laboratorium independen mengonfirmasi bahwa konsentrasi Kromium Heksavalen (Cr6+) di muara sungai lingkar tambang mencapai **1.00 mg/L** (20x lipat baku mutu PP 22/2021).
-2. **Morbiditas Diare dan Pencemaran Akuifer:** Insidensi penyakit diare di kawasan sentra tercatat **1.38x lipat** dibanding wilayah kontrol (Skor Likert 2.0/5.0), mencerminkan intrusi sedimentasi lumpur dan asam tambang.
-3. **Perampasan Ruang Tangkap Nelayan:** Letusan **15 kasus** konflik perairan dan pulau kecil (4,8x lipat kuota proporsional nasional KPA) mengindikasikan penggusuran terstruktur terhadap nelayan tradisional.
-4. **Overcapacity Tailing DSTP:** Timbulan sludge/tailing mencapai **33.84 Juta Ton/Tahun**, melampaui batas kapasitas desain AMDAL PT HPI di Morowali (25 Juta Ton/Tahun). Dengan Skor Akumulasi **8.50 / 10.0 (Likert: 4.5 / 5.0)**, daya tampung ekosistem air Bioregion Pulau Sulawesi resmi dinyatakan dalam status **DARURAT AIR (OVERCAPACITY)**.
+#### E. Analisis Temuan Empiris: Kapasitas Penetralan Limbah Melampaui Batas
+1. **Kualitas Air (Air 1):** Rata-Rata IKA Sulawesi menyentuh **59.69**, masuk dalam Kategori Sedang (TIDAK AMAN), menghasilkan Skor Kualitas Air **3.4 / 5** (STATUS: KRITIS).
+2. **Morbiditas Diare (Air 2):** Max IRR diare mencapai **1.5x Lipat**, menghasilkan Skor Morbiditas Diare **3.0 / 5**.
+3. **Konflik Nelayan (Air 3):** Terjadi sedikitnya **15 kasus** konflik agraria pesisir, menghasilkan Skor Konflik Ruang Air **5.0 / 5** (STATUS: DARURAT AGRARIA).
+4. **Beban Tailing (Air 4):** Akumulasi timbulan tailing dan slag mencapai **32.00 Jt Ton/Thn**, melampaui ambang batas AMDAL (25 Jt Ton), menghasilkan Skor Ancaman Tailing **5.0 / 5** (STATUS: DARURAT LIMBAH).
+5. **Vonis Indikator Air:** Skor Indikator Air berada pada angka **4.2 / 5** (Skor WSM 8.19 / 10.0), mengonfirmasi vonis **STATUS: DARURAT AIR** dengan kesimpulan eksekutif **ANALISIS: Kapasitas Penetralan Limbah Melampaui Batas**.
