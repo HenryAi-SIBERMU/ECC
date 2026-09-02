@@ -63,14 +63,16 @@ Pengujian inferensial menggunakan desain matriks kontinjensi 2×2 berbasis **amb
 
 > `χ² = Σ [ (O_ij - E_ij)² / E_ij ]   |   Odds Ratio (OR) = (a × d) / (b × c)`
 
-##### Matriks Konfigurasi Pengujian Hipotesis Tabulasi Silang 2×2
-| Skenario Pengujian (X → Y) | Kategorisasi Variabel X | Kategorisasi Variabel Y | Metode Uji & Parameter | Fokus Hipotesis Operasional (H₁) |
-| :--- | :--- | :--- | :--- | :--- |
-| PLTU Captive (MW) → Deforestasi Total (Ha) | Median Kapasitas MW (High / Low) | Median Deforestasi Total (High / Low) | Pearson χ² (df=1, α=0,05) & Odds Ratio | Konsentrasi PLTU captive batubara meningkatkan risiko kehilangan tutupan hutan |
-| IUP Baru (Unit) → Deforestasi Hutan Primer (Ha) | Median Jumlah Izin (High / Low) | Median Hutan Primer (High / Low) | Pearson χ², Odds Ratio, Fisher Exact | Penerbitan konsesi baru berasosiasi signifikan dengan konversi hutan alam primer |
-| IUP Baru (Unit) → Deforestasi Komoditas (Ha) | Median Jumlah Izin (High / Low) | Median Def. Komoditas (High / Low) | Pearson χ² (df=1) & Odds Ratio (ad/bc) | Tekanan izin tambang merupakan faktor pendorong langsung alih fungsi komoditas |
-| Luas Konsesi (Ha) → Deforestasi Komoditas (Ha) | Median Luas Konsesi (High / Low) | Median Def. Komoditas (High / Low) | Pearson χ², Odds Ratio (CI 95%) | Skala luasan konsesi tambang memperbesar probabilitas pembukaan lahan vegetasi |
-| Investasi PMDN (Rp) → Deforestasi Komoditas (Ha) | Median Arus Modal (High / Low) | Median Def. Komoditas (High / Low) | Pearson χ², Odds Ratio, Time-Lag Test | Realisasi modal domestik mendorong bukaan lahan dengan jeda waktu konstruksi |
+##### Matriks Konfigurasi Variabel Uji Chi-Square & Odds Ratio (Sub-bab 1.3 & 1.4)
+| Komponen Uji | Definisi Variabel & Parameter (Sub-bab 1.3) | Definisi Variabel & Parameter (Sub-bab 1.4) |
+| :--- | :--- | :--- |
+| **Variabel Independen (X)** | Jumlah Izin Baru (IUP) / Luas Konsesi Baru (Ha) | Realisasi Investasi PMDN Sektor Ekstraktif (Juta / Triliun Rp) |
+| **Variabel Dependen (Y)** | Deforestasi Komoditas (Ha) / Total Deforestasi Alam Primer (Ha) | Total Deforestasi Alam (Ha) / Deforestasi Komoditas (Ha) |
+| **Hipotesis Nol (H₀)** | Tingkat penerbitan izin/luas konsesi tidak berhubungan dengan laju deforestasi. | Tingginya realisasi investasi PMDN tidak berhubungan dengan laju deforestasi. |
+| **Hipotesis Alternatif (H₁)** | Ada hubungan positif antara tingginya penerbitan izin dengan tingginya laju deforestasi. | Ada hubungan positif antara tingginya realisasi investasi PMDN dengan laju deforestasi. |
+| **Decision Rule (Alpha 5%)** | Jika P-Value < 0,05, maka Tolak H₀ (terbukti signifikan bahwa ekspansi perizinan mendorong deforestasi). | Jika P-Value < 0,05, maka Tolak H₀ (terbukti signifikan bahwa realisasi investasi mendorong deforestasi). |
+| **Threshold Kategori (Median)** | Nilai Median Data Panel (N=60): X ≥ 2,0 izin; Y ≥ 10.961,8 Ha (Kategori High vs. Low). | Nilai Median Data Panel (N=48): X > Rp3.146,4 Miliar; Y ≥ 10.451,7 Ha (Kategori High vs. Low). |
+| **Orientasi Odds Ratio (OR)** | OR = (a × d) / (b × c) dengan a = Izin Tinggi & Deforestasi Tinggi; mengukur risiko deforestasi tinggi pada kelompok penerbitan izin tinggi. | OR = (a × d) / (b × c) dengan a = Investasi Tinggi & Deforestasi Tinggi; mengukur risiko deforestasi tinggi pada kelompok realisasi investasi tinggi. |
 
 ### D.6 Pemodelan Alur Rantai Pasok Maritim Ekspor (Kurva Bézier)
 Simpul logistik pelabuhan ekspor diverifikasi melalui triangulasi laporan investigasi keselamatan transportasi maritim, penetapan regulasi Proyek Strategis Nasional (PSN), dan laporan operasional korporasi. Alur pelayaran pengangkutan curah nikel menuju pasar internasional dimodelkan secara spasial menggunakan persamaan kurva Bézier kuadratik di atas koordinat bola bumi guna memetakan jalur lalu lintas maritim yang rentan kecelakaan tongkang.
