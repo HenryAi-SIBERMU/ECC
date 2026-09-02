@@ -2502,13 +2502,22 @@ with colB2:
         
         st.markdown("<hr style='border:1px solid #444; margin-top:5px; margin-bottom:15px;'>", unsafe_allow_html=True)
         
-        if not df_b3_tailing.empty:
-            fig_w4 = px.treemap(df_b3_tailing, path=['Provinsi', 'Kawasan/Perusahaan'], values='Estimasi Timbulan (Ton/Tahun)', 
-                                color='Estimasi Timbulan (Ton/Tahun)', color_continuous_scale='Blues',
-                                title="Proporsi Beban Limbah Tailing & Slag ke Ekosistem Air")
-            fig_w4.update_layout(template="plotly_dark", margin=dict(l=0, r=0, t=40, b=0))
-            st.plotly_chart(fig_w4, use_container_width=True, config={'displayModeBar': False})
+        df_b3_tailing_plot = df_b3_tailing[df_b3_tailing['Estimasi Timbulan (Ton/Tahun)'] > 0].copy() if not df_b3_tailing.empty else pd.DataFrame()
+        if not df_b3_tailing_plot.empty:
+            try:
+                fig_w4 = px.treemap(df_b3_tailing_plot, path=['Provinsi', 'Kawasan/Perusahaan'], values='Estimasi Timbulan (Ton/Tahun)', 
+                                    color='Estimasi Timbulan (Ton/Tahun)', color_continuous_scale='Blues',
+                                    title="Proporsi Beban Limbah Tailing & Slag ke Ekosistem Air")
+                fig_w4.update_layout(template="plotly_dark", margin=dict(l=0, r=0, t=40, b=0))
+                st.plotly_chart(fig_w4, use_container_width=True, config={'displayModeBar': False})
+            except Exception:
+                st.warning("Visualisasi Treemap tidak dapat dirender untuk dataset ini.")
             
+            with st.expander("Lihat Data Mentah: Rincian Limbah Tailing & Slag", expanded=False):
+                st.dataframe(df_b3_tailing, use_container_width=True, hide_index=True)
+                st.caption("Sumber: `sulawesi_limbah_b3.csv` (Data direduksi khusus jenis limbah Tailing, Slag, dan DSTP)")
+        elif not df_b3_tailing.empty:
+            st.info("Tidak ada data timbulan limbah tailing & slag bernilai positif untuk ditampilkan pada grafik.")
             with st.expander("Lihat Data Mentah: Rincian Limbah Tailing & Slag", expanded=False):
                 st.dataframe(df_b3_tailing, use_container_width=True, hide_index=True)
                 st.caption("Sumber: `sulawesi_limbah_b3.csv` (Data direduksi khusus jenis limbah Tailing, Slag, dan DSTP)")
