@@ -184,3 +184,58 @@ Berdasarkan hasil pemetaan empiris Z-Score EWM, Provinsi Sulawesi Tenggara mempe
 4. **Daya Dukung Sosial (Skor 4.5 / 5 — Melampaui Batas):** Krisis sosial terparah se-Sulawesi dengan 39.821 jiwa warga terancam kehilangan ruang hidup (Z = +1.95σ, Likert 5.0), 5 kasus manipulasi persetujuan FPIC (Z = +1.86σ, Likert 5.0), dan defisit SPA 17,92%.
 5. **Veto Kebijakan (Skor 3.0 / 5 — Mendekati Batas):** Obral 160 IUP baru pasca-2014 (Z = +0.64σ, Likert 4.0).
 6. **Vonis Komposit Sulawesi Tenggara (Skor 3.4 / 5.0 — Mendekati Batas):** Status **Mendekati Batas**, dengan catatan kritis bahwa Pilar Sosial (4.5 / 5) dan Kepadatan Konsesi Tambang (11,72%) telah berada pada status **Melampaui Batas Ekstrem** *(RED ALERT)*.
+
+---
+
+### 6.6.3 Evaluasi Empiris D3TLH: Provinsi Sulawesi Selatan (Sulsel)
+> **PROFIL EMPIRIS: Provinsi Sulawesi Selatan (Episentrum Bencana Alam, Konflik Pesisir & Kriminalisasi)**  
+> Kabupaten/Kota: 24 Daerah  |  Pusat Industri: KIMA Makassar, Smelter Huadi Bantaeng, Vale Sorowako Luwu Timur & PLTU Jeneponto  |  Populasi BPS: 9.073.509 Jiwa  
+> Karakteristik Krisis: Frekuensi bencana hidrometeorologi banjir bandang dan longsor tertinggi se-Sulawesi (669 kejadian), sengketa ruang laut nelayan pesisir terbanyak (7 kasus), insiden kriminalisasi pejuang HAM tertinggi (9 kasus), tambang ilegal marak (10 korporasi), dan cemaran karsinogenik Cr6+.
+
+#### A. Narasi Temuan Lapangan Sulsel
+Sebagai provinsi dengan populasi terbesar (9,07 juta jiwa) dan pusat gravitasi ekonomi regional, **Provinsi Sulawesi Selatan mencatat Skor Komposit 2.6 / 5.0 (Status: Mendekati Batas)**. Kendati secara agregat tidak berada pada status Melampaui Batas layaknya Sulteng, **audit forensik Z-score membongkar anomali outlier ekstrem pada 5 indikator kritis (Skor Likert 5.0 / Red Alert)** yang memperlihatkan kerentanan ekologis struktural di kawasan pesisir, daerah aliran sungai (DAS), dan ruang hidup agraria.
+
+Sulawesi Selatan mencatat rekor tertinggi se-Sulawesi pada tiga variabel destruktif sekaligus: **kejadian bencana hidrometeorologi sebanyak 669 kali (Z = +1.63σ, Likert 5.0)**, meletusnya **7 kasus konflik ruang tangkap laut nelayan vs tambang pasir laut dan tongkang (Z = +1.56σ, Likert 5.0)**, serta represi hukum dengan **9 insiden kriminalisasi petani dan aktivis pembela HAM (Z = +1.57σ, Likert 5.0)**. Selain itu, maraknya operasi **10 korporasi tambang ilegal di kawasan lindung (Z = +1.97σ, Likert 5.0)** dan cemaran Heksavalen Kromium (Cr6+) menegaskan darurat tata kelola lingkungan hidup di provinsi ini.
+
+#### B. Matriks Hasil Uji Empiris (Sulsel)
+##### Tabel 6.17: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Selatan (Model Hybrid Z-Score & EWM)
+| Pilar | Indikator Empiris | Fakta Mentah (A) | Nilai Z-Score | Bobot EWM | Skor Likert | Status Ekologis |
+| :---: | :--- | :---: | :---: | :---: | :---: | :--- |
+| Pilar Udara | Kapasitas PLTU Captive Beroperasi | 600 MW | -0.36σ | 0.0773 | 2.0 / 5 | Tidak Melampaui Batas |
+| Pilar Udara | Konsentrasi Gas NO2 Troposferik Satelit | 6.40e-06 mol/m² | +0.65σ | 0.0224 | 4.0 / 5 | Melampaui Batas |
+| Pilar Udara | Morbiditas ISPA (Incidence Rate Ratio) | 0.39x lipat | -0.81σ | 0.0461 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Udara | Proporsi Timbulan Limbah B3 Industri | 1.00 Jt Ton | -0.45σ | 0.0829 | 2.0 / 5 | Tidak Melampaui Batas |
+| Pilar Udara | Pelepasan Emisi Karbon Deforestasi GFW | 138.73 Jt Ton CO2e | +0.05σ | 0.0395 | 3.0 / 5 | Mendekati Batas |
+| Pilar Air | Indeks Kualitas Air (IKA) Terkini | 58.5 Poin | +0.35σ | 0.0262 | 3.0 / 5 | Mendekati Batas |
+| Pilar Air | Morbiditas Diare (Incidence Rate Ratio) | 0.91x lipat | -0.38σ | 0.0164 | 2.0 / 5 | Tidak Melampaui Batas |
+| Pilar Air | Konflik Ruang Laut Nelayan vs Tambang | 7 Kasus | +1.56σ | 0.0442 | 5.0 / 5 | Melampaui Batas |
+| Pilar Air | Akumulasi Beban Tailing, Slag & DSTP | 1.00 Jt Ton | -0.45σ | 0.0822 | 2.0 / 5 | Tidak Melampaui Batas |
+| Pilar Lahan | Bencana Hidrometeorologi (Banjir & Longsor) | 669 Kejadian | +1.63σ | 0.0271 | 5.0 / 5 | Melampaui Batas |
+| Pilar Lahan | Deforestasi Hutan Alam Primer GFW | 261,147 Ha | +0.19σ | 0.0346 | 3.0 / 5 | Mendekati Batas |
+| Pilar Lahan | Perambahan Tambang di Kawasan Hutan Lindung | 5,314 Ha | -0.24σ | 0.0392 | 2.0 / 5 | Tidak Melampaui Batas |
+| Pilar Lahan | Aktor Deforestasi Komoditas Tambang & Sawit | 166,047 Ha | -0.01σ | 0.0361 | 2.0 / 5 | Tidak Melampaui Batas |
+| Pilar Lahan | Kepadatan Konsesi IUP Nikel vs Daratan | 3.88% | -0.27σ | 0.0320 | 2.0 / 5 | Tidak Melampaui Batas |
+| Pilar Sosial | Manipulasi Persetujuan Konsultasi Warga (FPIC) | 0 Kasus | -0.68σ | 0.0635 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Sosial | Korban Perampasan Ruang Hidup & Krisis Agraria | 2,257 Jiwa | -0.43σ | 0.0781 | 2.0 / 5 | Tidak Melampaui Batas |
+| Pilar Sosial | Insiden Kriminalisasi Warga & Pembela HAM | 9 Insiden | +1.57σ | 0.0331 | 5.0 / 5 | Melampaui Batas |
+| Pilar Sosial | Defisit Kelayakan Standar Faskes SPA | 12.3 % Gap | +0.26σ | 0.0430 | 3.0 / 5 | Mendekati Batas |
+| Pilar Veto | Penerbitan Obral Konsesi WIUP Baru Pasca-2014 | 105 Izin | +0.09σ | 0.0415 | 3.0 / 5 | Mendekati Batas |
+| Pilar Veto | Korporat Tambang Pelanggar Hukum Beroperasi Ilegal | 10 Korporasi | +1.97σ | 0.0473 | 5.0 / 5 | Melampaui Batas |
+
+##### Tabel 6.18: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Selatan
+| Pilar / Dimensi | Cakupan Indikator Kunci | Skor Likert Pilar (0-5) | Status Ekologis | Interpretasi Temuan Lapangan Sulsel |
+| :---: | :--- | :---: | :---: | :--- |
+| Pilar 1: Udara | PLTU (600 MW), NO2 (6.4e-6), ISPA (0.39x), B3 (1.0 Jt Ton), CO2 (139 Jt Ton) | 2.1 / 5 | Tidak Melampaui Batas | Konsentrasi NO2 Satelit & Emisi PLTU Jeneponto/Barru |
+| Pilar 2: Air | IKA (58.50), Diare (0.91x), Tailing (1.0 Jt Ton), Cr6+ (1.0), Konflik Laut (7 Kasus) | 2.9 / 5 | Mendekati Batas | Toksisitas Logam Berat Cr6+ & Konflik Ruang Tangkap Nelayan Terbanyak |
+| Pilar 3: Lahan | Bencana (669 Kejadian), Deforestasi (261k Ha), Lindung (5.3k Ha), IUP (3.88%) | 2.7 / 5 | Mendekati Batas | Kerentanan Hidrometeorologi Terparah Se-Sulawesi & Banjir Bandang DAS |
+| Pilar 4: Sosial | FPIC (0 Kasus), Korban (2.257 Jiwa), Kriminalisasi (9 Insiden), Gap SPA (12.3%) | 2.4 / 5 | Tidak Melampaui Batas | Angka Kriminalisasi Petani & Pembela Lingkungan Tertinggi Se-Sulawesi |
+| Pilar 5: Veto | Obral Izin (105 IUP Baru), Korporat Ilegal (10 Perusahaan), Pengawasan Lemah | 3.1 / 5 | Mendekati Batas | Aktivitas Tambang Ilegal Terbanyak Se-Sulawesi di Kawasan DAS & Hutan |
+| SKOR KOMPOSIT SULSEL | Agregasi 5 Pilar EWM Weighted Average (Z-Score Standardization) | 2.6 / 5 | Mendekati Batas | STATUS AMBANG BATAS: OUTLIER BENCANA, KRIMINALISASI & CR6+ |
+
+#### C. Analisis Temuan Empiris (Sulsel)
+1. **Daya Tampung Udara (Skor 2.1 / 5 — Tidak Melampaui Batas):** Kapasitas PLTU captive beroperasi mencapai 600,0 MW (Punagaya Jeneponto & Barru, Z = -0.36σ), emisi karbon 138,73 Jt Ton CO2e (Z = +0.05σ), namun konsentrasi gas NO2 satelit menyentuh 6,40e-06 mol/m² (Z = +0.65σ, Likert 4.0) yang mencerminkan beban emisi perkotaan dan industri KIMA.
+2. **Daya Tampung Air (Skor 2.9 / 5 — Mendekati Batas):** Rerata IKA bernilai 58,50 poin (Z = +0.35σ), namun terdeteksi kontaminasi toksik Heksavalen Kromium Cr6+ (Z = +2.03σ, Likert 5.0) di perairan Luwu Timur, serta meletusnya 7 kasus konflik ruang laut nelayan pesisir vs tambang pasir laut dan tongkang (Z = +1.56σ, Likert 5.0 — tertinggi se-Sulawesi).
+3. **Daya Dukung Lahan (Skor 2.7 / 5 — Mendekati Batas):** Sulsel memikul bencana hidrometeorologi terparah se-Sulawesi dengan 669 kejadian banjir bandang dan longsor (Z = +1.63σ, Likert 5.0), dipicu laju deforestasi primer 261.147 Ha (Z = +0.19σ) dan perambahan 5.314 Ha hutan lindung di kawasan hulu DAS.
+4. **Daya Dukung Sosial (Skor 2.4 / 5 — Tidak Melampaui Batas):** Meskipun jumlah warga terdampak langsung tercatat 2.257 jiwa (Z = -0.43σ), Sulawesi Selatan mencatat eskalasi represi terberat dengan 9 insiden kriminalisasi warga dan aktivis lingkungan (Z = +1.57σ, Likert 5.0 — rekor tertinggi se-Sulawesi).
+5. **Veto Kebijakan (Skor 3.1 / 5 — Mendekati Batas):** Ditemukan 10 korporasi tambang beroperasi ilegal di kawasan hutan lindung dan DAS (Z = +1.97σ, Likert 5.0 — tertinggi se-Sulawesi) serta diterbitkannya 105 IUP baru pasca-2014 (Z = +0.09σ).
+6. **Vonis Komposit Sulawesi Selatan (Skor 2.6 / 5.0 — Mendekati Batas):** Status **Mendekati Batas** (WSM: 5.29 / 10.0), dengan catatan kritis bahwa dimensi penegakan hukum tambang ilegal, frekuensi bencana alam, dan represi kriminalisasi warga telah berada pada status **Melampaui Batas Ekstrem (RED ALERT)**.

@@ -505,6 +505,18 @@ def generate_bab6_skoring_provinsi():
         ["SKOR KOMPOSIT SULTRA", "Agregasi 5 Pilar EWM Weighted Average (Z-Score Standardization)", f"{sultra['total_likert']:.1f} / 5", sultra['likert_label'], "STATUS AMBANG BATAS: KRISIS RUANG HIDUP & KEPADATAN IUP"]
     ]
 
+    # 5. Ekstrak Data Empiris Sulsel (6.6.3)
+    sulsel = all_prov_results['Sulawesi Selatan']
+    table_eval_sulsel = extract_prov_eval_rows(sulsel)
+    rekap_sulsel = [
+        ["Pilar 1: Udara", "PLTU (600 MW), NO2 (6.4e-6), ISPA (0.39x), B3 (1.0 Jt Ton), CO2 (139 Jt Ton)", f"{sulsel['udara']:.1f} / 5", get_likert_label(sulsel['udara']), "Konsentrasi NO2 Satelit & Emisi PLTU Jeneponto/Barru"],
+        ["Pilar 2: Air", "IKA (58.50), Diare (0.91x), Tailing (1.0 Jt Ton), Cr6+ (1.0), Konflik Laut (7 Kasus)", f"{sulsel['air']:.1f} / 5", get_likert_label(sulsel['air']), "Toksisitas Logam Berat Cr6+ & Konflik Ruang Tangkap Nelayan Terbanyak"],
+        ["Pilar 3: Lahan", "Bencana (669 Kejadian), Deforestasi (261k Ha), Lindung (5.3k Ha), IUP (3.88%)", f"{sulsel['lahan']:.1f} / 5", get_likert_label(sulsel['lahan']), "Kerentanan Hidrometeorologi Terparah Se-Sulawesi & Banjir Bandang DAS"],
+        ["Pilar 4: Sosial", "FPIC (0 Kasus), Korban (2.257 Jiwa), Kriminalisasi (9 Insiden), Gap SPA (12.3%)", f"{sulsel['sosial']:.1f} / 5", get_likert_label(sulsel['sosial']), "Angka Kriminalisasi Petani & Pembela Lingkungan Tertinggi Se-Sulawesi"],
+        ["Pilar 5: Veto", "Obral Izin (105 IUP Baru), Korporat Ilegal (10 Perusahaan), Pengawasan Lemah", f"{sulsel['veto']:.1f} / 5", get_likert_label(sulsel['veto']), "Aktivitas Tambang Ilegal Terbanyak Se-Sulawesi di Kawasan DAS & Hutan"],
+        ["SKOR KOMPOSIT SULSEL", "Agregasi 5 Pilar EWM Weighted Average (Z-Score Standardization)", f"{sulsel['total_likert']:.1f} / 5", sulsel['likert_label'], "STATUS AMBANG BATAS: OUTLIER BENCANA, KRIMINALISASI & CR6+"]
+    ]
+
     # Flowchart Mermaid LR Regional (Satu Flowchart Terpusat untuk Seluruh Provinsi)
     mermaid_regional = """flowchart LR
     subgraph S1["1. Matriks Empiris Regional"]
@@ -793,6 +805,73 @@ def generate_bab6_skoring_provinsi():
         (f"Secara agregat, Sulawesi Tenggara memperoleh Skor Komposit 3.4 / 5.0 (Ekuivalen WSM 6.78 / 10.0) dengan status MENDEKATI BATAS. Namun, pengujian forensik membuktikan bahwa Pilar Daya Dukung Sosial (4.5 / 5) dan Kepadatan Konsesi Tambang (11,72%) telah berada pada status RED ALERT (MELAMPAUI BATAS EKSTREM).", False, False)
     ])
 
+    # -------------------------------------------------------------------------
+    # SEKSI 6.6.3: EVALUASI EMPIRIS SULAWESI SELATAN
+    # -------------------------------------------------------------------------
+    doc.add_page_break()
+    add_h3(doc, "6.6.3 Evaluasi Empiris D3TLH: Provinsi Sulawesi Selatan (Sulsel)")
+    add_note_box(
+        doc,
+        "PROFIL EMPIRIS: Provinsi Sulawesi Selatan (Episentrum Bencana Alam, Konflik Pesisir & Kriminalisasi)",
+        "Kabupaten/Kota: 24 Daerah  |  Pusat Industri: KIMA Makassar, Smelter Huadi Bantaeng, Vale Sorowako Luwu Timur & PLTU Jeneponto  |  Populasi BPS: 9.073.509 Jiwa\n"
+        "Karakteristik Krisis: Frekuensi bencana hidrometeorologi banjir bandang dan longsor tertinggi se-Sulawesi (669 kejadian), sengketa ruang laut nelayan pesisir terbanyak (7 kasus), insiden kriminalisasi warga tertinggi (9 kasus), tambang ilegal marak (10 korporasi), dan cemaran karsinogenik Cr6+."
+    )
+
+    add_h4(doc, "A. Narasi Temuan Lapangan Sulsel")
+    add_p(doc, [
+        ("Sebagai provinsi dengan populasi terbesar (9,07 juta jiwa) dan pusat gravitasi ekonomi regional, ", False, False),
+        ("Provinsi Sulawesi Selatan mencatat Skor Komposit 2.6 / 5.0 (Status: Mendekati Batas)", True, False),
+        (". Kendati secara agregat tidak berada pada status Melampaui Batas layaknya Sulteng, ", False, False),
+        ("audit forensik Z-score membongkar anomali outlier ekstrem pada 5 indikator kritis (Skor Likert 5.0 / Red Alert)", True, False),
+        (" yang memperlihatkan kerentanan ekologis struktural di kawasan pesisir, daerah aliran sungai (DAS), dan ruang hidup agraria.", False, False)
+    ])
+    add_p(doc, [
+        ("Sulawesi Selatan mencatat rekor tertinggi se-Sulawesi pada tiga variabel destruktif sekaligus: ", False, False),
+        ("kejadian bencana hidrometeorologi sebanyak 669 kali (Z = +1.63σ, Likert 5.0)", True, False),
+        (", meletusnya ", False, False),
+        ("7 kasus konflik ruang tangkap laut nelayan vs tambang pasir laut dan tongkang (Z = +1.56σ, Likert 5.0)", True, False),
+        (", serta represi hukum dengan ", False, False),
+        ("9 insiden kriminalisasi petani dan aktivis pembela HAM (Z = +1.57σ, Likert 5.0)", True, False),
+        (". Selain itu, maraknya operasi ", False, False),
+        ("10 korporasi tambang ilegal di kawasan lindung (Z = +1.97σ, Likert 5.0)", True, False),
+        (" dan cemaran Heksavalen Kromium (Cr6+) menegaskan darurat tata kelola lingkungan hidup di provinsi ini.", False, False)
+    ])
+
+    add_h4(doc, "B. Matriks Hasil Uji Empiris (Sulsel)")
+    add_caption(doc, "Tabel 6.17: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Selatan (Model Hybrid Z-Score & EWM)")
+    add_table_styled(
+        doc,
+        ["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Nilai Z-Score", "Bobot EWM", "Skor Likert", "Status Ekologis"],
+        table_eval_sulsel,
+        [2.2, 4.3, 3.0, 1.8, 1.7, 1.8, 2.2],
+        ["C", "L", "R", "C", "C", "C", "C"]
+    )
+
+    add_caption(doc, "Tabel 6.18: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Selatan")
+    add_table_styled(
+        doc,
+        ["Pilar / Dimensi", "Cakupan Indikator Kunci", "Skor Likert Pilar (0-5)", "Status Ekologis", "Interpretasi Temuan Lapangan Sulsel"],
+        rekap_sulsel,
+        [2.5, 4.5, 2.2, 2.8, 5.0],
+        ["C", "L", "C", "C", "L"]
+    )
+
+    add_h4(doc, "C. Analisis Temuan Empiris (Sulsel)")
+    add_p(doc, [
+        ("1. ", True, False), (f"Daya Tampung Udara (Skor {sulsel['udara']:.1f} / 5 — {get_likert_label(sulsel['udara'])}): ", True, False),
+        (f"Kapasitas PLTU captive beroperasi mencapai 600,0 MW (Punagaya Jeneponto & Barru, Z = -0.36σ), emisi karbon 138,73 Jt Ton CO2e (Z = +0.05σ), namun konsentrasi gas NO2 satelit menyentuh 6,40e-06 mol/m² (Z = +0.65σ, Likert 4.0) yang mencerminkan beban emisi perkotaan dan industri KIMA.\n", False, False),
+        ("2. ", True, False), (f"Daya Tampung Air (Skor {sulsel['air']:.1f} / 5 — {get_likert_label(sulsel['air'])}): ", True, False),
+        (f"Rerata IKA bernilai 58,50 poin (Z = +0.35σ), namun terdeteksi kontaminasi toksik Heksavalen Kromium Cr6+ (Z = +2.03σ, Likert 5.0) di perairan Luwu Timur, serta meletusnya 7 kasus konflik ruang laut nelayan pesisir vs tambang pasir laut dan tongkang (Z = +1.56σ, Likert 5.0 — tertinggi se-Sulawesi).\n", False, False),
+        ("3. ", True, False), (f"Daya Dukung Lahan (Skor {sulsel['lahan']:.1f} / 5 — {get_likert_label(sulsel['lahan'])}): ", True, False),
+        (f"Sulsel memikul bencana hidrometeorologi terparah se-Sulawesi dengan 669 kejadian banjir bandang dan longsor (Z = +1.63σ, Likert 5.0), dipicu laju deforestasi primer 261.147 Ha (Z = +0.19σ) dan perambahan 5.314 Ha hutan lindung di kawasan hulu DAS.\n", False, False),
+        ("4. ", True, False), (f"Daya Dukung Sosial (Skor {sulsel['sosial']:.1f} / 5 — {get_likert_label(sulsel['sosial'])}): ", True, False),
+        (f"Meskipun jumlah warga terdampak langsung tercatat 2.257 jiwa (Z = -0.43σ), Sulawesi Selatan mencatat eskalasi represi terberat dengan 9 insiden kriminalisasi warga dan aktivis lingkungan (Z = +1.57σ, Likert 5.0 — rekor tertinggi se-Sulawesi).\n", False, False),
+        ("5. ", True, False), (f"Veto Kebijakan (Skor {sulsel['veto']:.1f} / 5 — {get_likert_label(sulsel['veto'])}): ", True, False),
+        (f"Ditemukan 10 korporasi tambang beroperasi ilegal di kawasan hutan lindung dan DAS (Z = +1.97σ, Likert 5.0 — tertinggi se-Sulawesi) serta diterbitkannya 105 IUP baru pasca-2014 (Z = +0.09σ).\n", False, False),
+        ("6. ", True, False), (f"Vonis Komposit Sulawesi Selatan (Skor {sulsel['total_likert']:.1f} / 5.0 — {sulsel['likert_label']}): ", True, False),
+        (f"Secara agregat, Sulawesi Selatan memperoleh Skor Komposit 2.6 / 5.0 (Ekuivalen WSM 5.29 / 10.0) dengan status MENDEKATI BATAS. Namun, audit forensik membuktikan kondisi darurat pada 5 indikator outlier kritis: Bencana Alam (669 kejadian), Konflik Pesisir (7 kasus), Kriminalisasi Pejuang HAM (9 insiden), Tambang Ilegal (10 korporasi), dan Toksisitas Cr6+ yang berada pada status RED ALERT (MELAMPAUI BATAS EKSTREM).", False, False)
+    ])
+
     docx_path = tool_dir / "Metodologi_Bab6_Skoring_Provinsi.docx"
     doc.save(str(docx_path))
     print(f"  [OK] Tersimpan: {docx_path}")
@@ -925,6 +1004,35 @@ def generate_bab6_skoring_provinsi():
 <strong>5. Veto Kebijakan (Skor {sultra['veto']:.1f} / 5 — {get_likert_label(sultra['veto'])}):</strong> Obral 160 IUP baru pasca-2014 (Z = +0.64&sigma;, Likert 4.0).<br>
 <strong>6. Vonis Komposit Sulawesi Tenggara (Skor {sultra['total_likert']:.1f} / 5.0 — {sultra['likert_label']}):</strong> Status <span class="badge-warning">MENDEKATI BATAS</span>, dengan catatan kritis bahwa Pilar Sosial (4.5 / 5) dan Kepadatan Konsesi Tambang (11,72%) telah berada pada status RED ALERT (MELAMPAUI BATAS EKSTREM).</p>
 
+<div class="divider"></div>
+
+<!-- SEKSI 6.6.3 SULSEL -->
+<h3>6.6.3 Evaluasi Empiris D3TLH: Provinsi Sulawesi Selatan (Sulsel)</h3>
+<div class="note-box">
+  <strong>PROFIL EMPIRIS: Provinsi Sulawesi Selatan (Episentrum Bencana Alam, Konflik Pesisir & Kriminalisasi)</strong><br>
+  Kabupaten/Kota: 24 Daerah  |  Pusat Industri: KIMA Makassar, Smelter Huadi Bantaeng, Vale Sorowako Luwu Timur & PLTU Jeneponto  |  Populasi BPS: 9.073.509 Jiwa<br>
+  Karakteristik Krisis: Frekuensi bencana hidrometeorologi banjir bandang dan longsor tertinggi se-Sulawesi (669 kejadian), sengketa ruang laut nelayan pesisir terbanyak (7 kasus), insiden kriminalisasi pejuang HAM tertinggi (9 kasus), tambang ilegal marak (10 korporasi), dan cemaran karsinogenik Cr6+.
+</div>
+
+<h4>A. Narasi Temuan Lapangan Sulsel</h4>
+<p>Sebagai provinsi dengan populasi terbesar (9,07 juta jiwa) dan pusat gravitasi ekonomi regional, <strong>Provinsi Sulawesi Selatan mencatat Skor Komposit 2.6 / 5.0 (Status: Mendekati Batas)</strong>. Kendati secara agregat tidak berada pada status Melampaui Batas layaknya Sulteng, <strong>audit forensik Z-score membongkar anomali outlier ekstrem pada 5 indikator kritis (Skor Likert 5.0 / Red Alert)</strong> yang memperlihatkan kerentanan ekologis struktural di kawasan pesisir, daerah aliran sungai (DAS), dan ruang hidup agraria.</p>
+<p>Sulawesi Selatan mencatat rekor tertinggi se-Sulawesi pada tiga variabel destruktif sekaligus: <strong>kejadian bencana hidrometeorologi sebanyak 669 kali (Z = +1.63&sigma;, Likert 5.0)</strong>, meletusnya <strong>7 kasus konflik ruang tangkap laut nelayan vs tambang pasir laut dan tongkang (Z = +1.56&sigma;, Likert 5.0)</strong>, serta represi hukum dengan <strong>9 insiden kriminalisasi petani dan aktivis pembela HAM (Z = +1.57&sigma;, Likert 5.0)</strong>. Selain itu, maraknya operasi <strong>10 korporasi tambang ilegal di kawasan lindung (Z = +1.97&sigma;, Likert 5.0)</strong> dan cemaran Heksavalen Kromium (Cr6+) menegaskan darurat tata kelola lingkungan hidup di provinsi ini.</p>
+
+<h4>B. Matriks Hasil Uji Empiris (Sulsel)</h4>
+<div class="table-caption">Tabel 6.17: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Selatan (Model Hybrid Z-Score & EWM)</div>
+{html_table(["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Nilai Z-Score", "Bobot EWM", "Skor Likert", "Status Ekologis"], table_eval_sulsel)}
+
+<div class="table-caption">Tabel 6.18: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Selatan</div>
+{html_table(["Pilar / Dimensi", "Cakupan Indikator Kunci", "Skor Likert Pilar (0-5)", "Status Ekologis", "Interpretasi Temuan Lapangan Sulsel"], rekap_sulsel)}
+
+<h4>C. Analisis Temuan Empiris (Sulsel)</h4>
+<p><strong>1. Daya Tampung Udara (Skor {sulsel['udara']:.1f} / 5 — {get_likert_label(sulsel['udara'])}):</strong> Kapasitas PLTU captive beroperasi mencapai 600,0 MW (Punagaya Jeneponto & Barru, Z = -0.36&sigma;), emisi karbon 138,73 Jt Ton CO2e (Z = +0.05&sigma;), namun konsentrasi gas NO2 satelit menyentuh 6,40e-06 mol/m² (Z = +0.65&sigma;, Likert 4.0) yang mencerminkan beban emisi perkotaan dan industri KIMA.<br>
+<strong>2. Daya Tampung Air (Skor {sulsel['air']:.1f} / 5 — {get_likert_label(sulsel['air'])}):</strong> Rerata IKA bernilai 58,50 poin (Z = +0.35&sigma;), namun terdeteksi kontaminasi toksik Heksavalen Kromium Cr6+ (Z = +2.03&sigma;, Likert 5.0) di perairan Luwu Timur, serta meletusnya 7 kasus konflik ruang laut nelayan pesisir vs tambang pasir laut dan tongkang (Z = +1.56&sigma;, Likert 5.0 — tertinggi se-Sulawesi).<br>
+<strong>3. Daya Dukung Lahan (Skor {sulsel['lahan']:.1f} / 5 — {get_likert_label(sulsel['lahan'])}):</strong> Sulsel memikul bencana hidrometeorologi terparah se-Sulawesi dengan 669 kejadian banjir bandang dan longsor (Z = +1.63&sigma;, Likert 5.0), dipicu laju deforestasi primer 261.147 Ha (Z = +0.19&sigma;) dan perambahan 5.314 Ha hutan lindung di kawasan hulu DAS.<br>
+<strong>4. Daya Dukung Sosial (Skor {sulsel['sosial']:.1f} / 5 — {get_likert_label(sulsel['sosial'])}):</strong> Meskipun jumlah warga terdampak langsung tercatat 2.257 jiwa (Z = -0.43&sigma;), Sulawesi Selatan mencatat eskalasi represi terberat dengan 9 insiden kriminalisasi warga dan aktivis lingkungan (Z = +1.57&sigma;, Likert 5.0 — rekor tertinggi se-Sulawesi).<br>
+<strong>5. Veto Kebijakan (Skor {sulsel['veto']:.1f} / 5 — {get_likert_label(sulsel['veto'])}):</strong> Ditemukan 10 korporasi tambang beroperasi ilegal di kawasan hutan lindung dan DAS (Z = +1.97&sigma;, Likert 5.0 — tertinggi se-Sulawesi) serta diterbitkannya 105 IUP baru pasca-2014 (Z = +0.09&sigma;).<br>
+<strong>6. Vonis Komposit Sulawesi Selatan (Skor {sulsel['total_likert']:.1f} / 5.0 — {sulsel['likert_label']}):</strong> Status <span class="badge-warning">MENDEKATI BATAS</span> (WSM: 5.29 / 10.0), dengan catatan kritis bahwa dimensi penegakan hukum tambang ilegal, frekuensi bencana alam, dan represi kriminalisasi warga telah berada pada status RED ALERT (MELAMPAUI BATAS EKSTREM).</p>
+
 </body>
 </html>
 """
@@ -1027,6 +1135,33 @@ def generate_bab6_skoring_provinsi():
         f"4. **Daya Dukung Sosial (Skor {sultra['sosial']:.1f} / 5 — {get_likert_label(sultra['sosial'])}):** Krisis sosial terparah se-Sulawesi dengan 39.821 jiwa warga terancam kehilangan ruang hidup (Z = +1.95σ, Likert 5.0), 5 kasus manipulasi persetujuan FPIC (Z = +1.86σ, Likert 5.0), dan defisit SPA 17,92%.",
         f"5. **Veto Kebijakan (Skor {sultra['veto']:.1f} / 5 — {get_likert_label(sultra['veto'])}):** Obral 160 IUP baru pasca-2014 (Z = +0.64σ, Likert 4.0).",
         f"6. **Vonis Komposit Sulawesi Tenggara (Skor {sultra['total_likert']:.1f} / 5.0 — {sultra['likert_label']}):** Status **Mendekati Batas**, dengan catatan kritis bahwa Pilar Sosial (4.5 / 5) dan Kepadatan Konsesi Tambang (11,72%) telah berada pada status **Melampaui Batas Ekstrem** *(RED ALERT)*.",
+        "",
+        "---",
+        "",
+        "### 6.6.3 Evaluasi Empiris D3TLH: Provinsi Sulawesi Selatan (Sulsel)",
+        '> **PROFIL EMPIRIS: Provinsi Sulawesi Selatan (Episentrum Bencana Alam, Konflik Pesisir & Kriminalisasi)**  ',
+        '> Kabupaten/Kota: 24 Daerah  |  Pusat Industri: KIMA Makassar, Smelter Huadi Bantaeng, Vale Sorowako Luwu Timur & PLTU Jeneponto  |  Populasi BPS: 9.073.509 Jiwa  ',
+        '> Karakteristik Krisis: Frekuensi bencana hidrometeorologi banjir bandang dan longsor tertinggi se-Sulawesi (669 kejadian), sengketa ruang laut nelayan pesisir terbanyak (7 kasus), insiden kriminalisasi pejuang HAM tertinggi (9 kasus), tambang ilegal marak (10 korporasi), dan cemaran karsinogenik Cr6+.',
+        "",
+        "#### A. Narasi Temuan Lapangan Sulsel",
+        "Sebagai provinsi dengan populasi terbesar (9,07 juta jiwa) dan pusat gravitasi ekonomi regional, **Provinsi Sulawesi Selatan mencatat Skor Komposit 2.6 / 5.0 (Status: Mendekati Batas)**. Kendati secara agregat tidak berada pada status Melampaui Batas layaknya Sulteng, **audit forensik Z-score membongkar anomali outlier ekstrem pada 5 indikator kritis (Skor Likert 5.0 / Red Alert)** yang memperlihatkan kerentanan ekologis struktural di kawasan pesisir, daerah aliran sungai (DAS), dan ruang hidup agraria.",
+        "",
+        "Sulawesi Selatan mencatat rekor tertinggi se-Sulawesi pada tiga variabel destruktif sekaligus: **kejadian bencana hidrometeorologi sebanyak 669 kali (Z = +1.63σ, Likert 5.0)**, meletusnya **7 kasus konflik ruang tangkap laut nelayan vs tambang pasir laut dan tongkang (Z = +1.56σ, Likert 5.0)**, serta represi hukum dengan **9 insiden kriminalisasi petani dan aktivis pembela HAM (Z = +1.57σ, Likert 5.0)**. Selain itu, maraknya operasi **10 korporasi tambang ilegal di kawasan lindung (Z = +1.97σ, Likert 5.0)** dan cemaran Heksavalen Kromium (Cr6+) menegaskan darurat tata kelola lingkungan hidup di provinsi ini.",
+        "",
+        "#### B. Matriks Hasil Uji Empiris (Sulsel)",
+        "##### Tabel 6.17: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Selatan (Model Hybrid Z-Score & EWM)",
+        markdown_table(["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Nilai Z-Score", "Bobot EWM", "Skor Likert", "Status Ekologis"], table_eval_sulsel),
+        "",
+        "##### Tabel 6.18: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Selatan",
+        markdown_table(["Pilar / Dimensi", "Cakupan Indikator Kunci", "Skor Likert Pilar (0-5)", "Status Ekologis", "Interpretasi Temuan Lapangan Sulsel"], rekap_sulsel),
+        "",
+        "#### C. Analisis Temuan Empiris (Sulsel)",
+        f"1. **Daya Tampung Udara (Skor {sulsel['udara']:.1f} / 5 — {get_likert_label(sulsel['udara'])}):** Kapasitas PLTU captive beroperasi mencapai 600,0 MW (Punagaya Jeneponto & Barru, Z = -0.36σ), emisi karbon 138,73 Jt Ton CO2e (Z = +0.05σ), namun konsentrasi gas NO2 satelit menyentuh 6,40e-06 mol/m² (Z = +0.65σ, Likert 4.0) yang mencerminkan beban emisi perkotaan dan industri KIMA.",
+        f"2. **Daya Tampung Air (Skor {sulsel['air']:.1f} / 5 — {get_likert_label(sulsel['air'])}):** Rerata IKA bernilai 58,50 poin (Z = +0.35σ), namun terdeteksi kontaminasi toksik Heksavalen Kromium Cr6+ (Z = +2.03σ, Likert 5.0) di perairan Luwu Timur, serta meletusnya 7 kasus konflik ruang laut nelayan pesisir vs tambang pasir laut dan tongkang (Z = +1.56σ, Likert 5.0 — tertinggi se-Sulawesi).",
+        f"3. **Daya Dukung Lahan (Skor {sulsel['lahan']:.1f} / 5 — {get_likert_label(sulsel['lahan'])}):** Sulsel memikul bencana hidrometeorologi terparah se-Sulawesi dengan 669 kejadian banjir bandang dan longsor (Z = +1.63σ, Likert 5.0), dipicu laju deforestasi primer 261.147 Ha (Z = +0.19σ) dan perambahan 5.314 Ha hutan lindung di kawasan hulu DAS.",
+        f"4. **Daya Dukung Sosial (Skor {sulsel['sosial']:.1f} / 5 — {get_likert_label(sulsel['sosial'])}):** Meskipun jumlah warga terdampak langsung tercatat 2.257 jiwa (Z = -0.43σ), Sulawesi Selatan mencatat eskalasi represi terberat dengan 9 insiden kriminalisasi warga dan aktivis lingkungan (Z = +1.57σ, Likert 5.0 — rekor tertinggi se-Sulawesi).",
+        f"5. **Veto Kebijakan (Skor {sulsel['veto']:.1f} / 5 — {get_likert_label(sulsel['veto'])}):** Ditemukan 10 korporasi tambang beroperasi ilegal di kawasan hutan lindung dan DAS (Z = +1.97σ, Likert 5.0 — tertinggi se-Sulawesi) serta diterbitkannya 105 IUP baru pasca-2014 (Z = +0.09σ).",
+        f"6. **Vonis Komposit Sulawesi Selatan (Skor {sulsel['total_likert']:.1f} / 5.0 — {sulsel['likert_label']}):** Status **Mendekati Batas** (WSM: 5.29 / 10.0), dengan catatan kritis bahwa dimensi penegakan hukum tambang ilegal, frekuensi bencana alam, dan represi kriminalisasi warga telah berada pada status **Melampaui Batas Ekstrem (RED ALERT)**.",
         ""
     ]
 
@@ -1034,7 +1169,7 @@ def generate_bab6_skoring_provinsi():
     with open(md_path, "w", encoding="utf-8") as f:
         f.write("\n".join(md_lines))
     print(f"  [OK] Tersimpan: {md_path}")
-    print("[4/4] Selesai membangun Sub-bab 6.6 untuk Provinsi Sulawesi Tengah & Sulawesi Tenggara.")
+    print("[4/4] Selesai membangun Sub-bab 6.6 untuk Provinsi Sulawesi Tengah, Sulawesi Tenggara, dan Sulawesi Selatan.")
 
 
 if __name__ == "__main__":
