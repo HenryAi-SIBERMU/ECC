@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Laporan Metodologi Bab 1 — Ekspansi Industri Ekstraktif (CELIOS ECC)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true, theme:'dark'});</script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 10px; background: #0A0D13; min-height: 100vh; padding: 25px; }
+  body {
+    font-family: 'Inter', Arial, sans-serif;
+    background: #0E1117; color: #D4D4D4; line-height: 1.65;
+    max-width: 920px; padding: 30px 40px; margin: 0 auto;
+    box-shadow: 0 8px 45px rgba(0,0,0,0.85); border-radius: 6px;
+  }
+  @media print {
+    html { font-size: 8pt; background: #fff; padding: 0; }
+    body { background: #fff; color: #111; padding: 0; max-width: 100%; box-shadow: none; }
+    .hdr-title { color: #1B5E20 !important; }
+    .hdr-sub { color: #2E7D32 !important; }
+    h2 { color: #1B5E20 !important; border-bottom-color: #2E7D32 !important; }
+    h3 { color: #2E7D32 !important; }
+    p, li, td { color: #222 !important; }
+    strong { color: #111 !important; }
+    .data-th { background: #2E7D32 !important; color: #fff !important; -webkit-print-color-adjust: exact; }
+    .data-tr-even .data-td { background: #F5FBF5 !important; }
+    .note-box { background: #F1F8E9 !important; border-left-color: #2E7D32 !important; color: #333 !important; }
+    .formula { background: #EDF7EE !important; color: #1B5E20 !important; border-color: #A5D6A7 !important; }
+  }
+  .hdr { margin-bottom: 16pt; border-bottom: 2pt solid #2E7D32; padding-bottom: 8pt; }
+  .hdr-sub { font-size: 8.5pt; font-weight: 700; color: #43A047; text-transform: uppercase; letter-spacing: 1.5pt; }
+  .hdr-title { font-size: 15pt; font-weight: 800; color: #81C784; text-transform: uppercase; margin-top: 4pt; line-height: 1.3; }
+  h2 { font-size: 11.5pt; font-weight: 700; color: #81C784; text-transform: uppercase; margin-top: 22pt; margin-bottom: 8pt; padding-bottom: 3pt; border-bottom: 1pt solid #2E7D32; }
+  h3 { font-size: 10.5pt; font-weight: 700; color: #66BB6A; margin-top: 14pt; margin-bottom: 5pt; }
+  h4 { font-size: 9.5pt; font-weight: 700; color: #A5D6A7; margin-top: 10pt; margin-bottom: 4pt; }
+  p { font-size: 9.5pt; color: #CCCCCC; margin-bottom: 8pt; text-align: justify; }
+  ul { font-size: 9pt; color: #CCCCCC; margin-left: 18pt; margin-bottom: 8pt; }
+  li { margin-bottom: 3pt; }
+  strong { color: #E8F5E9; }
+  .note-box { background: #132213; border-left: 3pt solid #2E7D32; padding: 8pt 12pt; margin: 10pt 0; font-size: 8.5pt; color: #C8E6C9; border-radius: 0 4px 4px 0; }
+  .table-caption { font-size: 8.5pt; font-weight: 700; color: #81C784; margin-top: 12pt; margin-bottom: 4pt; }
+  table { width: 100%; border-collapse: collapse; margin: 6pt 0 14pt 0; font-size: 8.5pt; }
+  .data-th { background: #1B5E20; color: #FFFFFF; font-weight: 700; padding: 5pt 7pt; text-align: left; border: 0.5pt solid #2E7D32; }
+  .data-td { padding: 4.5pt 7pt; border: 0.5pt solid #243524; color: #CCCCCC; vertical-align: top; }
+  .data-tr-even .data-td { background: #131B13; }
+  .formula { background: #0D1B0E; border: 0.8pt solid #2E7D32; border-radius: 4px; padding: 7pt 11pt; font-family: 'JetBrains Mono', monospace; font-size: 8.5pt; color: #A5D6A7; margin: 6pt 0; }
+  .formula-title { font-size: 8.5pt; font-weight: 700; color: #81C784; margin-top: 8pt; }
+  .var-desc { background: #0E1610; border-left: 2pt solid #43A047; padding: 6pt 10pt; margin: 4pt 0 10pt 0; font-size: 8pt; color: #B0BEC5; }
+  .var-desc-title { font-weight: 700; color: #81C784; margin-bottom: 3pt; }
+  .var-desc ul { list-style-type: none; margin-left: 0; margin-bottom: 0; }
+  .var-desc li { margin-bottom: 2pt; }
+  .mermaid { background: #0D1610; border: 0.8pt solid #2E7D32; border-radius: 6px; padding: 12pt; margin: 8pt 0 14pt 0; text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-sub">CELIOS — Center of Economic and Law Studies &nbsp;|&nbsp; Laporan Riset Metodologi D3TLH</div>
+  <div class="hdr-title">BAB I: METODOLOGI ANALISIS EKSPANSI INDUSTRI EKSTRAKTIF DAN INFRASTRUKTUR PENUNJANG DI PULAU SULAWESI</div>
+</div>
+
+<p>
+  Dokumen laporan metodologi ini menyajikan kerangka ilmiah, landasan regulasi, formulasi matematis, prosedur analisis statistik, serta metodologi pembuktian berbasis data terbuka yang dioperasionalkan pada <strong>Bab 1: Ekspansi Industri Ekstraktif</strong> dalam studi Daya Dukung dan Daya Tampung Lingkungan Hidup (D3TLH) Sulawesi periode 2014–2024.
+</p>
+
+<h2>SUB-BAB 1.1: Konteks Makro: Breakdown PDRB per Komoditas</h2>
+
+<h3>1.1.1 Konteks Makro: Dominasi Ekstraktif vs Ekonomi Akar Rumput</h3>
+<p>
+  Bagian ini menganalisis struktur Produk Domestik Regional Bruto (PDRB) pada enam provinsi di Pulau Sulawesi sepanjang periode 2016–2024 menggunakan visualisasi grafik area bertumpuk (<em>Stacked Area Chart</em>). Analisis ini ditujukan untuk menguji secara empiris apakah percepatan pertumbuhan ekonomi daerah benar-benar bersumber dari sektor produktif masyarakat lokal atau didominasi oleh industri ekstraktif padat modal yang mengalihkan pemanfaatan ruang dan sumber daya alam.
+</p>
+
+<div class="note-box">
+  <strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong><br>
+  Badan Pusat Statistik (BPS) Provinsi se-Sulawesi (diolah CELIOS). Visualisasi <em>Stacked Area Chart</em> memetakan dinamika Produk Domestik Regional Bruto (PDRB) berdasarkan klasifikasi rantai pasok hukum (<em>Legal Supply-Chain</em>) untuk membandingkan trajektori Sektor Ekstraktif, Ekonomi Akar Rumput, dan Sektor Jasa & Lainnya.
+</div>
+
+<h4>A. Kerangka Dekomposisi Sektoral & Pendekatan Rantai Pasok Hukum (Legal Supply-Chain)</h4>
+<p>
+  Sistem Klasifikasi Baku Lapangan Usaha Indonesia (KBLI 2020) yang diterbitkan BPS membagi aktivitas perekonomian ke dalam 17 sektor. Melalui pendekatan <em>Legal Supply-Chain</em>, ke-17 sektor tersebut direklasifikasi menjadi 3 Klaster Makro (Ekstraktif, Akar Rumput, dan Jasa & Lainnya). Rincian pembagian sektor, dasar regulasi, serta intisari ketentuan hukum disajikan secara lengkap pada <strong>Tabel 1.1</strong> berikut:
+</p>
+
+<div class="table-caption">Tabel 1.1: Reklasifikasi Sektoral PDRB KBLI 2020 Berdasarkan Pendekatan Rantai Pasok Hukum (Legal Supply-Chain)</div>
+<table>
+  <thead>
+    <tr>
+      <th class="data-th" style="width:14%;">Kategori BPS</th>
+      <th class="data-th" style="width:24%;">Sektor Lapangan Usaha</th>
+      <th class="data-th" style="width:16%;">Klasifikasi Analisis</th>
+      <th class="data-th" style="width:22%;">Dasar Regulasi & Mandat Hukum</th>
+      <th class="data-th" style="width:24%;">Intisari Ketentuan Hukum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="data-td"><strong>Kategori B</strong></td><td class="data-td">Pertambangan dan Penggalian</td><td class="data-td" style="text-align:center;">Ekstraktif</td><td class="data-td">Perpres No. 26 Tahun 2010</td><td class="data-td">Ketentuan Pasal 1 Ayat (2) mengenai pengambilan komoditas tambang dari dalam bumi.</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>Kategori C</strong></td><td class="data-td">Industri Pengolahan (Smelter Logam)</td><td class="data-td" style="text-align:center;">Ekstraktif</td><td class="data-td">UU No. 3 Tahun 2020 & PP No. 96 Tahun 2021</td><td class="data-td">Pasal 102–103 mewajibkan pengolahan dan pemurnian di dalam negeri sebagai kesatuan pertambangan.</td></tr>
+    <tr><td class="data-td"><strong>Kategori D</strong></td><td class="data-td">Pengadaan Listrik & Gas (PLTU Captive)</td><td class="data-td" style="text-align:center;">Ekstraktif</td><td class="data-td">Perpres No. 112 Tahun 2022 & RUPTL PLN</td><td class="data-td">Pasal 3 Ayat (4) huruf b mengecualikan PLTU baru hanya bagi yang terintegrasi melayani smelter.</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>Kategori A</strong></td><td class="data-td">Pertanian, Kehutanan, Perikanan</td><td class="data-td" style="text-align:center;">Ekonomi Akar Rumput</td><td class="data-td">KBLI 2020 BPS</td><td class="data-td">Sektor pemanfaatan sumber daya hayati terbarukan dan penyerap tenaga kerja lokal.</td></tr>
+    <tr><td class="data-td"><strong>Kategori E–U</strong></td><td class="data-td">13 Sektor Jasa & Konstruksi</td><td class="data-td" style="text-align:center;">Sektor Jasa & Lainnya</td><td class="data-td">Klasifikasi Standar BPS</td><td class="data-td">Sektor sekunder dan tersier penunjang perekonomian daerah.</td></tr>
+  </tbody>
+</table>
+
+<h4>B. Alur Logika Metodologis Rantai Pasok Hukum (Mengapa Kat. B + C + D = Ekstraktif)</h4>
+<p>
+  Keterkaitan ketiga kategori lapangan usaha tersebut sebagai satu kesatuan rantai pasok ekstraktif dimodelkan dalam kerangka alur logika hukum sebagaimana diilustrasikan pada <strong>Bagan Alur 1.1</strong> berikut:
+</p>
+
+<div class="table-caption">Bagan Alur 1.1: Alur Logika Metodologis Rantai Pasok Hukum Sektor Ekstraktif</div>
+<div class="mermaid">
+graph TD
+    subgraph Mandat_Smelter["2. Rantai Pasok Smelter (Kategori C)"]
+        A["UU No. 3/2020 Ps. 1(1)<br/><i>Pertambangan = Eksplorasi + Penambangan + Pengolahan/Pemurnian</i>"] --> B["Smelter (Industri Pengolahan / Kat. C)<br/><b>Tahapan Wajib Pertambangan</b>"]
+        C["UU No. 3/2020 Ps. 102–103 & PP 96/2021<br/><i>Mandat Wajib Pemegang IUP Operasi Produksi</i>"] --> B
+    end
+
+    subgraph Mandat_Energi["3. Rantai Pasok Energi Captive (Kategori D)"]
+        D["Perpres No. 112/2022 Ps. 3(4)b<br/><i>PLTU Baru Dilarang, KECUALI Terintegrasi Smelter</i>"] --> E["PLTU Captive (Pengadaan Listrik / Kat. D)<br/><b>Instrumen Rantai Pasok Off-Grid</b>"]
+        F["RUPTL PLN 2021–2030 Hal. VI-24<br/><i>Pengakuan Pasokan Khusus Smelter</i>"] --> E
+    end
+
+    subgraph Hulu_Tambang["1. Sektor Hulu (Kategori B)"]
+        G["Perpres No. 26/2010 Ps. 1(2)<br/><b>Pertambangan & Penggalian (Kat. B)</b><br/><i>Ekstraksi SDA Tak Terbarukan</i>"]
+    end
+
+    G --> K["<b>KESIMPULAN:</b><br/>Kat. B + Kat. C + Kat. D = <b>SATU KESATUAN RANTAI PASOK EKSTRAKTIF</b> yang dimandatkan hukum"]
+    B --> K
+    E --> K
+</div>
+
+<h4>C. Formulasi Matematis: Persamaan Agregasi Sektor Ekstraktif (Legal Supply-Chain Aggregation)</h4>
+<p>
+  Data diproses menggunakan pendekatan Dekomposisi PDRB Sektoral. Nilai PDRB dikelompokkan menjadi 3 agregat makro melalui pendekatan Legal Supply-Chain. Sektor Ekstraktif dihitung dengan menggabungkan tiga kategori lapangan usaha utama yang saling terintegrasi (tambang, smelter, dan PLTU captive) menggunakan persamaan <strong>Agregasi Sektor Ekstraktif (Legal Supply-Chain Aggregation)</strong>:
+</p>
+
+<div class="formula-title">Persamaan Agregasi Sektor Ekstraktif (Legal Supply-Chain Aggregation):</div>
+<div class="formula">Sektor_Ekstraktif = PDRB(Kat.B: Pertambangan) + PDRB(Kat.C: Ind. Pengolahan) + PDRB(Kat.D: Listrik)</div>
+<div class="var-desc">
+  <div class="var-desc-title">Keterangan Variabel:</div>
+  <ul>
+    <li>• <strong>Sektor_Ekstraktif</strong>: Total nilai tambah bruto dari klaster industri ekstraktif yang saling terintegrasi (satuan: Triliun Rupiah).</li>
+    <li>• <strong>PDRB(Kat.B: Pertambangan)</strong>: Nilai tambah bruto dari aktivitas eksplorasi dan ekstraksi bijih mineral dari dalam bumi (BPS KBLI 2020 Kategori B).</li>
+    <li>• <strong>PDRB(Kat.C: Ind. Pengolahan)</strong>: Nilai tambah bruto dari pemurnian dan peleburan logam dasar di fasilitas smelter nikel (BPS KBLI 2020 Kategori C / Golongan Pokok 24).</li>
+    <li>• <strong>PDRB(Kat.D: Listrik)</strong>: Nilai tambah bruto dari pengadaan daya listrik batubara non-jaringan (PLTU captive) khusus melayani smelter (BPS KBLI 2020 Kategori D).</li>
+  </ul>
+</div>
+
+<p>Secara lengkap, perhitungan ketiga komponen makroekonomi dan indikator turunannya dirumuskan melalui sistem persamaan berikut:</p>
+
+<div class="formula-title">Persamaan Ekonomi Akar Rumput:</div>
+<div class="formula">Sektor_Akar_Rumput = PDRB(Kat.A: Pertanian, Kehutanan, dan Perikanan)</div>
+<div class="var-desc">
+  <div class="var-desc-title">Keterangan Variabel:</div>
+  <ul>
+    <li>• <strong>Sektor_Akar_Rumput</strong>: Total nilai Produk Domestik Regional Bruto yang dihasilkan dari pemanfaatan sumber daya hayati terbarukan (satuan: Triliun Rupiah).</li>
+    <li>• <strong>PDRB(Kat.A)</strong>: Agregasi nilai tambah tanaman pangan, hortikultura, perkebunan rakyat, peternakan, kehutanan, dan perikanan tangkap/budidaya (BPS KBLI 2020 Kategori A).</li>
+  </ul>
+</div>
+
+<div class="formula-title">Persamaan Sektor Jasa & Lainnya:</div>
+<div class="formula">Sektor_Jasa = Jumlah PDRB (Kategori E sampai dengan Kategori U)</div>
+<div class="var-desc">
+  <div class="var-desc-title">Keterangan Variabel:</div>
+  <ul>
+    <li>• <strong>Sektor_Jasa</strong>: Total nilai tambah gabungan dari 13 sektor penunjang sekunder dan tersier di luar sektor ekstraktif dan akar rumput (satuan: Triliun Rupiah).</li>
+    <li>• <strong>PDRB (Kat. E s.d. U)</strong>: Akumulasi nilai tambah sektor konstruksi, perdagangan besar/eceran, transportasi, pergudangan, akomodasi, informasi & komunikasi, jasa keuangan, real estat, dan jasa umum.</li>
+  </ul>
+</div>
+
+<div class="formula-title">Persamaan Total Produk Domestik Regional Bruto (PDRB Wilayah):</div>
+<div class="formula">Total_PDRB = Sektor_Ekstraktif + Sektor_Akar_Rumput + Sektor_Jasa</div>
+<div class="var-desc">
+  <div class="var-desc-title">Keterangan Variabel:</div>
+  <ul>
+    <li>• <strong>Total_PDRB</strong>: Nilai keseluruhan output ekonomi regional bruto suatu wilayah provinsi atau kabupaten pada periode tahun berjalan atas dasar harga berlaku (satuan: Triliun Rupiah).</li>
+    <li>• <strong>Sektor_Ekstraktif</strong>: Total nilai tambah sektor ekstraktif terintegrasi (Triliun Rupiah).</li>
+    <li>• <strong>Sektor_Akar_Rumput</strong>: Total nilai tambah ekonomi berbasis masyarakat lokal dan sumber daya hayati (Triliun Rupiah).</li>
+    <li>• <strong>Sektor_Jasa</strong>: Total nilai tambah sektor jasa dan fasilitas pendukung (Triliun Rupiah).</li>
+  </ul>
+</div>
+
+<div class="formula-title">Persamaan Pangsa Kontribusi Sektor Ekstraktif (%):</div>
+<div class="formula">Pangsa_Ekstraktif (%) = ( Sektor_Ekstraktif / Total_PDRB ) * 100</div>
+<div class="var-desc">
+  <div class="var-desc-title">Keterangan Variabel:</div>
+  <ul>
+    <li>• <strong>Pangsa_Ekstraktif (%)</strong>: Persentase pangsa/porsi dominasi sektor ekstraktif terhadap total kue perekonomian wilayah (satuan: Persen / %).</li>
+    <li>• <strong>Sektor_Ekstraktif</strong>: Nilai tambah nominal sektor ekstraktif terintegrasi pada tahun observasi (Triliun Rupiah).</li>
+    <li>• <strong>Total_PDRB</strong>: Total nilai nominal PDRB seluruh 17 sektor lapangan usaha pada tahun yang sama (Triliun Rupiah).</li>
+  </ul>
+</div>
+
+<div class="formula-title">Persamaan Laju Pertumbuhan Tahunan Sektoral (YoY):</div>
+<div class="formula">Laju_Pertumbuhan_Tahunan (%) = [ ( Nilai_Tahun_t - Nilai_Tahun_{t-1} ) / Nilai_Tahun_{t-1} ] * 100</div>
+<div class="var-desc">
+  <div class="var-desc-title">Keterangan Variabel:</div>
+  <ul>
+    <li>• <strong>Laju_Pertumbuhan_Tahunan (%)</strong>: Tingkat percepatan atau perlambatan ekspansi tahunan suatu sektor ekonomi (satuan: Persen / %).</li>
+    <li>• <strong>Nilai_Tahun_t</strong>: Nilai nominal PDRB sektor pada tahun observasi berjalan (t).</li>
+    <li>• <strong>Nilai_Tahun_{t-1}</strong>: Nilai nominal PDRB sektor pada satu tahun sebelumnya (t - 1).</li>
+  </ul>
+</div>
+
+<p>
+  Definisi operasional, cakupan lapangan usaha, dan institusi penyedia data primer untuk masing-masing komponen variabel dalam sistem persamaan di atas dipaparkan pada <strong>Tabel 1.2</strong> berikut:
+</p>
+
+<div class="table-caption">Tabel 1.2: Definisi Operasional Komponen Makroekonomi dan Sumber Data PDRB Sektoral</div>
+<table>
+  <thead>
+    <tr>
+      <th class="data-th" style="width:20%;">Komponen Analisis</th>
+      <th class="data-th" style="width:22%;">Cakupan Lapangan Usaha</th>
+      <th class="data-th" style="width:32%;">Definisi Operasional</th>
+      <th class="data-th" style="width:12%;">Satuan Nilai</th>
+      <th class="data-th" style="width:14%;">Sumber Data Primer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="data-td"><strong>Sektor Ekstraktif</strong></td><td class="data-td">Kategori B, Kategori C, Kategori D</td><td class="data-td">Akumulasi nilai tambah bruto pertambangan bijih nikel, peleburan logam dasar, dan penyediaan energi PLTU captive.</td><td class="data-td">Triliun Rupiah</td><td class="data-td">BPS Provinsi (SIMDASI)</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>Ekonomi Akar Rumput</strong></td><td class="data-td">Kategori A</td><td class="data-td">Nilai tambah pertanian tanaman pangan, perkebunan rakyat, kehutanan, dan perikanan tangkap maupun budidaya.</td><td class="data-td">Triliun Rupiah</td><td class="data-td">BPS Provinsi</td></tr>
+    <tr><td class="data-td"><strong>Sektor Jasa & Lainnya</strong></td><td class="data-td">Kategori E hingga Kategori U</td><td class="data-td">Nilai tambah gabungan perdagangan, konstruksi, transportasi, perbankan, dan jasa layanan umum.</td><td class="data-td">Triliun Rupiah</td><td class="data-td">BPS Provinsi</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>Total PDRB Wilayah</strong></td><td class="data-td">Seluruh 17 Kategori Lapangan Usaha</td><td class="data-td">Total nilai Produk Domestik Regional Bruto suatu wilayah atas dasar harga berlaku pada periode tahun berjalan.</td><td class="data-td">Triliun Rupiah</td><td class="data-td">BPS Provinsi</td></tr>
+    <tr><td class="data-td"><strong>Pangsa Ekstraktif (%)</strong></td><td class="data-td">Rasio Kontribusi Relatif</td><td class="data-td">Persentase kontribusi sektor ekstraktif terhadap keseluruhan perekonomian provinsi atau kabupaten.</td><td class="data-td">Persen (%)</td><td class="data-td">Hasil Olahan CELIOS</td></tr>
+  </tbody>
+</table>
+
+<p>
+  Penerapan formulasi di atas menunjukkan perbedaan struktur ekonomi yang sangat kontras antarwilayah di Pulau Sulawesi. Di <strong>Sulawesi Tengah (sebagai pusat hilirisasi)</strong>, ekspansi industri ekstraktif melaju sangat pesat hingga menguasai <strong>55.8% dari total PDRB provinsi</strong> pada tahun 2024. Sebaliknya, porsi Ekonomi Akar Rumput mengalami penurunan pangsa yang signifikan. Hal ini menunjukkan ketergantungan ekonomi daerah yang sangat tinggi pada satu klaster industri padat modal, berbeda dengan provinsi lain seperti Sulawesi Selatan dan Gorontalo yang perekonomiannya bertumpu pada basis pertanian terbarukan.
+</p>
+
+<h3>1.1.2 Pemusatan Sektor Ekstraktif di Kabupaten se-Sulawesi Tengah</h3>
+<p>
+  Jika dianalisis secara spasial pada tingkat kabupaten di Sulawesi Tengah, terlihat konsentrasi kegiatan industri ekstraktif. Kabupaten <strong>Morowali</strong> dan <strong>Morowali Utara</strong> mendominasi struktur PDRB provinsi melalui pengembangan kawasan industri hilirisasi dan PLTU Captive. Analisis ini membandingkan komposisi ketiga sektor advokatif di seluruh 13 kabupaten/kota se-Sulawesi Tengah pada tahun terbaru (2024).
+</p>
+
+<div class="note-box">
+  <strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong><br>
+  Badan Pusat Statistik (BPS) Kabupaten se-Sulawesi Tengah (diolah CELIOS). Visualisasi <em>Stacked Bar Chart</em> memetakan struktur Produk Domestik Regional Bruto (PDRB) tahun 2024 pada seluruh 13 kabupaten/kota untuk mengidentifikasi tingkat konsentrasi sektoral dan polarisasi spasial antara sentra industri pengolahan nikel dengan daerah non-sentra.
+</div>
+
+<h4>A. Rasionalitas Spasial & Urgensi Dekomposisi Sektoral Tingkat Kabupaten</h4>
+<p>
+  Analisis agregat pada tingkat provinsi sering kali menghasilkan <strong>Bias Ilusi Agregat (Aggregate Illusion Bias)</strong>, di mana angka pertumbuhan ekonomi makro yang tinggi memberi kesan seolah seluruh wilayah menikmati kemakmuran yang seimbang. Namun, ketika data didekomposisi ke tingkat kabupaten/kota, terlihat jurang pemisah ekonomi yang sangat tajam antara wilayah <strong>Enklave Industri Ekstraktif</strong> dengan daerah agraris tradisional sekitarnya.
+</p>
+
+<h4>B. Alur Logika Analisis Disparitas Spasial Kabupaten</h4>
+<p>
+  Kerangka kerja metodologis dalam membedah ketimpangan intra-provinsial ini diilustrasikan pada <strong>Bagan Alur 1.2</strong> berikut:
+</p>
+
+<div class="table-caption">Bagan Alur 1.2: Alur Logika Metodologis Dekomposisi Spasial PDRB Tingkat Kabupaten se-Sulawesi Tengah</div>
+<div class="mermaid">
+graph TD
+    subgraph Data_BPS["1. Input Data Statistik Daerah"]
+        A["BPS Kabupaten se-Sulawesi Tengah<br/><i>PDRB 17 Sektor Lapangan Usaha ADHB</i>"]
+    end
+
+    subgraph Reklasifikasi["2. Reklasifikasi Legal Supply-Chain"]
+        B["Ekstraktif = Kat. B + Kat. C + Kat. D"]
+        C["Akar Rumput = Kat. A"]
+        D["Jasa & Lainnya = Kat. E s.d. U"]
+    end
+
+    subgraph Analisis_Disparitas["3. Output Evaluasi Spasial"]
+        E["<b>Sentra Hilirisasi (Enclave Industri):</b><br/>Morowali & Morut menguasai Sektor Ekstraktif Tertinggi"]
+        F["<b>Non-Sentra (Pertanian Rakyat):</b><br/>11 Kabupaten tertinggal (<11% Porsi Ekstraktif)"]
+    end
+
+    A --> B
+    A --> C
+    A --> D
+    B --> E
+    C --> F
+    D --> F
+</div>
+
+<h4>C. Formulasi Matematis: Persamaan Agregasi Sektoral Kabupaten (Legal Supply-Chain Aggregation)</h4>
+<p>Kalkulasi PDRB tingkat kabupaten menggunakan sistem persamaan berikut:</p>
+
+<div class="formula-title">Persamaan Agregasi Sektor Ekstraktif Tingkat Kabupaten:</div>
+<div class="formula">Sektor_Ekstraktif_Kabupaten = PDRB_Kab(Kat.B: Pertambangan) + PDRB_Kab(Kat.C: Ind. Pengolahan) + PDRB_Kab(Kat.D: Listrik)</div>
+<div class="var-desc">
+  <div class="var-desc-title">Keterangan Variabel:</div>
+  <ul>
+    <li>• <strong>Sektor_Ekstraktif_Kabupaten</strong>: Total nilai tambah sektor ekstraktif di tingkat kabupaten target (satuan: Triliun Rupiah).</li>
+    <li>• <strong>PDRB_Kab(Kat.B: Pertambangan)</strong>: Nilai PDRB kabupaten dari aktivitas penambangan bijih logam dan galian (BPS Kategori B).</li>
+    <li>• <strong>PDRB_Kab(Kat.C: Ind. Pengolahan)</strong>: Nilai PDRB kabupaten dari industri peleburan logam dasar / smelter (BPS Kategori C).</li>
+    <li>• <strong>PDRB_Kab(Kat.D: Listrik)</strong>: Nilai PDRB kabupaten dari penyediaan daya listrik batubara captive (BPS Kategori D).</li>
+  </ul>
+</div>
+
+<div class="formula-title">Persamaan Total Produk Domestik Regional Bruto Tingkat Kabupaten:</div>
+<div class="formula">Total_PDRB_Kabupaten = Sektor_Ekstraktif_Kabupaten + Sektor_Akar_Rumput_Kabupaten + Sektor_Jasa_Kabupaten</div>
+<div class="var-desc">
+  <div class="var-desc-title">Keterangan Variabel:</div>
+  <ul>
+    <li>• <strong>Total_PDRB_Kabupaten</strong>: Total output perekonomian bruto kabupaten target atas dasar harga berlaku (satuan: Triliun Rupiah).</li>
+    <li>• <strong>Sektor_Ekstraktif_Kabupaten</strong>: Nilai tambah bruto sektor ekstraktif terintegrasi di kabupaten (Triliun Rupiah).</li>
+    <li>• <strong>Sektor_Akar_Rumput_Kabupaten</strong>: Nilai tambah sektor pertanian, kehutanan, dan perikanan di kabupaten (Triliun Rupiah).</li>
+    <li>• <strong>Sektor_Jasa_Kabupaten</strong>: Nilai tambah sektor perdagangan, transportasi, dan jasa layanan di kabupaten (Triliun Rupiah).</li>
+  </ul>
+</div>
+
+<div class="formula-title">Persamaan Porsi Sektoral dalam Kabupaten (Porsi (%) pada Tooltip Dashboard):</div>
+<div class="formula">Porsi_Sektor_Kabupaten (%) = ( Nilai_Sektor_Kabupaten / Total_PDRB_Kabupaten ) * 100</div>
+<div class="var-desc">
+  <div class="var-desc-title">Keterangan Variabel:</div>
+  <ul>
+    <li>• <strong>Porsi_Ekstraktif (%)</strong>: Persentase kontribusi Sektor Ekstraktif: ( Sektor_Ekstraktif / Total_PDRB ) * 100 (misal Morowali: 45.2%).</li>
+    <li>• <strong>Porsi_Jasa (%)</strong>: Persentase kontribusi Sektor Jasa & Lainnya: ( Sektor_Jasa / Total_PDRB ) * 100 (misal Morowali: 54.0%).</li>
+    <li>• <strong>Porsi_Akar_Rumput (%)</strong>: Persentase kontribusi Sektor Ekonomi Akar Rumput: ( Sektor_Akar_Rumput / Total_PDRB ) * 100 (misal Morowali: 0.8%).</li>
+    <li>• <strong>Total_PDRB_Kabupaten</strong>: Total nilai nominal PDRB seluruh sektor di kabupaten target (Triliun Rupiah).</li>
+  </ul>
+</div>
+
+<h4>D. Rincian Definisi Operasional & Matriks Distribusi PDRB 13 Kabupaten</h4>
+<p>
+  Penerapan sistem persamaan di atas terhadap seluruh 13 kabupaten dan kota di Provinsi Sulawesi Tengah pada tahun 2024 disajikan secara komprehensif pada <strong>Tabel 1.3</strong> berikut:
+</p>
+
+<div class="table-caption">Tabel 1.3: Distribusi Nilai Tambah Bruto dan Komposisi Sektoral PDRB 13 Kabupaten/Kota di Sulawesi Tengah (Tahun 2024)</div>
+<table>
+  <thead>
+    <tr>
+      <th class="data-th" style="width:16%;">Kabupaten / Kota</th>
+      <th class="data-th" style="width:10%;">Akar Rumput (T Rp)</th>
+      <th class="data-th" style="width:10%;">Ekstraktif (T Rp)</th>
+      <th class="data-th" style="width:10%;">Jasa (T Rp)</th>
+      <th class="data-th" style="width:11%;">Total PDRB (T Rp)</th>
+      <th class="data-th" style="width:11%;">Porsi Akar Rumput (%)</th>
+      <th class="data-th" style="width:11%;">Porsi Ekstraktif (%)</th>
+      <th class="data-th" style="width:10%;">Porsi Jasa (%)</th>
+      <th class="data-th" style="width:11%;">Basis Utama Ekonomi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="data-td"><strong>Morowali</strong></td><td class="data-td" style="text-align:center;">2.70</td><td class="data-td" style="text-align:center;">157.17</td><td class="data-td" style="text-align:center;">187.85</td><td class="data-td" style="text-align:center;"><strong>347.72</strong></td><td class="data-td" style="text-align:center;">0.8%</td><td class="data-td" style="text-align:center;">45.2%</td><td class="data-td" style="text-align:center;">54.0%</td><td class="data-td">Hilirisasi Nikel (Smelter & PLTU)</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>Banggai</strong></td><td class="data-td" style="text-align:center;">8.85</td><td class="data-td" style="text-align:center;">20.63</td><td class="data-td" style="text-align:center;">51.99</td><td class="data-td" style="text-align:center;"><strong>81.47</strong></td><td class="data-td" style="text-align:center;">10.9%</td><td class="data-td" style="text-align:center;">25.3%</td><td class="data-td" style="text-align:center;">63.8%</td><td class="data-td">Migas, Tambang & Perdagangan</td></tr>
+    <tr><td class="data-td"><strong>Palu</strong></td><td class="data-td" style="text-align:center;">1.24</td><td class="data-td" style="text-align:center;">4.56</td><td class="data-td" style="text-align:center;">60.03</td><td class="data-td" style="text-align:center;"><strong>65.84</strong></td><td class="data-td" style="text-align:center;">1.9%</td><td class="data-td" style="text-align:center;">6.9%</td><td class="data-td" style="text-align:center;">91.2%</td><td class="data-td">Jasa, Perdagangan & Pemerintahan</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>Morowali Utara</strong></td><td class="data-td" style="text-align:center;">5.17</td><td class="data-td" style="text-align:center;">19.22</td><td class="data-td" style="text-align:center;">36.08</td><td class="data-td" style="text-align:center;"><strong>60.47</strong></td><td class="data-td" style="text-align:center;">8.5%</td><td class="data-td" style="text-align:center;">31.8%</td><td class="data-td" style="text-align:center;">59.7%</td><td class="data-td">Hilirisasi Nikel (Smelter GNI)</td></tr>
+    <tr><td class="data-td"><strong>Parigi Moutong</strong></td><td class="data-td" style="text-align:center;">9.97</td><td class="data-td" style="text-align:center;">1.93</td><td class="data-td" style="text-align:center;">35.05</td><td class="data-td" style="text-align:center;"><strong>46.95</strong></td><td class="data-td" style="text-align:center;">21.2%</td><td class="data-td" style="text-align:center;">4.1%</td><td class="data-td" style="text-align:center;">74.7%</td><td class="data-td">Pertanian Pangan & Hortikultura</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>Donggala</strong></td><td class="data-td" style="text-align:center;">5.96</td><td class="data-td" style="text-align:center;">3.53</td><td class="data-td" style="text-align:center;">23.57</td><td class="data-td" style="text-align:center;"><strong>33.05</strong></td><td class="data-td" style="text-align:center;">18.0%</td><td class="data-td" style="text-align:center;">10.7%</td><td class="data-td" style="text-align:center;">71.3%</td><td class="data-td">Pertanian, Perkebunan & Galian C</td></tr>
+    <tr><td class="data-td"><strong>Poso</strong></td><td class="data-td" style="text-align:center;">4.96</td><td class="data-td" style="text-align:center;">0.40</td><td class="data-td" style="text-align:center;">20.12</td><td class="data-td" style="text-align:center;"><strong>25.48</strong></td><td class="data-td" style="text-align:center;">19.5%</td><td class="data-td" style="text-align:center;">1.6%</td><td class="data-td" style="text-align:center;">79.0%</td><td class="data-td">Pertanian & Perkebunan Kakao</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>Sigi</strong></td><td class="data-td" style="text-align:center;">5.17</td><td class="data-td" style="text-align:center;">0.83</td><td class="data-td" style="text-align:center;">19.13</td><td class="data-td" style="text-align:center;"><strong>25.12</strong></td><td class="data-td" style="text-align:center;">20.6%</td><td class="data-td" style="text-align:center;">3.3%</td><td class="data-td" style="text-align:center;">76.1%</td><td class="data-td">Pertanian Pangan & Hortikultura</td></tr>
+    <tr><td class="data-td"><strong>Toli-Toli</strong></td><td class="data-td" style="text-align:center;">4.35</td><td class="data-td" style="text-align:center;">0.44</td><td class="data-td" style="text-align:center;">17.36</td><td class="data-td" style="text-align:center;"><strong>22.15</strong></td><td class="data-td" style="text-align:center;">19.7%</td><td class="data-td" style="text-align:center;">2.0%</td><td class="data-td" style="text-align:center;">78.4%</td><td class="data-td">Perkebunan Cengkeh & Perikanan</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>Buol</strong></td><td class="data-td" style="text-align:center;">3.77</td><td class="data-td" style="text-align:center;">1.15</td><td class="data-td" style="text-align:center;">10.67</td><td class="data-td" style="text-align:center;"><strong>15.58</strong></td><td class="data-td" style="text-align:center;">24.2%</td><td class="data-td" style="text-align:center;">7.4%</td><td class="data-td" style="text-align:center;">68.5%</td><td class="data-td">Kelapa Sawit & Tanaman Pangan</td></tr>
+    <tr><td class="data-td"><strong>Tojo Una-Una</strong></td><td class="data-td" style="text-align:center;">2.88</td><td class="data-td" style="text-align:center;">0.61</td><td class="data-td" style="text-align:center;">11.21</td><td class="data-td" style="text-align:center;"><strong>14.71</strong></td><td class="data-td" style="text-align:center;">19.6%</td><td class="data-td" style="text-align:center;">4.2%</td><td class="data-td" style="text-align:center;">76.2%</td><td class="data-td">Pertanian & Pariwisata Bahari</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>Banggai Kepulauan</strong></td><td class="data-td" style="text-align:center;">2.53</td><td class="data-td" style="text-align:center;">0.18</td><td class="data-td" style="text-align:center;">8.04</td><td class="data-td" style="text-align:center;"><strong>10.75</strong></td><td class="data-td" style="text-align:center;">23.5%</td><td class="data-td" style="text-align:center;">1.7%</td><td class="data-td" style="text-align:center;">74.8%</td><td class="data-td">Perikanan Tangkap & Kelautan</td></tr>
+    <tr><td class="data-td"><strong>Banggai Laut</strong></td><td class="data-td" style="text-align:center;">1.80</td><td class="data-td" style="text-align:center;">0.12</td><td class="data-td" style="text-align:center;">4.52</td><td class="data-td" style="text-align:center;"><strong>6.45</strong></td><td class="data-td" style="text-align:center;">27.9%</td><td class="data-td" style="text-align:center;">1.9%</td><td class="data-td" style="text-align:center;">70.2%</td><td class="data-td">Perikanan & Budidaya Laut</td></tr>
+
+  </tbody>
+</table>
+
+<h4>E. Analisis Temuan Empiris: Polarisasi Ekstrem Morowali vs Daerah Non-Smelter</h4>
+<p>Data empiris pada Tabel 1.3 mengungkap bukti polarisasi ekonomi wilayah yang sangat ekstrem di Sulawesi Tengah:</p>
+<ul style="margin-left: 20px; margin-bottom: 15px;">
+  <li style="margin-bottom: 6px;"><strong>1. Dominasi Sektor Ekstraktif Morowali:</strong> Kabupaten Morowali mencatatkan nilai sektor ekstraktif sebesar Rp 157.17 Triliun atau menguasai porsi 45.2% dari total kue ekonomi kabupatennya (Rp 347.72 Triliun). Nilai sektor ekstraktif Morowali saja melampaui gabungan total PDRB dari delapan kabupaten lainnya di Sulawesi Tengah.</li>
+  <li style="margin-bottom: 6px;"><strong>2. Pemusatan pada Dua Sentra Hilirisasi:</strong> Kabupaten Morowali dan Morowali Utara merupakan dua daerah dengan nilai Sektor Ekstraktif tertinggi di Sulawesi Tengah, membuktikan bahwa percepatan output industri pertambangan dan hilirisasi terkunci pada kawasan industri smelter.</li>
+  <li style="margin-bottom: 6px;"><strong>3. Ketertinggalan Daerah Non-Sentra:</strong> Sebaliknya, delapan kabupaten lainnya (seperti Banggai Laut, Banggai Kepulauan, Tojo Una-Una, Buol, Toli-Toli, Sigi, Poso, dan Donggala) memiliki porsi Sektor Ekstraktif yang sangat rendah (<11%) dan tetap bergantung pada sektor pertanian rakyat (Akar Rumput) berproduktivitas rendah dengan keterbatasan akses terhadap nilai tambah modal.</li>
+</ul>
+
+<h3>1.1.3 Perbandingan Distribusi 17 Sektor Komoditas per Provinsi (Small Multiples, Tahun Terbaru)</h3>
+<p>
+  Visualisasi komparatif <strong>Small Multiples Horizontal Bar Chart</strong> membedah struktur 17 sektor lapangan usaha KBLI 2020 secara terpisah pada enam provinsi di Pulau Sulawesi pada tahun terbaru (2024). Setiap panel provinsi menampilkan sektor yang diurutkan dari penyumbang terbesar hingga terkecil dengan skala sumbu nilai yang disetarakan secara seragam untuk memastikan validitas komparasi lintas wilayah.
+</p>
+
+<div class="note-box">
+  <strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong><br>
+  Badan Pusat Statistik (BPS) Provinsi se-Sulawesi (diolah CELIOS). Visualisasi <em>Small Multiples Horizontal Bar Chart</em> menyajikan dekomposisi 17 sektor PDRB tahun 2024 di 6 provinsi se-Pulau Sulawesi. Sumbu X disetarakan pada rentang nilai seragam ([0, 178.5 Triliun Rp]) dengan pewarnaan berdasarkan 3 klaster makro (Merah: Ekstraktif, Hijau: Ekonomi Akar Rumput, Abu-abu: Sektor Jasa & Lainnya) guna mengidentifikasi spesialisasi dan anomali struktural ekonomi masing-masing provinsi.
+</div>
+
+<h4>A. Kerangka Konseptual & Standardisasi Skala Komparatif (Uniform Scale Small Multiples)</h4>
+<p>
+  Dalam analisis data multidimensi lintas wilayah, penggunaan skala dinamis mandiri (<em>independent dynamic scaling</em>) pada masing-masing panel sering kali menimbulkan <strong>Bias Distorsi Visual Komparatif (Visual Comparison Bias)</strong>. Tanpa penyetaraan batas skala maksimum, sektor dengan nominal kecil di provinsi ber-PDRB rendah dapat terlihat secara visual setara dengan sektor bernilai ratusan triliun di provinsi ber-PDRB besar. Oleh karena itu, metodologi ini menetapkan batas skala maksimum sumbu X yang seragam (<em>Uniform Scale Bound</em>) sebesar nilai maksimum sektor tertinggi di seluruh pulau ditambah faktor ruang margin sebesar 15%.
+</p>
+
+<h4>B. Alur Logika Metodologis Analisis Small Multiples 17 Sektor</h4>
+<p>
+  Kerangka operasionalisasi analisis perbandingan terpisah 17 sektor lapangan usaha ini dimodelkan dalam kerangka alur logika sebagaimana diilustrasikan pada <strong>Bagan Alur 1.3</strong> berikut:
+</p>
+
+<div class="table-caption">Bagan Alur 1.3: Alur Logika Metodologis Analisis Komparatif Small Multiples 17 Sektor PDRB per Provinsi</div>
+<div class="mermaid">
+graph TD
+    subgraph Input_Data["1. Input Data Statistik Provinsi"]
+        A["BPS Provinsi se-Sulawesi<br/><i>PDRB 17 Sektor Lapangan Usaha ADHB</i>"]
+    end
+
+    subgraph Standardisasi["2. Pemrosesan & Standardisasi Data"]
+        B["Konversi Nilai: Triliun Rp = Miliar Rp / 1000"]
+        C["Porsi Sektor (%) = (Nilai Sektor / Total PDRB) * 100"]
+        D["Skala X Seragam: [0, max(X) * 1.15]<br/><i>Mencegah Visual Comparison Bias</i>"]
+        E["Pewarnaan 3 Klaster Kritis:<br/>• Merah (Kat. B,C,D: Ekstraktif)<br/>• Hijau (Kat. A: Akar Rumput)<br/>• Abu-abu (Kat. E–U: Jasa & Lainnya)"]
+    end
+
+    subgraph Komparasi_Regional["3. Output Komparasi Antarwilayah"]
+        F["<b>Sulawesi Tengah & Sultra:</b><br/>Anomali Lonjakan Sektor Ekstraktif (Smelter & Tambang)"]
+        G["<b>Sulsel, Sulbar, Gorontalo & Sulut:</b><br/>Struktur Perekonomian Bertumpu pada Pertanian & Jasa"]
+    end
+
+    A --> B
+    B --> C
+    B --> D
+    C --> E
+    D --> E
+    E --> F
+    E --> G
+</div>
+
+<h4>C. Formulasi Matematis: Persamaan Agregasi dan Porsi 17 Sektor Komoditas</h4>
+<p>Kalkulasi perbandingan sektoral dan normalisasi skala grafik dihitung menggunakan sistem formulasi berikut:</p>
+
+<div class="formula-title">Persamaan Normalisasi Nilai Sektor ke Satuan Triliun Rupiah:</div>
+<div class="formula">Nilai_Sektor_Triliun = Nilai_Sektor_Miliar / 1000</div>
+<div class="var-desc">
+  <div class="var-desc-title">Keterangan Variabel:</div>
+  <ul>
+    <li>• <strong>Nilai_Sektor_Triliun</strong>: Nilai tambah bruto sektor lapangan usaha dalam satuan baku Triliun Rupiah.</li>
+    <li>• <strong>Nilai_Sektor_Miliar</strong>: Nilai nominal PDRB mentah dari publikasi resmi BPS (satuan: Miliar Rupiah).</li>
+  </ul>
+</div>
+
+<div class="formula-title">Persamaan Porsi Sektoral per Provinsi (Porsi (%) pada Tooltip Dashboard):</div>
+<div class="formula">Porsi_Sektor_Provinsi (%) = ( Nilai_Sektor_Provinsi / Total_PDRB_Provinsi ) * 100</div>
+<div class="var-desc">
+  <div class="var-desc-title">Keterangan Variabel:</div>
+  <ul>
+    <li>• <strong>Porsi_Sektor_Provinsi (%)</strong>: Persentase kontribusi sektor target terhadap keseluruhan total PDRB provinsi bersangkutan (satuan: Persen / %). Angka ini ditampilkan pada tooltip 'Porsi (%)' di dashboard.</li>
+    <li>• <strong>Nilai_Sektor_Provinsi</strong>: Nilai tambah bruto sektor lapangan usaha target di provinsi bersangkutan (Triliun Rupiah).</li>
+    <li>• <strong>Total_PDRB_Provinsi</strong>: Total nilai nominal PDRB seluruh 17 sektor di provinsi bersangkutan (Triliun Rupiah).</li>
+  </ul>
+</div>
+
+<div class="formula-title">Persamaan Batas Maksimum Skala Sumbu X Seragam (Uniform Scale Bound):</div>
+<div class="formula">Skala_Maksimum_Sumbu_X = max(Nilai_Sektor_Seluruh_Provinsi) * 1.15</div>
+<div class="var-desc">
+  <div class="var-desc-title">Keterangan Variabel:</div>
+  <ul>
+    <li>• <strong>Skala_Maksimum_Sumbu_X</strong>: Batas nilai tertinggi sumbu horizontal (X-axis) pada seluruh 6 panel grafik Small Multiples (satuan: Triliun Rupiah).</li>
+    <li>• <strong>max(Nilai_Sektor_Seluruh_Provinsi)</strong>: Nilai tertinggi dari seluruh kombinasi 17 sektor di 6 provinsi (yaitu Sektor Industri Pengolahan Sulteng sebesar Rp 155.24 Triliun).</li>
+    <li>• <strong>1.15</strong>: Faktor pengali ruang margin 15% untuk penempatan label teks nilai nominal pada ujung grafik batang.</li>
+  </ul>
+</div>
+
+<h4>D. Rincian Data Empiris: Matriks Perbandingan Sektor Unggulan 6 Provinsi</h4>
+<p>
+  Penerapan sistem persamaan di atas terhadap seluruh 6 provinsi di Pulau Sulawesi pada tahun 2024 disajikan secara komprehensif pada <strong>Tabel 1.4</strong> berikut:
+</p>
+
+<div class="table-caption">Tabel 1.4: Profil Distribusi dan Sektor Unggulan PDRB 6 Provinsi se-Pulau Sulawesi (Tahun 2024)</div>
+<table>
+  <thead>
+    <tr>
+      <th class="data-th" style="width:14%;">Provinsi</th>
+      <th class="data-th" style="width:10%;">Total PDRB (T Rp)</th>
+      <th class="data-th" style="width:14%;">Sektor Peringkat 1</th>
+      <th class="data-th" style="width:7%;">Porsi (%)</th>
+      <th class="data-th" style="width:14%;">Sektor Peringkat 2</th>
+      <th class="data-th" style="width:7%;">Porsi (%)</th>
+      <th class="data-th" style="width:14%;">Sektor Peringkat 3</th>
+      <th class="data-th" style="width:7%;">Porsi (%)</th>
+      <th class="data-th" style="width:13%;">Karakteristik Dominasi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="data-td"><strong>Sulawesi Tengah</strong></td><td class="data-td" style="text-align:center;"><strong>376.95</strong></td><td class="data-td">Industri Pengolahan</td><td class="data-td" style="text-align:center;">41.2%</td><td class="data-td">Pertanian & Perikanan</td><td class="data-td" style="text-align:center;">15.8%</td><td class="data-td">Pertambangan & Penggalian</td><td class="data-td" style="text-align:center;">14.6%</td><td class="data-td">Didominasi Industri Pengolahan Smelter & Pertambangan (Ekstraktif)</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>Sulawesi Tenggara</strong></td><td class="data-td" style="text-align:center;"><strong>189.48</strong></td><td class="data-td">Pertanian & Perikanan</td><td class="data-td" style="text-align:center;">23.5%</td><td class="data-td">Pertambangan & Penggalian</td><td class="data-td" style="text-align:center;">21.1%</td><td class="data-td">Perdagangan Besar & Eceran</td><td class="data-td" style="text-align:center;">12.5%</td><td class="data-td">Didominasi Pertanian & Pertambangan Logam (Campuran)</td></tr>
+    <tr><td class="data-td"><strong>Sulawesi Selatan</strong></td><td class="data-td" style="text-align:center;"><strong>696.25</strong></td><td class="data-td">Pertanian & Perikanan</td><td class="data-td" style="text-align:center;">21.8%</td><td class="data-td">Perdagangan Besar & Eceran</td><td class="data-td" style="text-align:center;">14.8%</td><td class="data-td">Konstruksi</td><td class="data-td" style="text-align:center;">13.5%</td><td class="data-td">Didominasi Pertanian, Perdagangan & Konstruksi (Agraris & Jasa)</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>Sulawesi Utara</strong></td><td class="data-td" style="text-align:center;"><strong>187.37</strong></td><td class="data-td">Pertanian & Perikanan</td><td class="data-td" style="text-align:center;">20.6%</td><td class="data-td">Perdagangan Besar & Eceran</td><td class="data-td" style="text-align:center;">13.6%</td><td class="data-td">Transportasi & Pergudangan</td><td class="data-td" style="text-align:center;">11.6%</td><td class="data-td">Didominasi Pertanian, Perdagangan & Transportasi (Jasa & Maritim)</td></tr>
+    <tr><td class="data-td"><strong>Sulawesi Barat</strong></td><td class="data-td" style="text-align:center;"><strong>64.21</strong></td><td class="data-td">Pertanian & Perikanan</td><td class="data-td" style="text-align:center;">46.1%</td><td class="data-td">Industri Pengolahan</td><td class="data-td" style="text-align:center;">10.4%</td><td class="data-td">Perdagangan Besar & Eceran</td><td class="data-td" style="text-align:center;">9.7%</td><td class="data-td">Didominasi Pertanian Tanaman Pangan & Perkebunan (Agraris)</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>Gorontalo</strong></td><td class="data-td" style="text-align:center;"><strong>54.56</strong></td><td class="data-td">Pertanian & Perikanan</td><td class="data-td" style="text-align:center;">37.3%</td><td class="data-td">Perdagangan Besar & Eceran</td><td class="data-td" style="text-align:center;">14.2%</td><td class="data-td">Konstruksi</td><td class="data-td" style="text-align:center;">11.3%</td><td class="data-td">Didominasi Pertanian, Perdagangan & Konstruksi (Agraris)</td></tr>
+
+  </tbody>
+</table>
+
+<h4>E. Analisis Temuan Empiris & Interpretasi Sektoral Dashboard</h4>
+<p>Hasil komparasi sektoral pada Tabel 1.4 mengungkap perbedaan fundamental orientasi pembangunan antarprovinsi se-Sulawesi:</p>
+<ul style="margin-left: 20px; margin-bottom: 15px;">
+  <li style="margin-bottom: 6px;"><strong>1. Anomali Struktural Sulawesi Tengah:</strong> Sulawesi Tengah menjadi satu-satunya wilayah di mana perekonomiannya dikuasai secara mutlak oleh Sektor Industri Pengolahan (Smelter Logam Dasar) senilai Rp 155.24 Triliun (41.2%) dan Sektor Pertambangan senilai Rp 55.20 Triliun (14.6%). Gabungan kedua sektor ekstraktif ini menguasai lebih dari 55% total PDRB provinsi.</li>
+  <li style="margin-bottom: 6px;"><strong>2. Sulawesi Tenggara sebagai Sentra Tambang Nikel Hulu:</strong> Sulawesi Tenggara memperlihatkan kontribusi Sektor Pertambangan yang sangat tinggi (Rp 40.03 Triliun atau 21.1%), berada tepat di bawah sektor Pertanian (23.5%), mengonfirmasi perannya sebagai lumbung pasokan bijih nikel primer.</li>
+  <li style="margin-bottom: 6px;"><strong>3. Basis Agraris Terbarukan di Empat Provinsi Lainnya:</strong> Sebaliknya, empat provinsi lainnya (Sulawesi Barat 46.1%, Gorontalo 37.3%, Sulawesi Selatan 21.8%, dan Sulawesi Utara 20.6%) secara konsisten menempatkan Sektor Pertanian, Kehutanan, dan Perikanan sebagai sektor penyumbang terbesar PDRB, ditopang oleh sektor perdagangan dan jasa layanan publik yang menyerap mayoritas angkatan kerja daerah.</li>
+</ul>
+
+<h2>SUB-BAB 1.2: Konsentrasi Kawasan Industri & PLTU Captive</h2>
+<p>
+  Intensifikasi industri pengolahan mineral di Pulau Sulawesi berpusat pada pembangunan mega-smelter yang ditopang secara mutlak oleh pembangkit listrik tenaga uap khusus (<em>PLTU Captive</em>) batu bara non-jaringan (<em>off-grid</em>). Bagian ini mengombinasikan <strong>Analisis Spasial Deskriptif</strong> untuk mengidentifikasi tingkat pemusatan fasilitas dan kapasitas energi fosil di enam provinsi, dengan <strong>Uji Tabulasi Silang Panel (Inferential Spatiotemporal Crosstabulation)</strong> berstandar SPSS guna membuktikan secara ilmiah keterkaitan antara ekspansi PLTU Captive terhadap kehilangan tutupan hutan di Pulau Sulawesi.
+</p>
+
+<div class="note-box">
+  <strong>Sumber Data Resmi & Deskripsi Metodologis:</strong><br>
+  Kementerian Energi dan Sumber Daya Mineral (ESDM / Minerbaone), Global Energy Monitor (GEM Coal Plant Tracker), dan Global Forest Watch (GFW / University of Maryland) (diolah CELIOS). Visualisasi <em>Bar Chart</em> Konsentrasi Industri dan Pemetaan Spasial menyajikan distribusi 778 unit fasilitas smelter serta 9,825 MW kapasitas terpasang aktif PLTU captive di 6 provinsi se-Pulau Sulawesi. Analisis dipadukan dengan Uji Tabulasi Silang Data Panel Spasiotemporal (Chi-Square Test & Risk Odds Ratio, N=60) untuk menguji keterkaitan ekspansi energi fosil industri terhadap eskalasi deforestasi komoditas.
+</div>
+
+<h4>A. Pemusatan Spasial Fasilitas Smelter dan PLTU Captive</h4>
+<p>
+  Intensifikasi industri pengolahan nikel di Sulawesi berpusat pada fasilitas mega-smelter. Pengoperasian <strong>778 fasilitas smelter</strong> didukung oleh kapasitas energi batu bara <strong>9,825 MW dari PLTU Captive</strong>. Berbeda dengan sistem kelistrikan umum PLN, pembangkit ini dikembangkan secara internal untuk menyokong operasi kawasan industri.
+</p>
+
+<h4>B. Metodologi: Analisis Spasial & Uji Tabulasi Silang</h4>
+<p>
+  Pengujian keterkaitan antara pembangunan PLTU Captive dengan kehilangan tutupan hutan dioperasionalkan melalui Standar Operasional Prosedur (SOP) tabulasi silang berstandar SPSS. Rangkaian tahapan logika metodologis, asumsi frekuensi harapan, hingga estimasi faktor risiko dimodelkan pada <strong>Bagan Alur 1.4</strong> berikut:
+</p>
+
+<div class="table-caption">Bagan Alur 1.4: Standar Operasional Prosedur (SOP) & Alur Logika Uji Tabulasi Silang (Crosstab) PLTU Captive vs Deforestasi</div>
+<div class="mermaid">
+flowchart TD
+    A(["Start: Input Data"]) --> B{"Apakah Data<br/>Kategorikal?"}
+    
+    B -- TIDAK (Numerik) --> C["Lakukan Diskritisasi/Binning<br/>Ubah Angka jadi Kategori<br/>Misal: Tinggi vs Rendah"]
+    C --> D
+    
+    B -- YA --> D["Penanganan Missing Values<br/>SPSS: Listwise Deletion<br/>Hapus baris yang datanya bolong"]
+    
+    D --> E["Jalankan Perhitungan<br/>Tabel Crosstab 2x2"]
+    
+    E --> F{"Cek Asumsi SPSS:<br/>Expected Count >= 5 ?"}
+    
+    F -- TIDAK (Ada sel bernilai 0 <br/>atau >20% sel nilainya <5) --> G["Asumsi Pearson Chi-Square<br/>DILANGGAR / CACAT"]
+    G --> H["Gunakan Uji Alternatif:<br/>Fisher's Exact Test"]
+    H --> K
+    
+    F -- YA (Memenuhi Syarat) --> I["Asumsi Terpenuhi<br/>Baca Nilai Pearson Chi-Square"]
+    I --> J{"Cek P-Value<br/>(Asymp. Sig)"}
+    
+    J -- P-Value >= 0.05 --> L["TIDAK SIGNIFIKAN<br/>(Hanya Kebetulan)"]
+    J -- P-Value < 0.05 --> M["SIGNIFIKAN<br/>(Hubungan Terbukti)"]
+    
+    M --> N["Cek Kekuatan Hubungan<br/>(Odds Ratio / Risk Estimate)"]
+    
+    N --> O1["Odds Ratio = 1<br/>Tidak ngefek"]
+    N --> O2["Odds Ratio > 1<br/>Risiko/Bahaya Naik"]
+    
+    L --> Z(["Selesai"])
+    O1 --> Z
+    O2 --> Z
+    K --> J
+    
+    classDef warning fill:#ffcccb,stroke:#ff0000,stroke-width:2px;
+    classDef success fill:#d4edda,stroke:#28a745,stroke-width:2px;
+    classDef process fill:#e1f5fe,stroke:#0288d1,stroke-width:2px;
+    
+    class B,F,J process;
+    class G,L warning;
+    class I,M success;
+</div>
+
+<h4>C. Formulasi Matematis: Kalkulasi Konsentrasi Spasial & Uji Chi-Square</h4>
+<p>Parameterisasi konsentrasi spasial dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:</p>
+
+<div class="formula-title">Persamaan Akumulasi Kapasitas PLTU Kumulatif per Wilayah (MW):</div>
+<div class="formula">Kapasitas_PLTU_Kumulatif_t (MW) = Jumlah Kapasitas Aktif Baru (MW) dari Tahun 2014 hingga Tahun t</div>
+<div class="var-desc">
+  <div class="var-desc-title">Keterangan Variabel:</div>
+  <ul>
+    <li>• <strong>Kapasitas_PLTU_Kumulatif_t (MW)</strong>: Total akumulasi kapasitas daya terpasang operasional PLTU captive batubara aktif hingga tahun t (satuan: Megawatt / MW).</li>
+    <li>• <strong>Kapasitas Aktif Baru</strong>: Besaran daya listrik unit PLTU off-grid yang mulai beroperasi komersial pada tahun tertentu (satuan: Megawatt / MW).</li>
+  </ul>
+</div>
+
+<div class="formula-title">Persamaan Rasio Konsentrasi Spasial Fasilitas Smelter (% pada Grafik Dashboard):</div>
+<div class="formula">Porsi_Smelter_Provinsi (%) = ( Jumlah_Smelter_Provinsi / Total_Smelter_Sulawesi ) * 100</div>
+<div class="var-desc">
+  <div class="var-desc-title">Keterangan Variabel:</div>
+  <ul>
+    <li>• <strong>Porsi_Smelter_Provinsi (%)</strong>: Persentase pangsa fasilitas smelter di provinsi bersangkutan terhadap seluruh Pulau Sulawesi (satuan: Persen / %).</li>
+    <li>• <strong>Jumlah_Smelter_Provinsi</strong>: Banyaknya unit smelter yang beroperasi di wilayah provinsi tertentu.</li>
+    <li>• <strong>Total_Smelter_Sulawesi</strong>: Total keseluruhan fasilitas smelter di Pulau Sulawesi (778 unit).</li>
+  </ul>
+</div>
+
+<div class="formula-title">Persamaan Uji Independensi Chi-Square Pearson (χ² Kontinjensi 2x2):</div>
+<div class="formula">Chi_Square (χ²) = Jumlah [ (Frekuensi_Observasi - Frekuensi_Harapan)^2 / Frekuensi_Harapan ]</div>
+<div class="var-desc">
+  <div class="var-desc-title">Keterangan Variabel:</div>
+  <ul>
+    <li>• <strong>Chi_Square (χ²)</strong>: Nilai statistik uji kecocokan Pearson untuk membuktikan ada tidaknya hubungan ketergantungan antara ekspansi PLTU Captive dengan lonjakan deforestasi pada panel spasiotemporal (N=60).</li>
+    <li>• <strong>Frekuensi_Observasi (O)</strong>: Jumlah kasus aktual yang tercatat pada sel tabel kontinjensi 2x2.</li>
+    <li>• <strong>Frekuensi_Harapan (E)</strong>: Jumlah kasus teoretis jika kedua variabel saling independen: E = (Total Baris * Total Kolom) / N.</li>
+  </ul>
+</div>
+
+<div class="formula-title">Persamaan Rasio Keunggulan Risiko (Risk Odds Ratio / OR):</div>
+<div class="formula">Odds_Ratio (OR) = ( a * d ) / ( b * c )</div>
+<div class="var-desc">
+  <div class="var-desc-title">Keterangan Variabel:</div>
+  <ul>
+    <li>• <strong>Odds_Ratio (OR)</strong>: Ukuran kelipatan risiko peluang terjadinya deforestasi komoditas tinggi pada kelompok dengan PLTU Captive aktif (>0 MW) dibanding kelompok tanpa PLTU Captive (≤0 MW).</li>
+    <li>• <strong>a</strong>: Jumlah observasi panel pada kelompok PLTU Rendah dan Deforestasi Rendah (27 kasus).</li>
+    <li>• <strong>b</strong>: Jumlah observasi panel pada kelompok PLTU Rendah dan Deforestasi Tinggi (10 kasus).</li>
+    <li>• <strong>c</strong>: Jumlah observasi panel pada kelompok PLTU Tinggi dan Deforestasi Rendah (3 kasus).</li>
+    <li>• <strong>d</strong>: Jumlah observasi panel pada kelompok PLTU Tinggi dan Deforestasi Tinggi (20 kasus).</li>
+  </ul>
+</div>
+
+<h4>D. Matriks Hasil Uji Empiris: Konsentrasi Spasial & Skenario Crosstab</h4>
+<p>
+  Penerapan sistem pengujian statistik tabulasi silang pada data panel 6 provinsi selama 1 dekade (2014–2023, total 60 observasi) disajikan secara lengkap pada <strong>Tabel 1.5</strong> berikut:
+</p>
+
+<div class="table-caption">Tabel 1.5: Ringkasan Eksekutif Seluruh Skenario Crosstab PLTU Captive Bab 1</div>
+<table>
+  <thead>
+    <tr>
+      <th class="data-th" style="width:25%;">Variabel Independen (X)</th>
+      <th class="data-th" style="width:25%;">Variabel Dependen (Y)</th>
+      <th class="data-th" style="width:12%;">Chi-Square (&chi;&sup2;)</th>
+      <th class="data-th" style="width:13%;">P-Value</th>
+      <th class="data-th" style="width:10%;">Odds Ratio</th>
+      <th class="data-th" style="width:15%;">Kesimpulan</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="data-td"><strong>Kapasitas Aktif PLTU Kumulatif (MW)</strong></td>
+      <td class="data-td">Total Deforestasi Alam (Hektar)</td>
+      <td class="data-td" style="text-align:center;">18.049</td>
+      <td class="data-td" style="text-align:center;">p < 0.0001</td>
+      <td class="data-td" style="text-align:center;">18.0</td>
+      <td class="data-td" style="color:#2E7D32; text-align:center;"><strong>{'SIGNIFIKAN' if p_val_display < 0.05 else 'TIDAK SIGNIFIKAN'}</strong></td>
+    </tr>
+    <tr class="data-tr-even">
+      <td class="data-td"><strong>Kapasitas Aktif PLTU Kumulatif (MW)</strong></td>
+      <td class="data-td">Deforestasi Komoditas Tambang/Sawit (Hektar)</td>
+      <td class="data-td" style="text-align:center;">18.049</td>
+      <td class="data-td" style="text-align:center;">p < 0.0001</td>
+      <td class="data-td" style="text-align:center;">18.0</td>
+      <td class="data-td" style="color:#2E7D32; text-align:center;"><strong>{'SIGNIFIKAN' if p_val_display < 0.05 else 'TIDAK SIGNIFIKAN'}</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>E. Interpretasi Spasial Industri: Eksternalitas dan Efek Meluber (Spillover)</h4>
+<p>
+  Konsentrasi masif fasilitas smelter dan 9.825 MW PLTU Captive di Sulawesi Tengah, Tenggara, dan Selatan terbukti memicu ledakan deforestasi. Uji Chi-Square membuktikan secara absolut bahwa daerah dengan PLTU Captive memiliki risiko deforestasi 18 kali lipat lebih parah dibandingkan wilayah non-smelter. Daya rusak industri ini melampaui tapak proyek (spillover effect).
+</p>
+<p>Kombinasi analisis spasial (Tabel 1.4b) dan hasil pengujian empiris (Tabel 1.5) membuktikan secara meyakinkan keterkaitan langsung antara ekspansi infrastruktur ekstraktif dengan kerusakan tutupan hutan di Pulau Sulawesi:</p>
+<ul style="margin-left: 20px; margin-bottom: 15px;">
+  <li style="margin-bottom: 6px;"><strong>1. Pemusatan Ekstrem di 3 Sentra Ekstraktif Utama:</strong> 100% kapasitas PLTU Captive dan mayoritas smelter berpusat di wilayah ini, memicu akumulasi deforestasi komoditas hingga ratusan ribu hektar, berbanding terbalik dengan "Area Non-Smelter".</li>
+  <li style="margin-bottom: 6px;"><strong>2. Signifikansi Statistik yang Sangat Kuat (p < 0.0001):</strong> Hipotesis Nol (H0) ditolak mutlak. Bukti empiris mengonfirmasi bahwa penambahan kapasitas PLTU Captive berkorelasi langsung dengan lonjakan kehilangan tutupan hutan.</li>
+  <li style="margin-bottom: 6px;"><strong>3. Kelipatan Risiko Bencana Ekologis (Odds Ratio = 18.00x):</strong> Wilayah dengan PLTU Captive memiliki risiko deforestasi komoditas 18 KALI LIPAT lebih besar. Hal ini didorong konversi masif untuk infrastruktur pendukung (coal yard, jalur transmisi, dan jalan logistik).</li>
+  <li style="margin-bottom: 6px;"><strong>4. Efek Meluber Lintas Batas (Spillover Effect) & Emisi Karbon Terkunci:</strong> Eksternalitas destruktif proyek merambat luas mendegradasi DAS dan laut, mengorbankan ruang hidup lokal, serta mengunci emisi dari ketergantungan puluhan juta ton batu bara per tahun.</li>
+</ul>
+
+<h2>SUB-BAB 1.3: Tren Pertumbuhan Izin Tambang Baru & Uji Signifikansi Statistik</h2>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Pola perizinan pertambangan di Pulau Sulawesi selama satu dekade terakhir menunjukkan peningkatan alokasi ruang yang signifikan. Berdasarkan data agregat <strong>Minerbaone</strong>, tercatat 574 Izin Usaha Pertambangan (IUP) baru sepanjang 2014-2024, dengan total luas konsesi mencapai 819,452 Hektar.</p>
+<p>Berdasarkan analisis tren time-series pada grafik "Penerbitan Izin Tambang", penerbitan izin pada periode awal (2014) tercatat lebih rendah. Peningkatan signifikan terjadi pada periode 2022-2024. Anotasi pada grafik mencatat kenaikan sebesar <strong>246% pada periode 2022-2024</strong>. Data ini mengindikasikan perlunya evaluasi terhadap instrumen pengendalian perizinan dan tata ruang. Distribusi perizinan tertinggi berada di Sulawesi Tengah dan Sulawesi Tenggara, yang selaras dengan kawasan pengembangan industri pemurnian nikel.</p>
+<p>Uji <strong>Crosstabulation</strong> pada analisis ini digunakan untuk mengukur hubungan antara laju penerbitan perizinan (X) dan indikator deforestasi di wilayah tersebut (Y).</p>
+
+<h4>B. Alur Logika Metodologis (Flowchart)</h4>
+<p>Pendekatan statistik Time-Series untuk mengidentifikasi tren pertumbuhan izin tambang diilustrasikan pada <strong>Bagan Alur 1.5</strong> berikut. Adapun untuk tahapan analisis inferensial (Uji Chi-Square), alur logikanya merujuk secara penuh pada <strong>Bagan Alur 1.4</strong> (di sub-bab sebelumnya) dengan penyesuaian konfigurasi variabel spesifik sesuai Tabel Asumsi Dasar di bawah gambar.</p>
+<div class="table-caption">Bagan Alur 1.5: Alur Logika Tren Pertumbuhan Izin Tambang Baru</div>
+<div class="mermaid">
+flowchart TD
+    subgraph Data_Preparation["1. Akuisisi & Penyiapan Data Panel"]
+        A["Data Penerbitan Izin Baru Minerbaone<br/><i>(Provinsi-Tahun, Jumlah Izin, Luas Konsesi)</i>"] --> C
+        B["Data Laju Deforestasi GFW<br/><i>(Provinsi-Tahun, Deforestasi Komoditas Tambang/Sawit)</i>"] --> C
+        C["<b>Gabung (Merge) Data Panel</b><br/>6 Provinsi x 10 Tahun = 60 Sampel (Unit Observasi)"]
+    end
+
+    subgraph Time_Series_Analysis["2. Analisis Tren (Time-Series)"]
+        C --> D["Agregasi Jumlah Izin & Luas per Tahun"]
+        D --> E["Kalkulasi Pertumbuhan Laju (YoY)"]
+        E --> F["Identifikasi Lonjakan Ekstraktif (Tahun 2022-2024)"]
+    end
+
+    subgraph Crosstab_Analysis["3. Analisis Inferensial (Chi-Square)"]
+        C --> G["<b>Binning Kategori (Threshold Median)</b><br/>Klasifikasi Tinggi (≥Median) vs Rendah (<Median)"]
+        G --> H["Definisikan X (Tekanan Ekspansi):<br/>- Jumlah Izin Baru (IUP)<br/>- Luas Konsesi Baru (Ha)"]
+        H --> I["Definisikan Y (Dampak Ekologis):<br/>- Total Deforestasi Alam<br/>- Deforestasi Komoditas"]
+        I --> J["Uji Chi-Square (Crosstabulation 2x2)"]
+    end
+
+    subgraph Output["4. Hasil Pengujian Hipotesis"]
+        F --> K["Tren Visual Distribusi Spasial (Bar/Line Chart)"]
+        J --> L{"P-Value < 0.05?"}
+        L -- YA --> M["<b>SIGNIFIKAN (Tolak H0)</b><br/>Ada Hubungan: Tekanan Ekspansi Terbukti Meningkatkan Laju Deforestasi"]
+        L -- TIDAK --> N["<b>TIDAK SIGNIFIKAN (Gagal Tolak H0)</b><br/>Indikasi Efek Spillover/Kehancuran Merata"]
+        M --> O["Hitung Odds Ratio (Risk Estimate)"]
+    end
+</div>
+<div class="table-caption">Tabel 1.5b: Konfigurasi Variabel Uji Chi-Square (Sub-bab 1.3)</div>
+<table>
+  <thead>
+    <tr>
+      <th class="data-th">Komponen Uji</th>
+      <th class="data-th">Definisi Variabel (Sub-bab 1.3)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="data-td">Variabel Independen (X)</td>
+      <td class="data-td">Frekuensi Penerbitan Izin Tambang Baru (IUP) / Luas Konsesi Baru (Ha)</td>
+    </tr>
+    <tr>
+      <td class="data-td">Variabel Dependen (Y)</td>
+      <td class="data-td">Deforestasi Komoditas (Ha) / Total Deforestasi Alam (Ha)</td>
+    </tr>
+    <tr>
+      <td class="data-td">Asumsi H0</td>
+      <td class="data-td">Tren perizinan baru dan laju deforestasi saling independen (tidak berhubungan).</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>C. Formulasi Matematis: Agregasi Tren Spasial & Uji Chi-Square</h4>
+<p>Parameterisasi laju pertumbuhan perizinan, luas konsesi, dan pengujian signifikansi dampaknya terhadap deforestasi dihitung menggunakan formulasi berikut:</p>
+<p><strong>Persamaan Agregasi Luas Konsesi Tambang Baru per Kategori Spasial</strong><br>
+Total_Konsesi_Kategori_t = &sum;(Luas_Konsesi_i) untuk i di Kategori_Wilayah</p>
+<ul>
+  <li><strong>Total_Konsesi_Kategori_t:</strong> Total luas konsesi tambang baru yang diterbitkan pada tahun berjalan (t) di dalam kategori wilayah spasial tertentu (satuan: Hektar / Ha).</li>
+  <li><strong>Kategori_Wilayah:</strong> Pengelompokan spasial provinsi observasi menjadi 'Daerah Sentra Tambang' atau 'Daerah Non-Sentra'.</li>
+  <li><strong>Luas_Konsesi_i:</strong> Luasan tiap individu Izin Usaha Pertambangan (IUP) baru yang terbit (satuan: Hektar / Ha).</li>
+</ul>
+<p><strong>Laju Pertumbuhan Izin Tahunan (Regresi Komparatif YoY)</strong><br>
+Pertumbuhan_Izin (%) = [ ( Jumlah_Izin_t - Jumlah_Izin_{t-1} ) / Jumlah_Izin_{t-1} ] &times; 100</p>
+<div class="var-desc">
+  <div class="var-desc-title">Keterangan Variabel:</div>
+  <ul>
+    <li>&bull; <strong>Pertumbuhan_Izin (%)</strong>: Persentase perubahan laju penerbitan izin tambang baru antar-tahun (satuan: Persen / %).</li>
+    <li>&bull; <strong>Jumlah_Izin_t</strong>: Agregasi jumlah izin (atau luasan) pada tahun berjalan (t).</li>
+    <li>&bull; <strong>Jumlah_Izin_{t-1}</strong>: Agregasi jumlah izin (atau luasan) pada satu tahun sebelumnya (t - 1).</li>
+  </ul>
+</div>
+<p><strong>Pengklasifikasian Kategori Data (Binning Threshold Median)</strong><br>
+Kategori = IF(Nilai_Prov_Tahun &ge; Median(Seluruh Panel), "Tinggi", "Rendah")</p>
+<ul>
+  <li><strong>Kategori:</strong> Data panel spasial-temporal diubah menjadi dua tingkatan untuk uji tabulasi silang (Tinggi vs Rendah).</li>
+  <li><strong>Median(Seluruh Panel):</strong> Ambang batas (threshold) dari nilai tengah keseluruhan observasi panel (N=60).</li>
+</ul>
+<p><strong>Uji Independensi Chi-Square (Pearson)</strong><br>
+&chi;&sup2; = &sum; [ (O_i - E_i)&sup2; / E_i ]</p>
+<ul>
+  <li><strong>&chi;&sup2;:</strong> Nilai statistik uji Chi-Square yang mencerminkan tingkat deviasi frekuensi aktual terhadap frekuensi harapan.</li>
+  <li><strong>O_i:</strong> Frekuensi observasi aktual (Observed) pada sel ke-i dalam matriks tabulasi silang.</li>
+  <li><strong>E_i:</strong> Frekuensi harapan (Expected) pada sel ke-i jika hipotesis nol (independensi penuh) bernilai benar.</li>
+</ul>
+<p><strong>Odds Ratio (OR)</strong><br>
+OR = (A &times; D) / (B &times; C)</p>
+<ul>
+  <li><strong>OR:</strong> Odds Ratio, metrik yang mengukur seberapa besar kelipatan peluang terjadinya peristiwa dependen (Deforestasi Tinggi) jika terpapar variabel independen (Kapasitas Tinggi).</li>
+  <li><strong>A, B, C, D:</strong> Frekuensi absolut masing-masing sel dalam matriks 2x2. A = (Tinggi, Tinggi), D = (Rendah, Rendah).</li>
+</ul>
+
+<p>
+  Dinamika historis perizinan secara terperinci dapat dilihat pada <strong>Tabel 1.5c</strong>, yang menunjukkan tren penerbitan izin baru di wilayah studi:
+</p>
+<div class="table-caption">Tabel 1.5c: Tren Penerbitan Izin Tambang Sulawesi (2014-2024)</div>
+<table class="data-table">
+  <thead>
+    <tr>
+      <th class="data-th">Tahun</th>
+      <th class="data-th">Gorontalo</th>
+      <th class="data-th">Sulawesi Barat</th>
+      <th class="data-th">Sulawesi Selatan</th>
+      <th class="data-th">Sulawesi Tengah</th>
+      <th class="data-th">Sulawesi Tenggara</th>
+      <th class="data-th">Sulawesi Utara</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="data-tr-odd"><td class="data-td" style="text-align:center;">2014</td><td class="data-td" style="text-align:center;">0</td><td class="data-td" style="text-align:center;">0</td><td class="data-td" style="text-align:center;">1</td><td class="data-td" style="text-align:center;">6</td><td class="data-td" style="text-align:center;">18</td><td class="data-td" style="text-align:center;">1</td></tr>
+    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">2015</td><td class="data-td" style="text-align:center;">0</td><td class="data-td" style="text-align:center;">0</td><td class="data-td" style="text-align:center;">0</td><td class="data-td" style="text-align:center;">3</td><td class="data-td" style="text-align:center;">1</td><td class="data-td" style="text-align:center;">1</td></tr>
+    <tr class="data-tr-odd"><td class="data-td" style="text-align:center;">2016</td><td class="data-td" style="text-align:center;">0</td><td class="data-td" style="text-align:center;">0</td><td class="data-td" style="text-align:center;">0</td><td class="data-td" style="text-align:center;">5</td><td class="data-td" style="text-align:center;">4</td><td class="data-td" style="text-align:center;">0</td></tr>
+    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">2017</td><td class="data-td" style="text-align:center;">0</td><td class="data-td" style="text-align:center;">0</td><td class="data-td" style="text-align:center;">5</td><td class="data-td" style="text-align:center;">7</td><td class="data-td" style="text-align:center;">13</td><td class="data-td" style="text-align:center;">1</td></tr>
+    <tr class="data-tr-odd"><td class="data-td" style="text-align:center;">2018</td><td class="data-td" style="text-align:center;">1</td><td class="data-td" style="text-align:center;">0</td><td class="data-td" style="text-align:center;">5</td><td class="data-td" style="text-align:center;">7</td><td class="data-td" style="text-align:center;">10</td><td class="data-td" style="text-align:center;">0</td></tr>
+    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">2019</td><td class="data-td" style="text-align:center;">0</td><td class="data-td" style="text-align:center;">0</td><td class="data-td" style="text-align:center;">3</td><td class="data-td" style="text-align:center;">2</td><td class="data-td" style="text-align:center;">10</td><td class="data-td" style="text-align:center;">2</td></tr>
+    <tr class="data-tr-odd"><td class="data-td" style="text-align:center;">2020</td><td class="data-td" style="text-align:center;">0</td><td class="data-td" style="text-align:center;">0</td><td class="data-td" style="text-align:center;">0</td><td class="data-td" style="text-align:center;">12</td><td class="data-td" style="text-align:center;">13</td><td class="data-td" style="text-align:center;">3</td></tr>
+    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">2021</td><td class="data-td" style="text-align:center;">1</td><td class="data-td" style="text-align:center;">2</td><td class="data-td" style="text-align:center;">8</td><td class="data-td" style="text-align:center;">17</td><td class="data-td" style="text-align:center;">13</td><td class="data-td" style="text-align:center;">0</td></tr>
+    <tr class="data-tr-odd"><td class="data-td" style="text-align:center;">2022</td><td class="data-td" style="text-align:center;">1</td><td class="data-td" style="text-align:center;">3</td><td class="data-td" style="text-align:center;">10</td><td class="data-td" style="text-align:center;">31</td><td class="data-td" style="text-align:center;">11</td><td class="data-td" style="text-align:center;">0</td></tr>
+    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">2023</td><td class="data-td" style="text-align:center;">1</td><td class="data-td" style="text-align:center;">6</td><td class="data-td" style="text-align:center;">19</td><td class="data-td" style="text-align:center;">83</td><td class="data-td" style="text-align:center;">38</td><td class="data-td" style="text-align:center;">2</td></tr>
+    <tr class="data-tr-odd"><td class="data-td" style="text-align:center;">2024</td><td class="data-td" style="text-align:center;">3</td><td class="data-td" style="text-align:center;">16</td><td class="data-td" style="text-align:center;">54</td><td class="data-td" style="text-align:center;">87</td><td class="data-td" style="text-align:center;">29</td><td class="data-td" style="text-align:center;">5</td></tr>
+  </tbody>
+</table>
+
+<h4>D. Matriks Hasil Uji Empiris: Rekapitulasi Signifikansi Panel</h4>
+<p>Hasil lengkap pengujian independensi statistik Chi-Square dan estimasi Odds Ratio (OR) untuk seluruh faktor tekanan terhadap kehilangan tutupan hutan komoditas dirangkum pada <strong>Tabel 1.6</strong> berikut:</p>
+
+<div class="table-caption">Tabel 1.6: Ringkasan Hasil Uji Independensi Chi-Square (&chi;&sup2;) dan Odds Ratio (OR) Data Panel Bab 1</div>
+<table>
+  <thead>
+    <tr>
+      <th class="data-th" style="width:28%;">Variabel Faktor Tekanan</th>
+      <th class="data-th" style="width:26%;">Variabel Dampak Lingkungan</th>
+      <th class="data-th" style="width:12%;">Chi-Square (&chi;&sup2;)</th>
+      <th class="data-th" style="width:10%;">Nilai p</th>
+      <th class="data-th" style="width:10%;">Odds Ratio</th>
+      <th class="data-th" style="width:6%;">df</th>
+      <th class="data-th" style="width:20%;">Kesimpulan Ilmiah</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="data-td"><strong>Jumlah Izin Tambang Baru (IUP)</strong></td><td class="data-td">Total Deforestasi Alam (Ha)</td><td class="data-td">17.239</td><td class="data-td">< 0.0001</td><td class="data-td">13.75</td><td class="data-td">1</td><td class="data-td">SIGNIFIKAN</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>Jumlah Izin Tambang Baru (IUP)</strong></td><td class="data-td">Deforestasi Komoditas (Ha)</td><td class="data-td">21.818</td><td class="data-td">< 0.0001</td><td class="data-td">21.36</td><td class="data-td">1</td><td class="data-td">SIGNIFIKAN</td></tr>
+    <tr><td class="data-td"><strong>Luas Konsesi Tambang Baru (Ha)</strong></td><td class="data-td">Total Deforestasi Alam (Ha)</td><td class="data-td">19.267</td><td class="data-td">< 0.0001</td><td class="data-td">16.00</td><td class="data-td">1</td><td class="data-td">SIGNIFIKAN</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>Luas Konsesi Tambang Baru (Ha)</strong></td><td class="data-td">Deforestasi Komoditas (Ha)</td><td class="data-td">19.267</td><td class="data-td">< 0.0001</td><td class="data-td">16.00</td><td class="data-td">1</td><td class="data-td">SIGNIFIKAN</td></tr>
+  </tbody>
+</table>
+
+<h4>E. Analisis Temuan Empiris: Pembedahan Realitas Ekologis</h4>
+<p>Data panel membedah realitas di lapangan: lonjakan izin di wilayah pusat ekstraksi sejalan dengan tingginya nilai Chi-Square. Nilai Odds Ratio menegaskan bahwa wilayah dengan tren izin tambang yang tinggi memiliki peluang lebih besar untuk mengalami tekanan deforestasi tinggi pada tahun-tahun berjalan dan berikutnya.</p>
+<p>Secara spesifik, terjadi <strong>lonjakan absolut sebesar 246%</strong> dalam penerbitan izin tambang baru pada rentang 2022 hingga 2024. Lonjakan ekstrem ini mengindikasikan percepatan luar biasa dari ekspansi industri ekstraktif yang mengabaikan kapasitas daya dukung lingkungan tapak, terutama di sentra-sentra produksi.</p>
+
+<h2>SUB-BAB 1.4: Analisis Realisasi Investasi PMDN dan Dampak Terhadap Tutupan Hutan</h2>
+
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>
+  Akumulasi Penanaman Modal Dalam Negeri sebesar <strong>Rp 218 Triliun</strong> (Kementerian Investasi / BKPM) yang masuk dari tahun 2016-2024 berbanding lurus dengan <strong>1,001,654 Hektar kehilangan tutupan hutan komoditas</strong> (Global Forest Watch). Grafik sumbu ganda (<em>dual-axis</em>) digunakan untuk membandingkan laju investasi dan laju deforestasi antara wilayah sentra industri tambang dengan non-sentra. Terlihat adanya fenomena <strong>Efek Jeda Waktu (Time-Lagging Effect)</strong>, di mana peningkatan realisasi modal pada tahap awal perizinan dan konstruksi diikuti oleh lonjakan pembukaan lahan hutan fisik pada 1 hingga 2 tahun berikutnya.
+</p>
+
+<h4>B. Alur Logika Metodologis Analisis Realisasi Investasi PMDN</h4>
+<p>Kerangka operasionalisasi uji statistik tabulasi silang antara realisasi Investasi PMDN dan deforestasi dimodelkan dalam kerangka alur logika sebagaimana diilustrasikan pada <strong>Bagan Alur 1.4</strong> berikut:</p>
+<div class="table-caption">Bagan Alur 1.4: Alur Logika Metodologis Uji Independensi Panel Investasi PMDN vs Deforestasi</div>
+<div class="mermaid">
+flowchart LR
+    subgraph Data_Preparation["1. Akuisisi & Penyiapan Data Panel"]
+        A["Data Realisasi Investasi PMDN<br/><i>(Provinsi-Tahun, Arus Modal Juta Rp)</i>"] --> C
+        B["Data Laju Deforestasi GFW<br/><i>(Provinsi-Tahun, Total Deforestasi)</i>"] --> C
+        C["<b>Gabung (Merge) Data Panel</b><br/>6 Provinsi x 8 Tahun = 48 Sampel Valid"]
+    end
+
+    subgraph Time_Series_Analysis["2. Analisis Statistik Tabulasi Silang"]
+        C --> D["Agregasi Median Variabel X & Y"]
+        D --> E["Kategorisasi Biner<br/>(Tinggi / Rendah)"]
+        E --> F["Uji Independensi Chi-Square Pearson"]
+        F --> G["Kalkulasi Odds Ratio (Risiko Deforestasi)"]
+    end
+</div>
+
+<h4>C. Formulasi Matematis: Agregasi Dampak Ekologis & Pengujian Statistik</h4>
+<p><strong>Persamaan Agregasi Luasan Deforestasi Berdasarkan Faktor Penggerak (Driver)</strong><br>
+Total_Deforestasi_Driver_k = &sum;(Area_Loss_i) untuk i di Kategori_Driver_k</p>
+<ul>
+  <li><strong>Total_Deforestasi_Driver_k:</strong> Total luas kehilangan tutupan pohon yang diakibatkan oleh faktor penggerak k (contoh: Ekspansi Komoditas) di seluruh wilayah observasi (satuan: Hektar / Ha).</li>
+  <li><strong>Kategori_Driver_k:</strong> Klasifikasi penyebab utama deforestasi (Dominant Driver of Tree Cover Loss) berdasarkan model data historis satelit.</li>
+  <li><strong>Area_Loss_i:</strong> Luas kehilangan tutupan pohon pada piksel observasi ke-i (satuan: Hektar / Ha).</li>
+</ul>
+<p><strong>Persamaan Perhitungan Akumulasi Kehilangan Hutan Primer (Primary Forest Loss)</strong><br>
+Total_Primary_Loss = &sum;(Area_Loss_j) untuk j di mana Tipe_Hutan = "Primer"</p>
+<ul>
+  <li><strong>Total_Primary_Loss:</strong> Akumulasi luas konversi tutupan hutan alam primer tak terganggu (intact primary forest) selama periode pengamatan (satuan: Hektar / Ha).</li>
+  <li><strong>Tipe_Hutan:</strong> Klasifikasi basemap jenis tutupan lahan awal sebelum terjadi deforestasi.</li>
+</ul>
+<p><strong>Persamaan Estimasi Pelepasan Emisi Karbon (Gross CO2 Emissions)</strong><br>
+Emisi_CO2_Total = &sum;(Area_Loss_c * Faktor_Emisi_Biomassa_c)</p>
+<ul>
+  <li><strong>Emisi_CO2_Total:</strong> Estimasi agregasi total emisi gas rumah kaca yang dilepaskan ke atmosfer akibat konversi tutupan (satuan: Megagrams CO2 / Mg CO2).</li>
+  <li><strong>Faktor_Emisi_Biomassa_c:</strong> Kandungan karbon rata-rata (above-ground & below-ground biomass) per hektar pada koordinat c yang diamati.</li>
+</ul>
+<p>Kalkulasi pengujian statistik dihitung menggunakan formulasi Matematis yang sama dengan Sub-Bab 1.2 dan 1.3, di mana variabel independen (X) adalah <strong>Investasi PMDN (Juta Rp)</strong> dan variabel dependen (Y) adalah <strong>Deforestasi Komoditas (Hektar)</strong>.</p>
+<p>Persamaan Kategorisasi Nilai Ambang Batas Median:<br>
+- Jika Nilai &gt; Median, maka Kategori = Tinggi<br>
+- Jika Nilai &le; Median, maka Kategori = Rendah</p>
+
+<h4>D. Matriks Hasil Uji Empiris: Konsentrasi Spasial & Skenario Crosstab</h4>
+<p>
+  Tingkat alokasi konsesi dan dampaknya terhadap tutupan hutan dapat dilihat secara empiris melalui perbandingan luas konsesi baru di Daerah Sentra Tambang (Morowali & Konawe) dengan wilayah non-sentra pada <strong>Tabel 1.7b</strong> berikut:
+</p>
+<div class="table-caption">Tabel 1.7b: Representasi Spasial Luas Konsesi Baru (Ha) di Daerah Sentra Tambang vs Non-Sentra (2014-2023)</div>
+<table class="data-table">
+  <thead>
+    <tr>
+      <th class="data-th">Tahun</th>
+      <th class="data-th">Luas Konsesi Baru Daerah Sentra Tambang (Ha)</th>
+      <th class="data-th">Luas Konsesi Baru Daerah Non-Sentra (Ha)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="data-tr-odd"><td class="data-td" style="text-align:center;">2014</td><td class="data-td" style="text-align:right;">39,216.7</td><td class="data-td" style="text-align:right;">10,301.4</td></tr>
+    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">2015</td><td class="data-td" style="text-align:right;">13,370.0</td><td class="data-td" style="text-align:right;">8,969.0</td></tr>
+    <tr class="data-tr-odd"><td class="data-td" style="text-align:center;">2016</td><td class="data-td" style="text-align:right;">12,515.8</td><td class="data-td" style="text-align:right;">0.0</td></tr>
+    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">2017</td><td class="data-td" style="text-align:right;">121,742.9</td><td class="data-td" style="text-align:right;">57,722.2</td></tr>
+    <tr class="data-tr-odd"><td class="data-td" style="text-align:center;">2018</td><td class="data-td" style="text-align:right;">15,634.7</td><td class="data-td" style="text-align:right;">22,336.0</td></tr>
+    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">2019</td><td class="data-td" style="text-align:right;">32,458.3</td><td class="data-td" style="text-align:right;">29,509.9</td></tr>
+    <tr class="data-tr-odd"><td class="data-td" style="text-align:center;">2020</td><td class="data-td" style="text-align:right;">60,420.8</td><td class="data-td" style="text-align:right;">46,139.0</td></tr>
+    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">2021</td><td class="data-td" style="text-align:right;">28,835.0</td><td class="data-td" style="text-align:right;">1,588.4</td></tr>
+    <tr class="data-tr-odd"><td class="data-td" style="text-align:center;">2022</td><td class="data-td" style="text-align:right;">58,268.1</td><td class="data-td" style="text-align:right;">7,859.4</td></tr>
+    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">2023</td><td class="data-td" style="text-align:right;">52,138.7</td><td class="data-td" style="text-align:right;">16,418.2</td></tr>
+  </tbody>
+</table>
+
+<p>
+  Terkait dengan hilangnya luasan hutan tersebut, pembedahan lebih lanjut berdasarkan aktor utama, luasan hutan primer, dan estimasi emisi karbon komoditas dapat dilihat pada <strong>Tabel 1.7c</strong> berikut:
+</p>
+<div class="table-caption">Tabel 1.7c: Matriks Pembedahan Ekologis Aktor & Emisi Karbon (Periode 2001-2025)</div>
+<table class="data-table">
+  <thead>
+    <tr><th class="data-th">Kategori Aktor / Metrik Ekologis</th><th class="data-th">Nilai Agregat</th><th class="data-th">Persentase dari Total Kehilangan</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="data-td"><strong>Ekspansi Komoditas (Tambang & Sawit)</strong></td><td class="data-td" style="text-align:center;">1,890,659 Hektar</td><td class="data-td" style="text-align:center;">48.4%</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>Kehutanan (Logging)</strong></td><td class="data-td" style="text-align:center;">247,011 Hektar</td><td class="data-td" style="text-align:center;">6.3%</td></tr>
+    <tr><td class="data-td"><strong>Pertanian Berpindah</strong></td><td class="data-td" style="text-align:center;">115,404 Hektar</td><td class="data-td" style="text-align:center;">2.9%</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>Total Kehilangan Hutan Primer</strong></td><td class="data-td" style="text-align:center;"><strong>3,904,079 Hektar</strong></td><td class="data-td" style="text-align:center;"><strong>100.0%</strong></td></tr>
+    <tr><td class="data-td"><strong>Estimasi Emisi Karbon Komoditas</strong></td><td class="data-td" style="text-align:center;">1,282,195,705 Mg CO2</td><td class="data-td" style="text-align:center;">-</td></tr>
+  </tbody>
+</table>
+
+<div class="table-caption">Tabel 1.7d: Konfigurasi Variabel Uji Chi-Square (Sub-bab 1.4)</div>
+<table class="data-table">
+  <thead>
+    <tr><th class="data-th">Komponen Uji</th><th class="data-th">Definisi Variabel (Sub-bab 1.4)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="data-td">Variabel Independen (X)</td><td class="data-td">Realisasi Investasi PMDN (Juta Rupiah)</td></tr>
+    <tr class="data-tr-even"><td class="data-td">Variabel Dependen (Y)</td><td class="data-td">Total Deforestasi Alam (Ha) / Deforestasi Komoditas (Ha)</td></tr>
+    <tr><td class="data-td">Hipotesis Nol (H0)</td><td class="data-td">Tingginya realisasi investasi PMDN tidak berhubungan dengan laju deforestasi.</td></tr>
+    <tr class="data-tr-even"><td class="data-td">Hipotesis Alternatif (H1)</td><td class="data-td">Ada hubungan positif antara tingginya realisasi investasi PMDN dengan laju deforestasi.</td></tr>
+    <tr><td class="data-td">Threshold Kategori</td><td class="data-td">Nilai Median Data Panel (N=48)</td></tr>
+  </tbody>
+</table>
+
+<p>Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square) untuk semua kemungkinan kombinasi indikator antara Realisasi Investasi PMDN dan Dampak Ekologis pada panel data 2016-2023. Hasil tersebut ditampilkan pada <strong>Tabel 1.8</strong> berikut:</p>
+<div class="table-caption">Tabel 1.8: Ringkasan Eksekutif Seluruh Skenario Crosstab Realisasi Investasi PMDN Bab 1</div>
+<table class="data-table">
+  <thead>
+    <tr><th>Variabel Independen (X)</th><th>Variabel Dependen (Y)</th><th>Chi-Square (&chi;&sup2;)</th><th>P-Value</th><th>Odds Ratio</th><th>Kesimpulan</th></tr>
+  </thead>
+  <tbody>
+    <tr class="data-tr-odd"><td class="data-td">Realisasi Investasi PMDN (Juta Rp)</td><td class="data-td">Total Deforestasi Alam (Hektar)</td><td class="data-td" style="text-align:center;">2.042</td><td class="data-td" style="text-align:center;">p = 0.1530</td><td class="data-td" style="text-align:center;">2.0</td><td class="data-td" style="text-align:center; font-weight:bold;">TIDAK SIGNIFIKAN</td></tr>
+    <tr class="data-tr-even"><td class="data-td">Realisasi Investasi PMDN (Juta Rp)</td><td class="data-td">Deforestasi Komoditas Tambang/Sawit (Hektar)</td><td class="data-td" style="text-align:center;">3.375</td><td class="data-td" style="text-align:center;">p = 0.0662</td><td class="data-td" style="text-align:center;">2.3</td><td class="data-td" style="text-align:center; font-weight:bold;">TIDAK SIGNIFIKAN</td></tr>
+  </tbody>
+</table>
+
+<h4>E. Analisis Temuan Empiris: Efek Jeda Waktu (Time-Lagging)</h4>
+<p>Hasil pengujian seluruh skenario tabulasi silang PMDN mengungkap fenomena yang kompleks dalam alur investasi ekstraktif:</p>
+<ul style="margin-left: 20px; margin-bottom: 15px;">
+  <li style="margin-bottom: 6px;"><strong>1. Ketidaksignifikanan Simultan &amp; Variasi P-Value:</strong> Tingkat signifikansi yang bervariasi menyingkap tabir jeda waktu (lagging effect) dalam eksekusi investasi di lapangan.</li>
+  <li style="margin-bottom: 6px;"><strong>2. Jeda Waktu Eksekusi Investasi (Lagging Effect):</strong> Suntikan modal masif di tahun tertentu tidak secara instan berwujud pembabatan lahan di tahun yang sama. Modal tersebut tertahan pada fase birokrasi, pembebasan lahan, dan pengadaan infrastruktur, sebelum daya rusaknya mengonversi lanskap hutan pada tahun-tahun berikutnya.</li>
+  <li style="margin-bottom: 6px;"><strong>3. Konsentrasi Modal Ekstrem di 3 Provinsi:</strong> Data spasial membuktikan 89% dari total modal PMDN ekstraktif se-Sulawesi hanya tersedot ke tiga provinsi sentra (Sulteng, Sultra, Sulsel), mengakibatkan polarisasi pertumbuhan dan mengunci ketimpangan spasial.</li>
+</ul>
+
+<h2>SUB-BAB 1.5: Pelabuhan Ekspor & Peta Jalur Distribusi Logistik Nikel Sulawesi</h2>
+<p>
+  Validasi silang informasi publik (triangulasi 4 sumber dokumen: Laporan Investigasi KNKT 52.378 DWT, Lampiran Perpres 109/2020 PSN Kawasan Industri, Laporan Tahunan ANTAM, dan Laporan Keberlanjutan Vale) memverifikasi enam simpul pelabuhan dan terminal khusus yang terhubung langsung ke pasar ekspor internasional melalui pemodelan kurva alur maritim sebagaimana diilustrasikan pada <strong>Bagan Alur 1.5</strong> berikut:
+</p>
+
+<div class="table-caption">Bagan Alur 1.5: Alur Logika Metodologis Validasi Silang (OSINT) dan Pemetaan Spasial Pelabuhan</div>
+<div style="text-align: center; margin: 20px 0;">
+  <img src="mermaid_flowchart_1_5.png" alt="Bagan Alur 1.5" style="max-width: 100%; border: 1px solid #ddd; padding: 10px; background-color: #fcfcfc;">
+</div>
+
+<p>
+  Berdasarkan protokol validasi silang tersebut, profil komprehensif enam simpul pelabuhan dan terminal khusus utama di Pulau Sulawesi dipetakan pada <strong>Tabel 1.7</strong> berikut:
+</p>
+
+<div class="table-caption">Tabel 1.7: Inventarisasi Enam Simpul Pelabuhan dan Terminal Khusus Ekspor Nikel di Pulau Sulawesi</div>
+<table>
+  <thead>
+    <tr>
+      <th class="data-th" style="width:20%;">Simpul Kawasan Industri</th>
+      <th class="data-th" style="width:18%;">Wilayah Administrasi</th>
+      <th class="data-th" style="width:22%;">Fasilitas Pelabuhan / Terminal</th>
+      <th class="data-th" style="width:16%;">Status Regulasi</th>
+      <th class="data-th" style="width:10%;">Kapasitas Kapal</th>
+      <th class="data-th" style="width:14%;">Tujuan Utama Ekspor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="data-td"><strong>IMIP Morowali</strong></td><td class="data-td">Morowali, Sulawesi Tengah</td><td class="data-td">Pelabuhan Samudera & Dermaga Curah</td><td class="data-td">PSN (Perpres 109/2020)</td><td class="data-td">Hingga 52.378 DWT</td><td class="data-td">Pasar Global (Tiongkok)</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>GNI Morowali Utara</strong></td><td class="data-td">Morowali Utara, Sulteng</td><td class="data-td">Terminal Khusus Pesisir Tomori</td><td class="data-td">Izin Industri Mandiri</td><td class="data-td">Hingga 30.000 DWT</td><td class="data-td">Pasar Global (Tiongkok)</td></tr>
+    <tr><td class="data-td"><strong>VDNI Konawe</strong></td><td class="data-td">Konawe, Sulawesi Tenggara</td><td class="data-td">Dermaga Khusus Curah & Kargo</td><td class="data-td">PSN (Perpres 109/2020)</td><td class="data-td">Hingga 50.000 DWT</td><td class="data-td">Pasar Global (Tiongkok)</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>OSS Konawe</strong></td><td class="data-td">Konawe, Sulawesi Tenggara</td><td class="data-td">Dermaga Terintegrasi Konawe</td><td class="data-td">PSN (Perpres 109/2020)</td><td class="data-td">Hingga 50.000 DWT</td><td class="data-td">Pasar Global (Tiongkok)</td></tr>
+    <tr><td class="data-td"><strong>Pomalaa (ANTAM)</strong></td><td class="data-td">Kolaka, Sulawesi Tenggara</td><td class="data-td">Dermaga Pomalaa & Konveyor</td><td class="data-td">Kawasan BUMN Industri</td><td class="data-td">Hingga 12.000 DWT</td><td class="data-td">Jepang & Korsel</td></tr>
+    <tr class="data-tr-even"><td class="data-td"><strong>Sorowako (Vale)</strong></td><td class="data-td">Luwu Timur, Sulawesi Selatan</td><td class="data-td">Pelabuhan Balantang Malili</td><td class="data-td">Kontrak Karya Tambang</td><td class="data-td">Hingga 15.000 DWT</td><td class="data-td">Jepang & Skandinavia</td></tr>
+  </tbody>
+</table>
+</body>
+</html>

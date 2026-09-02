@@ -1,13 +1,13 @@
 # BAB I: METODOLOGI ANALISIS EKSPANSI INDUSTRI EKSTRAKTIF DAN INFRASTRUKTUR PENUNJANG DI PULAU SULAWESI
 
-Dokumen laporan metodologi ini menyajikan kerangka ilmiah, landasan regulasi, formulasi matematis, prosedur analisis statistik, serta metodologi pembuktian berbasis data terbuka yang dioperasionalkan pada **Bab 1: Ekspansi Industri Ekstraktif** dalam studi Daya Dukung dan Daya Tampung Lingkungan Hidup (D3TLH) Sulawesi periode 2014–2024.
+Dokumen laporan metodologi ini menyajikan kerangka ilmiah, landasan regulasi, formulasi matematis, prosedur analisis statistik, serta metodologi pembuktian berbasis data terbuka yang dioperasionalkan pada **Bab 1: Ekspansi Industri Ekstraktif** dalam studi Daya Dukung dan Daya Tampung Lingkungan Hidup (D3TLH) Sulawesi periode 2014ΓÇô2024.
 
 ---
 
 ## SUB-BAB 1.1: Konteks Makro: Breakdown PDRB per Komoditas
 
 ### 1.1.1 Konteks Makro: Dominasi Ekstraktif vs Ekonomi Akar Rumput
-Bagian ini menganalisis struktur Produk Domestik Regional Bruto (PDRB) pada enam provinsi di Pulau Sulawesi sepanjang periode 2016–2024 menggunakan visualisasi grafik area bertumpuk (*Stacked Area Chart*). Analisis ini ditujukan untuk menguji secara empiris apakah percepatan pertumbuhan ekonomi daerah benar-benar bersumber dari sektor produktif masyarakat lokal atau didominasi oleh industri ekstraktif padat modal yang mengalihkan pemanfaatan ruang dan sumber daya alam.
+Bagian ini menganalisis struktur Produk Domestik Regional Bruto (PDRB) pada enam provinsi di Pulau Sulawesi sepanjang periode 2016ΓÇô2024 menggunakan visualisasi grafik area bertumpuk (*Stacked Area Chart*). Analisis ini ditujukan untuk menguji secara empiris apakah percepatan pertumbuhan ekonomi daerah benar-benar bersumber dari sektor produktif masyarakat lokal atau didominasi oleh industri ekstraktif padat modal yang mengalihkan pemanfaatan ruang dan sumber daya alam.
 
 > **Sumber Data:** Badan Pusat Statistik (BPS) Provinsi se-Sulawesi (diolah CELIOS). Visualisasi *Stacked Area Chart* memetakan dinamika Produk Domestik Regional Bruto (PDRB) berdasarkan klasifikasi rantai pasok hukum (*Legal Supply-Chain*) untuk membandingkan trajektori Sektor Ekstraktif, Ekonomi Akar Rumput, dan Sektor Jasa & Lainnya.
 
@@ -18,10 +18,10 @@ Sistem KBLI 2020 BPS membagi 17 sektor PDRB. Melalui pendekatan Legal Supply-Cha
 | Kategori BPS | Sektor Lapangan Usaha | Klasifikasi Analisis | Dasar Regulasi & Mandat Hukum | Intisari Ketentuan Hukum |
 | :--- | :--- | :---: | :--- | :--- |
 | **Kategori B** | Pertambangan dan Penggalian | Ekstraktif | Perpres No. 26 Tahun 2010 | Ketentuan Pasal 1 Ayat (2) mengenai pengambilan komoditas tambang dari dalam bumi. |
-| **Kategori C** | Industri Pengolahan (Smelter Logam) | Ekstraktif | UU No. 3 Tahun 2020 & PP No. 96 Tahun 2021 | Pasal 102–103 mewajibkan pengolahan dan pemurnian di dalam negeri sebagai kesatuan pertambangan. |
+| **Kategori C** | Industri Pengolahan (Smelter Logam) | Ekstraktif | UU No. 3 Tahun 2020 & PP No. 96 Tahun 2021 | Pasal 102ΓÇô103 mewajibkan pengolahan dan pemurnian di dalam negeri sebagai kesatuan pertambangan. |
 | **Kategori D** | Pengadaan Listrik & Gas (PLTU Captive) | Ekstraktif | Perpres No. 112 Tahun 2022 & RUPTL PLN | Pasal 3 Ayat (4) huruf b mengecualikan PLTU baru hanya bagi yang terintegrasi melayani smelter. |
 | **Kategori A** | Pertanian, Kehutanan, Perikanan | Ekonomi Akar Rumput | KBLI 2020 BPS | Sektor pemanfaatan sumber daya hayati terbarukan dan penyerap tenaga kerja lokal. |
-| **Kategori E–U** | 13 Sektor Jasa & Konstruksi | Sektor Jasa & Lainnya | Klasifikasi Standar BPS | Sektor sekunder dan tersier penunjang perekonomian daerah. |
+| **Kategori EΓÇôU** | 13 Sektor Jasa & Konstruksi | Sektor Jasa & Lainnya | Klasifikasi Standar BPS | Sektor sekunder dan tersier penunjang perekonomian daerah. |
 
 #### B. Alur Logika Metodologis Rantai Pasok Hukum (Mengapa Kat. B + C + D = Ekstraktif)
 Keterkaitan ketiga kategori lapangan usaha tersebut sebagai satu kesatuan rantai pasok ekstraktif dimodelkan dalam kerangka alur logika hukum sebagaimana diilustrasikan pada **Bagan Alur 1.1** berikut:
@@ -31,12 +31,12 @@ Keterkaitan ketiga kategori lapangan usaha tersebut sebagai satu kesatuan rantai
 graph TD
     subgraph Mandat_Smelter["2. Rantai Pasok Smelter (Kategori C)"]
         A["UU No. 3/2020 Ps. 1(1)<br/><i>Pertambangan = Eksplorasi + Penambangan + Pengolahan/Pemurnian</i>"] --> B["Smelter (Industri Pengolahan / Kat. C)<br/><b>Tahapan Wajib Pertambangan</b>"]
-        C["UU No. 3/2020 Ps. 102–103 & PP 96/2021<br/><i>Mandat Wajib Pemegang IUP Operasi Produksi</i>"] --> B
+        C["UU No. 3/2020 Ps. 102ΓÇô103 & PP 96/2021<br/><i>Mandat Wajib Pemegang IUP Operasi Produksi</i>"] --> B
     end
 
     subgraph Mandat_Energi["3. Rantai Pasok Energi Captive (Kategori D)"]
         D["Perpres No. 112/2022 Ps. 3(4)b<br/><i>PLTU Baru Dilarang, KECUALI Terintegrasi Smelter</i>"] --> E["PLTU Captive (Pengadaan Listrik / Kat. D)<br/><b>Instrumen Rantai Pasok Off-Grid</b>"]
-        F["RUPTL PLN 2021–2030 Hal. VI-24<br/><i>Pengakuan Pasokan Khusus Smelter</i>"] --> E
+        F["RUPTL PLN 2021ΓÇô2030 Hal. VI-24<br/><i>Pengakuan Pasokan Khusus Smelter</i>"] --> E
     end
 
     subgraph Hulu_Tambang["1. Sektor Hulu (Kategori B)"]
@@ -233,7 +233,7 @@ graph TD
         B["Konversi Nilai: Triliun Rp = Miliar Rp / 1000"]
         C["Porsi Sektor (%) = (Nilai Sektor / Total PDRB) * 100"]
         D["Skala X Seragam: [0, max(X) * 1.15]<br/><i>Mencegah Visual Comparison Bias</i>"]
-        E["Pewarnaan 3 Klaster Kritis:<br/>• Merah (Kat. B,C,D: Ekstraktif)<br/>• Hijau (Kat. A: Akar Rumput)<br/>• Abu-abu (Kat. E–U: Jasa & Lainnya)"]
+        E["Pewarnaan 3 Klaster Kritis:<br/>ΓÇó Merah (Kat. B,C,D: Ekstraktif)<br/>ΓÇó Hijau (Kat. A: Akar Rumput)<br/>ΓÇó Abu-abu (Kat. EΓÇôU: Jasa & Lainnya)"]
     end
 
     subgraph Komparasi_Regional["3. Output Komparasi Antarwilayah"]
@@ -292,26 +292,26 @@ Pengujian keterkaitan antara pembangunan PLTU Captive dengan kehilangan tutupan 
 flowchart TD
     A(["Start: Input Data Panel Spasiotemporal (N=60)"]) --> B{"Apakah Data<br/>Kategorikal?"}
     
-    B -- TIDAK (Numerik Kontinu) --> C["Diskritisasi / Binning Median<br/>• X: Kapasitas PLTU Kumulatif (>0 MW: Tinggi, ≤0 MW: Rendah)<br/>• Y: Deforestasi Komoditas (≥10,961 Ha: Tinggi, <10,961 Ha: Rendah)"]
+    B -- TIDAK (Numerik Kontinu) --> C["Diskritisasi / Binning Median<br/>ΓÇó X: Kapasitas PLTU Kumulatif (>0 MW: Tinggi, Γëñ0 MW: Rendah)<br/>ΓÇó Y: Deforestasi Komoditas (ΓëÑ10,961 Ha: Tinggi, <10,961 Ha: Rendah)"]
     C --> D
     
     B -- YA --> D["Penanganan Missing Values<br/>SPSS: Listwise Deletion<br/>(Valid N = 60 / 100.0%)"]
     
     D --> E["Konstruksi Matriks Tabel Kontinjensi 2x2<br/>(Observasi Aktual vs Frekuensi Harapan)"]
     
-    E --> F{"Cek Asumsi Uji SPSS:<br/>Expected Count ≥ 5 ?"}
+    E --> F{"Cek Asumsi Uji SPSS:<br/>Expected Count ΓëÑ 5 ?"}
     
-    F -- YA (Asumsi Terpenuhi: Min. Expected = 11.5) --> I["Kalkulasi Nilai Pearson Chi-Square<br/>(χ² = 18.049, df = 1, p = 0.0000)"]
+    F -- YA (Asumsi Terpenuhi: Min. Expected = 11.5) --> I["Kalkulasi Nilai Pearson Chi-Square<br/>(╧ç┬▓ = 18.049, df = 1, p = 0.0000)"]
     
     I --> J{"Evaluasi Taraf Signifikansi<br/>(P-Value vs Alpha 0.05)"}
     
     J -- P-Value < 0.05 (p = 0.0000) --> M["SIGNIFIKAN (Hipotesis Nol Ditolak)<br/>Ekspansi Energi Fosil Terbukti Memperparah Deforestasi"]
     
-    M --> N["Kalkulasi Kekuatan Hubungan & Risiko<br/>Odds Ratio (OR) = (a × d) / (b × c)"]
+    M --> N["Kalkulasi Kekuatan Hubungan & Risiko<br/>Odds Ratio (OR) = (a ├ù d) / (b ├ù c)"]
     
     N --> O2["Odds Ratio = 18.00x<br/>(Risiko Deforestasi Tinggi Melonjak 18 Kali Lipat)"]
     
-    O2 --> P["Pembedahan Realitas Ekologis:<br/>• Konsentrasi 78% Smelter & 94% PLTU di Sulteng & Sultra<br/>• Efek Meluber Lintas Batas (Spillover Effect)<br/>• Terkuncinya Jejak Emisi Karbon Jangka Panjang"]
+    O2 --> P["Pembedahan Realitas Ekologis:<br/>ΓÇó Konsentrasi 78% Smelter & 94% PLTU di Sulteng & Sultra<br/>ΓÇó Efek Meluber Lintas Batas (Spillover Effect)<br/>ΓÇó Terkuncinya Jejak Emisi Karbon Jangka Panjang"]
     
     P --> Z(["Selesai / Rekomendasi Kebijakan"])
 
@@ -345,12 +345,12 @@ Porsi_Smelter_Provinsi (%) = ( Jumlah_Smelter_Provinsi / Total_Smelter_Sulawesi 
 - `Jumlah_Smelter_Provinsi`: Banyaknya unit smelter yang beroperasi di wilayah provinsi tertentu.
 - `Total_Smelter_Sulawesi`: Total keseluruhan fasilitas smelter di Pulau Sulawesi (778 unit).
 
-**Persamaan Uji Independensi Chi-Square Pearson (χ² Kontinjensi 2x2):**
+**Persamaan Uji Independensi Chi-Square Pearson (╧ç┬▓ Kontinjensi 2x2):**
 ```text
-Chi_Square (χ²) = Jumlah [ (Frekuensi_Observasi - Frekuensi_Harapan)^2 / Frekuensi_Harapan ]
+Chi_Square (╧ç┬▓) = Jumlah [ (Frekuensi_Observasi - Frekuensi_Harapan)^2 / Frekuensi_Harapan ]
 ```
 *Keterangan Variabel:*
-- `Chi_Square (χ²)`: Nilai statistik uji kecocokan Pearson untuk membuktikan ada tidaknya hubungan ketergantungan antara ekspansi PLTU Captive dengan lonjakan deforestasi pada panel spasiotemporal (N=60).
+- `Chi_Square (╧ç┬▓)`: Nilai statistik uji kecocokan Pearson untuk membuktikan ada tidaknya hubungan ketergantungan antara ekspansi PLTU Captive dengan lonjakan deforestasi pada panel spasiotemporal (N=60).
 - `Frekuensi_Observasi (O)`: Jumlah kasus aktual yang tercatat pada sel tabel kontinjensi 2x2.
 - `Frekuensi_Harapan (E)`: Jumlah kasus teoretis jika kedua variabel saling independen: E = (Total Baris * Total Kolom) / N.
 
@@ -359,22 +359,22 @@ Chi_Square (χ²) = Jumlah [ (Frekuensi_Observasi - Frekuensi_Harapan)^2 / Freku
 Odds_Ratio (OR) = ( a * d ) / ( b * c )
 ```
 *Keterangan Variabel:*
-- `Odds_Ratio (OR)`: Ukuran kelipatan risiko peluang terjadinya deforestasi komoditas tinggi pada kelompok dengan PLTU Captive aktif (>0 MW) dibanding kelompok tanpa PLTU Captive (≤0 MW).
+- `Odds_Ratio (OR)`: Ukuran kelipatan risiko peluang terjadinya deforestasi komoditas tinggi pada kelompok dengan PLTU Captive aktif (>0 MW) dibanding kelompok tanpa PLTU Captive (Γëñ0 MW).
 - `a`: Jumlah observasi panel pada kelompok PLTU Rendah dan Deforestasi Rendah (27 kasus).
 - `b`: Jumlah observasi panel pada kelompok PLTU Rendah dan Deforestasi Tinggi (10 kasus).
 - `c`: Jumlah observasi panel pada kelompok PLTU Tinggi dan Deforestasi Rendah (3 kasus).
 - `d`: Jumlah observasi panel pada kelompok PLTU Tinggi dan Deforestasi Tinggi (20 kasus).
 
 ### D. Rincian Data Empiris: Matriks Hasil Uji Tabulasi Silang & Estimasi Risiko (Crosstab 2x2)
-Penerapan sistem pengujian statistik tabulasi silang pada data panel 6 provinsi selama 1 dekade (2014–2023, total 60 observasi) disajikan secara lengkap pada **Tabel 1.5** berikut:
+Penerapan sistem pengujian statistik tabulasi silang pada data panel 6 provinsi selama 1 dekade (2014ΓÇô2023, total 60 observasi) disajikan secara lengkap pada **Tabel 1.5** berikut:
 
-##### Tabel 1.5: Matriks Tabulasi Silang 2×2, Uji Chi-Square (χ²), dan Estimasi Odds Ratio Panel PLTU Captive vs Deforestasi Komoditas (2014–2023)
-| Kategori Kapasitas PLTU (X) | Deforestasi Rendah (<10.962 Ha) | Deforestasi Tinggi (≥10.962 Ha) | Total Kasus | Parameter Statistik Uji | Nilai / df | Signifikansi / Kesimpulan |
+##### Tabel 1.5: Matriks Tabulasi Silang 2├ù2, Uji Chi-Square (╧ç┬▓), dan Estimasi Odds Ratio Panel PLTU Captive vs Deforestasi Komoditas (2014ΓÇô2023)
+| Kategori Kapasitas PLTU (X) | Deforestasi Rendah (<10.962 Ha) | Deforestasi Tinggi (ΓëÑ10.962 Ha) | Total Kasus | Parameter Statistik Uji | Nilai / df | Signifikansi / Kesimpulan |
 | :--- | :---: | :---: | :---: | :--- | :---: | :--- |
-| **Rendah (≤0 MW)** | 27 [Exp: 18.5] | 10 [Exp: 18.5] | 37 (100%) | **Pearson Chi-Square (χ²)** | **18.049** (df=1) | p = 0.0000 (Signifikan) |
+| **Rendah (Γëñ0 MW)** | 27 [Exp: 18.5] | 10 [Exp: 18.5] | 37 (100%) | **Pearson Chi-Square (╧ç┬▓)** | **18.049** (df=1) | p = 0.0000 (Signifikan) |
 | **Tinggi (>0 MW)** | 3 [Exp: 11.5] | 20 [Exp: 11.5] | 23 (100%) | **Likelihood Ratio** | **19.420** (df=1) | p = 0.0000 (Signifikan) |
 | **Total Observasi Panel** | **30** [Exp: 30.0] | **30** [Exp: 30.0] | **60** (100%) | **Linear-by-Linear Association** | **20.036** (df=1) | p = 0.0000 (Signifikan) |
-| **Ukuran Risiko (Risk Estimate)** | Cross-Product: (27×20)/(10×3) | Rasio Peluang Risiko | OR = 18.00 | **Odds Ratio (OR)** | **18.00x** | **Risiko Lonjakan 18x Lipat** |
+| **Ukuran Risiko (Risk Estimate)** | Cross-Product: (27├ù20)/(10├ù3) | Rasio Peluang Risiko | OR = 18.00 | **Odds Ratio (OR)** | **18.00x** | **Risiko Lonjakan 18x Lipat** |
 
 ### E. Pembedahan Realitas Ekologis: Pembongkaran Kawasan Penyangga dan Efek Meluber (Spillover)
 Hasil pengujian empiris pada Tabel 1.5 membuktikan secara meyakinkan keterkaitan langsung antara ekspansi PLTU Captive dan kerusakan tutupan hutan di Pulau Sulawesi:
@@ -387,7 +387,7 @@ Hasil pengujian empiris pada Tabel 1.5 membuktikan secara meyakinkan keterkaitan
 
 ## 1.3 Tren Pertumbuhan Izin Tambang Baru & Uji Signifikansi Statistik
 - Total Penerbitan Izin: 574 IUP (819,452 Ha alokasi konsesi).
-- Laju Pertumbuhan YoY: Lonjakan 246% pada periode 2022–2024 pasca-penyesuaian regulasi perizinan terpusat.
+- Laju Pertumbuhan YoY: Lonjakan 246% pada periode 2022ΓÇô2024 pasca-penyesuaian regulasi perizinan terpusat.
 - Uji Independensi Chi-Square (Data Panel N=60): $\chi^2 = 17.086, p = 0.0000, \text{df} = 1, \text{Odds Ratio} = 13.14$ (Signifikan / Terbukti Berhubungan).
 
 **Persamaan Laju Pertumbuhan Izin Tahunan (YoY):**
@@ -401,8 +401,8 @@ Pertumbuhan_Izin (%) = [ ( Jumlah_Izin_Tahun_t - Jumlah_Izin_Tahun_{t-1} ) / Jum
 
 Hasil lengkap pengujian independensi statistik Chi-Square dan estimasi Odds Ratio (OR) untuk seluruh faktor tekanan terhadap kehilangan tutupan hutan komoditas dirangkum pada **Tabel 1.6** berikut:
 
-##### Tabel 1.6: Ringkasan Hasil Uji Independensi Chi-Square (χ²) dan Odds Ratio (OR) Data Panel Bab 1
-| Variabel Faktor Tekanan | Variabel Dampak Lingkungan | Nilai Chi-Square (χ²) | Nilai Signifikansi (p) | Odds Ratio (OR) | Derajat Bebas (df) | Kesimpulan Ilmiah |
+##### Tabel 1.6: Ringkasan Hasil Uji Independensi Chi-Square (╧ç┬▓) dan Odds Ratio (OR) Data Panel Bab 1
+| Variabel Faktor Tekanan | Variabel Dampak Lingkungan | Nilai Chi-Square (╧ç┬▓) | Nilai Signifikansi (p) | Odds Ratio (OR) | Derajat Bebas (df) | Kesimpulan Ilmiah |
 | :--- | :--- | :---: | :---: | :---: | :---: | :--- |
 | Jumlah Izin Tambang Baru (IUP) | Deforestasi Komoditas (Ha) | 17.086 | 0.0000 | 13.14 | 1 | Signifikan (Terbukti Berhubungan) |
 | Luas Konsesi Tambang Baru (Ha) | Deforestasi Komoditas (Ha) | 4.812 | 0.0283 | 3.45 | 1 | Signifikan (Terbukti Berhubungan) |
@@ -414,7 +414,7 @@ Hasil lengkap pengujian independensi statistik Chi-Square dan estimasi Odds Rati
 ## 1.4 Analisis Realisasi Investasi PMDN dan Dampak Terhadap Tutupan Hutan
 - Realisasi Investasi PMDN: Rp 218 Triliun (Kementerian Investasi / BKPM).
 - Kehilangan Hutan Komoditas: 1,001,654 Ha (Global Forest Watch).
-- Teridentifikasi fenomena *Time-Lagging Effect* (jeda waktu 1–2 tahun antara kucuran modal dengan pembukaan fisik lahan hutan).
+- Teridentifikasi fenomena *Time-Lagging Effect* (jeda waktu 1ΓÇô2 tahun antara kucuran modal dengan pembukaan fisik lahan hutan).
 
 ---
 
@@ -453,15 +453,15 @@ Seluruh variabel kuantitatif, kategori analisis, satuan ukur, periode tahun obse
 ##### Tabel 1.8: Matriks Indikator dan Sumber Data Primer Resmi Bab 1
 | No | Nama Indikator | Kategori Analisis | Satuan Ukur | Cakupan Tahun | Institusi & Sumber Data Resmi |
 | :---: | :--- | :--- | :---: | :---: | :--- |
-| 1 | Izin Usaha Pertambangan (IUP) Baru | Faktor Tekanan Ekstraktif | Unit Izin | 2014–2024 | Kementerian ESDM (Minerbaone) |
-| 2 | Luas Wilayah Konsesi Tambang Baru | Faktor Tekanan Ekstraktif | Hektar (Ha) | 2014–2024 | Kementerian ESDM (Minerbaone) |
-| 3 | Kapasitas Terpasang PLTU Captive | Infrastruktur Energi Khusus | Megawatt (MW) | 2014–2024 | Global Energy Monitor (GEM) |
-| 4 | Fasilitas Pengolahan & Pemurnian (Smelter) | Fasilitas Industri Hilir | Unit Fasilitas | 2014–2024 | Kementerian ESDM & Studi Industri |
-| 5 | Realisasi Investasi PMDN | Arus Modal Domestik | Triliun Rupiah | 2016–2024 | Kementerian Investasi / BKPM |
-| 6 | PDRB Menurut 17 Lapangan Usaha | Struktur Ekonomi Makro | Triliun Rupiah | 2016–2024 | Badan Pusat Statistik (BPS Provinsi) |
-| 7 | PDRB Kabupaten Sentra Tambang | Struktur Ekonomi Daerah | Triliun Rupiah | 2016–2024 | BPS Kabupaten se-Sulteng |
-| 8 | Luas Kehilangan Hutan Komoditas | Dampak Tutupan Lahan | Hektar (Ha) | 2014–2023 | Global Forest Watch (GFW) |
-| 9 | Simpul Dermaga & Terminal Khusus Ekspor | Infrastruktur Rantai Pasok | Titik Koordinat & DWT | 2014–2024 | KNKT, Perpres PSN, Lap. Terbuka |
+| 1 | Izin Usaha Pertambangan (IUP) Baru | Faktor Tekanan Ekstraktif | Unit Izin | 2014ΓÇô2024 | Kementerian ESDM (Minerbaone) |
+| 2 | Luas Wilayah Konsesi Tambang Baru | Faktor Tekanan Ekstraktif | Hektar (Ha) | 2014ΓÇô2024 | Kementerian ESDM (Minerbaone) |
+| 3 | Kapasitas Terpasang PLTU Captive | Infrastruktur Energi Khusus | Megawatt (MW) | 2014ΓÇô2024 | Global Energy Monitor (GEM) |
+| 4 | Fasilitas Pengolahan & Pemurnian (Smelter) | Fasilitas Industri Hilir | Unit Fasilitas | 2014ΓÇô2024 | Kementerian ESDM & Studi Industri |
+| 5 | Realisasi Investasi PMDN | Arus Modal Domestik | Triliun Rupiah | 2016ΓÇô2024 | Kementerian Investasi / BKPM |
+| 6 | PDRB Menurut 17 Lapangan Usaha | Struktur Ekonomi Makro | Triliun Rupiah | 2016ΓÇô2024 | Badan Pusat Statistik (BPS Provinsi) |
+| 7 | PDRB Kabupaten Sentra Tambang | Struktur Ekonomi Daerah | Triliun Rupiah | 2016ΓÇô2024 | BPS Kabupaten se-Sulteng |
+| 8 | Luas Kehilangan Hutan Komoditas | Dampak Tutupan Lahan | Hektar (Ha) | 2014ΓÇô2023 | Global Forest Watch (GFW) |
+| 9 | Simpul Dermaga & Terminal Khusus Ekspor | Infrastruktur Rantai Pasok | Titik Koordinat & DWT | 2014ΓÇô2024 | KNKT, Perpres PSN, Lap. Terbuka |
 
 ---
 
@@ -471,7 +471,7 @@ Keseluruhan struktur metodologis riset Bab 1 dioperasionalkan melalui empat fase
 ##### Tabel 1.9: Matriks Tahapan dan Alur Kerangka Kerja Riset Bab 1
 | Tahapan Riset | Fokus Metodologis | Bahan & Sumber Data | Keluaran / Hasil Analisis |
 | :--- | :--- | :--- | :--- |
-| **Fase I: Pengumpulan Data** | Kurasi data resmi lintas kementerian dan lembaga | Publikasi BPS, Minerbaone, BKPM, GEM, dan GFW | Basis Data Tabular Panel Provinsi (2014–2024) |
+| **Fase I: Pengumpulan Data** | Kurasi data resmi lintas kementerian dan lembaga | Publikasi BPS, Minerbaone, BKPM, GEM, dan GFW | Basis Data Tabular Panel Provinsi (2014ΓÇô2024) |
 | **Fase II: Reklasifikasi Hukum** | Penyusunan kerangka rantai pasok hukum terintegrasi | UU No. 3/2020, PP No. 96/2021, Perpres No. 112/2022 | 3 Klaster Makro (Ekstraktif, Akar Rumput, Jasa) |
 | **Fase III: Pengujian Statistik** | Uji signifikansi hubungan dan rasio peluang | Tabel Kontinjensi, Uji Chi-Square, Odds Ratio | Bukti Kausalitas Signifikan Tekanan vs Deforestasi |
-| **Fase IV: Pemetaan Rantai Pasok** | Triangulasi data logistik dan pemodelan maritim | Laporan KNKT, Perpres PSN, Kurva Parametrik Bézier | Peta Alur Rantai Pasok Ekspor & Konsentrasi Spasial 78% |
+| **Fase IV: Pemetaan Rantai Pasok** | Triangulasi data logistik dan pemodelan maritim | Laporan KNKT, Perpres PSN, Kurva Parametrik B├⌐zier | Peta Alur Rantai Pasok Ekspor & Konsentrasi Spasial 78% |

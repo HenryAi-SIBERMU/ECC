@@ -705,3 +705,46 @@ Berikut adalah daftar lengkap 23 anomali ekstrem (data di luar kewajaran YoY >15
 > Setelah dibersihkan dari seluruh cacat kertas administrasi (pemekaran wilayah dan koreksi Sensus), rata-rata pertumbuhan penduduk Kawasan Smelter kini melesat menjadi **3.36%** (mengalahkan Non-Smelter yang terbukti aslinya hanya tumbuh **2.03%**). 
 >
 > Hal yang paling luar biasa adalah variansi (*Standard Deviation*)-nya. Setelah dibersihkan dari pemekaran, variansi wilayah Non-Smelter terjun bebas dari 5.11 menjadi sangat stabil dan tenang di angka **2.85**. Sebaliknya, Kawasan Smelter terbukti tetap bergejolak hebat di angka **5.68** karena secara konklusif mengalami "tarikan migrasi" riil, bukan sekadar kertas administrasi. Tesis hilirisasi "Boom and Bust" terbukti sempurna di seluruh 11 halaman Dashboard tanpa ada anomali yang bisa dibantah.
+
+---
+
+# Validasi 9.3 — Pergeseran Ekonomi Agraris ke Tambang dan Industri (Shift Index)
+
+> **Tanggal:** 2026-08-27  
+> **Status:** Tervalidasi ✅  
+
+## Data Provenance Map (9.3)
+Berikut adalah jejak forensik aliran data (ETL) khusus untuk membentuk indeks pergeseran (*Shift Index*) yang digunakan pada sub-bab 9.3:
+
+| Lapis Pipeline | Nama File | Lokasi Direktori | Fungsi Utama |
+| :--- | :--- | :--- | :--- |
+| **1. Data Mentah Lapis 1** (Metadata) | (API BPS) Endpoint `id=23` | BPS SIMDASI Server | Memberikan definisi "KLU" (Klasifikasi Lapangan Usaha) seperti Sektor A, B, C dan satuan ukur (Miliar Rupiah). |
+| **2. Data Mentah Lapis 2** (Values) | (API BPS) Endpoint `id=25` | BPS SIMDASI Server | Memberikan angka mentah deret waktu PDRB sektoral. |
+| **3. ETL Script 1** (Ekstraktor) | `rebuild_pdrb_sektoral_sulawesi.py` | `scripts/` | Menarik data dari BPS, membersihkan format HTML, dan menghasilkan `sulawesi_pdrb_sektoral_2016_2024.csv`. |
+| **4. Base Dataset** (Struktur) | `sulawesi_pdrb_sektoral_2016_2024.csv` | `data/processed/` | Berisi data bersih *share* persentase per sektor. |
+| **5. ETL Script 2** (Kalkulator) | `build_demografi_fase4.py` | `scripts/` | Membaca Base Dataset, menjalankan algoritma matematika (B+C)/A untuk membuat *Shift Index*. |
+| **6. Final Dataset** (Visualisasi) | `sulawesi_pdrb_shift_index_2016_2024.csv` | `data/processed/` | Data final siap konsumsi (*ready-to-plot*) yang digunakan oleh Plotly di *Dashboard*. |
+
+---
+
+## Prolog: Apa yang Divisualisasikan di Sub-bab 9.3?
+Grafik pada halaman ini secara spesifik mengambil data sektoral PDRB untuk memvisualisasikan satu narasi utama: **Kematian perlahan sektor agraris akibat digerus oleh dominasi tambang & pabrik pengolahan.**
+
+Secara teknis algoritma, *script* ETL (`scripts/build_demografi_fase4.py`) melakukan operasi matematika sederhana pada data mentah PDRB BPS (SIMDASI Lapis 2) sebagai berikut:
+
+### 1. Membuat Blok Ekstraktif (Sektor B + C)
+Skrip menggabungkan secara penjumlahan nilai *share* dari dua kolom utama:
+- `pct_pdrb_pertambangan_B` (Sektor galian tambang mentah).
+- `pct_pdrb_industri_C` (Sektor pabrik pengolahan/smelter).
+Kedua sektor ini dijadikan satu entitas yang mewakili kekuatan industri padat modal raksasa baru (hilirisasi).
+
+### 2. Membandingkannya dengan Blok Agraris (Sektor A)
+Kekuatan ekstraktif baru tadi (B+C) kemudian diadu secara grafis (*line chart*) secara berhadapan dengan kolom `pct_pdrb_pertanian_A`, yang merepresentasikan ekonomi akar rumput tradisional (petani, nelayan, perkebunan).
+
+### 3. Menghitung Shift Index (Rasio Dominasi)
+Skrip melakukan pembagian absolut: **(B + C) / A**.
+- **Logika Rasio:** Jika hasil indeks bernilai di atas angka **1**, itu menandakan terjadinya titik balik (Tipping Point) di mana tulang punggung ekonomi provinsi tersebut sudah bukan lagi agraris, melainkan sepenuhnya dikendalikan oleh rantai tambang dan *smelter*.
+- **Representasi Visual:** Grafik di sub-bab 9.3 menceritakan narasi dramatis ini secara *time-series*. Bagaimana sebelum keran hilirisasi dibuka, garis Sektor Pertanian (A) selalu berada jauh di puncak, namun di tahun-tahun berikutnya, garis Tambang+Industri (B+C) meroket tajam menyalip garis Pertanian hingga memaksanya menukik turun.
+
+**Catatan Forensik:**
+Huruf "A", "B", dan "C" bukanlah variabel karangan, melainkan kode murni **KLU (Klasifikasi Lapangan Usaha)** bawaan BPS (seperti yang dijabarkan dalam dokumen `Forensik_API_BPS.md`). Oleh karena itu, rasio (B+C)/A ini sangat kuat untuk dipertanggungjawabkan secara argumen akademik dan *data engineering*.

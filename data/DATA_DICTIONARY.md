@@ -5,10 +5,10 @@ Dokumen ini memetakan **seluruh dataset di folder `data/processed`** ke sumber a
 
 | No | Nama File Processed | Sumber Asli (Raw/Master) | Kategori/Medium | Script Transformasi | Digunakan pada Bab/Sub-bab | Deskripsi / Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | `sulawesi_ekspor_komoditas_2020_2026.csv` | `data/raw/eksporimpor/` | API BPS | - | Bab 1.1, 1.2, 12 | Rincian ekspor by komoditas spesifik. |
-| 2 | `sulawesi_ekspor_2022_2026.csv` | `data/raw/eksporimpor/` | API BPS | - | Bab 1.1 | Agregat total ekspor Sulawesi. |
-| 3 | `sulawesi_ekspor_detail_2020_2026.csv` | `data/raw/eksporimpor/` | API BPS | - | Bab 1.1 | Rincian ekspor by HS Code. |
-| 4 | `sulawesi_ekspor_negara_2020_2026.csv` | `data/raw/eksporimpor/` | API BPS | - | Bab 1.1, 12 | Rincian ekspor tujuan negara. |
+| 1 | `sulawesi_ekspor_komoditas_2020_2026.csv` | `data/raw/eksporimpor/` | API BPS | - | Bab 12 | Rincian ekspor by komoditas spesifik. |
+| 2 | `sulawesi_ekspor_2022_2026.csv` | `data/raw/eksporimpor/` | API BPS | - | Bab 12 | Agregat total ekspor Sulawesi. |
+| 3 | `sulawesi_ekspor_detail_2020_2026.csv` | `data/raw/eksporimpor/` | API BPS | - | Bab 12 | Rincian ekspor by HS Code. |
+| 4 | `sulawesi_ekspor_negara_2020_2026.csv` | `data/raw/eksporimpor/` | API BPS | - | Bab 12 | Rincian ekspor tujuan negara. |
 | 5 | `sulawesi_pdrb_sektoral_2016_2024.csv` | `data/raw/bps_pdrb/` | API BPS (Subject 52, Var 141/153) | - | Bab 1.1.1, 1.1.3, 9.3 | Data PDRB Sektoral Sulawesi, diklasifikasi menjadi Ekstraktif dan Akar Rumput. |
 | 6 | `sulawesi_pdrb_sektoral_kabupaten_2016_2024.csv` | `data/raw/bps_pdrb/` | API BPS (Subject 52, Var 141/153) | - | Bab 1.1.2 | Data PDRB Sektoral tingkat Kabupaten Sulawesi. |
 | 7 | `sulawesi_esdm_nikel.csv` | `minerbaone_permits.csv` (MODI ESDM) & `CGS_Dataset.xlsx` | Database Smelter CGS & ESDM MODI | Gabungan Data / Manual | Bab 1.2 & 2.1 | Master data Fasilitas Smelter Nikel di Sulawesi. |

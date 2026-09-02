@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Laporan Metodologi Bab 2 - Kualitas Lingkungan</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true, theme:'dark'});</script>
+<style>
+body { font-family: Arial, sans-serif; max-width: 920px; margin: 0 auto; padding: 32px; background: #0E1117; color: #D4D4D4; line-height: 1.65; }
+.hdr-sub { color: #43A047; font-size: 8.5pt; font-weight: 700; text-transform: uppercase; }
+.hdr-title { color: #81C784; font-size: 15pt; font-weight: 800; text-transform: uppercase; border-bottom: 2px solid #2E7D32; padding-bottom: 8px; }
+h2 { color: #81C784; text-transform: uppercase; border-bottom: 1px solid #2E7D32; }
+h4 { color: #A5D6A7; }
+.note-box { background: #132213; border-left: 4px solid #2E7D32; padding: 10px 14px; margin: 12px 0; }
+.formula { background: #0D1B0E; border: 1px solid #2E7D32; color: #A5D6A7; padding: 8px 12px; font-family: monospace; }
+.data-th { background: #1B5E20; color: white; padding: 6px; text-align: left; border: 1px solid #2E7D32; }
+.data-td { padding: 6px; border: 1px solid #243524; vertical-align: top; }
+.data-tr-even .data-td { background: #131B13; }
+.mermaid { background: #0D1610; border: 1px solid #2E7D32; padding: 12px; margin: 10px 0; }
+</style>
+</head>
+<body>
+<div class="hdr-sub">CELIOS - Center of Economic and Law Studies | Laporan Riset Metodologi D3TLH</div>
+<div class="hdr-title">BAB II: Metodologi Analisis Kualitas Lingkungan di Kawasan Smelter</div>
+<p>Dokumen laporan metodologi ini menyajikan kerangka ilmiah, formulasi matematis, prosedur pengolahan data, dan pengujian statistik yang dioperasionalkan pada <strong>Bab 2: Kualitas Lingkungan di Kawasan Smelter</strong>.</p>
+<h2>2.1. Dampak Limbah Tailing: Konsentrasi Smelter vs Indeks Kualitas Air (IKA)</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Data Smelter, IKA, Limbah B3, dan Sungai Tercemar dari folder <code>data/processed</code>. Visualisasi dashboard menampilkan peta choropleth dan uji Crosstabulation SPSS-style.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Pengoperasian <strong>778 fasilitas mega-smelter</strong> yang didukung oleh kapasitas <strong>9,825 MW PLTU Captive</strong> meningkatkan intensitas emisi dan beban lingkungan di Pulau Sulawesi. Data menunjukkan konversi tutupan hutan mencapai <strong>1,001,654 Hektar</strong>, estimasi timbulan limbah B3/tailing sebesar <strong>20.9 Juta Ton</strong> per tahun, dan rata-rata IKA tahun 2023 sebesar <strong>58.8</strong>.</p>
+<h4>B. Alur Logika Metodologis Analisis Konsentrasi Smelter vs IKA</h4>
+<div class="mermaid">flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Smelter ESDM<br/><i>Provinsi, jumlah fasilitas, status operasional</i>"] --> C
+        B["Data IKA KLHK/BPS<br/><i>Provinsi, Tahun, Indeks Kualitas Air</i>"] --> C
+        D["Data Limbah B3 NGO & Sungai Tercemar<br/><i>Tailing, slag, kasus pencemaran</i>"] --> E
+    end
+
+    subgraph Panel_Processing["2. Pembentukan Panel 2.1"]
+        C["Agregasi Jumlah Smelter per Provinsi"] --> F["Merge dengan IKA Provinsi-Tahun"]
+        F --> G["Panel Data: Provinsi x Tahun"]
+        E --> H["Validasi spasial peta limbah dan sungai tercemar"]
+    end
+
+    subgraph Statistical_Test["3. Crosstabulation & Trendline"]
+        G --> I["Binning Median<br/>Smelter Tinggi/Rendah; IKA Kritis/Baik"]
+        I --> J["Uji Chi-Square Pearson"]
+        J --> K["Odds Ratio<br/>Risiko IKA kritis pada kelompok smelter tinggi"]
+    end
+
+    H --> L["Pembacaan empiris kualitas air kawasan smelter"]
+    K --> L</div>
+<h4>C. Formulasi Matematis</h4>
+<div class="formula">Jumlah_Smelter_Provinsi = COUNT(Smelter_i) GROUP BY Provinsi</div>
+<div class="formula">Rata_Rata_IKA_Provinsi_Tahun = MEAN(IKA) GROUP BY Provinsi, Tahun</div>
+<div class="formula">Chi_Square = SUM((O_ij - E_ij)^2 / E_ij)</div>
+<div class="formula">Odds_Ratio = (a * d) / (b * c)</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 2.1: Rincian Empiris Konsentrasi Smelter, IKA, Limbah B3, dan Sungai Tercemar (2023)</div>
+<table>
+<thead><tr><th class="data-th">Provinsi</th><th class="data-th">Jumlah Smelter</th><th class="data-th">IKA</th><th class="data-th">Limbah B3 (Ton/Tahun)</th><th class="data-th">Sungai Tercemar</th><th class="data-th">Daftar Sungai/Pesisir</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Sulawesi Tengah</td><td class="data-td">344</td><td class="data-td">63.6</td><td class="data-td">12,000,000</td><td class="data-td">4</td><td class="data-td">Sungai Bahodopi, Sungai Laroenai, Sungai Morowali, Pesisir Fatufia</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Tenggara</td><td class="data-td">262</td><td class="data-td">61.3</td><td class="data-td">7,700,000</td><td class="data-td">3</td><td class="data-td">Sungai Lasolo, Sungai Lalindu, Sungai Konaweha</td></tr>
+<tr><td class="data-td">Sulawesi Selatan</td><td class="data-td">111</td><td class="data-td">58.0</td><td class="data-td">1,000,000</td><td class="data-td">1</td><td class="data-td">Pesisir dan Sungai Bantaeng</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Barat</td><td class="data-td">39</td><td class="data-td">58.8</td><td class="data-td">0</td><td class="data-td">0</td><td class="data-td">-</td></tr>
+<tr><td class="data-td">Sulawesi Utara</td><td class="data-td">15</td><td class="data-td">52.1</td><td class="data-td">0</td><td class="data-td">0</td><td class="data-td">-</td></tr>
+<tr class="data-tr-even"><td class="data-td">Gorontalo</td><td class="data-td">7</td><td class="data-td">58.7</td><td class="data-td">0</td><td class="data-td">0</td><td class="data-td">-</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 2.3: Crosstabulation Kepadatan Smelter vs Indeks Kualitas Air</div>
+<table>
+<thead><tr><th class="data-th">Kategori Smelter (X)</th><th class="data-th">IKA Kritis Count</th><th class="data-th">IKA Kritis Expected</th><th class="data-th">IKA Baik Count</th><th class="data-th">IKA Baik Expected</th><th class="data-th">Total</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Rendah (<75.0)</td><td class="data-td">15</td><td class="data-td">12.0</td><td class="data-td">9</td><td class="data-td">12.0</td><td class="data-td">24</td></tr>
+<tr class="data-tr-even"><td class="data-td">Tinggi (>=75.0)</td><td class="data-td">9</td><td class="data-td">12.0</td><td class="data-td">15</td><td class="data-td">12.0</td><td class="data-td">24</td></tr>
+<tr><td class="data-td">Total</td><td class="data-td">24</td><td class="data-td">24.0</td><td class="data-td">24</td><td class="data-td">24.0</td><td class="data-td">48</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 2.4: Chi-Square Tests Sub-bab 2.1</div>
+<table>
+<thead><tr><th class="data-th">Jenis Uji</th><th class="data-th">Value</th><th class="data-th">df</th><th class="data-th">Asymp. Sig. (2-sided)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Pearson Chi-Square</td><td class="data-td">2.083</td><td class="data-td">1</td><td class="data-td">= 0.1489</td></tr>
+<tr class="data-tr-even"><td class="data-td">Likelihood Ratio</td><td class="data-td">2.099</td><td class="data-td">1</td><td class="data-td">= 0.1474</td></tr>
+<tr><td class="data-td">Linear-by-Linear Association</td><td class="data-td">2.938</td><td class="data-td">1</td><td class="data-td">= 0.0866</td></tr>
+<tr class="data-tr-even"><td class="data-td">N of Valid Cases</td><td class="data-td">48</td><td class="data-td"></td><td class="data-td"></td></tr>
+</tbody>
+</table>
+<h4>E. Analisis Temuan Empiris</h4>
+<p>Kegagalan statistik mendeteksi signifikansi membongkar fakta krusial: Indeks Kualitas Air (IKA) provinsi adalah metrik agregat yang mengencerkan tekanan ekologis di tapak. Pencemaran tailing fatal di area tambang dapat tertutupi oleh data sungai-sungai lain di luar lingkar industri.</p>
+</body>
+</html>
