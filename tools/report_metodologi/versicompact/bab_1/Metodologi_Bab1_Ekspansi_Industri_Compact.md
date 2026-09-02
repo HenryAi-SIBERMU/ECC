@@ -127,5 +127,3 @@ flowchart LR
 > 1. **Konfigurasi Dekomposisi Sektoral:** Menghasilkan matriks pangsa dan rasio kesenjangan spasial guna mengukur ketergantungan monolitik ekonomi makro-mikro.  
 > 2. **Konfigurasi Aglomerasi Geospasial:** Memetakan derajat konsentrasi spasial fasilitas hilirisasi, pembangkit off-grid, dan simpul maritim rantai pasok ekspor.  
 > 3. **Konfigurasi Inferensial Tabulasi Silang:** Menetapkan protokol pengujian Chi-Square dan Odds Ratio untuk membuktikan signifikansi kausalitas tekanan industri terhadap degradasi lingkungan.
-
-> *Catatan Metodologis: Seluruh analisis statistik kuantitatif dalam dokumen ini dijalankan pada matriks data panel provinsi-tahun (N = 60 observasi) dan kabupaten sentra industri. Angka komputasi dan sebaran spasial terperinci terintegrasi penuh pada naskah laporan Bab 1 dan antarmuka interaktif dashboard CELIOS.*

@@ -482,13 +482,6 @@ def generate_bab1_compact():
                    "2. Konfigurasi Aglomerasi Geospasial: Memetakan derajat konsentrasi spasial fasilitas hilirisasi, pembangkit off-grid, dan simpul maritim rantai pasok ekspor.\n"
                    "3. Konfigurasi Inferensial Tabulasi Silang: Menetapkan protokol pengujian Chi-Square dan Odds Ratio untuk membuktikan signifikansi kausalitas tekanan industri terhadap degradasi lingkungan.",
             pt=8, color=C_BODY)
-
-    add_note_box(doc, (
-        "Catatan Metodologis: Seluruh analisis statistik kuantitatif dalam dokumen ini dijalankan pada matriks data panel "
-        "provinsi-tahun (N = 60 observasi) dan kabupaten sentra industri. Angka komputasi dan sebaran spasial terperinci "
-        "terintegrasi penuh pada naskah laporan Bab 1 dan antarmuka interaktif dashboard CELIOS."
-    ))
-
     # ── SIMPAN DOKUMEN DOCX (DUAL SAVE) ─────────────────────────
     out_dir_compact = Path(__file__).resolve().parent
     out_dir_bab1    = out_dir_compact.parent.parent / "bab_1"
@@ -632,8 +625,6 @@ flowchart LR
 > 1. **Konfigurasi Dekomposisi Sektoral:** Menghasilkan matriks pangsa dan rasio kesenjangan spasial guna mengukur ketergantungan monolitik ekonomi makro-mikro.  
 > 2. **Konfigurasi Aglomerasi Geospasial:** Memetakan derajat konsentrasi spasial fasilitas hilirisasi, pembangkit off-grid, dan simpul maritim rantai pasok ekspor.  
 > 3. **Konfigurasi Inferensial Tabulasi Silang:** Menetapkan protokol pengujian Chi-Square dan Odds Ratio untuk membuktikan signifikansi kausalitas tekanan industri terhadap degradasi lingkungan.
-
-> *Catatan Metodologis: Seluruh analisis statistik kuantitatif dalam dokumen ini dijalankan pada matriks data panel provinsi-tahun (N = 60 observasi) dan kabupaten sentra industri. Angka komputasi dan sebaran spasial terperinci terintegrasi penuh pada naskah laporan Bab 1 dan antarmuka interaktif dashboard CELIOS.*
 """
 
     md_compact = out_dir_compact / "Metodologi_Bab1_Ekspansi_Industri_Compact.md"
