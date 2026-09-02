@@ -131,7 +131,7 @@ git commit -m "feat: generate Bab {X} compact methodology (ultra-dense layout, e
 | Bab | Topik Metodologi | Status Versi Compact | Jumlah Halaman Word |
 | :---: | :--- | :---: | :---: |
 | **Bab 1** | Ekspansi Industri Ekstraktif & Infrastruktur Penunjang | **SELESAI (Standard Acuan)** | **Tepat 2 Lembar** |
-| **Bab 2** | Beban Kualitas Lingkungan Hidup (IKU, IKA, Tailing, Deforestasi, Biodiversitas) | Menunggu Pengerjaan | Target: 2–4 Lembar |
+| **Bab 2** | Beban Kualitas Lingkungan Hidup (IKU, IKA, Tailing, Deforestasi, Biodiversitas) | **SELESAI** | **Tepat 2 Lembar** |
 | **Bab 3** | Beban Kesehatan & Kerugian Ekonomi Lingkungan | Menunggu Pengerjaan | Target: 2–4 Lembar |
 | **Bab 4** | Ketimpangan Ekonomi & Polarisasi Kesejahteraan | Menunggu Pengerjaan | Target: 2–4 Lembar |
 | **Bab 5** | Pola Penerbitan Izin & Tata Kelola Ruang Tambang | Menunggu Pengerjaan | Target: 2–4 Lembar |
