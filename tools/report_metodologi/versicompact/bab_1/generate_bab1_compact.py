@@ -157,6 +157,13 @@ def add_formula(doc, text):
     para_shd(p, 'EDF7EE')
     add_run(p, text, pt=8, color=G_MID, mono=True)
 
+def add_caption(doc, caption_text):
+    p = doc.add_paragraph()
+    p.paragraph_format.space_before = Pt(5)
+    p.paragraph_format.space_after  = Pt(2)
+    add_run(p, caption_text, bold=True, italic=True, pt=8.5, color=G_MID)
+    return p
+
 def add_note_box(doc, text):
     p = doc.add_paragraph()
     p.paragraph_format.space_before = Pt(3)
@@ -341,41 +348,28 @@ def generate_bab1_compact():
     ])
     add_formula(doc, "χ² = Σ [ (O_ij - E_ij)² / E_ij ]   |   Odds Ratio (OR) = (a × d) / (b × c)")
 
-    table_crosstab_config = [
-        ["Variabel Independen (X)",
-         "Jumlah Izin Baru (IUP) / Luas Konsesi Baru (Ha)",
-         "Realisasi Investasi PMDN Sektor Ekstraktif (Juta / Triliun Rp)"],
-        ["Variabel Dependen (Y)",
-         "Deforestasi Komoditas (Ha) / Total Deforestasi Alam Primer (Ha)",
-         "Total Deforestasi Alam (Ha) / Deforestasi Komoditas (Ha)"],
-        ["Hipotesis Nol (H₀)",
-         "Tingkat penerbitan izin/luas konsesi tidak berhubungan dengan laju deforestasi.",
-         "Tingginya realisasi investasi PMDN tidak berhubungan dengan laju deforestasi."],
-        ["Hipotesis Alternatif (H₁)",
-         "Ada hubungan positif antara tingginya penerbitan izin dengan tingginya laju deforestasi.",
-         "Ada hubungan positif antara tingginya realisasi investasi PMDN dengan laju deforestasi."],
-        ["Decision Rule (Alpha 5%)",
-         "Jika P-Value < 0,05, maka Tolak H₀ (terbukti signifikan bahwa ekspansi perizinan mendorong deforestasi).",
-         "Jika P-Value < 0,05, maka Tolak H₀ (terbukti signifikan bahwa realisasi investasi mendorong deforestasi)."],
-        ["Threshold Kategori (Median)",
-         "Nilai Median Data Panel (N=60): X ≥ 2,0 izin; Y ≥ 10.961,8 Ha (Kategori High vs. Low).",
-         "Nilai Median Data Panel (N=48): X > Rp3.146,4 Miliar; Y ≥ 10.451,7 Ha (Kategori High vs. Low)."],
-        ["Orientasi Odds Ratio (OR)",
-         "OR = (a × d) / (b × c) dengan a = Izin Tinggi & Deforestasi Tinggi; mengukur risiko deforestasi tinggi pada kelompok penerbitan izin tinggi.",
-         "OR = (a × d) / (b × c) dengan a = Investasi Tinggi & Deforestasi Tinggi; mengukur risiko deforestasi tinggi pada kelompok realisasi investasi tinggi."]
+    add_caption(doc, "Tabel 1.5b: Konfigurasi Variabel Uji Chi-Square (Sub-bab 1.3)")
+    table_1_5b_rows = [
+        ["Variabel Independen (X)", "Jumlah Izin Baru (IUP) / Luas Konsesi Baru (Ha)"],
+        ["Variabel Dependen (Y)", "Deforestasi Komoditas (Ha) / Total Deforestasi Alam (Ha)"],
+        ["Hipotesis Nol (H0)", "Tingkat penerbitan izin/luas konsesi tidak berhubungan dengan laju deforestasi."],
+        ["Hipotesis Alternatif (H1)", "Ada hubungan positif antara tingginya penerbitan izin dengan tingginya laju deforestasi."],
+        ["Decision Rule (Alpha 5%)", "Jika P-Value < 0.05, maka Tolak H0 (terbukti signifikan bahwa ekspansi perizinan mendorong deforestasi)."],
+        ["Threshold Kategori", "Nilai Median Data Panel (N=60): X >= 2.0 izin; Y >= 10,961.8 Ha."],
+        ["Orientasi Odds Ratio", "OR = ( a × d ) / ( b × c ) dengan a = Izin Tinggi & Deforestasi Tinggi; mengukur risiko deforestasi tinggi pada kelompok penerbitan izin tinggi."]
     ]
 
     add_table_styled(
         doc,
-        headers=["Komponen Uji", "Definisi Variabel & Parameter (Sub-bab 1.3)", "Definisi Variabel & Parameter (Sub-bab 1.4)"],
-        rows=table_crosstab_config,
-        col_widths_cm=[3.6, 6.7, 6.7],
-        alignments=['L', 'L', 'L']
+        headers=["Komponen Uji", "Definisi Variabel (Sub-bab 1.3)"],
+        rows=table_1_5b_rows,
+        col_widths_cm=[4.5, 12.5],
+        alignments=['L', 'L']
     )
 
     add_h3(doc, "1.4 Analisis Realisasi Investasi PMDN dan Dampak Terhadap Tutupan Hutan")
     add_body(doc, [
-        ("Analisis arus modal investasi PMDN mengevaluasi elastisitas suntikan modal terhadap laju alih fungsi hutan dan emisi komoditas. Formulasi pengujian inferensial dan parameter kategorisasi tabulasi silang disinkronkan secara terpadu pada matriks konfigurasi di atas dengan evaluasi efek jeda waktu (time-lag) ekspansi fisik di lapangan.", False, False)
+        ("Analisis arus modal investasi PMDN mengevaluasi elastisitas suntikan modal terhadap laju alih fungsi hutan dan emisi komoditas. Formulasi pengujian inferensial Chi-Square dan Odds Ratio pada Sub-bab 1.4 mengadopsi protokol pengujian kontinjensi 2×2 yang sama, dengan variabel independen realisasi investasi modal domestik (X > Rp3.146,4 Miliar) dan evaluasi efek jeda waktu (time-lag) ekspansi fisik di lapangan.", False, False)
     ])
 
     add_h3(doc, "1.5 Pelabuhan Ekspor & Peta Jalur Distribusi Logistik Nikel Sulawesi")
@@ -521,19 +515,19 @@ Pengujian inferensial menggunakan desain matriks kontinjensi 2×2 berbasis **amb
 
 > `χ² = Σ [ (O_ij - E_ij)² / E_ij ]   |   Odds Ratio (OR) = (a × d) / (b × c)`
 
-##### Matriks Konfigurasi Variabel Uji Chi-Square & Odds Ratio (Sub-bab 1.3 & 1.4)
-| Komponen Uji | Definisi Variabel & Parameter (Sub-bab 1.3) | Definisi Variabel & Parameter (Sub-bab 1.4) |
-| :--- | :--- | :--- |
-| **Variabel Independen (X)** | Jumlah Izin Baru (IUP) / Luas Konsesi Baru (Ha) | Realisasi Investasi PMDN Sektor Ekstraktif (Juta / Triliun Rp) |
-| **Variabel Dependen (Y)** | Deforestasi Komoditas (Ha) / Total Deforestasi Alam Primer (Ha) | Total Deforestasi Alam (Ha) / Deforestasi Komoditas (Ha) |
-| **Hipotesis Nol (H₀)** | Tingkat penerbitan izin/luas konsesi tidak berhubungan dengan laju deforestasi. | Tingginya realisasi investasi PMDN tidak berhubungan dengan laju deforestasi. |
-| **Hipotesis Alternatif (H₁)** | Ada hubungan positif antara tingginya penerbitan izin dengan tingginya laju deforestasi. | Ada hubungan positif antara tingginya realisasi investasi PMDN dengan laju deforestasi. |
-| **Decision Rule (Alpha 5%)** | Jika P-Value < 0,05, maka Tolak H₀ (terbukti signifikan bahwa ekspansi perizinan mendorong deforestasi). | Jika P-Value < 0,05, maka Tolak H₀ (terbukti signifikan bahwa realisasi investasi mendorong deforestasi). |
-| **Threshold Kategori (Median)** | Nilai Median Data Panel (N=60): X ≥ 2,0 izin; Y ≥ 10.961,8 Ha (Kategori High vs. Low). | Nilai Median Data Panel (N=48): X > Rp3.146,4 Miliar; Y ≥ 10.451,7 Ha (Kategori High vs. Low). |
-| **Orientasi Odds Ratio (OR)** | OR = (a × d) / (b × c) dengan a = Izin Tinggi & Deforestasi Tinggi; mengukur risiko deforestasi tinggi pada kelompok penerbitan izin tinggi. | OR = (a × d) / (b × c) dengan a = Investasi Tinggi & Deforestasi Tinggi; mengukur risiko deforestasi tinggi pada kelompok realisasi investasi tinggi. |
+##### Tabel 1.5b: Konfigurasi Variabel Uji Chi-Square (Sub-bab 1.3)
+| Komponen Uji | Definisi Variabel (Sub-bab 1.3) |
+| :--- | :--- |
+| **Variabel Independen (X)** | Jumlah Izin Baru (IUP) / Luas Konsesi Baru (Ha) |
+| **Variabel Dependen (Y)** | Deforestasi Komoditas (Ha) / Total Deforestasi Alam (Ha) |
+| **Hipotesis Nol (H0)** | Tingkat penerbitan izin/luas konsesi tidak berhubungan dengan laju deforestasi. |
+| **Hipotesis Alternatif (H1)** | Ada hubungan positif antara tingginya penerbitan izin dengan tingginya laju deforestasi. |
+| **Decision Rule (Alpha 5%)** | Jika P-Value < 0.05, maka Tolak H0 (terbukti signifikan bahwa ekspansi perizinan mendorong deforestasi). |
+| **Threshold Kategori** | Nilai Median Data Panel (N=60): X >= 2.0 izin; Y >= 10,961.8 Ha. |
+| **Orientasi Odds Ratio** | OR = ( a × d ) / ( b × c ) dengan a = Izin Tinggi & Deforestasi Tinggi; mengukur risiko deforestasi tinggi pada kelompok penerbitan izin tinggi. |
 
 ### 1.4 Analisis Realisasi Investasi PMDN dan Dampak Terhadap Tutupan Hutan
-Analisis arus modal investasi PMDN mengevaluasi elastisitas suntikan modal terhadap laju alih fungsi hutan dan emisi komoditas. Formulasi pengujian inferensial dan parameter kategorisasi tabulasi silang disinkronkan secara terpadu pada matriks konfigurasi di atas dengan evaluasi efek jeda waktu (time-lag) ekspansi fisik di lapangan.
+Analisis arus modal investasi PMDN mengevaluasi elastisitas suntikan modal terhadap laju alih fungsi hutan dan emisi komoditas. Formulasi pengujian inferensial Chi-Square dan Odds Ratio pada Sub-bab 1.4 mengadopsi protokol pengujian kontinjensi 2×2 yang sama, dengan variabel independen realisasi investasi modal domestik (X > Rp3.146,4 Miliar) dan evaluasi efek jeda waktu (time-lag) ekspansi fisik di lapangan.
 
 ### 1.5 Pelabuhan Ekspor & Peta Jalur Distribusi Logistik Nikel Sulawesi
 Simpul logistik pelabuhan ekspor diverifikasi melalui triangulasi laporan investigasi keselamatan transportasi maritim (KNKT), penetapan regulasi Proyek Strategis Nasional (PSN), dan laporan operasional korporasi. Alur pelayaran pengangkutan curah nikel menuju pasar internasional dimodelkan secara spasial menggunakan persamaan kurva Bézier kuadratik di atas koordinat bola bumi guna memetakan jalur lalu lintas maritim yang rentan kecelakaan tongkang.
