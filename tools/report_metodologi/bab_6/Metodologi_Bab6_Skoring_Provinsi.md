@@ -294,3 +294,58 @@ Kepadatan konsesi tambang nikel di Sulbar tercatat hanya **0,26% dari luas darat
 4. **Daya Dukung Sosial (Skor 1.0 / 5 — Tidak Melampaui Batas):** Minim konflik agraria struktural skala besar yang melibatkan industri tambang (1 jiwa terdampak, 1 insiden kriminalisasi, dan nihil sengketa FPIC), mencerminkan relasi sosial-ekologis yang relatif stabil.
 5. **Veto Kebijakan (Skor 1.0 / 5 — Tidak Melampaui Batas):** Penerbitan konsesi tambang nikel baru pasca-2014 sangat terbatas (27 IUP, Z = -0.68σ, Likert 1.0) dan tidak teridentifikasi adanya korporasi tambang ilegal skala besar yang beroperasi di kawasan hutan.
 6. **Vonis Komposit Sulawesi Barat (Skor 1.2 / 5.0 — Tidak Melampaui Batas):** Status **Tidak Melampaui Batas** (WSM: 2.36 / 10.0). Status terjaga ini membuktikan bahwa tanpa intervensi industri smelter nikel dan PLTU batubara, daya lentur lingkungan hidup regional dapat dipertahankan dalam ambang aman.
+
+---
+
+### 6.6.5 Evaluasi Empiris D3TLH: Provinsi Gorontalo
+> **PROFIL EMPIRIS: Provinsi Gorontalo (Bioregion Terjaga & Bebas Polusi Smelter Nikel)**  
+> Kabupaten/Kota: 6 Daerah  |  Pusat Agraria: Lembah Pertanian Jagung & Danau Limboto  |  Populasi BPS: 1.171.681 Jiwa  
+> Karakteristik Krisis: Kualitas atmosfer NO2 satelit paling bersih se-Sulawesi (3,76e-06 mol/m²), deforestasi primer dan emisi karbon terendah, nihil PLTU captive batubara maupun limbah B3 smelter, namun memikul anomali ISPA akibat faktor mikroklimat topografi cekungan dan residu pembakaran biomassa jagung.
+
+#### A. Narasi Temuan Lapangan Gorontalo
+Sebagai provinsi dengan luas daratan dan populasi terkecil di Pulau Sulawesi (1,17 juta jiwa), **Provinsi Gorontalo mencatatkan Skor Komposit 1.2 / 5.0 (Status: Tidak Melampaui Batas)**. Bersama dengan Sulawesi Barat, Gorontalo berada pada kuadran **ekologis terjaga (low-stress environment)** yang mempertegas validitas model Z-Score EWM: ketika suatu wilayah tidak dieksploitasi oleh mega-proyek hilirisasi nikel dan PLTU captive batubara, integritas daya dukung lingkungannya tetap berada di bawah ambang batas bahaya.
+
+Gorontalo membukukan rekor **konsentrasi gas troposferik NO2 paling bersih se-Pulau Sulawesi (3,76e-06 mol/m², Z = -1.40σ, Likert 0.0)**, laju deforestasi primer paling rendah (98.063 Ha, Z = -0.83σ), serta pelepasan emisi karbon deforestasi terendah (53,66 Jt Ton CO2e, Z = -0.85σ). Kepadatan izin tambang nikel hanya mencapai **0,46% dari daratan provinsi (Z = -1.04σ, Likert 0.0)**. Satu-satunya anomali yang mencuat adalah rasio morbiditas ISPA sebesar 2,41x lipat (Z = +0.79σ, Likert 4.0) yang dipicu oleh faktor mikroklimat topografi cekungan Lembah Limboto, debu jalanan pedesaan, serta pembakaran residu tongkol jagung pascapanen, bukan dari cerobong batubara.
+
+#### B. Matriks Hasil Uji Empiris (Gorontalo)
+##### Tabel 6.21: Bedah Matematika 20 Indikator Empiris Provinsi Gorontalo (Model Hybrid Z-Score & EWM)
+| Pilar | Indikator Empiris | Fakta Mentah (A) | Nilai Z-Score | Bobot EWM | Skor Likert | Status Ekologis |
+| :---: | :--- | :---: | :---: | :---: | :---: | :--- |
+| Pilar Udara | Kapasitas PLTU Captive Beroperasi | 0 MW | -0.57σ | 0.0773 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Udara | Konsentrasi Gas NO2 Troposferik Satelit | 3.76e-06 mol/m² | -1.40σ | 0.0224 | 0.0 / 5 | Tidak Melampaui Batas |
+| Pilar Udara | Morbiditas ISPA (Incidence Rate Ratio) | 2.41x lipat | +0.79σ | 0.0461 | 4.0 / 5 | Melampaui Batas |
+| Pilar Udara | Proporsi Timbulan Limbah B3 Industri | 0.00 Jt Ton | -0.54σ | 0.0829 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Udara | Pelepasan Emisi Karbon Deforestasi GFW | 53.66 Jt Ton CO2e | -0.85σ | 0.0395 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Air | Indeks Kualitas Air (IKA) Terkini | 58.1 Poin | +0.46σ | 0.0262 | 3.0 / 5 | Mendekati Batas |
+| Pilar Air | Morbiditas Diare (Incidence Rate Ratio) | 0.98x lipat | -0.16σ | 0.0164 | 2.0 / 5 | Tidak Melampaui Batas |
+| Pilar Air | Konflik Ruang Laut Nelayan vs Tambang | 0 Kasus | -0.87σ | 0.0442 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Air | Akumulasi Beban Tailing, Slag & DSTP | 0.00 Jt Ton | -0.55σ | 0.0822 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Lahan | Bencana Hidrometeorologi (Banjir & Longsor) | 0 Kejadian | -1.09σ | 0.0271 | 0.0 / 5 | Tidak Melampaui Batas |
+| Pilar Lahan | Deforestasi Hutan Alam Primer GFW | 98,063 Ha | -0.83σ | 0.0346 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Lahan | Perambahan Tambang di Kawasan Hutan Lindung | 2,019 Ha | -0.73σ | 0.0392 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Lahan | Aktor Deforestasi Komoditas Tambang & Sawit | 63,041 Ha | -0.81σ | 0.0361 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Lahan | Kepadatan Konsesi IUP Nikel vs Daratan | 0.46% | -1.04σ | 0.0320 | 0.0 / 5 | Tidak Melampaui Batas |
+| Pilar Sosial | Manipulasi Persetujuan Konsultasi Warga (FPIC) | 0 Kasus | -0.68σ | 0.0635 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Sosial | Korban Perampasan Ruang Hidup & Krisis Agraria | 0 Jiwa | -0.57σ | 0.0781 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Sosial | Insiden Kriminalisasi Warga & Pembela HAM | 0 Insiden | -1.00σ | 0.0331 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Sosial | Defisit Kelayakan Standar Faskes SPA | 0.0 % Gap | -0.92σ | 0.0430 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Veto | Penerbitan Obral Konsesi WIUP Baru Pasca-2014 | 7 Izin | -0.88σ | 0.0415 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Veto | Korporat Tambang Pelanggar Hukum Beroperasi Ilegal | 1 Korporasi | -0.45σ | 0.0473 | 2.0 / 5 | Tidak Melampaui Batas |
+
+##### Tabel 6.22: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Gorontalo
+| Pilar / Dimensi | Cakupan Indikator Kunci | Skor Likert Pilar (0-5) | Status Ekologis | Interpretasi Temuan Lapangan Gorontalo |
+| :---: | :--- | :---: | :---: | :--- |
+| Pilar 1: Udara | PLTU (0 MW), NO2 (3.8e-6), ISPA (2.4x), B3 (0 Jt Ton), CO2 (53.7 Jt Ton) | 1.4 / 5 | Tidak Melampaui Batas | Konsentrasi NO2 Satelit Terbersih Se-Sulawesi & Nihil PLTU Captive |
+| Pilar 2: Air | IKA (58.14), Diare (0.98x), Tailing (0 Jt Ton), Nihil Konflik Laut | 1.4 / 5 | Tidak Melampaui Batas | Bebas Tailing Tambang Nikel, Tekanan Sedimen di Danau Limboto |
+| Pilar 3: Lahan | Bencana (0 Kejadian), Deforestasi (98k Ha), Lindung (2.0k Ha), IUP (0.46%) | 0.7 / 5 | Tidak Melampaui Batas | Deforestasi Primer & Emisi Karbon Terendah Se-Sulawesi |
+| Pilar 4: Sosial | FPIC (0 Kasus), Korban (0 Jiwa), Kriminalisasi (0 Insiden), Gap SPA (0%) | 1.0 / 5 | Tidak Melampaui Batas | Bebas Konflik Perampasan Ruang Hidup Skala Masif Tambang Nikel |
+| Pilar 5: Veto | Obral Izin (7 IUP Baru), Korporat Ilegal (1 Perusahaan), Obral Terendah | 1.3 / 5 | Tidak Melampaui Batas | Penerbitan IUP Tambang Terendah Se-Sulawesi (Hanya 7 IUP Pasca-2014) |
+| SKOR KOMPOSIT GORONTALO | Agregasi 5 Pilar EWM Weighted Average (Z-Score Standardization) | 1.2 / 5 | Tidak Melampaui Batas | STATUS TERJAGA: EMISI NO2 & TEKANAN LAHAN TERENDAH |
+
+#### C. Analisis Temuan Empiris (Gorontalo)
+1. **Daya Tampung Udara (Skor 1.4 / 5 — Tidak Melampaui Batas):** Nihil beban PLTU captive batubara (0,0 MW, Z = -0.57σ) dan nihil limbah B3 smelter (0,0 Ton, Z = -0.54σ). Tingkat polusi NO2 satelit paling rendah se-Sulawesi (3,76e-06 mol/m², Z = -1.40σ, Likert 0.0). Catatan anomali ISPA 2,41x lipat (Z = +0.79σ, Likert 4.0) berkorelasi dengan asap pembakaran biomassa jagung dan dinamika inversi suhu Lembah Limboto.
+2. **Daya Tampung Air (Skor 1.4 / 5 — Tidak Melampaui Batas):** Nihil pembuangan tailing nikel (0,0 Ton) dan nihil konflik ruang laut pesisir. IKA berada pada level 58,14 poin (Z = +0.46σ, Likert 3.0) akibat tekanan sedimentasi erosi DAS Bone-Bolango dan eutrofikasi Danau Limboto dari limbah domestik.
+3. **Daya Dukung Lahan (Skor 0.7 / 5 — Tidak Melampaui Batas):** Gorontalo membukukan kehilangan tutupan hutan alam primer terendah se-Sulawesi (98.063 Ha, Z = -0.83σ, Likert 1.0) dengan kepadatan konsesi tambang nikel hanya 0,46% daratan (Z = -1.04σ, Likert 0.0) serta nihil catatan bencana longsor/banjir skala masif dalam periode audit.
+4. **Daya Dukung Sosial (Skor 1.0 / 5 — Tidak Melampaui Batas):** Bebas dari letupan konflik agraria industri tambang (nihil warga terdampak kehilangan ruang hidup, nihil sengketa FPIC, dan nihil kriminalisasi pejuang lingkungan).
+5. **Veto Kebijakan (Skor 1.3 / 5 — Tidak Melampaui Batas):** Pemerintah daerah mencatat laju obral izin tambang terendah se-Sulawesi (hanya 7 IUP baru pasca-2014, Z = -0.88σ, Likert 1.0) dan hanya teridentifikasi 1 aktivitas tambang rakyat/ilegal skala kecil di kawasan hulu (Z = -0.45σ).
+6. **Vonis Komposit Gorontalo (Skor 1.2 / 5.0 — Tidak Melampaui Batas):** Status **Tidak Melampaui Batas** (WSM: 2.31 / 10.0). Status aman ini menjadi bukti konklusif bahwa kelestarian bioregion Sulawesi bertumpu pada pembatasan ekspansi industri ekstraktif nikel.

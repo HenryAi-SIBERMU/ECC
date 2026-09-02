@@ -529,6 +529,18 @@ def generate_bab6_skoring_provinsi():
         ["SKOR KOMPOSIT SULBAR", "Agregasi 5 Pilar EWM Weighted Average (Z-Score Standardization)", f"{sulbar['total_likert']:.1f} / 5", sulbar['likert_label'], "STATUS TERJAGA: BIOREGION NON-HILIRISASI NIKEL"]
     ]
 
+    # 7. Ekstrak Data Empiris Gorontalo (6.6.5)
+    gorontalo = all_prov_results['Gorontalo']
+    table_eval_gorontalo = extract_prov_eval_rows(gorontalo)
+    rekap_gorontalo = [
+        ["Pilar 1: Udara", "PLTU (0 MW), NO2 (3.8e-6), ISPA (2.4x), B3 (0 Jt Ton), CO2 (53.7 Jt Ton)", f"{gorontalo['udara']:.1f} / 5", get_likert_label(gorontalo['udara']), "Konsentrasi NO2 Satelit Terbersih Se-Sulawesi & Nihil PLTU Captive"],
+        ["Pilar 2: Air", "IKA (58.14), Diare (0.98x), Tailing (0 Jt Ton), Nihil Konflik Laut", f"{gorontalo['air']:.1f} / 5", get_likert_label(gorontalo['air']), "Bebas Tailing Tambang Nikel, Tekanan Sedimen di Danau Limboto"],
+        ["Pilar 3: Lahan", "Bencana (0 Kejadian), Deforestasi (98k Ha), Lindung (2.0k Ha), IUP (0.46%)", f"{gorontalo['lahan']:.1f} / 5", get_likert_label(gorontalo['lahan']), "Deforestasi Primer & Emisi Karbon Terendah Se-Sulawesi"],
+        ["Pilar 4: Sosial", "FPIC (0 Kasus), Korban (0 Jiwa), Kriminalisasi (0 Insiden), Gap SPA (0%)", f"{gorontalo['sosial']:.1f} / 5", get_likert_label(gorontalo['sosial']), "Bebas Konflik Perampasan Ruang Hidup Skala Masif Tambang Nikel"],
+        ["Pilar 5: Veto", "Obral Izin (7 IUP Baru), Korporat Ilegal (1 Perusahaan), Obral Terendah", f"{gorontalo['veto']:.1f} / 5", get_likert_label(gorontalo['veto']), "Penerbitan IUP Tambang Terendah Se-Sulawesi (Hanya 7 IUP Pasca-2014)"],
+        ["SKOR KOMPOSIT GORONTALO", "Agregasi 5 Pilar EWM Weighted Average (Z-Score Standardization)", f"{gorontalo['total_likert']:.1f} / 5", gorontalo['likert_label'], "STATUS TERJAGA: EMISI NO2 & TEKANAN LAHAN TERENDAH"]
+    ]
+
     # Flowchart Mermaid LR Regional (Satu Flowchart Terpusat untuk Seluruh Provinsi)
     mermaid_regional = """flowchart LR
     subgraph S1["1. Matriks Empiris Regional"]
@@ -947,6 +959,69 @@ def generate_bab6_skoring_provinsi():
         (f"Secara agregat, Sulawesi Barat memperoleh Skor Komposit 1.2 / 5.0 (Ekuivalen WSM 2.36 / 10.0) dengan status TIDAK MELAMPAUI BATAS. Status terjaga ini membuktikan bahwa tanpa intervensi industri smelter nikel dan PLTU batubara, daya lentur lingkungan hidup regional dapat dipertahankan dalam ambang aman.", False, False)
     ])
 
+    # -------------------------------------------------------------------------
+    # SEKSI 6.6.5: EVALUASI EMPIRIS GORONTALO
+    # -------------------------------------------------------------------------
+    doc.add_page_break()
+    add_h3(doc, "6.6.5 Evaluasi Empiris D3TLH: Provinsi Gorontalo")
+    add_note_box(
+        doc,
+        "PROFIL EMPIRIS: Provinsi Gorontalo (Bioregion Terjaga & Bebas Polusi Smelter Nikel)",
+        "Kabupaten/Kota: 6 Daerah  |  Pusat Agraria: Lembah Pertanian Jagung & Danau Limboto  |  Populasi BPS: 1.171.681 Jiwa\n"
+        "Karakteristik Krisis: Kualitas atmosfer NO2 satelit paling bersih se-Sulawesi (3,76e-06 mol/m²), deforestasi primer dan emisi karbon terendah, nihil PLTU captive batubara maupun limbah B3 smelter, namun memikul anomali ISPA akibat faktor mikroklimat topografi cekungan dan residu pembakaran biomassa jagung."
+    )
+
+    add_h4(doc, "A. Narasi Temuan Lapangan Gorontalo")
+    add_p(doc, [
+        ("Sebagai provinsi dengan luas daratan dan populasi terkecil di Pulau Sulawesi (1,17 juta jiwa), ", False, False),
+        ("Provinsi Gorontalo mencatatkan Skor Komposit 1.2 / 5.0 (Status: Tidak Melampaui Batas)", True, False),
+        (". Bersama dengan Sulawesi Barat, Gorontalo berada pada kuadran ", False, False),
+        ("ekologis terjaga (low-stress environment)", True, False),
+        (" yang mempertegas validitas model Z-Score EWM: ketika suatu wilayah tidak dieksploitasi oleh mega-proyek hilirisasi nikel dan PLTU captive batubara, integritas daya dukung lingkungannya tetap berada di bawah ambang batas bahaya.", False, False)
+    ])
+    add_p(doc, [
+        ("Gorontalo membukukan rekor ", False, False),
+        ("konsentrasi gas troposferik NO2 paling bersih se-Pulau Sulawesi (3,76e-06 mol/m², Z = -1.40σ, Likert 0.0)", True, False),
+        (", laju deforestasi primer paling rendah (98.063 Ha, Z = -0.83σ), serta pelepasan emisi karbon deforestasi terendah (53,66 Jt Ton CO2e, Z = -0.85σ). Kepadatan izin tambang nikel hanya mencapai ", False, False),
+        ("0,46% dari daratan provinsi (Z = -1.04σ, Likert 0.0)", True, False),
+        (". Satu-satunya anomali yang mencuat adalah rasio morbiditas ISPA sebesar 2,41x lipat (Z = +0.79σ, Likert 4.0) yang dipicu oleh faktor mikroklimat topografi cekungan Lembah Limboto, debu jalanan pedesaan, serta pembakaran residu tongkol jagung pascapanen, bukan dari cerobong batubara.", False, False)
+    ])
+
+    add_h4(doc, "B. Matriks Hasil Uji Empiris (Gorontalo)")
+    add_caption(doc, "Tabel 6.21: Bedah Matematika 20 Indikator Empiris Provinsi Gorontalo (Model Hybrid Z-Score & EWM)")
+    add_table_styled(
+        doc,
+        ["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Nilai Z-Score", "Bobot EWM", "Skor Likert", "Status Ekologis"],
+        table_eval_gorontalo,
+        [2.2, 4.3, 3.0, 1.8, 1.7, 1.8, 2.2],
+        ["C", "L", "R", "C", "C", "C", "C"]
+    )
+
+    add_caption(doc, "Tabel 6.22: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Gorontalo")
+    add_table_styled(
+        doc,
+        ["Pilar / Dimensi", "Cakupan Indikator Kunci", "Skor Likert Pilar (0-5)", "Status Ekologis", "Interpretasi Temuan Lapangan Gorontalo"],
+        rekap_gorontalo,
+        [2.5, 4.5, 2.2, 2.8, 5.0],
+        ["C", "L", "C", "C", "L"]
+    )
+
+    add_h4(doc, "C. Analisis Temuan Empiris (Gorontalo)")
+    add_p(doc, [
+        ("1. ", True, False), (f"Daya Tampung Udara (Skor {gorontalo['udara']:.1f} / 5 — {get_likert_label(gorontalo['udara'])}): ", True, False),
+        (f"Nihil beban PLTU captive batubara (0,0 MW, Z = -0.57σ) dan nihil limbah B3 smelter (0,0 Ton, Z = -0.54σ). Tingkat polusi NO2 satelit paling rendah se-Sulawesi (3,76e-06 mol/m², Z = -1.40σ, Likert 0.0). Catatan anomali ISPA 2,41x lipat (Z = +0.79σ, Likert 4.0) berkorelasi dengan asap pembakaran biomassa jagung dan dinamika inversi suhu Lembah Limboto.\n", False, False),
+        ("2. ", True, False), (f"Daya Tampung Air (Skor {gorontalo['air']:.1f} / 5 — {get_likert_label(gorontalo['air'])}): ", True, False),
+        (f"Nihil pembuangan tailing nikel (0,0 Ton) dan nihil konflik ruang laut pesisir. IKA berada pada level 58,14 poin (Z = +0.46σ, Likert 3.0) akibat tekanan sedimentasi erosi DAS Bone-Bolango dan eutrofikasi Danau Limboto dari limbah domestik.\n", False, False),
+        ("3. ", True, False), (f"Daya Dukung Lahan (Skor {gorontalo['lahan']:.1f} / 5 — {get_likert_label(gorontalo['lahan'])}): ", True, False),
+        (f"Gorontalo membukukan kehilangan tutupan hutan alam primer terendah se-Sulawesi (98.063 Ha, Z = -0.83σ, Likert 1.0) dengan kepadatan konsesi tambang nikel hanya 0,46% daratan (Z = -1.04σ, Likert 0.0) serta nihil catatan bencana longsor/banjir skala masif dalam periode audit.\n", False, False),
+        ("4. ", True, False), (f"Daya Dukung Sosial (Skor {gorontalo['sosial']:.1f} / 5 — {get_likert_label(gorontalo['sosial'])}): ", True, False),
+        (f"Bebas dari letupan konflik agraria industri tambang (nihil warga terdampak kehilangan ruang hidup, nihil sengketa FPIC, dan nihil kriminalisasi pejuang lingkungan).\n", False, False),
+        ("5. ", True, False), (f"Veto Kebijakan (Skor {gorontalo['veto']:.1f} / 5 — {get_likert_label(gorontalo['veto'])}): ", True, False),
+        (f"Pemerintah daerah mencatat laju obral izin tambang terendah se-Sulawesi (hanya 7 IUP baru pasca-2014, Z = -0.88σ, Likert 1.0) dan hanya teridentifikasi 1 aktivitas tambang rakyat/ilegal skala kecil di kawasan hulu (Z = -0.45σ).\n", False, False),
+        ("6. ", True, False), (f"Vonis Komposit Gorontalo (Skor {gorontalo['total_likert']:.1f} / 5.0 — {gorontalo['likert_label']}): ", True, False),
+        (f"Secara agregat, Gorontalo memperoleh Skor Komposit 1.2 / 5.0 (Ekuivalen WSM 2.31 / 10.0) dengan status TIDAK MELAMPAUI BATAS. Status aman ini menjadi bukti konklusif bahwa kelestarian bioregion Sulawesi bertumpu pada pembatasan ekspansi industri ekstraktif nikel.", False, False)
+    ])
+
     docx_path = tool_dir / "Metodologi_Bab6_Skoring_Provinsi.docx"
     doc.save(str(docx_path))
     print(f"  [OK] Tersimpan: {docx_path}")
@@ -1137,6 +1212,35 @@ def generate_bab6_skoring_provinsi():
 <strong>5. Veto Kebijakan (Skor {sulbar['veto']:.1f} / 5 — {get_likert_label(sulbar['veto'])}):</strong> Penerbitan konsesi tambang nikel baru pasca-2014 sangat terbatas (27 IUP, Z = -0.68&sigma;, Likert 1.0) dan tidak teridentifikasi adanya korporasi tambang ilegal skala besar yang beroperasi di kawasan hutan.<br>
 <strong>6. Vonis Komposit Sulawesi Barat (Skor {sulbar['total_likert']:.1f} / 5.0 — {sulbar['likert_label']}):</strong> Status <span class="badge-success">TIDAK MELAMPAUI BATAS</span> (WSM: 2.36 / 10.0). Status terjaga ini membuktikan bahwa tanpa intervensi industri smelter nikel dan PLTU batubara, daya lentur lingkungan hidup regional dapat dipertahankan dalam ambang aman.</p>
 
+<div class="divider"></div>
+
+<!-- SEKSI 6.6.5 GORONTALO -->
+<h3>6.6.5 Evaluasi Empiris D3TLH: Provinsi Gorontalo</h3>
+<div class="note-box">
+  <strong>PROFIL EMPIRIS: Provinsi Gorontalo (Bioregion Terjaga & Bebas Polusi Smelter Nikel)</strong><br>
+  Kabupaten/Kota: 6 Daerah  |  Pusat Agraria: Lembah Pertanian Jagung & Danau Limboto  |  Populasi BPS: 1.171.681 Jiwa<br>
+  Karakteristik Krisis: Kualitas atmosfer NO2 satelit paling bersih se-Sulawesi (3,76e-06 mol/m²), deforestasi primer dan emisi karbon terendah, nihil PLTU captive batubara maupun limbah B3 smelter, namun memikul anomali ISPA akibat faktor mikroklimat topografi cekungan dan residu pembakaran biomassa jagung.
+</div>
+
+<h4>A. Narasi Temuan Lapangan Gorontalo</h4>
+<p>Sebagai provinsi dengan luas daratan dan populasi terkecil di Pulau Sulawesi (1,17 juta jiwa), <strong>Provinsi Gorontalo mencatatkan Skor Komposit 1.2 / 5.0 (Status: Tidak Melampaui Batas)</strong>. Bersama dengan Sulawesi Barat, Gorontalo berada pada kuadran <strong>ekologis terjaga (low-stress environment)</strong> yang mempertegas validitas model Z-Score EWM: ketika suatu wilayah tidak dieksploitasi oleh mega-proyek hilirisasi nikel dan PLTU captive batubara, integritas daya dukung lingkungannya tetap berada di bawah ambang batas bahaya.</p>
+<p>Gorontalo membukukan rekor <strong>konsentrasi gas troposferik NO2 paling bersih se-Pulau Sulawesi (3,76e-06 mol/m², Z = -1.40&sigma;, Likert 0.0)</strong>, laju deforestasi primer paling rendah (98.063 Ha, Z = -0.83&sigma;), serta pelepasan emisi karbon deforestasi terendah (53,66 Jt Ton CO2e, Z = -0.85&sigma;). Kepadatan izin tambang nikel hanya mencapai <strong>0,46% dari daratan provinsi (Z = -1.04&sigma;, Likert 0.0)</strong>. Satu-satunya anomali yang mencuat adalah rasio morbiditas ISPA sebesar 2,41x lipat (Z = +0.79&sigma;, Likert 4.0) yang dipicu oleh faktor mikroklimat topografi cekungan Lembah Limboto, debu jalanan pedesaan, serta pembakaran residu tongkol jagung pascapanen, bukan dari cerobong batubara.</p>
+
+<h4>B. Matriks Hasil Uji Empiris (Gorontalo)</h4>
+<div class="table-caption">Tabel 6.21: Bedah Matematika 20 Indikator Empiris Provinsi Gorontalo (Model Hybrid Z-Score & EWM)</div>
+{html_table(["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Nilai Z-Score", "Bobot EWM", "Skor Likert", "Status Ekologis"], table_eval_gorontalo)}
+
+<div class="table-caption">Tabel 6.22: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Gorontalo</div>
+{html_table(["Pilar / Dimensi", "Cakupan Indikator Kunci", "Skor Likert Pilar (0-5)", "Status Ekologis", "Interpretasi Temuan Lapangan Gorontalo"], rekap_gorontalo)}
+
+<h4>C. Analisis Temuan Empiris (Gorontalo)</h4>
+<p><strong>1. Daya Tampung Udara (Skor {gorontalo['udara']:.1f} / 5 — {get_likert_label(gorontalo['udara'])}):</strong> Nihil beban PLTU captive batubara (0,0 MW, Z = -0.57&sigma;) dan nihil limbah B3 smelter (0,0 Ton, Z = -0.54&sigma;). Tingkat polusi NO2 satelit paling rendah se-Sulawesi (3,76e-06 mol/m², Z = -1.40&sigma;, Likert 0.0). Catatan anomali ISPA 2,41x lipat (Z = +0.79&sigma;, Likert 4.0) berkorelasi dengan asap pembakaran biomassa jagung dan dinamika inversi suhu Lembah Limboto.<br>
+<strong>2. Daya Tampung Air (Skor {gorontalo['air']:.1f} / 5 — {get_likert_label(gorontalo['air'])}):</strong> Nihil pembuangan tailing nikel (0,0 Ton) dan nihil konflik ruang laut pesisir. IKA berada pada level 58,14 poin (Z = +0.46&sigma;, Likert 3.0) akibat tekanan sedimentasi erosi DAS Bone-Bolango dan eutrofikasi Danau Limboto dari limbah domestik.<br>
+<strong>3. Daya Dukung Lahan (Skor {gorontalo['lahan']:.1f} / 5 — {get_likert_label(gorontalo['lahan'])}):</strong> Gorontalo membukukan kehilangan tutupan hutan alam primer terendah se-Sulawesi (98.063 Ha, Z = -0.83&sigma;, Likert 1.0) dengan kepadatan konsesi tambang nikel hanya 0,46% daratan (Z = -1.04&sigma;, Likert 0.0) serta nihil catatan bencana longsor/banjir skala masif dalam periode audit.<br>
+<strong>4. Daya Dukung Sosial (Skor {gorontalo['sosial']:.1f} / 5 — {get_likert_label(gorontalo['sosial'])}):</strong> Bebas dari letupan konflik agraria industri tambang (nihil warga terdampak kehilangan ruang hidup, nihil sengketa FPIC, dan nihil kriminalisasi pejuang lingkungan).<br>
+<strong>5. Veto Kebijakan (Skor {gorontalo['veto']:.1f} / 5 — {get_likert_label(gorontalo['veto'])}):</strong> Pemerintah daerah mencatat laju obral izin tambang terendah se-Sulawesi (hanya 7 IUP baru pasca-2014, Z = -0.88&sigma;, Likert 1.0) dan hanya teridentifikasi 1 aktivitas tambang rakyat/ilegal skala kecil di kawasan hulu (Z = -0.45&sigma;).<br>
+<strong>6. Vonis Komposit Gorontalo (Skor {gorontalo['total_likert']:.1f} / 5.0 — {gorontalo['likert_label']}):</strong> Status <span class="badge-success">TIDAK MELAMPAUI BATAS</span> (WSM: 2.31 / 10.0). Status aman ini menjadi bukti konklusif bahwa kelestarian bioregion Sulawesi bertumpu pada pembatasan ekspansi industri ekstraktif nikel.</p>
+
 </body>
 </html>
 """
@@ -1293,6 +1397,33 @@ def generate_bab6_skoring_provinsi():
         f"4. **Daya Dukung Sosial (Skor {sulbar['sosial']:.1f} / 5 — {get_likert_label(sulbar['sosial'])}):** Minim konflik agraria struktural skala besar yang melibatkan industri tambang (1 jiwa terdampak, 1 insiden kriminalisasi, dan nihil sengketa FPIC), mencerminkan relasi sosial-ekologis yang relatif stabil.",
         f"5. **Veto Kebijakan (Skor {sulbar['veto']:.1f} / 5 — {get_likert_label(sulbar['veto'])}):** Penerbitan konsesi tambang nikel baru pasca-2014 sangat terbatas (27 IUP, Z = -0.68σ, Likert 1.0) dan tidak teridentifikasi adanya korporasi tambang ilegal skala besar yang beroperasi di kawasan hutan.",
         f"6. **Vonis Komposit Sulawesi Barat (Skor {sulbar['total_likert']:.1f} / 5.0 — {sulbar['likert_label']}):** Status **Tidak Melampaui Batas** (WSM: 2.36 / 10.0). Status terjaga ini membuktikan bahwa tanpa intervensi industri smelter nikel dan PLTU batubara, daya lentur lingkungan hidup regional dapat dipertahankan dalam ambang aman.",
+        "",
+        "---",
+        "",
+        "### 6.6.5 Evaluasi Empiris D3TLH: Provinsi Gorontalo",
+        '> **PROFIL EMPIRIS: Provinsi Gorontalo (Bioregion Terjaga & Bebas Polusi Smelter Nikel)**  ',
+        '> Kabupaten/Kota: 6 Daerah  |  Pusat Agraria: Lembah Pertanian Jagung & Danau Limboto  |  Populasi BPS: 1.171.681 Jiwa  ',
+        '> Karakteristik Krisis: Kualitas atmosfer NO2 satelit paling bersih se-Sulawesi (3,76e-06 mol/m²), deforestasi primer dan emisi karbon terendah, nihil PLTU captive batubara maupun limbah B3 smelter, namun memikul anomali ISPA akibat faktor mikroklimat topografi cekungan dan residu pembakaran biomassa jagung.',
+        "",
+        "#### A. Narasi Temuan Lapangan Gorontalo",
+        "Sebagai provinsi dengan luas daratan dan populasi terkecil di Pulau Sulawesi (1,17 juta jiwa), **Provinsi Gorontalo mencatatkan Skor Komposit 1.2 / 5.0 (Status: Tidak Melampaui Batas)**. Bersama dengan Sulawesi Barat, Gorontalo berada pada kuadran **ekologis terjaga (low-stress environment)** yang mempertegas validitas model Z-Score EWM: ketika suatu wilayah tidak dieksploitasi oleh mega-proyek hilirisasi nikel dan PLTU captive batubara, integritas daya dukung lingkungannya tetap berada di bawah ambang batas bahaya.",
+        "",
+        "Gorontalo membukukan rekor **konsentrasi gas troposferik NO2 paling bersih se-Pulau Sulawesi (3,76e-06 mol/m², Z = -1.40σ, Likert 0.0)**, laju deforestasi primer paling rendah (98.063 Ha, Z = -0.83σ), serta pelepasan emisi karbon deforestasi terendah (53,66 Jt Ton CO2e, Z = -0.85σ). Kepadatan izin tambang nikel hanya mencapai **0,46% dari daratan provinsi (Z = -1.04σ, Likert 0.0)**. Satu-satunya anomali yang mencuat adalah rasio morbiditas ISPA sebesar 2,41x lipat (Z = +0.79σ, Likert 4.0) yang dipicu oleh faktor mikroklimat topografi cekungan Lembah Limboto, debu jalanan pedesaan, serta pembakaran residu tongkol jagung pascapanen, bukan dari cerobong batubara.",
+        "",
+        "#### B. Matriks Hasil Uji Empiris (Gorontalo)",
+        "##### Tabel 6.21: Bedah Matematika 20 Indikator Empiris Provinsi Gorontalo (Model Hybrid Z-Score & EWM)",
+        markdown_table(["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Nilai Z-Score", "Bobot EWM", "Skor Likert", "Status Ekologis"], table_eval_gorontalo),
+        "",
+        "##### Tabel 6.22: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Gorontalo",
+        markdown_table(["Pilar / Dimensi", "Cakupan Indikator Kunci", "Skor Likert Pilar (0-5)", "Status Ekologis", "Interpretasi Temuan Lapangan Gorontalo"], rekap_gorontalo),
+        "",
+        "#### C. Analisis Temuan Empiris (Gorontalo)",
+        f"1. **Daya Tampung Udara (Skor {gorontalo['udara']:.1f} / 5 — {get_likert_label(gorontalo['udara'])}):** Nihil beban PLTU captive batubara (0,0 MW, Z = -0.57σ) dan nihil limbah B3 smelter (0,0 Ton, Z = -0.54σ). Tingkat polusi NO2 satelit paling rendah se-Sulawesi (3,76e-06 mol/m², Z = -1.40σ, Likert 0.0). Catatan anomali ISPA 2,41x lipat (Z = +0.79σ, Likert 4.0) berkorelasi dengan asap pembakaran biomassa jagung dan dinamika inversi suhu Lembah Limboto.",
+        f"2. **Daya Tampung Air (Skor {gorontalo['air']:.1f} / 5 — {get_likert_label(gorontalo['air'])}):** Nihil pembuangan tailing nikel (0,0 Ton) dan nihil konflik ruang laut pesisir. IKA berada pada level 58,14 poin (Z = +0.46σ, Likert 3.0) akibat tekanan sedimentasi erosi DAS Bone-Bolango dan eutrofikasi Danau Limboto dari limbah domestik.",
+        f"3. **Daya Dukung Lahan (Skor {gorontalo['lahan']:.1f} / 5 — {get_likert_label(gorontalo['lahan'])}):** Gorontalo membukukan kehilangan tutupan hutan alam primer terendah se-Sulawesi (98.063 Ha, Z = -0.83σ, Likert 1.0) dengan kepadatan konsesi tambang nikel hanya 0,46% daratan (Z = -1.04σ, Likert 0.0) serta nihil catatan bencana longsor/banjir skala masif dalam periode audit.",
+        f"4. **Daya Dukung Sosial (Skor {gorontalo['sosial']:.1f} / 5 — {get_likert_label(gorontalo['sosial'])}):** Bebas dari letupan konflik agraria industri tambang (nihil warga terdampak kehilangan ruang hidup, nihil sengketa FPIC, dan nihil kriminalisasi pejuang lingkungan).",
+        f"5. **Veto Kebijakan (Skor {gorontalo['veto']:.1f} / 5 — {get_likert_label(gorontalo['veto'])}):** Pemerintah daerah mencatat laju obral izin tambang terendah se-Sulawesi (hanya 7 IUP baru pasca-2014, Z = -0.88σ, Likert 1.0) dan hanya teridentifikasi 1 aktivitas tambang rakyat/ilegal skala kecil di kawasan hulu (Z = -0.45σ).",
+        f"6. **Vonis Komposit Gorontalo (Skor {gorontalo['total_likert']:.1f} / 5.0 — {gorontalo['likert_label']}):** Status **Tidak Melampaui Batas** (WSM: 2.31 / 10.0). Status aman ini menjadi bukti konklusif bahwa kelestarian bioregion Sulawesi bertumpu pada pembatasan ekspansi industri ekstraktif nikel.",
         ""
     ]
 
@@ -1300,7 +1431,7 @@ def generate_bab6_skoring_provinsi():
     with open(md_path, "w", encoding="utf-8") as f:
         f.write("\n".join(md_lines))
     print(f"  [OK] Tersimpan: {md_path}")
-    print("[4/4] Selesai membangun Sub-bab 6.6 untuk Provinsi Sulawesi Tengah, Sulawesi Tenggara, Sulawesi Selatan, dan Sulawesi Barat.")
+    print("[4/4] Selesai membangun Sub-bab 6.6 untuk Provinsi Sulawesi Tengah, Sulawesi Tenggara, Sulawesi Selatan, Sulawesi Barat, dan Gorontalo.")
 
 
 if __name__ == "__main__":
