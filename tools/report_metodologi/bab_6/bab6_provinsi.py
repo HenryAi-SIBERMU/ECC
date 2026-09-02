@@ -1,9 +1,10 @@
 # ==============================================================================
 # BAB 6 SUB-BAB 6.6: GENERATOR METODOLOGI SKORING D3TLH TINGKAT PROVINSI
-# DOKUMEN SATUAN (KOMPILASI SELURUH PROVINSI SULAWESI BERTAHAP)
-# PROVINSI CAKUPAN:
-#   6.6.1: SULAWESI TENGAH (SULTENG)
-#   6.6.2: SULAWESI TENGGARA (SULTRA)
+# DOKUMEN SATUAN KOMPILASI TINGKAT PROVINSI (TERPUSAT & MODULAR)
+# CAKUPAN SEKSI:
+#   6.6   : KERANGKA METODOLOGI & FORMULASI MATEMATIS UNIVERSAL SE-SULAWESI
+#   6.6.1 : EVALUASI EMPIRIS PROVINSI SULAWESI TENGAH (SULTENG)
+#   6.6.2 : EVALUASI EMPIRIS PROVINSI SULAWESI TENGGARA (SULTRA)
 # METODE: HYBRID Z-SCORE ANOMALI STANDAR DEVIASI + ENTROPY WEIGHT METHOD (EWM)
 # SINKRONISASI: 100% PERSIS TAB 3 STREAMLIT PAGE 6 (pages/6_Audit_D3TLH.py)
 # ==============================================================================
@@ -163,7 +164,7 @@ def add_note_box(doc, title, body):
     p = c.paragraphs[0]
     p.paragraph_format.space_before = Pt(0)
     p.paragraph_format.space_after = Pt(2)
-    r_t = p.add_run(f"PROFIL BIOREGION: {title}\n")
+    r_t = p.add_run(f"{title}\n")
     r_t.bold = True
     r_t.font.size = Pt(8.5)
     r_t.font.color.rgb = C_NAVY
@@ -314,8 +315,15 @@ def html_table(headers, rows):
         row_cls = ' class="total-row"' if is_total else ''
         out.append(f'<tr{row_cls}>')
         for idx, val in enumerate(r):
-            align_cls = 'text-center' if idx in [0, 5, 6, 7, 8] else ('text-right' if idx in [2, 3, 4] else 'text-left')
             val_str = str(val)
+            align_cls = 'text-center'
+            if idx in [1, 4] and len(headers) == 5:
+                align_cls = 'text-left'
+            elif idx == 1:
+                align_cls = 'text-left'
+            elif idx in [2, 3]:
+                align_cls = 'text-right'
+
             if "Melampaui Batas" in val_str:
                 val_str = f'<span class="badge-danger">{val_str}</span>'
             elif "Mendekati Batas" in val_str:
@@ -330,14 +338,14 @@ def html_table(headers, rows):
 def markdown_table(headers, rows):
     lines = []
     lines.append("| " + " | ".join(headers) + " |")
-    lines.append("| " + " | ".join([":---" if i in [1, 8] else ":---:" for i in range(len(headers))]) + " |")
+    lines.append("| " + " | ".join([":---" if i in [1, len(headers)-1] else ":---:" for i in range(len(headers))]) + " |")
     for r in rows:
         lines.append("| " + " | ".join([str(x) for x in r]) + " |")
     return "\n".join(lines)
 
 
 # =============================================================================
-# EXTRACT DATA PROVINSI (HELPER MODULAR)
+# METADATA INDIKATOR EMPIRIS (20 INDIKATOR KUNCI MULTIKRITERIA)
 # =============================================================================
 INDICATOR_META = {
     'pltu_mw': ('Pilar Udara', 'Kapasitas PLTU Captive Beroperasi', 'MW'),
@@ -362,57 +370,42 @@ INDICATOR_META = {
     'ilegal': ('Pilar Veto', 'Korporat Tambang Pelanggar Hukum Beroperasi Ilegal', 'Korporasi')
 }
 
-def extract_prov_table_rows(prov_data):
-    math_details = prov_data['math_details']
+def extract_prov_eval_rows(prov_data):
+    """
+    Mengekstrak baris tabel evaluasi empiris spesifik provinsi:
+    Columns: [Pilar, Indikator Empiris, Fakta Mentah A, Z-Score, Bobot EWM, Likert, Status Ekologis]
+    """
     raw_absolut = prov_data['raw_absolut']
     raw_zscores = prov_data['raw_zscores']
-    likert_dict = math_details['likert']
-    ewm_weights = math_details['ewm_weights']
-    means = math_details['mean']
-    stds = math_details['std']
+    likert_dict = prov_data['math_details']['likert']
+    ewm_weights = prov_data['math_details']['ewm_weights']
 
     table_rows = []
     for col, (pilar, nama_ind, satuan) in INDICATOR_META.items():
         val_a = raw_absolut.get(col, 0.0)
-        val_b = means.get(col, 0.0)
-        val_c = stds.get(col, 1.0)
         z_val = raw_zscores.get(col, 0.0)
         w_val = ewm_weights.get(col, 0.0)
         l_val = likert_dict.get(col, 0.0)
         label_ekologis = get_likert_label(l_val)
 
         if col == 'no2':
-            str_a = f"{val_a:.2e}"
-            str_b = f"{val_b:.2e}"
-            str_c = f"{val_c:.2e}"
+            str_a = f"{val_a:.2e} {satuan}"
         elif col in ['pltu_mw', 'deforestasi_ha', 'lindung_ha', 'driver_ha', 'jiwa_terdampak']:
             str_a = f"{val_a:,.0f} {satuan}"
-            str_b = f"{val_b:,.0f}"
-            str_c = f"{val_c:,.0f}"
         elif col in ['b3_ton', 'co2_mton', 'tailing_ton']:
             str_a = f"{val_a:,.2f} {satuan}"
-            str_b = f"{val_b:,.2f}"
-            str_c = f"{val_c:,.2f}"
         elif col == 'kepadatan_iup':
             str_a = f"{val_a*100:.2f}%"
-            str_b = f"{val_b*100:.2f}%"
-            str_c = f"{val_c*100:.2f}%"
         elif col in ['ispa_irr', 'diare_irr']:
-            str_a = f"{val_a:.2f}x"
-            str_b = f"{val_b:.2f}x"
-            str_c = f"{val_c:.2f}x"
+            str_a = f"{val_a:.2f}x lipat"
         else:
             str_a = f"{val_a:,.1f} {satuan}" if isinstance(val_a, float) else f"{val_a} {satuan}"
-            str_b = f"{val_b:,.1f}"
-            str_c = f"{val_c:,.1f}"
 
         table_rows.append([
             pilar,
             nama_ind,
             str_a,
-            str_b,
-            str_c,
-            f"{z_val:+.2f}",
+            f"{z_val:+.2f}σ",
             f"{w_val:.4f}",
             f"{l_val:.1f} / 5",
             label_ekologis
@@ -427,25 +420,82 @@ def generate_bab6_skoring_provinsi():
     print("[1/4] Mengekstraksi dataset empiris seluruh provinsi (Model Z-Score EWM)...")
     tool_dir = Path(__file__).parent
     
-    # Engine resmi
+    # 1. Jalankan Engine Algoritma Resmi ZscoreEWM
     all_prov_results = algo_prov_mod.kalkulasi_skor_provinsi_sulawesi()
     sulteng = all_prov_results['Sulawesi Tengah']
     sultra = all_prov_results['Sulawesi Tenggara']
 
-    table_math_sulteng = extract_prov_table_rows(sulteng)
-    table_math_sultra = extract_prov_table_rows(sultra)
+    # 2. Hitung Matriks Parameter Regional Se-Sulawesi (Universal Table 6.12)
+    df_prov = algo_prov_mod.pd.DataFrame.from_dict(algo_prov_mod.RAW_DATA, orient='index')
+    means = df_prov.mean(axis=0)
+    stds = df_prov.std(axis=0)
+    stds[stds == 0] = 1.0
 
-    # Rekapitulasi 5 Pilar Sulteng
+    n, m = df_prov.shape
+    min_vals = df_prov.min(axis=0)
+    max_vals = df_prov.max(axis=0)
+    range_vals = max_vals - min_vals
+    range_vals[range_vals == 0] = 1.0
+    r_matrix = (df_prov - min_vals) / range_vals
+    sum_r = r_matrix.sum(axis=0)
+    sum_r[sum_r == 0] = 1.0
+    p_matrix = r_matrix / sum_r
+    k_entropy = 1.0 / algo_prov_mod.np.log(n)
+    p_log_p = p_matrix * algo_prov_mod.np.log(p_matrix.replace(0, 1e-12))
+    e_j = -k_entropy * p_log_p.sum(axis=0)
+    d_j = 1.0 - e_j
+    w_j = d_j / d_j.sum()
+
+    table_regional_meta = []
+    for col, (pilar, nama_ind, satuan) in INDICATOR_META.items():
+        m_val = means.get(col, 0.0)
+        s_val = stds.get(col, 1.0)
+        ej_val = e_j.get(col, 0.0)
+        dj_val = d_j.get(col, 0.0)
+        wj_val = w_j.get(col, 0.0)
+
+        if col == 'no2':
+            str_m = f"{m_val:.2e}"
+            str_s = f"{s_val:.2e}"
+        elif col in ['pltu_mw', 'deforestasi_ha', 'lindung_ha', 'driver_ha', 'jiwa_terdampak']:
+            str_m = f"{m_val:,.0f} {satuan}"
+            str_s = f"{s_val:,.0f} {satuan}"
+        elif col in ['b3_ton', 'co2_mton', 'tailing_ton']:
+            str_m = f"{m_val:,.2f} {satuan}"
+            str_s = f"{s_val:,.2f} {satuan}"
+        elif col == 'kepadatan_iup':
+            str_m = f"{m_val*100:.2f}%"
+            str_s = f"{s_val*100:.2f}%"
+        elif col in ['ispa_irr', 'diare_irr']:
+            str_m = f"{m_val:.2f}x"
+            str_s = f"{s_val:.2f}x"
+        else:
+            str_m = f"{m_val:,.1f} {satuan}" if isinstance(m_val, float) else f"{m_val} {satuan}"
+            str_s = f"{s_val:,.1f} {satuan}" if isinstance(s_val, float) else f"{s_val} {satuan}"
+
+        table_regional_meta.append([
+            pilar,
+            nama_ind,
+            str_m,
+            str_s,
+            f"{ej_val:.4f}",
+            f"{dj_val:.4f}",
+            f"{wj_val:.4f}"
+        ])
+
+    # 3. Ekstrak Data Empiris Sulteng (6.6.1)
+    table_eval_sulteng = extract_prov_eval_rows(sulteng)
     rekap_sulteng = [
-        ["Pilar 1: Udara", "PLTU (7.325 MW), NO2 (6.5e-6), ISPA (3.5x), B3 (25.3 Jt Ton), CO2 (291 Jt Ton)", f"{sulteng['udara']:.1f} / 5", get_likert_label(sulteng['udara']), "Episentrum PLTU Captive Terbesar & Konsentrasi B3"],
-        ["Pilar 2: Air", "IKA (62.07), Diare (1.52x), Tailing (24.5 Jt Ton), Logam Cr6+", f"{sulteng['air']:.1f} / 5", get_likert_label(sulteng['air']), "Beban Tailing Raksasa & Morbiditas Pencernaan Tinggi"],
-        ["Pilar 3: Lahan", "Bencana (458), Deforestasi (481k Ha), Lindung (19.8k Ha), Driver (383k Ha)", f"{sulteng['lahan']:.1f} / 5", get_likert_label(sulteng['lahan']), "Deforestasi Primer Masif & Perambahan Hutan Lindung"],
-        ["Pilar 4: Sosial", "FPIC (1 Kasus), Korban (12.231 Jiwa), Kriminalisasi (6 Insiden), Defisit SPA", f"{sulteng['sosial']:.1f} / 5", get_likert_label(sulteng['sosial']), "Kriminalisasi Warga Pembela HAM & Defisit Sarana Kesehatan"],
+        ["Pilar 1: Udara", "PLTU (7.325 MW), NO2 (6.5e-6), ISPA (3.5x), B3 (25.3 Jt Ton), CO2 (291 Jt Ton)", f"{sulteng['udara']:.1f} / 5", get_likert_label(sulteng['udara']), "Episentrum PLTU Captive Terbesar & Konsentrasi Limbah B3"],
+        ["Pilar 2: Air", "IKA (62.07), Diare (1.52x), Tailing (24.5 Jt Ton), Toksisitas Cr6+", f"{sulteng['air']:.1f} / 5", get_likert_label(sulteng['air']), "Beban Tailing Ekstrem & Morbiditas Penyakit Pencernaan"],
+        ["Pilar 3: Lahan", "Bencana (458), Deforestasi (481k Ha), Lindung (19.8k Ha), Driver (383k Ha)", f"{sulteng['lahan']:.1f} / 5", get_likert_label(sulteng['lahan']), "Deforestasi Primer Masif & Perambahan Kawasan Lindung"],
+        ["Pilar 4: Sosial", "FPIC (1 Kasus), Korban (12.231 Jiwa), Kriminalisasi (6 Insiden), Defisit SPA", f"{sulteng['sosial']:.1f} / 5", get_likert_label(sulteng['sosial']), "Kriminalisasi Warga Pembela HAM & Hilangnya Ruang Hidup"],
         ["Pilar 5: Veto", "Obral Izin (260 IUP Baru), Korporat Ilegal (3 Perusahaan), PLTU Ekspansi", f"{sulteng['veto']:.1f} / 5", get_likert_label(sulteng['veto']), "Kegagalan Pengendalian Izin & Impunitas Pelanggaran"],
         ["SKOR KOMPOSIT SULTENG", "Agregasi 5 Pilar EWM Weighted Average (Z-Score Standardization)", f"{sulteng['total_likert']:.1f} / 5", sulteng['likert_label'], "STATUS RED ALERT: DARURAT DAYA DUKUNG LINGKUNGAN"]
     ]
 
-    # Rekapitulasi 5 Pilar Sultra
+    # 4. Ekstrak Data Empiris Sultra (6.6.2)
+    table_eval_sultra = extract_prov_eval_rows(sultra)
     rekap_sultra = [
         ["Pilar 1: Udara", "PLTU (1.900 MW), NO2 (6.6e-6), ISPA (0.91x), B3 (6.5 Jt Ton), CO2 (189 Jt Ton)", f"{sultra['udara']:.1f} / 5", get_likert_label(sultra['udara']), "Emisi Smelter Morosi/VDNI & Peningkatan NO2 Satelit"],
         ["Pilar 2: Air", "IKA (65.32), Diare (1.11x), Tailing (6.5 Jt Ton), Konflik Pesisir (5 Kasus)", f"{sultra['air']:.1f} / 5", get_likert_label(sultra['air']), "Sedimentasi Tailing Pesisir & Konflik Ruang Tangkap Nelayan"],
@@ -455,58 +505,33 @@ def generate_bab6_skoring_provinsi():
         ["SKOR KOMPOSIT SULTRA", "Agregasi 5 Pilar EWM Weighted Average (Z-Score Standardization)", f"{sultra['total_likert']:.1f} / 5", sultra['likert_label'], "STATUS AMBANG BATAS: KRISIS RUANG HIDUP & KEPADATAN IUP"]
     ]
 
-    # Flowchart Mermaid LR Sulteng & Sultra
-    mermaid_sulteng = """flowchart LR
-    subgraph S1["1. Data Empiris Input"]
-        A1["20 Indikator Empiris<br/><i>6 Provinsi Se-Sulawesi</i>"]
-        A2["Fokus Data Sulteng<br/><i>Episentrum Nikel & PLTU</i>"]
+    # Flowchart Mermaid LR Regional (Satu Flowchart Terpusat untuk Seluruh Provinsi)
+    mermaid_regional = """flowchart LR
+    subgraph S1["1. Matriks Empiris Regional"]
+        A1["20 Indikator Empiris Multisektor<br/><i>6 Provinsi Se-Pulau Sulawesi</i>"]
+        A2["Sensor NASA, KLHK, ESDM,<br/><i>Kemenkes, GFW, BNPB & KPA</i>"]
     end
-    subgraph S2["2. Standardisasi & Pembobotan"]
-        B1["Z-Score Deviasi Standar<br/><i>Z = (x - mean) / std</i>"]
-        B2["Inversi Parameter IKA<br/><i>Z_ika = -Z_ika</i>"]
-        B3["Entropy Weight Method (EWM)<br/><i>Bobot Objektif Dispersi W_j</i>"]
+    subgraph S2["2. Standardisasi & Pembobotan Objektif"]
+        B1["Z-Score Regional: Z = (x - mean) / std<br/><i>Inversi Indikator Positif (IKA)</i>"]
+        B2["Entropy Weight Method (EWM)<br/><i>Dispersi Informasi Shannon W_j</i>"]
     end
-    subgraph S3["3. Transformasi & Agregasi"]
-        C1["Mapping Likert Diskret (0-5)<br/><i>Threshold Outlier >= +1.0σ</i>"]
-        C2["EWM Weighted Average<br/><i>5 Pilar: Udara, Air, Lahan, Sosial, Veto</i>"]
+    subgraph S3["3. Transformasi & Agregasi Pilar"]
+        C1["Mapping Skala Likert Diskret (0 - 5)<br/><i>Threshold Outlier Ekstrem >= +1.0σ</i>"]
+        C2["EWM Weighted Average per Pilar<br/><i>Udara, Air, Lahan, Sosial, Veto</i>"]
     end
-    subgraph S4["4. Sintesis & Vonis Sulteng"]
-        D1["Skor Komposit: 4.0 / 5.0<br/><i>(WSM: 7.92 / 10.0)</i>"]
-        D2["STATUS: MELAMPAUI BATAS<br/><i>Darurat Ekologis Provinsi</i>"]
+    subgraph S4["4. Sintesis Komposit & Klasifikasi"]
+        D1["Skor Komposit 0.0 - 5.0 (WSM 0-10)<br/><i>Mean 5 Pilar Terbobot EWM</i>"]
+        D2["Vonis Status Daya Dukung<br/><i>Melampaui / Mendekati / Tidak</i>"]
     end
-    A1 & A2 --> B1 & B3
-    B1 --> B2 --> C1
-    B3 & C1 --> C2 --> D1 --> D2"""
+    A1 & A2 --> B1 & B2
+    B1 --> C1
+    B2 & C1 --> C2 --> D1 --> D2"""
 
-    mermaid_sultra = """flowchart LR
-    subgraph S1["1. Data Empiris Input"]
-        A1["20 Indikator Empiris<br/><i>6 Provinsi Se-Sulawesi</i>"]
-        A2["Fokus Data Sultra<br/><i>Episentrum Konflik Agraria & IUP</i>"]
-    end
-    subgraph S2["2. Standardisasi & Pembobotan"]
-        B1["Z-Score Deviasi Standar<br/><i>Z = (x - mean) / std</i>"]
-        B2["Inversi Parameter IKA<br/><i>Z_ika = -Z_ika</i>"]
-        B3["Entropy Weight Method (EWM)<br/><i>Bobot Objektif Dispersi W_j</i>"]
-    end
-    subgraph S3["3. Transformasi & Agregasi"]
-        C1["Mapping Likert Diskret (0-5)<br/><i>Kepadatan IUP (+1.50σ) & Sosial (+1.95σ)</i>"]
-        C2["EWM Weighted Average<br/><i>5 Pilar: Udara, Air, Lahan, Sosial, Veto</i>"]
-    end
-    subgraph S4["4. Sintesis & Vonis Sultra"]
-        D1["Skor Komposit: 3.4 / 5.0<br/><i>(WSM: 6.78 / 10.0)</i>"]
-        D2["STATUS: MENDEKATI BATAS<br/><i>Krisis Sosial & Kepadatan Tambang Kritis</i>"]
-    end
-    A1 & A2 --> B1 & B3
-    B1 --> B2 --> C1
-    B3 & C1 --> C2 --> D1 --> D2"""
-
-    png_sulteng = str(tool_dir / "mermaid_flowchart_6_6_sulteng.png")
-    png_sultra = str(tool_dir / "mermaid_flowchart_6_6_sultra.png")
-    dl_sulteng = download_mermaid_png(mermaid_sulteng, png_sulteng)
-    dl_sultra = download_mermaid_png(mermaid_sultra, png_sultra)
+    png_regional = str(tool_dir / "mermaid_flowchart_6_6_regional.png")
+    dl_regional = download_mermaid_png(mermaid_regional, png_regional)
 
     # =========================================================================
-    # [2/4] MEMBANGUN DOKUMEN WORD SATUAN (DOCX)
+    # [2/4] MEMBANGUN DOKUMEN WORD (DOCX) TERPUSAT
     # =========================================================================
     print("[2/4] Membangun DOCX Metodologi_Bab6_Skoring_Provinsi.docx...")
     doc = Document()
@@ -532,55 +557,60 @@ def generate_bab6_skoring_provinsi():
     add_h2(doc, "SUB-BAB 6.6: ALGORITMA SKORING TINGKAT PROVINSI (MODEL HYBRID Z-SCORE & EWM)")
 
     # -------------------------------------------------------------------------
-    # SEKSI 6.6.1: SULAWESI TENGAH
+    # KERANGKA METODOLOGI & FORMULASI MATEMATIS UNIVERSAL (BERLAKU 6 PROVINSI)
     # -------------------------------------------------------------------------
-    add_h3(doc, "6.6.1 Evaluasi Forensik D3TLH: Provinsi Sulawesi Tengah (Sulteng)")
     add_note_box(
         doc,
-        "Provinsi Sulawesi Tengah (Episentrum Hilirisasi & PLTU Captive)",
-        "Data empiris: Gabungan sensor satelit NASA TROPOMI NO2, Global Energy Monitor (GEM 2023), Rekam Medis Kemenkes (ISPA & Diare), Laporan Kinerja KLHK (Limbah B3 & Tailing), Global Forest Watch (Deforestasi & Emisi Karbon), BNPB (Bencana Alam), KPA & TanahKita (Konflik Agraria & Kriminalisasi), serta Minerba ESDM (IUP Nikel & Obral Izin). "
-        "Diolah menggunakan model hybrid Z-Score Anomali Deviasi Standar dan Entropy Weight Method (EWM) sesuai antarmuka Dashboard Streamlit Tab 3 (Bedah Matematika Z-Score + EWM per Provinsi)."
+        "KERANGKA METODOLOGI MULTIKRITERIA REGIONAL (BERLAKU MENGIKAT UNTUK 6 PROVINSI)",
+        "Model evaluasi daya dukung dan daya tampung lingkungan hidup tingkat provinsi dirancang menggunakan pendekatan terstandarisasi berbasis Hybrid Z-Score Anomali Deviasi Standar dan Entropy Weight Method (EWM) sesuai Nature Scientific Reports (Sun et al., 2024). "
+        "Metodologi, formula normalisasi, matriks entropi, dan bobot objektif indikator dihitung secara simultan dari matriks 6 provinsi se-Pulau Sulawesi, sehingga menjadi dasar penilaian yang adil, objektif, dan bebas bias subjektivitas."
     )
 
-    add_h4(doc, "A. Pengantar & Kerangka Narasi")
+    add_h4(doc, "A. Pengantar & Kerangka Narasi Metodologis")
     add_p(doc, [
         ("Sebagaimana ditampilkan pada antarmuka Streamlit ", False, False),
         ("Dashboard Page 6 (Audit D3TLH - Tab Bedah Matematika Z-Score + EWM per Provinsi)", True, False),
-        (", evaluasi daya dukung dan daya tampung lingkungan hidup tingkat provinsi dirancang untuk membongkar kelemahan metodologi pemerintah yang kerap mengaburkan krisis lokal melalui teknik perataan wilayah (dilution effect). "
-         "AMDAL dan dokumen D3TLH resmi selama ini berasumsi bahwa kapasitas asimilasi lingkungan bersifat homogen di seluruh daratan. Namun, fakta empiris membuktikan disparitas ekstrem antara provinsi episentrum industri nikel dengan wilayah sekitarnya.", False, False)
+        (", evaluasi tingkat provinsi bertujuan untuk mengatasi kelemahan mendasar dokumen AMDAL dan D3TLH konvensional yang kerap mengaburkan krisis lingkungan lokal melalui teknik perataan agregat wilayah (", False, False),
+        ("dilution effect", True, True),
+        ("). Dalam metodologi pemerintah, beban pencemaran masif di suatu kawasan industri tambang sering kali tampak 'aman' hanya karena dirata-ratakan dengan luas daratan pulau secara keseluruhan.", False, False)
     ])
     add_p(doc, [
-        ("Di sini pembaca dapat melihat persis bagaimana angka ", False, False),
-        ("Fakta Lapangan (Raw Absolute Data)", True, False),
-        (" ditransformasikan secara objektif oleh fungsi komputasi matematika ", False, False),
-        ("(Z-Score Anomali dan Pembobotan Entropi EWM Shannon)", True, False),
-        (" menjadi Skor Likert diskret 0.0 - 5.0. Analisis forensik membuktikan bahwa ", False, False),
-        ("Provinsi Sulawesi Tengah berada pada status RED ALERT (Skor Komposit 4.0 / 5.0 - Melampaui Batas)", True, False),
-        (", di mana beban pencemaran udara, akumulasi limbah B3, beban tailing, dan deforestasi primer telah melampaui batas toleransi daya lentur ekologis.", False, False)
+        ("Untuk mendobrak bias tersebut, riset ini menerapkan ", False, False),
+        ("Model Hybrid Z-Score Anomali dan Pembobotan Objektif Entropi (EWM)", True, False),
+        (". Pendekatan ini secara otomatis memberikan bobot evaluasi tertinggi pada indikator-indikator yang memiliki tingkat ketimpangan spasial paling ekstrem (seperti timbulan limbah B3, tailing tambang, korban krisis agraria, dan PLTU captive batubara). "
+         "Dengan demikian, provinsi yang menjadi episentrum industri ekstraktif terdeteksi secara akurat berada pada status anomali krisis tanpa terdistorsi oleh luas wilayah administratif.", False, False)
     ])
 
-    add_h4(doc, "B. Alur Logika Metodologis Skoring Tingkat Provinsi (Flowchart Sulteng)")
-    add_caption(doc, "Bagan Alur 6.6a: Alur Logika Pemrosesan Algoritma Skoring Provinsi Sulawesi Tengah")
-    if dl_sulteng:
+    add_h4(doc, "B. Alur Logika Metodologis Regional (Flowchart 6 Provinsi)")
+    add_p(doc, [
+        ("Seluruh proses komputasi skoring dari 6 provinsi di Pulau Sulawesi dijalankan melalui satu alur algoritma regional terintegrasi sebagaimana disajikan pada ", False, False),
+        ("Bagan Alur 6.6", True, False),
+        (":", False, False)
+    ])
+    add_caption(doc, "Bagan Alur 6.6: Alur Logika Algoritma Skoring Tingkat Provinsi (Model Hybrid Z-Score & EWM)")
+    if dl_regional:
         try:
             p_img = doc.add_paragraph()
             p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            p_img.add_run().add_picture(png_sulteng, width=Cm(15.0))
+            p_img.add_run().add_picture(png_regional, width=Cm(15.0))
         except Exception as exc:
-            print(f"[WARN] Gagal pasang gambar Sulteng: {exc}")
+            print(f"[WARN] Gagal pasang gambar Regional: {exc}")
 
-    add_h4(doc, "C. Formulasi Matematis & Definisi Variabel")
+    add_h4(doc, "C. Formulasi Matematis Universal & Definisi Variabel")
+    add_p(doc, [("Operasionalisasi matematis di bawah ini berlaku universal dan mengikat untuk seluruh 6 provinsi di Pulau Sulawesi:", False, False)])
+
     add_formula_box(
         doc,
         "Tahap 1: Standardisasi Deviasi Z-Score Regional (Anomali Spasial)",
         "Z_ij = (x_ij - mean(x_j)) / std(x_j)    ;    Khusus IKA: Z_ika = - (ika_i - mean(ika)) / std(ika)",
         [
-            ("x_ij", "Nilai empiris absolut provinsi i pada indikator j."),
-            ("mean(x_j)", "Rata-rata aritmatika indikator j dari seluruh 6 provinsi di Pulau Sulawesi."),
-            ("std(x_j)", "Standar deviasi sampel indikator j se-Sulawesi (substitusi 1.0 jika bernilai 0)."),
-            ("Inversi IKA", "Indeks Kualitas Air diinversi tandanya karena nilai IKA tinggi mencerminkan kualitas air baik.")
+            ("x_ij", "Nilai empiris aktual provinsi i pada indikator j."),
+            ("mean(x_j)", "Rata-rata aritmatika indikator j dari seluruh 6 provinsi di Pulau Sulawesi (nilai B)."),
+            ("std(x_j)", "Standar deviasi sampel indikator j se-Sulawesi (nilai C; disubstitusi 1.0 jika deviasi 0)."),
+            ("Inversi IKA", "Indeks Kualitas Air diinversi tandanya (dikalikan -1) karena nilai IKA tinggi mencerminkan kondisi air baik, sedangkan nilai rendah mencerminkan krisis pencemaran.")
         ]
     )
+
     add_formula_box(
         doc,
         "Tahap 2: Pembobotan Objektif Entropi Informasi (Entropy Weight Method - EWM)",
@@ -589,31 +619,77 @@ def generate_bab6_skoring_provinsi():
         [
             ("r_ij", "Matriks ternormalisasi skala Min-Max [0, 1] per kolom indikator."),
             ("P_ij", "Proporsi probabilitas kontribusi provinsi i terhadap total nilai indikator j."),
-            ("E_j", "Nilai entropi informasi Shannon indikator j (konstanta k = 1 / ln(6) = 0.5581)."),
-            ("W_j", "Bobot objektif final EWM. Indikator dengan disparitas paling timpang otomatis berbobot tertinggi.")
-        ]
-    )
-    add_formula_box(
-        doc,
-        "Tahap 3, 4 & 5: Mapping Likert Diskret & Agregasi Skor Komposit",
-        "L_ij = 5.0 (Z >= +1.0) ; 4.0 (0.5 <= Z < 1.0) ; 3.0 (0.0 <= Z < 0.5) ; 2.0 (-0.5 <= Z < 0.0) ; 1.0 (-1.0 <= Z < -0.5) ; 0.0 (Z < -1.0)\n"
-        "Skor_Pilar = SUM(L_ij * W_j) / SUM(W_j)    ;    Skor_Komposit = (Udara + Air + Lahan + Sosial + Veto) / 5.0",
-        [
-            ("Skor 5.0 (Z >= +1.0σ)", "Outlier Kritis Ekstrem / Red Alert (Beban melampaui rata-rata regional > 1 SD)."),
-            ("Vonis Status", "Melampaui Batas (Skor >= 4.0), Mendekati Batas (Skor = 3.0), Tidak Melampaui Batas (Skor < 3.0).")
+            ("E_j", "Nilai entropi informasi Shannon indikator j (konstanta k = 1 / ln(6) = 0.5581). Semakin timpang nilainya antar-provinsi, semakin kecil nilai entropi informasinya."),
+            ("D_j", "Derajat divergensi atau koefisien dispersi informasi indikator j (D_j = 1 - E_j)."),
+            ("W_j", "Bobot objektif final EWM untuk indikator j. Indikator yang paling timpang antar-provinsi (misal PLTU, B3, dan Tailing) otomatis memperoleh bobot evaluasi tertinggi.")
         ]
     )
 
-    add_h4(doc, "D. Matriks Hasil Uji Empiris (Sulteng)")
-    add_caption(doc, "Tabel 6.12: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Tengah (Model Hybrid Z-Score & EWM)")
+    add_formula_box(
+        doc,
+        "Tahap 3: Pemetaan Z-Score ke Skala Likert Diskret (0.0 - 5.0)",
+        "L_ij = 5.0 (jika Z >= +1.0) ; 4.0 (0.5 <= Z < 1.0) ; 3.0 (0.0 <= Z < 0.5) ; 2.0 (-0.5 <= Z < 0.0) ; 1.0 (-1.0 <= Z < -0.5) ; 0.0 (Z < -1.0)",
+        [
+            ("Skor 5.0 (Z >= +1.0σ)", "Outlier Kritis Ekstrem / Red Alert (Beban indikator melampaui batas rata-rata regional lebih dari 1 standar deviasi)."),
+            ("Skor 4.0 (+0.5σ s/d +1.0σ)", "Kerentanan Tinggi / Kondisi Buruk."),
+            ("Skor 3.0 (0.0 s/d +0.5σ)", "Ambang Batas Waspada / Kondisi Sedang."),
+            ("Skor 1.0 - 2.0 (Z < 0.0)", "Rendah / Waspada (Di bawah rata-rata tekanan lingkungan regional)."),
+            ("Skor 0.0 (Z < -1.0σ)", "Bebas Risiko Signifikan.")
+        ]
+    )
+
+    add_formula_box(
+        doc,
+        "Tahap 4 & 5: Agregasi EWM Weighted Average per Pilar & Skor Komposit Provinsi",
+        "Skor_Pilar = SUM(L_ij * W_j) / SUM(W_j)    ;    Skor_Komposit = (Udara + Air + Lahan + Sosial + Veto) / 5.0",
+        [
+            ("Skor_Pilar", "Rata-rata tertimbang skor Likert dalam satu matriks menggunakan bobot objektif EWM masing-masing indikator."),
+            ("Skor_Komposit", "Rata-rata unweighted dari 5 pilar daya dukung (skala 0.0 - 5.0). Ekuivalen Skor WSM 0 - 10 diperoleh dari Skor Komposit dikali 2.0."),
+            ("Vonis Status Ekologis", "Melampaui Batas (Skor >= 4.0), Mendekati Batas (Skor = 3.0), Tidak Melampaui Batas (Skor < 3.0).")
+        ]
+    )
+
+    add_caption(doc, "Tabel 6.12: Matriks Parameter Regional Se-Sulawesi (Rata-rata, Deviasi Standar, dan Bobot Objektif EWM 20 Indikator Empiris)")
     add_table_styled(
         doc,
-        ["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Rata-rata (B)", "Deviasi (C)", "Z-Score", "Bobot EWM", "Likert", "Status Ekologis"],
-        table_math_sulteng,
-        [1.5, 3.2, 2.0, 1.8, 1.7, 1.5, 1.5, 1.6, 2.2],
-        ["C", "L", "R", "R", "R", "C", "C", "C", "C"]
+        ["Pilar", "Indikator Empiris", "Rata-rata (B)", "Deviasi (C)", "Entropi (Ej)", "Divergensi (Dj)", "Bobot EWM (Wj)"],
+        table_regional_meta,
+        [2.2, 4.5, 2.5, 2.5, 1.8, 1.8, 1.7],
+        ["C", "L", "R", "R", "C", "C", "C"]
     )
-    add_caption(doc, "Tabel 6.13: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Tengah")
+
+    # -------------------------------------------------------------------------
+    # SEKSI 6.6.1: EVALUASI EMPIRIS SULAWESI TENGAH
+    # -------------------------------------------------------------------------
+    doc.add_page_break()
+    add_h3(doc, "6.6.1 Evaluasi Empiris D3TLH: Provinsi Sulawesi Tengah (Sulteng)")
+    add_note_box(
+        doc,
+        "PROFIL EMPIRIS: Provinsi Sulawesi Tengah (Episentrum Hilirisasi & PLTU Captive)",
+        "Kabupaten/Kota: 13 Daerah  |  Pusat Industri: Kawasan IMIP Morowali & Smelter Palu  |  Populasi BPS: 2.985.734 Jiwa\n"
+        "Karakteristik Krisis: Konsentrasi PLTU captive batubara terbesar nasional, hotspot satelit troposferik NO2 tertinggi, timbulan limbah B3 raksasa, dan laju deforestasi primer masif."
+    )
+
+    add_h4(doc, "A. Narasi Temuan Lapangan Sulteng")
+    add_p(doc, [
+        ("Hasil komputasi algoritma Z-Score EWM membuktikan bahwa ", False, False),
+        ("Provinsi Sulawesi Tengah berada pada status RED ALERT (Skor Komposit 4.0 / 5.0 — Melampaui Batas)", True, False),
+        (". Dari 20 indikator yang diuji, sebanyak 13 indikator berada pada kategori ", False, False),
+        ("Melampaui Batas (Skor Likert 4.0 hingga 5.0)", True, False),
+        (", dengan tekanan polusi udara dan perusakan lanskap daratan yang telah melampaui kapasitas asimilasi ekosistem.", False, False)
+    ])
+
+    add_h4(doc, "B. Matriks Hasil Uji Empiris (Sulteng)")
+    add_caption(doc, "Tabel 6.13: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Tengah (Model Hybrid Z-Score & EWM)")
+    add_table_styled(
+        doc,
+        ["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Nilai Z-Score", "Bobot EWM", "Skor Likert", "Status Ekologis"],
+        table_eval_sulteng,
+        [2.2, 4.3, 3.0, 1.8, 1.7, 1.8, 2.2],
+        ["C", "L", "R", "C", "C", "C", "C"]
+    )
+
+    add_caption(doc, "Tabel 6.14: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Tengah")
     add_table_styled(
         doc,
         ["Pilar / Dimensi", "Cakupan Indikator Kunci", "Skor Likert Pilar (0-5)", "Status Ekologis", "Interpretasi Temuan Lapangan Sulteng"],
@@ -622,95 +698,59 @@ def generate_bab6_skoring_provinsi():
         ["C", "L", "C", "C", "L"]
     )
 
-    add_h4(doc, "E. Analisis Temuan Empiris (Sulteng)")
+    add_h4(doc, "C. Analisis Temuan Empiris (Sulteng)")
     add_p(doc, [
-        ("1. ", True, False), ("Daya Tampung Udara (Skor 4.9 / 5 — Melampaui Batas): ", True, False),
+        ("1. ", True, False), (f"Daya Tampung Udara (Skor {sulteng['udara']:.1f} / 5 — {get_likert_label(sulteng['udara'])}): ", True, False),
         (f"Sulawesi Tengah memikul beban polusi udara terparah se-Sulawesi. Kapasitas PLTU captive batubara mencapai 7.325,0 MW (Z = +1.97σ), timbulan limbah B3 menyentuh 25,30 Juta Ton (Z = +1.97σ), emisi karbon 291,34 Juta Ton CO2e (Z = +1.67σ), dan rasio anomali ISPA mencapai 3,50x lipat (Z = +1.66σ).\n", False, False),
-        ("2. ", True, False), ("Daya Tampung Air (Skor 3.3 / 5 — Mendekati Batas): ", True, False),
+        ("2. ", True, False), (f"Daya Tampung Air (Skor {sulteng['air']:.1f} / 5 — {get_likert_label(sulteng['air'])}): ", True, False),
         (f"Meskipun rerata IKA bernilai 62,07, timbulan tailing dan slag mencapai 24,50 Juta Ton/Tahun (Z = +1.97σ) serta memicu lonjakan morbiditas diare sebesar 1,52x lipat dibanding kontrol (Z = +1.34σ, Likert 5.0).\n", False, False),
-        ("3. ", True, False), ("Daya Dukung Lahan (Skor 4.7 / 5 — Melampaui Batas): ", True, False),
+        ("3. ", True, False), (f"Daya Dukung Lahan (Skor {sulteng['lahan']:.1f} / 5 — {get_likert_label(sulteng['lahan'])}): ", True, False),
         (f"Kehancuran tutupan daratan terberat dengan total deforestasi primer 481.908 Ha (Z = +1.57σ), perambahan 19.804 Ha di kawasan hutan lindung (Z = +1.89σ), serta 383.304 Ha deforestasi komoditas tambang/sawit (Z = +1.69σ).\n", False, False),
-        ("4. ", True, False), ("Daya Dukung Sosial (Skor 2.5 / 5 — Tidak Melampaui Batas): ", True, False),
+        ("4. ", True, False), (f"Daya Dukung Sosial (Skor {sulteng['sosial']:.1f} / 5 — {get_likert_label(sulteng['sosial'])}): ", True, False),
         (f"Tercatat 12.231 jiwa masyarakat adat dan petani terancam kehilangan ruang hidup, serta terjadi 6 insiden kriminalisasi warga dan aktivis lingkungan hidup (Z = +0.71σ, Likert 4.0).\n", False, False),
-        ("5. ", True, False), ("Veto Kebijakan (Skor 4.4 / 5 — Melampaui Batas): ", True, False),
+        ("5. ", True, False), (f"Veto Kebijakan (Skor {sulteng['veto']:.1f} / 5 — {get_likert_label(sulteng['veto'])}): ", True, False),
         (f"Terjadi kegagalan pengendalian perizinan dengan diterbitkannya 260 IUP baru pasca-2014 (Z = +1.64σ, Likert 5.0) dan pembiaran 3 korporasi besar beroperasi ilegal di kawasan hutan.\n", False, False),
-        ("6. ", True, False), ("Vonis Komposit Sulawesi Tengah (Skor 4.0 / 5.0 — Melampaui Batas): ", True, False),
+        ("6. ", True, False), (f"Vonis Komposit Sulawesi Tengah (Skor {sulteng['total_likert']:.1f} / 5.0 — {sulteng['likert_label']}): ", True, False),
         (f"Secara agregat, Sulawesi Tengah memperoleh Skor Komposit 4.0 / 5.0 (Ekuivalen WSM 7.92 / 10.0) dengan status MELAMPAUI BATAS (RED ALERT).", False, False)
     ])
 
     # -------------------------------------------------------------------------
-    # SEKSI 6.6.2: SULAWESI TENGGARA
+    # SEKSI 6.6.2: EVALUASI EMPIRIS SULAWESI TENGGARA
     # -------------------------------------------------------------------------
     doc.add_page_break()
-
-    add_h3(doc, "6.6.2 Evaluasi Forensik D3TLH: Provinsi Sulawesi Tenggara (Sultra)")
+    add_h3(doc, "6.6.2 Evaluasi Empiris D3TLH: Provinsi Sulawesi Tenggara (Sultra)")
     add_note_box(
         doc,
-        "Provinsi Sulawesi Tenggara (Episentrum Konflik Agraria & Kepadatan IUP Ekstrem)",
-        "Data empiris: Gabungan sensor satelit NASA TROPOMI NO2, Global Energy Monitor (PLTU Captive Morosi & Konawe 1.900 MW), Rekam Medis Kemenkes (Diare & ISPA), Laporan Kinerja KLHK (Limbah B3 & Tailing 6,5 Jt Ton), Global Forest Watch (Deforestasi 337k Ha), BNPB (158 Bencana Alam), Konsorsium Pembaruan Agraria & TanahKita (39.821 Jiwa Terdampak & 5 Kasus Pelanggaran FPIC), serta Minerba ESDM (Kepadatan IUP 11,72% Daratan & 160 IUP Baru). "
-        "Diolah menggunakan model hybrid Z-Score Anomali Deviasi Standar dan Entropy Weight Method (EWM) sesuai antarmuka Dashboard Streamlit Tab 3 (Bedah Matematika Z-Score + EWM per Provinsi)."
+        "PROFIL EMPIRIS: Provinsi Sulawesi Tenggara (Episentrum Konflik Agraria & Kepadatan IUP Ekstrem)",
+        "Kabupaten/Kota: 17 Daerah  |  Pusat Industri: Smelter Morosi, Konawe, Kolaka & Pulau Wawonii  |  Populasi BPS: 2.624.875 Jiwa\n"
+        "Karakteristik Krisis: Kepadatan konsesi IUP tambang nikel tertinggi se-Sulawesi (11,72% daratan), korban perampasan ruang hidup terbesar (39.821 jiwa), sengketa ruang tangkap nelayan pesisir, dan pelanggaran persetujuan warga (FPIC) masif."
     )
 
-    add_h4(doc, "A. Pengantar & Kerangka Narasi")
+    add_h4(doc, "A. Narasi Temuan Lapangan Sultra")
     add_p(doc, [
-        ("Berdasarkan hasil pemetaan empiris di antarmuka Streamlit ", False, False),
-        ("Dashboard Page 6 (Audit D3TLH - Tab Bedah Matematika Z-Score + EWM per Provinsi)", True, False),
-        (", Provinsi Sulawesi Tenggara memperlihatkan profil anomali yang sangat spesifik dan kontras dibandingkan Sulawesi Tengah. "
-         "Jika tekanan ekologis di Sulawesi Tengah didominasi oleh polusi udara PLTU raksasa dan deforestasi daratan, maka ", False, False),
-        ("Sulawesi Tenggara mengalami ledakan krisis daya dukung sosial, perampasan ruang hidup masyarakat pesisir, dan kepadatan konsesi tambang tertinggi se-Sulawesi.", True, False)
+        ("Berdasarkan hasil pemetaan empiris Z-Score EWM, Provinsi Sulawesi Tenggara memperlihatkan profil krisis yang sangat kontras dengan Sulawesi Tengah. "
+         "Jika Sulawesi Tengah didominasi oleh polusi PLTU dan deforestasi hulu, maka ", False, False),
+        ("Sulawesi Tenggara mengalami ledakan krisis daya dukung sosial, perampasan ruang hidup masyarakat pesisir, dan kepadatan konsesi tambang tertinggi se-Pulau Sulawesi.", True, False)
     ])
     add_p(doc, [
-        ("Fakta lapangan mencatat bahwa konsesi tambang nikel di Sulawesi Tenggara telah mencaplok ", False, False),
-        ("11,72% dari seluruh luas daratan provinsi", True, False),
-        (" (skor Z-Score anomali Z = +1.50σ). Akibatnya, terjadi eskalasi perampasan ruang hidup yang berdampak langsung pada ", False, False),
-        ("39.821 jiwa petani, nelayan, dan masyarakat pesisir (Z = +1.95σ, Skor Likert 5.0 - Outlier Tertinggi se-Sulawesi)", True, False),
-        (", serta memicu 5 kasus sengketa pelanggaran persetujuan warga (FPIC) di pulau-pulau kecil seperti Pulau Wawonii (Konawe Kepulauan).", False, False)
+        ("Konsesi tambang nikel di Sulawesi Tenggara mencaplok ", False, False),
+        ("11,72% dari total daratan provinsi (Z = +1.50σ, Skor Likert 5.0 — Outlier Ekstrem Terpadat Se-Sulawesi)", True, False),
+        (". Dampak destruktifnya memicu krisis kemanusiaan langsung terhadap ", False, False),
+        ("39.821 jiwa petani dan nelayan (Z = +1.95σ, Skor Likert 5.0 — mencakup 73% total korban se-Sulawesi)", True, False),
+        (", serta 5 kasus manipulasi persetujuan warga (FPIC) di wilayah kepulauan.", False, False)
     ])
 
-    add_h4(doc, "B. Alur Logika Metodologis Skoring Tingkat Provinsi (Flowchart Sultra)")
-    add_caption(doc, "Bagan Alur 6.6b: Alur Logika Pemrosesan Algoritma Skoring Provinsi Sulawesi Tenggara")
-    if dl_sultra:
-        try:
-            p_img = doc.add_paragraph()
-            p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            p_img.add_run().add_picture(png_sultra, width=Cm(15.0))
-        except Exception as exc:
-            print(f"[WARN] Gagal pasang gambar Sultra: {exc}")
-
-    add_h4(doc, "C. Formulasi Matematis & Definisi Variabel")
-    add_p(doc, [("Operasionalisasi skoring di Sulawesi Tenggara menggunakan model normalisasi dan pembobotan EWM yang konsisten dengan standar regional se-Sulawesi:", False, False)])
-
-    add_formula_box(
-        doc,
-        "Tahap 1: Anomali Z-Score Sultra vs Rata-rata Bioregion",
-        "Z_sultra,j = (x_sultra,j - mean(x_j)) / std(x_j)",
-        [
-            ("Kepadatan IUP Sultra", "Nilai 11,72% menghasilkan Z = +1.50σ (Outlier Ekstrem Likert 5.0; rerata regional hanya 5,08%)."),
-            ("Korban Agraria Sultra", "Nilai 39.821 jiwa menghasilkan Z = +1.95σ (Skor Likert 5.0; mencakup 73% total korban se-Sulawesi)."),
-            ("Pelanggaran FPIC Sultra", "Nilai 5 kasus menghasilkan Z = +1.86σ (Skor Likert 5.0; tertinggi di seluruh bioregion).")
-        ]
-    )
-    add_formula_box(
-        doc,
-        "Tahap 2 & 3: Pembobotan Entropi EWM & Transformasi Likert Sultra",
-        "W_j = (1 - E_j) / SUM(1 - E_j)    ;    Skor_Pilar = SUM(L_sultra,j * W_j) / SUM(W_j)",
-        [
-            ("Bobot EWM Korban Jiwa", "Indikator jiwa terdampak memiliki varians disparitas tinggi sehingga memperoleh bobot EWM w = 0.0781."),
-            ("Bobot EWM FPIC", "Indikator FPIC memiliki bobot w = 0.0635, melipatgandakan sensitivitas penilaian pilar sosial."),
-            ("Skor Pilar Sosial Sultra", "Mencapai 4.5 / 5.0 (Status: Melampaui Batas / Red Alert).")
-        ]
-    )
-
-    add_h4(doc, "D. Matriks Hasil Uji Empiris (Sultra)")
-    add_caption(doc, "Tabel 6.14: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Tenggara (Model Hybrid Z-Score & EWM)")
+    add_h4(doc, "B. Matriks Hasil Uji Empiris (Sultra)")
+    add_caption(doc, "Tabel 6.15: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Tenggara (Model Hybrid Z-Score & EWM)")
     add_table_styled(
         doc,
-        ["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Rata-rata (B)", "Deviasi (C)", "Z-Score", "Bobot EWM", "Likert", "Status Ekologis"],
-        table_math_sultra,
-        [1.5, 3.2, 2.0, 1.8, 1.7, 1.5, 1.5, 1.6, 2.2],
-        ["C", "L", "R", "R", "R", "C", "C", "C", "C"]
+        ["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Nilai Z-Score", "Bobot EWM", "Skor Likert", "Status Ekologis"],
+        table_eval_sultra,
+        [2.2, 4.3, 3.0, 1.8, 1.7, 1.8, 2.2],
+        ["C", "L", "R", "C", "C", "C", "C"]
     )
-    add_caption(doc, "Tabel 6.15: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Tenggara")
+
+    add_caption(doc, "Tabel 6.16: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Tenggara")
     add_table_styled(
         doc,
         ["Pilar / Dimensi", "Cakupan Indikator Kunci", "Skor Likert Pilar (0-5)", "Status Ekologis", "Interpretasi Temuan Lapangan Sultra"],
@@ -719,7 +759,7 @@ def generate_bab6_skoring_provinsi():
         ["C", "L", "C", "C", "L"]
     )
 
-    add_h4(doc, "E. Analisis Temuan Empiris (Sultra)")
+    add_h4(doc, "C. Analisis Temuan Empiris (Sultra)")
     add_p(doc, [
         ("1. ", True, False), (f"Daya Tampung Udara (Skor {sultra['udara']:.1f} / 5 — {get_likert_label(sultra['udara'])}): ", True, False),
         (f"Kapasitas PLTU captive beroperasi mencapai 1.900,0 MW (Z = +0.09σ), konsentrasi gas NO2 troposferik 6,62e-06 mol/m² (Z = +0.82σ, Likert 4.0), dan pelepasan emisi karbon deforestasi 189,02 Juta Ton CO2e (Z = +0.59σ, Likert 4.0). Tekanan polusi terkonsentrasi di kawasan industri Morosi (Konawe).\n", False, False),
@@ -780,70 +820,78 @@ def generate_bab6_skoring_provinsi():
 <h1>BAB VI: AUDIT FORENSIK METODOLOGI D3TLH</h1>
 <h2>SUB-BAB 6.6: ALGORITMA SKORING TINGKAT PROVINSI (MODEL HYBRID Z-SCORE & EWM)</h2>
 
-<!-- SEKSI 6.6.1 SULTENG -->
-<h3>6.6.1 Evaluasi Forensik D3TLH: Provinsi Sulawesi Tengah (Sulteng)</h3>
 <div class="note-box">
-  <strong>PROFIL BIOREGION: Provinsi Sulawesi Tengah (Episentrum Hilirisasi & PLTU Captive)</strong><br>
-  Data empiris: Gabungan sensor satelit NASA TROPOMI NO2, Global Energy Monitor (GEM 2023), Rekam Medis Kemenkes (ISPA & Diare), Laporan Kinerja KLHK (Limbah B3 & Tailing), Global Forest Watch (Deforestasi & Emisi Karbon), BNPB (Bencana Alam), KPA & TanahKita (Konflik Agraria & Kriminalisasi), serta Minerba ESDM (IUP Nikel & Obral Izin). Diolah menggunakan model hybrid Z-Score Anomali Deviasi Standar dan Entropy Weight Method (EWM) sesuai antarmuka Dashboard Streamlit Tab 3 (Bedah Matematika Z-Score + EWM per Provinsi).
+  <strong>KERANGKA METODOLOGI MULTIKRITERIA REGIONAL (BERLAKU MENGIKAT UNTUK 6 PROVINSI)</strong><br>
+  Model evaluasi daya dukung dan daya tampung lingkungan hidup tingkat provinsi dirancang menggunakan pendekatan terstandarisasi berbasis Hybrid Z-Score Anomali Deviasi Standar dan Entropy Weight Method (EWM) sesuai Nature Scientific Reports (Sun et al., 2024). Metodologi, formula normalisasi, matriks entropi, dan bobot objektif indikator dihitung secara simultan dari matriks 6 provinsi se-Pulau Sulawesi.
 </div>
 
-<h4>A. Pengantar & Kerangka Narasi</h4>
-<p>Sebagaimana ditampilkan pada antarmuka Streamlit <strong>Dashboard Page 6 (Audit D3TLH - Tab Bedah Matematika Z-Score + EWM per Provinsi)</strong>, evaluasi daya dukung dan daya tampung lingkungan hidup tingkat provinsi dirancang untuk membongkar kelemahan metodologi pemerintah yang kerap mengaburkan krisis lokal melalui teknik perataan wilayah (dilution effect). Analisis forensik membuktikan bahwa <strong>Provinsi Sulawesi Tengah berada pada status RED ALERT (Skor Komposit 4.0 / 5.0 - Melampaui Batas)</strong>, di mana beban pencemaran udara, limbah B3, tailing, dan deforestasi primer telah melampaui batas lentur ekologis.</p>
+<h4>A. Pengantar & Kerangka Narasi Metodologis</h4>
+<p>Sebagaimana ditampilkan pada antarmuka Streamlit <strong>Dashboard Page 6 (Audit D3TLH - Tab Bedah Matematika Z-Score + EWM per Provinsi)</strong>, evaluasi tingkat provinsi bertujuan untuk mengatasi kelemahan mendasar dokumen AMDAL dan D3TLH konvensional yang kerap mengaburkan krisis lingkungan lokal melalui teknik perataan agregat wilayah (<em>dilution effect</em>). Dalam metodologi pemerintah, beban pencemaran masif di suatu kawasan industri tambang sering kali tampak 'aman' hanya karena dirata-ratakan dengan luas daratan pulau secara keseluruhan.</p>
+<p>Untuk mendobrak bias tersebut, riset ini menerapkan <strong>Model Hybrid Z-Score Anomali dan Pembobotan Objektif Entropi (EWM)</strong>. Pendekatan ini secara otomatis memberikan bobot evaluasi tertinggi pada indikator-indikator yang memiliki tingkat ketimpangan spasial paling ekstrem (seperti timbulan limbah B3, tailing tambang, korban krisis agraria, dan PLTU captive batubara). Dengan demikian, provinsi yang menjadi episentrum industri ekstraktif terdeteksi secara akurat berada pada status anomali krisis tanpa terdistorsi oleh luas wilayah administratif.</p>
 
-<h4>B. Alur Logika Metodologis Skoring Tingkat Provinsi (Flowchart Sulteng)</h4>
+<h4>B. Alur Logika Metodologis Regional (Flowchart 6 Provinsi)</h4>
 <div class="mermaid">
-{mermaid_sulteng}
+{mermaid_regional}
 </div>
 
-<h4>C. Formulasi Matematis & Definisi Variabel</h4>
-<div class="formula">Z_ij = (x_ij - mean(x_j)) / std(x_j) &nbsp;&nbsp;|&nbsp;&nbsp; Khusus IKA: Z_ika = - (ika_i - mean(ika)) / std(ika)</div>
-<div class="formula">r_ij = (x_ij - min(x_j)) / (max(x_j) - min(x_j)) &nbsp;➔&nbsp; P_ij = r_ij / &Sigma;r_ij &nbsp;➔&nbsp; E_j = -k * &Sigma;(P_ij * ln(P_ij)) &nbsp;➔&nbsp; W_j = (1 - E_j) / &Sigma;(1 - E_j)</div>
-<div class="formula">Skor_Pilar = &Sigma;(Likert_ij * W_j) / &Sigma;W_j &nbsp;&nbsp;|&nbsp;&nbsp; Skor_Komposit = (Udara + Air + Lahan + Sosial + Veto) / 5.0 = {sulteng['total_likert']:.1f} / 5</div>
+<h4>C. Formulasi Matematis Universal & Definisi Variabel</h4>
+<div class="formula">Tahap 1: Z_ij = (x_ij - mean(x_j)) / std(x_j) &nbsp;&nbsp;|&nbsp;&nbsp; Khusus IKA: Z_ika = - (ika_i - mean(ika)) / std(ika)</div>
+<div class="formula">Tahap 2: r_ij = (x_ij - min(x_j)) / (max(x_j) - min(x_j)) &nbsp;➔&nbsp; P_ij = r_ij / &Sigma;r_ij &nbsp;➔&nbsp; E_j = -k * &Sigma;(P_ij * ln(P_ij)) &nbsp;➔&nbsp; W_j = (1 - E_j) / &Sigma;(1 - E_j)</div>
+<div class="formula">Tahap 3: L_ij = 5.0 (Z &ge; +1.0) ; 4.0 (0.5 &le; Z < 1.0) ; 3.0 (0.0 &le; Z < 0.5) ; 2.0 (-0.5 &le; Z < 0.0) ; 1.0 (-1.0 &le; Z < -0.5) ; 0.0 (Z < -1.0)</div>
+<div class="formula">Tahap 4 & 5: Skor_Pilar = &Sigma;(L_ij * W_j) / &Sigma;W_j &nbsp;&nbsp;|&nbsp;&nbsp; Skor_Komposit = (Udara + Air + Lahan + Sosial + Veto) / 5.0</div>
 
-<h4>D. Matriks Hasil Uji Empiris (Sulteng)</h4>
-<div class="table-caption">Tabel 6.12: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Tengah (Model Hybrid Z-Score & EWM)</div>
-{html_table(["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Rata-rata (B)", "Deviasi (C)", "Z-Score", "Bobot EWM", "Likert", "Status Ekologis"], table_math_sulteng)}
+<div class="table-caption">Tabel 6.12: Matriks Parameter Regional Se-Sulawesi (Rata-rata, Deviasi Standar, dan Bobot Objektif EWM 20 Indikator Empiris)</div>
+{html_table(["Pilar", "Indikator Empiris", "Rata-rata (B)", "Deviasi (C)", "Entropi (Ej)", "Divergensi (Dj)", "Bobot EWM (Wj)"], table_regional_meta)}
 
-<div class="table-caption">Tabel 6.13: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Tengah</div>
+<div class="divider"></div>
+
+<!-- SEKSI 6.6.1 SULTENG -->
+<h3>6.6.1 Evaluasi Empiris D3TLH: Provinsi Sulawesi Tengah (Sulteng)</h3>
+<div class="note-box">
+  <strong>PROFIL EMPIRIS: Provinsi Sulawesi Tengah (Episentrum Hilirisasi & PLTU Captive)</strong><br>
+  Kabupaten/Kota: 13 Daerah  |  Pusat Industri: Kawasan IMIP Morowali & Smelter Palu  |  Populasi BPS: 2.985.734 Jiwa<br>
+  Karakteristik Krisis: Konsentrasi PLTU captive batubara terbesar nasional, hotspot satelit troposferik NO2 tertinggi, timbulan limbah B3 raksasa, dan laju deforestasi primer masif.
+</div>
+
+<h4>A. Narasi Temuan Lapangan Sulteng</h4>
+<p>Hasil komputasi algoritma Z-Score EWM membuktikan bahwa <strong>Provinsi Sulawesi Tengah berada pada status RED ALERT (Skor Komposit 4.0 / 5.0 — Melampaui Batas)</strong>. Dari 20 indikator yang diuji, sebanyak 13 indikator berada pada kategori <strong>Melampaui Batas (Skor Likert 4.0 hingga 5.0)</strong>, dengan tekanan polusi udara dan perusakan lanskap daratan yang telah melampaui kapasitas asimilasi ekosistem.</p>
+
+<h4>B. Matriks Hasil Uji Empiris (Sulteng)</h4>
+<div class="table-caption">Tabel 6.13: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Tengah (Model Hybrid Z-Score & EWM)</div>
+{html_table(["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Nilai Z-Score", "Bobot EWM", "Skor Likert", "Status Ekologis"], table_eval_sulteng)}
+
+<div class="table-caption">Tabel 6.14: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Tengah</div>
 {html_table(["Pilar / Dimensi", "Cakupan Indikator Kunci", "Skor Likert Pilar (0-5)", "Status Ekologis", "Interpretasi Temuan Lapangan Sulteng"], rekap_sulteng)}
 
-<h4>E. Analisis Temuan Empiris (Sulteng)</h4>
-<p><strong>1. Daya Tampung Udara (Skor {sulteng['udara']:.1f} / 5 — Melampaui Batas):</strong> Beban PLTU captive batubara 7.325,0 MW (Z = +1.97&sigma;), limbah B3 25,30 Jt Ton (Z = +1.97&sigma;), emisi CO2 291,34 Jt Ton, dan anomali ISPA 3,50x lipat (Z = +1.66&sigma;).<br>
-<strong>2. Daya Tampung Air (Skor {sulteng['air']:.1f} / 5 — Mendekati Batas):</strong> Timbulan tailing/slag 24,50 Jt Ton (Z = +1.97&sigma;) dan morbiditas diare 1,52x lipat (Z = +1.34&sigma;).<br>
-<strong>3. Daya Dukung Lahan (Skor {sulteng['lahan']:.1f} / 5 — Melampaui Batas):</strong> Deforestasi primer 481.908 Ha (Z = +1.57&sigma;), perambahan hutan lindung 19.804 Ha (Z = +1.89&sigma;), dan 458 kejadian bencana hidrometeorologi.<br>
-<strong>4. Daya Dukung Sosial (Skor {sulteng['sosial']:.1f} / 5 — Tidak Melampaui Batas):</strong> 12.231 jiwa terdampak konflik agraria dan 6 insiden kriminalisasi pembela HAM.<br>
-<strong>5. Veto Kebijakan (Skor {sulteng['veto']:.1f} / 5 — Melampaui Batas):</strong> Obral 260 IUP baru pasca-2014 (Z = +1.64&sigma;) dan impunitas korporat ilegal.<br>
-<strong>6. Vonis Komposit Sulteng (Skor {sulteng['total_likert']:.1f} / 5.0 — Melampaui Batas):</strong> Status <span class="badge-danger">MELAMPAUI BATAS (RED ALERT)</span> membuktikan keruntuhan daya dukung lingkungan akibat ekspansi smelter nikel.</p>
+<h4>C. Analisis Temuan Empiris (Sulteng)</h4>
+<p><strong>1. Daya Tampung Udara (Skor {sulteng['udara']:.1f} / 5 — {get_likert_label(sulteng['udara'])}):</strong> Beban PLTU captive batubara 7.325,0 MW (Z = +1.97&sigma;), limbah B3 25,30 Jt Ton (Z = +1.97&sigma;), emisi CO2 291,34 Jt Ton, dan anomali ISPA 3,50x lipat (Z = +1.66&sigma;).<br>
+<strong>2. Daya Tampung Air (Skor {sulteng['air']:.1f} / 5 — {get_likert_label(sulteng['air'])}):</strong> Timbulan tailing/slag 24,50 Jt Ton (Z = +1.97&sigma;) dan morbiditas diare 1,52x lipat (Z = +1.34&sigma;).<br>
+<strong>3. Daya Dukung Lahan (Skor {sulteng['lahan']:.1f} / 5 — {get_likert_label(sulteng['lahan'])}):</strong> Deforestasi primer 481.908 Ha (Z = +1.57&sigma;), perambahan hutan lindung 19.804 Ha (Z = +1.89&sigma;), dan 458 kejadian bencana hidrometeorologi.<br>
+<strong>4. Daya Dukung Sosial (Skor {sulteng['sosial']:.1f} / 5 — {get_likert_label(sulteng['sosial'])}):</strong> 12.231 jiwa terdampak konflik agraria dan 6 insiden kriminalisasi pembela HAM.<br>
+<strong>5. Veto Kebijakan (Skor {sulteng['veto']:.1f} / 5 — {get_likert_label(sulteng['veto'])}):</strong> Obral 260 IUP baru pasca-2014 (Z = +1.64&sigma;) dan impunitas korporat ilegal.<br>
+<strong>6. Vonis Komposit Sulteng (Skor {sulteng['total_likert']:.1f} / 5.0 — {sulteng['likert_label']}):</strong> Status <span class="badge-danger">MELAMPAUI BATAS (RED ALERT)</span> membuktikan keruntuhan daya dukung lingkungan akibat ekspansi smelter nikel.</p>
 
 <div class="divider"></div>
 
 <!-- SEKSI 6.6.2 SULTRA -->
-<h3>6.6.2 Evaluasi Forensik D3TLH: Provinsi Sulawesi Tenggara (Sultra)</h3>
+<h3>6.6.2 Evaluasi Empiris D3TLH: Provinsi Sulawesi Tenggara (Sultra)</h3>
 <div class="note-box">
-  <strong>PROFIL BIOREGION: Provinsi Sulawesi Tenggara (Episentrum Konflik Agraria & Kepadatan IUP Ekstrem)</strong><br>
-  Data empiris: Sensor satelit NASA NO2, PLTU Captive Morosi & Konawe 1.900 MW, Rekam Medis Diare & ISPA, Limbah B3 & Tailing 6,5 Jt Ton, Deforestasi 337k Ha, 158 Bencana Alam, 39.821 Jiwa Terdampak Konflik Agraria & 5 Kasus FPIC, serta Kepadatan IUP 11,72% Daratan & 160 IUP Baru. Diolah menggunakan model hybrid Z-Score Anomali Deviasi Standar dan Entropy Weight Method (EWM).
+  <strong>PROFIL EMPIRIS: Provinsi Sulawesi Tenggara (Episentrum Konflik Agraria & Kepadatan IUP Ekstrem)</strong><br>
+  Kabupaten/Kota: 17 Daerah  |  Pusat Industri: Smelter Morosi, Konawe, Kolaka & Pulau Wawonii  |  Populasi BPS: 2.624.875 Jiwa<br>
+  Karakteristik Krisis: Kepadatan konsesi IUP tambang nikel tertinggi se-Sulawesi (11,72% daratan), korban perampasan ruang hidup terbesar (39.821 jiwa), sengketa ruang tangkap nelayan pesisir, dan pelanggaran persetujuan warga (FPIC) masif.
 </div>
 
-<h4>A. Pengantar & Kerangka Narasi</h4>
-<p>Berdasarkan hasil pemetaan empiris di antarmuka Streamlit <strong>Dashboard Page 6 (Audit D3TLH - Tab Bedah Matematika Z-Score + EWM per Provinsi)</strong>, Provinsi Sulawesi Tenggara memperlihatkan profil anomali yang sangat kontras dengan Sulawesi Tengah. Sulawesi Tenggara mengalami <strong>ledakan krisis daya dukung sosial, perampasan ruang hidup masyarakat pesisir, dan kepadatan konsesi tambang tertinggi se-Sulawesi</strong>. Konsesi tambang nikel mencaplok <strong>11,72% daratan provinsi (Z = +1.50&sigma;, Likert 5.0)</strong> dan berdampak langsung pada <strong>39.821 jiwa (Z = +1.95&sigma;, Likert 5.0 - Outlier Tertinggi se-Sulawesi)</strong>.</p>
+<h4>A. Narasi Temuan Lapangan Sultra</h4>
+<p>Berdasarkan hasil pemetaan empiris Z-Score EWM, Provinsi Sulawesi Tenggara memperlihatkan profil anomali yang sangat kontras dengan Sulawesi Tengah. Jika Sulawesi Tengah didominasi oleh polusi PLTU dan deforestasi hulu, maka <strong>Sulawesi Tenggara mengalami ledakan krisis daya dukung sosial, perampasan ruang hidup masyarakat pesisir, dan kepadatan konsesi tambang tertinggi se-Pulau Sulawesi</strong>. Konsesi tambang nikel mencaplok <strong>11,72% daratan provinsi (Z = +1.50&sigma;, Likert 5.0)</strong> dan memicu perampasan ruang hidup terhadap <strong>39.821 jiwa (Z = +1.95&sigma;, Likert 5.0 — mencakup 73% korban se-Sulawesi)</strong>.</p>
 
-<h4>B. Alur Logika Metodologis Skoring Tingkat Provinsi (Flowchart Sultra)</h4>
-<div class="mermaid">
-{mermaid_sultra}
-</div>
+<h4>B. Matriks Hasil Uji Empiris (Sultra)</h4>
+<div class="table-caption">Tabel 6.15: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Tenggara (Model Hybrid Z-Score & EWM)</div>
+{html_table(["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Nilai Z-Score", "Bobot EWM", "Skor Likert", "Status Ekologis"], table_eval_sultra)}
 
-<h4>C. Formulasi Matematis & Definisi Variabel</h4>
-<div class="formula">Z_sultra,j = (x_sultra,j - mean(x_j)) / std(x_j)</div>
-<div class="formula">W_j = (1 - E_j) / &Sigma;(1 - E_j) &nbsp;&nbsp;|&nbsp;&nbsp; Skor_Pilar_Sosial = &Sigma;(Likert_sultra,j * W_j) / &Sigma;W_j = {sultra['sosial']:.1f} / 5</div>
-
-<h4>D. Matriks Hasil Uji Empiris (Sultra)</h4>
-<div class="table-caption">Tabel 6.14: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Tenggara (Model Hybrid Z-Score & EWM)</div>
-{html_table(["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Rata-rata (B)", "Deviasi (C)", "Z-Score", "Bobot EWM", "Likert", "Status Ekologis"], table_math_sultra)}
-
-<div class="table-caption">Tabel 6.15: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Tenggara</div>
+<div class="table-caption">Tabel 6.16: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Tenggara</div>
 {html_table(["Pilar / Dimensi", "Cakupan Indikator Kunci", "Skor Likert Pilar (0-5)", "Status Ekologis", "Interpretasi Temuan Lapangan Sultra"], rekap_sultra)}
 
-<h4>E. Analisis Temuan Empiris (Sultra)</h4>
+<h4>C. Analisis Temuan Empiris (Sultra)</h4>
 <p><strong>1. Daya Tampung Udara (Skor {sultra['udara']:.1f} / 5 — {get_likert_label(sultra['udara'])}):</strong> Kapasitas 1.900 MW PLTU captive (Morosi/Konawe), emisi karbon 189,02 Jt Ton CO2e (Z = +0.59&sigma;), dan NO2 satelit 6,62e-06 mol/m².<br>
 <strong>2. Daya Tampung Air (Skor {sultra['air']:.1f} / 5 — {get_likert_label(sultra['air'])}):</strong> IKA 65,32, beban tailing 6,52 Jt Ton, dan meletusnya 5 kasus konflik ruang tangkap laut nelayan vs tongkang nikel (Z = +0.87&sigma;, Likert 4.0).<br>
 <strong>3. Daya Dukung Lahan (Skor {sultra['lahan']:.1f} / 5 — {get_likert_label(sultra['lahan'])}):</strong> Kepadatan Konsesi IUP mencapai 11,72% daratan provinsi (Z = +1.50&sigma;, Likert 5.0 - Outlier Ekstrem Se-Sulawesi) yang menggerus 337.434 Ha hutan alam primer.<br>
@@ -866,75 +914,78 @@ def generate_bab6_skoring_provinsi():
         "# BAB VI: AUDIT FORENSIK METODOLOGI D3TLH",
         "## SUB-BAB 6.6: ALGORITMA SKORING TINGKAT PROVINSI (MODEL HYBRID Z-SCORE & EWM)",
         "",
-        "### 6.6.1 Evaluasi Forensik D3TLH: Provinsi Sulawesi Tengah (Sulteng)",
-        '> **PROFIL BIOREGION: Provinsi Sulawesi Tengah (Episentrum Hilirisasi & PLTU Captive)**  ',
-        '> Data empiris: Gabungan sensor satelit NASA TROPOMI NO2, Global Energy Monitor (GEM 2023), Rekam Medis Kemenkes (ISPA & Diare), Laporan Kinerja KLHK (Limbah B3 & Tailing), Global Forest Watch (Deforestasi & Emisi Karbon), BNPB (Bencana Alam), KPA & TanahKita (Konflik Agraria & Kriminalisasi), serta Minerba ESDM (IUP Nikel & Obral Izin). Diolah menggunakan model hybrid Z-Score Anomali Deviasi Standar dan Entropy Weight Method (EWM) sesuai antarmuka Dashboard Streamlit Tab 3 (Bedah Matematika Z-Score + EWM per Provinsi).',
+        '> **KERANGKA METODOLOGI MULTIKRITERIA REGIONAL (BERLAKU MENGIKAT UNTUK 6 PROVINSI)**  ',
+        '> Model evaluasi daya dukung dan daya tampung lingkungan hidup tingkat provinsi dirancang menggunakan pendekatan terstandarisasi berbasis Hybrid Z-Score Anomali Deviasi Standar dan Entropy Weight Method (EWM) sesuai Nature Scientific Reports (Sun et al., 2024). Metodologi, formula normalisasi, matriks entropi, dan bobot objektif indikator dihitung secara simultan dari matriks 6 provinsi se-Pulau Sulawesi.',
         "",
-        "#### A. Pengantar & Kerangka Narasi",
-        "Sebagaimana ditampilkan pada antarmuka Streamlit **Dashboard Page 6 (Audit D3TLH - Tab Bedah Matematika Z-Score + EWM per Provinsi)**, evaluasi daya dukung dan daya tampung lingkungan hidup tingkat provinsi dirancang untuk membongkar kelemahan metodologi pemerintah yang kerap mengaburkan krisis lokal melalui teknik perataan wilayah (dilution effect). Analisis forensik membuktikan bahwa **Provinsi Sulawesi Tengah berada pada status RED ALERT (Skor Komposit 4.0 / 5.0 - Melampaui Batas)**, di mana beban pencemaran udara, limbah B3, tailing, dan deforestasi primer telah melampaui batas lentur ekologis.",
+        "#### A. Pengantar & Kerangka Narasi Metodologis",
+        "Sebagaimana ditampilkan pada antarmuka Streamlit **Dashboard Page 6 (Audit D3TLH - Tab Bedah Matematika Z-Score + EWM per Provinsi)**, evaluasi tingkat provinsi bertujuan untuk mengatasi kelemahan mendasar dokumen AMDAL dan D3TLH konvensional yang kerap mengaburkan krisis lingkungan lokal melalui teknik perataan agregat wilayah (*dilution effect*). Dalam metodologi pemerintah, beban pencemaran masif di suatu kawasan industri tambang sering kali tampak 'aman' hanya karena dirata-ratakan dengan luas daratan pulau secara keseluruhan.",
         "",
-        "#### B. Alur Logika Metodologis Skoring Tingkat Provinsi (Flowchart Sulteng)",
+        "Untuk mendobrak bias tersebut, riset ini menerapkan **Model Hybrid Z-Score Anomali dan Pembobotan Objektif Entropi (EWM)**. Pendekatan ini secara otomatis memberikan bobot evaluasi tertinggi pada indikator-indikator yang memiliki tingkat ketimpangan spasial paling ekstrem (seperti timbulan limbah B3, tailing tambang, korban krisis agraria, dan PLTU captive batubara). Dengan demikian, provinsi yang menjadi episentrum industri ekstraktif terdeteksi secara akurat berada pada status anomali krisis tanpa terdistorsi oleh luas wilayah administratif.",
+        "",
+        "#### B. Alur Logika Metodologis Regional (Flowchart 6 Provinsi)",
         "```mermaid",
-        mermaid_sulteng,
+        mermaid_regional,
         "```",
         "",
-        "#### C. Formulasi Matematis & Definisi Variabel",
+        "#### C. Formulasi Matematis Universal & Definisi Variabel",
         "```text",
-        "1. Z-Score Standard: Z_ij = (x_ij - mean(x_j)) / std(x_j)  |  Khusus IKA: Z_ika = - (ika_i - mean(ika)) / std(ika)",
+        "1. Z-Score Regional: Z_ij = (x_ij - mean(x_j)) / std(x_j)  |  Khusus IKA: Z_ika = - (ika_i - mean(ika)) / std(ika)",
         "2. Min-Max Normalisasi: r_ij = (x_ij - min(x_j)) / (max(x_j) - min(x_j))",
         "3. Proporsi Probabilitas: P_ij = r_ij / SUM(r_ij)",
-        "4. Entropi Informasi: E_j = - (1 / ln(n)) * SUM(P_ij * ln(P_ij + eps))",
-        "5. Koefisien Dispersi: D_j = 1 - E_j  -->  Bobot EWM: W_j = D_j / SUM(D_j)",
-        "6. Mapping Likert: Z >= 1.0 -> 5.0 ; 0.5 <= Z < 1.0 -> 4.0 ; 0.0 <= Z < 0.5 -> 3.0 ; -0.5 <= Z < 0.0 -> 2.0 ; -1.0 <= Z < -0.5 -> 1.0 ; Z < -1.0 -> 0.0",
-        f"7. Agregasi Komposit Sulteng: (Udara + Air + Lahan + Sosial + Veto) / 5.0 = {sulteng['total_likert']:.1f} / 5 (WSM: {sulteng['total']:.2f} / 10.0)",
+        "4. Entropi Informasi Shannon: E_j = - (1 / ln(n)) * SUM(P_ij * ln(P_ij + eps))",
+        "5. Koefisien Dispersi Informasi: D_j = 1 - E_j",
+        "6. Bobot Objektif EWM Final: W_j = D_j / SUM(D_j)",
+        "7. Mapping Likert Diskret: Z >= 1.0 -> 5.0 ; 0.5 <= Z < 1.0 -> 4.0 ; 0.0 <= Z < 0.5 -> 3.0 ; -0.5 <= Z < 0.0 -> 2.0 ; -1.0 <= Z < -0.5 -> 1.0 ; Z < -1.0 -> 0.0",
+        "8. EWM Weighted Average Pilar: Skor_Pilar = SUM(L_ij * W_j) / SUM(W_j)",
+        "9. Skor Komposit Total: (Udara + Air + Lahan + Sosial + Veto) / 5.0",
         "```",
         "",
-        "#### D. Matriks Hasil Uji Empiris (Sulteng)",
-        "##### Tabel 6.12: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Tengah (Model Hybrid Z-Score & EWM)",
-        markdown_table(["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Rata-rata (B)", "Deviasi (C)", "Z-Score", "Bobot EWM", "Likert", "Status Ekologis"], table_math_sulteng),
-        "",
-        "##### Tabel 6.13: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Tengah",
-        markdown_table(["Pilar / Dimensi", "Cakupan Indikator Kunci", "Skor Likert Pilar (0-5)", "Status Ekologis", "Interpretasi Temuan Lapangan Sulteng"], rekap_sulteng),
-        "",
-        "#### E. Analisis Temuan Empiris (Sulteng)",
-        f"1. **Daya Tampung Udara (Skor {sulteng['udara']:.1f} / 5 — Melampaui Batas):** Beban PLTU captive batubara 7.325,0 MW (Z = +1.97σ), limbah B3 25,30 Jt Ton (Z = +1.97σ), emisi CO2 291,34 Jt Ton, dan anomali ISPA 3,50x lipat (Z = +1.66σ).",
-        f"2. **Daya Tampung Air (Skor {sulteng['air']:.1f} / 5 — Mendekati Batas):** Timbulan tailing/slag 24,50 Jt Ton (Z = +1.97σ) dan morbiditas diare 1,52x lipat (Z = +1.34σ).",
-        f"3. **Daya Dukung Lahan (Skor {sulteng['lahan']:.1f} / 5 — Melampaui Batas):** Deforestasi primer 481.908 Ha (Z = +1.57σ), perambahan hutan lindung 19.804 Ha (Z = +1.89σ), dan 458 kejadian bencana hidrometeorologi.",
-        f"4. **Daya Dukung Sosial (Skor {sulteng['sosial']:.1f} / 5 — Tidak Melampaui Batas):** 12.231 jiwa terdampak konflik agraria dan 6 insiden kriminalisasi pembela HAM.",
-        f"5. **Veto Kebijakan (Skor {sulteng['veto']:.1f} / 5 — Melampaui Batas):** Obral 260 IUP baru pasca-2014 (Z = +1.64σ) dan impunitas korporat ilegal.",
-        f"6. **Vonis Komposit Sulteng (Skor {sulteng['total_likert']:.1f} / 5.0 — Melampaui Batas):** Status **Melampaui Batas** *(STATUS: RED ALERT)* membuktikan keruntuhan daya dukung lingkungan akibat ekspansi smelter nikel.",
+        "##### Tabel 6.12: Matriks Parameter Regional Se-Sulawesi (Rata-rata, Deviasi Standar, dan Bobot Objektif EWM 20 Indikator Empiris)",
+        markdown_table(["Pilar", "Indikator Empiris", "Rata-rata (B)", "Deviasi (C)", "Entropi (Ej)", "Divergensi (Dj)", "Bobot EWM (Wj)"], table_regional_meta),
         "",
         "---",
         "",
-        "### 6.6.2 Evaluasi Forensik D3TLH: Provinsi Sulawesi Tenggara (Sultra)",
-        '> **PROFIL BIOREGION: Provinsi Sulawesi Tenggara (Episentrum Konflik Agraria & Kepadatan IUP Ekstrem)**  ',
-        '> Data empiris: Sensor satelit NASA NO2, PLTU Captive Morosi & Konawe 1.900 MW, Rekam Medis Diare & ISPA, Limbah B3 & Tailing 6,5 Jt Ton, Deforestasi 337k Ha, 158 Bencana Alam, 39.821 Jiwa Terdampak Konflik Agraria & 5 Kasus FPIC, serta Kepadatan IUP 11,72% Daratan & 160 IUP Baru. Diolah menggunakan model hybrid Z-Score Anomali Deviasi Standar dan Entropy Weight Method (EWM).',
+        "### 6.6.1 Evaluasi Empiris D3TLH: Provinsi Sulawesi Tengah (Sulteng)",
+        '> **PROFIL EMPIRIS: Provinsi Sulawesi Tengah (Episentrum Hilirisasi & PLTU Captive)**  ',
+        '> Kabupaten/Kota: 13 Daerah  |  Pusat Industri: Kawasan IMIP Morowali & Smelter Palu  |  Populasi BPS: 2.985.734 Jiwa  ',
+        '> Karakteristik Krisis: Konsentrasi PLTU captive batubara terbesar nasional, hotspot satelit troposferik NO2 tertinggi, timbulan limbah B3 raksasa, dan laju deforestasi primer masif.',
         "",
-        "#### A. Pengantar & Kerangka Narasi",
-        "Berdasarkan hasil pemetaan empiris di antarmuka Streamlit **Dashboard Page 6 (Audit D3TLH - Tab Bedah Matematika Z-Score + EWM per Provinsi)**, Provinsi Sulawesi Tenggara memperlihatkan profil anomali yang sangat kontras dengan Sulawesi Tengah. Sulawesi Tenggara mengalami **ledakan krisis daya dukung sosial, perampasan ruang hidup masyarakat pesisir, dan kepadatan konsesi tambang tertinggi se-Sulawesi**. Konsesi tambang nikel mencaplok **11,72% daratan provinsi (Z = +1.50σ, Likert 5.0)** dan berdampak langsung pada **39.821 jiwa (Z = +1.95σ, Likert 5.0 - Outlier Tertinggi se-Sulawesi)**.",
+        "#### A. Narasi Temuan Lapangan Sulteng",
+        "Hasil komputasi algoritma Z-Score EWM membuktikan bahwa **Provinsi Sulawesi Tengah berada pada status RED ALERT (Skor Komposit 4.0 / 5.0 — Melampaui Batas)**. Dari 20 indikator yang diuji, sebanyak 13 indikator berada pada kategori **Melampaui Batas (Skor Likert 4.0 hingga 5.0)**, dengan tekanan polusi udara dan perusakan lanskap daratan yang telah melampaui kapasitas asimilasi ekosistem.",
         "",
-        "#### B. Alur Logika Metodologis Skoring Tingkat Provinsi (Flowchart Sultra)",
-        "```mermaid",
-        mermaid_sultra,
-        "```",
+        "#### B. Matriks Hasil Uji Empiris (Sulteng)",
+        "##### Tabel 6.13: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Tengah (Model Hybrid Z-Score & EWM)",
+        markdown_table(["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Nilai Z-Score", "Bobot EWM", "Skor Likert", "Status Ekologis"], table_eval_sulteng),
         "",
-        "#### C. Formulasi Matematis & Definisi Variabel",
-        "```text",
-        "1. Anomali Z-Score Sultra: Z_sultra,j = (x_sultra,j - mean(x_j)) / std(x_j)",
-        "2. Kepadatan IUP Sultra: 11,72% -> Z = +1.50σ (Skor Likert 5.0 - Outlier Ekstrem se-Sulawesi)",
-        "3. Korban Jiwa Sultra: 39.821 Jiwa -> Z = +1.95σ (Skor Likert 5.0 - Mencakup 73% Korban se-Sulawesi)",
-        "4. Pelanggaran FPIC Sultra: 5 Kasus -> Z = +1.86σ (Skor Likert 5.0 - Tertinggi se-Sulawesi)",
-        f"5. Skor Komposit Total Sultra: (Udara + Air + Lahan + Sosial + Veto) / 5.0 = {sultra['total_likert']:.1f} / 5 (WSM: {sultra['total']:.2f} / 10.0)",
-        "```",
+        "##### Tabel 6.14: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Tengah",
+        markdown_table(["Pilar / Dimensi", "Cakupan Indikator Kunci", "Skor Likert Pilar (0-5)", "Status Ekologis", "Interpretasi Temuan Lapangan Sulteng"], rekap_sulteng),
         "",
-        "#### D. Matriks Hasil Uji Empiris (Sultra)",
-        "##### Tabel 6.14: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Tenggara (Model Hybrid Z-Score & EWM)",
-        markdown_table(["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Rata-rata (B)", "Deviasi (C)", "Z-Score", "Bobot EWM", "Likert", "Status Ekologis"], table_math_sultra),
+        "#### C. Analisis Temuan Empiris (Sulteng)",
+        f"1. **Daya Tampung Udara (Skor {sulteng['udara']:.1f} / 5 — {get_likert_label(sulteng['udara'])}):** Beban PLTU captive batubara 7.325,0 MW (Z = +1.97σ), timbulan limbah B3 25,30 Jt Ton (Z = +1.97σ), emisi CO2 291,34 Jt Ton, dan anomali ISPA 3,50x lipat (Z = +1.66σ).",
+        f"2. **Daya Tampung Air (Skor {sulteng['air']:.1f} / 5 — {get_likert_label(sulteng['air'])}):** Timbulan tailing/slag 24,50 Jt Ton (Z = +1.97σ) dan morbiditas diare 1,52x lipat (Z = +1.34σ).",
+        f"3. **Daya Dukung Lahan (Skor {sulteng['lahan']:.1f} / 5 — {get_likert_label(sulteng['lahan'])}):** Deforestasi primer 481.908 Ha (Z = +1.57σ), perambahan hutan lindung 19.804 Ha (Z = +1.89σ), dan 458 kejadian bencana hidrometeorologi.",
+        f"4. **Daya Dukung Sosial (Skor {sulteng['sosial']:.1f} / 5 — {get_likert_label(sulteng['sosial'])}):** 12.231 jiwa terdampak konflik agraria dan 6 insiden kriminalisasi pembela HAM.",
+        f"5. **Veto Kebijakan (Skor {sulteng['veto']:.1f} / 5 — {get_likert_label(sulteng['veto'])}):** Obral 260 IUP baru pasca-2014 (Z = +1.64σ) dan impunitas korporat ilegal.",
+        f"6. **Vonis Komposit Sulteng (Skor {sulteng['total_likert']:.1f} / 5.0 — {sulteng['likert_label']}):** Status **Melampaui Batas** *(STATUS: RED ALERT)* membuktikan keruntuhan daya dukung lingkungan akibat ekspansi smelter nikel.",
         "",
-        "##### Tabel 6.15: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Tenggara",
+        "---",
+        "",
+        "### 6.6.2 Evaluasi Empiris D3TLH: Provinsi Sulawesi Tenggara (Sultra)",
+        '> **PROFIL EMPIRIS: Provinsi Sulawesi Tenggara (Episentrum Konflik Agraria & Kepadatan IUP Ekstrem)**  ',
+        '> Kabupaten/Kota: 17 Daerah  |  Pusat Industri: Smelter Morosi, Konawe, Kolaka & Pulau Wawonii  |  Populasi BPS: 2.624.875 Jiwa  ',
+        '> Karakteristik Krisis: Kepadatan konsesi IUP tambang nikel tertinggi se-Sulawesi (11,72% daratan), korban perampasan ruang hidup terbesar (39.821 jiwa), sengketa ruang tangkap nelayan pesisir, dan pelanggaran persetujuan warga (FPIC) masif.',
+        "",
+        "#### A. Narasi Temuan Lapangan Sultra",
+        "Berdasarkan hasil pemetaan empiris Z-Score EWM, Provinsi Sulawesi Tenggara memperlihatkan profil anomali yang sangat kontras dengan Sulawesi Tengah. Jika Sulawesi Tengah didominasi oleh polusi PLTU dan deforestasi hulu, maka **Sulawesi Tenggara mengalami ledakan krisis daya dukung sosial, perampasan ruang hidup masyarakat pesisir, dan kepadatan konsesi tambang tertinggi se-Pulau Sulawesi**. Konsesi tambang nikel mencaplok **11,72% daratan provinsi (Z = +1.50σ, Likert 5.0)** dan memicu perampasan ruang hidup terhadap **39.821 jiwa (Z = +1.95σ, Likert 5.0 — mencakup 73% korban se-Sulawesi)**.",
+        "",
+        "#### B. Matriks Hasil Uji Empiris (Sultra)",
+        "##### Tabel 6.15: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Tenggara (Model Hybrid Z-Score & EWM)",
+        markdown_table(["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Nilai Z-Score", "Bobot EWM", "Skor Likert", "Status Ekologis"], table_eval_sultra),
+        "",
+        "##### Tabel 6.16: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Tenggara",
         markdown_table(["Pilar / Dimensi", "Cakupan Indikator Kunci", "Skor Likert Pilar (0-5)", "Status Ekologis", "Interpretasi Temuan Lapangan Sultra"], rekap_sultra),
         "",
-        "#### E. Analisis Temuan Empiris (Sultra)",
+        "#### C. Analisis Temuan Empiris (Sultra)",
         f"1. **Daya Tampung Udara (Skor {sultra['udara']:.1f} / 5 — {get_likert_label(sultra['udara'])}):** Kapasitas 1.900 MW PLTU captive (Morosi/Konawe), emisi karbon 189,02 Jt Ton CO2e (Z = +0.59σ), dan NO2 satelit 6,62e-06 mol/m².",
         f"2. **Daya Tampung Air (Skor {sultra['air']:.1f} / 5 — {get_likert_label(sultra['air'])}):** IKA 65,32, beban tailing 6,52 Jt Ton, dan meletusnya 5 kasus konflik ruang tangkap laut nelayan vs tongkang nikel (Z = +0.87σ, Likert 4.0).",
         f"3. **Daya Dukung Lahan (Skor {sultra['lahan']:.1f} / 5 — {get_likert_label(sultra['lahan'])}):** Kepadatan Konsesi IUP mencapai 11,72% daratan provinsi (Z = +1.50σ, Likert 5.0 - Outlier Ekstrem Se-Sulawesi) yang menggerus 337.434 Ha hutan alam primer.",
