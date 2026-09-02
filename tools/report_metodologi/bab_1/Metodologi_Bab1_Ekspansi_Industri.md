@@ -465,26 +465,28 @@ flowchart TD
 | Variabel Dependen (Y) | Deforestasi Komoditas (Ha) / Total Deforestasi Alam (Ha) |
 | Hipotesis Nol (H0) | Tingkat penerbitan izin/luas konsesi tidak berhubungan dengan laju deforestasi. |
 | Hipotesis Alternatif (H1) | Ada hubungan positif antara tingginya penerbitan izin dengan tingginya laju deforestasi. |
-| Threshold Kategori | Nilai Median Data Panel (N=60) |
+| Decision Rule (Alpha 5%) | Jika P-Value < 0.05, maka Tolak H0 (terbukti signifikan bahwa ekspansi perizinan mendorong deforestasi). |
+| Threshold Kategori | Nilai Median Data Panel (N=60): X ≥ 2.0 izin; Y ≥ 10,961.8 Ha. |
+| Orientasi Odds Ratio | OR = ( a × d ) / ( b × c ) dengan a = Izin Tinggi & Deforestasi Tinggi; mengukur risiko deforestasi tinggi pada kelompok penerbitan izin tinggi. |
 
 #### C. Formulasi Matematis: Analisis Tren & Uji Chi-Square
 Parameterisasi laju pertumbuhan perizinan dan pengujian signifikansi dampaknya terhadap deforestasi dihitung menggunakan formulasi berikut:
 
-**Laju Pertumbuhan Izin Tahunan (Regresi Komparatif YoY):**
+**Persamaan Laju Pertumbuhan Izin Tahunan (Regresi Komparatif YoY):**
 ```text
-Pertumbuhan_Izin (%) = [ ( Jumlah_Izin_t - Jumlah_Izin_{t-1} ) / Jumlah_Izin_{t-1} ] * 100
+Pertumbuhan_Izin (%) = [ ( Jumlah_Izin_t - Jumlah_Izin_t-1 ) / Jumlah_Izin_t-1 ] × 100
 ```
 *Keterangan Variabel:*
 - `Pertumbuhan_Izin (%)`: Persentase perubahan laju penerbitan izin tambang baru antar-tahun (satuan: Persen / %).
 - `Jumlah_Izin_t`: Agregasi jumlah izin (atau luasan) pada tahun berjalan (t).
-- `Jumlah_Izin_{t-1}`: Agregasi jumlah izin (atau luasan) pada satu tahun sebelumnya (t - 1).
+- `Jumlah_Izin_t-1`: Agregasi jumlah izin (atau luasan) pada satu tahun sebelumnya (t - 1).
 
-**Pengklasifikasian Kategori Data (Binning Threshold Median):**
+**Persamaan Pengklasifikasian Kategori Data (Binning Threshold Median, Fungsi Piecewise):**
 ```text
-Kategori = IF(Nilai_Prov_Tahun >= Median(Seluruh Panel), "Tinggi", "Rendah")
+Kategori(x) = 'Tinggi' , jika x ≥ Median(Panel)   |   'Rendah' , jika x < Median(Panel)
 ```
 *Keterangan Variabel:*
-- `Kategori`: Data panel spasial-temporal diubah menjadi dua tingkatan untuk uji tabulasi silang (Tinggi vs Rendah).
+- `Kategori(x)`: Data panel spasial-temporal diubah menjadi dua tingkatan untuk uji tabulasi silang (Tinggi vs Rendah).
 
 Dinamika historis perizinan secara terperinci dapat dilihat pada **Tabel 1.5c**, yang menunjukkan tren penerbitan izin baru di wilayah studi:
 
@@ -547,27 +549,26 @@ flowchart LR
 
 #### C. Formulasi Matematis: Agregasi Dampak Ekologis & Pengujian Statistik
 **Persamaan Agregasi Luasan Deforestasi Berdasarkan Faktor Penggerak (Driver)**
-`Total_Deforestasi_Driver_k = &sum;(Area_Loss_i) untuk i di Kategori_Driver_k`
+`Total_Deforestasi_Driver_k = Σ ( Area_Loss_i )   ;   untuk seluruh piksel i dalam Kategori_Driver_k`
 - **Total_Deforestasi_Driver_k:** Total luas kehilangan tutupan pohon yang diakibatkan oleh faktor penggerak k (contoh: Ekspansi Komoditas) di seluruh wilayah observasi (satuan: Hektar / Ha).
 - **Kategori_Driver_k:** Klasifikasi penyebab utama deforestasi (Dominant Driver of Tree Cover Loss) berdasarkan model data historis satelit.
 - **Area_Loss_i:** Luas kehilangan tutupan pohon pada piksel observasi ke-i (satuan: Hektar / Ha).
 
 **Persamaan Perhitungan Akumulasi Kehilangan Hutan Primer (Primary Forest Loss)**
-`Total_Primary_Loss = &sum;(Area_Loss_j) untuk j di mana Tipe_Hutan = "Primer"`
+`Total_Primary_Loss = Σ ( Area_Loss_j )   ;   untuk seluruh piksel j dengan Tipe_Hutan = 'Primer'`
 - **Total_Primary_Loss:** Akumulasi luas konversi tutupan hutan alam primer tak terganggu (intact primary forest) selama periode pengamatan (satuan: Hektar / Ha).
 - **Tipe_Hutan:** Klasifikasi basemap jenis tutupan lahan awal sebelum terjadi deforestasi.
 
 **Persamaan Estimasi Pelepasan Emisi Karbon (Gross CO2 Emissions)**
-`Emisi_CO2_Total = &sum;(Area_Loss_c * Faktor_Emisi_Biomassa_c)`
+`Emisi_CO2_Total = Σ ( Area_Loss_c × Faktor_Emisi_Biomassa_c )`
 - **Emisi_CO2_Total:** Estimasi agregasi total emisi gas rumah kaca yang dilepaskan ke atmosfer akibat konversi tutupan (satuan: Megagrams CO2 / Mg CO2).
 - **Faktor_Emisi_Biomassa_c:** Kandungan karbon rata-rata (above-ground & below-ground biomass) per hektar pada koordinat c yang diamati.
 
 Kalkulasi pengujian statistik dihitung menggunakan formulasi Matematis yang sama dengan Sub-Bab 1.2 dan 1.3, di mana variabel independen (X) adalah **Investasi PMDN (Juta Rp)** dan variabel dependen (Y) adalah **Deforestasi Komoditas (Hektar)**.
 
-**Persamaan Kategorisasi Nilai Ambang Batas Median:**
+**Persamaan Kategorisasi Nilai Ambang Batas Median (Fungsi Piecewise):**
 ```text
-- Jika Nilai > Median, maka Kategori = Tinggi
-- Jika Nilai <= Median, maka Kategori = Rendah
+Kategori(x) = 'Tinggi' , jika x ≥ Median(Panel)   |   'Rendah' , jika x < Median(Panel)
 ```
 
 #### D. Matriks Hasil Uji Empiris: Konsentrasi Spasial & Skenario Crosstab
@@ -615,7 +616,9 @@ Terkait dengan hilangnya luasan hutan tersebut, pembedahan lebih lanjut berdasar
 | Variabel Dependen (Y) | Total Deforestasi Alam (Ha) / Deforestasi Komoditas (Ha) |
 | Hipotesis Nol (H0) | Tingginya realisasi investasi PMDN tidak berhubungan dengan laju deforestasi. |
 | Hipotesis Alternatif (H1) | Ada hubungan positif antara tingginya realisasi investasi PMDN dengan laju deforestasi. |
-| Threshold Kategori | Nilai Median Data Panel (N=48) |
+| Decision Rule (Alpha 5%) | Jika P-Value < 0.05, maka Tolak H0 (terbukti signifikan bahwa realisasi investasi mendorong deforestasi). |
+| Threshold Kategori | Nilai Median Data Panel (N=96): X > 1,097.3 Juta Rp; Y ≥ 10,451.7 Ha. |
+| Orientasi Odds Ratio | OR = ( a × d ) / ( b × c ) dengan a = Investasi Tinggi & Deforestasi Tinggi; mengukur risiko deforestasi tinggi pada kelompok realisasi investasi tinggi. |
 
 Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square) untuk semua kemungkinan kombinasi indikator antara Realisasi Investasi PMDN dan Dampak Ekologis pada panel data 2016-2023. Hasil tersebut ditampilkan pada **Tabel 1.8** berikut:
 

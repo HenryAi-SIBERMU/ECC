@@ -53,8 +53,10 @@ h4 { color: #A5D6A7; }
 <tr><td class="data-td">Variabel Independen (X)</td><td class="data-td">Jumlah_Smelter: Total fasilitas smelter (beroperasi maupun konstruksi).</td></tr>
 <tr class="data-tr-even"><td class="data-td">Variabel Dependen (Y)</td><td class="data-td">Indeks Kualitas Air: Skor baku mutu air per provinsi.</td></tr>
 <tr><td class="data-td">Hipotesis Nol (H0)</td><td class="data-td">Tidak ada hubungan signifikan secara statistik antara kepadatan smelter dengan Indeks Kualitas Air.</td></tr>
-<tr class="data-tr-even"><td class="data-td">Decision Rule (Alpha 5%)</td><td class="data-td">Jika P-Value < 0.05, maka Tolak H0 (Terbukti signifikan bahwa smelter menurunkan mutu air).</td></tr>
-<tr><td class="data-td">Threshold Kategori</td><td class="data-td">Nilai Median Data Panel 2016-2024 (N=54); variabel kontinu dikonversi menjadi biner.</td></tr>
+<tr class="data-tr-even"><td class="data-td">Hipotesis Alternatif (H1)</td><td class="data-td">Ada hubungan negatif antara kepadatan smelter dengan Indeks Kualitas Air (semakin padat smelter, semakin kritis mutu air).</td></tr>
+<tr><td class="data-td">Decision Rule (Alpha 5%)</td><td class="data-td">Jika P-Value < 0.05, maka Tolak H0 (Terbukti signifikan bahwa smelter menurunkan mutu air).</td></tr>
+<tr class="data-tr-even"><td class="data-td">Threshold Kategori</td><td class="data-td">Nilai Median Data Panel 2016-2024 (N=54): X >= 75.0 fasilitas; Y >= 55.9 poin.</td></tr>
+<tr><td class="data-td">Orientasi Odds Ratio</td><td class="data-td">OR = ( a × d ) / ( b × c ) dengan a = Smelter Tinggi & IKA Kritis; mengukur risiko IKA kritis pada kelompok kepadatan smelter tinggi.</td></tr>
 </tbody>
 </table>
 <h4>C. Formulasi Matematis: Kalkulasi Konsentrasi Spasial &amp; Uji Chi-Square</h4>
@@ -119,8 +121,10 @@ h4 { color: #A5D6A7; }
 <tr><td class="data-td">Variabel Independen (X)</td><td class="data-td">Kapasitas PLTU (MW): Total kapasitas PLTU Captive yang beroperasi.</td></tr>
 <tr class="data-tr-even"><td class="data-td">Variabel Dependen (Y)</td><td class="data-td">Indeks Kualitas Udara: Skor baku mutu udara ambien per provinsi.</td></tr>
 <tr><td class="data-td">Hipotesis Nol (H0)</td><td class="data-td">Tidak ada hubungan signifikan secara statistik antara kapasitas PLTU dengan Indeks Kualitas Udara.</td></tr>
-<tr class="data-tr-even"><td class="data-td">Decision Rule (Alpha 5%)</td><td class="data-td">Jika P-Value < 0.05, maka Tolak H0 (Terbukti signifikan bahwa emisi PLTU menurunkan kualitas udara).</td></tr>
-<tr><td class="data-td">Threshold Kategori</td><td class="data-td">Nilai Median Data Panel (N=54); variabel kontinu dikonversi menjadi biner.</td></tr>
+<tr class="data-tr-even"><td class="data-td">Hipotesis Alternatif (H1)</td><td class="data-td">Ada hubungan negatif antara kapasitas PLTU dengan Indeks Kualitas Udara (semakin besar kapasitas, semakin kritis mutu udara).</td></tr>
+<tr><td class="data-td">Decision Rule (Alpha 5%)</td><td class="data-td">Jika P-Value < 0.05, maka Tolak H0 (Terbukti signifikan bahwa emisi PLTU menurunkan kualitas udara).</td></tr>
+<tr class="data-tr-even"><td class="data-td">Threshold Kategori</td><td class="data-td">Nilai Median Data Panel (N=54): X >= 220.0 MW; Y >= 91.0 poin.</td></tr>
+<tr><td class="data-td">Orientasi Odds Ratio</td><td class="data-td">OR = ( a × d ) / ( b × c ) dengan a = PLTU Tinggi & IKU Kritis; mengukur risiko IKU kritis pada kelompok kapasitas PLTU tinggi.</td></tr>
 </tbody>
 </table>
 <h4>C. Formulasi Matematis</h4>
@@ -193,7 +197,9 @@ h4 { color: #A5D6A7; }
 <tr class="data-tr-even"><td class="data-td">Variabel Dependen (Y)</td><td class="data-td">Kehilangan Tutupan Pohon (Ha) / Total Deforestasi Alam (Ha)</td></tr>
 <tr><td class="data-td">Hipotesis Nol (H0)</td><td class="data-td">Luasan ekspansi kawasan industri dan perizinan tambang tidak berhubungan dengan laju deforestasi.</td></tr>
 <tr class="data-tr-even"><td class="data-td">Hipotesis Alternatif (H1)</td><td class="data-td">Alokasi izin lahan (Luas IUP & Kawasan) berkorelasi positif dengan laju deforestasi.</td></tr>
-<tr><td class="data-td">Threshold Kategori</td><td class="data-td">Nilai Median Data Panel (N=60): X >= 138,148.8 Ha; Y >= 15,917.7 Ha</td></tr>
+<tr><td class="data-td">Decision Rule (Alpha 5%)</td><td class="data-td">Jika P-Value < 0.05, maka Tolak H0 (terbukti signifikan bahwa ekspansi izin lahan mendorong deforestasi).</td></tr>
+<tr class="data-tr-even"><td class="data-td">Threshold Kategori</td><td class="data-td">Nilai Median Data Panel (N=60): X >= 138,148.8 Ha; Y >= 15,917.7 Ha.</td></tr>
+<tr><td class="data-td">Orientasi Odds Ratio</td><td class="data-td">OR = ( a × d ) / ( b × c ) dengan a = IUP Tinggi & Deforestasi Tinggi/Parah; mengukur risiko deforestasi parah pada kelompok luas IUP tinggi.</td></tr>
 </tbody>
 </table>
 <h4>C. Formulasi Matematis: Akumulasi Konsesi, Deforestasi, dan Uji Crosstabulation</h4>

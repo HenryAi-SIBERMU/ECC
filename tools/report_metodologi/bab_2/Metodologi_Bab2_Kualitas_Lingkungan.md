@@ -38,8 +38,10 @@ Sebagai opsi ringkas pengganti bagan alur crosstab yang terlalu panjang, konfigu
 | Variabel Independen (X) | Jumlah_Smelter: Total fasilitas smelter (beroperasi maupun konstruksi). |
 | Variabel Dependen (Y) | Indeks Kualitas Air: Skor baku mutu air per provinsi. |
 | Hipotesis Nol (H0) | Tidak ada hubungan signifikan secara statistik antara kepadatan smelter dengan Indeks Kualitas Air. |
+| Hipotesis Alternatif (H1) | Ada hubungan negatif antara kepadatan smelter dengan Indeks Kualitas Air (semakin padat smelter, semakin kritis mutu air). |
 | Decision Rule (Alpha 5%) | Jika P-Value < 0.05, maka Tolak H0 (Terbukti signifikan bahwa smelter menurunkan mutu air). |
-| Threshold Kategori | Nilai Median Data Panel 2016-2024 (N=54); variabel kontinu dikonversi menjadi biner. |
+| Threshold Kategori | Nilai Median Data Panel 2016-2024 (N=54): X >= 75.0 fasilitas; Y >= 55.9 poin. |
+| Orientasi Odds Ratio | OR = ( a × d ) / ( b × c ) dengan a = Smelter Tinggi & IKA Kritis; mengukur risiko IKA kritis pada kelompok kepadatan smelter tinggi. |
 
 #### C. Formulasi Matematis: Kalkulasi Konsentrasi Spasial & Uji Chi-Square
 Parameterisasi konsentrasi spasial dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:
@@ -111,8 +113,10 @@ Sebagai opsi ringkas pengganti bagan alur crosstab yang terlalu panjang, konfigu
 | Variabel Independen (X) | Kapasitas PLTU (MW): Total kapasitas PLTU Captive yang beroperasi. |
 | Variabel Dependen (Y) | Indeks Kualitas Udara: Skor baku mutu udara ambien per provinsi. |
 | Hipotesis Nol (H0) | Tidak ada hubungan signifikan secara statistik antara kapasitas PLTU dengan Indeks Kualitas Udara. |
+| Hipotesis Alternatif (H1) | Ada hubungan negatif antara kapasitas PLTU dengan Indeks Kualitas Udara (semakin besar kapasitas, semakin kritis mutu udara). |
 | Decision Rule (Alpha 5%) | Jika P-Value < 0.05, maka Tolak H0 (Terbukti signifikan bahwa emisi PLTU menurunkan kualitas udara). |
-| Threshold Kategori | Nilai Median Data Panel (N=54); variabel kontinu dikonversi menjadi biner. |
+| Threshold Kategori | Nilai Median Data Panel (N=54): X >= 220.0 MW; Y >= 91.0 poin. |
+| Orientasi Odds Ratio | OR = ( a × d ) / ( b × c ) dengan a = PLTU Tinggi & IKU Kritis; mengukur risiko IKU kritis pada kelompok kapasitas PLTU tinggi. |
 
 #### C. Formulasi Matematis
 ```text
@@ -196,7 +200,9 @@ flowchart LR
 | Variabel Dependen (Y) | Kehilangan Tutupan Pohon (Ha) / Total Deforestasi Alam (Ha) |
 | Hipotesis Nol (H0) | Luasan ekspansi kawasan industri dan perizinan tambang tidak berhubungan dengan laju deforestasi. |
 | Hipotesis Alternatif (H1) | Alokasi izin lahan (Luas IUP & Kawasan) berkorelasi positif dengan laju deforestasi. |
-| Threshold Kategori | Nilai Median Data Panel (N=60): X >= 138,148.8 Ha; Y >= 15,917.7 Ha |
+| Decision Rule (Alpha 5%) | Jika P-Value < 0.05, maka Tolak H0 (terbukti signifikan bahwa ekspansi izin lahan mendorong deforestasi). |
+| Threshold Kategori | Nilai Median Data Panel (N=60): X >= 138,148.8 Ha; Y >= 15,917.7 Ha. |
+| Orientasi Odds Ratio | OR = ( a × d ) / ( b × c ) dengan a = IUP Tinggi & Deforestasi Tinggi/Parah; mengukur risiko deforestasi parah pada kelompok luas IUP tinggi. |
 
 #### C. Formulasi Matematis: Akumulasi Konsesi, Deforestasi, dan Uji Crosstabulation
 Parameterisasi tekanan ruang dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:

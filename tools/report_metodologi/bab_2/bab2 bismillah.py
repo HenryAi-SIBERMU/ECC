@@ -508,8 +508,10 @@ def generate_all_bab2():
         ["Variabel Independen (X)", "Jumlah_Smelter: Total fasilitas smelter (beroperasi maupun konstruksi)."],
         ["Variabel Dependen (Y)", "Indeks Kualitas Air: Skor baku mutu air per provinsi."],
         ["Hipotesis Nol (H0)", "Tidak ada hubungan signifikan secara statistik antara kepadatan smelter dengan Indeks Kualitas Air."],
+        ["Hipotesis Alternatif (H1)", "Ada hubungan negatif antara kepadatan smelter dengan Indeks Kualitas Air (semakin padat smelter, semakin kritis mutu air)."],
         ["Decision Rule (Alpha 5%)", "Jika P-Value < 0.05, maka Tolak H0 (Terbukti signifikan bahwa smelter menurunkan mutu air)."],
-        ["Threshold Kategori", f"Nilai Median Data Panel {focus_start_year}-{focus_end_year} (N={valid_cases}); variabel kontinu dikonversi menjadi biner."],
+        ["Threshold Kategori", f"Nilai Median Data Panel {focus_start_year}-{focus_end_year} (N={valid_cases}): X >= {stats_21['x_threshold']:,.1f} fasilitas; Y >= {stats_21['y_threshold']:,.1f} poin."],
+        ["Orientasi Odds Ratio", "OR = ( a × d ) / ( b × c ) dengan a = Smelter Tinggi & IKA Kritis; mengukur risiko IKA kritis pada kelompok kepadatan smelter tinggi."],
     ]
 
     mermaid_str_2_1 = """flowchart LR
@@ -567,8 +569,10 @@ def generate_all_bab2():
         ["Variabel Independen (X)", "Kapasitas PLTU (MW): Total kapasitas PLTU Captive yang beroperasi."],
         ["Variabel Dependen (Y)", "Indeks Kualitas Udara: Skor baku mutu udara ambien per provinsi."],
         ["Hipotesis Nol (H0)", "Tidak ada hubungan signifikan secara statistik antara kapasitas PLTU dengan Indeks Kualitas Udara."],
+        ["Hipotesis Alternatif (H1)", "Ada hubungan negatif antara kapasitas PLTU dengan Indeks Kualitas Udara (semakin besar kapasitas, semakin kritis mutu udara)."],
         ["Decision Rule (Alpha 5%)", "Jika P-Value < 0.05, maka Tolak H0 (Terbukti signifikan bahwa emisi PLTU menurunkan kualitas udara)."],
-        ["Threshold Kategori", f"Nilai Median Data Panel (N={valid_cases_22}); variabel kontinu dikonversi menjadi biner."],
+        ["Threshold Kategori", f"Nilai Median Data Panel (N={valid_cases_22}): X >= {stats_22['x_threshold']:,.1f} MW; Y >= {stats_22['y_threshold']:,.1f} poin."],
+        ["Orientasi Odds Ratio", "OR = ( a × d ) / ( b × c ) dengan a = PLTU Tinggi & IKU Kritis; mengukur risiko IKU kritis pada kelompok kapasitas PLTU tinggi."],
     ]
     
     summary_rows_22 = [[
@@ -723,7 +727,9 @@ def generate_all_bab2():
         ["Variabel Dependen (Y)", "Kehilangan Tutupan Pohon (Ha) / Total Deforestasi Alam (Ha)"],
         ["Hipotesis Nol (H0)", "Luasan ekspansi kawasan industri dan perizinan tambang tidak berhubungan dengan laju deforestasi."],
         ["Hipotesis Alternatif (H1)", "Alokasi izin lahan (Luas IUP & Kawasan) berkorelasi positif dengan laju deforestasi."],
-        ["Threshold Kategori", f"Nilai Median Data Panel (N={valid_cases_23}): X >= {stats_23['x_threshold']:,.1f} Ha; Y >= {stats_23['y_threshold']:,.1f} Ha"],
+        ["Decision Rule (Alpha 5%)", "Jika P-Value < 0.05, maka Tolak H0 (terbukti signifikan bahwa ekspansi izin lahan mendorong deforestasi)."],
+        ["Threshold Kategori", f"Nilai Median Data Panel (N={valid_cases_23}): X >= {stats_23['x_threshold']:,.1f} Ha; Y >= {stats_23['y_threshold']:,.1f} Ha."],
+        ["Orientasi Odds Ratio", "OR = ( a × d ) / ( b × c ) dengan a = IUP Tinggi & Deforestasi Tinggi/Parah; mengukur risiko deforestasi parah pada kelompok luas IUP tinggi."],
     ]
 
     print("[2.8/4] Mengekstraksi dataset empiris Bab 2 sub-bab 2.4...")
