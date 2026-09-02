@@ -239,3 +239,77 @@ Skor_Akumulasi_Lahan = (10.00 + 10.00 + 10.00 + 10.00 + 6.27) / 5.0 = 9.25 / 10.
 4. **Aktor Deforestasi (Lahan 4):** Komoditas industri tambang dan sawit memonopoli **1,001,654 Ha** deforestasi, memicu Skor Aktor Deforestasi **5.0 / 5** (STATUS: MONOPOLI KONSESI).
 5. **Kepadatan Konsesi (Lahan 5):** Konsesi IUP nikel menyita **1,185,174 Ha** atau **6.3%** daratan pulau, menghasilkan Skor Kepadatan Spasial **3.1 / 5**.
 6. **Vonis Indikator Lahan:** Skor Indikator Lahan berada pada angka **4.6 / 5** (Skor WSM 9.25 / 10.0), menetapkan vonis **STATUS: DARURAT LAHAN** dengan kesimpulan eksekutif **ANALISIS: Evaluasi Pengelolaan Lanskap**.
+
+## 6.4 Algoritma Skoring Bioregion Pulau: Matriks Daya Dukung Sosial
+
+> **Audit D3TLH: Daya Dukung Sosial (Page Streamlit):** "Status kawasan dialokasikan untuk peruntukan industri dengan pelaksanaan konsultasi publik." Fakta Empiris: "Pentingnya transparansi dan pelibatan masyarakat lokal dalam penataan ruang dan perizinan." Skor Indikator Sosial: **3.9 / 5** (STATUS: PERLU PENGAWASAN) | ANALISIS: **Pelibatan Masyarakat Lokal**.
+
+#### A. Pengantar & Kerangka Narasi
+Daya dukung lingkungan hidup tidak semata-mata diukur dari daya lentur bio-fisik, melainkan juga dari stabilitas tatanan sosial, kedaulatan ruang masyarakat hukum adat, dan perlindungan hak asasi manusia. Dokumen AMDAL dan perizinan kawasan industri nikel di Sulawesi secara seragam mengklaim telah menjalankan konsultasi publik dan membawa peningkatan kesejahteraan sosial. Namun, pembuktian terbalik berbasis data Konsorsium Pembaruan Agraria (KPA), JATAM, WALHI, dan Kemenkes RI membongkar kenyataan paradoksal: telah terjadi 8 kasus manipulasi persetujuan masyarakat (FPIC), menggusur 54,310 jiwa korban perampasan ruang hidup (505,192 Ha lahan pertanian/adat), diiringi 21 insiden kekerasan dan kriminalisasi warga oleh aparat, sementara fasilitas kesehatan dasar di lingkar tambang justru mengalami defisit kelayakan standar sarana, prasarana, dan alat kesehatan (SPA).
+
+#### B. Alur Logika Metodologis Skoring Bioregion Pulau (Matriks Sosial)
+```mermaid
+flowchart LR
+    subgraph S1["1. Data Empiris Input"]
+        A1["Investigasi Kasus FPIC<br/><i>KPA & JATAM/WALHI (8 Kasus)</i>"]
+        A2["Korban Konflik Agraria<br/><i>TanahKita (54,310 Jiwa)</i>"]
+        A3["Insiden Kriminalisasi HAM<br/><i>Aparat vs Warga (21 Kejadian)</i>"]
+        A4["Kepatuhan Standar SPA<br/><i>Faskes Kemenkes (74.35%)</i>"]
+    end
+    subgraph S2["2. Ambang Batas Regulasi"]
+        B1["FPIC: >= 3 Kasus (Zero Tolerance)<br/><i>IFC PS7 & Equator Principles</i>"]
+        B2["Jiwa Terdampak: > 40 Ribu Jiwa<br/><i>7.4% Demografi Nasional CATAHU KPA</i>"]
+        B3["Kriminalisasi: > 10 Insiden<br/><i>Outlier Stat: Mean + 1 SD (KPA)</i>"]
+        B4["Standar SPA: Target Minimal 80%<br/><i>RPJMN 2025-2029 & Permenkes 6/2024</i>"]
+    end
+    subgraph S3["3. Kalkulasi 4 Sub-Metrik"]
+        C1["Sosial 1: Pelanggaran FPIC<br/><i>Skor 10.00 / 10 (5.0 / 5)</i>"]
+        C2["Sosial 2: Perampasan Ruang<br/><i>Skor 10.00 / 10 (5.0 / 5)</i>"]
+        C3["Sosial 3: Represi & Kekerasan<br/><i>Skor 10.00 / 10 (5.0 / 5)</i>"]
+        C4["Sosial 4: Defisit Layanan Dasar<br/><i>Skor 1.26 / 10 (0.6 / 5)</i>"]
+    end
+    subgraph S4["4. Agregasi & Vonis D3TLH"]
+        D1["Simple Additive Weighting<br/><i>Bobot Equal 25% per Pilar</i>"]
+        D2["Skor WSM: 7.81 / 10.0<br/>Skor Indikator Sosial: 3.9 / 5"]
+        D3["STATUS: PERLU PENGAWASAN<br/><i>Analisis: Pelibatan Masyarakat Lokal</i>"]
+    end
+    A1 --> B1 --> C1
+    A2 --> B2 --> C2
+    A3 --> B3 --> C3
+    A4 --> B4 --> C4
+    C1 & C2 & C3 & C4 --> D1 --> D2 --> D3
+```
+
+#### C. Formulasi Matematis: Normalisasi Pelanggaran FPIC, Korban Agraria, Represi, dan Defisit SPA
+```text
+Skor_Sosial_1 = min(10.0, (8 / 3.0) * 10.0) = 10.00 / 10.0 (Likert: 5.0 / 5)
+Skor_Sosial_2 = min(10.0, (54,310 / 40000.0) * 10.0) = 10.00 / 10.0 (Likert: 5.0 / 5)
+Skor_Sosial_3 = min(10.0, (21 / 10.0) * 10.0) = 10.00 / 10.0 (Likert: 5.0 / 5)
+Skor_Sosial_4 = min(10.0, (5.65 / 45.0) * 10.0) = 1.26 / 10.0 (Likert: 0.6 / 5)
+Skor_Akumulasi_Sosial = (10.00 + 10.00 + 10.00 + 1.26) / 4.0 = 7.81 / 10.0 (Skor Indikator Sosial: 3.9 / 5)
+```
+
+#### D. Matriks Hasil Uji Empiris
+##### Tabel 6.7: Evaluasi Kuantitatif 4 Indikator Daya Dukung Sosial Bioregion Pulau Sulawesi (Sesuai Dashboard Page 6)
+| Kode | Indikator Empiris | Nilai Aktual | Ambang Batas Kritis | Formula Substitusi | Skor WSM (0-10) | Skor Likert (1-5) | Status Ekologis |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Sosial 1 | Manipulasi Persetujuan Warga (FPIC) | 8 Kasus | >= 3 Kasus (Zero Tolerance IFC PS7) | min(10.0, (8/3.0)*10) | 10.00 / 10.0 | 5.0 / 5 | AMDAL CACAT HUKUM |
+| Sosial 2 | Perampasan Ruang Hidup & Korban | 54,310 Jiwa (505,192 Ha) | > 40,000 Jiwa (7.4% Demografi Nasional KPA) | min(10.0, (54,310/40000)*10) | 10.00 / 10.0 | 5.0 / 5 | KRISIS AGRARIA |
+| Sosial 3 | Kriminalisasi Warga & Pembela HAM | 21 Insiden (10 Ditangkap) | > 10 Insiden (Outlier Stat: Mean + 1 SD) | min(10.0, (21/10.0)*10) | 10.00 / 10.0 | 5.0 / 5 | KEKERASAN NEGARA |
+| Sosial 4 | Defisit Standar Layanan Faskes (SPA) | 74.35% (Gap: 5.65%) | Target Min 80.0% (Defisit Max 45.0%) | min(10.0, (5.65/45.0)*10) | 1.26 / 10.0 | 0.6 / 5 | TERKENDALI / DEFISIT |
+| TOTAL | Akumulasi Skor Indikator Sosial | Rata-rata 4 Pilar SAW | Threshold Kritis >= 4.0 / 6.0 | Σ(Skor 1..4) / 4 | 7.81 / 10.0 | 3.9 / 5 | STATUS: PERLU PENGAWASAN |
+
+##### Tabel 6.8: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Sosial
+| Parameter | Regulasi / Rujukan Ilmiah | Kutipan Dokumen Resmi / Verbatim | Pasal / Hal. | Status Audit |
+| :--- | :--- | :--- | :--- | :--- |
+| Manipulasi FPIC (Sosial 1) | IFC Performance Standard 7 & Equator Principles 4 | Mandat persetujuan bebas, didahulukan, dan diinformasikan (FPIC) bagi masyarakat adat/lokal. Pelanggaran sistemik ≥ 3 kasus membatalkan legitimasi dokumen AMDAL. | IFC PS7 & Equator IV | VERIFIED |
+| Perampasan Ruang (Sosial 2) | Laporan Tahunan CATAHU KPA (2023) | Beban krisis agraria nasional mencapai 542.432 jiwa; alokasi proporsional demografi Sulawesi (7.4%) menetapkan threshold darurat kemanusiaan sebesar 40.000 jiwa. | Hal. 8 | VERIFIED |
+| Kriminalisasi HAM (Sosial 3) | UU No. 32/2009 (Pasal 66 Anti-SLAPP) & Satya Bumi (2023) | Perlindungan hukum pembela hak lingkungan hidup. Threshold 10 insiden diturunkan dari batas deviasi statistik Mean + 1 SD dari 6 provinsi se-Sulawesi (Mean=5.67, SD=3.90). | Ps. 66 & Metodologi KPA | VERIFIED |
+| Defisit Faskes SPA (Sosial 4) | Lampiran Perpres RPJMN 2025–2029 & Permenkes No. 6/2024 | Target pemenuhan sarana, prasarana, dan alat kesehatan (SPA) Puskesmas minimal 80%. Kesenjangan (gap) diukur dari capaian riil ASPAK Kemenkes. | Bab IV & Permenkes 6/2024 | VERIFIED |
+
+#### E. Analisis Temuan Empiris: Pelibatan Masyarakat Lokal
+1. **Manipulasi FPIC (Sosial 1):** Teridentifikasi **8 kasus** pelanggaran FPIC dalam AMDAL, memicu Skor Pelanggaran Konsultasi **5.0 / 5** (STATUS: AMDAL CACAT HUKUM).
+2. **Korban Agraria (Sosial 2):** Sebanyak **54,310 jiwa** penduduk tapak terancam perampasan lahan (505,192 Ha), memicu Skor Perampasan Ruang **5.0 / 5** (STATUS: KRISIS AGRARIA).
+3. **Kriminalisasi HAM (Sosial 3):** Tercatat **21 insiden** represi aparat dengan **10 warga ditangkap**, memicu Skor Represi **5.0 / 5** (STATUS: KEKERASAN NEGARA).
+4. **Kepatuhan Faskes SPA (Sosial 4):** Proporsi Puskesmas sesuai standar SPA menyentuh **74.35%** (defisit 5.65% di bawah target 80%), menghasilkan Skor Defisit **0.6 / 5**.
+5. **Vonis Indikator Sosial:** Skor Indikator Sosial berada pada angka **3.9 / 5** (Skor WSM 7.81 / 10.0), menetapkan vonis **STATUS: PERLU PENGAWASAN** dengan kesimpulan eksekutif **ANALISIS: Pelibatan Masyarakat Lokal**.

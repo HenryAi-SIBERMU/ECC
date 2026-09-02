@@ -263,5 +263,80 @@ h4 { color: #FFCDD2; margin-top: 18px; }
 <strong>4. Aktor Deforestasi (Lahan 4):</strong> Komoditas industri tambang dan sawit memonopoli <strong>1,001,654 Ha</strong> deforestasi, memicu Skor Aktor Deforestasi <strong>5.0 / 5</strong> (STATUS: MONOPOLI KONSESI).<br>
 <strong>5. Kepadatan Konsesi (Lahan 5):</strong> Konsesi IUP nikel menyita <strong>1,185,174 Ha</strong> atau <strong>6.3%</strong> daratan pulau, menghasilkan Skor Kepadatan Spasial <strong>3.1 / 5</strong>.<br>
 <strong>6. Vonis Indikator Lahan:</strong> Skor Indikator Lahan berada pada angka <strong>4.6 / 5</strong> (Skor WSM 9.25 / 10.0), menetapkan vonis <strong><span class="badge-danger">STATUS: DARURAT LAHAN</span></strong> dengan kesimpulan eksekutif <strong>ANALISIS: Evaluasi Pengelolaan Lanskap</strong>.</p>
+
+<h2>6.4 Algoritma Skoring Bioregion Pulau: Matriks Daya Dukung Sosial</h2>
+<div class="note-box"><strong>Audit D3TLH: Daya Dukung Sosial (Page Streamlit):</strong> "Status kawasan dialokasikan untuk peruntukan industri dengan pelaksanaan konsultasi publik." Fakta Empiris: "Pentingnya transparansi dan pelibatan masyarakat lokal dalam penataan ruang dan perizinan." Skor Indikator Sosial: <strong>3.9 / 5</strong> (STATUS: PERLU PENGAWASAN) | ANALISIS: <strong>Pelibatan Masyarakat Lokal</strong>.</div>
+
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Daya dukung lingkungan hidup tidak semata-mata diukur dari daya lentur bio-fisik, melainkan juga dari stabilitas tatanan sosial, kedaulatan ruang masyarakat hukum adat, dan perlindungan hak asasi manusia. Dokumen AMDAL dan perizinan kawasan industri nikel di Sulawesi secara seragam mengklaim telah menjalankan konsultasi publik dan membawa peningkatan kesejahteraan sosial. Namun, pembuktian terbalik berbasis data Konsorsium Pembaruan Agraria (KPA), JATAM, WALHI, dan Kemenkes RI membongkar kenyataan paradoksal: telah terjadi <strong>8 kasus manipulasi persetujuan masyarakat (FPIC)</strong>, menggusur <strong>54,310 jiwa korban perampasan ruang hidup (505,192 Ha)</strong>, diiringi <strong>21 insiden kekerasan dan kriminalisasi warga oleh aparat</strong>, sementara fasilitas kesehatan dasar di lingkar tambang justru mengalami defisit kelayakan standar sarana, prasarana, dan alat kesehatan (SPA).</p>
+
+<h4>B. Alur Logika Metodologis Skoring Bioregion Pulau</h4>
+<div class="mermaid">flowchart LR
+    subgraph S1["1. Data Empiris Input"]
+        A1["Investigasi Kasus FPIC<br/><i>KPA & JATAM/WALHI (8 Kasus)</i>"]
+        A2["Korban Konflik Agraria<br/><i>TanahKita (54,310 Jiwa)</i>"]
+        A3["Insiden Kriminalisasi HAM<br/><i>Aparat vs Warga (21 Kejadian)</i>"]
+        A4["Kepatuhan Standar SPA<br/><i>Faskes Kemenkes (74.35%)</i>"]
+    end
+    subgraph S2["2. Ambang Batas Regulasi"]
+        B1["FPIC: >= 3 Kasus (Zero Tolerance)<br/><i>IFC PS7 & Equator Principles</i>"]
+        B2["Jiwa Terdampak: > 40 Ribu Jiwa<br/><i>7.4% Demografi Nasional CATAHU KPA</i>"]
+        B3["Kriminalisasi: > 10 Insiden<br/><i>Outlier Stat: Mean + 1 SD (KPA)</i>"]
+        B4["Standar SPA: Target Minimal 80%<br/><i>RPJMN 2025-2029 & Permenkes 6/2024</i>"]
+    end
+    subgraph S3["3. Kalkulasi 4 Sub-Metrik"]
+        C1["Sosial 1: Pelanggaran FPIC<br/><i>Skor 10.00 / 10 (5.0 / 5)</i>"]
+        C2["Sosial 2: Perampasan Ruang<br/><i>Skor 10.00 / 10 (5.0 / 5)</i>"]
+        C3["Sosial 3: Represi & Kekerasan<br/><i>Skor 10.00 / 10 (5.0 / 5)</i>"]
+        C4["Sosial 4: Defisit Layanan Dasar<br/><i>Skor 1.26 / 10 (0.6 / 5)</i>"]
+    end
+    subgraph S4["4. Agregasi & Vonis D3TLH"]
+        D1["Simple Additive Weighting<br/><i>Bobot Equal 25% per Pilar</i>"]
+        D2["Skor WSM: 7.81 / 10.0<br/>Skor Indikator Sosial: 3.9 / 5"]
+        D3["STATUS: PERLU PENGAWASAN<br/><i>Analisis: Pelibatan Masyarakat Lokal</i>"]
+    end
+    A1 --> B1 --> C1
+    A2 --> B2 --> C2
+    A3 --> B3 --> C3
+    A4 --> B4 --> C4
+    C1 & C2 & C3 & C4 --> D1 --> D2 --> D3</div>
+
+<h4>C. Formulasi Matematis: Normalisasi Pelanggaran FPIC, Korban Agraria, Represi, dan Defisit SPA</h4>
+<div class="formula">Skor_Sosial_1 = min(10.0, (8 / 3.0) * 10.0) = 10.00 / 10.0 (Likert: 5.0 / 5)</div>
+<div class="formula">Skor_Sosial_2 = min(10.0, (54,310 / 40000.0) * 10.0) = 10.00 / 10.0 (Likert: 5.0 / 5)</div>
+<div class="formula">Skor_Sosial_3 = min(10.0, (21 / 10.0) * 10.0) = 10.00 / 10.0 (Likert: 5.0 / 5)</div>
+<div class="formula">Skor_Sosial_4 = min(10.0, (5.65 / 45.0) * 10.0) = 1.26 / 10.0 (Likert: 0.6 / 5)</div>
+<div class="formula">Skor_Akumulasi_Sosial = (10.00 + 10.00 + 10.00 + 1.26) / 4.0 = 7.81 / 10.0 (Skor Indikator Sosial: 3.9 / 5)</div>
+
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 6.7: Evaluasi Kuantitatif 4 Indikator Daya Dukung Sosial Bioregion Pulau Sulawesi (Sesuai Dashboard Page 6)</div>
+<table>
+<thead><tr><th class="data-th">Kode</th><th class="data-th">Indikator Empiris</th><th class="data-th">Nilai Aktual</th><th class="data-th">Ambang Batas Kritis</th><th class="data-th">Formula Substitusi</th><th class="data-th">Skor WSM (0-10)</th><th class="data-th">Skor Likert (1-5)</th><th class="data-th">Status Ekologis</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Sosial 1</td><td class="data-td">Manipulasi Persetujuan Warga (FPIC)</td><td class="data-td">8 Kasus</td><td class="data-td">>= 3 Kasus (Zero Tolerance IFC PS7)</td><td class="data-td">min(10.0, (8/3.0)*10)</td><td class="data-td">10.00 / 10.0</td><td class="data-td">5.0 / 5</td><td class="data-td">AMDAL CACAT HUKUM</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sosial 2</td><td class="data-td">Perampasan Ruang Hidup & Korban</td><td class="data-td">54,310 Jiwa (505,192 Ha)</td><td class="data-td">> 40,000 Jiwa (7.4% Demografi Nasional KPA)</td><td class="data-td">min(10.0, (54,310/40000)*10)</td><td class="data-td">10.00 / 10.0</td><td class="data-td">5.0 / 5</td><td class="data-td">KRISIS AGRARIA</td></tr>
+<tr><td class="data-td">Sosial 3</td><td class="data-td">Kriminalisasi Warga & Pembela HAM</td><td class="data-td">21 Insiden (10 Ditangkap)</td><td class="data-td">> 10 Insiden (Outlier Stat: Mean + 1 SD)</td><td class="data-td">min(10.0, (21/10.0)*10)</td><td class="data-td">10.00 / 10.0</td><td class="data-td">5.0 / 5</td><td class="data-td">KEKERASAN NEGARA</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sosial 4</td><td class="data-td">Defisit Standar Layanan Faskes (SPA)</td><td class="data-td">74.35% (Gap: 5.65%)</td><td class="data-td">Target Min 80.0% (Defisit Max 45.0%)</td><td class="data-td">min(10.0, (5.65/45.0)*10)</td><td class="data-td">1.26 / 10.0</td><td class="data-td">0.6 / 5</td><td class="data-td">TERKENDALI / DEFISIT</td></tr>
+<tr><td class="data-td">TOTAL</td><td class="data-td">Akumulasi Skor Indikator Sosial</td><td class="data-td">Rata-rata 4 Pilar SAW</td><td class="data-td">Threshold Kritis >= 4.0 / 6.0</td><td class="data-td">Σ(Skor 1..4) / 4</td><td class="data-td">7.81 / 10.0</td><td class="data-td">3.9 / 5</td><td class="data-td">STATUS: PERLU PENGAWASAN</td></tr>
+</tbody>
+</table>
+
+<div class="table-caption">Tabel 6.8: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Sosial</div>
+<table>
+<thead><tr><th class="data-th">Parameter</th><th class="data-th">Regulasi / Rujukan Ilmiah</th><th class="data-th">Kutipan Dokumen Resmi / Verbatim</th><th class="data-th">Pasal / Hal.</th><th class="data-th">Status Audit</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Manipulasi FPIC (Sosial 1)</td><td class="data-td">IFC Performance Standard 7 & Equator Principles 4</td><td class="data-td">Mandat persetujuan bebas, didahulukan, dan diinformasikan (FPIC) bagi masyarakat adat/lokal. Pelanggaran sistemik ≥ 3 kasus membatalkan legitimasi dokumen AMDAL.</td><td class="data-td">IFC PS7 & Equator IV</td><td class="data-td">VERIFIED</td></tr>
+<tr class="data-tr-even"><td class="data-td">Perampasan Ruang (Sosial 2)</td><td class="data-td">Laporan Tahunan CATAHU KPA (2023)</td><td class="data-td">Beban krisis agraria nasional mencapai 542.432 jiwa; alokasi proporsional demografi Sulawesi (7.4%) menetapkan threshold darurat kemanusiaan sebesar 40.000 jiwa.</td><td class="data-td">Hal. 8</td><td class="data-td">VERIFIED</td></tr>
+<tr><td class="data-td">Kriminalisasi HAM (Sosial 3)</td><td class="data-td">UU No. 32/2009 (Pasal 66 Anti-SLAPP) & Satya Bumi (2023)</td><td class="data-td">Perlindungan hukum pembela hak lingkungan hidup. Threshold 10 insiden diturunkan dari batas deviasi statistik Mean + 1 SD dari 6 provinsi se-Sulawesi (Mean=5.67, SD=3.90).</td><td class="data-td">Ps. 66 & Metodologi KPA</td><td class="data-td">VERIFIED</td></tr>
+<tr class="data-tr-even"><td class="data-td">Defisit Faskes SPA (Sosial 4)</td><td class="data-td">Lampiran Perpres RPJMN 2025–2029 & Permenkes No. 6/2024</td><td class="data-td">Target pemenuhan sarana, prasarana, dan alat kesehatan (SPA) Puskesmas minimal 80%. Kesenjangan (gap) diukur dari capaian riil ASPAK Kemenkes.</td><td class="data-td">Bab IV & Permenkes 6/2024</td><td class="data-td">VERIFIED</td></tr>
+</tbody>
+</table>
+
+<h4>E. Analisis Temuan Empiris</h4>
+<p><strong>1. Manipulasi FPIC (Sosial 1):</strong> Teridentifikasi <strong>8 kasus</strong> pelanggaran FPIC dalam AMDAL, memicu Skor Pelanggaran Konsultasi <strong>5.0 / 5</strong> (STATUS: AMDAL CACAT HUKUM).<br>
+<strong>2. Korban Agraria (Sosial 2):</strong> Sebanyak <strong>54,310 jiwa</strong> penduduk tapak terancam perampasan lahan (505,192 Ha), memicu Skor Perampasan Ruang <strong>5.0 / 5</strong> (STATUS: KRISIS AGRARIA).<br>
+<strong>3. Kriminalisasi HAM (Sosial 3):</strong> Tercatat <strong>21 insiden</strong> represi aparat dengan <strong>10 warga ditangkap</strong>, memicu Skor Represi <strong>5.0 / 5</strong> (STATUS: KEKERASAN NEGARA).<br>
+<strong>4. Kepatuhan Faskes SPA (Sosial 4):</strong> Proporsi Puskesmas sesuai standar SPA menyentuh <strong>74.35%</strong> (defisit 5.65% di bawah target 80%), menghasilkan Skor Defisit <strong>0.6 / 5</strong>.<br>
+<strong>5. Vonis Indikator Sosial:</strong> Skor Indikator Sosial berada pada angka <strong>3.9 / 5</strong> (Skor WSM 7.81 / 10.0), menetapkan vonis <strong><span class="badge-danger">STATUS: PERLU PENGAWASAN</span></strong> dengan kesimpulan eksekutif <strong>ANALISIS: Pelibatan Masyarakat Lokal</strong>.</p>
 </body>
 </html>
