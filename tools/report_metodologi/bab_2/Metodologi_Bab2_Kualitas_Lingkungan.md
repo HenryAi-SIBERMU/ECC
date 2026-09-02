@@ -43,6 +43,8 @@ Odds_Ratio = (a * d) / (b * c)
 ```
 
 #### D. Matriks Hasil Uji Empiris
+Akumulasi pemusatan fasilitas smelter, nilai IKA, estimasi timbulan limbah B3, dan laporan sungai/pesisir tercemar pada masing-masing provinsi dapat dilihat secara empiris pada **Tabel 2.1** berikut:
+
 ##### Tabel 2.1: Rincian Empiris Konsentrasi Smelter, IKA, Limbah B3, dan Sungai Tercemar (2023)
 | Provinsi | Jumlah Smelter | IKA | Limbah B3 (Ton/Tahun) | Sungai Tercemar | Daftar Sungai/Pesisir |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -53,20 +55,12 @@ Odds_Ratio = (a * d) / (b * c)
 | Sulawesi Utara | 15 | 52.1 | 0 | 0 | - |
 | Gorontalo | 7 | 58.7 | 0 | 0 | - |
 
-##### Tabel 2.3: Crosstabulation Kepadatan Smelter vs Indeks Kualitas Air
-| Kategori Smelter (X) | IKA Kritis Count | IKA Kritis Expected | IKA Baik Count | IKA Baik Expected | Total |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| Rendah (<75.0) | 15 | 12.0 | 9 | 12.0 | 24 |
-| Tinggi (>=75.0) | 9 | 12.0 | 15 | 12.0 | 24 |
-| Total | 24 | 24.0 | 24 | 24.0 | 48 |
+Penerapan sistem pengujian statistik tabulasi silang pada data panel 6 provinsi selama periode 2016-2023 (total 48 observasi valid) disajikan secara ringkas pada **Tabel 2.2** berikut:
 
-##### Tabel 2.4: Chi-Square Tests Sub-bab 2.1
-| Jenis Uji | Value | df | Asymp. Sig. (2-sided) |
-| :--- | :--- | :--- | :--- |
-| Pearson Chi-Square | 2.083 | 1 | = 0.1489 |
-| Likelihood Ratio | 2.099 | 1 | = 0.1474 |
-| Linear-by-Linear Association | 2.938 | 1 | = 0.0866 |
-| N of Valid Cases | 48 |  |  |
+##### Tabel 2.2: Ringkasan Eksekutif Skenario Crosstab Smelter vs IKA Bab 2
+| Variabel Independen (X) | Variabel Dependen (Y) | Chi-Square (χ²) | P-Value | Odds Ratio | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Kepadatan Smelter (Fasilitas) | Indeks Kualitas Air (IKA) | 2.083 | p = 0.1489 | 0.4 | TIDAK SIGNIFIKAN |
 
 #### E. Analisis Temuan Empiris: Pencemaran Air dan Efek Pengenceran Data Agregat
 Kegagalan statistik mendeteksi signifikansi membongkar fakta krusial: Indeks Kualitas Air (IKA) provinsi adalah metrik agregat yang mengencerkan tekanan ekologis di tapak. Pencemaran tailing fatal di area tambang dapat tertutupi oleh data sungai-sungai lain di luar lingkar industri.

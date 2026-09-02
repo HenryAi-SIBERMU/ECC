@@ -472,8 +472,8 @@ def generate_all_bab2():
         "Kepadatan Smelter (Fasilitas)",
         "Indeks Kualitas Air (IKA)",
         f"{stats_21['chi2']:.3f}",
-        fmt_p(stats_21["p_val"]),
-        "Infinite" if stats_21["odds_ratio"] == 0 else f"{stats_21['odds_ratio']:.2f}",
+        f"p {fmt_p(stats_21['p_val'])}",
+        "Infinite" if stats_21["odds_ratio"] == 0 else f"{stats_21['odds_ratio']:.1f}",
         "SIGNIFIKAN" if stats_21["p_val"] < 0.05 else "TIDAK SIGNIFIKAN",
     ]]
 
@@ -560,46 +560,52 @@ def generate_all_bab2():
         p_err = doc.add_paragraph()
         run(p_err, "[Gambar Flowchart Gagal Diunduh, silakan periksa koneksi internet saat generate]", color=C_RED, pt=9)
 
-    add_h4(doc, "C. Formulasi Matematis: Agregasi Smelter, Rata-rata IKA, dan Uji Crosstabulation")
+    add_h4(doc, "C. Formulasi Matematis: Kalkulasi Konsentrasi Spasial & Uji Chi-Square")
+    add_p(doc, [
+        ("Parameterisasi konsentrasi spasial dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:", False, False),
+    ])
     add_formula(doc, "Agregasi Jumlah Smelter per Provinsi", "Jumlah_Smelter_Provinsi = COUNT(Smelter_i) GROUP BY Provinsi", [
         ("Jumlah_Smelter_Provinsi", "Banyaknya fasilitas smelter atau entitas nikel pada provinsi observasi."),
         ("Smelter_i", "Unit observasi fasilitas/entitas smelter dalam data ESDM nikel."),
     ])
-    add_formula(doc, "Rata-rata Indeks Kualitas Air Panel", "Rata_Rata_IKA_Provinsi_Tahun = MEAN(IKA) GROUP BY Provinsi, Tahun", [
-        ("Rata_Rata_IKA_Provinsi_Tahun", "Skor rata-rata Indeks Kualitas Air pada provinsi dan tahun tertentu."),
-        ("IKA", "Indeks Kualitas Air dari data KLHK/BPS yang dipakai dashboard."),
+    add_formula(doc, "Persamaan Rata-rata Indeks Kualitas Air Panel Provinsi", "Rata_Rata_IKA_Provinsi_Tahun = MEAN(IKA_Provinsi_Tahun)", [
+        ("Rata_Rata_IKA_Provinsi_Tahun", "Skor rata-rata Indeks Kualitas Air pada provinsi dan tahun observasi tertentu."),
+        ("IKA_Provinsi_Tahun", "Nilai Indeks Kualitas Air dari KLHK/BPS pada kombinasi provinsi-tahun dalam panel 2016-2023."),
     ])
-    add_formula(doc, "Kategorisasi Nilai Ambang Median", "Kategori_X/Y = IF(Nilai >= Median(Seluruh Panel), 'Tinggi/Baik', 'Rendah/Kritis')", [
-        ("Kategori_X", "Binning kepadatan smelter menjadi Tinggi atau Rendah berdasarkan median panel."),
-        ("Kategori_Y", "Binning IKA menjadi Baik atau Kritis berdasarkan median panel."),
-        ("Median(Seluruh Panel)", f"Ambang panel data valid N={valid_cases} observasi."),
+    add_formula(doc, "Persamaan Kategorisasi Median Panel 2x2", "Kategori = IF(Nilai >= Median(Seluruh Panel), 'Tinggi/Baik', 'Rendah/Kritis')", [
+        ("Kategori Smelter", f"Smelter Tinggi jika Jumlah_Smelter_Provinsi >= median panel ({stats_21['x_threshold']:,.1f} fasilitas); selain itu Smelter Rendah."),
+        ("Kategori IKA", f"IKA Baik jika Indeks Kualitas Air >= median panel ({stats_21['y_threshold']:,.1f} poin); selain itu IKA Kritis."),
+        ("Median(Seluruh Panel)", f"Ambang batas dari seluruh observasi panel valid N={valid_cases}."),
     ])
-    add_formula(doc, "Uji Independensi Chi-Square Pearson", "Chi_Square = SUM((O_ij - E_ij)^2 / E_ij)", [
-        ("O_ij", "Frekuensi observasi pada sel ke-i,j tabel kontinjensi."),
-        ("E_ij", "Frekuensi harapan jika kepadatan smelter dan IKA saling independen."),
+    add_formula(doc, "Persamaan Uji Independensi Chi-Square Pearson (χ² Kontinjensi 2x2)", "Chi_Square (χ²) = Jumlah [ (Frekuensi_Observasi - Frekuensi_Harapan)^2 / Frekuensi_Harapan ]", [
+        ("Chi_Square (χ²)", f"Nilai statistik uji kecocokan Pearson untuk membuktikan ada tidaknya hubungan ketergantungan antara kepadatan smelter dan Indeks Kualitas Air pada panel spasiotemporal N={valid_cases}."),
+        ("Frekuensi_Observasi (O)", "Jumlah kasus aktual yang tercatat pada sel tabel kontinjensi 2x2."),
+        ("Frekuensi_Harapan (E)", "Jumlah kasus teoretis jika kepadatan smelter dan IKA saling independen: E = (Total Baris * Total Kolom) / N."),
     ])
-    add_formula(doc, "Odds Ratio Risiko IKA Kritis", "Odds_Ratio = (a * d) / (b * c)", [
-        ("a", "Kasus Smelter Tinggi dan IKA Kritis."),
-        ("b", "Kasus Smelter Tinggi dan IKA Baik."),
-        ("c", "Kasus Smelter Rendah dan IKA Kritis."),
-        ("d", "Kasus Smelter Rendah dan IKA Baik."),
+    add_formula(doc, "Persamaan Rasio Keunggulan Risiko IKA Kritis (Risk Odds Ratio / OR)", "Odds_Ratio (OR) = ( a * d ) / ( b * c )", [
+        ("Odds_Ratio (OR)", "Ukuran kelipatan peluang munculnya IKA Kritis pada kelompok Smelter Tinggi dibandingkan kelompok Smelter Rendah."),
+        ("a", f"Jumlah observasi panel pada kelompok Smelter Tinggi dan IKA Kritis ({stats_21['a']} kasus)."),
+        ("b", f"Jumlah observasi panel pada kelompok Smelter Tinggi dan IKA Baik ({stats_21['b']} kasus)."),
+        ("c", f"Jumlah observasi panel pada kelompok Smelter Rendah dan IKA Kritis ({stats_21['c']} kasus)."),
+        ("d", f"Jumlah observasi panel pada kelompok Smelter Rendah dan IKA Baik ({stats_21['d']} kasus)."),
     ])
 
     add_h4(doc, "D. Matriks Hasil Uji Empiris: Peta Limbah, IKA, dan Crosstabulation")
+    add_p(doc, [
+        ("Akumulasi pemusatan fasilitas smelter, nilai IKA, estimasi timbulan limbah B3, dan laporan sungai/pesisir tercemar pada masing-masing provinsi dapat dilihat secara empiris pada ", False, False),
+        ("Tabel 2.1", True, False),
+        (" berikut:", False, False),
+    ])
     add_caption(doc, f"Tabel 2.1: Rincian Empiris Konsentrasi Smelter, IKA, Limbah B3, dan Sungai Tercemar ({max_year_panel})")
     add_table_1col(doc, ["Provinsi", "Jumlah Smelter", "IKA", "Limbah B3 (Ton/Tahun)", "Sungai Tercemar", "Daftar Sungai/Pesisir"], empirical_rows, [2.8, 2.0, 1.4, 3.0, 2.0, 5.8], ["L", "C", "C", "C", "C", "L"])
 
-    add_caption(doc, "Tabel 2.2: Case Processing Summary Sub-bab 2.1")
-    add_table_1col(doc, ["Interaksi Variabel", "Valid N", "Valid %", "Missing N", "Missing %", "Total N"], [["Kepadatan Smelter (Fasilitas) * Indeks Kualitas Air (IKA)", valid_cases, f"{valid_cases / total_cases * 100:.1f}%", missing_cases, f"{missing_cases / total_cases * 100:.1f}%", total_cases]], [5.8, 1.8, 1.8, 1.8, 1.8, 1.8], ["L", "C", "C", "C", "C", "C"])
-
-    add_caption(doc, "Tabel 2.3: Crosstabulation Kepadatan Smelter vs Indeks Kualitas Air")
-    add_table_1col(doc, ["Kategori Smelter (X)", "IKA Kritis Count", "IKA Kritis Expected", "IKA Baik Count", "IKA Baik Expected", "Total"], crosstab_rows, [4.0, 2.2, 2.4, 2.2, 2.4, 1.8], ["L", "C", "C", "C", "C", "C"])
-
-    add_caption(doc, "Tabel 2.4: Chi-Square Tests Sub-bab 2.1")
-    add_table_1col(doc, ["Jenis Uji", "Value", "df", "Asymp. Sig. (2-sided)"], chi_rows, [6.0, 3.0, 2.0, 4.0], ["L", "C", "C", "C"])
-
-    add_caption(doc, "Tabel 2.5: Ringkasan Seluruh Skenario Crosstab Sub-bab 2.1")
-    add_table_1col(doc, ["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square", "P-Value", "Odds Ratio", "Status"], summary_rows, [4.0, 3.8, 2.0, 2.0, 2.0, 2.8], ["L", "L", "C", "C", "C", "C"])
+    add_p(doc, [
+        (f"Penerapan sistem pengujian statistik tabulasi silang pada data panel 6 provinsi selama periode {focus_start_year}-{focus_end_year} (total {valid_cases} observasi valid) disajikan secara ringkas pada ", False, False),
+        ("Tabel 2.2", True, False),
+        (" berikut:", False, False),
+    ])
+    add_caption(doc, "Tabel 2.2: Ringkasan Eksekutif Skenario Crosstab Smelter vs IKA Bab 2")
+    add_table_1col(doc, ["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (χ²)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows, [3.0, 3.5, 2.0, 2.0, 2.0, 2.5], ["L", "L", "C", "C", "C", "C"])
 
     add_h4(doc, "E. Analisis Temuan Empiris: Pencemaran Air dan Efek Pengenceran Data Agregat")
     if stats_21["p_val"] < 0.05:
@@ -647,18 +653,20 @@ h4 {{ color: #A5D6A7; }}
 <p>Pengoperasian <strong>{tot_smelter:,} fasilitas mega-smelter</strong> yang didukung oleh kapasitas <strong>{tot_kapasitas_pltu:,.0f} MW PLTU Captive</strong> meningkatkan intensitas emisi dan beban lingkungan di Pulau Sulawesi. Data menunjukkan konversi tutupan hutan mencapai <strong>{tot_deforestasi:,.0f} Hektar</strong>, estimasi timbulan limbah B3/tailing sebesar <strong>{tot_limbah_b3_juta:,.1f} Juta Ton</strong> per tahun, dan rata-rata IKA tahun {focus_end_year} sebesar <strong>{mean_ika_focus:.1f}</strong>.</p>
 <h4>B. Alur Logika Metodologis Analisis Konsentrasi Smelter vs IKA</h4>
 <div class="mermaid">{mermaid_str_2_1}</div>
-<h4>C. Formulasi Matematis</h4>
+<h4>C. Formulasi Matematis: Kalkulasi Konsentrasi Spasial &amp; Uji Chi-Square</h4>
+<p>Parameterisasi konsentrasi spasial dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:</p>
 <div class="formula">Jumlah_Smelter_Provinsi = COUNT(Smelter_i) GROUP BY Provinsi</div>
-<div class="formula">Rata_Rata_IKA_Provinsi_Tahun = MEAN(IKA) GROUP BY Provinsi, Tahun</div>
-<div class="formula">Chi_Square = SUM((O_ij - E_ij)^2 / E_ij)</div>
-<div class="formula">Odds_Ratio = (a * d) / (b * c)</div>
+<div class="formula">Rata_Rata_IKA_Provinsi_Tahun = MEAN(IKA_Provinsi_Tahun)</div>
+<div class="formula">Kategori = IF(Nilai &gt;= Median(Seluruh Panel), 'Tinggi/Baik', 'Rendah/Kritis')</div>
+<div class="formula">Chi_Square (&chi;&sup2;) = Jumlah [ (Frekuensi_Observasi - Frekuensi_Harapan)^2 / Frekuensi_Harapan ]</div>
+<div class="formula">Odds_Ratio (OR) = ( a * d ) / ( b * c )</div>
 <h4>D. Matriks Hasil Uji Empiris</h4>
+<p>Akumulasi pemusatan fasilitas smelter, nilai IKA, estimasi timbulan limbah B3, dan laporan sungai/pesisir tercemar pada masing-masing provinsi dapat dilihat secara empiris pada <strong>Tabel 2.1</strong> berikut:</p>
 <div class="table-caption">Tabel 2.1: Rincian Empiris Konsentrasi Smelter, IKA, Limbah B3, dan Sungai Tercemar ({max_year_panel})</div>
 {html_table(["Provinsi", "Jumlah Smelter", "IKA", "Limbah B3 (Ton/Tahun)", "Sungai Tercemar", "Daftar Sungai/Pesisir"], empirical_rows)}
-<div class="table-caption">Tabel 2.3: Crosstabulation Kepadatan Smelter vs Indeks Kualitas Air</div>
-{html_table(["Kategori Smelter (X)", "IKA Kritis Count", "IKA Kritis Expected", "IKA Baik Count", "IKA Baik Expected", "Total"], crosstab_rows)}
-<div class="table-caption">Tabel 2.4: Chi-Square Tests Sub-bab 2.1</div>
-{html_table(["Jenis Uji", "Value", "df", "Asymp. Sig. (2-sided)"], chi_rows)}
+<p>Penerapan sistem pengujian statistik tabulasi silang pada data panel 6 provinsi selama periode {focus_start_year}-{focus_end_year} (total {valid_cases} observasi valid) disajikan secara ringkas pada <strong>Tabel 2.2</strong> berikut:</p>
+<div class="table-caption">Tabel 2.2: Ringkasan Eksekutif Skenario Crosstab Smelter vs IKA Bab 2</div>
+{html_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (&chi;&sup2;)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows)}
 <h4>E. Analisis Temuan Empiris</h4>
 <p>{finding}</p>
 </body>
@@ -686,23 +694,27 @@ h4 {{ color: #A5D6A7; }}
         mermaid_str_2_1,
         "```",
         "",
-        "#### C. Formulasi Matematis",
+        "#### C. Formulasi Matematis: Kalkulasi Konsentrasi Spasial & Uji Chi-Square",
+        "Parameterisasi konsentrasi spasial dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:",
+        "",
         "```text",
         "Jumlah_Smelter_Provinsi = COUNT(Smelter_i) GROUP BY Provinsi",
-        "Rata_Rata_IKA_Provinsi_Tahun = MEAN(IKA) GROUP BY Provinsi, Tahun",
-        "Chi_Square = SUM((O_ij - E_ij)^2 / E_ij)",
-        "Odds_Ratio = (a * d) / (b * c)",
+        "Rata_Rata_IKA_Provinsi_Tahun = MEAN(IKA_Provinsi_Tahun)",
+        "Kategori = IF(Nilai >= Median(Seluruh Panel), 'Tinggi/Baik', 'Rendah/Kritis')",
+        "Chi_Square (χ²) = Jumlah [ (Frekuensi_Observasi - Frekuensi_Harapan)^2 / Frekuensi_Harapan ]",
+        "Odds_Ratio (OR) = ( a * d ) / ( b * c )",
         "```",
         "",
         "#### D. Matriks Hasil Uji Empiris",
+        "Akumulasi pemusatan fasilitas smelter, nilai IKA, estimasi timbulan limbah B3, dan laporan sungai/pesisir tercemar pada masing-masing provinsi dapat dilihat secara empiris pada **Tabel 2.1** berikut:",
+        "",
         f"##### Tabel 2.1: Rincian Empiris Konsentrasi Smelter, IKA, Limbah B3, dan Sungai Tercemar ({max_year_panel})",
         markdown_table(["Provinsi", "Jumlah Smelter", "IKA", "Limbah B3 (Ton/Tahun)", "Sungai Tercemar", "Daftar Sungai/Pesisir"], empirical_rows),
         "",
-        "##### Tabel 2.3: Crosstabulation Kepadatan Smelter vs Indeks Kualitas Air",
-        markdown_table(["Kategori Smelter (X)", "IKA Kritis Count", "IKA Kritis Expected", "IKA Baik Count", "IKA Baik Expected", "Total"], crosstab_rows),
+        f"Penerapan sistem pengujian statistik tabulasi silang pada data panel 6 provinsi selama periode {focus_start_year}-{focus_end_year} (total {valid_cases} observasi valid) disajikan secara ringkas pada **Tabel 2.2** berikut:",
         "",
-        "##### Tabel 2.4: Chi-Square Tests Sub-bab 2.1",
-        markdown_table(["Jenis Uji", "Value", "df", "Asymp. Sig. (2-sided)"], chi_rows),
+        "##### Tabel 2.2: Ringkasan Eksekutif Skenario Crosstab Smelter vs IKA Bab 2",
+        markdown_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (χ²)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows),
         "",
         "#### E. Analisis Temuan Empiris: Pencemaran Air dan Efek Pengenceran Data Agregat",
         finding,
