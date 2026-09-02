@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 """
-Generator Metodologi Versi Compact Bab 1 — GAYA V3 (EBT PODES)
-Mengadopsi arsitektur docs/generate_methodology_docx_v3.py dari proyek 8.1 Celios4-EBTsmallstack:
-- SATU HALAMAN, layout dua kolom (tabel layout kiri/kanan)
-- Seksi bernomor ringkas: 1 Desain, 2 Sumber Data, 3 Operasionalisasi, 4 Kerangka Analisis (4.x),
-  5 Korespondensi Sub-bab-Metode, 6 Bagan Alur snake Fase I-IV
-- Formula box satu baris bernotasi mudah dibaca publik (tanpa Sigma/subscript kriptik)
-- TIDAK mereplikasi tabel data & persamaan substitusi dokumen root non-compact
-- Sumber data ditulis sebagai institusi resmi (tanpa nama file CSV)
-- Tanpa icon/emoji
+Generator Metodologi Versi Compact Bab 1 — GAYA AKADEMIS TERPADU (CELIOS)
+Mengadopsi arsitektur metodologi ringkas dari proyek 8.1 Celios4-EBTsmallstack:
+- FORMAT: 1 KOLOM PENUH (Single Column Layout)
+- PANJANG: 2–3 Halaman Maksimal (Elegan, tidak sesak, proporsional)
+- OPERASIONALISASI INDIKATOR: 10 Indikator Empiris Lengkap dari Tabel 1.8 Root Metodologi
+- FORMULASI: Formula box bernotasi standar akademik dan praktis
+- ALUR RISET: 4 Fase Terintegrasi (Akuisisi, Reklasifikasi, Inferensial, Sintesis)
+- SINKRONISASI: Menghasilkan dokumen DOCX dan Markdown sekaligus.
 """
 
 import os
@@ -19,7 +18,7 @@ try:
     from docx import Document
     from docx.shared import Pt, RGBColor, Cm
     from docx.enum.text import WD_ALIGN_PARAGRAPH
-    from docx.enum.table import WD_ALIGN_VERTICAL
+    from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
     from docx.oxml.ns import qn
     from docx.oxml import OxmlElement
 except ImportError:
@@ -28,18 +27,19 @@ except ImportError:
     from docx import Document
     from docx.shared import Pt, RGBColor, Cm
     from docx.enum.text import WD_ALIGN_PARAGRAPH
-    from docx.enum.table import WD_ALIGN_VERTICAL
+    from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
     from docx.oxml.ns import qn
     from docx.oxml import OxmlElement
 
-# ── Warna ───────────────────────────────────────────────────
-G_DARK  = RGBColor(0x1B, 0x5E, 0x20)
-G_MID   = RGBColor(0x2E, 0x7D, 0x32)
-C_BODY  = RGBColor(0x22, 0x22, 0x22)
-C_GREY  = RGBColor(0x55, 0x55, 0x55)
-C_WHITE = RGBColor(0xFF, 0xFF, 0xFF)
+# ── Palet Warna Resmi CELIOS ─────────────────────────────────
+G_DARK  = RGBColor(0x1B, 0x5E, 0x20)  # Forest Dark Green
+G_MID   = RGBColor(0x2E, 0x7D, 0x32)  # Celios Accent Green
+G_LIGHT = RGBColor(0x38, 0x8E, 0x3C)  # Medium Green
+C_BODY  = RGBColor(0x22, 0x22, 0x22)  # Charcoal Body Text
+C_GREY  = RGBColor(0x55, 0x55, 0x55)  # Muted Grey Text
+C_WHITE = RGBColor(0xFF, 0xFF, 0xFF)  # Pure White
 
-# ── Pembantu XML ────────────────────────────────────────────
+# ── Pembantu XML & Format Word ──────────────────────────────
 def set_cell_borders(cell, top=None, left=None, bottom=None, right=None):
     tcPr = cell._tc.get_or_add_tcPr()
     bdr  = OxmlElement('w:tcBorders')
@@ -53,7 +53,7 @@ def set_cell_borders(cell, top=None, left=None, bottom=None, right=None):
         bdr.append(el)
     tcPr.append(bdr)
 
-def cell_margin(cell, left=0, right=0, top=0, bottom=0):
+def cell_margin(cell, left=100, right=100, top=60, bottom=60):
     tcPr = cell._tc.get_or_add_tcPr()
     m    = OxmlElement('w:tcMar')
     for side, val in [('top', top), ('bottom', bottom), ('left', left), ('right', right)]:
@@ -79,13 +79,13 @@ def cell_shd(cell, fill):
     s.set(qn('w:fill'), fill)
     tcPr.append(s)
 
-def para_border_bottom(p, color='2E7D32'):
+def para_border_bottom(p, color='2E7D32', sz='6'):
     pPr  = p._p.get_or_add_pPr()
     pBdr = OxmlElement('w:pBdr')
     el   = OxmlElement('w:bottom')
     el.set(qn('w:val'), 'single')
-    el.set(qn('w:sz'), '4')
-    el.set(qn('w:space'), '1')
+    el.set(qn('w:sz'), sz)
+    el.set(qn('w:space'), '2')
     el.set(qn('w:color'), color)
     pBdr.append(el)
     pPr.append(pBdr)
@@ -96,25 +96,25 @@ def para_border_left(p, color='2E7D32', sz='12'):
     el   = OxmlElement('w:left')
     el.set(qn('w:val'), 'single')
     el.set(qn('w:sz'), sz)
-    el.set(qn('w:space'), '4')
+    el.set(qn('w:space'), '6')
     el.set(qn('w:color'), color)
     pBdr.append(el)
     pPr.append(pBdr)
 
-def all_border_para(p, color='444444', sz='4'):
+def all_border_para(p, color='1B5E20', sz='6'):
     pPr  = p._p.get_or_add_pPr()
     pBdr = OxmlElement('w:pBdr')
     for side in ['top', 'left', 'bottom', 'right']:
         el = OxmlElement(f'w:{side}')
         el.set(qn('w:val'), 'single')
         el.set(qn('w:sz'), sz)
-        el.set(qn('w:space'), '2')
+        el.set(qn('w:space'), '3')
         el.set(qn('w:color'), color)
         pBdr.append(el)
     pPr.append(pBdr)
 
-# ── Pembantu konten ─────────────────────────────────────────
-def run(p, text, bold=False, italic=False, pt=8.5, color=None, mono=False):
+# ── Pembantu Penulisan Konten ───────────────────────────────
+def add_run(p, text, bold=False, italic=False, pt=8.5, color=None, mono=False):
     r = p.add_run(text)
     r.bold           = bold
     r.italic         = italic
@@ -125,430 +125,456 @@ def run(p, text, bold=False, italic=False, pt=8.5, color=None, mono=False):
         r._element.rPr.rFonts.set(qn('w:ascii'), 'Courier New')
     return r
 
-def h2(cell, num, title):
-    p = cell.add_paragraph()
-    p.paragraph_format.space_before = Pt(4)
+def add_h2(doc, num, title):
+    p = doc.add_paragraph()
+    p.paragraph_format.space_before = Pt(11)
+    p.paragraph_format.space_after  = Pt(3)
+    p.paragraph_format.keep_with_next = True
+    para_border_bottom(p, color='2E7D32', sz='6')
+    add_run(p, f"{num}.  {title.upper()}", bold=True, pt=10, color=G_DARK)
+
+def add_h3(doc, text):
+    p = doc.add_paragraph()
+    p.paragraph_format.space_before = Pt(7)
     p.paragraph_format.space_after  = Pt(2)
-    para_border_bottom(p)
-    run(p, f'{num}.  {title.upper()}', bold=True, pt=7.5, color=G_DARK)
+    p.paragraph_format.keep_with_next = True
+    add_run(p, text, bold=True, pt=9, color=G_MID)
 
-def h3(cell, text):
-    p = cell.add_paragraph()
-    p.paragraph_format.space_before = Pt(3.5)
-    p.paragraph_format.space_after  = Pt(1)
-    run(p, text, bold=True, pt=8, color=G_MID)
-
-def body(cell, parts, after=3):
-    p = cell.add_paragraph()
+def add_body(doc, parts, after=4):
+    p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
     p.paragraph_format.space_after = Pt(after)
+    p.paragraph_format.line_spacing = 1.15
     for text, bold, italic in parts:
-        run(p, text, bold=bold, italic=italic)
+        add_run(p, text, bold=bold, italic=italic, pt=8.5)
     return p
 
-def formula(cell, text):
-    p = cell.add_paragraph()
-    p.paragraph_format.space_after = Pt(3)
-    p.paragraph_format.left_indent = Pt(4)
-    para_shd(p, 'EDF7EE')
-    run(p, text, pt=7.5, color=G_MID, mono=True)
-
-def note_box(cell, text):
-    p = cell.add_paragraph()
-    p.paragraph_format.space_after  = Pt(2)
+def add_formula(doc, text):
+    p = doc.add_paragraph()
+    p.paragraph_format.space_before = Pt(2)
+    p.paragraph_format.space_after  = Pt(4)
     p.paragraph_format.left_indent  = Pt(8)
-    para_border_left(p)
-    para_shd(p, 'F1F8E9')
-    run(p, text, italic=True, pt=7.5, color=C_GREY)
+    para_shd(p, 'EDF7EE')
+    add_run(p, text, pt=8, color=G_MID, mono=True)
 
-def data_table(doc, cell, headers, rows, col_widths_cm):
+def add_note_box(doc, text):
+    p = doc.add_paragraph()
+    p.paragraph_format.space_before = Pt(3)
+    p.paragraph_format.space_after  = Pt(5)
+    p.paragraph_format.left_indent  = Pt(8)
+    para_border_left(p, color='2E7D32', sz='12')
+    para_shd(p, 'F1F8E9')
+    add_run(p, text, italic=True, pt=8, color=C_GREY)
+
+def add_table_styled(doc, headers, rows, col_widths_cm, alignments=None):
     tbl = doc.add_table(rows=1 + len(rows), cols=len(headers))
-    tbl.style = 'Table Grid'
+    tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
     tbl.autofit = False
+
+    bd_subtle = {'val': 'single', 'sz': '4', 'color': 'D0D7DE', 'space': '0'}
+    
+    # Header Row
     for j, (h, w) in enumerate(zip(headers, col_widths_cm)):
         c = tbl.rows[0].cells[j]
         c.width = Cm(w)
         cell_shd(c, '2E7D32')
+        cell_margin(c, left=80, right=80, top=50, bottom=50)
+        set_cell_borders(c, top=bd_subtle, left=bd_subtle, bottom=bd_subtle, right=bd_subtle)
         p = c.paragraphs[0]
-        p.paragraph_format.space_before = Pt(1)
-        p.paragraph_format.space_after  = Pt(1)
-        run(p, h, bold=True, pt=7, color=C_WHITE)
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.paragraph_format.space_before = Pt(2)
+        p.paragraph_format.space_after  = Pt(2)
+        add_run(p, h, bold=True, pt=7.5, color=C_WHITE)
+
+    # Data Rows
     for i, row_data in enumerate(rows):
-        fill = 'F5FBF5' if i % 2 == 0 else 'FFFFFF'
+        fill = 'F9FBF9' if i % 2 == 0 else 'FFFFFF'
         for j, val in enumerate(row_data):
             c = tbl.cell(i + 1, j)
             c.width = Cm(col_widths_cm[j])
+            c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
             cell_shd(c, fill)
+            cell_margin(c, left=80, right=80, top=40, bottom=40)
+            set_cell_borders(c, top=bd_subtle, left=bd_subtle, bottom=bd_subtle, right=bd_subtle)
             p = c.paragraphs[0]
             p.paragraph_format.space_before = Pt(1)
             p.paragraph_format.space_after  = Pt(1)
-            run(p, str(val), pt=7)
-    doc.element.body.remove(tbl._tbl)
-    cell._tc.append(tbl._tbl)
+            
+            # Text alignment
+            if alignments and j < len(alignments):
+                align = alignments[j]
+                if align == 'C':
+                    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                elif align == 'R':
+                    p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+                else:
+                    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+            else:
+                p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+            add_run(p, str(val), pt=7.5, color=C_BODY)
+
+    p_space = doc.add_paragraph()
+    p_space.paragraph_format.space_before = Pt(0)
+    p_space.paragraph_format.space_after  = Pt(3)
     return tbl
 
-def fc_terminal(cell, text, is_output=False):
-    p = cell.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.paragraph_format.space_before = Pt(2)
-    p.paragraph_format.space_after  = Pt(1)
-    if is_output:
-        all_border_para(p, color='1B5E20', sz='8')
-        para_shd(p, 'F1F8E9')
-        run(p, text, bold=True, pt=7, color=G_DARK)
-    else:
-        all_border_para(p, color='444444', sz='4')
-        run(p, text, bold=True, pt=7, color=C_BODY)
 
-def fc_arrow(cell):
-    p = cell.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.paragraph_format.space_before = Pt(0)
-    p.paragraph_format.space_after  = Pt(0)
-    run(p, '↓', pt=9, color=G_MID)
+def generate_bab1_compact():
+    print("[1/3] Membangun dokumen compact Bab 1 (Format 1-Kolom, 2-3 Halaman)...")
+    
+    doc = Document()
+    sec = doc.sections[0]
+    sec.page_width    = Cm(21.0)
+    sec.page_height   = Cm(29.7)
+    sec.left_margin   = Cm(2.0)
+    sec.right_margin  = Cm(2.0)
+    sec.top_margin    = Cm(1.8)
+    sec.bottom_margin = Cm(1.8)
 
-# ═══════════════════════════════════════════════════════════
-# BANGUN DOKUMEN
-# ═══════════════════════════════════════════════════════════
-doc = Document()
+    doc.styles['Normal'].font.name = 'Calibri'
+    doc.styles['Normal'].font.size = Pt(8.5)
 
-sec = doc.sections[0]
-sec.page_width    = Cm(21.0)
-sec.page_height   = Cm(29.7)
-sec.left_margin   = Cm(1.5)
-sec.right_margin  = Cm(1.5)
-sec.top_margin    = Cm(1.5)
-sec.bottom_margin = Cm(1.5)
+    # ── HEADER DOKUMEN ──────────────────────────────────────────
+    p_t = doc.add_paragraph()
+    p_t.paragraph_format.space_before = Pt(0)
+    p_t.paragraph_format.space_after  = Pt(2)
+    add_run(p_t, "METODOLOGI PENELITIAN: BAB 1 — EKSPANSI INDUSTRI EKSTRAKTIF DAN INFRASTRUKTUR PENUNJANG DI PULAU SULAWESI",
+            bold=True, pt=12, color=G_DARK)
 
-doc.styles['Normal'].font.name = 'Calibri'
-doc.styles['Normal'].font.size = Pt(8.5)
+    p_s = doc.add_paragraph()
+    p_s.paragraph_format.space_before = Pt(0)
+    p_s.paragraph_format.space_after  = Pt(8)
+    para_border_bottom(p_s, color='1B5E20', sz='8')
+    add_run(p_s, "CELIOS (Center of Economic and Law Studies) · Audit Spasial-Statistik D3TLH Sulawesi (2014–2024) · Ringkasan Eksekutif Metodologis",
+            italic=True, pt=8, color=C_GREY)
 
-# ── Judul Dokumen ───────────────────────────────────────────
-p_t = doc.add_paragraph()
-p_t.paragraph_format.space_after = Pt(1)
-run(p_t, 'METODOLOGI PENELITIAN — BAB 1: EKSPANSI INDUSTRI EKSTRAKTIF DAN INFRASTRUKTUR PENUNJANG DI PULAU SULAWESI',
-    bold=True, pt=9.5, color=G_DARK)
-p_s = doc.add_paragraph()
-p_s.paragraph_format.space_after = Pt(2)
-para_border_bottom(p_s, color='1B5E20')
-run(p_s, 'CELIOS — Center of Economic and Law Studies  ·  Riset Daya Dukung & Daya Tampung Lingkungan Hidup (D3TLH) Sulawesi  ·  2014–2024',
-    italic=True, pt=7.5, color=C_GREY)
+    # ── 1. DESAIN PENELITIAN & TUJUAN ───────────────────────────
+    add_h2(doc, "1", "Desain Penelitian & Tujuan")
+    add_body(doc, [
+        ("Penelitian ini menggunakan ", False, False),
+        ("desain audit spasial-statistik kuantitatif terintegrasi", True, False),
+        (" untuk membedah akselerasi ekspansi industri ekstraktif (tambang nikel, fasilitas pemurnian smelter, dan kawasan industri bertenaga PLTU captive batubara) di enam provinsi Pulau Sulawesi sepanjang satu dekade (", False, False),
+        ("2014–2024", True, False),
+        ("). Riset ini memanfaatkan data tabular panel resmi lintas kementerian dan lembaga yang disinkronkan secara spasial untuk mengatasi bias perataan makro. Tiga tujuan utama riset meliputi:\n", False, False),
+        ("1. ", True, False), ("Mengukur Derajat Dominasi Sektoral: ", True, False),
+        ("Mendekomposisi struktur PDRB provinsi dan kabupaten guna membuktikan pergeseran monolitik menuju sektor ekstraktif mengorbankan ekonomi pertanian rakyat.\n", False, False),
+        ("2. ", True, False), ("Memetakan Konsentrasi Spasial Klaster Industri: ", True, False),
+        ("Mengidentifikasi pengelompokan geografis 778 smelter, 9.825 MW PLTU captive, serta 574 izin tambang nikel baru seluas 819.452 Ha.\n", False, False),
+        ("3. ", True, False), ("Menguji Kausalitas Tekanan Industri vs Deforestasi: ", True, False),
+        ("Membuktikan secara inferensial signifikansi hubungan antara ekspansi pertambangan/energi dengan laju kehilangan tutupan hutan alam primer dan komoditas.", False, False)
+    ])
 
-# ── Tabel tata letak dua kolom ─────────────────────────────
-avail = sec.page_width - sec.left_margin - sec.right_margin
-cw    = avail // 2
+    # ── 2. SUMBER DATA & CAKUPAN WILAYAH ────────────────────────
+    add_h2(doc, "2", "Sumber Data & Cakupan Wilayah")
+    add_body(doc, [
+        ("Riset ini bersandar secara ketat pada data sekunder resmi dari otoritas statistik, kementerian teknis, dan lembaga pemantau global independen yang telah melalui audit konsistensi: ", False, False),
+        ("Badan Pusat Statistik (BPS)", True, False), (" (Subject 52 PDRB Lapangan Usaha & Keuangan Daerah), ", False, False),
+        ("Kementerian ESDM", True, False), (" (MODI Minerbaone & Database Smelter CGS), ", False, False),
+        ("Kementerian Investasi / BKPM", True, False), (" (Realisasi PMDN Sektoral), ", False, False),
+        ("Global Energy Monitor (GEM)", True, False), (" (Coal Plant Tracker), ", False, False),
+        ("Global Forest Watch / Hansen UMD", True, False), (" (Tree Cover Loss & Commodity Drivers), serta ", False, False),
+        ("Komite Nasional Keselamatan Transportasi (KNKT)", True, False), (" dan Perpres PSN (Simpul Logistik Maritim). Seluruh observasi dihimpun dalam struktur ", False, False),
+        ("data panel provinsi-tahun (N = 60 observasi: 6 provinsi × 10 tahun)", True, False),
+        (" untuk menjamin validitas pengujian parametrik dan non-parametrik.", False, False)
+    ])
 
-layout = doc.add_table(rows=1, cols=2)
-layout.autofit = False
-layout.columns[0].width = cw
-layout.columns[1].width = cw
+    # ── 3. OPERASIONALISASI 10 INDIKATOR EMPIRIS (TABEL 1.8) ───
+    add_h2(doc, "3", "Operasionalisasi 10 Indikator Empiris (Tabel 1.8)")
+    add_body(doc, [
+        ("Seluruh variabel kuantitatif, kategori analisis, satuan ukur, periode observasi, dan institusi primer resmi yang digunakan dalam Bab 1 disajikan secara komprehensif pada tabel berikut:", False, False)
+    ])
 
-LC = layout.cell(0, 0)
-RC = layout.cell(0, 1)
-LC.vertical_alignment = WD_ALIGN_VERTICAL.TOP
-RC.vertical_alignment = WD_ALIGN_VERTICAL.TOP
+    table_10_indikator = [
+        ["1", "Izin Usaha Pertambangan (IUP) Baru", "Faktor Tekanan Ekstraktif", "Unit Izin", "2014–2024", "Data Registry ESDM MODI (Minerbaone)"],
+        ["2", "Luas Wilayah Konsesi Tambang Baru", "Faktor Tekanan Ekstraktif", "Hektar (Ha)", "2014–2024", "Data Registry ESDM MODI (Minerbaone)"],
+        ["3", "Kapasitas Terpasang PLTU Captive", "Infrastruktur Energi Khusus", "Megawatt (MW)", "2014–2024", "Global Energy Monitor (GEM Tracker)"],
+        ["4", "Fasilitas Smelter Nikel", "Fasilitas Industri Hilir", "Unit Fasilitas", "2014–2024", "Database Smelter CGS & ESDM MODI"],
+        ["5", "Realisasi Investasi PMDN & Nikel", "Arus Modal Domestik", "Triliun Rp", "2016–2024", "API BPS & Kementerian Investasi / BKPM"],
+        ["6", "PDRB Provinsi (Ekstraktif vs Akar Rumput)", "Struktur Ekonomi Makro", "Triliun Rp", "2016–2024", "API BPS (Subject 52: PDRB Lapangan Usaha)"],
+        ["7", "PDRB Kabupaten Sentra Tambang", "Struktur Ekonomi Daerah", "Triliun Rp", "2016–2024", "API BPS (Subject 52 Kabupaten/Kota)"],
+        ["8", "Pendapatan Asli Daerah (PAD) & Pajak", "Kapasitas Fiskal Daerah", "Triliun Rp", "2016–2024", "API BPS (Statistik Keuangan Daerah)"],
+        ["9", "Luas Total Deforestasi Alam & Komoditas", "Dampak Ekologis Lanskap", "Hektar (Ha)", "2014–2023", "Global Forest Watch (GFW API / Hansen UMD)"],
+        ["10", "Simpul Pelabuhan & Terminal Logistik Ekspor", "Infrastruktur Rantai Pasok", "Titik & DWT", "2014–2024", "KNKT, Regulasi Perpres PSN & Korporasi"]
+    ]
 
-set_cell_borders(LC, right={'val': 'single', 'sz': '4', 'color': 'BBBBBB', 'space': '0'})
-set_cell_borders(RC)
+    add_table_styled(
+        doc,
+        headers=["#", "Nama Indikator Empiris", "Kategori Analisis", "Satuan", "Periode", "Institusi & Sumber Data Resmi"],
+        rows=table_10_indikator,
+        col_widths_cm=[0.8, 4.5, 3.2, 1.8, 2.0, 4.7],
+        alignments=['C', 'L', 'L', 'C', 'C', 'L']
+    )
 
-cell_margin(LC, left=0,   right=150, top=0, bottom=0)
-cell_margin(RC, left=150, right=0,   top=0, bottom=0)
+    # ── 4. KERANGKA ANALISIS & FORMULASI MATEMATIS ──────────────
+    add_h2(doc, "4", "Kerangka Analisis & Formulasi Matematis")
 
-for c in [LC, RC]:
-    for p in c.paragraphs:
-        p._element.getparent().remove(p._element)
+    add_h3(doc, "4.1 Reklasifikasi Rantai Pasok Hukum & Pangsa Sektoral (PDRB)")
+    add_body(doc, [
+        ("Tujuh belas sektor KBLI 2020 direklasifikasi menjadi tiga klaster makro berdasarkan relasi hukum hilirisasi nikel (UU No. 3/2020 jo. PP No. 96/2021): ", False, False),
+        ("Klaster Ekstraktif", True, False), (" (Pertambangan B, Industri Logam C24, dan Pengadaan Listrik D), ", False, False),
+        ("Klaster Akar Rumput", True, False), (" (Pertanian, Kehutanan & Perikanan A), serta ", False, False),
+        ("Klaster Jasa & Manufaktur Lain", True, False),
+        (". Pangsa dihitung untuk mengukur ketergantungan monolitik wilayah:", False, False)
+    ])
+    add_formula(doc, "Pangsa Sektor Ekstraktif (%) = [ PDRB Ekstraktif (B + C24 + D) / Total PDRB ] × 100")
 
-# ── KOLOM KIRI ──────────────────────────────────────────────
+    add_h3(doc, "4.2 Dekomposisi Spasial & Rasio Ketimpangan Kabupaten")
+    add_body(doc, [
+        ("Untuk membongkar ilusi agregat provinsi, PDRB didekomposisi ke 13 kabupaten/kota sentra nikel. Di Morowali, dominasi industri pengolahan nikel mencapai Rp157,17 Triliun, menciptakan kesenjangan ekstrim terhadap sektor pangan lokal:", False, False)
+    ])
+    add_formula(doc, "Rasio Kesenjangan Spasial = PDRB Sektor Ekstraktif / PDRB Pertanian Rakyat = 58,21× (Morowali)")
 
-h2(LC, '1', 'Desain Penelitian & Tujuan')
-body(LC, [
-    ('Penelitian ini menggunakan ', False, False),
-    ('desain audit spasial-statistik kuantitatif', True, False),
-    (' untuk membedah ekspansi industri ekstraktif (tambang, smelter, PLTU captive) di enam provinsi Pulau Sulawesi sepanjang ', False, False),
-    ('2014–2024', True, False),
-    (' berbasis data resmi terbuka lintas kementerian/lembaga. Tiga tujuan utama: (1) ', False, False),
-    ('mengukur', True, False),
-    (' dominasi sektor ekstraktif dalam struktur PDRB provinsi dan kabupaten; (2) ', False, False),
-    ('mengidentifikasi', True, False),
-    (' konsentrasi spasial fasilitas smelter, PLTU captive, izin tambang, dan modal PMDN; serta (3) ', False, False),
-    ('menguji', True, False),
-    (' keterkaitan statistik antara tekanan industri dan kehilangan tutupan hutan.', False, False),
-])
+    add_h3(doc, "4.3 Konsentrasi Spasial Kawasan Industri & PLTU Captive Off-Grid")
+    add_body(doc, [
+        ("Konsentrasi kapasitas smelter dan pembangkit listrik captive dihitung menggunakan rasio aglomerasi spasial. Hasil audit menunjukkan 89,06% dari total 9.825 MW kapasitas PLTU batubara off-grid terpusat hanya pada koridor Morowali–Konawe:", False, False)
+    ])
+    add_formula(doc, "Porsi Konsentrasi Sentra (%) = [ Kapasitas Sentra Industri (MW) / Total Kapasitas Se-Sulawesi (MW) ] × 100")
 
-h2(LC, '2', 'Sumber Data & Cakupan')
-body(LC, [
-    ('Seluruh data bersumber dari institusi resmi (', False, False),
-    ('BPS, ESDM/Minerbaone, BKPM, GEM, GFW, KNKT', True, False),
-    (' — diolah CELIOS), mencakup 6 provinsi se-Sulawesi 2014–2024 dan membentuk data panel provinsi-tahun (N = 60) untuk seluruh pengujian statistik.', False, False),
-])
+    add_h3(doc, "4.4 Deret Waktu Perizinan & Laju Alih Ruang Harian")
+    add_body(doc, [
+        ("Akumulasi 574 izin tambang baru seluas 819.452,54 Ha sepanjang 2014–2024 dievaluasi laju pertumbuhannya (lonjakan +246% pasca-2022) dan dikonversi menjadi intensitas konversi ruang per hari:", False, False)
+    ])
+    add_formula(doc, "Laju Alih Ruang Harian = Total Luas Konsesi Tambang Baru (Ha) / 3.650 Hari = 224,51 Ha / Hari")
 
-h2(LC, '3', 'Operasionalisasi Indikator')
-data_table(doc, LC,
-    headers=['#', 'Indikator', 'Institusi Sumber Resmi'],
-    rows=[
-        ('1', 'PDRB Sektoral Provinsi & Kabupaten', 'BPS (Subject 52)'),
-        ('2', 'IUP Tambang Baru & Luas Konsesi',    'ESDM — Minerbaone'),
-        ('3', 'Smelter Nikel (778 unit)',           'ESDM & CGS'),
-        ('4', 'PLTU Captive (9.825 MW)',            'Global Energy Monitor'),
-        ('5', 'Realisasi Investasi PMDN',           'Kement. Investasi/BKPM'),
-        ('6', 'Deforestasi & Driver',               'Global Forest Watch'),
-        ('7', 'Pelabuhan & Terminal Ekspor',        'KNKT · Perpres PSN'),
-    ],
-    col_widths_cm=[0.5, 4.3, 3.0])
+    add_h3(doc, "4.5 Analisis Tabulasi Silang, Uji Chi-Square & Odds Ratio (OR)")
+    add_body(doc, [
+        ("Seluruh observasi panel (N = 60) diklasifikasikan ke dalam matriks kontinjensi 2×2 berbasis ", False, False),
+        ("ambang median (High vs. Low)", True, False),
+        (". Uji Chi-Square independensi (α = 5%) diterapkan untuk membuktikan signifikansi asosiasi, sementara Odds Ratio (OR) mengukur rasio peluang kelipatan risiko degradasi hutan:", False, False)
+    ])
+    add_formula(doc, "χ² = Σ [ (O_ij - E_ij)² / E_ij ]   |   Odds Ratio (OR) = (a × d) / (b × c)")
 
-h2(LC, '6', 'Bagan Alur Desain Penelitian')
-fc_terminal(LC, 'MULAI')
-fc_arrow(LC)
+    table_crosstab = [
+        ["PLTU Captive (Kapasitas MW) → Deforestasi Total", "18,05", "18,0×", "p < 0,001 (Signifikan)", "Risiko deforestasi melonjak 18 kali lipat"],
+        ["IUP Baru (Jumlah Unit) → Deforestasi Alam Primer", "17,24", "13,8×", "p < 0,001 (Signifikan)", "Penerbitan izin memicu kehilangan hutan primer"],
+        ["IUP Baru (Jumlah Unit) → Deforestasi Komoditas", "21,82", "21,4×", "p < 0,001 (Signifikan)", "Tekanan izin tambang memicu alih fungsi terparah"],
+        ["Luas Konsesi (Hektar Ha) → Deforestasi Komoditas", "19,27", "16,0×", "p < 0,001 (Signifikan)", "Korelasi langsung luas konsesi vs bukaan hutan"],
+        ["Investasi PMDN (Triliun Rp) → Deforestasi Komoditas", "2,08", "2,8×", "p = 0,149 (Time-Lag)", "Efek modal tertunda pada fase konstruksi awal"]
+    ]
 
-_BD = {'val': 'single', 'sz': '4', 'color': '333333', 'space': '0'}
+    add_table_styled(
+        doc,
+        headers=["Skenario Uji Hubungan (X → Y)", "Nilai χ²", "Odds Ratio", "Signifikansi (p < 0.05)", "Interpretasi Hubungan Kausalitas"],
+        rows=table_crosstab,
+        col_widths_cm=[4.8, 1.8, 1.8, 3.4, 5.2],
+        alignments=['L', 'C', 'C', 'C', 'L']
+    )
 
-def _phase_cell(c, lbl, ttl, sub):
-    cell_shd(c, 'FFFFFF')
-    cell_margin(c, left=60, right=60, top=40, bottom=40)
-    set_cell_borders(c, top=_BD, left=_BD, bottom=_BD, right=_BD)
-    p0 = c.paragraphs[0]
-    for r in list(p0.runs): r._element.getparent().remove(r._element)
-    p0.paragraph_format.space_before = Pt(0)
-    p0.paragraph_format.space_after  = Pt(0)
-    run(p0, lbl.upper(), bold=True, pt=5.5, color=G_MID)
-    p2 = c.add_paragraph()
-    p2.paragraph_format.space_before = Pt(1)
-    p2.paragraph_format.space_after  = Pt(1)
-    run(p2, ttl, bold=True, pt=7, color=RGBColor(0x1a, 0x1a, 0x1a))
-    p3 = c.add_paragraph()
-    p3.paragraph_format.space_before = Pt(0)
-    p3.paragraph_format.space_after  = Pt(0)
-    run(p3, sub, pt=6.5, color=RGBColor(0x44, 0x44, 0x44))
+    add_h3(doc, "4.6 Pemodelan Alur Rantai Pasok Maritim Ekspor (Kurva Bézier)")
+    add_body(doc, [
+        ("Simpul logistik pelabuhan ekspor diverifikasi melalui triangulasi laporan investigasi KNKT, ketetapan Perpres PSN, dan data emiten tambang. Alur pelayaran curah nikel menuju pasar internasional (Tiongkok, Jepang, Korea Selatan menyerap >78% kargo) dimodelkan secara spasial menggunakan persamaan kurva Bézier kuadratik di atas koordinat bola bumi guna memetakan jalur lalu lintas maritim yang rentan kecelakaan tongkang.", False, False)
+    ])
 
-def _conn_cell(c, char=''):
-    set_cell_borders(c)
-    p0 = c.paragraphs[0]
-    for r in list(p0.runs): r._element.getparent().remove(r._element)
-    p0.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p0.paragraph_format.space_before = Pt(0)
-    p0.paragraph_format.space_after  = Pt(0)
-    if char:
-        run(p0, char, bold=True, pt=9, color=G_MID)
+    # ── 5. KORESPONDENSI METODOLOGI TERHADAP SUB-BAB LAPORAN ────
+    add_h2(doc, "5", "Korespondensi Metodologi terhadap Sub-bab Laporan Bab 1")
+    add_body(doc, [
+        ("Setiap sub-bab analitis pada Bab 1 ditopang oleh metode kuantitatif yang presisi dan menghasilkan luaran visual terstandarisasi sebagaimana dirangkum pada matriks berikut:", False, False)
+    ])
 
-ph_w = int(cw * 0.46)
-cn_w = cw - ph_w * 2
+    table_korespondensi = [
+        ["Sub-bab 1.1", "Struktur Makro PDRB Provinsi", "Reklasifikasi Hukum KBLI, Pangsa Sektoral, Tren Pertumbuhan", "Small Multiples Bar Chart, Tabel Kontribusi Sektor"],
+        ["Sub-bab 1.2", "Kawasan Industri & PLTU Captive", "Analisis Aglomerasi Spasial, Rasio Kapasitas Off-grid", "Peta Sebaran Smelter, Stacked Bar Kapasitas MW"],
+        ["Sub-bab 1.3", "Tren Perizinan Konsesi Tambang", "Deret Waktu Tahunan, Laju Alih Ruang Ha/Hari", "Area Chart Akumulasi Izin & Luas Konsesi"],
+        ["Sub-bab 1.4", "Arus Investasi PMDN & Deforestasi", "Uji Non-parametrik Chi-Square (χ²), Odds Ratio (OR)", "Matriks Tabel Kontinjensi 2×2, Ringkasan Inferensial"],
+        ["Sub-bab 1.5–1.6", "Infrastruktur Logistik & Rantai Pasok", "Triangulasi Dokumen Resmi, Kurva Parametrik Bézier", "Peta Alur Pelayaran Ekspor, Matriks Insiden Maritim"]
+    ]
 
-snake = doc.add_table(rows=4, cols=3)
-snake.autofit = False
-for row_s in snake.rows:
-    row_s.cells[0].width = ph_w
-    row_s.cells[1].width = cn_w
-    row_s.cells[2].width = ph_w
+    add_table_styled(
+        doc,
+        headers=["Sub-bab", "Fokus Kajian Empiris", "Metode Analitis Utama", "Luaran Visual / Statistik"],
+        rows=table_korespondensi,
+        col_widths_cm=[2.4, 4.3, 5.3, 5.0],
+        alignments=['C', 'L', 'L', 'L']
+    )
 
-_phase_cell(snake.cell(0, 0), 'Fase I — Akuisisi',
-    'Pengumpulan & Kurasi Data',
-    'BPS · Minerbaone · BKPM · GEM · GFW  ·  6 provinsi · 2014–2024')
-_conn_cell(snake.cell(0, 1), '→')
-_phase_cell(snake.cell(0, 2), 'Fase II — Klasifikasi',
-    'Reklasifikasi Rantai Pasok Hukum',
-    'UU 3/2020 · PP 96/2021 · Perpres 112/2022 → 3 klaster makro')
+    # ── 6. BAGAN ALUR KERANGKA KERJA RISET BAB 1 ────────────────
+    add_h2(doc, "6", "Bagan Alur Kerangka Kerja Riset (Research Workflow)")
+    add_body(doc, [
+        ("Kerangka kerja operasional metodologi Bab 1 berjalan secara sekuensial melalui empat fase sistematis:", False, False)
+    ])
 
-_conn_cell(snake.cell(1, 0))
-_conn_cell(snake.cell(1, 1))
-_conn_cell(snake.cell(1, 2), '↓')
+    table_workflow = [
+        ["Fase I", "Akuisisi & Kurasi Data", "Pengumpulan basis data resmi terbuka: BPS (PDRB & Keuangan Daerah), ESDM MODI (IUP & Konsesi), GEM (PLTU), BKPM (PMDN), GFW (Deforestasi), KNKT (Logistik)."],
+        ["Fase II", "Reklasifikasi Hukum & Spasial", "Standardisasi klasifikasi ekonomi berbasis mandat regulasi hilirisasi (UU 3/2020 & Perpres 112/2022) menjadi 3 klaster makro serta dekomposisi data ke level kabupaten."],
+        ["Fase III", "Pengujian Statistik Inferensial", "Konstruksi tabel kontinjensi 2×2 berbasis ambang median (Panel N=60), uji independensi Chi-Square (χ²), perhitungan rasio peluang risiko (Odds Ratio), dan uji asosiasi."],
+        ["Fase IV", "Pemodelan Spasial & Sintesis Kebijakan", "Pemodelan geospasial alur pasok maritim dengan kurva Bézier, sintesis disparitas ekonomi makro, serta perumusan bukti empiris dominasi ekstraktif bagi dokumen D3TLH."]
+    ]
 
-_phase_cell(snake.cell(2, 0), 'Fase IV — Sintesis',
-    'Pemetaan Rantai Pasok Ekspor',
-    'KNKT · Perpres PSN · Kurva Bézier · 6 simpul pelabuhan')
-_conn_cell(snake.cell(2, 1), '←')
-_phase_cell(snake.cell(2, 2), 'Fase III — Analisis',
-    'Pengujian Statistik Inferensial',
-    'Chi-Square · Odds Ratio · Panel N=60 · Ambang Median')
+    add_table_styled(
+        doc,
+        headers=["Fase Riset", "Tahapan Metodologis", "Rincian Operasional & Bahan Analisis"],
+        rows=table_workflow,
+        col_widths_cm=[2.0, 4.5, 10.5],
+        alignments=['C', 'L', 'L']
+    )
 
-_conn_cell(snake.cell(3, 0), '↓')
-_conn_cell(snake.cell(3, 1))
-_conn_cell(snake.cell(3, 2))
+    # Box Output Kesimpulan
+    p_box = doc.add_paragraph()
+    p_box.paragraph_format.space_before = Pt(4)
+    p_box.paragraph_format.space_after  = Pt(4)
+    all_border_para(p_box, color='1B5E20', sz='8')
+    para_shd(p_box, 'F1F8E9')
+    add_run(p_box, "LUARAN KUNCI METODOLOGIS BAB 1:\n", bold=True, pt=8.5, color=G_DARK)
+    add_run(p_box, "1. Dominasi Sektoral Ekstraktif: Klaster ekstraktif menguasai hingga 55,85% PDRB Sulteng dan 58,21× pertanian Morowali.\n"
+                   "2. Konsentrasi Spasial Ekstrem: 89,06% kapasitas PLTU captive batubara (9.825 MW) terkunci di koridor Morowali–Konawe.\n"
+                   "3. Kausalitas Signifikan: Penerbitan izin tambang baru terbukti meningkatkan risiko kehilangan hutan hingga 21,4× lipat (p < 0,001).",
+            pt=8, color=C_BODY)
 
-doc.element.body.remove(snake._tbl)
-LC._tc.append(snake._tbl)
+    add_note_box(doc, (
+        "Catatan Metodologis: Seluruh analisis statistik kuantitatif dalam dokumen ini dijalankan pada matriks data panel "
+        "provinsi-tahun (N = 60 observasi) dan kabupaten sentra industri. Angka komputasi dan sebaran spasial terperinci "
+        "terintegrasi penuh pada naskah laporan Bab 1 dan antarmuka interaktif dashboard CELIOS."
+    ))
 
-fc_terminal(LC,
-    'Dominasi Ekstraktif PDRB  ·  Konsentrasi Spasial Industri  ·  Risiko Deforestasi hingga 21× (Signifikan)',
-    is_output=True)
+    # ── SIMPAN DOKUMEN DOCX (DUAL SAVE) ─────────────────────────
+    out_dir_compact = Path(__file__).resolve().parent
+    out_dir_bab1    = out_dir_compact.parent.parent / "bab_1"
 
-# ── KOLOM KANAN ─────────────────────────────────────────────
+    docx_compact = out_dir_compact / "Metodologi_Bab1_Ekspansi_Industri_Compact.docx"
+    docx_bab1    = out_dir_bab1 / "Metodologi_Bab1_Ekspansi_Industri_Compact.docx"
+    
+    doc.save(str(docx_compact))
+    shutil.copyfile(docx_compact, docx_bab1)
+    print(f"  [OK] Tersimpan DOCX: {docx_compact}")
+    print(f"  [OK] Salinan DOCX : {docx_bab1}")
 
-h2(RC, '4', 'Kerangka Analisis')
+    # ── GENERATE MARKDOWN PADANAN ───────────────────────────────
+    print("[2/3] Membangun dokumen Markdown padanan...")
+    MD_CONTENT = """# METODOLOGI PENELITIAN: BAB 1 — EKSPANSI INDUSTRI EKSTRAKTIF DAN INFRASTRUKTUR PENUNJANG DI PULAU SULAWESI
+*CELIOS (Center of Economic and Law Studies) · Audit Spasial-Statistik D3TLH Sulawesi (2014–2024) · Ringkasan Eksekutif Metodologis*
 
-h3(RC, '4.1  Reklasifikasi Rantai Pasok Hukum (PDRB)')
-body(RC, [
-    ('Tujuh belas sektor KBLI 2020 direklasifikasi menjadi tiga klaster berbasis mandat hukum: ', False, False),
-    ('Ekstraktif', True, False),
-    (' (pertambangan, smelter, listrik PLTU), ', False, False),
-    ('Akar Rumput', True, False),
-    (' (pertanian-perikanan), dan ', False, False),
-    ('Jasa & Lainnya', True, False),
-    ('. Hasil kunci: klaster ekstraktif menguasai 55,85% PDRB Sulawesi Tengah 2024, tumbuh 7,4× dalam satu dekade.', False, False),
-])
-formula(RC, 'Pangsa Ekstraktif (%) = ( PDRB Ekstraktif ÷ Total PDRB ) × 100')
-
-h3(RC, '4.2  Dekomposisi Spasial Kabupaten')
-body(RC, [
-    ('Pemecahan PDRB ke level 13 kabupaten/kota membongkar ', False, False),
-    ('bias ilusi agregat', False, True),
-    (': sektor ekstraktif Morowali (Rp157,17 T) melampaui gabungan 8 kabupaten non-sentra, sementara pertanian rakyatnya tersisa 0,78%.', False, False),
-])
-formula(RC, 'Rasio Kesenjangan = Ekstraktif ÷ Pertanian Rakyat = 58,21× (Morowali)')
-
-h3(RC, '4.3  Konsentrasi Kawasan Industri & PLTU Captive')
-body(RC, [
-    ('Analisis spasial deskriptif memetakan pemusatan ', False, False),
-    ('778 smelter', True, False),
-    (' dan ', False, False),
-    ('9.825 MW PLTU captive batu bara off-grid', True, False),
-    (' — 89,06% daya terkunci hanya di koridor Morowali–Konawe.', False, False),
-])
-formula(RC, 'Porsi Konsentrasi (%) = ( Kapasitas Sentra ÷ Total Sulawesi ) × 100')
-
-h3(RC, '4.4  Tren Perizinan & Laju Alih Ruang')
-body(RC, [
-    ('Deret waktu ', False, False),
-    ('574 IUP baru (819.452 Ha)', True, False),
-    (' dianalisis dengan laju pertumbuhan tahunan — melonjak +246% pada 2022–2024 — lalu dikonversi menjadi laju alih fungsi ruang harian.', False, False),
-])
-formula(RC, 'Laju Alih Ruang = 819.452,54 Ha ÷ 3.650 Hari = 224,51 Ha/Hari')
-
-h3(RC, '4.5  Tabulasi Silang & Uji Hipotesis')
-body(RC, [
-    ('Panel provinsi-tahun (N=60) dikategorikan Tinggi/Rendah pada ', False, False),
-    ('ambang median', True, False),
-    (', lalu diuji ', False, False),
-    ('Chi-Square independensi', True, False),
-    (' (α = 5%) dan ', False, False),
-    ('odds ratio', True, False),
-    (' untuk mengukur arah serta kelipatan risiko tekanan industri terhadap deforestasi.', False, False),
-])
-formula(RC, 'χ² = Jumlah( (Observasi − Harapan)² ÷ Harapan )   ·   OR = (a×d) ÷ (b×c)')
-data_table(doc, RC,
-    headers=['Skenario Uji (X → Y)', 'χ²', 'OR', 'Hasil'],
-    rows=[
-        ('PLTU Captive → Deforestasi',      '18,05', '18,0×', 'Signifikan'),
-        ('IUP Baru → Deforestasi Alam',      '17,24', '13,8×', 'Signifikan'),
-        ('IUP Baru → Def. Komoditas',        '21,82', '21,4×', 'Signifikan'),
-        ('Luas Konsesi → Def. Komoditas',    '19,27', '16,0×', 'Signifikan'),
-        ('PMDN → Def. Komoditas',            '2,08',  '2,8×',  'Tidak (time-lag)'),
-    ],
-    col_widths_cm=[3.6, 1.0, 1.0, 2.2])
-
-h3(RC, '4.6  Pemetaan Rantai Pasok Logistik Ekspor')
-body(RC, [
-    ('Enam simpul pelabuhan ekspor nikel diverifikasi melalui triangulasi ', False, False),
-    ('Laporan KNKT, regulasi PSN (Perpres 109/2020), dan laporan emiten', True, False),
-    ('; alur pelayaran menuju Tiongkok–Jepang–Korea (>78% kargo) dimodelkan dengan kurva Bézier di permukaan bumi.', False, False),
-])
-
-h2(RC, '5', 'Korespondensi Sub-bab — Metode')
-data_table(doc, RC,
-    headers=['Sub-bab', 'Metode Utama'],
-    rows=[
-        ('1.1 Konteks Makro PDRB',      'Reklasifikasi hukum, pangsa sektor, laju pertumbuhan'),
-        ('1.2 Kawasan Industri & PLTU', 'Analisis spasial, crosstab χ², odds ratio'),
-        ('1.3 Tren Izin Tambang',       'Deret waktu, laju alih ruang, uji signifikansi'),
-        ('1.4 Investasi PMDN',          'Konsentrasi modal, atribusi driver deforestasi'),
-        ('1.5–1.6 Logistik Nikel', 'Triangulasi dokumen, kurva Bézier, pemetaan rute'),
-    ],
-    col_widths_cm=[2.9, 4.9])
-
-note_box(RC, (
-    'Seluruh prosedur statistik diterapkan pada data panel provinsi-tahun '
-    '(N = 60; 6 provinsi × 10 tahun) kecuali dinyatakan lain. Angka empiris '
-    'lengkap per indikator tersaji pada dokumen metodologi utuh Bab 1 (diolah CELIOS).'
-))
-
-# ── Simpan (dual save) ──────────────────────────────────────
-out_dir_compact = Path(__file__).resolve().parent
-out_dir_bab1    = out_dir_compact.parent.parent / "bab_1"
-
-docx_compact = out_dir_compact / "Metodologi_Bab1_Ekspansi_Industri_Compact.docx"
-docx_bab1    = out_dir_bab1 / "Metodologi_Bab1_Ekspansi_Industri_Compact.docx"
-doc.save(str(docx_compact))
-shutil.copyfile(docx_compact, docx_bab1)
-print(f"[OK] DOCX: {docx_compact}")
-print(f"[OK] Salinan: {docx_bab1}")
-
-# ── Naskah Markdown padanan ─────────────────────────────────
-MD = """# METODOLOGI PENELITIAN — BAB 1: EKSPANSI INDUSTRI EKSTRAKTIF DAN INFRASTRUKTUR PENUNJANG DI PULAU SULAWESI
-*CELIOS — Center of Economic and Law Studies · Riset D3TLH Sulawesi · 2014–2024*
+---
 
 ## 1. Desain Penelitian & Tujuan
-Penelitian ini menggunakan **desain audit spasial-statistik kuantitatif** untuk membedah ekspansi industri ekstraktif (tambang, smelter, PLTU captive) di enam provinsi Pulau Sulawesi sepanjang **2014–2024** berbasis data resmi terbuka lintas kementerian/lembaga. Tiga tujuan utama: (1) **mengukur** dominasi sektor ekstraktif dalam struktur PDRB provinsi dan kabupaten; (2) **mengidentifikasi** konsentrasi spasial fasilitas smelter, PLTU captive, izin tambang, dan modal PMDN; serta (3) **menguji** keterkaitan statistik antara tekanan industri dan kehilangan tutupan hutan.
+Penelitian ini menggunakan **desain audit spasial-statistik kuantitatif terintegrasi** untuk membedah akselerasi ekspansi industri ekstraktif (tambang nikel, fasilitas pemurnian smelter, dan kawasan industri bertenaga PLTU captive batubara) di enam provinsi Pulau Sulawesi sepanjang satu dekade (**2014–2024**). Riset ini memanfaatkan data tabular panel resmi lintas kementerian dan lembaga yang disinkronkan secara spasial untuk mengatasi bias perataan makro. Tiga tujuan utama riset meliputi:
 
-## 2. Sumber Data & Cakupan
-Seluruh data bersumber dari institusi resmi — **BPS, Kementerian ESDM (MODI/Minerbaone), Kementerian Investasi/BKPM, Global Energy Monitor, Global Forest Watch (University of Maryland), dan KNKT** — diolah CELIOS. Cakupan: 6 provinsi se-Sulawesi, dekade 2014–2024, membentuk data panel provinsi-tahun (N = 60 observasi) untuk seluruh pengujian statistik.
+1. **Mengukur Derajat Dominasi Sektoral:** Mendekomposisi struktur PDRB provinsi dan kabupaten guna membuktikan pergeseran monolitik menuju sektor ekstraktif mengorbankan ekonomi pertanian rakyat.
+2. **Memetakan Konsentrasi Spasial Klaster Industri:** Mengidentifikasi pengelompokan geografis 778 smelter, 9.825 MW PLTU captive, serta 574 izin tambang nikel baru seluas 819.452 Ha.
+3. **Menguji Kausalitas Tekanan Industri vs Deforestasi:** Membuktikan secara inferensial signifikansi hubungan antara ekspansi pertambangan/energi dengan laju kehilangan tutupan hutan alam primer dan komoditas.
 
-## 3. Operasionalisasi Indikator
-| # | Indikator | Institusi Sumber Resmi |
-| :---: | :--- | :--- |
-| 1 | PDRB Sektoral Provinsi & Kabupaten | BPS (Subject 52) |
-| 2 | IUP Tambang Baru & Luas Konsesi | ESDM — Minerbaone |
-| 3 | Smelter Nikel (778 unit) | ESDM & CGS |
-| 4 | PLTU Captive (9.825 MW) | Global Energy Monitor |
-| 5 | Realisasi Investasi PMDN | Kement. Investasi/BKPM |
-| 6 | Deforestasi & Driver | Global Forest Watch |
-| 7 | Pelabuhan & Terminal Ekspor | KNKT · Perpres PSN |
+---
 
-## 4. Kerangka Analisis
+## 2. Sumber Data & Cakupan Wilayah
+Riset ini bersandar secara ketat pada data sekunder resmi dari otoritas statistik, kementerian teknis, dan lembaga pemantau global independen yang telah melalui audit konsistensi: **Badan Pusat Statistik (BPS)** (Subject 52 PDRB Lapangan Usaha & Keuangan Daerah), **Kementerian ESDM** (MODI Minerbaone & Database Smelter CGS), **Kementerian Investasi / BKPM** (Realisasi PMDN Sektoral), **Global Energy Monitor (GEM)** (Coal Plant Tracker), **Global Forest Watch / Hansen UMD** (Tree Cover Loss & Commodity Drivers), serta **Komite Nasional Keselamatan Transportasi (KNKT)** dan Perpres PSN (Simpul Logistik Maritim). Seluruh observasi dihimpun dalam struktur **data panel provinsi-tahun (N = 60 observasi: 6 provinsi × 10 tahun)** untuk menjamin validitas pengujian parametrik dan non-parametrik.
 
-### 4.1 Reklasifikasi Rantai Pasok Hukum (PDRB)
-Tujuh belas sektor KBLI 2020 direklasifikasi menjadi tiga klaster berbasis mandat hukum: **Ekstraktif** (pertambangan, smelter, listrik PLTU), **Akar Rumput** (pertanian-perikanan), dan **Jasa & Lainnya**. Hasil kunci: klaster ekstraktif menguasai 55,85% PDRB Sulawesi Tengah 2024, tumbuh 7,4× dalam satu dekade.
+---
 
-> `Pangsa Ekstraktif (%) = ( PDRB Ekstraktif ÷ Total PDRB ) × 100`
+## 3. Operasionalisasi 10 Indikator Empiris (Tabel 1.8)
+Seluruh variabel kuantitatif, kategori analisis, satuan ukur, periode observasi, dan institusi primer resmi yang digunakan dalam Bab 1 disajikan secara komprehensif pada **Tabel 1.8** berikut:
 
-### 4.2 Dekomposisi Spasial Kabupaten
-Pemecahan PDRB ke level 13 kabupaten/kota membongkar *bias ilusi agregat*: sektor ekstraktif Morowali (Rp157,17 T) melampaui gabungan 8 kabupaten non-sentra, sementara pertanian rakyatnya tersisa 0,78%.
+##### Tabel 1.8: Matriks Indikator dan Sumber Data Primer Resmi Bab 1
+| # | Nama Indikator Empiris | Kategori Analisis | Satuan | Periode | Institusi & Sumber Data Resmi |
+| :---: | :--- | :--- | :---: | :---: | :--- |
+| 1 | Izin Usaha Pertambangan (IUP) Baru | Faktor Tekanan Ekstraktif | Unit Izin | 2014–2024 | Data Registry ESDM MODI (Minerbaone) |
+| 2 | Luas Wilayah Konsesi Tambang Baru | Faktor Tekanan Ekstraktif | Hektar (Ha) | 2014–2024 | Data Registry ESDM MODI (Minerbaone) |
+| 3 | Kapasitas Terpasang PLTU Captive | Infrastruktur Energi Khusus | Megawatt (MW) | 2014–2024 | Global Energy Monitor (GEM Tracker) |
+| 4 | Fasilitas Smelter Nikel | Fasilitas Industri Hilir | Unit Fasilitas | 2014–2024 | Database Smelter CGS & ESDM MODI |
+| 5 | Realisasi Investasi PMDN & Nikel | Arus Modal Domestik | Triliun Rp | 2016–2024 | API BPS & Kementerian Investasi / BKPM |
+| 6 | PDRB Provinsi (Ekstraktif vs Akar Rumput) | Struktur Ekonomi Makro | Triliun Rp | 2016–2024 | API BPS (Subject 52: PDRB Lapangan Usaha) |
+| 7 | PDRB Kabupaten Sentra Tambang | Struktur Ekonomi Daerah | Triliun Rp | 2016–2024 | API BPS (Subject 52 Kabupaten/Kota) |
+| 8 | Pendapatan Asli Daerah (PAD) & Pajak | Kapasitas Fiskal Daerah | Triliun Rp | 2016–2024 | API BPS (Statistik Keuangan Daerah) |
+| 9 | Luas Total Deforestasi Alam & Komoditas | Dampak Ekologis Lanskap | Hektar (Ha) | 2014–2023 | Global Forest Watch (GFW API / Hansen UMD) |
+| 10 | Simpul Pelabuhan & Terminal Logistik Ekspor | Infrastruktur Rantai Pasok | Titik & DWT | 2014–2024 | KNKT, Regulasi Perpres PSN & Korporasi |
 
-> `Rasio Kesenjangan = Ekstraktif ÷ Pertanian Rakyat = 58,21× (Morowali)`
+---
 
-### 4.3 Konsentrasi Kawasan Industri & PLTU Captive
-Analisis spasial deskriptif memetakan pemusatan **778 smelter** dan **9.825 MW PLTU captive batu bara off-grid** — 89,06% daya terkunci hanya di koridor Morowali–Konawe.
+## 4. Kerangka Analisis & Formulasi Matematis
 
-> `Porsi Konsentrasi (%) = ( Kapasitas Sentra ÷ Total Sulawesi ) × 100`
+### 4.1 Reklasifikasi Rantai Pasok Hukum & Pangsa Sektoral (PDRB)
+Tujuh belas sektor KBLI 2020 direklasifikasi menjadi tiga klaster makro berdasarkan relasi hukum hilirisasi nikel (UU No. 3/2020 jo. PP No. 96/2021): **Klaster Ekstraktif** (Pertambangan B, Industri Logam C24, dan Pengadaan Listrik D), **Klaster Akar Rumput** (Pertanian, Kehutanan & Perikanan A), serta **Klaster Jasa & Manufaktur Lain**. Pangsa dihitung untuk mengukur ketergantungan monolitik wilayah:
 
-### 4.4 Tren Perizinan & Laju Alih Ruang
-Deret waktu **574 IUP baru (819.452 Ha)** dianalisis dengan laju pertumbuhan tahunan — melonjak +246% pada 2022–2024 — lalu dikonversi menjadi laju alih fungsi ruang harian.
+> `Pangsa Sektor Ekstraktif (%) = [ PDRB Ekstraktif (B + C24 + D) / Total PDRB ] × 100`
 
-> `Laju Alih Ruang = 819.452,54 Ha ÷ 3.650 Hari = 224,51 Ha/Hari`
+### 4.2 Dekomposisi Spasial & Rasio Ketimpangan Kabupaten
+Untuk membongkar ilusi agregat provinsi, PDRB didekomposisi ke 13 kabupaten/kota sentra nikel. Di Morowali, dominasi industri pengolahan nikel mencapai Rp157,17 Triliun, menciptakan kesenjangan ekstrim terhadap sektor pangan lokal:
 
-### 4.5 Tabulasi Silang & Uji Hipotesis
-Panel provinsi-tahun (N=60) dikategorikan Tinggi/Rendah pada **ambang median**, lalu diuji **Chi-Square independensi** (α = 5%) dan **odds ratio** untuk mengukur arah serta kelipatan risiko tekanan industri terhadap deforestasi.
+> `Rasio Kesenjangan Spasial = PDRB Sektor Ekstraktif / PDRB Pertanian Rakyat = 58,21× (Morowali)`
 
-> `χ² = Jumlah( (Observasi − Harapan)² ÷ Harapan )   ·   OR = (a×d) ÷ (b×c)`
+### 4.3 Konsentrasi Spasial Kawasan Industri & PLTU Captive Off-Grid
+Konsentrasi kapasitas smelter dan pembangkit listrik captive dihitung menggunakan rasio aglomerasi spasial. Hasil audit menunjukkan 89,06% dari total 9.825 MW kapasitas PLTU batubara off-grid terpusat hanya pada koridor Morowali–Konawe:
 
-| Skenario Uji (X → Y) | χ² | OR | Hasil |
-| :--- | :---: | :---: | :--- |
-| PLTU Captive → Deforestasi | 18,05 | 18,0× | Signifikan |
-| IUP Baru → Deforestasi Alam | 17,24 | 13,8× | Signifikan |
-| IUP Baru → Def. Komoditas | 21,82 | 21,4× | Signifikan |
-| Luas Konsesi → Def. Komoditas | 19,27 | 16,0× | Signifikan |
-| PMDN → Def. Komoditas | 2,08 | 2,8× | Tidak (time-lag) |
+> `Porsi Konsentrasi Sentra (%) = [ Kapasitas Sentra Industri (MW) / Total Kapasitas Se-Sulawesi (MW) ] × 100`
 
-### 4.6 Pemetaan Rantai Pasok Logistik Ekspor
-Enam simpul pelabuhan ekspor nikel diverifikasi melalui triangulasi **Laporan KNKT, regulasi PSN (Perpres 109/2020), dan laporan emiten**; alur pelayaran menuju Tiongkok–Jepang–Korea (>78% kargo) dimodelkan dengan kurva Bézier di permukaan bumi.
+### 4.4 Deret Waktu Perizinan & Laju Alih Ruang Harian
+Akumulasi 574 izin tambang baru seluas 819.452,54 Ha sepanjang 2014–2024 dievaluasi laju pertumbuhannya (lonjakan +246% pasca-2022) dan dikonversi menjadi intensitas konversi ruang per hari:
 
-## 5. Korespondensi Sub-bab — Metode
-| Sub-bab | Metode Utama |
-| :--- | :--- |
-| 1.1 Konteks Makro PDRB | Reklasifikasi hukum, pangsa sektor, laju pertumbuhan |
-| 1.2 Kawasan Industri & PLTU | Analisis spasial, crosstab χ², odds ratio |
-| 1.3 Tren Izin Tambang | Deret waktu, laju alih ruang, uji signifikansi |
-| 1.4 Investasi PMDN | Konsentrasi modal, atribusi driver deforestasi |
-| 1.5–1.6 Logistik Nikel | Triangulasi dokumen, kurva Bézier, pemetaan rute |
+> `Laju Alih Ruang Harian = Total Luas Konsesi Tambang Baru (Ha) / 3.650 Hari = 224,51 Ha / Hari`
 
-## 6. Bagan Alur Desain Penelitian
-MULAI → **Fase I — Akuisisi** (BPS · Minerbaone · BKPM · GEM · GFW; 6 provinsi, 2014–2024) → **Fase II — Klasifikasi** (UU 3/2020 · PP 96/2021 · Perpres 112/2022 → 3 klaster makro) → **Fase III — Analisis** (Chi-Square · Odds Ratio · Panel N=60 · Ambang Median) → **Fase IV — Sintesis** (KNKT · Perpres PSN · Kurva Bézier · 6 simpul pelabuhan) → **KELUARAN: Dominasi Ekstraktif PDRB · Konsentrasi Spasial Industri · Risiko Deforestasi hingga 21× (Signifikan)**
+### 4.5 Analisis Tabulasi Silang, Uji Chi-Square & Odds Ratio (OR)
+Seluruh observasi panel (N = 60) diklasifikasikan ke dalam matriks kontinjensi 2×2 berbasis **ambang median (High vs. Low)**. Uji Chi-Square independensi (α = 5%) diterapkan untuk membuktikan signifikansi asosiasi, sementara Odds Ratio (OR) mengukur rasio peluang kelipatan risiko degradasi hutan:
 
-> *Seluruh prosedur statistik diterapkan pada data panel provinsi-tahun (N = 60; 6 provinsi × 10 tahun) kecuali dinyatakan lain. Angka empiris lengkap per indikator tersaji pada dokumen metodologi utuh Bab 1 (diolah CELIOS).*
+> `χ² = Σ [ (O_ij - E_ij)² / E_ij ]   |   Odds Ratio (OR) = (a × d) / (b × c)`
+
+##### Tabel 1.8.B: Ringkasan Hasil Uji Inferensial Chi-Square & Odds Ratio Bab 1
+| Skenario Uji Hubungan (X → Y) | Nilai χ² | Odds Ratio | Signifikansi (p < 0.05) | Interpretasi Hubungan Kausalitas |
+| :--- | :---: | :---: | :---: | :--- |
+| PLTU Captive (Kapasitas MW) → Deforestasi Total | 18,05 | 18,0× | p < 0,001 (Signifikan) | Risiko deforestasi melonjak 18 kali lipat |
+| IUP Baru (Jumlah Unit) → Deforestasi Alam Primer | 17,24 | 13,8× | p < 0,001 (Signifikan) | Penerbitan izin memicu kehilangan hutan primer |
+| IUP Baru (Jumlah Unit) → Deforestasi Komoditas | 21,82 | 21,4× | p < 0,001 (Signifikan) | Tekanan izin tambang memicu alih fungsi terparah |
+| Luas Konsesi (Hektar Ha) → Deforestasi Komoditas | 19,27 | 16,0× | p < 0,001 (Signifikan) | Korelasi langsung luas konsesi vs bukaan hutan |
+| Investasi PMDN (Triliun Rp) → Deforestasi Komoditas | 2,08 | 2,8× | p = 0,149 (Time-Lag) | Efek modal tertunda pada fase konstruksi awal |
+
+### 4.6 Pemodelan Alur Rantai Pasok Maritim Ekspor (Kurva Bézier)
+Simpul logistik pelabuhan ekspor diverifikasi melalui triangulasi laporan investigasi KNKT, ketetapan Perpres PSN, dan data emiten tambang. Alur pelayaran curah nikel menuju pasar internasional (Tiongkok, Jepang, Korea Selatan menyerap >78% kargo) dimodelkan secara spasial menggunakan persamaan kurva Bézier kuadratik di atas koordinat bola bumi guna memetakan jalur lalu lintas maritim yang rentan kecelakaan tongkang.
+
+---
+
+## 5. Korespondensi Metodologi terhadap Sub-bab Laporan Bab 1
+Setiap sub-bab analitis pada Bab 1 ditopang oleh metode kuantitatif yang presisi dan menghasilkan luaran visual terstandarisasi sebagaimana dirangkum pada matriks berikut:
+
+##### Tabel 1.9: Matriks Korespondensi Sub-bab terhadap Metode Analitis
+| Sub-bab | Fokus Kajian Empiris | Metode Analitis Utama | Luaran Visual / Statistik |
+| :---: | :--- | :--- | :--- |
+| **Sub-bab 1.1** | Struktur Makro PDRB Provinsi | Reklasifikasi Hukum KBLI, Pangsa Sektoral, Tren Pertumbuhan | Small Multiples Bar Chart, Tabel Kontribusi Sektor |
+| **Sub-bab 1.2** | Kawasan Industri & PLTU Captive | Analisis Aglomerasi Spasial, Rasio Kapasitas Off-grid | Peta Sebaran Smelter, Stacked Bar Kapasitas MW |
+| **Sub-bab 1.3** | Tren Perizinan Konsesi Tambang | Deret Waktu Tahunan, Laju Alih Ruang Ha/Hari | Area Chart Akumulasi Izin & Luas Konsesi |
+| **Sub-bab 1.4** | Arus Investasi PMDN & Deforestasi | Uji Non-parametrik Chi-Square (χ²), Odds Ratio (OR) | Matriks Tabel Kontinjensi 2×2, Ringkasan Inferensial |
+| **Sub-bab 1.5–1.6** | Infrastruktur Logistik & Rantai Pasok | Triangulasi Dokumen Resmi, Kurva Parametrik Bézier | Peta Alur Pelayaran Ekspor, Matriks Insiden Maritim |
+
+---
+
+## 6. Bagan Alur Kerangka Kerja Riset (Research Workflow)
+
+```mermaid
+flowchart LR
+    subgraph F1["Fase I: Akuisisi Data"]
+        A1["Kurasi Data Resmi Terbuka<br/><i>BPS, ESDM, GEM, BKPM, GFW, KNKT</i>"]
+        A2["Panel Provinsi-Tahun<br/><i>6 Provinsi Se-Sulawesi (N=60)</i>"]
+    end
+    subgraph F2["Fase II: Reklasifikasi"]
+        B1["Reklasifikasi Rantai Pasok Hukum<br/><i>UU 3/2020 & Perpres 112/2022</i>"]
+        B2["Dekomposisi Spasial<br/><i>13 Kabupaten Sentra Tambang</i>"]
+    end
+    subgraph F3["Fase III: Uji Statistik"]
+        C1["Tabel Kontinjensi 2×2<br/><i>Ambang Median High vs Low</i>"]
+        C2["Uji Chi-Square & Odds Ratio<br/><i>Signifikansi & Kelipatan Risiko</i>"]
+    end
+    subgraph F4["Fase IV: Pemodelan & Sintesis"]
+        D1["Pemodelan Rantai Pasok Ekspor<br/><i>Kurva Bézier 6 Pelabuhan</i>"]
+        D2["Bukti Kausalitas D3TLH<br/><i>Dominasi Ekstraktif & Deforestasi</i>"]
+    end
+    F1 --> F2 --> F3 --> F4
+```
+
+> **LUARAN KUNCI METODOLOGIS BAB 1:**  
+> 1. **Dominasi Sektoral Ekstraktif:** Klaster ekstraktif menguasai hingga 55,85% PDRB Sulteng dan 58,21× pertanian Morowali.  
+> 2. **Konsentrasi Spasial Ekstrem:** 89,06% kapasitas PLTU captive batubara (9.825 MW) terkunci di koridor Morowali–Konawe.  
+> 3. **Kausalitas Signifikan:** Penerbitan izin tambang baru terbukti meningkatkan risiko kehilangan hutan hingga 21,4× lipat (p < 0,001).
+
+> *Catatan Metodologis: Seluruh analisis statistik kuantitatif dalam dokumen ini dijalankan pada matriks data panel provinsi-tahun (N = 60 observasi) dan kabupaten sentra industri. Angka komputasi dan sebaran spasial terperinci terintegrasi penuh pada naskah laporan Bab 1 dan antarmuka interaktif dashboard CELIOS.*
 """
 
-md_compact = out_dir_compact / "Metodologi_Bab1_Ekspansi_Industri_Compact.md"
-md_bab1    = out_dir_bab1 / "Metodologi_Bab1_Ekspansi_Industri_Compact.md"
-for pth in [md_compact, md_bab1]:
-    with open(pth, "w", encoding="utf-8") as f:
-        f.write(MD)
-print(f"[OK] MD: {md_compact}")
-print(f"[OK] Salinan: {md_bab1}")
+    md_compact = out_dir_compact / "Metodologi_Bab1_Ekspansi_Industri_Compact.md"
+    md_bab1    = out_dir_bab1 / "Metodologi_Bab1_Ekspansi_Industri_Compact.md"
+    for pth in [md_compact, md_bab1]:
+        with open(pth, "w", encoding="utf-8") as f:
+            f.write(MD_CONTENT)
+    print(f"  [OK] Tersimpan MD  : {md_compact}")
+    print(f"  [OK] Salinan MD   : {md_bab1}")
+
+    print("[3/3] Selesai menghasilkan dokumen metodologi Bab 1 versi compact (1-Kolom, 2-3 Halaman).")
+
+
+if __name__ == "__main__":
+    generate_bab1_compact()
