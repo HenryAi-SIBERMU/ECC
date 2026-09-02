@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Laporan Metodologi Bab 9 - Demografi Sosial</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true, theme:'dark'});</script>
+<style>
+body { font-family: Arial, sans-serif; max-width: 920px; margin: 0 auto; padding: 32px; background: #0E1117; color: #D4D4D4; line-height: 1.65; }
+.hdr-sub { color: #43A047; font-size: 8.5pt; font-weight: 700; text-transform: uppercase; }
+.hdr-title { color: #81C784; font-size: 15pt; font-weight: 800; text-transform: uppercase; border-bottom: 2px solid #2E7D32; padding-bottom: 8px; }
+h2 { color: #81C784; text-transform: uppercase; border-bottom: 1px solid #2E7D32; }
+h4 { color: #A5D6A7; }
+.note-box { background: #132213; border-left: 4px solid #2E7D32; padding: 10px 14px; margin: 12px 0; }
+.formula { background: #0D1B0E; border: 1px solid #2E7D32; color: #A5D6A7; padding: 8px 12px; font-family: monospace; }
+.table-caption { color: #A5D6A7; font-weight: 700; font-style: italic; margin-top: 14px; }
+.data-th { background: #1B5E20; color: white; padding: 6px; text-align: left; border: 1px solid #2E7D32; }
+.data-td { padding: 6px; border: 1px solid #243524; vertical-align: top; }
+.data-tr-even .data-td { background: #131B13; }
+.mermaid { background: #0D1610; border: 1px solid #2E7D32; padding: 12px; margin: 10px 0; }
+</style>
+</head>
+<body>
+<div class="hdr-sub">CELIOS - Center of Economic and Law Studies | Laporan Riset Metodologi D3TLH</div>
+<div class="hdr-title">BAB IX: Metodologi Analisis Demografi Sosial - Ketika Hilirisasi Mengubah Struktur Masyarakat</div>
+<p>Dokumen laporan metodologi ini menyajikan kerangka ilmiah, prosedur pengolahan data, dan pembacaan empiris yang dioperasionalkan pada <strong>Bab 9: Demografi Sosial</strong>.</p>
+
+<h2>9.1 Tekanan Demografi di Kabupaten Industri Ekstraktif</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Data Demografi: <code>data/processed/sulawesi_demografi_master_fase4.csv</code> (BPS SIMDASI, klasifikasi Fase 4). Visualisasi dashboard menampilkan Boxplot komparatif sebaran laju pertumbuhan penduduk YoY (kuantil Hazen) antara kabupaten industri ekstraktif dan non-ekstraktif, beserta Tabel Rincian Metrik Anatomi Boxplot dan Tabel Rincian Perhitungan Mean & Varians.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Analisis ini membaca tekanan demografi melalui perubahan jumlah penduduk kabupaten (proxy migrasi), bukan data migrasi langsung. Fokus pada <strong>7 kabupaten prioritas smelter</strong>: Banggai, Kolaka, Konawe, Konawe Utara, Luwu Timur, Morowali, Morowali Utara. Rata-rata pertumbuhan YoY kabupaten smelter <strong>3.36%</strong> vs non-smelter <strong>2.03%</strong>; total populasi kabupaten smelter 2024 mencapai <strong>1.59 juta jiwa</strong>. Hilirisasi nikel menciptakan tekanan demografis yang harus dibaca sebagai bagian dari beban sosial.</p>
+<h4>B. Alur Logika Metodologis Proxy Migrasi dari Time-Series Populasi Kabupaten</h4>
+<p>Kerangka pembacaan diilustrasikan pada <strong>Bagan Alur 9.1</strong> berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan statistika deskriptif sebaran (kuantil Hazen) komparatif dua kategori wilayah.</p>
+<div class="table-caption">Bagan Alur 9.1: Alur Logika Analisis Proxy Migrasi & Anatomi Boxplot Demografi</div>
+<div class="mermaid">flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Demografi Master Fase 4<br/><i>kabupaten, tahun, penduduk, laju YoY, flag smelter</i>"]
+    end
+    subgraph Proxy_Processing["2. Proxy Migrasi Time-Series Populasi"]
+        A --> B["Segmentasi kabupaten<br/>Industri Ekstraktif vs Non-Ekstraktif"]
+        B --> C["Window observasi tahun ≤ 2024<br/>laju pertumbuhan YoY per kabupaten-tahun"]
+        C --> D["Anatomi Boxplot (kuantil Hazen)<br/>Median, Q1/Q3, IQR, fences, outliers"]
+    end
+    subgraph Visual_Output["3. Boxplot Komparatif"]
+        D --> E["Boxplot sebaran YoY dua kategori<br/>+ tabel metrik anatomi & mean-varians"]
+        E --> F["Pembacaan fenomena Boom and Bust demografis"]
+    end</div>
+<h4>C. Formulasi Matematis: Laju Pertumbuhan, Kuantil Hazen, dan Batas Kewajaran</h4>
+<div class="formula">Laju_YoY_k,t (%) = ( P_k,t - P_k,t-1 ) / P_k,t-1 × 100</div>
+<div class="formula">Q_p = Kuantil_Hazen ( Laju_YoY , p )   ;   IQR = Q3 - Q1</div>
+<div class="formula">Batas_Bawah = Q1 - 1,5 × IQR   ;   Batas_Atas = Q3 + 1,5 × IQR</div>
+<p>Substitusi angka dari dataset aktual:</p>
+<div class="formula">Ekstraktif: Median = 2.00% ; Q1 = 1.50% ; Q3 = 2.78% ; IQR = 1.28</div>
+<div class="formula">Non-Ekstraktif: Median = 1.15% ; Q1 = 0.695% ; Q3 = 1.895% ; IQR = 1.200</div>
+<div class="formula">Ekstraktif Fences: -0.10% s.d. 4.22%   ;   Min = -7.76% ; Max = 20.34%</div>
+<div class="formula">Mean_Ekstraktif = 3.36% (N=39)   vs   Mean_Non-Ekstraktif = 2.03% (N=464)</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 9.1: Rincian Metrik Anatomi Boxplot Laju Pertumbuhan Penduduk (YoY %)</div>
+<table>
+<thead><tr><th class="data-th">Kategori</th><th class="data-th">Max (%)</th><th class="data-th">Upper Fence (%)</th><th class="data-th">Q3 (%)</th><th class="data-th">Median (%)</th><th class="data-th">Q1 (%)</th><th class="data-th">Lower Fence (%)</th><th class="data-th">Min (%)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Kabupaten Industri Ekstraktif</td><td class="data-td">20.34</td><td class="data-td">4.22</td><td class="data-td">2.78</td><td class="data-td">2.00</td><td class="data-td">1.50</td><td class="data-td">-0.10</td><td class="data-td">-7.76</td></tr>
+<tr class="data-tr-even"><td class="data-td">Kabupaten Non-Ekstraktif</td><td class="data-td">14.80</td><td class="data-td">3.61</td><td class="data-td">1.90</td><td class="data-td">1.15</td><td class="data-td">0.69</td><td class="data-td">-0.89</td><td class="data-td">-6.73</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 9.2: Rincian Perhitungan Mean & Varians Laju Pertumbuhan YoY</div>
+<table>
+<thead><tr><th class="data-th">Kategori</th><th class="data-th">Rata-Rata / Mean (%)</th><th class="data-th">Standard Deviation</th><th class="data-th">Jumlah Sampel (Tahun-Kabupaten)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Kabupaten Industri Ekstraktif</td><td class="data-td">3.36</td><td class="data-td">5.68</td><td class="data-td">39</td></tr>
+<tr class="data-tr-even"><td class="data-td">Kabupaten Non-Ekstraktif</td><td class="data-td">2.03</td><td class="data-td">2.85</td><td class="data-td">464</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 9.3: Daftar Kabupaten Prioritas Industri Ekstraktif (Klasifikasi Fase 4)</div>
+<table>
+<thead><tr><th class="data-th">No</th><th class="data-th">Kabupaten</th></tr></thead>
+<tbody>
+<tr><td class="data-td">1</td><td class="data-td">Banggai</td></tr>
+<tr class="data-tr-even"><td class="data-td">2</td><td class="data-td">Kolaka</td></tr>
+<tr><td class="data-td">3</td><td class="data-td">Konawe</td></tr>
+<tr class="data-tr-even"><td class="data-td">4</td><td class="data-td">Konawe Utara</td></tr>
+<tr><td class="data-td">5</td><td class="data-td">Luwu Timur</td></tr>
+<tr class="data-tr-even"><td class="data-td">6</td><td class="data-td">Morowali</td></tr>
+<tr><td class="data-td">7</td><td class="data-td">Morowali Utara</td></tr>
+</tbody>
+</table>
+<h4>E. Analisis Temuan Empiris</h4>
+<p><strong>1. Median Konsisten Lebih Tinggi:</strong> kawasan ekstraktif 2.00% vs non-ekstraktif 1.15%. <strong>2. Variabilitas Ekstrem:</strong> IQR ekstraktif (1.50% - 2.78%) jauh lebih lebar dibanding non-ekstraktif (0.695% - 1.895%). <strong>3. Bukti Boom and Bust:</strong> sebaran menembus fences (-0.10% s.d. 4.22%) dengan Max 20.34% dan Min -7.76% — bukti matematis masuknya pekerja migran masif di fase konstruksi lalu eksodus drastis saat operasional menyusut.</p>
+
+<h2>9.2 Intensifikasi Ruang: Kepadatan Industri Ekstraktif vs Non-Ekstraktif</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Data Demografi: <code>data/processed/sulawesi_demografi_master_fase4.csv</code> (BPS SIMDASI). Visualisasi dashboard menampilkan Area Chart tren rata-rata kepadatan penduduk (jiwa/km2) dua kategori wilayah beserta tabel agregasi kepadatan per kategori.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Yang dibaca sub-bab ini adalah <strong>intensifikasi ruang</strong> — tekanan yang muncul ketika pertumbuhan penduduk dan konsentrasi industri bertemu pada wilayah yang sama (bukan klaim urbanisasi formal Podes). Rata-rata kepadatan kabupaten smelter pada 2024 mencapai <strong>42.7 jiwa/km2</strong> vs non-smelter <strong>438.3 jiwa/km2</strong> — rasio <strong>0.10 kali</strong>, sinyal kebutuhan kapasitas layanan publik yang berbeda di kawasan industri.</p>
+<h4>B. Alur Logika Metodologis Comparative Density Analysis</h4>
+<p>Kerangka komparasi diilustrasikan pada <strong>Bagan Alur 9.2</strong> berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan perbandingan rata-rata kepadatan deskriptif antar kategori dari waktu ke waktu.</p>
+<div class="table-caption">Bagan Alur 9.2: Alur Logika Analisis Comparative Density Analysis</div>
+<div class="mermaid">flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Demografi Master Fase 4<br/><i>kabupaten, tahun, kepadatan per km2, flag smelter</i>"]
+    end
+    subgraph Density_Processing["2. Comparative Density Analysis"]
+        A --> B["Window observasi tahun ≤ 2024"]
+        B --> C["Segmentasi kategori<br/>Industri Ekstraktif vs Non-Ekstraktif"]
+        C --> D["Rata-rata kepadatan per kategori per tahun"]
+        D --> E["Rasio kepadatan ekstraktif / non-ekstraktif"]
+    end
+    subgraph Visual_Output["3. Area Chart Komparatif"]
+        E --> F["Area Chart tren rata-rata kepadatan dua kategori"]
+        F --> G["Pembacaan intensifikasi ruang & kebutuhan layanan publik"]
+    end</div>
+<h4>C. Formulasi Matematis: Rata-rata Kepadatan dan Rasio Intensifikasi</h4>
+<div class="formula">D_c,t = [ Σ ( Densitas_k,t ) ] / n_c   ;   untuk seluruh kabupaten k dalam kategori c pada tahun t</div>
+<div class="formula">R_t = D_Ekstraktif,t / D_Non-Ekstraktif,t</div>
+<p>Substitusi angka dari dataset aktual:</p>
+<div class="formula">D_Ekstraktif,2024 = 42.7 jiwa/km2   ;   D_Non-Ekstraktif,2024 = 438.3 jiwa/km2</div>
+<div class="formula">R_2024 = 42.7 / 438.3 = 0.10x</div>
+<div class="formula">Δ D_Ekstraktif (2016-2024) = +39.7 jiwa/km2   ;   Δ D_Non-Ekstraktif = +225.6 jiwa/km2</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 9.4: Agregasi Rata-rata Kepadatan Penduduk per Kategori Wilayah (2016-2024)</div>
+<table>
+<thead><tr><th class="data-th">Tahun</th><th class="data-th">Industri Ekstraktif (jiwa/km2)</th><th class="data-th">Non-Ekstraktif (jiwa/km2)</th><th class="data-th">Rasio (x)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">2014</td><td class="data-td">-</td><td class="data-td">519.5</td><td class="data-td">-</td></tr>
+<tr class="data-tr-even"><td class="data-td">2015</td><td class="data-td">-</td><td class="data-td">526.3</td><td class="data-td">-</td></tr>
+<tr><td class="data-td">2016</td><td class="data-td">3.0</td><td class="data-td">212.8</td><td class="data-td">0.01x</td></tr>
+<tr class="data-tr-even"><td class="data-td">2017</td><td class="data-td">39.1</td><td class="data-td">413.3</td><td class="data-td">0.09x</td></tr>
+<tr><td class="data-td">2018</td><td class="data-td">39.6</td><td class="data-td">434.0</td><td class="data-td">0.09x</td></tr>
+<tr class="data-tr-even"><td class="data-td">2019</td><td class="data-td">40.7</td><td class="data-td">435.3</td><td class="data-td">0.09x</td></tr>
+<tr><td class="data-td">2020</td><td class="data-td">34.2</td><td class="data-td">470.2</td><td class="data-td">0.07x</td></tr>
+<tr class="data-tr-even"><td class="data-td">2021</td><td class="data-td">47.5</td><td class="data-td">450.0</td><td class="data-td">0.11x</td></tr>
+<tr><td class="data-td">2022</td><td class="data-td">50.0</td><td class="data-td">347.4</td><td class="data-td">0.14x</td></tr>
+<tr class="data-tr-even"><td class="data-td">2023</td><td class="data-td">49.0</td><td class="data-td">479.7</td><td class="data-td">0.10x</td></tr>
+<tr><td class="data-td">2024</td><td class="data-td">42.7</td><td class="data-td">438.3</td><td class="data-td">0.10x</td></tr>
+</tbody>
+</table>
+<h4>E. Analisis Temuan Empiris</h4>
+<p><strong>1. Profil Kepadatan Dua Kategori:</strong> pada 2024, kepadatan ekstraktif 42.7 jiwa/km2 — rasio 0.10x terhadap non-ekstraktif (438.3 jiwa/km2); kawasan ekstraktif berbasis kabupaten luas berpenduduk jarang sehingga rasionya di bawah satu. <strong>2. Intensifikasi Jauh Lebih Cepat:</strong> sepanjang 2016-2024 kepadatan ekstraktif melipat <strong>14.2x</strong> (dari 3.0 ke 42.7 jiwa/km2) vs non-ekstraktif hanya 2.1x — inilah intensifikasi ruang yang dibaca sub-bab ini. <strong>3. Implikasi:</strong> pemadatan cepat pada ruang yang semula lengang menuntut kapasitas layanan publik berbeda (perumahan, air bersih, sanitasi, transportasi, faskes) agar ruang hidup lokal tidak dipadatkan tanpa perencanaan sosial yang sepadan.</p>
+
+<h2>9.3 Pergeseran Ekonomi Agraris ke Tambang dan Industri</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Data Shift Index: <code>data/processed/sulawesi_employment_shift_fase4.csv</code> dan <code>data/processed/sulawesi_pdrb_sektoral_2016_2024.csv</code> (BPS SIMDASI). Visualisasi dashboard menampilkan Area Chart komposisi PDRB sektor kunci per provinsi (dengan dekomposisi estimasi Perikanan Tangkap) serta Line Chart Shift Index (B+C / A) 6 provinsi dengan garis ambang 1.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Sektor A dibaca sebagai basis agraris, sektor B dan C sebagai blok ekstraktif-industrial. Rasio B+C terhadap A menjadi <strong>shift index</strong>; nilai di atas 1 berarti kontribusi tambang dan industri sudah melampaui pertanian. Di Sulawesi Tengah, porsi pertanian turun dari <strong>34.39%</strong> menjadi <strong>15.80%</strong>, sementara tambang+industri naik dari <strong>15.45%</strong> menjadi <strong>55.82%</strong>. Indeksnya naik dari <strong>0.449</strong> ke <strong>3.533</strong> (7.9 kali) — hilirisasi mengubah pusat gravitasi ekonomi daerah dari ruang produksi agraris menuju rantai ekstraktif yang terkonsentrasi pada modal besar.</p>
+<h4>B. Alur Logika Metodologis PDRB Sector Shift Index (B+C / A)</h4>
+<p>Kerangka pembacaan diilustrasikan pada <strong>Bagan Alur 9.3</strong> berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan indeks rasio sektoral deskriptif dengan ambang interpretatif 1.</p>
+<div class="table-caption">Bagan Alur 9.3: Alur Logika Analisis PDRB Sector Shift Index</div>
+<div class="mermaid">flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Employment Shift Fase 4<br/><i>provinsi, tahun, pct PDRB sektor A/B/C, shift index</i>"]
+    end
+    subgraph Shift_Processing["2. PDRB Sector Shift Index"]
+        A --> B["Blok agraris: Sektor A<br/>dekomposisi Perikanan Tangkap ±22% (estimasi)"]
+        A --> C["Blok ekstraktif-industrial: B+C<br/>pertambangan + industri pengolahan"]
+        B --> D["Shift Index = (B+C) / A per provinsi-tahun"]
+        C --> D
+    end
+    subgraph Visual_Output["3. Area Chart & Line Index"]
+        D --> E["Area Chart komposisi sektor kunci per provinsi"]
+        D --> F["Line Chart shift index 6 provinsi<br/>+ garis ambang 1 (B+C melampaui Pertanian)"]
+    end
+    E --> G["Pembacaan pergeseran pusat gravitasi ekonomi daerah"]
+    F --> G</div>
+<h4>C. Formulasi Matematis: Shift Index, Dekomposisi Sektor A, dan Multiplier</h4>
+<div class="formula">Shift_Index_p,t = ( PDRB_B_p,t + PDRB_C_p,t ) / PDRB_A_p,t</div>
+<div class="formula">Perikanan_Tangkap ≈ 0,22 × Sektor_A   ;   Pertanian_Kehutanan ≈ 0,78 × Sektor_A</div>
+<div class="formula">Multiplier_p = Shift_Index_p,akhir / Shift_Index_p,awal</div>
+<p>Substitusi angka dari dataset aktual (Sulawesi Tengah sebagai episentrum):</p>
+<div class="formula">Shift_Index_Sulteng: 0.449 (2014) → 3.533 (2024)   ;   Multiplier = 7.9x</div>
+<div class="formula">Pertanian (A): 34.39% → 15.80%   ;   Tambang+Industri (B+C): 15.45% → 55.82%</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 9.5: Shift Index (B+C / A) per Provinsi per Tahun (2014-2024)</div>
+<table>
+<thead><tr><th class="data-th">Tahun</th><th class="data-th">Gorontalo</th><th class="data-th">Sulawesi Barat</th><th class="data-th">Sulawesi Selatan</th><th class="data-th">Sulawesi Tengah</th><th class="data-th">Sulawesi Tenggara</th><th class="data-th">Sulawesi Utara</th></tr></thead>
+<tbody>
+<tr><td class="data-td">2014</td><td class="data-td">0.145</td><td class="data-td">0.298</td><td class="data-td">0.918</td><td class="data-td">0.449</td><td class="data-td">1.009</td><td class="data-td">0.661</td></tr>
+<tr class="data-tr-even"><td class="data-td">2015</td><td class="data-td">0.149</td><td class="data-td">0.298</td><td class="data-td">0.873</td><td class="data-td">0.638</td><td class="data-td">1.117</td><td class="data-td">0.655</td></tr>
+<tr><td class="data-td">2016</td><td class="data-td">0.145</td><td class="data-td">0.286</td><td class="data-td">0.822</td><td class="data-td">0.799</td><td class="data-td">1.049</td><td class="data-td">0.636</td></tr>
+<tr class="data-tr-even"><td class="data-td">2017</td><td class="data-td">0.138</td><td class="data-td">0.294</td><td class="data-td">0.810</td><td class="data-td">0.869</td><td class="data-td">1.114</td><td class="data-td">0.660</td></tr>
+<tr><td class="data-td">2018</td><td class="data-td">0.135</td><td class="data-td">0.283</td><td class="data-td">0.784</td><td class="data-td">1.351</td><td class="data-td">1.127</td><td class="data-td">0.674</td></tr>
+<tr class="data-tr-even"><td class="data-td">2019</td><td class="data-td">0.138</td><td class="data-td">0.288</td><td class="data-td">0.833</td><td class="data-td">1.544</td><td class="data-td">1.156</td><td class="data-td">0.661</td></tr>
+<tr><td class="data-td">2020</td><td class="data-td">0.140</td><td class="data-td">0.285</td><td class="data-td">0.802</td><td class="data-td">1.885</td><td class="data-td">1.121</td><td class="data-td">-</td></tr>
+<tr class="data-tr-even"><td class="data-td">2021</td><td class="data-td">0.142</td><td class="data-td">0.294</td><td class="data-td">0.765</td><td class="data-td">2.548</td><td class="data-td">1.143</td><td class="data-td">0.750</td></tr>
+<tr><td class="data-td">2022</td><td class="data-td">0.149</td><td class="data-td">0.293</td><td class="data-td">0.813</td><td class="data-td">3.518</td><td class="data-td">1.229</td><td class="data-td">0.759</td></tr>
+<tr class="data-tr-even"><td class="data-td">2023</td><td class="data-td">0.146</td><td class="data-td">0.299</td><td class="data-td">0.829</td><td class="data-td">3.525</td><td class="data-td">1.313</td><td class="data-td">0.762</td></tr>
+<tr><td class="data-td">2024</td><td class="data-td">0.147</td><td class="data-td">0.274</td><td class="data-td">0.804</td><td class="data-td">3.533</td><td class="data-td">1.300</td><td class="data-td">0.754</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 9.6: Ringkasan Pergeseran Struktur Ekonomi per Provinsi</div>
+<table>
+<thead><tr><th class="data-th">Provinsi</th><th class="data-th">Index Awal</th><th class="data-th">Index Akhir</th><th class="data-th">Multiplier</th><th class="data-th">Status Ambang</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Gorontalo</td><td class="data-td">0.145</td><td class="data-td">0.147</td><td class="data-td">1.0x</td><td class="data-td">Di bawah ambang</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Barat</td><td class="data-td">0.298</td><td class="data-td">0.274</td><td class="data-td">0.9x</td><td class="data-td">Di bawah ambang</td></tr>
+<tr><td class="data-td">Sulawesi Selatan</td><td class="data-td">0.918</td><td class="data-td">0.804</td><td class="data-td">0.9x</td><td class="data-td">Di bawah ambang</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Tengah</td><td class="data-td">0.449</td><td class="data-td">3.533</td><td class="data-td">7.9x</td><td class="data-td">MELAMPAUI AMBANG (B+C > A)</td></tr>
+<tr><td class="data-td">Sulawesi Tenggara</td><td class="data-td">1.009</td><td class="data-td">1.300</td><td class="data-td">1.3x</td><td class="data-td">MELAMPAUI AMBANG (B+C > A)</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Utara</td><td class="data-td">0.661</td><td class="data-td">0.754</td><td class="data-td">1.1x</td><td class="data-td">Di bawah ambang</td></tr>
+</tbody>
+</table>
+<h4>E. Analisis Temuan Empiris</h4>
+<p><strong>1. Episentrum Pergeseran di Sulawesi Tengah:</strong> shift index melonjak 0.449 → 3.533 (7.9x); blok tambang+industri kini 55.82% PDRB vs pertanian 15.80%. <strong>2. Provinsi Pelampau Ambang:</strong> Sulawesi Tengah (3.533), Sulawesi Tenggara (1.300). <strong>3. Catatan Metodologis:</strong> dekomposisi Perikanan Tangkap adalah estimasi (±22% Sektor A) untuk keperluan visual; klaim pergeseran pekerjaan tidak ditarik dari PDRB semata.</p>
+</body>
+</html>

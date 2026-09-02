@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Laporan Metodologi Bab 7 - Kegagalan Tata Kelola</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true, theme:'dark'});</script>
+<style>
+body { font-family: Arial, sans-serif; max-width: 920px; margin: 0 auto; padding: 32px; background: #0E1117; color: #D4D4D4; line-height: 1.65; }
+.hdr-sub { color: #43A047; font-size: 8.5pt; font-weight: 700; text-transform: uppercase; }
+.hdr-title { color: #81C784; font-size: 15pt; font-weight: 800; text-transform: uppercase; border-bottom: 2px solid #2E7D32; padding-bottom: 8px; }
+h2 { color: #81C784; text-transform: uppercase; border-bottom: 1px solid #2E7D32; }
+h4 { color: #A5D6A7; }
+.note-box { background: #132213; border-left: 4px solid #2E7D32; padding: 10px 14px; margin: 12px 0; }
+.formula { background: #0D1B0E; border: 1px solid #2E7D32; color: #A5D6A7; padding: 8px 12px; font-family: monospace; }
+.table-caption { color: #A5D6A7; font-weight: 700; font-style: italic; margin-top: 14px; }
+.data-th { background: #1B5E20; color: white; padding: 6px; text-align: left; border: 1px solid #2E7D32; }
+.data-td { padding: 6px; border: 1px solid #243524; vertical-align: top; }
+.data-tr-even .data-td { background: #131B13; }
+.mermaid { background: #0D1610; border: 1px solid #2E7D32; padding: 12px; margin: 10px 0; }
+</style>
+</head>
+<body>
+<div class="hdr-sub">CELIOS - Center of Economic and Law Studies | Laporan Riset Metodologi D3TLH</div>
+<div class="hdr-title">BAB VII: Metodologi Analisis Kegagalan Tata Kelola - D3TLH Dalam Sistem Perizinan</div>
+<p>Dokumen laporan metodologi ini menyajikan kerangka ilmiah, prosedur pengolahan data, dan pembacaan empiris yang dioperasionalkan pada <strong>Bab 7: Kegagalan Tata Kelola - D3TLH Dalam Sistem Perizinan</strong>.</p>
+
+<h2>7.1 Pembuktian Empiris: Status Ekologis vs Penerbitan Izin</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Data Izin: <code>data/processed/sulawesi_izin_baru_per_tahun.csv</code> dan <code>data/processed/sulawesi_izin_raw_details.csv</code> (MODI ESDM); Data Deforestasi: <code>data/processed/sulawesi_gfw_master_1_dekade_2014_2023_v3.csv</code> (GFW). Visualisasi dashboard menampilkan Matriks Kepatuhan D3TLH (Seharusnya vs Kenyataan per status Aman/Tertekan/Kritis) beserta Tabel Irisan daftar perusahaan penerima izin di zona kritis.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>D3TLH dirancang sebagai instrumen pencegahan dan pengatur batas pengaman ekologis (ecological safeguard). Penyandingan data deforestasi tahunan GFW dan data perizinan MODI ESDM menunjukkan bahwa penerbitan izin usaha pertambangan baru tetap tercatat pada kurun waktu ketika perubahan tutupan hutan meningkat — terlihat pada tren Sulawesi Tengah dan Tenggara 2014-2023. Kondisi ini menggarisbawahi pentingnya penguatan fungsi AMDAL, D3TLH, dan KLHS sebagai pertimbangan yang mengikat dalam keputusan perizinan.</p>
+<h4>B. Alur Logika Metodologis Evaluasi Kepatuhan D3TLH (Rule-based Categorization)</h4>
+<p>Kerangka agregasi berbasis aturan diilustrasikan pada <strong>Bagan Alur 7.1</strong> berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan Compliance Modeling deskriptif dengan binning persentil tiga kelas.</p>
+<div class="table-caption">Bagan Alur 7.1: Alur Logika Analisis Evaluasi Kepatuhan D3TLH (Rule-based Categorization)</div>
+<div class="mermaid">flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Deforestasi GFW<br/><i>Provinsi, Tahun, Total Deforestasi (Ha)</i>"] --> C
+        B["Data Izin Baru MODI ESDM<br/><i>Provinsi, Tahun, Jumlah IUP, Luas Konsesi</i>"] --> C
+    end
+    subgraph Compliance_Modeling["2. Rule-based Categorization"]
+        C["Panel Join Provinsi-Tahun"] --> D["Binning Persentil Deforestasi<br/>Aman (P33); Tertekan (P33-P66); Kritis (P66+)"]
+        D --> E["Agregasi IUP & luas konsesi<br/>per status daya dukung"]
+    end
+    subgraph Output_Analysis["3. Matriks Kepatuhan & Tabel Irisan"]
+        E --> F["Matriks Seharusnya vs Kenyataan<br/>per status D3TLH"]
+        E --> G["Tabel Irisan ESDM x GFW<br/>daftar IUP terbit di zona Kritis"]
+    end
+    F --> H["Pembacaan kepatuhan instrumen D3TLH"]
+    G --> H</div>
+<h4>C. Formulasi Matematis: Ambang Persentil, Klasifikasi Status, dan Kuantifikasi Pelanggaran</h4>
+<div class="formula">Ambang_Tertekan = Persentil_33 ( D_p,t )   ;   Ambang_Kritis = Persentil_66 ( D_p,t )</div>
+<div class="formula">Status(x) = 'Aman' , jika x ≤ P33   |   'Tertekan' , jika P33 &lt; x ≤ P66   |   'Kritis' , jika x &gt; P66</div>
+<div class="formula">Total_Izin_Zona_Kritis = Σ ( IUP_p,t )   ;   untuk seluruh observasi dengan Status = 'Kritis'</div>
+<p>Substitusi angka dari dataset aktual ke dalam rumus ambang persentil dan kuantifikasi pelanggaran:</p>
+<div class="formula">Ambang_Tertekan = Persentil_33 ( D ) = 12,897.8 Ha   ;   Ambang_Kritis = Persentil_66 ( D ) = 26,453.0 Ha</div>
+<div class="formula">N_Aman = 20 observasi   ;   N_Tertekan = 19 observasi   ;   N_Kritis = 21 observasi   (Total N = 60)</div>
+<div class="formula">Σ IUP_Aman = 26 izin   ;   Σ IUP_Tertekan = 77 izin   ;   Σ IUP_Kritis = 277 izin (440,998 Ha)</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 7.1: Matriks Kepatuhan D3TLH - Seharusnya vs Kenyataan per Status Daya Dukung</div>
+<table>
+<thead><tr><th class="data-th">Status Daya Dukung</th><th class="data-th">Rentang Kerusakan Hutan</th><th class="data-th">N Observasi</th><th class="data-th">Seharusnya (Menurut Aturan)</th><th class="data-th">Kenyataan di Lapangan</th><th class="data-th">Total Luas Konsesi (Ha)</th><th class="data-th">Kesimpulan Tata Kelola</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Aman</td><td class="data-td">2,690 - 12,382 Ha</td><td class="data-td">20</td><td class="data-td">Wajar diterbitkan izin</td><td class="data-td">26 Izin Baru Keluar</td><td class="data-td">87,070</td><td class="data-td">Normal (Sesuai Aturan)</td></tr>
+<tr class="data-tr-even"><td class="data-td">Tertekan</td><td class="data-td">13,479 - 25,302 Ha</td><td class="data-td">19</td><td class="data-td">Izin mulai direm/dibatasi</td><td class="data-td">77 Izin Baru Keluar</td><td class="data-td">107,377</td><td class="data-td">Anomali (Lampu Kuning)</td></tr>
+<tr><td class="data-td">Kritis</td><td class="data-td">26,526 - 97,091 Ha</td><td class="data-td">21</td><td class="data-td">Moratorium / Evaluasi Ketat</td><td class="data-td">277 Izin Baru Keluar</td><td class="data-td">440,998</td><td class="data-td">PERLU EVALUASI</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 7.2: Sampel Irisan Izin IUP Terbit di Zona Kritis - 10 Konsesi Terluas (dari 277 izin)</div>
+<table>
+<thead><tr><th class="data-th">Nama Perusahaan (IUP)</th><th class="data-th">Komoditas</th><th class="data-th">Provinsi</th><th class="data-th">Tahun Terbit</th><th class="data-th">Kehilangan Hutan Provinsi (Ha)</th><th class="data-th">Luas Konsesi (Ha)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">CITRA PALU MINERALS</td><td class="data-td">Emas</td><td class="data-td">Sulawesi Tengah</td><td class="data-td">2017</td><td class="data-td">39,356</td><td class="data-td">85,180.00</td></tr>
+<tr class="data-tr-even"><td class="data-td">GORONTALO MINERALS</td><td class="data-td">Emas</td><td class="data-td">Sulawesi Selatan</td><td class="data-td">2019</td><td class="data-td">29,367</td><td class="data-td">24,995.00</td></tr>
+<tr><td class="data-td">SULAWESI CAHAYA MINERAL</td><td class="data-td">Nikel</td><td class="data-td">Sulawesi Tenggara</td><td class="data-td">2019</td><td class="data-td">41,994</td><td class="data-td">21,100.00</td></tr>
+<tr class="data-tr-even"><td class="data-td">TRIO KENCANA</td><td class="data-td">Emas</td><td class="data-td">Sulawesi Tengah</td><td class="data-td">2020</td><td class="data-td">28,365</td><td class="data-td">15,725.00</td></tr>
+<tr><td class="data-td">KALLA AREBAMMA</td><td class="data-td">Emas</td><td class="data-td">Sulawesi Selatan</td><td class="data-td">2017</td><td class="data-td">27,761</td><td class="data-td">12,010.00</td></tr>
+<tr class="data-tr-even"><td class="data-td">BUMI INDAH SULTRA</td><td class="data-td">Nikel</td><td class="data-td">Sulawesi Tengah</td><td class="data-td">2020</td><td class="data-td">28,365</td><td class="data-td">8,034.00</td></tr>
+<tr><td class="data-td">BANGGAI KENCANA PERMAI</td><td class="data-td">Nikel</td><td class="data-td">Sulawesi Tengah</td><td class="data-td">2022</td><td class="data-td">26,526</td><td class="data-td">7,878.00</td></tr>
+<tr class="data-tr-even"><td class="data-td">ARTESIS INDONESIA</td><td class="data-td">Tembaga</td><td class="data-td">Sulawesi Selatan</td><td class="data-td">2017</td><td class="data-td">27,761</td><td class="data-td">7,614.00</td></tr>
+<tr><td class="data-td">KALLA AREBAMMA</td><td class="data-td">Besi</td><td class="data-td">Sulawesi Selatan</td><td class="data-td">2017</td><td class="data-td">27,761</td><td class="data-td">6,812.00</td></tr>
+<tr class="data-tr-even"><td class="data-td">PARAMOS REZEKI INDAH</td><td class="data-td">Nikel</td><td class="data-td">Sulawesi Selatan</td><td class="data-td">2023</td><td class="data-td">41,356</td><td class="data-td">6,639.00</td></tr>
+</tbody>
+</table>
+<h4>E. Analisis Temuan Empiris</h4>
+<p><strong>1. Fungsi Pembatas D3TLH Perlu Ditingkatkan:</strong> terdapat <strong>277 Izin Baru</strong> yang terbit pada periode berstatus deforestasi tinggi (Kritis), mencakup luasan konsesi 440,998 Ha. <strong>2. Bukti Irisan 100% Data-Driven:</strong> tabel irisan ESDM x GFW mengidentifikasi <strong>277 izin IUP baru</strong> (total luas 440,998 Ha) yang tetap diterbitkan di tengah situasi kritis. <strong>3. Implikasi Kebijakan:</strong> diperlukan penguatan integrasi data lingkungan agar AMDAL, D3TLH, dan KLHS menjadi pertimbangan yang mengikat dalam keputusan perizinan.</p>
+
+<h2>7.2 Tabrakan Hukum: Impunitas dan Pembiaran Operasi Ilegal</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Data Konflik Hukum: <code>data/processed/sulawesi_konflik_hukum.csv</code> (kompilasi Konsorsium Pembaruan Agraria / KPA, TanahKita, dan laporan LSM). Visualisasi dashboard menampilkan metrik total kasus, Bubble Timeline sebaran konflik agraria 10 tahun terakhir (Tahun × Provinsi), tabel sebaran sektor konflik, serta daftar rekam jejak kasus.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Konsep D3TLH mengukur kapasitas daya tahan ekosistem serta daya dukung sosial masyarakat di sekitar kawasan industri. Kompilasi laporan masyarakat sipil mencatat adanya sengketa tanah dan dinamika sosial dalam ekspansi industri ekstraktif — menunjukkan pentingnya kepatuhan perizinan, penerapan sanksi administratif yang konsisten, pengawasan batas wilayah perizinan (HGU/IUP), pelaksanaan konsultasi publik (FPIC), serta penyelesaian sengketa tenurial secara adil.</p>
+<h4>B. Alur Logika Metodologis Pemetaan Impunitas Korporasi (Thematic Coding)</h4>
+<p>Kerangka agregasi pelaporan berbasis insiden diilustrasikan pada <strong>Bagan Alur 7.2</strong> berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan Thematic Coding dan analisis kasus deskriptif.</p>
+<div class="table-caption">Bagan Alur 7.2: Alur Logika Analisis Pemetaan Impunitas Korporasi (Thematic Coding)</div>
+<div class="mermaid">flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Database Konflik Hukum LSM/KPA/TanahKita<br/><i>Provinsi, Sektor, Judul Kasus, Tahun, Sumber</i>"]
+    end
+    subgraph Thematic_Coding["2. Thematic Coding & Agregasi Insiden"]
+        A --> B["Klasifikasi rekam jejak<br/>sengketa lahan, pelanggaran HAM, operasi ilegal"]
+        B --> C["Agregasi kasus per Sektor"]
+        B --> D["Agregasi kasus per Provinsi & Tahun"]
+    end
+    subgraph Visual_Output["3. Pemetaan Pembiaran (State Omission)"]
+        C --> E["Tabel sebaran sektor konflik"]
+        D --> F["Bubble Timeline 10 tahun terakhir<br/>Tahun × Provinsi × jumlah kasus"]
+    end
+    E --> G["Pembacaan impunitas dan pembiaran struktural"]
+    F --> G</div>
+<h4>C. Formulasi Matematis: Agregasi Insiden dan Volume Pembiaran Sektoral</h4>
+<div class="formula">Total_Kasus_Impunitas = Σ ( Kasus_i )   ;   untuk seluruh laporan insiden i dalam database</div>
+<div class="formula">Volume_Sektoral_s = Σ ( Kasus_i )   ;   untuk seluruh kasus i dengan Sektor = s</div>
+<div class="formula">Proporsi_Sektoral_s (%) = ( Volume_Sektoral_s / Total_Kasus_Impunitas ) × 100</div>
+<p>Substitusi angka dari dataset aktual ke dalam rumus agregasi insiden:</p>
+<div class="formula">Total_Kasus_Impunitas = 32 kasus   ;   17 kasus pada dekade 2014-2023</div>
+<div class="formula">Volume_Sektoral_Pertambangan = 11 kasus (34.4%)   ;   Volume_Sektoral_Perkebunan = 6 kasus</div>
+<div class="formula">Volume_Provinsi_Tertinggi: Sulawesi Tenggara = 8 kasus (dari total 32 kasus se-Sulawesi)</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 7.3: Sebaran Sektor Konflik dan Pembiaran Operasi Ilegal</div>
+<table>
+<thead><tr><th class="data-th">Sektor (Penyebab)</th><th class="data-th">Jumlah Kasus</th><th class="data-th">Proporsi (%)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Pertambangan</td><td class="data-td">11</td><td class="data-td">34.4%</td></tr>
+<tr class="data-tr-even"><td class="data-td">Perkebunan</td><td class="data-td">6</td><td class="data-td">18.8%</td></tr>
+<tr><td class="data-td">Hutan Lindung</td><td class="data-td">5</td><td class="data-td">15.6%</td></tr>
+<tr class="data-tr-even"><td class="data-td">Hutan Produksi</td><td class="data-td">3</td><td class="data-td">9.4%</td></tr>
+<tr><td class="data-td">Hutan Konservasi</td><td class="data-td">2</td><td class="data-td">6.2%</td></tr>
+<tr class="data-tr-even"><td class="data-td">Kawasan Industri</td><td class="data-td">1</td><td class="data-td">3.1%</td></tr>
+<tr><td class="data-td">Infrastruktur Energi Listrik</td><td class="data-td">1</td><td class="data-td">3.1%</td></tr>
+<tr class="data-tr-even"><td class="data-td">Infrastruktur</td><td class="data-td">1</td><td class="data-td">3.1%</td></tr>
+<tr><td class="data-td">Transmigrasi</td><td class="data-td">1</td><td class="data-td">3.1%</td></tr>
+<tr class="data-tr-even"><td class="data-td">Pariwisata</td><td class="data-td">1</td><td class="data-td">3.1%</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 7.4: Sebaran Wilayah Konflik per Provinsi dan Rentang Tahun Kejadian</div>
+<table>
+<thead><tr><th class="data-th">Provinsi</th><th class="data-th">Jumlah Kasus</th><th class="data-th">Proporsi (%)</th><th class="data-th">Rentang Tahun</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Sulawesi Tenggara</td><td class="data-td">8</td><td class="data-td">25.0%</td><td class="data-td">1999-2023</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Selatan</td><td class="data-td">7</td><td class="data-td">21.9%</td><td class="data-td">1982-2017</td></tr>
+<tr><td class="data-td">Sulawesi Utara</td><td class="data-td">6</td><td class="data-td">18.8%</td><td class="data-td">1999-2023</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Tengah</td><td class="data-td">5</td><td class="data-td">15.6%</td><td class="data-td">2011-2023</td></tr>
+<tr><td class="data-td">Sulawesi (Umum)</td><td class="data-td">4</td><td class="data-td">12.5%</td><td class="data-td">2003-2017</td></tr>
+<tr class="data-tr-even"><td class="data-td">Gorontalo</td><td class="data-td">2</td><td class="data-td">6.2%</td><td class="data-td">2012-2018</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 7.5: Sampel Rekam Jejak Konflik Agraria & Pelanggaran Hak (10 Kasus Terbaru)</div>
+<table>
+<thead><tr><th class="data-th">Tahun</th><th class="data-th">Provinsi</th><th class="data-th">Sektor</th><th class="data-th">Judul/Nama Kasus</th><th class="data-th">Sumber</th></tr></thead>
+<tbody>
+<tr><td class="data-td">2023</td><td class="data-td">Sulawesi Tengah</td><td class="data-td">Perkebunan</td><td class="data-td">Dua kelompok Warga di Kabupaten Mamuju Tengah (Mateng), Sulawesi Barat (Sulbar) bentrok lantaran memperebutkan lahan sawit. Insiden itu menewaskan 1 orang dan 4 lainnya luka-luka.</td><td class="data-td">data/raw/konflik_kpa_ylbhi_tanahkita/</td></tr>
+<tr class="data-tr-even"><td class="data-td">2023</td><td class="data-td">Sulawesi Utara</td><td class="data-td">Infrastruktur</td><td class="data-td">Ganti Rugi Belum Dibayar, Warga Kembali Blokir Akses Masuk Tol Jatikarya</td><td class="data-td">data/raw/konflik_kpa_ylbhi_tanahkita/</td></tr>
+<tr><td class="data-td">2023</td><td class="data-td">Sulawesi Tengah</td><td class="data-td">Perkebunan</td><td class="data-td">Sengketa Lahan Masyarakat Morowali Utara dengan PT Agro Nusa Abadi (ANA)</td><td class="data-td">data/raw/konflik_kpa_ylbhi_tanahkita/</td></tr>
+<tr class="data-tr-even"><td class="data-td">2023</td><td class="data-td">Sulawesi Tenggara</td><td class="data-td">Pertambangan</td><td class="data-td">Konflik Rumpun Suka Kecamatan Tinanggea dan Perusahaan Pertambangan PT Ifishdeco</td><td class="data-td">data/raw/konflik_kpa_ylbhi_tanahkita/</td></tr>
+<tr><td class="data-td">2022</td><td class="data-td">Sulawesi Utara</td><td class="data-td">Infrastruktur Energi Listrik</td><td class="data-td">Pembangunan Proyek Strategis Nasional (PSN) proyek PLTU Gorontalo Utara yang dibangun Pt.Gorontalo Listrik Perdana (GLP) masih menyisakan masalah sengketa lahan</td><td class="data-td">data/raw/konflik_kpa_ylbhi_tanahkita/</td></tr>
+<tr class="data-tr-even"><td class="data-td">2022</td><td class="data-td">Sulawesi Tenggara</td><td class="data-td">Pertambangan</td><td class="data-td">Orang Wawoni dan Ancaman Tambang Nikel</td><td class="data-td">data/raw/konflik_kpa_ylbhi_tanahkita/</td></tr>
+<tr><td class="data-td">2022</td><td class="data-td">Sulawesi Tenggara</td><td class="data-td">Pertambangan</td><td class="data-td">Konflik Koalisi Selamatkan Pulau Wawoni</td><td class="data-td">data/raw/konflik_kpa_ylbhi_tanahkita/</td></tr>
+<tr class="data-tr-even"><td class="data-td">2021</td><td class="data-td">Sulawesi Tengah</td><td class="data-td">Hutan Lindung</td><td class="data-td">Konflik Tenurial di Kawasan Suaka Margasatwa Karang Gading</td><td class="data-td">data/raw/konflik_kpa_ylbhi_tanahkita/</td></tr>
+<tr><td class="data-td">2019</td><td class="data-td">Sulawesi Tenggara</td><td class="data-td">Pertambangan</td><td class="data-td">Konflik antara warga Kabupaten Konawe Kepulauan dengan PT Gema Kreasi Persada, pertambangan</td><td class="data-td">data/raw/konflik_kpa_ylbhi_tanahkita/</td></tr>
+<tr class="data-tr-even"><td class="data-td">2018</td><td class="data-td">Gorontalo</td><td class="data-td">Hutan Produksi</td><td class="data-td">Warga Desa Bongo dan PT PG Gorontalo Berebut Lahan</td><td class="data-td">data/raw/konflik_kpa_ylbhi_tanahkita/</td></tr>
+</tbody>
+</table>
+<h4>E. Analisis Temuan Empiris</h4>
+<p><strong>1. Bukti Impunitas Hukum:</strong> database kompilasi LSM/KPA mendokumentasikan <strong>32 kasus</strong> konflik/pelanggaran yang dibiarkan di Sulawesi (17 kasus pada dekade 2014-2023). <strong>2. Dominasi Sektor Ekstraktif:</strong> sektor <strong>Pertambangan</strong> penyebab terbanyak dengan 11 kasus (34.4%), disusul Perkebunan (6 kasus). <strong>3. Konsentrasi Spasial:</strong> Sulawesi Tenggara mencatat kasus terbanyak (8 kasus) — menegaskan pentingnya penguatan koordinasi antar-instansi, sanksi administratif konsisten, dan penyelesaian sengketa tenurial yang adil.</p>
+
+<h2>7.3 Inkonsistensi Iklim: Karpet Merah PLTU Captive</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Data PLTU Captive: <code>data/processed/sulawesi_pltu_captive.csv</code> (Global Coal Plant Tracker / GEM, ekstraksi Januari 2026). Visualisasi dashboard menampilkan metrik total unit dan kapasitas pembangkitan kotor, Line Chart timeline pertumbuhan kapasitas kumulatif per provinsi hingga 2024, serta daftar lengkap unit PLTU batubara captive.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Pemenuhan kebutuhan energi untuk fasilitas pengolahan nikel (smelter) di Sulawesi masih didominasi oleh PLTU Batubara Captive. Data GEM mencatat <strong>67 unit PLTU Captive</strong> yang beroperasi maupun direncanakan di kawasan industri Sulawesi dengan total kapasitas <strong>12,245 MW</strong> — tantangan tersendiri bagi pengelolaan emisi gas rumah kaca dan kualitas udara ambien, yang menunjukkan perlunya percepatan transisi energi bersih agar target hilirisasi selaras dengan komitmen penurunan emisi nasional.</p>
+<h4>B. Alur Logika Metodologis Agregasi Beban Karbon PLTU Captive</h4>
+<p>Kerangka inventarisasi agregat kuantitatif diilustrasikan pada <strong>Bagan Alur 7.3</strong> berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan penyaringan agregat dataset eksternal deskriptif.</p>
+<div class="table-caption">Bagan Alur 7.3: Alur Logika Analisis Agregasi Beban Karbon PLTU Captive (GEM)</div>
+<div class="mermaid">flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Global Coal Plant Tracker (GEM)<br/><i>Plant, Unit, Capacity (MW), Status, Start year, Provinsi</i>"]
+    end
+    subgraph Inventory_Aggregation["2. Isolasi Regional & Agregasi Kuantitatif"]
+        A --> B["Filter unit PLTU captive<br/>kawasan industri Sulawesi"]
+        B --> C["Agregasi unit & kapasitas MW<br/>per Provinsi dan Status"]
+        B --> D["Timeline kumulatif kapasitas<br/>berdasarkan Start Year (s.d. 2024)"]
+    end
+    subgraph Visual_Output["3. Kuantifikasi Kontradiksi Karbon"]
+        C --> E["Metrik total unit & MW pembangkitan kotor"]
+        D --> F["Line Chart pertumbuhan kumulatif per provinsi"]
+    end
+    E --> G["Pembacaan paradoks hilirisasi hijau vs PLTU batubara"]
+    F --> G</div>
+<h4>C. Formulasi Matematis: Inventarisasi Unit, Beban Karbon, dan Timeline Kumulatif</h4>
+<div class="formula">Total_Infrastruktur_Kotor = Σ ( Unit_u )   ;   untuk seluruh unit PLTU captive u di kawasan industri Sulawesi</div>
+<div class="formula">Total_Beban_Karbon_p = Σ ( Kapasitas_u )   ;   untuk seluruh unit u pada provinsi p</div>
+<div class="formula">Kumulatif_Kapasitas_p(T) = Σ Kapasitas_p(t)   ;   untuk t = tahun operasi awal s.d. T (T ≤ 2024)</div>
+<p>Substitusi angka dari dataset aktual ke dalam rumus inventarisasi:</p>
+<div class="formula">Total_Infrastruktur_Kotor = 67 unit   ;   Total_Beban_Karbon = 12,245 MW</div>
+<div class="formula">Total_Beban_Karbon_Tertinggi: Sulawesi Tengah = 9,365 MW (76.5% dari total)</div>
+<div class="formula">Operating = 55 unit (9,825 MW)   ;   Non-Operating = 12 unit</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 7.6: Agregat Unit dan Kapasitas PLTU Captive per Provinsi (Total 12,245 MW)</div>
+<table>
+<thead><tr><th class="data-th">Provinsi</th><th class="data-th">Jumlah Unit</th><th class="data-th">Kapasitas (MW)</th><th class="data-th">Proporsi (%)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Sulawesi Tengah</td><td class="data-td">44</td><td class="data-td">9,365</td><td class="data-td">76.5%</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Tenggara</td><td class="data-td">13</td><td class="data-td">2,280</td><td class="data-td">18.6%</td></tr>
+<tr><td class="data-td">Sulawesi Selatan</td><td class="data-td">10</td><td class="data-td">600</td><td class="data-td">4.9%</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 7.7: Timeline Pertumbuhan Kapasitas Kumulatif PLTU Captive per Provinsi (MW, s.d. 2024)</div>
+<table>
+<thead><tr><th class="data-th">Tahun</th><th class="data-th">Sulawesi Selatan</th><th class="data-th">Sulawesi Tengah</th><th class="data-th">Sulawesi Tenggara</th><th class="data-th">Total (MW)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">2013</td><td class="data-td">70</td><td class="data-td">0</td><td class="data-td">0</td><td class="data-td">70</td></tr>
+<tr class="data-tr-even"><td class="data-td">2014</td><td class="data-td">70</td><td class="data-td">0</td><td class="data-td">0</td><td class="data-td">70</td></tr>
+<tr><td class="data-td">2015</td><td class="data-td">70</td><td class="data-td">130</td><td class="data-td">0</td><td class="data-td">200</td></tr>
+<tr class="data-tr-even"><td class="data-td">2016</td><td class="data-td">70</td><td class="data-td">280</td><td class="data-td">60</td><td class="data-td">410</td></tr>
+<tr><td class="data-td">2017</td><td class="data-td">70</td><td class="data-td">980</td><td class="data-td">60</td><td class="data-td">1,110</td></tr>
+<tr class="data-tr-even"><td class="data-td">2018</td><td class="data-td">380</td><td class="data-td">980</td><td class="data-td">60</td><td class="data-td">1,420</td></tr>
+<tr><td class="data-td">2019</td><td class="data-td">600</td><td class="data-td">1,680</td><td class="data-td">60</td><td class="data-td">2,340</td></tr>
+<tr class="data-tr-even"><td class="data-td">2020</td><td class="data-td">600</td><td class="data-td">2,080</td><td class="data-td">465</td><td class="data-td">3,145</td></tr>
+<tr><td class="data-td">2021</td><td class="data-td">600</td><td class="data-td">2,565</td><td class="data-td">1,520</td><td class="data-td">4,685</td></tr>
+<tr class="data-tr-even"><td class="data-td">2022</td><td class="data-td">600</td><td class="data-td">3,850</td><td class="data-td">1,900</td><td class="data-td">6,350</td></tr>
+<tr><td class="data-td">2023</td><td class="data-td">600</td><td class="data-td">5,885</td><td class="data-td">1,900</td><td class="data-td">8,385</td></tr>
+<tr class="data-tr-even"><td class="data-td">2024</td><td class="data-td">600</td><td class="data-td">7,325</td><td class="data-td">1,900</td><td class="data-td">9,825</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 7.8: Sepuluh Unit PLTU Captive Berkapasitas Terbesar di Sulawesi</div>
+<table>
+<thead><tr><th class="data-th">Nama Pembangkit</th><th class="data-th">Unit</th><th class="data-th">Provinsi</th><th class="data-th">Kapasitas (MW)</th><th class="data-th">Status</th><th class="data-th">Tahun Beroperasi</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Sulawesi Labota power station</td><td class="data-td">Unit 4</td><td class="data-td">Sulawesi Tengah</td><td class="data-td">380</td><td class="data-td">operating</td><td class="data-td">2023</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Labota power station</td><td class="data-td">Unit 9</td><td class="data-td">Sulawesi Tengah</td><td class="data-td">380</td><td class="data-td">operating</td><td class="data-td">2024</td></tr>
+<tr><td class="data-td">Sulawesi Labota power station</td><td class="data-td">Unit 8</td><td class="data-td">Sulawesi Tengah</td><td class="data-td">380</td><td class="data-td">operating</td><td class="data-td">2024</td></tr>
+<tr class="data-tr-even"><td class="data-td">Delong Nickel Phase II power station</td><td class="data-td">Unit 10</td><td class="data-td">Sulawesi Tenggara</td><td class="data-td">380</td><td class="data-td">operating</td><td class="data-td">2021</td></tr>
+<tr><td class="data-td">Delong Nickel Phase II power station</td><td class="data-td">Unit 11</td><td class="data-td">Sulawesi Tenggara</td><td class="data-td">380</td><td class="data-td">cancelled</td><td class="data-td">Belum Operasi</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Labota power station</td><td class="data-td">Unit 7</td><td class="data-td">Sulawesi Tengah</td><td class="data-td">380</td><td class="data-td">operating</td><td class="data-td">2023</td></tr>
+<tr><td class="data-td">Sulawesi Labota power station</td><td class="data-td">Unit 3</td><td class="data-td">Sulawesi Tengah</td><td class="data-td">380</td><td class="data-td">operating</td><td class="data-td">2023</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Labota power station</td><td class="data-td">Unit 5</td><td class="data-td">Sulawesi Tengah</td><td class="data-td">380</td><td class="data-td">operating</td><td class="data-td">2023</td></tr>
+<tr><td class="data-td">Sulawesi Labota power station</td><td class="data-td">Unit 6</td><td class="data-td">Sulawesi Tengah</td><td class="data-td">380</td><td class="data-td">operating</td><td class="data-td">2023</td></tr>
+<tr class="data-tr-even"><td class="data-td">Delong Nickel Phase II power station</td><td class="data-td">Unit 09</td><td class="data-td">Sulawesi Tenggara</td><td class="data-td">380</td><td class="data-td">operating</td><td class="data-td">2022</td></tr>
+</tbody>
+</table>
+<h4>E. Analisis Temuan Empiris</h4>
+<p><strong>1. Skala Infrastruktur Kotor:</strong> GEM mencatat <strong>67 unit</strong> PLTU batubara captive dengan total kapasitas <strong>12,245 MW</strong> (55 unit beroperasi, 9,825 MW). <strong>2. Konsentrasi Beban Karbon:</strong> Sulawesi Tengah menanggung beban terbesar 9,365 MW (76.5%), sejalan dengan konsentrasi kawasan industri hilirisasi. <strong>3. Implikasi Transisi Energi:</strong> diperlukan percepatan transisi energi bersih di sektor industri ekstraktif agar target hilirisasi selaras dengan komitmen penurunan emisi nasional.</p>
+</body>
+</html>
