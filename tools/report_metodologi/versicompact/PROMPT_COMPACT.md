@@ -32,14 +32,15 @@ Sebelum menulis kode atau membuat file untuk bab target (`Bab X`), agen **WAJIB*
 | 2 | **Contoh Skrip Generator Sukses** | `tools/report_metodologi/versicompact/bab_1/generate_bab1_compact.py` | Template skrip python-docx padat yang menghasilkan Word tepat 2 lembar. |
 | 3 | **Contoh Markdown Sukses** | `tools/report_metodologi/versicompact/bab_1/Metodologi_Bab1_Ekspansi_Industri_Compact.md` | Standar kepadatan naskah Markdown. |
 | 4 | **Dokumen Root Bab Target (Full)** | `tools/report_metodologi/bab_{X}/Metodologi_Bab{X}_....md` | Sumber data primer tunggal (semua narasi, rumus, dan angka diambil dari sini). |
+| 5 | **Referensi Gaya Notasi Publik** | `tools/report_metodologi/versicompact/ref/Celios-Metodologi-Statistik-2.md` | Acuan WAJIB gaya penulisan rumus "matriks kalkulasi" berbahasa sehari-hari (mudah dibaca publik). |
 
 ---
 
-## 3. 6 Aturan Emas yang Tidak Boleh Dilanggar (*Non-Negotiable Rules*)
+## 3. 7 Aturan Emas yang Tidak Boleh Dilanggar (*Non-Negotiable Rules*)
 
-1. **Target Panjang Halaman (Page Budget): MAKSIMAL 2 HINGGA 4 LEMBAR**
+1. **Target Panjang Halaman (Page Budget): MAKSIMAL 3 HINGGA 4 LEMBAR**
    - Dokumen Word (DOCX) yang dihasilkan **TIDAK BOLEH LEBIH DARI 4 HALAMAN**.
-   - Idealnya tepat **2 hingga 3 halaman** seperti Bab 1 dan Bab 2.
+   - **Tidak perlu pemadatan ekstrem** — keterbacaan publik diutamakan (arahan pengguna). Standar Bab 1 & Bab 2 revisi: tepat **3 halaman**.
    - Wajib diverifikasi dengan menjalankan pengujian halaman Word COM di terminal.
 2. **Kesesuaian Header & Judul Root:**
    - Judul dokumen `# BAB {X}: METODOLOGI ANALISIS ...` harus sama persis dengan dokumen root non-compact.
@@ -50,12 +51,15 @@ Sebelum menulis kode atau membuat file untuk bab target (`Bab X`), agen **WAJIB*
    - **DILARANG** menggunakan label artifisial kaku seperti `"Analisis Temuan Empiris:"` (narasi harus mengalir natural).
 4. **Nol Icon / Emoji (No Icon Policy):**
    - Hapus total seluruh icon atau emoji grafis (`⚠️`, `🔎`, `✅`, `❌`, dsb.).
-5. **Highlight Formulasi Matematis & Persamaan Substitusi Substantif:**
+5. **Highlight Formulasi Matematis & Persamaan Substitusi Substantif (Notasi Publik):**
    - Setiap topik substantif wajib menonjolkan **Formulasi Matematis** dan **Persamaan Substitusi (dengan angka riil)** (agregasi PDRB, rasio disparitas wilayah, laju alih ruang, volume limbah, atribusi emisi CO2, keterancaman spesies).
-   - **Khusus Analisis Crosstab (Chi-Square & Odds Ratio): TIDAK PERLU persamaan substitusi aritmatika**. Cukup tuliskan formulasi umum horizontal 1 baris, karena seluruh rincian angka uji chi-square, df, p-value, dan rasio risiko sudah tertera rapi pada Tabel Sintesis Inferensial.
-6. **Sintesis Tabel Padat:**
+   - **Notasi rumus WAJIB "mudah dibaca publik"** ala `ref/Celios-Metodologi-Statistik-2.md`: nama variabel deskriptif berbahasa sehari-hari dengan operator `÷` dan `×` (contoh: `Pangsa Ekstraktif (%) = ( Sektor Ekstraktif ÷ Total PDRB ) × 100%`). **DILARANG** memakai simbol kriptik `Σ`, subscript `_{p,t}`, `MEAN(...)`, dsb.
+   - **Khusus Analisis Crosstab (Chi-Square & Odds Ratio): TIDAK PERLU persamaan substitusi aritmatika**, tetapi **WAJIB menyertakan 1 Tabel Konfigurasi Variabel Uji Crosstab** (kolom per sub-bab; baris: X, Y, H1, Decision Rule Alpha 5%, Threshold Kategori Median, Orientasi Odds Ratio) tepat sebelum Tabel Sintesis Inferensial. Formulasi umum cukup 1 baris berbahasa natural.
+6. **Sumber Data Publik (No CSV Policy):**
+   - **DILARANG** menuliskan nama file dataset internal (`*.csv`) di dokumen; tuliskan **institusi sumber resmi** (BPS, Kementerian ESDM/Minerbaone, KLHK, BKPM, GEM, GFW, NASA TROPOMI, GBIF, IUCN, KNKT) diikuti "(diolah CELIOS)". Kolom `Dataset File` di Matriks Indikator dihapus.
+7. **Sintesis Tabel Padat:**
    - Gabungkan skenario tabel inferensial statistik (Chi-Square, p-value, Odds Ratio) ke dalam **1 tabel sintesis panel** berstandar SPSS.
-   - Batasi total tabel dalam satu bab hanya berkisar antara **4 hingga 6 tabel kunci**.
+   - Batasi total tabel dalam satu bab hanya berkisar antara **5 hingga 7 tabel kunci** (termasuk Tabel Konfigurasi Crosstab).
 
 ---
 
@@ -133,8 +137,8 @@ git commit -m "feat: generate Bab {X} compact methodology (ultra-dense layout, e
 
 | Bab | Topik Metodologi | Status Versi Compact | Jumlah Halaman Word |
 | :---: | :--- | :---: | :---: |
-| **Bab 1** | Ekspansi Industri Ekstraktif & Infrastruktur Penunjang | **SELESAI (Standard Acuan)** | **Tepat 2 Lembar** |
-| **Bab 2** | Beban Kualitas Lingkungan Hidup (IKU, IKA, Tailing, Deforestasi, Biodiversitas) | **SELESAI** | **Tepat 2 Lembar** |
+| **Bab 1** | Ekspansi Industri Ekstraktif & Infrastruktur Penunjang | **SELESAI (Standard Acuan, Revisi Publik: konfigurasi crosstab, sumber institusi, notasi mudah dibaca)** | **Tepat 3 Lembar** |
+| **Bab 2** | Beban Kualitas Lingkungan Hidup (IKU, IKA, Tailing, Deforestasi, Biodiversitas) | **SELESAI (Revisi Publik: konfigurasi crosstab, sumber institusi, notasi mudah dibaca)** | **Tepat 3 Lembar** |
 | **Bab 3** | Beban Kesehatan & Kerugian Ekonomi Lingkungan | Menunggu Pengerjaan | Target: 2–4 Lembar |
 | **Bab 4** | Ketimpangan Ekonomi & Polarisasi Kesejahteraan | Menunggu Pengerjaan | Target: 2–4 Lembar |
 | **Bab 5** | Pola Penerbitan Izin & Tata Kelola Ruang Tambang | Menunggu Pengerjaan | Target: 2–4 Lembar |

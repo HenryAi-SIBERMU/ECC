@@ -22,16 +22,16 @@ Struktur Produk Domestik Regional Bruto (PDRB) enam provinsi Sulawesi (2016–20
 
 **Formulasi Matematis (Agregasi Rantai Pasok Hukum & Pangsa PDRB):**
 ```text
-Sektor_Ekstraktif = PDRB(Kat.B: Pertambangan) + PDRB(Kat.C: Ind. Pengolahan) + PDRB(Kat.D: Listrik)
-Total_PDRB = Sektor_Ekstraktif + Sektor_Akar_Rumput(Kat.A) + Sektor_Jasa(Kat.E s.d. U)
-Pangsa_Ekstraktif (%) = ( Sektor_Ekstraktif / Total_PDRB ) * 100
-Laju_Pertumbuhan (%) = [ ( Nilai_Tahun_t - Nilai_Tahun_{t-1} ) / Nilai_Tahun_{t-1} ] * 100
+Sektor Ekstraktif = PDRB Pertambangan (Kat. B) + PDRB Industri Pengolahan/Smelter (Kat. C) + PDRB Listrik/PLTU (Kat. D)
+Total PDRB = Sektor Ekstraktif + Sektor Akar Rumput (Kat. A) + Sektor Jasa & Lainnya (Kat. E s.d. U)
+Pangsa Ekstraktif (%) = ( Sektor Ekstraktif ÷ Total PDRB ) × 100%
+Laju Pertumbuhan (%) = ( ( Nilai Tahun Ini - Nilai Tahun Sebelumnya ) ÷ Nilai Tahun Sebelumnya ) × 100%
 ```
 **Persamaan Substitusi:**
 ```text
-Sektor_Ekstraktif_2024 (Sulteng) = Rp28.450 M + Rp173.864 M + Rp8.200 M = Rp210.513,75 Miliar (Rp210,51 Triliun)
-Pangsa_Ekstraktif_2024 = ( 210.513,75 Miliar / 376.950,31 Miliar ) * 100% = 55,85%
-Laju_Pertumbuhan = [ (Rp210,51 T - Rp28,45 T) / Rp28,45 T ] * 100% = +639,93% (Meroket 7,40 Kali Lipat)
+Sektor Ekstraktif Sulteng 2024 = Rp28.450 M (Tambang) + Rp173.864 M (Smelter) + Rp8.200 M (Listrik) = Rp210.513,75 Miliar (Rp210,51 Triliun)
+Pangsa Ekstraktif 2024 = ( Rp210.513,75 Miliar ÷ Rp376.950,31 Miliar ) × 100% = 55,85%
+Laju Pertumbuhan = ( ( Rp210,51 T - Rp28,45 T ) ÷ Rp28,45 T ) × 100% = +639,93% (Meroket 7,40 Kali Lipat)
 ```
 *Di Sulawesi Tengah, klaster ekstraktif menguasai 55,85% total PDRB 2024, sedangkan pertanian rakyat anjlok di bawah 18%.*
 
@@ -51,16 +51,16 @@ Dekomposisi spasial membongkar *Aggregate Illusion Bias*. Kabupaten **Morowali**
 
 **Formulasi Matematis (Disparitas Spasial & Rasio Kesenjangan Morowali):**
 ```text
-Sektor_Ekstraktif_Kab = PDRB_Kab(Kat.B) + PDRB_Kab(Kat.C) + PDRB_Kab(Kat.D)
-Porsi_Sektor_Kab (%) = ( Nilai_Sektor_Kab / Total_PDRB_Kab ) * 100
-Rasio_Kesenjangan = Sektor_Ekstraktif_Morowali / Sektor_Akar_Rumput_Morowali
+Sektor Ekstraktif Kabupaten = PDRB Pertambangan + PDRB Industri Pengolahan + PDRB Listrik (level kabupaten)
+Porsi Sektor (%) = ( Nilai Sektor Kabupaten ÷ Total PDRB Kabupaten ) × 100%
+Rasio Kesenjangan = Sektor Ekstraktif Morowali ÷ Sektor Pertanian Rakyat Morowali
 ```
 **Persamaan Substitusi:**
 ```text
-Sektor_Ekstraktif_Morowali = Rp29,20 T (Tambang) + Rp127,96 T (Smelter) = Rp157,17 Triliun (Porsi: 45,20%)
-Sektor_Akar_Rumput_Morowali = Rp2,70 Triliun (Porsi: 0,78%)
-Rasio_Kesenjangan_Morowali = Rp157,17 Triliun / Rp2,70 Triliun = 58,21 Kali Lipat
-Komparasi_Wilayah: Sektor ekstraktif Morowali (Rp157,17 T) > Gabungan 8 Kab. Non-Sentra Sulteng (Rp115,22 T)
+Sektor Ekstraktif Morowali = Rp29,20 T (Tambang) + Rp127,96 T (Smelter) = Rp157,17 Triliun (Porsi: 45,20%)
+Sektor Pertanian Rakyat Morowali = Rp2,70 Triliun (Porsi: 0,78%)
+Rasio Kesenjangan Morowali = Rp157,17 Triliun ÷ Rp2,70 Triliun = 58,21 Kali Lipat
+Komparasi Wilayah: Sektor ekstraktif Morowali (Rp157,17 T) > Gabungan 8 Kabupaten Non-Sentra Sulteng (Rp115,22 T)
 ```
 *Sektor pangan dan pertanian rakyat Morowali hanya tersisa 0,78% dari total kapasitas ekonomi daerah.*
 
@@ -77,14 +77,14 @@ Operasi **778 unit smelter** di Sulawesi ditopang oleh **9.825 MW PLTU Captive b
 
 **Formulasi Matematis (Konsentrasi Spasial Energi PLTU Captive):**
 ```text
-Porsi_Konsentrasi (%) = ( Kapasitas_Sentra / Total_Kapasitas_Sulawesi ) * 100
-χ² = Σ [ ( O_ij - E_ij )² / E_ij ]  |  Odds_Ratio (OR) = ( a * d ) / ( b * c )
+Porsi Konsentrasi (%) = ( Kapasitas PLTU Wilayah Sentra ÷ Total Kapasitas se-Sulawesi ) × 100%
+Chi-Square (χ²) = Jumlah dari [ ( Frekuensi Observasi - Frekuensi Harapan )² ÷ Frekuensi Harapan ]  |  Odds Ratio (OR) = ( a × d ) ÷ ( b × c )
 ```
 **Persamaan Substitusi:**
 ```text
-Konsentrasi_Morowali_Konawe = ( 8.750 MW / 9.825 MW ) * 100% = 89,06% Daya Terkunci
+Konsentrasi Morowali + Konawe = ( 8.750 MW ÷ 9.825 MW ) × 100% = 89,06% Daya Terkunci
 ```
-*Hasil pengujian statistik tabulasi silang (Chi-Square & Odds Ratio) dirinci secara komprehensif pada Tabel 1.3.*
+*Hasil pengujian statistik tabulasi silang (Chi-Square & Odds Ratio) dirinci secara komprehensif pada Tabel 1.4, dengan konfigurasi variabel uji pada Tabel 1.3.*
 
 ---
 
@@ -94,16 +94,16 @@ Pangkalan data Minerbaone mencatat penerbitan **574 Izin Usaha Pertambangan (IUP
 
 **Formulasi Matematis (Laju Pertumbuhan Izin & Alih Fungsi Ruang):**
 ```text
-Pertumbuhan_Izin (%) = [ ( IUP_t - IUP_{t-1} ) / IUP_{t-1} ] * 100
-Laju_Alih_Ruang_Harian = Luas_Konsesi_Total / 3.650 Hari
-χ² = Σ [ ( O - E )² / E ]  |  Odds_Ratio (OR) = ( a * d ) / ( b * c )
+Pertumbuhan Izin (%) = ( ( Izin Tahun Ini - Izin Tahun Sebelumnya ) ÷ Izin Tahun Sebelumnya ) × 100%
+Laju Alih Ruang Harian = Total Luas Konsesi 10 Tahun ÷ 3.650 Hari
+Chi-Square (χ²) = Jumlah dari [ ( Frekuensi Observasi - Frekuensi Harapan )² ÷ Frekuensi Harapan ]  |  Odds Ratio (OR) = ( a × d ) ÷ ( b × c )
 ```
 **Persamaan Substitusi:**
 ```text
-Lonjakan_IUP_2022_2024 = [ (194 izin - 56 izin) / 56 izin ] * 100% = +246,43%
-Laju_Alih_Ruang = 819.452,54 Ha / 3.650 Hari = 224,51 Hektar/Hari (Setara 314 Lapangan Bola/Hari)
+Lonjakan IUP 2022–2024 = ( ( 194 izin - 56 izin ) ÷ 56 izin ) × 100% = +246,43%
+Laju Alih Ruang = 819.452,54 Ha ÷ 3.650 Hari = 224,51 Hektar/Hari (Setara 314 Lapangan Bola/Hari)
 ```
-*Hasil pengujian statistik tabulasi silang (Chi-Square & Odds Ratio) dirinci secara komprehensif pada Tabel 1.3.*
+*Hasil pengujian statistik tabulasi silang (Chi-Square & Odds Ratio) dirinci secara komprehensif pada Tabel 1.4, dengan konfigurasi variabel uji pada Tabel 1.3.*
 
 ---
 
@@ -113,18 +113,28 @@ Realisasi Penanaman Modal Dalam Negeri (PMDN) sebesar **Rp 218 Triliun** (BKPM 2
 
 **Formulasi Matematis (Konsentrasi Modal PMDN & Atribusi Deforestasi Komoditas):**
 ```text
-Konsentrasi_PMDN (%) = ( PMDN_Sentra / Total_PMDN ) * 100
-Rasio_Kerusakan = Deforestasi_Komoditas / Deforestasi_Pertanian_Rakyat
-χ² = Σ [ ( O - E )² / E ]  |  Odds_Ratio (OR) = ( a * d ) / ( b * c )
+Konsentrasi PMDN (%) = ( PMDN 3 Provinsi Sentra ÷ Total PMDN Sulawesi ) × 100%
+Rasio Kerusakan = Deforestasi Komoditas (Tambang/Sawit) ÷ Deforestasi Pertanian Rakyat
+Chi-Square (χ²) = Jumlah dari [ ( Frekuensi Observasi - Frekuensi Harapan )² ÷ Frekuensi Harapan ]  |  Odds Ratio (OR) = ( a × d ) ÷ ( b × c )
 ```
 **Persamaan Substitusi:**
 ```text
-Konsentrasi_PMDN = ( Rp194,89 Triliun / Rp218,98 Triliun ) * 100% = 89,00% Tertumpuk di Sulteng, Sultra, Sulsel
-Rasio_Kerusakan = 1.001.654 Ha (Tambang/Sawit) / 55.905 Ha (Pertanian Rakyat) = 17,92 Kali Lipat Lebih Masif
+Konsentrasi PMDN = ( Rp194,89 Triliun ÷ Rp218,98 Triliun ) × 100% = 89,00% Tertumpuk di Sulteng, Sultra, Sulsel
+Rasio Kerusakan = 1.001.654 Ha (Tambang/Sawit) ÷ 55.905 Ha (Pertanian Rakyat) = 17,92 Kali Lipat Lebih Masif
 ```
-*Hasil pengujian statistik tabulasi silang (Chi-Square & Odds Ratio) dirinci secara komprehensif pada Tabel 1.3.*
+*Hasil pengujian statistik tabulasi silang (Chi-Square & Odds Ratio) dirinci secara komprehensif pada Tabel 1.4, dengan konfigurasi variabel uji pada Tabel 1.3.*
 
-##### Tabel 1.3: Ringkasan Hasil Uji Independensi Chi-Square (χ²) dan Odds Ratio (OR) Data Panel Bab 1 (N=60)
+##### Tabel 1.3: Konfigurasi Variabel Uji Tabulasi Silang (Crosstab) Bab 1 — Skenario Sub-bab 1.2, 1.3, dan 1.4
+| Komponen Uji | 1.2 PLTU Captive vs Deforestasi | 1.3 Izin Tambang vs Deforestasi | 1.4 Investasi PMDN vs Deforestasi |
+| :--- | :--- | :--- | :--- |
+| **Variabel Independen (X)** | Kapasitas PLTU Captive (MW) | Frekuensi IUP Baru (Unit) / Luas Konsesi Baru (Ha) | Realisasi Investasi PMDN (Juta Rp) |
+| **Variabel Dependen (Y)** | Deforestasi Komoditas (Ha) | Deforestasi Komoditas (Ha) / Total Deforestasi Alam (Ha) | Total Deforestasi Alam (Ha) / Deforestasi Komoditas (Ha) |
+| **Hipotesis Alternatif (H1)** | Ekspansi PLTU Captive berkorelasi positif dengan lonjakan deforestasi komoditas | Tingginya penerbitan izin / luas konsesi berhubungan positif dengan laju deforestasi | Tingginya realisasi investasi PMDN berhubungan positif dengan laju deforestasi |
+| **Decision Rule (Alpha 5%)** | Tolak H0 jika P-Value < 0.05 | Tolak H0 jika P-Value < 0.05 | Tolak H0 jika P-Value < 0.05 |
+| **Threshold Kategori (Median Panel)** | X > 0 MW (PLTU aktif); Y ≥ 10,961.8 Ha (N=60) | X ≥ 2.0 izin; Y ≥ 10,961.8 Ha (N=60) | X > 3,146.4 Juta Rp; Y ≥ 10,451.7 Ha (N=48) |
+| **Orientasi Odds Ratio** | a = PLTU Tinggi & Deforestasi Tinggi (risiko lonjakan deforestasi) | a = Izin Tinggi & Deforestasi Tinggi (risiko deforestasi tinggi) | a = Investasi Tinggi & Deforestasi Tinggi (risiko deforestasi tinggi) |
+
+##### Tabel 1.4: Ringkasan Hasil Uji Independensi Chi-Square (χ²) dan Odds Ratio (OR) Data Panel Bab 1 (N=60)
 | Faktor Tekanan Industri (X) | Indikator Dampak Lingkungan (Y) | Chi-Square (χ²) | P-Value | Odds Ratio | df | Kesimpulan Ilmiah |
 | :--- | :--- | :---: | :---: | :---: | :---: | :--- |
 | **Kapasitas PLTU Captive (MW)** | Deforestasi Komoditas (≥10,961 Ha) | 18.049 | p < 0.0001 | 18.00x | 1 | SIGNIFIKAN (Risiko 18x Lipat) |
@@ -139,7 +149,7 @@ Rasio_Kerusakan = 1.001.654 Ha (Tambang/Sawit) / 55.905 Ha (Pertanian Rakyat) = 
 
 Eksploitasi nikel terhubung langsung ke pasar global melalui 6 simpul pelabuhan samudera dan terminal khusus utama di pesisir Sulawesi yang diverifikasi melalui triangulasi Laporan KNKT, Regulasi PSN (Perpres No. 109/2020), dan laporan emiten.
 
-##### Tabel 1.4: Inventarisasi Enam Simpul Pelabuhan dan Terminal Khusus Ekspor Nikel di Pulau Sulawesi
+##### Tabel 1.5: Inventarisasi Enam Simpul Pelabuhan dan Terminal Khusus Ekspor Nikel di Pulau Sulawesi
 | Kawasan Industri | Wilayah Administrasi | Fasilitas Pelabuhan / Terminal | Status Regulasi | Kapasitas Kapal | Tujuan Utama Ekspor |
 | :--- | :--- | :--- | :--- | :---: | :--- |
 | **IMIP Morowali** | Morowali, Sulteng | Pelabuhan Samudera & Dermaga Curah | PSN (Perpres 109/2020) | Hingga 52.378 DWT | Pasar Global (Tiongkok) |
@@ -157,37 +167,37 @@ Pemodelan spasial alur pelayaran kargo nikel dari 6 pelabuhan muat Sulawesi menu
 
 **Formulasi Matematis (Kurva Parametrik Bézier Alur Pelayaran Maritim):**
 ```text
-Kurva(t) = ( 1 - t )² * P_Asal + 2 * ( 1 - t ) * t * P_Kontrol + t² * P_Tujuan ,  t ∈ [0, 1]
+Titik Kurva Pelayaran = ( 1 - t )² × Pelabuhan Asal + 2 × ( 1 - t ) × t × Titik Kontrol + t² × Pelabuhan Tujuan ,  t bergerak dari 0 ke 1
 ```
 **Persamaan Substitusi:**
 ```text
-Kapasitas_Kapal_Maksimum = 52.378 DWT (Setara ~5.200 Truk Tronton per Pengapalan)
-Orientasi_Logistik = Lebih dari 78% kargo bertolak langsung ke pelabuhan Tiongkok (Ningbo, Qingdao) dan Jepang (Chiba)
+Kapasitas Kapal Maksimum = 52.378 DWT (Setara ~5.200 Truk Tronton per Pengapalan)
+Orientasi Logistik: Lebih dari 78% kargo bertolak langsung ke pelabuhan Tiongkok (Ningbo, Qingdao) dan Jepang (Chiba)
 ```
-*P_Asal: koordinat pelabuhan Sulawesi, P_Kontrol: jangkar perairan internasional, P_Tujuan: pelabuhan bongkar.*
+*Pelabuhan Asal: koordinat pelabuhan muat Sulawesi; Titik Kontrol: jangkar lengkung di perairan internasional; Pelabuhan Tujuan: pelabuhan bongkar negara tujuan.*
 
 ---
 
 ## 1.7 Matriks Indikator dan Sumber Data Resmi Bab 1
 
-##### Tabel 1.5: Matriks Indikator dan Sumber Data Primer Resmi Bab 1
-| No | Nama Indikator | Kategori Analisis | Satuan | Cakupan | Institusi Sumber Data Primer | Dataset File |
-| :---: | :--- | :--- | :---: | :---: | :--- | :--- |
-| 1 | IUP Tambang Baru | Tekanan Ekstraktif | Unit | 2014-2024 | ESDM MODI (Minerbaone) | `sulawesi_izin_baru_per_tahun.csv` |
-| 2 | Luas Konsesi Baru | Tekanan Ekstraktif | Hektar | 2014-2024 | ESDM MODI (Minerbaone) | `sulawesi_kawasan_nikel_luas.csv` |
-| 3 | PLTU Captive | Energi Fosil Khusus | MW | 2014-2024 | Global Energy Monitor (GEM) | `sulawesi_pltu_captive.csv` |
-| 4 | Smelter Nikel | Fasilitas Industri | Unit | 2014-2024 | ESDM & Center for Global Sustainability | `sulawesi_esdm_nikel.csv` |
-| 5 | Investasi PMDN | Arus Modal | Triliun Rp | 2016-2024 | Kementerian Investasi / BKPM & BPS | `sulawesi_investasi_pmdn_2016_2024.csv` |
-| 6 | PDRB Provinsi Sektoral | Ekonomi Makro | Triliun Rp | 2016-2024 | BPS Provinsi (Subject 52) | `sulawesi_pdrb_sektoral_2016_2024.csv` |
-| 7 | PDRB Kabupaten Sentra | Ekonomi Daerah | Triliun Rp | 2016-2024 | BPS Kabupaten se-Sulteng | `sulawesi_pdrb_sektoral_kabupaten_2016_2024.csv` |
-| 8 | Deforestasi Komoditas | Dampak Ekologis | Hektar | 2014-2023 | Global Forest Watch (GFW API v2) | `sulawesi_gfw_master_1_dekade_2014_2023_v3.csv` |
-| 9 | Pelabuhan & Terminal Khusus | Logistik Maritim | DWT / Titik | 2014-2024 | KNKT, Perpres PSN, Laporan Korporasi | `sulawesi_logistik_simpul_nikel.csv` |
+##### Tabel 1.6: Matriks Indikator dan Sumber Data Primer Resmi Bab 1
+| No | Nama Indikator | Kategori Analisis | Satuan | Cakupan | Institusi Sumber Data Primer Resmi |
+| :---: | :--- | :--- | :---: | :---: | :--- |
+| 1 | IUP Tambang Baru | Tekanan Ekstraktif | Unit | 2014-2024 | Kementerian ESDM — MODI (Minerbaone) |
+| 2 | Luas Konsesi Baru | Tekanan Ekstraktif | Hektar | 2014-2024 | Kementerian ESDM — MODI (Minerbaone) |
+| 3 | PLTU Captive | Energi Fosil Khusus | MW | 2014-2024 | Global Energy Monitor (GEM) |
+| 4 | Smelter Nikel | Fasilitas Industri | Unit | 2014-2024 | Kementerian ESDM & Center for Global Sustainability |
+| 5 | Investasi PMDN | Arus Modal | Triliun Rp | 2016-2024 | Kementerian Investasi / BKPM & BPS |
+| 6 | PDRB Provinsi Sektoral | Ekonomi Makro | Triliun Rp | 2016-2024 | BPS Provinsi se-Sulawesi (Subject 52) |
+| 7 | PDRB Kabupaten Sentra | Ekonomi Daerah | Triliun Rp | 2016-2024 | BPS Kabupaten se-Sulawesi Tengah |
+| 8 | Deforestasi Komoditas | Dampak Ekologis | Hektar | 2014-2023 | Global Forest Watch (University of Maryland) |
+| 9 | Pelabuhan & Terminal Khusus | Logistik Maritim | DWT / Titik | 2014-2024 | KNKT, Perpres PSN, Laporan Korporasi |
 
 ---
 
 ## 1.8 Bagan Alur Kerangka Kerja Riset Bab 1
 
-##### Tabel 1.6: Matriks Tahapan dan Alur Kerangka Kerja Riset Bab 1
+##### Tabel 1.7: Matriks Tahapan dan Alur Kerangka Kerja Riset Bab 1
 | Fase Riset | Fokus Metodologis | Bahan & Sumber Data Primer | Keluaran Analisis |
 | :--- | :--- | :--- | :--- |
 | **Fase I: Pengumpulan Data** | Kurasi data resmi lintas K/L | Publikasi BPS, Minerbaone, BKPM, GEM, GFW | Basis Data Tabular Panel Provinsi (2014–2024) |

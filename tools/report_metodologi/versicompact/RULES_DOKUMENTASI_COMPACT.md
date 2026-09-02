@@ -3,14 +3,15 @@
 
 Dokumen ini merupakan **SOP (Standard Operating Procedure)** wajib dalam menyusun laporan **Metodologi Statistik Versi Compact** untuk seluruh bab riset Daya Dukung dan Daya Tampung Lingkungan Hidup (D3TLH) Sulawesi periode 2014–2024.
 
-Standar baku ini dirumuskan dan diverifikasi berdasarkan implementasi final **Bab 1 Versi Compact** yang berukuran **tepat 2 lembar halaman Word** di [`tools/report_metodologi/versicompact/bab_1/`](file:///C:/Users/yooma/OneDrive/Desktop/duniahub/client/4.%20Celios2/tools/report_metodologi/versicompact/bab_1/).
+Standar baku ini dirumuskan dan diverifikasi berdasarkan implementasi final **Bab 1 & Bab 2 Versi Compact (revisi publik, masing-masing 3 lembar halaman Word)** di [`tools/report_metodologi/versicompact/`](file:///C:/Users/yooma/OneDrive/Desktop/duniahub/client/4.%20Celios2/tools/report_metodologi/versicompact/). Gaya notasi matematika mengacu pada referensi publik CELIOS di [`versicompact/ref/Celios-Metodologi-Statistik-2.md`](file:///C:/Users/yooma/OneDrive/Desktop/duniahub/client/4.%20Celios2/tools/report_metodologi/versicompact/ref/).
 
 ---
 
 ## 1. Prinsip Utama & Batasan Panjang Dokumen (Page Budget)
 
 1. **Target Panjang Halaman:**
-   - **MAKSIMAL 2 HINGGA 4 LEMBAR (HALAMAN)** per bab saat dibuka di Microsoft Word (DOCX).
+   - **MAKSIMAL 3 HINGGA 4 LEMBAR (HALAMAN)** per bab saat dibuka di Microsoft Word (DOCX).
+   - **TIDAK PERLU pemadatan ekstrem** — keterbacaan publik lebih diutamakan daripada penghematan halaman (arahan pengguna: "jangan terlalu compact, maksimal 3-4 page gak apa apa"). Standar Bab 1 & Bab 2 revisi: tepat 3 lembar.
    - Verifikasi wajib menggunakan penghitungan statistik Word (*ComputeStatistics wdStatisticPages*).
 2. **Kesesuaian Mutlak dengan Dokumen Root Non-Compact:**
    - **TIDAK BOLEH** menambah narasi, opini, atau metafora buatan di luar dokumen metodologi non-compact/full (`Metodologi_Bab{X}_....md`).
@@ -20,6 +21,10 @@ Standar baku ini dirumuskan dan diverifikasi berdasarkan implementasi final **Ba
    - **DILARANG** menambahkan blok *Catatan Keterbatasan Data (Caveats)* terpisah di luar metodologi resmi.
 4. **Tanpa Icon / Emoji (No Icon Policy):**
    - Dokumen harus 100% formal dan akademis. Tidak boleh ada emoji atau icon grafis seperti `⚠️`, `🔎`, `✅`, `❌`, `📌`, dll.
+5. **Sumber Data untuk Pembaca Publik (No CSV Policy):**
+   - **DILARANG** menuliskan nama file dataset internal (`*.csv`, path `data/processed/...`) di seluruh badan dokumen, callout Sumber Data, maupun tabel Matriks Indikator.
+   - Sumber data wajib ditulis sebagai **nama institusi resmi**: BPS, Kementerian ESDM (MODI/Minerbaone), KLHK, Kementerian Investasi/BKPM, Global Energy Monitor (GEM), Global Forest Watch (University of Maryland), NASA TROPOMI, GBIF, IUCN Red List, KNKT, dst. — diikuti keterangan "(diolah CELIOS)".
+   - Kolom `Dataset File` pada Tabel Matriks Indikator **DIHAPUS**; cukup kolom `Institusi Sumber Data Primer Resmi`.
 
 ---
 
@@ -74,10 +79,16 @@ Untuk menjamin dokumen muat dalam **2–4 lembar**, spesifikasi file Word (`.doc
 
 ### A. Formulasi Matematis & Persamaan Substitusi
 - **Highlight Utama:** Setiap topik substantif wajib menonjolkan **Formulasi Matematis** dan **Persamaan Substitusi (dengan angka riil)**, misalnya agregasi PDRB, rasio disparitas wilayah sentra, laju alih ruang harian, rasio kerusakan deforestasi komoditas vs rakyat, atribusi emisi karbon, atau keterancaman spesies.
-- **Pengecualian untuk Analisis Crosstab (Chi-Square & Odds Ratio):**
-  - **TIDAK PERLU** menuliskan persamaan substitusi aritmatika (seperti perhitungan perkalian sel tabel kontinjensi `(a * d) / (b * c)` atau pecahan `(O - E)² / E`).
-  - Cukup tampilkan formulasi umum simbolik horizontal 1 baris:
-    `χ² = Σ [ ( O_ij - E_ij )² / E_ij ]  |  Odds_Ratio (OR) = ( a * d ) / ( b * c )`
+- **Notasi "Mudah Dibaca Publik" (WAJIB, Gaya Referensi `ref/Celios-Metodologi-Statistik-2.md`):**
+  - Rumus ditulis dengan **nama variabel deskriptif berbahasa sehari-hari** dan operator eksplisit `÷` serta `×`, mengikuti gaya matriks kalkulasi publikasi CELIOS, contoh:
+    `Total Biaya = ( 51% × Jumlah Provinsi × Biaya per Provinsi ) + ( 51% × Jumlah Kabupaten × Biaya per Kabupaten )`
+  - **DILARANG** menggunakan notasi simbolik akademis kriptik: `Σ`, subscript `_{p,t}`, `S_p = Σ s_i`, `MEAN(...)`, `t ∈ [0,1]`, dsb.
+  - Pola baku per topik: (1) rumus umum berbahasa natural, (2) Persamaan Substitusi dengan angka riil, (3) satu kalimat hasil/interpretasi.
+- **Aturan untuk Analisis Crosstab (Chi-Square & Odds Ratio):**
+  - **TIDAK PERLU** menuliskan persamaan substitusi aritmatika (seperti perhitungan perkalian sel tabel kontinjensi atau pecahan frekuensi).
+  - Formulasi umum cukup 1 baris berbahasa natural:
+    `Chi-Square (χ²) = Jumlah dari [ ( Frekuensi Observasi - Frekuensi Harapan )² ÷ Frekuensi Harapan ]  |  Odds Ratio (OR) = ( a × d ) ÷ ( b × c )`
+  - **WAJIB menyertakan 1 Tabel Konfigurasi Variabel Uji Tabulasi Silang (Crosstab)** yang mengonsolidasikan seluruh skenario uji bab tersebut dalam kolom per sub-bab, dengan baris: Variabel Independen (X), Variabel Dependen (Y), Hipotesis Alternatif (H1), Decision Rule (Alpha 5%), Threshold Kategori (Median Panel), dan Orientasi Odds Ratio. Tabel ini ditempatkan tepat sebelum Tabel Sintesis Inferensial (contoh: Tabel 1.3 Bab 1, Tabel 2.4 Bab 2).
   - Seluruh rincian koefisien chi-square, df, p-value, dan rasio risiko odds ratio **sudah tersaji lengkap dan terstandarisasi pada Tabel Sintesis Inferensial**.
 - **Gaya Narasi Alami (Tanpa Label Artifisial):**
   - Dilarang menuliskan label kaku seperti `"Analisis Temuan Empiris:"` secara berulang-ulang di awal paragraf. Narasi temuan harus mengalir secara natural dan akademis.
