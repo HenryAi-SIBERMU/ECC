@@ -961,9 +961,6 @@ with st.expander("2 · KUALITAS LINGKUNGAN", expanded=False):
     </div>
     ''', unsafe_allow_html=True)
     # --- Crosstab Introduction ---
-    import importlib
-    import src.components.spss_crosstab
-    importlib.reload(src.components.spss_crosstab)
     from src.components.spss_crosstab import render_spss_crosstab
 
     if df_smelter is not None and not df_ika.empty:

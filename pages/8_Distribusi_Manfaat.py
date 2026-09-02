@@ -532,9 +532,6 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-import importlib
-import src.components.spss_crosstab
-importlib.reload(src.components.spss_crosstab)
 from src.components.spss_crosstab import render_spss_crosstab
 
 try:

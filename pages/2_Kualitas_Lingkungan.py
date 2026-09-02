@@ -487,9 +487,6 @@ with st.expander("Lihat Data Mentah: Peta Choropleth 2023", expanded=False):
         st.caption("📁 **Sumber File:** `data/processed/sulawesi_sungai_tercemar.csv`")
 
 # --- Crosstab Introduction ---
-import importlib
-import src.components.spss_crosstab
-importlib.reload(src.components.spss_crosstab)
 from src.components.spss_crosstab import render_spss_crosstab
 
 x_options = {
