@@ -111,6 +111,18 @@ h4 { color: #A5D6A7; }
     end
 
     G --> H["Pembacaan empiris kualitas udara kawasan PLTU"]</div>
+<p>Sebagai opsi ringkas pengganti bagan alur crosstab yang terlalu panjang, konfigurasi variabel pengujian Chi-Square disajikan pada <strong>Tabel 2.2a</strong> berikut:</p>
+<div class="table-caption">Tabel 2.2a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.2)</div>
+<table>
+<thead><tr><th class="data-th">Komponen Uji</th><th class="data-th">Definisi Variabel (Sub-bab 2.2)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Variabel Independen (X)</td><td class="data-td">Kapasitas PLTU (MW): Total kapasitas PLTU Captive yang beroperasi.</td></tr>
+<tr class="data-tr-even"><td class="data-td">Variabel Dependen (Y)</td><td class="data-td">Indeks Kualitas Udara: Skor baku mutu udara ambien per provinsi.</td></tr>
+<tr><td class="data-td">Hipotesis Nol (H0)</td><td class="data-td">Tidak ada hubungan signifikan secara statistik antara kapasitas PLTU dengan Indeks Kualitas Udara.</td></tr>
+<tr class="data-tr-even"><td class="data-td">Decision Rule (Alpha 5%)</td><td class="data-td">Jika P-Value < 0.05, maka Tolak H0 (Terbukti signifikan bahwa emisi PLTU menurunkan kualitas udara).</td></tr>
+<tr><td class="data-td">Threshold Kategori</td><td class="data-td">Nilai Median Data Panel (N=54); variabel kontinu dikonversi menjadi biner.</td></tr>
+</tbody>
+</table>
 <h4>C. Formulasi Matematis</h4>
 <div class="formula">Kapasitas_PLTU_Provinsi = SUM(Kapasitas_i) GROUP BY Provinsi</div>
 <div class="formula">Rata_Rata_IKU_Provinsi_Tahun = MEAN(IKU) GROUP BY Provinsi, Tahun</div>

@@ -553,6 +553,14 @@ def generate_all_bab2():
     stats_22 = calculate_spss_style_crosstab(df_panel_2_2, "Kapasitas_PLTU_MW", "IKU")
     valid_cases_22 = len(stats_22["df_clean"])
     
+    konf_rows_22 = [
+        ["Variabel Independen (X)", "Kapasitas PLTU (MW): Total kapasitas PLTU Captive yang beroperasi."],
+        ["Variabel Dependen (Y)", "Indeks Kualitas Udara: Skor baku mutu udara ambien per provinsi."],
+        ["Hipotesis Nol (H0)", "Tidak ada hubungan signifikan secara statistik antara kapasitas PLTU dengan Indeks Kualitas Udara."],
+        ["Decision Rule (Alpha 5%)", "Jika P-Value < 0.05, maka Tolak H0 (Terbukti signifikan bahwa emisi PLTU menurunkan kualitas udara)."],
+        ["Threshold Kategori", f"Nilai Median Data Panel (N={valid_cases_22}); variabel kontinu dikonversi menjadi biner."],
+    ]
+    
     summary_rows_22 = [[
         "Kapasitas PLTU (MW)",
         "Indeks Kualitas Udara (IKU)",
@@ -817,6 +825,18 @@ def generate_all_bab2():
         p_err = doc.add_paragraph()
         run(p_err, "[Gambar Flowchart Gagal Diunduh, silakan periksa koneksi internet saat generate]", color=C_RED, pt=9)
 
+    p_spacer_22 = doc.add_paragraph()
+    p_spacer_22.paragraph_format.space_before = Pt(2)
+    p_spacer_22.paragraph_format.space_after = Pt(4)
+
+    add_p(doc, [
+        ("Sebagai opsi ringkas pengganti bagan alur crosstab yang terlalu panjang, konfigurasi variabel pengujian Chi-Square disajikan pada ", False, False),
+        ("Tabel 2.2a", True, False),
+        (" berikut:", False, False),
+    ])
+    add_caption(doc, "Tabel 2.2a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.2)")
+    add_table_1col(doc, ["Komponen Uji", "Definisi Variabel (Sub-bab 2.2)"], konf_rows_22, [4.5, 11.0], ["L", "L"])
+
     add_h4(doc, "C. Formulasi Matematis: Kapasitas PLTU, Rata-rata IKU, dan Uji Crosstabulation")
     add_formula(doc, "Agregasi Kapasitas PLTU Captive per Provinsi", "Kapasitas_PLTU_Provinsi = SUM(Kapasitas_i) GROUP BY Provinsi", [
         ("Kapasitas_PLTU_Provinsi", "Total kapasitas (MW) PLTU captive yang beroperasi di provinsi observasi."),
@@ -993,6 +1013,9 @@ h4 {{ color: #A5D6A7; }}
 <p>Keberadaan <strong>{tot_kapasitas_pltu:,.0f} MW PLTU Captive</strong> di kawasan hilirisasi secara langsung berkontribusi pada pencemaran udara. Sub-bab ini menguji hipotesis apakah kapasitas terpasang PLTU Captive memiliki hubungan yang signifikan dengan penurunan Indeks Kualitas Udara (IKU).</p>
 <h4>B. Alur Logika Metodologis Analisis Kapasitas PLTU vs IKU</h4>
 <div class="mermaid">{mermaid_str_2_2}</div>
+<p>Sebagai opsi ringkas pengganti bagan alur crosstab yang terlalu panjang, konfigurasi variabel pengujian Chi-Square disajikan pada <strong>Tabel 2.2a</strong> berikut:</p>
+<div class="table-caption">Tabel 2.2a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.2)</div>
+{html_table(["Komponen Uji", "Definisi Variabel (Sub-bab 2.2)"], konf_rows_22)}
 <h4>C. Formulasi Matematis</h4>
 <div class="formula">Kapasitas_PLTU_Provinsi = SUM(Kapasitas_i) GROUP BY Provinsi</div>
 <div class="formula">Rata_Rata_IKU_Provinsi_Tahun = MEAN(IKU) GROUP BY Provinsi, Tahun</div>
@@ -1091,6 +1114,11 @@ h4 {{ color: #A5D6A7; }}
         "```mermaid",
         mermaid_str_2_2,
         "```",
+        "",
+        "Sebagai opsi ringkas pengganti bagan alur crosstab yang terlalu panjang, konfigurasi variabel pengujian Chi-Square disajikan pada **Tabel 2.2a** berikut:",
+        "",
+        "##### Tabel 2.2a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.2)",
+        markdown_table(["Komponen Uji", "Definisi Variabel (Sub-bab 2.2)"], konf_rows_22),
         "",
         "#### C. Formulasi Matematis",
         "```text",

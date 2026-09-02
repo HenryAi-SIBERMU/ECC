@@ -103,6 +103,17 @@ flowchart LR
     G --> H["Pembacaan empiris kualitas udara kawasan PLTU"]
 ```
 
+Sebagai opsi ringkas pengganti bagan alur crosstab yang terlalu panjang, konfigurasi variabel pengujian Chi-Square disajikan pada **Tabel 2.2a** berikut:
+
+##### Tabel 2.2a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.2)
+| Komponen Uji | Definisi Variabel (Sub-bab 2.2) |
+| :--- | :--- |
+| Variabel Independen (X) | Kapasitas PLTU (MW): Total kapasitas PLTU Captive yang beroperasi. |
+| Variabel Dependen (Y) | Indeks Kualitas Udara: Skor baku mutu udara ambien per provinsi. |
+| Hipotesis Nol (H0) | Tidak ada hubungan signifikan secara statistik antara kapasitas PLTU dengan Indeks Kualitas Udara. |
+| Decision Rule (Alpha 5%) | Jika P-Value < 0.05, maka Tolak H0 (Terbukti signifikan bahwa emisi PLTU menurunkan kualitas udara). |
+| Threshold Kategori | Nilai Median Data Panel (N=54); variabel kontinu dikonversi menjadi biner. |
+
 #### C. Formulasi Matematis
 ```text
 Kapasitas_PLTU_Provinsi = SUM(Kapasitas_i) GROUP BY Provinsi
