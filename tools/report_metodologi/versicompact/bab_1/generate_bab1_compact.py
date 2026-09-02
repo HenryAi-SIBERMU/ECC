@@ -12,7 +12,28 @@ Mengadopsi arsitektur metodologi ringkas dari proyek 8.1 Celios4-EBTsmallstack:
 
 import os
 import shutil
+import base64
+import requests
 from pathlib import Path
+
+def download_mermaid_png(mermaid_str, filepath):
+    if os.path.exists(filepath) and os.path.getsize(filepath) > 1000:
+        return True
+    try:
+        encoded = base64.urlsafe_b64encode(mermaid_str.encode('utf-8')).decode('utf-8')
+        url = f'https://mermaid.ink/img/{encoded}'
+        print(f"[INFO] Mendownload Mermaid JS flowchart ke {filepath}...")
+        resp = requests.get(url, timeout=15)
+        if resp.status_code == 200:
+            with open(filepath, 'wb') as f:
+                f.write(resp.content)
+            return True
+        else:
+            print(f"[WARN] Gagal download mermaid (Status Code: {resp.status_code})")
+            return False
+    except Exception as e:
+        print(f"[WARN] Exception saat download mermaid: {e}")
+        return False
 
 try:
     from docx import Document
@@ -409,23 +430,46 @@ def generate_bab1_compact():
     # ── F. BAGAN ALUR KERANGKA KERJA RISET BAB 1 ────────────────
     add_h2(doc, "F", "Bagan Alur Kerangka Kerja Riset (Research Workflow)")
     add_body(doc, [
-        ("Kerangka kerja operasional metodologi Bab 1 berjalan secara sekuensial melalui empat fase sistematis:", False, False)
+        ("Kerangka operasional metodologi Bab 1 berjalan secara terpadu melalui empat fase berurutan sebagaimana divisualisasikan pada bagan alur kerja riset berikut:", False, False)
     ])
 
-    table_workflow = [
-        ["Fase I", "Akuisisi & Kurasi Data", "Pengumpulan basis data resmi terbuka: BPS (PDRB & Keuangan Daerah), ESDM MODI (IUP & Konsesi), GEM (PLTU), BKPM (PMDN), GFW (Deforestasi), KNKT (Logistik)."],
-        ["Fase II", "Reklasifikasi Hukum & Spasial", "Standardisasi klasifikasi ekonomi berbasis mandat regulasi hilirisasi (UU 3/2020 & Perpres 112/2022) menjadi 3 klaster makro serta dekomposisi data ke level kabupaten."],
-        ["Fase III", "Pengujian Statistik Inferensial", "Konstruksi tabel kontinjensi 2×2 berbasis ambang median (Panel N=60), uji independensi Chi-Square (χ²), perhitungan rasio peluang risiko (Odds Ratio), dan uji asosiasi."],
-        ["Fase IV", "Pemodelan Spasial & Sintesis Kebijakan", "Pemodelan geospasial alur pasok maritim dengan kurva Bézier, sintesis disparitas ekonomi makro, serta perumusan bukti empiris dominasi ekstraktif bagi dokumen D3TLH."]
-    ]
+    out_dir_compact = Path(__file__).resolve().parent
+    out_dir_bab1    = out_dir_compact.parent.parent / "bab_1"
 
-    add_table_styled(
-        doc,
-        headers=["Fase Riset", "Tahapan Metodologis", "Rincian Operasional & Bahan Analisis"],
-        rows=table_workflow,
-        col_widths_cm=[2.0, 4.5, 10.5],
-        alignments=['C', 'L', 'L']
-    )
+    mermaid_str_f = """flowchart LR
+    subgraph F1["Fase I: Akuisisi Data"]
+        A1["Kurasi Data Resmi Terbuka<br/><i>BPS, ESDM, GEM, BKPM, GFW, KNKT</i>"]
+        A2["Panel Provinsi-Tahun<br/><i>6 Provinsi Se-Sulawesi (N=60)</i>"]
+    end
+    subgraph F2["Fase II: Reklasifikasi"]
+        B1["Reklasifikasi Rantai Pasok Hukum<br/><i>UU 3/2020 & Perpres 112/2022</i>"]
+        B2["Dekomposisi Spasial<br/><i>13 Kabupaten Sentra Tambang</i>"]
+    end
+    subgraph F3["Fase III: Uji Statistik"]
+        C1["Tabel Kontinjensi 2x2<br/><i>Ambang Median High vs Low</i>"]
+        C2["Uji Chi-Square & Odds Ratio<br/><i>Signifikansi & Kelipatan Risiko</i>"]
+    end
+    subgraph F4["Fase IV: Pemodelan & Sintesis"]
+        D1["Pemodelan Rantai Pasok Ekspor<br/><i>Kurva Bézier 6 Pelabuhan</i>"]
+        D2["Bukti Kausalitas D3TLH<br/><i>Dominasi Ekstraktif & Deforestasi</i>"]
+    end
+    F1 --> F2 --> F3 --> F4"""
+
+    png_workflow_path = str(out_dir_compact / "mermaid_workflow_bab1.png")
+    is_downloaded = download_mermaid_png(mermaid_str_f, png_workflow_path)
+
+    add_caption(doc, "Bagan Alur 1.1: Alur Logika Kerangka Kerja Riset Bab 1 (Research Workflow)")
+    if is_downloaded and os.path.exists(png_workflow_path):
+        p_img = doc.add_paragraph()
+        p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p_img.paragraph_format.space_before = Pt(3)
+        p_img.paragraph_format.space_after  = Pt(4)
+        r_img = p_img.add_run()
+        r_img.add_picture(png_workflow_path, width=Cm(16.5))
+        try:
+            shutil.copyfile(png_workflow_path, str(out_dir_bab1 / "mermaid_workflow_bab1.png"))
+        except Exception:
+            pass
 
     # Box Output Kesimpulan
     p_box = doc.add_paragraph()
