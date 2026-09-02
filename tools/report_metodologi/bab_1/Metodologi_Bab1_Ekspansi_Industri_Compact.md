@@ -39,41 +39,41 @@ Seluruh variabel kuantitatif, kategori analisis, satuan ukur, periode observasi,
 ## 4. Kerangka Analisis & Formulasi Matematis
 
 ### 4.1 Reklasifikasi Rantai Pasok Hukum & Pangsa Sektoral (PDRB)
-Tujuh belas sektor KBLI 2020 direklasifikasi menjadi tiga klaster makro berdasarkan relasi hukum hilirisasi nikel (UU No. 3/2020 jo. PP No. 96/2021): **Klaster Ekstraktif** (Pertambangan B, Industri Logam C24, dan Pengadaan Listrik D), **Klaster Akar Rumput** (Pertanian, Kehutanan & Perikanan A), serta **Klaster Jasa & Manufaktur Lain**. Pangsa dihitung untuk mengukur ketergantungan monolitik wilayah:
+Tujuh belas sektor KBLI 2020 direklasifikasi menjadi tiga klaster makro berdasarkan relasi hukum hilirisasi nikel (UU No. 3/2020 jo. PP No. 96/2021): **Klaster Ekstraktif** (Pertambangan B, Industri Logam C24, dan Pengadaan Listrik D), **Klaster Akar Rumput** (Pertanian, Kehutanan & Perikanan A), serta **Klaster Jasa & Manufaktur Lain**. Konfigurasi reklasifikasi ini dirancang untuk mengisolasi porsi kontribusi murni sektor industri hilirisasi terhadap total struktur perekonomian daerah:
 
 > `Pangsa Sektor Ekstraktif (%) = [ PDRB Ekstraktif (B + C24 + D) / Total PDRB ] × 100`
 
 ### 4.2 Dekomposisi Spasial & Rasio Ketimpangan Kabupaten
-Untuk membongkar ilusi agregat provinsi, PDRB didekomposisi ke 13 kabupaten/kota sentra nikel. Di Morowali, dominasi industri pengolahan nikel mencapai Rp157,17 Triliun, menciptakan kesenjangan ekstrim terhadap sektor pangan lokal:
+Untuk membongkar ilusi agregat provinsi, PDRB didekomposisi ke seluruh kabupaten/kota sentra nikel guna mengukur derajat polarisasi ekonomi industri ekstraktif terhadap basis mata pencaharian pertanian-perikanan lokal:
 
-> `Rasio Kesenjangan Spasial = PDRB Sektor Ekstraktif / PDRB Pertanian Rakyat = 58,21× (Morowali)`
+> `Rasio Kesenjangan Spasial = PDRB Sektor Ekstraktif (Kabupaten) / PDRB Pertanian Rakyat (Kabupaten)`
 
 ### 4.3 Konsentrasi Spasial Kawasan Industri & PLTU Captive Off-Grid
-Konsentrasi kapasitas smelter dan pembangkit listrik captive dihitung menggunakan rasio aglomerasi spasial. Hasil audit menunjukkan 89,06% dari total 9.825 MW kapasitas PLTU batubara off-grid terpusat hanya pada koridor Morowali–Konawe:
+Derajat konsentrasi fasilitas pengolahan nikel dan kapasitas pembangkit listrik captive batubara diukur menggunakan rasio aglomerasi spasial untuk memetakan pemusatan beban energi dan lingkungan antar-wilayah:
 
 > `Porsi Konsentrasi Sentra (%) = [ Kapasitas Sentra Industri (MW) / Total Kapasitas Se-Sulawesi (MW) ] × 100`
 
 ### 4.4 Deret Waktu Perizinan & Laju Alih Ruang Harian
-Akumulasi 574 izin tambang baru seluas 819.452,54 Ha sepanjang 2014–2024 dievaluasi laju pertumbuhannya (lonjakan +246% pasca-2022) dan dikonversi menjadi intensitas konversi ruang per hari:
+Akumulasi izin konsesi tambang baru dievaluasi laju pertumbuhannya dan dinormalisasi ke dalam unit waktu harian untuk mengukur kecepatan konversi bentang lahan alami menjadi kawasan pertambangan:
 
-> `Laju Alih Ruang Harian = Total Luas Konsesi Tambang Baru (Ha) / 3.650 Hari = 224,51 Ha / Hari`
+> `Laju Alih Ruang Harian (Ha/Hari) = Total Luas Konsesi Tambang Baru (Ha) / Jumlah Hari Observasi (t)`
 
 ### 4.5 Analisis Tabulasi Silang, Uji Chi-Square & Odds Ratio (OR)
-Seluruh observasi panel (N = 60) diklasifikasikan ke dalam matriks kontinjensi 2×2 berbasis **ambang median (High vs. Low)**. Uji Chi-Square independensi (α = 5%) diterapkan untuk membuktikan signifikansi asosiasi, sementara Odds Ratio (OR) mengukur rasio peluang kelipatan risiko degradasi hutan:
+Pengujian inferensial menggunakan desain matriks kontinjensi 2×2 berbasis **ambang median panel provinsi-tahun (N = 60)**. Uji Chi-Square independensi (α = 5%, df = 1) diterapkan untuk menguji signifikansi hubungan bivariat, sedangkan rasio peluang (Odds Ratio) mengukur magnitudo kelipatan risiko dampak ekologis:
 
 > `χ² = Σ [ (O_ij - E_ij)² / E_ij ]   |   Odds Ratio (OR) = (a × d) / (b × c)`
 
-##### Matriks Ringkasan Hasil Uji Inferensial Chi-Square & Odds Ratio
-| Skenario Uji Hubungan (X → Y) | Nilai χ² | Odds Ratio | Signifikansi (p < 0.05) | Interpretasi Hubungan Kausalitas |
-| :--- | :---: | :---: | :---: | :--- |
-| PLTU Captive (Kapasitas MW) → Deforestasi Total | 18,05 | 18,0× | p < 0,001 (Signifikan) | Risiko deforestasi melonjak 18 kali lipat |
-| IUP Baru (Jumlah Unit) → Deforestasi Alam Primer | 17,24 | 13,8× | p < 0,001 (Signifikan) | Penerbitan izin memicu kehilangan hutan primer |
-| IUP Baru (Jumlah Unit) → Deforestasi Komoditas | 21,82 | 21,4× | p < 0,001 (Signifikan) | Tekanan izin tambang memicu alih fungsi terparah |
-| Luas Konsesi (Hektar Ha) → Deforestasi Komoditas | 19,27 | 16,0× | p < 0,001 (Signifikan) | Korelasi langsung luas konsesi vs bukaan hutan |
-| Investasi PMDN (Triliun Rp) → Deforestasi Komoditas | 2,08 | 2,8× | p = 0,149 (Time-Lag) | Efek modal tertunda pada fase konstruksi awal |
+##### Matriks Konfigurasi Pengujian Hipotesis Tabulasi Silang 2×2
+| Skenario Pengujian (X → Y) | Kategorisasi Variabel X | Kategorisasi Variabel Y | Metode Uji & Parameter | Fokus Hipotesis Operasional (H₁) |
+| :--- | :--- | :--- | :--- | :--- |
+| PLTU Captive (MW) → Deforestasi Total (Ha) | Median Kapasitas MW (High / Low) | Median Deforestasi Total (High / Low) | Pearson χ² (df=1, α=0,05) & Odds Ratio | Konsentrasi PLTU captive batubara meningkatkan risiko kehilangan tutupan hutan |
+| IUP Baru (Unit) → Deforestasi Hutan Primer (Ha) | Median Jumlah Izin (High / Low) | Median Hutan Primer (High / Low) | Pearson χ², Odds Ratio, Fisher Exact | Penerbitan konsesi baru berasosiasi signifikan dengan konversi hutan alam primer |
+| IUP Baru (Unit) → Deforestasi Komoditas (Ha) | Median Jumlah Izin (High / Low) | Median Def. Komoditas (High / Low) | Pearson χ² (df=1) & Odds Ratio (ad/bc) | Tekanan izin tambang merupakan faktor pendorong langsung alih fungsi komoditas |
+| Luas Konsesi (Ha) → Deforestasi Komoditas (Ha) | Median Luas Konsesi (High / Low) | Median Def. Komoditas (High / Low) | Pearson χ², Odds Ratio (CI 95%) | Skala luasan konsesi tambang memperbesar probabilitas pembukaan lahan vegetasi |
+| Investasi PMDN (Rp) → Deforestasi Komoditas (Ha) | Median Arus Modal (High / Low) | Median Def. Komoditas (High / Low) | Pearson χ², Odds Ratio, Time-Lag Test | Realisasi modal domestik mendorong bukaan lahan dengan jeda waktu konstruksi |
 
 ### 4.6 Pemodelan Alur Rantai Pasok Maritim Ekspor (Kurva Bézier)
-Simpul logistik pelabuhan ekspor diverifikasi melalui triangulasi laporan investigasi KNKT, ketetapan Perpres PSN, dan data emiten tambang. Alur pelayaran curah nikel menuju pasar internasional (Tiongkok, Jepang, Korea Selatan menyerap >78% kargo) dimodelkan secara spasial menggunakan persamaan kurva Bézier kuadratik di atas koordinat bola bumi guna memetakan jalur lalu lintas maritim yang rentan kecelakaan tongkang.
+Simpul logistik pelabuhan ekspor diverifikasi melalui triangulasi laporan investigasi keselamatan transportasi maritim, penetapan regulasi Proyek Strategis Nasional (PSN), dan laporan operasional korporasi. Alur pelayaran pengangkutan curah nikel menuju pasar internasional dimodelkan secara spasial menggunakan persamaan kurva Bézier kuadratik di atas koordinat bola bumi guna memetakan jalur lalu lintas maritim yang rentan kecelakaan tongkang.
 
 ---
 
@@ -114,9 +114,9 @@ flowchart LR
     F1 --> F2 --> F3 --> F4
 ```
 
-> **LUARAN KUNCI METODOLOGIS BAB 1:**  
-> 1. **Dominasi Sektoral Ekstraktif:** Klaster ekstraktif menguasai hingga 55,85% PDRB Sulteng dan 58,21× pertanian Morowali.  
-> 2. **Konsentrasi Spasial Ekstrem:** 89,06% kapasitas PLTU captive batubara (9.825 MW) terkunci di koridor Morowali–Konawe.  
-> 3. **Kausalitas Signifikan:** Penerbitan izin tambang baru terbukti meningkatkan risiko kehilangan hutan hingga 21,4× lipat (p < 0,001).
+> **KERANGKA KELUARAN METODOLOGIS BAB 1:**  
+> 1. **Konfigurasi Dekomposisi Sektoral:** Menghasilkan matriks pangsa dan rasio kesenjangan spasial guna mengukur ketergantungan monolitik ekonomi makro-mikro.  
+> 2. **Konfigurasi Aglomerasi Geospasial:** Memetakan derajat konsentrasi spasial fasilitas hilirisasi, pembangkit off-grid, dan simpul maritim rantai pasok ekspor.  
+> 3. **Konfigurasi Inferensial Tabulasi Silang:** Menetapkan protokol pengujian Chi-Square dan Odds Ratio untuk membuktikan signifikansi kausalitas tekanan industri terhadap degradasi lingkungan.
 
 > *Catatan Metodologis: Seluruh analisis statistik kuantitatif dalam dokumen ini dijalankan pada matriks data panel provinsi-tahun (N = 60 observasi) dan kabupaten sentra industri. Angka komputasi dan sebaran spasial terperinci terintegrasi penuh pada naskah laporan Bab 1 dan antarmuka interaktif dashboard CELIOS.*
