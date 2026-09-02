@@ -1,34 +1,30 @@
 #!/usr/bin/env python3
 """
-Generator Laporan Metodologi Statistik (Versi Compact) Bab 2:
-Metodologi Analisis Kualitas Lingkungan di Kawasan Smelter
-
-Standar Baku CELIOS Versi Compact:
-- Highlight pada Formulasi Matematis dan Persamaan Substitusi substantif (angka nyata)
-- Notasi formulasi WAJIB "mudah dibaca publik" ala referensi Celios-Metodologi-Statistik-2:
-  nama variabel deskriptif bahasa sehari-hari, operator ÷ dan ×, TANPA simbol Σ / subscript {p,t}
-- Untuk Crosstab / Chi-Square / Odds Ratio: TIDAK MENGGUNAKAN persamaan substitusi aritmatika;
-  WAJIB menyertakan Tabel Konfigurasi Variabel Uji (X, Y, H1, decision rule, threshold median, orientasi OR)
-- Sumber data ditulis sebagai INSTITUSI RESMI (ESDM, KLHK, BPS, GEM, GFW, NASA TROPOMI, GBIF, IUCN),
-  DILARANG menuliskan nama file dataset .csv (dokumen dibaca publik)
-- Tanpa label artifisial 'Analisis Temuan Empiris:' (narasi mengalir natural)
-- Header dan Judul SAMA PERSIS dengan dokumen non-compact root
-- Penomoran sub-bab langsung: 2.1, 2.2, 2.3, 2.4, 2.5
-- Target Panjang: maksimal 3-4 lembar di Microsoft Word (tidak perlu pemadatan ekstrem)
-- Tanpa icon / emoji
-- Narasi, rumus, dan tabel murni dari Metodologi_Bab2_Kualitas_Lingkungan.md
+Generator Metodologi Versi Compact Bab 2 — GAYA AKADEMIS TERPADU (CELIOS)
+Mengadopsi arsitektur metodologi ringkas terstandarisasi konsisten dengan Bab 1:
+- FORMAT: 1 KOLOM PENUH (Single Column Layout)
+- PANJANG: 2–3 Halaman Maksimal (Elegan, proporsional, tanpa pemadatan berlebihan)
+- PENOMORAN SEKSI UTAMA: Huruf kapital A, B, C, D, E, F
+- SUB-BAB SEKSI D: 2.1, 2.2, 2.3, 2.4, 2.5 (Judul persis dokumen induk)
+- OPERASIONALISASI INDIKATOR: 10 Indikator Empiris Lengkap (Matriks Indikator & Sumber Data Resmi)
+- FORMULASI & TABEL CROSSTAB: Format standar Tabel 1.5b (Komponen Uji per baris, murni konfigurasi teknis tanpa hasil empiris)
+- KORESPONDENSI METODOLOGI: 3 kolom bersih (Sub-bab, Fokus Kajian Empiris, Metode Analitis Utama)
+- FLOWCHART: Mermaid JS horizontal (flowchart LR) dirender tajam ke DOCX (16.5 cm) dan blok kode di MD
+- SINKRONISASI: Dual-save ke direktori versicompact/bab_2 dan bab_2.
 """
 
 import os
 import sys
 import shutil
+import base64
+import requests
 from pathlib import Path
 
 try:
     from docx import Document
     from docx.shared import Pt, RGBColor, Cm
     from docx.enum.text import WD_ALIGN_PARAGRAPH
-    from docx.enum.table import WD_TABLE_ALIGNMENT
+    from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
     from docx.oxml.ns import qn
     from docx.oxml import OxmlElement
 except ImportError:
@@ -37,17 +33,19 @@ except ImportError:
     from docx import Document
     from docx.shared import Pt, RGBColor, Cm
     from docx.enum.text import WD_ALIGN_PARAGRAPH
-    from docx.enum.table import WD_TABLE_ALIGNMENT
+    from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
     from docx.oxml.ns import qn
     from docx.oxml import OxmlElement
 
-# ── Warna Tema CELIOS D3TLH ─────────────────────────────────
-G_DARK   = RGBColor(0x1B, 0x5E, 0x20)  # Hijau Hutan Gelap (#1B5E20)
-G_MID    = RGBColor(0x2E, 0x7D, 0x32)  # Hijau Utama CELIOS (#2E7D32)
-C_BODY   = RGBColor(0x22, 0x22, 0x22)  # Abu Gelap Teks (#222222)
-C_WHITE  = RGBColor(0xFF, 0xFF, 0xFF)  # Putih
+# ── Palet Warna Resmi CELIOS ─────────────────────────────────
+G_DARK  = RGBColor(0x1B, 0x5E, 0x20)  # Forest Dark Green (#1B5E20)
+G_MID   = RGBColor(0x2E, 0x7D, 0x32)  # Celios Accent Green (#2E7D32)
+G_LIGHT = RGBColor(0x38, 0x8E, 0x3C)  # Medium Green (#388E3C)
+C_BODY  = RGBColor(0x22, 0x22, 0x22)  # Charcoal Body Text (#222222)
+C_GREY  = RGBColor(0x55, 0x55, 0x55)  # Muted Grey Text (#555555)
+C_WHITE = RGBColor(0xFF, 0xFF, 0xFF)  # Pure White
 
-# ── Helper XML Word Formatting (Ultra-Compact) ──────────────
+# ── Helper Fungsi XML Word ───────────────────────────────────
 def set_cell_borders(cell, top=None, left=None, bottom=None, right=None):
     tcPr = cell._tc.get_or_add_tcPr()
     bdr  = OxmlElement('w:tcBorders')
@@ -61,7 +59,7 @@ def set_cell_borders(cell, top=None, left=None, bottom=None, right=None):
         bdr.append(el)
     tcPr.append(bdr)
 
-def cell_margin(cell, left=40, right=40, top=18, bottom=18):
+def cell_margin(cell, left=80, right=80, top=40, bottom=40):
     tcPr = cell._tc.get_or_add_tcPr()
     m    = OxmlElement('w:tcMar')
     for side, val in [('top', top), ('bottom', bottom), ('left', left), ('right', right)]:
@@ -71,23 +69,34 @@ def cell_margin(cell, left=40, right=40, top=18, bottom=18):
         m.append(el)
     tcPr.append(m)
 
-def cell_shd(cell, fill):
+def cell_shd(cell, fill_hex):
     tcPr = cell._tc.get_or_add_tcPr()
     s    = OxmlElement('w:shd')
     s.set(qn('w:val'), 'clear')
     s.set(qn('w:color'), 'auto')
-    s.set(qn('w:fill'), fill)
+    s.set(qn('w:fill'), fill_hex)
     tcPr.append(s)
 
-def para_shd(p, fill):
+def para_shd(p, fill_hex):
     pPr = p._p.get_or_add_pPr()
     s   = OxmlElement('w:shd')
     s.set(qn('w:val'), 'clear')
     s.set(qn('w:color'), 'auto')
-    s.set(qn('w:fill'), fill)
+    s.set(qn('w:fill'), fill_hex)
     pPr.append(s)
 
-def para_border_left(p, color='2E7D32', sz='14'):
+def para_border_bottom(p, color='1B5E20', sz='12'):
+    pPr  = p._p.get_or_add_pPr()
+    pBdr = OxmlElement('w:pBdr')
+    el   = OxmlElement('w:bottom')
+    el.set(qn('w:val'), 'single')
+    el.set(qn('w:sz'), sz)
+    el.set(qn('w:space'), '3')
+    el.set(qn('w:color'), color)
+    pBdr.append(el)
+    pPr.append(pBdr)
+
+def para_border_left(p, color='2E7D32', sz='12'):
     pPr  = p._p.get_or_add_pPr()
     pBdr = OxmlElement('w:pBdr')
     el   = OxmlElement('w:left')
@@ -98,581 +107,616 @@ def para_border_left(p, color='2E7D32', sz='14'):
     pBdr.append(el)
     pPr.append(pBdr)
 
-def para_border_bottom(p, color='2E7D32', sz='6'):
+def all_border_para(p, color='1B5E20', sz='8'):
     pPr  = p._p.get_or_add_pPr()
     pBdr = OxmlElement('w:pBdr')
-    el   = OxmlElement('w:bottom')
-    el.set(qn('w:val'), 'single')
-    el.set(qn('w:sz'), sz)
-    el.set(qn('w:space'), '1')
-    el.set(qn('w:color'), color)
-    pBdr.append(el)
+    for edge in ['top', 'left', 'bottom', 'right']:
+        el = OxmlElement(f'w:{edge}')
+        el.set(qn('w:val'), 'single')
+        el.set(qn('w:sz'), sz)
+        el.set(qn('w:space'), '4')
+        el.set(qn('w:color'), color)
+        pBdr.append(el)
     pPr.append(pBdr)
 
-# ── Helper Tipografi Padat ──────────────────────────────────
-def run(p, text, bold=False, italic=False, pt=8.5, color=None, mono=False):
+# ── Helper Typography & Content ──────────────────────────────
+def add_run(p, text, bold=False, italic=False, pt=8.5, color=C_BODY, mono=False):
     r = p.add_run(text)
     r.bold           = bold
     r.italic         = italic
     r.font.size      = Pt(pt)
-    r.font.color.rgb = color if color else C_BODY
+    r.font.color.rgb = color
     if mono:
         r.font.name = 'Consolas'
         r._element.rPr.rFonts.set(qn('w:ascii'), 'Consolas')
+    else:
+        r.font.name = 'Calibri'
+        r._element.rPr.rFonts.set(qn('w:ascii'), 'Calibri')
     return r
 
-def add_h1(doc, title):
+def add_h2(doc, prefix, title):
     p = doc.add_paragraph()
-    p.paragraph_format.space_before = Pt(3)
-    p.paragraph_format.space_after  = Pt(1.5)
+    p.paragraph_format.space_before = Pt(8)
+    p.paragraph_format.space_after  = Pt(3)
+    p.paragraph_format.keep_with_next = True
     para_border_bottom(p, color='1B5E20', sz='8')
-    run(p, title.upper(), bold=True, pt=10.0, color=G_DARK)
-
-def add_h2(doc, title):
-    p = doc.add_paragraph()
-    p.paragraph_format.space_before = Pt(3.5)
-    p.paragraph_format.space_after  = Pt(1)
-    para_border_bottom(p, color='2E7D32', sz='4')
-    run(p, title, bold=True, pt=9.0, color=G_DARK)
+    add_run(p, f"{prefix}.  ", bold=True, pt=11, color=G_DARK)
+    add_run(p, title.upper(), bold=True, pt=11, color=G_DARK)
+    return p
 
 def add_h3(doc, title):
     p = doc.add_paragraph()
-    p.paragraph_format.space_before = Pt(2.5)
-    p.paragraph_format.space_after  = Pt(1)
-    run(p, title, bold=True, pt=8.5, color=G_MID)
+    p.paragraph_format.space_before = Pt(5)
+    p.paragraph_format.space_after  = Pt(2)
+    p.paragraph_format.keep_with_next = True
+    add_run(p, title, bold=True, pt=9.5, color=G_MID)
+    return p
 
-def add_p(doc, parts, space_after=2, indent=0):
+def add_body(doc, parts, space_after=3):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
     p.paragraph_format.space_before = Pt(0)
     p.paragraph_format.space_after  = Pt(space_after)
     p.paragraph_format.line_spacing = 1.05
-    if indent > 0:
-        p.paragraph_format.left_indent = Pt(indent)
     for text, bold, italic in parts:
-        run(p, text, bold=bold, italic=italic, pt=8.5)
+        add_run(p, text, bold=bold, italic=italic, pt=8.5, color=C_BODY)
     return p
 
-def add_note_inline(doc, title, text):
-    p = doc.add_paragraph()
-    p.paragraph_format.space_before = Pt(1)
-    p.paragraph_format.space_after  = Pt(2)
-    p.paragraph_format.left_indent  = Pt(5)
-    p.paragraph_format.line_spacing = 1.05
-    para_border_left(p, color='2E7D32', sz='10')
-    para_shd(p, 'F1F8E9')
-    run(p, f"{title}: ", bold=True, pt=7.5, color=G_DARK)
-    run(p, text, italic=True, pt=7.5, color=RGBColor(0x33, 0x33, 0x33))
-
-def add_math_block(doc, title, formula_str, sub_str=None, ket_str=None):
-    p = doc.add_paragraph()
-    p.paragraph_format.space_before = Pt(1.5)
-    p.paragraph_format.space_after  = Pt(2)
-    p.paragraph_format.left_indent  = Pt(5)
-    p.paragraph_format.line_spacing = 1.05
-    para_shd(p, 'EDF7EE')
-    para_border_left(p, color='2E7D32', sz='12')
-    run(p, f"Formulasi Matematis ({title}):\n", bold=True, pt=7.5, color=G_DARK)
-    run(p, f"{formula_str}\n", pt=7.2, color=RGBColor(0x10, 0x40, 0x10), mono=True)
-    if sub_str:
-        run(p, "Persamaan Substitusi:\n", bold=True, pt=7.5, color=RGBColor(0x1B, 0x5E, 0x20))
-        run(p, f"{sub_str}", pt=7.2, color=RGBColor(0x22, 0x22, 0x22), mono=True)
-    if ket_str:
-        run(p, f"\nKet: {ket_str}", italic=True, pt=7.0, color=RGBColor(0x55, 0x55, 0x55))
-
-def add_caption_compact(doc, caption_text):
+def add_formula(doc, text):
     p = doc.add_paragraph()
     p.paragraph_format.space_before = Pt(2)
-    p.paragraph_format.space_after  = Pt(1)
-    run(p, caption_text, bold=True, italic=True, pt=7.5, color=G_MID)
+    p.paragraph_format.space_after  = Pt(4)
+    p.paragraph_format.left_indent  = Pt(8)
+    para_shd(p, 'EDF7EE')
+    add_run(p, text, pt=8, color=G_MID, mono=True)
 
-def add_table_compact(doc, headers, rows, col_widths_cm, alignments=None):
+def add_caption(doc, caption_text):
+    p = doc.add_paragraph()
+    p.paragraph_format.space_before = Pt(5)
+    p.paragraph_format.space_after  = Pt(2)
+    add_run(p, caption_text, bold=True, italic=True, pt=8.5, color=G_MID)
+    return p
+
+def add_table_styled(doc, headers, rows, col_widths_cm, alignments=None):
     tbl = doc.add_table(rows=1 + len(rows), cols=len(headers))
     tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
-    tbl.style = 'Table Grid'
     tbl.autofit = False
 
-    bd_cfg = {'val': 'single', 'sz': '4', 'color': 'D8D8D8', 'space': '0'}
-
-    # Header
+    bd_subtle = {'val': 'single', 'sz': '4', 'color': 'D0D7DE', 'space': '0'}
+    
+    # Header Row
     for j, (h, w) in enumerate(zip(headers, col_widths_cm)):
         c = tbl.rows[0].cells[j]
         c.width = Cm(w)
         cell_shd(c, '2E7D32')
-        cell_margin(c, left=40, right=40, top=18, bottom=18)
-        set_cell_borders(c, top=bd_cfg, left=bd_cfg, bottom={'val': 'single', 'sz': '8', 'color': '1B5E20', 'space': '0'}, right=bd_cfg)
+        cell_margin(c, left=80, right=80, top=50, bottom=50)
+        set_cell_borders(c, top=bd_subtle, left=bd_subtle, bottom=bd_subtle, right=bd_subtle)
         p = c.paragraphs[0]
-        p.alignment = WD_ALIGN_PARAGRAPH.CENTER if (alignments and alignments[j] == 'C') else WD_ALIGN_PARAGRAPH.LEFT
-        p.paragraph_format.space_before = Pt(0)
-        p.paragraph_format.space_after  = Pt(0)
-        p.paragraph_format.line_spacing = 1.0
-        run(p, h, bold=True, pt=7.5, color=C_WHITE)
-
-    # Rows
-    for i, row in enumerate(rows):
-        bg = 'F9FBF9' if i % 2 == 1 else 'FFFFFF'
-        for j, (val, w) in enumerate(zip(row, col_widths_cm)):
-            c = tbl.rows[1 + i].cells[j]
-            c.width = Cm(w)
-            cell_shd(c, bg)
-            cell_margin(c, left=40, right=40, top=16, bottom=16)
-            set_cell_borders(c, top=bd_cfg, left=bd_cfg, bottom=bd_cfg, right=bd_cfg)
-            p = c.paragraphs[0]
-            align = alignments[j] if alignments else 'L'
+        p.paragraph_format.space_before = Pt(2)
+        p.paragraph_format.space_after  = Pt(2)
+        if alignments and j < len(alignments):
+            align = alignments[j]
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER if align == 'C' else (WD_ALIGN_PARAGRAPH.RIGHT if align == 'R' else WD_ALIGN_PARAGRAPH.LEFT)
-            p.paragraph_format.space_before = Pt(0)
-            p.paragraph_format.space_after  = Pt(0)
-            p.paragraph_format.line_spacing = 1.0
-            is_bold = (j == 0) or ('Total' in str(val)) or ('SIGNIFIKAN' in str(val))
-            run(p, str(val), bold=is_bold, pt=7.0, color=C_BODY)
+        else:
+            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        add_run(p, h, bold=True, pt=8, color=C_WHITE)
 
-# ── Main Generator ──────────────────────────────────────────
-def build_compact_report():
-    print("[1/4] Menginisialisasi dokumen Word Bab 2 dengan fokus Formulasi & Persamaan Substitusi...")
+    # Data Rows
+    for i, row_data in enumerate(rows):
+        fill = 'F9FBF9' if i % 2 == 0 else 'FFFFFF'
+        for j, val in enumerate(row_data):
+            c = tbl.cell(i + 1, j)
+            c.width = Cm(col_widths_cm[j])
+            c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+            cell_shd(c, fill)
+            cell_margin(c, left=80, right=80, top=40, bottom=40)
+            set_cell_borders(c, top=bd_subtle, left=bd_subtle, bottom=bd_subtle, right=bd_subtle)
+            p = c.paragraphs[0]
+            p.paragraph_format.space_before = Pt(1)
+            p.paragraph_format.space_after  = Pt(1)
+            
+            if alignments and j < len(alignments):
+                align = alignments[j]
+                if align == 'C':
+                    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                elif align == 'R':
+                    p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+                else:
+                    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+            else:
+                p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+
+            add_run(p, str(val), pt=7.5, color=C_BODY)
+
+    p_space = doc.add_paragraph()
+    p_space.paragraph_format.space_before = Pt(0)
+    p_space.paragraph_format.space_after  = Pt(3)
+    return tbl
+
+def download_mermaid_png(mermaid_str, filepath):
+    if os.path.exists(filepath) and os.path.getsize(filepath) > 1000:
+        return True
+    try:
+        encoded = base64.urlsafe_b64encode(mermaid_str.encode('utf-8')).decode('utf-8')
+        url = f'https://mermaid.ink/img/{encoded}'
+        print(f"[INFO] Mendownload Mermaid JS flowchart ke {filepath}...")
+        resp = requests.get(url, timeout=15)
+        if resp.status_code == 200:
+            with open(filepath, 'wb') as f:
+                f.write(resp.content)
+            return True
+        else:
+            print(f"[WARN] Gagal download mermaid (Status Code: {resp.status_code})")
+            return False
+    except Exception as e:
+        print(f"[WARN] Exception saat download mermaid: {e}")
+        return False
+
+
+def generate_bab2_compact():
+    print("[1/3] Membangun dokumen compact Bab 2 (Format 1-Kolom, 2-3 Halaman)...")
+    
+    out_dir_compact = Path(__file__).resolve().parent
+    out_dir_bab2    = out_dir_compact.parent.parent / "bab_2"
+
     doc = Document()
-
-    # Margin Halaman Padat (1.2 cm)
-    for section in doc.sections:
-        section.top_margin    = Cm(1.2)
-        section.bottom_margin = Cm(1.2)
-        section.left_margin   = Cm(1.2)
-        section.right_margin  = Cm(1.2)
+    sec = doc.sections[0]
+    sec.page_width    = Cm(21.0)
+    sec.page_height   = Cm(29.7)
+    sec.left_margin   = Cm(2.0)
+    sec.right_margin  = Cm(2.0)
+    sec.top_margin    = Cm(1.8)
+    sec.bottom_margin = Cm(1.8)
 
     doc.styles['Normal'].font.name = 'Calibri'
     doc.styles['Normal'].font.size = Pt(8.5)
 
-    # ── HEADER BANNER ───────────────────────────────────────────
-    p_hdr = doc.add_paragraph()
-    p_hdr.paragraph_format.space_before = Pt(0)
-    p_hdr.paragraph_format.space_after  = Pt(1)
-    run(p_hdr, "CELIOS — CENTER OF ECONOMIC AND LAW STUDIES  |  LAPORAN RISET METODOLOGI D3TLH", bold=True, pt=7.5, color=G_MID)
+    # ── HEADER DOKUMEN ──────────────────────────────────────────
+    p_t = doc.add_paragraph()
+    p_t.paragraph_format.space_before = Pt(0)
+    p_t.paragraph_format.space_after  = Pt(1)
+    add_run(p_t, "RINGKASAN EKSEKUTIF METODOLOGIS", bold=True, pt=8.5, color=G_MID)
 
-    add_h1(doc, "BAB II: METODOLOGI ANALISIS KUALITAS LINGKUNGAN DI KAWASAN SMELTER")
+    p_h = doc.add_paragraph()
+    p_h.paragraph_format.space_before = Pt(0)
+    p_h.paragraph_format.space_after  = Pt(2)
+    para_border_bottom(p_h, color='1B5E20', sz='12')
+    add_run(p_h, "BAB 2: METODOLOGI ANALISIS KUALITAS LINGKUNGAN DI KAWASAN SMELTER", bold=True, pt=15, color=G_DARK)
 
-    add_p(doc, [
-        ("Dokumen laporan metodologi ini menyajikan kerangka ilmiah, formulasi matematis, prosedur pengolahan data, dan pengujian statistik yang dioperasionalkan pada ", False, False),
-        ("Bab 2: Kualitas Lingkungan di Kawasan Smelter", True, False),
-        (" dalam studi Daya Dukung dan Daya Tampung Lingkungan Hidup (D3TLH) Sulawesi periode 2014–2024.", False, False),
-    ], space_after=2)
+    p_meta = doc.add_paragraph()
+    p_meta.paragraph_format.space_before = Pt(1)
+    p_meta.paragraph_format.space_after  = Pt(5)
+    add_run(p_meta, "Studi Daya Dukung & Daya Tampung Lingkungan Hidup (D3TLH) Sulawesi · ", italic=True, pt=8, color=C_GREY)
+    add_run(p_meta, "Center of Economic and Law Studies (CELIOS)", bold=True, italic=True, pt=8, color=G_DARK)
 
-    # ═══════════════════════════════════════════════════════════
-    # 2.1 DAMPAK LIMBAH TAILING: SMELTER VS IKA
-    # ═══════════════════════════════════════════════════════════
-    add_h2(doc, "2.1. Dampak Limbah Tailing: Konsentrasi Smelter vs Indeks Kualitas Air (IKA)")
-    add_p(doc, [
-        ("Pengoperasian ", False, False),
-        ("778 fasilitas mega-smelter", True, False),
-        (" yang didukung oleh kapasitas ", False, False),
-        ("9.825 MW PLTU Captive", True, False),
-        (" meningkatkan intensitas emisi dan beban lingkungan di Pulau Sulawesi. Konversi tutupan hutan mencapai ", False, False),
-        ("1.001.654 Hektar", True, False),
-        (", estimasi timbulan limbah B3/tailing sebesar ", False, False),
-        ("20,9 Juta Ton per tahun", True, False),
-        (", dan rata-rata Indeks Kualitas Air (IKA) tahun 2024 sebesar ", False, False),
-        ("59,7", True, False),
-        (".", False, False)
+    # ── A. DESAIN PENELITIAN & TUJUAN ───────────────────────────
+    add_h2(doc, "A", "Desain Penelitian & Tujuan")
+    add_body(doc, [
+        ("Penelitian ini menggunakan ", False, False),
+        ("desain audit spasial-statistik kuantitatif dan inferensial bivariat terintegrasi", True, False),
+        (" untuk mengukur dampak degradasi lingkungan hidup akibat pemusatan fasilitas smelter nikel dan kawasan industri bertenaga PLTU captive batubara di enam provinsi Pulau Sulawesi sepanjang satu dekade (", False, False),
+        ("2014–2024", True, False),
+        ("). Tiga tujuan utama metodologis Bab 2 meliputi:", False, False)
     ])
-    add_note_inline(doc, "Sumber Data", "Kementerian ESDM & Center for Global Sustainability (fasilitas smelter); KLHK & BPS (Indeks Kualitas Air 2016–2024); laporan lembaga masyarakat sipil (proksi timbulan limbah B3/tailing) dan inventarisasi laporan pencemaran sungai-pesisir (diolah CELIOS).")
+    add_body(doc, [
+        ("1. ", True, False), ("Membongkar Bias Pengenceran Agregat (Aggregate Dilution Bias): ", True, False),
+        ("Membuktikan bahwa indeks mutu air (IKA) dan udara (IKU) resmi pada skala provinsi menyamarkan tingkat keparahan polusi riil di sekitar tapak cerobong PLTU captive dan sungai pembuangan limbah tailing smelter.\n", False, False),
+        ("2. ", True, False), ("Menguji Kausalitas Eksekusi Ruang vs Deforestasi: ", True, False),
+        ("Mengukur kekuatan hubungan dan rasio peluang (Odds Ratio) antara alokasi luasan izin konsesi industri nikel terhadap percepatan kehilangan tutupan hutan alam primer.\n", False, False),
+        ("3. ", True, False), ("Kuantifikasi Atribusi Karbon & Ancaman Kepunahan Satwa: ", True, False),
+        ("Mendekomposisi faktor pendorong deforestasi guna membuktikan dominasi pelepasan emisi CO₂ serta memetakan pertampalan spasial titik perjumpaan spesies endemik kunci Wallacea dengan konsesi tambang.", False, False)
+    ])
 
-    add_caption_compact(doc, "Tabel 2.1: Rincian Empiris Konsentrasi Smelter, IKA, Limbah B3, dan Sungai Tercemar per Provinsi (2024)")
-    t1_headers = ["Provinsi", "Smelter (Unit)", "Skor IKA", "Limbah B3 (Ton/Thn)", "Sungai Tercemar", "Daftar Sungai / Pesisir Terdampak"]
-    t1_rows = [
-        ["Sulawesi Tengah", "344", "62.1", "12,000,000", "4", "Sungai Bahodopi, Laroenai, Morowali, Pesisir Fatufia"],
-        ["Sulawesi Tenggara", "262", "65.3", "7,700,000", "3", "Sungai Lasolo, Sungai Lalindu, Sungai Konaweha"],
-        ["Sulawesi Selatan", "111", "58.5", "1,000,000", "1", "Pesisir dan Sungai Bantaeng"],
-        ["Sulawesi Barat", "39", "55.9", "0", "0", "Tidak teridentifikasi pembuangan tailing smelter"],
-        ["Sulawesi Utara", "15", "58.2", "0", "0", "Tidak teridentifikasi pembuangan tailing smelter"],
-        ["Gorontalo", "7", "58.1", "0", "0", "Tidak teridentifikasi pembuangan tailing smelter"]
+    # ── B. SUMBER DATA & CAKUPAN WILAYAH ─────────────────────────
+    add_h2(doc, "B", "Sumber Data & Cakupan Wilayah")
+    add_body(doc, [
+        ("Penelitian mencakup seluruh wilayah daratan dan pesisir Pulau Sulawesi yang terbagi ke dalam ", False, False),
+        ("6 provinsi", True, False),
+        (" (Sulawesi Tengah, Sulawesi Tenggara, Sulawesi Selatan, Sulawesi Barat, Gorontalo, Sulawesi Utara) serta ", False, False),
+        ("kawasan industri terpadu sentra nikel", True, False),
+        (". Data yang dihimpun berbentuk panel tahunan (2014–2024) berbasis data terbuka resmi lintas kementerian, registri global, dan citra satelit independen:", False, False)
+    ])
+    add_body(doc, [
+        ("• ", True, False), ("Kementerian Lingkungan Hidup dan Kehutanan (Ditjen PPKL): ", True, False),
+        ("Indeks Kualitas Lingkungan Hidup (IKLH), Indeks Kualitas Air (IKA), Indeks Kualitas Udara (IKU), dan data status mutu sungai.\n", False, False),
+        ("• ", True, False), ("ESDM (MODI & MinerbaOne) & Kementerian Investasi (BKPM): ", True, False),
+        ("Inventarisasi unit fasilitas smelter nikel dan alokasi konsesi pertambangan.\n", False, False),
+        ("• ", True, False), ("Global Energy Monitor (GEM) & RUPTL PLN: ", True, False),
+        ("Registri geospasial unit dan kapasitas operasional PLTU captive industri batubara off-grid (Megawatt).\n", False, False),
+        ("• ", True, False), ("Global Forest Watch (GFW / Hansen UMD) & IPCC: ", True, False),
+        ("Time-series kehilangan tutupan pohon (Ha) dan estimasi emisi gas rumah kaca (Megagram CO₂e) per faktor pendorong.\n", False, False),
+        ("• ", True, False), ("NASA TROPOMI (Sentinel-5P): ", True, False),
+        ("Konsentrasi troposferik nitrogen dioksida (NO₂ rasio µmol/m²) di atas kawasan industri nikel.\n", False, False),
+        ("• ", True, False), ("GBIF & IUCN Red List: ", True, False),
+        ("269 titik koordinat geospasial perjumpaan aktual (occurrences) 7 spesies endemik kunci Wallacea dan status ancaman pertambangan (Mining Threat).", False, False)
+    ])
+
+    # ── C. OPERASIONALISASI VARIABEL & INDIKATOR RISET ──────────
+    add_h2(doc, "C", "Operasionalisasi Variabel & Indikator Riset")
+    add_body(doc, [
+        ("Seluruh variabel lingkungan, emisi, ruang, dan keanekaragaman hayati dioperasionalkan secara terukur ke dalam ", False, False),
+        ("10 indikator empiris terpadu", True, False),
+        (" sebagaimana dirangkum pada matriks operasional berikut:", False, False)
+    ])
+
+    add_caption(doc, "Matriks Operasionalisasi Variabel dan Sumber Data Resmi Bab 2")
+    table_indikator_data = [
+        ["1", "Kepadatan Fasilitas Smelter", "Pemusatan Industri Pirometalurgi & HPAL", "Unit Fasilitas", "2016–2024", "ESDM MODI & MinerbaOne"],
+        ["2", "Indeks Kualitas Air (IKA)", "Status Mutu Air Sungai & Pesisir", "Poin Skor (0–100)", "2016–2024", "Ditjen PPKL KLHK (IKLH)"],
+        ["3", "Estimasi Timbulan Limbah B3", "Residu Tailing & Terak Slag Nikel", "Ton / Tahun", "2016–2024", "Amdal Industri & Neraca KLHK"],
+        ["4", "Kapasitas PLTU Captive Batubara", "Intensitas Pembangkit Listrik Off-Grid", "Megawatt (MW)", "2016–2024", "Global Energy Monitor & RUPTL"],
+        ["5", "Indeks Kualitas Udara (IKU)", "Status Mutu Udara Ambien Agregat", "Poin Skor (0–100)", "2016–2024", "Ditjen PPKL KLHK (IKLH)"],
+        ["6", "Konsentrasi Troposferik NO₂", "Pencemaran Polutan Udara Satelit", "µmol/m²", "2019–2024", "Satelit NASA TROPOMI (Sentinel-5P)"],
+        ["7", "Luas Konsesi IUP & Kawasan", "Alokasi Ruang Industri Ekstraktif", "Hektar (Ha)", "2014–2023", "ESDM MODI & ATR/BPN"],
+        ["8", "Luas Deforestasi Hutan Alam", "Kehilangan Tutupan Pohon Alami", "Hektar (Ha)", "2014–2023", "Global Forest Watch (Hansen UMD)"],
+        ["9", "Atribusi Emisi Karbon CO₂", "Pelepasan GRK per Faktor Pendorong", "Megagram CO₂e", "2014–2023", "GFW & IPCC Tier-1 Methodology"],
+        ["10", "Sebaran Spesies Endemik & IUCN", "Keterancaman Habitat Wallacea", "Titik & Kategori", "2014–2024", "GBIF API & IUCN Red List"]
     ]
-    add_table_compact(doc, t1_headers, t1_rows, [3.2, 2.2, 1.8, 3.2, 2.2, 6.0], ['L', 'C', 'C', 'R', 'C', 'L'])
 
-    # Sesuai arahan user: Untuk Crosstab TIDAK USAH persamaan substitusi aritmatika
-    add_math_block(
+    add_table_styled(
         doc,
-        "Konsentrasi Smelter & Beban Limbah B3 Tailing",
-        "Jumlah Smelter Provinsi = Penjumlahan seluruh fasilitas smelter di provinsi tersebut  |  Rata-rata IKA Provinsi = Jumlah skor IKA seluruh titik pantau ÷ Banyaknya titik pantau\n"
-        "Chi-Square (χ²) = Jumlah dari [ ( Frekuensi Observasi - Frekuensi Harapan )² ÷ Frekuensi Harapan ]  |  Odds Ratio (OR) = ( a × d ) ÷ ( b × c )",
-        "Gabungan Smelter Sulteng + Sultra = 344 unit + 262 unit = 606 unit (77,89% dari total se-Sulawesi)\n"
-        "Estimasi Limbah B3 Tailing = 12.000.000 Ton/Thn (Sulteng) + 7.700.000 Ton/Thn (Sultra) = 19.700.000 Ton/Thn (94,26% dari total limbah B3)",
-        "Hasil uji Chi-Square dan Odds Ratio data panel disajikan pada Tabel 2.5, dengan konfigurasi variabel uji pada Tabel 2.4. Kegagalan signifikansi statistik membuktikan Aggregate Dilution Bias (pencemaran fatal sungai industri Bahodopi & Lasolo terencerkan oleh stasiun pemantau sungai non-industri)."
+        headers=["No", "Indikator Riset", "Fokus Pengukuran", "Satuan", "Periode", "Sumber Data Primer Resmi"],
+        rows=table_indikator_data,
+        col_widths_cm=[0.8, 3.5, 3.7, 1.8, 2.0, 5.2],
+        alignments=['C', 'L', 'L', 'C', 'C', 'L']
     )
 
-    # ═══════════════════════════════════════════════════════════
-    # 2.2 KEPUNGAN ASAP: KAPASITAS PLTU VS IKU
-    # ═══════════════════════════════════════════════════════════
-    add_h2(doc, "2.2. Kepungan Asap: Kapasitas PLTU vs Indeks Kualitas Udara (IKU)")
-    add_p(doc, [
-        ("Sebanyak ", False, False),
-        ("9.825 MW PLTU Captive batu bara off-grid", True, False),
-        (" beroperasi di kawasan hilirisasi nikel menyumbang polusi udara ambien dan gas buang NO₂.", False, False)
+    # ── D. KERANGKA ANALISIS & FORMULASI MATEMATIS ──────────────
+    add_h2(doc, "D", "Kerangka Analisis & Formulasi Matematis")
+
+    # 2.1
+    add_h3(doc, "2.1 Dampak Limbah Tailing: Konsentrasi Smelter vs Indeks Kualitas Air (IKA)")
+    add_body(doc, [
+        ("Pemusatan unit pengolahan pirometalurgi dan hidrometalurgi dihitung berdasarkan agregasi titik fasilitas di setiap provinsi guna mengukur tekanan potensi pelepasan tailing dan slag nikel terhadap baku mutu sungai:", False, False)
     ])
-    add_note_inline(doc, "Sumber Data", "Kementerian ESDM & Global Energy Monitor (kapasitas PLTU Captive & Grid PLN); KLHK (Indeks Kualitas Udara 2015–2024); pantauan emisi Satelit NASA TROPOMI (konsentrasi NO₂) (diolah CELIOS).")
+    add_formula(doc, "Kepadatan Smelter (Unit) = Σ [ Fasilitas Smelter Beroperasi & Konstruksi di Provinsi ]")
+    add_body(doc, [
+        ("Status mutu air diukur menggunakan rata-rata indeks IKA provinsi. Protokol pengujian kontinjensi 2×2 diterapkan untuk menguji signifikansi hubungan antara kepadatan smelter dan status IKA kritis berbasis ambang median:", False, False)
+    ])
 
-    add_caption_compact(doc, "Tabel 2.2: Rincian Empiris Kapasitas PLTU (Captive & Grid), IKU, dan Konsentrasi NO₂ NASA (2024)")
-    t2_headers = ["Provinsi", "Kapasitas PLTU Captive (MW)", "PLTU Grid PLN (MW)", "Total Daya (MW)", "Skor IKU", "NASA TROPOMI NO₂ (mol/m²)"]
-    t2_rows = [
-        ["Sulawesi Tengah", "9,365", "0", "9,365", "92.9", "6.50e-06"],
-        ["Sulawesi Tenggara", "2,280", "100", "2,380", "93.0", "6.62e-06"],
-        ["Sulawesi Selatan", "600", "920", "1,520", "91.5", "6.40e-06"],
-        ["Sulawesi Utara", "0", "220", "220", "93.4", "4.09e-06"],
-        ["Gorontalo", "0", "100", "100", "93.5", "3.76e-06"],
-        ["Sulawesi Barat", "0", "0", "0", "92.5", "6.00e-06"]
+    add_caption(doc, "Tabel 2.1a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.1)")
+    tabel_2_1a_rows = [
+        ["Variabel Independen (X)", "Jumlah Smelter: Total fasilitas smelter (beroperasi maupun konstruksi)."],
+        ["Variabel Dependen (Y)", "Indeks Kualitas Air: Skor baku mutu air per provinsi."],
+        ["Hipotesis Nol (H0)", "Tidak ada hubungan signifikan secara statistik antara kepadatan smelter dengan Indeks Kualitas Air."],
+        ["Hipotesis Alternatif (H1)", "Ada hubungan negatif antara kepadatan smelter dengan Indeks Kualitas Air (semakin padat smelter, semakin kritis mutu air)."],
+        ["Decision Rule (Alpha 5%)", "Jika P-Value < 0.05, maka Tolak H0 (Terbukti signifikan bahwa smelter menurunkan mutu air)."],
+        ["Threshold Kategori", "Nilai Median Data Panel 2016-2024 (N=54): X >= 75.0 fasilitas; Y >= 55.9 poin."],
+        ["Orientasi Odds Ratio", "OR = ( a × d ) / ( b × c ) dengan a = Smelter Tinggi & IKA Kritis; mengukur risiko IKA kritis pada kelompok kepadatan smelter tinggi."]
     ]
-    add_table_compact(doc, t2_headers, t2_rows, [3.8, 3.2, 2.6, 2.6, 2.2, 4.2], ['L', 'R', 'R', 'R', 'C', 'C'])
-
-    # Sesuai arahan user: Untuk Crosstab TIDAK USAH persamaan substitusi aritmatika
-    add_math_block(
+    add_table_styled(
         doc,
-        "Kapasitas Energi PLTU & Parameter Kualitas Udara",
-        "Kapasitas PLTU Provinsi = Penjumlahan kapasitas seluruh unit PLTU di provinsi tersebut  |  Rata-rata IKU = Jumlah skor IKU ÷ Banyaknya observasi provinsi-tahun\n"
-        "Chi-Square (χ²) = Jumlah dari [ ( Frekuensi Observasi - Frekuensi Harapan )² ÷ Frekuensi Harapan ]  |  Odds Ratio (OR) = ( a × d ) ÷ ( b × c )",
-        "Total PLTU Captive 3 Sentra = 9.365 MW (Sulteng) + 2.280 MW (Sultra) + 600 MW (Sulsel) = 12.245 MW terpasang",
-        "Hasil pengujian statistik tabulasi silang dirinci pada Tabel 2.5, dengan konfigurasi variabel uji pada Tabel 2.4. Ketidaksignifikanan membuktikan Efek Pengenceran Udara Ambien karena sensor IKU tersebar merata di hutan berudara bersih."
+        headers=["Komponen Uji", "Definisi Variabel (Sub-bab 2.1)"],
+        rows=tabel_2_1a_rows,
+        col_widths_cm=[4.5, 12.5],
+        alignments=['L', 'L']
     )
 
-    # ═══════════════════════════════════════════════════════════
-    # 2.3 EKSEKUSI RUANG: EKSPANSI INDUSTRI VS DEFORESTASI
-    # ═══════════════════════════════════════════════════════════
-    add_h2(doc, "2.3. Eksekusi Ruang: Ekspansi Kawasan Industri vs Tekanan Ekologis (Deforestasi)")
-    add_p(doc, [
-        ("Alokasi konsesi IUP dan Kawasan Industri mencakup ", False, False),
-        ("1.185.174 Hektar", True, False),
-        (" di Sulawesi. Sepanjang dekade 2014–2023, data Global Forest Watch (GFW) merekam akumulasi kehilangan tutupan pohon sebesar ", False, False),
-        ("1.386.055 Hektar", True, False),
-        (" (terbesar di Sulawesi Tengah dan Tenggara).", False, False)
+    # 2.2
+    add_h3(doc, "2.2 Kepungan Asap: Kapasitas PLTU vs Indeks Kualitas Udara (IKU)")
+    add_body(doc, [
+        ("Akumulasi beban emisi pembakaran batubara dihitung dari total kapasitas pembangkit listrik tenaga uap captive terpasang pada kawasan industri nikel:", False, False)
     ])
-    add_note_inline(doc, "Sumber Data", "Kementerian ESDM — MODI/Minerbaone (izin konsesi IUP & kawasan industri); Global Forest Watch — University of Maryland (kehilangan tutupan pohon 2014–2023) (diolah CELIOS).")
+    add_formula(doc, "Total Kapasitas PLTU (MW) = Σ [ Kapasitas PLTU Captive Terpasang di Koridor Industri ]")
+    add_body(doc, [
+        ("Pengujian statistik tabulasi silang mengevaluasi interaksi antara kapasitas pembangkit off-grid terhadap penurunan skor mutu udara ambien (IKU) serta divalidasi oleh densitas polutan satelit NO₂:", False, False)
+    ])
 
-    add_caption_compact(doc, "Tabel 2.3: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif (2014–2023)")
-    t3_headers = ["Provinsi", "Luas IUP & Kawasan (Ha)", "Konsesi Baru Kumulatif (Ha)", "Deforestasi Kumulatif 1 Dekade (Ha)"]
-    t3_rows = [
-        ["Sulawesi Tengah", "453,216", "387,124", "481,908"],
-        ["Sulawesi Tenggara", "446,025", "212,717", "337,434"],
-        ["Sulawesi Selatan", "181,469", "123,065", "261,147"],
-        ["Sulawesi Utara", "94,829", "89,170", "74,240"],
-        ["Gorontalo", "5,212", "5,212", "98,063"],
-        ["Sulawesi Barat", "4,424", "2,163", "133,263"]
+    add_caption(doc, "Tabel 2.2a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.2)")
+    tabel_2_2a_rows = [
+        ["Variabel Independen (X)", "Kapasitas PLTU (MW): Total kapasitas PLTU Captive yang beroperasi."],
+        ["Variabel Dependen (Y)", "Indeks Kualitas Udara: Skor baku mutu udara ambien per provinsi."],
+        ["Hipotesis Nol (H0)", "Tidak ada hubungan signifikan secara statistik antara kapasitas PLTU dengan Indeks Kualitas Udara."],
+        ["Hipotesis Alternatif (H1)", "Ada hubungan negatif antara kapasitas PLTU dengan Indeks Kualitas Udara (semakin besar kapasitas, semakin kritis mutu udara)."],
+        ["Decision Rule (Alpha 5%)", "Jika P-Value < 0.05, maka Tolak H0 (Terbukti signifikan bahwa emisi PLTU menurunkan kualitas udara)."],
+        ["Threshold Kategori", "Nilai Median Data Panel (N=54): X >= 220.0 MW; Y >= 91.0 poin."],
+        ["Orientasi Odds Ratio", "OR = ( a × d ) / ( b × c ) dengan a = PLTU Tinggi & IKU Kritis; mengukur risiko IKU kritis pada kelompok kapasitas PLTU tinggi."]
     ]
-    add_table_compact(doc, t3_headers, t3_rows, [4.2, 4.6, 4.6, 5.2], ['L', 'R', 'R', 'R'])
-
-    # KONFIGURASI VARIABEL UJI CROSSTAB BAB 2 (SUB-BAB 2.1, 2.2, 2.3)
-    add_caption_compact(doc, "Tabel 2.4: Konfigurasi Variabel Uji Tabulasi Silang (Crosstab) Bab 2 — Skenario Sub-bab 2.1, 2.2, dan 2.3")
-    cfg_headers = ["Komponen Uji", "2.1 Smelter vs IKA", "2.2 PLTU vs IKU", "2.3 Ekspansi Industri vs Deforestasi"]
-    cfg_rows = [
-        ["Variabel Independen (X)", "Jumlah Smelter (fasilitas beroperasi & konstruksi)", "Kapasitas PLTU (MW)", "Luas Ekspansi Industri / IUP & Kawasan (Ha)"],
-        ["Variabel Dependen (Y)", "Indeks Kualitas Air (skor baku mutu air provinsi)", "Indeks Kualitas Udara (skor baku mutu udara ambien)", "Kehilangan Tutupan Pohon / Total Deforestasi Alam (Ha)"],
-        ["Hipotesis Alternatif (H1)", "Hubungan negatif: semakin padat smelter, semakin kritis mutu air", "Hubungan negatif: semakin besar kapasitas PLTU, semakin kritis mutu udara", "Korelasi positif: ekspansi izin lahan mendorong laju deforestasi"],
-        ["Decision Rule (Alpha 5%)", "Tolak H0 jika P-Value < 0.05", "Tolak H0 jika P-Value < 0.05", "Tolak H0 jika P-Value < 0.05"],
-        ["Threshold Kategori (Median Panel)", "X >= 75.0 fasilitas; Y >= 55.9 poin (N=54)", "X >= 220.0 MW; Y >= 91.0 poin (N=54)", "X >= 138,148.8 Ha; Y >= 15,917.7 Ha (N=60)"],
-        ["Orientasi Odds Ratio", "a = Smelter Tinggi & IKA Kritis (risiko IKA kritis)", "a = PLTU Tinggi & IKU Kritis (risiko IKU kritis)", "a = IUP Tinggi & Deforestasi Parah (risiko deforestasi parah)"]
-    ]
-    add_table_compact(doc, cfg_headers, cfg_rows, [3.2, 4.9, 5.0, 5.5], ['L', 'L', 'L', 'L'])
-
-    # SINTESIS TABEL INFERENSIAL BAB 2
-    add_caption_compact(doc, "Tabel 2.5: Ringkasan Hasil Uji Independensi Chi-Square (χ²) dan Odds Ratio (OR) Data Panel Bab 2 (N=54 s.d. 60)")
-    inf_headers = ["Faktor Tekanan Lingkungan (X)", "Indikator Dampak (Y)", "Chi-Square (χ²)", "P-Value", "Odds Ratio", "Kesimpulan Ilmiah"]
-    inf_rows = [
-        ["Kepadatan Smelter (Fasilitas)", "Indeks Kualitas Air (IKA)", "2.667", "0.102", "0.35x", "TIDAK SIGNIFIKAN (Pengenceran Agregat)"],
-        ["Kapasitas PLTU (MW)", "Indeks Kualitas Udara (IKU)", "0.000", "1.000", "1.18x", "TIDAK SIGNIFIKAN (Pengenceran Ambien)"],
-        ["Luas Ekspansi Industri (Ha)", "Kehilangan Tutupan Pohon (Ha)", "35.267", "p < 0.001", "81.0x", "SIGNIFIKAN (Risiko Deforestasi 81x Lipat)"]
-    ]
-    add_table_compact(doc, inf_headers, inf_rows, [4.5, 4.2, 2.0, 1.8, 1.8, 4.3], ['L', 'L', 'C', 'C', 'C', 'L'])
-
-    # Sesuai arahan user: Untuk Crosstab TIDAK USAH persamaan substitusi aritmatika
-    add_math_block(
+    add_table_styled(
         doc,
-        "Eksekusi Ruang & Konsentrasi Deforestasi Sentra",
-        "Luas IUP & Kawasan Provinsi = Penjumlahan luas seluruh izin konsesi di provinsi tersebut  |  Deforestasi Kumulatif = Penjumlahan deforestasi tahunan 2014 s.d. 2023\n"
-        "Chi-Square (χ²) = Jumlah dari [ ( Frekuensi Observasi - Frekuensi Harapan )² ÷ Frekuensi Harapan ]  |  Odds Ratio (OR) = ( a × d ) ÷ ( b × c )",
-        "Gabungan Konsesi Sulteng + Sultra = 453.216 Ha + 446.025 Ha = 899.241 Hektar (75,87% dari konsesi se-Sulawesi)\n"
-        "Gabungan Deforestasi Sulteng + Sultra = 481.908 Ha + 337.434 Ha = 819.342 Hektar (59,11% dari deforestasi se-Sulawesi)",
-        "Uji Chi-Square membuktikan secara sangat signifikan (χ² = 35.267, p < 0.001, OR = 81.0x) bahwa wilayah konsesi industri nikel menghadapi risiko deforestasi 81 kali lipat lebih tinggi (lihat Tabel 2.5; konfigurasi variabel uji pada Tabel 2.4)."
+        headers=["Komponen Uji", "Definisi Variabel (Sub-bab 2.2)"],
+        rows=tabel_2_2a_rows,
+        col_widths_cm=[4.5, 12.5],
+        alignments=['L', 'L']
     )
 
-    # ═══════════════════════════════════════════════════════════
-    # 2.4 DRIVER DEFORESTASI & ATRIBUSI EMISI CO2
-    # ═══════════════════════════════════════════════════════════
-    add_h2(doc, "2.4. Driver Deforestasi: Analisis Faktor Pendorong Perubahan Tutupan Hutan")
-    add_p(doc, [
-        ("Atribusi kausalitas membedah kontribusi faktor pendorong terhadap ", False, False),
-        ("1,22+ juta hektar deforestasi di Sulawesi", True, False),
-        (" (GFW 2014–2023) antara industri komoditas ekstraktif skala besar vs pertanian berpindah masyarakat.", False, False)
+    # 2.3
+    add_h3(doc, "2.3 Eksekusi Ruang: Ekspansi Kawasan Industri vs Tekanan Ekologis (Deforestasi)")
+    add_body(doc, [
+        ("Total alokasi ruang konsesi industri nikel dihitung melalui penjumlahan luasan izin usaha pertambangan (IUP) aktif dan zonasi kawasan industri terpadu:", False, False)
     ])
-    add_note_inline(doc, "Sumber Data", "Global Forest Watch — University of Maryland (klasifikasi faktor pendorong deforestasi & estimasi pelepasan emisi CO₂ kumulatif 2014–2023) (diolah CELIOS).")
+    add_formula(doc, "Total Alokasi Ruang (Ha) = Σ [ Luas Konsesi IUP Tambang + Luas Tapak Kawasan Industri ]")
+    add_body(doc, [
+        ("Uji independensi Chi-Square (α = 5%, df = 1) dan Odds Ratio diterapkan untuk menguji hipotesis pembuktian apakah penguasaan ruang skala besar meningkatkan risiko deforestasi terbuka secara eksponensial:", False, False)
+    ])
 
-    add_caption_compact(doc, "Tabel 2.6: Matriks Atribusi Deforestasi dan Pelepasan Emisi CO₂ per Faktor Pendorong (Kumulatif 2014–2023)")
-    driver_headers = ["Faktor Pendorong Deforestasi", "Total Deforestasi (Ha)", "Proporsi (%)", "Estimasi Emisi Karbon CO₂ (Mg)", "Proporsi Emisi (%)"]
-    driver_rows = [
-        ["Pertambangan dan Sawit (Ekstraktif)", "1,001,654", "82.2%", "664,472,885", "82.6%"],
-        ["Kehutanan Komersial (Logging)", "134,637", "11.1%", "87,138,022", "10.8%"],
-        ["Pertanian Berpindah (Masyarakat)", "55,905", "4.6%", "38,215,565", "4.8%"],
-        ["Tidak Teridentifikasi / Lainnya", "25,738", "2.1%", "14,225,278", "1.8%"],
-        ["Total Agregat Sulawesi", "1,217,934", "100.0%", "804,051,750", "100.0%"]
+    add_caption(doc, "Tabel 2.3a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.3)")
+    tabel_2_3a_rows = [
+        ["Variabel Independen (X)", "Luas Ekspansi Industri (Ha) / Luas IUP & Kawasan (Ha)"],
+        ["Variabel Dependen (Y)", "Kehilangan Tutupan Pohon (Ha) / Total Deforestasi Alam (Ha)"],
+        ["Hipotesis Nol (H0)", "Luasan ekspansi kawasan industri dan perizinan tambang tidak berhubungan dengan laju deforestasi."],
+        ["Hipotesis Alternatif (H1)", "Alokasi izin lahan (Luas IUP & Kawasan) berkorelasi positif dengan laju deforestasi."],
+        ["Decision Rule (Alpha 5%)", "Jika P-Value < 0.05, maka Tolak H0 (terbukti signifikan bahwa ekspansi izin lahan mendorong deforestasi)."],
+        ["Threshold Kategori", "Nilai Median Data Panel (N=60): X >= 138,148.8 Ha; Y >= 15,917.7 Ha."],
+        ["Orientasi Odds Ratio", "OR = ( a × d ) / ( b × c ) dengan a = IUP Tinggi & Deforestasi Tinggi/Parah; mengukur risiko deforestasi parah pada kelompok luas IUP tinggi."]
     ]
-    add_table_compact(doc, driver_headers, driver_rows, [5.2, 3.0, 2.2, 5.0, 3.2], ['L', 'R', 'C', 'R', 'C'])
-
-    add_math_block(
+    add_table_styled(
         doc,
-        "Atribusi Deforestasi Komoditas & Pelepasan Karbon",
-        "Proporsi Faktor Pendorong (%) = ( Deforestasi Faktor Tersebut ÷ Total Deforestasi Kumulatif ) × 100%\n"
-        "Rasio Kerusakan = Deforestasi Tambang & Sawit ÷ Deforestasi Pertanian Rakyat",
-        "Proporsi Tambang & Sawit = ( 1.001.654 Ha ÷ 1.217.934 Ha ) × 100% = 82,24% (Emisi: 664.472.885 Mg CO2 / 82,64%)\n"
-        "Proporsi Pertanian Rakyat = ( 55.905 Ha ÷ 1.217.934 Ha ) × 100% = 4,59% (Emisi: 38.215.565 Mg CO2 / 4,75%)\n"
-        "Rasio Kerusakan = 1.001.654 Ha ÷ 55.905 Ha = 17,92 Kali Lipat Lebih Masif",
-        "Fakta empiris membantah tudingan deforestasi akibat perladangan rakyat: industri tambang & sawit merusak hutan 18 kali lipat lebih masif."
+        headers=["Komponen Uji", "Definisi Variabel (Sub-bab 2.3)"],
+        rows=tabel_2_3a_rows,
+        col_widths_cm=[4.5, 12.5],
+        alignments=['L', 'L']
     )
 
-    # ═══════════════════════════════════════════════════════════
-    # 2.5 KEHANCURAN BIODIVERSITAS: HABITAT SATWA ENDEMIK
-    # ═══════════════════════════════════════════════════════════
-    add_h2(doc, "2.5. Kehancuran Biodiversitas: Dampak Terhadap Habitat Satwa Endemik")
-    add_p(doc, [
-        ("Ekspansi pertambangan nikel dan kawasan industri mengancam keanekaragaman hayati kawasan biogeografi Wallacea. Data spasial ", False, False),
-        ("GBIF", True, False),
-        (" memetakan ", False, False),
-        ("269 titik koordinat perjumpaan (occurrence)", True, False),
-        (" dari 7 spesies endemik kunci. Validasi ", False, False),
-        ("IUCN Red List", True, False),
-        (" menunjukkan seluruh spesies mengalami tren penurunan populasi (*Decreasing*) dan ", False, False),
-        ("4 dari 7 spesies terkonfirmasi menghadapi Mining Threat", True, False),
-        (".", False, False)
+    # 2.4
+    add_h3(doc, "2.4 Driver Deforestasi: Analisis Faktor Pendorong Perubahan Tutupan Hutan")
+    add_body(doc, [
+        ("Dekomposisi faktor pendorong deforestasi mengkuantifikasi porsi relatif pembabatan hutan alami ke dalam empat kategori pendorong utama, serta menghitung kuantitas pelepasan karbon teratribusi:", False, False)
     ])
-    add_note_inline(doc, "Sumber Data", "GBIF — Global Biodiversity Information Facility (titik koordinat perjumpaan satwa); IUCN Red List (status konservasi, tren populasi, dan penanda Mining Threat) (diolah CELIOS).")
+    add_formula(doc, "Proporsi Driver (%) = [ Deforestasi Driver Spesifik (Ha) / Total Deforestasi (Ha) ] × 100")
+    add_formula(doc, "Atribusi Emisi CO₂ (Mg) = Total Deforestasi Driver (Ha) × Koefisien Karbon Lanskap (Mg CO₂/Ha)")
 
-    add_caption_compact(doc, "Tabel 2.7: Matriks Spesies Endemik Wallacea, Status IUCN, Penanda Mining Threat, dan Titik GBIF")
-    bio_headers = ["Nama Ilmiah (Scientific Name)", "Nama Umum (Common Name)", "Status IUCN", "Tren Populasi", "Mining Threat", "Titik GBIF"]
-    bio_rows = [
-        ["Macaca nigra", "Celebes Crested Macaque", "Critically Endangered", "Decreasing", "Yes", "87"],
-        ["Macrocephalon maleo", "Maleo", "Critically Endangered", "Decreasing", "No", "95"],
-        ["Bubalus depressicornis", "Lowland Anoa", "Endangered", "Decreasing", "Yes", "18"],
-        ["Bubalus quarlesi", "Mountain Anoa", "Endangered", "Decreasing", "Yes", "10"],
-        ["Babyrousa celebensis", "Sulawesi Babirusa", "Vulnerable", "Decreasing", "Yes", "33"],
-        ["Babyrousa babyrussa", "Hairy Babirusa", "Vulnerable", "Decreasing", "No", "14"],
-        ["Tarsius tarsier", "Spectral Tarsier", "Vulnerable", "Decreasing", "No", "12"]
+    # 2.5
+    add_h3(doc, "2.5 Kehancuran Biodiversitas: Dampak Terhadap Habitat Satwa Endemik")
+    add_body(doc, [
+        ("Analisis keterancaman keanekaragaman hayati mengintegrasikan 269 titik perjumpaan aktual (occurrences) GBIF dari 7 spesies endemik kunci Wallacea dengan analisis tumpang tindih spasial (overlay) poligon konsesi pertambangan dan status ancaman kepunahan internasional (IUCN Red List):", False, False)
+    ])
+    add_formula(doc, "Kepadatan Occurrence (Titik/Km²) = Jumlah Titik Perjumpaan GBIF / Luas Wilayah Observasi (Km²)")
+
+    # ── E. KORESPONDENSI METODOLOGI TERHADAP SUB-BAB LAPORAN ────
+    add_h2(doc, "E", "Korespondensi Metodologi terhadap Sub-bab Laporan Bab 2")
+    add_body(doc, [
+        ("Setiap sub-bab analitis pada Bab 2 ditopang oleh metode kuantitatif yang presisi dan menghasilkan sintesis bukti empiris terstandarisasi sebagaimana dirangkum pada matriks berikut:", False, False)
+    ])
+
+    table_korespondensi = [
+        ["Sub-bab 2.1", "Limbah Tailing & Mutu Air (IKA)", "Pemetaan Spasial Smelter, Uji Non-parametrik Chi-Square (χ²), Odds Ratio (OR)"],
+        ["Sub-bab 2.2", "Emisi PLTU Captive & Mutu Udara (IKU)", "Pemetaan Kapasitas Pembangkit MW, Uji Chi-Square (χ²), Validasi Satelit NO₂"],
+        ["Sub-bab 2.3", "Ekspansi Ruang Industri vs Deforestasi", "Animated Bubble Chart Temporal, Uji Chi-Square (χ²), Odds Ratio Risiko (OR)"],
+        ["Sub-bab 2.4", "Dekomposisi Driver Deforestasi & Emisi CO₂", "Agregasi Tabular Atribusi Kausalitas, Proporsi Pendorong, Koefisien Emisi Karbon"],
+        ["Sub-bab 2.5", "Fragmentasi Habitat & Satwa Endemik", "Spatial Overlay GBIF Occurrence, Sintesis Status Keterancaman IUCN Red List"]
     ]
-    add_table_compact(doc, bio_headers, bio_rows, [4.2, 4.2, 3.6, 2.4, 2.0, 2.2], ['L', 'L', 'C', 'C', 'C', 'C'])
 
-    add_math_block(
+    add_table_styled(
         doc,
-        "Keterancaman Spesies Wallacea & Penanda Mining Threat",
-        "Proporsi Status Kritis (%) = ( Jumlah Spesies CR & EN ÷ Total Spesies ) × 100%  |  Proporsi Mining Threat (%) = ( Jumlah Spesies Terancam Tambang ÷ Total Spesies ) × 100%",
-        "Titik Occurrence GBIF = 269 Titik Terverifikasi (Maleo 95, Macaca 87, Babirusa 47, Anoa 28, Tarsius 12)\n"
-        "Status Konservasi Kritis = ( ( 2 Spesies CR + 2 Spesies EN ) ÷ 7 Spesies ) × 100% = 57,14% Sangat Terancam Punah\n"
-        "Penanda Mining Threat = ( 4 Spesies ÷ 7 Spesies ) × 100% = 57,14% Beririsan Langsung dengan Konsesi IUP Nikel",
-        "Spesies Anoa dan Babirusa terbukti secara empiris menghadapi ancaman kepunahan langsung akibat fragmentasi habitat konsesi pertambangan."
+        headers=["Sub-bab", "Fokus Kajian Empiris", "Metode Analitis Utama"],
+        rows=table_korespondensi,
+        col_widths_cm=[2.5, 5.5, 9.0],
+        alignments=['C', 'L', 'L']
     )
 
-    # Simpan File DOCX
-    out_dir_compact = Path(__file__).resolve().parent
-    out_dir_bab2    = out_dir_compact.parent.parent / "bab_2"
-    out_dir_compact.mkdir(parents=True, exist_ok=True)
-    out_dir_bab2.mkdir(parents=True, exist_ok=True)
+    # ── F. BAGAN ALUR KERANGKA KERJA RISET BAB 2 ────────────────
+    add_h2(doc, "F", "Bagan Alur Kerangka Kerja Riset (Research Workflow)")
+    add_body(doc, [
+        ("Kerangka operasional metodologi Bab 2 berjalan secara terpadu melalui empat fase berurutan sebagaimana divisualisasikan pada bagan alur kerja riset berikut:", False, False)
+    ])
 
-    docx_path_compact = out_dir_compact / "Metodologi_Bab2_Kualitas_Lingkungan_Compact.docx"
-    docx_path_bab2    = out_dir_bab2 / "Metodologi_Bab2_Kualitas_Lingkungan_Compact.docx"
+    mermaid_str_f = """flowchart LR
+    subgraph F1["Fase I: Akuisisi Data"]
+        A1["Kurasi Data Resmi Terbuka<br/><i>KLHK, ESDM, GEM, GFW, NASA, GBIF</i>"]
+        A2["Panel Provinsi-Tahun<br/><i>6 Provinsi Se-Sulawesi (N=54 s.d. 60)</i>"]
+    end
+    subgraph F2["Fase II: Harmonisasi Spasial"]
+        B1["Penyelarasan Koordinat<br/><i>Smelter, PLTU, Konsesi & Titik GBIF</i>"]
+        B2["Overlay Geospasial<br/><i>Baku Mutu vs Tekanan Industri</i>"]
+    end
+    subgraph F3["Fase III: Uji Statistik"]
+        C1["Tabel Kontinjensi 2x2<br/><i>Ambang Median High vs Low</i>"]
+        C2["Uji Chi-Square & Odds Ratio<br/><i>Signifikansi & Kelipatan Risiko</i>"]
+    end
+    subgraph F4["Fase IV: Atribusi & Sintesis"]
+        D1["Dekomposisi Driver CO2<br/><i>Pertambangan vs Agrikultur</i>"]
+        D2["Bukti Kausalitas D3TLH<br/><i>Degradasi Air, Udara & Biodiversitas</i>"]
+    end
+    F1 --> F2 --> F3 --> F4"""
 
-    doc.save(str(docx_path_compact))
-    shutil.copyfile(docx_path_compact, docx_path_bab2)
-    print(f"[OK] Berhasil menyimpan DOCX di: {docx_path_compact}")
-    print(f"[OK] Salinan tersimpan di: {docx_path_bab2}")
+    png_workflow_path = str(out_dir_compact / "mermaid_workflow_bab2.png")
+    is_downloaded = download_mermaid_png(mermaid_str_f, png_workflow_path)
 
-# ── Generator Naskah Markdown Compact ───────────────────────
-def generate_compact_markdown():
-    print("[2/4] Menyusun naskah Markdown Bab 2 Versi Compact...")
-    md_content = """# BAB II: METODOLOGI ANALISIS KUALITAS LINGKUNGAN DI KAWASAN SMELTER
+    add_caption(doc, "Bagan Alur 2.1: Alur Logika Kerangka Kerja Riset Bab 2 (Research Workflow)")
+    if is_downloaded and os.path.exists(png_workflow_path):
+        p_img = doc.add_paragraph()
+        p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p_img.paragraph_format.space_before = Pt(3)
+        p_img.paragraph_format.space_after  = Pt(4)
+        r_img = p_img.add_run()
+        r_img.add_picture(png_workflow_path, width=Cm(16.5))
+        try:
+            shutil.copyfile(png_workflow_path, str(out_dir_bab2 / "mermaid_workflow_bab2.png"))
+        except Exception:
+            pass
 
-Dokumen laporan metodologi ini menyajikan kerangka ilmiah, formulasi matematis, prosedur pengolahan data, dan pengujian statistik yang dioperasionalkan pada **Bab 2: Kualitas Lingkungan di Kawasan Smelter** dalam studi Daya Dukung dan Daya Tampung Lingkungan Hidup (D3TLH) Sulawesi periode 2014–2024.
+    # Box Output Kesimpulan
+    p_box = doc.add_paragraph()
+    p_box.paragraph_format.space_before = Pt(4)
+    p_box.paragraph_format.space_after  = Pt(4)
+    all_border_para(p_box, color='1B5E20', sz='8')
+    para_shd(p_box, 'F1F8E9')
+    add_run(p_box, "KERANGKA KELUARAN METODOLOGIS BAB 2:\n", bold=True, pt=8.5, color=G_DARK)
+    add_run(p_box, "1. Konfigurasi Baku Mutu Lingkungan vs Titik Tekanan Industri: Mengisolasi anomali aggregate dilution bias pada indeks agregat provinsi (IKA dan IKU) terhadap pencemaran riil di tapak industri.\n"
+                   "2. Konfigurasi Inferensial Eksekusi Ruang: Menguji signifikansi kausalitas alokasi izin lahan terhadap percepatan laju deforestasi tutupan hutan melalui matriks kontinjensi Chi-Square dan rasio peluang (OR).\n"
+                   "3. Konfigurasi Dekomposisi Driver & Integritas Biodiversitas: Mengkuantifikasi kontribusi dominan sektor pertambangan terhadap pelepasan emisi karbon dan memvalidasi krisis keterancaman habitat satwa endemik Wallacea.",
+            pt=8, color=C_BODY)
+
+    # ── SIMPAN DOKUMEN DOCX (DUAL SAVE) ─────────────────────────
+    docx_compact = out_dir_compact / "Metodologi_Bab2_Kualitas_Lingkungan_Compact.docx"
+    docx_bab2    = out_dir_bab2 / "Metodologi_Bab2_Kualitas_Lingkungan_Compact.docx"
+    
+    doc.save(str(docx_compact))
+    shutil.copyfile(docx_compact, docx_bab2)
+    print(f"  [OK] Tersimpan DOCX: {docx_compact}")
+    print(f"  [OK] Salinan DOCX : {docx_bab2}")
+
+    # ── GENERATE MARKDOWN PADANAN ───────────────────────────────
+    print("[2/3] Membangun dokumen Markdown padanan...")
+    MD_CONTENT = """# METODOLOGI PENELITIAN: BAB 2 — ANALISIS KUALITAS LINGKUNGAN DI KAWASAN SMELTER
+*CELIOS (Center of Economic and Law Studies) · Audit Spasial-Statistik D3TLH Sulawesi (2014–2024) · Ringkasan Eksekutif Metodologis*
 
 ---
 
-## 2.1. Dampak Limbah Tailing: Konsentrasi Smelter vs Indeks Kualitas Air (IKA)
+## A. Desain Penelitian & Tujuan
+Penelitian ini menggunakan **desain audit spasial-statistik kuantitatif dan inferensial bivariat terintegrasi** untuk mengukur dampak degradasi lingkungan hidup akibat pemusatan fasilitas smelter nikel dan kawasan industri bertenaga PLTU captive batubara di enam provinsi Pulau Sulawesi sepanjang satu dekade (**2014–2024**). Tiga tujuan utama metodologis Bab 2 meliputi:
 
-Pengoperasian **778 fasilitas mega-smelter** yang didukung oleh kapasitas **9.825 MW PLTU Captive** meningkatkan intensitas emisi dan beban lingkungan di Pulau Sulawesi. Konversi tutupan hutan mencapai **1.001.654 Hektar**, estimasi timbulan limbah B3/tailing sebesar **20,9 Juta Ton per tahun**, dan rata-rata Indeks Kualitas Air (IKA) tahun 2024 sebesar **59,7**.
-
-> **Sumber Data:** Kementerian ESDM & Center for Global Sustainability (fasilitas smelter); KLHK & BPS (Indeks Kualitas Air 2016–2024); laporan lembaga masyarakat sipil (proksi timbulan limbah B3/tailing) dan inventarisasi laporan pencemaran sungai-pesisir (diolah CELIOS).
-
-##### Tabel 2.1: Rincian Empiris Konsentrasi Smelter, IKA, Limbah B3, dan Sungai Tercemar per Provinsi (2024)
-| Provinsi | Smelter (Unit) | Skor IKA | Limbah B3 (Ton/Thn) | Sungai Tercemar | Daftar Sungai / Pesisir Terdampak |
-| :--- | :---: | :---: | :---: | :---: | :--- |
-| **Sulawesi Tengah** | 344 | 62.1 | 12,000,000 | 4 | Sungai Bahodopi, Laroenai, Morowali, Pesisir Fatufia |
-| **Sulawesi Tenggara** | 262 | 65.3 | 7,700,000 | 3 | Sungai Lasolo, Sungai Lalindu, Sungai Konaweha |
-| **Sulawesi Selatan** | 111 | 58.5 | 1,000,000 | 1 | Pesisir dan Sungai Bantaeng |
-| **Sulawesi Barat** | 39 | 55.9 | 0 | 0 | Tidak teridentifikasi pembuangan tailing smelter |
-| **Sulawesi Utara** | 15 | 58.2 | 0 | 0 | Tidak teridentifikasi pembuangan tailing smelter |
-| **Gorontalo** | 7 | 58.1 | 0 | 0 | Tidak teridentifikasi pembuangan tailing smelter |
-
-**Formulasi Matematis (Konsentrasi Smelter & Beban Limbah B3 Tailing):**
-```text
-Jumlah Smelter Provinsi = Penjumlahan seluruh fasilitas smelter di provinsi tersebut  |  Rata-rata IKA Provinsi = Jumlah skor IKA seluruh titik pantau ÷ Banyaknya titik pantau
-Chi-Square (χ²) = Jumlah dari [ ( Frekuensi Observasi - Frekuensi Harapan )² ÷ Frekuensi Harapan ]  |  Odds Ratio (OR) = ( a × d ) ÷ ( b × c )
-```
-**Persamaan Substitusi:**
-```text
-Gabungan Smelter Sulteng + Sultra = 344 unit + 262 unit = 606 unit (77,89% dari total se-Sulawesi)
-Estimasi Limbah B3 Tailing = 12.000.000 Ton/Thn (Sulteng) + 7.700.000 Ton/Thn (Sultra) = 19.700.000 Ton/Thn (94,26% dari total limbah B3)
-```
-*Hasil uji Chi-Square dan Odds Ratio data panel disajikan pada Tabel 2.5, dengan konfigurasi variabel uji pada Tabel 2.4. Kegagalan signifikansi statistik membuktikan Aggregate Dilution Bias (pencemaran fatal sungai industri Bahodopi & Lasolo terencerkan oleh stasiun pemantau sungai non-industri).*
+1. **Membongkar Bias Pengenceran Agregat (Aggregate Dilution Bias):** Membuktikan bahwa indeks mutu air (IKA) dan udara (IKU) resmi pada skala provinsi menyamarkan tingkat keparahan polusi riil di sekitar tapak cerobong PLTU captive dan sungai pembuangan limbah tailing smelter.
+2. **Menguji Kausalitas Eksekusi Ruang vs Deforestasi:** Mengukur kekuatan hubungan dan rasio peluang (Odds Ratio) antara alokasi luasan izin konsesi industri nikel terhadap percepatan kehilangan tutupan hutan alam primer.
+3. **Kuantifikasi Atribusi Karbon & Ancaman Kepunahan Satwa:** Mendekomposisi faktor pendorong deforestasi guna membuktikan dominasi pelepasan emisi CO₂ serta memetakan pertampalan spasial titik perjumpaan spesies endemik kunci Wallacea dengan konsesi tambang.
 
 ---
 
-## 2.2. Kepungan Asap: Kapasitas PLTU vs Indeks Kualitas Udara (IKU)
+## B. Sumber Data & Cakupan Wilayah
+Penelitian mencakup seluruh wilayah daratan dan pesisir Pulau Sulawesi yang terbagi ke dalam **6 provinsi** (Sulawesi Tengah, Sulawesi Tenggara, Sulawesi Selatan, Sulawesi Barat, Gorontalo, Sulawesi Utara) serta **kawasan industri terpadu sentra nikel**. Data yang dihimpun berbentuk panel tahunan (2014–2024) berbasis data terbuka resmi lintas kementerian, registri global, dan citra satelit independen:
 
-Sebanyak **9.825 MW PLTU Captive batu bara off-grid** beroperasi di kawasan hilirisasi nikel menyumbang polusi udara ambien dan gas buang NO₂.
-
-> **Sumber Data:** Kementerian ESDM & Global Energy Monitor (kapasitas PLTU Captive & Grid PLN); KLHK (Indeks Kualitas Udara 2015–2024); pantauan emisi Satelit NASA TROPOMI (konsentrasi NO₂) (diolah CELIOS).
-
-##### Tabel 2.2: Rincian Empiris Kapasitas PLTU (Captive & Grid), IKU, dan Konsentrasi NO₂ NASA (2024)
-| Provinsi | Kapasitas PLTU Captive (MW) | PLTU Grid PLN (MW) | Total Daya (MW) | Skor IKU | NASA TROPOMI NO₂ (mol/m²) |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **Sulawesi Tengah** | 9,365 | 0 | 9,365 | 92.9 | 6.50e-06 |
-| **Sulawesi Tenggara** | 2,280 | 100 | 2,380 | 93.0 | 6.62e-06 |
-| **Sulawesi Selatan** | 600 | 920 | 1,520 | 91.5 | 6.40e-06 |
-| **Sulawesi Utara** | 0 | 220 | 220 | 93.4 | 4.09e-06 |
-| **Gorontalo** | 0 | 100 | 100 | 93.5 | 3.76e-06 |
-| **Sulawesi Barat** | 0 | 0 | 0 | 92.5 | 6.00e-06 |
-
-**Formulasi Matematis (Kapasitas Energi PLTU & Parameter Kualitas Udara):**
-```text
-Kapasitas PLTU Provinsi = Penjumlahan kapasitas seluruh unit PLTU di provinsi tersebut  |  Rata-rata IKU = Jumlah skor IKU ÷ Banyaknya observasi provinsi-tahun
-Chi-Square (χ²) = Jumlah dari [ ( Frekuensi Observasi - Frekuensi Harapan )² ÷ Frekuensi Harapan ]  |  Odds Ratio (OR) = ( a × d ) ÷ ( b × c )
-```
-**Persamaan Substitusi:**
-```text
-Total PLTU Captive 3 Sentra = 9.365 MW (Sulteng) + 2.280 MW (Sultra) + 600 MW (Sulsel) = 12.245 MW terpasang
-```
-*Hasil pengujian statistik tabulasi silang dirinci pada Tabel 2.5, dengan konfigurasi variabel uji pada Tabel 2.4. Ketidaksignifikanan membuktikan Efek Pengenceran Udara Ambien karena sensor IKU tersebar merata di hutan berudara bersih.*
+- **Kementerian Lingkungan Hidup dan Kehutanan (Ditjen PPKL):** Indeks Kualitas Lingkungan Hidup (IKLH), Indeks Kualitas Air (IKA), Indeks Kualitas Udara (IKU), dan data status mutu sungai.
+- **ESDM (MODI & MinerbaOne) & Kementerian Investasi (BKPM):** Inventarisasi unit fasilitas smelter nikel dan alokasi konsesi pertambangan.
+- **Global Energy Monitor (GEM) & RUPTL PLN:** Registri geospasial unit dan kapasitas operasional PLTU captive industri batubara off-grid (Megawatt).
+- **Global Forest Watch (GFW / Hansen UMD) & IPCC:** Time-series kehilangan tutupan pohon (Ha) dan estimasi emisi gas rumah kaca (Megagram CO₂e) per faktor pendorong.
+- **NASA TROPOMI (Sentinel-5P):** Konsentrasi troposferik nitrogen dioksida (NO₂ rasio µmol/m²) di atas kawasan industri nikel.
+- **GBIF & IUCN Red List:** 269 titik koordinat geospasial perjumpaan aktual (occurrences) 7 spesies endemik kunci Wallacea dan status ancaman pertambangan (Mining Threat).
 
 ---
 
-## 2.3. Eksekusi Ruang: Ekspansi Kawasan Industri vs Tekanan Ekologis (Deforestasi)
+## C. Operasionalisasi Variabel & Indikator Riset
+Seluruh variabel lingkungan, emisi, ruang, dan keanekaragaman hayati dioperasionalkan secara terukur ke dalam **10 indikator empiris terpadu** sebagaimana dirangkum pada matriks operasional berikut:
 
-Alokasi konsesi IUP dan Kawasan Industri mencakup **1.185.174 Hektar** di Sulawesi. Sepanjang dekade 2014–2023, data Global Forest Watch (GFW) merekam akumulasi kehilangan tutupan pohon sebesar **1.386.055 Hektar** (terbesar di Sulawesi Tengah dan Tenggara).
-
-> **Sumber Data:** Kementerian ESDM — MODI/Minerbaone (izin konsesi IUP & kawasan industri); Global Forest Watch — University of Maryland (kehilangan tutupan pohon 2014–2023) (diolah CELIOS).
-
-##### Tabel 2.3: Rincian Empiris Luas Konsesi IUP-Kawasan Industri dan Deforestasi Kumulatif (2014–2023)
-| Provinsi | Luas IUP & Kawasan (Ha) | Konsesi Baru Kumulatif (Ha) | Deforestasi Kumulatif 1 Dekade (Ha) |
-| :--- | :---: | :---: | :---: |
-| **Sulawesi Tengah** | 453,216 | 387,124 | 481,908 |
-| **Sulawesi Tenggara** | 446,025 | 212,717 | 337,434 |
-| **Sulawesi Selatan** | 181,469 | 123,065 | 261,147 |
-| **Sulawesi Utara** | 94,829 | 89,170 | 74,240 |
-| **Gorontalo** | 5,212 | 5,212 | 98,063 |
-| **Sulawesi Barat** | 4,424 | 2,163 | 133,263 |
-
-##### Tabel 2.4: Konfigurasi Variabel Uji Tabulasi Silang (Crosstab) Bab 2 — Skenario Sub-bab 2.1, 2.2, dan 2.3
-| Komponen Uji | 2.1 Smelter vs IKA | 2.2 PLTU vs IKU | 2.3 Ekspansi Industri vs Deforestasi |
-| :--- | :--- | :--- | :--- |
-| **Variabel Independen (X)** | Jumlah Smelter (fasilitas beroperasi & konstruksi) | Kapasitas PLTU (MW) | Luas Ekspansi Industri / IUP & Kawasan (Ha) |
-| **Variabel Dependen (Y)** | Indeks Kualitas Air (skor baku mutu air provinsi) | Indeks Kualitas Udara (skor baku mutu udara ambien) | Kehilangan Tutupan Pohon / Total Deforestasi Alam (Ha) |
-| **Hipotesis Alternatif (H1)** | Hubungan negatif: semakin padat smelter, semakin kritis mutu air | Hubungan negatif: semakin besar kapasitas PLTU, semakin kritis mutu udara | Korelasi positif: ekspansi izin lahan mendorong laju deforestasi |
-| **Decision Rule (Alpha 5%)** | Tolak H0 jika P-Value < 0.05 | Tolak H0 jika P-Value < 0.05 | Tolak H0 jika P-Value < 0.05 |
-| **Threshold Kategori (Median Panel)** | X ≥ 75.0 fasilitas; Y ≥ 55.9 poin (N=54) | X ≥ 220.0 MW; Y ≥ 91.0 poin (N=54) | X ≥ 138,148.8 Ha; Y ≥ 15,917.7 Ha (N=60) |
-| **Orientasi Odds Ratio** | a = Smelter Tinggi & IKA Kritis (risiko IKA kritis) | a = PLTU Tinggi & IKU Kritis (risiko IKU kritis) | a = IUP Tinggi & Deforestasi Parah (risiko deforestasi parah) |
-
-##### Tabel 2.5: Ringkasan Hasil Uji Independensi Chi-Square (χ²) dan Odds Ratio (OR) Data Panel Bab 2 (N=54 s.d. 60)
-| Faktor Tekanan Lingkungan (X) | Indikator Dampak (Y) | Chi-Square (χ²) | P-Value | Odds Ratio | Kesimpulan Ilmiah |
-| :--- | :--- | :---: | :---: | :---: | :--- |
-| **Kepadatan Smelter (Fasilitas)** | Indeks Kualitas Air (IKA) | 2.667 | 0.102 | 0.35x | TIDAK SIGNIFIKAN (Pengenceran Agregat) |
-| **Kapasitas PLTU (MW)** | Indeks Kualitas Udara (IKU) | 0.000 | 1.000 | 1.18x | TIDAK SIGNIFIKAN (Pengenceran Ambien) |
-| **Luas Ekspansi Industri (Ha)** | Kehilangan Tutupan Pohon (Ha) | 35.267 | p < 0.001 | 81.0x | SIGNIFIKAN (Risiko Deforestasi 81x Lipat) |
-
-**Formulasi Matematis (Eksekusi Ruang & Konsentrasi Deforestasi Sentra):**
-```text
-Luas IUP & Kawasan Provinsi = Penjumlahan luas seluruh izin konsesi di provinsi tersebut  |  Deforestasi Kumulatif = Penjumlahan deforestasi tahunan 2014 s.d. 2023
-Chi-Square (χ²) = Jumlah dari [ ( Frekuensi Observasi - Frekuensi Harapan )² ÷ Frekuensi Harapan ]  |  Odds Ratio (OR) = ( a × d ) ÷ ( b × c )
-```
-**Persamaan Substitusi:**
-```text
-Gabungan Konsesi Sulteng + Sultra = 453.216 Ha + 446.025 Ha = 899.241 Hektar (75,87% dari konsesi se-Sulawesi)
-Gabungan Deforestasi Sulteng + Sultra = 481.908 Ha + 337.434 Ha = 819.342 Hektar (59,11% dari deforestasi se-Sulawesi)
-```
-*Uji Chi-Square membuktikan secara sangat signifikan (χ² = 35.267, p < 0.001, OR = 81.0x) bahwa wilayah konsesi industri nikel menghadapi risiko deforestasi 81 kali lipat lebih tinggi (lihat Tabel 2.5; konfigurasi variabel uji pada Tabel 2.4).*
+##### Matriks Operasionalisasi Variabel dan Sumber Data Resmi Bab 2
+| No | Indikator Riset | Fokus Pengukuran | Satuan | Periode | Sumber Data Primer Resmi |
+| :-: | :--- | :--- | :-: | :-: | :--- |
+| 1 | Kepadatan Fasilitas Smelter | Pemusatan Industri Pirometalurgi & HPAL | Unit Fasilitas | 2016–2024 | ESDM MODI & MinerbaOne |
+| 2 | Indeks Kualitas Air (IKA) | Status Mutu Air Sungai & Pesisir | Poin Skor (0–100) | 2016–2024 | Ditjen PPKL KLHK (IKLH) |
+| 3 | Estimasi Timbulan Limbah B3 | Residu Tailing & Terak Slag Nikel | Ton / Tahun | 2016–2024 | Amdal Industri & Neraca KLHK |
+| 4 | Kapasitas PLTU Captive Batubara | Intensitas Pembangkit Listrik Off-Grid | Megawatt (MW) | 2016–2024 | Global Energy Monitor & RUPTL |
+| 5 | Indeks Kualitas Udara (IKU) | Status Mutu Udara Ambien Agregat | Poin Skor (0–100) | 2016–2024 | Ditjen PPKL KLHK (IKLH) |
+| 6 | Konsentrasi Troposferik NO₂ | Pencemaran Polutan Udara Satelit | µmol/m² | 2019–2024 | Satelit NASA TROPOMI (Sentinel-5P) |
+| 7 | Luas Konsesi IUP & Kawasan | Alokasi Ruang Industri Ekstraktif | Hektar (Ha) | 2014–2023 | ESDM MODI & ATR/BPN |
+| 8 | Luas Deforestasi Hutan Alam | Kehilangan Tutupan Pohon Alami | Hektar (Ha) | 2014–2023 | Global Forest Watch (Hansen UMD) |
+| 9 | Atribusi Emisi Karbon CO₂ | Pelepasan GRK per Faktor Pendorong | Megagram CO₂e | 2014–2023 | GFW & IPCC Tier-1 Methodology |
+| 10 | Sebaran Spesies Endemik & IUCN | Keterancaman Habitat Wallacea | Titik & Kategori | 2014–2024 | GBIF API & IUCN Red List |
 
 ---
 
-## 2.4. Driver Deforestasi: Analisis Faktor Pendorong Perubahan Tutupan Hutan
+## D. Kerangka Analisis & Formulasi Matematis
 
-Atribusi kausalitas membedah kontribusi faktor pendorong terhadap **1,22+ juta hektar deforestasi di Sulawesi** (GFW 2014–2023) antara industri komoditas ekstraktif skala besar vs pertanian berpindah masyarakat.
+### 2.1 Dampak Limbah Tailing: Konsentrasi Smelter vs Indeks Kualitas Air (IKA)
+Pemusatan unit pengolahan pirometalurgi dan hidrometalurgi dihitung berdasarkan agregasi titik fasilitas di setiap provinsi guna mengukur tekanan potensi pelepasan tailing dan slag nikel terhadap baku mutu sungai:
 
-> **Sumber Data:** Global Forest Watch — University of Maryland (klasifikasi faktor pendorong deforestasi & estimasi pelepasan emisi CO₂ kumulatif 2014–2023) (diolah CELIOS).
+> `Kepadatan Smelter (Unit) = Σ [ Fasilitas Smelter Beroperasi & Konstruksi di Provinsi ]`
 
-##### Tabel 2.6: Matriks Atribusi Deforestasi dan Pelepasan Emisi CO₂ per Faktor Pendorong (Kumulatif 2014–2023)
-| Faktor Pendorong Deforestasi | Total Deforestasi (Ha) | Proporsi (%) | Estimasi Emisi Karbon CO₂ (Mg) | Proporsi Emisi (%) |
-| :--- | :---: | :---: | :---: | :---: |
-| **Pertambangan dan Sawit (Ekstraktif)** | 1,001,654 | 82.2% | 664,472,885 | 82.6% |
-| **Kehutanan Komersial (Logging)** | 134,637 | 11.1% | 87,138,022 | 10.8% |
-| **Pertanian Berpindah (Masyarakat)** | 55,905 | 4.6% | 38,215,565 | 4.8% |
-| **Tidak Teridentifikasi / Lainnya** | 25,738 | 2.1% | 14,225,278 | 1.8% |
-| **Total Agregat Sulawesi** | **1,217,934** | **100.0%** | **804,051,750** | **100.0%** |
+Status mutu air diukur menggunakan rata-rata indeks IKA provinsi. Protokol pengujian kontinjensi 2×2 diterapkan untuk menguji signifikansi hubungan antara kepadatan smelter dan status IKA kritis berbasis ambang median:
 
-**Formulasi Matematis (Atribusi Deforestasi Komoditas & Pelepasan Karbon):**
-```text
-Proporsi Faktor Pendorong (%) = ( Deforestasi Faktor Tersebut ÷ Total Deforestasi Kumulatif ) × 100%
-Rasio Kerusakan = Deforestasi Tambang & Sawit ÷ Deforestasi Pertanian Rakyat
-```
-**Persamaan Substitusi:**
-```text
-Proporsi Tambang & Sawit = ( 1.001.654 Ha ÷ 1.217.934 Ha ) × 100% = 82,24% (Emisi: 664.472.885 Mg CO2 / 82,64%)
-Proporsi Pertanian Rakyat = ( 55.905 Ha ÷ 1.217.934 Ha ) × 100% = 4,59% (Emisi: 38.215.565 Mg CO2 / 4,75%)
-Rasio Kerusakan = 1.001.654 Ha ÷ 55.905 Ha = 17,92 Kali Lipat Lebih Masif
-```
-*Fakta empiris membantah tudingan deforestasi akibat perladangan rakyat: industri tambang & sawit merusak hutan 18 kali lipat lebih masif.*
+##### Tabel 2.1a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.1)
+| Komponen Uji | Definisi Variabel (Sub-bab 2.1) |
+| :--- | :--- |
+| **Variabel Independen (X)** | Jumlah Smelter: Total fasilitas smelter (beroperasi maupun konstruksi). |
+| **Variabel Dependen (Y)** | Indeks Kualitas Air: Skor baku mutu air per provinsi. |
+| **Hipotesis Nol (H0)** | Tidak ada hubungan signifikan secara statistik antara kepadatan smelter dengan Indeks Kualitas Air. |
+| **Hipotesis Alternatif (H1)** | Ada hubungan negatif antara kepadatan smelter dengan Indeks Kualitas Air (semakin padat smelter, semakin kritis mutu air). |
+| **Decision Rule (Alpha 5%)** | Jika P-Value < 0.05, maka Tolak H0 (Terbukti signifikan bahwa smelter menurunkan mutu air). |
+| **Threshold Kategori** | Nilai Median Data Panel 2016-2024 (N=54): X >= 75.0 fasilitas; Y >= 55.9 poin. |
+| **Orientasi Odds Ratio** | OR = ( a × d ) / ( b × c ) dengan a = Smelter Tinggi & IKA Kritis; mengukur risiko IKA kritis pada kelompok kepadatan smelter tinggi. |
+
+### 2.2 Kepungan Asap: Kapasitas PLTU vs Indeks Kualitas Udara (IKU)
+Akumulasi beban emisi pembakaran batubara dihitung dari total kapasitas pembangkit listrik tenaga uap captive terpasang pada kawasan industri nikel:
+
+> `Total Kapasitas PLTU (MW) = Σ [ Kapasitas PLTU Captive Terpasang di Koridor Industri ]`
+
+Pengujian statistik tabulasi silang mengevaluasi interaksi antara kapasitas pembangkit off-grid terhadap penurunan skor mutu udara ambien (IKU) serta divalidasi oleh densitas polutan satelit NO₂:
+
+##### Tabel 2.2a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.2)
+| Komponen Uji | Definisi Variabel (Sub-bab 2.2) |
+| :--- | :--- |
+| **Variabel Independen (X)** | Kapasitas PLTU (MW): Total kapasitas PLTU Captive yang beroperasi. |
+| **Variabel Dependen (Y)** | Indeks Kualitas Udara: Skor baku mutu udara ambien per provinsi. |
+| **Hipotesis Nol (H0)** | Tidak ada hubungan signifikan secara statistik antara kapasitas PLTU dengan Indeks Kualitas Udara. |
+| **Hipotesis Alternatif (H1)** | Ada hubungan negatif antara kapasitas PLTU dengan Indeks Kualitas Udara (semakin besar kapasitas, semakin kritis mutu udara). |
+| **Decision Rule (Alpha 5%)** | Jika P-Value < 0.05, maka Tolak H0 (Terbukti signifikan bahwa emisi PLTU menurunkan kualitas udara). |
+| **Threshold Kategori** | Nilai Median Data Panel (N=54): X >= 220.0 MW; Y >= 91.0 poin. |
+| **Orientasi Odds Ratio** | OR = ( a × d ) / ( b × c ) dengan a = PLTU Tinggi & IKU Kritis; mengukur risiko IKU kritis pada kelompok kapasitas PLTU tinggi. |
+
+### 2.3 Eksekusi Ruang: Ekspansi Kawasan Industri vs Tekanan Ekologis (Deforestasi)
+Total alokasi ruang konsesi industri nikel dihitung melalui penjumlahan luasan izin usaha pertambangan (IUP) aktif dan zonasi kawasan industri terpadu:
+
+> `Total Alokasi Ruang (Ha) = Σ [ Luas Konsesi IUP Tambang + Luas Tapak Kawasan Industri ]`
+
+Uji independensi Chi-Square (α = 5%, df = 1) dan Odds Ratio diterapkan untuk menguji hipotesis pembuktian apakah penguasaan ruang skala besar meningkatkan risiko deforestasi terbuka secara eksponensial:
+
+##### Tabel 2.3a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.3)
+| Komponen Uji | Definisi Variabel (Sub-bab 2.3) |
+| :--- | :--- |
+| **Variabel Independen (X)** | Luas Ekspansi Industri (Ha) / Luas IUP & Kawasan (Ha) |
+| **Variabel Dependen (Y)** | Kehilangan Tutupan Pohon (Ha) / Total Deforestasi Alam (Ha) |
+| **Hipotesis Nol (H0)** | Luasan ekspansi kawasan industri dan perizinan tambang tidak berhubungan dengan laju deforestasi. |
+| **Hipotesis Alternatif (H1)** | Alokasi izin lahan (Luas IUP & Kawasan) berkorelasi positif dengan laju deforestasi. |
+| **Decision Rule (Alpha 5%)** | Jika P-Value < 0.05, maka Tolak H0 (terbukti signifikan bahwa ekspansi izin lahan mendorong deforestasi). |
+| **Threshold Kategori** | Nilai Median Data Panel (N=60): X >= 138,148.8 Ha; Y >= 15,917.7 Ha. |
+| **Orientasi Odds Ratio** | OR = ( a × d ) / ( b × c ) dengan a = IUP Tinggi & Deforestasi Tinggi/Parah; mengukur risiko deforestasi parah pada kelompok luas IUP tinggi. |
+
+### 2.4 Driver Deforestasi: Analisis Faktor Pendorong Perubahan Tutupan Hutan
+Dekomposisi faktor pendorong deforestasi mengkuantifikasi porsi relatif pembabatan hutan alami ke dalam empat kategori pendorong utama, serta menghitung kuantitas pelepasan karbon teratribusi:
+
+> `Proporsi Driver (%) = [ Deforestasi Driver Spesifik (Ha) / Total Deforestasi (Ha) ] × 100`
+
+> `Atribusi Emisi CO₂ (Mg) = Total Deforestasi Driver (Ha) × Koefisien Karbon Lanskap (Mg CO₂/Ha)`
+
+### 2.5 Kehancuran Biodiversitas: Dampak Terhadap Habitat Satwa Endemik
+Analisis keterancaman keanekaragaman hayati mengintegrasikan 269 titik perjumpaan aktual (occurrences) GBIF dari 7 spesies endemik kunci Wallacea dengan analisis tumpang tindih spasial (overlay) poligon konsesi pertambangan dan status ancaman kepunahan internasional (IUCN Red List):
+
+> `Kepadatan Occurrence (Titik/Km²) = Jumlah Titik Perjumpaan GBIF / Luas Wilayah Observasi (Km²)`
 
 ---
 
-## 2.5. Kehancuran Biodiversitas: Dampak Terhadap Habitat Satwa Endemik
+## E. Korespondensi Metodologi terhadap Sub-bab Laporan Bab 2
+Setiap sub-bab analitis pada Bab 2 ditopang oleh metode kuantitatif yang presisi dan menghasilkan sintesis bukti empiris terstandarisasi sebagaimana dirangkum pada matriks berikut:
 
-Ekspansi pertambangan nikel dan kawasan industri mengancam keanekaragaman hayati kawasan biogeografi Wallacea. Data spasial **GBIF** memetakan **269 titik koordinat perjumpaan (*occurrence*)** dari 7 spesies endemik kunci. Validasi **IUCN Red List** menunjukkan seluruh spesies mengalami tren penurunan populasi (*Decreasing*) dan **4 dari 7 spesies terkonfirmasi menghadapi Mining Threat**.
+##### Matriks Korespondensi Sub-bab terhadap Metode Analitis
+| Sub-bab | Fokus Kajian Empiris | Metode Analitis Utama |
+| :---: | :--- | :--- |
+| **Sub-bab 2.1** | Limbah Tailing & Mutu Air (IKA) | Pemetaan Spasial Smelter, Uji Non-parametrik Chi-Square (χ²), Odds Ratio (OR) |
+| **Sub-bab 2.2** | Emisi PLTU Captive & Mutu Udara (IKU) | Pemetaan Kapasitas Pembangkit MW, Uji Chi-Square (χ²), Validasi Satelit NO₂ |
+| **Sub-bab 2.3** | Ekspansi Ruang Industri vs Deforestasi | Animated Bubble Chart Temporal, Uji Chi-Square (χ²), Odds Ratio Risiko (OR) |
+| **Sub-bab 2.4** | Dekomposisi Driver Deforestasi & Emisi CO₂ | Agregasi Tabular Atribusi Kausalitas, Proporsi Pendorong, Koefisien Emisi Karbon |
+| **Sub-bab 2.5** | Fragmentasi Habitat & Satwa Endemik | Spatial Overlay GBIF Occurrence, Sintesis Status Keterancaman IUCN Red List |
 
-> **Sumber Data:** GBIF — Global Biodiversity Information Facility (titik koordinat perjumpaan satwa); IUCN Red List (status konservasi, tren populasi, dan penanda Mining Threat) (diolah CELIOS).
+---
 
-##### Tabel 2.7: Matriks Spesies Endemik Wallacea, Status IUCN, Penanda Mining Threat, dan Titik GBIF
-| Nama Ilmiah (Scientific Name) | Nama Umum (Common Name) | Status IUCN | Tren Populasi | Mining Threat | Titik GBIF |
-| :--- | :--- | :---: | :---: | :---: | :---: |
-| **Macaca nigra** | Celebes Crested Macaque | Critically Endangered | Decreasing | Yes | 87 |
-| **Macrocephalon maleo** | Maleo | Critically Endangered | Decreasing | No | 95 |
-| **Bubalus depressicornis** | Lowland Anoa | Endangered | Decreasing | Yes | 18 |
-| **Bubalus quarlesi** | Mountain Anoa | Endangered | Decreasing | Yes | 10 |
-| **Babyrousa celebensis** | Sulawesi Babirusa | Vulnerable | Decreasing | Yes | 33 |
-| **Babyrousa babyrussa** | Hairy Babirusa | Vulnerable | Decreasing | No | 14 |
-| **Tarsius tarsier** | Spectral Tarsier | Vulnerable | Decreasing | No | 12 |
+## F. Bagan Alur Kerangka Kerja Riset (Research Workflow)
 
-**Formulasi Matematis (Keterancaman Spesies Wallacea & Penanda Mining Threat):**
-```text
-Proporsi Status Kritis (%) = ( Jumlah Spesies CR & EN ÷ Total Spesies ) × 100%  |  Proporsi Mining Threat (%) = ( Jumlah Spesies Terancam Tambang ÷ Total Spesies ) × 100%
+```mermaid
+flowchart LR
+    subgraph F1["Fase I: Akuisisi Data"]
+        A1["Kurasi Data Resmi Terbuka<br/><i>KLHK, ESDM, GEM, GFW, NASA, GBIF</i>"]
+        A2["Panel Provinsi-Tahun<br/><i>6 Provinsi Se-Sulawesi (N=54 s.d. 60)</i>"]
+    end
+    subgraph F2["Fase II: Harmonisasi Spasial"]
+        B1["Penyelarasan Koordinat<br/><i>Smelter, PLTU, Konsesi & Titik GBIF</i>"]
+        B2["Overlay Geospasial<br/><i>Baku Mutu vs Tekanan Industri</i>"]
+    end
+    subgraph F3["Fase III: Uji Statistik"]
+        C1["Tabel Kontinjensi 2x2<br/><i>Ambang Median High vs Low</i>"]
+        C2["Uji Chi-Square & Odds Ratio<br/><i>Signifikansi & Kelipatan Risiko</i>"]
+    end
+    subgraph F4["Fase IV: Atribusi & Sintesis"]
+        D1["Dekomposisi Driver CO2<br/><i>Pertambangan vs Agrikultur</i>"]
+        D2["Bukti Kausalitas D3TLH<br/><i>Degradasi Air, Udara & Biodiversitas</i>"]
+    end
+    F1 --> F2 --> F3 --> F4
 ```
-**Persamaan Substitusi:**
-```text
-Titik Occurrence GBIF = 269 Titik Terverifikasi (Maleo 95, Macaca 87, Babirusa 47, Anoa 28, Tarsius 12)
-Status Konservasi Kritis = ( ( 2 Spesies CR + 2 Spesies EN ) ÷ 7 Spesies ) × 100% = 57,14% Sangat Terancam Punah
-Penanda Mining Threat = ( 4 Spesies ÷ 7 Spesies ) × 100% = 57,14% Beririsan Langsung dengan Konsesi IUP Nikel
-```
-*Spesies Anoa dan Babirusa terbukti secara empiris menghadapi ancaman kepunahan langsung akibat fragmentasi habitat konsesi pertambangan.*
+
+> **KERANGKA KELUARAN METODOLOGIS BAB 2:**  
+> 1. **Konfigurasi Baku Mutu Lingkungan vs Titik Tekanan Industri:** Mengisolasi anomali aggregate dilution bias pada indeks agregat provinsi (IKA dan IKU) terhadap pencemaran riil di tapak industri.  
+> 2. **Konfigurasi Inferensial Eksekusi Ruang:** Menguji signifikansi kausalitas alokasi izin lahan terhadap percepatan laju deforestasi tutupan hutan melalui matriks kontinjensi Chi-Square dan rasio peluang (OR).  
+> 3. **Konfigurasi Dekomposisi Driver & Integritas Biodiversitas:** Mengkuantifikasi kontribusi dominan sektor pertambangan terhadap pelepasan emisi karbon dan memvalidasi krisis keterancaman habitat satwa endemik Wallacea.
 """
 
-    out_dir_compact = Path(__file__).resolve().parent
-    out_dir_bab2    = out_dir_compact.parent.parent / "bab_2"
-    out_dir_compact.mkdir(parents=True, exist_ok=True)
-    out_dir_bab2.mkdir(parents=True, exist_ok=True)
-    
-    md_path_compact = out_dir_compact / "Metodologi_Bab2_Kualitas_Lingkungan_Compact.md"
-    md_path_bab2    = out_dir_bab2 / "Metodologi_Bab2_Kualitas_Lingkungan_Compact.md"
+    md_compact = out_dir_compact / "Metodologi_Bab2_Kualitas_Lingkungan_Compact.md"
+    md_bab2    = out_dir_bab2 / "Metodologi_Bab2_Kualitas_Lingkungan_Compact.md"
+    for pth in [md_compact, md_bab2]:
+        with open(pth, "w", encoding="utf-8") as f:
+            f.write(MD_CONTENT)
+    print(f"  [OK] Tersimpan MD  : {md_compact}")
+    print(f"  [OK] Salinan MD   : {md_bab2}")
 
-    with open(md_path_compact, "w", encoding="utf-8") as f:
-        f.write(md_content)
-    with open(md_path_bab2, "w", encoding="utf-8") as f:
-        f.write(md_content)
+    print("[3/3] Selesai menghasilkan dokumen metodologi Bab 2 versi compact (1-Kolom, 2-3 Halaman).")
 
-    print(f"[OK] Berhasil menyimpan Markdown di: {md_path_compact}")
-    print(f"[OK] Salinan tersimpan di: {md_path_bab2}")
 
 if __name__ == "__main__":
-    print("=" * 70)
-    print("GENERATOR METODOLOGI STATISTIK VERSI COMPACT - BAB 2")
-    print("=" * 70)
-    build_compact_report()
-    generate_compact_markdown()
-    print("=" * 70)
-    print("SELESAI! Dokumen Versi Compact Bab 2 berhasil diperbarui.")
-    print("=" * 70)
+    generate_bab2_compact()
