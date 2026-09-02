@@ -727,6 +727,85 @@ def generate_all_bab2():
         ["Threshold Kategori", f"Nilai Median Data Panel (N={valid_cases_23}): X >= {stats_23['x_threshold']:,.1f} Ha; Y >= {stats_23['y_threshold']:,.1f} Ha"],
     ]
 
+    print("[2.8/4] Mengekstraksi dataset empiris Bab 2 sub-bab 2.4...")
+    df_driver_24 = pd.read_csv(data_dir / "sulawesi_gfw_loss_by_driver_2014_2023_v3.csv")
+    driver_mapping_24 = {
+        "Deforestasi Komoditas (Tambang/Sawit)": "Pertambangan dan Sawit",
+        "Kehutanan": "Kehutanan Komersial",
+        "Pertanian Berpindah": "Pertanian Berpindah (Masyarakat)",
+        "Urbanisasi": "Urbanisasi & Infrastruktur",
+        "Tidak Diketahui": "Tidak Teridentifikasi",
+    }
+    df_driver_clean_24 = df_driver_24.copy()
+    df_driver_clean_24["Faktor_Pendorong"] = df_driver_clean_24["Faktor_Pendorong"].replace(driver_mapping_24)
+
+    focus_provinces_24 = ["Sulawesi Tengah", "Sulawesi Tenggara", "Sulawesi Utara", "Sulawesi Selatan", "Gorontalo", "Sulawesi Barat"]
+    df_driver_focus_24 = df_driver_clean_24[df_driver_clean_24["Provinsi"].isin(focus_provinces_24)]
+
+    total_deforestasi_fokus = df_driver_focus_24["Luas_Deforestasi_Ha"].sum()
+    teks_juta_24 = f"{total_deforestasi_fokus / 1e6:.2f}".replace(".", ",")
+    tahun_min_24 = int(df_driver_focus_24["Tahun"].min())
+    tahun_max_24 = int(df_driver_focus_24["Tahun"].max())
+    jml_prov_24 = df_driver_focus_24["Provinsi"].nunique()
+    jml_driver_24 = df_driver_focus_24["Faktor_Pendorong"].nunique()
+
+    df_driver_total_all = df_driver_focus_24.groupby("Faktor_Pendorong").agg({
+        "Luas_Deforestasi_Ha": "sum",
+        "Emisi_CO2_Megagram": "sum",
+    }).reset_index().sort_values("Luas_Deforestasi_Ha", ascending=False)
+    tot_luas_24 = df_driver_total_all["Luas_Deforestasi_Ha"].sum()
+    tot_emisi_24 = df_driver_total_all["Emisi_CO2_Megagram"].sum()
+
+    driver_rows_24 = []
+    for _, row in df_driver_total_all.iterrows():
+        driver_rows_24.append([
+            row["Faktor_Pendorong"],
+            f"{row['Luas_Deforestasi_Ha']:,.0f}",
+            f"{row['Luas_Deforestasi_Ha'] / tot_luas_24 * 100:.1f}%",
+            f"{row['Emisi_CO2_Megagram']:,.0f}",
+        ])
+
+    industri_total_24 = df_driver_total_all.loc[df_driver_total_all["Faktor_Pendorong"] == "Pertambangan dan Sawit", "Luas_Deforestasi_Ha"].values[0]
+    petani_total_24 = df_driver_total_all.loc[df_driver_total_all["Faktor_Pendorong"] == "Pertanian Berpindah (Masyarakat)", "Luas_Deforestasi_Ha"].values[0]
+    industri_pct_24 = industri_total_24 / tot_luas_24 * 100
+    petani_pct_24 = petani_total_24 / tot_luas_24 * 100
+    rasio_24 = industri_total_24 / petani_total_24
+    emisi_industri_24 = df_driver_total_all.loc[df_driver_total_all["Faktor_Pendorong"] == "Pertambangan dan Sawit", "Emisi_CO2_Megagram"].values[0]
+    emisi_industri_pct_24 = emisi_industri_24 / tot_emisi_24 * 100
+
+    share_tahunan_24 = df_driver_focus_24.groupby(["Tahun", "Faktor_Pendorong"])["Luas_Deforestasi_Ha"].sum().unstack(fill_value=0)
+    share_industri_24 = share_tahunan_24["Pertambangan dan Sawit"] / share_tahunan_24.sum(axis=1) * 100
+    share_ind_min_24 = share_industri_24.min()
+    share_ind_max_24 = share_industri_24.max()
+
+    konf_headers_24 = ["Komponen Analisis", "Definisi Variabel (Sub-bab 2.4)"]
+    konf_rows_24 = [
+        ["Variabel Independen (X)", f"Faktor Pendorong Deforestasi ({jml_driver_24} kelompok klasifikasi driver aktual dalam data)"],
+        ["Variabel Dependen (Y1)", "Luas Deforestasi (Ha): kehilangan tutupan pohon per faktor pendorong"],
+        ["Variabel Dependen (Y2)", "Emisi CO2 (Megagram): kuantitas karbon dioksida ekuivalen yang terlepas ke atmosfer"],
+        ["Periode & Cakupan Observasi", f"{tahun_min_24}-{tahun_max_24} pada {jml_prov_24} provinsi se-Sulawesi"],
+        ["Metode Atribusi", "Agregasi tabular GROUP BY Faktor_Pendorong dengan kuantifikasi proporsi absolut (tanpa uji inferensial)"],
+    ]
+
+    mermaid_str_2_4 = """flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data GFW Klasifikasi Driver<br/><i>Provinsi, Tahun, Faktor Pendorong, Luas (Ha), Emisi CO2 (Mg)</i>"] --> C
+    end
+    subgraph Driver_Processing["2. Klasifikasi & Agregasi Driver"]
+        C["Pemetaan Kelompok Faktor Pendorong<br/>Tambang-Sawit; Kehutanan; Pertanian; Urbanisasi; Tak Teridentifikasi"] --> F["Agregasi SUM Luas & Emisi<br/>GROUP BY Faktor Pendorong"]
+        F --> G["Kuantifikasi Proporsi (%)<br/>terhadap total kumulatif deforestasi"]
+    end
+    subgraph Attribution_Analysis["3. Atribusi & Visualisasi"]
+        G --> H["Normalized Stacked Area<br/>Evolusi temporal komposisi driver"]
+        G --> I["Bar Chart Kumulatif<br/>Total deforestasi per driver"]
+        G --> J["Atribusi Emisi CO2<br/>Jejak karbon per faktor pendorong"]
+    end
+    H --> K["Pembacaan anatomi deforestasi Sulawesi"]
+    I --> K
+    J --> K"""
+    mermaid_png_path_2_4 = str(tool_dir / "mermaid_flowchart_2_4.png")
+    download_success_2_4 = download_mermaid_png(mermaid_str_2_4, mermaid_png_path_2_4)
+
     print("[2.9/4] Membangun DOCX Metodologi_Bab2_Kualitas_Lingkungan.docx...")
     doc = Document()
     sec = doc.sections[0]
@@ -1039,6 +1118,99 @@ def generate_all_bab2():
 
     add_h4(doc, "E. Analisis Temuan Empiris: Eksekusi Ruang dan Laju Deforestasi")
     add_p(doc, [(finding_23, False, False)])
+
+    add_h2(doc, "2.4. Driver Deforestasi: Analisis Faktor Pendorong Perubahan Tutupan Hutan")
+    add_note_box(doc, "Sumber Data Resmi & Deskripsi Visualisasi", "Data GFW Klasifikasi Driver: data/processed/sulawesi_gfw_loss_by_driver_2014_2023_v3.csv. Visualisasi dashboard menampilkan Normalized Stacked Area Chart (evolusi temporal komposisi driver), Bar Chart kumulatif per driver, serta kartu metrik atribusi deforestasi industri vs pertanian masyarakat.")
+
+    add_h4(doc, "A. Pengantar & Kerangka Narasi")
+    add_p(doc, [
+        ("Fokus analisis sub-bab ini adalah membedah kontribusi masing-masing sektor pendorong terhadap ", False, False),
+        (f"{teks_juta_24}+ juta hektar deforestasi di Sulawesi", True, False),
+        (f" sepanjang dekade {tahun_min_24}-{tahun_max_24}. Section ini menyajikan atribusi kuantitatif antara aktivitas industri ekstraktif komoditas (tambang/sawit) dan sektor pertanian masyarakat.", False, False),
+    ])
+    add_p(doc, [
+        ("Faktor-faktor penyebab deforestasi diklasifikasikan ke dalam 5 kelompok: ", False, False),
+        ("Industri Ekstraktif (Tambang/Sawit), Kehutanan Komersial, Pertanian Berpindah, Urbanisasi, dan Tidak Teridentifikasi", True, False),
+        (". Kuantifikasi proporsi menghitung rasio kontribusi absolut luasan deforestasi dari masing-masing faktor pendorong terhadap total kumulatif deforestasi, sekaligus mengatribusikan jejak karbon (Emisi CO2) dari konversi biomasa masing-masing faktor.", False, False),
+    ])
+
+    add_h4(doc, "B. Alur Logika Metodologis Analisis Driver & Atribusi Emisi CO2")
+    add_p(doc, [
+        ("Kerangka atribusi kausalitas hilangnya tutupan lahan dan kuantifikasi jejak karbon dari masing-masing faktor pendorong diilustrasikan pada ", False, False),
+        ("Bagan Alur 2.4", True, False),
+        (" berikut. Sub-bab ini murni menggunakan agregasi tabular atribusi (tanpa uji inferensial Chi-Square), dengan konfigurasi variabel analisis dirinci pada Tabel 2.4a di bawah gambar.", False, False),
+    ])
+    add_caption(doc, "Bagan Alur 2.4: Alur Logika Metodologis Driver Analysis & Emisi CO2 Attribution")
+    if download_success_2_4:
+        try:
+            p_img = doc.add_paragraph()
+            p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p_img.add_run().add_picture(mermaid_png_path_2_4, width=Cm(15))
+        except Exception as exc:
+            print(f"[WARN] Gagal memasukkan gambar Mermaid 2.4 ke DOCX: {exc}")
+            p_err = doc.add_paragraph()
+            run(p_err, "[Gambar Flowchart Gagal Dimuat]", color=C_RED, pt=9)
+    else:
+        p_err = doc.add_paragraph()
+        run(p_err, "[Gambar Flowchart Gagal Diunduh, silakan periksa koneksi internet saat generate]", color=C_RED, pt=9)
+
+    p_spacer_24 = doc.add_paragraph()
+    p_spacer_24.paragraph_format.space_before = Pt(2)
+    p_spacer_24.paragraph_format.space_after = Pt(4)
+
+    add_caption(doc, "Tabel 2.4a: Konfigurasi Variabel Analisis Driver & Atribusi Emisi (Sub-bab 2.4)")
+    add_table_1col(doc, konf_headers_24, konf_rows_24, [4.5, 11.0], ["L", "L"])
+
+    p_spacer_24b = doc.add_paragraph()
+    p_spacer_24b.paragraph_format.space_before = Pt(2)
+    p_spacer_24b.paragraph_format.space_after = Pt(4)
+
+    add_h4(doc, "C. Formulasi Matematis: Agregasi Driver, Proporsi, dan Atribusi Emisi")
+    add_p(doc, [
+        ("Kuantifikasi atribusi kausalitas dan jejak karbon dihitung menggunakan sistem formulasi matematis berikut:", False, False),
+    ])
+    add_formula(doc, "Agregasi Total Deforestasi per Faktor Pendorong", "Total_Deforestasi = SUM(Luas_Deforestasi_Ha) GROUP BY Faktor_Pendorong", [
+        ("Total_Deforestasi", "Total kehilangan tutupan pohon (Ha) yang diatribusikan pada faktor pendorong observasi."),
+        ("Luas_Deforestasi_Ha", "Variabel Dependen (Y1): kehilangan tutupan pohon per hektar."),
+        ("Faktor_Pendorong", "Variabel Independen (X): kategori aktivitas penyebab hilangnya hutan."),
+    ])
+    add_formula(doc, "Agregasi Total Emisi per Faktor Pendorong", "Total_Emisi = SUM(Emisi_CO2_Megagram) GROUP BY Faktor_Pendorong", [
+        ("Total_Emisi", "Total pelepasan gas rumah kaca dari konversi biomasa per faktor pendorong."),
+        ("Emisi_CO2_Megagram", "Variabel Dependen (Y2): kuantitas karbon dioksida ekuivalen yang terlepas ke atmosfer."),
+    ])
+    add_formula(doc, "Kuantifikasi Proporsi Kontribusi Driver", "Persentase_Driver (%) = ( Total_Deforestasi_Driver / Total_Deforestasi_Kumulatif ) * 100", [
+        ("Persentase_Driver (%)", "Rasio kontribusi absolut luasan deforestasi faktor pendorong terhadap total kumulatif deforestasi."),
+        ("Total_Deforestasi_Kumulatif", f"Total seluruh deforestasi {jml_prov_24} provinsi periode {tahun_min_24}-{tahun_max_24} ({tot_luas_24:,.0f} Ha)."),
+    ])
+    add_formula(doc, "Rasio Perbandingan Industri Ekstraktif vs Pertanian Masyarakat", "Rasio_Perbandingan = Total_Pertambangan_Sawit / Total_Pertanian_Berpindah", [
+        ("Rasio_Perbandingan", f"Kelipatan luasan deforestasi komoditas tambang dan sawit dibandingkan pertanian berpindah ({rasio_24:.0f}x)."),
+        ("Total_Pertambangan_Sawit", f"Akumulasi deforestasi driver Pertambangan dan Sawit ({industri_total_24:,.0f} Ha)."),
+        ("Total_Pertanian_Berpindah", f"Akumulasi deforestasi driver Pertanian Berpindah/Masyarakat ({petani_total_24:,.0f} Ha)."),
+    ])
+
+    add_h4(doc, "D. Matriks Hasil Uji Empiris: Atribusi Deforestasi & Emisi CO2 per Driver")
+    add_p(doc, [
+        (f"Akumulasi total deforestasi, proporsi kontribusi, dan atribusi emisi CO2 masing-masing faktor pendorong pada periode {tahun_min_24}-{tahun_max_24} dapat dilihat secara empiris pada ", False, False),
+        ("Tabel 2.8", True, False),
+        (" berikut:", False, False),
+    ])
+    add_caption(doc, f"Tabel 2.8: Matriks Atribusi Deforestasi dan Emisi CO2 per Faktor Pendorong (Kumulatif {tahun_min_24}-{tahun_max_24})")
+    add_table_1col(doc, ["Faktor Pendorong", "Total Deforestasi (Ha)", "Proporsi (%)", "Emisi CO2 (Megagram)"], driver_rows_24, [4.5, 3.6, 2.6, 4.3], ["L", "C", "C", "C"])
+
+    add_h4(doc, "E. Analisis Temuan Empiris: Anatomi Deforestasi Sulawesi")
+    add_p(doc, [
+        ("Pembacaan matriks atribusi driver mengungkap anatomi deforestasi Sulawesi sebagai berikut:", False, False),
+    ])
+    add_p(doc, [
+        ("1. ", True, False), ("Dominasi Sektor Pertambangan dan Sawit: ", True, False),
+        (f"Sektor Pertambangan dan Sawit merupakan faktor pendorong utama deforestasi di Sulawesi, mencakup {industri_total_24:,.0f} Ha atau {industri_pct_24:.1f}% dari total kehilangan tutupan hutan periode {tahun_min_24}-{tahun_max_24}, dengan proporsi tahunan yang konsisten pada rentang {share_ind_min_24:.0f}-{share_ind_max_24:.0f}% setiap tahunnya.\n", False, False),
+        ("2. ", True, False), ("Porsi Minor Pertanian Berpindah: ", True, False),
+        (f"Pertanian Berpindah (Masyarakat) mencatatkan porsi {petani_pct_24:.1f}% ({petani_total_24:,.0f} Ha) dari total deforestasi kumulatif. Akumulasi deforestasi komoditas tambang dan sawit mencatatkan luasan {rasio_24:.0f} kali lebih besar dibanding pertanian berpindah.\n", False, False),
+        ("3. ", True, False), ("Atribusi Emisi CO2: ", True, False),
+        (f"Deforestasi yang didorong oleh komoditas pertambangan dan perkebunan berkontribusi terhadap pelepasan {emisi_industri_24:,.0f} Megagram CO2 atau {emisi_industri_pct_24:.1f}% dari total agregat pelepasan karbon perubahan tutupan lahan di Pulau Sulawesi.\n", False, False),
+        ("4. ", True, False), ("Implikasi Kebijakan: ", True, False),
+        ("Pengendalian deforestasi memerlukan evaluasi tata ruang perizinan pertambangan dan pengawasan ketat terhadap pembukaan lahan komoditas di wilayah tutupan hutan.", False, False),
+    ])
 
     docx_path = tool_dir / "Metodologi_Bab2_Kualitas_Lingkungan.docx"
     doc.save(str(docx_path))
