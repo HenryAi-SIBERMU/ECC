@@ -61,13 +61,13 @@ Skor_Likert (Versi 3) = 9.73 / 2.0 = 4.86 -> 5.0 / 5.0 (DARURAT UDARA)
 ##### Tabel 6.1: Evaluasi Kuantitatif 4 Sub-Metrik Daya Tampung Udara Bioregion Pulau Sulawesi
 | Kode | Indikator Empiris | Nilai Aktual | Ambang Batas Kritis | Formula Substitusi | Skor WSM (0-10) | Skor Likert (1-5) | Status Ekologis |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Udara 1a | Kapasitas PLTU Captive Beroperasi | 9,825.0 MW | > 5.000 MW (GEM 2023) | min(5.0, (9,825/5000)*5) | 5.00 / 5.0 | 2.50 / 2.5 | Kritis Ekstrem |
-| Udara 1b | Konsentrasi Gas NO2 Satelit TROPOMI | 5.56e-06 mol/m² | > 6.0e-6 mol/m² (Baseline) | min(5.0, (NO2-4e-6)/(2e-6)*5) | 3.91 / 5.0 | 1.95 / 2.5 | Melampaui Baku Mutu |
-| Udara 1 | Sub-Metrik Gabungan Ancaman Udara | Kombinasi PLTU + NO2 | Maksimal Skor 10.0 | min(10.0, 5.00 + 3.91) | 8.91 / 10.0 | 4.45 / 5.0 | Darurat Polusi |
-| Udara 2 | Rasio Anomali ISPA (Morbiditas) | 3.50x lipat (IRR) | > 2.0x lipat (WHO EHC 6) | min(10.0, (3.50-1)*10) | 10.00 / 10.0 | 5.00 / 5.0 | KLB Morbiditas |
-| Udara 3 | Proporsi Timbulan Limbah B3 | 7.93% dari Nasional | > 5.0% Beban Nasional (KLHK) | min(10.0, (7.93/5)*10) | 10.00 / 10.0 | 5.00 / 5.0 | Overcapacity Asimetris |
-| Udara 4 | Defisit Ekosistem Emisi Karbon | 804.05 Juta Ton CO2e | > 150 Jt Ton (Target NDC FOLU) | min(10.0, (804.1/150)*10) | 10.00 / 10.0 | 5.00 / 5.0 | Target FOLU Kolaps |
-| TOTAL | Akumulasi Skor Matriks Udara | Rata-rata 4 Pilar SAW | Threshold Kritis >= 4.0 / 6.0 | Σ(Skor 1..4) / 4 | 9.73 / 10.0 | 4.86 / 5.0 | DARURAT UDARA |
+| Udara 1a | Kapasitas PLTU Captive Beroperasi | 9,825.0 MW | > 5.000 MW (GEM 2023) | min(5.0, (9,825/5000)*5) | 5.00 / 5.0 | 2.50 / 2.5 | Melampaui Batas |
+| Udara 1b | Konsentrasi Gas NO2 Satelit TROPOMI | 5.56e-06 mol/m² | > 6.0e-6 mol/m² (Baseline) | min(5.0, (NO2-4e-6)/(2e-6)*5) | 3.91 / 5.0 | 1.95 / 2.5 | Melampaui Batas |
+| Udara 1 | Sub-Metrik Gabungan Ancaman Udara | Kombinasi PLTU + NO2 | Maksimal Skor 10.0 | min(10.0, 5.00 + 3.91) | 8.91 / 10.0 | 4.45 / 5.0 | Melampaui Batas |
+| Udara 2 | Rasio Anomali ISPA (Morbiditas) | 3.50x lipat (IRR) | > 2.0x lipat (WHO EHC 6) | min(10.0, (3.50-1)*10) | 10.00 / 10.0 | 5.00 / 5.0 | Melampaui Batas |
+| Udara 3 | Proporsi Timbulan Limbah B3 | 7.93% dari Nasional | > 5.0% Beban Nasional (KLHK) | min(10.0, (7.93/5)*10) | 10.00 / 10.0 | 5.00 / 5.0 | Melampaui Batas |
+| Udara 4 | Defisit Ekosistem Emisi Karbon | 804.05 Juta Ton CO2e | > 150 Jt Ton (Target NDC FOLU) | min(10.0, (804.1/150)*10) | 10.00 / 10.0 | 5.00 / 5.0 | Melampaui Batas |
+| TOTAL | Akumulasi Skor Matriks Udara | Rata-rata 4 Pilar SAW | Threshold Kritis >= 4.0 / 6.0 | Σ(Skor 1..4) / 4 | 9.73 / 10.0 | 4.86 / 5.0 | Melampaui Batas |
 
 ##### Tabel 6.2: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Udara
 | Parameter | Regulasi / Rujukan Ilmiah | Kutipan Dokumen Resmi / Verbatim | Pasal / Hal. | Status Audit |
@@ -137,11 +137,11 @@ Skor_Akumulasi_Air = (6.77 + 6.00 + 10.00 + 10.00) / 4.0 = 8.19 / 10.0 (Skor Ind
 ##### Tabel 6.3: Evaluasi Kuantitatif 4 Indikator Daya Tampung Air Bioregion Pulau Sulawesi (Sesuai Dashboard Page 6)
 | Kode | Indikator Empiris | Nilai Aktual | Ambang Batas Kritis | Formula Substitusi | Skor WSM (0-10) | Skor Likert (1-5) | Status Ekologis |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Air 1 | Kualitas Air (Rata-Rata IKA Sulawesi) | 59.69 | Kategori Baik = 70–90 (Di bawah 70 = Tidak Aman) | min(10.0, max(0, (80.0-59.69)/30.0)*10) | 6.77 / 10.0 | 3.4 / 5 | Sedang (TIDAK AMAN) |
-| Air 2 | Morbiditas Diare (Max IRR Dinamis) | 1.5x Lipat | IRR > 2.0x (Risiko 2x Populasi Kontrol) | round(min(10.0, (1.52-1)*10)/2)*2 | 6.00 / 10.0 | 3.0 / 5 | Terkendali / Waspada |
-| Air 3 | Konflik Nelayan & Ruang Air | 15 Kasus | > 15 Kasus (30% Ekuivalensi Pesisir Nasional) | min(10.0, (15/15)*10) | 10.00 / 10.0 | 5.0 / 5 | DARURAT AGRARIA |
-| Air 4 | Beban Tailing, Slag & DSTP | 32.00 Jt Ton/Thn | > 25 Jt Ton/Thn (Batas Kapasitas AMDAL) | min(10.0, (32.00/25)*10) | 10.00 / 10.0 | 5.0 / 5 | DARURAT LIMBAH |
-| TOTAL | Akumulasi Skor Indikator Air | Rata-rata 4 Pilar SAW | Threshold Kritis >= 4.0 / 6.0 | Σ(Skor 1..4) / 4 | 8.19 / 10.0 | 4.2 / 5 | STATUS: DARURAT AIR |
+| Air 1 | Kualitas Air (Rata-Rata IKA Sulawesi) | 59.69 | Kategori Baik = 70–90 (Di bawah 70 = Tidak Aman) | min(10.0, max(0, (80.0-59.69)/30.0)*10) | 6.77 / 10.0 | 3.4 / 5 | Mendekati Batas |
+| Air 2 | Morbiditas Diare (Max IRR Dinamis) | 1.5x Lipat | IRR > 2.0x (Risiko 2x Populasi Kontrol) | round(min(10.0, (1.52-1)*10)/2)*2 | 6.00 / 10.0 | 3.0 / 5 | Mendekati Batas |
+| Air 3 | Konflik Nelayan & Ruang Air | 15 Kasus | > 15 Kasus (30% Ekuivalensi Pesisir Nasional) | min(10.0, (15/15)*10) | 10.00 / 10.0 | 5.0 / 5 | Melampaui Batas |
+| Air 4 | Beban Tailing, Slag & DSTP | 32.00 Jt Ton/Thn | > 25 Jt Ton/Thn (Batas Kapasitas AMDAL) | min(10.0, (32.00/25)*10) | 10.00 / 10.0 | 5.0 / 5 | Melampaui Batas |
+| TOTAL | Akumulasi Skor Indikator Air | Rata-rata 4 Pilar SAW | Threshold Kritis >= 4.0 / 6.0 | Σ(Skor 1..4) / 4 | 8.19 / 10.0 | 4.2 / 5 | Melampaui Batas |
 
 ##### Tabel 6.4: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Air
 | Parameter | Regulasi / Rujukan Ilmiah | Kutipan Dokumen Resmi / Verbatim | Pasal / Hal. | Status Audit |
@@ -216,12 +216,12 @@ Skor_Akumulasi_Lahan = (10.00 + 10.00 + 10.00 + 10.00 + 6.27) / 5.0 = 9.25 / 10.
 ##### Tabel 6.5: Evaluasi Kuantitatif 5 Indikator Daya Dukung Lahan Bioregion Pulau Sulawesi (Sesuai Dashboard Page 6)
 | Kode | Indikator Empiris | Nilai Aktual | Ambang Batas Kritis | Formula Substitusi | Skor WSM (0-10) | Skor Likert (1-5) | Status Ekologis |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Lahan 1 | Bencana Banjir & Longsor (BNPB) | 1,609 Kejadian | > 877 Kejadian (Outlier Stat: Mean + 1 SD) | min(10.0, (1,609/877)*10) | 10.00 / 10.0 | 5.0 / 5 | DARURAT BENCANA |
-| Lahan 2 | Deforestasi Hutan Primer (GFW) | 1,386,055 Ha | > 638,000 Ha (Target Kuota FOLU Net Sink) | min(10.0, (1,386,055/638000)*10) | 10.00 / 10.0 | 5.0 / 5 | OVERCAPACITY LAHAN |
-| Lahan 3 | Perambahan Kawasan Hutan Lindung | 41,785 Ha | 0 Hektar / Nol Toleransi Hukum Mutlak | 10.0 if Luas > 0 else 0.0 | 10.00 / 10.0 | 5.0 / 5 | PELANGGARAN HUKUM |
-| Lahan 4 | Aktor Deforestasi Tambang & Sawit | 1,001,654 Ha | > 500,000 Ha (Dominasi Korporasi Ekstraktif) | min(10.0, (1,001,654/500000)*10) | 10.00 / 10.0 | 5.0 / 5 | MONOPOLI KONSESI |
-| Lahan 5 | Kepadatan Spasial Konsesi IUP Nikel | 6.3% (1,185,174 Ha) | > 10.0% Luas Daratan Pulau (18.9 Jt Ha) | min(10.0, (0.0627/0.10)*10) | 6.27 / 10.0 | 3.1 / 5 | PERLU PENGAWASAN |
-| TOTAL | Akumulasi Skor Indikator Lahan | Rata-rata 5 Pilar SAW | Threshold Kritis >= 4.0 / 6.0 | Σ(Skor 1..5) / 5 | 9.25 / 10.0 | 4.6 / 5 | STATUS: DARURAT LAHAN |
+| Lahan 1 | Bencana Banjir & Longsor (BNPB) | 1,609 Kejadian | > 877 Kejadian (Outlier Stat: Mean + 1 SD) | min(10.0, (1,609/877)*10) | 10.00 / 10.0 | 5.0 / 5 | Melampaui Batas |
+| Lahan 2 | Deforestasi Hutan Primer (GFW) | 1,386,055 Ha | > 638,000 Ha (Target Kuota FOLU Net Sink) | min(10.0, (1,386,055/638000)*10) | 10.00 / 10.0 | 5.0 / 5 | Melampaui Batas |
+| Lahan 3 | Perambahan Kawasan Hutan Lindung | 41,785 Ha | 0 Hektar / Nol Toleransi Hukum Mutlak | 10.0 if Luas > 0 else 0.0 | 10.00 / 10.0 | 5.0 / 5 | Melampaui Batas |
+| Lahan 4 | Aktor Deforestasi Tambang & Sawit | 1,001,654 Ha | > 500,000 Ha (Dominasi Korporasi Ekstraktif) | min(10.0, (1,001,654/500000)*10) | 10.00 / 10.0 | 5.0 / 5 | Melampaui Batas |
+| Lahan 5 | Kepadatan Spasial Konsesi IUP Nikel | 6.3% (1,185,174 Ha) | > 10.0% Luas Daratan Pulau (18.9 Jt Ha) | min(10.0, (0.0627/0.10)*10) | 6.27 / 10.0 | 3.1 / 5 | Mendekati Batas |
+| TOTAL | Akumulasi Skor Indikator Lahan | Rata-rata 5 Pilar SAW | Threshold Kritis >= 4.0 / 6.0 | Σ(Skor 1..5) / 5 | 9.25 / 10.0 | 4.6 / 5 | Melampaui Batas |
 
 ##### Tabel 6.6: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Lahan
 | Parameter | Regulasi / Rujukan Ilmiah | Kutipan Dokumen Resmi / Verbatim | Pasal / Hal. | Status Audit |
@@ -293,11 +293,11 @@ Skor_Akumulasi_Sosial = (10.00 + 10.00 + 10.00 + 1.26) / 4.0 = 7.81 / 10.0 (Skor
 ##### Tabel 6.7: Evaluasi Kuantitatif 4 Indikator Daya Dukung Sosial Bioregion Pulau Sulawesi (Sesuai Dashboard Page 6)
 | Kode | Indikator Empiris | Nilai Aktual | Ambang Batas Kritis | Formula Substitusi | Skor WSM (0-10) | Skor Likert (1-5) | Status Ekologis |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Sosial 1 | Manipulasi Persetujuan Warga (FPIC) | 8 Kasus | >= 3 Kasus (Zero Tolerance IFC PS7) | min(10.0, (8/3.0)*10) | 10.00 / 10.0 | 5.0 / 5 | AMDAL CACAT HUKUM |
-| Sosial 2 | Perampasan Ruang Hidup & Korban | 54,310 Jiwa (505,192 Ha) | > 40,000 Jiwa (7.4% Demografi Nasional KPA) | min(10.0, (54,310/40000)*10) | 10.00 / 10.0 | 5.0 / 5 | KRISIS AGRARIA |
-| Sosial 3 | Kriminalisasi Warga & Pembela HAM | 21 Insiden (10 Ditangkap) | > 10 Insiden (Outlier Stat: Mean + 1 SD) | min(10.0, (21/10.0)*10) | 10.00 / 10.0 | 5.0 / 5 | KEKERASAN NEGARA |
-| Sosial 4 | Defisit Standar Layanan Faskes (SPA) | 74.35% (Gap: 5.65%) | Target Min 80.0% (Defisit Max 45.0%) | min(10.0, (5.65/45.0)*10) | 1.26 / 10.0 | 0.6 / 5 | TERKENDALI / DEFISIT |
-| TOTAL | Akumulasi Skor Indikator Sosial | Rata-rata 4 Pilar SAW | Threshold Kritis >= 4.0 / 6.0 | Σ(Skor 1..4) / 4 | 7.81 / 10.0 | 3.9 / 5 | STATUS: PERLU PENGAWASAN |
+| Sosial 1 | Manipulasi Persetujuan Warga (FPIC) | 8 Kasus | >= 3 Kasus (Zero Tolerance IFC PS7) | min(10.0, (8/3.0)*10) | 10.00 / 10.0 | 5.0 / 5 | Melampaui Batas |
+| Sosial 2 | Perampasan Ruang Hidup & Korban | 54,310 Jiwa (505,192 Ha) | > 40,000 Jiwa (7.4% Demografi Nasional KPA) | min(10.0, (54,310/40000)*10) | 10.00 / 10.0 | 5.0 / 5 | Melampaui Batas |
+| Sosial 3 | Kriminalisasi Warga & Pembela HAM | 21 Insiden (10 Ditangkap) | > 10 Insiden (Outlier Stat: Mean + 1 SD) | min(10.0, (21/10.0)*10) | 10.00 / 10.0 | 5.0 / 5 | Melampaui Batas |
+| Sosial 4 | Defisit Standar Layanan Faskes (SPA) | 74.35% (Gap: 5.65%) | Target Min 80.0% (Defisit Max 45.0%) | min(10.0, (5.65/45.0)*10) | 1.26 / 10.0 | 0.6 / 5 | Tidak Melampaui Batas |
+| TOTAL | Akumulasi Skor Indikator Sosial | Rata-rata 4 Pilar SAW | Threshold Kritis >= 4.0 / 6.0 | Σ(Skor 1..4) / 4 | 7.81 / 10.0 | 3.9 / 5 | Melampaui Batas |
 
 ##### Tabel 6.8: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Sosial
 | Parameter | Regulasi / Rujukan Ilmiah | Kutipan Dokumen Resmi / Verbatim | Pasal / Hal. | Status Audit |
@@ -362,10 +362,10 @@ Skor_Akumulasi_Veto = (10.00 + 10.00 + 10.00) / 3.0 = 10.00 / 10.0 (Skor Pengend
 ##### Tabel 6.9: Evaluasi Kuantitatif 3 Indikator Veto Kebijakan Bioregion Pulau Sulawesi (Sesuai Dashboard Page 6)
 | Kode | Indikator Empiris | Nilai Aktual | Ambang Batas Kritis | Formula Substitusi | Skor WSM (0-10) | Skor Likert (1-5) | Status Ekologis |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Veto 1 | Obral Konsesi WIUP Baru Pasca-2014 | 574 Izin | > 100 Izin Baru (Threshold Veto ESDM) | min(10.0, (574/100)*10) | 10.00 / 10.0 | 5.0 / 5 | VETO GAGAL (RED FLAG) |
-| Veto 2 | Pembiaran Korporat Pelanggar Hukum | 21 Korporat | > 10 Korporat (Batas Toleransi Impunitas) | min(10.0, (21/10)*10) | 10.00 / 10.0 | 5.0 / 5 | NEGARA LUMPUH (RED FLAG) |
-| Veto 3 | Ekspansi PLTU Batubara Captive | 10.26 GW (10,255 MW) | > 5,000 MW (5 GW Batas Kritis GEM) | min(10.0, (10,255/5000)*10) | 10.00 / 10.0 | 5.0 / 5 | HYPOCRISY (RED FLAG) |
-| TOTAL | Akumulasi Skor Indikator Veto | Rata-rata 3 Pilar SAW | Threshold Kritis >= 4.0 / 6.0 | Σ(Skor 1..3) / 3 | 10.00 / 10.0 | 5.0 / 5 | STATUS: PERLU REFORMASI |
+| Veto 1 | Obral Konsesi WIUP Baru Pasca-2014 | 574 Izin | > 100 Izin Baru (Threshold Veto ESDM) | min(10.0, (574/100)*10) | 10.00 / 10.0 | 5.0 / 5 | Melampaui Batas |
+| Veto 2 | Pembiaran Korporat Pelanggar Hukum | 21 Korporat | > 10 Korporat (Batas Toleransi Impunitas) | min(10.0, (21/10)*10) | 10.00 / 10.0 | 5.0 / 5 | Melampaui Batas |
+| Veto 3 | Ekspansi PLTU Batubara Captive | 10.26 GW (10,255 MW) | > 5,000 MW (5 GW Batas Kritis GEM) | min(10.0, (10,255/5000)*10) | 10.00 / 10.0 | 5.0 / 5 | Melampaui Batas |
+| TOTAL | Akumulasi Skor Indikator Veto | Rata-rata 3 Pilar SAW | Threshold Kritis >= 4.0 / 6.0 | Σ(Skor 1..3) / 3 | 10.00 / 10.0 | 5.0 / 5 | Melampaui Batas |
 
 ##### Tabel 6.10: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Veto
 | Parameter | Regulasi / Rujukan Ilmiah | Kutipan Dokumen Resmi / Verbatim | Pasal / Hal. | Status Audit |
@@ -377,12 +377,12 @@ Skor_Akumulasi_Veto = (10.00 + 10.00 + 10.00) / 3.0 = 10.00 / 10.0 (Skor Pengend
 ##### Tabel 6.11: Rekapitulasi Sintesis 5 Matriks Bioregion Pulau Sulawesi (Tingkat Pulau Makro)
 | Dimensi | Indikator Utama | Kondisi Aktual Empiris | Skor WSM | Skor Likert | Status Audit | Kesimpulan Analisis |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Dimensi 1 | Daya Tampung Udara & Emisi Industri | 16,000 MW PLTU, NO2 Satelit, ISPA 1.34x, B3 77.8% | 9.73 / 10.0 | 4.9 / 5 | DARURAT UDARA | Kapasitas Asimilasi Udara Habis |
-| Dimensi 2 | Daya Tampung Air & Beban Limbah | IKA 59.69, Diare IRR 1.5x, Tailing 33.03 Jt Ton | 8.19 / 10.0 | 4.2 / 5 | DARURAT AIR | Kapasitas Penetralan Limbah Melampaui Batas |
-| Dimensi 3 | Daya Dukung Lahan & Ekosistem | 1,609 Bencana, Deforestasi 1.38 Jt Ha, Lindung 41 Ribu Ha | 9.25 / 10.0 | 4.6 / 5 | DARURAT LAHAN | Evaluasi Pengelolaan Lanskap |
-| Dimensi 4 | Daya Dukung Sosial & Hak Asasi Warga | 8 Kasus FPIC, 54,310 Jiwa Terdampak, 21 Kriminalisasi | 7.81 / 10.0 | 3.9 / 5 | PERLU PENGAWASAN | Pelibatan Masyarakat Lokal |
-| Dimensi 5 | Veto Kebijakan & Pengendalian Izin | 574 Izin Baru, 21 Korporat Ilegal, 10.26 GW PLTU | 10.00 / 10.0 | 5.0 / 5 | PERLU REFORMASI | Penguatan Pengawasan Kebijakan |
-| TOTAL | SKOR KOMPOSIT BIOREGION PULAU SULAWESI | Agregasi 5 Dimensi Daya Dukung & Daya Tampung | 9.00 / 10.0 | 4.5 / 5 | DARURAT TOTAL | KOLAPS DAYA DUKUNG SISTEMIK |
+| Dimensi 1 | Daya Tampung Udara & Emisi Industri | 16,000 MW PLTU, NO2 Satelit, ISPA 1.34x, B3 77.8% | 9.73 / 10.0 | 4.9 / 5 | Melampaui Batas | Kapasitas Asimilasi Udara Habis |
+| Dimensi 2 | Daya Tampung Air & Beban Limbah | IKA 59.69, Diare IRR 1.5x, Tailing 33.03 Jt Ton | 8.19 / 10.0 | 4.2 / 5 | Melampaui Batas | Kapasitas Penetralan Limbah Melampaui Batas |
+| Dimensi 3 | Daya Dukung Lahan & Ekosistem | 1,609 Bencana, Deforestasi 1.38 Jt Ha, Lindung 41 Ribu Ha | 9.25 / 10.0 | 4.6 / 5 | Melampaui Batas | Evaluasi Pengelolaan Lanskap |
+| Dimensi 4 | Daya Dukung Sosial & Hak Asasi Warga | 8 Kasus FPIC, 54,310 Jiwa Terdampak, 21 Kriminalisasi | 7.81 / 10.0 | 3.9 / 5 | Melampaui Batas | Pelibatan Masyarakat Lokal |
+| Dimensi 5 | Veto Kebijakan & Pengendalian Izin | 574 Izin Baru, 21 Korporat Ilegal, 10.26 GW PLTU | 10.00 / 10.0 | 5.0 / 5 | Melampaui Batas | Penguatan Pengawasan Kebijakan |
+| TOTAL | SKOR KOMPOSIT BIOREGION PULAU SULAWESI | Agregasi 5 Dimensi Daya Dukung & Daya Tampung | 9.00 / 10.0 | 4.5 / 5 | Melampaui Batas | KOLAPS DAYA DUKUNG SISTEMIK |
 
 #### E. Analisis Temuan Empiris: Penguatan Pengawasan Kebijakan
 1. **Obral Izin Baru (Veto 1):** Penerbitan **574 IUP baru** di era krisis daya dukung membuktikan mandulnya fungsi pembatasan regulasi, memicu Skor **5.0 / 5** (STATUS: VETO GAGAL).

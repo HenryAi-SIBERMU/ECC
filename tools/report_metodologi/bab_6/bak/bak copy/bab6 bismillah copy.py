@@ -269,24 +269,6 @@ def markdown_table(headers, rows):
     return "\n".join(lines)
 
 
-def get_likert_label(score):
-    """
-    Kategori Status Ekologis Standar MCDA-Likert 0 - 5
-    (Sesuai docs/Metode Model_Matematis_Skoring_ECC.md Hal. 683-688
-    dan pages/6_Audit_D3TLH.py baris 585-593):
-    - Skor Likert >= 3.5 (round >= 4): Melampaui Batas
-    - Skor Likert 2.5 <= s < 3.5 (round == 3): Mendekati Batas
-    - Skor Likert < 2.5 (round <= 2): Tidak Melampaui Batas
-    """
-    s = round(score)
-    if s >= 4:
-        return "Melampaui Batas"
-    elif s == 3:
-        return "Mendekati Batas"
-    else:
-        return "Tidak Melampaui Batas"
-
-
 def generate_all_bab6():
     tool_dir = Path(__file__).resolve().parent
     root_dir = tool_dir.parent.parent.parent
@@ -358,15 +340,15 @@ def generate_all_bab6():
     skor_akumulasi_udara = (skor_udara_1 + skor_udara_2 + skor_udara_3 + skor_udara_4) / 4.0
     skor_likert_udara = skor_akumulasi_udara / 2.0
 
-    # Tabel Evaluasi Empiris Udara (Sinkron 100% Label Likert SIBERMU)
+    # Tabel Evaluasi Empiris Udara
     udara_rows = [
-        ["Udara 1a", "Kapasitas PLTU Captive Beroperasi", f"{kapasitas_terkini:,.1f} MW", "> 5.000 MW (GEM 2023)", f"min(5.0, ({kapasitas_terkini:,.0f}/5000)*5)", f"{skor_pltu:.2f} / 5.0", f"{(skor_pltu/2.0):.2f} / 2.5", get_likert_label(skor_pltu)],
-        ["Udara 1b", "Konsentrasi Gas NO2 Satelit TROPOMI", f"{no2_terkini:.2e} mol/m²", "> 6.0e-6 mol/m² (Baseline)", f"min(5.0, (NO2-4e-6)/(2e-6)*5)", f"{skor_no2:.2f} / 5.0", f"{(skor_no2/2.0):.2f} / 2.5", get_likert_label(skor_no2)],
-        ["Udara 1", "Sub-Metrik Gabungan Ancaman Udara", "Kombinasi PLTU + NO2", "Maksimal Skor 10.0", f"min(10.0, {skor_pltu:.2f} + {skor_no2:.2f})", f"{skor_udara_1:.2f} / 10.0", f"{(skor_udara_1/2.0):.2f} / 5.0", get_likert_label(skor_udara_1 / 2.0)],
-        ["Udara 2", "Rasio Anomali ISPA (Morbiditas)", f"{rasio_anomali_ispa:.2f}x lipat (IRR)", "> 2.0x lipat (WHO EHC 6)", f"min(10.0, ({rasio_anomali_ispa:.2f}-1)*10)", f"{skor_udara_2:.2f} / 10.0", f"{(skor_udara_2/2.0):.2f} / 5.0", get_likert_label(skor_udara_2 / 2.0)],
-        ["Udara 3", "Proporsi Timbulan Limbah B3", f"{proporsi_b3:.2f}% dari Nasional", "> 5.0% Beban Nasional (KLHK)", f"min(10.0, ({proporsi_b3:.2f}/5)*10)", f"{skor_udara_3:.2f} / 10.0", f"{(skor_udara_3/2.0):.2f} / 5.0", get_likert_label(skor_udara_3 / 2.0)],
-        ["Udara 4", "Defisit Ekosistem Emisi Karbon", f"{total_emisi_co2:,.2f} Juta Ton CO2e", "> 150 Jt Ton (Target NDC FOLU)", f"min(10.0, ({total_emisi_co2:,.1f}/150)*10)", f"{skor_udara_4:.2f} / 10.0", f"{(skor_udara_4/2.0):.2f} / 5.0", get_likert_label(skor_udara_4 / 2.0)],
-        ["TOTAL", "Akumulasi Skor Matriks Udara", "Rata-rata 4 Pilar SAW", "Threshold Kritis >= 4.0 / 6.0", "Σ(Skor 1..4) / 4", f"{skor_akumulasi_udara:.2f} / 10.0", f"{skor_likert_udara:.2f} / 5.0", get_likert_label(skor_likert_udara)]
+        ["Udara 1a", "Kapasitas PLTU Captive Beroperasi", f"{kapasitas_terkini:,.1f} MW", "> 5.000 MW (GEM 2023)", f"min(5.0, ({kapasitas_terkini:,.0f}/5000)*5)", f"{skor_pltu:.2f} / 5.0", f"{(skor_pltu/2.0):.2f} / 2.5", "Kritis Ekstrem"],
+        ["Udara 1b", "Konsentrasi Gas NO2 Satelit TROPOMI", f"{no2_terkini:.2e} mol/m²", "> 6.0e-6 mol/m² (Baseline)", f"min(5.0, (NO2-4e-6)/(2e-6)*5)", f"{skor_no2:.2f} / 5.0", f"{(skor_no2/2.0):.2f} / 2.5", "Melampaui Baku Mutu"],
+        ["Udara 1", "Sub-Metrik Gabungan Ancaman Udara", "Kombinasi PLTU + NO2", "Maksimal Skor 10.0", f"min(10.0, {skor_pltu:.2f} + {skor_no2:.2f})", f"{skor_udara_1:.2f} / 10.0", f"{(skor_udara_1/2.0):.2f} / 5.0", "Darurat Polusi"],
+        ["Udara 2", "Rasio Anomali ISPA (Morbiditas)", f"{rasio_anomali_ispa:.2f}x lipat (IRR)", "> 2.0x lipat (WHO EHC 6)", f"min(10.0, ({rasio_anomali_ispa:.2f}-1)*10)", f"{skor_udara_2:.2f} / 10.0", f"{(skor_udara_2/2.0):.2f} / 5.0", "KLB Morbiditas"],
+        ["Udara 3", "Proporsi Timbulan Limbah B3", f"{proporsi_b3:.2f}% dari Nasional", "> 5.0% Beban Nasional (KLHK)", f"min(10.0, ({proporsi_b3:.2f}/5)*10)", f"{skor_udara_3:.2f} / 10.0", f"{(skor_udara_3/2.0):.2f} / 5.0", "Overcapacity Asimetris"],
+        ["Udara 4", "Defisit Ekosistem Emisi Karbon", f"{total_emisi_co2:,.2f} Juta Ton CO2e", "> 150 Jt Ton (Target NDC FOLU)", f"min(10.0, ({total_emisi_co2:,.1f}/150)*10)", f"{skor_udara_4:.2f} / 10.0", f"{(skor_udara_4/2.0):.2f} / 5.0", "Target FOLU Kolaps"],
+        ["TOTAL", "Akumulasi Skor Matriks Udara", "Rata-rata 4 Pilar SAW", "Threshold Kritis >= 4.0 / 6.0", "Σ(Skor 1..4) / 4", f"{skor_akumulasi_udara:.2f} / 10.0", f"{skor_likert_udara:.2f} / 5.0", "DARURAT UDARA"]
     ]
 
     regulasi_rows = [
@@ -606,13 +588,13 @@ def generate_all_bab6():
     except Exception:
         max_cr6 = 1.0
 
-    # Tabel Evaluasi Empiris Air (Sinkron 100% Label Likert SIBERMU)
+    # Tabel Evaluasi Empiris Air (Sinkron 100% Page 6)
     air_rows = [
-        ["Air 1", "Kualitas Air (Rata-Rata IKA Sulawesi)", f"{ika_avg:.2f}", "Kategori Baik = 70–90 (Di bawah 70 = Tidak Aman)", f"min(10.0, max(0, (80.0-{ika_avg:.2f})/30.0)*10)", f"{skor_air_1:.2f} / 10.0", f"{(skor_air_1/2.0):.1f} / 5", get_likert_label(skor_air_1 / 2.0)],
-        ["Air 2", "Morbiditas Diare (Max IRR Dinamis)", f"{rasio_diare:.1f}x Lipat", "IRR > 2.0x (Risiko 2x Populasi Kontrol)", f"round(min(10.0, ({rasio_diare:.2f}-1)*10)/2)*2", f"{skor_air_2:.2f} / 10.0", f"{(skor_air_2/2.0):.1f} / 5", get_likert_label(skor_air_2 / 2.0)],
-        ["Air 3", "Konflik Nelayan & Ruang Air", f"{jumlah_konflik_air} Kasus", "> 15 Kasus (30% Ekuivalensi Pesisir Nasional)", f"min(10.0, ({jumlah_konflik_air}/15)*10)", f"{skor_air_3:.2f} / 10.0", f"{(skor_air_3/2.0):.1f} / 5", get_likert_label(skor_air_3 / 2.0)],
-        ["Air 4", "Beban Tailing, Slag & DSTP", f"{total_tailing_sulawesi/1_000_000.0:,.2f} Jt Ton/Thn", "> 25 Jt Ton/Thn (Batas Kapasitas AMDAL)", f"min(10.0, ({total_tailing_sulawesi/1_000_000.0:.2f}/25)*10)", f"{skor_air_4:.2f} / 10.0", f"{(skor_air_4/2.0):.1f} / 5", get_likert_label(skor_air_4 / 2.0)],
-        ["TOTAL", "Akumulasi Skor Indikator Air", "Rata-rata 4 Pilar SAW", "Threshold Kritis >= 4.0 / 6.0", "Σ(Skor 1..4) / 4", f"{skor_akumulasi_air:.2f} / 10.0", "4.2 / 5", get_likert_label(4.2)]
+        ["Air 1", "Kualitas Air (Rata-Rata IKA Sulawesi)", f"{ika_avg:.2f}", "Kategori Baik = 70–90 (Di bawah 70 = Tidak Aman)", f"min(10.0, max(0, (80.0-{ika_avg:.2f})/30.0)*10)", f"{skor_air_1:.2f} / 10.0", f"{(skor_air_1/2.0):.1f} / 5", "Sedang (TIDAK AMAN)"],
+        ["Air 2", "Morbiditas Diare (Max IRR Dinamis)", f"{rasio_diare:.1f}x Lipat", "IRR > 2.0x (Risiko 2x Populasi Kontrol)", f"round(min(10.0, ({rasio_diare:.2f}-1)*10)/2)*2", f"{skor_air_2:.2f} / 10.0", f"{(skor_air_2/2.0):.1f} / 5", "Terkendali / Waspada"],
+        ["Air 3", "Konflik Nelayan & Ruang Air", f"{jumlah_konflik_air} Kasus", "> 15 Kasus (30% Ekuivalensi Pesisir Nasional)", f"min(10.0, ({jumlah_konflik_air}/15)*10)", f"{skor_air_3:.2f} / 10.0", f"{(skor_air_3/2.0):.1f} / 5", "DARURAT AGRARIA"],
+        ["Air 4", "Beban Tailing, Slag & DSTP", f"{total_tailing_sulawesi/1_000_000.0:,.2f} Jt Ton/Thn", "> 25 Jt Ton/Thn (Batas Kapasitas AMDAL)", f"min(10.0, ({total_tailing_sulawesi/1_000_000.0:.2f}/25)*10)", f"{skor_air_4:.2f} / 10.0", f"{(skor_air_4/2.0):.1f} / 5", "DARURAT LIMBAH"],
+        ["TOTAL", "Akumulasi Skor Indikator Air", "Rata-rata 4 Pilar SAW", "Threshold Kritis >= 4.0 / 6.0", "Σ(Skor 1..4) / 4", f"{skor_akumulasi_air:.2f} / 10.0", "4.2 / 5", "STATUS: DARURAT AIR"]
     ]
 
     regulasi_air_rows = [
@@ -790,14 +772,14 @@ def generate_all_bab6():
     skor_akumulasi_lahan = (skor_lahan_1 + skor_lahan_2 + skor_lahan_3 + skor_lahan_4 + skor_lahan_5) / 5.0
     card_l_val = f"{(skor_akumulasi_lahan / 2.0):.1f}"
 
-    # Tabel Evaluasi Empiris Lahan (Sinkron 100% Label Likert SIBERMU)
+    # Tabel Evaluasi Empiris Lahan (Sinkron 100% Page 6)
     lahan_rows = [
-        ["Lahan 1", "Bencana Banjir & Longsor (BNPB)", f"{total_bencana_sulawesi:,.0f} Kejadian", "> 877 Kejadian (Outlier Stat: Mean + 1 SD)", f"min(10.0, ({total_bencana_sulawesi:,.0f}/877)*10)", f"{skor_lahan_1:.2f} / 10.0", f"{(skor_lahan_1/2.0):.1f} / 5", get_likert_label(skor_lahan_1 / 2.0)],
-        ["Lahan 2", "Deforestasi Hutan Primer (GFW)", f"{total_deforestasi_sulawesi:,.0f} Ha", "> 638,000 Ha (Target Kuota FOLU Net Sink)", f"min(10.0, ({total_deforestasi_sulawesi:,.0f}/638000)*10)", f"{skor_lahan_2:.2f} / 10.0", f"{(skor_lahan_2/2.0):.1f} / 5", get_likert_label(skor_lahan_2 / 2.0)],
-        ["Lahan 3", "Perambahan Kawasan Hutan Lindung", f"{total_lindung_hilang_sulawesi:,.0f} Ha", "0 Hektar / Nol Toleransi Hukum Mutlak", f"10.0 if Luas > 0 else 0.0", f"{skor_lahan_3:.2f} / 10.0", f"{(skor_lahan_3/2.0):.1f} / 5", get_likert_label(skor_lahan_3 / 2.0)],
-        ["Lahan 4", "Aktor Deforestasi Tambang & Sawit", f"{total_tambang_driver_sulawesi:,.0f} Ha", "> 500,000 Ha (Dominasi Korporasi Ekstraktif)", f"min(10.0, ({total_tambang_driver_sulawesi:,.0f}/500000)*10)", f"{skor_lahan_4:.2f} / 10.0", f"{(skor_lahan_4/2.0):.1f} / 5", get_likert_label(skor_lahan_4 / 2.0)],
-        ["Lahan 5", "Kepadatan Spasial Konsesi IUP Nikel", f"{rasio_ekspansi*100:.1f}% ({total_iup_nikel:,.0f} Ha)", "> 10.0% Luas Daratan Pulau (18.9 Jt Ha)", f"min(10.0, ({rasio_ekspansi:.4f}/0.10)*10)", f"{skor_lahan_5:.2f} / 10.0", f"{(skor_lahan_5/2.0):.1f} / 5", get_likert_label(skor_lahan_5 / 2.0)],
-        ["TOTAL", "Akumulasi Skor Indikator Lahan", "Rata-rata 5 Pilar SAW", "Threshold Kritis >= 4.0 / 6.0", "Σ(Skor 1..5) / 5", f"{skor_akumulasi_lahan:.2f} / 10.0", f"{card_l_val} / 5", get_likert_label(skor_akumulasi_lahan / 2.0)]
+        ["Lahan 1", "Bencana Banjir & Longsor (BNPB)", f"{total_bencana_sulawesi:,.0f} Kejadian", "> 877 Kejadian (Outlier Stat: Mean + 1 SD)", f"min(10.0, ({total_bencana_sulawesi:,.0f}/877)*10)", f"{skor_lahan_1:.2f} / 10.0", f"{(skor_lahan_1/2.0):.1f} / 5", "DARURAT BENCANA"],
+        ["Lahan 2", "Deforestasi Hutan Primer (GFW)", f"{total_deforestasi_sulawesi:,.0f} Ha", "> 638,000 Ha (Target Kuota FOLU Net Sink)", f"min(10.0, ({total_deforestasi_sulawesi:,.0f}/638000)*10)", f"{skor_lahan_2:.2f} / 10.0", f"{(skor_lahan_2/2.0):.1f} / 5", "OVERCAPACITY LAHAN"],
+        ["Lahan 3", "Perambahan Kawasan Hutan Lindung", f"{total_lindung_hilang_sulawesi:,.0f} Ha", "0 Hektar / Nol Toleransi Hukum Mutlak", f"10.0 if Luas > 0 else 0.0", f"{skor_lahan_3:.2f} / 10.0", f"{(skor_lahan_3/2.0):.1f} / 5", "PELANGGARAN HUKUM"],
+        ["Lahan 4", "Aktor Deforestasi Tambang & Sawit", f"{total_tambang_driver_sulawesi:,.0f} Ha", "> 500,000 Ha (Dominasi Korporasi Ekstraktif)", f"min(10.0, ({total_tambang_driver_sulawesi:,.0f}/500000)*10)", f"{skor_lahan_4:.2f} / 10.0", f"{(skor_lahan_4/2.0):.1f} / 5", "MONOPOLI KONSESI"],
+        ["Lahan 5", "Kepadatan Spasial Konsesi IUP Nikel", f"{rasio_ekspansi*100:.1f}% ({total_iup_nikel:,.0f} Ha)", "> 10.0% Luas Daratan Pulau (18.9 Jt Ha)", f"min(10.0, ({rasio_ekspansi:.4f}/0.10)*10)", f"{skor_lahan_5:.2f} / 10.0", f"{(skor_lahan_5/2.0):.1f} / 5", "PERLU PENGAWASAN"],
+        ["TOTAL", "Akumulasi Skor Indikator Lahan", "Rata-rata 5 Pilar SAW", "Threshold Kritis >= 4.0 / 6.0", "Σ(Skor 1..5) / 5", f"{skor_akumulasi_lahan:.2f} / 10.0", f"{card_l_val} / 5", "STATUS: DARURAT LAHAN"]
     ]
 
     regulasi_lahan_rows = [
@@ -983,13 +965,13 @@ def generate_all_bab6():
     skor_akumulasi_sosial = (skor_sosial_1 + skor_sosial_2 + skor_sosial_3 + skor_sosial_4) / 4.0
     card_s_val = f"{(skor_akumulasi_sosial / 2.0):.1f}"
 
-    # Tabel Evaluasi Empiris Sosial (Sinkron 100% Label Likert SIBERMU)
+    # Tabel Evaluasi Empiris Sosial (Sinkron 100% Page 6)
     sosial_rows = [
-        ["Sosial 1", "Manipulasi Persetujuan Warga (FPIC)", f"{kasus_fpic} Kasus", ">= 3 Kasus (Zero Tolerance IFC PS7)", f"min(10.0, ({kasus_fpic}/3.0)*10)", f"{skor_sosial_1:.2f} / 10.0", f"{(skor_sosial_1/2.0):.1f} / 5", get_likert_label(skor_sosial_1 / 2.0)],
-        ["Sosial 2", "Perampasan Ruang Hidup & Korban", f"{jiwa_terdampak:,.0f} Jiwa ({luas_ha_dirampas:,.0f} Ha)", "> 40,000 Jiwa (7.4% Demografi Nasional KPA)", f"min(10.0, ({jiwa_terdampak:,.0f}/40000)*10)", f"{skor_sosial_2:.2f} / 10.0", f"{(skor_sosial_2/2.0):.1f} / 5", get_likert_label(skor_sosial_2 / 2.0)],
-        ["Sosial 3", "Kriminalisasi Warga & Pembela HAM", f"{insiden_krim} Insiden ({warga_ditangkap:,.0f} Ditangkap)", "> 10 Insiden (Outlier Stat: Mean + 1 SD)", f"min(10.0, ({insiden_krim}/10.0)*10)", f"{skor_sosial_3:.2f} / 10.0", f"{(skor_sosial_3/2.0):.1f} / 5", get_likert_label(skor_sosial_3 / 2.0)],
-        ["Sosial 4", "Defisit Standar Layanan Faskes (SPA)", f"{spa_aktual_pct:.2f}% (Gap: {gap_spa:.2f}%)", "Target Min 80.0% (Defisit Max 45.0%)", f"min(10.0, ({gap_spa:.2f}/45.0)*10)", f"{skor_sosial_4:.2f} / 10.0", f"{(skor_sosial_4/2.0):.1f} / 5", get_likert_label(skor_sosial_4 / 2.0)],
-        ["TOTAL", "Akumulasi Skor Indikator Sosial", "Rata-rata 4 Pilar SAW", "Threshold Kritis >= 4.0 / 6.0", "Σ(Skor 1..4) / 4", f"{skor_akumulasi_sosial:.2f} / 10.0", f"{card_s_val} / 5", get_likert_label(skor_akumulasi_sosial / 2.0)]
+        ["Sosial 1", "Manipulasi Persetujuan Warga (FPIC)", f"{kasus_fpic} Kasus", ">= 3 Kasus (Zero Tolerance IFC PS7)", f"min(10.0, ({kasus_fpic}/3.0)*10)", f"{skor_sosial_1:.2f} / 10.0", f"{(skor_sosial_1/2.0):.1f} / 5", "AMDAL CACAT HUKUM"],
+        ["Sosial 2", "Perampasan Ruang Hidup & Korban", f"{jiwa_terdampak:,.0f} Jiwa ({luas_ha_dirampas:,.0f} Ha)", "> 40,000 Jiwa (7.4% Demografi Nasional KPA)", f"min(10.0, ({jiwa_terdampak:,.0f}/40000)*10)", f"{skor_sosial_2:.2f} / 10.0", f"{(skor_sosial_2/2.0):.1f} / 5", "KRISIS AGRARIA"],
+        ["Sosial 3", "Kriminalisasi Warga & Pembela HAM", f"{insiden_krim} Insiden ({warga_ditangkap:,.0f} Ditangkap)", "> 10 Insiden (Outlier Stat: Mean + 1 SD)", f"min(10.0, ({insiden_krim}/10.0)*10)", f"{skor_sosial_3:.2f} / 10.0", f"{(skor_sosial_3/2.0):.1f} / 5", "KEKERASAN NEGARA"],
+        ["Sosial 4", "Defisit Standar Layanan Faskes (SPA)", f"{spa_aktual_pct:.2f}% (Gap: {gap_spa:.2f}%)", "Target Min 80.0% (Defisit Max 45.0%)", f"min(10.0, ({gap_spa:.2f}/45.0)*10)", f"{skor_sosial_4:.2f} / 10.0", f"{(skor_sosial_4/2.0):.1f} / 5", "TERKENDALI / DEFISIT"],
+        ["TOTAL", "Akumulasi Skor Indikator Sosial", "Rata-rata 4 Pilar SAW", "Threshold Kritis >= 4.0 / 6.0", "Σ(Skor 1..4) / 4", f"{skor_akumulasi_sosial:.2f} / 10.0", f"{card_s_val} / 5", "STATUS: PERLU PENGAWASAN"]
     ]
 
     regulasi_sosial_rows = [
@@ -1150,12 +1132,12 @@ def generate_all_bab6():
     skor_akumulasi_veto = (skor_veto_1 + skor_veto_2 + skor_veto_3) / 3.0
     card_v_val = f"{(skor_akumulasi_veto / 2.0):.1f}"
 
-    # Tabel Evaluasi Empiris Veto (Sinkron 100% Label Likert SIBERMU)
+    # Tabel Evaluasi Empiris Veto (Sinkron 100% Page 6)
     veto_rows = [
-        ["Veto 1", "Obral Konsesi WIUP Baru Pasca-2014", f"{izin_baru:,.0f} Izin", "> 100 Izin Baru (Threshold Veto ESDM)", f"min(10.0, ({izin_baru:,.0f}/100)*10)", f"{skor_veto_1:.2f} / 10.0", f"{(skor_veto_1/2.0):.1f} / 5", get_likert_label(skor_veto_1 / 2.0)],
-        ["Veto 2", "Pembiaran Korporat Pelanggar Hukum", f"{perusahaan_ilegal} Korporat", "> 10 Korporat (Batas Toleransi Impunitas)", f"min(10.0, ({perusahaan_ilegal}/10)*10)", f"{skor_veto_2:.2f} / 10.0", f"{(skor_veto_2/2.0):.1f} / 5", get_likert_label(skor_veto_2 / 2.0)],
-        ["Veto 3", "Ekspansi PLTU Batubara Captive", f"{kapasitas_pltu/1000.0:.2f} GW ({kapasitas_pltu:,.0f} MW)", "> 5,000 MW (5 GW Batas Kritis GEM)", f"min(10.0, ({kapasitas_pltu:,.0f}/5000)*10)", f"{skor_veto_3:.2f} / 10.0", f"{(skor_veto_3/2.0):.1f} / 5", get_likert_label(skor_veto_3 / 2.0)],
-        ["TOTAL", "Akumulasi Skor Indikator Veto", "Rata-rata 3 Pilar SAW", "Threshold Kritis >= 4.0 / 6.0", "Σ(Skor 1..3) / 3", f"{skor_akumulasi_veto:.2f} / 10.0", f"{card_v_val} / 5", get_likert_label(skor_akumulasi_veto / 2.0)]
+        ["Veto 1", "Obral Konsesi WIUP Baru Pasca-2014", f"{izin_baru:,.0f} Izin", "> 100 Izin Baru (Threshold Veto ESDM)", f"min(10.0, ({izin_baru:,.0f}/100)*10)", f"{skor_veto_1:.2f} / 10.0", f"{(skor_veto_1/2.0):.1f} / 5", "VETO GAGAL (RED FLAG)"],
+        ["Veto 2", "Pembiaran Korporat Pelanggar Hukum", f"{perusahaan_ilegal} Korporat", "> 10 Korporat (Batas Toleransi Impunitas)", f"min(10.0, ({perusahaan_ilegal}/10)*10)", f"{skor_veto_2:.2f} / 10.0", f"{(skor_veto_2/2.0):.1f} / 5", "NEGARA LUMPUH (RED FLAG)"],
+        ["Veto 3", "Ekspansi PLTU Batubara Captive", f"{kapasitas_pltu/1000.0:.2f} GW ({kapasitas_pltu:,.0f} MW)", "> 5,000 MW (5 GW Batas Kritis GEM)", f"min(10.0, ({kapasitas_pltu:,.0f}/5000)*10)", f"{skor_veto_3:.2f} / 10.0", f"{(skor_veto_3/2.0):.1f} / 5", "HYPOCRISY (RED FLAG)"],
+        ["TOTAL", "Akumulasi Skor Indikator Veto", "Rata-rata 3 Pilar SAW", "Threshold Kritis >= 4.0 / 6.0", "Σ(Skor 1..3) / 3", f"{skor_akumulasi_veto:.2f} / 10.0", f"{card_v_val} / 5", "STATUS: PERLU REFORMASI"]
     ]
 
     regulasi_veto_rows = [
@@ -1164,17 +1146,17 @@ def generate_all_bab6():
         ["PLTU Captive (Veto 3)", "Global Energy Monitor (GEM 2023) & Perpres 112/2022", "Pemberian karpet merah pembangunan PLTU batubara off-grid captive untuk smelter (10.26 GW), melanggar komitmen transisi energi berkeadilan JETP dan NZE 2060.", "GEM Hal. 2", "VERIFIED"]
     ]
 
-    # Rekapitulasi 5 Matriks Bioregion Pulau (Sinkron 100% Label Likert SIBERMU)
+    # Rekapitulasi 5 Matriks Bioregion Pulau
     skor_komposit_final = (skor_akumulasi_udara + skor_akumulasi_air + skor_akumulasi_lahan + skor_akumulasi_sosial + skor_akumulasi_veto) / 5.0
     skor_komposit_likert = skor_komposit_final / 2.0
 
     sintesis_pulau_rows = [
-        ["Dimensi 1", "Daya Tampung Udara & Emisi Industri", "16,000 MW PLTU, NO2 Satelit, ISPA 1.34x, B3 77.8%", f"{skor_akumulasi_udara:.2f} / 10.0", f"{(skor_akumulasi_udara/2.0):.1f} / 5", get_likert_label(skor_akumulasi_udara / 2.0), "Kapasitas Asimilasi Udara Habis"],
-        ["Dimensi 2", "Daya Tampung Air & Beban Limbah", "IKA 59.69, Diare IRR 1.5x, Tailing 33.03 Jt Ton", f"{skor_akumulasi_air:.2f} / 10.0", f"4.2 / 5", get_likert_label(4.2), "Kapasitas Penetralan Limbah Melampaui Batas"],
-        ["Dimensi 3", "Daya Dukung Lahan & Ekosistem", "1,609 Bencana, Deforestasi 1.38 Jt Ha, Lindung 41 Ribu Ha", f"{skor_akumulasi_lahan:.2f} / 10.0", f"{card_l_val} / 5", get_likert_label(skor_akumulasi_lahan / 2.0), "Evaluasi Pengelolaan Lanskap"],
-        ["Dimensi 4", "Daya Dukung Sosial & Hak Asasi Warga", "8 Kasus FPIC, 54,310 Jiwa Terdampak, 21 Kriminalisasi", f"{skor_akumulasi_sosial:.2f} / 10.0", f"{card_s_val} / 5", get_likert_label(skor_akumulasi_sosial / 2.0), "Pelibatan Masyarakat Lokal"],
-        ["Dimensi 5", "Veto Kebijakan & Pengendalian Izin", "574 Izin Baru, 21 Korporat Ilegal, 10.26 GW PLTU", f"{skor_akumulasi_veto:.2f} / 10.0", f"{card_v_val} / 5", get_likert_label(skor_akumulasi_veto / 2.0), "Penguatan Pengawasan Kebijakan"],
-        ["TOTAL", "SKOR KOMPOSIT BIOREGION PULAU SULAWESI", "Agregasi 5 Dimensi Daya Dukung & Daya Tampung", f"{skor_komposit_final:.2f} / 10.0", f"{skor_komposit_likert:.1f} / 5", get_likert_label(skor_komposit_likert), "KOLAPS DAYA DUKUNG SISTEMIK"]
+        ["Dimensi 1", "Daya Tampung Udara & Emisi Industri", "16,000 MW PLTU, NO2 Satelit, ISPA 1.34x, B3 77.8%", f"{skor_akumulasi_udara:.2f} / 10.0", f"{(skor_akumulasi_udara/2.0):.1f} / 5", "DARURAT UDARA", "Kapasitas Asimilasi Udara Habis"],
+        ["Dimensi 2", "Daya Tampung Air & Beban Limbah", "IKA 59.69, Diare IRR 1.5x, Tailing 33.03 Jt Ton", f"{skor_akumulasi_air:.2f} / 10.0", f"4.2 / 5", "DARURAT AIR", "Kapasitas Penetralan Limbah Melampaui Batas"],
+        ["Dimensi 3", "Daya Dukung Lahan & Ekosistem", "1,609 Bencana, Deforestasi 1.38 Jt Ha, Lindung 41 Ribu Ha", f"{skor_akumulasi_lahan:.2f} / 10.0", f"{card_l_val} / 5", "DARURAT LAHAN", "Evaluasi Pengelolaan Lanskap"],
+        ["Dimensi 4", "Daya Dukung Sosial & Hak Asasi Warga", "8 Kasus FPIC, 54,310 Jiwa Terdampak, 21 Kriminalisasi", f"{skor_akumulasi_sosial:.2f} / 10.0", f"{card_s_val} / 5", "PERLU PENGAWASAN", "Pelibatan Masyarakat Lokal"],
+        ["Dimensi 5", "Veto Kebijakan & Pengendalian Izin", "574 Izin Baru, 21 Korporat Ilegal, 10.26 GW PLTU", f"{skor_akumulasi_veto:.2f} / 10.0", f"{card_v_val} / 5", "PERLU REFORMASI", "Penguatan Pengawasan Kebijakan"],
+        ["TOTAL", "SKOR KOMPOSIT BIOREGION PULAU SULAWESI", "Agregasi 5 Dimensi Daya Dukung & Daya Tampung", f"{skor_komposit_final:.2f} / 10.0", f"{skor_komposit_likert:.1f} / 5", "DARURAT TOTAL", "KOLAPS DAYA DUKUNG SISTEMIK"]
     ]
 
     # Flowchart Mermaid 6.5 (Sinkron Page 6)
