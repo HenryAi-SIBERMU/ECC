@@ -541,6 +541,28 @@ def generate_bab6_skoring_provinsi():
         ["SKOR KOMPOSIT GORONTALO", "Agregasi 5 Pilar EWM Weighted Average (Z-Score Standardization)", f"{gorontalo['total_likert']:.1f} / 5", gorontalo['likert_label'], "STATUS TERJAGA: EMISI NO2 & TEKANAN LAHAN TERENDAH"]
     ]
 
+    # 8. Ekstrak Data Empiris Sulawesi Utara (6.6.6)
+    sulut = all_prov_results['Sulawesi Utara']
+    table_eval_sulut = extract_prov_eval_rows(sulut)
+    rekap_sulut = [
+        ["Pilar 1: Udara", "PLTU (0 MW), NO2 (4.1e-6), ISPA (0.46x), B3 (0.001 Jt Ton), CO2 (48.8 Jt Ton)", f"{sulut['udara']:.1f} / 5", get_likert_label(sulut['udara']), "Bebas PLTU Captive, Udara Terbersih & Emisi Karbon Terendah Se-Sulawesi"],
+        ["Pilar 2: Air", "IKA (58.17), Diare (0.46x), Tailing (0.001 Jt Ton), Konflik Pesisir (2 Kasus)", f"{sulut['air']:.1f} / 5", get_likert_label(sulut['air']), "Insidensi Diare Terendah Se-Sulawesi, Konflik Pesisir Pulau Sangihe"],
+        ["Pilar 3: Lahan", "Bencana (181 Kejadian), Deforestasi (74k Ha), Lindung (5.2k Ha), IUP (6.83%)", f"{sulut['lahan']:.1f} / 5", get_likert_label(sulut['lahan']), "Kerentanan Lanskap Pulau Kecil Kepulauan & Deforestasi Primer Rendah"],
+        ["Pilar 4: Sosial", "FPIC (2 Kasus), Korban (0 Jiwa), Kriminalisasi (1 Insiden), Gap SPA (25.16%)", f"{sulut['sosial']:.1f} / 5", get_likert_label(sulut['sosial']), "Kesenjangan Faskes SPA Tertinggi Se-Sulawesi (25,16%) di Wilayah Kepulauan"],
+        ["Pilar 5: Veto", "Obral Izin (15 IUP Baru), Korporat Ilegal (1 Perusahaan), Sengketa Pulau Kecil", f"{sulut['veto']:.1f} / 5", get_likert_label(sulut['veto']), "Isu Perizinan Kontroversial Tambang Kontrak Karya di Pulau Sangihe"],
+        ["SKOR KOMPOSIT SULUT", "Agregasi 5 Pilar EWM Weighted Average (Z-Score Standardization)", f"{sulut['total_likert']:.1f} / 5", sulut['likert_label'], "STATUS TERJAGA: OUTLIER GAP FASKES SPA & KERENTANAN PULAU KECIL"]
+    ]
+
+    # 9. Matriks Komparasi Sintesis Regional 6 Provinsi Se-Sulawesi
+    table_sintesis_regional = [
+        ["1", "Sulawesi Tengah", f"{sulteng['udara']:.1f}", f"{sulteng['air']:.1f}", f"{sulteng['lahan']:.1f}", f"{sulteng['sosial']:.1f}", f"{sulteng['veto']:.1f}", f"{sulteng['total_likert']:.1f} / 5", f"{sulteng['total']:.2f}", sulteng['likert_label'], "Episentrum PLTU Captive Batubara (7.325 MW) & Limbah B3 Raksasa"],
+        ["2", "Sulawesi Tenggara", f"{sultra['udara']:.1f}", f"{sultra['air']:.1f}", f"{sultra['lahan']:.1f}", f"{sultra['sosial']:.1f}", f"{sultra['veto']:.1f}", f"{sultra['total_likert']:.1f} / 5", f"{sultra['total']:.2f}", sultra['likert_label'], "Episentrum Krisis Agraria (39.821 Jiwa) & Kepadatan IUP (11,72%)"],
+        ["3", "Sulawesi Selatan", f"{sulsel['udara']:.1f}", f"{sulsel['air']:.1f}", f"{sulsel['lahan']:.1f}", f"{sulsel['sosial']:.1f}", f"{sulsel['veto']:.1f}", f"{sulsel['total_likert']:.1f} / 5", f"{sulsel['total']:.2f}", sulsel['likert_label'], "Episentrum Bencana Alam (669 Kejadian), Konflik Pesisir & Kriminalisasi"],
+        ["4", "Sulawesi Utara", f"{sulut['udara']:.1f}", f"{sulut['air']:.1f}", f"{sulut['lahan']:.1f}", f"{sulut['sosial']:.1f}", f"{sulut['veto']:.1f}", f"{sulut['total_likert']:.1f} / 5", f"{sulut['total']:.2f}", sulut['likert_label'], "Outlier Kesenjangan Faskes SPA Kepulauan (25,16%) & Isu Tambang Sangihe"],
+        ["5", "Sulawesi Barat", f"{sulbar['udara']:.1f}", f"{sulbar['air']:.1f}", f"{sulbar['lahan']:.1f}", f"{sulbar['sosial']:.1f}", f"{sulbar['veto']:.1f}", f"{sulbar['total_likert']:.1f} / 5", f"{sulbar['total']:.2f}", sulbar['likert_label'], "Bioregion Agromaritim Terjaga, Tekanan Kualitas Air PKS Sawit Lokal"],
+        ["6", "Gorontalo", f"{gorontalo['udara']:.1f}", f"{gorontalo['air']:.1f}", f"{gorontalo['lahan']:.1f}", f"{gorontalo['sosial']:.1f}", f"{gorontalo['veto']:.1f}", f"{gorontalo['total_likert']:.1f} / 5", f"{gorontalo['total']:.2f}", gorontalo['likert_label'], "Atmosfer NO2 Terbersih Se-Sulawesi, Deforestasi & Emisi Terendah"]
+    ]
+
     # Flowchart Mermaid LR Regional (Satu Flowchart Terpusat untuk Seluruh Provinsi)
     mermaid_regional = """flowchart LR
     subgraph S1["1. Matriks Empiris Regional"]
@@ -1022,6 +1044,102 @@ def generate_bab6_skoring_provinsi():
         (f"Secara agregat, Gorontalo memperoleh Skor Komposit 1.2 / 5.0 (Ekuivalen WSM 2.31 / 10.0) dengan status TIDAK MELAMPAUI BATAS. Status aman ini menjadi bukti konklusif bahwa kelestarian bioregion Sulawesi bertumpu pada pembatasan ekspansi industri ekstraktif nikel.", False, False)
     ])
 
+    # -------------------------------------------------------------------------
+    # SEKSI 6.6.6: EVALUASI EMPIRIS SULAWESI UTARA
+    # -------------------------------------------------------------------------
+    doc.add_page_break()
+    add_h3(doc, "6.6.6 Evaluasi Empiris D3TLH: Provinsi Sulawesi Utara (Sulut)")
+    add_note_box(
+        doc,
+        "PROFIL EMPIRIS: Provinsi Sulawesi Utara (Bioregion Kepulauan, Bebas Smelter & Outlier Kesenjangan Faskes)",
+        "Kabupaten/Kota: 15 Daerah  |  Pusat Perekonomian: Jasa Maritim, Perikanan Tangkap, Agrowisata & Perdagangan  |  Populasi BPS: 2.621.923 Jiwa\n"
+        "Karakteristik Krisis: Kualitas udara sangat baik dan emisi karbon deforestasi terendah se-Sulawesi (48,80 Jt Ton CO2e), namun memikul anomali disparitas fasilitas kesehatan tertinggi se-Sulawesi (Gap SPA 25,16%) akibat hambatan geografis pulau-pulau 3T (Sangihe, Talaud, Sitaro) serta sengketa ruang hidup tambang emas di pulau kecil."
+    )
+
+    add_h4(doc, "A. Narasi Temuan Lapangan Sulut")
+    add_p(doc, [
+        ("Sebagai provinsi di ujung utara pulau dengan karakteristik kepulauan (15 kabupaten/kota dan 2,62 juta jiwa), ", False, False),
+        ("Provinsi Sulawesi Utara mencatatkan Skor Komposit 1.6 / 5.0 (Status: Tidak Melampaui Batas)", True, False),
+        (". Sulawesi Utara terbebas dari kepungan industri pengolahan nikel berskala masif dan PLTU captive batubara (0 MW, 0 Ton limbah B3). Kondisi ini tercermin dari ", False, False),
+        ("pelepasan emisi karbon deforestasi terendah se-Pulau Sulawesi (48,80 Jt Ton CO2e, Z = -0.91σ, Likert 1.0)", True, False),
+        (" serta konsentrasi troposferik NO2 satelit yang sangat bersih (4,09e-06 mol/m², Z = -1.14σ, Likert 0.0).", False, False)
+    ])
+    add_p(doc, [
+        ("Kendati demikian, audit forensik Z-score membongkar ", False, False),
+        ("satu indikator anomali outlier ekstrem (Skor Likert 5.0 / Red Alert)", True, False),
+        (" pada Pilar Sosial, yaitu ", False, False),
+        ("Defisit Standar Pelayanan Minimal Fasilitas Kesehatan (Gap SPA) sebesar 25,16% (Z = +1.47σ, Likert 5.0 — Rekor Tertinggi Se-Sulawesi)", True, False),
+        (". Angka ketimpangan ini mencerminkan kerentanan struktural masyarakat kepulauan terluar (Sangihe, Talaud, Sitaro) yang terisolasi dari akses rujukan medis. Selain itu, meletusnya sengketa tambang emas kontrak karya di Pulau Sangihe (pulau kecil rentan) memicu 2 kasus konflik persetujuan warga FPIC (Z = +0.34σ) dan sengketa ruang tangkap nelayan pesisir.", False, False)
+    ])
+
+    add_h4(doc, "B. Matriks Hasil Uji Empiris (Sulut)")
+    add_caption(doc, "Tabel 6.23: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Utara (Model Hybrid Z-Score & EWM)")
+    add_table_styled(
+        doc,
+        ["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Nilai Z-Score", "Bobot EWM", "Skor Likert", "Status Ekologis"],
+        table_eval_sulut,
+        [2.2, 4.3, 3.0, 1.8, 1.7, 1.8, 2.2],
+        ["C", "L", "R", "C", "C", "C", "C"]
+    )
+
+    add_caption(doc, "Tabel 6.24: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Utara")
+    add_table_styled(
+        doc,
+        ["Pilar / Dimensi", "Cakupan Indikator Kunci", "Skor Likert Pilar (0-5)", "Status Ekologis", "Interpretasi Temuan Lapangan Sulut"],
+        rekap_sulut,
+        [2.5, 4.5, 2.2, 2.8, 5.0],
+        ["C", "L", "C", "C", "L"]
+    )
+
+    add_h4(doc, "C. Analisis Temuan Empiris (Sulut)")
+    add_p(doc, [
+        ("1. ", True, False), (f"Daya Tampung Udara (Skor {sulut['udara']:.1f} / 5 — {get_likert_label(sulut['udara'])}): ", True, False),
+        (f"Sulut bebas dari PLTU captive (0,0 MW, Z = -0.57σ) dan limbah B3 industri (0,001 Jt Ton). Kualitas udara satelit NO2 sangat bersih (4,09e-06 mol/m², Z = -1.14σ, Likert 0.0) dan emisi karbon deforestasi tercatat paling rendah se-Sulawesi (48,80 Jt Ton CO2e, Z = -0.91σ).\n", False, False),
+        ("2. ", True, False), (f"Daya Tampung Air (Skor {sulut['air']:.1f} / 5 — {get_likert_label(sulut['air'])}): ", True, False),
+        (f"Mencatat morbiditas diare paling rendah se-Sulawesi (0,46x lipat, Z = -1.61σ, Likert 0.0) dan IKA 58,17 poin (Z = +0.45σ). Terdapat 2 kasus konflik pesisir (Z = -0.17σ) yang dipicu oleh kekhawatiran nelayan terhadap dampak limbah tambang emas di perairan pesisir pulau kecil.\n", False, False),
+        ("3. ", True, False), (f"Daya Dukung Lahan (Skor {sulut['lahan']:.1f} / 5 — {get_likert_label(sulut['lahan'])}): ", True, False),
+        (f"Kepadatan konsesi tambang tercatat 6,83% daratan (Z = +0.39σ, Likert 3.0), deforestasi primer 74.240 Ha (Z = -0.98σ), perambahan hutan lindung 5.161 Ha (Z = -0.27σ), dan 181 kejadian bencana alam banjir/longsor.\n", False, False),
+        ("4. ", True, False), (f"Daya Dukung Sosial (Skor {sulut['sosial']:.1f} / 5 — {get_likert_label(sulut['sosial'])}): ", True, False),
+        (f"Mengalami anomali kesenjangan faskes SPA terparah se-Sulawesi (25,16% gap, Z = +1.47σ, Likert 5.0 — Outlier Ekstrem) akibat keterbatasan fasilitas di pulau 3T. Terdapat 2 kasus sengketa persetujuan warga FPIC tambang emas dan 1 insiden kriminalisasi warga.\n", False, False),
+        ("5. ", True, False), (f"Veto Kebijakan (Skor {sulut['veto']:.1f} / 5 — {get_likert_label(sulut['veto'])}): ", True, False),
+        (f"Penerbitan 15 IUP baru pasca-2014 (Z = -0.80σ, Likert 1.0) dan terdeteksi 1 entitas pertambangan kontroversial yang beroperasi di pulau kecil rentan.\n", False, False),
+        ("6. ", True, False), (f"Vonis Komposit Sulawesi Utara (Skor {sulut['total_likert']:.1f} / 5.0 — {sulut['likert_label']}): ", True, False),
+        (f"Secara agregat, Sulawesi Utara memperoleh Skor Komposit 1.6 / 5.0 (Ekuivalen WSM 3.13 / 10.0) dengan status TIDAK MELAMPAUI BATAS. Tantangan ekologis utama Sulut terletak pada perlindungan ekosistem pulau-pulau kecil dari industri ekstraktif serta pemerataan fasilitas kesehatan perdesaan-kepulauan.", False, False)
+    ])
+
+    # -------------------------------------------------------------------------
+    # SEKSI 6.6.7: SINTESIS KOMPARATIF REGIONAL SE-SULAWESI
+    # -------------------------------------------------------------------------
+    doc.add_page_break()
+    add_h3(doc, "6.6.7 Sintesis Komparatif D3TLH 6 Provinsi Se-Pulau Sulawesi")
+    add_note_box(
+        doc,
+        "KESIMPULAN METODOLOGIS REGIONAL: Peta Polarisasi & Peringkat Kerentanan Ekologis Pulau Sulawesi",
+        "Penerapan Model Hybrid Z-Score & Entropy Weight Method (EWM) membuktikan secara konklusif adanya polarisasi tajam antara provinsi sentra hilirisasi ekstraktif nikel vs provinsi agromaritim berbasis rakyat. Hilirisasi ekstraktif nikel menjadi faktor determinan tunggal yang mendorong ambruknya daya lentur ekologis di Pulau Sulawesi."
+    )
+
+    add_caption(doc, "Tabel 6.25: Matriks Sintesis Komparatif Skor D3TLH 6 Provinsi Se-Pulau Sulawesi (Peringkat Kerentanan Regional)")
+    add_table_styled(
+        doc,
+        ["Peringkat", "Provinsi", "Udara", "Air", "Lahan", "Sosial", "Veto", "Skor Likert", "Skor WSM", "Status Ekologis", "Faktor Determinan Krisis Utama"],
+        table_sintesis_regional,
+        [1.5, 2.8, 1.2, 1.2, 1.2, 1.2, 1.2, 1.8, 1.6, 2.5, 4.5],
+        ["C", "L", "C", "C", "C", "C", "C", "C", "C", "C", "L"]
+    )
+
+    add_h4(doc, "Analisis Sintesis & Temuan Kebijakan Regional")
+    add_p(doc, [
+        ("Berdasarkan komparasi lintas wilayah pada Tabel 6.25, teridentifikasi ", False, False),
+        ("tiga tipologi ekologis utama di Pulau Sulawesi", True, False),
+        (":\n", False, False),
+        ("1. ", True, False), ("Zona Bencana Ekologis Kritis (Sulteng & Sultra): ", True, False),
+        ("Provinsi Sulawesi Tengah (Skor 4.0 / 5.0, Red Alert) dan Sulawesi Tenggara (Skor 3.4 / 5.0, Mendekati Batas) menyerap beban polusi PLTU batubara, timbulan limbah B3, konflik agraria, dan perusakan kawasan hutan lindung paling ekstrem. Di wilayah ini, kapasitas asimilasi lingkungan telah terlampaui secara struktural.\n", False, False),
+        ("2. ", True, False), ("Zona Rentan Pesisir & Bencana (Sulsel): ", True, False),
+        ("Sulawesi Selatan (Skor 2.6 / 5.0, Mendekati Batas) menjadi episentrum anomali bencana hidrometeorologi, sengketa ruang laut nelayan, dan represi hukum terhadap pembela HAM terberat di kawasan Wallacea.\n", False, False),
+        ("3. ", True, False), ("Zona Resiliensi Agromaritim (Sulut, Sulbar, Gorontalo): ", True, False),
+        ("Ketiga provinsi ini mencatatkan status Tidak Melampaui Batas (Skor 1.2 - 1.6 / 5.0). Data empiris ini membantah narasi pemerintah bahwa seluruh Pulau Sulawesi membutuhkan ekspansi smelter nikel untuk berkembang. Sebaliknya, wilayah yang terbebas dari hilirisasi nikel berhasil mempertahankan mutu udara, sumber daya air, dan ketahanan sosial pangan dengan jauh lebih berdaya lentur.", False, False)
+    ])
+
     docx_path = tool_dir / "Metodologi_Bab6_Skoring_Provinsi.docx"
     doc.save(str(docx_path))
     print(f"  [OK] Tersimpan: {docx_path}")
@@ -1241,6 +1359,53 @@ def generate_bab6_skoring_provinsi():
 <strong>5. Veto Kebijakan (Skor {gorontalo['veto']:.1f} / 5 — {get_likert_label(gorontalo['veto'])}):</strong> Pemerintah daerah mencatat laju obral izin tambang terendah se-Sulawesi (hanya 7 IUP baru pasca-2014, Z = -0.88&sigma;, Likert 1.0) dan hanya teridentifikasi 1 aktivitas tambang rakyat/ilegal skala kecil di kawasan hulu (Z = -0.45&sigma;).<br>
 <strong>6. Vonis Komposit Gorontalo (Skor {gorontalo['total_likert']:.1f} / 5.0 — {gorontalo['likert_label']}):</strong> Status <span class="badge-success">TIDAK MELAMPAUI BATAS</span> (WSM: 2.31 / 10.0). Status aman ini menjadi bukti konklusif bahwa kelestarian bioregion Sulawesi bertumpu pada pembatasan ekspansi industri ekstraktif nikel.</p>
 
+<div class="divider"></div>
+
+<!-- SEKSI 6.6.6 SULUT -->
+<h3>6.6.6 Evaluasi Empiris D3TLH: Provinsi Sulawesi Utara (Sulut)</h3>
+<div class="note-box">
+  <strong>PROFIL EMPIRIS: Provinsi Sulawesi Utara (Bioregion Kepulauan, Bebas Smelter & Outlier Kesenjangan Faskes)</strong><br>
+  Kabupaten/Kota: 15 Daerah  |  Pusat Perekonomian: Jasa Maritim, Perikanan Tangkap, Agrowisata & Perdagangan  |  Populasi BPS: 2.621.923 Jiwa<br>
+  Karakteristik Krisis: Kualitas udara sangat baik dan emisi karbon deforestasi terendah se-Sulawesi (48,80 Jt Ton CO2e), namun memikul anomali disparitas fasilitas kesehatan tertinggi se-Sulawesi (Gap SPA 25,16%) akibat hambatan geografis pulau-pulau 3T (Sangihe, Talaud, Sitaro) serta sengketa ruang hidup tambang emas di pulau kecil.
+</div>
+
+<h4>A. Narasi Temuan Lapangan Sulut</h4>
+<p>Sebagai provinsi di ujung utara pulau dengan karakteristik kepulauan (15 kabupaten/kota dan 2,62 juta jiwa), <strong>Provinsi Sulawesi Utara mencatatkan Skor Komposit 1.6 / 5.0 (Status: Tidak Melampaui Batas)</strong>. Sulawesi Utara terbebas dari kepungan industri pengolahan nikel berskala masif dan PLTU captive batubara (0 MW, 0 Ton limbah B3). Kondisi ini tercermin dari <strong>pelepasan emisi karbon deforestasi terendah se-Pulau Sulawesi (48,80 Jt Ton CO2e, Z = -0.91&sigma;, Likert 1.0)</strong> serta konsentrasi troposferik NO2 satelit yang sangat bersih (4,09e-06 mol/m², Z = -1.14&sigma;, Likert 0.0).</p>
+<p>Kendati demikian, audit forensik Z-score membongkar <strong>satu indikator anomali outlier ekstrem (Skor Likert 5.0 / Red Alert)</strong> pada Pilar Sosial, yaitu <strong>Defisit Standar Pelayanan Minimal Fasilitas Kesehatan (Gap SPA) sebesar 25,16% (Z = +1.47&sigma;, Likert 5.0 — Rekor Tertinggi Se-Sulawesi)</strong>. Angka ketimpangan ini mencerminkan kerentanan struktural masyarakat kepulauan terluar (Sangihe, Talaud, Sitaro) yang terisolasi dari akses rujukan medis. Selain itu, meletusnya sengketa tambang emas kontrak karya di Pulau Sangihe (pulau kecil rentan) memicu 2 kasus konflik persetujuan warga FPIC (Z = +0.34&sigma;) dan sengketa ruang tangkap nelayan pesisir.</p>
+
+<h4>B. Matriks Hasil Uji Empiris (Sulut)</h4>
+<div class="table-caption">Tabel 6.23: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Utara (Model Hybrid Z-Score & EWM)</div>
+{html_table(["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Nilai Z-Score", "Bobot EWM", "Skor Likert", "Status Ekologis"], table_eval_sulut)}
+
+<div class="table-caption">Tabel 6.24: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Utara</div>
+{html_table(["Pilar / Dimensi", "Cakupan Indikator Kunci", "Skor Likert Pilar (0-5)", "Status Ekologis", "Interpretasi Temuan Lapangan Sulut"], rekap_sulut)}
+
+<h4>C. Analisis Temuan Empiris (Sulut)</h4>
+<p><strong>1. Daya Tampung Udara (Skor {sulut['udara']:.1f} / 5 — {get_likert_label(sulut['udara'])}):</strong> Sulut bebas dari PLTU captive (0,0 MW, Z = -0.57&sigma;) dan limbah B3 industri (0,001 Jt Ton). Kualitas udara satelit NO2 sangat bersih (4,09e-06 mol/m², Z = -1.14&sigma;, Likert 0.0) dan emisi karbon deforestasi tercatat paling rendah se-Sulawesi (48,80 Jt Ton CO2e, Z = -0.91&sigma;).<br>
+<strong>2. Daya Tampung Air (Skor {sulut['air']:.1f} / 5 — {get_likert_label(sulut['air'])}):</strong> Mencatat morbiditas diare paling rendah se-Sulawesi (0,46x lipat, Z = -1.61&sigma;, Likert 0.0) dan IKA 58,17 poin (Z = +0.45&sigma;). Terdapat 2 kasus konflik pesisir (Z = -0.17&sigma;) yang dipicu oleh kekhawatiran nelayan terhadap dampak limbah tambang emas di perairan pesisir pulau kecil.<br>
+<strong>3. Daya Dukung Lahan (Skor {sulut['lahan']:.1f} / 5 — {get_likert_label(sulut['lahan'])}):</strong> Kepadatan konsesi tambang tercatat 6,83% daratan (Z = +0.39&sigma;, Likert 3.0), deforestasi primer 74.240 Ha (Z = -0.98&sigma;), perambahan hutan lindung 5.161 Ha (Z = -0.27&sigma;), dan 181 kejadian bencana alam banjir/longsor.<br>
+<strong>4. Daya Dukung Sosial (Skor {sulut['sosial']:.1f} / 5 — {get_likert_label(sulut['sosial'])}):</strong> Mengalami anomali kesenjangan faskes SPA terparah se-Sulawesi (25,16% gap, Z = +1.47&sigma;, Likert 5.0 — Outlier Ekstrem) akibat keterbatasan fasilitas di pulau 3T. Terdapat 2 kasus sengketa persetujuan warga FPIC tambang emas dan 1 insiden kriminalisasi warga.<br>
+<strong>5. Veto Kebijakan (Skor {sulut['veto']:.1f} / 5 — {get_likert_label(sulut['veto'])}):</strong> Penerbitan 15 IUP baru pasca-2014 (Z = -0.80&sigma;, Likert 1.0) dan terdeteksi 1 entitas pertambangan kontroversial yang beroperasi di pulau kecil rentan.<br>
+<strong>6. Vonis Komposit Sulawesi Utara (Skor {sulut['total_likert']:.1f} / 5.0 — {sulut['likert_label']}):</strong> Status <span class="badge-success">TIDAK MELAMPAUI BATAS</span> (WSM: 3.13 / 10.0). Tantangan ekologis utama Sulut terletak pada perlindungan ekosistem pulau-pulau kecil dari industri ekstraktif serta pemerataan fasilitas kesehatan perdesaan-kepulauan.</p>
+
+<div class="divider"></div>
+
+<!-- SEKSI 6.6.7 SINTESIS REGIONAL -->
+<h3>6.6.7 Sintesis Komparatif D3TLH 6 Provinsi Se-Pulau Sulawesi</h3>
+<div class="note-box">
+  <strong>KESIMPULAN METODOLOGIS REGIONAL: Peta Polarisasi & Peringkat Kerentanan Ekologis Pulau Sulawesi</strong><br>
+  Penerapan Model Hybrid Z-Score & Entropy Weight Method (EWM) membuktikan secara konklusif adanya polarisasi tajam antara provinsi sentra hilirisasi ekstraktif nikel vs provinsi agromaritim berbasis rakyat. Hilirisasi ekstraktif nikel menjadi faktor determinan tunggal yang mendorong ambruknya daya lentur ekologis di Pulau Sulawesi.
+</div>
+
+<div class="table-caption">Tabel 6.25: Matriks Sintesis Komparatif Skor D3TLH 6 Provinsi Se-Pulau Sulawesi (Peringkat Kerentanan Regional)</div>
+{html_table(["Peringkat", "Provinsi", "Udara", "Air", "Lahan", "Sosial", "Veto", "Skor Likert", "Skor WSM", "Status Ekologis", "Faktor Determinan Krisis Utama"], table_sintesis_regional)}
+
+<h4>Analisis Sintesis & Temuan Kebijakan Regional</h4>
+<p>Berdasarkan komparasi lintas wilayah pada Tabel 6.25, teridentifikasi <strong>tiga tipologi ekologis utama di Pulau Sulawesi</strong>:<br>
+<strong>1. Zona Bencana Ekologis Kritis (Sulteng & Sultra):</strong> Provinsi Sulawesi Tengah (Skor 4.0 / 5.0, Red Alert) dan Sulawesi Tenggara (Skor 3.4 / 5.0, Mendekati Batas) menyerap beban polusi PLTU batubara, timbulan limbah B3, konflik agraria, dan perusakan kawasan hutan lindung paling ekstrem. Di wilayah ini, kapasitas asimilasi lingkungan telah terlampaui secara struktural.<br>
+<strong>2. Zona Rentan Pesisir & Bencana (Sulsel):</strong> Sulawesi Selatan (Skor 2.6 / 5.0, Mendekati Batas) menjadi episentrum anomali bencana hidrometeorologi, sengketa ruang laut nelayan, dan represi hukum terhadap pembela HAM terberat di kawasan Wallacea.<br>
+<strong>3. Zona Resiliensi Agromaritim (Sulut, Sulbar, Gorontalo):</strong> Ketiga provinsi ini mencatatkan status Tidak Melampaui Batas (Skor 1.2 - 1.6 / 5.0). Data empiris ini membantah narasi pemerintah bahwa seluruh Pulau Sulawesi membutuhkan ekspansi smelter nikel untuk berkembang. Sebaliknya, wilayah yang terbebas dari hilirisasi nikel berhasil mempertahankan mutu udara, sumber daya air, dan ketahanan sosial pangan dengan jauh lebih berdaya lentur.</p>
+
 </body>
 </html>
 """
@@ -1424,6 +1589,49 @@ def generate_bab6_skoring_provinsi():
         f"4. **Daya Dukung Sosial (Skor {gorontalo['sosial']:.1f} / 5 — {get_likert_label(gorontalo['sosial'])}):** Bebas dari letupan konflik agraria industri tambang (nihil warga terdampak kehilangan ruang hidup, nihil sengketa FPIC, dan nihil kriminalisasi pejuang lingkungan).",
         f"5. **Veto Kebijakan (Skor {gorontalo['veto']:.1f} / 5 — {get_likert_label(gorontalo['veto'])}):** Pemerintah daerah mencatat laju obral izin tambang terendah se-Sulawesi (hanya 7 IUP baru pasca-2014, Z = -0.88σ, Likert 1.0) dan hanya teridentifikasi 1 aktivitas tambang rakyat/ilegal skala kecil di kawasan hulu (Z = -0.45σ).",
         f"6. **Vonis Komposit Gorontalo (Skor {gorontalo['total_likert']:.1f} / 5.0 — {gorontalo['likert_label']}):** Status **Tidak Melampaui Batas** (WSM: 2.31 / 10.0). Status aman ini menjadi bukti konklusif bahwa kelestarian bioregion Sulawesi bertumpu pada pembatasan ekspansi industri ekstraktif nikel.",
+        "",
+        "---",
+        "",
+        "### 6.6.6 Evaluasi Empiris D3TLH: Provinsi Sulawesi Utara (Sulut)",
+        '> **PROFIL EMPIRIS: Provinsi Sulawesi Utara (Bioregion Kepulauan, Bebas Smelter & Outlier Kesenjangan Faskes)**  ',
+        '> Kabupaten/Kota: 15 Daerah  |  Pusat Perekonomian: Jasa Maritim, Perikanan Tangkap, Agrowisata & Perdagangan  |  Populasi BPS: 2.621.923 Jiwa  ',
+        '> Karakteristik Krisis: Kualitas udara sangat baik dan emisi karbon deforestasi terendah se-Sulawesi (48,80 Jt Ton CO2e), namun memikul anomali disparitas fasilitas kesehatan tertinggi se-Sulawesi (Gap SPA 25,16%) akibat hambatan geografis pulau-pulau 3T (Sangihe, Talaud, Sitaro) serta sengketa ruang hidup tambang emas di pulau kecil.',
+        "",
+        "#### A. Narasi Temuan Lapangan Sulut",
+        "Sebagai provinsi di ujung utara pulau dengan karakteristik kepulauan (15 kabupaten/kota dan 2,62 juta jiwa), **Provinsi Sulawesi Utara mencatatkan Skor Komposit 1.6 / 5.0 (Status: Tidak Melampaui Batas)**. Sulawesi Utara terbebas dari kepungan industri pengolahan nikel berskala masif dan PLTU captive batubara (0 MW, 0 Ton limbah B3). Kondisi ini tercermin dari **pelepasan emisi karbon deforestasi terendah se-Pulau Sulawesi (48,80 Jt Ton CO2e, Z = -0.91σ, Likert 1.0)** serta konsentrasi troposferik NO2 satelit yang sangat bersih (4,09e-06 mol/m², Z = -1.14σ, Likert 0.0).",
+        "",
+        "Kendati demikian, audit forensik Z-score membongkar **satu indikator anomali outlier ekstrem (Skor Likert 5.0 / Red Alert)** pada Pilar Sosial, yaitu **Defisit Standar Pelayanan Minimal Fasilitas Kesehatan (Gap SPA) sebesar 25,16% (Z = +1.47σ, Likert 5.0 — Rekor Tertinggi Se-Sulawesi)**. Angka ketimpangan ini mencerminkan kerentanan struktural masyarakat kepulauan terluar (Sangihe, Talaud, Sitaro) yang terisolasi dari akses rujukan medis. Selain itu, meletusnya sengketa tambang emas kontrak karya di Pulau Sangihe (pulau kecil rentan) memicu 2 kasus konflik persetujuan warga FPIC (Z = +0.34σ) dan sengketa ruang tangkap nelayan pesisir.",
+        "",
+        "#### B. Matriks Hasil Uji Empiris (Sulut)",
+        "##### Tabel 6.23: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Utara (Model Hybrid Z-Score & EWM)",
+        markdown_table(["Pilar", "Indikator Empiris", "Fakta Mentah (A)", "Nilai Z-Score", "Bobot EWM", "Skor Likert", "Status Ekologis"], table_eval_sulut),
+        "",
+        "##### Tabel 6.24: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Utara",
+        markdown_table(["Pilar / Dimensi", "Cakupan Indikator Kunci", "Skor Likert Pilar (0-5)", "Status Ekologis", "Interpretasi Temuan Lapangan Sulut"], rekap_sulut),
+        "",
+        "#### C. Analisis Temuan Empiris (Sulut)",
+        f"1. **Daya Tampung Udara (Skor {sulut['udara']:.1f} / 5 — {get_likert_label(sulut['udara'])}):** Sulut bebas dari PLTU captive (0,0 MW, Z = -0.57σ) dan limbah B3 industri (0,001 Jt Ton). Kualitas udara satelit NO2 sangat bersih (4,09e-06 mol/m², Z = -1.14σ, Likert 0.0) dan emisi karbon deforestasi tercatat paling rendah se-Sulawesi (48,80 Jt Ton CO2e, Z = -0.91σ).",
+        f"2. **Daya Tampung Air (Skor {sulut['air']:.1f} / 5 — {get_likert_label(sulut['air'])}):** Mencatat morbiditas diare paling rendah se-Sulawesi (0,46x lipat, Z = -1.61σ, Likert 0.0) dan IKA 58,17 poin (Z = +0.45σ). Terdapat 2 kasus konflik pesisir (Z = -0.17σ) yang dipicu oleh kekhawatiran nelayan terhadap dampak limbah tambang emas di perairan pesisir pulau kecil.",
+        f"3. **Daya Dukung Lahan (Skor {sulut['lahan']:.1f} / 5 — {get_likert_label(sulut['lahan'])}):** Kepadatan konsesi tambang tercatat 6,83% daratan (Z = +0.39σ, Likert 3.0), deforestasi primer 74.240 Ha (Z = -0.98σ), perambahan hutan lindung 5.161 Ha (Z = -0.27σ), dan 181 kejadian bencana alam banjir/longsor.",
+        f"4. **Daya Dukung Sosial (Skor {sulut['sosial']:.1f} / 5 — {get_likert_label(sulut['sosial'])}):** Mengalami anomali kesenjangan faskes SPA terparah se-Sulawesi (25,16% gap, Z = +1.47σ, Likert 5.0 — Outlier Ekstrem) akibat keterbatasan fasilitas di pulau 3T. Terdapat 2 kasus sengketa persetujuan warga FPIC tambang emas dan 1 insiden kriminalisasi warga.",
+        f"5. **Veto Kebijakan (Skor {sulut['veto']:.1f} / 5 — {get_likert_label(sulut['veto'])}):** Penerbitan 15 IUP baru pasca-2014 (Z = -0.80σ, Likert 1.0) dan terdeteksi 1 entitas pertambangan kontroversial yang beroperasi di pulau kecil rentan.",
+        f"6. **Vonis Komposit Sulawesi Utara (Skor {sulut['total_likert']:.1f} / 5.0 — {sulut['likert_label']}):** Status **Tidak Melampaui Batas** (WSM: 3.13 / 10.0). Tantangan ekologis utama Sulut terletak pada perlindungan ekosistem pulau-pulau kecil dari industri ekstraktif serta pemerataan fasilitas kesehatan perdesaan-kepulauan.",
+        "",
+        "---",
+        "",
+        "### 6.6.7 Sintesis Komparatif D3TLH 6 Provinsi Se-Pulau Sulawesi",
+        '> **KESIMPULAN METODOLOGIS REGIONAL: Peta Polarisasi & Peringkat Kerentanan Ekologis Pulau Sulawesi**  ',
+        '> Penerapan Model Hybrid Z-Score & Entropy Weight Method (EWM) membuktikan secara konklusif adanya polarisasi tajam antara provinsi sentra hilirisasi ekstraktif nikel vs provinsi agromaritim berbasis rakyat. Hilirisasi ekstraktif nikel menjadi faktor determinan tunggal yang mendorong ambruknya daya lentur ekologis di Pulau Sulawesi.',
+        "",
+        "##### Tabel 6.25: Matriks Sintesis Komparatif Skor D3TLH 6 Provinsi Se-Pulau Sulawesi (Peringkat Kerentanan Regional)",
+        markdown_table(["Peringkat", "Provinsi", "Udara", "Air", "Lahan", "Sosial", "Veto", "Skor Likert", "Skor WSM", "Status Ekologis", "Faktor Determinan Krisis Utama"], table_sintesis_regional),
+        "",
+        "#### Analisis Sintesis & Temuan Kebijakan Regional",
+        "Berdasarkan komparasi lintas wilayah pada Tabel 6.25, teridentifikasi **tiga tipologi ekologis utama di Pulau Sulawesi**:",
+        "",
+        "1. **Zona Bencana Ekologis Kritis (Sulteng & Sultra):** Provinsi Sulawesi Tengah (Skor 4.0 / 5.0, Red Alert) dan Sulawesi Tenggara (Skor 3.4 / 5.0, Mendekati Batas) menyerap beban polusi PLTU batubara, timbulan limbah B3, konflik agraria, dan perusakan kawasan hutan lindung paling ekstrem. Di wilayah ini, kapasitas asimilasi lingkungan telah terlampaui secara struktural.",
+        "2. **Zona Rentan Pesisir & Bencana (Sulsel):** Sulawesi Selatan (Skor 2.6 / 5.0, Mendekati Batas) menjadi episentrum anomali bencana hidrometeorologi, sengketa ruang laut nelayan, dan represi hukum terhadap pembela HAM terberat di kawasan Wallacea.",
+        "3. **Zona Resiliensi Agromaritim (Sulut, Sulbar, Gorontalo):** Ketiga provinsi ini mencatatkan status Tidak Melampaui Batas (Skor 1.2 - 1.6 / 5.0). Data empiris ini membantah narasi pemerintah bahwa seluruh Pulau Sulawesi membutuhkan ekspansi smelter nikel untuk berkembang. Sebaliknya, wilayah yang terbebas dari hilirisasi nikel berhasil mempertahankan mutu udara, sumber daya air, dan ketahanan sosial pangan dengan jauh lebih berdaya lentur.",
         ""
     ]
 
@@ -1431,7 +1639,7 @@ def generate_bab6_skoring_provinsi():
     with open(md_path, "w", encoding="utf-8") as f:
         f.write("\n".join(md_lines))
     print(f"  [OK] Tersimpan: {md_path}")
-    print("[4/4] Selesai membangun Sub-bab 6.6 untuk Provinsi Sulawesi Tengah, Sulawesi Tenggara, Sulawesi Selatan, Sulawesi Barat, dan Gorontalo.")
+    print("[4/4] Selesai membangun Sub-bab 6.6 untuk SELURUH 6 PROVINSI se-Pulau Sulawesi dan Sintesis Komparatif Regional.")
 
 
 if __name__ == "__main__":
