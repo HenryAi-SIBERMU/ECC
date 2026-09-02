@@ -969,6 +969,22 @@ Emisi_CO2_Total = &sum;(Area_Loss_c * Faktor_Emisi_Biomassa_c)</p>
 </table>
 
 <h2>SUB-BAB 1.6: Peta Jalur Distribusi Logistik Nikel Sulawesi</h2>
+
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>
+  Metode analisis pada tahapan ini difokuskan pada <strong>Pemetaan Kausalitas (Spasial)</strong> untuk membedah asimetri penguasaan ruang antara wilayah hulu (origin: sumber ekstraksi di Sulawesi) dan hilir (destination: pusat industrialisasi luar negeri). Garis diplot menggunakan rute pelayaran untuk merepresentasikan jarak tempuh aktual kapal logistik di permukaan bumi.
+</p>
+
+<h4>B. Alur Logika Metodologis (Flowchart Analisis Spasial)</h4>
+<p>
+  Rangkaian proses ekstraksi koordinat hingga visualisasi spasial direpresentasikan pada <strong>Bagan Alur 1.6</strong> berikut:
+</p>
+<div class="table-caption">Bagan Alur 1.6: Alur Logika Metodologis Pemetaan Jalur Logistik Maritim (Bézier Curve)</div>
+<div style="text-align: center; margin: 20px 0;">
+  <img src="mermaid_flowchart_1_6.png" alt="Bagan Alur 1.6" style="max-width: 100%; border: 1px solid #ddd; padding: 10px; background-color: #fcfcfc;">
+</div>
+
+<h4>C. Formulasi Matematis: Kurva Parametrik Alur Pelayaran</h4>
 <div class="formula-title">Persamaan Formulasi Kurva Parametrik Alur Pelayaran Maritim:</div>
 <div class="formula">Kurva(t) = (1 - t)^2 * Titik_Asal + 2 * (1 - t) * t * Titik_Kontrol + t^2 * Titik_Tujuan,   t dalam rentang [0, 1]</div>
 <div class="var-desc">
@@ -981,6 +997,19 @@ Emisi_CO2_Total = &sum;(Area_Loss_c * Faktor_Emisi_Biomassa_c)</p>
     <li>• <strong>t</strong>: Parameter interpolasi waktu dan pergerakan lintasan dalam rentang kontinu [0, 1].</li>
   </ul>
 </div>
+
+<h4>D. Matriks Hasil Pemetaan Spasial</h4>
+<p>
+  Agregasi titik asal (Origin) dan tujuan akhir (Destination) di-render langsung ke dalam proyeksi spasial. Struktur data logistik yang menggerakkan pemetaan ini memetakan pelabuhan asal menuju pasar utama, yaitu <strong>Tiongkok, Jepang, dan Korea Selatan</strong>.
+</p>
+
+<h4>E. Interpretasi Spasial Industri (Anatomi Rantai Pasok)</h4>
+<p>Peta rute logistik maritim mengilustrasikan alur distribusi produk olahan nikel dari kawasan industri di Sulawesi:</p>
+<ul style="margin-left: 20px; margin-bottom: 15px;">
+  <li style="margin-bottom: 6px;"><strong>1. Orientasi Ekspor:</strong> Kawasan industri utama yang berstatus Proyek Strategis Nasional (PSN) mengalirkan produk olahan ke sentra-sentra industri manufaktur di pasar internasional.</li>
+  <li style="margin-bottom: 6px;"><strong>2. Integrasi Rantai Pasok:</strong> Mayoritas rute pengapalan terhubung langsung dengan pelabuhan ekspor tujuan, yang mengindikasikan posisi kawasan pemurnian di Sulawesi sebagai pemasok bahan baku setengah jadi.</li>
+  <li style="margin-bottom: 6px;"><strong>3. Dinamika Rute Maritim:</strong> Peta rute mencerminkan diversifikasi pasar ekspor (Asia Timur) dan jaringan logistik kawasan.</li>
+</ul>
 
 <h2>SUB-BAB 1.7: Matriks Indikator dan Sumber Data Resmi Bab 1</h2>
 <p>

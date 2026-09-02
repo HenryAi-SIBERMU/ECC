@@ -1781,15 +1781,16 @@ def generate_all_bab1():
     add_caption(doc, "Tabel 1.8: Matriks Indikator dan Sumber Data Primer Resmi Bab 1 (Ekspansi Industri Ekstraktif)")
     master_headers = ["No", "Nama Indikator", "Kategori Analisis", "Satuan Ukur", "Cakupan Tahun", "Institusi & Sumber Data Resmi"]
     master_rows = [
-        ["1", "Izin Usaha Pertambangan (IUP) Baru", "Faktor Tekanan Ekstraktif", "Unit Izin", "2014–2024", "Kementerian ESDM (Minerbaone)"],
-        ["2", "Luas Wilayah Konsesi Tambang Baru", "Faktor Tekanan Ekstraktif", "Hektar (Ha)", "2014–2024", "Kementerian ESDM (Minerbaone)"],
-        ["3", "Kapasitas Terpasang PLTU Captive", "Infrastruktur Energi Khusus", "Megawatt (MW)", "2014–2024", "Global Energy Monitor (GEM)"],
-        ["4", "Fasilitas Pengolahan & Pemurnian (Smelter)", "Fasilitas Industri Hilir", "Unit Fasilitas", "2014–2024", "Kementerian ESDM & Basis Data Industri"],
-        ["5", "Realisasi Investasi PMDN", "Arus Modal Domestik", "Triliun Rupiah", "2016–2024", "Kementerian Investasi / BKPM"],
-        ["6", "PDRB Menurut 17 Lapangan Usaha", "Struktur Ekonomi Makro", "Triliun Rupiah", "2016–2024", "Badan Pusat Statistik (BPS Provinsi se-Sulawesi)"],
-        ["7", "PDRB Kabupaten Sentra Tambang", "Struktur Ekonomi Daerah", "Triliun Rupiah", "2016–2024", "Badan Pusat Statistik (BPS Kabupaten se-Sulteng)"],
-        ["8", "Luas Kehilangan Hutan Komoditas", "Dampak Perubahan Tutupan Lahan", "Hektar (Ha)", "2014–2023", "Global Forest Watch (GFW / Univ. of Maryland)"],
-        ["9", "Simpul Dermaga & Terminal Khusus Ekspor", "Infrastruktur Rantai Pasok", "Titik Koordinat & DWT", "2014–2024", "KNKT Kemenhub, Perpres PSN, Laporan Korporasi"],
+        ["1", "Izin Usaha Pertambangan (IUP) Baru", "Faktor Tekanan Ekstraktif", "Unit Izin", "2014–2024", "Data Registry ESDM MODI (Minerbaone)"],
+        ["2", "Luas Wilayah Konsesi Tambang Baru", "Faktor Tekanan Ekstraktif", "Hektar (Ha)", "2014–2024", "Data Registry ESDM MODI (Minerbaone)"],
+        ["3", "Kapasitas Terpasang PLTU Captive", "Infrastruktur Energi Khusus", "Megawatt (MW)", "2014–2024", "NGO (Global Energy Monitor / GEM)"],
+        ["4", "Fasilitas Smelter Nikel", "Fasilitas Industri Hilir", "Unit Fasilitas", "2014–2024", "Database Smelter CGS & ESDM MODI"],
+        ["5", "Realisasi Investasi PMDN & Nikel", "Arus Modal Domestik", "Triliun Rupiah", "2016–2024", "API BPS & BKPM"],
+        ["6", "PDRB Provinsi (Ekstraktif vs Akar Rumput)", "Struktur Ekonomi Makro", "Triliun Rupiah", "2016–2024", "API BPS (Subject 52)"],
+        ["7", "PDRB Kabupaten Sentra Tambang", "Struktur Ekonomi Daerah", "Triliun Rupiah", "2016–2024", "API BPS (Subject 52)"],
+        ["8", "Pendapatan Asli Daerah (PAD) & Breakdown Pajak", "Kapasitas Fiskal Daerah", "Triliun Rupiah", "2016–2024", "API BPS"],
+        ["9", "Luas Total Deforestasi Alam & Komoditas", "Dampak Ekologis", "Hektar (Ha)", "2014–2023", "Global Forest Watch (GFW API)"],
+        ["10", "Simpul Pelabuhan & Terminal Logistik", "Infrastruktur Rantai Pasok", "Titik Koordinat & DWT", "2014–2024", "Laporan Publik (KNKT, Perpres PSN, Korporasi)"],
     ]
     add_table_1col(doc, master_headers, master_rows, [0.8, 4.2, 3.2, 2.0, 2.0, 5.8], ['C', 'L', 'L', 'C', 'C', 'L'])
 
@@ -2702,16 +2703,16 @@ Emisi_CO2_Total = &sum;(Area_Loss_c * Faktor_Emisi_Biomassa_c)</p>
       <th class="data-th" style="width:24%;">Institusi & Sumber Data Resmi</th>
     </tr>
   </thead>
-  <tbody>
-    <tr><td class="data-td" style="text-align:center;">1</td><td class="data-td">Izin Usaha Pertambangan (IUP) Baru</td><td class="data-td">Faktor Tekanan Ekstraktif</td><td class="data-td" style="text-align:center;">Unit Izin</td><td class="data-td" style="text-align:center;">2014–2024</td><td class="data-td">Kementerian ESDM (Minerbaone)</td></tr>
-    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">2</td><td class="data-td">Luas Wilayah Konsesi Tambang Baru</td><td class="data-td">Faktor Tekanan Ekstraktif</td><td class="data-td" style="text-align:center;">Hektar (Ha)</td><td class="data-td" style="text-align:center;">2014–2024</td><td class="data-td">Kementerian ESDM (Minerbaone)</td></tr>
-    <tr><td class="data-td" style="text-align:center;">3</td><td class="data-td">Kapasitas Terpasang PLTU Captive</td><td class="data-td">Infrastruktur Energi Khusus</td><td class="data-td" style="text-align:center;">Megawatt (MW)</td><td class="data-td" style="text-align:center;">2014–2024</td><td class="data-td">Global Energy Monitor (GEM)</td></tr>
-    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">4</td><td class="data-td">Fasilitas Pengolahan & Pemurnian (Smelter)</td><td class="data-td">Fasilitas Industri Hilir</td><td class="data-td" style="text-align:center;">Unit Fasilitas</td><td class="data-td" style="text-align:center;">2014–2024</td><td class="data-td">Kementerian ESDM & Basis Data Industri</td></tr>
-    <tr><td class="data-td" style="text-align:center;">5</td><td class="data-td">Realisasi Investasi PMDN</td><td class="data-td">Arus Modal Domestik</td><td class="data-td" style="text-align:center;">Triliun Rupiah</td><td class="data-td" style="text-align:center;">2016–2024</td><td class="data-td">Kementerian Investasi / BKPM</td></tr>
-    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">6</td><td class="data-td">PDRB Menurut 17 Lapangan Usaha</td><td class="data-td">Struktur Ekonomi Makro</td><td class="data-td" style="text-align:center;">Triliun Rupiah</td><td class="data-td" style="text-align:center;">2016–2024</td><td class="data-td">Badan Pusat Statistik (BPS Provinsi se-Sulawesi)</td></tr>
-    <tr><td class="data-td" style="text-align:center;">7</td><td class="data-td">PDRB Kabupaten Sentra Tambang</td><td class="data-td">Struktur Ekonomi Daerah</td><td class="data-td" style="text-align:center;">Triliun Rupiah</td><td class="data-td" style="text-align:center;">2016–2024</td><td class="data-td">Badan Pusat Statistik (BPS Kabupaten se-Sulteng)</td></tr>
-    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">8</td><td class="data-td">Luas Kehilangan Hutan Komoditas</td><td class="data-td">Dampak Perubahan Tutupan Lahan</td><td class="data-td" style="text-align:center;">Hektar (Ha)</td><td class="data-td" style="text-align:center;">2014–2023</td><td class="data-td">Global Forest Watch (GFW / Univ. of Maryland)</td></tr>
-    <tr><td class="data-td" style="text-align:center;">9</td><td class="data-td">Simpul Dermaga & Terminal Khusus Ekspor</td><td class="data-td">Infrastruktur Rantai Pasok</td><td class="data-td" style="text-align:center;">Titik Koordinat & DWT</td><td class="data-td" style="text-align:center;">2014–2024</td><td class="data-td">KNKT Kemenhub, Perpres PSN, Laporan Korporasi</td></tr>
+    <tr><td class="data-td" style="text-align:center;">1</td><td class="data-td">Izin Usaha Pertambangan (IUP) Baru</td><td class="data-td">Faktor Tekanan Ekstraktif</td><td class="data-td" style="text-align:center;">Unit Izin</td><td class="data-td" style="text-align:center;">2014–2024</td><td class="data-td">Data Registry ESDM MODI (Minerbaone)</td></tr>
+    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">2</td><td class="data-td">Luas Wilayah Konsesi Tambang Baru</td><td class="data-td">Faktor Tekanan Ekstraktif</td><td class="data-td" style="text-align:center;">Hektar (Ha)</td><td class="data-td" style="text-align:center;">2014–2024</td><td class="data-td">Data Registry ESDM MODI (Minerbaone)</td></tr>
+    <tr><td class="data-td" style="text-align:center;">3</td><td class="data-td">Kapasitas Terpasang PLTU Captive</td><td class="data-td">Infrastruktur Energi Khusus</td><td class="data-td" style="text-align:center;">Megawatt (MW)</td><td class="data-td" style="text-align:center;">2014–2024</td><td class="data-td">NGO (Global Energy Monitor / GEM)</td></tr>
+    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">4</td><td class="data-td">Fasilitas Smelter Nikel</td><td class="data-td">Fasilitas Industri Hilir</td><td class="data-td" style="text-align:center;">Unit Fasilitas</td><td class="data-td" style="text-align:center;">2014–2024</td><td class="data-td">Database Smelter CGS & ESDM MODI</td></tr>
+    <tr><td class="data-td" style="text-align:center;">5</td><td class="data-td">Realisasi Investasi PMDN & Nikel</td><td class="data-td">Arus Modal Domestik</td><td class="data-td" style="text-align:center;">Triliun Rupiah</td><td class="data-td" style="text-align:center;">2016–2024</td><td class="data-td">API BPS & BKPM</td></tr>
+    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">6</td><td class="data-td">PDRB Provinsi (Ekstraktif vs Akar Rumput)</td><td class="data-td">Struktur Ekonomi Makro</td><td class="data-td" style="text-align:center;">Triliun Rupiah</td><td class="data-td" style="text-align:center;">2016–2024</td><td class="data-td">API BPS (Subject 52)</td></tr>
+    <tr><td class="data-td" style="text-align:center;">7</td><td class="data-td">PDRB Kabupaten Sentra Tambang</td><td class="data-td">Struktur Ekonomi Daerah</td><td class="data-td" style="text-align:center;">Triliun Rupiah</td><td class="data-td" style="text-align:center;">2016–2024</td><td class="data-td">API BPS (Subject 52)</td></tr>
+    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">8</td><td class="data-td">Pendapatan Asli Daerah (PAD) & Breakdown Pajak</td><td class="data-td">Kapasitas Fiskal Daerah</td><td class="data-td" style="text-align:center;">Triliun Rupiah</td><td class="data-td" style="text-align:center;">2016–2024</td><td class="data-td">API BPS</td></tr>
+    <tr><td class="data-td" style="text-align:center;">9</td><td class="data-td">Luas Total Deforestasi Alam & Komoditas</td><td class="data-td">Dampak Ekologis</td><td class="data-td" style="text-align:center;">Hektar (Ha)</td><td class="data-td" style="text-align:center;">2014–2023</td><td class="data-td">Global Forest Watch (GFW API)</td></tr>
+    <tr class="data-tr-even"><td class="data-td" style="text-align:center;">10</td><td class="data-td">Simpul Pelabuhan & Terminal Logistik</td><td class="data-td">Infrastruktur Rantai Pasok</td><td class="data-td" style="text-align:center;">Titik & DWT</td><td class="data-td" style="text-align:center;">2014–2024</td><td class="data-td">Laporan Publik (KNKT, Perpres PSN, Korporasi)</td></tr>
   </tbody>
 </table>
 
@@ -3288,15 +3289,16 @@ Emisi_CO2_Total = &sum;(Area_Loss_c * Faktor_Emisi_Biomassa_c)</p>
         "##### Tabel 1.8: Matriks Indikator dan Sumber Data Primer Resmi Bab 1",
         "| No | Nama Indikator | Kategori Analisis | Satuan Ukur | Cakupan Tahun | Institusi & Sumber Data Resmi |",
         "| :---: | :--- | :--- | :---: | :---: | :--- |",
-        "| 1 | Izin Usaha Pertambangan (IUP) Baru | Faktor Tekanan Ekstraktif | Unit Izin | 2014–2024 | Kementerian ESDM (Minerbaone) |",
-        "| 2 | Luas Wilayah Konsesi Tambang Baru | Faktor Tekanan Ekstraktif | Hektar (Ha) | 2014–2024 | Kementerian ESDM (Minerbaone) |",
-        "| 3 | Kapasitas Terpasang PLTU Captive | Infrastruktur Energi Khusus | Megawatt (MW) | 2014–2024 | Global Energy Monitor (GEM) |",
-        "| 4 | Fasilitas Pengolahan & Pemurnian (Smelter) | Fasilitas Industri Hilir | Unit Fasilitas | 2014–2024 | Kementerian ESDM & Studi Industri |",
-        "| 5 | Realisasi Investasi PMDN | Arus Modal Domestik | Triliun Rupiah | 2016–2024 | Kementerian Investasi / BKPM |",
-        "| 6 | PDRB Menurut 17 Lapangan Usaha | Struktur Ekonomi Makro | Triliun Rupiah | 2016–2024 | Badan Pusat Statistik (BPS Provinsi) |",
-        "| 7 | PDRB Kabupaten Sentra Tambang | Struktur Ekonomi Daerah | Triliun Rupiah | 2016–2024 | BPS Kabupaten se-Sulteng |",
-        "| 8 | Luas Kehilangan Hutan Komoditas | Dampak Tutupan Lahan | Hektar (Ha) | 2014–2023 | Global Forest Watch (GFW) |",
-        "| 9 | Simpul Dermaga & Terminal Khusus Ekspor | Infrastruktur Rantai Pasok | Titik Koordinat & DWT | 2014–2024 | KNKT, Perpres PSN, Lap. Terbuka |",
+        "| 1 | Izin Usaha Pertambangan (IUP) Baru | Faktor Tekanan Ekstraktif | Unit Izin | 2014–2024 | Data Registry ESDM MODI (Minerbaone) |",
+        "| 2 | Luas Wilayah Konsesi Tambang Baru | Faktor Tekanan Ekstraktif | Hektar (Ha) | 2014–2024 | Data Registry ESDM MODI (Minerbaone) |",
+        "| 3 | Kapasitas Terpasang PLTU Captive | Infrastruktur Energi Khusus | Megawatt (MW) | 2014–2024 | NGO (Global Energy Monitor / GEM) |",
+        "| 4 | Fasilitas Smelter Nikel | Fasilitas Industri Hilir | Unit Fasilitas | 2014–2024 | Database Smelter CGS & ESDM MODI |",
+        "| 5 | Realisasi Investasi PMDN & Nikel | Arus Modal Domestik | Triliun Rupiah | 2016–2024 | API BPS & BKPM |",
+        "| 6 | PDRB Provinsi (Ekstraktif vs Akar Rumput) | Struktur Ekonomi Makro | Triliun Rupiah | 2016–2024 | API BPS (Subject 52) |",
+        "| 7 | PDRB Kabupaten Sentra Tambang | Struktur Ekonomi Daerah | Triliun Rupiah | 2016–2024 | API BPS (Subject 52) |",
+        "| 8 | Pendapatan Asli Daerah (PAD) & Breakdown Pajak | Kapasitas Fiskal Daerah | Triliun Rupiah | 2016–2024 | API BPS |",
+        "| 9 | Luas Total Deforestasi Alam & Komoditas | Dampak Ekologis | Hektar (Ha) | 2014–2023 | Global Forest Watch (GFW API) |",
+        "| 10 | Simpul Pelabuhan & Terminal Logistik | Infrastruktur Rantai Pasok | Titik Koordinat & DWT | 2014–2024 | Laporan Publik (KNKT, Perpres PSN, Korporasi) |",
         "",
         "---",
         "",

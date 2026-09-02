@@ -671,9 +671,23 @@ Berdasarkan protokol validasi silang tersebut, profil komprehensif enam simpul p
 ---
 
 ## 1.6 Peta Jalur Distribusi Logistik Nikel Sulawesi
-#### A. Formulasi Matematis: Kurva Parametrik Alur Pelayaran
-Pemetaan alur pelayaran internasional dimodelkan menggunakan formulasi kurva parametrik lengkung (*Bézier Curve*) untuk merepresentasikan alur laut kepulauan dan rute maritim internasional secara realistis:
+#### A. Pengantar & Kerangka Narasi
+Metode analisis pada tahapan ini difokuskan pada **Pemetaan Kausalitas (Spasial)** untuk membedah asimetri penguasaan ruang antara wilayah hulu (origin: sumber ekstraksi di Sulawesi) dan hilir (destination: pusat industrialisasi luar negeri). Garis diplot menggunakan rute pelayaran untuk merepresentasikan jarak tempuh aktual kapal logistik di permukaan bumi.
 
+#### B. Alur Logika Metodologis (Flowchart Analisis Spasial)
+Rangkaian proses ekstraksi koordinat hingga visualisasi spasial direpresentasikan pada **Bagan Alur 1.6** berikut:
+
+##### Bagan Alur 1.6: Alur Logika Metodologis Pemetaan Jalur Logistik Maritim (Bézier Curve)
+```mermaid
+flowchart LR
+    A["Ekstraksi Koordinat<br/>Origin (Sulawesi)"] --> B["Penentuan Titik<br/>Tujuan (China/Jepang)"]
+    B --> C["Kalkulasi Kurva<br/>Parametrik (Bézier)"]
+    C --> D["Plotting Spasial<br/>(Plotly Scattergeo)"]
+    D --> E["Peta Jalur Distribusi<br/>Logistik Maritim"]
+
+```
+
+#### C. Formulasi Matematis: Kurva Parametrik Alur Pelayaran
 **Persamaan Formulasi Kurva Parametrik Alur Pelayaran Maritim:**
 ```text
 Kurva(t) = (1 - t)^2 * Titik_Asal + 2 * (1 - t) * t * Titik_Kontrol + t^2 * Titik_Tujuan
@@ -684,11 +698,15 @@ Kurva(t) = (1 - t)^2 * Titik_Asal + 2 * (1 - t) * t * Titik_Kontrol + t^2 * Titi
 - `Titik_Kontrol`: Titik koordinat jangkar pemandu kurva lengkung di perairan internasional.
 - `Titik_Tujuan`: Titik koordinat geografis pelabuhan bongkar di negara tujuan ekspor.
 
-#### B. Interpretasi Spasial Industri: Rantai Pasok Global
-Visualisasi jalur pelayaran ini mengonfirmasi temuan struktural pada sub-bab sebelumnya, di mana eksploitasi ekstraktif sepenuhnya berorientasi ekspor:
+#### D. Matriks Hasil Pemetaan Spasial
+Agregasi titik asal (Origin) dan tujuan akhir (Destination) di-render langsung ke dalam proyeksi spasial. Struktur data logistik yang menggerakkan pemetaan ini memetakan pelabuhan asal menuju pasar utama, yaitu **Tiongkok, Jepang, dan Korea Selatan**.
 
-1. **Infrastruktur Raksasa Penunjang Ekspor:** Keenam simpul pelabuhan melayani kapal dengan kapasitas hingga 50.000 DWT, memastikan arus bahan baku mentah (raw materials) terus mengalir ke pusat-pusat industri global, terutama Tiongkok.
-2. **Eksternalitas bagi Ekosistem Pesisir:** Pembangunan pelabuhan samudera di pesisir Morowali dan Konawe memicu fragmentasi ekosistem laut, perusakan terumbu karang, dan konflik ruang dengan nelayan tangkap tradisional.
+#### E. Interpretasi Spasial Industri (Anatomi Rantai Pasok)
+Peta rute logistik maritim mengilustrasikan alur distribusi produk olahan nikel dari kawasan industri di Sulawesi:
+
+1. **Orientasi Ekspor:** Kawasan industri utama yang berstatus Proyek Strategis Nasional (PSN) mengalirkan produk olahan ke sentra-sentra industri manufaktur di pasar internasional.
+2. **Integrasi Rantai Pasok:** Mayoritas rute pengapalan terhubung langsung dengan pelabuhan ekspor tujuan, yang mengindikasikan posisi kawasan pemurnian di Sulawesi sebagai pemasok bahan baku setengah jadi.
+3. **Dinamika Rute Maritim:** Peta rute mencerminkan diversifikasi pasar ekspor (Asia Timur) dan jaringan logistik kawasan.
 
 ---
 

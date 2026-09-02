@@ -488,27 +488,31 @@ def generate_all_bab2():
         "SIGNIFIKAN" if stats_21["p_val"] < 0.05 else "TIDAK SIGNIFIKAN",
     ]]
 
+    konf_rows_21 = [
+        ["Variabel Independen (X)", "Jumlah Smelter per Provinsi / Kepadatan Smelter (Fasilitas)"],
+        ["Variabel Dependen (Y)", "Indeks Kualitas Air (IKA)"],
+        ["Hipotesis Nol (H0)", "Kepadatan smelter tidak berhubungan dengan Indeks Kualitas Air."],
+        ["Hipotesis Alternatif (H1)", "Ada hubungan antara tingginya kepadatan smelter dengan kondisi Indeks Kualitas Air."],
+        ["Threshold Kategori", f"Nilai Median Data Panel (N={valid_cases})"],
+    ]
+
     mermaid_str_2_1 = """flowchart LR
     subgraph Data_Input["1. Input Data Dashboard"]
-        A["Data Smelter ESDM<br/><i>Provinsi, jumlah fasilitas, status operasional</i>"] --> C
-        B["Data IKA KLHK/BPS<br/><i>Provinsi, Tahun, Indeks Kualitas Air</i>"] --> C
-        D["Data Limbah B3 NGO & Sungai Tercemar<br/><i>Tailing, slag, kasus pencemaran</i>"] --> E
+        A["Data Smelter ESDM<br/><i>Provinsi & jumlah fasilitas</i>"]
+        B["Data IKA KLHK/BPS<br/><i>Provinsi, Tahun, Indeks Kualitas Air</i>"]
+        C["Data Limbah B3 & Sungai Tercemar<br/><i>Tailing, slag, laporan pencemaran</i>"]
     end
 
-    subgraph Panel_Processing["2. Pembentukan Panel 2.1"]
-        C["Agregasi Jumlah Smelter per Provinsi"] --> F["Merge dengan IKA Provinsi-Tahun"]
-        F --> G["Panel Data: Provinsi x Tahun"]
-        E --> H["Validasi spasial peta limbah dan sungai tercemar"]
+    subgraph Visual_Processing["2. Analisis Spasial & Trendline"]
+        A --> D["Agregasi jumlah smelter per provinsi"]
+        B --> E["Rata-rata IKA provinsi-tahun"]
+        C --> F["Validasi konteks limbah dan sungai tercemar"]
+        D --> G["Peta dan trendline tekanan kualitas air"]
+        E --> G
+        F --> G
     end
 
-    subgraph Statistical_Test["3. Crosstabulation & Trendline"]
-        G --> I["Binning Median<br/>Smelter Tinggi/Rendah; IKA Kritis/Baik"]
-        I --> J["Uji Chi-Square Pearson"]
-        J --> K["Odds Ratio<br/>Risiko IKA kritis pada kelompok smelter tinggi"]
-    end
-
-    H --> L["Pembacaan empiris kualitas air kawasan smelter"]
-    K --> L"""
+    G --> H["Pembacaan empiris kualitas air kawasan smelter"]"""
     mermaid_png_path_2_1 = str(tool_dir / "mermaid_flowchart_2_1.png")
     download_success_2_1 = download_mermaid_png(mermaid_str_2_1, mermaid_png_path_2_1)
 
@@ -678,11 +682,11 @@ def generate_all_bab2():
 
     add_h4(doc, "B. Alur Logika Metodologis Analisis Konsentrasi Smelter vs IKA")
     add_p(doc, [
-        ("Kerangka operasionalisasi sub-bab ini menggunakan pendekatan Analisis Spasial dan Uji Statistik Chi-Square (Crosstabulation) untuk mengukur dampak konsentrasi smelter terhadap penurunan kualitas air. Alur data dan pengujian diilustrasikan pada ", False, False),
+        ("Pendekatan statistik trendline untuk membaca hubungan konsentrasi smelter, IKA, dan konteks limbah/sungai tercemar diilustrasikan pada ", False, False),
         ("Bagan Alur 2.1", True, False),
-        (" berikut:", False, False),
+        (" berikut. Adapun untuk tahapan analisis inferensial (Uji Chi-Square), alur logikanya diringkas melalui tabel konfigurasi variabel di bawah gambar.", False, False),
     ])
-    add_caption(doc, "Bagan Alur 2.1: Alur Logika Metodologis Crosstabulation & Trendline Konsentrasi Smelter vs IKA")
+    add_caption(doc, "Bagan Alur 2.1: Alur Logika Analisis Trendline Konsentrasi Smelter vs IKA")
     if download_success_2_1:
         try:
             p_img = doc.add_paragraph()
@@ -695,6 +699,18 @@ def generate_all_bab2():
     else:
         p_err = doc.add_paragraph()
         run(p_err, "[Gambar Flowchart Gagal Diunduh, silakan periksa koneksi internet saat generate]", color=C_RED, pt=9)
+
+    p_spacer_21 = doc.add_paragraph()
+    p_spacer_21.paragraph_format.space_before = Pt(2)
+    p_spacer_21.paragraph_format.space_after = Pt(4)
+
+    add_p(doc, [
+        ("Sebagai opsi ringkas pengganti bagan alur crosstab yang terlalu panjang, konfigurasi variabel pengujian Chi-Square disajikan pada ", False, False),
+        ("Tabel 2.1a", True, False),
+        (" berikut:", False, False),
+    ])
+    add_caption(doc, "Tabel 2.1a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.1)")
+    add_table_1col(doc, ["Komponen Uji", "Definisi Variabel (Sub-bab 2.1)"], konf_rows_21, [4.5, 11.0], ["L", "L"])
 
     add_h4(doc, "C. Formulasi Matematis: Kalkulasi Konsentrasi Spasial & Uji Chi-Square")
     add_p(doc, [
@@ -931,6 +947,9 @@ h4 {{ color: #A5D6A7; }}
 <p>Pengoperasian <strong>{tot_smelter:,} fasilitas mega-smelter</strong> yang didukung oleh kapasitas <strong>{tot_kapasitas_pltu:,.0f} MW PLTU Captive</strong> meningkatkan intensitas emisi dan beban lingkungan di Pulau Sulawesi. Data menunjukkan konversi tutupan hutan mencapai <strong>{tot_deforestasi:,.0f} Hektar</strong>, estimasi timbulan limbah B3/tailing sebesar <strong>{tot_limbah_b3_juta:,.1f} Juta Ton</strong> per tahun, dan rata-rata IKA tahun {focus_end_year} sebesar <strong>{mean_ika_focus:.1f}</strong>.</p>
 <h4>B. Alur Logika Metodologis Analisis Konsentrasi Smelter vs IKA</h4>
 <div class="mermaid">{mermaid_str_2_1}</div>
+<p>Sebagai opsi ringkas pengganti bagan alur crosstab yang terlalu panjang, konfigurasi variabel pengujian Chi-Square disajikan pada <strong>Tabel 2.1a</strong> berikut:</p>
+<div class="table-caption">Tabel 2.1a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.1)</div>
+{html_table(["Komponen Uji", "Definisi Variabel (Sub-bab 2.1)"], konf_rows_21)}
 <h4>C. Formulasi Matematis: Kalkulasi Konsentrasi Spasial &amp; Uji Chi-Square</h4>
 <p>Parameterisasi konsentrasi spasial dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:</p>
 <div class="formula">Jumlah_Smelter_Provinsi = COUNT(Smelter_i) GROUP BY Provinsi</div>
@@ -1010,6 +1029,11 @@ h4 {{ color: #A5D6A7; }}
         "```mermaid",
         mermaid_str_2_1,
         "```",
+        "",
+        "Sebagai opsi ringkas pengganti bagan alur crosstab yang terlalu panjang, konfigurasi variabel pengujian Chi-Square disajikan pada **Tabel 2.1a** berikut:",
+        "",
+        "##### Tabel 2.1a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.1)",
+        markdown_table(["Komponen Uji", "Definisi Variabel (Sub-bab 2.1)"], konf_rows_21),
         "",
         "#### C. Formulasi Matematis: Kalkulasi Konsentrasi Spasial & Uji Chi-Square",
         "Parameterisasi konsentrasi spasial dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:",

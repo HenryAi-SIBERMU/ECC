@@ -30,25 +30,33 @@ h4 { color: #A5D6A7; }
 <h4>B. Alur Logika Metodologis Analisis Konsentrasi Smelter vs IKA</h4>
 <div class="mermaid">flowchart LR
     subgraph Data_Input["1. Input Data Dashboard"]
-        A["Data Smelter ESDM<br/><i>Provinsi, jumlah fasilitas, status operasional</i>"] --> C
-        B["Data IKA KLHK/BPS<br/><i>Provinsi, Tahun, Indeks Kualitas Air</i>"] --> C
-        D["Data Limbah B3 NGO & Sungai Tercemar<br/><i>Tailing, slag, kasus pencemaran</i>"] --> E
+        A["Data Smelter ESDM<br/><i>Provinsi & jumlah fasilitas</i>"]
+        B["Data IKA KLHK/BPS<br/><i>Provinsi, Tahun, Indeks Kualitas Air</i>"]
+        C["Data Limbah B3 & Sungai Tercemar<br/><i>Tailing, slag, laporan pencemaran</i>"]
     end
 
-    subgraph Panel_Processing["2. Pembentukan Panel 2.1"]
-        C["Agregasi Jumlah Smelter per Provinsi"] --> F["Merge dengan IKA Provinsi-Tahun"]
-        F --> G["Panel Data: Provinsi x Tahun"]
-        E --> H["Validasi spasial peta limbah dan sungai tercemar"]
+    subgraph Visual_Processing["2. Analisis Spasial & Trendline"]
+        A --> D["Agregasi jumlah smelter per provinsi"]
+        B --> E["Rata-rata IKA provinsi-tahun"]
+        C --> F["Validasi konteks limbah dan sungai tercemar"]
+        D --> G["Peta dan trendline tekanan kualitas air"]
+        E --> G
+        F --> G
     end
 
-    subgraph Statistical_Test["3. Crosstabulation & Trendline"]
-        G --> I["Binning Median<br/>Smelter Tinggi/Rendah; IKA Kritis/Baik"]
-        I --> J["Uji Chi-Square Pearson"]
-        J --> K["Odds Ratio<br/>Risiko IKA kritis pada kelompok smelter tinggi"]
-    end
-
-    H --> L["Pembacaan empiris kualitas air kawasan smelter"]
-    K --> L</div>
+    G --> H["Pembacaan empiris kualitas air kawasan smelter"]</div>
+<p>Sebagai opsi ringkas pengganti bagan alur crosstab yang terlalu panjang, konfigurasi variabel pengujian Chi-Square disajikan pada <strong>Tabel 2.1a</strong> berikut:</p>
+<div class="table-caption">Tabel 2.1a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.1)</div>
+<table>
+<thead><tr><th class="data-th">Komponen Uji</th><th class="data-th">Definisi Variabel (Sub-bab 2.1)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Variabel Independen (X)</td><td class="data-td">Jumlah Smelter per Provinsi / Kepadatan Smelter (Fasilitas)</td></tr>
+<tr class="data-tr-even"><td class="data-td">Variabel Dependen (Y)</td><td class="data-td">Indeks Kualitas Air (IKA)</td></tr>
+<tr><td class="data-td">Hipotesis Nol (H0)</td><td class="data-td">Kepadatan smelter tidak berhubungan dengan Indeks Kualitas Air.</td></tr>
+<tr class="data-tr-even"><td class="data-td">Hipotesis Alternatif (H1)</td><td class="data-td">Ada hubungan antara tingginya kepadatan smelter dengan kondisi Indeks Kualitas Air.</td></tr>
+<tr><td class="data-td">Threshold Kategori</td><td class="data-td">Nilai Median Data Panel (N=48)</td></tr>
+</tbody>
+</table>
 <h4>C. Formulasi Matematis: Kalkulasi Konsentrasi Spasial &amp; Uji Chi-Square</h4>
 <p>Parameterisasi konsentrasi spasial dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:</p>
 <div class="formula">Jumlah_Smelter_Provinsi = COUNT(Smelter_i) GROUP BY Provinsi</div>
