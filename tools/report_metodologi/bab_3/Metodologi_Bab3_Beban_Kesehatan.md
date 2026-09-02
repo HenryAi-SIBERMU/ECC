@@ -153,28 +153,26 @@ Rata-rata penderita ISPA/Pneumonia di Sentra Industri tercatat **5,353 kasus per
 Meskipun secara akumulatif kawasan Sentra Industri menanggung beban yang lebih berat, penelusuran data secara *time-series* (historis) dari 2014 hingga 2024 memberikan wawasan tambahan mengenai fluktuasi kasus penyakit dari tahun ke tahun. Hipotesis utama: **penurunan kualitas udara ambien (IKU) berbanding lurus dengan peningkatan insidensi penyakit pernapasan dan lingkungan**. Untuk mengujinya di tengah keterbatasan jumlah provinsi (N=6), uji Chi-Square menggunakan unit observasi **Provinsi-Tahun** (6 provinsi × 11 tahun panel) dengan klasifikasi berdasarkan median per-provinsi.
 
 #### B. Alur Logika Metodologis Time-Series Line Chart & Crosstabulation
-Kerangka penelusuran runtut waktu insiden penyakit beserta tahapan uji silang statistiknya diilustrasikan pada **Bagan Alur 3.3** berikut, dengan konfigurasi variabel pengujian dirinci pada Tabel 3.3a di bawah gambar.
+Pendekatan penelusuran runtut waktu insiden penyakit sejalan dengan akumulasi polusi tahunan diilustrasikan pada **Bagan Alur 3.3** berikut. Adapun untuk tahapan analisis inferensial (Uji Chi-Square), alur logikanya diringkas melalui tabel konfigurasi variabel di bawah gambar.
 
-##### Bagan Alur 3.3: Alur Logika Metodologis Time-Series Line Chart & Crosstabulation Beban Kesehatan
+##### Bagan Alur 3.3: Alur Logika Analisis Time-Series Beban Kesehatan
 ```mermaid
 flowchart LR
     subgraph Data_Input["1. Input Data Dashboard"]
-        A["Data Kesehatan Detail<br/><i>provinsi, tahun, indikator, nilai</i>"] --> C
-        B["Data IKU KLHK & IKA<br/><i>Provinsi, Tahun, indeks kualitas</i>"] --> C
-        P["Populasi Proxy BPS 2020<br/><i>normalisasi per kapita</i>"] --> D
+        A["Data Kesehatan Detail<br/><i>provinsi, tahun, indikator, nilai</i>"]
+        B["Data IKU KLHK & IKA<br/><i>Provinsi, Tahun, indeks kualitas</i>"]
+        P["Populasi Proxy BPS 2020<br/><i>denominator per kapita</i>"]
     end
-    subgraph Panel_Processing["2. Pembentukan Panel 3.3"]
-        C["Merge Panel Provinsi-Tahun<br/>ISPA, Diare, IKA, IKU"] --> D["Rasio Insiden per 10.000 Penduduk"]
-        C --> E["Segmentasi IKU Sentra vs Non-Sentra"]
+    subgraph Panel_Processing["2. Pembentukan Panel & Normalisasi"]
+        A --> C["Merge Panel Provinsi-Tahun<br/>ISPA, Diare, IKA, IKU"]
+        B --> C
+        P --> D["Rasio Insiden per 10.000 Penduduk"]
+        C --> D
     end
-    subgraph Statistical_Test["3. Time-Series & Crosstabulation"]
-        D --> F["Time-Series Line Chart<br/>per kapita & absolut 2014-2024"]
-        E --> G["Binning Median per-Provinsi<br/>Tinggi/Rendah"]
-        G --> H["Uji Chi-Square Pearson"]
-        H --> I["Odds Ratio<br/>Risiko insiden tinggi saat IKU rendah"]
+    subgraph Visual_Output["3. Time-Series Line Chart"]
+        D --> E["Tren per kapita & absolut 2014-2024<br/>Sentra (merah) vs Non-Sentra (biru)"]
+        E --> F["Pembacaan lintasan waktu beban kesehatan"]
     end
-    F --> J["Pembacaan lintasan waktu beban kesehatan"]
-    I --> J
 ```
 
 ##### Tabel 3.3a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 3.3)
@@ -288,3 +286,63 @@ R_d = Z̄_Tambang / Z̄_Kontrol
 
 #### E. Analisis Temuan Empiris: Anomali Zoonosis Level Tapak
 Pada penyakit terpilih (DBD), rata-rata kasus di wilayah Lingkar Tambang/Smelter Aktif mencapai **115.5** kasus per observasi, dibandingkan **88.5** kasus pada wilayah Non-Tambang/Agraris (Kontrol), dengan rasio komparatif **1.3x**. Pola ini memberikan sinyal bahwa perubahan ekologis di sekitar kawasan industri perlu dibaca sampai level tapak, karena data agregat provinsi dapat mengaburkan lonjakan penyakit pada kabupaten episentrum ekstraktif.
+
+## 3.5 Pemetaan Geospasial: Distribusi Spasial Beban Penyakit
+
+> **Sumber Data Resmi & Deskripsi Visualisasi:** Data Spasial: `data/raw/indonesia-prov.geojson`; Data Penyakit: `data/processed/sulawesi_kesehatan_detail_2014_2024.csv`. Visualisasi dashboard menggunakan *Choropleth & Bubble Map (GeoJSON)* untuk membandingkan beban ISPA dan Diare antara 2015 dan 2024.
+
+#### A. Pengantar & Kerangka Narasi
+Peta interaktif pada dashboard memproyeksikan secara spasial perbandingan absolut beban kesehatan (ISPA dan Diare) antara **Awal Ekstraksi (2015)** dan **Kondisi Terkini (2024)**. Sesuai *framework Before-After Analysis*, sub-bab ini membaca bagaimana distribusi beban penyakit berkembang seiring perluasan kawasan industri.
+
+#### B. Alur Logika Metodologis Choropleth & Bubble Map
+```mermaid
+flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Penyakit<br/><i>ISPA, Diare, Provinsi, Tahun</i>"]
+        B["GeoJSON Provinsi<br/><i>Polygon Sulawesi</i>"]
+    end
+    subgraph Before_After["2. Before-After Analysis"]
+        A --> C["Agregasi kasus 2015<br/>kondisi awal"]
+        A --> D["Agregasi kasus 2024<br/>kondisi terkini"]
+        B --> E["Pemetaan choropleth provinsi"]
+    end
+    subgraph Visual_Encoding["3. Choropleth & Bubble Map"]
+        C --> F["Warna poligon<br/>intensitas ISPA"]
+        D --> F
+        C --> G["Radius bubble<br/>skala kasus Diare"]
+        D --> G
+        F --> H["Komparasi spasial beban penyakit"]
+        G --> H
+    end
+```
+
+#### C. Formulasi Matematis: Radius Bubble dan Pertumbuhan Before-After
+```text
+r_{p,t} = √D_{p,t} / K
+G_p (%) = [ ( X_{p,2024} - X_{p,2015} ) / X_{p,2015} ] × 100
+Batas_Warna = min(ISPA_{2015,2024}) + q × [ max(ISPA_{2015,2024}) - min(ISPA_{2015,2024}) ]
+```
+
+#### D. Matriks Hasil Uji Empiris
+##### Tabel 3.10: Matriks Before-After ISPA dan Diare per Provinsi (2015 vs 2024)
+| Provinsi | Kategori | ISPA 2015 | ISPA 2024 | Growth ISPA | Diare 2015 | Diare 2024 | Growth Diare |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Gorontalo | Non-Sentra Industri | 4,226 | 2,843 | -32.7% | 14,086 | 13,040 | -7.4% |
+| Sulawesi Barat | Non-Sentra Industri | 1,532 | 1,381 | -9.9% | 14,723 | 16,785 | 14.0% |
+| Sulawesi Selatan | Non-Sentra Industri | 2,445 | 9,052 | 270.2% | 28,221 | 120,370 | 326.5% |
+| Sulawesi Tengah | Sentra Industri | 10,152 | 8,840 | -12.9% | 12,803 | 34,225 | 167.3% |
+| Sulawesi Tenggara | Sentra Industri | 3,262 | 1,647 | -49.5% | 115,878 | 24,613 | -78.8% |
+| Sulawesi Utara | Non-Sentra Industri | 753 | 243 | -67.7% | 59,614 | 11,532 | -80.7% |
+
+##### Tabel 3.11: Standarisasi Radius Bubble Kasus Diare
+| Provinsi | Diare 2015 | Radius 2015 | Diare 2024 | Radius 2024 |
+| :--- | :--- | :--- | :--- | :--- |
+| Gorontalo | 14,086 | 7.91 | 13,040 | 7.61 |
+| Sulawesi Barat | 14,723 | 8.09 | 16,785 | 8.64 |
+| Sulawesi Selatan | 28,221 | 11.20 | 120,370 | 23.13 |
+| Sulawesi Tengah | 12,803 | 7.54 | 34,225 | 12.33 |
+| Sulawesi Tenggara | 115,878 | 22.69 | 24,613 | 10.46 |
+| Sulawesi Utara | 59,614 | 16.28 | 11,532 | 7.16 |
+
+#### E. Analisis Temuan Empiris: Pergeseran Spasial Beban Penyakit
+Pada kondisi terkini 2024, beban ISPA tertinggi tercatat di **Sulawesi Selatan** dengan **9,052** kasus, sedangkan beban Diare tertinggi tercatat di **Sulawesi Selatan** dengan **120,370** kasus. Pemetaan Before-After menegaskan pentingnya membaca perubahan beban kesehatan secara spasial: warna choropleth menunjukkan intensitas ISPA, sedangkan radius bubble memperlihatkan skala Diare secara proporsional.
