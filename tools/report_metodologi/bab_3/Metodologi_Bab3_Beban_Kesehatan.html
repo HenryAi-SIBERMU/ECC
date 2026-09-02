@@ -337,5 +337,166 @@ h4 { color: #A5D6A7; }
 </table>
 <h4>E. Analisis Temuan Empiris</h4>
 <p>Pada kondisi terkini 2024, beban ISPA tertinggi tercatat di <strong>Sulawesi Selatan</strong> dengan <strong>9,052</strong> kasus, sedangkan beban Diare tertinggi tercatat di <strong>Sulawesi Selatan</strong> dengan <strong>120,370</strong> kasus.</p>
+
+<h2>3.6 Krisis Air Bersih: Tinjauan Makro Provinsi dan Bukti Uji Klinis Lingkar Tambang</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Data Uji Lab Independen: <code>data/processed/ika_ngo_cr6_gabungan.csv</code> (AEER & WALHI); Data IKA: <code>data/processed/sulawesi_ika_2016_2024.csv</code>; Data Diare: <code>data/processed/sulawesi_kesehatan_detail_2014_2024.csv</code>. Visualisasi dashboard menampilkan grafik batang kadar Cr6+ vs baku mutu, Scatter Plot regresi OLS IKA vs Diare, Bar Chart rata-rata per provinsi, serta pengujian Chi-Square tabulasi silang dengan binning median per-provinsi.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Sub-bab ini membedah krisis air bersih melalui <strong>dua tingkat observasi paralel</strong>: tinjauan mikro di kawasan padat industri menggunakan hasil uji fisik laboratorium independen, dan pemetaan tren makro di tingkat provinsi antara Indeks Kualitas Air (IKA) dan sebaran kasus Diare. IKA pemerintah merupakan nilai rata-rata seluruh DAS di satu provinsi sehingga tidak bisa mendeteksi pencemaran ekstrem di muara tambang (point source) — karena itu pemetaan makro didampingkan dengan bukti lab klinis (Kromium Heksavalen) di tingkat tapak.</p>
+<h4>B. Alur Logika Metodologis Pendekatan Komplementer Dua Lensa</h4>
+<p>Kerangka pendekatan komplementer dua lensa diilustrasikan pada <strong>Bagan Alur 3.6</strong> berikut. Adapun untuk tahapan analisis inferensial (Uji Chi-Square), alur logikanya diringkas melalui tabel konfigurasi variabel di bawah gambar.</p>
+<div class="table-caption">Bagan Alur 3.6: Alur Logika Analisis Dua Lensa Krisis Air Bersih</div>
+<div class="mermaid">flowchart LR
+    subgraph Lensa_Mikro["1. Lensa Mikro: Bukti Fisik Tapak"]
+        A["Data Lab Independen AEER & WALHI<br/><i>Titik sampling, konsentrasi Cr6+ (mg/L)</i>"] --> B["Benchmark Baku Mutu<br/>Biota Laut 0.005 mg/L; Budidaya 0.050 mg/L"]
+        B --> C["Identifikasi pelanggaran toksisitas absolut"]
+    end
+    subgraph Lensa_Makro["2. Lensa Makro: Panel Provinsi"]
+        D["Data IKA BPS/KLHK 2016-2024"] --> F["Merge Panel Provinsi-Tahun"]
+        E["Data Kasus Diare Kemenkes"] --> F
+        F --> G["Scatter Plot & Regresi OLS<br/>Bar Chart rata-rata provinsi"]
+    end
+    C --> H["Pembacaan komplementer krisis air bersih"]
+    G --> H</div>
+<div class="table-caption">Tabel 3.6a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 3.6)</div>
+<table>
+<thead><tr><th class="data-th">Komponen Uji</th><th class="data-th">Definisi Variabel (Sub-bab 3.6)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Variabel Independen (X)</td><td class="data-td">IKA Wilayah Sentra Tambang / IKA Wilayah Non-Sentra (Indeks Kualitas Air BPS/KLHK).</td></tr>
+<tr class="data-tr-even"><td class="data-td">Variabel Dependen (Y)</td><td class="data-td">Total Kasus Diare (kasus infeksi saluran pencernaan yang dilayani, Kemenkes).</td></tr>
+<tr><td class="data-td">Hipotesis Nol (H0)</td><td class="data-td">Rendahnya Indeks Kualitas Air (IKA) tidak berhubungan dengan tingginya kasus Diare.</td></tr>
+<tr class="data-tr-even"><td class="data-td">Hipotesis Alternatif (H1)</td><td class="data-td">Provinsi dengan IKA rendah berasosiasi signifikan dengan peningkatan kasus Diare.</td></tr>
+<tr><td class="data-td">Decision Rule (Alpha 5%)</td><td class="data-td">Jika P-Value < 0.05, maka Tolak H0 (terbukti signifikan bahwa pencemaran air meningkatkan kasus Diare).</td></tr>
+<tr class="data-tr-even"><td class="data-td">Threshold Kategori</td><td class="data-td">Median per-provinsi data panel Provinsi-Tahun (N=16 observasi valid skenario Sentra dari 6 provinsi × 8 tahun); binning 'Tinggi'/'Rendah' per provinsi.</td></tr>
+<tr><td class="data-td">Orientasi Odds Ratio</td><td class="data-td">Karena IKA indikator positif (semakin tinggi semakin baik), risiko dihitung saat IKA Rendah: OR = ( b × c ) / ( a × d ).</td></tr>
+</tbody>
+</table>
+<h4>C. Formulasi Matematis: Benchmark Toksisitas, Regresi OLS, dan Uji Crosstabulation</h4>
+<div class="formula">Rasio_Pelanggaran_s = Konsentrasi_Cr6_s / Baku_Mutu_Biota</div>
+<div class="formula">Diare_p,t = β1 × IKA_p,t + β0 + ε_p,t</div>
+<div class="formula">R² = 1 - ( SS_res / SS_tot )</div>
+<div class="formula">Kategori(x_p,t) = 'Tinggi' , jika x_p,t &ge; Median_Prov_p   |   'Rendah' , jika x_p,t &lt; Median_Prov_p</div>
+<div class="formula">&chi;&sup2; = Σ [ ( O_ij - E_ij )² / E_ij ]   ;   dengan E_ij = ( Total_Baris_i × Total_Kolom_j ) / N</div>
+<div class="formula">Odds_Ratio (OR) = ( b × c ) / ( a × d )   ;   untuk X berjenis indeks kualitas (IKA)</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 3.12: Hasil Uji Kadar Kromium Heksavalen (Cr6+) Laboratorium Independen di Lingkar Tambang</div>
+<table>
+<thead><tr><th class="data-th">Titik Sampling</th><th class="data-th">Lokasi</th><th class="data-th">Cr6+ (mg/L)</th><th class="data-th">Baku Mutu Biota (mg/L)</th><th class="data-th">Status</th><th class="data-th">Sumber</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Sungai Kecil dekat Laut (KIBA)</td><td class="data-td">Kawasan Industri Bantaeng</td><td class="data-td">1.000</td><td class="data-td">0.005</td><td class="data-td">MELAMPAUI BAKU MUTU</td><td class="data-td">WALHI (2024)</td></tr>
+<tr class="data-tr-even"><td class="data-td">Desa One Pute (Hulu)</td><td class="data-td">Desa One Pute</td><td class="data-td">0.100</td><td class="data-td">0.005</td><td class="data-td">MELAMPAUI BAKU MUTU</td><td class="data-td">WALHI (2023)</td></tr>
+<tr><td class="data-td">Desa Dampala</td><td class="data-td">Desa Dampala</td><td class="data-td">0.100</td><td class="data-td">0.005</td><td class="data-td">MELAMPAUI BAKU MUTU</td><td class="data-td">WALHI (2023)</td></tr>
+<tr class="data-tr-even"><td class="data-td">Saluran Smelter Morosi</td><td class="data-td">Kecamatan Morosi</td><td class="data-td">0.100</td><td class="data-td">0.005</td><td class="data-td">MELAMPAUI BAKU MUTU</td><td class="data-td">WALHI (2023)</td></tr>
+<tr><td class="data-td">Titik 3 (IMIP)</td><td class="data-td">Kawasan IMIP</td><td class="data-td">0.070</td><td class="data-td">0.005</td><td class="data-td">MELAMPAUI BAKU MUTU</td><td class="data-td">AEER (2022)</td></tr>
+<tr class="data-tr-even"><td class="data-td">Titik 2 (IMIP)</td><td class="data-td">Kawasan IMIP</td><td class="data-td">0.028</td><td class="data-td">0.005</td><td class="data-td">MELAMPAUI BAKU MUTU</td><td class="data-td">AEER (2022)</td></tr>
+<tr><td class="data-td">Titik 8 (IMIP)</td><td class="data-td">Kawasan IMIP</td><td class="data-td">0.023</td><td class="data-td">0.005</td><td class="data-td">MELAMPAUI BAKU MUTU</td><td class="data-td">AEER (2022)</td></tr>
+<tr class="data-tr-even"><td class="data-td">Titik 7 (IMIP)</td><td class="data-td">Kawasan IMIP</td><td class="data-td">0.021</td><td class="data-td">0.005</td><td class="data-td">MELAMPAUI BAKU MUTU</td><td class="data-td">AEER (2022)</td></tr>
+<tr><td class="data-td">Titik 4 (IMIP)</td><td class="data-td">Kawasan IMIP</td><td class="data-td">0.010</td><td class="data-td">0.005</td><td class="data-td">MELAMPAUI BAKU MUTU</td><td class="data-td">AEER (2022)</td></tr>
+<tr class="data-tr-even"><td class="data-td">Titik 5 (IMIP)</td><td class="data-td">Kawasan IMIP</td><td class="data-td">0.005</td><td class="data-td">0.005</td><td class="data-td">Di bawah baku mutu</td><td class="data-td">AEER (2022)</td></tr>
+<tr><td class="data-td">Titik 1 (IMIP)</td><td class="data-td">Kawasan IMIP</td><td class="data-td">0.004</td><td class="data-td">0.005</td><td class="data-td">Di bawah baku mutu</td><td class="data-td">AEER (2022)</td></tr>
+<tr class="data-tr-even"><td class="data-td">Titik 6 (IMIP)</td><td class="data-td">Kawasan IMIP</td><td class="data-td">0.004</td><td class="data-td">0.005</td><td class="data-td">Di bawah baku mutu</td><td class="data-td">AEER (2022)</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 3.13: Rata-rata IKA dan Kasus Diare per Provinsi (2016-2024)</div>
+<table>
+<thead><tr><th class="data-th">Provinsi</th><th class="data-th">Kategori Zona</th><th class="data-th">Rata-rata IKA</th><th class="data-th">Rata-rata Kasus Diare per Tahun</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Sulawesi Utara</td><td class="data-td">Non-Sentra Industri (Lainnya)</td><td class="data-td">51.0</td><td class="data-td">11,246</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Barat</td><td class="data-td">Non-Sentra Industri (Lainnya)</td><td class="data-td">54.1</td><td class="data-td">23,508</td></tr>
+<tr><td class="data-td">Gorontalo</td><td class="data-td">Non-Sentra Industri (Lainnya)</td><td class="data-td">55.4</td><td class="data-td">14,816</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Tenggara</td><td class="data-td">Sentra Industri (Sulteng & Sultra)</td><td class="data-td">56.3</td><td class="data-td">23,525</td></tr>
+<tr><td class="data-td">Sulawesi Selatan</td><td class="data-td">Non-Sentra Industri (Lainnya)</td><td class="data-td">56.9</td><td class="data-td">119,875</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Tengah</td><td class="data-td">Sentra Industri (Sulteng & Sultra)</td><td class="data-td">57.0</td><td class="data-td">33,201</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 3.14: Ringkasan Eksekutif Seluruh Skenario Crosstab IKA vs Kasus Diare Bab 3</div>
+<table>
+<thead><tr><th class="data-th">Variabel Independen (X)</th><th class="data-th">Variabel Dependen (Y)</th><th class="data-th">Chi-Square (&chi;&sup2;)</th><th class="data-th">P-Value</th><th class="data-th">Odds Ratio</th><th class="data-th">Kesimpulan</th></tr></thead>
+<tbody>
+<tr><td class="data-td">IKA Wilayah Sentra Tambang</td><td class="data-td">Total Kasus Diare</td><td class="data-td">0.250</td><td class="data-td">p = 0.617</td><td class="data-td">0.36</td><td class="data-td">TIDAK SIGNIFIKAN</td></tr>
+<tr class="data-tr-even"><td class="data-td">IKA Wilayah Non-Sentra</td><td class="data-td">Total Kasus Diare</td><td class="data-td">0.000</td><td class="data-td">p = 1.000</td><td class="data-td">1.00</td><td class="data-td">TIDAK SIGNIFIKAN</td></tr>
+</tbody>
+</table>
+<h4>E. Analisis Temuan Empiris</h4>
+<p><strong>1. Bukti Mikro Tapak:</strong> dari 12 titik sampel, <strong>9 titik (75%)</strong> melampaui batas aman toksisitas biota laut (0.005 mg/L); terparah di Sungai Kecil dekat Laut (KIBA) dengan 1.000 mg/L (200x ambang batas). <strong>2. Tren Makro Regresi:</strong> korelasi positif yang lemah (R² = 0.043, P = 0.1565, N=48) — kesimpulan pencemaran lebih valid ditarik dari uji klinis tapak. <strong>3. Pembedahan Realitas Ekologis:</strong> Hasil pengujian menunjukkan bahwa korelasi antara IKA dan Kasus Diare TIDAK SIGNIFIKAN secara statistik (P >= 0.05). Dalam kacamata ekonomi politik ekologi, ketidaksignifikanan ini mengindikasikan bahwa pencemaran air telah terjadi secara meluas dan merata di seluruh provinsi Sulawesi. Tantangan tata kelola air bersifat sistemik di berbagai zona wilayah.</p>
+
+<h2>3.7 Beban Limbah Beracun (B3): Eksternalitas Kesehatan yang Diabaikan</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Data Audit LSM & KLHK: <code>data/processed/sulawesi_limbah_b3.csv</code> (kompilasi AEER Report 2024, WALHI, JATAM, BPLH, dan kajian akademis independen). Visualisasi dashboard menampilkan Horizontal Bar Chart distribusi B3 per provinsi, Vertical Bar Chart komposisi jenis limbah, serta matriks fasilitas penghasil limbah B3 terbesar.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Sub-bab ini mengungkap timbulan <strong>Limbah Bahan Berbahaya dan Beracun (B3)</strong> dari operasi smelter dan tambang nikel: Slag & Tailing (Chromium, Nikel, Kadmium), Tailing HPAL (asam sulfat tinggi), Air Limbah Tambang, serta Residu & DSTP. Data kompilasi AEER, WALHI, JATAM membuktikan operasi smelter di Sulawesi menghasilkan lebih dari <strong>32.8 juta ton limbah B3 per tahun</strong> — angka yang kemungkinan besar underestimate karena banyak fasilitas tidak melaporkan timbulan secara transparan.</p>
+<h4>B. Alur Logika Metodologis Descriptive Statistics & Comparative Bar Chart</h4>
+<p>Kerangka agregasi statistik deskriptif diilustrasikan pada <strong>Bagan Alur 3.7</strong> berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan pemeringkatan dan profiling komposisi buangan absolut, dengan konfigurasi variabel dirinci pada Tabel 3.7a di bawah gambar.</p>
+<div class="table-caption">Bagan Alur 3.7: Alur Logika Analisis Deskriptif Beban Limbah B3</div>
+<div class="mermaid">flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Audit LSM & KLHK<br/><i>Provinsi, kawasan, jenis limbah, timbulan (Ton/Tahun)</i>"]
+    end
+    subgraph Descriptive_Processing["2. Agregasi Statistik Deskriptif"]
+        A --> B["Filter sumber mayor<br/>timbulan > 1.000 Ton/Tahun"]
+        B --> C["Agregasi per Provinsi"]
+        B --> D["Agregasi per Jenis Limbah"]
+        B --> E["Profiling fasilitas penghasil terbesar"]
+    end
+    subgraph Visual_Output["3. Komparasi Bar Chart"]
+        C --> F["Horizontal Bar<br/>distribusi B3 antar provinsi"]
+        D --> G["Vertical Bar<br/>komposisi jenis limbah"]
+        E --> H["Matriks fasilitas & sumber referensi"]
+    end
+    F --> I["Pembacaan beban ganda masyarakat terdampak"]
+    G --> I
+    H --> I</div>
+<div class="table-caption">Tabel 3.7a: Konfigurasi Variabel Analisis Deskriptif Limbah B3 (Sub-bab 3.7)</div>
+<table>
+<thead><tr><th class="data-th">Komponen Analisis</th><th class="data-th">Definisi Variabel (Sub-bab 3.7)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Variabel Independen (X)</td><td class="data-td">Kawasan/Perusahaan dan Jenis Limbah B3 (klasifikasi operasi dan karakter residu: Slag, Tailing HPAL, Air Asam Tambang).</td></tr>
+<tr class="data-tr-even"><td class="data-td">Variabel Dependen (Y)</td><td class="data-td">Estimasi Timbulan (Ton/Tahun): volume absolut buangan limbah B3 per fasilitas.</td></tr>
+<tr><td class="data-td">Metode Analisis</td><td class="data-td">Statistik deskriptif (pemeringkatan, profiling komposisi, audit defisit pengelolaan) dan komparasi Bar Chart; tanpa uji inferensial Chi-Square.</td></tr>
+<tr class="data-tr-even"><td class="data-td">Filter Sumber Mayor</td><td class="data-td">Hanya fasilitas dengan timbulan > 1,000 Ton/Tahun (6 dari 67 entri sumber).</td></tr>
+<tr><td class="data-td">Periode Observasi</td><td class="data-td">Kompilasi laporan 2020-2024 (AEER, WALHI, JATAM, BPLH, kajian akademis).</td></tr>
+<tr class="data-tr-even"><td class="data-td">Dataset & File</td><td class="data-td">data/processed/sulawesi_limbah_b3.csv</td></tr>
+</tbody>
+</table>
+<h4>C. Formulasi Matematis: Agregasi Timbulan dan Proporsi Komposisi</h4>
+<div class="formula">Total_B3_p = Σ ( Timbulan_i )   ;   untuk seluruh fasilitas mayor i pada provinsi p</div>
+<div class="formula">Total_B3_j = Σ ( Timbulan_i )   ;   untuk seluruh fasilitas mayor i dengan Jenis_Limbah j</div>
+<div class="formula">Proporsi_Jenis_j (%) = ( Total_B3_j / Total_B3_Keseluruhan ) × 100</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 3.15: Distribusi Timbulan Limbah B3 per Provinsi (Total 32.8 Juta Ton/Tahun)</div>
+<table>
+<thead><tr><th class="data-th">Provinsi</th><th class="data-th">Timbulan B3 (Ton/Tahun)</th><th class="data-th">Proporsi (%)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Sulawesi Tengah</td><td class="data-td">25,300,000</td><td class="data-td">77.1%</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Tenggara</td><td class="data-td">6,500,000</td><td class="data-td">19.8%</td></tr>
+<tr><td class="data-td">Sulawesi Selatan</td><td class="data-td">1,000,000</td><td class="data-td">3.0%</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Utara</td><td class="data-td">0</td><td class="data-td">0.0%</td></tr>
+<tr><td class="data-td">Gorontalo</td><td class="data-td">0</td><td class="data-td">0.0%</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Barat</td><td class="data-td">0</td><td class="data-td">0.0%</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 3.16: Komposisi Timbulan B3 Berdasarkan Jenis Limbah</div>
+<table>
+<thead><tr><th class="data-th">Jenis Limbah B3</th><th class="data-th">Timbulan (Ton/Tahun)</th><th class="data-th">Proporsi (%)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Tailing HPAL</td><td class="data-td">12,500,000</td><td class="data-td">38.1%</td></tr>
+<tr class="data-tr-even"><td class="data-td">Slag & Tailing HPAL</td><td class="data-td">12,000,000</td><td class="data-td">36.6%</td></tr>
+<tr><td class="data-td">Slag Feronikel</td><td class="data-td">6,500,000</td><td class="data-td">19.8%</td></tr>
+<tr class="data-tr-even"><td class="data-td">Slag EAF</td><td class="data-td">1,000,000</td><td class="data-td">3.0%</td></tr>
+<tr><td class="data-td">Air Limbah Tambang</td><td class="data-td">800,000</td><td class="data-td">2.4%</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 3.17: Fasilitas Penghasil Limbah B3 Terbesar di Sulawesi</div>
+<table>
+<thead><tr><th class="data-th">Provinsi</th><th class="data-th">Kawasan/Perusahaan</th><th class="data-th">Jenis Limbah</th><th class="data-th">Timbulan (Ton/Tahun)</th><th class="data-th">Sumber</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Sulawesi Tengah</td><td class="data-td">IMIP (Morowali)</td><td class="data-td">Slag & Tailing HPAL</td><td class="data-td">12,000,000</td><td class="data-td">Temuan KLH/BPLH & Laporan AEER (2024-2025)</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Tengah</td><td class="data-td">PT Huayue Nickel Cobalt (HNC) - Morowali</td><td class="data-td">Tailing HPAL</td><td class="data-td">7,000,000</td><td class="data-td">AEER HPAL Report (2024)</td></tr>
+<tr><td class="data-td">Sulawesi Tenggara</td><td class="data-td">VDNI (Konawe) & Sekitarnya</td><td class="data-td">Slag Feronikel</td><td class="data-td">6,500,000</td><td class="data-td">Data Produksi VDNI & Kajian WALHI</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Tengah</td><td class="data-td">PT QMB New Energy Materials - Morowali</td><td class="data-td">Tailing HPAL</td><td class="data-td">5,500,000</td><td class="data-td">AEER HPAL Report (2024)</td></tr>
+<tr><td class="data-td">Sulawesi Selatan</td><td class="data-td">Huadi Nickel Alloy (Bantaeng)</td><td class="data-td">Slag EAF</td><td class="data-td">1,000,000</td><td class="data-td">Kajian JATAM & Akademis (Unhas/BRIN)</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Tengah</td><td class="data-td">PT SCM (Sulawesi Cahaya Mineral)</td><td class="data-td">Air Limbah Tambang</td><td class="data-td">800,000</td><td class="data-td">AEER HPAL Report (2024)</td></tr>
+</tbody>
+</table>
+<h4>E. Analisis Temuan Empiris</h4>
+<p><strong>1. Skala Ancaman Regional:</strong> lebih dari 32.8 juta ton limbah B3 per tahun dari 6 fasilitas mayor; beban terbesar di <strong>Sulawesi Tengah</strong> (25.3 juta ton). <strong>2. Dominasi Slag & Tailing:</strong> 32.0 juta ton/tahun (97.6%) mengandung logam berat karsinogenik dan neurotoksik. <strong>3. Konsentrasi IMIP:</strong> 12.0 juta ton/tahun dari kompleks IMIP Morowali. <strong>4. Beban Ganda:</strong> masyarakat penyangga menanggung polusi aktif (emisi, debu, pencemaran air) sekaligus polusi pasif dari timbunan limbah beracun tanpa jaminan keamanan jangka panjang.</p>
 </body>
 </html>

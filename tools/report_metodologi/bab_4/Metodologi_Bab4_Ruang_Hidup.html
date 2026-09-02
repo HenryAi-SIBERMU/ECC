@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Laporan Metodologi Bab 4 - Ruang Hidup yang Terampas</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true, theme:'dark'});</script>
+<style>
+body { font-family: Arial, sans-serif; max-width: 920px; margin: 0 auto; padding: 32px; background: #0E1117; color: #D4D4D4; line-height: 1.65; }
+.hdr-sub { color: #43A047; font-size: 8.5pt; font-weight: 700; text-transform: uppercase; }
+.hdr-title { color: #81C784; font-size: 15pt; font-weight: 800; text-transform: uppercase; border-bottom: 2px solid #2E7D32; padding-bottom: 8px; }
+h2 { color: #81C784; text-transform: uppercase; border-bottom: 1px solid #2E7D32; }
+h4 { color: #A5D6A7; }
+.note-box { background: #132213; border-left: 4px solid #2E7D32; padding: 10px 14px; margin: 12px 0; }
+.formula { background: #0D1B0E; border: 1px solid #2E7D32; color: #A5D6A7; padding: 8px 12px; font-family: monospace; }
+.data-th { background: #1B5E20; color: white; padding: 6px; text-align: left; border: 1px solid #2E7D32; }
+.data-td { padding: 6px; border: 1px solid #243524; vertical-align: top; }
+.data-tr-even .data-td { background: #131B13; }
+.mermaid { background: #0D1610; border: 1px solid #2E7D32; padding: 12px; margin: 10px 0; }
+</style>
+</head>
+<body>
+<div class="hdr-sub">CELIOS - Center of Economic and Law Studies | Laporan Riset Metodologi D3TLH</div>
+<div class="hdr-title">BAB IV: Metodologi Analisis Ruang Hidup yang Terampas</div>
+<p>Dokumen laporan metodologi ini menyajikan kerangka ilmiah, prosedur pengolahan data, dan pembacaan empiris yang dioperasionalkan pada <strong>Bab 4: Ruang Hidup yang Terampas</strong>.</p>
+<h2>4.1 Tren Eskalasi Konflik Agraria Seiring Ekspansi Industri</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Catatan Konflik Agraria: <code>data/processed/sulawesi_konflik_agraria_tanahkita.csv</code>. Visualisasi dashboard menggunakan Analisis Tren Time-Series.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Ekspansi industri ekstraktif dan proyek strategis berimplikasi pada dinamika sosial dan penggunaan lahan masyarakat. Data empiris mencatat akumulasi <strong>95 kasus konflik agraria</strong>, dengan estimasi <strong>90,582 jiwa terdampak</strong>. Tiga sektor utama (Perkebunan, Kehutanan, dan Pertambangan) menyumbang <strong>82.1%</strong> dari keseluruhan catatan konflik regional.</p>
+<h4>B. Alur Logika Metodologis Analisis Tren Time-Series</h4>
+<div class="mermaid">flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Konflik Agraria KPA/Tanah Kita<br/><i>judul, deskripsi, lokasi, status, tahun</i>"]
+    end
+    subgraph Regional_Filter["2. Filter Regional & Klasifikasi Sektor"]
+        A --> B["Filter keyword Sulawesi, Maluku Utara,<br/>dan sentra nikel terkait"]
+        B --> C["Klasifikasi sektor pemicu<br/>Perkebunan, Kehutanan, Pertambangan, PSN, Pesisir"]
+    end
+    subgraph Trend_Analysis["3. Time-Series Trend Analysis"]
+        C --> D["Agregasi konflik tahunan sejak 1990"]
+        D --> E["Komparasi pra-2005 vs pasca-2005"]
+        D --> F["Identifikasi puncak insidensi konflik"]
+    end
+    E --> G["Pembacaan eskalasi konflik agraria"]
+    F --> G</div>
+<h4>C. Formulasi Matematis</h4>
+<div class="formula">K_{t,s} = Σ c_i, untuk setiap kasus i pada tahun t dan sektor s</div>
+<div class="formula">E (%) = ( K_Pasca / K_Pra ) × 100</div>
+<div class="formula">E = (82 / 13) × 100 = 630.8%</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 4.1: Tren Tahunan Konflik Agraria Regional (1990-2025)</div>
+<table>
+<thead><tr><th class="data-th">Tahun</th><th class="data-th">Jumlah Konflik</th></tr></thead>
+<tbody>
+<tr><td class="data-td">1996</td><td class="data-td">1</td></tr>
+<tr class="data-tr-even"><td class="data-td">1997</td><td class="data-td">1</td></tr>
+<tr><td class="data-td">1999</td><td class="data-td">3</td></tr>
+<tr class="data-tr-even"><td class="data-td">2000</td><td class="data-td">1</td></tr>
+<tr><td class="data-td">2001</td><td class="data-td">1</td></tr>
+<tr class="data-tr-even"><td class="data-td">2003</td><td class="data-td">2</td></tr>
+<tr><td class="data-td">2004</td><td class="data-td">1</td></tr>
+<tr class="data-tr-even"><td class="data-td">2007</td><td class="data-td">4</td></tr>
+<tr><td class="data-td">2008</td><td class="data-td">3</td></tr>
+<tr class="data-tr-even"><td class="data-td">2009</td><td class="data-td">3</td></tr>
+<tr><td class="data-td">2010</td><td class="data-td">3</td></tr>
+<tr class="data-tr-even"><td class="data-td">2011</td><td class="data-td">4</td></tr>
+<tr><td class="data-td">2012</td><td class="data-td">5</td></tr>
+<tr class="data-tr-even"><td class="data-td">2013</td><td class="data-td">5</td></tr>
+<tr><td class="data-td">2014</td><td class="data-td">5</td></tr>
+<tr class="data-tr-even"><td class="data-td">2015</td><td class="data-td">2</td></tr>
+<tr><td class="data-td">2016</td><td class="data-td">4</td></tr>
+<tr class="data-tr-even"><td class="data-td">2017</td><td class="data-td">21</td></tr>
+<tr><td class="data-td">2018</td><td class="data-td">3</td></tr>
+<tr class="data-tr-even"><td class="data-td">2019</td><td class="data-td">4</td></tr>
+<tr><td class="data-td">2021</td><td class="data-td">3</td></tr>
+<tr class="data-tr-even"><td class="data-td">2022</td><td class="data-td">9</td></tr>
+<tr><td class="data-td">2023</td><td class="data-td">4</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 4.2: Distribusi Konflik Agraria menurut Sektor Pemicu</div>
+<table>
+<thead><tr><th class="data-th">Sektor Pemicu</th><th class="data-th">Jumlah Konflik</th><th class="data-th">Proporsi</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Kehutanan</td><td class="data-td">30</td><td class="data-td">32.6%</td></tr>
+<tr class="data-tr-even"><td class="data-td">Perkebunan</td><td class="data-td">23</td><td class="data-td">25.0%</td></tr>
+<tr><td class="data-td">Pertambangan</td><td class="data-td">22</td><td class="data-td">23.9%</td></tr>
+<tr class="data-tr-even"><td class="data-td">Infrastruktur & PSN</td><td class="data-td">14</td><td class="data-td">15.2%</td></tr>
+<tr><td class="data-td">Pariwisata & Pesisir</td><td class="data-td">3</td><td class="data-td">3.3%</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 4.3: Komposisi Sektor pada Tahun Puncak Insidensi (2017)</div>
+<table>
+<thead><tr><th class="data-th">Tahun</th><th class="data-th">Sektor Pemicu</th><th class="data-th">Jumlah Konflik</th></tr></thead>
+<tbody>
+<tr><td class="data-td">2017</td><td class="data-td">Kehutanan</td><td class="data-td">13</td></tr>
+<tr class="data-tr-even"><td class="data-td">2017</td><td class="data-td">Perkebunan</td><td class="data-td">4</td></tr>
+<tr><td class="data-td">2017</td><td class="data-td">Pertambangan</td><td class="data-td">2</td></tr>
+<tr class="data-tr-even"><td class="data-td">2017</td><td class="data-td">Infrastruktur & PSN</td><td class="data-td">1</td></tr>
+<tr><td class="data-td">2017</td><td class="data-td">Pariwisata & Pesisir</td><td class="data-td">1</td></tr>
+</tbody>
+</table>
+<h4>E. Analisis Temuan Empiris</h4>
+<p>Grafik time-series pada dashboard memperlihatkan peningkatan insidensi konflik yang memuncak pada tahun <strong>2017</strong> dengan <strong>21 kasus konflik</strong>. Peningkatan insidensi konflik beririsan dengan dinamika perizinan kawasan.</p>
+</body>
+</html>

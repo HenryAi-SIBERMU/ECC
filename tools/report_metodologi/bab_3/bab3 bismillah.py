@@ -840,6 +840,88 @@ def generate_all_bab3():
     mermaid_png_path_3_6 = str(tool_dir / "mermaid_flowchart_3_6.png")
     download_success_3_6 = download_mermaid_png(mermaid_str_3_6, mermaid_png_path_3_6)
 
+    print("[1.98/4] Mengekstraksi dataset empiris Bab 3 sub-bab 3.7...")
+    df_b3_37 = pd.read_csv(data_dir / "sulawesi_limbah_b3.csv")
+    df_b3_37["Estimasi Timbulan (Ton/Tahun)"] = pd.to_numeric(df_b3_37["Estimasi Timbulan (Ton/Tahun)"], errors="coerce")
+    ambang_mayor_37 = 1000
+    df_b3_agg_37 = df_b3_37[df_b3_37["Estimasi Timbulan (Ton/Tahun)"] > ambang_mayor_37].copy()
+    total_b3_37 = df_b3_agg_37["Estimasi Timbulan (Ton/Tahun)"].sum()
+    n_sumber_raw_37 = len(df_b3_37)
+    n_sumber_mayor_37 = len(df_b3_agg_37)
+
+    semua_prov_37 = ["Sulawesi Selatan", "Sulawesi Tengah", "Sulawesi Tenggara", "Sulawesi Utara", "Gorontalo", "Sulawesi Barat"]
+    df_b3_prov_37 = df_b3_agg_37.groupby("Provinsi")["Estimasi Timbulan (Ton/Tahun)"].sum().reindex(semua_prov_37, fill_value=0).reset_index()
+    df_b3_prov_37 = df_b3_prov_37.sort_values("Estimasi Timbulan (Ton/Tahun)", ascending=False)
+    max_prov_37 = df_b3_prov_37.iloc[0]
+    sulteng_b3_37 = df_b3_prov_37.loc[df_b3_prov_37["Provinsi"] == "Sulawesi Tengah", "Estimasi Timbulan (Ton/Tahun)"].values[0]
+    sultra_b3_37 = df_b3_prov_37.loc[df_b3_prov_37["Provinsi"] == "Sulawesi Tenggara", "Estimasi Timbulan (Ton/Tahun)"].values[0]
+
+    prov_rows_37 = []
+    for _, row in df_b3_prov_37.iterrows():
+        pct_prov_37 = row["Estimasi Timbulan (Ton/Tahun)"] / total_b3_37 * 100 if total_b3_37 else 0
+        prov_rows_37.append([
+            row["Provinsi"],
+            f"{row['Estimasi Timbulan (Ton/Tahun)']:,.0f}",
+            f"{pct_prov_37:.1f}%",
+        ])
+
+    df_b3_type_37 = df_b3_agg_37.groupby("Jenis Limbah B3")["Estimasi Timbulan (Ton/Tahun)"].sum().reset_index()
+    df_b3_type_37 = df_b3_type_37.sort_values("Estimasi Timbulan (Ton/Tahun)", ascending=False)
+    type_rows_37 = []
+    for _, row in df_b3_type_37.iterrows():
+        type_rows_37.append([
+            row["Jenis Limbah B3"],
+            f"{row['Estimasi Timbulan (Ton/Tahun)']:,.0f}",
+            f"{row['Estimasi Timbulan (Ton/Tahun)'] / total_b3_37 * 100:.1f}%",
+        ])
+
+    mask_slag_tailing_37 = df_b3_type_37["Jenis Limbah B3"].str.contains("Slag", case=False, na=False) | df_b3_type_37["Jenis Limbah B3"].str.contains("Tailing", case=False, na=False)
+    slag_tailing_total_37 = df_b3_type_37[mask_slag_tailing_37]["Estimasi Timbulan (Ton/Tahun)"].sum()
+    slag_tailing_pct_37 = slag_tailing_total_37 / total_b3_37 * 100 if total_b3_37 else 0
+    imip_b3_37 = df_b3_agg_37[df_b3_agg_37["Kawasan/Perusahaan"].str.contains("IMIP", case=False, na=False)]["Estimasi Timbulan (Ton/Tahun)"].sum()
+
+    df_fasilitas_37 = df_b3_agg_37.sort_values("Estimasi Timbulan (Ton/Tahun)", ascending=False).head(10)
+    fasilitas_rows_37 = []
+    for _, row in df_fasilitas_37.iterrows():
+        fasilitas_rows_37.append([
+            row["Provinsi"],
+            row["Kawasan/Perusahaan"],
+            row["Jenis Limbah B3"],
+            f"{row['Estimasi Timbulan (Ton/Tahun)']:,.0f}",
+            row["Sumber Referensi"],
+        ])
+
+    konf_headers_37 = ["Komponen Analisis", "Definisi Variabel (Sub-bab 3.7)"]
+    konf_rows_37 = [
+        ["Variabel Independen (X)", "Kawasan/Perusahaan dan Jenis Limbah B3 (klasifikasi operasi dan karakter residu: Slag, Tailing HPAL, Air Asam Tambang)."],
+        ["Variabel Dependen (Y)", "Estimasi Timbulan (Ton/Tahun): volume absolut buangan limbah B3 per fasilitas."],
+        ["Metode Analisis", "Statistik deskriptif (pemeringkatan, profiling komposisi, audit defisit pengelolaan) dan komparasi Bar Chart; tanpa uji inferensial Chi-Square."],
+        ["Filter Sumber Mayor", f"Hanya fasilitas dengan timbulan > {ambang_mayor_37:,.0f} Ton/Tahun ({n_sumber_mayor_37} dari {n_sumber_raw_37} entri sumber)."],
+        ["Periode Observasi", "Kompilasi laporan 2020-2024 (AEER, WALHI, JATAM, BPLH, kajian akademis)."],
+        ["Dataset & File", "data/processed/sulawesi_limbah_b3.csv"],
+    ]
+
+    mermaid_str_3_7 = """flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Audit LSM & KLHK<br/><i>Provinsi, kawasan, jenis limbah, timbulan (Ton/Tahun)</i>"]
+    end
+    subgraph Descriptive_Processing["2. Agregasi Statistik Deskriptif"]
+        A --> B["Filter sumber mayor<br/>timbulan > 1.000 Ton/Tahun"]
+        B --> C["Agregasi per Provinsi"]
+        B --> D["Agregasi per Jenis Limbah"]
+        B --> E["Profiling fasilitas penghasil terbesar"]
+    end
+    subgraph Visual_Output["3. Komparasi Bar Chart"]
+        C --> F["Horizontal Bar<br/>distribusi B3 antar provinsi"]
+        D --> G["Vertical Bar<br/>komposisi jenis limbah"]
+        E --> H["Matriks fasilitas & sumber referensi"]
+    end
+    F --> I["Pembacaan beban ganda masyarakat terdampak"]
+    G --> I
+    H --> I"""
+    mermaid_png_path_3_7 = str(tool_dir / "mermaid_flowchart_3_7.png")
+    download_success_3_7 = download_mermaid_png(mermaid_str_3_7, mermaid_png_path_3_7)
+
     print("[2/4] Membangun DOCX Metodologi_Bab3_Beban_Kesehatan.docx...")
     doc = Document()
     sec = doc.sections[0]
@@ -1213,6 +1295,196 @@ def generate_all_bab3():
         ("Pemetaan Before-After menegaskan pentingnya membaca perubahan beban kesehatan secara spasial: warna choropleth menunjukkan intensitas ISPA, sedangkan radius bubble memperlihatkan skala Diare secara proporsional.", False, False),
     ])
 
+    add_h2(doc, "3.6 Krisis Air Bersih: Tinjauan Makro Provinsi dan Bukti Uji Klinis Lingkar Tambang")
+    add_note_box(doc, "Sumber Data Resmi & Deskripsi Visualisasi", "Data Uji Lab Independen: data/processed/ika_ngo_cr6_gabungan.csv (AEER & WALHI); Data IKA: data/processed/sulawesi_ika_2016_2024.csv; Data Diare: data/processed/sulawesi_kesehatan_detail_2014_2024.csv. Visualisasi dashboard menampilkan grafik batang kadar Kromium Heksavalen (Cr6+) vs baku mutu, Scatter Plot regresi OLS IKA vs Diare, Bar Chart rata-rata per provinsi, serta pengujian Chi-Square tabulasi silang (Crosstabulation) dengan binning median per-provinsi.")
+
+    add_h4(doc, "A. Pengantar & Kerangka Narasi")
+    add_p(doc, [
+        ("Sub-bab ini membedah krisis air bersih melalui dua tingkat observasi paralel. Pertama, tinjauan mikro spesifik di kawasan padat industri menggunakan hasil uji fisik laboratorium independen. Kedua, pemetaan tren makro di tingkat provinsi yang melihat distribusi Indeks Kualitas Air (IKA) terhadap sebaran kasus Diare.", False, False),
+    ])
+    add_p(doc, [
+        ("Pendekatan komplementer ini sangat penting untuk dilakukan. Indeks Kualitas Air (IKA) dari pemerintah merupakan nilai rata-rata dari seluruh DAS (Daerah Aliran Sungai) di satu provinsi, sehingga tidak bisa mendeteksi pencemaran ekstrem secara spesifik di muara tambang (point source). Oleh karena itu, pemetaan statistik makro didampingkan dengan bukti lab klinis (Kromium Heksavalen) di tingkat tapak untuk mendapatkan realita krisis secara utuh.", False, False),
+    ])
+
+    add_h4(doc, "B. Alur Logika Metodologis Pendekatan Komplementer Dua Lensa")
+    add_p(doc, [
+        ("Kerangka pendekatan komplementer dua lensa (bukti fisik tapak dan panel makro provinsi) diilustrasikan pada ", False, False),
+        ("Bagan Alur 3.6", True, False),
+        (" berikut. Adapun untuk tahapan analisis inferensial (Uji Chi-Square), alur logikanya diringkas melalui tabel konfigurasi variabel di bawah gambar.", False, False),
+    ])
+    add_caption(doc, "Bagan Alur 3.6: Alur Logika Analisis Dua Lensa Krisis Air Bersih")
+    if download_success_3_6:
+        try:
+            p_img = doc.add_paragraph()
+            p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p_img.add_run().add_picture(mermaid_png_path_3_6, width=Cm(15))
+        except Exception as exc:
+            print(f"[WARN] Gagal memasukkan gambar Mermaid 3.6 ke DOCX: {exc}")
+            p_err = doc.add_paragraph()
+            run(p_err, "[Gambar Flowchart Gagal Dimuat]", color=C_RED, pt=9)
+    else:
+        p_err = doc.add_paragraph()
+        run(p_err, "[Gambar Flowchart Gagal Diunduh, silakan periksa koneksi internet saat generate]", color=C_RED, pt=9)
+
+    add_caption(doc, "Tabel 3.6a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 3.6)")
+    add_table_1col(doc, konf_headers_36, konf_rows_36, [4.5, 11.0], ["L", "L"])
+
+    add_h4(doc, "C. Formulasi Matematis: Benchmark Toksisitas, Regresi OLS, dan Uji Crosstabulation")
+    add_p(doc, [("Kuantifikasi pelanggaran toksisitas, tren makro, dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:", False, False)])
+    add_formula(doc, "Persamaan Rasio Pelanggaran Toksisitas (Lensa Mikro)", "Rasio_Pelanggaran_s = Konsentrasi_Cr6_s / Baku_Mutu_Biota", [
+        ("Rasio_Pelanggaran_s", f"Kelipatan konsentrasi Kromium Heksavalen titik sampling s terhadap baku mutu biota laut; temuan terparah {lipat_36:.0f}x di {max_location_36}."),
+        ("Konsentrasi_Cr6_s", "Kadar Cr6+ (mg/L) hasil uji laboratorium independen pada titik sampling s."),
+        ("Baku_Mutu_Biota", f"Ambang batas aman toksisitas biota laut ({baku_mutu_biota_36} mg/L); baku mutu budidaya {baku_mutu_budidaya_36} mg/L."),
+    ])
+    add_formula(doc, "Persamaan Regresi Linear OLS IKA vs Diare (Lensa Makro)", "Diare_p,t = β1 × IKA_p,t + β0 + ε_p,t", [
+        ("Diare_p,t", "Jumlah kasus Diare pada provinsi p dan tahun t (variabel terikat)."),
+        ("IKA_p,t", "Indeks Kualitas Air pada provinsi p dan tahun t (variabel bebas)."),
+        ("β1", f"Koefisien kemiringan (slope) hasil estimasi: {slope_36:,.2f} kasus per poin IKA."),
+        ("β0", f"Konstanta (intercept) hasil estimasi: {intercept_36:,.2f}."),
+        ("ε_p,t", "Galat residu observasi."),
+    ])
+    add_formula(doc, "Persamaan Koefisien Determinasi", "R² = 1 - ( SS_res / SS_tot )", [
+        ("R²", f"Proporsi variasi kasus Diare yang dijelaskan oleh IKA pada panel N={n_obs_36}: R² = {r2_36:.3f} (P = {p_reg_36:.4f})."),
+        ("SS_res", "Jumlah kuadrat residu model regresi."),
+        ("SS_tot", "Jumlah kuadrat total variasi data."),
+    ])
+    add_formula(doc, "Persamaan Kategorisasi Median per-Provinsi (Fungsi Piecewise)", "Kategori(x_p,t) = 'Tinggi' , jika x_p,t ≥ Median_Prov_p   |   'Rendah' , jika x_p,t < Median_Prov_p", [
+        ("Kategori(x_p,t)", "Klasifikasi biner tiap observasi provinsi-tahun terhadap median provinsinya sendiri (menghilangkan bias besaran absolut antar wilayah)."),
+    ])
+    add_formula(doc, "Persamaan Uji Independensi Chi-Square Pearson (χ² Kontinjensi 2x2)", "χ² = Σ [ ( O_ij - E_ij )² / E_ij ]   ;   dengan E_ij = ( Total_Baris_i × Total_Kolom_j ) / N", [
+        ("χ²", f"Nilai statistik uji kecocokan Pearson untuk membuktikan ada tidaknya hubungan ketergantungan antara IKA dan kasus Diare pada panel Provinsi-Tahun (N={valid_cases_36} observasi valid skenario Sentra)."),
+        ("O_ij", "Frekuensi Observasi: jumlah kasus aktual pada sel baris i kolom j tabel kontinjensi 2x2."),
+        ("E_ij", "Frekuensi Harapan: jumlah kasus teoretis jika kedua variabel saling independen, E_ij = ( Total_Baris_i × Total_Kolom_j ) / N."),
+    ])
+    add_formula(doc, "Persamaan Rasio Keunggulan Risiko untuk Variabel Indeks (Risk Odds Ratio / OR)", "Odds_Ratio (OR) = ( b × c ) / ( a × d )   ;   untuk X berjenis indeks kualitas (IKA)", [
+        ("Odds_Ratio (OR)", "Ukuran kelipatan peluang munculnya kasus Diare Tinggi pada kelompok IKA Rendah; orientasi dibalik karena risiko terjadi saat indeks kualitas air menurun."),
+        ("a", "Jumlah observasi panel pada kelompok X Rendah dan Y Rendah."),
+        ("b", "Jumlah observasi panel pada kelompok X Rendah dan Y Tinggi."),
+        ("c", "Jumlah observasi panel pada kelompok X Tinggi dan Y Rendah."),
+        ("d", "Jumlah observasi panel pada kelompok X Tinggi dan Y Tinggi."),
+    ])
+
+    add_h4(doc, "D. Matriks Hasil Uji Empiris: Bukti Lab Tapak, Rata-rata Provinsi, dan Skenario Crosstab")
+    add_p(doc, [
+        (f"Hasil uji klinis laboratorium independen dari {total_samples_36} titik sampel di lingkar kawasan tambang disajikan pada ", False, False),
+        ("Tabel 3.12", True, False),
+        (" berikut:", False, False),
+    ])
+    add_caption(doc, "Tabel 3.12: Hasil Uji Kadar Kromium Heksavalen (Cr6+) Laboratorium Independen di Lingkar Tambang")
+    add_table_1col(doc, ["Titik Sampling", "Lokasi", "Cr6+ (mg/L)", "Baku Mutu Biota (mg/L)", "Status", "Sumber"], cr6_rows_36, [2.8, 2.6, 2.0, 2.6, 3.0, 2.6], ["L", "L", "C", "C", "C", "L"])
+
+    add_p(doc, [
+        (f"Rata-rata IKA dan kasus Diare per provinsi pada periode {tahun_min_36}-{tahun_max_36} (diurutkan dari IKA terburuk) disajikan pada ", False, False),
+        ("Tabel 3.13", True, False),
+        (" berikut:", False, False),
+    ])
+    add_caption(doc, f"Tabel 3.13: Rata-rata IKA dan Kasus Diare per Provinsi ({tahun_min_36}-{tahun_max_36})")
+    add_table_1col(doc, ["Provinsi", "Kategori Zona", "Rata-rata IKA", "Rata-rata Kasus Diare per Tahun"], bar_rows_36, [3.0, 4.6, 2.6, 4.0], ["L", "L", "C", "C"])
+
+    add_p(doc, [
+        ("Ringkasan hasil pengujian statistik (Chi-Square) untuk indikator IKA terhadap Kasus Diare pada panel data yang sama disajikan pada ", False, False),
+        ("Tabel 3.14", True, False),
+        (" berikut:", False, False),
+    ])
+    add_caption(doc, "Tabel 3.14: Ringkasan Eksekutif Seluruh Skenario Crosstab IKA vs Kasus Diare Bab 3")
+    add_table_1col(doc, ["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (χ²)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_36, [3.2, 3.0, 2.0, 2.0, 2.0, 2.6], ["L", "L", "C", "C", "C", "C"])
+
+    add_h4(doc, "E. Analisis Temuan Empiris: Realita Krisis Air Dua Lensa")
+    add_p(doc, [
+        ("1. ", True, False), ("Bukti Mikro Tapak: ", True, False),
+        (f"Berdasarkan hasil uji klinis dari {total_samples_36} titik sampel di lingkar kawasan tambang, teridentifikasi bahwa {exceed_biota_36} titik ({pct_exceed_36:.0f}%) melampaui batas aman toksisitas biota laut ({baku_mutu_biota_36} mg/L). Konsentrasi terparah ditemukan di {max_location_36} dengan kadar Kromium Heksavalen mencapai {max_cr6_36:.3f} mg/L, atau {lipat_36:.0f} kali lipat lebih tinggi dari ambang batas aman. Kromium Heksavalen (Cr6+) adalah logam berat karsinogenik beracun yang memicu iritasi kulit kronis, kerusakan pernapasan, pencernaan, dan potensi kanker di komunitas lingkar tambang.\n", False, False),
+        ("2. ", True, False), ("Tren Makro Regresi: ", True, False),
+        (f"Regresi linear OLS menunjukkan korelasi {corr_direction_36} yang {corr_strength_36} antara IKA dan kasus Diare (R² = {r2_36:.3f}, P = {p_reg_36:.4f}) pada {n_obs_36} observasi panel. Titik yang tersebar mengindikasikan data makro tidak menunjukkan korelasi kausalitas yang kuat pada level agregat provinsi, sehingga kesimpulan pencemaran air lebih valid ditarik dari hasil uji klinis mikroskopis di tapak.\n", False, False),
+        ("3. ", True, False), ("Pembedahan Realitas Ekologis (Crosstab): ", True, False),
+        (finding_36_crosstab, False, False),
+    ])
+
+    add_h2(doc, "3.7 Beban Limbah Beracun (B3): Eksternalitas Kesehatan yang Diabaikan")
+    add_note_box(doc, "Sumber Data Resmi & Deskripsi Visualisasi", "Data Audit LSM & KLHK: data/processed/sulawesi_limbah_b3.csv (kompilasi AEER Report 2024, WALHI, JATAM, BPLH, dan kajian akademis independen). Visualisasi dashboard menampilkan Horizontal Bar Chart distribusi B3 per provinsi, Vertical Bar Chart komposisi jenis limbah, serta matriks fasilitas penghasil limbah B3 terbesar.")
+
+    add_h4(doc, "A. Pengantar & Kerangka Narasi")
+    add_p(doc, [
+        ("Jika sub-bab sebelumnya telah membedah dampak pencemaran udara (IKU - ISPA) dan air (IKA - Diare), maka sub-bab ini mengungkap sumber polusi yang signifikan namun memerlukan perhatian khusus: timbulan Limbah Bahan Berbahaya dan Beracun (B3) dari operasi smelter dan tambang nikel. ", False, False),
+        ("Limbah B3 adalah residu hasil proses ekstraktif yang mengandung logam berat, senyawa kimia berbahaya, dan material berpotensi karsinogenik: Slag & Tailing (mengandung Chromium, Nikel, Kadmium), Tailing HPAL (bersifat asam dengan sulfat tinggi), Air Limbah Tambang, serta Residu & DSTP (Deep Sea Tailing Placement).", False, False),
+    ])
+    add_p(doc, [
+        (f"Data kompilasi dari laporan AEER, WALHI, JATAM, dan kajian akademis membuktikan bahwa operasi smelter di Sulawesi menghasilkan lebih dari {total_b3_37 / 1_000_000:.1f} juta ton limbah B3 per tahun. Klaim bahwa slag dapat 'dimanfaatkan untuk batako dan penahan abrasi' memerlukan kajian kritis, mengingat akumulasi material ini memerlukan pengelolaan dan pemantauan risiko kesehatan yang transparan. Angka resmi ini kemungkinan besar underestimate karena banyak fasilitas yang tidak melaporkan timbulan limbah secara transparan.", False, False),
+    ])
+
+    add_h4(doc, "B. Alur Logika Metodologis Descriptive Statistics & Comparative Bar Chart")
+    add_p(doc, [
+        ("Kerangka agregasi statistik deskriptif dan komparasi grafik batang untuk merunut skala penumpukan limbah B3 diilustrasikan pada ", False, False),
+        ("Bagan Alur 3.7", True, False),
+        (" berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan pemeringkatan dan profiling komposisi buangan absolut, dengan konfigurasi variabel dirinci pada Tabel 3.7a di bawah gambar.", False, False),
+    ])
+    add_caption(doc, "Bagan Alur 3.7: Alur Logika Analisis Deskriptif Beban Limbah B3")
+    if download_success_3_7:
+        try:
+            p_img = doc.add_paragraph()
+            p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p_img.add_run().add_picture(mermaid_png_path_3_7, width=Cm(15))
+        except Exception as exc:
+            print(f"[WARN] Gagal memasukkan gambar Mermaid 3.7 ke DOCX: {exc}")
+            p_err = doc.add_paragraph()
+            run(p_err, "[Gambar Flowchart Gagal Dimuat]", color=C_RED, pt=9)
+    else:
+        p_err = doc.add_paragraph()
+        run(p_err, "[Gambar Flowchart Gagal Diunduh, silakan periksa koneksi internet saat generate]", color=C_RED, pt=9)
+
+    add_caption(doc, "Tabel 3.7a: Konfigurasi Variabel Analisis Deskriptif Limbah B3 (Sub-bab 3.7)")
+    add_table_1col(doc, konf_headers_37, konf_rows_37, [4.5, 11.0], ["L", "L"])
+
+    add_h4(doc, "C. Formulasi Matematis: Agregasi Timbulan dan Proporsi Komposisi")
+    add_p(doc, [("Kuantifikasi skala timbulan limbah dari level fasilitas hingga level regional dihitung menggunakan sistem formulasi matematis berikut:", False, False)])
+    add_formula(doc, "Persamaan Agregasi Timbulan B3 per Provinsi", "Total_B3_p = Σ ( Timbulan_i )   ;   untuk seluruh fasilitas mayor i pada provinsi p", [
+        ("Total_B3_p", "Total timbulan limbah B3 (Ton/Tahun) seluruh fasilitas mayor di provinsi p."),
+        ("Timbulan_i", f"Estimasi timbulan (Ton/Tahun) fasilitas i; hanya fasilitas dengan timbulan > {ambang_mayor_37:,.0f} Ton/Tahun yang diagregasi."),
+    ])
+    add_formula(doc, "Persamaan Agregasi Timbulan B3 per Jenis Limbah", "Total_B3_j = Σ ( Timbulan_i )   ;   untuk seluruh fasilitas mayor i dengan Jenis_Limbah j", [
+        ("Total_B3_j", "Total timbulan limbah B3 (Ton/Tahun) untuk jenis limbah j (Slag, Tailing HPAL, Air Asam Tambang, dst.)."),
+    ])
+    add_formula(doc, "Persamaan Proporsi Komposisi Jenis Limbah", "Proporsi_Jenis_j (%) = ( Total_B3_j / Total_B3_Keseluruhan ) × 100", [
+        ("Proporsi_Jenis_j (%)", f"Kontribusi jenis limbah j terhadap total timbulan regional; Slag dan Tailing mendominasi {slag_tailing_pct_37:.1f}% dari total."),
+        ("Total_B3_Keseluruhan", f"Total seluruh timbulan B3 fasilitas mayor se-Sulawesi ({total_b3_37:,.0f} Ton/Tahun)."),
+    ])
+
+    add_h4(doc, "D. Matriks Hasil Uji Empiris: Distribusi Spasial, Komposisi, dan Fasilitas Penghasil")
+    add_p(doc, [
+        ("Distribusi beban limbah B3 antar provinsi disajikan pada ", False, False),
+        ("Tabel 3.15", True, False),
+        (" berikut:", False, False),
+    ])
+    add_caption(doc, f"Tabel 3.15: Distribusi Timbulan Limbah B3 per Provinsi (Total {total_b3_37 / 1_000_000:.1f} Juta Ton/Tahun)")
+    add_table_1col(doc, ["Provinsi", "Timbulan B3 (Ton/Tahun)", "Proporsi (%)"], prov_rows_37, [4.5, 4.5, 3.0], ["L", "C", "C"])
+
+    add_p(doc, [
+        ("Komposisi timbulan berdasarkan jenis limbah B3 disajikan pada ", False, False),
+        ("Tabel 3.16", True, False),
+        (" berikut:", False, False),
+    ])
+    add_caption(doc, "Tabel 3.16: Komposisi Timbulan B3 Berdasarkan Jenis Limbah")
+    add_table_1col(doc, ["Jenis Limbah B3", "Timbulan (Ton/Tahun)", "Proporsi (%)"], type_rows_37, [5.5, 4.0, 3.0], ["L", "C", "C"])
+
+    add_p(doc, [
+        (f"Profil {n_sumber_mayor_37} fasilitas penghasil limbah B3 terbesar beserta sumber referensinya disajikan pada ", False, False),
+        ("Tabel 3.17", True, False),
+        (" berikut:", False, False),
+    ])
+    add_caption(doc, "Tabel 3.17: Fasilitas Penghasil Limbah B3 Terbesar di Sulawesi")
+    add_table_1col(doc, ["Provinsi", "Kawasan/Perusahaan", "Jenis Limbah", "Timbulan (Ton/Tahun)", "Sumber"], fasilitas_rows_37, [2.6, 3.6, 3.0, 2.8, 3.4], ["L", "L", "L", "C", "L"])
+
+    add_h4(doc, "E. Analisis Temuan Empiris: Beban Ganda Masyarakat Terdampak")
+    add_p(doc, [
+        ("1. ", True, False), ("Skala Ancaman Regional: ", True, False),
+        (f"Industri nikel di Sulawesi menghasilkan lebih dari {total_b3_37 / 1_000_000:.1f} juta ton limbah B3 per tahun dari {n_sumber_mayor_37} fasilitas mayor. Provinsi {max_prov_37['Provinsi']} menanggung beban terbesar dengan {max_prov_37['Estimasi Timbulan (Ton/Tahun)'] / 1_000_000:.1f} juta ton per tahun, disusul Sulawesi Tenggara ({sultra_b3_37 / 1_000_000:.1f} juta ton).\n", False, False),
+        ("2. ", True, False), ("Dominasi Slag & Tailing: ", True, False),
+        (f"Slag dan Tailing mendominasi timbulan dengan total {slag_tailing_total_37 / 1_000_000:.1f} juta ton/tahun ({slag_tailing_pct_37:.1f}% dari total). Material ini mengandung logam berat Chromium, Nikel, Kadmium, dan Arsenik yang bersifat karsinogenik dan neurotoksik.\n", False, False),
+        ("3. ", True, False), ("Konsentrasi di Kompleks IMIP: ", True, False),
+        (f"Kompleks IMIP di Morowali sendiri menghasilkan {imip_b3_37 / 1_000_000:.1f} juta ton limbah B3/tahun, menegaskan pentingnya evaluasi independen atas dampak lingkungan dan kesehatan dari ekspansi industri nikel.\n", False, False),
+        ("4. ", True, False), ("Beban Ganda (Double Burden): ", True, False),
+        (f"Masyarakat di zona penyangga smelter menanggung beban polusi aktif (paparan harian emisi SO2, debu PM2.5, dan pencemaran air) sekaligus beban polusi pasif: hidup berdampingan dengan timbunan {total_b3_37 / 1_000_000:.1f} juta ton limbah beracun yang terakumulasi setiap tahun tanpa jaminan keamanan jangka panjang. Pengendaliannya memerlukan kajian risiko kesehatan independen, sistem monitoring limbah B3 yang transparan, dan skema kompensasi yang adil bagi masyarakat terdampak.", False, False),
+    ])
+
     docx_path = tool_dir / "Metodologi_Bab3_Beban_Kesehatan.docx"
     doc.save(str(docx_path))
     print(f"  [OK] Tersimpan: {docx_path}")
@@ -1350,6 +1622,57 @@ h4 {{ color: #A5D6A7; }}
 {html_table(["Provinsi", "Diare 2015", "Radius 2015", "Diare 2024", "Radius 2024"], radius_rows_35)}
 <h4>E. Analisis Temuan Empiris</h4>
 <p>Pada kondisi terkini 2024, beban ISPA tertinggi tercatat di <strong>{top_ispa_2024_35['provinsi']}</strong> dengan <strong>{top_ispa_2024_35['Kasus ISPA/Pneumonia_2024']:,.0f}</strong> kasus, sedangkan beban Diare tertinggi tercatat di <strong>{top_diare_2024_35['provinsi']}</strong> dengan <strong>{top_diare_2024_35['Kasus Diare Dilayani_2024']:,.0f}</strong> kasus.</p>
+
+<h2>3.6 Krisis Air Bersih: Tinjauan Makro Provinsi dan Bukti Uji Klinis Lingkar Tambang</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Data Uji Lab Independen: <code>data/processed/ika_ngo_cr6_gabungan.csv</code> (AEER & WALHI); Data IKA: <code>data/processed/sulawesi_ika_2016_2024.csv</code>; Data Diare: <code>data/processed/sulawesi_kesehatan_detail_2014_2024.csv</code>. Visualisasi dashboard menampilkan grafik batang kadar Cr6+ vs baku mutu, Scatter Plot regresi OLS IKA vs Diare, Bar Chart rata-rata per provinsi, serta pengujian Chi-Square tabulasi silang dengan binning median per-provinsi.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Sub-bab ini membedah krisis air bersih melalui <strong>dua tingkat observasi paralel</strong>: tinjauan mikro di kawasan padat industri menggunakan hasil uji fisik laboratorium independen, dan pemetaan tren makro di tingkat provinsi antara Indeks Kualitas Air (IKA) dan sebaran kasus Diare. IKA pemerintah merupakan nilai rata-rata seluruh DAS di satu provinsi sehingga tidak bisa mendeteksi pencemaran ekstrem di muara tambang (point source) — karena itu pemetaan makro didampingkan dengan bukti lab klinis (Kromium Heksavalen) di tingkat tapak.</p>
+<h4>B. Alur Logika Metodologis Pendekatan Komplementer Dua Lensa</h4>
+<p>Kerangka pendekatan komplementer dua lensa diilustrasikan pada <strong>Bagan Alur 3.6</strong> berikut. Adapun untuk tahapan analisis inferensial (Uji Chi-Square), alur logikanya diringkas melalui tabel konfigurasi variabel di bawah gambar.</p>
+<div class="table-caption">Bagan Alur 3.6: Alur Logika Analisis Dua Lensa Krisis Air Bersih</div>
+<div class="mermaid">{mermaid_str_3_6}</div>
+<div class="table-caption">Tabel 3.6a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 3.6)</div>
+{html_table(konf_headers_36, konf_rows_36)}
+<h4>C. Formulasi Matematis: Benchmark Toksisitas, Regresi OLS, dan Uji Crosstabulation</h4>
+<div class="formula">Rasio_Pelanggaran_s = Konsentrasi_Cr6_s / Baku_Mutu_Biota</div>
+<div class="formula">Diare_p,t = β1 × IKA_p,t + β0 + ε_p,t</div>
+<div class="formula">R² = 1 - ( SS_res / SS_tot )</div>
+<div class="formula">Kategori(x_p,t) = 'Tinggi' , jika x_p,t &ge; Median_Prov_p   |   'Rendah' , jika x_p,t &lt; Median_Prov_p</div>
+<div class="formula">&chi;&sup2; = Σ [ ( O_ij - E_ij )² / E_ij ]   ;   dengan E_ij = ( Total_Baris_i × Total_Kolom_j ) / N</div>
+<div class="formula">Odds_Ratio (OR) = ( b × c ) / ( a × d )   ;   untuk X berjenis indeks kualitas (IKA)</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 3.12: Hasil Uji Kadar Kromium Heksavalen (Cr6+) Laboratorium Independen di Lingkar Tambang</div>
+{html_table(["Titik Sampling", "Lokasi", "Cr6+ (mg/L)", "Baku Mutu Biota (mg/L)", "Status", "Sumber"], cr6_rows_36)}
+<div class="table-caption">Tabel 3.13: Rata-rata IKA dan Kasus Diare per Provinsi ({tahun_min_36}-{tahun_max_36})</div>
+{html_table(["Provinsi", "Kategori Zona", "Rata-rata IKA", "Rata-rata Kasus Diare per Tahun"], bar_rows_36)}
+<div class="table-caption">Tabel 3.14: Ringkasan Eksekutif Seluruh Skenario Crosstab IKA vs Kasus Diare Bab 3</div>
+{html_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (&chi;&sup2;)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_36)}
+<h4>E. Analisis Temuan Empiris</h4>
+<p><strong>1. Bukti Mikro Tapak:</strong> dari {total_samples_36} titik sampel, <strong>{exceed_biota_36} titik ({pct_exceed_36:.0f}%)</strong> melampaui batas aman toksisitas biota laut ({baku_mutu_biota_36} mg/L); terparah di {max_location_36} dengan {max_cr6_36:.3f} mg/L ({lipat_36:.0f}x ambang batas). <strong>2. Tren Makro Regresi:</strong> korelasi {corr_direction_36} yang {corr_strength_36} (R² = {r2_36:.3f}, P = {p_reg_36:.4f}, N={n_obs_36}) — kesimpulan pencemaran lebih valid ditarik dari uji klinis tapak. <strong>3. Pembedahan Realitas Ekologis:</strong> {finding_36_crosstab}</p>
+
+<h2>3.7 Beban Limbah Beracun (B3): Eksternalitas Kesehatan yang Diabaikan</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Data Audit LSM & KLHK: <code>data/processed/sulawesi_limbah_b3.csv</code> (kompilasi AEER Report 2024, WALHI, JATAM, BPLH, dan kajian akademis independen). Visualisasi dashboard menampilkan Horizontal Bar Chart distribusi B3 per provinsi, Vertical Bar Chart komposisi jenis limbah, serta matriks fasilitas penghasil limbah B3 terbesar.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Sub-bab ini mengungkap timbulan <strong>Limbah Bahan Berbahaya dan Beracun (B3)</strong> dari operasi smelter dan tambang nikel: Slag & Tailing (Chromium, Nikel, Kadmium), Tailing HPAL (asam sulfat tinggi), Air Limbah Tambang, serta Residu & DSTP. Data kompilasi AEER, WALHI, JATAM membuktikan operasi smelter di Sulawesi menghasilkan lebih dari <strong>{total_b3_37 / 1_000_000:.1f} juta ton limbah B3 per tahun</strong> — angka yang kemungkinan besar underestimate karena banyak fasilitas tidak melaporkan timbulan secara transparan.</p>
+<h4>B. Alur Logika Metodologis Descriptive Statistics & Comparative Bar Chart</h4>
+<p>Kerangka agregasi statistik deskriptif diilustrasikan pada <strong>Bagan Alur 3.7</strong> berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan pemeringkatan dan profiling komposisi buangan absolut, dengan konfigurasi variabel dirinci pada Tabel 3.7a di bawah gambar.</p>
+<div class="table-caption">Bagan Alur 3.7: Alur Logika Analisis Deskriptif Beban Limbah B3</div>
+<div class="mermaid">{mermaid_str_3_7}</div>
+<div class="table-caption">Tabel 3.7a: Konfigurasi Variabel Analisis Deskriptif Limbah B3 (Sub-bab 3.7)</div>
+{html_table(konf_headers_37, konf_rows_37)}
+<h4>C. Formulasi Matematis: Agregasi Timbulan dan Proporsi Komposisi</h4>
+<div class="formula">Total_B3_p = Σ ( Timbulan_i )   ;   untuk seluruh fasilitas mayor i pada provinsi p</div>
+<div class="formula">Total_B3_j = Σ ( Timbulan_i )   ;   untuk seluruh fasilitas mayor i dengan Jenis_Limbah j</div>
+<div class="formula">Proporsi_Jenis_j (%) = ( Total_B3_j / Total_B3_Keseluruhan ) × 100</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 3.15: Distribusi Timbulan Limbah B3 per Provinsi (Total {total_b3_37 / 1_000_000:.1f} Juta Ton/Tahun)</div>
+{html_table(["Provinsi", "Timbulan B3 (Ton/Tahun)", "Proporsi (%)"], prov_rows_37)}
+<div class="table-caption">Tabel 3.16: Komposisi Timbulan B3 Berdasarkan Jenis Limbah</div>
+{html_table(["Jenis Limbah B3", "Timbulan (Ton/Tahun)", "Proporsi (%)"], type_rows_37)}
+<div class="table-caption">Tabel 3.17: Fasilitas Penghasil Limbah B3 Terbesar di Sulawesi</div>
+{html_table(["Provinsi", "Kawasan/Perusahaan", "Jenis Limbah", "Timbulan (Ton/Tahun)", "Sumber"], fasilitas_rows_37)}
+<h4>E. Analisis Temuan Empiris</h4>
+<p><strong>1. Skala Ancaman Regional:</strong> lebih dari {total_b3_37 / 1_000_000:.1f} juta ton limbah B3 per tahun dari {n_sumber_mayor_37} fasilitas mayor; beban terbesar di <strong>{max_prov_37['Provinsi']}</strong> ({max_prov_37['Estimasi Timbulan (Ton/Tahun)'] / 1_000_000:.1f} juta ton). <strong>2. Dominasi Slag & Tailing:</strong> {slag_tailing_total_37 / 1_000_000:.1f} juta ton/tahun ({slag_tailing_pct_37:.1f}%) mengandung logam berat karsinogenik dan neurotoksik. <strong>3. Konsentrasi IMIP:</strong> {imip_b3_37 / 1_000_000:.1f} juta ton/tahun dari kompleks IMIP Morowali. <strong>4. Beban Ganda:</strong> masyarakat penyangga menanggung polusi aktif (emisi, debu, pencemaran air) sekaligus polusi pasif dari timbunan limbah beracun tanpa jaminan keamanan jangka panjang.</p>
 </body>
 </html>
 """
@@ -1542,6 +1865,94 @@ h4 {{ color: #A5D6A7; }}
         "",
         "#### E. Analisis Temuan Empiris: Pergeseran Spasial Beban Penyakit",
         f"Pada kondisi terkini 2024, beban ISPA tertinggi tercatat di **{top_ispa_2024_35['provinsi']}** dengan **{top_ispa_2024_35['Kasus ISPA/Pneumonia_2024']:,.0f}** kasus, sedangkan beban Diare tertinggi tercatat di **{top_diare_2024_35['provinsi']}** dengan **{top_diare_2024_35['Kasus Diare Dilayani_2024']:,.0f}** kasus. Pemetaan Before-After menegaskan pentingnya membaca perubahan beban kesehatan secara spasial: warna choropleth menunjukkan intensitas ISPA, sedangkan radius bubble memperlihatkan skala Diare secara proporsional.",
+        "",
+        "## 3.6 Krisis Air Bersih: Tinjauan Makro Provinsi dan Bukti Uji Klinis Lingkar Tambang",
+        "",
+        "> **Sumber Data Resmi & Deskripsi Visualisasi:** Data Uji Lab Independen: `data/processed/ika_ngo_cr6_gabungan.csv` (AEER & WALHI); Data IKA: `data/processed/sulawesi_ika_2016_2024.csv`; Data Diare: `data/processed/sulawesi_kesehatan_detail_2014_2024.csv`. Visualisasi dashboard menampilkan grafik batang kadar Cr6+ vs baku mutu, Scatter Plot regresi OLS IKA vs Diare, Bar Chart rata-rata per provinsi, serta pengujian Chi-Square tabulasi silang dengan binning median per-provinsi.",
+        "",
+        "#### A. Pengantar & Kerangka Narasi",
+        "Sub-bab ini membedah krisis air bersih melalui **dua tingkat observasi paralel**: tinjauan mikro di kawasan padat industri menggunakan hasil uji fisik laboratorium independen, dan pemetaan tren makro di tingkat provinsi antara Indeks Kualitas Air (IKA) dan sebaran kasus Diare. IKA pemerintah merupakan nilai rata-rata seluruh DAS di satu provinsi sehingga tidak bisa mendeteksi pencemaran ekstrem di muara tambang (*point source*) — karena itu pemetaan makro didampingkan dengan bukti lab klinis (Kromium Heksavalen) di tingkat tapak.",
+        "",
+        "#### B. Alur Logika Metodologis Pendekatan Komplementer Dua Lensa",
+        "Kerangka pendekatan komplementer dua lensa diilustrasikan pada **Bagan Alur 3.6** berikut. Adapun untuk tahapan analisis inferensial (Uji Chi-Square), alur logikanya diringkas melalui tabel konfigurasi variabel di bawah gambar.",
+        "",
+        "##### Bagan Alur 3.6: Alur Logika Analisis Dua Lensa Krisis Air Bersih",
+        "```mermaid",
+        mermaid_str_3_6,
+        "```",
+        "",
+        "##### Tabel 3.6a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 3.6)",
+        markdown_table(konf_headers_36, konf_rows_36),
+        "",
+        "#### C. Formulasi Matematis: Benchmark Toksisitas, Regresi OLS, dan Uji Crosstabulation",
+        "Kuantifikasi pelanggaran toksisitas, tren makro, dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:",
+        "",
+        "```text",
+        "Rasio_Pelanggaran_s = Konsentrasi_Cr6_s / Baku_Mutu_Biota",
+        "Diare_p,t = β1 × IKA_p,t + β0 + ε_p,t",
+        "R² = 1 - ( SS_res / SS_tot )",
+        "Kategori(x_p,t) = 'Tinggi' , jika x_p,t ≥ Median_Prov_p   |   'Rendah' , jika x_p,t < Median_Prov_p",
+        "χ² = Σ [ ( O_ij - E_ij )² / E_ij ]   ;   dengan E_ij = ( Total_Baris_i × Total_Kolom_j ) / N",
+        "Odds_Ratio (OR) = ( b × c ) / ( a × d )   ;   untuk X berjenis indeks kualitas (IKA)",
+        "```",
+        "",
+        "#### D. Matriks Hasil Uji Empiris",
+        "##### Tabel 3.12: Hasil Uji Kadar Kromium Heksavalen (Cr6+) Laboratorium Independen di Lingkar Tambang",
+        markdown_table(["Titik Sampling", "Lokasi", "Cr6+ (mg/L)", "Baku Mutu Biota (mg/L)", "Status", "Sumber"], cr6_rows_36),
+        "",
+        f"##### Tabel 3.13: Rata-rata IKA dan Kasus Diare per Provinsi ({tahun_min_36}-{tahun_max_36})",
+        markdown_table(["Provinsi", "Kategori Zona", "Rata-rata IKA", "Rata-rata Kasus Diare per Tahun"], bar_rows_36),
+        "",
+        "##### Tabel 3.14: Ringkasan Eksekutif Seluruh Skenario Crosstab IKA vs Kasus Diare Bab 3",
+        markdown_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (χ²)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_36),
+        "",
+        "#### E. Analisis Temuan Empiris: Realita Krisis Air Dua Lensa",
+        f"1. **Bukti Mikro Tapak:** dari {total_samples_36} titik sampel, **{exceed_biota_36} titik ({pct_exceed_36:.0f}%)** melampaui batas aman toksisitas biota laut ({baku_mutu_biota_36} mg/L); terparah di {max_location_36} dengan {max_cr6_36:.3f} mg/L ({lipat_36:.0f}x ambang batas). Kromium Heksavalen (Cr6+) adalah logam berat karsinogenik beracun bagi komunitas lingkar tambang.",
+        f"2. **Tren Makro Regresi:** korelasi {corr_direction_36} yang {corr_strength_36} antara IKA dan kasus Diare (R² = {r2_36:.3f}, P = {p_reg_36:.4f}, N={n_obs_36} observasi panel) — kesimpulan pencemaran air lebih valid ditarik dari hasil uji klinis mikroskopis di tapak.",
+        f"3. **Pembedahan Realitas Ekologis:** {finding_36_crosstab}",
+        "",
+        "## 3.7 Beban Limbah Beracun (B3): Eksternalitas Kesehatan yang Diabaikan",
+        "",
+        "> **Sumber Data Resmi & Deskripsi Visualisasi:** Data Audit LSM & KLHK: `data/processed/sulawesi_limbah_b3.csv` (kompilasi AEER Report 2024, WALHI, JATAM, BPLH, dan kajian akademis independen). Visualisasi dashboard menampilkan Horizontal Bar Chart distribusi B3 per provinsi, Vertical Bar Chart komposisi jenis limbah, serta matriks fasilitas penghasil limbah B3 terbesar.",
+        "",
+        "#### A. Pengantar & Kerangka Narasi",
+        f"Sub-bab ini mengungkap timbulan **Limbah Bahan Berbahaya dan Beracun (B3)** dari operasi smelter dan tambang nikel: Slag & Tailing (Chromium, Nikel, Kadmium), Tailing HPAL (asam sulfat tinggi), Air Limbah Tambang, serta Residu & DSTP. Data kompilasi AEER, WALHI, JATAM membuktikan operasi smelter di Sulawesi menghasilkan lebih dari **{total_b3_37 / 1_000_000:.1f} juta ton limbah B3 per tahun** — angka yang kemungkinan besar *underestimate* karena banyak fasilitas tidak melaporkan timbulan secara transparan.",
+        "",
+        "#### B. Alur Logika Metodologis Descriptive Statistics & Comparative Bar Chart",
+        "Kerangka agregasi statistik deskriptif diilustrasikan pada **Bagan Alur 3.7** berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan pemeringkatan dan profiling komposisi buangan absolut, dengan konfigurasi variabel dirinci pada Tabel 3.7a di bawah gambar.",
+        "",
+        "##### Bagan Alur 3.7: Alur Logika Analisis Deskriptif Beban Limbah B3",
+        "```mermaid",
+        mermaid_str_3_7,
+        "```",
+        "",
+        "##### Tabel 3.7a: Konfigurasi Variabel Analisis Deskriptif Limbah B3 (Sub-bab 3.7)",
+        markdown_table(konf_headers_37, konf_rows_37),
+        "",
+        "#### C. Formulasi Matematis: Agregasi Timbulan dan Proporsi Komposisi",
+        "Kuantifikasi skala timbulan limbah dari level fasilitas hingga level regional dihitung menggunakan sistem formulasi matematis berikut:",
+        "",
+        "```text",
+        "Total_B3_p = Σ ( Timbulan_i )   ;   untuk seluruh fasilitas mayor i pada provinsi p",
+        "Total_B3_j = Σ ( Timbulan_i )   ;   untuk seluruh fasilitas mayor i dengan Jenis_Limbah j",
+        "Proporsi_Jenis_j (%) = ( Total_B3_j / Total_B3_Keseluruhan ) × 100",
+        "```",
+        "",
+        "#### D. Matriks Hasil Uji Empiris",
+        f"##### Tabel 3.15: Distribusi Timbulan Limbah B3 per Provinsi (Total {total_b3_37 / 1_000_000:.1f} Juta Ton/Tahun)",
+        markdown_table(["Provinsi", "Timbulan B3 (Ton/Tahun)", "Proporsi (%)"], prov_rows_37),
+        "",
+        "##### Tabel 3.16: Komposisi Timbulan B3 Berdasarkan Jenis Limbah",
+        markdown_table(["Jenis Limbah B3", "Timbulan (Ton/Tahun)", "Proporsi (%)"], type_rows_37),
+        "",
+        "##### Tabel 3.17: Fasilitas Penghasil Limbah B3 Terbesar di Sulawesi",
+        markdown_table(["Provinsi", "Kawasan/Perusahaan", "Jenis Limbah", "Timbulan (Ton/Tahun)", "Sumber"], fasilitas_rows_37),
+        "",
+        "#### E. Analisis Temuan Empiris: Beban Ganda Masyarakat Terdampak",
+        f"1. **Skala Ancaman Regional:** industri nikel di Sulawesi menghasilkan lebih dari **{total_b3_37 / 1_000_000:.1f} juta ton limbah B3 per tahun** dari {n_sumber_mayor_37} fasilitas mayor; beban terbesar di **{max_prov_37['Provinsi']}** ({max_prov_37['Estimasi Timbulan (Ton/Tahun)'] / 1_000_000:.1f} juta ton/tahun), disusul Sulawesi Tenggara ({sultra_b3_37 / 1_000_000:.1f} juta ton).",
+        f"2. **Dominasi Slag & Tailing:** total {slag_tailing_total_37 / 1_000_000:.1f} juta ton/tahun ({slag_tailing_pct_37:.1f}% dari total) mengandung logam berat Chromium, Nikel, Kadmium, dan Arsenik yang karsinogenik dan neurotoksik.",
+        f"3. **Konsentrasi di Kompleks IMIP:** {imip_b3_37 / 1_000_000:.1f} juta ton limbah B3/tahun dihasilkan kompleks IMIP Morowali — menegaskan pentingnya evaluasi independen atas dampak lingkungan dan kesehatan ekspansi industri nikel.",
+        f"4. **Beban Ganda (Double Burden):** masyarakat zona penyangga menanggung polusi aktif (emisi SO2, debu PM2.5, pencemaran air) sekaligus polusi pasif dari timbunan {total_b3_37 / 1_000_000:.1f} juta ton limbah beracun per tahun tanpa jaminan keamanan jangka panjang; diperlukan kajian risiko kesehatan independen, monitoring transparan, dan skema kompensasi yang adil.",
         "",
     ]
     md_path = tool_dir / "Metodologi_Bab3_Beban_Kesehatan.md"
