@@ -573,19 +573,29 @@ Kalkulasi pengujian statistik dihitung menggunakan formulasi Matematis yang sama
 #### D. Matriks Hasil Uji Empiris: Konsentrasi Spasial & Skenario Crosstab
 Tingkat alokasi konsesi dan dampaknya terhadap tutupan hutan dapat dilihat secara empiris melalui perbandingan luas konsesi baru di Daerah Sentra Tambang (Morowali & Konawe) dengan wilayah non-sentra pada **Tabel 1.7b** berikut:
 
-##### Tabel 1.7b: Representasi Spasial Luas Konsesi Baru (Ha) di Daerah Sentra Tambang vs Non-Sentra (2014-2023)
-| Tahun | Luas Konsesi Baru Daerah Sentra Tambang (Ha) | Luas Konsesi Baru Daerah Non-Sentra (Ha) |
-| :---: | :---: | :---: |
-| 2014 | 39,216.7 | 10,301.4 |
-| 2015 | 13,370.0 | 8,969.0 |
-| 2016 | 12,515.8 | 0.0 |
-| 2017 | 121,742.9 | 57,722.2 |
-| 2018 | 15,634.7 | 22,336.0 |
-| 2019 | 32,458.3 | 29,509.9 |
-| 2020 | 60,420.8 | 46,139.0 |
-| 2021 | 28,835.0 | 1,588.4 |
-| 2022 | 58,268.1 | 7,859.4 |
-| 2023 | 52,138.7 | 16,418.2 |
+##### Tabel 1.7b: Representasi Spasial Luas Konsesi Baru dan Deforestasi (2014-2023)
+| Kategori Wilayah | Tahun | Deforestasi Komoditas (Ha) | Luas Konsesi Tambang Baru (Ha) |
+| :--- | :---: | :---: | :---: |
+| Non-Sentra | 2014 | 44341.9906 | 10301.4400 |
+| Non-Sentra | 2015 | 50885.6152 | 8969.0000 |
+| Non-Sentra | 2016 | 42911.6971 | 0.0000 |
+| Non-Sentra | 2017 | 39320.7079 | 57722.1600 |
+| Non-Sentra | 2018 | 38984.2072 | 22336.0300 |
+| Non-Sentra | 2019 | 44913.5941 | 29509.9400 |
+| Non-Sentra | 2020 | 21852.7737 | 46139.0000 |
+| Non-Sentra | 2021 | 19525.3948 | 1588.4100 |
+| Non-Sentra | 2022 | 25459.4902 | 7859.4500 |
+| Non-Sentra | 2023 | 47154.2266 | 16418.1900 |
+| Sentra Tambang | 2014 | 73072.3408 | 39216.7100 |
+| Sentra Tambang | 2015 | 116062.2081 | 13370.0000 |
+| Sentra Tambang | 2016 | 94353.9226 | 12515.8000 |
+| Sentra Tambang | 2017 | 53740.0814 | 121742.9000 |
+| Sentra Tambang | 2018 | 52747.6914 | 15634.6900 |
+| Sentra Tambang | 2019 | 69673.7395 | 32458.3000 |
+| Sentra Tambang | 2020 | 38731.7141 | 60420.8300 |
+| Sentra Tambang | 2021 | 29562.8337 | 28835.0500 |
+| Sentra Tambang | 2022 | 32315.8498 | 58268.0700 |
+| Sentra Tambang | 2023 | 66044.1797 | 52138.7200 |
 
 Terkait dengan hilangnya luasan hutan tersebut, pembedahan lebih lanjut berdasarkan aktor utama, luasan hutan primer, dan estimasi emisi karbon komoditas dapat dilihat pada **Tabel 1.7c** berikut:
 
@@ -714,18 +724,18 @@ Peta rute logistik maritim mengilustrasikan alur distribusi produk olahan nikel 
 Seluruh variabel kuantitatif, kategori analisis, satuan ukur, periode tahun observasi, dan institusi penyedia data primer resmi yang digunakan dalam Bab 1 dikompilasikan pada **Tabel 1.8** berikut:
 
 ##### Tabel 1.8: Matriks Indikator dan Sumber Data Primer Resmi Bab 1
-| No | Nama Indikator | Kategori Analisis | Satuan Ukur | Cakupan Tahun | Institusi & Sumber Data Resmi |
-| :---: | :--- | :--- | :---: | :---: | :--- |
-| 1 | Izin Usaha Pertambangan (IUP) Baru | Faktor Tekanan Ekstraktif | Unit Izin | 2014–2024 | Data Registry ESDM MODI (Minerbaone) |
-| 2 | Luas Wilayah Konsesi Tambang Baru | Faktor Tekanan Ekstraktif | Hektar (Ha) | 2014–2024 | Data Registry ESDM MODI (Minerbaone) |
-| 3 | Kapasitas Terpasang PLTU Captive | Infrastruktur Energi Khusus | Megawatt (MW) | 2014–2024 | NGO (Global Energy Monitor / GEM) |
-| 4 | Fasilitas Smelter Nikel | Fasilitas Industri Hilir | Unit Fasilitas | 2014–2024 | Database Smelter CGS & ESDM MODI |
-| 5 | Realisasi Investasi PMDN & Nikel | Arus Modal Domestik | Triliun Rupiah | 2016–2024 | API BPS & BKPM |
-| 6 | PDRB Provinsi (Ekstraktif vs Akar Rumput) | Struktur Ekonomi Makro | Triliun Rupiah | 2016–2024 | API BPS (Subject 52) |
-| 7 | PDRB Kabupaten Sentra Tambang | Struktur Ekonomi Daerah | Triliun Rupiah | 2016–2024 | API BPS (Subject 52) |
-| 8 | Pendapatan Asli Daerah (PAD) & Breakdown Pajak | Kapasitas Fiskal Daerah | Triliun Rupiah | 2016–2024 | API BPS |
-| 9 | Luas Total Deforestasi Alam & Komoditas | Dampak Ekologis | Hektar (Ha) | 2014–2023 | Global Forest Watch (GFW API) |
-| 10 | Simpul Pelabuhan & Terminal Logistik | Infrastruktur Rantai Pasok | Titik Koordinat & DWT | 2014–2024 | Laporan Publik (KNKT, Perpres PSN, Korporasi) |
+| No | Nama Indikator | Kategori Analisis | Satuan Ukur | Cakupan Tahun | Institusi & Sumber Data Resmi | Data File Asli |
+| :---: | :--- | :--- | :---: | :---: | :--- | :--- |
+| 1 | Izin Usaha Pertambangan (IUP) Baru | Faktor Tekanan Ekstraktif | Unit Izin | 2014-2024 | Data Registry ESDM MODI (Minerbaone) | `sulawesi_izin_baru_per_tahun.csv` |
+| 2 | Luas Wilayah Konsesi Tambang Baru | Faktor Tekanan Ekstraktif | Hektar (Ha) | 2014-2024 | Data Registry ESDM MODI (Minerbaone) | `sulawesi_kawasan_nikel_luas.csv` |
+| 3 | Kapasitas Terpasang PLTU Captive | Infrastruktur Energi Khusus | Megawatt (MW) | 2014-2024 | NGO (Global Energy Monitor / GEM) | `sulawesi_pltu_captive.csv` |
+| 4 | Fasilitas Smelter Nikel | Fasilitas Industri Hilir | Unit Fasilitas | 2014-2024 | Database Smelter CGS & ESDM MODI | `sulawesi_esdm_nikel.csv` |
+| 5 | Realisasi Investasi PMDN & Nikel | Arus Modal Domestik | Triliun Rupiah | 2016-2024 | API BPS & BKPM | `sulawesi_investasi_pmdn_2016_2024.csv` |
+| 6 | PDRB Provinsi (Ekstraktif vs Akar Rumput) | Struktur Ekonomi Makro | Triliun Rupiah | 2016-2024 | API BPS (Subject 52) | `sulawesi_pdrb_sektoral_2016_2024.csv` |
+| 7 | PDRB Kabupaten Sentra Tambang | Struktur Ekonomi Daerah | Triliun Rupiah | 2016-2024 | API BPS (Subject 52) | `sulawesi_pdrb_sektoral_kabupaten_2016_2024.csv` |
+| 8 | Pendapatan Asli Daerah (PAD) & Breakdown Pajak | Kapasitas Fiskal Daerah | Triliun Rupiah | 2016-2024 | API BPS | `sulawesi_pad_breakdown_2016_2024.csv` |
+| 9 | Luas Total Deforestasi Alam & Komoditas | Dampak Ekologis | Hektar (Ha) | 2014-2023 | Global Forest Watch (GFW API) | `sulawesi_gfw_master_1_dekade_2014_2023_v3.csv` |
+| 10 | Simpul Pelabuhan & Terminal Logistik | Infrastruktur Rantai Pasok | Titik Koordinat & DWT | 2014-2024 | Laporan Publik (KNKT, Perpres PSN, Korporasi) | `sulawesi_logistik_simpul_nikel.csv` |
 
 ---
 

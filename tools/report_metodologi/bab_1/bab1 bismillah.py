@@ -1563,28 +1563,41 @@ def generate_all_bab1():
     ])
 
     sentra_provs_1_4 = ["Sulawesi Tengah", "Sulawesi Tenggara"]
-    df_izin_1_4 = df_izin.copy()
-    df_izin_1_4 = df_izin_1_4[df_izin_1_4['Tahun'] <= 2023]
-    df_izin_1_4['Kategori_Wilayah'] = df_izin_1_4['Provinsi'].apply(lambda x: 'Daerah Sentra Tambang' if x in sentra_provs_1_4 else 'Daerah Non-Sentra')
-    df_agg_1_4 = df_izin_1_4.groupby(['Tahun', 'Kategori_Wilayah'])['Total_Luas_Konsesi_Baru_Ha'].sum().reset_index()
-    pivot_df_1_4 = df_agg_1_4.pivot(index='Tahun', columns='Kategori_Wilayah', values='Total_Luas_Konsesi_Baru_Ha').fillna(0)
+    
+    # 1. Group GFW by Kategori & Tahun
+    df_gfw_kat = df_gfw.copy()
+    df_gfw_kat = df_gfw_kat[df_gfw_kat['Tahun'] <= 2023]
+    df_gfw_kat['Kategori_Wilayah'] = df_gfw_kat['Provinsi'].apply(lambda x: 'Sentra Tambang' if x in sentra_provs_1_4 else 'Non-Sentra')
+    df_gfw_kategori = df_gfw_kat.groupby(['Kategori_Wilayah', 'Tahun'])['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'].sum().reset_index()
+
+    # 2. Group Izin by Kategori & Tahun
+    df_izin_kat = df_izin.copy()
+    df_izin_kat = df_izin_kat[df_izin_kat['Tahun'] <= 2023]
+    df_izin_kat['Kategori_Wilayah'] = df_izin_kat['Provinsi'].apply(lambda x: 'Sentra Tambang' if x in sentra_provs_1_4 else 'Non-Sentra')
+    df_izin_kategori = df_izin_kat.groupby(['Kategori_Wilayah', 'Tahun'])['Total_Luas_Konsesi_Baru_Ha'].sum().reset_index()
+
+    # 3. Merge
+    df_viz_1_4 = pd.merge(df_gfw_kategori, df_izin_kategori, on=['Kategori_Wilayah', 'Tahun'], how='inner')
+    df_viz_1_4 = df_viz_1_4.sort_values(by=['Kategori_Wilayah', 'Tahun'])
 
     emp_rows_1_4 = []
     html_emp_rows_1_4 = ""
     md_emp_rows_1_4 = ""
-    for idx, (tahun, row) in enumerate(pivot_df_1_4.iterrows()):
-        val_sentra = float(row['Daerah Sentra Tambang'])
-        val_non = float(row['Daerah Non-Sentra'])
+    for idx, row in df_viz_1_4.iterrows():
+        kat = str(row['Kategori_Wilayah'])
+        tahun = int(row['Tahun'])
+        def_ha = float(row['Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha'])
+        izin_ha = float(row['Total_Luas_Konsesi_Baru_Ha'])
         
-        emp_rows_1_4.append([str(int(tahun)), f"{val_sentra:,.1f}", f"{val_non:,.1f}"])
+        emp_rows_1_4.append([kat, str(tahun), f"{def_ha:.4f}", f"{izin_ha:.4f}"])
         
         row_cls = "data-tr-even" if (idx + 1) % 2 == 0 else "data-tr-odd"
-        html_emp_rows_1_4 += f"    <tr class=\"{row_cls}\"><td class=\"data-td\" style=\"text-align:center;\">{int(tahun)}</td><td class=\"data-td\" style=\"text-align:right;\">{val_sentra:,.1f}</td><td class=\"data-td\" style=\"text-align:right;\">{val_non:,.1f}</td></tr>\n"
-        md_emp_rows_1_4 += f"| {int(tahun)} | {val_sentra:,.1f} | {val_non:,.1f} |\n"
+        html_emp_rows_1_4 += f"    <tr class=\"{row_cls}\"><td class=\"data-td\">{kat}</td><td class=\"data-td\" style=\"text-align:center;\">{tahun}</td><td class=\"data-td\" style=\"text-align:right;\">{def_ha:.4f}</td><td class=\"data-td\" style=\"text-align:right;\">{izin_ha:.4f}</td></tr>\n"
+        md_emp_rows_1_4 += f"| {kat} | {tahun} | {def_ha:.4f} | {izin_ha:.4f} |\n"
 
-    add_caption(doc, "Tabel 1.7b: Representasi Spasial Luas Konsesi Baru (Ha) di Daerah Sentra Tambang vs Non-Sentra (2014-2023)")
-    emp_headers_1_4 = ["Tahun", "Luas Konsesi Baru Daerah Sentra Tambang (Ha)", "Luas Konsesi Baru Daerah Non-Sentra (Ha)"]
-    add_table_1col(doc, emp_headers_1_4, emp_rows_1_4, [3.0, 5.9, 5.9], ['C', 'R', 'R'])
+    add_caption(doc, "Tabel 1.7b: Representasi Spasial Luas Konsesi Baru dan Deforestasi (2014-2023)")
+    emp_headers_1_4 = ["Kategori Wilayah", "Tahun", "Deforestasi Komoditas (Ha)", "Luas Konsesi Tambang Baru (Ha)"]
+    add_table_1col(doc, emp_headers_1_4, emp_rows_1_4, [3.5, 2.0, 4.5, 4.8], ['L', 'C', 'R', 'R'])
 
     add_p(doc, [
         ("Terkait dengan hilangnya luasan hutan tersebut, pembedahan lebih lanjut berdasarkan aktor utama, luasan hutan primer, dan estimasi emisi karbon komoditas dapat dilihat pada ", False, False),
@@ -2543,13 +2556,14 @@ Emisi_CO2_Total = &sum;(Area_Loss_c * Faktor_Emisi_Biomassa_c)</p>
 <p>
   Tingkat alokasi konsesi dan dampaknya terhadap tutupan hutan dapat dilihat secara empiris melalui perbandingan luas konsesi baru di Daerah Sentra Tambang (Morowali & Konawe) dengan wilayah non-sentra pada <strong>Tabel 1.7b</strong> berikut:
 </p>
-<div class="table-caption">Tabel 1.7b: Representasi Spasial Luas Konsesi Baru (Ha) di Daerah Sentra Tambang vs Non-Sentra (2014-2023)</div>
+<div class="table-caption">Tabel 1.7b: Representasi Spasial Luas Konsesi Baru dan Deforestasi (2014-2023)</div>
 <table class="data-table">
   <thead>
     <tr>
+      <th class="data-th">Kategori Wilayah</th>
       <th class="data-th">Tahun</th>
-      <th class="data-th">Luas Konsesi Baru Daerah Sentra Tambang (Ha)</th>
-      <th class="data-th">Luas Konsesi Baru Daerah Non-Sentra (Ha)</th>
+      <th class="data-th">Deforestasi Komoditas (Ha)</th>
+      <th class="data-th">Luas Konsesi Tambang Baru (Ha)</th>
     </tr>
   </thead>
   <tbody>
@@ -3163,9 +3177,9 @@ Emisi_CO2_Total = &sum;(Area_Loss_c * Faktor_Emisi_Biomassa_c)</p>
         "#### D. Matriks Hasil Uji Empiris: Konsentrasi Spasial & Skenario Crosstab",
         "Tingkat alokasi konsesi dan dampaknya terhadap tutupan hutan dapat dilihat secara empiris melalui perbandingan luas konsesi baru di Daerah Sentra Tambang (Morowali & Konawe) dengan wilayah non-sentra pada **Tabel 1.7b** berikut:",
         "",
-        "##### Tabel 1.7b: Representasi Spasial Luas Konsesi Baru (Ha) di Daerah Sentra Tambang vs Non-Sentra (2014-2023)",
-        "| Tahun | Luas Konsesi Baru Daerah Sentra Tambang (Ha) | Luas Konsesi Baru Daerah Non-Sentra (Ha) |",
-        "| :---: | :---: | :---: |",
+        "##### Tabel 1.7b: Representasi Spasial Luas Konsesi Baru dan Deforestasi (2014-2023)",
+        "| Kategori Wilayah | Tahun | Deforestasi Komoditas (Ha) | Luas Konsesi Tambang Baru (Ha) |",
+        "| :--- | :---: | :---: | :---: |",
         md_emp_rows_1_4.rstrip(),
         "",
         "Terkait dengan hilangnya luasan hutan tersebut, pembedahan lebih lanjut berdasarkan aktor utama, luasan hutan primer, dan estimasi emisi karbon komoditas dapat dilihat pada **Tabel 1.7c** berikut:",
