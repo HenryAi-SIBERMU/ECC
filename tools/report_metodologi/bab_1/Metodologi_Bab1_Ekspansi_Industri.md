@@ -617,7 +617,7 @@ Terkait dengan hilangnya luasan hutan tersebut, pembedahan lebih lanjut berdasar
 | Hipotesis Nol (H0) | Tingginya realisasi investasi PMDN tidak berhubungan dengan laju deforestasi. |
 | Hipotesis Alternatif (H1) | Ada hubungan positif antara tingginya realisasi investasi PMDN dengan laju deforestasi. |
 | Decision Rule (Alpha 5%) | Jika P-Value < 0.05, maka Tolak H0 (terbukti signifikan bahwa realisasi investasi mendorong deforestasi). |
-| Threshold Kategori | Nilai Median Data Panel (N=96): X > 1,097.3 Juta Rp; Y ≥ 10,451.7 Ha. |
+| Threshold Kategori | Nilai Median Data Panel (N=48): X > 3,146.4 Juta Rp; Y ≥ 10,451.7 Ha. |
 | Orientasi Odds Ratio | OR = ( a × d ) / ( b × c ) dengan a = Investasi Tinggi & Deforestasi Tinggi; mengukur risiko deforestasi tinggi pada kelompok realisasi investasi tinggi. |
 
 Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square) untuk semua kemungkinan kombinasi indikator antara Realisasi Investasi PMDN dan Dampak Ekologis pada panel data 2016-2023. Hasil tersebut ditampilkan pada **Tabel 1.8** berikut:
@@ -625,8 +625,8 @@ Tabel di bawah ini merangkum hasil pengujian statistik (Chi-Square) untuk semua 
 ##### Tabel 1.8: Ringkasan Eksekutif Seluruh Skenario Crosstab Realisasi Investasi PMDN Bab 1
 | Variabel Independen (X) | Variabel Dependen (Y) | Chi-Square (χ²) | P-Value | Odds Ratio | Kesimpulan |
 | :--- | :--- | :---: | :---: | :---: | :--- |
-| Realisasi Investasi PMDN (Juta Rp) | Total Deforestasi Alam (Hektar) | 2.042 | p = 0.1530 | 2.0 | TIDAK SIGNIFIKAN |
-| Realisasi Investasi PMDN (Juta Rp) | Deforestasi Komoditas Tambang/Sawit (Hektar) | 3.375 | p = 0.0662 | 2.3 | TIDAK SIGNIFIKAN |
+| Realisasi Investasi PMDN (Juta Rp) | Total Deforestasi Alam (Hektar) | 2.083 | p = 0.1489 | 2.8 | TIDAK SIGNIFIKAN |
+| Realisasi Investasi PMDN (Juta Rp) | Deforestasi Komoditas Tambang/Sawit (Hektar) | 2.083 | p = 0.1489 | 2.8 | TIDAK SIGNIFIKAN |
 
 #### E. Analisis Temuan Empiris: Efek Jeda Waktu (Time-Lagging)
 Hasil pengujian seluruh skenario tabulasi silang PMDN mengungkap fenomena yang kompleks dalam alur investasi ekstraktif:
