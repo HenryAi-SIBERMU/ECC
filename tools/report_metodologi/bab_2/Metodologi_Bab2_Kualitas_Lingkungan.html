@@ -127,17 +127,17 @@ h4 { color: #A5D6A7; }
 <div class="formula">Kapasitas_PLTU_Provinsi = SUM(Kapasitas_i) GROUP BY Provinsi</div>
 <div class="formula">Rata_Rata_IKU_Provinsi_Tahun = MEAN(IKU) GROUP BY Provinsi, Tahun</div>
 <h4>D. Matriks Hasil Uji Empiris</h4>
-<p>Akumulasi kapasitas PLTU captive yang beroperasi, beserta kondisi mutu udara melalui pengukuran IKU dan satelit NASA TROPOMI (NO₂) dapat dilihat secara empiris pada <strong>Tabel 2.3</strong> berikut:</p>
-<div class="table-caption">Tabel 2.3: Rincian Empiris Kapasitas PLTU Captive, IKU, dan Konsentrasi NO₂ NASA (2024)</div>
+<p>Akumulasi kapasitas total PLTU (Captive dan Grid) yang beroperasi, beserta kondisi mutu udara melalui pengukuran IKU dan satelit NASA TROPOMI (NO₂) dapat dilihat secara empiris pada <strong>Tabel 2.3</strong> berikut:</p>
+<div class="table-caption">Tabel 2.3: Rincian Empiris Kapasitas PLTU (Captive & Grid), IKU, dan Konsentrasi NO₂ NASA (2024)</div>
 <table>
-<thead><tr><th class="data-th">Provinsi</th><th class="data-th">Kapasitas PLTU Captive (MW)</th><th class="data-th">IKU</th><th class="data-th">NASA TROPOMI NO₂ (mol/m²)</th></tr></thead>
+<thead><tr><th class="data-th">Provinsi</th><th class="data-th">Kapasitas PLTU (Captive & Grid) (MW)</th><th class="data-th">IKU</th><th class="data-th">NASA TROPOMI NO₂ (mol/m²)</th></tr></thead>
 <tbody>
 <tr><td class="data-td">Sulawesi Tengah</td><td class="data-td">9,365</td><td class="data-td">92.9</td><td class="data-td">6.50e-06</td></tr>
-<tr class="data-tr-even"><td class="data-td">Sulawesi Tenggara</td><td class="data-td">2,280</td><td class="data-td">93.0</td><td class="data-td">6.62e-06</td></tr>
-<tr><td class="data-td">Sulawesi Selatan</td><td class="data-td">600</td><td class="data-td">91.5</td><td class="data-td">6.40e-06</td></tr>
-<tr class="data-tr-even"><td class="data-td">Gorontalo</td><td class="data-td">0</td><td class="data-td">93.5</td><td class="data-td">3.76e-06</td></tr>
-<tr><td class="data-td">Sulawesi Barat</td><td class="data-td">0</td><td class="data-td">92.5</td><td class="data-td">6.00e-06</td></tr>
-<tr class="data-tr-even"><td class="data-td">Sulawesi Utara</td><td class="data-td">0</td><td class="data-td">93.4</td><td class="data-td">4.09e-06</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Tenggara</td><td class="data-td">2,380</td><td class="data-td">93.0</td><td class="data-td">6.62e-06</td></tr>
+<tr><td class="data-td">Sulawesi Selatan</td><td class="data-td">1,520</td><td class="data-td">91.5</td><td class="data-td">6.40e-06</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Utara</td><td class="data-td">220</td><td class="data-td">93.4</td><td class="data-td">4.09e-06</td></tr>
+<tr><td class="data-td">Gorontalo</td><td class="data-td">100</td><td class="data-td">93.5</td><td class="data-td">3.76e-06</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Barat</td><td class="data-td">0</td><td class="data-td">92.5</td><td class="data-td">6.00e-06</td></tr>
 </tbody>
 </table>
 <p>Penerapan pengujian statistik tabulasi silang pada data panel (total 54 observasi valid) disajikan secara ringkas pada <strong>Tabel 2.4</strong> berikut:</p>
@@ -145,7 +145,7 @@ h4 { color: #A5D6A7; }
 <table>
 <thead><tr><th class="data-th">Variabel Independen (X)</th><th class="data-th">Variabel Dependen (Y)</th><th class="data-th">Chi-Square (&chi;&sup2;)</th><th class="data-th">P-Value</th><th class="data-th">Odds Ratio</th><th class="data-th">Kesimpulan</th></tr></thead>
 <tbody>
-<tr><td class="data-td">Kapasitas PLTU (MW)</td><td class="data-td">Indeks Kualitas Udara (IKU)</td><td class="data-td">0.000</td><td class="data-td">1.000</td><td class="data-td">0.00</td><td class="data-td">TIDAK SIGNIFIKAN</td></tr>
+<tr><td class="data-td">Kapasitas PLTU (MW)</td><td class="data-td">Indeks Kualitas Udara (IKU)</td><td class="data-td">0.000</td><td class="data-td">1.000</td><td class="data-td">1.18</td><td class="data-td">TIDAK SIGNIFIKAN</td></tr>
 </tbody>
 </table>
 <h4>E. Analisis Temuan Empiris</h4>
@@ -156,6 +156,8 @@ h4 { color: #A5D6A7; }
 <h4>A. Pengantar & Kerangka Narasi</h4>
 <p>Pengembangan kawasan industri pemurnian nikel dan perizinan tambang berimplikasi pada alokasi ruang dan perubahan tutupan lahan. Data menunjukkan bahwa alokasi konsesi perizinan (IUP) dan Kawasan Industri mencakup total luasan <strong>1,185,174 Hektar</strong> di Pulau Sulawesi, dengan alokasi terbesar berada di <strong>Sulawesi Tengah</strong>. Sepanjang periode 2014-2023, data Global Forest Watch (GFW) merekam akumulasi kehilangan tutupan pohon sebesar <strong>1,386,055 Hektar</strong>, dengan akumulasi terbesar berada di Sulawesi Tengah. Sub-bab ini menguji hipotesis secara empiris: <strong>apakah luasan ekspansi kawasan industri dan perizinan tambang berbanding lurus dengan laju deforestasi?</strong></p>
 <h4>B. Alur Logika Metodologis Analisis Ekspansi Industri vs Deforestasi</h4>
+<p>Pendekatan visualisasi dinamis Animated Bubble Chart (Hans Rosling-style) untuk memetakan eksekusi ruang secara spasio-temporal diilustrasikan pada <strong>Bagan Alur 2.3</strong> berikut. Adapun untuk tahapan analisis inferensial (Uji Chi-Square), alur logikanya merujuk secara penuh pada <strong>Bagan Alur 2.1</strong> (di sub-bab sebelumnya) dengan penyesuaian konfigurasi variabel spesifik sesuai Tabel 2.3a di bawah gambar.</p>
+<div class="table-caption">Bagan Alur 2.3: Alur Logika Metodologis Animated Bubble Chart Ekspansi Industri vs Deforestasi</div>
 <div class="mermaid">flowchart LR
     subgraph Data_Input["1. Input Data Dashboard"]
         A["Data Izin Konsesi Minerbaone<br/><i>Provinsi, Tahun, Luas Konsesi Baru (Ha)</i>"] --> C
@@ -163,17 +165,26 @@ h4 { color: #A5D6A7; }
         D["Data Deforestasi GFW 2014-2023<br/><i>Provinsi, Tahun, Total Deforestasi (Ha)</i>"] --> C
     end
     subgraph Panel_Processing["2. Pembentukan Panel 2.3"]
-        C["Agregasi Luas IUP-Kawasan per Provinsi"] --> F["Merge dengan Panel Deforestasi Provinsi-Tahun"]
-        F --> G["CUMSUM Konsesi & Deforestasi<br/>per Provinsi (2014-2023)"]
+        C["Merge Panel Provinsi-Tahun"] --> F["CUMSUM Konsesi & Deforestasi<br/>per Provinsi (2014-2023)"]
     end
-    subgraph Statistical_Test["3. Animated Bubble & Crosstabulation"]
-        G --> H["Animated Bubble Chart<br/>Choropleth deforestasi kumulatif; bubble konsesi kumulatif"]
-        G --> I["Binning Median<br/>IUP Tinggi/Rendah; Deforestasi Tinggi-Parah/Rendah"]
-        I --> J["Uji Chi-Square Pearson"]
-        J --> K["Odds Ratio<br/>Risiko deforestasi parah pada kelompok IUP tinggi"]
+    subgraph Visual_Analysis["3. Animated Bubble Chart (Hans Rosling-style)"]
+        F --> G["Choropleth<br/>Level keparahan deforestasi kumulatif"]
+        F --> H["Bubble Size<br/>Skala konsesi industri kumulatif"]
+        G --> I["Animasi & Slider Temporal<br/>2014-2023"]
+        H --> I
     end
-    H --> L["Pembacaan empiris eksekusi ruang kawasan industri"]
-    K --> L</div>
+    I --> J["Pembacaan empiris eksekusi ruang spasio-temporal"]</div>
+<div class="table-caption">Tabel 2.3a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.3)</div>
+<table>
+<thead><tr><th class="data-th">Komponen Uji</th><th class="data-th">Definisi Variabel (Sub-bab 2.3)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Variabel Independen (X)</td><td class="data-td">Luas Ekspansi Industri (Ha) / Luas IUP & Kawasan (Ha)</td></tr>
+<tr class="data-tr-even"><td class="data-td">Variabel Dependen (Y)</td><td class="data-td">Kehilangan Tutupan Pohon (Ha) / Total Deforestasi Alam (Ha)</td></tr>
+<tr><td class="data-td">Hipotesis Nol (H0)</td><td class="data-td">Luasan ekspansi kawasan industri dan perizinan tambang tidak berhubungan dengan laju deforestasi.</td></tr>
+<tr class="data-tr-even"><td class="data-td">Hipotesis Alternatif (H1)</td><td class="data-td">Alokasi izin lahan (Luas IUP & Kawasan) berkorelasi positif dengan laju deforestasi.</td></tr>
+<tr><td class="data-td">Threshold Kategori</td><td class="data-td">Nilai Median Data Panel (N=60): X >= 138,148.8 Ha; Y >= 15,917.7 Ha</td></tr>
+</tbody>
+</table>
 <h4>C. Formulasi Matematis: Akumulasi Konsesi, Deforestasi, dan Uji Crosstabulation</h4>
 <p>Parameterisasi tekanan ruang dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:</p>
 <div class="formula">Luas_IUP_Kawasan_Provinsi = SUM(total_luas_ha) GROUP BY Provinsi</div>

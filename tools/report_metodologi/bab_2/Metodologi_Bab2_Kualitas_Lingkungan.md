@@ -121,24 +121,24 @@ Rata_Rata_IKU_Provinsi_Tahun = MEAN(IKU) GROUP BY Provinsi, Tahun
 ```
 
 #### D. Matriks Hasil Uji Empiris
-Akumulasi kapasitas PLTU captive yang beroperasi, beserta kondisi mutu udara melalui pengukuran IKU dan satelit NASA TROPOMI (NO₂) dapat dilihat secara empiris pada **Tabel 2.3** berikut:
+Akumulasi kapasitas total PLTU (Captive dan Grid) yang beroperasi, beserta kondisi mutu udara melalui pengukuran IKU dan satelit NASA TROPOMI (NO₂) dapat dilihat secara empiris pada **Tabel 2.3** berikut:
 
-##### Tabel 2.3: Rincian Empiris Kapasitas PLTU Captive, IKU, dan Konsentrasi NO₂ NASA (2024)
-| Provinsi | Kapasitas PLTU Captive (MW) | IKU | NASA TROPOMI NO₂ (mol/m²) |
+##### Tabel 2.3: Rincian Empiris Kapasitas PLTU (Captive & Grid), IKU, dan Konsentrasi NO₂ NASA (2024)
+| Provinsi | Kapasitas PLTU (Captive & Grid) (MW) | IKU | NASA TROPOMI NO₂ (mol/m²) |
 | :--- | :--- | :--- | :--- |
 | Sulawesi Tengah | 9,365 | 92.9 | 6.50e-06 |
-| Sulawesi Tenggara | 2,280 | 93.0 | 6.62e-06 |
-| Sulawesi Selatan | 600 | 91.5 | 6.40e-06 |
-| Gorontalo | 0 | 93.5 | 3.76e-06 |
+| Sulawesi Tenggara | 2,380 | 93.0 | 6.62e-06 |
+| Sulawesi Selatan | 1,520 | 91.5 | 6.40e-06 |
+| Sulawesi Utara | 220 | 93.4 | 4.09e-06 |
+| Gorontalo | 100 | 93.5 | 3.76e-06 |
 | Sulawesi Barat | 0 | 92.5 | 6.00e-06 |
-| Sulawesi Utara | 0 | 93.4 | 4.09e-06 |
 
 Penerapan pengujian statistik tabulasi silang pada data panel (total 54 observasi valid) disajikan secara ringkas pada **Tabel 2.4** berikut:
 
 ##### Tabel 2.4: Ringkasan Eksekutif Skenario Crosstab Kapasitas PLTU vs IKU Bab 2
 | Variabel Independen (X) | Variabel Dependen (Y) | Chi-Square (χ²) | P-Value | Odds Ratio | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| Kapasitas PLTU (MW) | Indeks Kualitas Udara (IKU) | 0.000 | 1.000 | 0.00 | TIDAK SIGNIFIKAN |
+| Kapasitas PLTU (MW) | Indeks Kualitas Udara (IKU) | 0.000 | 1.000 | 1.18 | TIDAK SIGNIFIKAN |
 
 #### E. Analisis Temuan Empiris: Efek Pengenceran Udara Ambien
 Kegagalan pengujian statistik ini membongkar fakta krusial bahwa Indeks Kualitas Udara (IKU) level provinsi adalah metrik agregat yang mengencerkan pencemaran udara lokal di tapak industri. Kualitas udara yang buruk di sekitar PLTU tertutupi oleh wilayah yang masih bersih.
@@ -151,6 +151,9 @@ Kegagalan pengujian statistik ini membongkar fakta krusial bahwa Indeks Kualitas
 Pengembangan kawasan industri pemurnian nikel dan perizinan tambang berimplikasi pada alokasi ruang dan perubahan tutupan lahan. Data menunjukkan bahwa alokasi konsesi perizinan (IUP) dan Kawasan Industri mencakup total luasan **1,185,174 Hektar** di Pulau Sulawesi, dengan alokasi terbesar berada di **Sulawesi Tengah**. Sepanjang periode 2014-2023, data Global Forest Watch (GFW) merekam akumulasi kehilangan tutupan pohon sebesar **1,386,055 Hektar**, dengan akumulasi terbesar berada di Sulawesi Tengah. Sub-bab ini menguji hipotesis secara empiris: **apakah luasan ekspansi kawasan industri dan perizinan tambang berbanding lurus dengan laju deforestasi?**
 
 #### B. Alur Logika Metodologis Analisis Ekspansi Industri vs Deforestasi
+Pendekatan visualisasi dinamis Animated Bubble Chart (Hans Rosling-style) untuk memetakan eksekusi ruang secara spasio-temporal diilustrasikan pada **Bagan Alur 2.3** berikut. Adapun untuk tahapan analisis inferensial (Uji Chi-Square), alur logikanya merujuk secara penuh pada **Bagan Alur 2.1** (di sub-bab sebelumnya) dengan penyesuaian konfigurasi variabel spesifik sesuai Tabel 2.3a di bawah gambar.
+
+##### Bagan Alur 2.3: Alur Logika Metodologis Animated Bubble Chart Ekspansi Industri vs Deforestasi
 ```mermaid
 flowchart LR
     subgraph Data_Input["1. Input Data Dashboard"]
@@ -159,18 +162,25 @@ flowchart LR
         D["Data Deforestasi GFW 2014-2023<br/><i>Provinsi, Tahun, Total Deforestasi (Ha)</i>"] --> C
     end
     subgraph Panel_Processing["2. Pembentukan Panel 2.3"]
-        C["Agregasi Luas IUP-Kawasan per Provinsi"] --> F["Merge dengan Panel Deforestasi Provinsi-Tahun"]
-        F --> G["CUMSUM Konsesi & Deforestasi<br/>per Provinsi (2014-2023)"]
+        C["Merge Panel Provinsi-Tahun"] --> F["CUMSUM Konsesi & Deforestasi<br/>per Provinsi (2014-2023)"]
     end
-    subgraph Statistical_Test["3. Animated Bubble & Crosstabulation"]
-        G --> H["Animated Bubble Chart<br/>Choropleth deforestasi kumulatif; bubble konsesi kumulatif"]
-        G --> I["Binning Median<br/>IUP Tinggi/Rendah; Deforestasi Tinggi-Parah/Rendah"]
-        I --> J["Uji Chi-Square Pearson"]
-        J --> K["Odds Ratio<br/>Risiko deforestasi parah pada kelompok IUP tinggi"]
+    subgraph Visual_Analysis["3. Animated Bubble Chart (Hans Rosling-style)"]
+        F --> G["Choropleth<br/>Level keparahan deforestasi kumulatif"]
+        F --> H["Bubble Size<br/>Skala konsesi industri kumulatif"]
+        G --> I["Animasi & Slider Temporal<br/>2014-2023"]
+        H --> I
     end
-    H --> L["Pembacaan empiris eksekusi ruang kawasan industri"]
-    K --> L
+    I --> J["Pembacaan empiris eksekusi ruang spasio-temporal"]
 ```
+
+##### Tabel 2.3a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.3)
+| Komponen Uji | Definisi Variabel (Sub-bab 2.3) |
+| :--- | :--- |
+| Variabel Independen (X) | Luas Ekspansi Industri (Ha) / Luas IUP & Kawasan (Ha) |
+| Variabel Dependen (Y) | Kehilangan Tutupan Pohon (Ha) / Total Deforestasi Alam (Ha) |
+| Hipotesis Nol (H0) | Luasan ekspansi kawasan industri dan perizinan tambang tidak berhubungan dengan laju deforestasi. |
+| Hipotesis Alternatif (H1) | Alokasi izin lahan (Luas IUP & Kawasan) berkorelasi positif dengan laju deforestasi. |
+| Threshold Kategori | Nilai Median Data Panel (N=60): X >= 138,148.8 Ha; Y >= 15,917.7 Ha |
 
 #### C. Formulasi Matematis: Akumulasi Konsesi, Deforestasi, dan Uji Crosstabulation
 Parameterisasi tekanan ruang dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:

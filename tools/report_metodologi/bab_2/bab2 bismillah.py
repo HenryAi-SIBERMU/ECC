@@ -543,6 +543,15 @@ def generate_all_bab2():
     }
     df_pltu_2 = df_pltu.copy()
     df_pltu_2['Provinsi'] = df_pltu_2['Subnational unit (province, state)'].replace(prov_map)
+    
+    grid_pltu = pd.DataFrame([
+        {'Provinsi': 'Gorontalo', 'Capacity (MW)': 100},
+        {'Provinsi': 'Sulawesi Utara', 'Capacity (MW)': 220},
+        {'Provinsi': 'Sulawesi Selatan', 'Capacity (MW)': 920},
+        {'Provinsi': 'Sulawesi Tenggara', 'Capacity (MW)': 100}
+    ])
+    df_pltu_2 = pd.concat([df_pltu_2, grid_pltu], ignore_index=True)
+    
     df_pltu_prov = df_pltu_2.groupby('Provinsi')['Capacity (MW)'].sum().reset_index()
     df_pltu_prov.rename(columns={'Capacity (MW)': 'Kapasitas_PLTU_MW'}, inplace=True)
     
@@ -671,19 +680,26 @@ def generate_all_bab2():
         D["Data Deforestasi GFW 2014-2023<br/><i>Provinsi, Tahun, Total Deforestasi (Ha)</i>"] --> C
     end
     subgraph Panel_Processing["2. Pembentukan Panel 2.3"]
-        C["Agregasi Luas IUP-Kawasan per Provinsi"] --> F["Merge dengan Panel Deforestasi Provinsi-Tahun"]
-        F --> G["CUMSUM Konsesi & Deforestasi<br/>per Provinsi (2014-2023)"]
+        C["Merge Panel Provinsi-Tahun"] --> F["CUMSUM Konsesi & Deforestasi<br/>per Provinsi (2014-2023)"]
     end
-    subgraph Statistical_Test["3. Animated Bubble & Crosstabulation"]
-        G --> H["Animated Bubble Chart<br/>Choropleth deforestasi kumulatif; bubble konsesi kumulatif"]
-        G --> I["Binning Median<br/>IUP Tinggi/Rendah; Deforestasi Tinggi-Parah/Rendah"]
-        I --> J["Uji Chi-Square Pearson"]
-        J --> K["Odds Ratio<br/>Risiko deforestasi parah pada kelompok IUP tinggi"]
+    subgraph Visual_Analysis["3. Animated Bubble Chart (Hans Rosling-style)"]
+        F --> G["Choropleth<br/>Level keparahan deforestasi kumulatif"]
+        F --> H["Bubble Size<br/>Skala konsesi industri kumulatif"]
+        G --> I["Animasi & Slider Temporal<br/>2014-2023"]
+        H --> I
     end
-    H --> L["Pembacaan empiris eksekusi ruang kawasan industri"]
-    K --> L"""
+    I --> J["Pembacaan empiris eksekusi ruang spasio-temporal"]"""
     mermaid_png_path_2_3 = str(tool_dir / "mermaid_flowchart_2_3.png")
     download_success_2_3 = download_mermaid_png(mermaid_str_2_3, mermaid_png_path_2_3)
+
+    konf_headers_23 = ["Komponen Uji", "Definisi Variabel (Sub-bab 2.3)"]
+    konf_rows_23 = [
+        ["Variabel Independen (X)", "Luas Ekspansi Industri (Ha) / Luas IUP & Kawasan (Ha)"],
+        ["Variabel Dependen (Y)", "Kehilangan Tutupan Pohon (Ha) / Total Deforestasi Alam (Ha)"],
+        ["Hipotesis Nol (H0)", "Luasan ekspansi kawasan industri dan perizinan tambang tidak berhubungan dengan laju deforestasi."],
+        ["Hipotesis Alternatif (H1)", "Alokasi izin lahan (Luas IUP & Kawasan) berkorelasi positif dengan laju deforestasi."],
+        ["Threshold Kategori", f"Nilai Median Data Panel (N={valid_cases_23}): X >= {stats_23['x_threshold']:,.1f} Ha; Y >= {stats_23['y_threshold']:,.1f} Ha"],
+    ]
 
     print("[2.9/4] Membangun DOCX Metodologi_Bab2_Kualitas_Lingkungan.docx...")
     doc = Document()
@@ -867,12 +883,12 @@ def generate_all_bab2():
 
     add_h4(doc, "D. Matriks Hasil Uji Empiris: Kapasitas PLTU, IKU, dan Konsentrasi NO2 NASA")
     add_p(doc, [
-        ("Akumulasi kapasitas PLTU captive yang beroperasi, beserta kondisi mutu udara melalui pengukuran IKU dan satelit NASA TROPOMI (NO₂) dapat dilihat secara empiris pada ", False, False),
+        ("Akumulasi kapasitas total PLTU (Captive dan Grid) yang beroperasi, beserta kondisi mutu udara melalui pengukuran IKU dan satelit NASA TROPOMI (NO₂) dapat dilihat secara empiris pada ", False, False),
         ("Tabel 2.3", True, False),
         (" berikut:", False, False),
     ])
-    add_caption(doc, f"Tabel 2.3: Rincian Empiris Kapasitas PLTU Captive, IKU, dan Konsentrasi NO₂ NASA ({focus_end_year})")
-    add_table_1col(doc, ["Provinsi", "Kapasitas PLTU Captive (MW)", "IKU", "NASA TROPOMI NO₂ (mol/m²)\n*Batas Kritis: 6.00e-06"], empirical_rows_22, [3.5, 4.0, 2.0, 4.5], ["L", "C", "C", "C"])
+    add_caption(doc, f"Tabel 2.3: Rincian Empiris Kapasitas PLTU (Captive & Grid), IKU, dan Konsentrasi NO₂ NASA ({focus_end_year})")
+    add_table_1col(doc, ["Provinsi", "Kapasitas PLTU (Captive & Grid) (MW)", "IKU", "NASA TROPOMI NO₂ (mol/m²)\n*Batas Kritis: 6.00e-06"], empirical_rows_22, [3.5, 4.0, 2.0, 4.5], ["L", "C", "C", "C"])
 
     add_p(doc, [
         (f"Penerapan pengujian statistik tabulasi silang pada data panel (total {valid_cases_22} observasi valid) disajikan secara ringkas pada ", False, False),
@@ -905,11 +921,13 @@ def generate_all_bab2():
 
     add_h4(doc, "B. Alur Logika Metodologis Analisis Ekspansi Industri vs Deforestasi")
     add_p(doc, [
-        ("Kerangka operasionalisasi sub-bab ini menggunakan pendekatan visualisasi dinamis Animated Bubble Chart (Hans Rosling-style) dan Uji Statistik Chi-Square (Crosstabulation) untuk mengukur keterkaitan alokasi izin lahan dengan laju deforestasi. Alur data dan pengujian diilustrasikan pada ", False, False),
+        ("Pendekatan visualisasi dinamis Animated Bubble Chart (Hans Rosling-style) untuk memetakan eksekusi ruang secara spasio-temporal diilustrasikan pada ", False, False),
         ("Bagan Alur 2.3", True, False),
-        (" berikut:", False, False),
+        (" berikut. Adapun untuk tahapan analisis inferensial (Uji Chi-Square), alur logikanya merujuk secara penuh pada ", False, False),
+        ("Bagan Alur 2.1", True, False),
+        (" (di sub-bab sebelumnya) dengan penyesuaian konfigurasi variabel spesifik sesuai Tabel 2.3a di bawah gambar.", False, False),
     ])
-    add_caption(doc, "Bagan Alur 2.3: Alur Logika Metodologis Animated Bubble Chart & Crosstabulation Ekspansi Industri vs Deforestasi")
+    add_caption(doc, "Bagan Alur 2.3: Alur Logika Metodologis Animated Bubble Chart Ekspansi Industri vs Deforestasi")
     if download_success_2_3:
         try:
             p_img = doc.add_paragraph()
@@ -922,6 +940,17 @@ def generate_all_bab2():
     else:
         p_err = doc.add_paragraph()
         run(p_err, "[Gambar Flowchart Gagal Diunduh, silakan periksa koneksi internet saat generate]", color=C_RED, pt=9)
+
+    p_spacer_23 = doc.add_paragraph()
+    p_spacer_23.paragraph_format.space_before = Pt(2)
+    p_spacer_23.paragraph_format.space_after = Pt(4)
+
+    add_caption(doc, "Tabel 2.3a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.3)")
+    add_table_1col(doc, konf_headers_23, konf_rows_23, [4.5, 11.0], ["L", "L"])
+
+    p_spacer_23b = doc.add_paragraph()
+    p_spacer_23b.paragraph_format.space_before = Pt(2)
+    p_spacer_23b.paragraph_format.space_after = Pt(4)
 
     add_h4(doc, "C. Formulasi Matematis: Akumulasi Konsesi, Deforestasi, dan Uji Crosstabulation")
     add_p(doc, [
@@ -1046,9 +1075,9 @@ h4 {{ color: #A5D6A7; }}
 <div class="formula">Kapasitas_PLTU_Provinsi = SUM(Kapasitas_i) GROUP BY Provinsi</div>
 <div class="formula">Rata_Rata_IKU_Provinsi_Tahun = MEAN(IKU) GROUP BY Provinsi, Tahun</div>
 <h4>D. Matriks Hasil Uji Empiris</h4>
-<p>Akumulasi kapasitas PLTU captive yang beroperasi, beserta kondisi mutu udara melalui pengukuran IKU dan satelit NASA TROPOMI (NO₂) dapat dilihat secara empiris pada <strong>Tabel 2.3</strong> berikut:</p>
-<div class="table-caption">Tabel 2.3: Rincian Empiris Kapasitas PLTU Captive, IKU, dan Konsentrasi NO₂ NASA ({focus_end_year})</div>
-{html_table(["Provinsi", "Kapasitas PLTU Captive (MW)", "IKU", "NASA TROPOMI NO₂ (mol/m²)"], empirical_rows_22)}
+<p>Akumulasi kapasitas total PLTU (Captive dan Grid) yang beroperasi, beserta kondisi mutu udara melalui pengukuran IKU dan satelit NASA TROPOMI (NO₂) dapat dilihat secara empiris pada <strong>Tabel 2.3</strong> berikut:</p>
+<div class="table-caption">Tabel 2.3: Rincian Empiris Kapasitas PLTU (Captive & Grid), IKU, dan Konsentrasi NO₂ NASA ({focus_end_year})</div>
+{html_table(["Provinsi", "Kapasitas PLTU (Captive & Grid) (MW)", "IKU", "NASA TROPOMI NO₂ (mol/m²)"], empirical_rows_22)}
 <p>Penerapan pengujian statistik tabulasi silang pada data panel (total {valid_cases_22} observasi valid) disajikan secara ringkas pada <strong>Tabel 2.4</strong> berikut:</p>
 <div class="table-caption">Tabel 2.4: Ringkasan Eksekutif Skenario Crosstab Kapasitas PLTU vs IKU Bab 2</div>
 {html_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (&chi;&sup2;)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_22)}
@@ -1060,7 +1089,11 @@ h4 {{ color: #A5D6A7; }}
 <h4>A. Pengantar & Kerangka Narasi</h4>
 <p>Pengembangan kawasan industri pemurnian nikel dan perizinan tambang berimplikasi pada alokasi ruang dan perubahan tutupan lahan. Data menunjukkan bahwa alokasi konsesi perizinan (IUP) dan Kawasan Industri mencakup total luasan <strong>{tot_luas_konsesi:,.0f} Hektar</strong> di Pulau Sulawesi, dengan alokasi terbesar berada di <strong>{prov_max_iup}</strong>. Sepanjang periode 2014-2023, data Global Forest Watch (GFW) merekam akumulasi kehilangan tutupan pohon sebesar <strong>{tot_def_10thn:,.0f} Hektar</strong>, dengan akumulasi terbesar berada di {prov_max_def}. Sub-bab ini menguji hipotesis secara empiris: <strong>apakah luasan ekspansi kawasan industri dan perizinan tambang berbanding lurus dengan laju deforestasi?</strong></p>
 <h4>B. Alur Logika Metodologis Analisis Ekspansi Industri vs Deforestasi</h4>
+<p>Pendekatan visualisasi dinamis Animated Bubble Chart (Hans Rosling-style) untuk memetakan eksekusi ruang secara spasio-temporal diilustrasikan pada <strong>Bagan Alur 2.3</strong> berikut. Adapun untuk tahapan analisis inferensial (Uji Chi-Square), alur logikanya merujuk secara penuh pada <strong>Bagan Alur 2.1</strong> (di sub-bab sebelumnya) dengan penyesuaian konfigurasi variabel spesifik sesuai Tabel 2.3a di bawah gambar.</p>
+<div class="table-caption">Bagan Alur 2.3: Alur Logika Metodologis Animated Bubble Chart Ekspansi Industri vs Deforestasi</div>
 <div class="mermaid">{mermaid_str_2_3}</div>
+<div class="table-caption">Tabel 2.3a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.3)</div>
+{html_table(konf_headers_23, konf_rows_23)}
 <h4>C. Formulasi Matematis: Akumulasi Konsesi, Deforestasi, dan Uji Crosstabulation</h4>
 <p>Parameterisasi tekanan ruang dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:</p>
 <div class="formula">Luas_IUP_Kawasan_Provinsi = SUM(total_luas_ha) GROUP BY Provinsi</div>
@@ -1157,10 +1190,10 @@ h4 {{ color: #A5D6A7; }}
         "```",
         "",
         "#### D. Matriks Hasil Uji Empiris",
-        "Akumulasi kapasitas PLTU captive yang beroperasi, beserta kondisi mutu udara melalui pengukuran IKU dan satelit NASA TROPOMI (NO₂) dapat dilihat secara empiris pada **Tabel 2.3** berikut:",
+        "Akumulasi kapasitas total PLTU (Captive dan Grid) yang beroperasi, beserta kondisi mutu udara melalui pengukuran IKU dan satelit NASA TROPOMI (NO₂) dapat dilihat secara empiris pada **Tabel 2.3** berikut:",
         "",
-        f"##### Tabel 2.3: Rincian Empiris Kapasitas PLTU Captive, IKU, dan Konsentrasi NO₂ NASA ({focus_end_year})",
-        markdown_table(["Provinsi", "Kapasitas PLTU Captive (MW)", "IKU", "NASA TROPOMI NO₂ (mol/m²)"], empirical_rows_22),
+        f"##### Tabel 2.3: Rincian Empiris Kapasitas PLTU (Captive & Grid), IKU, dan Konsentrasi NO₂ NASA ({focus_end_year})",
+        markdown_table(["Provinsi", "Kapasitas PLTU (Captive & Grid) (MW)", "IKU", "NASA TROPOMI NO₂ (mol/m²)"], empirical_rows_22),
         "",
         f"Penerapan pengujian statistik tabulasi silang pada data panel (total {valid_cases_22} observasi valid) disajikan secara ringkas pada **Tabel 2.4** berikut:",
         "",
@@ -1178,9 +1211,15 @@ h4 {{ color: #A5D6A7; }}
         f"Pengembangan kawasan industri pemurnian nikel dan perizinan tambang berimplikasi pada alokasi ruang dan perubahan tutupan lahan. Data menunjukkan bahwa alokasi konsesi perizinan (IUP) dan Kawasan Industri mencakup total luasan **{tot_luas_konsesi:,.0f} Hektar** di Pulau Sulawesi, dengan alokasi terbesar berada di **{prov_max_iup}**. Sepanjang periode 2014-2023, data Global Forest Watch (GFW) merekam akumulasi kehilangan tutupan pohon sebesar **{tot_def_10thn:,.0f} Hektar**, dengan akumulasi terbesar berada di {prov_max_def}. Sub-bab ini menguji hipotesis secara empiris: **apakah luasan ekspansi kawasan industri dan perizinan tambang berbanding lurus dengan laju deforestasi?**",
         "",
         "#### B. Alur Logika Metodologis Analisis Ekspansi Industri vs Deforestasi",
+        "Pendekatan visualisasi dinamis Animated Bubble Chart (Hans Rosling-style) untuk memetakan eksekusi ruang secara spasio-temporal diilustrasikan pada **Bagan Alur 2.3** berikut. Adapun untuk tahapan analisis inferensial (Uji Chi-Square), alur logikanya merujuk secara penuh pada **Bagan Alur 2.1** (di sub-bab sebelumnya) dengan penyesuaian konfigurasi variabel spesifik sesuai Tabel 2.3a di bawah gambar.",
+        "",
+        "##### Bagan Alur 2.3: Alur Logika Metodologis Animated Bubble Chart Ekspansi Industri vs Deforestasi",
         "```mermaid",
         mermaid_str_2_3,
         "```",
+        "",
+        "##### Tabel 2.3a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 2.3)",
+        markdown_table(konf_headers_23, konf_rows_23),
         "",
         "#### C. Formulasi Matematis: Akumulasi Konsesi, Deforestasi, dan Uji Crosstabulation",
         "Parameterisasi tekanan ruang dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:",
