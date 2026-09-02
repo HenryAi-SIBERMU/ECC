@@ -26,19 +26,19 @@ Penelitian mencakup catatan letupan konflik agraria terdata di seluruh wilayah a
 Merujuk pada pemetaan data pada **DATA_DICTIONARY.md** (Entri 31), seluruh dinamika perampasan ruang, eskalasi konflik, korban terdampak, represi hukum, hingga keterlibatan aktor dioperasionalkan secara terstruktur dari dataset primer **`sulawesi_konflik_agraria_tanahkita.csv`** ke dalam indikator riset empiris sebagaimana dirangkum pada matriks berikut:
 
 ##### Matriks Operasionalisasi Variabel dan Sumber Data Resmi Bab 4
-| No | Indikator Riset | Fokus Pengukuran | Satuan | Periode | Sumber Data Primer Resmi |
-| :-: | :--- | :--- | :-: | :-: | :--- |
-| 1 | Insidensi Konflik Agraria | Frekuensi Kejadian Letupan Sengketa Lahan | Kasus | 1990–2024 | KPA / Basis Data TanahKita |
-| 2 | Sebaran Sektor Pemicu | Klasifikasi Sektoral (Tambang, Sawit, Hutan, PSN) | Kategori Sektor | 1990–2024 | KPA / Basis Data TanahKita |
-| 3 | Skala Masyarakat Terdampak | Agregasi Korban Warga & Masyarakat Adat | Jiwa | 1990–2024 | KPA & Koalisi Sipil |
-| 4 | Luas Monopoli Area Sengketa | Bentang Lahan Dikuasai / Disengketakan | Hektar (Ha) | 1990–2024 | TanahKita & ATR/BPN |
-| 5 | Kasus Indikasi Kriminalisasi | Penuntutan Hukum Warga & Pejuang Tenurial | Kasus | 2000–2024 | KPA & Komnas HAM |
-| 6 | Korban Penangkapan Aparat | Warga/Aktivis Ditahan Aparat Penegak Hukum | Orang | 2000–2024 | KPA & Komnas HAM |
-| 7 | Korban Kekerasan & Fatalitas | Korban Menderita Luka-luka & Meninggal Dunia | Orang | 2000–2024 | KPA & Komnas HAM |
-| 8 | Tingkat Penelantaran Kasus | Rasio Sengketa Berstatus Belum Ditangani | Persen (%) | 1990–2024 | KPA / Basis Data TanahKita |
-| 9 | Laju Eskalasi Era Hilirisasi | Komparasi Pertumbuhan Kasus Pra vs Pasca 2014 | Kasus / Tahun | 1990 vs 2024 | Data Panel Tahunan KPA |
-| 10 | Dominasi Entitas Korporasi | Frekuensi Keterlibatan Konglomerasi Tambang | Token Count | Korpus 568 Teks | Text Parsing NLP RegEx |
-| 11 | Aktor Proksi & Vigilante | Deteksi Pengamanan Swakarsa, Preman, Satgas | Token Count | Korpus 568 Teks | Text Parsing NLP RegEx |
+| No | Indikator Riset | Fokus Pengukuran | Satuan | Sumber Data Primer Resmi |
+| :-: | :--- | :--- | :-: | :--- |
+| 1 | Insidensi Konflik Agraria | Frekuensi Kejadian Letupan Sengketa Lahan | Kasus | KPA / Basis Data TanahKita |
+| 2 | Sebaran Sektor Pemicu | Klasifikasi Sektoral (Tambang, Sawit, Hutan, PSN) | Kategori Sektor | KPA / Basis Data TanahKita |
+| 3 | Skala Masyarakat Terdampak | Agregasi Korban Warga & Masyarakat Adat | Jiwa | KPA & Koalisi Sipil |
+| 4 | Luas Monopoli Area Sengketa | Bentang Lahan Dikuasai / Disengketakan | Hektar (Ha) | TanahKita & ATR/BPN |
+| 5 | Kasus Indikasi Kriminalisasi | Penuntutan Hukum Warga & Pejuang Tenurial | Kasus | KPA & Komnas HAM |
+| 6 | Korban Penangkapan Aparat | Warga/Aktivis Ditahan Aparat Penegak Hukum | Orang | KPA & Komnas HAM |
+| 7 | Korban Kekerasan & Fatalitas | Korban Menderita Luka-luka & Meninggal Dunia | Orang | KPA & Komnas HAM |
+| 8 | Tingkat Penelantaran Kasus | Rasio Sengketa Berstatus Belum Ditangani | Persen (%) | KPA / Basis Data TanahKita |
+| 9 | Laju Eskalasi Era Hilirisasi | Komparasi Pertumbuhan Kasus Pra vs Pasca 2014 | Kasus / Tahun | Data Panel Tahunan KPA |
+| 10 | Dominasi Entitas Korporasi | Frekuensi Keterlibatan Konglomerasi Tambang | Token Count | Text Parsing NLP RegEx |
+| 11 | Aktor Proksi & Vigilante | Deteksi Pengamanan Swakarsa, Preman, Satgas | Token Count | Text Parsing NLP RegEx |
 
 ---
 

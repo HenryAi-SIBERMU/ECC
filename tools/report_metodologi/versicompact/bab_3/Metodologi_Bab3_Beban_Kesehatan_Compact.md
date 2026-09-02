@@ -27,18 +27,18 @@ Penelitian mencakup analisis lintas provinsi pada **6 provinsi Pulau Sulawesi** 
 Seluruh variabel kesehatan masyarakat, kualitas sanitasi, toksisitas klinis, dan limbah industri dioperasionalkan ke dalam **10 indikator empiris terpadu** sebagaimana dirangkum pada matriks operasional berikut:
 
 ##### Matriks Operasionalisasi Variabel dan Sumber Data Resmi Bab 3
-| No | Indikator Riset | Fokus Pengukuran | Satuan | Periode | Sumber Data Primer Resmi |
-| :-: | :--- | :--- | :-: | :-: | :--- |
-| 1 | Ketersediaan Fasilitas Kesehatan | Rasio Rumah Sakit & Puskesmas per Zona | Unit Faskes | 2024 | BPS & Kemenkes RI |
-| 2 | Beban Penyakit ISPA / Pneumonia | Morbiditas Saluran Pernapasan Akut | Kasus Absolut | 2014–2024 | Dinas Kesehatan Provinsi |
-| 3 | Beban Kasus Diare Terlayani | Morbiditas Saluran Pencernaan & Sanitasi | Kasus Absolut | 2014–2024 | Dinas Kesehatan Provinsi |
-| 4 | Tingkat Insidensi per Kapita | Normalisasi Beban Penyakit terhadap Populasi | Kasus / 10.000 Jiwa | 2014–2024 | Dinkes & Populasi BPS |
-| 5 | Indeks Kualitas Udara (IKU) | Kondisi Baku Mutu Udara Ambien Agregat | Poin Skor (0–100) | 2015–2024 | Ditjen PPKL KLHK |
-| 6 | Indeks Kualitas Air (IKA) | Kondisi Baku Mutu Air Sungai & DAS Agregat | Poin Skor (0–100) | 2016–2024 | Ditjen PPKL KLHK |
-| 7 | Prevalensi Vektor Zoonosis | Insidensi DBD, Malaria, & Filariasis Tapak | Kasus / Distrik | 2015–2024 | Dinkes Sulteng (Tapak) |
-| 8 | Kadar Kromium Heksavalen (Cr6+) | Toksisitas Logam Berat Karsinogenik Tapak | mg / Liter | 2022–2024 | Uji Lab AEER & WALHI |
-| 9 | Timbulan Limbah B3 Industri | Volume Residu Slag & Tailing HPAL | Juta Ton / Tahun | 2024–2025 | KLHK, AEER, WALHI, JATAM |
-| 10 | Dinamika Spasial Before-After | Pergeseran Spasial Morbiditas Ekologis | Rasio Pertumbuhan (%) | 2015 vs 2024 | GeoJSON & Profil Dinkes |
+| No | Indikator Riset | Fokus Pengukuran | Satuan | Sumber Data Primer Resmi |
+| :-: | :--- | :--- | :-: | :--- |
+| 1 | Ketersediaan Fasilitas Kesehatan | Rasio Rumah Sakit & Puskesmas per Zona | Unit Faskes | BPS & Kemenkes RI |
+| 2 | Beban Penyakit ISPA / Pneumonia | Morbiditas Saluran Pernapasan Akut | Kasus Absolut | Dinas Kesehatan Provinsi |
+| 3 | Beban Kasus Diare Terlayani | Morbiditas Saluran Pencernaan & Sanitasi | Kasus Absolut | Dinas Kesehatan Provinsi |
+| 4 | Tingkat Insidensi per Kapita | Normalisasi Beban Penyakit terhadap Populasi | Kasus / 10.000 Jiwa | Dinkes & Populasi BPS |
+| 5 | Indeks Kualitas Udara (IKU) | Kondisi Baku Mutu Udara Ambien Agregat | Poin Skor (0–100) | Ditjen PPKL KLHK |
+| 6 | Indeks Kualitas Air (IKA) | Kondisi Baku Mutu Air Sungai & DAS Agregat | Poin Skor (0–100) | Ditjen PPKL KLHK |
+| 7 | Prevalensi Vektor Zoonosis | Insidensi DBD, Malaria, & Filariasis Tapak | Kasus / Distrik | Dinkes Sulteng (Tapak) |
+| 8 | Kadar Kromium Heksavalen (Cr6+) | Toksisitas Logam Berat Karsinogenik Tapak | mg / Liter | Uji Lab AEER & WALHI |
+| 9 | Timbulan Limbah B3 Industri | Volume Residu Slag & Tailing HPAL | Juta Ton / Tahun | KLHK, AEER, WALHI, JATAM |
+| 10 | Dinamika Spasial Before-After | Pergeseran Spasial Morbiditas Ekologis | Rasio Pertumbuhan (%) | GeoJSON & Profil Dinkes |
 
 ---
 

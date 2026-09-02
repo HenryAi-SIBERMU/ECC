@@ -28,18 +28,18 @@ Penelitian mencakup seluruh wilayah daratan dan pesisir Pulau Sulawesi yang terb
 Seluruh variabel lingkungan, emisi, ruang, dan keanekaragaman hayati dioperasionalkan secara terukur ke dalam **10 indikator empiris terpadu** sebagaimana dirangkum pada matriks operasional berikut:
 
 ##### Matriks Operasionalisasi Variabel dan Sumber Data Resmi Bab 2
-| No | Indikator Riset | Fokus Pengukuran | Satuan | Periode | Sumber Data Primer Resmi |
-| :-: | :--- | :--- | :-: | :-: | :--- |
-| 1 | Kepadatan Fasilitas Smelter | Pemusatan Industri Pirometalurgi & HPAL | Unit Fasilitas | 2016–2024 | ESDM MODI & MinerbaOne |
-| 2 | Indeks Kualitas Air (IKA) | Status Mutu Air Sungai & Pesisir | Poin Skor (0–100) | 2016–2024 | Ditjen PPKL KLHK (IKLH) |
-| 3 | Estimasi Timbulan Limbah B3 | Residu Tailing & Terak Slag Nikel | Ton / Tahun | 2016–2024 | Amdal Industri & Neraca KLHK |
-| 4 | Kapasitas PLTU Captive Batubara | Intensitas Pembangkit Listrik Off-Grid | Megawatt (MW) | 2016–2024 | Global Energy Monitor & RUPTL |
-| 5 | Indeks Kualitas Udara (IKU) | Status Mutu Udara Ambien Agregat | Poin Skor (0–100) | 2016–2024 | Ditjen PPKL KLHK (IKLH) |
-| 6 | Konsentrasi Troposferik NO₂ | Pencemaran Polutan Udara Satelit | µmol/m² | 2019–2024 | Satelit NASA TROPOMI (Sentinel-5P) |
-| 7 | Luas Konsesi IUP & Kawasan | Alokasi Ruang Industri Ekstraktif | Hektar (Ha) | 2014–2023 | ESDM MODI & ATR/BPN |
-| 8 | Luas Deforestasi Hutan Alam | Kehilangan Tutupan Pohon Alami | Hektar (Ha) | 2014–2023 | Global Forest Watch (Hansen UMD) |
-| 9 | Atribusi Emisi Karbon CO₂ | Pelepasan GRK per Faktor Pendorong | Megagram CO₂e | 2014–2023 | GFW & IPCC Tier-1 Methodology |
-| 10 | Sebaran Spesies Endemik & IUCN | Keterancaman Habitat Wallacea | Titik & Kategori | 2014–2024 | GBIF API & IUCN Red List |
+| No | Indikator Riset | Fokus Pengukuran | Satuan | Sumber Data Primer Resmi |
+| :-: | :--- | :--- | :-: | :--- |
+| 1 | Kepadatan Fasilitas Smelter | Pemusatan Industri Pirometalurgi & HPAL | Unit Fasilitas | ESDM MODI & MinerbaOne |
+| 2 | Indeks Kualitas Air (IKA) | Status Mutu Air Sungai & Pesisir | Poin Skor (0–100) | Ditjen PPKL KLHK (IKLH) |
+| 3 | Estimasi Timbulan Limbah B3 | Residu Tailing & Terak Slag Nikel | Ton / Tahun | Amdal Industri & Neraca KLHK |
+| 4 | Kapasitas PLTU Captive Batubara | Intensitas Pembangkit Listrik Off-Grid | Megawatt (MW) | Global Energy Monitor & RUPTL |
+| 5 | Indeks Kualitas Udara (IKU) | Status Mutu Udara Ambien Agregat | Poin Skor (0–100) | Ditjen PPKL KLHK (IKLH) |
+| 6 | Konsentrasi Troposferik NO₂ | Pencemaran Polutan Udara Satelit | µmol/m² | Satelit NASA TROPOMI (Sentinel-5P) |
+| 7 | Luas Konsesi IUP & Kawasan | Alokasi Ruang Industri Ekstraktif | Hektar (Ha) | ESDM MODI & ATR/BPN |
+| 8 | Luas Deforestasi Hutan Alam | Kehilangan Tutupan Pohon Alami | Hektar (Ha) | Global Forest Watch (Hansen UMD) |
+| 9 | Atribusi Emisi Karbon CO₂ | Pelepasan GRK per Faktor Pendorong | Megagram CO₂e | GFW & IPCC Tier-1 Methodology |
+| 10 | Sebaran Spesies Endemik & IUCN | Keterancaman Habitat Wallacea | Titik & Kategori | GBIF API & IUCN Red List |
 
 ---
 
