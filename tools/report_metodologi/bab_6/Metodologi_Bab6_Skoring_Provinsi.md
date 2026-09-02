@@ -239,3 +239,58 @@ Sulawesi Selatan mencatat rekor tertinggi se-Sulawesi pada tiga variabel destruk
 4. **Daya Dukung Sosial (Skor 2.4 / 5 — Tidak Melampaui Batas):** Meskipun jumlah warga terdampak langsung tercatat 2.257 jiwa (Z = -0.43σ), Sulawesi Selatan mencatat eskalasi represi terberat dengan 9 insiden kriminalisasi warga dan aktivis lingkungan (Z = +1.57σ, Likert 5.0 — rekor tertinggi se-Sulawesi).
 5. **Veto Kebijakan (Skor 3.1 / 5 — Mendekati Batas):** Ditemukan 10 korporasi tambang beroperasi ilegal di kawasan hutan lindung dan DAS (Z = +1.97σ, Likert 5.0 — tertinggi se-Sulawesi) serta diterbitkannya 105 IUP baru pasca-2014 (Z = +0.09σ).
 6. **Vonis Komposit Sulawesi Selatan (Skor 2.6 / 5.0 — Mendekati Batas):** Status **Mendekati Batas** (WSM: 5.29 / 10.0), dengan catatan kritis bahwa dimensi penegakan hukum tambang ilegal, frekuensi bencana alam, dan represi kriminalisasi warga telah berada pada status **Melampaui Batas Ekstrem (RED ALERT)**.
+
+---
+
+### 6.6.4 Evaluasi Empiris D3TLH: Provinsi Sulawesi Barat (Sulbar)
+> **PROFIL EMPIRIS: Provinsi Sulawesi Barat (Bioregion Non-Hilirisasi & Dominasi Agromaritim)**  
+> Kabupaten/Kota: 6 Daerah  |  Basis Perekonomian: Perkebunan Sawit, Kakao & Perikanan Tangkap  |  Populasi BPS: 1.419.229 Jiwa  
+> Karakteristik Krisis: Bebas dari ekspansi PLTU captive batubara (0 MW) dan nihil timbulan limbah B3/tailing nikel, namun menghadapi tekanan mutu air sungai (IKA 55,93 poin) akibat limbah PKS perkebunan sawit monokultur dan erosi DAS.
+
+#### A. Narasi Temuan Lapangan Sulbar
+Sebagai wilayah pemekaran dengan 6 kabupaten dan populasi 1,42 juta jiwa, **Provinsi Sulawesi Barat mencatatkan Skor Komposit 1.2 / 5.0 (Status: Tidak Melampaui Batas)**. Profil ekologis Sulbar menjadi **bukti empiris pembanding (control baseline)** yang sangat berharga dalam laporan ini. Karena tidak menjadi lokasi hilirisasi industri nikel berskala raksasa, Sulbar terhindar dari akumulasi limbah B3, tailing laut, dan PLTU captive batubara yang menghancurkan daya lentur lingkungan hidup seperti di Sulteng dan Sultra.
+
+Kepadatan konsesi tambang nikel di Sulbar tercatat hanya **0,26% dari luas daratan provinsi (Z = -1.09σ, Likert 0.0 — Terendah se-Sulawesi)**. Namun demikian, evaluasi D3TLH mencatat **dua peringatan ekologis lokal (local stressor)**: yaitu penurunan Indeks Kualitas Air (IKA 55,93 poin, Z = +1.11σ, Likert 5.0) dan angka morbiditas diare sebesar 1,27x lipat (Z = +0.63σ, Likert 4.0), yang dipicu oleh pelepasan limbah cair pabrik kelapa sawit (PKS) monokultur di Pasangkayu dan Mamuju Tengah serta defisit sanitasi dasar perdesaan.
+
+#### B. Matriks Hasil Uji Empiris (Sulbar)
+##### Tabel 6.19: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Barat (Model Hybrid Z-Score & EWM)
+| Pilar | Indikator Empiris | Fakta Mentah (A) | Nilai Z-Score | Bobot EWM | Skor Likert | Status Ekologis |
+| :---: | :--- | :---: | :---: | :---: | :---: | :--- |
+| Pilar Udara | Kapasitas PLTU Captive Beroperasi | 0 MW | -0.57σ | 0.0773 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Udara | Konsentrasi Gas NO2 Troposferik Satelit | 6.00e-06 mol/m² | +0.34σ | 0.0224 | 3.0 / 5 | Mendekati Batas |
+| Pilar Udara | Morbiditas ISPA (Incidence Rate Ratio) | 0.77x lipat | -0.50σ | 0.0461 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Udara | Proporsi Timbulan Limbah B3 Industri | 0.00 Jt Ton | -0.54σ | 0.0829 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Udara | Pelepasan Emisi Karbon Deforestasi GFW | 82.51 Jt Ton CO2e | -0.55σ | 0.0395 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Air | Indeks Kualitas Air (IKA) Terkini | 55.9 Poin | +1.11σ | 0.0262 | 5.0 / 5 | Melampaui Batas |
+| Pilar Air | Morbiditas Diare (Incidence Rate Ratio) | 1.27x lipat | +0.63σ | 0.0164 | 4.0 / 5 | Melampaui Batas |
+| Pilar Air | Konflik Ruang Laut Nelayan vs Tambang | 0 Kasus | -0.87σ | 0.0442 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Air | Akumulasi Beban Tailing, Slag & DSTP | 0.00 Jt Ton | -0.55σ | 0.0822 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Lahan | Bencana Hidrometeorologi (Banjir & Longsor) | 143 Kejadian | -0.51σ | 0.0271 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Lahan | Deforestasi Hutan Alam Primer GFW | 133,263 Ha | -0.61σ | 0.0346 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Lahan | Perambahan Tambang di Kawasan Hutan Lindung | 1,251 Ha | -0.84σ | 0.0392 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Lahan | Aktor Deforestasi Komoditas Tambang & Sawit | 99,586 Ha | -0.52σ | 0.0361 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Lahan | Kepadatan Konsesi IUP Nikel vs Daratan | 0.26% | -1.09σ | 0.0320 | 0.0 / 5 | Tidak Melampaui Batas |
+| Pilar Sosial | Manipulasi Persetujuan Konsultasi Warga (FPIC) | 0 Kasus | -0.68σ | 0.0635 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Sosial | Korban Perampasan Ruang Hidup & Krisis Agraria | 1 Jiwa | -0.57σ | 0.0781 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Sosial | Insiden Kriminalisasi Warga & Pembela HAM | 1 Insiden | -0.71σ | 0.0331 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Sosial | Defisit Kelayakan Standar Faskes SPA | 0.0 % Gap | -0.92σ | 0.0430 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Veto | Penerbitan Obral Konsesi WIUP Baru Pasca-2014 | 27 Izin | -0.68σ | 0.0415 | 1.0 / 5 | Tidak Melampaui Batas |
+| Pilar Veto | Korporat Tambang Pelanggar Hukum Beroperasi Ilegal | 0 Korporasi | -0.72σ | 0.0473 | 1.0 / 5 | Tidak Melampaui Batas |
+
+##### Tabel 6.20: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Barat
+| Pilar / Dimensi | Cakupan Indikator Kunci | Skor Likert Pilar (0-5) | Status Ekologis | Interpretasi Temuan Lapangan Sulbar |
+| :---: | :--- | :---: | :---: | :--- |
+| Pilar 1: Udara | PLTU (0 MW), NO2 (6.0e-6), ISPA (0.77x), B3 (0 Jt Ton), CO2 (82.5 Jt Ton) | 1.2 / 5 | Tidak Melampaui Batas | Bebas Polusi PLTU Captive & Nihil Timbulan Limbah B3 Smelter |
+| Pilar 2: Air | IKA (55.93), Diare (1.27x), Tailing (0 Jt Ton), Nihil Konflik Laut | 1.9 / 5 | Tidak Melampaui Batas | Penurunan Mutu Air Sungai Akibat Limbah PKS Monokultur Sawit & Erosi |
+| Pilar 3: Lahan | Bencana (143 Kejadian), Deforestasi (133k Ha), Lindung (1.2k Ha), IUP (0.26%) | 0.8 / 5 | Tidak Melampaui Batas | Kepadatan Konsesi Tambang Nikel Terendah Se-Sulawesi (Hanya 0,26%) |
+| Pilar 4: Sosial | FPIC (0 Kasus), Korban (1 Jiwa), Kriminalisasi (1 Insiden), Gap SPA (0%) | 1.0 / 5 | Tidak Melampaui Batas | Relatif Minim Konflik Tambang Ekstraktif Nikel Skala Masif |
+| Pilar 5: Veto | Obral Izin (27 IUP Baru), Nihil Korporat Ilegal Teridentifikasi | 1.0 / 5 | Tidak Melampaui Batas | Aktivitas Perizinan Tambang Nikel Terbatas di Kawasan Pesisir |
+| SKOR KOMPOSIT SULBAR | Agregasi 5 Pilar EWM Weighted Average (Z-Score Standardization) | 1.2 / 5 | Tidak Melampaui Batas | STATUS TERJAGA: BIOREGION NON-HILIRISASI NIKEL |
+
+#### C. Analisis Temuan Empiris (Sulbar)
+1. **Daya Tampung Udara (Skor 1.2 / 5 — Tidak Melampaui Batas):** Sulbar bebas dari beban PLTU captive batubara (0,0 MW, Z = -0.57σ) dan nihil timbulan limbah B3 industri smelter (0,0 Ton, Z = -0.54σ). Emisi karbon deforestasi tercatat 82,51 Jt Ton CO2e (Z = -0.55σ) dan konsentrasi NO2 troposferik sebesar 6,00e-06 mol/m² (Z = +0.34σ).
+2. **Daya Tampung Air (Skor 1.9 / 5 — Tidak Melampaui Batas):** Nihil pembuangan tailing/slag tambang (0,0 Ton), namun mencatat IKA terendah se-Sulawesi (55,93 poin, Z = +1.11σ, Likert 5.0) dan insidensi diare 1,27x lipat (Z = +0.63σ, Likert 4.0) yang bersumber dari limbah cair PKS kelapa sawit dan sedimentasi erosi DAS Lariang & Karama.
+3. **Daya Dukung Lahan (Skor 0.8 / 5 — Tidak Melampaui Batas):** Kepadatan konsesi tambang nikel paling rendah se-Sulawesi (hanya 0,26% daratan, Z = -1.09σ, Likert 0.0), deforestasi primer 133.263 Ha (Z = -0.61σ), perambahan hutan lindung 1.251 Ha, dan frekuensi bencana alam sebanyak 143 kejadian.
+4. **Daya Dukung Sosial (Skor 1.0 / 5 — Tidak Melampaui Batas):** Minim konflik agraria struktural skala besar yang melibatkan industri tambang (1 jiwa terdampak, 1 insiden kriminalisasi, dan nihil sengketa FPIC), mencerminkan relasi sosial-ekologis yang relatif stabil.
+5. **Veto Kebijakan (Skor 1.0 / 5 — Tidak Melampaui Batas):** Penerbitan konsesi tambang nikel baru pasca-2014 sangat terbatas (27 IUP, Z = -0.68σ, Likert 1.0) dan tidak teridentifikasi adanya korporasi tambang ilegal skala besar yang beroperasi di kawasan hutan.
+6. **Vonis Komposit Sulawesi Barat (Skor 1.2 / 5.0 — Tidak Melampaui Batas):** Status **Tidak Melampaui Batas** (WSM: 2.36 / 10.0). Status terjaga ini membuktikan bahwa tanpa intervensi industri smelter nikel dan PLTU batubara, daya lentur lingkungan hidup regional dapat dipertahankan dalam ambang aman.
