@@ -367,15 +367,25 @@ def generate_bab6_provinsi_compact():
     add_h2(doc, "D", "Kerangka Analisis & Formulasi Matematis")
 
     add_h3(doc, "Sub-bab 6.6: Algoritma Skoring Tingkat Provinsi (Model Hybrid Z-Score & EWM)")
-    add_body(doc, [
-        ("Model evaluasi regional mengombinasikan standardisasi Z-Score untuk mendeteksi outlier deviasi spasial dengan pembobotan objektif Entropy Weight Method (EWM) berbasis dispersi informasi Shannon, dilanjutkan pemetaan skala Likert diskret (0–5):", False, False)
-    ])
-    add_formula(doc, "1. Z-Score Regional: Z_ij = (x_ij - mean_j) / std_j   |   Khusus IKA: Z_ika = - (ika_i - mean_ika) / std_ika\n"
-                     "2. Min-Max Normalisasi: r_ij = (x_ij - min_j) / (max_j - min_j)   ;   P_ij = r_ij / Σ r_ij\n"
-                     "3. Entropi Shannon: E_j = - (1 / ln(n)) × Σ [ P_ij × ln(P_ij + ε) ]   ;   D_j = 1 - E_j   ;   W_j = D_j / Σ D_j\n"
-                     "4. Pemetaan Likert Diskret: Z >= +1.0σ -> 5.0 ; 0.5 <= Z < 1.0 -> 4.0 ; 0.0 <= Z < 0.5 -> 3.0 ; -0.5 <= Z < 0.0 -> 2.0 ; -1.0 <= Z < -0.5 -> 1.0 ; Z < -1.0 -> 0.0\n"
-                     "5. Skor Pilar Terbobot EWM: Skor_Pilar_i = Σ [ L_ij × W_j ] / Σ W_j   |   Skor Komposit = [ Σ Skor_Pilar (1..5) ] / 5.0",
-                ket="n = 6 Provinsi; ε = 1e-12; W_j = Bobot objektif Shannon EWM (B3 = 8,29%, Tailing = 8,22%, Korban Agraria = 7,81%, PLTU = 7,73%); L_ij = Skor Likert diskret (0-5); Nilai Z >= +1.0σ merefleksikan anomali krisis ekstrem (Red Alert).")
+    add_formula(doc, 
+        "1. Pengukuran Deviasi Wilayah (Z-Score):\n"
+        "   Nilai Deviasi = (Nilai Riil Provinsi - Rata-rata 6 Provinsi) / Standar Deviasi\n"
+        "   *Khusus Mutu Air (IKA): Tanda dibalik (-) karena semakin rendah angka IKA, semakin tercemar airnya.\n\n"
+        "2. Pembobotan Otomatis Tingkat Ketimpangan (Metode Entropi Shannon / EWM):\n"
+        "   Bobot Indikator = Tingkat Ketimpangan Indikator / Total Ketimpangan 20 Indikator\n"
+        "   *Indikator paling timpang otomatis berbobot terbesar: B3 (8,29%), Tailing (8,22%), Korban Agraria (7,81%), PLTU (7,73%).\n\n"
+        "3. Konversi Nilai Deviasi ke Skala Kerusakan Lingkungan (Skor 0 s.d. 5):\n"
+        "   • Skor 5,0 (Darurat Merah / Red Alert) : Deviasi sangat ekstrem (>= +1,0 di atas rata-rata pulau)\n"
+        "   • Skor 4,0 (Melampaui Batas)          : Deviasi tinggi (+0,5 s.d. +1,0 di atas rata-rata pulau)\n"
+        "   • Skor 3,0 (Mendekati Batas)           : Deviasi sedang (0,0 s.d. +0,5 di atas rata-rata pulau)\n"
+        "   • Skor 2,0 (Waspada)                   : Deviasi rendah (-0,5 s.d. 0,0 di bawah rata-rata pulau)\n"
+        "   • Skor 1,0 (Terjaga)                   : Jauh di bawah rata-rata (-1,0 s.d. -0,5)\n"
+        "   • Skor 0,0 (Sangat Aman)               : Tingkat paling aman (< -1,0 di bawah rata-rata pulau)\n\n"
+        "4. Perhitungan Skor Akhir Provinsi:\n"
+        "   Skor Dimensi  = Total (Skor Indikator × Bobot Indikator) / Total Bobot Dimensi\n"
+        "   Skor Komposit = (Skor Udara + Skor Air + Skor Lahan + Skor Sosial + Skor Veto) / 5.0",
+        ket="Contoh Nyata (PLTU Captive Sulteng): Deviasi = (7.325 MW - 1.638 MW) / 2.882 MW = +1,97 (Jauh melampaui +1,0) -> Skor Langsung 5,0 / 5 (Darurat Merah / Red Alert)."
+    )
 
     add_body(doc, [
         ("Penerapan model ini pada 6 provinsi se-Pulau Sulawesi menghasilkan sintesis komparatif tingkat kerentanan regional sebagaimana dirangkum pada tabel berikut:", False, False)
@@ -555,14 +565,29 @@ Merujuk pada Tabel Verifikasi Threshold model evaluasi D3TLH, seluruh parameter 
 ## D. Kerangka Analisis & Formulasi Matematis
 
 ### Sub-bab 6.6: Algoritma Skoring Tingkat Provinsi (Model Hybrid Z-Score & EWM)
-Model evaluasi regional mengombinasikan standardisasi Z-Score untuk mendeteksi outlier deviasi spasial dengan pembobotan objektif Entropy Weight Method (EWM) berbasis dispersi informasi Shannon, dilanjutkan pemetaan skala Likert diskret (0–5):
+Model evaluasi regional mengombinasikan standardisasi Z-Score untuk mendeteksi tingkat keparahan anomali wilayah dengan pembobotan objektif Entropy Weight Method (EWM) berbasis tingkat ketimpangan data, yang dihitung melalui 4 tahapan matematis yang mudah dipahami:
 
-> `1. Z-Score Regional: Z_ij = (x_ij - mean_j) / std_j   |   Khusus IKA: Z_ika = - (ika_i - mean_ika) / std_ika`  
-> `2. Min-Max Normalisasi: r_ij = (x_ij - min_j) / (max_j - min_j)   ;   P_ij = r_ij / Σ r_ij`  
-> `3. Entropi Shannon: E_j = - (1 / ln(n)) × Σ [ P_ij × ln(P_ij + ε) ]   ;   D_j = 1 - E_j   ;   W_j = D_j / Σ D_j`  
-> `4. Pemetaan Likert Diskret: Z >= +1.0σ -> 5.0 ; 0.5 <= Z < 1.0 -> 4.0 ; 0.0 <= Z < 0.5 -> 3.0 ; -0.5 <= Z < 0.0 -> 2.0 ; -1.0 <= Z < -0.5 -> 1.0 ; Z < -1.0 -> 0.0`  
-> `5. Skor Pilar Terbobot EWM: Skor_Pilar_i = Σ [ L_ij × W_j ] / Σ W_j   |   Skor Komposit = [ Σ Skor_Pilar (1..5) ] / 5.0`  
-> *Keterangan: n = 6 Provinsi; ε = 1e-12; W_j = Bobot objektif Shannon EWM (B3 = 8,29%, Tailing = 8,22%, Korban Agraria = 7,81%, PLTU = 7,73%); L_ij = Skor Likert diskret (0-5); Nilai Z >= +1.0σ merefleksikan anomali krisis ekstrem (Red Alert).*
+> **1. Pengukuran Deviasi Wilayah (Z-Score):**  
+> `Nilai Deviasi = (Nilai Riil Provinsi - Rata-rata 6 Provinsi) / Standar Deviasi`  
+> *Khusus Mutu Air (IKA): Tanda dibalik (-) karena semakin rendah angka IKA, semakin tercemar airnya.*  
+>  
+> **2. Pembobotan Otomatis Tingkat Ketimpangan (Metode Entropi Shannon / EWM):**  
+> `Bobot Indikator = Tingkat Ketimpangan Indikator / Total Ketimpangan 20 Indikator`  
+> *Indikator dengan ketimpangan paling ekstrem otomatis memperoleh bobot analitis terbesar: Limbah B3 (8,29%), Residu Tailing (8,22%), Korban Konflik Agraria (7,81%), dan Kapasitas PLTU Batubara (7,73%).*  
+>  
+> **3. Konversi Nilai Deviasi ke Skala Kerusakan Lingkungan (Skor 0 s.d. 5):**  
+> • **Skor 5,0 (Darurat Merah / Red Alert)** : Nilai deviasi sangat ekstrem (≥ +1,0 di atas rata-rata pulau)  
+> • **Skor 4,0 (Melampaui Batas)** : Nilai deviasi tinggi (+0,5 s.d. +1,0 di atas rata-rata pulau)  
+> • **Skor 3,0 (Mendekati Batas)** : Nilai deviasi sedang (0,0 s.d. +0,5 di atas rata-rata pulau)  
+> • **Skor 2,0 (Waspada)** : Nilai deviasi rendah (-0,5 s.d. 0,0 di bawah rata-rata pulau)  
+> • **Skor 1,0 (Terjaga)** : Berada jauh di bawah rata-rata (-1,0 s.d. -0,5)  
+> • **Skor 0,0 (Sangat Aman)** : Tingkat paling aman (< -1,0 di bawah rata-rata pulau)  
+>  
+> **4. Perhitungan Skor Akhir Provinsi:**  
+> `Skor Dimensi  = Total (Skor Indikator × Bobot Indikator) / Total Bobot Dimensi`  
+> `Skor Komposit = (Skor Udara + Skor Air + Skor Lahan + Skor Sosial + Skor Veto) / 5.0`  
+>  
+> *Contoh Nyata (PLTU Captive Sulteng): Deviasi = (7.325 MW - 1.638 MW) / 2.882 MW = +1,97 (Jauh melampaui +1,0) → Skor Langsung 5,0 / 5 (Darurat Merah / Red Alert).*
 
 ##### Tabel 6.6a: Matriks Sintesis Komparatif Skor D3TLH 6 Provinsi Se-Pulau Sulawesi
 | Rank | Provinsi | Udara | Air | Lahan | Sosial | Veto | Likert | WSM | Status Ekologis | Faktor Determinan Utama |
