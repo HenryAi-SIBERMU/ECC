@@ -101,5 +101,150 @@ h4 { color: #A5D6A7; }
 </table>
 <h4>E. Analisis Temuan Empiris</h4>
 <p>Grafik time-series pada dashboard memperlihatkan peningkatan insidensi konflik yang memuncak pada tahun <strong>2017</strong> dengan <strong>21 kasus konflik</strong>. Peningkatan insidensi konflik beririsan dengan dinamika perizinan kawasan.</p>
+<h2>4.2 Sebaran Sektoral: Dampak Masyarakat dan Penggunaan Lahan</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Dampak Konflik: <code>data/processed/sulawesi_konflik_agraria_tanahkita.csv</code>. Visualisasi dashboard menggunakan Analisis Komparatif Dampak Sosial-Ekologis.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Visualisasi komparatif menggambarkan skala dampak sosial dan penggunaan lahan berdasarkan sektor industri. Sektor Pertambangan mencatatkan jumlah warga terdampak terbesar, yaitu <strong>54,658 jiwa</strong>, disusul sektor Kehutanan sebanyak <strong>21,886 jiwa</strong>. Dari dimensi penggunaan lahan, Sektor Pertambangan juga mencatatkan luas sengketa terbesar yaitu <strong>441,286 hektar</strong>.</p>
+<h4>B. Alur Logika Metodologis Analisis Komparatif Dampak Sosial-Ekologis</h4>
+<div class="mermaid">flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Konflik Agraria<br/><i>sektor, jiwa terdampak, luas ha, tahun</i>"]
+    end
+    subgraph Sectoral_Burden["2. Sectoral Burden Analysis"]
+        A --> B["Klasifikasi sektor pemicu konflik"]
+        B --> C["Agregasi korban terdampak (jiwa)<br/>per sektor dan tahun"]
+        B --> D["Agregasi luas area konflik (Ha)<br/>per sektor dan tahun"]
+    end
+    subgraph Comparative_Output["3. Analisis Komparatif Dampak"]
+        C --> E["Distribusi korban terdampak"]
+        D --> F["Distribusi monopoli area konflik"]
+        E --> G["Bedah anomali lonjakan jiwa"]
+        F --> H["Bedah anomali lonjakan area"]
+    end</div>
+<h4>C. Formulasi Matematis</h4>
+<div class="formula">J_s = Σ J_i, untuk setiap kasus i pada sektor s</div>
+<div class="formula">A_s = Σ A_i, untuk setiap kasus i pada sektor s</div>
+<div class="formula">P_s (%) = ( Nilai_s / Nilai_Total ) × 100</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 4.4: Matriks Dampak Sosial-Ekologis Konflik Agraria menurut Sektor</div>
+<table>
+<thead><tr><th class="data-th">Sektor Pemicu</th><th class="data-th">Jiwa Terdampak</th><th class="data-th">Proporsi Jiwa</th><th class="data-th">Luas Area (Ha)</th><th class="data-th">Proporsi Area</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Pertambangan</td><td class="data-td">54,658</td><td class="data-td">60.3%</td><td class="data-td">441,286</td><td class="data-td">73.1%</td></tr>
+<tr class="data-tr-even"><td class="data-td">Kehutanan</td><td class="data-td">21,886</td><td class="data-td">24.2%</td><td class="data-td">66,193</td><td class="data-td">11.0%</td></tr>
+<tr><td class="data-td">Perkebunan</td><td class="data-td">13,799</td><td class="data-td">15.2%</td><td class="data-td">77,902</td><td class="data-td">12.9%</td></tr>
+<tr class="data-tr-even"><td class="data-td">Pariwisata & Pesisir</td><td class="data-td">215</td><td class="data-td">0.2%</td><td class="data-td">543</td><td class="data-td">0.1%</td></tr>
+<tr><td class="data-td">Infrastruktur & PSN</td><td class="data-td">24</td><td class="data-td">0.0%</td><td class="data-td">17,443</td><td class="data-td">2.9%</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 4.5: Bedah Anomali Lonjakan Korban Terdampak (Jiwa)</div>
+<table>
+<thead><tr><th class="data-th">Anomali</th><th class="data-th">Tahun</th><th class="data-th">Sektor</th><th class="data-th">Korban Jiwa</th><th class="data-th">Kasus Utama</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Anomali Jiwa 1</td><td class="data-td">2022</td><td class="data-td">Pertambangan</td><td class="data-td">37,000</td><td class="data-td">Konflik Koalisi Selamatkan Pulau Wawoni</td></tr>
+<tr class="data-tr-even"><td class="data-td">Anomali Jiwa 2</td><td class="data-td">2012</td><td class="data-td">Pertambangan</td><td class="data-td">13,936</td><td class="data-td">Konflik Masyarakat Tumpang Pitu dengan PT BSI</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 4.6: Bedah Anomali Monopoli Area Konflik (Hektar)</div>
+<table>
+<thead><tr><th class="data-th">Anomali</th><th class="data-th">Tahun</th><th class="data-th">Sektor</th><th class="data-th">Luas Ha</th><th class="data-th">Kasus Utama</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Anomali Area 1</td><td class="data-td">2017</td><td class="data-td">Pertambangan</td><td class="data-td">146,201</td><td class="data-td">Konflik Nelayan Desa Boddia dengan Pertambangan Pasir Laut PT. Boskalis dan PT. Jan De Nul</td></tr>
+<tr class="data-tr-even"><td class="data-td">Anomali Area 2</td><td class="data-td">2022</td><td class="data-td">Pertambangan</td><td class="data-td">86,758</td><td class="data-td">Konflik Koalisi Selamatkan Pulau Wawoni</td></tr>
+</tbody>
+</table>
+<h4>E. Analisis Temuan Empiris</h4>
+<p>Matriks dampak sektoral menunjukkan bahwa sektor Pertambangan menjadi penyumbang utama korban terdampak sekaligus sektor dengan luas sengketa terbesar. Dinamika konflik perlu dibaca dari jumlah kasus, skala korban, dan luas ruang hidup yang diperebutkan.</p>
+<h2>4.3 Indikasi Represi dan Kriminalisasi dalam Konflik Agraria</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Represi dan Kriminalisasi: <code>data/processed/sulawesi_konflik_agraria_tanahkita.csv</code>. Visualisasi dashboard menggunakan Analisis Agregat Kasus Represi & Pelanggaran HAM.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Dari database yang didokumentasikan, terdapat <strong>46 kasus indikasi kriminalisasi</strong> dan <strong>93 warga/aktivis lingkungan</strong> yang tercatat pernah ditangkap. Berdasarkan distribusi sektoral, <strong>Sektor Pertambangan</strong> mencatatkan frekuensi indikasi represi tertinggi dengan <strong>17 kasus</strong>. Tahun dengan jumlah catatan insiden represi tertinggi adalah <strong>2017</strong> dengan <strong>7 kasus</strong>.</p>
+<h4>B. Alur Logika Metodologis Analisis Agregat Kasus Represi & Pelanggaran HAM</h4>
+<div class="mermaid">flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Konflik Agraria<br/><i>indikasi kriminalisasi, ditangkap, luka, tewas</i>"]
+    end
+    subgraph Violence_Tracking["2. Violence & Criminalization Tracking"]
+        A --> B["Standarisasi kolom korban<br/>ditangkap, luka, tewas"]
+        B --> C["Hitung total kasus kriminalisasi"]
+        B --> D["Agregasi tren kriminalisasi pasca-2000"]
+        B --> E["Agregasi sektor paling represif"]
+    end
+    subgraph Output["3. Pemetaan Ruang Sipil"]
+        C --> F["Metrik represi agregat"]
+        D --> G["Tren tahunan kriminalisasi"]
+        E --> H["Sektor dominan represi"]
+        F --> I["Pembacaan risiko HAM"]
+        G --> I
+        H --> I
+    end</div>
+<h4>C. Formulasi Matematis</h4>
+<div class="formula">K_krim = Σ I_i, untuk setiap kasus i dengan indikasi kriminalisasi</div>
+<div class="formula">R = Σ ( D_i + L_i + T_i )</div>
+<div class="formula">R = 93 + 4 + 1 = 98 orang</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 4.7: Metrik Agregat Represi dan Kriminalisasi</div>
+<table>
+<thead><tr><th class="data-th">Indikator</th><th class="data-th">Nilai</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Kasus Indikasi Kriminalisasi</td><td class="data-td">46</td></tr>
+<tr class="data-tr-even"><td class="data-td">Warga/Aktivis Ditangkap</td><td class="data-td">93</td></tr>
+<tr><td class="data-td">Korban Luka-luka</td><td class="data-td">4</td></tr>
+<tr class="data-tr-even"><td class="data-td">Korban Tewas</td><td class="data-td">1</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 4.8: Tren Kasus Kriminalisasi dan Represi Pasca-2000</div>
+<table>
+<thead><tr><th class="data-th">Tahun</th><th class="data-th">Jumlah Kasus</th></tr></thead>
+<tbody>
+<tr><td class="data-td">2000</td><td class="data-td">1</td></tr>
+<tr class="data-tr-even"><td class="data-td">2001</td><td class="data-td">1</td></tr>
+<tr><td class="data-td">2003</td><td class="data-td">2</td></tr>
+<tr class="data-tr-even"><td class="data-td">2004</td><td class="data-td">1</td></tr>
+<tr><td class="data-td">2007</td><td class="data-td">2</td></tr>
+<tr class="data-tr-even"><td class="data-td">2008</td><td class="data-td">1</td></tr>
+<tr><td class="data-td">2009</td><td class="data-td">3</td></tr>
+<tr class="data-tr-even"><td class="data-td">2010</td><td class="data-td">2</td></tr>
+<tr><td class="data-td">2012</td><td class="data-td">3</td></tr>
+<tr class="data-tr-even"><td class="data-td">2013</td><td class="data-td">4</td></tr>
+<tr><td class="data-td">2014</td><td class="data-td">2</td></tr>
+<tr class="data-tr-even"><td class="data-td">2015</td><td class="data-td">1</td></tr>
+<tr><td class="data-td">2016</td><td class="data-td">1</td></tr>
+<tr class="data-tr-even"><td class="data-td">2017</td><td class="data-td">7</td></tr>
+<tr><td class="data-td">2019</td><td class="data-td">3</td></tr>
+<tr class="data-tr-even"><td class="data-td">2021</td><td class="data-td">1</td></tr>
+<tr><td class="data-td">2022</td><td class="data-td">6</td></tr>
+<tr class="data-tr-even"><td class="data-td">2023</td><td class="data-td">2</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 4.9: Sektor Industri Paling Represif</div>
+<table>
+<thead><tr><th class="data-th">Sektor Pemicu</th><th class="data-th">Jumlah Kasus Kriminalisasi</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Pertambangan</td><td class="data-td">17</td></tr>
+<tr class="data-tr-even"><td class="data-td">Kehutanan</td><td class="data-td">13</td></tr>
+<tr><td class="data-td">Perkebunan</td><td class="data-td">12</td></tr>
+<tr class="data-tr-even"><td class="data-td">Infrastruktur & PSN</td><td class="data-td">2</td></tr>
+<tr><td class="data-td">Pariwisata & Pesisir</td><td class="data-td">2</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 4.10: Arsip Kasus Represi dan Kekerasan Fisik Tertinggi</div>
+<table>
+<thead><tr><th class="data-th">Tahun</th><th class="data-th">Sektor</th><th class="data-th">Perusahaan Terlibat</th><th class="data-th">Ditangkap</th><th class="data-th">Tewas</th><th class="data-th">Narasi Singkat</th></tr></thead>
+<tbody>
+<tr><td class="data-td">2001</td><td class="data-td">Kehutanan</td><td class="data-td">Tidak/Belum Teridentifikasi</td><td class="data-td">22</td><td class="data-td">0</td><td class="data-td">Kawasan Hutan Konservasi TWA Nanggala III sebelumnya merupakan Kawasan Hutan Lindung yang ditunjuk berdasarkan Tata Guna Hutan Kesepakatan (TGHK).</td></tr>
+<tr class="data-tr-even"><td class="data-td">2004</td><td class="data-td">Perkebunan</td><td class="data-td">PT Bina Mulia Ternak</td><td class="data-td">20</td><td class="data-td">0</td><td class="data-td">PT Perkebunan Nusantara (PTPN) XIV dituntut segera mengembalikan lahan warga Kecamatan Keera, Kabupaten Wajo, Sulawesi Selatan (Sulsel), sesuai kesepakatan bersama di Kantor Mar...</td></tr>
+<tr><td class="data-td">2007</td><td class="data-td">Kehutanan</td><td class="data-td">PT. Wirakarya Sakti , SInarmas Forestry , Asia Pulp and Paper</td><td class="data-td">15</td><td class="data-td">0</td><td class="data-td">Konflik yang terjadi di Desa Lubuk Mandarsah mengarah ke proses penyelesaian, pasca Terbunuhnya Indra Pelani Pada Tahun 2015 hingga sekarang masyarakat masih bertahan dan belum ...</td></tr>
+<tr class="data-tr-even"><td class="data-td">2009</td><td class="data-td">Kehutanan</td><td class="data-td">Tidak/Belum Teridentifikasi</td><td class="data-td">11</td><td class="data-td">0</td><td class="data-td">Nasib masyarakat adat Barambang Katute, di Desa Bonto Katute, Kecamatan Sinjai Borong, Kabupaten Sinjai, Sulawesi Selatan (Sulsel), makin tak menentu. Setelah didera teror penan...</td></tr>
+<tr><td class="data-td">2009</td><td class="data-td">Kehutanan</td><td class="data-td">PT. Galena Sumber Energi</td><td class="data-td">11</td><td class="data-td">0</td><td class="data-td">-</td></tr>
+<tr class="data-tr-even"><td class="data-td">2022</td><td class="data-td">Pertambangan</td><td class="data-td">PT Gema Kreasi Perdana (GKP)</td><td class="data-td">6</td><td class="data-td">0</td><td class="data-td">Keberadaan PT Gema Kreasi Perdana (GKP), anak perusahaan Harita Group, di Pulau Wawonii, Kabupaten Konawe Kepulauan, Sulawesi Tenggara mengancam keselamatan warga, menggusur lah...</td></tr>
+<tr><td class="data-td">2017</td><td class="data-td">Kehutanan</td><td class="data-td">Tidak/Belum Teridentifikasi</td><td class="data-td">4</td><td class="data-td">0</td><td class="data-td">-</td></tr>
+<tr class="data-tr-even"><td class="data-td">2013</td><td class="data-td">Kehutanan</td><td class="data-td">Tidak/Belum Teridentifikasi</td><td class="data-td">3</td><td class="data-td">0</td><td class="data-td">Bahtiar bin Sabang adalah salah satu korban kriminalisasi karena dituduh menebang pohon di atas tanahnya sendiri yang diklim oleh Kehutanan Sebagai Kawasan Hutan Produksi Terbatas</td></tr>
+<tr><td class="data-td">2012</td><td class="data-td">Pertambangan</td><td class="data-td">PT Bumi Suksindo , PT. Merdeka Copper Gold</td><td class="data-td">1</td><td class="data-td">0</td><td class="data-td">Gunung Tumpang Pitu yang masuk wilayah Desa Sumberagung, Kecamatan Pesanggaran, Kabupaten Banyuwangi, Jawa Timur, merupakan lokasi tambang emas dari PT Bumi Suksindo ( PT BSI) s...</td></tr>
+<tr class="data-tr-even"><td class="data-td">2022</td><td class="data-td">Pertambangan</td><td class="data-td">PT. Trio Kencana</td><td class="data-td">0</td><td class="data-td">1</td><td class="data-td">Penolakan dilakukan karena warga khawatir sumber air bersih mereka yang masuk ke wilayah konsesi tambang akan hilang. Warga akhirnya berunjuk rasa memblokade jalan dan terjadi p...</td></tr>
+</tbody>
+</table>
+<h4>E. Analisis Temuan Empiris</h4>
+<p>Keberadaan kasus kriminalisasi di sekitar area konsesi, terutama pada sektor <strong>Pertambangan</strong>, mengindikasikan pentingnya jaminan perlindungan ruang sipil dan penghormatan HAM dalam setiap proses pembangunan.</p>
 </body>
 </html>

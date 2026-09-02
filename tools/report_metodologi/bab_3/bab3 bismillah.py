@@ -891,16 +891,6 @@ def generate_all_bab3():
             row["Sumber Referensi"],
         ])
 
-    konf_headers_37 = ["Komponen Analisis", "Definisi Variabel (Sub-bab 3.7)"]
-    konf_rows_37 = [
-        ["Variabel Independen (X)", "Kawasan/Perusahaan dan Jenis Limbah B3 (klasifikasi operasi dan karakter residu: Slag, Tailing HPAL, Air Asam Tambang)."],
-        ["Variabel Dependen (Y)", "Estimasi Timbulan (Ton/Tahun): volume absolut buangan limbah B3 per fasilitas."],
-        ["Metode Analisis", "Statistik deskriptif (pemeringkatan, profiling komposisi, audit defisit pengelolaan) dan komparasi Bar Chart; tanpa uji inferensial Chi-Square."],
-        ["Filter Sumber Mayor", f"Hanya fasilitas dengan timbulan > {ambang_mayor_37:,.0f} Ton/Tahun ({n_sumber_mayor_37} dari {n_sumber_raw_37} entri sumber)."],
-        ["Periode Observasi", "Kompilasi laporan 2020-2024 (AEER, WALHI, JATAM, BPLH, kajian akademis)."],
-        ["Dataset & File", "data/processed/sulawesi_limbah_b3.csv"],
-    ]
-
     mermaid_str_3_7 = """flowchart LR
     subgraph Data_Input["1. Input Data Dashboard"]
         A["Data Audit LSM & KLHK<br/><i>Provinsi, kawasan, jenis limbah, timbulan (Ton/Tahun)</i>"]
@@ -1415,7 +1405,7 @@ def generate_all_bab3():
     add_p(doc, [
         ("Kerangka agregasi statistik deskriptif dan komparasi grafik batang untuk merunut skala penumpukan limbah B3 diilustrasikan pada ", False, False),
         ("Bagan Alur 3.7", True, False),
-        (" berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan pemeringkatan dan profiling komposisi buangan absolut, dengan konfigurasi variabel dirinci pada Tabel 3.7a di bawah gambar.", False, False),
+        (f" berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan pemeringkatan dan profiling komposisi buangan absolut; hanya fasilitas mayor dengan timbulan > {ambang_mayor_37:,.0f} Ton/Tahun ({n_sumber_mayor_37} dari {n_sumber_raw_37} entri sumber) yang diagregasi.", False, False),
     ])
     add_caption(doc, "Bagan Alur 3.7: Alur Logika Analisis Deskriptif Beban Limbah B3")
     if download_success_3_7:
@@ -1430,9 +1420,6 @@ def generate_all_bab3():
     else:
         p_err = doc.add_paragraph()
         run(p_err, "[Gambar Flowchart Gagal Diunduh, silakan periksa koneksi internet saat generate]", color=C_RED, pt=9)
-
-    add_caption(doc, "Tabel 3.7a: Konfigurasi Variabel Analisis Deskriptif Limbah B3 (Sub-bab 3.7)")
-    add_table_1col(doc, konf_headers_37, konf_rows_37, [4.5, 11.0], ["L", "L"])
 
     add_h4(doc, "C. Formulasi Matematis: Agregasi Timbulan dan Proporsi Komposisi")
     add_p(doc, [("Kuantifikasi skala timbulan limbah dari level fasilitas hingga level regional dihitung menggunakan sistem formulasi matematis berikut:", False, False)])
@@ -1655,11 +1642,9 @@ h4 {{ color: #A5D6A7; }}
 <h4>A. Pengantar & Kerangka Narasi</h4>
 <p>Sub-bab ini mengungkap timbulan <strong>Limbah Bahan Berbahaya dan Beracun (B3)</strong> dari operasi smelter dan tambang nikel: Slag & Tailing (Chromium, Nikel, Kadmium), Tailing HPAL (asam sulfat tinggi), Air Limbah Tambang, serta Residu & DSTP. Data kompilasi AEER, WALHI, JATAM membuktikan operasi smelter di Sulawesi menghasilkan lebih dari <strong>{total_b3_37 / 1_000_000:.1f} juta ton limbah B3 per tahun</strong> — angka yang kemungkinan besar underestimate karena banyak fasilitas tidak melaporkan timbulan secara transparan.</p>
 <h4>B. Alur Logika Metodologis Descriptive Statistics & Comparative Bar Chart</h4>
-<p>Kerangka agregasi statistik deskriptif diilustrasikan pada <strong>Bagan Alur 3.7</strong> berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan pemeringkatan dan profiling komposisi buangan absolut, dengan konfigurasi variabel dirinci pada Tabel 3.7a di bawah gambar.</p>
+<p>Kerangka agregasi statistik deskriptif diilustrasikan pada <strong>Bagan Alur 3.7</strong> berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan pemeringkatan dan profiling komposisi buangan absolut; hanya fasilitas mayor dengan timbulan > {ambang_mayor_37:,.0f} Ton/Tahun ({n_sumber_mayor_37} dari {n_sumber_raw_37} entri sumber) yang diagregasi.</p>
 <div class="table-caption">Bagan Alur 3.7: Alur Logika Analisis Deskriptif Beban Limbah B3</div>
 <div class="mermaid">{mermaid_str_3_7}</div>
-<div class="table-caption">Tabel 3.7a: Konfigurasi Variabel Analisis Deskriptif Limbah B3 (Sub-bab 3.7)</div>
-{html_table(konf_headers_37, konf_rows_37)}
 <h4>C. Formulasi Matematis: Agregasi Timbulan dan Proporsi Komposisi</h4>
 <div class="formula">Total_B3_p = Σ ( Timbulan_i )   ;   untuk seluruh fasilitas mayor i pada provinsi p</div>
 <div class="formula">Total_B3_j = Σ ( Timbulan_i )   ;   untuk seluruh fasilitas mayor i dengan Jenis_Limbah j</div>
@@ -1919,15 +1904,12 @@ h4 {{ color: #A5D6A7; }}
         f"Sub-bab ini mengungkap timbulan **Limbah Bahan Berbahaya dan Beracun (B3)** dari operasi smelter dan tambang nikel: Slag & Tailing (Chromium, Nikel, Kadmium), Tailing HPAL (asam sulfat tinggi), Air Limbah Tambang, serta Residu & DSTP. Data kompilasi AEER, WALHI, JATAM membuktikan operasi smelter di Sulawesi menghasilkan lebih dari **{total_b3_37 / 1_000_000:.1f} juta ton limbah B3 per tahun** — angka yang kemungkinan besar *underestimate* karena banyak fasilitas tidak melaporkan timbulan secara transparan.",
         "",
         "#### B. Alur Logika Metodologis Descriptive Statistics & Comparative Bar Chart",
-        "Kerangka agregasi statistik deskriptif diilustrasikan pada **Bagan Alur 3.7** berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan pemeringkatan dan profiling komposisi buangan absolut, dengan konfigurasi variabel dirinci pada Tabel 3.7a di bawah gambar.",
+        f"Kerangka agregasi statistik deskriptif diilustrasikan pada **Bagan Alur 3.7** berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan pemeringkatan dan profiling komposisi buangan absolut; hanya fasilitas mayor dengan timbulan > {ambang_mayor_37:,.0f} Ton/Tahun ({n_sumber_mayor_37} dari {n_sumber_raw_37} entri sumber) yang diagregasi.",
         "",
         "##### Bagan Alur 3.7: Alur Logika Analisis Deskriptif Beban Limbah B3",
         "```mermaid",
         mermaid_str_3_7,
         "```",
-        "",
-        "##### Tabel 3.7a: Konfigurasi Variabel Analisis Deskriptif Limbah B3 (Sub-bab 3.7)",
-        markdown_table(konf_headers_37, konf_rows_37),
         "",
         "#### C. Formulasi Matematis: Agregasi Timbulan dan Proporsi Komposisi",
         "Kuantifikasi skala timbulan limbah dari level fasilitas hingga level regional dihitung menggunakan sistem formulasi matematis berikut:",

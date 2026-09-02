@@ -442,7 +442,7 @@ Odds_Ratio (OR) = ( b × c ) / ( a × d )   ;   untuk X berjenis indeks kualitas
 Sub-bab ini mengungkap timbulan **Limbah Bahan Berbahaya dan Beracun (B3)** dari operasi smelter dan tambang nikel: Slag & Tailing (Chromium, Nikel, Kadmium), Tailing HPAL (asam sulfat tinggi), Air Limbah Tambang, serta Residu & DSTP. Data kompilasi AEER, WALHI, JATAM membuktikan operasi smelter di Sulawesi menghasilkan lebih dari **32.8 juta ton limbah B3 per tahun** — angka yang kemungkinan besar *underestimate* karena banyak fasilitas tidak melaporkan timbulan secara transparan.
 
 #### B. Alur Logika Metodologis Descriptive Statistics & Comparative Bar Chart
-Kerangka agregasi statistik deskriptif diilustrasikan pada **Bagan Alur 3.7** berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan pemeringkatan dan profiling komposisi buangan absolut, dengan konfigurasi variabel dirinci pada Tabel 3.7a di bawah gambar.
+Kerangka agregasi statistik deskriptif diilustrasikan pada **Bagan Alur 3.7** berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan pemeringkatan dan profiling komposisi buangan absolut; hanya fasilitas mayor dengan timbulan > 1,000 Ton/Tahun (6 dari 67 entri sumber) yang diagregasi.
 
 ##### Bagan Alur 3.7: Alur Logika Analisis Deskriptif Beban Limbah B3
 ```mermaid
@@ -465,16 +465,6 @@ flowchart LR
     G --> I
     H --> I
 ```
-
-##### Tabel 3.7a: Konfigurasi Variabel Analisis Deskriptif Limbah B3 (Sub-bab 3.7)
-| Komponen Analisis | Definisi Variabel (Sub-bab 3.7) |
-| :--- | :--- |
-| Variabel Independen (X) | Kawasan/Perusahaan dan Jenis Limbah B3 (klasifikasi operasi dan karakter residu: Slag, Tailing HPAL, Air Asam Tambang). |
-| Variabel Dependen (Y) | Estimasi Timbulan (Ton/Tahun): volume absolut buangan limbah B3 per fasilitas. |
-| Metode Analisis | Statistik deskriptif (pemeringkatan, profiling komposisi, audit defisit pengelolaan) dan komparasi Bar Chart; tanpa uji inferensial Chi-Square. |
-| Filter Sumber Mayor | Hanya fasilitas dengan timbulan > 1,000 Ton/Tahun (6 dari 67 entri sumber). |
-| Periode Observasi | Kompilasi laporan 2020-2024 (AEER, WALHI, JATAM, BPLH, kajian akademis). |
-| Dataset & File | data/processed/sulawesi_limbah_b3.csv |
 
 #### C. Formulasi Matematis: Agregasi Timbulan dan Proporsi Komposisi
 Kuantifikasi skala timbulan limbah dari level fasilitas hingga level regional dihitung menggunakan sistem formulasi matematis berikut:

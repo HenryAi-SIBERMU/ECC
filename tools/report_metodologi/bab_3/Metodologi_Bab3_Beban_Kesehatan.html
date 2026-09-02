@@ -424,7 +424,7 @@ h4 { color: #A5D6A7; }
 <h4>A. Pengantar & Kerangka Narasi</h4>
 <p>Sub-bab ini mengungkap timbulan <strong>Limbah Bahan Berbahaya dan Beracun (B3)</strong> dari operasi smelter dan tambang nikel: Slag & Tailing (Chromium, Nikel, Kadmium), Tailing HPAL (asam sulfat tinggi), Air Limbah Tambang, serta Residu & DSTP. Data kompilasi AEER, WALHI, JATAM membuktikan operasi smelter di Sulawesi menghasilkan lebih dari <strong>32.8 juta ton limbah B3 per tahun</strong> — angka yang kemungkinan besar underestimate karena banyak fasilitas tidak melaporkan timbulan secara transparan.</p>
 <h4>B. Alur Logika Metodologis Descriptive Statistics & Comparative Bar Chart</h4>
-<p>Kerangka agregasi statistik deskriptif diilustrasikan pada <strong>Bagan Alur 3.7</strong> berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan pemeringkatan dan profiling komposisi buangan absolut, dengan konfigurasi variabel dirinci pada Tabel 3.7a di bawah gambar.</p>
+<p>Kerangka agregasi statistik deskriptif diilustrasikan pada <strong>Bagan Alur 3.7</strong> berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan pemeringkatan dan profiling komposisi buangan absolut; hanya fasilitas mayor dengan timbulan > 1,000 Ton/Tahun (6 dari 67 entri sumber) yang diagregasi.</p>
 <div class="table-caption">Bagan Alur 3.7: Alur Logika Analisis Deskriptif Beban Limbah B3</div>
 <div class="mermaid">flowchart LR
     subgraph Data_Input["1. Input Data Dashboard"]
@@ -444,18 +444,6 @@ h4 { color: #A5D6A7; }
     F --> I["Pembacaan beban ganda masyarakat terdampak"]
     G --> I
     H --> I</div>
-<div class="table-caption">Tabel 3.7a: Konfigurasi Variabel Analisis Deskriptif Limbah B3 (Sub-bab 3.7)</div>
-<table>
-<thead><tr><th class="data-th">Komponen Analisis</th><th class="data-th">Definisi Variabel (Sub-bab 3.7)</th></tr></thead>
-<tbody>
-<tr><td class="data-td">Variabel Independen (X)</td><td class="data-td">Kawasan/Perusahaan dan Jenis Limbah B3 (klasifikasi operasi dan karakter residu: Slag, Tailing HPAL, Air Asam Tambang).</td></tr>
-<tr class="data-tr-even"><td class="data-td">Variabel Dependen (Y)</td><td class="data-td">Estimasi Timbulan (Ton/Tahun): volume absolut buangan limbah B3 per fasilitas.</td></tr>
-<tr><td class="data-td">Metode Analisis</td><td class="data-td">Statistik deskriptif (pemeringkatan, profiling komposisi, audit defisit pengelolaan) dan komparasi Bar Chart; tanpa uji inferensial Chi-Square.</td></tr>
-<tr class="data-tr-even"><td class="data-td">Filter Sumber Mayor</td><td class="data-td">Hanya fasilitas dengan timbulan > 1,000 Ton/Tahun (6 dari 67 entri sumber).</td></tr>
-<tr><td class="data-td">Periode Observasi</td><td class="data-td">Kompilasi laporan 2020-2024 (AEER, WALHI, JATAM, BPLH, kajian akademis).</td></tr>
-<tr class="data-tr-even"><td class="data-td">Dataset & File</td><td class="data-td">data/processed/sulawesi_limbah_b3.csv</td></tr>
-</tbody>
-</table>
 <h4>C. Formulasi Matematis: Agregasi Timbulan dan Proporsi Komposisi</h4>
 <div class="formula">Total_B3_p = Σ ( Timbulan_i )   ;   untuk seluruh fasilitas mayor i pada provinsi p</div>
 <div class="formula">Total_B3_j = Σ ( Timbulan_i )   ;   untuk seluruh fasilitas mayor i dengan Jenis_Limbah j</div>

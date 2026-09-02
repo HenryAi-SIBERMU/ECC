@@ -385,6 +385,167 @@ def generate_all_bab4():
     mermaid_png_path_4_1 = str(tool_dir / "mermaid_flowchart_4_1.png")
     download_success_4_1 = download_mermaid_png(mermaid_str_4_1, mermaid_png_path_4_1)
 
+    print("[1.5/4] Mengekstraksi dataset empiris Bab 4 sub-bab 4.2...")
+    df_dampak = df_konflik.copy()
+    df_dampak["dampak_masyarakat_jiwa"] = pd.to_numeric(df_dampak["dampak_masyarakat_jiwa"], errors="coerce").fillna(0)
+    df_dampak["luas_ha"] = pd.to_numeric(df_dampak["luas_ha"], errors="coerce").fillna(0)
+
+    df_sektor_agg = df_dampak.groupby("Sektor_Grup").agg({
+        "dampak_masyarakat_jiwa": "sum",
+        "luas_ha": "sum",
+    }).reset_index()
+    df_sektor_agg = df_sektor_agg[df_sektor_agg["Sektor_Grup"] != "Lainnya"].copy()
+
+    def sector_sum(col, sector):
+        vals = df_sektor_agg.loc[df_sektor_agg["Sektor_Grup"] == sector, col]
+        return float(vals.sum()) if not vals.empty else 0.0
+
+    jiwa_kehutanan = sector_sum("dampak_masyarakat_jiwa", "Kehutanan")
+    jiwa_tambang = sector_sum("dampak_masyarakat_jiwa", "Pertambangan")
+    ha_kebun = sector_sum("luas_ha", "Perkebunan")
+    ha_kehutanan = sector_sum("luas_ha", "Kehutanan")
+    ha_tambang = sector_sum("luas_ha", "Pertambangan")
+    total_jiwa_42 = df_sektor_agg["dampak_masyarakat_jiwa"].sum()
+    total_ha_42 = df_sektor_agg["luas_ha"].sum()
+
+    sektor_dampak_rows = []
+    for _, row in df_sektor_agg.sort_values("dampak_masyarakat_jiwa", ascending=False).iterrows():
+        sektor_dampak_rows.append([
+            row["Sektor_Grup"],
+            f"{row['dampak_masyarakat_jiwa']:,.0f}",
+            f"{row['dampak_masyarakat_jiwa'] / total_jiwa_42 * 100:.1f}%" if total_jiwa_42 else "0.0%",
+            f"{row['luas_ha']:,.0f}",
+            f"{row['luas_ha'] / total_ha_42 * 100:.1f}%" if total_ha_42 else "0.0%",
+        ])
+
+    df_sektor_tahun = df_dampak[df_dampak["tahun"] >= 1990].groupby(["tahun", "Sektor_Grup"]).agg({
+        "dampak_masyarakat_jiwa": "sum",
+        "luas_ha": "sum",
+    }).reset_index()
+    df_sektor_tahun = df_sektor_tahun[df_sektor_tahun["Sektor_Grup"] != "Lainnya"].copy()
+
+    top_jiwa = df_sektor_tahun.groupby("tahun")["dampak_masyarakat_jiwa"].sum().sort_values(ascending=False)
+    top_jiwa = top_jiwa[top_jiwa > 0].head(2)
+    top_ha = df_sektor_tahun.groupby("tahun")["luas_ha"].sum().sort_values(ascending=False)
+    top_ha = top_ha[top_ha > 0].head(2)
+
+    anomaly_jiwa_rows = []
+    for i, (year, val) in enumerate(top_jiwa.items(), 1):
+        cases = df_dampak[df_dampak["tahun"] == year].copy()
+        cases["jiwa_num"] = pd.to_numeric(cases["dampak_masyarakat_jiwa"], errors="coerce").fillna(0)
+        if cases.empty:
+            continue
+        top_case = cases.sort_values("jiwa_num", ascending=False).iloc[0]
+        anomaly_jiwa_rows.append([
+            f"Anomali Jiwa {i}",
+            str(int(year)),
+            top_case["Sektor_Grup"],
+            f"{top_case['jiwa_num']:,.0f}",
+            str(top_case["judul"]),
+        ])
+
+    anomaly_ha_rows = []
+    for i, (year, val) in enumerate(top_ha.items(), 1):
+        cases = df_dampak[df_dampak["tahun"] == year].copy()
+        cases["ha_num"] = pd.to_numeric(cases["luas_ha"], errors="coerce").fillna(0)
+        if cases.empty:
+            continue
+        top_case = cases.sort_values("ha_num", ascending=False).iloc[0]
+        anomaly_ha_rows.append([
+            f"Anomali Area {i}",
+            str(int(year)),
+            top_case["Sektor_Grup"],
+            f"{top_case['ha_num']:,.0f}",
+            str(top_case["judul"]),
+        ])
+
+    mermaid_str_4_2 = """flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Konflik Agraria<br/><i>sektor, jiwa terdampak, luas ha, tahun</i>"]
+    end
+    subgraph Sectoral_Burden["2. Sectoral Burden Analysis"]
+        A --> B["Klasifikasi sektor pemicu konflik"]
+        B --> C["Agregasi korban terdampak (jiwa)<br/>per sektor dan tahun"]
+        B --> D["Agregasi luas area konflik (Ha)<br/>per sektor dan tahun"]
+    end
+    subgraph Comparative_Output["3. Analisis Komparatif Dampak"]
+        C --> E["Distribusi korban terdampak"]
+        D --> F["Distribusi monopoli area konflik"]
+        E --> G["Bedah anomali lonjakan jiwa"]
+        F --> H["Bedah anomali lonjakan area"]
+    end"""
+    mermaid_png_path_4_2 = str(tool_dir / "mermaid_flowchart_4_2.png")
+    download_success_4_2 = download_mermaid_png(mermaid_str_4_2, mermaid_png_path_4_2)
+
+    print("[1.7/4] Mengekstraksi dataset empiris Bab 4 sub-bab 4.3...")
+    df_dampak["jumlah_ditangkap"] = pd.to_numeric(df_dampak["jumlah_ditangkap"], errors="coerce").fillna(0)
+    df_dampak["jumlah_luka"] = pd.to_numeric(df_dampak["jumlah_luka"], errors="coerce").fillna(0)
+    df_dampak["jumlah_tewas"] = pd.to_numeric(df_dampak["jumlah_tewas"], errors="coerce").fillna(0)
+    df_dampak["indikasi_kriminalisasi"] = df_dampak["indikasi_kriminalisasi"].fillna(False).astype(bool)
+
+    total_kriminalisasi = df_dampak[df_dampak["indikasi_kriminalisasi"]].shape[0]
+    total_ditangkap = int(df_dampak["jumlah_ditangkap"].sum())
+    total_luka = int(df_dampak["jumlah_luka"].sum())
+    total_tewas = int(df_dampak["jumlah_tewas"].sum())
+
+    df_krim_tahun = df_dampak[(df_dampak["indikasi_kriminalisasi"]) & (df_dampak["tahun"] >= 2000)].groupby("tahun").size().reset_index(name="jumlah_kasus")
+    df_krim_sektor = df_dampak[(df_dampak["indikasi_kriminalisasi"]) & (df_dampak["Sektor_Grup"] != "Lainnya")].groupby("Sektor_Grup").size().reset_index(name="jumlah_kasus").sort_values("jumlah_kasus", ascending=True)
+
+    top_sektor = df_krim_sektor.iloc[-1]["Sektor_Grup"] if not df_krim_sektor.empty else "Industri"
+    top_sektor_count = int(df_krim_sektor.iloc[-1]["jumlah_kasus"]) if not df_krim_sektor.empty else 0
+    top_tahun = int(df_krim_tahun.loc[df_krim_tahun["jumlah_kasus"].idxmax()]["tahun"]) if not df_krim_tahun.empty else 0
+    top_tahun_count = int(df_krim_tahun["jumlah_kasus"].max()) if not df_krim_tahun.empty else 0
+
+    krim_tahun_rows = []
+    for _, row in df_krim_tahun.sort_values("tahun").iterrows():
+        krim_tahun_rows.append([str(int(row["tahun"])), f"{int(row['jumlah_kasus']):,}"])
+
+    krim_sektor_rows = []
+    for _, row in df_krim_sektor.sort_values("jumlah_kasus", ascending=False).iterrows():
+        krim_sektor_rows.append([row["Sektor_Grup"], f"{int(row['jumlah_kasus']):,}"])
+
+    df_kekerasan = df_dampak[(df_dampak["jumlah_ditangkap"] > 0) | (df_dampak["jumlah_tewas"] > 0)].sort_values(["jumlah_ditangkap", "jumlah_tewas"], ascending=[False, False])
+    kekerasan_rows = []
+    def clean_table_text(value):
+        if pd.isna(value) or str(value).strip().lower() == "nan":
+            return "-"
+        return str(value).replace("|", ",").strip()
+
+    for _, row in df_kekerasan.head(10).iterrows():
+        perusahaan = clean_table_text(row["keterlibatan_perusahaan"] if pd.notna(row["keterlibatan_perusahaan"]) else "Tidak/Belum Teridentifikasi")
+        deskripsi = clean_table_text(row["deskripsi"])
+        if len(deskripsi) > 180:
+            deskripsi = deskripsi[:177] + "..."
+        kekerasan_rows.append([
+            str(int(row["tahun"])),
+            clean_table_text(row["Sektor_Grup"]),
+            perusahaan,
+            f"{int(row['jumlah_ditangkap']):,}",
+            f"{int(row['jumlah_tewas']):,}",
+            deskripsi,
+        ])
+
+    mermaid_str_4_3 = """flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Konflik Agraria<br/><i>indikasi kriminalisasi, ditangkap, luka, tewas</i>"]
+    end
+    subgraph Violence_Tracking["2. Violence & Criminalization Tracking"]
+        A --> B["Standarisasi kolom korban<br/>ditangkap, luka, tewas"]
+        B --> C["Hitung total kasus kriminalisasi"]
+        B --> D["Agregasi tren kriminalisasi pasca-2000"]
+        B --> E["Agregasi sektor paling represif"]
+    end
+    subgraph Output["3. Pemetaan Ruang Sipil"]
+        C --> F["Metrik represi agregat"]
+        D --> G["Tren tahunan kriminalisasi"]
+        E --> H["Sektor dominan represi"]
+        F --> I["Pembacaan risiko HAM"]
+        G --> I
+        H --> I
+    end"""
+    mermaid_png_path_4_3 = str(tool_dir / "mermaid_flowchart_4_3.png")
+    download_success_4_3 = download_mermaid_png(mermaid_str_4_3, mermaid_png_path_4_3)
+
     print("[2/4] Membangun DOCX Metodologi_Bab4_Ruang_Hidup.docx...")
     doc = Document()
     sec = doc.sections[0]
@@ -473,6 +634,136 @@ def generate_all_bab4():
         ("Peningkatan insidensi konflik beririsan dengan dinamika perizinan kawasan, sehingga pengelolaan alokasi ruang dan perlindungan hak masyarakat di wilayah investasi menjadi faktor penting untuk meminimalkan dampak sosial.", False, False),
     ])
 
+    add_h2(doc, "4.2 Sebaran Sektoral: Dampak Masyarakat dan Penggunaan Lahan")
+    add_note_box(doc, "Sumber Data Resmi & Deskripsi Visualisasi", "Dampak Konflik: data/processed/sulawesi_konflik_agraria_tanahkita.csv. Visualisasi dashboard menggunakan Analisis Komparatif Dampak Sosial-Ekologis untuk membedah skala korban terdampak (jiwa) dan luas area konflik (hektar) antar sektor.")
+
+    add_h4(doc, "A. Pengantar & Kerangka Narasi")
+    add_p(doc, [
+        ("Visualisasi komparatif menggambarkan skala dampak sosial dan penggunaan lahan berdasarkan sektor industri. ", False, False),
+        (f"Data menunjukkan bahwa Sektor Pertambangan mencatatkan jumlah warga terdampak terbesar, yaitu {jiwa_tambang:,.0f} jiwa, disusul sektor Kehutanan sebanyak {jiwa_kehutanan:,.0f} jiwa. ", False, False),
+        ("Pola ini memperlihatkan bahwa konflik agraria tidak hanya terkait jumlah kejadian, tetapi juga skala sosial warga yang terdampak.", False, False),
+    ])
+    add_p(doc, [
+        (f"Dari dimensi penggunaan lahan, Sektor Pertambangan juga mencatatkan luas sengketa terbesar yaitu {ha_tambang:,.0f} hektar, disusul Perkebunan seluas {ha_kebun:,.0f} ha dan Kehutanan seluas {ha_kehutanan:,.0f} ha.", False, False),
+    ])
+
+    add_h4(doc, "B. Alur Logika Metodologis Analisis Komparatif Dampak Sosial-Ekologis")
+    add_p(doc, [
+        ("Kerangka agregasi komparatif untuk membedah skala kehancuran sosial dan monopoli ruang antar sektor diilustrasikan pada ", False, False),
+        ("Bagan Alur 4.2", True, False),
+        (" berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan Sectoral Burden Analysis dan bedah anomali lonjakan.", False, False),
+    ])
+    add_caption(doc, "Bagan Alur 4.2: Alur Logika Metodologis Analisis Komparatif Dampak Sosial-Ekologis")
+    if download_success_4_2:
+        try:
+            p_img = doc.add_paragraph()
+            p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p_img.add_run().add_picture(mermaid_png_path_4_2, width=Cm(15))
+        except Exception as exc:
+            print(f"[WARN] Gagal memasukkan gambar Mermaid 4.2 ke DOCX: {exc}")
+            p_err = doc.add_paragraph()
+            run(p_err, "[Gambar Flowchart Gagal Dimuat]", color=C_RED, pt=9)
+    else:
+        p_err = doc.add_paragraph()
+        run(p_err, "[Gambar Flowchart Gagal Diunduh, silakan periksa koneksi internet saat generate]", color=C_RED, pt=9)
+
+    add_h4(doc, "C. Formulasi Matematis: Agregasi Jiwa Terdampak dan Monopoli Area")
+    add_p(doc, [("Agregasi korban terdampak dan luas area konflik per sektor dihitung menggunakan sistem formulasi matematis berikut:", False, False)])
+    add_formula(doc, "Total Jiwa Terdampak per Sektor", "J_s = Σ J_i, untuk setiap kasus i pada sektor s", [
+        ("J_s", "Total warga terdampak pada sektor konflik s."),
+        ("J_i", "Jumlah masyarakat terdampak pada kasus konflik ke-i."),
+        ("s", "Sektor pemicu konflik."),
+    ])
+    add_formula(doc, "Total Monopoli Area Konflik per Sektor", "A_s = Σ A_i, untuk setiap kasus i pada sektor s", [
+        ("A_s", "Total luas area konflik pada sektor s (hektar)."),
+        ("A_i", "Luas area konflik pada kasus ke-i (hektar)."),
+    ])
+    add_formula(doc, "Proporsi Dampak Sektoral", "P_s (%) = ( Nilai_s / Nilai_Total ) × 100", [
+        ("P_s (%)", "Persentase kontribusi sektor s terhadap total jiwa terdampak atau total luas area konflik."),
+        ("Nilai_s", "Total jiwa atau total hektar pada sektor s."),
+        ("Nilai_Total", "Total jiwa atau total hektar seluruh sektor yang dianalisis."),
+    ])
+
+    add_h4(doc, "D. Matriks Hasil Uji Empiris: Dampak Sosial dan Monopoli Ruang")
+    add_p(doc, [("Agregasi dampak masyarakat dan luas area konflik menurut sektor disajikan pada Tabel 4.4 berikut:", False, False)])
+    add_caption(doc, "Tabel 4.4: Matriks Dampak Sosial-Ekologis Konflik Agraria menurut Sektor")
+    add_table_1col(doc, ["Sektor Pemicu", "Jiwa Terdampak", "Proporsi Jiwa", "Luas Area (Ha)", "Proporsi Area"], sektor_dampak_rows, [3.8, 2.7, 2.2, 2.7, 2.2], ["L", "C", "C", "C", "C"])
+
+    add_caption(doc, "Tabel 4.5: Bedah Anomali Lonjakan Korban Terdampak (Jiwa)")
+    add_table_1col(doc, ["Anomali", "Tahun", "Sektor", "Korban Jiwa", "Kasus Utama"], anomaly_jiwa_rows, [2.3, 1.5, 2.5, 2.3, 6.0], ["L", "C", "L", "C", "L"])
+
+    add_caption(doc, "Tabel 4.6: Bedah Anomali Monopoli Area Konflik (Hektar)")
+    add_table_1col(doc, ["Anomali", "Tahun", "Sektor", "Luas Ha", "Kasus Utama"], anomaly_ha_rows, [2.3, 1.5, 2.5, 2.3, 6.0], ["L", "C", "L", "C", "L"])
+
+    add_h4(doc, "E. Analisis Temuan Empiris: Asimetri Dampak Sosial dan Penguasaan Ruang")
+    add_p(doc, [
+        (f"Matriks dampak sektoral menunjukkan bahwa sektor Pertambangan menjadi penyumbang utama korban terdampak sekaligus sektor dengan luas sengketa terbesar. Dengan demikian, dinamika konflik tidak hanya perlu dibaca dari jumlah kasus, tetapi juga dari skala korban dan luas ruang hidup yang diperebutkan. ", False, False),
+        ("Bedah anomali tahunan memperlihatkan tahun-tahun tertentu sebagai titik lonjakan ekstrem yang mendorong grafik korban dan area konflik.", False, False),
+    ])
+
+    add_h2(doc, "4.3 Indikasi Represi dan Kriminalisasi dalam Konflik Agraria")
+    add_note_box(doc, "Sumber Data Resmi & Deskripsi Visualisasi", "Represi dan Kriminalisasi: data/processed/sulawesi_konflik_agraria_tanahkita.csv. Visualisasi dashboard menggunakan Analisis Agregat Kasus Represi & Pelanggaran HAM untuk menghitung indikasi kriminalisasi, korban ditangkap, luka-luka, dan tewas.")
+
+    add_h4(doc, "A. Pengantar & Kerangka Narasi")
+    add_p(doc, [
+        (f"Data kuantitatif di wilayah Sulawesi mencatat indikasi terjadinya represi dan tindakan kriminalisasi dalam sebagian sengketa agraria. Dari database yang didokumentasikan, terdapat {total_kriminalisasi:,} kasus indikasi kriminalisasi dan {total_ditangkap:,} warga/aktivis lingkungan yang tercatat pernah ditangkap dalam penanganan sengketa lahan. ", False, False),
+        (f"Berdasarkan distribusi sektoral, Sektor {top_sektor} mencatatkan frekuensi indikasi represi tertinggi dengan {top_sektor_count:,} kasus. Tahun dengan jumlah catatan insiden represi tertinggi adalah {top_tahun} dengan {top_tahun_count:,} kasus.", False, False),
+    ])
+
+    add_h4(doc, "B. Alur Logika Metodologis Analisis Agregat Kasus Represi & Pelanggaran HAM")
+    add_p(doc, [
+        ("Kerangka pemodelan indikator kekerasan, kriminalisasi, dan penyempitan ruang sipil diilustrasikan pada ", False, False),
+        ("Bagan Alur 4.3", True, False),
+        (" berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan agregasi kasus represi dan fatalitas.", False, False),
+    ])
+    add_caption(doc, "Bagan Alur 4.3: Alur Logika Metodologis Analisis Represi dan Kriminalisasi")
+    if download_success_4_3:
+        try:
+            p_img = doc.add_paragraph()
+            p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p_img.add_run().add_picture(mermaid_png_path_4_3, width=Cm(15))
+        except Exception as exc:
+            print(f"[WARN] Gagal memasukkan gambar Mermaid 4.3 ke DOCX: {exc}")
+            p_err = doc.add_paragraph()
+            run(p_err, "[Gambar Flowchart Gagal Dimuat]", color=C_RED, pt=9)
+    else:
+        p_err = doc.add_paragraph()
+        run(p_err, "[Gambar Flowchart Gagal Diunduh, silakan periksa koneksi internet saat generate]", color=C_RED, pt=9)
+
+    add_h4(doc, "C. Formulasi Matematis: Kriminalisasi dan Korban Represi")
+    add_p(doc, [("Jumlah insiden kriminalisasi dan korban represi fisik dihitung menggunakan sistem formulasi matematis berikut:", False, False)])
+    add_formula(doc, "Total Kasus Kriminalisasi", "K_krim = Σ I_i, untuk setiap kasus i dengan indikasi kriminalisasi", [
+        ("K_krim", "Total kasus dengan indikasi kriminalisasi."),
+        ("I_i", "Indikator kasus ke-i; bernilai 1 jika indikasi kriminalisasi = benar, dan 0 jika tidak."),
+    ])
+    add_formula(doc, "Total Korban Represi Fisik", "R = Σ ( D_i + L_i + T_i )", [
+        ("R", "Total korban represi fisik yang terdokumentasi."),
+        ("D_i", "Jumlah warga/aktivis ditangkap pada kasus i."),
+        ("L_i", "Jumlah korban luka pada kasus i."),
+        ("T_i", "Jumlah korban tewas pada kasus i."),
+    ])
+    add_formula(doc, "Substitusi Korban Represi", f"R = {total_ditangkap:,} + {total_luka:,} + {total_tewas:,} = {total_ditangkap + total_luka + total_tewas:,} orang")
+
+    add_h4(doc, "D. Matriks Hasil Uji Empiris: Tren Represi dan Arsip Kekerasan")
+    add_p(doc, [("Metrik agregat represi dan kriminalisasi disajikan pada Tabel 4.7 berikut:", False, False)])
+    add_caption(doc, "Tabel 4.7: Metrik Agregat Represi dan Kriminalisasi")
+    add_table_1col(doc, ["Indikator", "Nilai"], [["Kasus Indikasi Kriminalisasi", f"{total_kriminalisasi:,}"], ["Warga/Aktivis Ditangkap", f"{total_ditangkap:,}"], ["Korban Luka-luka", f"{total_luka:,}"], ["Korban Tewas", f"{total_tewas:,}"]], [6.0, 3.0], ["L", "C"])
+
+    add_caption(doc, "Tabel 4.8: Tren Kasus Kriminalisasi dan Represi Pasca-2000")
+    add_table_1col(doc, ["Tahun", "Jumlah Kasus"], krim_tahun_rows, [3.0, 3.0], ["C", "C"])
+
+    add_caption(doc, "Tabel 4.9: Sektor Industri Paling Represif")
+    add_table_1col(doc, ["Sektor Pemicu", "Jumlah Kasus Kriminalisasi"], krim_sektor_rows, [5.0, 4.0], ["L", "C"])
+
+    add_caption(doc, "Tabel 4.10: Arsip Kasus Represi dan Kekerasan Fisik Tertinggi")
+    add_table_1col(doc, ["Tahun", "Sektor", "Perusahaan Terlibat", "Ditangkap", "Tewas", "Narasi Singkat"], kekerasan_rows, [1.4, 2.0, 3.0, 1.6, 1.4, 6.0], ["C", "L", "L", "C", "C", "L"])
+
+    add_h4(doc, "E. Analisis Temuan Empiris: Penyempitan Ruang Sipil dan Risiko HAM")
+    add_p(doc, [
+        (f"Keberadaan kasus kriminalisasi di sekitar area konsesi, terutama pada sektor {top_sektor}, mengindikasikan pentingnya jaminan perlindungan ruang sipil dan penghormatan HAM dalam setiap proses pembangunan. ", False, False),
+        ("Catatan ini menunjukkan perlunya pendekatan hukum yang adil, penyelesaian konflik secara ramah HAM, serta perlindungan bagi pejuang lingkungan dan komunitas lokal.", False, False),
+    ])
+
     docx_path = tool_dir / "Metodologi_Bab4_Ruang_Hidup.docx"
     doc.save(str(docx_path))
     print(f"  [OK] Tersimpan: {docx_path}")
@@ -522,6 +813,46 @@ h4 {{ color: #A5D6A7; }}
 {html_table(["Tahun", "Sektor Pemicu", "Jumlah Konflik"], peak_sector_rows)}
 <h4>E. Analisis Temuan Empiris</h4>
 <p>Grafik time-series pada dashboard memperlihatkan peningkatan insidensi konflik yang memuncak pada tahun <strong>{peak_year}</strong> dengan <strong>{peak_value:,} kasus konflik</strong>. Peningkatan insidensi konflik beririsan dengan dinamika perizinan kawasan.</p>
+<h2>4.2 Sebaran Sektoral: Dampak Masyarakat dan Penggunaan Lahan</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Dampak Konflik: <code>data/processed/sulawesi_konflik_agraria_tanahkita.csv</code>. Visualisasi dashboard menggunakan Analisis Komparatif Dampak Sosial-Ekologis.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Visualisasi komparatif menggambarkan skala dampak sosial dan penggunaan lahan berdasarkan sektor industri. Sektor Pertambangan mencatatkan jumlah warga terdampak terbesar, yaitu <strong>{jiwa_tambang:,.0f} jiwa</strong>, disusul sektor Kehutanan sebanyak <strong>{jiwa_kehutanan:,.0f} jiwa</strong>. Dari dimensi penggunaan lahan, Sektor Pertambangan juga mencatatkan luas sengketa terbesar yaitu <strong>{ha_tambang:,.0f} hektar</strong>.</p>
+<h4>B. Alur Logika Metodologis Analisis Komparatif Dampak Sosial-Ekologis</h4>
+<div class="mermaid">{mermaid_str_4_2}</div>
+<h4>C. Formulasi Matematis</h4>
+<div class="formula">J_s = Σ J_i, untuk setiap kasus i pada sektor s</div>
+<div class="formula">A_s = Σ A_i, untuk setiap kasus i pada sektor s</div>
+<div class="formula">P_s (%) = ( Nilai_s / Nilai_Total ) × 100</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 4.4: Matriks Dampak Sosial-Ekologis Konflik Agraria menurut Sektor</div>
+{html_table(["Sektor Pemicu", "Jiwa Terdampak", "Proporsi Jiwa", "Luas Area (Ha)", "Proporsi Area"], sektor_dampak_rows)}
+<div class="table-caption">Tabel 4.5: Bedah Anomali Lonjakan Korban Terdampak (Jiwa)</div>
+{html_table(["Anomali", "Tahun", "Sektor", "Korban Jiwa", "Kasus Utama"], anomaly_jiwa_rows)}
+<div class="table-caption">Tabel 4.6: Bedah Anomali Monopoli Area Konflik (Hektar)</div>
+{html_table(["Anomali", "Tahun", "Sektor", "Luas Ha", "Kasus Utama"], anomaly_ha_rows)}
+<h4>E. Analisis Temuan Empiris</h4>
+<p>Matriks dampak sektoral menunjukkan bahwa sektor Pertambangan menjadi penyumbang utama korban terdampak sekaligus sektor dengan luas sengketa terbesar. Dinamika konflik perlu dibaca dari jumlah kasus, skala korban, dan luas ruang hidup yang diperebutkan.</p>
+<h2>4.3 Indikasi Represi dan Kriminalisasi dalam Konflik Agraria</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Represi dan Kriminalisasi: <code>data/processed/sulawesi_konflik_agraria_tanahkita.csv</code>. Visualisasi dashboard menggunakan Analisis Agregat Kasus Represi & Pelanggaran HAM.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Dari database yang didokumentasikan, terdapat <strong>{total_kriminalisasi:,} kasus indikasi kriminalisasi</strong> dan <strong>{total_ditangkap:,} warga/aktivis lingkungan</strong> yang tercatat pernah ditangkap. Berdasarkan distribusi sektoral, <strong>Sektor {top_sektor}</strong> mencatatkan frekuensi indikasi represi tertinggi dengan <strong>{top_sektor_count:,} kasus</strong>. Tahun dengan jumlah catatan insiden represi tertinggi adalah <strong>{top_tahun}</strong> dengan <strong>{top_tahun_count:,} kasus</strong>.</p>
+<h4>B. Alur Logika Metodologis Analisis Agregat Kasus Represi & Pelanggaran HAM</h4>
+<div class="mermaid">{mermaid_str_4_3}</div>
+<h4>C. Formulasi Matematis</h4>
+<div class="formula">K_krim = Σ I_i, untuk setiap kasus i dengan indikasi kriminalisasi</div>
+<div class="formula">R = Σ ( D_i + L_i + T_i )</div>
+<div class="formula">R = {total_ditangkap:,} + {total_luka:,} + {total_tewas:,} = {total_ditangkap + total_luka + total_tewas:,} orang</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 4.7: Metrik Agregat Represi dan Kriminalisasi</div>
+{html_table(["Indikator", "Nilai"], [["Kasus Indikasi Kriminalisasi", f"{total_kriminalisasi:,}"], ["Warga/Aktivis Ditangkap", f"{total_ditangkap:,}"], ["Korban Luka-luka", f"{total_luka:,}"], ["Korban Tewas", f"{total_tewas:,}"]])}
+<div class="table-caption">Tabel 4.8: Tren Kasus Kriminalisasi dan Represi Pasca-2000</div>
+{html_table(["Tahun", "Jumlah Kasus"], krim_tahun_rows)}
+<div class="table-caption">Tabel 4.9: Sektor Industri Paling Represif</div>
+{html_table(["Sektor Pemicu", "Jumlah Kasus Kriminalisasi"], krim_sektor_rows)}
+<div class="table-caption">Tabel 4.10: Arsip Kasus Represi dan Kekerasan Fisik Tertinggi</div>
+{html_table(["Tahun", "Sektor", "Perusahaan Terlibat", "Ditangkap", "Tewas", "Narasi Singkat"], kekerasan_rows)}
+<h4>E. Analisis Temuan Empiris</h4>
+<p>Keberadaan kasus kriminalisasi di sekitar area konsesi, terutama pada sektor <strong>{top_sektor}</strong>, mengindikasikan pentingnya jaminan perlindungan ruang sipil dan penghormatan HAM dalam setiap proses pembangunan.</p>
 </body>
 </html>
 """
@@ -568,6 +899,77 @@ h4 {{ color: #A5D6A7; }}
         "",
         "#### E. Analisis Temuan Empiris: Puncak Insidensi dan Eskalasi Konflik",
         f"Grafik time-series pada dashboard memperlihatkan peningkatan insidensi konflik yang memuncak pada tahun **{peak_year}** dengan **{peak_value:,} kasus konflik**. Peningkatan insidensi konflik beririsan dengan dinamika perizinan kawasan, sehingga pengelolaan alokasi ruang dan perlindungan hak masyarakat di wilayah investasi menjadi faktor penting untuk meminimalkan dampak sosial.",
+        "",
+        "## 4.2 Sebaran Sektoral: Dampak Masyarakat dan Penggunaan Lahan",
+        "",
+        "> **Sumber Data Resmi & Deskripsi Visualisasi:** Dampak Konflik: `data/processed/sulawesi_konflik_agraria_tanahkita.csv`. Visualisasi dashboard menggunakan *Analisis Komparatif Dampak Sosial-Ekologis* untuk membedah skala korban terdampak (jiwa) dan luas area konflik (hektar) antar sektor.",
+        "",
+        "#### A. Pengantar & Kerangka Narasi",
+        f"Visualisasi komparatif menggambarkan skala dampak sosial dan penggunaan lahan berdasarkan sektor industri. Data menunjukkan bahwa **Sektor Pertambangan** mencatatkan jumlah warga terdampak terbesar, yaitu **{jiwa_tambang:,.0f} jiwa**, disusul sektor Kehutanan sebanyak **{jiwa_kehutanan:,.0f} jiwa**.",
+        "",
+        f"Dari dimensi penggunaan lahan, **Sektor Pertambangan** juga mencatatkan luas sengketa terbesar yaitu **{ha_tambang:,.0f} hektar**, disusul Perkebunan seluas **{ha_kebun:,.0f} ha** dan Kehutanan seluas **{ha_kehutanan:,.0f} ha**.",
+        "",
+        "#### B. Alur Logika Metodologis Analisis Komparatif Dampak Sosial-Ekologis",
+        "```mermaid",
+        mermaid_str_4_2,
+        "```",
+        "",
+        "#### C. Formulasi Matematis: Agregasi Jiwa Terdampak dan Monopoli Area",
+        "```text",
+        "J_s = Σ J_i, untuk setiap kasus i pada sektor s",
+        "A_s = Σ A_i, untuk setiap kasus i pada sektor s",
+        "P_s (%) = ( Nilai_s / Nilai_Total ) × 100",
+        "```",
+        "",
+        "#### D. Matriks Hasil Uji Empiris",
+        "##### Tabel 4.4: Matriks Dampak Sosial-Ekologis Konflik Agraria menurut Sektor",
+        markdown_table(["Sektor Pemicu", "Jiwa Terdampak", "Proporsi Jiwa", "Luas Area (Ha)", "Proporsi Area"], sektor_dampak_rows),
+        "",
+        "##### Tabel 4.5: Bedah Anomali Lonjakan Korban Terdampak (Jiwa)",
+        markdown_table(["Anomali", "Tahun", "Sektor", "Korban Jiwa", "Kasus Utama"], anomaly_jiwa_rows),
+        "",
+        "##### Tabel 4.6: Bedah Anomali Monopoli Area Konflik (Hektar)",
+        markdown_table(["Anomali", "Tahun", "Sektor", "Luas Ha", "Kasus Utama"], anomaly_ha_rows),
+        "",
+        "#### E. Analisis Temuan Empiris: Asimetri Dampak Sosial dan Penguasaan Ruang",
+        "Matriks dampak sektoral menunjukkan bahwa sektor Pertambangan menjadi penyumbang utama korban terdampak sekaligus sektor dengan luas sengketa terbesar. Dengan demikian, dinamika konflik tidak hanya perlu dibaca dari jumlah kasus, tetapi juga dari skala korban dan luas ruang hidup yang diperebutkan.",
+        "",
+        "## 4.3 Indikasi Represi dan Kriminalisasi dalam Konflik Agraria",
+        "",
+        "> **Sumber Data Resmi & Deskripsi Visualisasi:** Represi dan Kriminalisasi: `data/processed/sulawesi_konflik_agraria_tanahkita.csv`. Visualisasi dashboard menggunakan *Analisis Agregat Kasus Represi & Pelanggaran HAM* untuk menghitung indikasi kriminalisasi, korban ditangkap, luka-luka, dan tewas.",
+        "",
+        "#### A. Pengantar & Kerangka Narasi",
+        f"Data kuantitatif di wilayah Sulawesi mencatat indikasi terjadinya represi dan tindakan kriminalisasi dalam sebagian sengketa agraria. Dari database yang didokumentasikan, terdapat **{total_kriminalisasi:,} kasus indikasi kriminalisasi** dan **{total_ditangkap:,} warga/aktivis lingkungan yang tercatat pernah ditangkap** dalam penanganan sengketa lahan.",
+        "",
+        f"Berdasarkan distribusi sektoral, **Sektor {top_sektor}** mencatatkan frekuensi indikasi represi tertinggi dengan **{top_sektor_count:,} kasus**. Tahun dengan jumlah catatan insiden represi tertinggi adalah **{top_tahun}** dengan **{top_tahun_count:,} kasus**.",
+        "",
+        "#### B. Alur Logika Metodologis Analisis Agregat Kasus Represi & Pelanggaran HAM",
+        "```mermaid",
+        mermaid_str_4_3,
+        "```",
+        "",
+        "#### C. Formulasi Matematis: Kriminalisasi dan Korban Represi",
+        "```text",
+        "K_krim = Σ I_i, untuk setiap kasus i dengan indikasi kriminalisasi",
+        "R = Σ ( D_i + L_i + T_i )",
+        f"R = {total_ditangkap:,} + {total_luka:,} + {total_tewas:,} = {total_ditangkap + total_luka + total_tewas:,} orang",
+        "```",
+        "",
+        "#### D. Matriks Hasil Uji Empiris",
+        "##### Tabel 4.7: Metrik Agregat Represi dan Kriminalisasi",
+        markdown_table(["Indikator", "Nilai"], [["Kasus Indikasi Kriminalisasi", f"{total_kriminalisasi:,}"], ["Warga/Aktivis Ditangkap", f"{total_ditangkap:,}"], ["Korban Luka-luka", f"{total_luka:,}"], ["Korban Tewas", f"{total_tewas:,}"]]),
+        "",
+        "##### Tabel 4.8: Tren Kasus Kriminalisasi dan Represi Pasca-2000",
+        markdown_table(["Tahun", "Jumlah Kasus"], krim_tahun_rows),
+        "",
+        "##### Tabel 4.9: Sektor Industri Paling Represif",
+        markdown_table(["Sektor Pemicu", "Jumlah Kasus Kriminalisasi"], krim_sektor_rows),
+        "",
+        "##### Tabel 4.10: Arsip Kasus Represi dan Kekerasan Fisik Tertinggi",
+        markdown_table(["Tahun", "Sektor", "Perusahaan Terlibat", "Ditangkap", "Tewas", "Narasi Singkat"], kekerasan_rows),
+        "",
+        "#### E. Analisis Temuan Empiris: Penyempitan Ruang Sipil dan Risiko HAM",
+        f"Keberadaan kasus kriminalisasi di sekitar area konsesi, terutama pada sektor **{top_sektor}**, mengindikasikan pentingnya jaminan perlindungan ruang sipil dan penghormatan HAM dalam setiap proses pembangunan. Catatan ini menunjukkan perlunya pendekatan hukum yang adil, penyelesaian konflik secara ramah HAM, serta perlindungan bagi pejuang lingkungan dan komunitas lokal.",
         "",
     ]
     md_path = tool_dir / "Metodologi_Bab4_Ruang_Hidup.md"
