@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Bab VI: Audit Forensik Metodologi D3TLH — Sub-bab 6.6 Algoritma Skoring Tingkat Provinsi</title>
+<style>
+  body { font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #202426; max-width: 1150px; margin: 0 auto; padding: 25px; background-color: #FAFAFA; }
+  h1 { color: #143642; border-bottom: 2px solid #143642; padding-bottom: 8px; font-size: 24px; }
+  h2 { color: #A8201A; margin-top: 25px; font-size: 20px; }
+  h3 { color: #0F4C5C; margin-top: 30px; font-size: 18px; border-bottom: 1px solid #0F4C5C; padding-bottom: 5px; }
+  h4 { color: #143642; margin-top: 15px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .note-box { background-color: #F4F5F6; border-left: 5px solid #143642; padding: 12px 18px; margin: 15px 0; font-size: 13px; }
+  .formula { background-color: #F8F9FA; border-left: 4px solid #0F4C5C; padding: 10px 15px; margin: 10px 0; font-family: Consolas, monospace; font-size: 13px; color: #143642; font-weight: bold; }
+  .table-container { overflow-x: auto; margin: 15px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; background-color: #FFF; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th { background-color: #143642; color: #FFF; padding: 9px 10px; text-align: center; border: 1px solid #143642; font-size: 11px; }
+  td { padding: 7px 10px; border: 1px solid #E0E0E0; }
+  tr:nth-child(even) { background-color: #F9FAFA; }
+  tr.total-row { background-color: #EAEBED; font-weight: bold; }
+  .text-center { text-align: center; }
+  .text-right { text-align: right; }
+  .text-left { text-align: left; }
+  .badge-danger { background-color: #A8201A; color: white; padding: 2px 6px; border-radius: 3px; font-weight: bold; font-size: 10px; display: inline-block; }
+  .badge-warning { background-color: #E36414; color: white; padding: 2px 6px; border-radius: 3px; font-weight: bold; font-size: 10px; display: inline-block; }
+  .badge-success { background-color: #1E7E34; color: white; padding: 2px 6px; border-radius: 3px; font-weight: bold; font-size: 10px; display: inline-block; }
+  .mermaid { margin: 20px 0; text-align: center; background: #FFF; padding: 15px; border: 1px solid #E0E0E0; }
+  .table-caption { font-weight: bold; font-style: italic; color: #143642; margin-top: 15px; margin-bottom: 5px; font-size: 13px; }
+  .divider { margin: 40px 0; border-top: 2px dashed #CCCCCC; }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>
+</head>
+<body>
+
+<h1>BAB VI: AUDIT FORENSIK METODOLOGI D3TLH</h1>
+<h2>SUB-BAB 6.6: ALGORITMA SKORING TINGKAT PROVINSI (MODEL HYBRID Z-SCORE & EWM)</h2>
+
+<!-- SEKSI 6.6.1 SULTENG -->
+<h3>6.6.1 Evaluasi Forensik D3TLH: Provinsi Sulawesi Tengah (Sulteng)</h3>
+<div class="note-box">
+  <strong>PROFIL BIOREGION: Provinsi Sulawesi Tengah (Episentrum Hilirisasi & PLTU Captive)</strong><br>
+  Data empiris: Gabungan sensor satelit NASA TROPOMI NO2, Global Energy Monitor (GEM 2023), Rekam Medis Kemenkes (ISPA & Diare), Laporan Kinerja KLHK (Limbah B3 & Tailing), Global Forest Watch (Deforestasi & Emisi Karbon), BNPB (Bencana Alam), KPA & TanahKita (Konflik Agraria & Kriminalisasi), serta Minerba ESDM (IUP Nikel & Obral Izin). Diolah menggunakan model hybrid Z-Score Anomali Deviasi Standar dan Entropy Weight Method (EWM) sesuai antarmuka Dashboard Streamlit Tab 3 (Bedah Matematika Z-Score + EWM per Provinsi).
+</div>
+
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Sebagaimana ditampilkan pada antarmuka Streamlit <strong>Dashboard Page 6 (Audit D3TLH - Tab Bedah Matematika Z-Score + EWM per Provinsi)</strong>, evaluasi daya dukung dan daya tampung lingkungan hidup tingkat provinsi dirancang untuk membongkar kelemahan metodologi pemerintah yang kerap mengaburkan krisis lokal melalui teknik perataan wilayah (dilution effect). Analisis forensik membuktikan bahwa <strong>Provinsi Sulawesi Tengah berada pada status RED ALERT (Skor Komposit 4.0 / 5.0 - Melampaui Batas)</strong>, di mana beban pencemaran udara, limbah B3, tailing, dan deforestasi primer telah melampaui batas lentur ekologis.</p>
+
+<h4>B. Alur Logika Metodologis Skoring Tingkat Provinsi (Flowchart Sulteng)</h4>
+<div class="mermaid">
+flowchart LR
+    subgraph S1["1. Data Empiris Input"]
+        A1["20 Indikator Empiris<br/><i>6 Provinsi Se-Sulawesi</i>"]
+        A2["Fokus Data Sulteng<br/><i>Episentrum Nikel & PLTU</i>"]
+    end
+    subgraph S2["2. Standardisasi & Pembobotan"]
+        B1["Z-Score Deviasi Standar<br/><i>Z = (x - mean) / std</i>"]
+        B2["Inversi Parameter IKA<br/><i>Z_ika = -Z_ika</i>"]
+        B3["Entropy Weight Method (EWM)<br/><i>Bobot Objektif Dispersi W_j</i>"]
+    end
+    subgraph S3["3. Transformasi & Agregasi"]
+        C1["Mapping Likert Diskret (0-5)<br/><i>Threshold Outlier >= +1.0σ</i>"]
+        C2["EWM Weighted Average<br/><i>5 Pilar: Udara, Air, Lahan, Sosial, Veto</i>"]
+    end
+    subgraph S4["4. Sintesis & Vonis Sulteng"]
+        D1["Skor Komposit: 4.0 / 5.0<br/><i>(WSM: 7.92 / 10.0)</i>"]
+        D2["STATUS: MELAMPAUI BATAS<br/><i>Darurat Ekologis Provinsi</i>"]
+    end
+    A1 & A2 --> B1 & B3
+    B1 --> B2 --> C1
+    B3 & C1 --> C2 --> D1 --> D2
+</div>
+
+<h4>C. Formulasi Matematis & Definisi Variabel</h4>
+<div class="formula">Z_ij = (x_ij - mean(x_j)) / std(x_j) &nbsp;&nbsp;|&nbsp;&nbsp; Khusus IKA: Z_ika = - (ika_i - mean(ika)) / std(ika)</div>
+<div class="formula">r_ij = (x_ij - min(x_j)) / (max(x_j) - min(x_j)) &nbsp;➔&nbsp; P_ij = r_ij / &Sigma;r_ij &nbsp;➔&nbsp; E_j = -k * &Sigma;(P_ij * ln(P_ij)) &nbsp;➔&nbsp; W_j = (1 - E_j) / &Sigma;(1 - E_j)</div>
+<div class="formula">Skor_Pilar = &Sigma;(Likert_ij * W_j) / &Sigma;W_j &nbsp;&nbsp;|&nbsp;&nbsp; Skor_Komposit = (Udara + Air + Lahan + Sosial + Veto) / 5.0 = 4.0 / 5</div>
+
+<h4>D. Matriks Hasil Uji Empiris (Sulteng)</h4>
+<div class="table-caption">Tabel 6.12: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Tengah (Model Hybrid Z-Score & EWM)</div>
+<div class="table-container"><table>
+<thead><tr>
+<th class="data-th">Pilar</th>
+<th class="data-th">Indikator Empiris</th>
+<th class="data-th">Fakta Mentah (A)</th>
+<th class="data-th">Rata-rata (B)</th>
+<th class="data-th">Deviasi (C)</th>
+<th class="data-th">Z-Score</th>
+<th class="data-th">Bobot EWM</th>
+<th class="data-th">Likert</th>
+<th class="data-th">Status Ekologis</th>
+</tr></thead><tbody>
+<tr>
+<td class="text-center">Pilar Udara</td>
+<td class="text-left">Kapasitas PLTU Captive Beroperasi</td>
+<td class="text-right">7,325 MW</td>
+<td class="text-right">1,638</td>
+<td class="text-right">2,882</td>
+<td class="text-center">+1.97</td>
+<td class="text-center">0.0773</td>
+<td class="text-center">5.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Udara</td>
+<td class="text-left">Konsentrasi Gas NO2 Troposferik Satelit</td>
+<td class="text-right">6.50e-06</td>
+<td class="text-right">5.56e-06</td>
+<td class="text-right">1.29e-06</td>
+<td class="text-center">+0.73</td>
+<td class="text-center">0.0224</td>
+<td class="text-center">4.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Udara</td>
+<td class="text-left">Morbiditas ISPA (Incidence Rate Ratio)</td>
+<td class="text-right">3.50x</td>
+<td class="text-right">1.41x</td>
+<td class="text-right">1.26x</td>
+<td class="text-center">+1.66</td>
+<td class="text-center">0.0461</td>
+<td class="text-center">5.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Udara</td>
+<td class="text-left">Proporsi Timbulan Limbah B3 Industri</td>
+<td class="text-right">25.30 Jt Ton</td>
+<td class="text-right">5.47</td>
+<td class="text-right">10.04</td>
+<td class="text-center">+1.97</td>
+<td class="text-center">0.0829</td>
+<td class="text-center">5.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Udara</td>
+<td class="text-left">Pelepasan Emisi Karbon Deforestasi GFW</td>
+<td class="text-right">291.34 Jt Ton CO2e</td>
+<td class="text-right">134.01</td>
+<td class="text-right">93.99</td>
+<td class="text-center">+1.67</td>
+<td class="text-center">0.0395</td>
+<td class="text-center">5.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Air</td>
+<td class="text-left">Indeks Kualitas Air (IKA) Terkini</td>
+<td class="text-right">62.1 Poin</td>
+<td class="text-right">59.7</td>
+<td class="text-right">3.4</td>
+<td class="text-center">-0.70</td>
+<td class="text-center">0.0262</td>
+<td class="text-center">1.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Tidak Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Air</td>
+<td class="text-left">Morbiditas Diare (Incidence Rate Ratio)</td>
+<td class="text-right">1.52x</td>
+<td class="text-right">1.04x</td>
+<td class="text-right">0.36x</td>
+<td class="text-center">+1.34</td>
+<td class="text-center">0.0164</td>
+<td class="text-center">5.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Air</td>
+<td class="text-left">Konflik Ruang Laut Nelayan vs Tambang</td>
+<td class="text-right">1 Kasus</td>
+<td class="text-right">2.5</td>
+<td class="text-right">2.9</td>
+<td class="text-center">-0.52</td>
+<td class="text-center">0.0442</td>
+<td class="text-center">1.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Tidak Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Air</td>
+<td class="text-left">Akumulasi Beban Tailing, Slag & DSTP</td>
+<td class="text-right">24.50 Jt Ton</td>
+<td class="text-right">5.34</td>
+<td class="text-right">9.73</td>
+<td class="text-center">+1.97</td>
+<td class="text-center">0.0822</td>
+<td class="text-center">5.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Lahan</td>
+<td class="text-left">Bencana Hidrometeorologi (Banjir & Longsor)</td>
+<td class="text-right">458 Kejadian</td>
+<td class="text-right">268.2</td>
+<td class="text-right">246.6</td>
+<td class="text-center">+0.77</td>
+<td class="text-center">0.0271</td>
+<td class="text-center">4.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Lahan</td>
+<td class="text-left">Deforestasi Hutan Alam Primer GFW</td>
+<td class="text-right">481,908 Ha</td>
+<td class="text-right">231,009</td>
+<td class="text-right">159,368</td>
+<td class="text-center">+1.57</td>
+<td class="text-center">0.0346</td>
+<td class="text-center">5.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Lahan</td>
+<td class="text-left">Perambahan Tambang di Kawasan Hutan Lindung</td>
+<td class="text-right">19,804 Ha</td>
+<td class="text-right">6,964</td>
+<td class="text-right">6,775</td>
+<td class="text-center">+1.89</td>
+<td class="text-center">0.0392</td>
+<td class="text-center">5.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Lahan</td>
+<td class="text-left">Aktor Deforestasi Komoditas Tambang & Sawit</td>
+<td class="text-right">383,304 Ha</td>
+<td class="text-right">166,942</td>
+<td class="text-right">128,370</td>
+<td class="text-center">+1.69</td>
+<td class="text-center">0.0361</td>
+<td class="text-center">5.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Lahan</td>
+<td class="text-left">Kepadatan Konsesi IUP Nikel vs Daratan</td>
+<td class="text-right">7.33%</td>
+<td class="text-right">5.08%</td>
+<td class="text-right">4.43%</td>
+<td class="text-center">+0.51</td>
+<td class="text-center">0.0320</td>
+<td class="text-center">4.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Sosial</td>
+<td class="text-left">Manipulasi Persetujuan Konsultasi Warga (FPIC)</td>
+<td class="text-right">1 Kasus</td>
+<td class="text-right">1.3</td>
+<td class="text-right">2.0</td>
+<td class="text-center">-0.17</td>
+<td class="text-center">0.0635</td>
+<td class="text-center">2.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Tidak Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Sosial</td>
+<td class="text-left">Korban Perampasan Ruang Hidup & Krisis Agraria</td>
+<td class="text-right">12,231 Jiwa</td>
+<td class="text-right">9,052</td>
+<td class="text-right">15,804</td>
+<td class="text-center">+0.20</td>
+<td class="text-center">0.0781</td>
+<td class="text-center">3.0 / 5</td>
+<td class="text-center"><span class="badge-warning">Mendekati Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Sosial</td>
+<td class="text-left">Insiden Kriminalisasi Warga & Pembela HAM</td>
+<td class="text-right">6 Insiden</td>
+<td class="text-right">3.5</td>
+<td class="text-right">3.5</td>
+<td class="text-center">+0.71</td>
+<td class="text-center">0.0331</td>
+<td class="text-center">4.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Sosial</td>
+<td class="text-left">Defisit Kelayakan Standar Faskes SPA</td>
+<td class="text-right">2.4 % Gap</td>
+<td class="text-right">9.6</td>
+<td class="text-right">10.5</td>
+<td class="text-center">-0.68</td>
+<td class="text-center">0.0430</td>
+<td class="text-center">1.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Tidak Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Veto</td>
+<td class="text-left">Penerbitan Obral Konsesi WIUP Baru Pasca-2014</td>
+<td class="text-right">260 Izin</td>
+<td class="text-right">95.7</td>
+<td class="text-right">100.3</td>
+<td class="text-center">+1.64</td>
+<td class="text-center">0.0415</td>
+<td class="text-center">5.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Veto</td>
+<td class="text-left">Korporat Tambang Pelanggar Hukum Beroperasi Ilegal</td>
+<td class="text-right">3 Korporasi</td>
+<td class="text-right">2.7</td>
+<td class="text-right">3.7</td>
+<td class="text-center">+0.09</td>
+<td class="text-center">0.0473</td>
+<td class="text-center">3.0 / 5</td>
+<td class="text-center"><span class="badge-warning">Mendekati Batas</span></td>
+</tr>
+</tbody></table></div>
+
+<div class="table-caption">Tabel 6.13: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Tengah</div>
+<div class="table-container"><table>
+<thead><tr>
+<th class="data-th">Pilar / Dimensi</th>
+<th class="data-th">Cakupan Indikator Kunci</th>
+<th class="data-th">Skor Likert Pilar (0-5)</th>
+<th class="data-th">Status Ekologis</th>
+<th class="data-th">Interpretasi Temuan Lapangan Sulteng</th>
+</tr></thead><tbody>
+<tr>
+<td class="text-center">Pilar 1: Udara</td>
+<td class="text-left">PLTU (7.325 MW), NO2 (6.5e-6), ISPA (3.5x), B3 (25.3 Jt Ton), CO2 (291 Jt Ton)</td>
+<td class="text-right">4.9 / 5</td>
+<td class="text-right"><span class="badge-danger">Melampaui Batas</span></td>
+<td class="text-right">Episentrum PLTU Captive Terbesar & Konsentrasi B3</td>
+</tr>
+<tr>
+<td class="text-center">Pilar 2: Air</td>
+<td class="text-left">IKA (62.07), Diare (1.52x), Tailing (24.5 Jt Ton), Logam Cr6+</td>
+<td class="text-right">3.3 / 5</td>
+<td class="text-right"><span class="badge-warning">Mendekati Batas</span></td>
+<td class="text-right">Beban Tailing Raksasa & Morbiditas Pencernaan Tinggi</td>
+</tr>
+<tr>
+<td class="text-center">Pilar 3: Lahan</td>
+<td class="text-left">Bencana (458), Deforestasi (481k Ha), Lindung (19.8k Ha), Driver (383k Ha)</td>
+<td class="text-right">4.7 / 5</td>
+<td class="text-right"><span class="badge-danger">Melampaui Batas</span></td>
+<td class="text-right">Deforestasi Primer Masif & Perambahan Hutan Lindung</td>
+</tr>
+<tr>
+<td class="text-center">Pilar 4: Sosial</td>
+<td class="text-left">FPIC (1 Kasus), Korban (12.231 Jiwa), Kriminalisasi (6 Insiden), Defisit SPA</td>
+<td class="text-right">2.5 / 5</td>
+<td class="text-right"><span class="badge-danger">Tidak Melampaui Batas</span></td>
+<td class="text-right">Kriminalisasi Warga Pembela HAM & Defisit Sarana Kesehatan</td>
+</tr>
+<tr>
+<td class="text-center">Pilar 5: Veto</td>
+<td class="text-left">Obral Izin (260 IUP Baru), Korporat Ilegal (3 Perusahaan), PLTU Ekspansi</td>
+<td class="text-right">4.4 / 5</td>
+<td class="text-right"><span class="badge-danger">Melampaui Batas</span></td>
+<td class="text-right">Kegagalan Pengendalian Izin & Impunitas Pelanggaran</td>
+</tr>
+<tr class="total-row">
+<td class="text-center">SKOR KOMPOSIT SULTENG</td>
+<td class="text-left">Agregasi 5 Pilar EWM Weighted Average (Z-Score Standardization)</td>
+<td class="text-right">4.0 / 5</td>
+<td class="text-right"><span class="badge-danger">Melampaui Batas</span></td>
+<td class="text-right">STATUS RED ALERT: DARURAT DAYA DUKUNG LINGKUNGAN</td>
+</tr>
+</tbody></table></div>
+
+<h4>E. Analisis Temuan Empiris (Sulteng)</h4>
+<p><strong>1. Daya Tampung Udara (Skor 4.9 / 5 — Melampaui Batas):</strong> Beban PLTU captive batubara 7.325,0 MW (Z = +1.97&sigma;), limbah B3 25,30 Jt Ton (Z = +1.97&sigma;), emisi CO2 291,34 Jt Ton, dan anomali ISPA 3,50x lipat (Z = +1.66&sigma;).<br>
+<strong>2. Daya Tampung Air (Skor 3.3 / 5 — Mendekati Batas):</strong> Timbulan tailing/slag 24,50 Jt Ton (Z = +1.97&sigma;) dan morbiditas diare 1,52x lipat (Z = +1.34&sigma;).<br>
+<strong>3. Daya Dukung Lahan (Skor 4.7 / 5 — Melampaui Batas):</strong> Deforestasi primer 481.908 Ha (Z = +1.57&sigma;), perambahan hutan lindung 19.804 Ha (Z = +1.89&sigma;), dan 458 kejadian bencana hidrometeorologi.<br>
+<strong>4. Daya Dukung Sosial (Skor 2.5 / 5 — Tidak Melampaui Batas):</strong> 12.231 jiwa terdampak konflik agraria dan 6 insiden kriminalisasi pembela HAM.<br>
+<strong>5. Veto Kebijakan (Skor 4.4 / 5 — Melampaui Batas):</strong> Obral 260 IUP baru pasca-2014 (Z = +1.64&sigma;) dan impunitas korporat ilegal.<br>
+<strong>6. Vonis Komposit Sulteng (Skor 4.0 / 5.0 — Melampaui Batas):</strong> Status <span class="badge-danger">MELAMPAUI BATAS (RED ALERT)</span> membuktikan keruntuhan daya dukung lingkungan akibat ekspansi smelter nikel.</p>
+
+<div class="divider"></div>
+
+<!-- SEKSI 6.6.2 SULTRA -->
+<h3>6.6.2 Evaluasi Forensik D3TLH: Provinsi Sulawesi Tenggara (Sultra)</h3>
+<div class="note-box">
+  <strong>PROFIL BIOREGION: Provinsi Sulawesi Tenggara (Episentrum Konflik Agraria & Kepadatan IUP Ekstrem)</strong><br>
+  Data empiris: Sensor satelit NASA NO2, PLTU Captive Morosi & Konawe 1.900 MW, Rekam Medis Diare & ISPA, Limbah B3 & Tailing 6,5 Jt Ton, Deforestasi 337k Ha, 158 Bencana Alam, 39.821 Jiwa Terdampak Konflik Agraria & 5 Kasus FPIC, serta Kepadatan IUP 11,72% Daratan & 160 IUP Baru. Diolah menggunakan model hybrid Z-Score Anomali Deviasi Standar dan Entropy Weight Method (EWM).
+</div>
+
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Berdasarkan hasil pemetaan empiris di antarmuka Streamlit <strong>Dashboard Page 6 (Audit D3TLH - Tab Bedah Matematika Z-Score + EWM per Provinsi)</strong>, Provinsi Sulawesi Tenggara memperlihatkan profil anomali yang sangat kontras dengan Sulawesi Tengah. Sulawesi Tenggara mengalami <strong>ledakan krisis daya dukung sosial, perampasan ruang hidup masyarakat pesisir, dan kepadatan konsesi tambang tertinggi se-Sulawesi</strong>. Konsesi tambang nikel mencaplok <strong>11,72% daratan provinsi (Z = +1.50&sigma;, Likert 5.0)</strong> dan berdampak langsung pada <strong>39.821 jiwa (Z = +1.95&sigma;, Likert 5.0 - Outlier Tertinggi se-Sulawesi)</strong>.</p>
+
+<h4>B. Alur Logika Metodologis Skoring Tingkat Provinsi (Flowchart Sultra)</h4>
+<div class="mermaid">
+flowchart LR
+    subgraph S1["1. Data Empiris Input"]
+        A1["20 Indikator Empiris<br/><i>6 Provinsi Se-Sulawesi</i>"]
+        A2["Fokus Data Sultra<br/><i>Episentrum Konflik Agraria & IUP</i>"]
+    end
+    subgraph S2["2. Standardisasi & Pembobotan"]
+        B1["Z-Score Deviasi Standar<br/><i>Z = (x - mean) / std</i>"]
+        B2["Inversi Parameter IKA<br/><i>Z_ika = -Z_ika</i>"]
+        B3["Entropy Weight Method (EWM)<br/><i>Bobot Objektif Dispersi W_j</i>"]
+    end
+    subgraph S3["3. Transformasi & Agregasi"]
+        C1["Mapping Likert Diskret (0-5)<br/><i>Kepadatan IUP (+1.50σ) & Sosial (+1.95σ)</i>"]
+        C2["EWM Weighted Average<br/><i>5 Pilar: Udara, Air, Lahan, Sosial, Veto</i>"]
+    end
+    subgraph S4["4. Sintesis & Vonis Sultra"]
+        D1["Skor Komposit: 3.4 / 5.0<br/><i>(WSM: 6.78 / 10.0)</i>"]
+        D2["STATUS: MENDEKATI BATAS<br/><i>Krisis Sosial & Kepadatan Tambang Kritis</i>"]
+    end
+    A1 & A2 --> B1 & B3
+    B1 --> B2 --> C1
+    B3 & C1 --> C2 --> D1 --> D2
+</div>
+
+<h4>C. Formulasi Matematis & Definisi Variabel</h4>
+<div class="formula">Z_sultra,j = (x_sultra,j - mean(x_j)) / std(x_j)</div>
+<div class="formula">W_j = (1 - E_j) / &Sigma;(1 - E_j) &nbsp;&nbsp;|&nbsp;&nbsp; Skor_Pilar_Sosial = &Sigma;(Likert_sultra,j * W_j) / &Sigma;W_j = 4.5 / 5</div>
+
+<h4>D. Matriks Hasil Uji Empiris (Sultra)</h4>
+<div class="table-caption">Tabel 6.14: Bedah Matematika 20 Indikator Empiris Provinsi Sulawesi Tenggara (Model Hybrid Z-Score & EWM)</div>
+<div class="table-container"><table>
+<thead><tr>
+<th class="data-th">Pilar</th>
+<th class="data-th">Indikator Empiris</th>
+<th class="data-th">Fakta Mentah (A)</th>
+<th class="data-th">Rata-rata (B)</th>
+<th class="data-th">Deviasi (C)</th>
+<th class="data-th">Z-Score</th>
+<th class="data-th">Bobot EWM</th>
+<th class="data-th">Likert</th>
+<th class="data-th">Status Ekologis</th>
+</tr></thead><tbody>
+<tr>
+<td class="text-center">Pilar Udara</td>
+<td class="text-left">Kapasitas PLTU Captive Beroperasi</td>
+<td class="text-right">1,900 MW</td>
+<td class="text-right">1,638</td>
+<td class="text-right">2,882</td>
+<td class="text-center">+0.09</td>
+<td class="text-center">0.0773</td>
+<td class="text-center">3.0 / 5</td>
+<td class="text-center"><span class="badge-warning">Mendekati Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Udara</td>
+<td class="text-left">Konsentrasi Gas NO2 Troposferik Satelit</td>
+<td class="text-right">6.62e-06</td>
+<td class="text-right">5.56e-06</td>
+<td class="text-right">1.29e-06</td>
+<td class="text-center">+0.82</td>
+<td class="text-center">0.0224</td>
+<td class="text-center">4.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Udara</td>
+<td class="text-left">Morbiditas ISPA (Incidence Rate Ratio)</td>
+<td class="text-right">0.91x</td>
+<td class="text-right">1.41x</td>
+<td class="text-right">1.26x</td>
+<td class="text-center">-0.39</td>
+<td class="text-center">0.0461</td>
+<td class="text-center">2.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Tidak Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Udara</td>
+<td class="text-left">Proporsi Timbulan Limbah B3 Industri</td>
+<td class="text-right">6.52 Jt Ton</td>
+<td class="text-right">5.47</td>
+<td class="text-right">10.04</td>
+<td class="text-center">+0.10</td>
+<td class="text-center">0.0829</td>
+<td class="text-center">3.0 / 5</td>
+<td class="text-center"><span class="badge-warning">Mendekati Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Udara</td>
+<td class="text-left">Pelepasan Emisi Karbon Deforestasi GFW</td>
+<td class="text-right">189.02 Jt Ton CO2e</td>
+<td class="text-right">134.01</td>
+<td class="text-right">93.99</td>
+<td class="text-center">+0.59</td>
+<td class="text-center">0.0395</td>
+<td class="text-center">4.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Air</td>
+<td class="text-left">Indeks Kualitas Air (IKA) Terkini</td>
+<td class="text-right">65.3 Poin</td>
+<td class="text-right">59.7</td>
+<td class="text-right">3.4</td>
+<td class="text-center">-1.66</td>
+<td class="text-center">0.0262</td>
+<td class="text-center">0.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Tidak Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Air</td>
+<td class="text-left">Morbiditas Diare (Incidence Rate Ratio)</td>
+<td class="text-right">1.11x</td>
+<td class="text-right">1.04x</td>
+<td class="text-right">0.36x</td>
+<td class="text-center">+0.18</td>
+<td class="text-center">0.0164</td>
+<td class="text-center">3.0 / 5</td>
+<td class="text-center"><span class="badge-warning">Mendekati Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Air</td>
+<td class="text-left">Konflik Ruang Laut Nelayan vs Tambang</td>
+<td class="text-right">5 Kasus</td>
+<td class="text-right">2.5</td>
+<td class="text-right">2.9</td>
+<td class="text-center">+0.87</td>
+<td class="text-center">0.0442</td>
+<td class="text-center">4.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Air</td>
+<td class="text-left">Akumulasi Beban Tailing, Slag & DSTP</td>
+<td class="text-right">6.52 Jt Ton</td>
+<td class="text-right">5.34</td>
+<td class="text-right">9.73</td>
+<td class="text-center">+0.12</td>
+<td class="text-center">0.0822</td>
+<td class="text-center">3.0 / 5</td>
+<td class="text-center"><span class="badge-warning">Mendekati Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Lahan</td>
+<td class="text-left">Bencana Hidrometeorologi (Banjir & Longsor)</td>
+<td class="text-right">158 Kejadian</td>
+<td class="text-right">268.2</td>
+<td class="text-right">246.6</td>
+<td class="text-center">-0.45</td>
+<td class="text-center">0.0271</td>
+<td class="text-center">2.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Tidak Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Lahan</td>
+<td class="text-left">Deforestasi Hutan Alam Primer GFW</td>
+<td class="text-right">337,434 Ha</td>
+<td class="text-right">231,009</td>
+<td class="text-right">159,368</td>
+<td class="text-center">+0.67</td>
+<td class="text-center">0.0346</td>
+<td class="text-center">4.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Lahan</td>
+<td class="text-left">Perambahan Tambang di Kawasan Hutan Lindung</td>
+<td class="text-right">8,236 Ha</td>
+<td class="text-right">6,964</td>
+<td class="text-right">6,775</td>
+<td class="text-center">+0.19</td>
+<td class="text-center">0.0392</td>
+<td class="text-center">3.0 / 5</td>
+<td class="text-center"><span class="badge-warning">Mendekati Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Lahan</td>
+<td class="text-left">Aktor Deforestasi Komoditas Tambang & Sawit</td>
+<td class="text-right">243,001 Ha</td>
+<td class="text-right">166,942</td>
+<td class="text-right">128,370</td>
+<td class="text-center">+0.59</td>
+<td class="text-center">0.0361</td>
+<td class="text-center">4.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Lahan</td>
+<td class="text-left">Kepadatan Konsesi IUP Nikel vs Daratan</td>
+<td class="text-right">11.72%</td>
+<td class="text-right">5.08%</td>
+<td class="text-right">4.43%</td>
+<td class="text-center">+1.50</td>
+<td class="text-center">0.0320</td>
+<td class="text-center">5.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Sosial</td>
+<td class="text-left">Manipulasi Persetujuan Konsultasi Warga (FPIC)</td>
+<td class="text-right">5 Kasus</td>
+<td class="text-right">1.3</td>
+<td class="text-right">2.0</td>
+<td class="text-center">+1.86</td>
+<td class="text-center">0.0635</td>
+<td class="text-center">5.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Sosial</td>
+<td class="text-left">Korban Perampasan Ruang Hidup & Krisis Agraria</td>
+<td class="text-right">39,821 Jiwa</td>
+<td class="text-right">9,052</td>
+<td class="text-right">15,804</td>
+<td class="text-center">+1.95</td>
+<td class="text-center">0.0781</td>
+<td class="text-center">5.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Sosial</td>
+<td class="text-left">Insiden Kriminalisasi Warga & Pembela HAM</td>
+<td class="text-right">4 Insiden</td>
+<td class="text-right">3.5</td>
+<td class="text-right">3.5</td>
+<td class="text-center">+0.14</td>
+<td class="text-center">0.0331</td>
+<td class="text-center">3.0 / 5</td>
+<td class="text-center"><span class="badge-warning">Mendekati Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Sosial</td>
+<td class="text-left">Defisit Kelayakan Standar Faskes SPA</td>
+<td class="text-right">17.9 % Gap</td>
+<td class="text-right">9.6</td>
+<td class="text-right">10.5</td>
+<td class="text-center">+0.79</td>
+<td class="text-center">0.0430</td>
+<td class="text-center">4.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Veto</td>
+<td class="text-left">Penerbitan Obral Konsesi WIUP Baru Pasca-2014</td>
+<td class="text-right">160 Izin</td>
+<td class="text-right">95.7</td>
+<td class="text-right">100.3</td>
+<td class="text-center">+0.64</td>
+<td class="text-center">0.0415</td>
+<td class="text-center">4.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Melampaui Batas</span></td>
+</tr>
+<tr>
+<td class="text-center">Pilar Veto</td>
+<td class="text-left">Korporat Tambang Pelanggar Hukum Beroperasi Ilegal</td>
+<td class="text-right">1 Korporasi</td>
+<td class="text-right">2.7</td>
+<td class="text-right">3.7</td>
+<td class="text-center">-0.45</td>
+<td class="text-center">0.0473</td>
+<td class="text-center">2.0 / 5</td>
+<td class="text-center"><span class="badge-danger">Tidak Melampaui Batas</span></td>
+</tr>
+</tbody></table></div>
+
+<div class="table-caption">Tabel 6.15: Rekapitulasi Skor 5 Pilar & Status Ekologis Komposit Provinsi Sulawesi Tenggara</div>
+<div class="table-container"><table>
+<thead><tr>
+<th class="data-th">Pilar / Dimensi</th>
+<th class="data-th">Cakupan Indikator Kunci</th>
+<th class="data-th">Skor Likert Pilar (0-5)</th>
+<th class="data-th">Status Ekologis</th>
+<th class="data-th">Interpretasi Temuan Lapangan Sultra</th>
+</tr></thead><tbody>
+<tr>
+<td class="text-center">Pilar 1: Udara</td>
+<td class="text-left">PLTU (1.900 MW), NO2 (6.6e-6), ISPA (0.91x), B3 (6.5 Jt Ton), CO2 (189 Jt Ton)</td>
+<td class="text-right">3.1 / 5</td>
+<td class="text-right"><span class="badge-warning">Mendekati Batas</span></td>
+<td class="text-right">Emisi Smelter Morosi/VDNI & Peningkatan NO2 Satelit</td>
+</tr>
+<tr>
+<td class="text-center">Pilar 2: Air</td>
+<td class="text-left">IKA (65.32), Diare (1.11x), Tailing (6.5 Jt Ton), Konflik Pesisir (5 Kasus)</td>
+<td class="text-right">2.8 / 5</td>
+<td class="text-right"><span class="badge-warning">Mendekati Batas</span></td>
+<td class="text-right">Sedimentasi Tailing Pesisir & Konflik Ruang Tangkap Nelayan</td>
+</tr>
+<tr>
+<td class="text-center">Pilar 3: Lahan</td>
+<td class="text-left">Bencana (158), Deforestasi (337k Ha), Lindung (8.2k Ha), Kepadatan IUP (11.72%)</td>
+<td class="text-right">3.6 / 5</td>
+<td class="text-right"><span class="badge-danger">Melampaui Batas</span></td>
+<td class="text-right">Outlier Kepadatan Konsesi Tambang Nikel Terpadat Se-Sulawesi</td>
+</tr>
+<tr>
+<td class="text-center">Pilar 4: Sosial</td>
+<td class="text-left">FPIC (5 Kasus), Korban (39.821 Jiwa), Kriminalisasi (4 Insiden), Gap SPA (17.9%)</td>
+<td class="text-right">4.5 / 5</td>
+<td class="text-right"><span class="badge-danger">Melampaui Batas</span></td>
+<td class="text-right">Krisis Kemanusiaan & Perampasan Ruang Hidup Terparah Se-Sulawesi</td>
+</tr>
+<tr>
+<td class="text-center">Pilar 5: Veto</td>
+<td class="text-left">Obral Izin (160 IUP Baru), Korporat Ilegal (1 Perusahaan), Ekspansi Smelter</td>
+<td class="text-right">3.0 / 5</td>
+<td class="text-right"><span class="badge-warning">Mendekati Batas</span></td>
+<td class="text-right">Obral Izin Tambang Nikel Baru Pasca-2014 di Pesisir & Pulau</td>
+</tr>
+<tr class="total-row">
+<td class="text-center">SKOR KOMPOSIT SULTRA</td>
+<td class="text-left">Agregasi 5 Pilar EWM Weighted Average (Z-Score Standardization)</td>
+<td class="text-right">3.4 / 5</td>
+<td class="text-right"><span class="badge-warning">Mendekati Batas</span></td>
+<td class="text-right">STATUS AMBANG BATAS: KRISIS RUANG HIDUP & KEPADATAN IUP</td>
+</tr>
+</tbody></table></div>
+
+<h4>E. Analisis Temuan Empiris (Sultra)</h4>
+<p><strong>1. Daya Tampung Udara (Skor 3.1 / 5 — Mendekati Batas):</strong> Kapasitas 1.900 MW PLTU captive (Morosi/Konawe), emisi karbon 189,02 Jt Ton CO2e (Z = +0.59&sigma;), dan NO2 satelit 6,62e-06 mol/m².<br>
+<strong>2. Daya Tampung Air (Skor 2.8 / 5 — Mendekati Batas):</strong> IKA 65,32, beban tailing 6,52 Jt Ton, dan meletusnya 5 kasus konflik ruang tangkap laut nelayan vs tongkang nikel (Z = +0.87&sigma;, Likert 4.0).<br>
+<strong>3. Daya Dukung Lahan (Skor 3.6 / 5 — Melampaui Batas):</strong> Kepadatan Konsesi IUP mencapai 11,72% daratan provinsi (Z = +1.50&sigma;, Likert 5.0 - Outlier Ekstrem Se-Sulawesi) yang menggerus 337.434 Ha hutan alam primer.<br>
+<strong>4. Daya Dukung Sosial (Skor 4.5 / 5 — Melampaui Batas):</strong> Krisis sosial terparah se-Sulawesi dengan 39.821 jiwa warga terancam kehilangan ruang hidup (Z = +1.95&sigma;, Likert 5.0), 5 kasus manipulasi persetujuan FPIC (Z = +1.86&sigma;, Likert 5.0), dan defisit SPA 17,92%.<br>
+<strong>5. Veto Kebijakan (Skor 3.0 / 5 — Mendekati Batas):</strong> Obral 160 IUP baru pasca-2014 (Z = +0.64&sigma;, Likert 4.0).<br>
+<strong>6. Vonis Komposit Sulawesi Tenggara (Skor 3.4 / 5.0 — Mendekati Batas):</strong> Status <span class="badge-warning">MENDEKATI BATAS</span>, dengan catatan kritis bahwa Pilar Sosial (4.5 / 5) dan Kepadatan Konsesi Tambang (11,72%) telah berada pada status RED ALERT (MELAMPAUI BATAS EKSTREM).</p>
+
+</body>
+</html>
