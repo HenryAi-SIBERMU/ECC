@@ -507,7 +507,7 @@ def generate_all_bab6():
     add_table_1col(doc, ["Kode", "Indikator Empiris", "Nilai Aktual", "Ambang Batas Kritis", "Formula Substitusi", "Skor WSM (0-10)", "Skor Likert (1-5)", "Status Ekologis"], udara_rows, [1.3, 3.4, 2.5, 3.2, 3.0, 1.8, 1.8, 2.2], ["C", "L", "C", "L", "L", "C", "C", "C"])
 
     add_caption(doc, "Tabel 6.2: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Udara")
-    add_table_1col(doc, ["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal."], regulasi_rows, [3.0, 4.5, 8.0, 2.0], ["L", "L", "L", "C"])
+    add_table_1col(doc, ["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal."], regulasi_rows, [2.8, 4.0, 8.5, 2.7], ["L", "L", "L", "C"])
 
     add_h4(doc, "E. Analisis Temuan Empiris")
     add_p(doc, [
@@ -721,7 +721,7 @@ def generate_all_bab6():
     add_table_1col(doc, ["Kode", "Indikator Empiris", "Nilai Aktual", "Ambang Batas Kritis", "Formula Substitusi", "Skor WSM (0-10)", "Skor Likert (1-5)", "Status Ekologis"], air_rows, [1.3, 3.4, 2.5, 3.2, 3.0, 1.8, 1.8, 2.2], ["C", "L", "C", "L", "L", "C", "C", "C"])
 
     add_caption(doc, "Tabel 6.4: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Air")
-    add_table_1col(doc, ["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal."], regulasi_air_rows, [3.0, 4.5, 8.0, 2.0], ["L", "L", "L", "C"])
+    add_table_1col(doc, ["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal."], regulasi_air_rows, [2.8, 4.0, 8.5, 2.7], ["L", "L", "L", "C"])
 
     add_h4(doc, "E. Analisis Temuan Empiris")
     add_p(doc, [
@@ -916,7 +916,7 @@ def generate_all_bab6():
     add_table_1col(doc, ["Kode", "Indikator Empiris", "Nilai Aktual", "Ambang Batas Kritis", "Formula Substitusi", "Skor WSM (0-10)", "Skor Likert (1-5)", "Status Ekologis"], lahan_rows, [1.3, 3.4, 2.5, 3.2, 3.0, 1.8, 1.8, 2.2], ["C", "L", "C", "L", "L", "C", "C", "C"])
 
     add_caption(doc, "Tabel 6.6: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Lahan")
-    add_table_1col(doc, ["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal."], regulasi_lahan_rows, [3.0, 4.5, 8.0, 2.0], ["L", "L", "L", "C"])
+    add_table_1col(doc, ["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal."], regulasi_lahan_rows, [2.8, 4.0, 8.5, 2.7], ["L", "L", "L", "C"])
 
     add_h4(doc, "E. Analisis Temuan Empiris")
     add_p(doc, [
@@ -1101,7 +1101,7 @@ def generate_all_bab6():
     add_table_1col(doc, ["Kode", "Indikator Empiris", "Nilai Aktual", "Ambang Batas Kritis", "Formula Substitusi", "Skor WSM (0-10)", "Skor Likert (1-5)", "Status Ekologis"], sosial_rows, [1.3, 3.4, 2.5, 3.2, 3.0, 1.8, 1.8, 2.2], ["C", "L", "C", "L", "L", "C", "C", "C"])
 
     add_caption(doc, "Tabel 6.8: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Sosial")
-    add_table_1col(doc, ["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal."], regulasi_sosial_rows, [3.0, 4.5, 8.0, 2.0], ["L", "L", "L", "C"])
+    add_table_1col(doc, ["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal."], regulasi_sosial_rows, [2.8, 4.0, 8.5, 2.7], ["L", "L", "L", "C"])
 
     add_h4(doc, "E. Analisis Temuan Empiris")
     add_p(doc, [
@@ -1274,10 +1274,10 @@ def generate_all_bab6():
     add_table_1col(doc, ["Kode", "Indikator Empiris", "Nilai Aktual", "Ambang Batas Kritis", "Formula Substitusi", "Skor WSM (0-10)", "Skor Likert (1-5)", "Status Ekologis"], veto_rows, [1.3, 3.4, 2.5, 3.2, 3.0, 1.8, 1.8, 2.2], ["C", "L", "C", "L", "L", "C", "C", "C"])
 
     add_caption(doc, "Tabel 6.10: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Veto")
-    add_table_1col(doc, ["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal."], regulasi_veto_rows, [3.0, 4.5, 8.0, 2.0], ["L", "L", "L", "C"])
+    add_table_1col(doc, ["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal."], regulasi_veto_rows, [2.8, 4.0, 8.5, 2.7], ["L", "L", "L", "C"])
 
     add_caption(doc, "Tabel 6.11: Rekapitulasi Sintesis 5 Matriks Bioregion Pulau Sulawesi (Tingkat Pulau Makro)")
-    add_table_1col(doc, ["Dimensi", "Indikator Utama", "Kondisi Aktual Empiris", "Skor WSM", "Skor Likert", "Kesimpulan Analisis"], sintesis_pulau_rows, [1.8, 3.5, 4.8, 1.8, 1.8, 3.8], ["C", "L", "L", "C", "C", "L"])
+    add_table_1col(doc, ["Dimensi", "Indikator Utama", "Kondisi Aktual Empiris", "Skor WSM", "Skor Likert", "Kesimpulan Analisis"], sintesis_pulau_rows, [1.8, 3.5, 4.7, 2.0, 2.0, 4.0], ["C", "L", "L", "C", "C", "L"])
 
     add_h4(doc, "E. Analisis Temuan Empiris")
     add_p(doc, [
