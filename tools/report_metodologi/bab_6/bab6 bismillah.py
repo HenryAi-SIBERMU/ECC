@@ -509,16 +509,18 @@ def generate_all_bab6():
     add_caption(doc, "Tabel 6.2: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Udara")
     add_table_1col(doc, ["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_rows, [2.5, 3.5, 7.5, 2.5, 2.0], ["L", "L", "L", "C", "C"])
 
-    add_h4(doc, "E. Analisis Temuan Empiris: Pembuktian Terbalik Kolapsnya Daya Tampung Udara")
+    add_h4(doc, "E. Analisis Temuan Empiris (TL;DR)")
     add_p(doc, [
-        ("1. ", True, False), ("Kapasitas Pembakaran Batubara Ekstrem: ", True, False),
-        (f"Operasional PLTU captive batubara di kawasan industri nikel Sulawesi telah menembus angka {kapasitas_terkini:,.1f} MW. Angka ini hampir dua kali lipat melampaui ambang batas konsentrasi spasial 5.000 MW yang ditetapkan Global Energy Monitor (GEM 2023), memicu fenomena orographic trapping polutan SO2 dan NOx di lembah pesisir bioregion.\n", False, False),
-        ("2. ", True, False), ("Anomali Satelit TROPOMI dan Baku Mutu Udara Ambien: ", True, False),
-        (f"Konsentrasi rata-rata NO2 tahunan pulau mencapai {no2_terkini:.2e} mol/m², sementara di episentrum smelter Morowali angkanya menyentuh 8.8e-5 mol/m². Konsentrasi ini melampaui baku mutu PP 22/2021 dan melewati batas polusi berat internasional (6.6e-5 mol/m²), membuktikan bahwa klaim udara bersih pada dokumen D3TLH resmi adalah fiksi administratif.\n", False, False),
-        ("3. ", True, False), ("Krisis Morbiditas dan Ketidakadilan Beban B3: ", True, False),
-        (f"Rasio insidensi ISPA warga di wilayah sentra industri tercatat {rasio_anomali_ispa:.2f}x lipat lebih tinggi daripada wilayah non-sentra, jauh melampaui batas darurat medis WHO (IRR > 2.0). Di sisi lain, Sulawesi menanggung {proporsi_b3:.2f}% timbulan limbah B3 nasional ({total_b3_sulawesi:,.0f} Ton/Tahun), memvalidasi overcapacity ekologis per kapita hingga lebih dari lima kali lipat kewajaran nasional.\n", False, False),
-        ("4. ", True, False), ("Vonis Kegagalan Iklim: ", True, False),
-        (f"Kehilangan tutupan pohon melepaskan emisi sebesar {total_emisi_co2:,.2f} Juta Ton CO2e, menghancurkan target penyerapan karbon FOLU Net Sink 2030 (-140 Juta Ton CO2e). Dengan Skor Akumulasi {skor_akumulasi_udara:.2f} / 10.0 (Skor Likert 5.0 / 5.0), daya tampung beban udara Bioregion Pulau Sulawesi resmi dinyatakan berada dalam status DARURAT UDARA (OVERCAPACITY).", False, False),
+        ("1. ", True, False), ("PLTU Captive (Udara 1a): ", True, False),
+        (f"Kapasitas operasional {kapasitas_terkini:,.1f} MW melampaui 1,96x lipat ambang batas aman 5.000 MW (GEM 2023). Skor: 5.0 / 5 (Melampaui Batas).\n", False, False),
+        ("2. ", True, False), ("Polusi NO2 Satelit (Udara 1b): ", True, False),
+        (f"Densitas NO2 pulau {no2_terkini:.2e} mol/m² (Morowali 8.8e-5 mol/m²) melampaui baku mutu PP 22/2021 dan standar polusi berat internasional (6.6e-5 mol/m²). Skor: 3.91 / 5 (Melampaui Batas).\n", False, False),
+        ("3. ", True, False), ("Morbiditas ISPA & Beban B3 (Udara 2 & 3): ", True, False),
+        (f"Rasio ISPA sentra tambang {rasio_anomali_ispa:.2f}x lipat (KLB Medis WHO); Sulawesi menampung {proporsi_b3:.2f}% ({total_b3_sulawesi:,.0f} Ton) timbulan limbah B3 nasional. Skor: 5.0 / 5 (Melampaui Batas).\n", False, False),
+        ("4. ", True, False), ("Defisit Emisi Karbon (Udara 4): ", True, False),
+        (f"Pelepasan emisi {total_emisi_co2:,.2f} Juta Ton CO2e menggagalkan komitmen FOLU Net Sink 2030 (-140 Juta Ton). Skor: 5.0 / 5 (Melampaui Batas).\n", False, False),
+        ("5. ", True, False), ("Vonis Daya Tampung Udara: ", True, False),
+        (f"Skor Akumulasi {skor_akumulasi_udara:.2f} / 10.0 (Likert: {skor_likert_udara:.1f} / 5.0). Status: Melampaui Batas (DARURAT UDARA / OVERCAPACITY).", False, False),
     ])
 
     # -------------------------------------------------------------
@@ -721,18 +723,18 @@ def generate_all_bab6():
     add_caption(doc, "Tabel 6.4: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Air")
     add_table_1col(doc, ["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_air_rows, [2.5, 3.5, 7.5, 2.5, 2.0], ["L", "L", "L", "C", "C"])
 
-    add_h4(doc, "E. Analisis Temuan Empiris: Kapasitas Penetralan Limbah Melampaui Batas")
+    add_h4(doc, "E. Analisis Temuan Empiris (TL;DR)")
     add_p(doc, [
-        ("1. ", True, False), ("Runtuhnya Kualitas Air Regional (Air 1): ", True, False),
-        (f"Nilai rata-rata agregat IKA se-Sulawesi tertekan di angka {ika_avg:.2f}, masuk dalam kategori Sedang (50–69) yang secara resmi berada di bawah batas aman Kategori Baik (≥ 70.0) PermenLHK No. 27/2021. Skor Kualitas Air tercatat 3.4 / 5 (STATUS: KRITIS).\n", False, False),
-        ("2. ", True, False), ("Morbiditas Diare Penduduk Tapak (Air 2): ", True, False),
-        (f"Max Incidence Rate Ratio (IRR) diare di wilayah sentra mencapai {rasio_diare:.1f}x Lipat dibanding populasi kontrol provinsi lainnya, menghasilkan Skor Morbiditas Diare 3.0 / 5 (Terkendali / Waspada).\n", False, False),
-        ("3. ", True, False), ("Letusan Konflik Ruang Pesisir & Nelayan (Air 3): ", True, False),
-        (f"Terjadi sedikitnya {jumlah_konflik_air} kasus letusan konflik agraria pesisir dan perairan akibat ekspansi dermaga jetty, jalur tongkang batubara, dan sedimentasi laut, menghasilkan Skor Konflik Ruang Air 5.0 / 5 (STATUS: DARURAT AGRARIA).\n", False, False),
-        ("4. ", True, False), ("Overcapacity Beban Tailing (Air 4): ", True, False),
-        (f"Akumulasi timbulan limbah tailing dan slag mencapai {total_tailing_sulawesi/1_000_000.0:,.2f} Juta Ton/Tahun, melampaui kapasitas maksimal AMDAL kawasan industri (25 Juta Ton/Tahun), menghasilkan Skor Ancaman Tailing 5.0 / 5 (STATUS: DARURAT LIMBAH).\n", False, False),
-        ("5. ", True, False), ("Vonis Status Ekologis: ", True, False),
-        (f"Secara agregat, Skor Indikator Air berada pada angka 4.2 / 5 (Skor WSM {skor_akumulasi_air:.2f} / 10.0), yang secara resmi mengonfirmasi vonis STATUS: DARURAT AIR dengan kesimpulan eksekutif ANALISIS: Kapasitas Penetralan Limbah Melampaui Batas.", False, False),
+        ("1. ", True, False), ("Kualitas Air Rata-Rata (Air 1): ", True, False),
+        (f"Rerata IKA Sulawesi tertekan di angka {ika_avg:.2f} (Kategori Sedang, defisit 10.31 poin di bawah ambang batas aman ≥ 70). Skor: 3.4 / 5 (Mendekati Batas).\n", False, False),
+        ("2. ", True, False), ("Morbiditas Diare (Air 2): ", True, False),
+        (f"Insidensi diare sentra tambang mencapai {rasio_diare:.1f}x Lipat dibanding populasi kontrol (ambang batas WHO: > 2.0x). Skor: 3.0 / 5 (Mendekati Batas).\n", False, False),
+        ("3. ", True, False), ("Konflik Ruang Air Nelayan (Air 3): ", True, False),
+        (f"Tercatat {jumlah_konflik_air} kasus konflik ruang tangkap nelayan akibat sedimentasi dan dermaga jetty (threshold: 15 kasus). Skor: 5.0 / 5 (Melampaui Batas).\n", False, False),
+        ("4. ", True, False), ("Beban Tailing & Slag (Air 4): ", True, False),
+        (f"Akumulasi limbah tailing dan slag mencapai {total_tailing_sulawesi/1_000_000.0:,.2f} Jt Ton/Thn (kapasitas AMDAL: 25 Jt Ton/Thn). Skor: 5.0 / 5 (Melampaui Batas).\n", False, False),
+        ("5. ", True, False), ("Vonis Daya Tampung Air: ", True, False),
+        (f"Skor Akumulasi {skor_akumulasi_air:.2f} / 10.0 (Likert: 4.2 / 5). Status: Melampaui Batas (DARURAT AIR / Kapasitas Limbah Jebol).", False, False),
     ])
 
     # -------------------------------------------------------------
@@ -916,20 +918,20 @@ def generate_all_bab6():
     add_caption(doc, "Tabel 6.6: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Lahan")
     add_table_1col(doc, ["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_lahan_rows, [2.5, 3.5, 7.5, 2.5, 2.0], ["L", "L", "L", "C", "C"])
 
-    add_h4(doc, "E. Analisis Temuan Empiris: Evaluasi Pengelolaan Lanskap")
+    add_h4(doc, "E. Analisis Temuan Empiris (TL;DR)")
     add_p(doc, [
-        ("1. ", True, False), ("Ledakan Bencana Hidrometeorologi (Lahan 1): ", True, False),
-        (f"Akumulasi kejadian bencana banjir bandang dan tanah longsor mencapai {total_bencana_sulawesi:,.0f} kejadian, melampaui batas outlier statistik Mean + 1 SD (877 kejadian). Hal ini membuktikan bahwa hilangnya tutupan kanopi hulu tambang telah merusak kapasitas retensi hidrologis DAS Sulawesi, memicu Skor Bencana Lahan 5.0 / 5 (STATUS: DARURAT BENCANA).\n", False, False),
-        ("2. ", True, False), ("Jebolnya Kuota Iklim FOLU Net Sink (Lahan 2): ", True, False),
-        (f"Kehilangan tutupan hutan menembus {total_deforestasi_sulawesi:,.0f} Hektar dalam satu dekade, melampaui 2,17x lipat batas kuota proporsional FOLU Net Sink 2030 (638.000 Ha), memicu Skor Deforestasi Primer 5.0 / 5 (STATUS: OVERCAPACITY LAHAN).\n", False, False),
-        ("3. ", True, False), ("Pelanggaran Mutlak Kawasan Hutan Lindung (Lahan 3): ", True, False),
-        (f"Teridentifikasi sedikitnya {total_lindung_hilang_sulawesi:,.0f} Hektar deforestasi di dalam kawasan Hutan Lindung (Protected Areas). Sesuai mandat Pasal 38 Ayat 4 UU Kehutanan No. 41/1999 yang melarang tambang terbuka di hutan lindung, angka ini mengonfirmasi tindak pidana kehutanan mutlak, menghasilkan Skor Pelanggaran Zonasi 5.0 / 5 (STATUS: PELANGGARAN HUKUM).\n", False, False),
-        ("4. ", True, False), ("Monopoli Deforestasi oleh Industri Ekstraktif (Lahan 4): ", True, False),
-        (f"Data atribusi GFW membuktikan bahwa {total_tambang_driver_sulawesi:,.0f} Hektar kehilangan hutan didorong secara eksklusif oleh komoditas industri (tambang nikel dan perkebunan sawit), melampaui batas 500.000 Ha dan mematahkan klaim pemerintah yang menyalahkan masyarakat adat/peladang lokal, menghasilkan Skor Aktor Deforestasi 5.0 / 5 (STATUS: MONOPOLI KONSESI).\n", False, False),
-        ("5. ", True, False), ("Tekanan Kepadatan Spasial Izin Pertambangan (Lahan 5): ", True, False),
-        (f"Sebanyak {total_iup_nikel:,.0f} Hektar daratan Sulawesi telah dipatok oleh konsesi IUP nikel aktif, merefleksikan 6.3% dari total luas daratan pulau. Di wilayah sentra Morowali dan Konawe, rasio ini bahkan telah melampaui 10%, menghasilkan Skor Kepadatan Spasial 3.1 / 5 (Skor WSM {skor_lahan_5:.2f} / 10.0).\n", False, False),
-        ("6. ", True, False), ("Vonis Status Daya Dukung Lahan: ", True, False),
-        (f"Dengan Skor Akumulasi Lahan sebesar {skor_akumulasi_lahan:.2f} / 10.0 (Skor Indikator Lahan {card_l_val} / 5), daya dukung ekosistem daratan Bioregion Pulau Sulawesi resmi dinyatakan dalam STATUS: DARURAT LAHAN dengan kesimpulan ANALISIS: Evaluasi Pengelolaan Lanskap.", False, False),
+        ("1. ", True, False), ("Bencana Banjir & Longsor (Lahan 1): ", True, False),
+        (f"Akumulasi {total_bencana_sulawesi:,.0f} bencana hidrometeorologi melampaui 1,83x batas outlier statistik Mean + 1 SD (877 kejadian). Skor: 5.0 / 5 (Melampaui Batas).\n", False, False),
+        ("2. ", True, False), ("Deforestasi Hutan Primer (Lahan 2): ", True, False),
+        (f"Deforestasi mencapai {total_deforestasi_sulawesi:,.0f} Ha, melampaui 2,17x kuota 11 tahun FOLU Net Sink 2030 (638.000 Ha). Skor: 5.0 / 5 (Melampaui Batas).\n", False, False),
+        ("3. ", True, False), ("Perambahan Hutan Lindung (Lahan 3): ", True, False),
+        (f"Tambang merambah {total_lindung_hilang_sulawesi:,.0f} Ha kawasan hutan lindung, melanggar nol toleransi hukum Pasal 38 UU Kehutanan 41/1999. Skor: 5.0 / 5 (Melampaui Batas).\n", False, False),
+        ("4. ", True, False), ("Monopoli Aktor Korporat (Lahan 4): ", True, False),
+        (f"Komoditas tambang nikel & sawit memonopoli {total_tambang_driver_sulawesi:,.0f} Ha kehilangan hutan (threshold: 500.000 Ha). Skor: 5.0 / 5 (Melampaui Batas).\n", False, False),
+        ("5. ", True, False), ("Kepadatan Spasial IUP (Lahan 5): ", True, False),
+        (f"IUP nikel aktif menyita {total_iup_nikel:,.0f} Ha ({rasio_ekspansi*100:.1f}% luas daratan pulau). Skor: 3.1 / 5 (Mendekati Batas).\n", False, False),
+        ("6. ", True, False), ("Vonis Daya Dukung Lahan: ", True, False),
+        (f"Skor Akumulasi {skor_akumulasi_lahan:.2f} / 10.0 (Likert: {card_l_val} / 5). Status: Melampaui Batas (DARURAT LAHAN / Evaluasi Lanskap).", False, False),
     ])
 
     # -------------------------------------------------------------
@@ -1101,18 +1103,18 @@ def generate_all_bab6():
     add_caption(doc, "Tabel 6.8: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Sosial")
     add_table_1col(doc, ["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_sosial_rows, [2.5, 3.5, 7.5, 2.5, 2.0], ["L", "L", "L", "C", "C"])
 
-    add_h4(doc, "E. Analisis Temuan Empiris: Pelibatan Masyarakat Lokal")
+    add_h4(doc, "E. Analisis Temuan Empiris (TL;DR)")
     add_p(doc, [
-        ("1. ", True, False), ("AMDAL Cacat Hukum akibat Rekayasa FPIC (Sosial 1): ", True, False),
-        (f"Teridentifikasi sedikitnya {kasus_fpic} kasus pelanggaran prinsip FPIC dalam penyusunan AMDAL kawasan industri pertambangan, melampaui ambang batas zero tolerance (3 kasus). Ini membuktikan bahwa klaim konsultasi publik dalam AMDAL hanyalah formalitas administratif tanpa persetujuan warga terdampak, memicu Skor Pelanggaran FPIC 5.0 / 5 (STATUS: AMDAL CACAT HUKUM).\n", False, False),
-        ("2. ", True, False), ("Eskalasi Genosida Ruang Hidup Petani (Sosial 2): ", True, False),
-        (f"Sebanyak {jiwa_terdampak:,.0f} jiwa penduduk tapak terancam kehilangan ruang hidup dan tanah pertanian produktif seluas {luas_ha_dirampas:,.0f} Hektar, melampaui ambang darurat kemanusiaan proporsional nasional (40.000 jiwa), memicu Skor Perampasan Ruang 5.0 / 5 (STATUS: KRISIS AGRARIA).\n", False, False),
-        ("3. ", True, False), ("Represi dan Kekerasan oleh Aparat Keamanan (Sosial 3): ", True, False),
-        (f"Tercatat {insiden_krim} insiden kriminalisasi dan intimidasi bersenjata terhadap masyarakat penolak tambang, dengan sedikitnya {warga_ditangkap:,.0f} warga ditangkap secara sewenang-wenang. Angka ini 2,1x lipat di atas batas outlier statistik Mean + 1 SD (10 insiden), membuktikan kegagalan perlindungan Anti-SLAPP Pasal 66 UU No. 32/2009, memicu Skor Represi 5.0 / 5 (STATUS: KEKERASAN NEGARA).\n", False, False),
-        ("4. ", True, False), ("Ironi Pemenuhan Layanan Kesehatan Dasar (Sosial 4): ", True, False),
-        (f"Di tengah lonjakan devisa ekspor nikel, rata-rata kelayakan sarana, prasarana, dan alat kesehatan (SPA) Puskesmas se-Sulawesi hanya mencapai {spa_aktual_pct:.2f}%, tertinggal {gap_spa:.2f}% di bawah target nasional 80% RPJMN. Skor Defisit Layanan berada pada 0.6 / 5 (Skor WSM {skor_sosial_4:.2f} / 10.0), mencerminkan ketimpangan alokasi belanja sosial.\n", False, False),
-        ("5. ", True, False), ("Vonis Status Daya Dukung Sosial: ", True, False),
-        (f"Meskipun pilar SPA faskes masih berada pada kategori terkendali, tiga pilar HAM (FPIC, Jiwa Terdampak, dan Kriminalisasi) mencatatkan skor maksimal 5.0 / 5 (Red Flag). Secara akumulatif, Skor Indikator Sosial berada pada angka {card_s_val} / 5 (Skor WSM {skor_akumulasi_sosial:.2f} / 10.0), yang secara resmi mengonfirmasi vonis STATUS: PERLU PENGAWASAN dengan rekomendasi eksekutif ANALISIS: Pelibatan Masyarakat Lokal.", False, False),
+        ("1. ", True, False), ("Manipulasi FPIC (Sosial 1): ", True, False),
+        (f"Teridentifikasi {kasus_fpic} kasus pelanggaran konsultasi publik AMDAL (zero tolerance: < 3 kasus). Skor: 5.0 / 5 (Melampaui Batas).\n", False, False),
+        ("2. ", True, False), ("Korban Agraria (Sosial 2): ", True, False),
+        (f"Sebanyak {jiwa_terdampak:,.0f} jiwa penduduk tapak terancam perampasan lahan seluas {luas_ha_dirampas:,.0f} Ha (ambang batas KPA: 40.000 jiwa). Skor: 5.0 / 5 (Melampaui Batas).\n", False, False),
+        ("3. ", True, False), ("Kriminalisasi HAM (Sosial 3): ", True, False),
+        (f"Tercatat {insiden_krim} insiden represi dengan {warga_ditangkap:,.0f} warga ditangkap sewenang-wenang (ambang batas: 10 insiden). Skor: 5.0 / 5 (Melampaui Batas).\n", False, False),
+        ("4. ", True, False), ("Defisit Layanan Faskes SPA (Sosial 4): ", True, False),
+        (f"Kelayakan SPA Puskesmas hanya mencapai {spa_aktual_pct:.2f}% (defisit {gap_spa:.2f}% dari target nasional 80%). Skor: 0.6 / 5 (Tidak Melampaui Batas).\n", False, False),
+        ("5. ", True, False), ("Vonis Daya Dukung Sosial: ", True, False),
+        (f"Skor Akumulasi {skor_akumulasi_sosial:.2f} / 10.0 (Likert: {card_s_val} / 5). Status: Melampaui Batas (PERLU PENGAWASAN / Pelibatan Warga).", False, False),
     ])
 
     # -------------------------------------------------------------
@@ -1277,16 +1279,18 @@ def generate_all_bab6():
     add_caption(doc, "Tabel 6.11: Rekapitulasi Sintesis 5 Matriks Bioregion Pulau Sulawesi (Tingkat Pulau Makro)")
     add_table_1col(doc, ["Dimensi", "Indikator Utama", "Kondisi Aktual Empiris", "Skor WSM", "Skor Likert", "Status Audit", "Kesimpulan Analisis"], sintesis_pulau_rows, [1.6, 3.2, 4.2, 1.8, 1.8, 2.2, 3.2], ["C", "L", "L", "C", "C", "C", "L"])
 
-    add_h4(doc, "E. Analisis Temuan Empiris: Penguatan Pengawasan Kebijakan")
+    add_h4(doc, "E. Analisis Temuan Empiris (TL;DR)")
     add_p(doc, [
-        ("1. ", True, False), ("Kegagalan Total Fungsi Veto Izin (Veto 1): ", True, False),
-        (f"Penerbitan {izin_baru:,.0f} izin baru di wilayah yang daya tampungnya sudah jenuh membuktikan bahwa dokumen D3TLH dan AMDAL tidak pernah difungsikan sebagai instrumen pengendali, melainkan sekadar formalitas legitimasi investasi, memicu Skor Paradoks Izin 5.0 / 5 (STATUS: VETO GAGAL).\n", False, False),
-        ("2. ", True, False), ("Kelumpuhan Penegakan Hukum & Impunitas (Veto 2): ", True, False),
-        (f"Sebanyak {perusahaan_ilegal} korporasi tambang terbukti melakukan pelanggaran hukum fatal (menyerobot hutan lindung dan menggunakan HGU kadaluwarsa), namun tetap beroperasi tanpa pencabutan izin, memicu Skor Impunitas 5.0 / 5 (STATUS: NEGARA LUMPUH).\n", False, False),
-        ("3. ", True, False), ("Inkonsistensi Komitmen Iklim Global (Veto 3): ", True, False),
-        (f"Pemerintah memberikan izin pembangunan {kapasitas_pltu/1000.0:.2f} GW ({kapasitas_pltu:,.0f} MW) PLTU batubara captive off-grid, melampaui 2,05x lipat batas kritis GEM (5.000 MW). Pengecualian smelter dari moratorium PLTU dalam Perpres No. 112/2022 membuktikan hipokrisi iklim, memicu Skor Inkonsistensi Iklim 5.0 / 5 (STATUS: HYPOCRISY).\n", False, False),
-        ("4. ", True, False), ("Vonis Sintesis Bioregion Pulau Sulawesi: ", True, False),
-        (f"Dengan Skor Komposit Akhir {skor_komposit_final:.2f} / 10.0 (Skor Likert {skor_komposit_likert:.1f} / 5.0), Bioregion Pulau Sulawesi resmi dinyatakan berada dalam STATUS: DARURAT EKOLOGIS TOTAL (OVERCAPACITY). Seluruh daya lentur asimilasi udara, purifikasi air, keseimbangan tata air lahan, dan keadilan agraria telah runtuh, menuntut moratorium perizinan total dan reformasi tata kelola mendasar.", False, False),
+        ("1. ", True, False), ("Obral IUP Baru (Veto 1): ", True, False),
+        (f"Penerbitan {izin_baru:,.0f} IUP baru pasca-2014 di tengah daya dukung jenuh membuktikan kegagalan veto izin (threshold: 100 izin). Skor: 5.0 / 5 (Melampaui Batas).\n", False, False),
+        ("2. ", True, False), ("Impunitas Korporat (Veto 2): ", True, False),
+        (f"Pembiaran {perusahaan_ilegal} korporasi pelanggar hutan lindung dan pemakai HGU kadaluwarsa tanpa sanksi pencabutan izin (threshold: 10 korporat). Skor: 5.0 / 5 (Melampaui Batas).\n", False, False),
+        ("3. ", True, False), ("Karpet Merah PLTU Captive (Veto 3): ", True, False),
+        (f"Izin {kapasitas_pltu/1000.0:.2f} GW ({kapasitas_pltu:,.0f} MW) PLTU captive batubara melampaui 2,05x batas aman GEM 5.000 MW, melanggar komitmen JETP & NZE 2060. Skor: 5.0 / 5 (Melampaui Batas).\n", False, False),
+        ("4. ", True, False), ("Vonis Veto Kebijakan: ", True, False),
+        (f"Skor Akumulasi Veto {skor_akumulasi_veto:.2f} / 10.0 (Likert: {card_v_val} / 5). Status: Melampaui Batas (PERLU REFORMASI / Pengawasan Kebijakan).\n", False, False),
+        ("5. ", True, False), ("Sintesis Komposit Bioregion Sulawesi: ", True, False),
+        (f"Skor Komposit Akhir {skor_komposit_final:.2f} / 10.0 (Likert: {skor_komposit_likert:.1f} / 5.0). Vonis: Melampaui Batas (DARURAT EKOLOGIS TOTAL / SYSTEMIC COLLAPSE).", False, False),
     ])
 
     docx_path = tool_dir / "Metodologi_Bab6_Audit_D3TLH.docx"
@@ -1347,11 +1351,12 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
 <div class="table-caption">Tabel 6.2: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Udara</div>
 {html_table(["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_rows)}
 
-<h4>E. Analisis Temuan Empiris</h4>
-<p><strong>1. Kapasitas PLTU:</strong> Total kapasitas PLTU captive beroperasi menyentuh <strong>{kapasitas_terkini:,.1f} MW</strong>, melampaui batas konsentrasi 5.000 MW (GEM 2023).<br>
-<strong>2. NO2 Satelit:</strong> Rata-rata densitas NO2 <strong>{no2_terkini:.2e} mol/m²</strong> (di Morowali mencapai 8.8e-5 mol/m²), melampaui baku mutu PP 22/2021 dan standar polusi berat internasional.<br>
-<strong>3. ISPA & Limbah B3:</strong> IRR ISPA mencapai <strong>{rasio_anomali_ispa:.2f}x lipat</strong> (KLB Medis), sementara Sulawesi memproduksi <strong>{proporsi_b3:.2f}%</strong> limbah B3 nasional ({total_b3_sulawesi:,.0f} Ton).<br>
-<strong>4. Vonis Iklim:</strong> Pelepasan karbon <strong>{total_emisi_co2:,.2f} Juta Ton CO2e</strong> menggagalkan target FOLU Net Sink 2030 (-140 Juta Ton). Skor akhir <strong>{skor_akumulasi_udara:.2f} / 10.0 (Likert: 5.0 / 5.0)</strong> menetapkan vonis <strong><span class="badge-danger">DARURAT UDARA (OVERCAPACITY)</span></strong>.</p>
+<h4>E. Analisis Temuan Empiris (TL;DR)</h4>
+<p><strong>1. PLTU Captive (Udara 1a):</strong> Kapasitas <strong>{kapasitas_terkini:,.1f} MW</strong> melampaui 1,96x batas aman 5.000 MW (GEM 2023). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
+<strong>2. NO2 Satelit (Udara 1b):</strong> Densitas NO2 pulau <strong>{no2_terkini:.2e} mol/m²</strong> (Morowali 8.8e-5 mol/m²) melampaui baku mutu PP 22/2021. Skor: <strong>3.91 / 5</strong> (Melampaui Batas).<br>
+<strong>3. Morbiditas ISPA & B3 (Udara 2 & 3):</strong> Rasio ISPA <strong>{rasio_anomali_ispa:.2f}x lipat</strong> (KLB WHO); limbah B3 <strong>{proporsi_b3:.2f}%</strong> nasional ({total_b3_sulawesi:,.0f} Ton). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
+<strong>4. Emisi Karbon (Udara 4):</strong> Pelepasan <strong>{total_emisi_co2:,.2f} Juta Ton CO2e</strong> menggagalkan target FOLU Net Sink 2030. Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
+<strong>5. Vonis Udara:</strong> Skor WSM <strong>{skor_akumulasi_udara:.2f} / 10.0</strong> (Likert: <strong>{skor_likert_udara:.1f} / 5</strong>). Status: <strong><span class="badge-danger">Melampaui Batas (DARURAT UDARA)</span></strong>.</p>
 
 <h2>6.2 Algoritma Skoring Bioregion Pulau: Matriks Daya Tampung Air</h2>
 <div class="note-box"><strong>Audit D3TLH: Daya Tampung Air (Page Streamlit):</strong> "Daya tampung air diukur berdasarkan rasio pengenceran alami dan neraca kualitas air." Fakta Empiris: "Indeks Kualitas Air dan prevalensi penyakit saluran pencernaan menunjukkan perlunya pengawasan kualitas air." Skor Indikator Air: <strong>4.2 / 5</strong> (STATUS: DARURAT AIR) | ANALISIS: <strong>Kapasitas Penetralan Limbah Melampaui Batas</strong>.</div>
@@ -1376,12 +1381,12 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
 <div class="table-caption">Tabel 6.4: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Air</div>
 {html_table(["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_air_rows)}
 
-<h4>E. Analisis Temuan Empiris</h4>
-<p><strong>1. Kualitas Air (Air 1):</strong> Rata-Rata IKA Sulawesi menyentuh <strong>{ika_avg:.2f}</strong>, masuk dalam Kategori Sedang (TIDAK AMAN), menghasilkan Skor Kualitas Air <strong>3.4 / 5</strong> (STATUS: KRITIS).<br>
-<strong>2. Morbiditas Diare (Air 2):</strong> Max IRR diare mencapai <strong>{rasio_diare:.1f}x Lipat</strong>, menghasilkan Skor Morbiditas Diare <strong>3.0 / 5</strong>.<br>
-<strong>3. Konflik Nelayan (Air 3):</strong> Terjadi sedikitnya <strong>{jumlah_konflik_air} kasus</strong> konflik agraria pesisir, menghasilkan Skor Konflik Ruang Air <strong>5.0 / 5</strong> (STATUS: DARURAT AGRARIA).<br>
-<strong>4. Beban Tailing (Air 4):</strong> Akumulasi timbulan tailing dan slag mencapai <strong>{total_tailing_sulawesi/1_000_000.0:,.2f} Jt Ton/Thn</strong>, melampaui ambang batas AMDAL (25 Jt Ton), menghasilkan Skor Ancaman Tailing <strong>5.0 / 5</strong> (STATUS: DARURAT LIMBAH).<br>
-<strong>5. Vonis Indikator Air:</strong> Skor Indikator Air berada pada angka <strong>4.2 / 5</strong> (Skor WSM {skor_akumulasi_air:.2f} / 10.0), mengonfirmasi vonis <strong><span class="badge-danger">STATUS: DARURAT AIR</span></strong> dengan kesimpulan eksekutif <strong>ANALISIS: Kapasitas Penetralan Limbah Melampaui Batas</strong>.</p>
+<h4>E. Analisis Temuan Empiris (TL;DR)</h4>
+<p><strong>1. Kualitas Air (Air 1):</strong> Rerata IKA <strong>{ika_avg:.2f}</strong> (Kategori Sedang, defisit 10.31 poin di bawah aman ≥ 70). Skor: <strong>3.4 / 5</strong> (Mendekati Batas).<br>
+<strong>2. Morbiditas Diare (Air 2):</strong> Max IRR diare mencapai <strong>{rasio_diare:.1f}x Lipat</strong> dibanding wilayah kontrol non-tambang. Skor: <strong>3.0 / 5</strong> (Mendekati Batas).<br>
+<strong>3. Konflik Nelayan (Air 3):</strong> Tercatat <strong>{jumlah_konflik_air} kasus</strong> konflik ruang laut nelayan vs jetty tambang. Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
+<strong>4. Beban Tailing (Air 4):</strong> Akumulasi tailing/slag <strong>{total_tailing_sulawesi/1_000_000.0:,.2f} Jt Ton/Thn</strong> melampaui batas AMDAL (25 Jt Ton). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
+<strong>5. Vonis Air:</strong> Skor WSM <strong>{skor_akumulasi_air:.2f} / 10.0</strong> (Likert: <strong>4.2 / 5</strong>). Status: <strong><span class="badge-danger">Melampaui Batas (DARURAT AIR)</span></strong>.</p>
 
 <h2>6.3 Algoritma Skoring Bioregion Pulau: Matriks Daya Dukung Lahan</h2>
 <div class="note-box"><strong>Audit D3TLH: Daya Dukung Lahan (Page Streamlit):</strong> "Daya dukung lahan dianalisis berdasarkan kecukupan tutupan hutan dan batas fungsi kawasan." Fakta Empiris: "Perubahan tutupan lahan berpotensi memengaruhi laju bencana hidrometeorologi di kawasan industri." Skor Indikator Lahan: <strong>{card_l_val} / 5</strong> (STATUS: DARURAT LAHAN) | ANALISIS: <strong>Evaluasi Pengelolaan Lanskap</strong>.</div>
@@ -1407,13 +1412,13 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
 <div class="table-caption">Tabel 6.6: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Lahan</div>
 {html_table(["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_lahan_rows)}
 
-<h4>E. Analisis Temuan Empiris</h4>
-<p><strong>1. Bencana Alam (Lahan 1):</strong> Total bencana banjir dan longsor tercatat <strong>{total_bencana_sulawesi:,.0f} kejadian</strong>, melampaui ambang batas outlier statistik (877 kejadian), memicu Skor Bencana Lahan <strong>5.0 / 5</strong> (STATUS: DARURAT BENCANA).<br>
-<strong>2. Deforestasi Hutan (Lahan 2):</strong> Kehilangan tutupan pohon menyentuh <strong>{total_deforestasi_sulawesi:,.0f} Ha</strong>, melampaui kuota 11 tahun FOLU Net Sink 2030 (638.000 Ha), menghasilkan Skor Deforestasi <strong>5.0 / 5</strong> (STATUS: OVERCAPACITY LAHAN).<br>
-<strong>3. Kawasan Lindung (Lahan 3):</strong> Teridentifikasi <strong>{total_lindung_hilang_sulawesi:,.0f} Ha</strong> deforestasi di dalam Hutan Lindung, memicu pelanggaran hukum absolut UU Kehutanan No. 41/1999 dengan Skor <strong>5.0 / 5</strong> (STATUS: PELANGGARAN HUKUM).<br>
-<strong>4. Aktor Deforestasi (Lahan 4):</strong> Komoditas industri tambang dan sawit memonopoli <strong>{total_tambang_driver_sulawesi:,.0f} Ha</strong> deforestasi, memicu Skor Aktor Deforestasi <strong>5.0 / 5</strong> (STATUS: MONOPOLI KONSESI).<br>
-<strong>5. Kepadatan Konsesi (Lahan 5):</strong> Konsesi IUP nikel menyita <strong>{total_iup_nikel:,.0f} Ha</strong> atau <strong>{rasio_ekspansi*100:.1f}%</strong> daratan pulau, menghasilkan Skor Kepadatan Spasial <strong>{(skor_lahan_5/2.0):.1f} / 5</strong>.<br>
-<strong>6. Vonis Indikator Lahan:</strong> Skor Indikator Lahan berada pada angka <strong>{card_l_val} / 5</strong> (Skor WSM {skor_akumulasi_lahan:.2f} / 10.0), menetapkan vonis <strong><span class="badge-danger">STATUS: DARURAT LAHAN</span></strong> dengan kesimpulan eksekutif <strong>ANALISIS: Evaluasi Pengelolaan Lanskap</strong>.</p>
+<h4>E. Analisis Temuan Empiris (TL;DR)</h4>
+<p><strong>1. Bencana Alam (Lahan 1):</strong> Tercatat <strong>{total_bencana_sulawesi:,.0f} kejadian</strong> banjir/longsor melampaui batas outlier (877 kejadian). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
+<strong>2. Deforestasi Primer (Lahan 2):</strong> Kehilangan tutupan <strong>{total_deforestasi_sulawesi:,.0f} Ha</strong> melampaui 2,17x kuota FOLU 2030 (638.000 Ha). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
+<strong>3. Hutan Lindung (Lahan 3):</strong> Tambang merambah <strong>{total_lindung_hilang_sulawesi:,.0f} Ha</strong> kawasan lindung (nol toleransi UU 41/1999). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
+<strong>4. Aktor Industri (Lahan 4):</strong> Tambang & sawit memonopoli <strong>{total_tambang_driver_sulawesi:,.0f} Ha</strong> deforestasi (kuota: 500.000 Ha). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
+<strong>5. Kepadatan IUP (Lahan 5):</strong> Konsesi nikel menyita <strong>{total_iup_nikel:,.0f} Ha</strong> ({rasio_ekspansi*100:.1f}% daratan). Skor: <strong>3.1 / 5</strong> (Mendekati Batas).<br>
+<strong>6. Vonis Lahan:</strong> Skor WSM <strong>{skor_akumulasi_lahan:.2f} / 10.0</strong> (Likert: <strong>{card_l_val} / 5</strong>). Status: <strong><span class="badge-danger">Melampaui Batas (DARURAT LAHAN)</span></strong>.</p>
 
 <h2>6.4 Algoritma Skoring Bioregion Pulau: Matriks Daya Dukung Sosial</h2>
 <div class="note-box"><strong>Audit D3TLH: Daya Dukung Sosial (Page Streamlit):</strong> "Status kawasan dialokasikan untuk peruntukan industri dengan pelaksanaan konsultasi publik." Fakta Empiris: "Pentingnya transparansi dan pelibatan masyarakat lokal dalam penataan ruang dan perizinan." Skor Indikator Sosial: <strong>{card_s_val} / 5</strong> (STATUS: PERLU PENGAWASAN) | ANALISIS: <strong>Pelibatan Masyarakat Lokal</strong>.</div>
@@ -1438,12 +1443,12 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
 <div class="table-caption">Tabel 6.8: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Sosial</div>
 {html_table(["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_sosial_rows)}
 
-<h4>E. Analisis Temuan Empiris</h4>
-<p><strong>1. Manipulasi FPIC (Sosial 1):</strong> Teridentifikasi <strong>{kasus_fpic} kasus</strong> pelanggaran FPIC dalam AMDAL, memicu Skor Pelanggaran Konsultasi <strong>5.0 / 5</strong> (STATUS: AMDAL CACAT HUKUM).<br>
-<strong>2. Korban Agraria (Sosial 2):</strong> Sebanyak <strong>{jiwa_terdampak:,.0f} jiwa</strong> penduduk tapak terancam perampasan lahan ({luas_ha_dirampas:,.0f} Ha), memicu Skor Perampasan Ruang <strong>5.0 / 5</strong> (STATUS: KRISIS AGRARIA).<br>
-<strong>3. Kriminalisasi HAM (Sosial 3):</strong> Tercatat <strong>{insiden_krim} insiden</strong> represi aparat dengan <strong>{warga_ditangkap:,.0f} warga ditangkap</strong>, memicu Skor Represi <strong>5.0 / 5</strong> (STATUS: KEKERASAN NEGARA).<br>
-<strong>4. Kepatuhan Faskes SPA (Sosial 4):</strong> Proporsi Puskesmas sesuai standar SPA menyentuh <strong>{spa_aktual_pct:.2f}%</strong> (defisit {gap_spa:.2f}% di bawah target 80%), menghasilkan Skor Defisit <strong>{(skor_sosial_4/2.0):.1f} / 5</strong>.<br>
-<strong>5. Vonis Indikator Sosial:</strong> Skor Indikator Sosial berada pada angka <strong>{card_s_val} / 5</strong> (Skor WSM {skor_akumulasi_sosial:.2f} / 10.0), menetapkan vonis <strong><span class="badge-danger">STATUS: PERLU PENGAWASAN</span></strong> dengan kesimpulan eksekutif <strong>ANALISIS: Pelibatan Masyarakat Lokal</strong>.</p>
+<h4>E. Analisis Temuan Empiris (TL;DR)</h4>
+<p><strong>1. Manipulasi FPIC (Sosial 1):</strong> Ditemukan <strong>{kasus_fpic} kasus</strong> pelanggaran FPIC dalam AMDAL (zero tolerance: < 3 kasus). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
+<strong>2. Korban Agraria (Sosial 2):</strong> Sebanyak <strong>{jiwa_terdampak:,.0f} jiwa</strong> terancam perampasan lahan {luas_ha_dirampas:,.0f} Ha (threshold: 40.000 jiwa). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
+<strong>3. Kriminalisasi HAM (Sosial 3):</strong> Tercatat <strong>{insiden_krim} insiden</strong> represi dengan <strong>{warga_ditangkap:,.0f} warga ditangkap</strong> (threshold: 10 insiden). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
+<strong>4. Faskes SPA (Sosial 4):</strong> Kelayakan Puskesmas menyentuh <strong>{spa_aktual_pct:.2f}%</strong> (defisit {gap_spa:.2f}% dari target 80%). Skor: <strong>0.6 / 5</strong> (Tidak Melampaui Batas).<br>
+<strong>5. Vonis Sosial:</strong> Skor WSM <strong>{skor_akumulasi_sosial:.2f} / 10.0</strong> (Likert: <strong>{card_s_val} / 5</strong>). Status: <strong><span class="badge-danger">Melampaui Batas (PERLU PENGAWASAN)</span></strong>.</p>
 
 <h2>6.5 Algoritma Skoring Bioregion Pulau: Matriks Veto Kebijakan</h2>
 <div class="note-box"><strong>Audit D3TLH: Veto Kebijakan (Page Streamlit):</strong> "Penyusunan D3TLH dirancang sebagai pertimbangan dalam membatasi izin eksploitasi." Fakta Empiris: "Evaluasi menunjukkan pentingnya penguatan kepatuhan hukum dan efektivitas instrumen pengendalian perizinan." Skor Pengendalian Izin: <strong>{card_v_val} / 5</strong> (STATUS: PERLU REFORMASI) | ANALISIS: <strong>Penguatan Pengawasan Kebijakan</strong>.</div>
@@ -1470,12 +1475,12 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
 <div class="table-caption">Tabel 6.11: Rekapitulasi Sintesis 5 Matriks Bioregion Pulau Sulawesi (Tingkat Pulau Makro)</div>
 {html_table(["Dimensi", "Indikator Utama", "Kondisi Aktual Empiris", "Skor WSM", "Skor Likert", "Status Audit", "Kesimpulan Analisis"], sintesis_pulau_rows)}
 
-<h4>E. Analisis Temuan Empiris</h4>
-<p><strong>1. Obral Izin Baru (Veto 1):</strong> Penerbitan <strong>{izin_baru:,.0f} IUP baru</strong> di era krisis daya dukung membuktikan mandulnya fungsi pembatasan regulasi, memicu Skor <strong>5.0 / 5</strong> (STATUS: VETO GAGAL).<br>
-<strong>2. Impunitas Korporat (Veto 2):</strong> Sebanyak <strong>{perusahaan_ilegal} korporasi</strong> pelanggar hukum beroperasi tanpa sanksi tegas, memicu Skor <strong>5.0 / 5</strong> (STATUS: NEGARA LUMPUH).<br>
-<strong>3. Karpet Merah PLTU Captive (Veto 3):</strong> Izin pembangunan <strong>{kapasitas_pltu/1000.0:.2f} GW ({kapasitas_pltu:,.0f} MW) PLTU batubara</strong> off-grid memicu Skor <strong>5.0 / 5</strong> (STATUS: HYPOCRISY).<br>
-<strong>4. Vonis Indikator Veto:</strong> Skor Pengendalian Izin berada pada angka <strong>{card_v_val} / 5</strong> (Skor WSM {skor_akumulasi_veto:.2f} / 10.0), menetapkan vonis <strong><span class="badge-danger">STATUS: PERLU REFORMASI</span></strong> dengan kesimpulan eksekutif <strong>ANALISIS: Penguatan Pengawasan Kebijakan</strong>.<br>
-<strong>5. Sintesis Total Bioregion Pulau:</strong> Skor Komposit Bioregion Sulawesi berada pada angka <strong>{skor_komposit_likert:.1f} / 5.0</strong> (Skor WSM {skor_komposit_final:.2f} / 10.0), mengonfirmasi vonis mutlak <strong><span class="badge-danger">STATUS: DARURAT EKOLOGIS TOTAL (OVERCAPACITY)</span></strong>.</p>
+<h4>E. Analisis Temuan Empiris (TL;DR)</h4>
+<p><strong>1. Obral Izin (Veto 1):</strong> Penerbitan <strong>{izin_baru:,.0f} IUP baru</strong> membuktikan mandulnya fungsi pembatasan regulasi (threshold: 100 izin). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
+<strong>2. Impunitas Korporat (Veto 2):</strong> Pembiaran <strong>{perusahaan_ilegal} korporasi</strong> pelanggar hukum beroperasi tanpa sanksi (threshold: 10 korporat). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
+<strong>3. Karpet Merah PLTU (Veto 3):</strong> Pembangunan <strong>{kapasitas_pltu/1000.0:.2f} GW ({kapasitas_pltu:,.0f} MW) PLTU</strong> melanggar komitmen JETP/NZE (threshold: 5 GW). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
+<strong>4. Vonis Veto:</strong> Skor WSM <strong>{skor_akumulasi_veto:.2f} / 10.0</strong> (Likert: <strong>{card_v_val} / 5</strong>). Status: <strong><span class="badge-danger">Melampaui Batas (PERLU REFORMASI)</span></strong>.<br>
+<strong>5. Sintesis Total Bioregion:</strong> Skor Komposit <strong>{skor_komposit_likert:.1f} / 5.0</strong> (Skor WSM {skor_komposit_final:.2f} / 10.0). Status: <strong><span class="badge-danger">Melampaui Batas (DARURAT EKOLOGIS TOTAL)</span></strong>.</p>
 </body>
 </html>
 """
@@ -1523,15 +1528,16 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
         "##### Tabel 6.2: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Udara",
         markdown_table(["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_rows),
         "",
-        "#### E. Analisis Temuan Empiris: Pembuktian Terbalik Kolapsnya Daya Tampung Udara",
-        f"1. **Kapasitas Pembakaran Batubara Ekstrem:** Operasional PLTU captive batubara di kawasan industri nikel Sulawesi telah menembus angka **{kapasitas_terkini:,.1f} MW**, melampaui ambang batas konsentrasi spasial 5.000 MW (GEM 2023).",
-        f"2. **Anomali Satelit TROPOMI dan Baku Mutu Udara Ambien:** Konsentrasi rata-rata NO2 tahunan pulau mencapai **{no2_terkini:.2e} mol/m²** (di Morowali mencapai 8.8e-5 mol/m²), melampaui baku mutu PP 22/2021 dan standar polusi berat internasional (6.6e-5 mol/m²).",
-        f"3. **Krisis Morbiditas dan Ketidakadilan Beban B3:** Rasio insidensi ISPA warga di wilayah sentra industri tercatat **{rasio_anomali_ispa:.2f}x lipat** lebih tinggi daripada wilayah non-sentra (KLB Medis WHO). Sulawesi juga menanggung **{proporsi_b3:.2f}%** timbulan limbah B3 nasional ({total_b3_sulawesi:,.0f} Ton/Tahun), memvalidasi overcapacity ekologis per kapita 5x lipat kewajaran nasional.",
-        f"4. **Vonis Kegagalan Iklim:** Pelepasan karbon **{total_emisi_co2:,.2f} Juta Ton CO2e** menghancurkan target penyerapan FOLU Net Sink 2030 (-140 Juta Ton CO2e). Dengan Skor Akumulasi **{skor_akumulasi_udara:.2f} / 10.0 (Likert: 5.0 / 5.0)**, daya tampung beban udara Bioregion Pulau Sulawesi resmi dinyatakan dalam status **DARURAT UDARA (OVERCAPACITY)**.",
+        "#### E. Analisis Temuan Empiris (TL;DR)",
+        f"1. **PLTU Captive (Udara 1a):** Kapasitas **{kapasitas_terkini:,.1f} MW** melampaui 1,96x batas aman 5.000 MW (GEM 2023). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
+        f"2. **NO2 Satelit (Udara 1b):** Densitas NO2 **{no2_terkini:.2e} mol/m²** (Morowali 8.8e-5 mol/m²) melampaui baku mutu PP 22/2021. Skor: **3.91 / 5** *(Status: Melampaui Batas)*.",
+        f"3. **Morbiditas ISPA & B3 (Udara 2 & 3):** Rasio ISPA **{rasio_anomali_ispa:.2f}x lipat** (KLB Medis WHO); beban limbah B3 **{proporsi_b3:.2f}%** nasional ({total_b3_sulawesi:,.0f} Ton). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
+        f"4. **Emisi Karbon (Udara 4):** Pelepasan **{total_emisi_co2:,.2f} Juta Ton CO2e** menggagalkan target FOLU Net Sink 2030. Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
+        f"5. **Vonis Udara:** Skor WSM **{skor_akumulasi_udara:.2f} / 10.0** (Likert: **{skor_likert_udara:.1f} / 5**). Status: **Melampaui Batas** *(DARURAT UDARA / OVERCAPACITY)*.",
         "",
         "## 6.2 Algoritma Skoring Bioregion Pulau: Matriks Daya Tampung Air",
         "",
-        "> **Audit D3TLH: Daya Tampung Air (Page Streamlit):** \"Daya tampung air diukur berdasarkan rasio pengenceran alami dan neraca kualitas air.\" Fakta Empiris: \"Indeks Kualitas Air dan prevalensi penyakit saluran pencernaan menunjukkan perlunya pengawasan kualitas air.\" Skor Indikator Air: **4.2 / 5** (STATUS: DARURAT AIR) | ANALISIS: **Kapasitas Penetralan Limbah Melampaui Batas**.",
+        '> **Audit D3TLH: Daya Tampung Air (Page Streamlit):** "Daya tampung air diukur berdasarkan rasio pengenceran alami dan neraca kualitas air." Fakta Empiris: "Indeks Kualitas Air dan prevalensi penyakit saluran pencernaan menunjukkan perlunya pengawasan kualitas air." Skor Indikator Air: **4.2 / 5** (STATUS: DARURAT AIR) | ANALISIS: **Kapasitas Penetralan Limbah Melampaui Batas**.',
         "",
         "#### A. Pengantar & Kerangka Narasi",
         "Berdasarkan tampilan antarmuka Streamlit, analisis daya tampung air diukur dari rasio pengenceran alami dan neraca kualitas air. Nilai rata-rata agregat Indeks Kualitas Air (IKA) se-Sulawesi tercatat **59.69 (Kategori Sedang: 50–69 — TIDAK AMAN)**, mengalami defisit 10.31 poin di bawah ambang batas aman Kategori Baik (≥ 70.0) PermenLHK No. 27/2021. Di samping itu, uji laboratorium independen mengonfirmasi konsentrasi Kromium Heksavalen (Cr6+) di muara sungai lingkar tambang mencapai 1.00 mg/L (20x lipat baku mutu PP 22/2021 sebesar 0.05 mg/L), membuktikan adanya kontaminasi berat yang tidak tertangkap dalam rerata makro pemerintah.",
@@ -1557,12 +1563,12 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
         "##### Tabel 6.4: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Air",
         markdown_table(["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_air_rows),
         "",
-        "#### E. Analisis Temuan Empiris: Kapasitas Penetralan Limbah Melampaui Batas",
-        f"1. **Kualitas Air (Air 1):** Rata-Rata IKA Sulawesi menyentuh **{ika_avg:.2f}**, masuk dalam Kategori Sedang (TIDAK AMAN), menghasilkan Skor Kualitas Air **3.4 / 5** (STATUS: KRITIS).",
-        f"2. **Morbiditas Diare (Air 2):** Max IRR diare mencapai **{rasio_diare:.1f}x Lipat**, menghasilkan Skor Morbiditas Diare **3.0 / 5**.",
-        f"3. **Konflik Nelayan (Air 3):** Terjadi sedikitnya **{jumlah_konflik_air} kasus** konflik agraria pesisir, menghasilkan Skor Konflik Ruang Air **5.0 / 5** (STATUS: DARURAT AGRARIA).",
-        f"4. **Beban Tailing (Air 4):** Akumulasi timbulan tailing dan slag mencapai **{total_tailing_sulawesi/1_000_000.0:,.2f} Jt Ton/Thn**, melampaui ambang batas AMDAL (25 Jt Ton), menghasilkan Skor Ancaman Tailing **5.0 / 5** (STATUS: DARURAT LIMBAH).",
-        f"5. **Vonis Indikator Air:** Skor Indikator Air berada pada angka **4.2 / 5** (Skor WSM {skor_akumulasi_air:.2f} / 10.0), mengonfirmasi vonis **STATUS: DARURAT AIR** dengan kesimpulan eksekutif **ANALISIS: Kapasitas Penetralan Limbah Melampaui Batas**.",
+        "#### E. Analisis Temuan Empiris (TL;DR)",
+        f"1. **Kualitas Air (Air 1):** Rerata IKA **{ika_avg:.2f}** (Kategori Sedang, defisit 10.31 poin di bawah batas aman ≥ 70). Skor: **3.4 / 5** *(Status: Mendekati Batas)*.",
+        f"2. **Morbiditas Diare (Air 2):** Max IRR diare sentra tambang **{rasio_diare:.1f}x Lipat** dibanding kontrol. Skor: **3.0 / 5** *(Status: Mendekati Batas)*.",
+        f"3. **Konflik Nelayan (Air 3):** Teridentifikasi **{jumlah_konflik_air} kasus** konflik ruang tangkap pesisir vs ekspansi jetty tambang. Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
+        f"4. **Beban Tailing (Air 4):** Akumulasi tailing dan slag **{total_tailing_sulawesi/1_000_000.0:,.2f} Jt Ton/Thn** melampaui daya tampung AMDAL (25 Jt Ton). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
+        f"5. **Vonis Air:** Skor WSM **{skor_akumulasi_air:.2f} / 10.0** (Likert: **4.2 / 5**). Status: **Melampaui Batas** *(DARURAT AIR / Penetralan Limbah Melampaui Batas)*.",
         "",
         "## 6.3 Algoritma Skoring Bioregion Pulau: Matriks Daya Dukung Lahan",
         "",
@@ -1593,20 +1599,20 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
         "##### Tabel 6.6: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Lahan",
         markdown_table(["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_lahan_rows),
         "",
-        "#### E. Analisis Temuan Empiris: Evaluasi Pengelolaan Lanskap",
-        f"1. **Bencana Alam (Lahan 1):** Total bencana banjir dan longsor tercatat **{total_bencana_sulawesi:,.0f} kejadian**, melampaui ambang batas outlier statistik (877 kejadian), memicu Skor Bencana Lahan **5.0 / 5** (STATUS: DARURAT BENCANA).",
-        f"2. **Deforestasi Hutan (Lahan 2):** Kehilangan tutupan pohon menyentuh **{total_deforestasi_sulawesi:,.0f} Ha**, melampaui kuota 11 tahun FOLU Net Sink 2030 (638.000 Ha), menghasilkan Skor Deforestasi **5.0 / 5** (STATUS: OVERCAPACITY LAHAN).",
-        f"3. **Kawasan Lindung (Lahan 3):** Teridentifikasi **{total_lindung_hilang_sulawesi:,.0f} Ha** deforestasi di dalam Hutan Lindung, memicu pelanggaran hukum absolut UU Kehutanan No. 41/1999 dengan Skor **5.0 / 5** (STATUS: PELANGGARAN HUKUM).",
-        f"4. **Aktor Deforestasi (Lahan 4):** Komoditas industri tambang dan sawit memonopoli **{total_tambang_driver_sulawesi:,.0f} Ha** deforestasi, memicu Skor Aktor Deforestasi **5.0 / 5** (STATUS: MONOPOLI KONSESI).",
-        f"5. **Kepadatan Konsesi (Lahan 5):** Konsesi IUP nikel menyita **{total_iup_nikel:,.0f} Ha** atau **{rasio_ekspansi*100:.1f}%** daratan pulau, menghasilkan Skor Kepadatan Spasial **{(skor_lahan_5/2.0):.1f} / 5**.",
-        f"6. **Vonis Indikator Lahan:** Skor Indikator Lahan berada pada angka **{card_l_val} / 5** (Skor WSM {skor_akumulasi_lahan:.2f} / 10.0), menetapkan vonis **STATUS: DARURAT LAHAN** dengan kesimpulan eksekutif **ANALISIS: Evaluasi Pengelolaan Lanskap**.",
+        "#### E. Analisis Temuan Empiris (TL;DR)",
+        f"1. **Bencana Alam (Lahan 1):** Tercatat **{total_bencana_sulawesi:,.0f} kejadian** banjir & longsor (ambang batas outlier: 877 kejadian). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
+        f"2. **Deforestasi Primer (Lahan 2):** Hutan hilang **{total_deforestasi_sulawesi:,.0f} Ha**, melampaui 2,17x kuota FOLU 2030 (638.000 Ha). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
+        f"3. **Kawasan Lindung (Lahan 3):** Deforestasi **{total_lindung_hilang_sulawesi:,.0f} Ha** di hutan lindung melanggar UU Kehutanan No. 41/1999. Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
+        f"4. **Monopoli Korporasi (Lahan 4):** Tambang & sawit memonopoli **{total_tambang_driver_sulawesi:,.0f} Ha** deforestasi (threshold: 500.000 Ha). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
+        f"5. **Kepadatan IUP (Lahan 5):** Konsesi nikel menyita **{total_iup_nikel:,.0f} Ha** ({rasio_ekspansi*100:.1f}% daratan). Skor: **3.1 / 5** *(Status: Mendekati Batas)*.",
+        f"6. **Vonis Lahan:** Skor WSM **{skor_akumulasi_lahan:.2f} / 10.0** (Likert: **{card_l_val} / 5**). Status: **Melampaui Batas** *(DARURAT LAHAN / Evaluasi Lanskap)*.",
         "",
         "## 6.4 Algoritma Skoring Bioregion Pulau: Matriks Daya Dukung Sosial",
         "",
         f'> **Audit D3TLH: Daya Dukung Sosial (Page Streamlit):** "Status kawasan dialokasikan untuk peruntukan industri dengan pelaksanaan konsultasi publik." Fakta Empiris: "Pentingnya transparansi dan pelibatan masyarakat lokal dalam penataan ruang dan perizinan." Skor Indikator Sosial: **{card_s_val} / 5** (STATUS: PERLU PENGAWASAN) | ANALISIS: **Pelibatan Masyarakat Lokal**.',
         "",
         "#### A. Pengantar & Kerangka Narasi",
-        "Daya dukung lingkungan hidup tidak semata-mata diukur dari daya lentur bio-fisik, melainkan juga dari stabilitas tatanan sosial, kedaulatan ruang masyarakat hukum adat, dan perlindungan hak asasi manusia. Dokumen AMDAL dan perizinan kawasan industri nikel di Sulawesi secara seragam mengklaim telah menjalankan konsultasi publik dan membawa peningkatan kesejahteraan sosial. Namun, pembuktian terbalik berbasis data Konsorsium Pembaruan Agraria (KPA), JATAM, WALHI, dan Kemenkes RI membongkar kenyataan paradoksal: telah terjadi 8 kasus manipulasi persetujuan masyarakat (FPIC), menggusur 54,310 jiwa korban perampasan ruang hidup (505,192 Ha lahan pertanian/adat), diiringi 21 insiden kekerasan dan kriminalisasi warga oleh aparat, sementara fasilitas kesehatan dasar di lingkar tambang justru mengalami defisit kelayakan standar sarana, prasarana, dan alat kesehatan (SPA).",
+        "Daya dukung lingkungan hidup tidak semata-mata diukur dari daya lentur bio-fisik, melainkan juga dari stabilitas tatanan sosial, kedaulatan ruang masyarakat hukum adat, dan perlindungan hak asasi manusia. Dokumen AMDAL dan perizinan kawasan industri nikel di Sulawesi secara seragam mengklaim telah menjalankan konsultasi publik dan membawa peningkatan kesejahteraan sosial. Namun, pembuktian terbalik berbasis data Konsorsium Pembaruan Agraria (KPA), JATAM, WALHI, dan Kemenkes RI membongkar kenyataan paradoksal: telah terjadi **8 kasus manipulasi persetujuan masyarakat (FPIC)**, menggusur **54,310 jiwa korban perampasan ruang hidup (505,192 Ha)**, diiringi **21 insiden kekerasan dan kriminalisasi warga oleh aparat**, sementara fasilitas kesehatan dasar di lingkar tambang justru mengalami defisit kelayakan standar sarana, prasarana, dan alat kesehatan (SPA).",
         "",
         "#### B. Alur Logika Metodologis Skoring Bioregion Pulau (Matriks Sosial)",
         "```mermaid",
@@ -1629,12 +1635,12 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
         "##### Tabel 6.8: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Sosial",
         markdown_table(["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_sosial_rows),
         "",
-        "#### E. Analisis Temuan Empiris: Pelibatan Masyarakat Lokal",
-        f"1. **Manipulasi FPIC (Sosial 1):** Teridentifikasi **{kasus_fpic} kasus** pelanggaran FPIC dalam AMDAL, memicu Skor Pelanggaran Konsultasi **5.0 / 5** (STATUS: AMDAL CACAT HUKUM).",
-        f"2. **Korban Agraria (Sosial 2):** Sebanyak **{jiwa_terdampak:,.0f} jiwa** penduduk tapak terancam perampasan lahan ({luas_ha_dirampas:,.0f} Ha), memicu Skor Perampasan Ruang **5.0 / 5** (STATUS: KRISIS AGRARIA).",
-        f"3. **Kriminalisasi HAM (Sosial 3):** Tercatat **{insiden_krim} insiden** represi aparat dengan **{warga_ditangkap:,.0f} warga ditangkap**, memicu Skor Represi **5.0 / 5** (STATUS: KEKERASAN NEGARA).",
-        f"4. **Kepatuhan Faskes SPA (Sosial 4):** Proporsi Puskesmas sesuai standar SPA menyentuh **{spa_aktual_pct:.2f}%** (defisit {gap_spa:.2f}% di bawah target 80%), menghasilkan Skor Defisit **{(skor_sosial_4/2.0):.1f} / 5**.",
-        f"5. **Vonis Indikator Sosial:** Skor Indikator Sosial berada pada angka **{card_s_val} / 5** (Skor WSM {skor_akumulasi_sosial:.2f} / 10.0), menetapkan vonis **STATUS: PERLU PENGAWASAN** dengan kesimpulan eksekutif **ANALISIS: Pelibatan Masyarakat Lokal**.",
+        "#### E. Analisis Temuan Empiris (TL;DR)",
+        f"1. **Manipulasi FPIC (Sosial 1):** Ditemukan **{kasus_fpic} kasus** pelanggaran konsultasi warga dalam AMDAL (toleransi: < 3 kasus). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
+        f"2. **Krisis Agraria (Sosial 2):** Sebanyak **{jiwa_terdampak:,.0f} jiwa** terancam kehilangan {luas_ha_dirampas:,.0f} Ha lahan (ambang batas: 40.000 jiwa). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
+        f"3. **Kriminalisasi HAM (Sosial 3):** Terjadi **{insiden_krim} insiden** represi dengan **{warga_ditangkap:,.0f} warga ditangkap** (ambang batas: 10 insiden). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
+        f"4. **Faskes SPA (Sosial 4):** Kelayakan SPA Puskesmas hanya **{spa_aktual_pct:.2f}%** (defisit {gap_spa:.2f}% di bawah target 80%). Skor: **0.6 / 5** *(Status: Tidak Melampaui Batas)*.",
+        f"5. **Vonis Sosial:** Skor WSM **{skor_akumulasi_sosial:.2f} / 10.0** (Likert: **{card_s_val} / 5**). Status: **Melampaui Batas** *(PERLU PENGAWASAN / Pelibatan Warga)*.",
         "",
         "## 6.5 Algoritma Skoring Bioregion Pulau: Matriks Veto Kebijakan",
         "",
@@ -1666,12 +1672,12 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
         "##### Tabel 6.11: Rekapitulasi Sintesis 5 Matriks Bioregion Pulau Sulawesi (Tingkat Pulau Makro)",
         markdown_table(["Dimensi", "Indikator Utama", "Kondisi Aktual Empiris", "Skor WSM", "Skor Likert", "Status Audit", "Kesimpulan Analisis"], sintesis_pulau_rows),
         "",
-        "#### E. Analisis Temuan Empiris: Penguatan Pengawasan Kebijakan",
-        f"1. **Obral Izin Baru (Veto 1):** Penerbitan **{izin_baru:,.0f} IUP baru** di era krisis daya dukung membuktikan mandulnya fungsi pembatasan regulasi, memicu Skor **5.0 / 5** (STATUS: VETO GAGAL).",
-        f"2. **Impunitas Korporat (Veto 2):** Sebanyak **{perusahaan_ilegal} korporasi** pelanggar hukum beroperasi tanpa sanksi tegas, memicu Skor **5.0 / 5** (STATUS: NEGARA LUMPUH).",
-        f"3. **Karpet Merah PLTU Captive (Veto 3):** Izin pembangunan **{kapasitas_pltu/1000.0:.2f} GW ({kapasitas_pltu:,.0f} MW) PLTU batubara** off-grid memicu Skor **5.0 / 5** (STATUS: HYPOCRISY).",
-        f"4. **Vonis Indikator Veto:** Skor Pengendalian Izin berada pada angka **{card_v_val} / 5** (Skor WSM {skor_akumulasi_veto:.2f} / 10.0), menetapkan vonis **STATUS: PERLU REFORMASI** dengan kesimpulan eksekutif **ANALISIS: Penguatan Pengawasan Kebijakan**.",
-        f"5. **Sintesis Total Bioregion Pulau:** Skor Komposit Bioregion Sulawesi berada pada angka **{skor_komposit_likert:.1f} / 5.0** (Skor WSM {skor_komposit_final:.2f} / 10.0), mengonfirmasi vonis mutlak **STATUS: DARURAT EKOLOGIS TOTAL (OVERCAPACITY)**.",
+        "#### E. Analisis Temuan Empiris (TL;DR)",
+        f"1. **Obral Izin (Veto 1):** Penerbitan **{izin_baru:,.0f} IUP baru** membuktikan mandulnya fungsi pembatasan regulasi (threshold: 100 izin). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
+        f"2. **Impunitas Korporat (Veto 2):** Pembiaran **{perusahaan_ilegal} korporasi** pelanggar hukum beroperasi tanpa sanksi tegas (threshold: 10 korporat). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
+        f"3. **Karpet Merah PLTU (Veto 3):** Pembangunan **{kapasitas_pltu/1000.0:.2f} GW ({kapasitas_pltu:,.0f} MW) PLTU** melanggar komitmen iklim JETP & NZE (threshold: 5 GW). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
+        f"4. **Vonis Veto:** Skor WSM **{skor_akumulasi_veto:.2f} / 10.0** (Likert: **{card_v_val} / 5**). Status: **Melampaui Batas** *(PERLU REFORMASI / Pengawasan Kebijakan)*.",
+        f"5. **Sintesis Komposit Bioregion:** Skor Komposit **{skor_komposit_likert:.1f} / 5.0** (Skor WSM {skor_komposit_final:.2f} / 10.0). Status: **Melampaui Batas** *(DARURAT EKOLOGIS TOTAL / SYSTEMIC COLLAPSE)*.",
         "",
     ]
 
