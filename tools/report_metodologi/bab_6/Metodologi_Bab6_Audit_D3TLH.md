@@ -313,3 +313,80 @@ Skor_Akumulasi_Sosial = (10.00 + 10.00 + 10.00 + 1.26) / 4.0 = 7.81 / 10.0 (Skor
 3. **Kriminalisasi HAM (Sosial 3):** Tercatat **21 insiden** represi aparat dengan **10 warga ditangkap**, memicu Skor Represi **5.0 / 5** (STATUS: KEKERASAN NEGARA).
 4. **Kepatuhan Faskes SPA (Sosial 4):** Proporsi Puskesmas sesuai standar SPA menyentuh **74.35%** (defisit 5.65% di bawah target 80%), menghasilkan Skor Defisit **0.6 / 5**.
 5. **Vonis Indikator Sosial:** Skor Indikator Sosial berada pada angka **3.9 / 5** (Skor WSM 7.81 / 10.0), menetapkan vonis **STATUS: PERLU PENGAWASAN** dengan kesimpulan eksekutif **ANALISIS: Pelibatan Masyarakat Lokal**.
+
+## 6.5 Algoritma Skoring Bioregion Pulau: Matriks Veto Kebijakan
+
+> **Audit D3TLH: Veto Kebijakan (Page Streamlit):** "Penyusunan D3TLH dirancang sebagai pertimbangan dalam membatasi izin eksploitasi." Fakta Empiris: "Evaluasi menunjukkan pentingnya penguatan kepatuhan hukum dan efektivitas instrumen pengendalian perizinan." Skor Pengendalian Izin: **5.0 / 5** (STATUS: PERLU REFORMASI) | ANALISIS: **Penguatan Pengawasan Kebijakan**.
+
+#### A. Pengantar & Kerangka Narasi
+Secara doktriner dalam hukum tata ruang dan lingkungan hidup (Pasal 12 UU No. 32/2009), Daya Dukung dan Daya Tampung Lingkungan Hidup (D3TLH) berkedudukan sebagai instrumen Veto Kebijakan (Veto Power) yang mutlak membatasi atau menghentikan penerbitan izin eksploitasi jika daya lentur ekologis telah terlampaui. Namun, temuan audit forensik ini membuktikan terjadinya fenomena Regulatory Capture dan Impunitas Total. Di saat daya dukung udara, air, dan lahan Sulawesi telah berada dalam status darurat merah, pemerintah pusat justru meloloskan 574 Izin Usaha Pertambangan (IUP) baru sejak 2014, membiarkan 21 korporasi perusak lingkungan beroperasi ilegal tanpa sanksi, serta memberikan karpet merah ekspansi 10.26 GW (10,255 MW) PLTU batubara captive yang melanggar komitmen iklim nasional.
+
+#### B. Alur Logika Metodologis Skoring Bioregion Pulau (Matriks Veto)
+```mermaid
+flowchart LR
+    subgraph S1["1. Data Empiris Input"]
+        A1["Registry MODI ESDM<br/><i>Penerbitan IUP Baru (574 Izin)</i>"]
+        A2["Investigasi Korporat KPA<br/><i>Pelanggaran Izin (21 Korporat)</i>"]
+        A3["Global Energy Monitor<br/><i>PLTU Captive (10.26 GW / 10,255 MW)</i>"]
+    end
+    subgraph S2["2. Ambang Batas Regulasi"]
+        B1["Obral Izin: > 100 Izin Baru<br/><i>Threshold Veto Kumulatif ESDM</i>"]
+        B2["Impunitas: > 10 Korporat<br/><i>Batas Toleransi Pelanggaran Hukum</i>"]
+        B3["PLTU Captive: > 5.000 MW<br/><i>Batas Ambang Daya Tampung GEM</i>"]
+    end
+    subgraph S3["3. Kalkulasi 3 Sub-Metrik"]
+        C1["Veto 1: Paradoks Izin Baru<br/><i>Skor 10.00 / 10 (5.0 / 5)</i>"]
+        C2["Veto 2: Impunitas Korporat<br/><i>Skor 10.00 / 10 (5.0 / 5)</i>"]
+        C3["Veto 3: Inkonsistensi Iklim<br/><i>Skor 10.00 / 10 (5.0 / 5)</i>"]
+    end
+    subgraph S4["4. Agregasi & Vonis Veto"]
+        D1["Simple Additive Weighting<br/><i>Bobot Equal 33.3% per Pilar</i>"]
+        D2["Skor WSM: 10.00 / 10.0<br/>Skor Indikator Veto: 5.0 / 5"]
+        D3["STATUS: PERLU REFORMASI<br/><i>Penguatan Pengawasan Kebijakan</i>"]
+    end
+    A1 --> B1 --> C1
+    A2 --> B2 --> C2
+    A3 --> B3 --> C3
+    C1 & C2 & C3 --> D1 --> D2 --> D3
+```
+
+#### C. Formulasi Matematis: Normalisasi Obral Izin, Impunitas Korporat, dan PLTU Captive
+```text
+Skor_Veto_1 = min(10.0, (574 / 100.0) * 10.0) = 10.00 / 10.0 (Likert: 5.0 / 5)
+Skor_Veto_2 = min(10.0, (21 / 10.0) * 10.0) = 10.00 / 10.0 (Likert: 5.0 / 5)
+Skor_Veto_3 = min(10.0, (10,255 / 5000.0) * 10.0) = 10.00 / 10.0 (Likert: 5.0 / 5)
+Skor_Akumulasi_Veto = (10.00 + 10.00 + 10.00) / 3.0 = 10.00 / 10.0 (Skor Pengendalian Izin: 5.0 / 5)
+```
+
+#### D. Matriks Hasil Uji Empiris
+##### Tabel 6.9: Evaluasi Kuantitatif 3 Indikator Veto Kebijakan Bioregion Pulau Sulawesi (Sesuai Dashboard Page 6)
+| Kode | Indikator Empiris | Nilai Aktual | Ambang Batas Kritis | Formula Substitusi | Skor WSM (0-10) | Skor Likert (1-5) | Status Ekologis |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Veto 1 | Obral Konsesi WIUP Baru Pasca-2014 | 574 Izin | > 100 Izin Baru (Threshold Veto ESDM) | min(10.0, (574/100)*10) | 10.00 / 10.0 | 5.0 / 5 | VETO GAGAL (RED FLAG) |
+| Veto 2 | Pembiaran Korporat Pelanggar Hukum | 21 Korporat | > 10 Korporat (Batas Toleransi Impunitas) | min(10.0, (21/10)*10) | 10.00 / 10.0 | 5.0 / 5 | NEGARA LUMPUH (RED FLAG) |
+| Veto 3 | Ekspansi PLTU Batubara Captive | 10.26 GW (10,255 MW) | > 5,000 MW (5 GW Batas Kritis GEM) | min(10.0, (10,255/5000)*10) | 10.00 / 10.0 | 5.0 / 5 | HYPOCRISY (RED FLAG) |
+| TOTAL | Akumulasi Skor Indikator Veto | Rata-rata 3 Pilar SAW | Threshold Kritis >= 4.0 / 6.0 | Σ(Skor 1..3) / 3 | 10.00 / 10.0 | 5.0 / 5 | STATUS: PERLU REFORMASI |
+
+##### Tabel 6.10: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Veto
+| Parameter | Regulasi / Rujukan Ilmiah | Kutipan Dokumen Resmi / Verbatim | Pasal / Hal. | Status Audit |
+| :--- | :--- | :--- | :--- | :--- |
+| Obral Konsesi (Veto 1) | Registry MODI Ditjen Minerba ESDM (2014–2024) | Penerbitan IUP baru di tengah status daya dukung lingkungan yang telah jenuh. Threshold veto kumulatif 100 izin dilanggar secara masif dengan terbitnya 574 izin baru. | Registry MODI | VERIFIED |
+| Pembiaran Ilegal (Veto 2) | Catatan Akhir Tahun (CATAHU) KPA 2023 | Praktik impunitas korporasi pertambangan yang menabrak kawasan lindung, HGU kadaluwarsa, dan tumpang tindih tata ruang tanpa pencabutan izin (21 korporat). | Hal. 49 | VERIFIED |
+| PLTU Captive (Veto 3) | Global Energy Monitor (GEM 2023) & Perpres 112/2022 | Pemberian karpet merah pembangunan PLTU batubara off-grid captive untuk smelter (10.26 GW), melanggar komitmen transisi energi berkeadilan JETP dan NZE 2060. | GEM Hal. 2 | VERIFIED |
+
+##### Tabel 6.11: Rekapitulasi Sintesis 5 Matriks Bioregion Pulau Sulawesi (Tingkat Pulau Makro)
+| Dimensi | Indikator Utama | Kondisi Aktual Empiris | Skor WSM | Skor Likert | Status Audit | Kesimpulan Analisis |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Dimensi 1 | Daya Tampung Udara & Emisi Industri | 16,000 MW PLTU, NO2 Satelit, ISPA 1.34x, B3 77.8% | 9.73 / 10.0 | 4.9 / 5 | DARURAT UDARA | Kapasitas Asimilasi Udara Habis |
+| Dimensi 2 | Daya Tampung Air & Beban Limbah | IKA 59.69, Diare IRR 1.5x, Tailing 33.03 Jt Ton | 8.19 / 10.0 | 4.2 / 5 | DARURAT AIR | Kapasitas Penetralan Limbah Melampaui Batas |
+| Dimensi 3 | Daya Dukung Lahan & Ekosistem | 1,609 Bencana, Deforestasi 1.38 Jt Ha, Lindung 41 Ribu Ha | 9.25 / 10.0 | 4.6 / 5 | DARURAT LAHAN | Evaluasi Pengelolaan Lanskap |
+| Dimensi 4 | Daya Dukung Sosial & Hak Asasi Warga | 8 Kasus FPIC, 54,310 Jiwa Terdampak, 21 Kriminalisasi | 7.81 / 10.0 | 3.9 / 5 | PERLU PENGAWASAN | Pelibatan Masyarakat Lokal |
+| Dimensi 5 | Veto Kebijakan & Pengendalian Izin | 574 Izin Baru, 21 Korporat Ilegal, 10.26 GW PLTU | 10.00 / 10.0 | 5.0 / 5 | PERLU REFORMASI | Penguatan Pengawasan Kebijakan |
+| TOTAL | SKOR KOMPOSIT BIOREGION PULAU SULAWESI | Agregasi 5 Dimensi Daya Dukung & Daya Tampung | 9.00 / 10.0 | 4.5 / 5 | DARURAT TOTAL | KOLAPS DAYA DUKUNG SISTEMIK |
+
+#### E. Analisis Temuan Empiris: Penguatan Pengawasan Kebijakan
+1. **Obral Izin Baru (Veto 1):** Penerbitan **574 IUP baru** di era krisis daya dukung membuktikan mandulnya fungsi pembatasan regulasi, memicu Skor **5.0 / 5** (STATUS: VETO GAGAL).
+2. **Impunitas Korporat (Veto 2):** Sebanyak **21 korporasi** pelanggar hukum beroperasi tanpa sanksi tegas, memicu Skor **5.0 / 5** (STATUS: NEGARA LUMPUH).
+3. **Karpet Merah PLTU Captive (Veto 3):** Izin pembangunan **10.26 GW (10,255 MW) PLTU batubara** off-grid memicu Skor **5.0 / 5** (STATUS: HYPOCRISY).
+4. **Vonis Indikator Veto:** Skor Pengendalian Izin berada pada angka **5.0 / 5** (Skor WSM 10.00 / 10.0), menetapkan vonis **STATUS: PERLU REFORMASI** dengan kesimpulan eksekutif **ANALISIS: Penguatan Pengawasan Kebijakan**.
+5. **Sintesis Total Bioregion Pulau:** Skor Komposit Bioregion Sulawesi berada pada angka **4.5 / 5.0** (Skor WSM 9.00 / 10.0), mengonfirmasi vonis mutlak **STATUS: DARURAT EKOLOGIS TOTAL (OVERCAPACITY)**.
