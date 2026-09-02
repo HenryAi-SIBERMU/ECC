@@ -23,7 +23,7 @@ Penelitian mencakup catatan letupan konflik agraria terdata di seluruh wilayah a
 ---
 
 ## C. Operasionalisasi Variabel & Indikator Riset
-Merujuk pada pemetaan data pada **DATA_DICTIONARY.md** (Entri 31), seluruh dinamika perampasan ruang, eskalasi konflik, korban terdampak, represi hukum, hingga keterlibatan aktor dioperasionalkan secara terstruktur dari dataset primer **`sulawesi_konflik_agraria_tanahkita.csv`** ke dalam indikator riset empiris sebagaimana dirangkum pada matriks berikut:
+Seluruh dinamika perampasan ruang, eskalasi konflik agraria, beban korban terdampak, represi hukum, hingga keterlibatan entitas aktor dioperasionalkan secara terstruktur ke dalam **indikator riset empiris** sebagaimana dirangkum pada matriks operasional berikut:
 
 ##### Matriks Operasionalisasi Variabel dan Sumber Data Resmi Bab 4
 | No | Indikator Riset | Fokus Pengukuran | Satuan | Sumber Data Primer Resmi |
