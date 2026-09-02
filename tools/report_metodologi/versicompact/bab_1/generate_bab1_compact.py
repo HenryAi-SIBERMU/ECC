@@ -249,8 +249,8 @@ def generate_bab1_compact():
     add_run(p_s, "CELIOS (Center of Economic and Law Studies) · Audit Spasial-Statistik D3TLH Sulawesi (2014–2024) · Ringkasan Eksekutif Metodologis",
             italic=True, pt=8, color=C_GREY)
 
-    # ── 1. DESAIN PENELITIAN & TUJUAN ───────────────────────────
-    add_h2(doc, "1", "Desain Penelitian & Tujuan")
+    # ── A. DESAIN PENELITIAN & TUJUAN ───────────────────────────
+    add_h2(doc, "A", "Desain Penelitian & Tujuan")
     add_body(doc, [
         ("Penelitian ini menggunakan ", False, False),
         ("desain audit spasial-statistik kuantitatif terintegrasi", True, False),
@@ -265,8 +265,8 @@ def generate_bab1_compact():
         ("Membuktikan secara inferensial signifikansi hubungan antara ekspansi pertambangan/energi dengan laju kehilangan tutupan hutan alam primer dan komoditas.", False, False)
     ])
 
-    # ── 2. SUMBER DATA & CAKUPAN WILAYAH ────────────────────────
-    add_h2(doc, "2", "Sumber Data & Cakupan Wilayah")
+    # ── B. SUMBER DATA & CAKUPAN WILAYAH ────────────────────────
+    add_h2(doc, "B", "Sumber Data & Cakupan Wilayah")
     add_body(doc, [
         ("Riset ini bersandar secara ketat pada data sekunder resmi dari otoritas statistik, kementerian teknis, dan lembaga pemantau global independen yang telah melalui audit konsistensi: ", False, False),
         ("Badan Pusat Statistik (BPS)", True, False), (" (Subject 52 PDRB Lapangan Usaha & Keuangan Daerah), ", False, False),
@@ -279,8 +279,8 @@ def generate_bab1_compact():
         (" untuk menjamin validitas pengujian parametrik dan non-parametrik.", False, False)
     ])
 
-    # ── 3. OPERASIONALISASI VARIABEL & INDIKATOR RISET ─────────
-    add_h2(doc, "3", "Operasionalisasi Variabel & Indikator Riset")
+    # ── C. OPERASIONALISASI VARIABEL & INDIKATOR RISET ─────────
+    add_h2(doc, "C", "Operasionalisasi Variabel & Indikator Riset")
     add_body(doc, [
         ("Seluruh variabel kuantitatif, kategori analisis, satuan ukur, periode observasi, dan institusi primer resmi yang digunakan dalam penelitian ini disajikan pada matriks operasionalisasi berikut:", False, False)
     ])
@@ -306,10 +306,10 @@ def generate_bab1_compact():
         alignments=['C', 'L', 'L', 'C', 'C', 'L']
     )
 
-    # ── 4. KERANGKA ANALISIS & FORMULASI MATEMATIS ──────────────
-    add_h2(doc, "4", "Kerangka Analisis & Formulasi Matematis")
+    # ── D. KERANGKA ANALISIS & FORMULASI MATEMATIS ──────────────
+    add_h2(doc, "D", "Kerangka Analisis & Formulasi Matematis")
 
-    add_h3(doc, "4.1 Reklasifikasi Rantai Pasok Hukum & Pangsa Sektoral (PDRB)")
+    add_h3(doc, "D.1 Reklasifikasi Rantai Pasok Hukum & Pangsa Sektoral (PDRB)")
     add_body(doc, [
         ("Tujuh belas sektor KBLI 2020 direklasifikasi menjadi tiga klaster makro berdasarkan relasi hukum hilirisasi nikel (UU No. 3/2020 jo. PP No. 96/2021): ", False, False),
         ("Klaster Ekstraktif", True, False), (" (Pertambangan B, Industri Logam C24, dan Pengadaan Listrik D), ", False, False),
@@ -319,25 +319,25 @@ def generate_bab1_compact():
     ])
     add_formula(doc, "Pangsa Sektor Ekstraktif (%) = [ PDRB Ekstraktif (B + C24 + D) / Total PDRB ] × 100")
 
-    add_h3(doc, "4.2 Dekomposisi Spasial & Rasio Ketimpangan Kabupaten")
+    add_h3(doc, "D.2 Dekomposisi Spasial & Rasio Ketimpangan Kabupaten")
     add_body(doc, [
         ("Untuk membongkar ilusi agregat provinsi, PDRB didekomposisi ke seluruh kabupaten/kota sentra nikel guna mengukur derajat polarisasi ekonomi industri ekstraktif terhadap basis mata pencaharian pertanian-perikanan lokal:", False, False)
     ])
     add_formula(doc, "Rasio Kesenjangan Spasial = PDRB Sektor Ekstraktif (Kabupaten) / PDRB Pertanian Rakyat (Kabupaten)")
 
-    add_h3(doc, "4.3 Konsentrasi Spasial Kawasan Industri & PLTU Captive Off-Grid")
+    add_h3(doc, "D.3 Konsentrasi Spasial Kawasan Industri & PLTU Captive Off-Grid")
     add_body(doc, [
         ("Derajat konsentrasi fasilitas pengolahan nikel dan kapasitas pembangkit listrik captive batubara diukur menggunakan rasio aglomerasi spasial untuk memetakan pemusatan beban energi dan lingkungan antar-wilayah:", False, False)
     ])
     add_formula(doc, "Porsi Konsentrasi Sentra (%) = [ Kapasitas Sentra Industri (MW) / Total Kapasitas Se-Sulawesi (MW) ] × 100")
 
-    add_h3(doc, "4.4 Deret Waktu Perizinan & Laju Alih Ruang Harian")
+    add_h3(doc, "D.4 Deret Waktu Perizinan & Laju Alih Ruang Harian")
     add_body(doc, [
         ("Akumulasi izin konsesi tambang baru dievaluasi laju pertumbuhannya dan dinormalisasi ke dalam unit waktu harian untuk mengukur kecepatan konversi bentang lahan alami menjadi kawasan pertambangan:", False, False)
     ])
     add_formula(doc, "Laju Alih Ruang Harian (Ha/Hari) = Total Luas Konsesi Tambang Baru (Ha) / Jumlah Hari Observasi (t)")
 
-    add_h3(doc, "4.5 Analisis Tabulasi Silang, Uji Chi-Square & Odds Ratio (OR)")
+    add_h3(doc, "D.5 Analisis Tabulasi Silang, Uji Chi-Square & Odds Ratio (OR)")
     add_body(doc, [
         ("Pengujian inferensial menggunakan desain matriks kontinjensi 2×2 berbasis ", False, False),
         ("ambang median panel provinsi-tahun (N = 60)", True, False),
@@ -361,13 +361,13 @@ def generate_bab1_compact():
         alignments=['L', 'C', 'C', 'C', 'L']
     )
 
-    add_h3(doc, "4.6 Pemodelan Alur Rantai Pasok Maritim Ekspor (Kurva Bézier)")
+    add_h3(doc, "D.6 Pemodelan Alur Rantai Pasok Maritim Ekspor (Kurva Bézier)")
     add_body(doc, [
         ("Simpul logistik pelabuhan ekspor diverifikasi melalui triangulasi laporan investigasi keselamatan transportasi maritim, penetapan regulasi Proyek Strategis Nasional (PSN), dan laporan operasional korporasi. Alur pelayaran pengangkutan curah nikel menuju pasar internasional dimodelkan secara spasial menggunakan persamaan kurva Bézier kuadratik di atas koordinat bola bumi guna memetakan jalur lalu lintas maritim yang rentan kecelakaan tongkang.", False, False)
     ])
 
-    # ── 5. KORESPONDENSI METODOLOGI TERHADAP SUB-BAB LAPORAN ────
-    add_h2(doc, "5", "Korespondensi Metodologi terhadap Sub-bab Laporan Bab 1")
+    # ── E. KORESPONDENSI METODOLOGI TERHADAP SUB-BAB LAPORAN ────
+    add_h2(doc, "E", "Korespondensi Metodologi terhadap Sub-bab Laporan Bab 1")
     add_body(doc, [
         ("Setiap sub-bab analitis pada Bab 1 ditopang oleh metode kuantitatif yang presisi dan menghasilkan luaran visual terstandarisasi sebagaimana dirangkum pada matriks berikut:", False, False)
     ])
@@ -388,8 +388,8 @@ def generate_bab1_compact():
         alignments=['C', 'L', 'L', 'L']
     )
 
-    # ── 6. BAGAN ALUR KERANGKA KERJA RISET BAB 1 ────────────────
-    add_h2(doc, "6", "Bagan Alur Kerangka Kerja Riset (Research Workflow)")
+    # ── F. BAGAN ALUR KERANGKA KERJA RISET BAB 1 ────────────────
+    add_h2(doc, "F", "Bagan Alur Kerangka Kerja Riset (Research Workflow)")
     add_body(doc, [
         ("Kerangka kerja operasional metodologi Bab 1 berjalan secara sekuensial melalui empat fase sistematis:", False, False)
     ])
@@ -446,7 +446,7 @@ def generate_bab1_compact():
 
 ---
 
-## 1. Desain Penelitian & Tujuan
+## A. Desain Penelitian & Tujuan
 Penelitian ini menggunakan **desain audit spasial-statistik kuantitatif terintegrasi** untuk membedah akselerasi ekspansi industri ekstraktif (tambang nikel, fasilitas pemurnian smelter, dan kawasan industri bertenaga PLTU captive batubara) di enam provinsi Pulau Sulawesi sepanjang satu dekade (**2014–2024**). Riset ini memanfaatkan data tabular panel resmi lintas kementerian dan lembaga yang disinkronkan secara spasial untuk mengatasi bias perataan makro. Tiga tujuan utama riset meliputi:
 
 1. **Mengukur Derajat Dominasi Sektoral:** Mendekomposisi struktur PDRB provinsi dan kabupaten guna membuktikan pergeseran monolitik menuju sektor ekstraktif mengorbankan ekonomi pertanian rakyat.
@@ -455,12 +455,12 @@ Penelitian ini menggunakan **desain audit spasial-statistik kuantitatif terinteg
 
 ---
 
-## 2. Sumber Data & Cakupan Wilayah
+## B. Sumber Data & Cakupan Wilayah
 Riset ini bersandar secara ketat pada data sekunder resmi dari otoritas statistik, kementerian teknis, dan lembaga pemantau global independen yang telah melalui audit konsistensi: **Badan Pusat Statistik (BPS)** (Subject 52 PDRB Lapangan Usaha & Keuangan Daerah), **Kementerian ESDM** (MODI Minerbaone & Database Smelter CGS), **Kementerian Investasi / BKPM** (Realisasi PMDN Sektoral), **Global Energy Monitor (GEM)** (Coal Plant Tracker), **Global Forest Watch / Hansen UMD** (Tree Cover Loss & Commodity Drivers), serta **Komite Nasional Keselamatan Transportasi (KNKT)** dan Perpres PSN (Simpul Logistik Maritim). Seluruh observasi dihimpun dalam struktur **data panel provinsi-tahun (N = 60 observasi: 6 provinsi × 10 tahun)** untuk menjamin validitas pengujian parametrik dan non-parametrik.
 
 ---
 
-## 3. Operasionalisasi Variabel & Indikator Riset
+## C. Operasionalisasi Variabel & Indikator Riset
 Seluruh variabel kuantitatif, kategori analisis, satuan ukur, periode observasi, dan institusi primer resmi yang digunakan dalam penelitian ini disajikan secara komprehensif pada matriks operasionalisasi berikut:
 
 ##### Matriks Operasionalisasi Variabel dan Sumber Data Resmi
@@ -479,29 +479,29 @@ Seluruh variabel kuantitatif, kategori analisis, satuan ukur, periode observasi,
 
 ---
 
-## 4. Kerangka Analisis & Formulasi Matematis
+## D. Kerangka Analisis & Formulasi Matematis
 
-### 4.1 Reklasifikasi Rantai Pasok Hukum & Pangsa Sektoral (PDRB)
+### D.1 Reklasifikasi Rantai Pasok Hukum & Pangsa Sektoral (PDRB)
 Tujuh belas sektor KBLI 2020 direklasifikasi menjadi tiga klaster makro berdasarkan relasi hukum hilirisasi nikel (UU No. 3/2020 jo. PP No. 96/2021): **Klaster Ekstraktif** (Pertambangan B, Industri Logam C24, dan Pengadaan Listrik D), **Klaster Akar Rumput** (Pertanian, Kehutanan & Perikanan A), serta **Klaster Jasa & Manufaktur Lain**. Konfigurasi reklasifikasi ini dirancang untuk mengisolasi porsi kontribusi murni sektor industri hilirisasi terhadap total struktur perekonomian daerah:
 
 > `Pangsa Sektor Ekstraktif (%) = [ PDRB Ekstraktif (B + C24 + D) / Total PDRB ] × 100`
 
-### 4.2 Dekomposisi Spasial & Rasio Ketimpangan Kabupaten
+### D.2 Dekomposisi Spasial & Rasio Ketimpangan Kabupaten
 Untuk membongkar ilusi agregat provinsi, PDRB didekomposisi ke seluruh kabupaten/kota sentra nikel guna mengukur derajat polarisasi ekonomi industri ekstraktif terhadap basis mata pencaharian pertanian-perikanan lokal:
 
 > `Rasio Kesenjangan Spasial = PDRB Sektor Ekstraktif (Kabupaten) / PDRB Pertanian Rakyat (Kabupaten)`
 
-### 4.3 Konsentrasi Spasial Kawasan Industri & PLTU Captive Off-Grid
+### D.3 Konsentrasi Spasial Kawasan Industri & PLTU Captive Off-Grid
 Derajat konsentrasi fasilitas pengolahan nikel dan kapasitas pembangkit listrik captive batubara diukur menggunakan rasio aglomerasi spasial untuk memetakan pemusatan beban energi dan lingkungan antar-wilayah:
 
 > `Porsi Konsentrasi Sentra (%) = [ Kapasitas Sentra Industri (MW) / Total Kapasitas Se-Sulawesi (MW) ] × 100`
 
-### 4.4 Deret Waktu Perizinan & Laju Alih Ruang Harian
+### D.4 Deret Waktu Perizinan & Laju Alih Ruang Harian
 Akumulasi izin konsesi tambang baru dievaluasi laju pertumbuhannya dan dinormalisasi ke dalam unit waktu harian untuk mengukur kecepatan konversi bentang lahan alami menjadi kawasan pertambangan:
 
 > `Laju Alih Ruang Harian (Ha/Hari) = Total Luas Konsesi Tambang Baru (Ha) / Jumlah Hari Observasi (t)`
 
-### 4.5 Analisis Tabulasi Silang, Uji Chi-Square & Odds Ratio (OR)
+### D.5 Analisis Tabulasi Silang, Uji Chi-Square & Odds Ratio (OR)
 Pengujian inferensial menggunakan desain matriks kontinjensi 2×2 berbasis **ambang median panel provinsi-tahun (N = 60)**. Uji Chi-Square independensi (α = 5%, df = 1) diterapkan untuk menguji signifikansi hubungan bivariat, sedangkan rasio peluang (Odds Ratio) mengukur magnitudo kelipatan risiko dampak ekologis:
 
 > `χ² = Σ [ (O_ij - E_ij)² / E_ij ]   |   Odds Ratio (OR) = (a × d) / (b × c)`
@@ -515,12 +515,12 @@ Pengujian inferensial menggunakan desain matriks kontinjensi 2×2 berbasis **amb
 | Luas Konsesi (Ha) → Deforestasi Komoditas (Ha) | Median Luas Konsesi (High / Low) | Median Def. Komoditas (High / Low) | Pearson χ², Odds Ratio (CI 95%) | Skala luasan konsesi tambang memperbesar probabilitas pembukaan lahan vegetasi |
 | Investasi PMDN (Rp) → Deforestasi Komoditas (Ha) | Median Arus Modal (High / Low) | Median Def. Komoditas (High / Low) | Pearson χ², Odds Ratio, Time-Lag Test | Realisasi modal domestik mendorong bukaan lahan dengan jeda waktu konstruksi |
 
-### 4.6 Pemodelan Alur Rantai Pasok Maritim Ekspor (Kurva Bézier)
+### D.6 Pemodelan Alur Rantai Pasok Maritim Ekspor (Kurva Bézier)
 Simpul logistik pelabuhan ekspor diverifikasi melalui triangulasi laporan investigasi keselamatan transportasi maritim, penetapan regulasi Proyek Strategis Nasional (PSN), dan laporan operasional korporasi. Alur pelayaran pengangkutan curah nikel menuju pasar internasional dimodelkan secara spasial menggunakan persamaan kurva Bézier kuadratik di atas koordinat bola bumi guna memetakan jalur lalu lintas maritim yang rentan kecelakaan tongkang.
 
 ---
 
-## 5. Korespondensi Metodologi terhadap Sub-bab Laporan Bab 1
+## E. Korespondensi Metodologi terhadap Sub-bab Laporan Bab 1
 Setiap sub-bab analitis pada Bab 1 ditopang oleh metode kuantitatif yang presisi dan menghasilkan luaran visual terstandarisasi sebagaimana dirangkum pada matriks berikut:
 
 ##### Matriks Korespondensi Sub-bab terhadap Metode Analitis
@@ -534,7 +534,7 @@ Setiap sub-bab analitis pada Bab 1 ditopang oleh metode kuantitatif yang presisi
 
 ---
 
-## 6. Bagan Alur Kerangka Kerja Riset (Research Workflow)
+## F. Bagan Alur Kerangka Kerja Riset (Research Workflow)
 
 ```mermaid
 flowchart LR
