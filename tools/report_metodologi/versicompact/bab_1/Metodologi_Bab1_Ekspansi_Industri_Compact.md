@@ -17,10 +17,10 @@ Riset ini bersandar secara ketat pada data sekunder resmi dari otoritas statisti
 
 ---
 
-## 3. Operasionalisasi 10 Indikator Empiris (Tabel 1.8)
-Seluruh variabel kuantitatif, kategori analisis, satuan ukur, periode observasi, dan institusi primer resmi yang digunakan dalam Bab 1 disajikan secara komprehensif pada **Tabel 1.8** berikut:
+## 3. Operasionalisasi Variabel & Indikator Riset
+Seluruh variabel kuantitatif, kategori analisis, satuan ukur, periode observasi, dan institusi primer resmi yang digunakan dalam penelitian ini disajikan secara komprehensif pada matriks operasionalisasi berikut:
 
-##### Tabel 1.8: Matriks Indikator dan Sumber Data Primer Resmi Bab 1
+##### Matriks Operasionalisasi Variabel dan Sumber Data Resmi
 | # | Nama Indikator Empiris | Kategori Analisis | Satuan | Periode | Institusi & Sumber Data Resmi |
 | :---: | :--- | :--- | :---: | :---: | :--- |
 | 1 | Izin Usaha Pertambangan (IUP) Baru | Faktor Tekanan Ekstraktif | Unit Izin | 2014–2024 | Data Registry ESDM MODI (Minerbaone) |
@@ -63,7 +63,7 @@ Seluruh observasi panel (N = 60) diklasifikasikan ke dalam matriks kontinjensi 2
 
 > `χ² = Σ [ (O_ij - E_ij)² / E_ij ]   |   Odds Ratio (OR) = (a × d) / (b × c)`
 
-##### Tabel 1.8.B: Ringkasan Hasil Uji Inferensial Chi-Square & Odds Ratio Bab 1
+##### Matriks Ringkasan Hasil Uji Inferensial Chi-Square & Odds Ratio
 | Skenario Uji Hubungan (X → Y) | Nilai χ² | Odds Ratio | Signifikansi (p < 0.05) | Interpretasi Hubungan Kausalitas |
 | :--- | :---: | :---: | :---: | :--- |
 | PLTU Captive (Kapasitas MW) → Deforestasi Total | 18,05 | 18,0× | p < 0,001 (Signifikan) | Risiko deforestasi melonjak 18 kali lipat |
@@ -80,7 +80,7 @@ Simpul logistik pelabuhan ekspor diverifikasi melalui triangulasi laporan invest
 ## 5. Korespondensi Metodologi terhadap Sub-bab Laporan Bab 1
 Setiap sub-bab analitis pada Bab 1 ditopang oleh metode kuantitatif yang presisi dan menghasilkan luaran visual terstandarisasi sebagaimana dirangkum pada matriks berikut:
 
-##### Tabel 1.9: Matriks Korespondensi Sub-bab terhadap Metode Analitis
+##### Matriks Korespondensi Sub-bab terhadap Metode Analitis
 | Sub-bab | Fokus Kajian Empiris | Metode Analitis Utama | Luaran Visual / Statistik |
 | :---: | :--- | :--- | :--- |
 | **Sub-bab 1.1** | Struktur Makro PDRB Provinsi | Reklasifikasi Hukum KBLI, Pangsa Sektoral, Tren Pertumbuhan | Small Multiples Bar Chart, Tabel Kontribusi Sektor |
