@@ -232,3 +232,69 @@ Penerapan pengujian statistik tabulasi silang pada data panel provinsi-tahun per
 
 #### E. Analisis Temuan Empiris: Eksekusi Ruang dan Laju Deforestasi
 Hasil pengujian mengonfirmasi secara SIGNIFIKAN bahwa perluasan kawasan industri dan izin pertambangan baru memiliki korelasi positif dengan tingkat deforestasi. Temuan statistik mengonfirmasi bahwa peningkatan luasan Ekspansi Industri berkorelasi signifikan dengan kenaikan tingkat Deforestasi.
+
+## 2.4. Driver Deforestasi: Analisis Faktor Pendorong Perubahan Tutupan Hutan
+
+> **Sumber Data Resmi & Deskripsi Visualisasi:** Data GFW Klasifikasi Driver: `data/processed/sulawesi_gfw_loss_by_driver_2014_2023_v3.csv`. Visualisasi dashboard menampilkan Normalized Stacked Area Chart (evolusi temporal komposisi driver), Bar Chart kumulatif per driver, serta kartu metrik atribusi deforestasi industri vs pertanian masyarakat.
+
+#### A. Pengantar & Kerangka Narasi
+Fokus analisis sub-bab ini adalah membedah kontribusi masing-masing sektor pendorong terhadap **1,22+ juta hektar deforestasi di Sulawesi** sepanjang dekade 2014-2023. Section ini menyajikan atribusi kuantitatif antara aktivitas industri ekstraktif komoditas (tambang/sawit) dan sektor pertanian masyarakat. Faktor-faktor penyebab deforestasi diklasifikasikan ke dalam 5 kelompok: **Industri Ekstraktif (Tambang/Sawit), Kehutanan Komersial, Pertanian Berpindah, Urbanisasi, dan Tidak Teridentifikasi**.
+
+#### B. Alur Logika Metodologis Analisis Driver & Atribusi Emisi CO2
+Kerangka atribusi kausalitas hilangnya tutupan lahan dan kuantifikasi jejak karbon dari masing-masing faktor pendorong diilustrasikan pada **Bagan Alur 2.4** berikut. Sub-bab ini murni menggunakan agregasi tabular atribusi (tanpa uji inferensial Chi-Square), dengan konfigurasi variabel analisis dirinci pada Tabel 2.4a di bawah gambar.
+
+##### Bagan Alur 2.4: Alur Logika Metodologis Driver Analysis & Emisi CO2 Attribution
+```mermaid
+flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data GFW Klasifikasi Driver<br/><i>Provinsi, Tahun, Faktor Pendorong, Luas (Ha), Emisi CO2 (Mg)</i>"] --> C
+    end
+    subgraph Driver_Processing["2. Klasifikasi & Agregasi Driver"]
+        C["Pemetaan Kelompok Faktor Pendorong<br/>Tambang-Sawit; Kehutanan; Pertanian; Urbanisasi; Tak Teridentifikasi"] --> F["Agregasi SUM Luas & Emisi<br/>GROUP BY Faktor Pendorong"]
+        F --> G["Kuantifikasi Proporsi (%)<br/>terhadap total kumulatif deforestasi"]
+    end
+    subgraph Attribution_Analysis["3. Atribusi & Visualisasi"]
+        G --> H["Normalized Stacked Area<br/>Evolusi temporal komposisi driver"]
+        G --> I["Bar Chart Kumulatif<br/>Total deforestasi per driver"]
+        G --> J["Atribusi Emisi CO2<br/>Jejak karbon per faktor pendorong"]
+    end
+    H --> K["Pembacaan anatomi deforestasi Sulawesi"]
+    I --> K
+    J --> K
+```
+
+##### Tabel 2.4a: Konfigurasi Variabel Analisis Driver & Atribusi Emisi (Sub-bab 2.4)
+| Komponen Analisis | Definisi Variabel (Sub-bab 2.4) |
+| :--- | :--- |
+| Variabel Independen (X) | Faktor Pendorong Deforestasi (4 kelompok klasifikasi driver aktual dalam data) |
+| Variabel Dependen (Y1) | Luas Deforestasi (Ha): kehilangan tutupan pohon per faktor pendorong |
+| Variabel Dependen (Y2) | Emisi CO2 (Megagram): kuantitas karbon dioksida ekuivalen yang terlepas ke atmosfer |
+| Periode & Cakupan Observasi | 2014-2023 pada 6 provinsi se-Sulawesi |
+| Metode Atribusi | Agregasi tabular GROUP BY Faktor_Pendorong dengan kuantifikasi proporsi absolut (tanpa uji inferensial) |
+
+#### C. Formulasi Matematis: Agregasi Driver, Proporsi, dan Atribusi Emisi
+Kuantifikasi atribusi kausalitas dan jejak karbon dihitung menggunakan sistem formulasi matematis berikut:
+
+```text
+Total_Deforestasi = SUM(Luas_Deforestasi_Ha) GROUP BY Faktor_Pendorong
+Total_Emisi = SUM(Emisi_CO2_Megagram) GROUP BY Faktor_Pendorong
+Persentase_Driver (%) = ( Total_Deforestasi_Driver / Total_Deforestasi_Kumulatif ) * 100
+Rasio_Perbandingan = Total_Pertambangan_Sawit / Total_Pertanian_Berpindah
+```
+
+#### D. Matriks Hasil Uji Empiris
+Akumulasi total deforestasi, proporsi kontribusi, dan atribusi emisi CO2 masing-masing faktor pendorong pada periode 2014-2023 dapat dilihat secara empiris pada **Tabel 2.8** berikut:
+
+##### Tabel 2.8: Matriks Atribusi Deforestasi dan Emisi CO2 per Faktor Pendorong (Kumulatif 2014-2023)
+| Faktor Pendorong | Total Deforestasi (Ha) | Proporsi (%) | Emisi CO2 (Megagram) |
+| :--- | :--- | :--- | :--- |
+| Pertambangan dan Sawit | 1,001,654 | 82.2% | 664,472,885 |
+| Kehutanan Komersial | 134,637 | 11.1% | 87,138,022 |
+| Pertanian Berpindah (Masyarakat) | 55,905 | 4.6% | 38,215,565 |
+| Tidak Teridentifikasi | 25,738 | 2.1% | 14,225,278 |
+
+#### E. Analisis Temuan Empiris: Anatomi Deforestasi Sulawesi
+1. **Dominasi Sektor Pertambangan dan Sawit:** mencakup 1,001,654 Ha atau **82.2%** dari total kehilangan tutupan hutan periode 2014-2023, dengan proporsi tahunan konsisten pada rentang 78-85% setiap tahunnya.
+2. **Porsi Minor Pertanian Berpindah:** 4.6% (55,905 Ha) dari total deforestasi kumulatif; deforestasi komoditas tambang dan sawit 18 kali lebih besar dibanding pertanian berpindah.
+3. **Atribusi Emisi CO2:** sektor pertambangan dan sawit melepaskan 664,472,885 Megagram CO2 (82.6% dari total agregat pelepasan karbon).
+4. **Implikasi Kebijakan:** pengendalian deforestasi memerlukan evaluasi tata ruang perizinan pertambangan dan pengawasan ketat terhadap pembukaan lahan komoditas di wilayah tutupan hutan.
