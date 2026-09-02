@@ -543,17 +543,18 @@ def generate_all_bab2():
     }
     df_pltu_2 = df_pltu.copy()
     df_pltu_2['Provinsi'] = df_pltu_2['Subnational unit (province, state)'].replace(prov_map)
+    df_captive_prov = df_pltu_2.groupby('Provinsi')['Capacity (MW)'].sum().reset_index()
+    df_captive_prov.rename(columns={'Capacity (MW)': 'Captive_MW'}, inplace=True)
     
     grid_pltu = pd.DataFrame([
-        {'Provinsi': 'Gorontalo', 'Capacity (MW)': 100},
-        {'Provinsi': 'Sulawesi Utara', 'Capacity (MW)': 220},
-        {'Provinsi': 'Sulawesi Selatan', 'Capacity (MW)': 920},
-        {'Provinsi': 'Sulawesi Tenggara', 'Capacity (MW)': 100}
+        {'Provinsi': 'Gorontalo', 'Grid_MW': 100},
+        {'Provinsi': 'Sulawesi Utara', 'Grid_MW': 220},
+        {'Provinsi': 'Sulawesi Selatan', 'Grid_MW': 920},
+        {'Provinsi': 'Sulawesi Tenggara', 'Grid_MW': 100}
     ])
-    df_pltu_2 = pd.concat([df_pltu_2, grid_pltu], ignore_index=True)
     
-    df_pltu_prov = df_pltu_2.groupby('Provinsi')['Capacity (MW)'].sum().reset_index()
-    df_pltu_prov.rename(columns={'Capacity (MW)': 'Kapasitas_PLTU_MW'}, inplace=True)
+    df_pltu_prov = pd.merge(df_captive_prov, grid_pltu, on='Provinsi', how='outer').fillna(0)
+    df_pltu_prov['Kapasitas_PLTU_MW'] = df_pltu_prov['Captive_MW'] + df_pltu_prov['Grid_MW']
     
     df_iku_panel = df_iku.groupby(['Provinsi', 'Tahun'])['IKU'].mean().reset_index()
     df_panel_2_2 = pd.merge(df_iku_panel, df_pltu_prov, on='Provinsi', how='left').fillna({'Kapasitas_PLTU_MW': 0})
@@ -609,15 +610,16 @@ def generate_all_bab2():
     
     df_iku_2023 = df_iku[df_iku["Tahun"] == focus_end_year].groupby("Provinsi")["IKU"].mean().reset_index()
     
-    empirical_22 = pd.merge(df_iku_2023, df_pltu_prov, on="Provinsi", how="left").fillna({'Kapasitas_PLTU_MW': 0})
+    empirical_22 = pd.merge(df_iku_2023, df_pltu_prov, on="Provinsi", how="left").fillna({'Kapasitas_PLTU_MW': 0, 'Captive_MW': 0, 'Grid_MW': 0})
     empirical_22 = pd.merge(empirical_22, df_no2_2023[["Provinsi", "Rata_Rata_NO2"]], on="Provinsi", how="left")
     empirical_22 = empirical_22.sort_values("Kapasitas_PLTU_MW", ascending=False)
     
     empirical_rows_22 = []
     for _, row in empirical_22.iterrows():
+        cap_str = f"{row['Kapasitas_PLTU_MW']:,.0f}\n(Captive: {row['Captive_MW']:,.0f} | Grid: {row['Grid_MW']:,.0f})"
         empirical_rows_22.append([
             row["Provinsi"],
-            f"{row['Kapasitas_PLTU_MW']:,.0f}",
+            cap_str,
             f"{row['IKU']:.1f}" if pd.notna(row['IKU']) else "-",
             f"{row['Rata_Rata_NO2']:.2e}" if pd.notna(row['Rata_Rata_NO2']) else "-",
         ])
@@ -1077,7 +1079,7 @@ h4 {{ color: #A5D6A7; }}
 <h4>D. Matriks Hasil Uji Empiris</h4>
 <p>Akumulasi kapasitas total PLTU (Captive dan Grid) yang beroperasi, beserta kondisi mutu udara melalui pengukuran IKU dan satelit NASA TROPOMI (NO₂) dapat dilihat secara empiris pada <strong>Tabel 2.3</strong> berikut:</p>
 <div class="table-caption">Tabel 2.3: Rincian Empiris Kapasitas PLTU (Captive & Grid), IKU, dan Konsentrasi NO₂ NASA ({focus_end_year})</div>
-{html_table(["Provinsi", "Kapasitas PLTU (Captive & Grid) (MW)", "IKU", "NASA TROPOMI NO₂ (mol/m²)"], empirical_rows_22)}
+{html_table(["Provinsi", "Kapasitas PLTU (Captive & Grid) (MW)", "IKU", "NASA TROPOMI NO₂ (mol/m²)"], empirical_rows_22).replace("\\n", "<br/>")}
 <p>Penerapan pengujian statistik tabulasi silang pada data panel (total {valid_cases_22} observasi valid) disajikan secara ringkas pada <strong>Tabel 2.4</strong> berikut:</p>
 <div class="table-caption">Tabel 2.4: Ringkasan Eksekutif Skenario Crosstab Kapasitas PLTU vs IKU Bab 2</div>
 {html_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (&chi;&sup2;)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_22)}
@@ -1193,7 +1195,7 @@ h4 {{ color: #A5D6A7; }}
         "Akumulasi kapasitas total PLTU (Captive dan Grid) yang beroperasi, beserta kondisi mutu udara melalui pengukuran IKU dan satelit NASA TROPOMI (NO₂) dapat dilihat secara empiris pada **Tabel 2.3** berikut:",
         "",
         f"##### Tabel 2.3: Rincian Empiris Kapasitas PLTU (Captive & Grid), IKU, dan Konsentrasi NO₂ NASA ({focus_end_year})",
-        markdown_table(["Provinsi", "Kapasitas PLTU (Captive & Grid) (MW)", "IKU", "NASA TROPOMI NO₂ (mol/m²)"], empirical_rows_22),
+        markdown_table(["Provinsi", "Kapasitas PLTU (Captive & Grid) (MW)", "IKU", "NASA TROPOMI NO₂ (mol/m²)"], [[str(item).replace('\\n', '<br/>') for item in row] for row in empirical_rows_22]),
         "",
         f"Penerapan pengujian statistik tabulasi silang pada data panel (total {valid_cases_22} observasi valid) disajikan secara ringkas pada **Tabel 2.4** berikut:",
         "",
