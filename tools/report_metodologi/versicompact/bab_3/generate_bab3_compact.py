@@ -162,13 +162,15 @@ def add_body(doc, parts, space_after=3):
         add_run(p, text, bold=bold, italic=italic, pt=8.5, color=C_BODY)
     return p
 
-def add_formula(doc, text):
+def add_formula(doc, text, ket=None):
     p = doc.add_paragraph()
     p.paragraph_format.space_before = Pt(2)
     p.paragraph_format.space_after  = Pt(4)
     p.paragraph_format.left_indent  = Pt(8)
     para_shd(p, 'EDF7EE')
     add_run(p, text, pt=8, color=G_MID, mono=True)
+    if ket:
+        add_run(p, f"\nKeterangan: {ket}", italic=True, pt=7.5, color=RGBColor(0x33, 0x55, 0x33))
 
 def add_caption(doc, caption_text):
     p = doc.add_paragraph()
@@ -369,21 +371,24 @@ def generate_bab3_compact():
     add_body(doc, [
         ("Kesenjangan fasilitas pelayanan kesehatan dianalisis melalui segmentasi cross-sectional per jenis fasilitas (Puskesmas vs Rumah Sakit) antara zona sentra industri ekstraktif dan zona non-sentra:", False, False)
     ])
-    add_formula(doc, "Rata-rata Faskes (F̄_z,j) = [ Σ F_p,j ] / n_z   ;   Rasio Disparitas (D_j) = F̄_Sentra,j / F̄_Non-Sentra,j")
+    add_formula(doc, "Rata-rata Faskes (F̄_z,j) = [ Σ F_p,j ] / n_z   ;   Rasio Disparitas (D_j) = F̄_Sentra,j / F̄_Non-Sentra,j",
+                ket="F_p,j = Jumlah faskes tipe j (Puskesmas/RS) di provinsi p; n_z = Jumlah provinsi di zona z; D_j = Rasio disparitas fasilitas kesehatan tipe j antara sentra industri dan non-sentra.")
 
     # 3.2
     add_h3(doc, "3.2 Ketimpangan Beban Penyakit: Sentra Industri vs Non-Sentra")
     add_body(doc, [
         ("Komparasi beban morbiditas penyakit pernapasan dan pencernaan dihitung guna mengukur disparitas kelipatan risiko kesehatan pada provinsi lingkar hilirisasi:", False, False)
     ])
-    add_formula(doc, "Beban Rata-rata (B̄_z) = [ Σ B_p,t ] / N_z   ;   Kelipatan Disparitas (Q) = B̄_Sentra / B̄_Non-Sentra")
+    add_formula(doc, "Beban Rata-rata (B̄_z) = [ Σ B_p,t ] / N_z   ;   Kelipatan Disparitas (Q) = B̄_Sentra / B̄_Non-Sentra",
+                ket="B_p,t = Total kasus penyakit (ISPA/Diare) di provinsi p tahun t; N_z = Jumlah observasi data panel zona z; Q = Rasio kelipatan disparitas beban morbiditas sentra industri vs non-sentra.")
 
     # 3.3
     add_h3(doc, "3.3 Lintasan Waktu Ekologis & Dinamika Penyakit di Kawasan Industri Ekstraktif")
     add_body(doc, [
         ("Normalisasi beban penyakit per 10.000 penduduk dan protokol pengujian independensi Chi-Square (χ²) tabulasi silang diterapkan pada matriks panel provinsi-tahun berbasis ambang batas median spesifik provinsi:", False, False)
     ])
-    add_formula(doc, "Insiden_10K = ( Kasus_p,t / Populasi_p ) × 10.000   ;   χ² = Σ [ ( O_ij - E_ij )² / E_ij ]")
+    add_formula(doc, "Insiden_10K = ( Kasus_p,t / Populasi_p ) × 10.000   ;   χ² = Σ [ ( O_ij - E_ij )² / E_ij ]",
+                ket="Insiden_10K = Tingkat insidensi per 10.000 jiwa; Kasus_p,t = Jumlah kasus absolut di provinsi p tahun t; Populasi_p = Jumlah penduduk provinsi p; χ² = Statistik Chi-Square (O_ij = frekuensi observasi, E_ij = frekuensi harapan).")
 
     add_caption(doc, "Tabel 3.3a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 3.3)")
     tabel_3_3a_rows = [
@@ -408,21 +413,24 @@ def generate_bab3_compact():
     add_body(doc, [
         ("Isolasi data tapak tingkat distrik/kabupaten sentra tambang aktif (Morowali, Morowali Utara, Banggai) mengukur lonjakan vektor zoonosis akibat genangan lubang tambang dan sanitasi industri dibandingkan kabupaten kontrol:", False, False)
     ])
-    add_formula(doc, "Akumulasi Zoonosis (Z_w,t,d) = Σ C_r,t,d   ;   Rasio Zoonosis Tapak (R_d) = Z̄_Tambang / Z̄_Kontrol")
+    add_formula(doc, "Akumulasi Zoonosis (Z_w,t,d) = Σ C_r,t,d   ;   Rasio Zoonosis Tapak (R_d) = Z̄_Tambang / Z̄_Kontrol",
+                ket="C_r,t,d = Kasus zoonosis d di distrik r tahun t; Z_w,t,d = Akumulasi kasus per wilayah w; R_d = Rasio komparasi beban zoonosis distrik lingkar tambang terhadap wilayah kontrol agraris.")
 
     # 3.5
     add_h3(doc, "3.5 Pemetaan Geospasial: Distribusi Spasial Beban Penyakit")
     add_body(doc, [
         ("Pemodelan Before-After Analysis memproyeksikan pergeseran spasial intensitas morbiditas antara tahun acuan awal ekstraksi (2015) dan kondisi terkini (2024):", False, False)
     ])
-    add_formula(doc, "Radius Bubble Diare (r_p,t) = √D_p,t / K   ;   Laju Pertumbuhan (G_p %) = [ ( X_2024 - X_2015 ) / X_2015 ] × 100")
+    add_formula(doc, "Radius Bubble Diare (r_p,t) = √D_p,t / K   ;   Laju Pertumbuhan (G_p %) = [ ( X_2024 - X_2015 ) / X_2015 ] × 100",
+                ket="r_p,t = Radius visual simbol bubble peta provinsi p tahun t; D_p,t = Kasus diare absolut; K = Konstanta skala visual kartografi; G_p = Laju pertumbuhan morbiditas 2015 vs 2024.")
 
     # 3.6
     add_h3(doc, "3.6 Krisis Air Bersih: Tinjauan Makro Provinsi dan Bukti Uji Klinis Lingkar Tambang")
     add_body(doc, [
         ("Pendekatan komplementer dua lensa memadukan benchmark rasio toksisitas laboratorium Kromium Heksavalen (Cr6+) pada muara sungai tambang dengan uji Chi-Square data panel makro IKA vs Diare:", False, False)
     ])
-    add_formula(doc, "Rasio Pelanggaran Toksisitas = Konsentrasi Cr6+ / Baku Mutu Biota Laut (0.005 mg/L)")
+    add_formula(doc, "Rasio Pelanggaran Toksisitas = Konsentrasi Cr6+ / Baku Mutu Biota Laut (0.005 mg/L)",
+                ket="Konsentrasi Cr6+ = Kadar Kromium Heksavalen terukur sampel lab (mg/L); Baku Mutu Biota = Ambang aman air laut biota perairan (0.005 mg/L); Rasio = Kelipatan keterlampauan batas aman.")
 
     add_caption(doc, "Tabel 3.6a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 3.6)")
     tabel_3_6a_rows = [
@@ -447,7 +455,8 @@ def generate_bab3_compact():
     add_body(doc, [
         ("Kuantifikasi neraca timbulan limbah bahan berbahaya dan beracun (B3) mengagregasi volume pelepasan residu padat dan cair per provinsi serta menghitung proporsi jenis limbah spesifik:", False, False)
     ])
-    add_formula(doc, "Total Timbulan B3_p = Σ [ Timbulan Fasilitas Mayor_i ]   ;   Proporsi Jenis B3 (%) = [ Total B3_j / Total B3 ] × 100")
+    add_formula(doc, "Total Timbulan B3_p = Σ [ Timbulan Fasilitas Mayor_i ]   ;   Proporsi Jenis B3 (%) = [ Total B3_j / Total B3 ] × 100",
+                ket="Total Timbulan B3_p = Akumulasi limbah B3 provinsi p (Ton/Tahun); Total B3_j = Tonase timbulan jenis limbah spesifik j (Slag, Tailing HPAL, Air Asam Tambang); Proporsi = Pangsa persentase jenis residu terhadap total timbulan B3.")
 
     # ── E. KORESPONDENSI METODOLOGI TERHADAP SUB-BAB LAPORAN ────
     add_h2(doc, "E", "Korespondensi Metodologi terhadap Sub-bab Laporan Bab 3")
@@ -586,17 +595,20 @@ Seluruh variabel kesehatan masyarakat, kualitas sanitasi, toksisitas klinis, dan
 ### 3.1 Kesenjangan Fasilitas Kesehatan di Kawasan Ekstraktif
 Kesenjangan fasilitas pelayanan kesehatan dianalisis melalui segmentasi cross-sectional per jenis fasilitas (Puskesmas vs Rumah Sakit) antara zona sentra industri ekstraktif dan zona non-sentra:
 
-> `Rata-rata Faskes (F̄_z,j) = [ Σ F_p,j ] / n_z   ;   Rasio Disparitas (D_j) = F̄_Sentra,j / F̄_Non-Sentra,j`
+> `Rata-rata Faskes (F̄_z,j) = [ Σ F_p,j ] / n_z   ;   Rasio Disparitas (D_j) = F̄_Sentra,j / F̄_Non-Sentra,j`  
+> *Keterangan: F_p,j = Jumlah faskes tipe j (Puskesmas/RS) di provinsi p; n_z = Jumlah provinsi di zona z; D_j = Rasio disparitas fasilitas kesehatan tipe j antara sentra industri dan non-sentra.*
 
 ### 3.2 Ketimpangan Beban Penyakit: Sentra Industri vs Non-Sentra
 Komparasi beban morbiditas penyakit pernapasan dan pencernaan dihitung guna mengukur disparitas kelipatan risiko kesehatan pada provinsi lingkar hilirisasi:
 
-> `Beban Rata-rata (B̄_z) = [ Σ B_p,t ] / N_z   ;   Kelipatan Disparitas (Q) = B̄_Sentra / B̄_Non-Sentra`
+> `Beban Rata-rata (B̄_z) = [ Σ B_p,t ] / N_z   ;   Kelipatan Disparitas (Q) = B̄_Sentra / B̄_Non-Sentra`  
+> *Keterangan: B_p,t = Total kasus penyakit (ISPA/Diare) di provinsi p tahun t; N_z = Jumlah observasi data panel zona z; Q = Rasio kelipatan disparitas beban morbiditas sentra industri vs non-sentra.*
 
 ### 3.3 Lintasan Waktu Ekologis & Dinamika Penyakit di Kawasan Industri Ekstraktif
 Normalisasi beban penyakit per 10.000 penduduk dan protokol pengujian independensi Chi-Square (χ²) tabulasi silang diterapkan pada matriks panel provinsi-tahun berbasis ambang batas median spesifik provinsi:
 
-> `Insiden_10K = ( Kasus_p,t / Populasi_p ) × 10.000   ;   χ² = Σ [ ( O_ij - E_ij )² / E_ij ]`
+> `Insiden_10K = ( Kasus_p,t / Populasi_p ) × 10.000   ;   χ² = Σ [ ( O_ij - E_ij )² / E_ij ]`  
+> *Keterangan: Insiden_10K = Tingkat insidensi per 10.000 jiwa; Kasus_p,t = Jumlah kasus absolut di provinsi p tahun t; Populasi_p = Jumlah penduduk provinsi p; χ² = Statistik Chi-Square (O_ij = frekuensi observasi, E_ij = frekuensi harapan).*
 
 ##### Tabel 3.3a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 3.3)
 | Komponen Uji | Definisi Variabel (Sub-bab 3.3) |
@@ -612,17 +624,20 @@ Normalisasi beban penyakit per 10.000 penduduk dan protokol pengujian independen
 ### 3.4 Anomali Zoonosis: Dampak Kritis Ekspansi Industri di Level Tapak (Studi Kasus Sulteng)
 Isolasi data tapak tingkat distrik/kabupaten sentra tambang aktif (Morowali, Morowali Utara, Banggai) mengukur lonjakan vektor zoonosis akibat genangan lubang tambang dan sanitasi industri dibandingkan kabupaten kontrol:
 
-> `Akumulasi Zoonosis (Z_w,t,d) = Σ C_r,t,d   ;   Rasio Zoonosis Tapak (R_d) = Z̄_Tambang / Z̄_Kontrol`
+> `Akumulasi Zoonosis (Z_w,t,d) = Σ C_r,t,d   ;   Rasio Zoonosis Tapak (R_d) = Z̄_Tambang / Z̄_Kontrol`  
+> *Keterangan: C_r,t,d = Kasus zoonosis d di distrik r tahun t; Z_w,t,d = Akumulasi kasus per wilayah w; R_d = Rasio komparasi beban zoonosis distrik lingkar tambang terhadap wilayah kontrol agraris.*
 
 ### 3.5 Pemetaan Geospasial: Distribusi Spasial Beban Penyakit
 Pemodelan Before-After Analysis memproyeksikan pergeseran spasial intensitas morbiditas antara tahun acuan awal ekstraksi (2015) dan kondisi terkini (2024):
 
-> `Radius Bubble Diare (r_p,t) = √D_p,t / K   ;   Laju Pertumbuhan (G_p %) = [ ( X_2024 - X_2015 ) / X_2015 ] × 100`
+> `Radius Bubble Diare (r_p,t) = √D_p,t / K   ;   Laju Pertumbuhan (G_p %) = [ ( X_2024 - X_2015 ) / X_2015 ] × 100`  
+> *Keterangan: r_p,t = Radius visual simbol bubble peta provinsi p tahun t; D_p,t = Kasus diare absolut; K = Konstanta skala visual kartografi; G_p = Laju pertumbuhan morbiditas 2015 vs 2024.*
 
 ### 3.6 Krisis Air Bersih: Tinjauan Makro Provinsi dan Bukti Uji Klinis Lingkar Tambang
 Pendekatan komplementer dua lensa memadukan benchmark rasio toksisitas laboratorium Kromium Heksavalen (Cr6+) pada muara sungai tambang dengan uji Chi-Square data panel makro IKA vs Diare:
 
-> `Rasio Pelanggaran Toksisitas = Konsentrasi Cr6+ / Baku Mutu Biota Laut (0.005 mg/L)`
+> `Rasio Pelanggaran Toksisitas = Konsentrasi Cr6+ / Baku Mutu Biota Laut (0.005 mg/L)`  
+> *Keterangan: Konsentrasi Cr6+ = Kadar Kromium Heksavalen terukur sampel lab (mg/L); Baku Mutu Biota = Ambang aman air laut biota perairan (0.005 mg/L); Rasio = Kelipatan keterlampauan batas aman.*
 
 ##### Tabel 3.6a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 3.6)
 | Komponen Uji | Definisi Variabel (Sub-bab 3.6) |
@@ -638,7 +653,8 @@ Pendekatan komplementer dua lensa memadukan benchmark rasio toksisitas laborator
 ### 3.7 Beban Limbah Beracun (B3): Eksternalitas Kesehatan yang Diabaikan
 Kuantifikasi neraca timbulan limbah bahan berbahaya dan beracun (B3) mengagregasi volume pelepasan residu padat dan cair per provinsi serta menghitung proporsi jenis limbah spesifik:
 
-> `Total Timbulan B3_p = Σ [ Timbulan Fasilitas Mayor_i ]   ;   Proporsi Jenis B3 (%) = [ Total B3_j / Total B3 ] × 100`
+> `Total Timbulan B3_p = Σ [ Timbulan Fasilitas Mayor_i ]   ;   Proporsi Jenis B3 (%) = [ Total B3_j / Total B3 ] × 100`  
+> *Keterangan: Total Timbulan B3_p = Akumulasi limbah B3 provinsi p (Ton/Tahun); Total B3_j = Tonase timbulan jenis limbah spesifik j (Slag, Tailing HPAL, Air Asam Tambang); Proporsi = Pangsa persentase jenis residu terhadap total timbulan B3.*
 
 ---
 
