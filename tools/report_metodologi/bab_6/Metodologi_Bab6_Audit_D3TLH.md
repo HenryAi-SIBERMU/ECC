@@ -78,7 +78,7 @@ Skor_Likert (Versi 3) = 9.73 / 2.0 = 4.86 -> 5.0 / 5.0 (DARURAT UDARA)
 | Limbah B3 (Udara 3) | Laporan Kinerja (LKj) KLHK 2022 | Total limbah B3 nasional = 427 juta ton. Penduduk Sulteng hanya 1,1% nasional, threshold >5% merefleksikan beban per kapita 5x lipat rata-rata nasional. | LKj KLHK 2022, Hal. 10 | DEFENSIBLE |
 | Emisi CO2 (Udara 4) | SK MenLHK No.SK.168/MENLHK/PKTL/PLA.1/2/2022 | Sasaran implementasi FOLU Net Sink 2030 adalah tingkat emisi gas rumah kaca sebesar -140 juta ton CO2e. Emisi >150 juta ton menggagalkan komitmen NDC. | Bab I.3, Hal. 5-6 | VERIFIED |
 
-#### E. Analisis Temuan Empiris (TL;DR)
+#### E. Analisis Temuan Empiris
 1. **PLTU Captive (Udara 1a):** Kapasitas **9,825.0 MW** melampaui 1,96x batas aman 5.000 MW (GEM 2023). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.
 2. **NO2 Satelit (Udara 1b):** Densitas NO2 **5.56e-06 mol/m²** (Morowali 8.8e-5 mol/m²) melampaui baku mutu PP 22/2021. Skor: **3.91 / 5** *(Status: Melampaui Batas)*.
 3. **Morbiditas ISPA & B3 (Udara 2 & 3):** Rasio ISPA **3.50x lipat** (KLB Medis WHO); beban limbah B3 **7.93%** nasional (33,840,141 Ton). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.
@@ -152,7 +152,7 @@ Skor_Akumulasi_Air = (6.77 + 6.00 + 10.00 + 10.00) / 4.0 = 8.19 / 10.0 (Skor Ind
 | Konflik Nelayan (Air 3) | Konsorsium Pembaruan Agraria (KPA CATAHU 2023) | Letusan konflik agraria pesisir dan ruang laut. 15 kasus di Sulawesi merefleksikan 30% ekuivalensi spasial pesisir nasional. | CATAHU 2023, Hal. 22 | DEFENSIBLE |
 | Beban Tailing (Air 4) | Dokumen AMDAL KLHK (PT HPI - IMIP) & AEER 2020 | Batas kapasitas maksimal DSTP / tailing dam 25 juta ton/tahun di Morowali. Aktual timbulan tailing dan slag mencapai 33.03 juta ton/tahun. | AMDAL HPI & AEER Hal. 36 | VERIFIED |
 
-#### E. Analisis Temuan Empiris (TL;DR)
+#### E. Analisis Temuan Empiris
 1. **Kualitas Air (Air 1):** Rerata IKA **59.69** (Kategori Sedang, defisit 10.31 poin di bawah batas aman ≥ 70). Skor: **3.4 / 5** *(Status: Mendekati Batas)*.
 2. **Morbiditas Diare (Air 2):** Max IRR diare sentra tambang **1.5x Lipat** dibanding kontrol. Skor: **3.0 / 5** *(Status: Mendekati Batas)*.
 3. **Konflik Nelayan (Air 3):** Teridentifikasi **15 kasus** konflik ruang tangkap pesisir vs ekspansi jetty tambang. Skor: **5.0 / 5** *(Status: Melampaui Batas)*.
@@ -233,7 +233,7 @@ Skor_Akumulasi_Lahan = (10.00 + 10.00 + 10.00 + 10.00 + 6.27) / 5.0 = 9.25 / 10.
 | Aktor Deforestasi (Lahan 4) | Global Forest Watch (Loss by Driver 2014–2023) | Komoditas ekstraktif skala besar (tambang nikel dan perkebunan monokultur sawit) memonopoli 1,00 Juta Ha kehilangan hutan, membantah mitos perladangan berpindah warga lokal. | GFW Drivers | VERIFIED |
 | Kepadatan Spasial (Lahan 5) | Kompilasi Minerba ESDM & Luas Daratan BPS (2023) | Carrying capacity tata ruang membatasi rasio konsesi tambang maksimal 10% dari luas daratan. Total IUP nikel aktif menyita 1,18 Juta Ha daratan Sulawesi (rasio 6.3%). | Minerba ESDM | DEFENSIBLE |
 
-#### E. Analisis Temuan Empiris (TL;DR)
+#### E. Analisis Temuan Empiris
 1. **Bencana Alam (Lahan 1):** Tercatat **1,609 kejadian** banjir & longsor (ambang batas outlier: 877 kejadian). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.
 2. **Deforestasi Primer (Lahan 2):** Hutan hilang **1,386,055 Ha**, melampaui 2,17x kuota FOLU 2030 (638.000 Ha). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.
 3. **Kawasan Lindung (Lahan 3):** Deforestasi **41,785 Ha** di hutan lindung melanggar UU Kehutanan No. 41/1999. Skor: **5.0 / 5** *(Status: Melampaui Batas)*.
@@ -308,7 +308,7 @@ Skor_Akumulasi_Sosial = (10.00 + 10.00 + 10.00 + 1.26) / 4.0 = 7.81 / 10.0 (Skor
 | Kriminalisasi HAM (Sosial 3) | UU No. 32/2009 (Pasal 66 Anti-SLAPP) & Satya Bumi (2023) | Perlindungan hukum pembela hak lingkungan hidup. Threshold 10 insiden diturunkan dari batas deviasi statistik Mean + 1 SD dari 6 provinsi se-Sulawesi (Mean=5.67, SD=3.90). | Ps. 66 & Metodologi KPA | VERIFIED |
 | Defisit Faskes SPA (Sosial 4) | Lampiran Perpres RPJMN 2025–2029 & Permenkes No. 6/2024 | Target pemenuhan sarana, prasarana, dan alat kesehatan (SPA) Puskesmas minimal 80%. Kesenjangan (gap) diukur dari capaian riil ASPAK Kemenkes. | Bab IV & Permenkes 6/2024 | VERIFIED |
 
-#### E. Analisis Temuan Empiris (TL;DR)
+#### E. Analisis Temuan Empiris
 1. **Manipulasi FPIC (Sosial 1):** Ditemukan **8 kasus** pelanggaran konsultasi warga dalam AMDAL (toleransi: < 3 kasus). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.
 2. **Krisis Agraria (Sosial 2):** Sebanyak **54,310 jiwa** terancam kehilangan 505,192 Ha lahan (ambang batas: 40.000 jiwa). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.
 3. **Kriminalisasi HAM (Sosial 3):** Terjadi **21 insiden** represi dengan **10 warga ditangkap** (ambang batas: 10 insiden). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.
@@ -385,7 +385,7 @@ Skor_Akumulasi_Veto = (10.00 + 10.00 + 10.00) / 3.0 = 10.00 / 10.0 (Skor Pengend
 | Dimensi 5 | Veto Kebijakan & Pengendalian Izin | 574 Izin Baru, 21 Korporat Ilegal, 10.26 GW PLTU | 10.00 / 10.0 | 5.0 / 5 | Melampaui Batas | Penguatan Pengawasan Kebijakan |
 | TOTAL | SKOR KOMPOSIT BIOREGION PULAU SULAWESI | Agregasi 5 Dimensi Daya Dukung & Daya Tampung | 9.00 / 10.0 | 4.5 / 5 | Melampaui Batas | KOLAPS DAYA DUKUNG SISTEMIK |
 
-#### E. Analisis Temuan Empiris (TL;DR)
+#### E. Analisis Temuan Empiris
 1. **Obral Izin (Veto 1):** Penerbitan **574 IUP baru** membuktikan mandulnya fungsi pembatasan regulasi (threshold: 100 izin). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.
 2. **Impunitas Korporat (Veto 2):** Pembiaran **21 korporasi** pelanggar hukum beroperasi tanpa sanksi tegas (threshold: 10 korporat). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.
 3. **Karpet Merah PLTU (Veto 3):** Pembangunan **10.26 GW (10,255 MW) PLTU** melanggar komitmen iklim JETP & NZE (threshold: 5 GW). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.

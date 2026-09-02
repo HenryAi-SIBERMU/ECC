@@ -509,7 +509,7 @@ def generate_all_bab6():
     add_caption(doc, "Tabel 6.2: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Udara")
     add_table_1col(doc, ["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_rows, [2.5, 3.5, 7.5, 2.5, 2.0], ["L", "L", "L", "C", "C"])
 
-    add_h4(doc, "E. Analisis Temuan Empiris (TL;DR)")
+    add_h4(doc, "E. Analisis Temuan Empiris")
     add_p(doc, [
         ("1. ", True, False), ("PLTU Captive (Udara 1a): ", True, False),
         (f"Kapasitas operasional {kapasitas_terkini:,.1f} MW melampaui 1,96x lipat ambang batas aman 5.000 MW (GEM 2023). Skor: 5.0 / 5 (Melampaui Batas).\n", False, False),
@@ -723,7 +723,7 @@ def generate_all_bab6():
     add_caption(doc, "Tabel 6.4: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Air")
     add_table_1col(doc, ["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_air_rows, [2.5, 3.5, 7.5, 2.5, 2.0], ["L", "L", "L", "C", "C"])
 
-    add_h4(doc, "E. Analisis Temuan Empiris (TL;DR)")
+    add_h4(doc, "E. Analisis Temuan Empiris")
     add_p(doc, [
         ("1. ", True, False), ("Kualitas Air Rata-Rata (Air 1): ", True, False),
         (f"Rerata IKA Sulawesi tertekan di angka {ika_avg:.2f} (Kategori Sedang, defisit 10.31 poin di bawah ambang batas aman ≥ 70). Skor: 3.4 / 5 (Mendekati Batas).\n", False, False),
@@ -918,7 +918,7 @@ def generate_all_bab6():
     add_caption(doc, "Tabel 6.6: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Lahan")
     add_table_1col(doc, ["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_lahan_rows, [2.5, 3.5, 7.5, 2.5, 2.0], ["L", "L", "L", "C", "C"])
 
-    add_h4(doc, "E. Analisis Temuan Empiris (TL;DR)")
+    add_h4(doc, "E. Analisis Temuan Empiris")
     add_p(doc, [
         ("1. ", True, False), ("Bencana Banjir & Longsor (Lahan 1): ", True, False),
         (f"Akumulasi {total_bencana_sulawesi:,.0f} bencana hidrometeorologi melampaui 1,83x batas outlier statistik Mean + 1 SD (877 kejadian). Skor: 5.0 / 5 (Melampaui Batas).\n", False, False),
@@ -1103,7 +1103,7 @@ def generate_all_bab6():
     add_caption(doc, "Tabel 6.8: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Sosial")
     add_table_1col(doc, ["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_sosial_rows, [2.5, 3.5, 7.5, 2.5, 2.0], ["L", "L", "L", "C", "C"])
 
-    add_h4(doc, "E. Analisis Temuan Empiris (TL;DR)")
+    add_h4(doc, "E. Analisis Temuan Empiris")
     add_p(doc, [
         ("1. ", True, False), ("Manipulasi FPIC (Sosial 1): ", True, False),
         (f"Teridentifikasi {kasus_fpic} kasus pelanggaran konsultasi publik AMDAL (zero tolerance: < 3 kasus). Skor: 5.0 / 5 (Melampaui Batas).\n", False, False),
@@ -1279,7 +1279,7 @@ def generate_all_bab6():
     add_caption(doc, "Tabel 6.11: Rekapitulasi Sintesis 5 Matriks Bioregion Pulau Sulawesi (Tingkat Pulau Makro)")
     add_table_1col(doc, ["Dimensi", "Indikator Utama", "Kondisi Aktual Empiris", "Skor WSM", "Skor Likert", "Status Audit", "Kesimpulan Analisis"], sintesis_pulau_rows, [1.6, 3.2, 4.2, 1.8, 1.8, 2.2, 3.2], ["C", "L", "L", "C", "C", "C", "L"])
 
-    add_h4(doc, "E. Analisis Temuan Empiris (TL;DR)")
+    add_h4(doc, "E. Analisis Temuan Empiris")
     add_p(doc, [
         ("1. ", True, False), ("Obral IUP Baru (Veto 1): ", True, False),
         (f"Penerbitan {izin_baru:,.0f} IUP baru pasca-2014 di tengah daya dukung jenuh membuktikan kegagalan veto izin (threshold: 100 izin). Skor: 5.0 / 5 (Melampaui Batas).\n", False, False),
@@ -1351,7 +1351,7 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
 <div class="table-caption">Tabel 6.2: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Udara</div>
 {html_table(["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_rows)}
 
-<h4>E. Analisis Temuan Empiris (TL;DR)</h4>
+<h4>E. Analisis Temuan Empiris</h4>
 <p><strong>1. PLTU Captive (Udara 1a):</strong> Kapasitas <strong>{kapasitas_terkini:,.1f} MW</strong> melampaui 1,96x batas aman 5.000 MW (GEM 2023). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
 <strong>2. NO2 Satelit (Udara 1b):</strong> Densitas NO2 pulau <strong>{no2_terkini:.2e} mol/m²</strong> (Morowali 8.8e-5 mol/m²) melampaui baku mutu PP 22/2021. Skor: <strong>3.91 / 5</strong> (Melampaui Batas).<br>
 <strong>3. Morbiditas ISPA & B3 (Udara 2 & 3):</strong> Rasio ISPA <strong>{rasio_anomali_ispa:.2f}x lipat</strong> (KLB WHO); limbah B3 <strong>{proporsi_b3:.2f}%</strong> nasional ({total_b3_sulawesi:,.0f} Ton). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
@@ -1381,7 +1381,7 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
 <div class="table-caption">Tabel 6.4: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Air</div>
 {html_table(["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_air_rows)}
 
-<h4>E. Analisis Temuan Empiris (TL;DR)</h4>
+<h4>E. Analisis Temuan Empiris</h4>
 <p><strong>1. Kualitas Air (Air 1):</strong> Rerata IKA <strong>{ika_avg:.2f}</strong> (Kategori Sedang, defisit 10.31 poin di bawah aman ≥ 70). Skor: <strong>3.4 / 5</strong> (Mendekati Batas).<br>
 <strong>2. Morbiditas Diare (Air 2):</strong> Max IRR diare mencapai <strong>{rasio_diare:.1f}x Lipat</strong> dibanding wilayah kontrol non-tambang. Skor: <strong>3.0 / 5</strong> (Mendekati Batas).<br>
 <strong>3. Konflik Nelayan (Air 3):</strong> Tercatat <strong>{jumlah_konflik_air} kasus</strong> konflik ruang laut nelayan vs jetty tambang. Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
@@ -1412,7 +1412,7 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
 <div class="table-caption">Tabel 6.6: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Lahan</div>
 {html_table(["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_lahan_rows)}
 
-<h4>E. Analisis Temuan Empiris (TL;DR)</h4>
+<h4>E. Analisis Temuan Empiris</h4>
 <p><strong>1. Bencana Alam (Lahan 1):</strong> Tercatat <strong>{total_bencana_sulawesi:,.0f} kejadian</strong> banjir/longsor melampaui batas outlier (877 kejadian). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
 <strong>2. Deforestasi Primer (Lahan 2):</strong> Kehilangan tutupan <strong>{total_deforestasi_sulawesi:,.0f} Ha</strong> melampaui 2,17x kuota FOLU 2030 (638.000 Ha). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
 <strong>3. Hutan Lindung (Lahan 3):</strong> Tambang merambah <strong>{total_lindung_hilang_sulawesi:,.0f} Ha</strong> kawasan lindung (nol toleransi UU 41/1999). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
@@ -1443,7 +1443,7 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
 <div class="table-caption">Tabel 6.8: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Sosial</div>
 {html_table(["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_sosial_rows)}
 
-<h4>E. Analisis Temuan Empiris (TL;DR)</h4>
+<h4>E. Analisis Temuan Empiris</h4>
 <p><strong>1. Manipulasi FPIC (Sosial 1):</strong> Ditemukan <strong>{kasus_fpic} kasus</strong> pelanggaran FPIC dalam AMDAL (zero tolerance: < 3 kasus). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
 <strong>2. Korban Agraria (Sosial 2):</strong> Sebanyak <strong>{jiwa_terdampak:,.0f} jiwa</strong> terancam perampasan lahan {luas_ha_dirampas:,.0f} Ha (threshold: 40.000 jiwa). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
 <strong>3. Kriminalisasi HAM (Sosial 3):</strong> Tercatat <strong>{insiden_krim} insiden</strong> represi dengan <strong>{warga_ditangkap:,.0f} warga ditangkap</strong> (threshold: 10 insiden). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
@@ -1475,7 +1475,7 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
 <div class="table-caption">Tabel 6.11: Rekapitulasi Sintesis 5 Matriks Bioregion Pulau Sulawesi (Tingkat Pulau Makro)</div>
 {html_table(["Dimensi", "Indikator Utama", "Kondisi Aktual Empiris", "Skor WSM", "Skor Likert", "Status Audit", "Kesimpulan Analisis"], sintesis_pulau_rows)}
 
-<h4>E. Analisis Temuan Empiris (TL;DR)</h4>
+<h4>E. Analisis Temuan Empiris</h4>
 <p><strong>1. Obral Izin (Veto 1):</strong> Penerbitan <strong>{izin_baru:,.0f} IUP baru</strong> membuktikan mandulnya fungsi pembatasan regulasi (threshold: 100 izin). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
 <strong>2. Impunitas Korporat (Veto 2):</strong> Pembiaran <strong>{perusahaan_ilegal} korporasi</strong> pelanggar hukum beroperasi tanpa sanksi (threshold: 10 korporat). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
 <strong>3. Karpet Merah PLTU (Veto 3):</strong> Pembangunan <strong>{kapasitas_pltu/1000.0:.2f} GW ({kapasitas_pltu:,.0f} MW) PLTU</strong> melanggar komitmen JETP/NZE (threshold: 5 GW). Skor: <strong>5.0 / 5</strong> (Melampaui Batas).<br>
@@ -1528,7 +1528,7 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
         "##### Tabel 6.2: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Udara",
         markdown_table(["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_rows),
         "",
-        "#### E. Analisis Temuan Empiris (TL;DR)",
+        "#### E. Analisis Temuan Empiris",
         f"1. **PLTU Captive (Udara 1a):** Kapasitas **{kapasitas_terkini:,.1f} MW** melampaui 1,96x batas aman 5.000 MW (GEM 2023). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
         f"2. **NO2 Satelit (Udara 1b):** Densitas NO2 **{no2_terkini:.2e} mol/m²** (Morowali 8.8e-5 mol/m²) melampaui baku mutu PP 22/2021. Skor: **3.91 / 5** *(Status: Melampaui Batas)*.",
         f"3. **Morbiditas ISPA & B3 (Udara 2 & 3):** Rasio ISPA **{rasio_anomali_ispa:.2f}x lipat** (KLB Medis WHO); beban limbah B3 **{proporsi_b3:.2f}%** nasional ({total_b3_sulawesi:,.0f} Ton). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
@@ -1563,7 +1563,7 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
         "##### Tabel 6.4: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Air",
         markdown_table(["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_air_rows),
         "",
-        "#### E. Analisis Temuan Empiris (TL;DR)",
+        "#### E. Analisis Temuan Empiris",
         f"1. **Kualitas Air (Air 1):** Rerata IKA **{ika_avg:.2f}** (Kategori Sedang, defisit 10.31 poin di bawah batas aman ≥ 70). Skor: **3.4 / 5** *(Status: Mendekati Batas)*.",
         f"2. **Morbiditas Diare (Air 2):** Max IRR diare sentra tambang **{rasio_diare:.1f}x Lipat** dibanding kontrol. Skor: **3.0 / 5** *(Status: Mendekati Batas)*.",
         f"3. **Konflik Nelayan (Air 3):** Teridentifikasi **{jumlah_konflik_air} kasus** konflik ruang tangkap pesisir vs ekspansi jetty tambang. Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
@@ -1599,7 +1599,7 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
         "##### Tabel 6.6: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Lahan",
         markdown_table(["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_lahan_rows),
         "",
-        "#### E. Analisis Temuan Empiris (TL;DR)",
+        "#### E. Analisis Temuan Empiris",
         f"1. **Bencana Alam (Lahan 1):** Tercatat **{total_bencana_sulawesi:,.0f} kejadian** banjir & longsor (ambang batas outlier: 877 kejadian). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
         f"2. **Deforestasi Primer (Lahan 2):** Hutan hilang **{total_deforestasi_sulawesi:,.0f} Ha**, melampaui 2,17x kuota FOLU 2030 (638.000 Ha). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
         f"3. **Kawasan Lindung (Lahan 3):** Deforestasi **{total_lindung_hilang_sulawesi:,.0f} Ha** di hutan lindung melanggar UU Kehutanan No. 41/1999. Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
@@ -1635,7 +1635,7 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
         "##### Tabel 6.8: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Sosial",
         markdown_table(["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_sosial_rows),
         "",
-        "#### E. Analisis Temuan Empiris (TL;DR)",
+        "#### E. Analisis Temuan Empiris",
         f"1. **Manipulasi FPIC (Sosial 1):** Ditemukan **{kasus_fpic} kasus** pelanggaran konsultasi warga dalam AMDAL (toleransi: < 3 kasus). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
         f"2. **Krisis Agraria (Sosial 2):** Sebanyak **{jiwa_terdampak:,.0f} jiwa** terancam kehilangan {luas_ha_dirampas:,.0f} Ha lahan (ambang batas: 40.000 jiwa). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
         f"3. **Kriminalisasi HAM (Sosial 3):** Terjadi **{insiden_krim} insiden** represi dengan **{warga_ditangkap:,.0f} warga ditangkap** (ambang batas: 10 insiden). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
@@ -1672,7 +1672,7 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
         "##### Tabel 6.11: Rekapitulasi Sintesis 5 Matriks Bioregion Pulau Sulawesi (Tingkat Pulau Makro)",
         markdown_table(["Dimensi", "Indikator Utama", "Kondisi Aktual Empiris", "Skor WSM", "Skor Likert", "Status Audit", "Kesimpulan Analisis"], sintesis_pulau_rows),
         "",
-        "#### E. Analisis Temuan Empiris (TL;DR)",
+        "#### E. Analisis Temuan Empiris",
         f"1. **Obral Izin (Veto 1):** Penerbitan **{izin_baru:,.0f} IUP baru** membuktikan mandulnya fungsi pembatasan regulasi (threshold: 100 izin). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
         f"2. **Impunitas Korporat (Veto 2):** Pembiaran **{perusahaan_ilegal} korporasi** pelanggar hukum beroperasi tanpa sanksi tegas (threshold: 10 korporat). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
         f"3. **Karpet Merah PLTU (Veto 3):** Pembangunan **{kapasitas_pltu/1000.0:.2f} GW ({kapasitas_pltu:,.0f} MW) PLTU** melanggar komitmen iklim JETP & NZE (threshold: 5 GW). Skor: **5.0 / 5** *(Status: Melampaui Batas)*.",
