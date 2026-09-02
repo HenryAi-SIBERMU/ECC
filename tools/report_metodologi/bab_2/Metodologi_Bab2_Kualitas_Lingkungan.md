@@ -34,12 +34,15 @@ flowchart LR
     K --> L
 ```
 
-#### C. Formulasi Matematis
+#### C. Formulasi Matematis: Kalkulasi Konsentrasi Spasial & Uji Chi-Square
+Parameterisasi konsentrasi spasial dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:
+
 ```text
 Jumlah_Smelter_Provinsi = COUNT(Smelter_i) GROUP BY Provinsi
-Rata_Rata_IKA_Provinsi_Tahun = MEAN(IKA) GROUP BY Provinsi, Tahun
-Chi_Square = SUM((O_ij - E_ij)^2 / E_ij)
-Odds_Ratio = (a * d) / (b * c)
+Rata_Rata_IKA_Provinsi_Tahun = MEAN(IKA_Provinsi_Tahun)
+Kategori = IF(Nilai >= Median(Seluruh Panel), 'Tinggi/Baik', 'Rendah/Kritis')
+Chi_Square (χ²) = Jumlah [ (Frekuensi_Observasi - Frekuensi_Harapan)^2 / Frekuensi_Harapan ]
+Odds_Ratio (OR) = ( a * d ) / ( b * c )
 ```
 
 #### D. Matriks Hasil Uji Empiris
@@ -64,3 +67,46 @@ Penerapan sistem pengujian statistik tabulasi silang pada data panel 6 provinsi 
 
 #### E. Analisis Temuan Empiris: Pencemaran Air dan Efek Pengenceran Data Agregat
 Kegagalan statistik mendeteksi signifikansi membongkar fakta krusial: Indeks Kualitas Air (IKA) provinsi adalah metrik agregat yang mengencerkan tekanan ekologis di tapak. Pencemaran tailing fatal di area tambang dapat tertutupi oleh data sungai-sungai lain di luar lingkar industri.
+
+## 2.2. Kepungan Asap: Kapasitas PLTU vs Indeks Kualitas Udara (IKU)
+
+> **Sumber Data Resmi & Deskripsi Visualisasi:** Data PLTU Captive: `data/processed/sulawesi_pltu_captive.csv`; Data IKU: `data/processed/sulawesi_iku_2015_2024.csv`. Visualisasi dashboard menampilkan trendline IKU dan pengujian Chi-Square tabulasi silang (Crosstabulation).
+
+#### A. Pengantar & Kerangka Narasi
+Keberadaan **9,825 MW PLTU Captive** di kawasan hilirisasi secara langsung berkontribusi pada pencemaran udara. Sub-bab ini menguji hipotesis apakah kapasitas terpasang PLTU Captive memiliki hubungan yang signifikan dengan penurunan Indeks Kualitas Udara (IKU).
+
+#### B. Alur Logika Metodologis Analisis Kapasitas PLTU vs IKU
+```mermaid
+flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data PLTU Captive<br/><i>Kapasitas (MW), Status, Provinsi</i>"] --> C
+        B["Data IKU KLHK<br/><i>Provinsi, Tahun, IKU</i>"] --> C
+    end
+    subgraph Panel_Processing["2. Pembentukan Panel 2.2"]
+        C["Agregasi Kapasitas PLTU per Provinsi"] --> F["Merge dengan IKU Provinsi-Tahun"]
+        F --> G["Panel Data: Provinsi x Tahun"]
+    end
+    subgraph Statistical_Test["3. Crosstabulation & Analisis"]
+        G --> I["Binning Median<br/>PLTU Tinggi/Rendah; IKU Kritis/Baik"]
+        I --> J["Uji Chi-Square Pearson"]
+        J --> K["Odds Ratio<br/>Risiko IKU kritis pada kelompok PLTU tinggi"]
+    end
+    K --> L["Pembacaan empiris kualitas udara ambien"]
+```
+
+#### C. Formulasi Matematis
+```text
+Kapasitas_PLTU_Provinsi = SUM(Kapasitas_i) GROUP BY Provinsi
+Rata_Rata_IKU_Provinsi_Tahun = MEAN(IKU) GROUP BY Provinsi, Tahun
+```
+
+#### D. Matriks Hasil Uji Empiris
+Penerapan pengujian statistik tabulasi silang pada data panel (total 54 observasi valid) disajikan secara ringkas pada **Tabel 2.3** berikut:
+
+##### Tabel 2.3: Ringkasan Eksekutif Skenario Crosstab Kapasitas PLTU vs IKU Bab 2
+| Variabel Independen (X) | Variabel Dependen (Y) | Chi-Square (χ²) | P-Value | Odds Ratio | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Kapasitas PLTU Captive (MW) | Indeks Kualitas Udara (IKU) | 0.000 | p = 1.0000 | Infinite | TIDAK SIGNIFIKAN |
+
+#### E. Analisis Temuan Empiris: Efek Pengenceran Udara Ambien
+Kegagalan pengujian statistik ini membongkar fakta krusial bahwa Indeks Kualitas Udara (IKU) level provinsi adalah metrik agregat yang mengencerkan pencemaran udara lokal di tapak industri. Kualitas udara yang buruk di sekitar PLTU tertutupi oleh wilayah yang masih bersih.

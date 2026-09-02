@@ -402,6 +402,7 @@ def generate_all_bab2():
     df_gfw = pd.read_csv(data_dir / "sulawesi_gfw_master_1_dekade_2014_2023_v3.csv")
     df_b3 = pd.read_csv(data_dir / "sulawesi_limbah_b3_ngo_proxy.csv")
     df_sungai = pd.read_csv(data_dir / "sulawesi_sungai_tercemar.csv")
+    df_iku = pd.read_csv(data_dir / "sulawesi_iku_2015_2024.csv")
 
     focus_start_year = 2016
     focus_end_year = 2023
@@ -501,7 +502,60 @@ def generate_all_bab2():
     mermaid_png_path_2_1 = str(tool_dir / "mermaid_flowchart_2_1.png")
     download_success_2_1 = download_mermaid_png(mermaid_str_2_1, mermaid_png_path_2_1)
 
-    print("[2/4] Membangun DOCX Metodologi_Bab2_Kualitas_Lingkungan.docx...")
+    print("[2.5/4] Mengekstraksi dataset empiris Bab 2 sub-bab 2.2...")
+    prov_map = {
+        'North Sulawesi': 'Sulawesi Utara',
+        'South Sulawesi': 'Sulawesi Selatan',
+        'Southeast Sulawesi': 'Sulawesi Tenggara',
+        'Central Sulawesi': 'Sulawesi Tengah',
+        'Gorontalo': 'Gorontalo',
+        'West Sulawesi': 'Sulawesi Barat'
+    }
+    df_pltu_2 = df_pltu.copy()
+    df_pltu_2['Provinsi'] = df_pltu_2['Subnational unit (province, state)'].replace(prov_map)
+    df_pltu_prov = df_pltu_2.groupby('Provinsi')['Capacity (MW)'].sum().reset_index()
+    df_pltu_prov.rename(columns={'Capacity (MW)': 'Kapasitas_PLTU_MW'}, inplace=True)
+    
+    df_iku_panel = df_iku.groupby(['Provinsi', 'Tahun'])['IKU'].mean().reset_index()
+    df_panel_2_2 = pd.merge(df_iku_panel, df_pltu_prov, on='Provinsi', how='left').fillna({'Kapasitas_PLTU_MW': 0})
+    df_panel_2_2.dropna(subset=['IKU'], inplace=True)
+    
+    stats_22 = calculate_spss_style_crosstab(df_panel_2_2, "Kapasitas_PLTU_MW", "IKU")
+    valid_cases_22 = len(stats_22["df_clean"])
+    
+    summary_rows_22 = [[
+        "Kapasitas PLTU Captive (MW)",
+        "Indeks Kualitas Udara (IKU)",
+        f"{stats_22['chi2']:.3f}",
+        f"p {fmt_p(stats_22['p_val'])}",
+        "Infinite" if stats_22["odds_ratio"] == 0 else f"{stats_22['odds_ratio']:.1f}",
+        "SIGNIFIKAN" if stats_22["p_val"] < 0.05 else "TIDAK SIGNIFIKAN",
+    ]]
+    
+    if stats_22["p_val"] < 0.05:
+        finding_22 = "Dari skenario pengujian, terbukti secara SIGNIFIKAN bahwa peningkatan kapasitas PLTU berkorelasi dengan memburuknya kualitas udara. Angka Odds Ratio menegaskan bahwa ekspansi industri hilirisasi memberikan risiko kerusakan pada udara ambien."
+    else:
+        finding_22 = "Kegagalan pengujian statistik ini membongkar fakta krusial bahwa Indeks Kualitas Udara (IKU) level provinsi adalah metrik agregat yang mengencerkan pencemaran udara lokal di tapak industri. Kualitas udara yang buruk di sekitar PLTU tertutupi oleh wilayah yang masih bersih."
+        
+    mermaid_str_2_2 = """flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data PLTU Captive<br/><i>Kapasitas (MW), Status, Provinsi</i>"] --> C
+        B["Data IKU KLHK<br/><i>Provinsi, Tahun, IKU</i>"] --> C
+    end
+    subgraph Panel_Processing["2. Pembentukan Panel 2.2"]
+        C["Agregasi Kapasitas PLTU per Provinsi"] --> F["Merge dengan IKU Provinsi-Tahun"]
+        F --> G["Panel Data: Provinsi x Tahun"]
+    end
+    subgraph Statistical_Test["3. Crosstabulation & Analisis"]
+        G --> I["Binning Median<br/>PLTU Tinggi/Rendah; IKU Kritis/Baik"]
+        I --> J["Uji Chi-Square Pearson"]
+        J --> K["Odds Ratio<br/>Risiko IKU kritis pada kelompok PLTU tinggi"]
+    end
+    K --> L["Pembacaan empiris kualitas udara ambien"]"""
+    mermaid_png_path_2_2 = str(tool_dir / "mermaid_flowchart_2_2.png")
+    download_success_2_2 = download_mermaid_png(mermaid_str_2_2, mermaid_png_path_2_2)
+
+    print("[2.9/4] Membangun DOCX Metodologi_Bab2_Kualitas_Lingkungan.docx...")
     doc = Document()
     sec = doc.sections[0]
     sec.page_width = Cm(21.0)
@@ -617,6 +671,56 @@ def generate_all_bab2():
         ("Pembacaan empiris tetap harus dilakukan bersama peta limbah B3 dan laporan sungai tercemar. Dashboard memperlihatkan bahwa analisis IKA BPS tidak berdiri sendiri, melainkan dibaca bersama estimasi timbulan tailing/slag dan laporan NGO tentang pencemaran sungai/pesisir. Dengan demikian, sub-bab ini memosisikan IKA sebagai indikator makro yang perlu diuji silang dengan bukti spasial di kawasan smelter.", False, False),
     ])
 
+    add_h2(doc, "2.2. Kepungan Asap: Kapasitas PLTU vs Indeks Kualitas Udara (IKU)")
+    add_note_box(doc, "Sumber Data Resmi & Deskripsi Visualisasi", "Data PLTU Captive: data/processed/sulawesi_pltu_captive.csv; Data IKU: data/processed/sulawesi_iku_2015_2024.csv. Visualisasi dashboard menampilkan trendline IKU dan pengujian Chi-Square tabulasi silang (Crosstabulation).")
+
+    add_h4(doc, "A. Pengantar & Kerangka Narasi")
+    add_p(doc, [
+        (f"Keberadaan {tot_kapasitas_pltu:,.0f} MW PLTU Captive di kawasan hilirisasi secara langsung berkontribusi pada pencemaran udara. Sub-bab ini menguji hipotesis apakah kapasitas terpasang PLTU Captive memiliki hubungan yang signifikan dengan penurunan Indeks Kualitas Udara (IKU).", False, False),
+    ])
+
+    add_h4(doc, "B. Alur Logika Metodologis Analisis Kapasitas PLTU vs IKU")
+    add_p(doc, [
+        ("Kerangka operasionalisasi sub-bab ini menggunakan pendekatan analisis kuantitatif dan Uji Statistik Chi-Square (Crosstabulation) untuk mengukur korelasi tersebut. Alur data dan pengujian diilustrasikan pada ", False, False),
+        ("Bagan Alur 2.2", True, False),
+        (" berikut:", False, False),
+    ])
+    add_caption(doc, "Bagan Alur 2.2: Alur Logika Metodologis Crosstabulation & Trendline PLTU vs IKU")
+    if download_success_2_2:
+        try:
+            p_img = doc.add_paragraph()
+            p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p_img.add_run().add_picture(mermaid_png_path_2_2, width=Cm(15))
+        except Exception as exc:
+            print(f"[WARN] Gagal memasukkan gambar Mermaid 2.2 ke DOCX: {exc}")
+            p_err = doc.add_paragraph()
+            run(p_err, "[Gambar Flowchart Gagal Dimuat]", color=C_RED, pt=9)
+    else:
+        p_err = doc.add_paragraph()
+        run(p_err, "[Gambar Flowchart Gagal Diunduh, silakan periksa koneksi internet saat generate]", color=C_RED, pt=9)
+
+    add_h4(doc, "C. Formulasi Matematis: Kapasitas PLTU, Rata-rata IKU, dan Uji Crosstabulation")
+    add_formula(doc, "Agregasi Kapasitas PLTU Captive per Provinsi", "Kapasitas_PLTU_Provinsi = SUM(Kapasitas_i) GROUP BY Provinsi", [
+        ("Kapasitas_PLTU_Provinsi", "Total kapasitas (MW) PLTU captive yang beroperasi di provinsi observasi."),
+        ("Kapasitas_i", "Kapasitas (MW) unit PLTU captive i dalam data operasi."),
+    ])
+    add_formula(doc, "Rata-rata Indeks Kualitas Udara Panel", "Rata_Rata_IKU_Provinsi_Tahun = MEAN(IKU) GROUP BY Provinsi, Tahun", [
+        ("Rata_Rata_IKU_Provinsi_Tahun", "Skor rata-rata Indeks Kualitas Udara (IKU) pada provinsi dan tahun tertentu."),
+        ("IKU", "Indeks Kualitas Udara dari data KLHK."),
+    ])
+
+    add_h4(doc, "D. Matriks Hasil Uji Empiris: Crosstabulation PLTU vs IKU")
+    add_p(doc, [
+        (f"Penerapan pengujian statistik tabulasi silang pada data panel (total {valid_cases_22} observasi valid) disajikan secara ringkas pada ", False, False),
+        ("Tabel 2.3", True, False),
+        (" berikut:", False, False),
+    ])
+    add_caption(doc, "Tabel 2.3: Ringkasan Eksekutif Skenario Crosstab Kapasitas PLTU vs IKU Bab 2")
+    add_table_1col(doc, ["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (χ²)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_22, [3.0, 3.5, 2.0, 2.0, 2.0, 2.5], ["L", "L", "C", "C", "C", "C"])
+
+    add_h4(doc, "E. Analisis Temuan Empiris: Efek Pengenceran Udara Ambien")
+    add_p(doc, [(finding_22, False, False)])
+
     docx_path = tool_dir / "Metodologi_Bab2_Kualitas_Lingkungan.docx"
     doc.save(str(docx_path))
     print(f"  [OK] Tersimpan: {docx_path}")
@@ -669,6 +773,21 @@ h4 {{ color: #A5D6A7; }}
 {html_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (&chi;&sup2;)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows)}
 <h4>E. Analisis Temuan Empiris</h4>
 <p>{finding}</p>
+
+<h2>2.2. Kepungan Asap: Kapasitas PLTU vs Indeks Kualitas Udara (IKU)</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Data PLTU Captive: <code>data/processed/sulawesi_pltu_captive.csv</code>; Data IKU: <code>data/processed/sulawesi_iku_2015_2024.csv</code>. Visualisasi dashboard menampilkan trendline IKU dan pengujian Chi-Square tabulasi silang (Crosstabulation).</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Keberadaan <strong>{tot_kapasitas_pltu:,.0f} MW PLTU Captive</strong> di kawasan hilirisasi secara langsung berkontribusi pada pencemaran udara. Sub-bab ini menguji hipotesis apakah kapasitas terpasang PLTU Captive memiliki hubungan yang signifikan dengan penurunan Indeks Kualitas Udara (IKU).</p>
+<h4>B. Alur Logika Metodologis Analisis Kapasitas PLTU vs IKU</h4>
+<div class="mermaid">{mermaid_str_2_2}</div>
+<h4>C. Formulasi Matematis</h4>
+<div class="formula">Kapasitas_PLTU_Provinsi = SUM(Kapasitas_i) GROUP BY Provinsi</div>
+<div class="formula">Rata_Rata_IKU_Provinsi_Tahun = MEAN(IKU) GROUP BY Provinsi, Tahun</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 2.3: Ringkasan Eksekutif Skenario Crosstab Kapasitas PLTU vs IKU Bab 2</div>
+{html_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (&chi;&sup2;)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_22)}
+<h4>E. Analisis Temuan Empiris</h4>
+<p>{finding_22}</p>
 </body>
 </html>
 """
@@ -719,13 +838,40 @@ h4 {{ color: #A5D6A7; }}
         "#### E. Analisis Temuan Empiris: Pencemaran Air dan Efek Pengenceran Data Agregat",
         finding,
         "",
+        "## 2.2. Kepungan Asap: Kapasitas PLTU vs Indeks Kualitas Udara (IKU)",
+        "",
+        "> **Sumber Data Resmi & Deskripsi Visualisasi:** Data PLTU Captive: `data/processed/sulawesi_pltu_captive.csv`; Data IKU: `data/processed/sulawesi_iku_2015_2024.csv`. Visualisasi dashboard menampilkan trendline IKU dan pengujian Chi-Square tabulasi silang (Crosstabulation).",
+        "",
+        "#### A. Pengantar & Kerangka Narasi",
+        f"Keberadaan **{tot_kapasitas_pltu:,.0f} MW PLTU Captive** di kawasan hilirisasi secara langsung berkontribusi pada pencemaran udara. Sub-bab ini menguji hipotesis apakah kapasitas terpasang PLTU Captive memiliki hubungan yang signifikan dengan penurunan Indeks Kualitas Udara (IKU).",
+        "",
+        "#### B. Alur Logika Metodologis Analisis Kapasitas PLTU vs IKU",
+        "```mermaid",
+        mermaid_str_2_2,
+        "```",
+        "",
+        "#### C. Formulasi Matematis",
+        "```text",
+        "Kapasitas_PLTU_Provinsi = SUM(Kapasitas_i) GROUP BY Provinsi",
+        "Rata_Rata_IKU_Provinsi_Tahun = MEAN(IKU) GROUP BY Provinsi, Tahun",
+        "```",
+        "",
+        "#### D. Matriks Hasil Uji Empiris",
+        f"Penerapan pengujian statistik tabulasi silang pada data panel (total {valid_cases_22} observasi valid) disajikan secara ringkas pada **Tabel 2.3** berikut:",
+        "",
+        "##### Tabel 2.3: Ringkasan Eksekutif Skenario Crosstab Kapasitas PLTU vs IKU Bab 2",
+        markdown_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square (χ²)", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_22),
+        "",
+        "#### E. Analisis Temuan Empiris: Efek Pengenceran Udara Ambien",
+        finding_22,
+        "",
     ]
     md_path = tool_dir / "Metodologi_Bab2_Kualitas_Lingkungan.md"
     with open(md_path, "w", encoding="utf-8") as f:
         f.write("\n".join(md_lines))
     print(f"  [OK] Tersimpan: {md_path}")
 
-    print("[4/4] Selesai membangun Bab 2 sub-bab 2.1.")
+    print("[4/4] Selesai membangun Bab 2.")
 
 
 if __name__ == "__main__":
