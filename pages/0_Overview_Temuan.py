@@ -697,36 +697,42 @@ with st.expander("1 · EKSPANSI INDUSTRI EKSTRAKTIF", expanded=True):
     st.subheader("1.5 Pelabuhan Ekspor: Ke Mana Nikel Sulawesi Dikirim?")
     df_logistik = d.get('logistik')
     if df_logistik is not None:
+        total_simpul = len(df_logistik)
+        psn_confirmed_count = len(df_logistik[df_logistik['psn_status'] == 'terkonfirmasi'])
+
         col1, col2, col3 = st.columns(3)
         with col1:
-            st.markdown("""
+            st.markdown(f"""
             <div style="background-color: #262730; padding: 20px; border-radius: 10px; border: 1px solid #333;">
-                <div style="color: #A0AEC0; font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; text-align: center;">Pelabuhan Nikel Terkonfirmasi</div>
-                <div style="color: #48BB78; font-size: 2.5rem; font-weight: bold; text-align: center; margin-bottom: 15px;">6</div>
-                <div style="color: #A0AEC0; font-size: 0.85rem; margin-bottom: 20px; text-align: left;">Seluruh lokasi industri nikel besar di Sulawesi terbukti memiliki pelabuhan atau dermaga ekspor.</div>
+                <div style="color: #A0AEC0; font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; text-align: center;">Simpul Logistik Terverifikasi</div>
+                <div style="color: #48BB78; font-size: 2.5rem; font-weight: bold; text-align: center; margin-bottom: 15px;">{total_simpul}</div>
+                <div style="color: #A0AEC0; font-size: 0.85rem; margin-bottom: 20px; text-align: left;">Seluruh {total_simpul} lokasi industri nikel utama di Sulawesi terkonfirmasi memiliki terminal khusus / pelabuhan ekspor.</div>
+                <div style="color: #718096; font-size: 0.75rem; border-top: 1px solid #333; padding-top: 10px;"><b>Audit PDF:</b> ANTAM AR 2024 (Hal. 73), Vale SR 2024, AEER 2024, Perpres 109/2020</div>
             </div>
             """, unsafe_allow_html=True)
         with col2:
-            st.markdown("""
+            st.markdown(f"""
             <div style="background-color: #262730; padding: 20px; border-radius: 10px; border: 1px solid #333;">
-                <div style="color: #A0AEC0; font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; text-align: center;">Berlabel Proyek Strategis Nasional</div>
-                <div style="color: #ECC94B; font-size: 2.5rem; font-weight: bold; text-align: center; margin-bottom: 15px;">4 <span style="font-size: 1.2rem; color: #718096;">/ 6</span></div>
-                <div style="color: #A0AEC0; font-size: 0.85rem; margin-bottom: 20px; text-align: left;">Label PSN mempercepat perizinan dan memudahkan pembebasan lahan warga sekitar.</div>
+                <div style="color: #A0AEC0; font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; text-align: center;">Status Proyek Strategis Nasional (PSN)</div>
+                <div style="color: #ECC94B; font-size: 2.5rem; font-weight: bold; text-align: center; margin-bottom: 15px;">{psn_confirmed_count} <span style="font-size: 1.2rem; color: #718096;">/ {total_simpul} Simpul</span></div>
+                <div style="color: #A0AEC0; font-size: 0.85rem; margin-bottom: 20px; text-align: left;">Morowali (No. 97), Konawe (No. 98 - VDNI & OSS), dan Pomalaa berstatus PSN. GNI & Sorowako non-PSN (IUI & KK).</div>
+                <div style="color: #718096; font-size: 0.75rem; border-top: 1px solid #333; padding-top: 10px;"><b>Rujukan Legal:</b> Lampiran Perpres No. 109/2020 Hal. 14 Sektor Kawasan Industri Poin 97 & 98</div>
             </div>
             """, unsafe_allow_html=True)
         with col3:
             st.markdown("""
             <div style="background-color: #262730; padding: 20px; border-radius: 10px; border: 1px solid #333;">
-                <div style="color: #A0AEC0; font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; text-align: center;">Pelabuhan Terbesar</div>
-                <div style="color: #63B3ED; font-size: 2.5rem; font-weight: bold; text-align: center; margin-bottom: 15px;">50.000 <span style="font-size: 1.2rem; color: #718096;">ton</span></div>
-                <div style="color: #A0AEC0; font-size: 0.85rem; margin-bottom: 20px; text-align: left;">GNI Petasia memiliki pelabuhan yang mampu menampung kapal pengangkut berkapasitas hingga 50.000 ton.</div>
+                <div style="color: #A0AEC0; font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; text-align: center;">Kapasitas Bobot Mati Kapal (DWT)</div>
+                <div style="color: #63B3ED; font-size: 2.5rem; font-weight: bold; text-align: center; margin-bottom: 15px;">52.378 <span style="font-size: 1.2rem; color: #718096;">DWT</span></div>
+                <div style="color: #A0AEC0; font-size: 0.85rem; margin-bottom: 20px; text-align: left;">Pelabuhan Morowali dan Pelabuhan Morosi (Konawe) melayani kapal curah (bulk carrier) muatan 51.500 WMT bijih nikel.</div>
+                <div style="color: #718096; font-size: 0.75rem; border-top: 1px solid #333; padding-top: 10px;"><b>Laporan Resmi Pemerintah:</b> KNKT Kemenhub RI (2019) Hal. 19 & 21</div>
             </div>
             """, unsafe_allow_html=True)
 
         st.markdown('''
         <div style="border: 1px solid #333; border-radius: 8px; padding: 16px; background-color: #12161F; margin-bottom: 20px; margin-top: 20px;">
             <p style="font-size: 0.9rem; color: #B0BEC5; margin-bottom: 10px;">
-                <b>Sumber:</b> Database Pelabuhan Kementerian Perhubungan dan KPPIP (diolah CELIOS). Angka kunci di atas menyoroti "Status dan Skala Pelabuhan Ekspor Nikel".
+                <b>Sumber:</b> Database Pelabuhan Kementerian Perhubungan, KNKT, dan KPPIP (diolah CELIOS). Angka kunci di atas menyoroti "Status dan Skala Pelabuhan Ekspor Nikel".
             </p>
             <p style="font-size: 0.9rem; color: #B0BEC5; margin-bottom: 0;">
                 <b>Catatan Metodologi:</b> Data infrastruktur pelabuhan diekstraksi dan diverifikasi silang dengan daftar Proyek Strategis Nasional (PSN). Mayoritas fasilitas yang dibangun difokuskan untuk memperlancar arus ekspor komoditas mentah dan setengah jadi, dengan mendapat prioritas kemudahan perizinan.
