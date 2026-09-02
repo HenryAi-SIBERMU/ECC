@@ -16,4 +16,8 @@ Setiap agen yang membaca aturan ini **DIWAJIBKAN** mematuhi pedoman berikut tanp
    - Jangan pernah mengasumsikan bahwa pekerjaan pengguna telah di-*commit*. Selalu asumsikan ada *uncommitted changes* (pekerjaan yang belum disimpan) yang sangat berharga di dalam *working directory*.
    - Segala bentuk perintah yang bersifat merusak (destructive) dan menimpa *uncommitted changes* (`git reset --hard`, `git checkout HEAD`, `git restore .`) dilarang mutlak kecuali pengguna secara spesifik dan eksplisit meminta Anda membuang pekerjaannya.
 
+3. **WAJIB MELAKUKAN AUTO-COMMIT SETIAP KALI ADA PERUBAHAN KODE DARI AGEN.**
+   - Setiap kali Anda (agen) berhasil mengedit, mengubah, atau memperbaiki *source code* apa pun, Anda **DIWAJIBKAN** langsung menjalankan perintah `git add .` dan `git commit -m "[Deskripsi Perubahan]"` untuk menyimpan versi yang aman.
+   - Ini bertindak sebagai titik *checkpoint* agar jika terjadi kesalahan, pekerjaan dapat dengan mudah di-*rollback*.
+
 Melanggar aturan ini akan berakibat fatal bagi proyek pengguna. Selalu patuhi instruksi ini di setiap sesi seumur hidup proyek ini.
