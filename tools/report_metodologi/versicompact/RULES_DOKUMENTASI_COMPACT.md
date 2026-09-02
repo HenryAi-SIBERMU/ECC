@@ -72,14 +72,15 @@ Untuk menjamin dokumen muat dalam **2–4 lembar**, spesifikasi file Word (`.doc
 
 ## 4. Teknik Pemadatan Konten (Condensation Guidelines)
 
-### A. Pemadatan Formulasi Matematika
-- Tampilkan persamaan inti dalam 1 atau 2 baris horizontal secara telanjang.
-- Keterangan variabel dituliskan langsung secara *inline* setelah simbol pemisah `|`:
-  ```text
-  χ² = Σ [ (O - E)² / E ] ; E_ij = (R_i * C_j) / N ; OR = (a * d) / (b * c)
-  Ket: O = observasi aktual, E = frekuensi harapan, OR = rasio keunggulan risiko kelompok perlakuan
-  ```
-- Hindari membuat daftar bullet vertikal panjang untuk setiap variabel jika memakan ruang baris.
+### A. Formulasi Matematis & Persamaan Substitusi
+- **Highlight Utama:** Setiap topik substantif wajib menonjolkan **Formulasi Matematis** dan **Persamaan Substitusi (dengan angka riil)**, misalnya agregasi PDRB, rasio disparitas wilayah sentra, laju alih ruang harian, rasio kerusakan deforestasi komoditas vs rakyat, atribusi emisi karbon, atau keterancaman spesies.
+- **Pengecualian untuk Analisis Crosstab (Chi-Square & Odds Ratio):**
+  - **TIDAK PERLU** menuliskan persamaan substitusi aritmatika (seperti perhitungan perkalian sel tabel kontinjensi `(a * d) / (b * c)` atau pecahan `(O - E)² / E`).
+  - Cukup tampilkan formulasi umum simbolik horizontal 1 baris:
+    `χ² = Σ [ ( O_ij - E_ij )² / E_ij ]  |  Odds_Ratio (OR) = ( a * d ) / ( b * c )`
+  - Seluruh rincian koefisien chi-square, df, p-value, dan rasio risiko odds ratio **sudah tersaji lengkap dan terstandarisasi pada Tabel Sintesis Inferensial**.
+- **Gaya Narasi Alami (Tanpa Label Artifisial):**
+  - Dilarang menuliskan label kaku seperti `"Analisis Temuan Empiris:"` secara berulang-ulang di awal paragraf. Narasi temuan harus mengalir secara natural dan akademis.
 
 ### B. Sintesis Tabel Efisien
 - Jangan menduplikasi tabel mentah berukuran puluhan baris.

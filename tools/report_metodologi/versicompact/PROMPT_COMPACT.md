@@ -35,11 +35,11 @@ Sebelum menulis kode atau membuat file untuk bab target (`Bab X`), agen **WAJIB*
 
 ---
 
-## 3. 5 Aturan Emas yang Tidak Boleh Dilanggar (*Non-Negotiable Rules*)
+## 3. 6 Aturan Emas yang Tidak Boleh Dilanggar (*Non-Negotiable Rules*)
 
 1. **Target Panjang Halaman (Page Budget): MAKSIMAL 2 HINGGA 4 LEMBAR**
    - Dokumen Word (DOCX) yang dihasilkan **TIDAK BOLEH LEBIH DARI 4 HALAMAN**.
-   - Idealnya tepat **2 hingga 3 halaman** seperti Bab 1.
+   - Idealnya tepat **2 hingga 3 halaman** seperti Bab 1 dan Bab 2.
    - Wajib diverifikasi dengan menjalankan pengujian halaman Word COM di terminal.
 2. **Kesesuaian Header & Judul Root:**
    - Judul dokumen `# BAB {X}: METODOLOGI ANALISIS ...` harus sama persis dengan dokumen root non-compact.
@@ -47,10 +47,13 @@ Sebelum menulis kode atau membuat file untuk bab target (`Bab X`), agen **WAJIB*
 3. **Nol Improvisasi (Strict Content Fidelity):**
    - **DILARANG** menambahkan narasi buatan sendiri atau opini di luar dokumen root.
    - **DILARANG** membuat kotak `SKALA HUMANISASI (REALITAS SOSIAL)` atau `CATATAN KETERBATASAN DATA (CAVEATS)` buatan.
-   - **DILARANG** menggunakan metafora yang tidak ada di naskah root (cangkir kopi, lapangan bola, upah detik buruh, dsb.).
+   - **DILARANG** menggunakan label artifisial kaku seperti `"Analisis Temuan Empiris:"` (narasi harus mengalir natural).
 4. **Nol Icon / Emoji (No Icon Policy):**
    - Hapus total seluruh icon atau emoji grafis (`⚠️`, `🔎`, `✅`, `❌`, dsb.).
-5. **Sintesis Tabel Padat:**
+5. **Highlight Formulasi Matematis & Persamaan Substitusi Substantif:**
+   - Setiap topik substantif wajib menonjolkan **Formulasi Matematis** dan **Persamaan Substitusi (dengan angka riil)** (agregasi PDRB, rasio disparitas wilayah, laju alih ruang, volume limbah, atribusi emisi CO2, keterancaman spesies).
+   - **Khusus Analisis Crosstab (Chi-Square & Odds Ratio): TIDAK PERLU persamaan substitusi aritmatika**. Cukup tuliskan formulasi umum horizontal 1 baris, karena seluruh rincian angka uji chi-square, df, p-value, dan rasio risiko sudah tertera rapi pada Tabel Sintesis Inferensial.
+6. **Sintesis Tabel Padat:**
    - Gabungkan skenario tabel inferensial statistik (Chi-Square, p-value, Odds Ratio) ke dalam **1 tabel sintesis panel** berstandar SPSS.
    - Batasi total tabel dalam satu bab hanya berkisar antara **4 hingga 6 tabel kunci**.
 
