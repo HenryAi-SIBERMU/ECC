@@ -22,22 +22,24 @@ Penelitian mencakup catatan letupan konflik agraria terdata di seluruh wilayah a
 
 ---
 
-## C. Operasionalisasi Variabel & Indikator Riset
-Seluruh dinamika perampasan ruang, eskalasi konflik, dan keterlibatan aktor dioperasionalkan ke dalam **10 indikator empiris terpadu** sebagaimana dirangkum pada matriks operasional berikut:
+## C. Operasionalisasi Variabel Dataset Riset
+Merujuk pada pemetaan silsilah data pada **DATA_DICTIONARY.md** (Entri 31), analisis Bab 4 bertumpu pada dataset primer **`sulawesi_konflik_agraria_tanahkita.csv`** yang diekstraksi dari API platform advokasi Konsorsium Pembaruan Agraria (KPA) dan YLBHI. Struktur operasional variabel tidak dipaksakan ke dalam kuota indikator artifisial, melainkan dikondisikan secara objektif mengikuti **12 variabel inti dataset** yang mencakup dimensi temporal, sektoral, skala korban, kriminalisasi hukum, hingga korpus narasi kronologi konflik:
 
-##### Matriks Operasionalisasi Variabel dan Sumber Data Resmi Bab 4
-| No | Indikator Riset | Fokus Pengukuran | Satuan | Periode | Sumber Data Primer Resmi |
-| :-: | :--- | :--- | :-: | :-: | :--- |
-| 1 | Insidensi Konflik Agraria | Frekuensi Kejadian Letupan Sengketa Lahan | Kasus | 1990–2024 | KPA / TanahKita |
-| 2 | Sektor Pemicu Sengketa | Klasifikasi Sektoral (Tambang, Sawit, Hutan) | Kategori | 1990–2024 | KPA / TanahKita |
-| 3 | Skala Korban Terdampak | Masyarakat Adat & Komunitas Lokal Terdampak | Jiwa | 1990–2024 | KPA & Koalisi Sipil |
-| 4 | Luas Monopoli Area Sengketa | Luas Ruang Hidup & Lahan Diperebutkan | Hektar (Ha) | 1990–2024 | TanahKita & ATR/BPN |
-| 5 | Kasus Indikasi Kriminalisasi | Penuntutan Hukum Terhadap Warga/Aktivis | Kasus | 2000–2024 | KPA & Komnas HAM |
-| 6 | Korban Represi & Kekerasan | Warga Ditangkap, Mengalami Luka, & Tewas | Orang | 2000–2024 | KPA & Komnas HAM |
-| 7 | Laju Eskalasi Hilirisasi | Rasio Before-After Kasus Pra vs Pasca 2014 | Kasus / Tahun | 1990 vs 2024 | Data Panel Tahunan |
-| 8 | Tingkat Penelantaran Kasus | Sengketa Lahan Berstatus Belum Ditangani | Persen (%) | 1990–2024 | KPA / TanahKita |
-| 9 | Frekuensi Entitas Korporasi | Keterlibatan Konglomerasi dalam Konflik | Token Count | Korpus NLP | NLP Regex TanahKita |
-| 10 | Frekuensi Aktor Proksi/Vigilante | Keterlibatan Pengamanan Swakarsa/Preman | Token Count | Korpus NLP | NLP Regex TanahKita |
+##### Matriks Kamus Variabel Dataset Riset Bab 4 (sulawesi_konflik_agraria_tanahkita.csv)
+| No | Variabel Dataset (CSV) | Tipe Data & Skala | Definisi Operasional dalam Riset Bab 4 | Relevansi Sub-bab | Sumber Asal Data |
+| :-: | :--- | :--- | :--- | :-: | :--- |
+| 1 | `tahun` | Integer (1990–2024) | Tahun pencatatan kejadian konflik; dasar analisis time-series dan partisi Before-After (<2014 vs >=2014) | Sub-bab 4.1, 4.4 | TanahKita KPA |
+| 2 | `sektor` | Kategorikal Nominal | Klasifikasi sektor pemicu: Pertambangan, Kehutanan, Perkebunan, Infrastruktur/PSN, Pesisir | Sub-bab 4.1, 4.2, 4.4 | TanahKita KPA |
+| 3 | `dampak_masyarakat_jiwa` | Numerik Diskrit (Jiwa) | Estimasi jumlah warga/masyarakat adat terdampak sengketa lahan dan penggusuran ruang hidup | Sub-bab 4.2 | KPA & Koalisi Sipil |
+| 4 | `luas_ha` | Numerik Kontinu (Ha) | Luas bentang lahan yang dikuasai atau disengketakan konsesi industri ekstraktif | Sub-bab 4.2 | TanahKita & ATR/BPN |
+| 5 | `indikasi_kriminalisasi` | Boolean (True/False) | Status keberadaan tindakan kriminalisasi/penuntutan hukum terhadap warga atau pendamping | Sub-bab 4.3, 4.4 | KPA & Komnas HAM |
+| 6 | `jumlah_ditangkap` | Numerik Diskrit (Jiwa) | Jumlah warga/pejuang lingkungan yang ditangkap aparat penegak hukum dalam eskalasi sengketa | Sub-bab 4.3, 4.4 | KPA & Komnas HAM |
+| 7 | `jumlah_luka` | Numerik Diskrit (Jiwa) | Jumlah korban yang menderita luka-luka akibat benturan fisik atau tindakan represif pengamanan | Sub-bab 4.3, 4.4 | KPA & Komnas HAM |
+| 8 | `jumlah_tewas` | Numerik Diskrit (Jiwa) | Jumlah korban jiwa yang tewas dalam letupan kekerasan konflik agraria di tapak industri | Sub-bab 4.3, 4.4 | KPA & Komnas HAM |
+| 9 | `status_konflik` | Kategorikal Nominal | Status penanganan kasus: Belum Ditangani, Dalam Proses Hukum, atau Selesai (indikator penelantaran) | Sub-bab 4.1, 4.4 | TanahKita KPA |
+| 10 | `keterlibatan_pemerintah` | Teks / Multi-label | Identifikasi institusi negara/aparat keamanan yang terlibat dalam penanganan sengketa | Sub-bab 4.4 | TanahKita KPA |
+| 11 | `keterlibatan_perusahaan` | Teks Nama Entitas | Nama entitas korporasi/PT/CV untuk Text Parsing NLP dan pemetaan dominasi grup oligarki | Sub-bab 4.5 | NLP Korpus KPA |
+| 12 | `narasi` & `deskripsi` | Korpus Teks Bebas | Kronologi tekstual kasus agraria untuk ekstraksi Regex aktor proksi (Preman, Ormas, Satgas) | Sub-bab 4.5 | NLP Korpus KPA |
 
 ---
 
