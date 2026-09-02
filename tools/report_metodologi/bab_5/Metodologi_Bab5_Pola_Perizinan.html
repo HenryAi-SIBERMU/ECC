@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Laporan Metodologi Bab 5 - Pola Penerbitan Izin</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true, theme:'dark'});</script>
+<style>
+body { font-family: Arial, sans-serif; max-width: 920px; margin: 0 auto; padding: 32px; background: #0E1117; color: #D4D4D4; line-height: 1.65; }
+.hdr-sub { color: #43A047; font-size: 8.5pt; font-weight: 700; text-transform: uppercase; }
+.hdr-title { color: #81C784; font-size: 15pt; font-weight: 800; text-transform: uppercase; border-bottom: 2px solid #2E7D32; padding-bottom: 8px; }
+h2 { color: #81C784; text-transform: uppercase; border-bottom: 1px solid #2E7D32; }
+h4 { color: #A5D6A7; }
+.note-box { background: #132213; border-left: 4px solid #2E7D32; padding: 10px 14px; margin: 12px 0; }
+.formula { background: #0D1B0E; border: 1px solid #2E7D32; color: #A5D6A7; padding: 8px 12px; font-family: monospace; }
+.data-th { background: #1B5E20; color: white; padding: 6px; text-align: left; border: 1px solid #2E7D32; }
+.data-td { padding: 6px; border: 1px solid #243524; vertical-align: top; }
+.data-tr-even .data-td { background: #131B13; }
+.mermaid { background: #0D1610; border: 1px solid #2E7D32; padding: 12px; margin: 10px 0; }
+</style>
+</head>
+<body>
+<div class="hdr-sub">CELIOS - Center of Economic and Law Studies | Laporan Riset Metodologi D3TLH</div>
+<div class="hdr-title">BAB V: Metodologi Analisis Pola Penerbitan Izin di Zona Kritis Ekologis</div>
+<h2>5.1 Fakta Penyebab: Sinkronisasi Waktu (Timeline Mapping)</h2>
+<p>Penelusuran data spasial dan temporal di Sulawesi menunjukkan total deforestasi sebesar <strong>1,386,055.4 hektar</strong>, sementara penerbitan <strong>574 izin tambang baru</strong> mencakup luas konsesi <strong>819,452.5 hektar</strong>.</p>
+<div class="mermaid">flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Izin Baru Minerbaone<br/><i>Tahun, Jumlah IUP, Luas Konsesi</i>"]
+        B["Data Deforestasi GFW<br/><i>Tahun, Total Deforestasi Ha</i>"]
+    end
+    subgraph Timeline_Mapping["2. Sinkronisasi Waktu"]
+        A --> C["Agregasi izin & luas konsesi per tahun"]
+        B --> D["Agregasi deforestasi per tahun"]
+        C --> E["Merge timeline 2014-2023"]
+        D --> E
+    end
+    subgraph Visual_Analysis["3. Dual-Axis Combo Chart"]
+        E --> F["Bar: Deforestasi tahunan"]
+        E --> G["Line: Area Konsesi IUP & jumlah izin"]
+        F --> H["Identifikasi sinkronisasi krisis ekologis dan keputusan izin"]
+        G --> H
+    end</div>
+<div class="table-caption">Tabel 5.1: Agregasi Waktu Historis Izin Tambang dan Deforestasi (2014-2023)</div>
+<table>
+<thead><tr><th class="data-th">Tahun</th><th class="data-th">Total Deforestasi (Ha)</th><th class="data-th">Jumlah IUP Baru</th><th class="data-th">Luas Konsesi Baru (Ha)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">2014</td><td class="data-td">158,688</td><td class="data-td">26</td><td class="data-td">49,518</td></tr>
+<tr class="data-tr-even"><td class="data-td">2015</td><td class="data-td">225,751</td><td class="data-td">5</td><td class="data-td">22,339</td></tr>
+<tr><td class="data-td">2016</td><td class="data-td">190,064</td><td class="data-td">9</td><td class="data-td">12,516</td></tr>
+<tr class="data-tr-even"><td class="data-td">2017</td><td class="data-td">127,180</td><td class="data-td">26</td><td class="data-td">179,465</td></tr>
+<tr><td class="data-td">2018</td><td class="data-td">123,572</td><td class="data-td">23</td><td class="data-td">37,971</td></tr>
+<tr class="data-tr-even"><td class="data-td">2019</td><td class="data-td">159,501</td><td class="data-td">17</td><td class="data-td">61,968</td></tr>
+<tr><td class="data-td">2020</td><td class="data-td">82,269</td><td class="data-td">28</td><td class="data-td">106,560</td></tr>
+<tr class="data-tr-even"><td class="data-td">2021</td><td class="data-td">67,210</td><td class="data-td">41</td><td class="data-td">30,423</td></tr>
+<tr><td class="data-td">2022</td><td class="data-td">80,121</td><td class="data-td">56</td><td class="data-td">66,128</td></tr>
+<tr class="data-tr-even"><td class="data-td">2023</td><td class="data-td">171,699</td><td class="data-td">149</td><td class="data-td">68,557</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 5.2: Ringkasan Periode Kritis Penerbitan Izin</div>
+<table>
+<thead><tr><th class="data-th">Periode/Indikator</th><th class="data-th">Nilai</th><th class="data-th">Keterangan</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Pra-2020</td><td class="data-td">106</td><td class="data-td">Periode sebelum akselerasi pasca-2020</td></tr>
+<tr class="data-tr-even"><td class="data-td">Pasca-2020</td><td class="data-td">468</td><td class="data-td">4.4x dibanding pra-2020</td></tr>
+<tr><td class="data-td">Tahun Kritis Ekologis</td><td class="data-td">330</td><td class="data-td">86.8% dari izin panel GFW-IUP</td></tr>
+</tbody>
+</table>
+<h2>5.2 Fakta Spasial: Tabrakan Tata Ruang di Kawasan Konservasi</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Data GFW Overlay Kawasan Lindung: <code>data/processed/sulawesi_gfw_kawasan_lindung_loss_2014_2023_v3.csv</code> (GFW dengan overlay Livelihood Zone Proxy Kategori 1 & 2). Visualisasi dashboard menggunakan Stacked Bar Chart kumulatif per kategori livelihood dengan garis Total Kehancuran Kumulatif 2014-2023.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Dataset spasial menunjukkan pentingnya kepatuhan terhadap batas-batas tata ruang. Analisis mengisolasi data tree cover loss (GFW) yang beririsan dengan poligon Kawasan Livelihood (Zona Pertanian, Peternakan) dan Perkebunan Warga, lalu mengkalkulasi kehancuran agregat kawasan penyangga ekosistem esensial selama satu dekade terakhir akibat penetrasi aktivitas tambang.</p>
+<h4>B. Alur Logika Metodologis Overlay Area Kawasan Lindung (GFW)</h4>
+<p>Kerangka agregasi spasial bertingkat diilustrasikan pada <strong>Bagan Alur 5.2</strong> berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan Geospatial Overlay dan kuantifikasi kerusakan kumulatif deskriptif.</p>
+<div class="table-caption">Bagan Alur 5.2: Alur Logika Analisis Overlay Spasial Kawasan Livelihood</div>
+<div class="mermaid">flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data GFW Kawasan Lindung Loss<br/><i>Tahun, kategori IUCN livelihood, luas hilang (Ha)</i>"]
+    end
+    subgraph Spatial_Overlay["2. Geospatial Overlay & Isolasi"]
+        A --> B["Filter kategori livelihood valid<br/>Cat 1: Pertanian & Peternakan; Cat 2: Perkebunan Warga"]
+        B --> C["Pivot agregasi luas hilang<br/>per Tahun × Kategori"]
+        C --> D["Kalkulasi kumulatif<br/>kerusakan permanen 2014-2023"]
+    end
+    subgraph Visual_Output["3. Stacked Bar Chart Kumulatif"]
+        D --> E["Stacked Bar per kategori<br/>+ garis Total Kehancuran Kumulatif"]
+        E --> F["Pembacaan tabrakan tata ruang kawasan livelihood"]
+    end</div>
+<h4>C. Formulasi Matematis: Isolasi Overlay dan Akumulasi Kerusakan</h4>
+<div class="formula">Luas_Hancur_c(t) = Σ ( Loss_i )   ;   untuk seluruh observasi i dengan Kategori_Livelihood = c pada tahun t</div>
+<div class="formula">Kumulatif_Hancur_c(T) = Σ Luas_Hancur_c(t)   ;   untuk t = 2014 s.d. T</div>
+<div class="formula">Total_Kumulatif(T) = Kumulatif_Hancur_1(T) + Kumulatif_Hancur_2(T)</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 5.3: Rincian Kehancuran Kawasan Livelihood Warga per Tahun (2014-2023)</div>
+<table>
+<thead><tr><th class="data-th">Tahun</th><th class="data-th">Pertanian & Peternakan (Ha)</th><th class="data-th">Perkebunan Warga (Ha)</th><th class="data-th">Total Tahunan (Ha)</th><th class="data-th">Total Kumulatif (Ha)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">2014</td><td class="data-td">2,261.0</td><td class="data-td">1,478.8</td><td class="data-td">3,739.9</td><td class="data-td">3,739.9</td></tr>
+<tr class="data-tr-even"><td class="data-td">2015</td><td class="data-td">4,512.1</td><td class="data-td">3,164.5</td><td class="data-td">7,676.6</td><td class="data-td">11,416.5</td></tr>
+<tr><td class="data-td">2016</td><td class="data-td">4,046.4</td><td class="data-td">3,814.5</td><td class="data-td">7,860.9</td><td class="data-td">19,277.3</td></tr>
+<tr class="data-tr-even"><td class="data-td">2017</td><td class="data-td">2,341.9</td><td class="data-td">1,560.3</td><td class="data-td">3,902.2</td><td class="data-td">23,179.6</td></tr>
+<tr><td class="data-td">2018</td><td class="data-td">2,266.6</td><td class="data-td">1,363.8</td><td class="data-td">3,630.4</td><td class="data-td">26,810.0</td></tr>
+<tr class="data-tr-even"><td class="data-td">2019</td><td class="data-td">2,698.7</td><td class="data-td">1,555.4</td><td class="data-td">4,254.1</td><td class="data-td">31,064.1</td></tr>
+<tr><td class="data-td">2020</td><td class="data-td">1,428.9</td><td class="data-td">1,379.1</td><td class="data-td">2,808.0</td><td class="data-td">33,872.0</td></tr>
+<tr class="data-tr-even"><td class="data-td">2021</td><td class="data-td">955.6</td><td class="data-td">969.1</td><td class="data-td">1,924.7</td><td class="data-td">35,796.8</td></tr>
+<tr><td class="data-td">2022</td><td class="data-td">1,134.8</td><td class="data-td">848.0</td><td class="data-td">1,982.9</td><td class="data-td">37,779.6</td></tr>
+<tr class="data-tr-even"><td class="data-td">2023</td><td class="data-td">2,458.3</td><td class="data-td">1,547.2</td><td class="data-td">4,005.5</td><td class="data-td">41,785.1</td></tr>
+</tbody>
+</table>
+<h4>E. Analisis Temuan Empiris</h4>
+<p><strong>1. Skala Kehancuran Dekade:</strong> total lebih dari <strong>41.8 ribu hektar</strong> kawasan livelihood warga mengalami perubahan tutupan lahan yang beririsan dengan dinamika industri ekstraktif. <strong>2. Komposisi Kategori:</strong> Zona Pertanian & Peternakan 24,104.2 Ha (57.7%), Perkebunan Warga 17,680.9 Ha (42.3%). <strong>3. Tahun Lonjakan Tertinggi:</strong> 2016 sebesar 7,860.9 Ha — karena kerusakan bersifat permanen, akumulasi ini menegaskan pentingnya kepatuhan batas tata ruang.</p>
+<h2>5.3 Realitas Lapangan: Izin Bermasalah, FPIC Diabaikan, Masyarakat Dikorbankan</h2>
+<div class="note-box"><strong>Metode:</strong> Cross-Dataset Integration (KPA CATAHU + Tanahkita + CRI/Mighty Earth Reports)</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Laporan mendokumentasikan isu tata kelola perizinan dan pelaksanaan konsultasi publik (FPIC). Penelusuran terhadap database Konsorsium Pembaruan Agraria (KPA) CATAHU mengidentifikasi <strong>21 kasus permasalahan izin perusahaan</strong>. Di Sulawesi, tercatat <strong>12 kasus konflik pertambangan</strong> dengan <strong>8 kasus yang mencatatkan indikasi isu pelaksanaan FPIC</strong>.</p>
+<h4>B. Alur Logika Metodologis Pelanggaran FPIC</h4>
+<div class="mermaid">flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Konflik Tambang<br/><i>Kasus, Luas, Indikasi FPIC</i>"]
+        B["Data Masalah Izin KPA<br/><i>Perusahaan, Jenis Masalah</i>"]
+    end
+    subgraph Cross_Dataset["2. Cross-Dataset Integration"]
+        A --> C["Kuantifikasi Pelanggaran FPIC"]
+        B --> D["Rekam Jejak Perusahaan"]
+        C --> E["Agregasi Anomali Perizinan"]
+        D --> E
+    end
+    subgraph Output["3. Realitas Lapangan"]
+        E --> F["Identifikasi Masyarakat Dikorbankan"]
+    end</div>
+<h4>C. Formulasi Matematis</h4>
+<div class="formula">Total_Pelanggaran_FPIC = Σ Kasus, untuk indikasi_fpic = True</div>
+<div class="formula">Rekam_Jejak = Σ Jenis_Masalah_Izin, dikelompokkan berdasarkan nama_perusahaan</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 5.3: Metrik Konflik dan Pelanggaran FPIC</div>
+<table>
+<thead><tr><th class="data-th">Indikator</th><th class="data-th">Total Kasus</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Total Konflik Pertambangan Sulawesi</td><td class="data-td">12</td></tr>
+<tr class="data-tr-even"><td class="data-td">Kasus Indikasi Pelanggaran FPIC</td><td class="data-td">8</td></tr>
+<tr><td class="data-td">Perusahaan Bermasalah di Sulawesi</td><td class="data-td">16</td></tr>
+</tbody>
+</table>
+<h4>E. Analisis Temuan Empiris</h4>
+<p>Dari 12 konflik pertambangan di Sulawesi, 8 di antaranya terkait pelanggaran FPIC.</p>
+
+<h2>5.4 Pembuktian Empiris: Uji Statistik Korelasi Penerbitan Izin & Deforestasi</h2>
+<div class="mermaid">flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Izin Baru Minerbaone<br/><i>Jumlah IUP & Luas Konsesi</i>"]
+        B["Data Deforestasi GFW<br/><i>Total & Driver Komoditas</i>"]
+    end
+    subgraph Panel_Join["2. Panel Join Provinsi-Tahun"]
+        A --> C["Merge berdasarkan Provinsi dan Tahun"]
+        B --> C
+        C --> D["Binning median<br/>Tinggi vs Rendah"]
+    end
+    subgraph Statistical_Test["3. Crosstabulation & Pearson Chi-Square"]
+        D --> E["Tabel kontinjensi 2x2"]
+        E --> F["Pearson Chi-Square"]
+        E --> G["Odds Ratio"]
+    end
+    F --> H["Pembacaan korelasi izin dan deforestasi"]
+    G --> H</div>
+<div class="table-caption">Tabel 5.4a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 5.4)</div>
+<table>
+<thead><tr><th class="data-th">Komponen Uji</th><th class="data-th">Definisi Variabel (Sub-bab 5.4)</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Variabel Independen (X)</td><td class="data-td">Jumlah_Izin_Baru atau Total_Luas_Konsesi_Baru_Ha.</td></tr>
+<tr class="data-tr-even"><td class="data-td">Variabel Dependen (Y)</td><td class="data-td">Total_Deforestasi_Ha atau Deforestasi_Driver_Komoditas_Tambang_Sawit_Ha.</td></tr>
+<tr><td class="data-td">Hipotesis Nol (H0)</td><td class="data-td">Tidak ada hubungan signifikan antara klasifikasi tingginya penerbitan IUP baru dan klasifikasi tingginya deforestasi.</td></tr>
+<tr class="data-tr-even"><td class="data-td">Decision Rule</td><td class="data-td">Tolak H0 jika P-Value Pearson Chi-Square < 0.05.</td></tr>
+<tr><td class="data-td">Unit Observasi</td><td class="data-td">Panel Provinsi-Tahun hasil join data izin dan GFW (N=60).</td></tr>
+</tbody>
+</table>
+<h4>C. Formulasi Matematis</h4>
+<div class="formula">Kategori(x) = Tinggi jika x ≥ Median(Panel); Rendah jika x &lt; Median(Panel)</div>
+<div class="formula">χ² = Σ [ ( O_i - E_i )² / E_i ]</div>
+<div class="formula">OR = ( a × d ) / ( b × c )</div>
+<div class="table-caption">Tabel 5.4: Ambang Median Panel Uji Crosstab</div>
+<table>
+<thead><tr><th class="data-th">Variabel X</th><th class="data-th">Variabel Y</th><th class="data-th">Median X</th><th class="data-th">Median Y</th><th class="data-th">N</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Jumlah Izin Baru (IUP)</td><td class="data-td">Total Deforestasi Alam (Hektar)</td><td class="data-td">2.0</td><td class="data-td">15,917.7</td><td class="data-td">60</td></tr>
+<tr class="data-tr-even"><td class="data-td">Jumlah Izin Baru (IUP)</td><td class="data-td">Deforestasi Komoditas Tambang/Sawit (Hektar)</td><td class="data-td">2.0</td><td class="data-td">10,961.8</td><td class="data-td">60</td></tr>
+<tr><td class="data-td">Luas Konsesi Baru (Hektar)</td><td class="data-td">Total Deforestasi Alam (Hektar)</td><td class="data-td">2,011.5</td><td class="data-td">15,917.7</td><td class="data-td">60</td></tr>
+<tr class="data-tr-even"><td class="data-td">Luas Konsesi Baru (Hektar)</td><td class="data-td">Deforestasi Komoditas Tambang/Sawit (Hektar)</td><td class="data-td">2,011.5</td><td class="data-td">10,961.8</td><td class="data-td">60</td></tr>
+</tbody>
+</table>
+<div class="table-caption">Tabel 5.5: Ringkasan Eksekutif Seluruh Skenario Crosstab Izin vs Deforestasi</div>
+<table>
+<thead><tr><th class="data-th">Variabel Independen (X)</th><th class="data-th">Variabel Dependen (Y)</th><th class="data-th">Chi-Square</th><th class="data-th">P-Value</th><th class="data-th">Odds Ratio</th><th class="data-th">Kesimpulan</th></tr></thead>
+<tbody>
+<tr><td class="data-td">Jumlah Izin Baru (IUP)</td><td class="data-td">Total Deforestasi Alam (Hektar)</td><td class="data-td">13.081</td><td class="data-td">p < 0.001</td><td class="data-td">9.04</td><td class="data-td">SIGNIFIKAN</td></tr>
+<tr class="data-tr-even"><td class="data-td">Jumlah Izin Baru (IUP)</td><td class="data-td">Deforestasi Komoditas Tambang/Sawit (Hektar)</td><td class="data-td">17.086</td><td class="data-td">p < 0.001</td><td class="data-td">13.14</td><td class="data-td">SIGNIFIKAN</td></tr>
+<tr><td class="data-td">Luas Konsesi Baru (Hektar)</td><td class="data-td">Total Deforestasi Alam (Hektar)</td><td class="data-td">19.267</td><td class="data-td">p < 0.001</td><td class="data-td">16.00</td><td class="data-td">SIGNIFIKAN</td></tr>
+<tr class="data-tr-even"><td class="data-td">Luas Konsesi Baru (Hektar)</td><td class="data-td">Deforestasi Komoditas Tambang/Sawit (Hektar)</td><td class="data-td">19.267</td><td class="data-td">p < 0.001</td><td class="data-td">16.00</td><td class="data-td">SIGNIFIKAN</td></tr>
+</tbody>
+</table>
+<p>Dari 4 skenario pengujian, terdapat 4 skenario yang terbukti SIGNIFIKAN. Tingginya Odds Ratio pada skenario signifikan menegaskan bahwa peningkatan penerbitan izin berasosiasi dengan risiko laju deforestasi yang lebih tinggi.</p>
+</body>
+</html>

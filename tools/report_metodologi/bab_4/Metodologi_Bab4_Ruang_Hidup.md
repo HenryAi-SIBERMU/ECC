@@ -240,3 +240,141 @@ R = 93 + 4 + 1 = 98 orang
 
 #### E. Analisis Temuan Empiris: Penyempitan Ruang Sipil dan Risiko HAM
 Keberadaan kasus kriminalisasi di sekitar area konsesi, terutama pada sektor **Pertambangan**, mengindikasikan pentingnya jaminan perlindungan ruang sipil dan penghormatan HAM dalam setiap proses pembangunan. Catatan ini menunjukkan perlunya pendekatan hukum yang adil, penyelesaian konflik secara ramah HAM, serta perlindungan bagi pejuang lingkungan dan komunitas lokal.
+
+## 4.4 Pembuktian Statistik: Ekspansi vs Eskalasi Konflik
+
+> **Sumber Data Resmi & Deskripsi Visualisasi:** Base Data Cross-Section: `data/processed/sulawesi_konflik_agraria_tanahkita.csv`. Visualisasi dashboard menggunakan *Before-After Analysis & Crosstabulation* untuk menguji hubungan antara indikator ekspansi dan eskalasi konflik.
+
+#### A. Pengantar & Kerangka Narasi
+Hipotesis utama dalam evaluasi ini adalah bahwa **industrialisasi dan ekspansi korporasi** berbanding lurus dengan **eskalasi konflik dan represi** terhadap masyarakat. Analisis dibagi menjadi dua bagian: komparasi metrik Before-After dan uji signifikansi Crosstab Chi-Square. Unit observasinya adalah catatan kejadian letupan konflik historis.
+
+#### B. Alur Logika Metodologis Before-After Analysis & Crosstabulation
+```mermaid
+flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Konflik Agraria<br/><i>tahun, status, aktor, kriminalisasi, kekerasan</i>"]
+    end
+    subgraph Before_After["2. Before-After Analysis"]
+        A --> B["Pisah periode<br/>Pra <2014 dan Pasca >=2014"]
+        B --> C["Hitung rata-rata kasus/tahun<br/>ditangkap dan tewas"]
+    end
+    subgraph Crosstab["3. Crosstabulation"]
+        A --> D["Bentuk variabel kategorikal X<br/>periode, sektor, pemerintah"]
+        A --> E["Bentuk variabel kategorikal Y<br/>represi, penelantaran, kekerasan"]
+        D --> F["Uji Chi-Square & Odds Ratio"]
+        E --> F
+    end
+    C --> G["Pembacaan eskalasi konflik"]
+    F --> G
+```
+
+##### Tabel 4.4a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 4.4)
+| Komponen Uji | Definisi Variabel (Sub-bab 4.4) |
+| :--- | :--- |
+| Matriks Ekspansi (X) | Periode Ekspansi Industri; Tipe Sektor (Tambang vs Non-Tambang); Keterlibatan Aparat/Pemerintah. |
+| Matriks Eskalasi (Y) | Tingkat Represi & Kriminalisasi; Tingkat Penelantaran Kasus; Tingkat Insiden Fisik. |
+| Hipotesis Nol (H0) | Variabel baris (Periode/Aktor) saling bebas secara absolut terhadap variabel kolom (Represi/Kematian). |
+| Decision Rule | Chi-Square P-Value < 0.05, maka tolak H0 dan terdapat korelasi signifikan. |
+| Unit Observasi | Catatan kejadian letupan konflik historis sejak 1990 (N=523). |
+
+#### C. Formulasi Matematis: Before-After, Chi-Square, dan Odds Ratio
+```text
+K̄_p = N_p / T_p
+K̄_Pra = 37 / 18 = 2.1; K̄_Pasca = 55 / 10 = 5.5
+χ² = Σ [ ( O_ij - E_ij )² / E_ij ]
+OR = ( a × d ) / ( b × c )
+```
+
+#### D. Matriks Hasil Uji Empiris
+##### Tabel 4.11: Analisis Komparatif Before-After Pra vs Era Hilirisasi
+| Periode | Total Konflik | Jumlah Tahun | Kasus/Tahun | Ditangkap | Tewas |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Pra-Ekspansi (<2014) | 37 | 18 | 2.1 | 83 | 0 |
+| Pasca-Ekspansi (>=2014) | 55 | 10 | 5.5 | 10 | 1 |
+
+##### Tabel 4.12: Ringkasan Eksekutif Seluruh Skenario Crosstab Ekspansi vs Eskalasi Konflik
+| Variabel Independen (X) | Variabel Dependen (Y) | Chi-Square | P-Value | Odds Ratio | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Periode Ekspansi Industri | Tingkat Represi & Kriminalisasi | 14.331 | p < 0.001 | 2.04 | SIGNIFIKAN |
+| Periode Ekspansi Industri | Tingkat Penelantaran Kasus | 3.283 | p = 0.070 | 1.40 | TIDAK SIGNIFIKAN |
+| Periode Ekspansi Industri | Tingkat Insiden Fisik (Luka/Tewas/Ditangkap) | 2.636 | p = 0.104 | 0.53 | TIDAK SIGNIFIKAN |
+| Tipe Sektor (Tambang vs Non-Tambang) | Tingkat Represi & Kriminalisasi | 13.609 | p < 0.001 | 2.84 | SIGNIFIKAN |
+| Tipe Sektor (Tambang vs Non-Tambang) | Tingkat Penelantaran Kasus | 4.742 | p = 0.029 | 1.89 | SIGNIFIKAN |
+| Tipe Sektor (Tambang vs Non-Tambang) | Tingkat Insiden Fisik (Luka/Tewas/Ditangkap) | 0.665 | p = 0.415 | 1.66 | TIDAK SIGNIFIKAN |
+| Keterlibatan Aparat/Pemerintah | Tingkat Represi & Kriminalisasi | 55.633 | p < 0.001 | 4.80 | SIGNIFIKAN |
+| Keterlibatan Aparat/Pemerintah | Tingkat Penelantaran Kasus | 1.135 | p = 0.287 | 0.81 | TIDAK SIGNIFIKAN |
+| Keterlibatan Aparat/Pemerintah | Tingkat Insiden Fisik (Luka/Tewas/Ditangkap) | 3.253 | p = 0.071 | 2.23 | TIDAK SIGNIFIKAN |
+
+#### E. Analisis Temuan Empiris: Validitas Statistik Eskalasi Konflik
+Dari 9 skenario pengujian, terdapat 4 skenario yang terbukti SIGNIFIKAN. Tingginya Odds Ratio pada skenario yang signifikan menegaskan bahwa ekspansi operasi industri berasosiasi dengan peningkatan risiko sengketa lahan. Skenario yang tidak signifikan mengindikasikan bahwa dinamika sengketa lahan tersebar secara merata di berbagai sektor dan kurun waktu.
+
+## 4.5 Peta Entitas Aktor: Korporasi dan Organisasi Masyarakat
+
+> **Sumber Data Resmi & Deskripsi Visualisasi:** Teks Bebas (Free-Text): `data/processed/sulawesi_konflik_agraria_tanahkita.csv`. Visualisasi dashboard menampilkan dua Horizontal Bar Chart berdampingan (Top 10 Entitas Korporasi Paling Dominan dan Top Aktor Proksi & Vigilante Terdeteksi) hasil ekstraksi teks berbasis NLP Regex dari korpus narasi seluruh kasus agraria.
+
+#### A. Pengantar & Kerangka Narasi
+Analisis entitas aktor berbasis pemrosesan teks (*string parsing*) terhadap catatan kronologi dokumentasi TanahKita memetakan keterlibatan berbagai pihak dalam sengketa agraria. Korpus dibangun dari penggabungan kolom `judul`, `deskripsi`, dan `narasi` pada **568 kasus agraria** (nasional) untuk memetakan orkestrasi struktural dan modus operandi aktor secara utuh, termasuk memvalidasi indikasi konsentrasi kekuasaan oleh segelintir konglomerasi besar.
+
+#### B. Alur Logika Metodologis Frequency Profiling (Text Parsing NLP)
+Kerangka ekstraksi entitas berbasis Regular Expressions (RegEx) dan penghitungan frekuensi penyebutan diilustrasikan pada **Bagan Alur 4.5** berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan Frequency Profiling deskriptif atas kemunculan entitas dalam korpus teks.
+
+##### Bagan Alur 4.5: Alur Logika Analisis Frequency Profiling Entitas Aktor
+```mermaid
+flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Repositori Kasus TanahKita<br/><i>judul, deskripsi, narasi (free-text)</i>"] --> B["Penggabungan Korpus Teks<br/>seluruh kasus agraria nasional"]
+    end
+    subgraph NLP_Processing["2. Ekstraksi Entitas (RegEx NLP)"]
+        B --> C["Pattern Matching Korporasi<br/>deteksi entitas PT/CV + normalisasi PTPN"]
+        B --> D["Pattern Matching Aktor Proksi<br/>Preman, Ormas, Satgas, dst. + stopword cutoff"]
+        C --> E["Token Counting<br/>frekuensi penyebutan per entitas"]
+        D --> E
+    end
+    subgraph Visual_Output["3. Frequency Profiling"]
+        E --> F["Dual Horizontal Bar Chart<br/>Top 10 korporasi vs Top 10 aktor proksi"]
+        F --> G["Pembacaan orkestrasi konflik & pemetaan oligarki"]
+    end
+```
+
+#### C. Formulasi Matematis: Konstruksi Korpus dan Token Counting
+Kuantifikasi frekuensi penyebutan entitas dihitung menggunakan sistem formulasi matematis berikut:
+
+```text
+Korpus = Gabungan ( judul_k , deskripsi_k , narasi_k )   ;   untuk k = 1 s.d. N
+Frekuensi_a = Σ ( Match_i,a )   ;   untuk seluruh kemunculan pola entitas a dalam Korpus
+```
+
+Pola korporasi mendeteksi awalan PT/CV diikuti nama kapital (maksimum 4 kata) dengan normalisasi varian PTPN; pola aktor proksi mendeteksi kata kunci Preman, Ormas, Satgas, PAM Swakarsa, Pemuda Pancasila, GRIB, Laskar, Oknum, Security, Satpam, Centeng, Beking beserta frasa lanjutannya (dipotong pada stopword pertama).
+
+#### D. Matriks Hasil Uji Empiris
+##### Tabel 4.13: Top 10 Entitas Korporasi Paling Dominan dalam Dokumentasi Konflik
+| Entitas Korporasi | Frekuensi Penyebutan |
+| :--- | :--- |
+| PT Perkebunan Nusantara (PTPN) | 153 |
+| PT TPL | 48 |
+| PT SR | 30 |
+| PT KEM | 24 |
+| PT. Bina Sari Alam Makmur | 24 |
+| PT. Boskalis | 23 |
+| PT MAS | 22 |
+| PT WKS | 21 |
+| PT BAE | 21 |
+| PT MMP | 20 |
+
+##### Tabel 4.14: Top Aktor Proksi & Vigilante Terdeteksi dalam Dokumentasi Konflik
+| Aktor Proksi / Vigilante | Frekuensi Penyebutan |
+| :--- | :--- |
+| Preman | 16 |
+| Oknum | 10 |
+| Satgas | 8 |
+| Security | 5 |
+| Oknum Pejabat | 3 |
+| Preman Bayaran | 3 |
+| Oknum Masyarakat Lokal | 2 |
+| Satgas Pkh | 2 |
+| Oknum Mantan Perangkat Desa | 2 |
+| Oknum Ormas | 1 |
+
+#### E. Analisis Temuan Empiris: Orkestrasi Konflik dan Pemetaan Oligarki
+1. **Dominasi Entitas Korporasi:** entitas **PT Perkebunan Nusantara (PTPN)** tercatat tertinggi dengan **153 catatan kasus terpisah** (dari 1,033 entitas terdeteksi dan 2,686 total penyebutan), memvalidasi indikasi konsentrasi kekuasaan dan monopoli penguasaan ruang oleh segelintir konglomerasi besar.
+2. **Orkestrasi Horizontal Aktor Proksi:** kelompok sipil seperti **Preman** terdeteksi hingga **16 kali** — korporasi seringkali menggunakan pengamanan swakarsa, kelompok preman, hingga ormas vigilante sebagai 'bemper proksi' untuk mengintimidasi warga lokal dan memecah belah solidaritas akar rumput.

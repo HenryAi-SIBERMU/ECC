@@ -8,11 +8,13 @@ dengan SOP dokumentasi Celios2.
 """
 
 import base64
+import re
 import sys
 from pathlib import Path
 
 try:
     import pandas as pd
+    import scipy.stats as stats
     import requests
     from docx import Document
     from docx.enum.table import WD_TABLE_ALIGNMENT
@@ -34,6 +36,7 @@ except ImportError:
         "python-docx",
     ])
     import pandas as pd
+    import scipy.stats as stats
     import requests
     from docx import Document
     from docx.enum.table import WD_TABLE_ALIGNMENT
@@ -546,6 +549,161 @@ def generate_all_bab4():
     mermaid_png_path_4_3 = str(tool_dir / "mermaid_flowchart_4_3.png")
     download_success_4_3 = download_mermaid_png(mermaid_str_4_3, mermaid_png_path_4_3)
 
+    print("[1.9/4] Mengekstraksi dataset empiris Bab 4 sub-bab 4.4...")
+    df_ba_44 = df_dampak[df_dampak["tahun"] >= 1990].copy()
+    df_pra_44 = df_ba_44[df_ba_44["tahun"] < 2014]
+    df_pasca_44 = df_ba_44[df_ba_44["tahun"] >= 2014]
+    tahun_pra_44 = max(1, 2014 - int(df_pra_44["tahun"].min())) if not df_pra_44.empty else 24
+    tahun_pasca_44 = max(1, int(df_pasca_44["tahun"].max()) - 2013) if not df_pasca_44.empty else 11
+    avg_pra_44 = len(df_pra_44) / tahun_pra_44
+    avg_pasca_44 = len(df_pasca_44) / tahun_pasca_44
+    before_after_rows_44 = [
+        ["Pra-Ekspansi (<2014)", f"{len(df_pra_44):,}", f"{tahun_pra_44:,}", f"{avg_pra_44:.1f}", f"{int(df_pra_44['jumlah_ditangkap'].sum()):,}", f"{int(df_pra_44['jumlah_tewas'].sum()):,}"],
+        ["Pasca-Ekspansi (>=2014)", f"{len(df_pasca_44):,}", f"{tahun_pasca_44:,}", f"{avg_pasca_44:.1f}", f"{int(df_pasca_44['jumlah_ditangkap'].sum()):,}", f"{int(df_pasca_44['jumlah_tewas'].sum()):,}"],
+    ]
+
+    df_crosstab_44 = pd.read_csv(data_dir / "sulawesi_konflik_agraria_tanahkita.csv")
+    df_crosstab_44["tahun"] = pd.to_numeric(df_crosstab_44["tahun"], errors="coerce")
+    df_crosstab_44 = df_crosstab_44[df_crosstab_44["tahun"] >= 1990].copy()
+    df_crosstab_44["Periode_Ekspansi"] = df_crosstab_44["tahun"].apply(lambda x: "Pasca-ekspansi (>= 2014)" if x >= 2014 else "Pra-ekspansi (< 2014)")
+    df_crosstab_44["Sektor_Tambang"] = df_crosstab_44["status"].str.contains("Tambang|Pertambangan", case=False, na=False).apply(lambda x: "Sektor Pertambangan" if x else "Sektor Non-Tambang")
+    df_crosstab_44["Keterlibatan_Pemerintah"] = df_crosstab_44["keterlibatan_pemerintah"].notna().apply(lambda x: "Terlibat Aparat/Negara" if x else "Tanpa Keterlibatan Negara")
+    df_crosstab_44["Indikasi_Kriminalisasi"] = df_crosstab_44["indikasi_kriminalisasi"].fillna(False).astype(bool).apply(lambda x: "Ada Represi/Kriminalisasi" if x else "Baseline (Tanpa Kriminalisasi)")
+    df_crosstab_44["Status_Penyelesaian"] = df_crosstab_44["status_konflik"].str.contains("Belum Ditangani", na=False).apply(lambda x: "Konflik Dibiarkan Terlantar" if x else "Konflik Selesai/Diproses")
+    has_luka_44 = pd.to_numeric(df_crosstab_44["jumlah_luka"], errors="coerce").fillna(0) > 0
+    has_tewas_44 = pd.to_numeric(df_crosstab_44["jumlah_tewas"], errors="coerce").fillna(0) > 0
+    has_tangkap_44 = pd.to_numeric(df_crosstab_44["jumlah_ditangkap"], errors="coerce").fillna(0) > 0
+    df_crosstab_44["Dampak_Kekerasan"] = (has_luka_44 | has_tewas_44 | has_tangkap_44).apply(lambda x: "Terjadi Kekerasan/Penangkapan" if x else "Tanpa Insiden Fisik")
+
+    x_options_44 = {
+        "Periode_Ekspansi": "Periode Ekspansi Industri",
+        "Sektor_Tambang": "Tipe Sektor (Tambang vs Non-Tambang)",
+        "Keterlibatan_Pemerintah": "Keterlibatan Aparat/Pemerintah",
+    }
+    y_options_44 = {
+        "Indikasi_Kriminalisasi": "Tingkat Represi & Kriminalisasi",
+        "Status_Penyelesaian": "Tingkat Penelantaran Kasus",
+        "Dampak_Kekerasan": "Tingkat Insiden Fisik (Luka/Tewas/Ditangkap)",
+    }
+    x_order_44 = {
+        "Periode_Ekspansi": ["Pra-ekspansi (< 2014)", "Pasca-ekspansi (>= 2014)"],
+        "Sektor_Tambang": ["Sektor Non-Tambang", "Sektor Pertambangan"],
+        "Keterlibatan_Pemerintah": ["Tanpa Keterlibatan Negara", "Terlibat Aparat/Negara"],
+    }
+    y_order_44 = {
+        "Indikasi_Kriminalisasi": ["Baseline (Tanpa Kriminalisasi)", "Ada Represi/Kriminalisasi"],
+        "Dampak_Kekerasan": ["Tanpa Insiden Fisik", "Terjadi Kekerasan/Penangkapan"],
+        "Status_Penyelesaian": ["Konflik Selesai/Diproses", "Konflik Dibiarkan Terlantar"],
+    }
+
+    summary_rows_44 = []
+    for k_x, v_x in x_options_44.items():
+        for k_y, v_y in y_options_44.items():
+            ct = pd.crosstab(df_crosstab_44[k_x], df_crosstab_44[k_y]).reindex(index=x_order_44[k_x], columns=y_order_44[k_y], fill_value=0)
+            try:
+                c2_val, pv_val, dof_val, _ = stats.chi2_contingency(ct)
+            except Exception:
+                c2_val, pv_val, dof_val = 0, 1.0, 0
+            try:
+                aa = ct.loc[x_order_44[k_x][0], y_order_44[k_y][0]]
+                bb = ct.loc[x_order_44[k_x][0], y_order_44[k_y][1]]
+                cc = ct.loc[x_order_44[k_x][1], y_order_44[k_y][0]]
+                dd = ct.loc[x_order_44[k_x][1], y_order_44[k_y][1]]
+                or_v = (aa * dd) / (bb * cc) if (bb * cc) > 0 else 0
+            except Exception:
+                or_v = 0
+            p_disp = "p < 0.001" if pv_val < 0.001 else f"p = {pv_val:.3f}"
+            summary_rows_44.append([v_x, v_y, f"{c2_val:.3f}", p_disp, f"{or_v:.2f}", "SIGNIFIKAN" if pv_val < 0.05 else "TIDAK SIGNIFIKAN"])
+
+    sig_count_44 = sum(1 for row in summary_rows_44 if row[5] == "SIGNIFIKAN")
+    total_scenarios_44 = len(summary_rows_44)
+    valid_cases_44 = len(df_crosstab_44)
+
+    konf_headers_44 = ["Komponen Uji", "Definisi Variabel (Sub-bab 4.4)"]
+    konf_rows_44 = [
+        ["Matriks Ekspansi (X)", "Periode Ekspansi Industri; Tipe Sektor (Tambang vs Non-Tambang); Keterlibatan Aparat/Pemerintah."],
+        ["Matriks Eskalasi (Y)", "Tingkat Represi & Kriminalisasi; Tingkat Penelantaran Kasus; Tingkat Insiden Fisik."],
+        ["Hipotesis Nol (H0)", "Variabel baris (Periode/Aktor) saling bebas secara absolut terhadap variabel kolom (Represi/Kematian)."],
+        ["Decision Rule", "Chi-Square P-Value < 0.05, maka tolak H0 dan terdapat korelasi signifikan."],
+        ["Unit Observasi", f"Catatan kejadian letupan konflik historis sejak 1990 (N={valid_cases_44})."],
+    ]
+
+    mermaid_str_4_4 = """flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Data Konflik Agraria<br/><i>tahun, status, aktor, kriminalisasi, kekerasan</i>"]
+    end
+    subgraph Before_After["2. Before-After Analysis"]
+        A --> B["Pisah periode<br/>Pra <2014 dan Pasca >=2014"]
+        B --> C["Hitung rata-rata kasus/tahun<br/>ditangkap dan tewas"]
+    end
+    subgraph Crosstab["3. Crosstabulation"]
+        A --> D["Bentuk variabel kategorikal X<br/>periode, sektor, pemerintah"]
+        A --> E["Bentuk variabel kategorikal Y<br/>represi, penelantaran, kekerasan"]
+        D --> F["Uji Chi-Square & Odds Ratio"]
+        E --> F
+    end
+    C --> G["Pembacaan eskalasi konflik"]
+    F --> G"""
+    mermaid_png_path_4_4 = str(tool_dir / "mermaid_flowchart_4_4.png")
+    download_success_4_4 = download_mermaid_png(mermaid_str_4_4, mermaid_png_path_4_4)
+
+    print("[1.95/4] Mengekstraksi dataset empiris Bab 4 sub-bab 4.5...")
+    df_nlp_45 = pd.read_csv(data_dir / "sulawesi_konflik_agraria_tanahkita.csv")
+    n_kasus_45 = len(df_nlp_45)
+    text_corpus_45 = " ".join((df_nlp_45["judul"].fillna("") + " " + df_nlp_45["deskripsi"].fillna("") + " " + df_nlp_45["narasi"].fillna("")).tolist())
+
+    pattern_corp_45 = r'\b(?:PT|CV)\.?\s*[A-Z][a-zA-Z]*(?:\s+[A-Z][a-zA-Z]*){0,3}\b'
+    pattern_civil_45 = r'\b(?:Preman|Ormas|Satgas|PAM Swakarsa|Pemuda Pancasila|GRIB|Laskar|Tandingan|Oknum|Security|Satpam|Pengamanan Swakarsa|Centeng|Beking)\b[^\.,;\!\?\(\)\[\]"\'\-]*'
+
+    pts_45 = re.findall(pattern_corp_45, text_corpus_45)
+    pts_45 = [" ".join(pt.split()) for pt in pts_45]
+    pts_45 = [re.sub(r'\bPTPN(?:\s+(?:XIV|XII|VII|II|14|Unit\s*14))?\b', 'PT Perkebunan Nusantara (PTPN)', pt, flags=re.IGNORECASE) for pt in pts_45]
+    df_aktor_perusahaan_45 = pd.Series(pts_45).value_counts().reset_index()
+    df_aktor_perusahaan_45.columns = ["Aktor", "Frekuensi"]
+
+    civils_raw_45 = re.findall(pattern_civil_45, text_corpus_45, flags=re.IGNORECASE)
+    stopwords_45 = {"yang", "dan", "di", "dari", "dengan", "untuk", "pada", "ke", "dalam", "oleh", "serta", "sebagai", "adalah", "ini", "itu", "tersebut", "kepada", "saat", "ketika", "juga", "mengatasnamakan", "berjumlah", "melarang", "datang", "berupaya", "segera", "salah", "lainnya", "tak", "nya", "sedang", "akan", "karena", "sebab", "lalu", "kemudian", "mereka"}
+    civils_clean_45 = []
+    for phrase in civils_raw_45:
+        clean_words = []
+        for w in phrase.split():
+            if w.lower() in stopwords_45:
+                break
+            clean_words.append(w.title())
+        if clean_words:
+            civils_clean_45.append(" ".join(clean_words))
+    df_aktor_masyarakat_45 = pd.Series(civils_clean_45).value_counts().reset_index()
+    df_aktor_masyarakat_45.columns = ["Aktor", "Frekuensi"]
+
+    n_entitas_corp_45 = len(df_aktor_perusahaan_45)
+    n_entitas_civ_45 = len(df_aktor_masyarakat_45)
+    total_mentions_corp_45 = int(df_aktor_perusahaan_45["Frekuensi"].sum())
+    total_mentions_civ_45 = int(df_aktor_masyarakat_45["Frekuensi"].sum())
+    top1_corp_name_45 = df_aktor_perusahaan_45.iloc[0]["Aktor"] if not df_aktor_perusahaan_45.empty else "Korporasi"
+    top1_corp_freq_45 = int(df_aktor_perusahaan_45.iloc[0]["Frekuensi"]) if not df_aktor_perusahaan_45.empty else 0
+    top1_civ_name_45 = df_aktor_masyarakat_45.iloc[0]["Aktor"] if not df_aktor_masyarakat_45.empty else "Preman/Ormas"
+    top1_civ_freq_45 = int(df_aktor_masyarakat_45.iloc[0]["Frekuensi"]) if not df_aktor_masyarakat_45.empty else 0
+
+    corp_rows_45 = [[row["Aktor"], f"{int(row['Frekuensi']):,}"] for _, row in df_aktor_perusahaan_45.head(10).iterrows()]
+    civil_rows_45 = [[row["Aktor"], f"{int(row['Frekuensi']):,}"] for _, row in df_aktor_masyarakat_45.head(10).iterrows()]
+
+    mermaid_str_4_5 = """flowchart LR
+    subgraph Data_Input["1. Input Data Dashboard"]
+        A["Repositori Kasus TanahKita<br/><i>judul, deskripsi, narasi (free-text)</i>"] --> B["Penggabungan Korpus Teks<br/>seluruh kasus agraria nasional"]
+    end
+    subgraph NLP_Processing["2. Ekstraksi Entitas (RegEx NLP)"]
+        B --> C["Pattern Matching Korporasi<br/>deteksi entitas PT/CV + normalisasi PTPN"]
+        B --> D["Pattern Matching Aktor Proksi<br/>Preman, Ormas, Satgas, dst. + stopword cutoff"]
+        C --> E["Token Counting<br/>frekuensi penyebutan per entitas"]
+        D --> E
+    end
+    subgraph Visual_Output["3. Frequency Profiling"]
+        E --> F["Dual Horizontal Bar Chart<br/>Top 10 korporasi vs Top 10 aktor proksi"]
+        F --> G["Pembacaan orkestrasi konflik & pemetaan oligarki"]
+    end"""
+    mermaid_png_path_4_5 = str(tool_dir / "mermaid_flowchart_4_5.png")
+    download_success_4_5 = download_mermaid_png(mermaid_str_4_5, mermaid_png_path_4_5)
+
     print("[2/4] Membangun DOCX Metodologi_Bab4_Ruang_Hidup.docx...")
     doc = Document()
     sec = doc.sections[0]
@@ -764,6 +922,135 @@ def generate_all_bab4():
         ("Catatan ini menunjukkan perlunya pendekatan hukum yang adil, penyelesaian konflik secara ramah HAM, serta perlindungan bagi pejuang lingkungan dan komunitas lokal.", False, False),
     ])
 
+    add_h2(doc, "4.4 Pembuktian Statistik: Ekspansi vs Eskalasi Konflik")
+    add_note_box(doc, "Sumber Data Resmi & Deskripsi Visualisasi", "Base Data Cross-Section: data/processed/sulawesi_konflik_agraria_tanahkita.csv. Visualisasi dashboard menggunakan Before-After Analysis & Crosstabulation untuk menguji hubungan antara indikator ekspansi dan eskalasi konflik.")
+
+    add_h4(doc, "A. Pengantar & Kerangka Narasi")
+    add_p(doc, [
+        ("Hipotesis utama dalam evaluasi ini adalah bahwa industrialisasi dan ekspansi korporasi berbanding lurus dengan eskalasi konflik dan represi terhadap masyarakat. ", False, False),
+        ("Analisis dibagi menjadi dua bagian: komparasi metrik Before-After dan uji signifikansi Crosstab Chi-Square. Unit observasinya adalah catatan kejadian letupan konflik historis.", False, False),
+    ])
+
+    add_h4(doc, "B. Alur Logika Metodologis Before-After Analysis & Crosstabulation")
+    add_p(doc, [
+        ("Kerangka komparasi pra/pasca ekspansi serta tabulasi silang indikator konflik diilustrasikan pada ", False, False),
+        ("Bagan Alur 4.4", True, False),
+        (" berikut. Konfigurasi variabel uji Chi-Square dirinci pada Tabel 4.4a di bawah gambar.", False, False),
+    ])
+    add_caption(doc, "Bagan Alur 4.4: Alur Logika Metodologis Before-After Analysis & Crosstabulation")
+    if download_success_4_4:
+        try:
+            p_img = doc.add_paragraph()
+            p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p_img.add_run().add_picture(mermaid_png_path_4_4, width=Cm(15))
+        except Exception as exc:
+            print(f"[WARN] Gagal memasukkan gambar Mermaid 4.4 ke DOCX: {exc}")
+            p_err = doc.add_paragraph()
+            run(p_err, "[Gambar Flowchart Gagal Dimuat]", color=C_RED, pt=9)
+    else:
+        p_err = doc.add_paragraph()
+        run(p_err, "[Gambar Flowchart Gagal Diunduh, silakan periksa koneksi internet saat generate]", color=C_RED, pt=9)
+
+    add_caption(doc, "Tabel 4.4a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 4.4)")
+    add_table_1col(doc, konf_headers_44, konf_rows_44, [4.5, 11.0], ["L", "L"])
+
+    add_h4(doc, "C. Formulasi Matematis: Before-After, Chi-Square, dan Odds Ratio")
+    add_p(doc, [("Komparasi periode dan pengujian statistik dihitung menggunakan sistem formulasi matematis berikut:", False, False)])
+    add_formula(doc, "Rata-rata Konflik per Tahun", "K̄_p = N_p / T_p", [
+        ("K̄_p", "Rata-rata kasus konflik per tahun pada periode p."),
+        ("N_p", "Total letupan konflik pada periode p."),
+        ("T_p", "Jumlah tahun observasi pada periode p."),
+    ])
+    add_formula(doc, "Substitusi Before-After", f"K̄_Pra = {len(df_pra_44):,} / {tahun_pra_44} = {avg_pra_44:.1f}; K̄_Pasca = {len(df_pasca_44):,} / {tahun_pasca_44} = {avg_pasca_44:.1f}")
+    add_formula(doc, "Uji Independensi Chi-Square Pearson", "χ² = Σ [ ( O_ij - E_ij )² / E_ij ]", [
+        ("O_ij", "Frekuensi observasi pada sel baris i dan kolom j."),
+        ("E_ij", "Frekuensi harapan jika variabel X dan Y saling independen."),
+    ])
+    add_formula(doc, "Odds Ratio", "OR = ( a × d ) / ( b × c )", [
+        ("a,b,c,d", "Empat sel pada tabel kontinjensi 2x2."),
+    ])
+
+    add_h4(doc, "D. Matriks Hasil Uji Empiris: Before-After dan Skenario Crosstab")
+    add_caption(doc, "Tabel 4.11: Analisis Komparatif Before-After Pra vs Era Hilirisasi")
+    add_table_1col(doc, ["Periode", "Total Konflik", "Jumlah Tahun", "Kasus/Tahun", "Ditangkap", "Tewas"], before_after_rows_44, [3.2, 2.3, 2.0, 2.2, 2.0, 1.8], ["L", "C", "C", "C", "C", "C"])
+
+    add_caption(doc, "Tabel 4.12: Ringkasan Eksekutif Seluruh Skenario Crosstab Ekspansi vs Eskalasi Konflik")
+    add_table_1col(doc, ["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_44, [3.0, 3.3, 1.8, 1.8, 1.8, 2.3], ["L", "L", "C", "C", "C", "C"])
+
+    add_h4(doc, "E. Analisis Temuan Empiris: Validitas Statistik Eskalasi Konflik")
+    if sig_count_44 > 0:
+        finding_44 = f"Dari {total_scenarios_44} skenario pengujian, terdapat {sig_count_44} skenario yang terbukti SIGNIFIKAN. Tingginya Odds Ratio pada skenario yang signifikan menegaskan bahwa ekspansi operasi industri berasosiasi dengan peningkatan risiko sengketa lahan. Skenario yang tidak signifikan mengindikasikan bahwa dinamika sengketa lahan tersebar secara merata di berbagai sektor dan kurun waktu."
+    else:
+        finding_44 = f"Dari {total_scenarios_44} skenario pengujian, seluruhnya menunjukkan status TIDAK SIGNIFIKAN. Hal ini menunjukkan bahwa sengketa lahan dan tantangan penyelesaiannya terdistribusi secara konsisten di sepanjang waktu dan sektor."
+    add_p(doc, [(finding_44, False, False)])
+
+    add_h2(doc, "4.5 Peta Entitas Aktor: Korporasi dan Organisasi Masyarakat")
+    add_note_box(doc, "Sumber Data Resmi & Deskripsi Visualisasi", "Teks Bebas (Free-Text): data/processed/sulawesi_konflik_agraria_tanahkita.csv. Visualisasi dashboard menampilkan dua Horizontal Bar Chart berdampingan (Top 10 Entitas Korporasi Paling Dominan dan Top Aktor Proksi & Vigilante Terdeteksi) hasil ekstraksi teks berbasis NLP Regex dari korpus narasi seluruh kasus agraria.")
+
+    add_h4(doc, "A. Pengantar & Kerangka Narasi")
+    add_p(doc, [
+        ("Analisis entitas aktor berbasis pemrosesan teks (string parsing) terhadap catatan kronologi dokumentasi TanahKita memetakan keterlibatan berbagai pihak dalam sengketa agraria. Hasil ekstraksi teks mengidentifikasi entitas korporasi, lembaga pemerintah, serta organisasi masyarakat sipil yang tercatat dalam dokumentasi kasus. ", False, False),
+        (f"Korpus dibangun dari penggabungan kolom judul, deskripsi, dan narasi pada {n_kasus_45:,} kasus agraria (nasional) untuk memetakan orkestrasi struktural dan modus operandi aktor secara utuh, termasuk memvalidasi indikasi konsentrasi kekuasaan dan monopoli penguasaan ruang oleh segelintir konglomerasi besar melalui seberapa sering nama entitas muncul dalam sengketa tanah.", False, False),
+    ])
+
+    add_h4(doc, "B. Alur Logika Metodologis Frequency Profiling (Text Parsing NLP)")
+    add_p(doc, [
+        ("Kerangka ekstraksi entitas berbasis Regular Expressions (RegEx) dan penghitungan frekuensi penyebutan diilustrasikan pada ", False, False),
+        ("Bagan Alur 4.5", True, False),
+        (" berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan Frequency Profiling deskriptif atas kemunculan entitas dalam korpus teks.", False, False),
+    ])
+    add_caption(doc, "Bagan Alur 4.5: Alur Logika Analisis Frequency Profiling Entitas Aktor")
+    if download_success_4_5:
+        try:
+            p_img = doc.add_paragraph()
+            p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p_img.add_run().add_picture(mermaid_png_path_4_5, width=Cm(15))
+        except Exception as exc:
+            print(f"[WARN] Gagal memasukkan gambar Mermaid 4.5 ke DOCX: {exc}")
+            p_err = doc.add_paragraph()
+            run(p_err, "[Gambar Flowchart Gagal Dimuat]", color=C_RED, pt=9)
+    else:
+        p_err = doc.add_paragraph()
+        run(p_err, "[Gambar Flowchart Gagal Diunduh, silakan periksa koneksi internet saat generate]", color=C_RED, pt=9)
+
+    add_h4(doc, "C. Formulasi Matematis: Konstruksi Korpus dan Token Counting")
+    add_p(doc, [("Kuantifikasi frekuensi penyebutan entitas dihitung menggunakan sistem formulasi matematis berikut:", False, False)])
+    add_formula(doc, "Persamaan Konstruksi Korpus Teks", "Korpus = Gabungan ( judul_k , deskripsi_k , narasi_k )   ;   untuk k = 1 s.d. N", [
+        ("Korpus", "Teks gabungan seluruh dokumentasi kasus sebagai bahan ekstraksi entitas (Variabel Independen)."),
+        ("judul_k, deskripsi_k, narasi_k", "Kolom teks bebas pada kasus ke-k dalam repositori TanahKita."),
+        ("N", f"Jumlah kasus agraria dalam repositori ({n_kasus_45:,} kasus)."),
+    ])
+    add_formula(doc, "Persamaan Token Counting Frekuensi Entitas", "Frekuensi_a = Σ ( Match_i,a )   ;   untuk seluruh kemunculan pola entitas a dalam Korpus", [
+        ("Frekuensi_a", "Jumlah absolut penyebutan (mentions) entitas a dalam korpus (Variabel Dependen)."),
+        ("Match_i,a", "Kemunculan ke-i dari pola RegEx entitas a; pola korporasi mendeteksi awalan PT/CV diikuti nama kapital (maksimum 4 kata), dengan normalisasi varian PTPN menjadi satu entitas."),
+        ("Pola Aktor Proksi", "Deteksi kata kunci Preman, Ormas, Satgas, PAM Swakarsa, Pemuda Pancasila, GRIB, Laskar, Oknum, Security, Satpam, Centeng, Beking beserta frasa lanjutannya, dipotong pada stopword pertama."),
+    ])
+
+    add_h4(doc, "D. Matriks Hasil Uji Empiris: Frekuensi Entitas Korporasi dan Aktor Proksi")
+    add_p(doc, [
+        (f"Sepuluh entitas korporasi paling dominan (dari total {n_entitas_corp_45:,} entitas terdeteksi dengan {total_mentions_corp_45:,} penyebutan) disajikan pada ", False, False),
+        ("Tabel 4.13", True, False),
+        (" berikut:", False, False),
+    ])
+    add_caption(doc, "Tabel 4.13: Top 10 Entitas Korporasi Paling Dominan dalam Dokumentasi Konflik")
+    add_table_1col(doc, ["Entitas Korporasi", "Frekuensi Penyebutan"], corp_rows_45, [9.5, 6.0], ["L", "C"])
+
+    add_p(doc, [
+        (f"Sepuluh aktor proksi dan vigilante paling sering terdeteksi (dari total {n_entitas_civ_45:,} varian frasa dengan {total_mentions_civ_45:,} penyebutan) disajikan pada ", False, False),
+        ("Tabel 4.14", True, False),
+        (" berikut:", False, False),
+    ])
+    add_caption(doc, "Tabel 4.14: Top Aktor Proksi & Vigilante Terdeteksi dalam Dokumentasi Konflik")
+    add_table_1col(doc, ["Aktor Proksi / Vigilante", "Frekuensi Penyebutan"], civil_rows_45, [9.5, 6.0], ["L", "C"])
+
+    add_h4(doc, "E. Analisis Temuan Empiris: Orkestrasi Konflik dan Pemetaan Oligarki")
+    add_p(doc, [
+        ("1. ", True, False), ("Dominasi Entitas Korporasi: ", True, False),
+        (f"Ekstraksi teks mencatat frekuensi penyebutan entitas {top1_corp_name_45} tertinggi dengan {top1_corp_freq_45:,} catatan kasus terpisah, memvalidasi indikasi konsentrasi kekuasaan dan monopoli penguasaan ruang oleh segelintir konglomerasi besar.\n", False, False),
+        ("2. ", True, False), ("Orkestrasi Horizontal Aktor Proksi: ", True, False),
+        (f"Kemunculan kelompok sipil seperti {top1_civ_name_45} (terdeteksi hingga {top1_civ_freq_45:,} kali) menangkap besarnya skala orkestrasi horizontal. Korporasi seringkali menggunakan jasa pengamanan swakarsa, kelompok preman, hingga ormas vigilante sebagai 'bemper proksi' untuk mengintimidasi warga lokal dan memecah belah solidaritas akar rumput.", False, False),
+    ])
+
     docx_path = tool_dir / "Metodologi_Bab4_Ruang_Hidup.docx"
     doc.save(str(docx_path))
     print(f"  [OK] Tersimpan: {docx_path}")
@@ -853,6 +1140,46 @@ h4 {{ color: #A5D6A7; }}
 {html_table(["Tahun", "Sektor", "Perusahaan Terlibat", "Ditangkap", "Tewas", "Narasi Singkat"], kekerasan_rows)}
 <h4>E. Analisis Temuan Empiris</h4>
 <p>Keberadaan kasus kriminalisasi di sekitar area konsesi, terutama pada sektor <strong>{top_sektor}</strong>, mengindikasikan pentingnya jaminan perlindungan ruang sipil dan penghormatan HAM dalam setiap proses pembangunan.</p>
+<h2>4.4 Pembuktian Statistik: Ekspansi vs Eskalasi Konflik</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Base Data Cross-Section: <code>data/processed/sulawesi_konflik_agraria_tanahkita.csv</code>. Visualisasi dashboard menggunakan Before-After Analysis & Crosstabulation.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Hipotesis utama dalam evaluasi ini adalah bahwa industrialisasi dan ekspansi korporasi berbanding lurus dengan eskalasi konflik dan represi terhadap masyarakat. Analisis dibagi menjadi komparasi metrik Before-After dan uji signifikansi Crosstab Chi-Square.</p>
+<h4>B. Alur Logika Metodologis Before-After Analysis & Crosstabulation</h4>
+<div class="mermaid">{mermaid_str_4_4}</div>
+<div class="table-caption">Tabel 4.4a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 4.4)</div>
+{html_table(konf_headers_44, konf_rows_44)}
+<h4>C. Formulasi Matematis</h4>
+<div class="formula">K̄_p = N_p / T_p</div>
+<div class="formula">K̄_Pra = {len(df_pra_44):,} / {tahun_pra_44} = {avg_pra_44:.1f}; K̄_Pasca = {len(df_pasca_44):,} / {tahun_pasca_44} = {avg_pasca_44:.1f}</div>
+<div class="formula">χ² = Σ [ ( O_ij - E_ij )² / E_ij ]</div>
+<div class="formula">OR = ( a × d ) / ( b × c )</div>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 4.11: Analisis Komparatif Before-After Pra vs Era Hilirisasi</div>
+{html_table(["Periode", "Total Konflik", "Jumlah Tahun", "Kasus/Tahun", "Ditangkap", "Tewas"], before_after_rows_44)}
+<div class="table-caption">Tabel 4.12: Ringkasan Eksekutif Seluruh Skenario Crosstab Ekspansi vs Eskalasi Konflik</div>
+{html_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_44)}
+<h4>E. Analisis Temuan Empiris</h4>
+<p>{finding_44}</p>
+
+<h2>4.5 Peta Entitas Aktor: Korporasi dan Organisasi Masyarakat</h2>
+<div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Teks Bebas (Free-Text): <code>data/processed/sulawesi_konflik_agraria_tanahkita.csv</code>. Visualisasi dashboard menampilkan dua Horizontal Bar Chart berdampingan (Top 10 Entitas Korporasi Paling Dominan dan Top Aktor Proksi & Vigilante Terdeteksi) hasil ekstraksi teks berbasis NLP Regex dari korpus narasi seluruh kasus agraria.</div>
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Analisis entitas aktor berbasis pemrosesan teks (string parsing) terhadap catatan kronologi dokumentasi TanahKita memetakan keterlibatan berbagai pihak dalam sengketa agraria. Korpus dibangun dari penggabungan kolom <code>judul</code>, <code>deskripsi</code>, dan <code>narasi</code> pada <strong>{n_kasus_45:,} kasus agraria</strong> (nasional) untuk memetakan orkestrasi struktural dan modus operandi aktor secara utuh, termasuk memvalidasi indikasi konsentrasi kekuasaan oleh segelintir konglomerasi besar.</p>
+<h4>B. Alur Logika Metodologis Frequency Profiling (Text Parsing NLP)</h4>
+<p>Kerangka ekstraksi entitas berbasis Regular Expressions (RegEx) dan penghitungan frekuensi penyebutan diilustrasikan pada <strong>Bagan Alur 4.5</strong> berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan Frequency Profiling deskriptif atas kemunculan entitas dalam korpus teks.</p>
+<div class="table-caption">Bagan Alur 4.5: Alur Logika Analisis Frequency Profiling Entitas Aktor</div>
+<div class="mermaid">{mermaid_str_4_5}</div>
+<h4>C. Formulasi Matematis: Konstruksi Korpus dan Token Counting</h4>
+<div class="formula">Korpus = Gabungan ( judul_k , deskripsi_k , narasi_k )   ;   untuk k = 1 s.d. N</div>
+<div class="formula">Frekuensi_a = Σ ( Match_i,a )   ;   untuk seluruh kemunculan pola entitas a dalam Korpus</div>
+<p>Pola korporasi mendeteksi awalan PT/CV diikuti nama kapital (maksimum 4 kata) dengan normalisasi varian PTPN; pola aktor proksi mendeteksi kata kunci Preman, Ormas, Satgas, PAM Swakarsa, Pemuda Pancasila, GRIB, Laskar, Oknum, Security, Satpam, Centeng, Beking beserta frasa lanjutannya (dipotong pada stopword pertama).</p>
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 4.13: Top 10 Entitas Korporasi Paling Dominan dalam Dokumentasi Konflik</div>
+{html_table(["Entitas Korporasi", "Frekuensi Penyebutan"], corp_rows_45)}
+<div class="table-caption">Tabel 4.14: Top Aktor Proksi & Vigilante Terdeteksi dalam Dokumentasi Konflik</div>
+{html_table(["Aktor Proksi / Vigilante", "Frekuensi Penyebutan"], civil_rows_45)}
+<h4>E. Analisis Temuan Empiris</h4>
+<p><strong>1. Dominasi Entitas Korporasi:</strong> entitas <strong>{top1_corp_name_45}</strong> tercatat tertinggi dengan <strong>{top1_corp_freq_45:,} catatan kasus terpisah</strong> (dari {n_entitas_corp_45:,} entitas dan {total_mentions_corp_45:,} penyebutan), memvalidasi indikasi konsentrasi kekuasaan dan monopoli penguasaan ruang. <strong>2. Orkestrasi Horizontal Aktor Proksi:</strong> kelompok sipil seperti <strong>{top1_civ_name_45}</strong> terdeteksi hingga <strong>{top1_civ_freq_45:,} kali</strong> — korporasi seringkali menggunakan pengamanan swakarsa, kelompok preman, hingga ormas vigilante sebagai "bemper proksi" untuk mengintimidasi warga lokal dan memecah belah solidaritas akar rumput.</p>
 </body>
 </html>
 """
@@ -970,6 +1297,75 @@ h4 {{ color: #A5D6A7; }}
         "",
         "#### E. Analisis Temuan Empiris: Penyempitan Ruang Sipil dan Risiko HAM",
         f"Keberadaan kasus kriminalisasi di sekitar area konsesi, terutama pada sektor **{top_sektor}**, mengindikasikan pentingnya jaminan perlindungan ruang sipil dan penghormatan HAM dalam setiap proses pembangunan. Catatan ini menunjukkan perlunya pendekatan hukum yang adil, penyelesaian konflik secara ramah HAM, serta perlindungan bagi pejuang lingkungan dan komunitas lokal.",
+        "",
+        "## 4.4 Pembuktian Statistik: Ekspansi vs Eskalasi Konflik",
+        "",
+        "> **Sumber Data Resmi & Deskripsi Visualisasi:** Base Data Cross-Section: `data/processed/sulawesi_konflik_agraria_tanahkita.csv`. Visualisasi dashboard menggunakan *Before-After Analysis & Crosstabulation* untuk menguji hubungan antara indikator ekspansi dan eskalasi konflik.",
+        "",
+        "#### A. Pengantar & Kerangka Narasi",
+        "Hipotesis utama dalam evaluasi ini adalah bahwa **industrialisasi dan ekspansi korporasi** berbanding lurus dengan **eskalasi konflik dan represi** terhadap masyarakat. Analisis dibagi menjadi dua bagian: komparasi metrik Before-After dan uji signifikansi Crosstab Chi-Square. Unit observasinya adalah catatan kejadian letupan konflik historis.",
+        "",
+        "#### B. Alur Logika Metodologis Before-After Analysis & Crosstabulation",
+        "```mermaid",
+        mermaid_str_4_4,
+        "```",
+        "",
+        "##### Tabel 4.4a: Konfigurasi Variabel Uji Chi-Square (Sub-bab 4.4)",
+        markdown_table(konf_headers_44, konf_rows_44),
+        "",
+        "#### C. Formulasi Matematis: Before-After, Chi-Square, dan Odds Ratio",
+        "```text",
+        "K̄_p = N_p / T_p",
+        f"K̄_Pra = {len(df_pra_44):,} / {tahun_pra_44} = {avg_pra_44:.1f}; K̄_Pasca = {len(df_pasca_44):,} / {tahun_pasca_44} = {avg_pasca_44:.1f}",
+        "χ² = Σ [ ( O_ij - E_ij )² / E_ij ]",
+        "OR = ( a × d ) / ( b × c )",
+        "```",
+        "",
+        "#### D. Matriks Hasil Uji Empiris",
+        "##### Tabel 4.11: Analisis Komparatif Before-After Pra vs Era Hilirisasi",
+        markdown_table(["Periode", "Total Konflik", "Jumlah Tahun", "Kasus/Tahun", "Ditangkap", "Tewas"], before_after_rows_44),
+        "",
+        "##### Tabel 4.12: Ringkasan Eksekutif Seluruh Skenario Crosstab Ekspansi vs Eskalasi Konflik",
+        markdown_table(["Variabel Independen (X)", "Variabel Dependen (Y)", "Chi-Square", "P-Value", "Odds Ratio", "Kesimpulan"], summary_rows_44),
+        "",
+        "#### E. Analisis Temuan Empiris: Validitas Statistik Eskalasi Konflik",
+        finding_44,
+        "",
+        "## 4.5 Peta Entitas Aktor: Korporasi dan Organisasi Masyarakat",
+        "",
+        "> **Sumber Data Resmi & Deskripsi Visualisasi:** Teks Bebas (Free-Text): `data/processed/sulawesi_konflik_agraria_tanahkita.csv`. Visualisasi dashboard menampilkan dua Horizontal Bar Chart berdampingan (Top 10 Entitas Korporasi Paling Dominan dan Top Aktor Proksi & Vigilante Terdeteksi) hasil ekstraksi teks berbasis NLP Regex dari korpus narasi seluruh kasus agraria.",
+        "",
+        "#### A. Pengantar & Kerangka Narasi",
+        f"Analisis entitas aktor berbasis pemrosesan teks (*string parsing*) terhadap catatan kronologi dokumentasi TanahKita memetakan keterlibatan berbagai pihak dalam sengketa agraria. Korpus dibangun dari penggabungan kolom `judul`, `deskripsi`, dan `narasi` pada **{n_kasus_45:,} kasus agraria** (nasional) untuk memetakan orkestrasi struktural dan modus operandi aktor secara utuh, termasuk memvalidasi indikasi konsentrasi kekuasaan oleh segelintir konglomerasi besar.",
+        "",
+        "#### B. Alur Logika Metodologis Frequency Profiling (Text Parsing NLP)",
+        "Kerangka ekstraksi entitas berbasis Regular Expressions (RegEx) dan penghitungan frekuensi penyebutan diilustrasikan pada **Bagan Alur 4.5** berikut. Sub-bab ini tidak menggunakan uji inferensial Chi-Square, melainkan Frequency Profiling deskriptif atas kemunculan entitas dalam korpus teks.",
+        "",
+        "##### Bagan Alur 4.5: Alur Logika Analisis Frequency Profiling Entitas Aktor",
+        "```mermaid",
+        mermaid_str_4_5,
+        "```",
+        "",
+        "#### C. Formulasi Matematis: Konstruksi Korpus dan Token Counting",
+        "Kuantifikasi frekuensi penyebutan entitas dihitung menggunakan sistem formulasi matematis berikut:",
+        "",
+        "```text",
+        "Korpus = Gabungan ( judul_k , deskripsi_k , narasi_k )   ;   untuk k = 1 s.d. N",
+        "Frekuensi_a = Σ ( Match_i,a )   ;   untuk seluruh kemunculan pola entitas a dalam Korpus",
+        "```",
+        "",
+        "Pola korporasi mendeteksi awalan PT/CV diikuti nama kapital (maksimum 4 kata) dengan normalisasi varian PTPN; pola aktor proksi mendeteksi kata kunci Preman, Ormas, Satgas, PAM Swakarsa, Pemuda Pancasila, GRIB, Laskar, Oknum, Security, Satpam, Centeng, Beking beserta frasa lanjutannya (dipotong pada stopword pertama).",
+        "",
+        "#### D. Matriks Hasil Uji Empiris",
+        "##### Tabel 4.13: Top 10 Entitas Korporasi Paling Dominan dalam Dokumentasi Konflik",
+        markdown_table(["Entitas Korporasi", "Frekuensi Penyebutan"], corp_rows_45),
+        "",
+        "##### Tabel 4.14: Top Aktor Proksi & Vigilante Terdeteksi dalam Dokumentasi Konflik",
+        markdown_table(["Aktor Proksi / Vigilante", "Frekuensi Penyebutan"], civil_rows_45),
+        "",
+        "#### E. Analisis Temuan Empiris: Orkestrasi Konflik dan Pemetaan Oligarki",
+        f"1. **Dominasi Entitas Korporasi:** entitas **{top1_corp_name_45}** tercatat tertinggi dengan **{top1_corp_freq_45:,} catatan kasus terpisah** (dari {n_entitas_corp_45:,} entitas terdeteksi dan {total_mentions_corp_45:,} total penyebutan), memvalidasi indikasi konsentrasi kekuasaan dan monopoli penguasaan ruang oleh segelintir konglomerasi besar.",
+        f"2. **Orkestrasi Horizontal Aktor Proksi:** kelompok sipil seperti **{top1_civ_name_45}** terdeteksi hingga **{top1_civ_freq_45:,} kali** — korporasi seringkali menggunakan pengamanan swakarsa, kelompok preman, hingga ormas vigilante sebagai 'bemper proksi' untuk mengintimidasi warga lokal dan memecah belah solidaritas akar rumput.",
         "",
     ]
     md_path = tool_dir / "Metodologi_Bab4_Ruang_Hidup.md"
