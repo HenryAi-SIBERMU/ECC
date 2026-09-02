@@ -8,8 +8,10 @@ import plotly.graph_objects as go
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from src.components.sidebar import render_sidebar
-from tools.algo_skoring_pulau.kalkulasi_pulau_sulawesi import kalkulasi_skor_pulau_sulawesi
-from tools.algo_skoring_provinsi_ZscoreEWM.kalkulasi_provinsi_sulawesi import kalkulasi_skor_provinsi_sulawesi
+import tools.algo_skoring_pulau.kalkulasi_pulau_sulawesi as algo_pulau_mod
+import tools.algo_skoring_provinsi_ZscoreEWM.kalkulasi_provinsi_sulawesi as algo_prov_mod
+kalkulasi_skor_pulau_sulawesi = algo_pulau_mod.kalkulasi_skor_pulau_sulawesi
+kalkulasi_skor_provinsi_sulawesi = algo_prov_mod.kalkulasi_skor_provinsi_sulawesi
 
 def get_spa_aktual(prov: str) -> float:
     # Diekstrak dari raw_kemenkes_puskesmas_2024.csv Baris 39 (Persentase Puskesmas SPA)
