@@ -716,15 +716,16 @@ Seluruh variabel kuantitatif, kategori analisis, satuan ukur, periode tahun obse
 ##### Tabel 1.8: Matriks Indikator dan Sumber Data Primer Resmi Bab 1
 | No | Nama Indikator | Kategori Analisis | Satuan Ukur | Cakupan Tahun | Institusi & Sumber Data Resmi |
 | :---: | :--- | :--- | :---: | :---: | :--- |
-| 1 | Izin Usaha Pertambangan (IUP) Baru | Faktor Tekanan Ekstraktif | Unit Izin | 2014–2024 | Kementerian ESDM (Minerbaone) |
-| 2 | Luas Wilayah Konsesi Tambang Baru | Faktor Tekanan Ekstraktif | Hektar (Ha) | 2014–2024 | Kementerian ESDM (Minerbaone) |
-| 3 | Kapasitas Terpasang PLTU Captive | Infrastruktur Energi Khusus | Megawatt (MW) | 2014–2024 | Global Energy Monitor (GEM) |
-| 4 | Fasilitas Pengolahan & Pemurnian (Smelter) | Fasilitas Industri Hilir | Unit Fasilitas | 2014–2024 | Kementerian ESDM & Studi Industri |
-| 5 | Realisasi Investasi PMDN | Arus Modal Domestik | Triliun Rupiah | 2016–2024 | Kementerian Investasi / BKPM |
-| 6 | PDRB Menurut 17 Lapangan Usaha | Struktur Ekonomi Makro | Triliun Rupiah | 2016–2024 | Badan Pusat Statistik (BPS Provinsi) |
-| 7 | PDRB Kabupaten Sentra Tambang | Struktur Ekonomi Daerah | Triliun Rupiah | 2016–2024 | BPS Kabupaten se-Sulteng |
-| 8 | Luas Kehilangan Hutan Komoditas | Dampak Tutupan Lahan | Hektar (Ha) | 2014–2023 | Global Forest Watch (GFW) |
-| 9 | Simpul Dermaga & Terminal Khusus Ekspor | Infrastruktur Rantai Pasok | Titik Koordinat & DWT | 2014–2024 | KNKT, Perpres PSN, Lap. Terbuka |
+| 1 | Izin Usaha Pertambangan (IUP) Baru | Faktor Tekanan Ekstraktif | Unit Izin | 2014–2024 | Data Registry ESDM MODI (Minerbaone) |
+| 2 | Luas Wilayah Konsesi Tambang Baru | Faktor Tekanan Ekstraktif | Hektar (Ha) | 2014–2024 | Data Registry ESDM MODI (Minerbaone) |
+| 3 | Kapasitas Terpasang PLTU Captive | Infrastruktur Energi Khusus | Megawatt (MW) | 2014–2024 | NGO (Global Energy Monitor / GEM) |
+| 4 | Fasilitas Smelter Nikel | Fasilitas Industri Hilir | Unit Fasilitas | 2014–2024 | Database Smelter CGS & ESDM MODI |
+| 5 | Realisasi Investasi PMDN & Nikel | Arus Modal Domestik | Triliun Rupiah | 2016–2024 | API BPS & BKPM |
+| 6 | PDRB Provinsi (Ekstraktif vs Akar Rumput) | Struktur Ekonomi Makro | Triliun Rupiah | 2016–2024 | API BPS (Subject 52) |
+| 7 | PDRB Kabupaten Sentra Tambang | Struktur Ekonomi Daerah | Triliun Rupiah | 2016–2024 | API BPS (Subject 52) |
+| 8 | Pendapatan Asli Daerah (PAD) & Breakdown Pajak | Kapasitas Fiskal Daerah | Triliun Rupiah | 2016–2024 | API BPS |
+| 9 | Luas Total Deforestasi Alam & Komoditas | Dampak Ekologis | Hektar (Ha) | 2014–2023 | Global Forest Watch (GFW API) |
+| 10 | Simpul Pelabuhan & Terminal Logistik | Infrastruktur Rantai Pasok | Titik Koordinat & DWT | 2014–2024 | Laporan Publik (KNKT, Perpres PSN, Korporasi) |
 
 ---
 

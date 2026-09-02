@@ -26,7 +26,7 @@ h4 { color: #A5D6A7; }
 <h2>2.1. Dampak Limbah Tailing: Konsentrasi Smelter vs Indeks Kualitas Air (IKA)</h2>
 <div class="note-box"><strong>Sumber Data Resmi & Deskripsi Visualisasi:</strong> Data Smelter, IKA, Limbah B3, dan Sungai Tercemar dari folder <code>data/processed</code>. Visualisasi dashboard menampilkan peta choropleth dan uji Crosstabulation SPSS-style.</div>
 <h4>A. Pengantar & Kerangka Narasi</h4>
-<p>Pengoperasian <strong>778 fasilitas mega-smelter</strong> yang didukung oleh kapasitas <strong>9,825 MW PLTU Captive</strong> meningkatkan intensitas emisi dan beban lingkungan di Pulau Sulawesi. Data menunjukkan konversi tutupan hutan mencapai <strong>1,001,654 Hektar</strong>, estimasi timbulan limbah B3/tailing sebesar <strong>20.9 Juta Ton</strong> per tahun, dan rata-rata IKA tahun 2023 sebesar <strong>58.8</strong>.</p>
+<p>Pengoperasian <strong>778 fasilitas mega-smelter</strong> yang didukung oleh kapasitas <strong>9,825 MW PLTU Captive</strong> meningkatkan intensitas emisi dan beban lingkungan di Pulau Sulawesi. Data menunjukkan konversi tutupan hutan mencapai <strong>1,001,654 Hektar</strong>, estimasi timbulan limbah B3/tailing sebesar <strong>20.9 Juta Ton</strong> per tahun, dan rata-rata IKA tahun 2024 sebesar <strong>59.7</strong>.</p>
 <h4>B. Alur Logika Metodologis Analisis Konsentrasi Smelter vs IKA</h4>
 <div class="mermaid">flowchart LR
     subgraph Data_Input["1. Input Data Dashboard"]
@@ -50,11 +50,11 @@ h4 { color: #A5D6A7; }
 <table>
 <thead><tr><th class="data-th">Komponen Uji</th><th class="data-th">Definisi Variabel (Sub-bab 2.1)</th></tr></thead>
 <tbody>
-<tr><td class="data-td">Variabel Independen (X)</td><td class="data-td">Jumlah Smelter per Provinsi / Kepadatan Smelter (Fasilitas)</td></tr>
-<tr class="data-tr-even"><td class="data-td">Variabel Dependen (Y)</td><td class="data-td">Indeks Kualitas Air (IKA)</td></tr>
-<tr><td class="data-td">Hipotesis Nol (H0)</td><td class="data-td">Kepadatan smelter tidak berhubungan dengan Indeks Kualitas Air.</td></tr>
-<tr class="data-tr-even"><td class="data-td">Hipotesis Alternatif (H1)</td><td class="data-td">Ada hubungan antara tingginya kepadatan smelter dengan kondisi Indeks Kualitas Air.</td></tr>
-<tr><td class="data-td">Threshold Kategori</td><td class="data-td">Nilai Median Data Panel (N=48)</td></tr>
+<tr><td class="data-td">Variabel Independen (X)</td><td class="data-td">Jumlah_Smelter: Total fasilitas smelter (beroperasi maupun konstruksi).</td></tr>
+<tr class="data-tr-even"><td class="data-td">Variabel Dependen (Y)</td><td class="data-td">Indeks Kualitas Air: Skor baku mutu air per provinsi.</td></tr>
+<tr><td class="data-td">Hipotesis Nol (H0)</td><td class="data-td">Tidak ada hubungan signifikan secara statistik antara kepadatan smelter dengan Indeks Kualitas Air.</td></tr>
+<tr class="data-tr-even"><td class="data-td">Decision Rule (Alpha 5%)</td><td class="data-td">Jika P-Value < 0.05, maka Tolak H0 (Terbukti signifikan bahwa smelter menurunkan mutu air).</td></tr>
+<tr><td class="data-td">Threshold Kategori</td><td class="data-td">Nilai Median Data Panel 2016-2024 (N=54); variabel kontinu dikonversi menjadi biner.</td></tr>
 </tbody>
 </table>
 <h4>C. Formulasi Matematis: Kalkulasi Konsentrasi Spasial &amp; Uji Chi-Square</h4>
@@ -66,24 +66,24 @@ h4 { color: #A5D6A7; }
 <div class="formula">Odds_Ratio (OR) = ( a * d ) / ( b * c )</div>
 <h4>D. Matriks Hasil Uji Empiris</h4>
 <p>Akumulasi pemusatan fasilitas smelter, nilai IKA, estimasi timbulan limbah B3, dan laporan sungai/pesisir tercemar pada masing-masing provinsi dapat dilihat secara empiris pada <strong>Tabel 2.1</strong> berikut:</p>
-<div class="table-caption">Tabel 2.1: Rincian Empiris Konsentrasi Smelter, IKA, Limbah B3, dan Sungai Tercemar (2023)</div>
+<div class="table-caption">Tabel 2.1: Rincian Empiris Konsentrasi Smelter, IKA, Limbah B3, dan Sungai Tercemar (2024)</div>
 <table>
 <thead><tr><th class="data-th">Provinsi</th><th class="data-th">Jumlah Smelter</th><th class="data-th">IKA</th><th class="data-th">Limbah B3 (Ton/Tahun)</th><th class="data-th">Sungai Tercemar</th><th class="data-th">Daftar Sungai/Pesisir</th></tr></thead>
 <tbody>
-<tr><td class="data-td">Sulawesi Tengah</td><td class="data-td">344</td><td class="data-td">63.6</td><td class="data-td">12,000,000</td><td class="data-td">4</td><td class="data-td">Sungai Bahodopi, Sungai Laroenai, Sungai Morowali, Pesisir Fatufia</td></tr>
-<tr class="data-tr-even"><td class="data-td">Sulawesi Tenggara</td><td class="data-td">262</td><td class="data-td">61.3</td><td class="data-td">7,700,000</td><td class="data-td">3</td><td class="data-td">Sungai Lasolo, Sungai Lalindu, Sungai Konaweha</td></tr>
-<tr><td class="data-td">Sulawesi Selatan</td><td class="data-td">111</td><td class="data-td">58.0</td><td class="data-td">1,000,000</td><td class="data-td">1</td><td class="data-td">Pesisir dan Sungai Bantaeng</td></tr>
-<tr class="data-tr-even"><td class="data-td">Sulawesi Barat</td><td class="data-td">39</td><td class="data-td">58.8</td><td class="data-td">0</td><td class="data-td">0</td><td class="data-td">-</td></tr>
-<tr><td class="data-td">Sulawesi Utara</td><td class="data-td">15</td><td class="data-td">52.1</td><td class="data-td">0</td><td class="data-td">0</td><td class="data-td">-</td></tr>
-<tr class="data-tr-even"><td class="data-td">Gorontalo</td><td class="data-td">7</td><td class="data-td">58.7</td><td class="data-td">0</td><td class="data-td">0</td><td class="data-td">-</td></tr>
+<tr><td class="data-td">Sulawesi Tengah</td><td class="data-td">344</td><td class="data-td">62.1</td><td class="data-td">12,000,000</td><td class="data-td">4</td><td class="data-td">Sungai Bahodopi, Sungai Laroenai, Sungai Morowali, Pesisir Fatufia</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Tenggara</td><td class="data-td">262</td><td class="data-td">65.3</td><td class="data-td">7,700,000</td><td class="data-td">3</td><td class="data-td">Sungai Lasolo, Sungai Lalindu, Sungai Konaweha</td></tr>
+<tr><td class="data-td">Sulawesi Selatan</td><td class="data-td">111</td><td class="data-td">58.5</td><td class="data-td">1,000,000</td><td class="data-td">1</td><td class="data-td">Pesisir dan Sungai Bantaeng</td></tr>
+<tr class="data-tr-even"><td class="data-td">Sulawesi Barat</td><td class="data-td">39</td><td class="data-td">55.9</td><td class="data-td">0</td><td class="data-td">0</td><td class="data-td">-</td></tr>
+<tr><td class="data-td">Sulawesi Utara</td><td class="data-td">15</td><td class="data-td">58.2</td><td class="data-td">0</td><td class="data-td">0</td><td class="data-td">-</td></tr>
+<tr class="data-tr-even"><td class="data-td">Gorontalo</td><td class="data-td">7</td><td class="data-td">58.1</td><td class="data-td">0</td><td class="data-td">0</td><td class="data-td">-</td></tr>
 </tbody>
 </table>
-<p>Penerapan sistem pengujian statistik tabulasi silang pada data panel 6 provinsi selama periode 2016-2023 (total 48 observasi valid) disajikan secara ringkas pada <strong>Tabel 2.2</strong> berikut:</p>
+<p>Penerapan sistem pengujian statistik tabulasi silang pada data panel 6 provinsi selama periode 2016-2024 (total 54 observasi valid) disajikan secara ringkas pada <strong>Tabel 2.2</strong> berikut:</p>
 <div class="table-caption">Tabel 2.2: Ringkasan Eksekutif Skenario Crosstab Smelter vs IKA Bab 2</div>
 <table>
 <thead><tr><th class="data-th">Variabel Independen (X)</th><th class="data-th">Variabel Dependen (Y)</th><th class="data-th">Chi-Square (&chi;&sup2;)</th><th class="data-th">P-Value</th><th class="data-th">Odds Ratio</th><th class="data-th">Kesimpulan</th></tr></thead>
 <tbody>
-<tr><td class="data-td">Kepadatan Smelter (Fasilitas)</td><td class="data-td">Indeks Kualitas Air (IKA)</td><td class="data-td">2.083</td><td class="data-td">p = 0.1489</td><td class="data-td">0.4</td><td class="data-td">TIDAK SIGNIFIKAN</td></tr>
+<tr><td class="data-td">Kepadatan Smelter (Fasilitas)</td><td class="data-td">Indeks Kualitas Air (IKA)</td><td class="data-td">2.667</td><td class="data-td">0.102</td><td class="data-td">0.35</td><td class="data-td">TIDAK SIGNIFIKAN</td></tr>
 </tbody>
 </table>
 <h4>E. Analisis Temuan Empiris</h4>
@@ -117,7 +117,7 @@ h4 { color: #A5D6A7; }
 <table>
 <thead><tr><th class="data-th">Variabel Independen (X)</th><th class="data-th">Variabel Dependen (Y)</th><th class="data-th">Chi-Square (&chi;&sup2;)</th><th class="data-th">P-Value</th><th class="data-th">Odds Ratio</th><th class="data-th">Kesimpulan</th></tr></thead>
 <tbody>
-<tr><td class="data-td">Kapasitas PLTU Captive (MW)</td><td class="data-td">Indeks Kualitas Udara (IKU)</td><td class="data-td">0.000</td><td class="data-td">p = 1.0000</td><td class="data-td">Infinite</td><td class="data-td">TIDAK SIGNIFIKAN</td></tr>
+<tr><td class="data-td">Kapasitas PLTU (MW)</td><td class="data-td">Indeks Kualitas Udara (IKU)</td><td class="data-td">0.000</td><td class="data-td">1.000</td><td class="data-td">0.00</td><td class="data-td">TIDAK SIGNIFIKAN</td></tr>
 </tbody>
 </table>
 <h4>E. Analisis Temuan Empiris</h4>

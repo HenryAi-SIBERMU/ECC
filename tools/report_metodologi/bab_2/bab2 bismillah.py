@@ -62,6 +62,22 @@ def fmt_p(val):
     return f"= {val:.4f}"
 
 
+def fmt_p_summary(val):
+    if pd.isna(val):
+        return "NaN"
+    if val < 0.001:
+        return "< 0.001"
+    return f"{val:.3f}"
+
+
+def fmt_p_summary(val):
+    if pd.isna(val):
+        return "NaN"
+    if val < 0.001:
+        return "< 0.001"
+    return f"{val:.3f}"
+
+
 def download_mermaid_png(mermaid_str, filepath):
     try:
         encoded = base64.urlsafe_b64encode(mermaid_str.encode("utf-8")).decode("utf-8")
@@ -414,9 +430,9 @@ def generate_all_bab2():
     df_sungai = pd.read_csv(data_dir / "sulawesi_sungai_tercemar.csv")
     df_iku = pd.read_csv(data_dir / "sulawesi_iku_2015_2024.csv")
 
-    focus_start_year = 2016
-    focus_end_year = 2023
-    df_ika_focus = df_ika[df_ika["Tahun"].between(focus_start_year, focus_end_year)].copy()
+    focus_start_year = int(df_ika["Tahun"].min())
+    focus_end_year = int(df_ika["Tahun"].max())
+    df_ika_focus = df_ika.copy()
     mean_ika_focus = df_ika_focus[df_ika_focus["Tahun"] == focus_end_year]["Indeks Kualitas Air"].mean()
     tot_smelter = len(df_smelter)
     df_pltu_op = df_pltu[df_pltu["Status"].str.lower() == "operating"].copy()
@@ -483,17 +499,17 @@ def generate_all_bab2():
         "Kepadatan Smelter (Fasilitas)",
         "Indeks Kualitas Air (IKA)",
         f"{stats_21['chi2']:.3f}",
-        f"p {fmt_p(stats_21['p_val'])}",
-        "Infinite" if stats_21["odds_ratio"] == 0 else f"{stats_21['odds_ratio']:.1f}",
+        fmt_p_summary(stats_21["p_val"]),
+        "Infinite" if stats_21["odds_ratio"] == 0 else f"{stats_21['odds_ratio']:.2f}",
         "SIGNIFIKAN" if stats_21["p_val"] < 0.05 else "TIDAK SIGNIFIKAN",
     ]]
 
     konf_rows_21 = [
-        ["Variabel Independen (X)", "Jumlah Smelter per Provinsi / Kepadatan Smelter (Fasilitas)"],
-        ["Variabel Dependen (Y)", "Indeks Kualitas Air (IKA)"],
-        ["Hipotesis Nol (H0)", "Kepadatan smelter tidak berhubungan dengan Indeks Kualitas Air."],
-        ["Hipotesis Alternatif (H1)", "Ada hubungan antara tingginya kepadatan smelter dengan kondisi Indeks Kualitas Air."],
-        ["Threshold Kategori", f"Nilai Median Data Panel (N={valid_cases})"],
+        ["Variabel Independen (X)", "Jumlah_Smelter: Total fasilitas smelter (beroperasi maupun konstruksi)."],
+        ["Variabel Dependen (Y)", "Indeks Kualitas Air: Skor baku mutu air per provinsi."],
+        ["Hipotesis Nol (H0)", "Tidak ada hubungan signifikan secara statistik antara kepadatan smelter dengan Indeks Kualitas Air."],
+        ["Decision Rule (Alpha 5%)", "Jika P-Value < 0.05, maka Tolak H0 (Terbukti signifikan bahwa smelter menurunkan mutu air)."],
+        ["Threshold Kategori", f"Nilai Median Data Panel {focus_start_year}-{focus_end_year} (N={valid_cases}); variabel kontinu dikonversi menjadi biner."],
     ]
 
     mermaid_str_2_1 = """flowchart LR
@@ -538,11 +554,11 @@ def generate_all_bab2():
     valid_cases_22 = len(stats_22["df_clean"])
     
     summary_rows_22 = [[
-        "Kapasitas PLTU Captive (MW)",
+        "Kapasitas PLTU (MW)",
         "Indeks Kualitas Udara (IKU)",
         f"{stats_22['chi2']:.3f}",
-        f"p {fmt_p(stats_22['p_val'])}",
-        "Infinite" if stats_22["odds_ratio"] == 0 else f"{stats_22['odds_ratio']:.1f}",
+        fmt_p_summary(stats_22["p_val"]),
+        f"{stats_22['odds_ratio']:.2f}",
         "SIGNIFIKAN" if stats_22["p_val"] < 0.05 else "TIDAK SIGNIFIKAN",
     ]]
     
@@ -716,18 +732,20 @@ def generate_all_bab2():
     add_p(doc, [
         ("Parameterisasi konsentrasi spasial dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:", False, False),
     ])
-    add_formula(doc, "Agregasi Jumlah Smelter per Provinsi", "Jumlah_Smelter_Provinsi = COUNT(Smelter_i) GROUP BY Provinsi", [
-        ("Jumlah_Smelter_Provinsi", "Banyaknya fasilitas smelter atau entitas nikel pada provinsi observasi."),
-        ("Smelter_i", "Unit observasi fasilitas/entitas smelter dalam data ESDM nikel."),
+    add_formula(doc, "Persamaan Agregasi Jumlah Smelter per Provinsi", "S_p = Σ s_i, untuk setiap fasilitas i yang berada di provinsi p", [
+        ("S_p", "Total fasilitas smelter pada provinsi p."),
+        ("s_i", "Indikator keberadaan fasilitas smelter ke-i; bernilai 1 jika fasilitas berada di provinsi p."),
+        ("p", "Provinsi observasi di Pulau Sulawesi."),
     ])
-    add_formula(doc, "Persamaan Rata-rata Indeks Kualitas Air Panel Provinsi", "Rata_Rata_IKA_Provinsi_Tahun = MEAN(IKA_Provinsi_Tahun)", [
-        ("Rata_Rata_IKA_Provinsi_Tahun", "Skor rata-rata Indeks Kualitas Air pada provinsi dan tahun observasi tertentu."),
-        ("IKA_Provinsi_Tahun", "Nilai Indeks Kualitas Air dari KLHK/BPS pada kombinasi provinsi-tahun dalam panel 2016-2023."),
+    add_formula(doc, "Persamaan Rata-rata Indeks Kualitas Air Panel Provinsi", "IKĀ_{p,t} = (1 / n_{p,t}) × Σ IKA_{j,p,t}", [
+        ("IKĀ_{p,t}", "Rata-rata Indeks Kualitas Air pada provinsi p dan tahun t."),
+        ("IKA_{j,p,t}", "Nilai pengamatan Indeks Kualitas Air ke-j pada provinsi p dan tahun t."),
+        ("n_{p,t}", "Jumlah pengamatan IKA yang tersedia pada provinsi p dan tahun t."),
     ])
-    add_formula(doc, "Persamaan Kategorisasi Median Panel 2x2", "Kategori = IF(Nilai >= Median(Seluruh Panel), 'Tinggi/Baik', 'Rendah/Kritis')", [
+    add_formula(doc, "Persamaan Kategorisasi Median Panel 2x2", "K_x = Tinggi jika X_{p,t} ≥ M_X; K_y = Baik jika Y_{p,t} ≥ M_Y", [
         ("Kategori Smelter", f"Smelter Tinggi jika Jumlah_Smelter_Provinsi >= median panel ({stats_21['x_threshold']:,.1f} fasilitas); selain itu Smelter Rendah."),
         ("Kategori IKA", f"IKA Baik jika Indeks Kualitas Air >= median panel ({stats_21['y_threshold']:,.1f} poin); selain itu IKA Kritis."),
-        ("Median(Seluruh Panel)", f"Ambang batas dari seluruh observasi panel valid N={valid_cases}."),
+        ("M_X dan M_Y", f"Nilai median masing-masing variabel pada seluruh observasi panel valid N={valid_cases}."),
     ])
     add_formula(doc, "Persamaan Uji Independensi Chi-Square Pearson (χ² Kontinjensi 2x2)", "Chi_Square (χ²) = Jumlah [ (Frekuensi_Observasi - Frekuensi_Harapan)^2 / Frekuensi_Harapan ]", [
         ("Chi_Square (χ²)", f"Nilai statistik uji kecocokan Pearson untuk membuktikan ada tidaknya hubungan ketergantungan antara kepadatan smelter dan Indeks Kualitas Air pada panel spasiotemporal N={valid_cases}."),
@@ -952,9 +970,9 @@ h4 {{ color: #A5D6A7; }}
 {html_table(["Komponen Uji", "Definisi Variabel (Sub-bab 2.1)"], konf_rows_21)}
 <h4>C. Formulasi Matematis: Kalkulasi Konsentrasi Spasial &amp; Uji Chi-Square</h4>
 <p>Parameterisasi konsentrasi spasial dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:</p>
-<div class="formula">Jumlah_Smelter_Provinsi = COUNT(Smelter_i) GROUP BY Provinsi</div>
-<div class="formula">Rata_Rata_IKA_Provinsi_Tahun = MEAN(IKA_Provinsi_Tahun)</div>
-<div class="formula">Kategori = IF(Nilai &gt;= Median(Seluruh Panel), 'Tinggi/Baik', 'Rendah/Kritis')</div>
+<div class="formula">S_p = Σ s_i, untuk setiap fasilitas i yang berada di provinsi p</div>
+<div class="formula">IKĀ_{p,t} = (1 / n_{p,t}) × Σ IKA_{j,p,t}</div>
+<div class="formula">K_x = Tinggi jika X_{p,t} ≥ M_X; K_y = Baik jika Y_{p,t} ≥ M_Y</div>
 <div class="formula">Chi_Square (&chi;&sup2;) = Jumlah [ (Frekuensi_Observasi - Frekuensi_Harapan)^2 / Frekuensi_Harapan ]</div>
 <div class="formula">Odds_Ratio (OR) = ( a * d ) / ( b * c )</div>
 <h4>D. Matriks Hasil Uji Empiris</h4>
@@ -1039,9 +1057,9 @@ h4 {{ color: #A5D6A7; }}
         "Parameterisasi konsentrasi spasial dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:",
         "",
         "```text",
-        "Jumlah_Smelter_Provinsi = COUNT(Smelter_i) GROUP BY Provinsi",
-        "Rata_Rata_IKA_Provinsi_Tahun = MEAN(IKA_Provinsi_Tahun)",
-        "Kategori = IF(Nilai >= Median(Seluruh Panel), 'Tinggi/Baik', 'Rendah/Kritis')",
+        "S_p = Σ s_i, untuk setiap fasilitas i yang berada di provinsi p",
+        "IKĀ_{p,t} = (1 / n_{p,t}) × Σ IKA_{j,p,t}",
+        "K_x = Tinggi jika X_{p,t} ≥ M_X; K_y = Baik jika Y_{p,t} ≥ M_Y",
         "Chi_Square (χ²) = Jumlah [ (Frekuensi_Observasi - Frekuensi_Harapan)^2 / Frekuensi_Harapan ]",
         "Odds_Ratio (OR) = ( a * d ) / ( b * c )",
         "```",
