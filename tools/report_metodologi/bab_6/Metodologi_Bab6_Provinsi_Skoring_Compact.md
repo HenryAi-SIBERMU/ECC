@@ -79,6 +79,9 @@ Model evaluasi regional mengombinasikan standardisasi Z-Score untuk mendeteksi t
 > `Skor Dimensi  = Total (Skor Indikator × Bobot Indikator) / Total Bobot Dimensi`  
 > `Skor Komposit = (Skor Udara + Skor Air + Skor Lahan + Skor Sosial + Skor Veto) / 5.0`  
 >  
+> **Reasoning Pembobotan EWM (Anti-Dilution Effect):**  
+> Indikator seperti Limbah B3, Tailing, Korban Konflik Agraria, dan Kapasitas PLTU Batubara terkonsentrasi secara sangat ekstrem di 1–2 provinsi sentra tambang (Sulteng & Sultra). Secara matematis, metode Entropi Shannon memberikan bobot terbesar pada indikator yang memiliki ketimpangan spasial tertinggi agar sinyal krisis di zona ekstraktif tidak terhapus atau tertutupi oleh kondisi provinsi lain yang masih alami (menghilangkan bias perataan pulau / *anti-dilution effect*). Sebaliknya, indikator yang nilainya tersebar merata di seluruh wilayah (seperti Mutu Air IKA dan Diare) secara otomatis memperoleh bobot analitis lebih kecil.  
+>  
 > *Contoh Nyata (PLTU Captive Sulteng): Deviasi = (7.325 MW - 1.638 MW) / 2.882 MW = +1,97 (Jauh melampaui +1,0) → Skor Langsung 5,0 / 5 (Darurat Merah / Red Alert).*
 
 ##### Tabel 6.6a: Matriks Sintesis Komparatif Skor D3TLH 6 Provinsi Se-Pulau Sulawesi
