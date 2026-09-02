@@ -569,19 +569,21 @@ def generate_all_bab2():
         
     mermaid_str_2_2 = """flowchart LR
     subgraph Data_Input["1. Input Data Dashboard"]
-        A["Data PLTU Captive<br/><i>Kapasitas (MW), Status, Provinsi</i>"] --> C
-        B["Data IKU KLHK<br/><i>Provinsi, Tahun, IKU</i>"] --> C
+        A["Data PLTU Captive<br/><i>Kapasitas (MW), Status, Provinsi</i>"]
+        B["Data IKU KLHK<br/><i>Provinsi, Tahun, Indeks Kualitas Udara</i>"]
+        C["Data Emisi NASA TROPOMI<br/><i>Pantauan satelit udara ambien (NO2)</i>"]
     end
-    subgraph Panel_Processing["2. Pembentukan Panel 2.2"]
-        C["Agregasi Kapasitas PLTU per Provinsi"] --> F["Merge dengan IKU Provinsi-Tahun"]
-        F --> G["Panel Data: Provinsi x Tahun"]
+
+    subgraph Visual_Processing["2. Analisis Spasial & Trendline"]
+        A --> D["Agregasi kapasitas PLTU per provinsi"]
+        B --> E["Rata-rata IKU provinsi-tahun"]
+        C --> F["Validasi konteks polusi dan kepungan asap"]
+        D --> G["Peta dan trendline tekanan kualitas udara"]
+        E --> G
+        F --> G
     end
-    subgraph Statistical_Test["3. Crosstabulation & Analisis"]
-        G --> I["Binning Median<br/>PLTU Tinggi/Rendah; IKU Kritis/Baik"]
-        I --> J["Uji Chi-Square Pearson"]
-        J --> K["Odds Ratio<br/>Risiko IKU kritis pada kelompok PLTU tinggi"]
-    end
-    K --> L["Pembacaan empiris kualitas udara ambien"]"""
+
+    G --> H["Pembacaan empiris kualitas udara kawasan PLTU"]"""
     mermaid_png_path_2_2 = str(tool_dir / "mermaid_flowchart_2_2.png")
     download_success_2_2 = download_mermaid_png(mermaid_str_2_2, mermaid_png_path_2_2)
 
@@ -971,8 +973,8 @@ h4 {{ color: #A5D6A7; }}
 <h4>C. Formulasi Matematis: Kalkulasi Konsentrasi Spasial &amp; Uji Chi-Square</h4>
 <p>Parameterisasi konsentrasi spasial dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:</p>
 <div class="formula">S_p = Σ s_i, untuk setiap fasilitas i yang berada di provinsi p</div>
-<div class="formula">IKĀ_{p,t} = (1 / n_{p,t}) × Σ IKA_{j,p,t}</div>
-<div class="formula">K_x = Tinggi jika X_{p,t} ≥ M_X; K_y = Baik jika Y_{p,t} ≥ M_Y</div>
+<div class="formula">IKĀ_{{p,t}} = (1 / n_{{p,t}}) × Σ IKA_{{j,p,t}}</div>
+<div class="formula">K_x = Tinggi jika X_{{p,t}} ≥ M_X; K_y = Baik jika Y_{{p,t}} ≥ M_Y</div>
 <div class="formula">Chi_Square (&chi;&sup2;) = Jumlah [ (Frekuensi_Observasi - Frekuensi_Harapan)^2 / Frekuensi_Harapan ]</div>
 <div class="formula">Odds_Ratio (OR) = ( a * d ) / ( b * c )</div>
 <h4>D. Matriks Hasil Uji Empiris</h4>

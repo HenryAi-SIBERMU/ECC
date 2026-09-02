@@ -45,9 +45,9 @@ Sebagai opsi ringkas pengganti bagan alur crosstab yang terlalu panjang, konfigu
 Parameterisasi konsentrasi spasial dan pembuktian statistik dihitung menggunakan sistem formulasi matematis berikut:
 
 ```text
-Jumlah_Smelter_Provinsi = COUNT(Smelter_i) GROUP BY Provinsi
-Rata_Rata_IKA_Provinsi_Tahun = MEAN(IKA_Provinsi_Tahun)
-Kategori = IF(Nilai >= Median(Seluruh Panel), 'Tinggi/Baik', 'Rendah/Kritis')
+S_p = Σ s_i, untuk setiap fasilitas i yang berada di provinsi p
+IKĀ_{p,t} = (1 / n_{p,t}) × Σ IKA_{j,p,t}
+K_x = Tinggi jika X_{p,t} ≥ M_X; K_y = Baik jika Y_{p,t} ≥ M_Y
 Chi_Square (χ²) = Jumlah [ (Frekuensi_Observasi - Frekuensi_Harapan)^2 / Frekuensi_Harapan ]
 Odds_Ratio (OR) = ( a * d ) / ( b * c )
 ```
@@ -86,19 +86,21 @@ Keberadaan **9,825 MW PLTU Captive** di kawasan hilirisasi secara langsung berko
 ```mermaid
 flowchart LR
     subgraph Data_Input["1. Input Data Dashboard"]
-        A["Data PLTU Captive<br/><i>Kapasitas (MW), Status, Provinsi</i>"] --> C
-        B["Data IKU KLHK<br/><i>Provinsi, Tahun, IKU</i>"] --> C
+        A["Data PLTU Captive<br/><i>Kapasitas (MW), Status, Provinsi</i>"]
+        B["Data IKU KLHK<br/><i>Provinsi, Tahun, Indeks Kualitas Udara</i>"]
+        C["Data Emisi NASA TROPOMI<br/><i>Pantauan satelit udara ambien (NO2)</i>"]
     end
-    subgraph Panel_Processing["2. Pembentukan Panel 2.2"]
-        C["Agregasi Kapasitas PLTU per Provinsi"] --> F["Merge dengan IKU Provinsi-Tahun"]
-        F --> G["Panel Data: Provinsi x Tahun"]
+
+    subgraph Visual_Processing["2. Analisis Spasial & Trendline"]
+        A --> D["Agregasi kapasitas PLTU per provinsi"]
+        B --> E["Rata-rata IKU provinsi-tahun"]
+        C --> F["Validasi konteks polusi dan kepungan asap"]
+        D --> G["Peta dan trendline tekanan kualitas udara"]
+        E --> G
+        F --> G
     end
-    subgraph Statistical_Test["3. Crosstabulation & Analisis"]
-        G --> I["Binning Median<br/>PLTU Tinggi/Rendah; IKU Kritis/Baik"]
-        I --> J["Uji Chi-Square Pearson"]
-        J --> K["Odds Ratio<br/>Risiko IKU kritis pada kelompok PLTU tinggi"]
-    end
-    K --> L["Pembacaan empiris kualitas udara ambien"]
+
+    G --> H["Pembacaan empiris kualitas udara kawasan PLTU"]
 ```
 
 #### C. Formulasi Matematis
