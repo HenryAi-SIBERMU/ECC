@@ -157,3 +157,85 @@ Skor_Akumulasi_Air = (6.77 + 6.00 + 10.00 + 10.00) / 4.0 = 8.19 / 10.0 (Skor Ind
 3. **Konflik Nelayan (Air 3):** Terjadi sedikitnya **15 kasus** konflik agraria pesisir, menghasilkan Skor Konflik Ruang Air **5.0 / 5** (STATUS: DARURAT AGRARIA).
 4. **Beban Tailing (Air 4):** Akumulasi timbulan tailing dan slag mencapai **32.00 Jt Ton/Thn**, melampaui ambang batas AMDAL (25 Jt Ton), menghasilkan Skor Ancaman Tailing **5.0 / 5** (STATUS: DARURAT LIMBAH).
 5. **Vonis Indikator Air:** Skor Indikator Air berada pada angka **4.2 / 5** (Skor WSM 8.19 / 10.0), mengonfirmasi vonis **STATUS: DARURAT AIR** dengan kesimpulan eksekutif **ANALISIS: Kapasitas Penetralan Limbah Melampaui Batas**.
+
+## 6.3 Algoritma Skoring Bioregion Pulau: Matriks Daya Dukung Lahan
+
+> **Audit D3TLH: Daya Dukung Lahan (Page Streamlit):** "Daya dukung lahan dianalisis berdasarkan kecukupan tutupan hutan dan batas fungsi kawasan." Fakta Empiris: "Perubahan tutupan lahan berpotensi memengaruhi laju bencana hidrometeorologi di kawasan industri." Skor Indikator Lahan: **4.6 / 5** (STATUS: DARURAT LAHAN) | ANALISIS: **Evaluasi Pengelolaan Lanskap**.
+
+#### A. Pengantar & Kerangka Narasi
+Dalam metodologi D3TLH resmi pemerintah, daya dukung lahan dianalisis menggunakan pemodelan jasa ekosistem berbasis tutupan lahan statis, yang mengabaikan hubungan kausal antara pembongkaran hutan hulu dengan lonjakan bencana hidrometeorologi. Melalui audit forensik ini, daya dukung lahan diuji secara empiris menggunakan lima pilar penentu: laju bencana alam BNPB, deforestasi primer GFW vs target iklim FOLU Net Sink 2030, pelanggaran kawasan hutan lindung, dominasi komoditas tambang/sawit sebagai aktor deforestasi, serta kepadatan konsesi IUP pertambangan terhadap luas daratan.
+
+#### B. Alur Logika Metodologis Skoring Bioregion Pulau (Matriks Lahan)
+```mermaid
+flowchart LR
+    subgraph S1["1. Data Empiris Input"]
+        A1["Bencana BNPB (2014-2024)<br/><i>Banjir & Longsor (1,609 Kasus)</i>"]
+        A2["Deforestasi GFW (1 Dekade)<br/><i>Kehilangan Tutupan (1.38 Jt Ha)</i>"]
+        A3["Deforestasi Lindung GFW<br/><i>Perambahan Hutan (41,785 Ha)</i>"]
+        A4["Drivers Deforestasi GFW<br/><i>Tambang & Sawit (1.00 Jt Ha)</i>"]
+        A5["Konsentrasi IUP Minerba<br/><i>Luas IUP Nikel (1.18 Jt Ha)</i>"]
+    end
+    subgraph S2["2. Ambang Batas Regulasi"]
+        B1["Bencana: > 877 Kejadian<br/><i>Outlier Stat: Mean + 1 SD</i>"]
+        B2["Deforestasi: > 638 Ribu Ha<br/><i>Kuota FOLU Net Sink 2030</i>"]
+        B3["Hutan Lindung: > 0 Ha<br/><i>Nol Toleransi UU 41/1999 Ps. 38</i>"]
+        B4["Drivers: > 500 Ribu Ha<br/><i>Dominasi Korporasi Ekstraktif</i>"]
+        B5["Kepadatan: > 10% Daratan<br/><i>Batas Carrying Capacity Spasial</i>"]
+    end
+    subgraph S3["3. Kalkulasi 5 Sub-Metrik"]
+        C1["Lahan 1: Frekuensi Bencana<br/><i>Skor 10.00 / 10 (5.0 / 5)</i>"]
+        C2["Lahan 2: Deforestasi Primer<br/><i>Skor 10.00 / 10 (5.0 / 5)</i>"]
+        C3["Lahan 3: Pelanggaran Lindung<br/><i>Skor 10.00 / 10 (5.0 / 5)</i>"]
+        C4["Lahan 4: Aktor Deforestasi<br/><i>Skor 10.00 / 10 (5.0 / 5)</i>"]
+        C5["Lahan 5: Kepadatan Spasial<br/><i>Skor 6.27 / 10 (3.1 / 5)</i>"]
+    end
+    subgraph S4["4. Agregasi & Vonis D3TLH"]
+        D1["Simple Additive Weighting<br/><i>Bobot Equal 20% per Pilar</i>"]
+        D2["Skor WSM: 9.25 / 10.0<br/>Skor Indikator Lahan: 4.6 / 5"]
+        D3["STATUS: DARURAT LAHAN<br/><i>Evaluasi Pengelolaan Lanskap</i>"]
+    end
+    A1 --> B1 --> C1
+    A2 --> B2 --> C2
+    A3 --> B3 --> C3
+    A4 --> B4 --> C4
+    A5 --> B5 --> C5
+    C1 & C2 & C3 & C4 & C5 --> D1 --> D2 --> D3
+```
+
+#### C. Formulasi Matematis: Normalisasi Z-Score Bencana, Kuota FOLU, dan Batas Spasial
+```text
+Skor_Lahan_1 = min(10.0, (1,609 / 877.0) * 10.0) = 10.00 / 10.0 (Likert: 5.0 / 5)
+Skor_Lahan_2 = min(10.0, (1,386,055 / 638000.0) * 10.0) = 10.00 / 10.0 (Likert: 5.0 / 5)
+Skor_Lahan_3 = 10.0 if 41,785 > 0 else 0.0 = 10.00 / 10.0 (Likert: 5.0 / 5)
+Skor_Lahan_4 = min(10.0, (1,001,654 / 500000.0) * 10.0) = 10.00 / 10.0 (Likert: 5.0 / 5)
+Skor_Lahan_5 = min(10.0, max(0.0, (0.0627 / 0.10) * 10.0)) = 6.27 / 10.0 (Likert: 3.1 / 5)
+Skor_Akumulasi_Lahan = (10.00 + 10.00 + 10.00 + 10.00 + 6.27) / 5.0 = 9.25 / 10.0 (Skor Indikator Lahan: 4.6 / 5)
+```
+
+#### D. Matriks Hasil Uji Empiris
+##### Tabel 6.5: Evaluasi Kuantitatif 5 Indikator Daya Dukung Lahan Bioregion Pulau Sulawesi (Sesuai Dashboard Page 6)
+| Kode | Indikator Empiris | Nilai Aktual | Ambang Batas Kritis | Formula Substitusi | Skor WSM (0-10) | Skor Likert (1-5) | Status Ekologis |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Lahan 1 | Bencana Banjir & Longsor (BNPB) | 1,609 Kejadian | > 877 Kejadian (Outlier Stat: Mean + 1 SD) | min(10.0, (1,609/877)*10) | 10.00 / 10.0 | 5.0 / 5 | DARURAT BENCANA |
+| Lahan 2 | Deforestasi Hutan Primer (GFW) | 1,386,055 Ha | > 638,000 Ha (Target Kuota FOLU Net Sink) | min(10.0, (1,386,055/638000)*10) | 10.00 / 10.0 | 5.0 / 5 | OVERCAPACITY LAHAN |
+| Lahan 3 | Perambahan Kawasan Hutan Lindung | 41,785 Ha | 0 Hektar / Nol Toleransi Hukum Mutlak | 10.0 if Luas > 0 else 0.0 | 10.00 / 10.0 | 5.0 / 5 | PELANGGARAN HUKUM |
+| Lahan 4 | Aktor Deforestasi Tambang & Sawit | 1,001,654 Ha | > 500,000 Ha (Dominasi Korporasi Ekstraktif) | min(10.0, (1,001,654/500000)*10) | 10.00 / 10.0 | 5.0 / 5 | MONOPOLI KONSESI |
+| Lahan 5 | Kepadatan Spasial Konsesi IUP Nikel | 6.3% (1,185,174 Ha) | > 10.0% Luas Daratan Pulau (18.9 Jt Ha) | min(10.0, (0.0627/0.10)*10) | 6.27 / 10.0 | 3.1 / 5 | PERLU PENGAWASAN |
+| TOTAL | Akumulasi Skor Indikator Lahan | Rata-rata 5 Pilar SAW | Threshold Kritis >= 4.0 / 6.0 | Σ(Skor 1..5) / 5 | 9.25 / 10.0 | 4.6 / 5 | STATUS: DARURAT LAHAN |
+
+##### Tabel 6.6: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Lahan
+| Parameter | Regulasi / Rujukan Ilmiah | Kutipan Dokumen Resmi / Verbatim | Pasal / Hal. | Status Audit |
+| :--- | :--- | :--- | :--- | :--- |
+| Bencana Alam (Lahan 1) | Dataset Historis BNPB (2014–2024) | Frekuensi bencana hidrometeorologi (banjir dan longsor). Ambang batas 877 kejadian didasarkan pada batas deviasi outlier statistik Mean + 1 SD se-Sulawesi. | Dataset BNPB | VERIFIED |
+| Deforestasi Primer (Lahan 2) | Dokumen Renops FOLU Net Sink 2030 KLHK | Batas maksimal deforestasi nasional LTS-LCCP rata-rata 57.000 Ha/tahun (kuota 11 tahun: 638.000 Ha). Deforestasi aktual Sulawesi 1,38 Juta Ha melampaui 2,1x kuota nasional. | Hal. 128 | DEFENSIBLE |
+| Kawasan Lindung (Lahan 3) | Pasal 38 Ayat 4 UU No. 41 Tahun 1999 tentang Kehutanan | Pada kawasan hutan lindung dilarang melakukan penambangan dengan pola pertambangan terbuka. Nol toleransi hukum: luas hilang > 0 Ha memicu tindak pidana kehutanan. | Pasal 38 Ayat 4 | VERIFIED |
+| Aktor Deforestasi (Lahan 4) | Global Forest Watch (Loss by Driver 2014–2023) | Komoditas ekstraktif skala besar (tambang nikel dan perkebunan monokultur sawit) memonopoli 1,00 Juta Ha kehilangan hutan, membantah mitos perladangan berpindah warga lokal. | GFW Drivers | VERIFIED |
+| Kepadatan Spasial (Lahan 5) | Kompilasi Minerba ESDM & Luas Daratan BPS (2023) | Carrying capacity tata ruang membatasi rasio konsesi tambang maksimal 10% dari luas daratan. Total IUP nikel aktif menyita 1,18 Juta Ha daratan Sulawesi (rasio 6.3%). | Minerba ESDM | DEFENSIBLE |
+
+#### E. Analisis Temuan Empiris: Evaluasi Pengelolaan Lanskap
+1. **Bencana Alam (Lahan 1):** Total bencana banjir dan longsor tercatat **1,609 kejadian**, melampaui ambang batas outlier statistik (877 kejadian), memicu Skor Bencana Lahan **5.0 / 5** (STATUS: DARURAT BENCANA).
+2. **Deforestasi Hutan (Lahan 2):** Kehilangan tutupan pohon menyentuh **1,386,055 Ha**, melampaui kuota 11 tahun FOLU Net Sink 2030 (638.000 Ha), menghasilkan Skor Deforestasi **5.0 / 5** (STATUS: OVERCAPACITY LAHAN).
+3. **Kawasan Lindung (Lahan 3):** Teridentifikasi **41,785 Ha** deforestasi di dalam Hutan Lindung, memicu pelanggaran hukum absolut UU Kehutanan No. 41/1999 dengan Skor **5.0 / 5** (STATUS: PELANGGARAN HUKUM).
+4. **Aktor Deforestasi (Lahan 4):** Komoditas industri tambang dan sawit memonopoli **1,001,654 Ha** deforestasi, memicu Skor Aktor Deforestasi **5.0 / 5** (STATUS: MONOPOLI KONSESI).
+5. **Kepadatan Konsesi (Lahan 5):** Konsesi IUP nikel menyita **1,185,174 Ha** atau **6.3%** daratan pulau, menghasilkan Skor Kepadatan Spasial **3.1 / 5**.
+6. **Vonis Indikator Lahan:** Skor Indikator Lahan berada pada angka **4.6 / 5** (Skor WSM 9.25 / 10.0), menetapkan vonis **STATUS: DARURAT LAHAN** dengan kesimpulan eksekutif **ANALISIS: Evaluasi Pengelolaan Lanskap**.

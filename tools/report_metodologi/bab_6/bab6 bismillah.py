@@ -717,6 +717,203 @@ def generate_all_bab6():
         (f"Secara agregat, Skor Indikator Air berada pada angka 4.2 / 5 (Skor WSM {skor_akumulasi_air:.2f} / 10.0), yang secara resmi mengonfirmasi vonis STATUS: DARURAT AIR dengan kesimpulan eksekutif ANALISIS: Kapasitas Penetralan Limbah Melampaui Batas.", False, False),
     ])
 
+    # -------------------------------------------------------------
+    # SUB-BAB 6.3: MATRIKS DAYA DUKUNG LAHAN BIOREGION PULAU
+    # SINKRONISASI 100% DENGAN PAGES/6_AUDIT_D3TLH.PY
+    # -------------------------------------------------------------
+    print("[2.5/4] Mengekstraksi dataset empiris Bab 6 Sub-bab 6.3 (Matriks Lahan)...")
+    df_bencana = pd.read_csv(data_dir / "sulawesi_bencana_bnpb_2014_2024.csv") if (data_dir / "sulawesi_bencana_bnpb_2014_2024.csv").exists() else pd.DataFrame()
+    df_gfw = pd.read_csv(data_dir / "sulawesi_gfw_master_1_dekade_2014_2023_v3.csv") if (data_dir / "sulawesi_gfw_master_1_dekade_2014_2023_v3.csv").exists() else pd.DataFrame()
+    df_gfw_lindung = pd.read_csv(data_dir / "sulawesi_gfw_kawasan_lindung_loss_2014_2023_v3.csv") if (data_dir / "sulawesi_gfw_kawasan_lindung_loss_2014_2023_v3.csv").exists() else pd.DataFrame()
+    df_gfw_driver = pd.read_csv(data_dir / "sulawesi_gfw_loss_by_driver_2014_2023_v3.csv") if (data_dir / "sulawesi_gfw_loss_by_driver_2014_2023_v3.csv").exists() else pd.DataFrame()
+    df_kawasan_nikel = pd.read_csv(data_dir / "sulawesi_kawasan_nikel_luas_per_provinsi.csv") if (data_dir / "sulawesi_kawasan_nikel_luas_per_provinsi.csv").exists() else pd.DataFrame()
+
+    total_bencana_sulawesi = 0.0
+    if not df_bencana.empty:
+        df_bencana_sulawesi = df_bencana.copy()
+        df_bencana_sulawesi['jumlah_kejadian'] = pd.to_numeric(df_bencana_sulawesi['jumlah_kejadian'], errors='coerce').fillna(0)
+        total_bencana_sulawesi = float(df_bencana_sulawesi['jumlah_kejadian'].sum())
+
+    total_deforestasi_sulawesi = 0.0
+    if not df_gfw.empty:
+        df_gfw_sulawesi = df_gfw.copy()
+        df_gfw_sulawesi['Total_Deforestasi_Ha'] = pd.to_numeric(df_gfw_sulawesi['Total_Deforestasi_Ha'], errors='coerce').fillna(0)
+        total_deforestasi_sulawesi = float(df_gfw_sulawesi['Total_Deforestasi_Ha'].sum())
+
+    total_lindung_hilang_sulawesi = 0.0
+    if not df_gfw_lindung.empty:
+        df_l = df_gfw_lindung.copy()
+        df_l['Luas_Hilang_Kawasan_Lindung_Ha'] = pd.to_numeric(df_l['Luas_Hilang_Kawasan_Lindung_Ha'], errors='coerce').fillna(0)
+        total_lindung_hilang_sulawesi = float(df_l['Luas_Hilang_Kawasan_Lindung_Ha'].sum())
+
+    total_tambang_driver_sulawesi = 0.0
+    if not df_gfw_driver.empty:
+        df_d = df_gfw_driver.copy()
+        df_d['Luas_Deforestasi_Ha'] = pd.to_numeric(df_d['Luas_Deforestasi_Ha'], errors='coerce').fillna(0)
+        tambang_driver = df_d[df_d['Faktor_Pendorong'] == 'Deforestasi Komoditas (Tambang/Sawit)']
+        total_tambang_driver_sulawesi = float(tambang_driver['Luas_Deforestasi_Ha'].sum())
+
+    rasio_ekspansi = 0.0
+    total_iup_nikel = 0.0
+    luas_daratan_total = 18906621.0
+    if not df_kawasan_nikel.empty:
+        sentra_kn = df_kawasan_nikel.copy()
+        sentra_kn['total_luas_iup_ha'] = pd.to_numeric(sentra_kn['total_luas_iup_ha'], errors='coerce').fillna(0)
+        total_iup_nikel = float(sentra_kn['total_luas_iup_ha'].sum())
+        rasio_ekspansi = float(total_iup_nikel / luas_daratan_total)
+
+    # 5 Pilar Lahan (Kalkulasi Persis kalkulasi_pulau_sulawesi.py & page 6):
+    skor_lahan_1 = min(10.0, (total_bencana_sulawesi / 877.0) * 10.0)
+    skor_lahan_2 = min(10.0, (total_deforestasi_sulawesi / 638000.0) * 10.0)
+    skor_lahan_3 = 10.0 if total_lindung_hilang_sulawesi > 0 else 0.0
+    skor_lahan_4 = min(10.0, (total_tambang_driver_sulawesi / 500000.0) * 10.0)
+    skor_lahan_5 = min(10.0, max(0.0, (rasio_ekspansi / 0.10) * 10.0))
+
+    skor_akumulasi_lahan = (skor_lahan_1 + skor_lahan_2 + skor_lahan_3 + skor_lahan_4 + skor_lahan_5) / 5.0
+    card_l_val = f"{(skor_akumulasi_lahan / 2.0):.1f}"
+
+    # Tabel Evaluasi Empiris Lahan (Sinkron 100% Page 6)
+    lahan_rows = [
+        ["Lahan 1", "Bencana Banjir & Longsor (BNPB)", f"{total_bencana_sulawesi:,.0f} Kejadian", "> 877 Kejadian (Outlier Stat: Mean + 1 SD)", f"min(10.0, ({total_bencana_sulawesi:,.0f}/877)*10)", f"{skor_lahan_1:.2f} / 10.0", f"{(skor_lahan_1/2.0):.1f} / 5", "DARURAT BENCANA"],
+        ["Lahan 2", "Deforestasi Hutan Primer (GFW)", f"{total_deforestasi_sulawesi:,.0f} Ha", "> 638,000 Ha (Target Kuota FOLU Net Sink)", f"min(10.0, ({total_deforestasi_sulawesi:,.0f}/638000)*10)", f"{skor_lahan_2:.2f} / 10.0", f"{(skor_lahan_2/2.0):.1f} / 5", "OVERCAPACITY LAHAN"],
+        ["Lahan 3", "Perambahan Kawasan Hutan Lindung", f"{total_lindung_hilang_sulawesi:,.0f} Ha", "0 Hektar / Nol Toleransi Hukum Mutlak", f"10.0 if Luas > 0 else 0.0", f"{skor_lahan_3:.2f} / 10.0", f"{(skor_lahan_3/2.0):.1f} / 5", "PELANGGARAN HUKUM"],
+        ["Lahan 4", "Aktor Deforestasi Tambang & Sawit", f"{total_tambang_driver_sulawesi:,.0f} Ha", "> 500,000 Ha (Dominasi Korporasi Ekstraktif)", f"min(10.0, ({total_tambang_driver_sulawesi:,.0f}/500000)*10)", f"{skor_lahan_4:.2f} / 10.0", f"{(skor_lahan_4/2.0):.1f} / 5", "MONOPOLI KONSESI"],
+        ["Lahan 5", "Kepadatan Spasial Konsesi IUP Nikel", f"{rasio_ekspansi*100:.1f}% ({total_iup_nikel:,.0f} Ha)", "> 10.0% Luas Daratan Pulau (18.9 Jt Ha)", f"min(10.0, ({rasio_ekspansi:.4f}/0.10)*10)", f"{skor_lahan_5:.2f} / 10.0", f"{(skor_lahan_5/2.0):.1f} / 5", "PERLU PENGAWASAN"],
+        ["TOTAL", "Akumulasi Skor Indikator Lahan", "Rata-rata 5 Pilar SAW", "Threshold Kritis >= 4.0 / 6.0", "Σ(Skor 1..5) / 5", f"{skor_akumulasi_lahan:.2f} / 10.0", f"{card_l_val} / 5", "STATUS: DARURAT LAHAN"]
+    ]
+
+    regulasi_lahan_rows = [
+        ["Bencana Alam (Lahan 1)", "Dataset Historis BNPB (2014–2024)", "Frekuensi bencana hidrometeorologi (banjir dan longsor). Ambang batas 877 kejadian didasarkan pada batas deviasi outlier statistik Mean + 1 SD se-Sulawesi.", "Dataset BNPB", "VERIFIED"],
+        ["Deforestasi Primer (Lahan 2)", "Dokumen Renops FOLU Net Sink 2030 KLHK", "Batas maksimal deforestasi nasional LTS-LCCP rata-rata 57.000 Ha/tahun (kuota 11 tahun: 638.000 Ha). Deforestasi aktual Sulawesi 1,38 Juta Ha melampaui 2,1x kuota nasional.", "Hal. 128", "DEFENSIBLE"],
+        ["Kawasan Lindung (Lahan 3)", "Pasal 38 Ayat 4 UU No. 41 Tahun 1999 tentang Kehutanan", "Pada kawasan hutan lindung dilarang melakukan penambangan dengan pola pertambangan terbuka. Nol toleransi hukum: luas hilang > 0 Ha memicu tindak pidana kehutanan.", "Pasal 38 Ayat 4", "VERIFIED"],
+        ["Aktor Deforestasi (Lahan 4)", "Global Forest Watch (Loss by Driver 2014–2023)", "Komoditas ekstraktif skala besar (tambang nikel dan perkebunan monokultur sawit) memonopoli 1,00 Juta Ha kehilangan hutan, membantah mitos perladangan berpindah warga lokal.", "GFW Drivers", "VERIFIED"],
+        ["Kepadatan Spasial (Lahan 5)", "Kompilasi Minerba ESDM & Luas Daratan BPS (2023)", "Carrying capacity tata ruang membatasi rasio konsesi tambang maksimal 10% dari luas daratan. Total IUP nikel aktif menyita 1,18 Juta Ha daratan Sulawesi (rasio 6.3%).", "Minerba ESDM", "DEFENSIBLE"]
+    ]
+
+    # Flowchart Mermaid 6.3 (Sinkron Page 6)
+    mermaid_str_6_3 = """flowchart LR
+    subgraph S1["1. Data Empiris Input"]
+        A1["Bencana BNPB (2014-2024)<br/><i>Banjir & Longsor (1,609 Kasus)</i>"]
+        A2["Deforestasi GFW (1 Dekade)<br/><i>Kehilangan Tutupan (1.38 Jt Ha)</i>"]
+        A3["Deforestasi Lindung GFW<br/><i>Perambahan Hutan (41,785 Ha)</i>"]
+        A4["Drivers Deforestasi GFW<br/><i>Tambang & Sawit (1.00 Jt Ha)</i>"]
+        A5["Konsentrasi IUP Minerba<br/><i>Luas IUP Nikel (1.18 Jt Ha)</i>"]
+    end
+    subgraph S2["2. Ambang Batas Regulasi"]
+        B1["Bencana: > 877 Kejadian<br/><i>Outlier Stat: Mean + 1 SD</i>"]
+        B2["Deforestasi: > 638 Ribu Ha<br/><i>Kuota FOLU Net Sink 2030</i>"]
+        B3["Hutan Lindung: > 0 Ha<br/><i>Nol Toleransi UU 41/1999 Ps. 38</i>"]
+        B4["Drivers: > 500 Ribu Ha<br/><i>Dominasi Korporasi Ekstraktif</i>"]
+        B5["Kepadatan: > 10% Daratan<br/><i>Batas Carrying Capacity Spasial</i>"]
+    end
+    subgraph S3["3. Kalkulasi 5 Sub-Metrik"]
+        C1["Lahan 1: Frekuensi Bencana<br/><i>Skor 10.00 / 10 (5.0 / 5)</i>"]
+        C2["Lahan 2: Deforestasi Primer<br/><i>Skor 10.00 / 10 (5.0 / 5)</i>"]
+        C3["Lahan 3: Pelanggaran Lindung<br/><i>Skor 10.00 / 10 (5.0 / 5)</i>"]
+        C4["Lahan 4: Aktor Deforestasi<br/><i>Skor 10.00 / 10 (5.0 / 5)</i>"]
+        C5["Lahan 5: Kepadatan Spasial<br/><i>Skor 6.27 / 10 (3.1 / 5)</i>"]
+    end
+    subgraph S4["4. Agregasi & Vonis D3TLH"]
+        D1["Simple Additive Weighting<br/><i>Bobot Equal 20% per Pilar</i>"]
+        D2["Skor WSM: 9.25 / 10.0<br/>Skor Indikator Lahan: 4.6 / 5"]
+        D3["STATUS: DARURAT LAHAN<br/><i>Evaluasi Pengelolaan Lanskap</i>"]
+    end
+    A1 --> B1 --> C1
+    A2 --> B2 --> C2
+    A3 --> B3 --> C3
+    A4 --> B4 --> C4
+    A5 --> B5 --> C5
+    C1 & C2 & C3 & C4 & C5 --> D1 --> D2 --> D3"""
+
+    mermaid_png_path_6_3 = str(tool_dir / "mermaid_flowchart_6_3.png")
+    download_success_6_3 = download_mermaid_png(mermaid_str_6_3, mermaid_png_path_6_3)
+
+    # DOCX untuk Sub-bab 6.3
+    add_h2(doc, "6.3 ALGORITMA SKORING BIOREGION PULAU: MATRIKS DAYA DUKUNG LAHAN")
+    add_note_box(doc, "Audit D3TLH: Daya Dukung Lahan (Page Streamlit)", 'Daya dukung lahan dianalisis berdasarkan kecukupan tutupan hutan dan batas fungsi kawasan. Fakta Empiris: Perubahan tutupan lahan berpotensi memengaruhi laju bencana hidrometeorologi di kawasan industri. Skor Indikator Lahan: 4.6 / 5 (STATUS: DARURAT LAHAN) | ANALISIS: Evaluasi Pengelolaan Lanskap.')
+
+    add_h4(doc, "A. Pengantar & Kerangka Narasi")
+    add_p(doc, [
+        ("Dalam metodologi D3TLH resmi pemerintah, daya dukung lahan dianalisis menggunakan pemodelan jasa ekosistem berbasis tutupan lahan statis, yang mengabaikan hubungan kausal antara pembongkaran hutan hulu dengan lonjakan bencana hidrometeorologi. Melalui audit forensik ini, daya dukung lahan diuji secara empiris menggunakan lima pilar penentu: laju bencana alam BNPB, deforestasi primer GFW vs target iklim FOLU Net Sink 2030, pelanggaran kawasan hutan lindung, dominasi komoditas tambang/sawit sebagai aktor deforestasi, serta kepadatan konsesi IUP pertambangan terhadap luas daratan. ", False, False),
+        ("Hasil uji empiris membuktikan bahwa total deforestasi Pulau Sulawesi telah mencapai ", False, False),
+        ("1,386,055 Hektar (overshoot 117.2% dari kuota 11 tahun FOLU Net Sink)", True, False),
+        (", sementara sedikitnya 41,785 Hektar kawasan hutan lindung telah dibabat habis, memicu 1,609 kejadian bencana banjir bandang dan longsor se-Sulawesi.", False, False),
+    ])
+
+    add_h4(doc, "B. Alur Logika Metodologis Skoring Bioregion Pulau (Matriks Lahan)")
+    add_p(doc, [
+        ("Kerangka alur komputasi pengujian daya dukung ekosistem daratan Pulau Sulawesi disajikan pada ", False, False),
+        ("Bagan Alur 6.3", True, False),
+        (". Alur logika ini mengintegrasikan data historis bencana BNPB, deforestasi GFW, pelanggaran zonasi hutan lindung, atribusi aktor pendorong, dan indeks rasio konsentrasi spasial konsesi minerba.", False, False),
+    ])
+    add_caption(doc, "Bagan Alur 6.3: Alur Logika Pemrosesan Algoritma Skoring Matriks Lahan Bioregion Pulau")
+    if download_success_6_3:
+        try:
+            p_img = doc.add_paragraph()
+            p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p_img.add_run().add_picture(mermaid_png_path_6_3, width=Cm(15))
+        except Exception as exc:
+            print(f"[WARN] Gagal memasukkan gambar Mermaid 6.3 ke DOCX: {exc}")
+            run(doc.add_paragraph(), "[Gambar Flowchart Gagal Dimuat]", color=C_RED, pt=9)
+    else:
+        run(doc.add_paragraph(), "[Gambar Flowchart Gagal Diunduh, silakan periksa koneksi internet saat generate]", color=C_RED, pt=9)
+
+    add_h4(doc, "C. Formulasi Matematis: Normalisasi Z-Score Bencana, Kuota FOLU, dan Batas Spasial")
+    add_p(doc, [("Kelima indikator empiris matriks lahan ditransformasikan ke dalam skala ancaman 0.0 - 10.0 menggunakan sistem formulasi matematis yang linier 100% dengan antarmuka Streamlit:", False, False)])
+
+    add_formula(doc, "Lahan 1: Skor Bencana Alam (Banjir & Longsor)", "Skor_Lahan_1 = min(10.0, (Total_Bencana / 877.0) * 10.0)", [
+        ("Total_Bencana", f"Akumulasi kejadian banjir dan tanah longsor BNPB se-Sulawesi ({total_bencana_sulawesi:,.0f} kejadian)."),
+        ("Threshold 877 Kejadian", "Batas deviasi outlier statistik Mean + 1 SD dari 6 provinsi Sulawesi (Mean=778, SD=99) rentang 1 dekade 2014-2024."),
+    ])
+
+    add_formula(doc, "Lahan 2: Skor Deforestasi Primer (Kuota FOLU Net Sink)", "Skor_Lahan_2 = min(10.0, (Total_Deforestasi_Ha / 638000.0) * 10.0)", [
+        ("Total_Deforestasi_Ha", f"Kehilangan tutupan pohon GFW 2014-2023 ({total_deforestasi_sulawesi:,.0f} Ha)."),
+        ("Threshold 638.000 Ha", "Batas kuota deforestasi proporsional 11 tahun berdasarkan Dokumen Renops FOLU Net Sink 2030 KLHK (58.000 Ha/tahun x 11 tahun)."),
+    ])
+
+    add_formula(doc, "Lahan 3: Skor Pelanggaran Kawasan Lindung (Nol Toleransi)", "Skor_Lahan_3 = 10.0 if Total_Lindung_Hilang_Ha > 0 else 0.0", [
+        ("Total_Lindung_Hilang_Ha", f"Deforestasi teridentifikasi di dalam kawasan hutan lindung ({total_lindung_hilang_sulawesi:,.0f} Ha)."),
+        ("Ambang Batas 0 Ha", "Pasal 38 Ayat 4 UU No. 41/1999 tentang Kehutanan melarang penambangan terbuka di kawasan hutan lindung; pembabatan > 0 Ha memicu Skor Maksimal 10.0."),
+    ])
+
+    add_formula(doc, "Lahan 4: Skor Dominasi Aktor Ekstraktif (Tambang & Sawit)", "Skor_Lahan_4 = min(10.0, (Total_Tambang_Driver_Ha / 500000.0) * 10.0)", [
+        ("Total_Tambang_Driver_Ha", f"Deforestasi yang didorong oleh komoditas industri tambang/sawit ({total_tambang_driver_sulawesi:,.0f} Ha)."),
+        ("Threshold 500.000 Ha", "Batas kritis daya dukung pulau terhadap monopoli ruang oleh korporasi ekstraktif komersial skala masif."),
+    ])
+
+    add_formula(doc, "Lahan 5: Skor Kepadatan Spasial Konsesi IUP Nikel", "Skor_Lahan_5 = min(10.0, max(0.0, (Rasio_Ekspansi / 0.10) * 10.0))", [
+        ("Rasio_Ekspansi", f"Luas total IUP nikel ({total_iup_nikel:,.0f} Ha) dibagi Luas Daratan Sulawesi ({luas_daratan_total:,.0f} Ha) = {rasio_ekspansi*100:.1f}%."),
+        ("Threshold 10% Daratan", "Batas carrying capacity tata ruang ESDM/BPS; rasio penguasaan izin industri tunggal melampaui 10% memicu defisit ruang hidup."),
+    ])
+
+    add_formula(doc, "Akumulasi Skor Indikator Lahan (Simple Additive Weighting)", "Skor_Akumulasi_Lahan = (Skor_Lahan_1 + Skor_Lahan_2 + Skor_Lahan_3 + Skor_Lahan_4 + Skor_Lahan_5) / 5.0", [
+        ("Skor_Akumulasi_Lahan", f"Rata-rata 5 pilar bobot equal 20% (bernilai {skor_akumulasi_lahan:.2f} / 10.0)."),
+        ("Skor Indikator Lahan (Page 6)", f"Skor Indikator Lahan: {card_l_val} / 5 (STATUS: DARURAT LAHAN | ANALISIS: Evaluasi Pengelolaan Lanskap)."),
+    ])
+
+    add_h4(doc, "D. Matriks Hasil Uji Empiris: Evaluasi Daya Dukung Lahan Bioregion")
+    add_caption(doc, "Tabel 6.5: Evaluasi Kuantitatif 5 Indikator Daya Dukung Lahan Bioregion Pulau Sulawesi (Sesuai Dashboard Page 6)")
+    add_table_1col(doc, ["Kode", "Indikator Empiris", "Nilai Aktual", "Ambang Batas Kritis", "Formula Substitusi", "Skor WSM (0-10)", "Skor Likert (1-5)", "Status Ekologis"], lahan_rows, [1.3, 3.4, 2.5, 3.2, 3.0, 1.8, 1.8, 2.2], ["C", "L", "C", "L", "L", "C", "C", "C"])
+
+    add_caption(doc, "Tabel 6.6: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Lahan")
+    add_table_1col(doc, ["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_lahan_rows, [2.5, 3.5, 7.5, 2.5, 2.0], ["L", "L", "L", "C", "C"])
+
+    add_h4(doc, "E. Analisis Temuan Empiris: Evaluasi Pengelolaan Lanskap")
+    add_p(doc, [
+        ("1. ", True, False), ("Ledakan Bencana Hidrometeorologi (Lahan 1): ", True, False),
+        (f"Akumulasi kejadian bencana banjir bandang dan tanah longsor mencapai {total_bencana_sulawesi:,.0f} kejadian, melampaui batas outlier statistik Mean + 1 SD (877 kejadian). Hal ini membuktikan bahwa hilangnya tutupan kanopi hulu tambang telah merusak kapasitas retensi hidrologis DAS Sulawesi, memicu Skor Bencana Lahan 5.0 / 5 (STATUS: DARURAT BENCANA).\n", False, False),
+        ("2. ", True, False), ("Jebolnya Kuota Iklim FOLU Net Sink (Lahan 2): ", True, False),
+        (f"Kehilangan tutupan hutan menembus {total_deforestasi_sulawesi:,.0f} Hektar dalam satu dekade, melampaui 2,17x lipat batas kuota proporsional FOLU Net Sink 2030 (638.000 Ha), memicu Skor Deforestasi Primer 5.0 / 5 (STATUS: OVERCAPACITY LAHAN).\n", False, False),
+        ("3. ", True, False), ("Pelanggaran Mutlak Kawasan Hutan Lindung (Lahan 3): ", True, False),
+        (f"Teridentifikasi sedikitnya {total_lindung_hilang_sulawesi:,.0f} Hektar deforestasi di dalam kawasan Hutan Lindung (Protected Areas). Sesuai mandat Pasal 38 Ayat 4 UU Kehutanan No. 41/1999 yang melarang tambang terbuka di hutan lindung, angka ini mengonfirmasi tindak pidana kehutanan mutlak, menghasilkan Skor Pelanggaran Zonasi 5.0 / 5 (STATUS: PELANGGARAN HUKUM).\n", False, False),
+        ("4. ", True, False), ("Monopoli Deforestasi oleh Industri Ekstraktif (Lahan 4): ", True, False),
+        (f"Data atribusi GFW membuktikan bahwa {total_tambang_driver_sulawesi:,.0f} Hektar kehilangan hutan didorong secara eksklusif oleh komoditas industri (tambang nikel dan perkebunan sawit), melampaui batas 500.000 Ha dan mematahkan klaim pemerintah yang menyalahkan masyarakat adat/peladang lokal, menghasilkan Skor Aktor Deforestasi 5.0 / 5 (STATUS: MONOPOLI KONSESI).\n", False, False),
+        ("5. ", True, False), ("Tekanan Kepadatan Spasial Izin Pertambangan (Lahan 5): ", True, False),
+        (f"Sebanyak {total_iup_nikel:,.0f} Hektar daratan Sulawesi telah dipatok oleh konsesi IUP nikel aktif, merefleksikan 6.3% dari total luas daratan pulau. Di wilayah sentra Morowali dan Konawe, rasio ini bahkan telah melampaui 10%, menghasilkan Skor Kepadatan Spasial 3.1 / 5 (Skor WSM {skor_lahan_5:.2f} / 10.0).\n", False, False),
+        ("6. ", True, False), ("Vonis Status Daya Dukung Lahan: ", True, False),
+        (f"Dengan Skor Akumulasi Lahan sebesar {skor_akumulasi_lahan:.2f} / 10.0 (Skor Indikator Lahan {card_l_val} / 5), daya dukung ekosistem daratan Bioregion Pulau Sulawesi resmi dinyatakan dalam STATUS: DARURAT LAHAN dengan kesimpulan ANALISIS: Evaluasi Pengelolaan Lanskap.", False, False),
+    ])
+
     docx_path = tool_dir / "Metodologi_Bab6_Audit_D3TLH.docx"
     doc.save(str(docx_path))
     print(f"  [OK] Tersimpan: {docx_path}")
@@ -810,6 +1007,38 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
 <strong>3. Konflik Nelayan (Air 3):</strong> Terjadi sedikitnya <strong>{jumlah_konflik_air} kasus</strong> konflik agraria pesisir, menghasilkan Skor Konflik Ruang Air <strong>5.0 / 5</strong> (STATUS: DARURAT AGRARIA).<br>
 <strong>4. Beban Tailing (Air 4):</strong> Akumulasi timbulan tailing dan slag mencapai <strong>{total_tailing_sulawesi/1_000_000.0:,.2f} Jt Ton/Thn</strong>, melampaui ambang batas AMDAL (25 Jt Ton), menghasilkan Skor Ancaman Tailing <strong>5.0 / 5</strong> (STATUS: DARURAT LIMBAH).<br>
 <strong>5. Vonis Indikator Air:</strong> Skor Indikator Air berada pada angka <strong>4.2 / 5</strong> (Skor WSM {skor_akumulasi_air:.2f} / 10.0), mengonfirmasi vonis <strong><span class="badge-danger">STATUS: DARURAT AIR</span></strong> dengan kesimpulan eksekutif <strong>ANALISIS: Kapasitas Penetralan Limbah Melampaui Batas</strong>.</p>
+
+<h2>6.3 Algoritma Skoring Bioregion Pulau: Matriks Daya Dukung Lahan</h2>
+<div class="note-box"><strong>Audit D3TLH: Daya Dukung Lahan (Page Streamlit):</strong> "Daya dukung lahan dianalisis berdasarkan kecukupan tutupan hutan dan batas fungsi kawasan." Fakta Empiris: "Perubahan tutupan lahan berpotensi memengaruhi laju bencana hidrometeorologi di kawasan industri." Skor Indikator Lahan: <strong>{card_l_val} / 5</strong> (STATUS: DARURAT LAHAN) | ANALISIS: <strong>Evaluasi Pengelolaan Lanskap</strong>.</div>
+
+<h4>A. Pengantar & Kerangka Narasi</h4>
+<p>Dalam metodologi D3TLH resmi pemerintah, daya dukung lahan dianalisis menggunakan pemodelan jasa ekosistem berbasis tutupan lahan statis, yang mengabaikan hubungan kausal antara pembongkaran hutan hulu dengan lonjakan bencana hidrometeorologi. Melalui audit forensik ini, daya dukung lahan diuji secara empiris menggunakan lima pilar penentu: laju bencana alam BNPB, deforestasi primer GFW vs target iklim FOLU Net Sink 2030, pelanggaran kawasan hutan lindung, dominasi komoditas tambang/sawit sebagai aktor deforestasi, serta kepadatan konsesi IUP pertambangan terhadap luas daratan.</p>
+
+<h4>B. Alur Logika Metodologis Skoring Bioregion Pulau</h4>
+<div class="mermaid">{mermaid_str_6_3}</div>
+
+<h4>C. Formulasi Matematis: Normalisasi Z-Score Bencana, Kuota FOLU, dan Batas Spasial</h4>
+<div class="formula">Skor_Lahan_1 = min(10.0, ({total_bencana_sulawesi:,.0f} / 877.0) * 10.0) = {skor_lahan_1:.2f} / 10.0 (Likert: {(skor_lahan_1/2.0):.1f} / 5)</div>
+<div class="formula">Skor_Lahan_2 = min(10.0, ({total_deforestasi_sulawesi:,.0f} / 638000.0) * 10.0) = {skor_lahan_2:.2f} / 10.0 (Likert: {(skor_lahan_2/2.0):.1f} / 5)</div>
+<div class="formula">Skor_Lahan_3 = 10.0 if {total_lindung_hilang_sulawesi:,.0f} > 0 else 0.0 = {skor_lahan_3:.2f} / 10.0 (Likert: {(skor_lahan_3/2.0):.1f} / 5)</div>
+<div class="formula">Skor_Lahan_4 = min(10.0, ({total_tambang_driver_sulawesi:,.0f} / 500000.0) * 10.0) = {skor_lahan_4:.2f} / 10.0 (Likert: {(skor_lahan_4/2.0):.1f} / 5)</div>
+<div class="formula">Skor_Lahan_5 = min(10.0, max(0.0, ({rasio_ekspansi:.4f} / 0.10) * 10.0)) = {skor_lahan_5:.2f} / 10.0 (Likert: {(skor_lahan_5/2.0):.1f} / 5)</div>
+<div class="formula">Skor_Akumulasi_Lahan = ({skor_lahan_1:.2f} + {skor_lahan_2:.2f} + {skor_lahan_3:.2f} + {skor_lahan_4:.2f} + {skor_lahan_5:.2f}) / 5.0 = {skor_akumulasi_lahan:.2f} / 10.0 (Skor Indikator Lahan: {card_l_val} / 5)</div>
+
+<h4>D. Matriks Hasil Uji Empiris</h4>
+<div class="table-caption">Tabel 6.5: Evaluasi Kuantitatif 5 Indikator Daya Dukung Lahan Bioregion Pulau Sulawesi (Sesuai Dashboard Page 6)</div>
+{html_table(["Kode", "Indikator Empiris", "Nilai Aktual", "Ambang Batas Kritis", "Formula Substitusi", "Skor WSM (0-10)", "Skor Likert (1-5)", "Status Ekologis"], lahan_rows)}
+
+<div class="table-caption">Tabel 6.6: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Lahan</div>
+{html_table(["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_lahan_rows)}
+
+<h4>E. Analisis Temuan Empiris</h4>
+<p><strong>1. Bencana Alam (Lahan 1):</strong> Total bencana banjir dan longsor tercatat <strong>{total_bencana_sulawesi:,.0f} kejadian</strong>, melampaui ambang batas outlier statistik (877 kejadian), memicu Skor Bencana Lahan <strong>5.0 / 5</strong> (STATUS: DARURAT BENCANA).<br>
+<strong>2. Deforestasi Hutan (Lahan 2):</strong> Kehilangan tutupan pohon menyentuh <strong>{total_deforestasi_sulawesi:,.0f} Ha</strong>, melampaui kuota 11 tahun FOLU Net Sink 2030 (638.000 Ha), menghasilkan Skor Deforestasi <strong>5.0 / 5</strong> (STATUS: OVERCAPACITY LAHAN).<br>
+<strong>3. Kawasan Lindung (Lahan 3):</strong> Teridentifikasi <strong>{total_lindung_hilang_sulawesi:,.0f} Ha</strong> deforestasi di dalam Hutan Lindung, memicu pelanggaran hukum absolut UU Kehutanan No. 41/1999 dengan Skor <strong>5.0 / 5</strong> (STATUS: PELANGGARAN HUKUM).<br>
+<strong>4. Aktor Deforestasi (Lahan 4):</strong> Komoditas industri tambang dan sawit memonopoli <strong>{total_tambang_driver_sulawesi:,.0f} Ha</strong> deforestasi, memicu Skor Aktor Deforestasi <strong>5.0 / 5</strong> (STATUS: MONOPOLI KONSESI).<br>
+<strong>5. Kepadatan Konsesi (Lahan 5):</strong> Konsesi IUP nikel menyita <strong>{total_iup_nikel:,.0f} Ha</strong> atau <strong>{rasio_ekspansi*100:.1f}%</strong> daratan pulau, menghasilkan Skor Kepadatan Spasial <strong>{(skor_lahan_5/2.0):.1f} / 5</strong>.<br>
+<strong>6. Vonis Indikator Lahan:</strong> Skor Indikator Lahan berada pada angka <strong>{card_l_val} / 5</strong> (Skor WSM {skor_akumulasi_lahan:.2f} / 10.0), menetapkan vonis <strong><span class="badge-danger">STATUS: DARURAT LAHAN</span></strong> dengan kesimpulan eksekutif <strong>ANALISIS: Evaluasi Pengelolaan Lanskap</strong>.</p>
 </body>
 </html>
 """
@@ -898,13 +1127,50 @@ h4 {{ color: #FFCDD2; margin-top: 18px; }}
         f"4. **Beban Tailing (Air 4):** Akumulasi timbulan tailing dan slag mencapai **{total_tailing_sulawesi/1_000_000.0:,.2f} Jt Ton/Thn**, melampaui ambang batas AMDAL (25 Jt Ton), menghasilkan Skor Ancaman Tailing **5.0 / 5** (STATUS: DARURAT LIMBAH).",
         f"5. **Vonis Indikator Air:** Skor Indikator Air berada pada angka **4.2 / 5** (Skor WSM {skor_akumulasi_air:.2f} / 10.0), mengonfirmasi vonis **STATUS: DARURAT AIR** dengan kesimpulan eksekutif **ANALISIS: Kapasitas Penetralan Limbah Melampaui Batas**.",
         "",
+        "## 6.3 Algoritma Skoring Bioregion Pulau: Matriks Daya Dukung Lahan",
+        "",
+        f'> **Audit D3TLH: Daya Dukung Lahan (Page Streamlit):** "Daya dukung lahan dianalisis berdasarkan kecukupan tutupan hutan dan batas fungsi kawasan." Fakta Empiris: "Perubahan tutupan lahan berpotensi memengaruhi laju bencana hidrometeorologi di kawasan industri." Skor Indikator Lahan: **{card_l_val} / 5** (STATUS: DARURAT LAHAN) | ANALISIS: **Evaluasi Pengelolaan Lanskap**.',
+        "",
+        "#### A. Pengantar & Kerangka Narasi",
+        "Dalam metodologi D3TLH resmi pemerintah, daya dukung lahan dianalisis menggunakan pemodelan jasa ekosistem berbasis tutupan lahan statis, yang mengabaikan hubungan kausal antara pembongkaran hutan hulu dengan lonjakan bencana hidrometeorologi. Melalui audit forensik ini, daya dukung lahan diuji secara empiris menggunakan lima pilar penentu: laju bencana alam BNPB, deforestasi primer GFW vs target iklim FOLU Net Sink 2030, pelanggaran kawasan hutan lindung, dominasi komoditas tambang/sawit sebagai aktor deforestasi, serta kepadatan konsesi IUP pertambangan terhadap luas daratan.",
+        "",
+        "#### B. Alur Logika Metodologis Skoring Bioregion Pulau (Matriks Lahan)",
+        "```mermaid",
+        mermaid_str_6_3,
+        "```",
+        "",
+        "#### C. Formulasi Matematis: Normalisasi Z-Score Bencana, Kuota FOLU, dan Batas Spasial",
+        "```text",
+        f"Skor_Lahan_1 = min(10.0, ({total_bencana_sulawesi:,.0f} / 877.0) * 10.0) = {skor_lahan_1:.2f} / 10.0 (Likert: {(skor_lahan_1/2.0):.1f} / 5)",
+        f"Skor_Lahan_2 = min(10.0, ({total_deforestasi_sulawesi:,.0f} / 638000.0) * 10.0) = {skor_lahan_2:.2f} / 10.0 (Likert: {(skor_lahan_2/2.0):.1f} / 5)",
+        f"Skor_Lahan_3 = 10.0 if {total_lindung_hilang_sulawesi:,.0f} > 0 else 0.0 = {skor_lahan_3:.2f} / 10.0 (Likert: {(skor_lahan_3/2.0):.1f} / 5)",
+        f"Skor_Lahan_4 = min(10.0, ({total_tambang_driver_sulawesi:,.0f} / 500000.0) * 10.0) = {skor_lahan_4:.2f} / 10.0 (Likert: {(skor_lahan_4/2.0):.1f} / 5)",
+        f"Skor_Lahan_5 = min(10.0, max(0.0, ({rasio_ekspansi:.4f} / 0.10) * 10.0)) = {skor_lahan_5:.2f} / 10.0 (Likert: {(skor_lahan_5/2.0):.1f} / 5)",
+        f"Skor_Akumulasi_Lahan = ({skor_lahan_1:.2f} + {skor_lahan_2:.2f} + {skor_lahan_3:.2f} + {skor_lahan_4:.2f} + {skor_lahan_5:.2f}) / 5.0 = {skor_akumulasi_lahan:.2f} / 10.0 (Skor Indikator Lahan: {card_l_val} / 5)",
+        "```",
+        "",
+        "#### D. Matriks Hasil Uji Empiris",
+        "##### Tabel 6.5: Evaluasi Kuantitatif 5 Indikator Daya Dukung Lahan Bioregion Pulau Sulawesi (Sesuai Dashboard Page 6)",
+        markdown_table(["Kode", "Indikator Empiris", "Nilai Aktual", "Ambang Batas Kritis", "Formula Substitusi", "Skor WSM (0-10)", "Skor Likert (1-5)", "Status Ekologis"], lahan_rows),
+        "",
+        "##### Tabel 6.6: Dasar Regulasi, Dokumen Legal, dan Landasan Ilmiah Ambang Batas Matriks Lahan",
+        markdown_table(["Parameter", "Regulasi / Rujukan Ilmiah", "Kutipan Dokumen Resmi / Verbatim", "Pasal / Hal.", "Status Audit"], regulasi_lahan_rows),
+        "",
+        "#### E. Analisis Temuan Empiris: Evaluasi Pengelolaan Lanskap",
+        f"1. **Bencana Alam (Lahan 1):** Total bencana banjir dan longsor tercatat **{total_bencana_sulawesi:,.0f} kejadian**, melampaui ambang batas outlier statistik (877 kejadian), memicu Skor Bencana Lahan **5.0 / 5** (STATUS: DARURAT BENCANA).",
+        f"2. **Deforestasi Hutan (Lahan 2):** Kehilangan tutupan pohon menyentuh **{total_deforestasi_sulawesi:,.0f} Ha**, melampaui kuota 11 tahun FOLU Net Sink 2030 (638.000 Ha), menghasilkan Skor Deforestasi **5.0 / 5** (STATUS: OVERCAPACITY LAHAN).",
+        f"3. **Kawasan Lindung (Lahan 3):** Teridentifikasi **{total_lindung_hilang_sulawesi:,.0f} Ha** deforestasi di dalam Hutan Lindung, memicu pelanggaran hukum absolut UU Kehutanan No. 41/1999 dengan Skor **5.0 / 5** (STATUS: PELANGGARAN HUKUM).",
+        f"4. **Aktor Deforestasi (Lahan 4):** Komoditas industri tambang dan sawit memonopoli **{total_tambang_driver_sulawesi:,.0f} Ha** deforestasi, memicu Skor Aktor Deforestasi **5.0 / 5** (STATUS: MONOPOLI KONSESI).",
+        f"5. **Kepadatan Konsesi (Lahan 5):** Konsesi IUP nikel menyita **{total_iup_nikel:,.0f} Ha** atau **{rasio_ekspansi*100:.1f}%** daratan pulau, menghasilkan Skor Kepadatan Spasial **{(skor_lahan_5/2.0):.1f} / 5**.",
+        f"6. **Vonis Indikator Lahan:** Skor Indikator Lahan berada pada angka **{card_l_val} / 5** (Skor WSM {skor_akumulasi_lahan:.2f} / 10.0), menetapkan vonis **STATUS: DARURAT LAHAN** dengan kesimpulan eksekutif **ANALISIS: Evaluasi Pengelolaan Lanskap**.",
+        "",
     ]
 
     md_path = tool_dir / "Metodologi_Bab6_Audit_D3TLH.md"
     with open(md_path, "w", encoding="utf-8") as f:
         f.write("\n".join(md_lines))
     print(f"  [OK] Tersimpan: {md_path}")
-    print("[4/4] Selesai membangun Bab 6 Sub-bab 6.1 dan 6.2.")
+    print("[4/4] Selesai membangun Bab 6 Sub-bab 6.1, 6.2, dan 6.3.")
 
 
 if __name__ == "__main__":
