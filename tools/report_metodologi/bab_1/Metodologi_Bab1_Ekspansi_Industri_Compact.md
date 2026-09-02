@@ -75,22 +75,28 @@ Pengujian inferensial menggunakan desain matriks kontinjensi 2×2 berbasis **amb
 ### 1.4 Analisis Realisasi Investasi PMDN dan Dampak Terhadap Tutupan Hutan
 Analisis arus modal investasi PMDN mengevaluasi elastisitas suntikan modal terhadap laju alih fungsi hutan dan emisi komoditas. Formulasi pengujian inferensial Chi-Square dan Odds Ratio pada Sub-bab 1.4 mengadopsi protokol pengujian kontinjensi 2×2 yang sama, dengan variabel independen realisasi investasi modal domestik (X > Rp3.146,4 Miliar) dan evaluasi efek jeda waktu (time-lag) ekspansi fisik di lapangan.
 
-### 1.5 Pelabuhan Ekspor & Peta Jalur Distribusi Logistik Nikel Sulawesi
-Simpul logistik pelabuhan ekspor diverifikasi melalui triangulasi laporan investigasi keselamatan transportasi maritim (KNKT), penetapan regulasi Proyek Strategis Nasional (PSN), dan laporan operasional korporasi. Alur pelayaran pengangkutan curah nikel menuju pasar internasional dimodelkan secara spasial menggunakan persamaan kurva Bézier kuadratik di atas koordinat bola bumi guna memetakan jalur lalu lintas maritim yang rentan kecelakaan tongkang.
+### 1.5 Pelabuhan Ekspor: Ke Mana Nikel Sulawesi Dikirim?
+Verifikasi titik pelabuhan dan terminal khusus ekspor nikel dilakukan melalui protokol triangulasi informasi publik (OSINT): Laporan Investigasi Keselamatan Transportasi Laut KNKT (bobot muatan tongkang hingga 52.378 DWT), lampiran regulasi Proyek Strategis Nasional (Perpres No. 109/2020), laporan keberlanjutan emiten terbuka (PT Vale Indonesia Tbk dan PT ANTAM Tbk), serta publikasi riset audit independen mengenai operasional pelabuhan khusus.
+
+### 1.6 Peta Jalur Distribusi Logistik Nikel Sulawesi
+Pemodelan spasial rute pelayaran internasional pengangkutan produk olahan nikel dari simpul pelabuhan Sulawesi menuju negara tujuan utama (Tiongkok dan Jepang) dimodelkan menggunakan persamaan parametrik kurva Bézier kuadratik di atas koordinat bola bumi guna memetakan jalur lintas laut aktual:
+
+> `Kurva(t) = (1 - t)² × Titik_Asal + 2(1 - t)t × Titik_Kontrol + t² × Titik_Tujuan`
 
 ---
 
 ## E. Korespondensi Metodologi terhadap Sub-bab Laporan Bab 1
-Setiap sub-bab analitis pada Bab 1 ditopang oleh metode kuantitatif yang presisi dan menghasilkan luaran visual terstandarisasi sebagaimana dirangkum pada matriks berikut:
+Setiap sub-bab analitis pada Bab 1 ditopang oleh metode kuantitatif yang presisi dan menghasilkan sintesis bukti empiris terstandarisasi sebagaimana dirangkum pada matriks berikut:
 
 ##### Matriks Korespondensi Sub-bab terhadap Metode Analitis
-| Sub-bab | Fokus Kajian Empiris | Metode Analitis Utama | Luaran Visual / Statistik |
-| :---: | :--- | :--- | :--- |
-| **Sub-bab 1.1** | Struktur Makro PDRB Provinsi | Reklasifikasi Hukum KBLI, Pangsa Sektoral, Tren Pertumbuhan | Small Multiples Bar Chart, Tabel Kontribusi Sektor |
-| **Sub-bab 1.2** | Kawasan Industri & PLTU Captive | Analisis Aglomerasi Spasial, Rasio Kapasitas Off-grid | Peta Sebaran Smelter, Stacked Bar Kapasitas MW |
-| **Sub-bab 1.3** | Tren Perizinan Konsesi Tambang | Deret Waktu Tahunan, Laju Alih Ruang Ha/Hari | Area Chart Akumulasi Izin & Luas Konsesi |
-| **Sub-bab 1.4** | Arus Investasi PMDN & Deforestasi | Uji Non-parametrik Chi-Square (χ²), Odds Ratio (OR) | Matriks Tabel Kontinjensi 2×2, Ringkasan Inferensial |
-| **Sub-bab 1.5–1.6** | Infrastruktur Logistik & Rantai Pasok | Triangulasi Dokumen Resmi, Kurva Parametrik Bézier | Peta Alur Pelayaran Ekspor, Matriks Insiden Maritim |
+| Sub-bab | Fokus Kajian Empiris | Metode Analitis Utama |
+| :---: | :--- | :--- |
+| **Sub-bab 1.1** | Struktur Makro PDRB Provinsi & Kabupaten | Reklasifikasi Hukum KBLI, Pangsa Sektoral, Rasio Kesenjangan Spasial |
+| **Sub-bab 1.2** | Kawasan Industri & PLTU Captive | Analisis Aglomerasi Spasial, Rasio Kapasitas Off-grid |
+| **Sub-bab 1.3** | Tren Perizinan Konsesi Tambang | Deret Waktu Tahunan, Laju Alih Ruang Ha/Hari, Uji Chi-Square (χ²) |
+| **Sub-bab 1.4** | Arus Investasi PMDN & Deforestasi | Uji Non-parametrik Chi-Square (χ²), Odds Ratio (OR), Efek Time-lag |
+| **Sub-bab 1.5** | Simpul Pelabuhan Ekspor & Terminal Khusus | Triangulasi Validasi Silang (OSINT: KNKT, Regulasi PSN, Laporan Emiten) |
+| **Sub-bab 1.6** | Peta Jalur Distribusi Logistik Maritim | Pemodelan Spasial Rute Parametrik Kurva Bézier Kuadratik (Scattergeo) |
 
 ---
 
