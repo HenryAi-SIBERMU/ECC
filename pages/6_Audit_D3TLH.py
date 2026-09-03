@@ -2598,13 +2598,22 @@ with colC2:
             df_b['tahun'] = pd.to_numeric(df_b['tahun'], errors='coerce')
             df_b['jumlah_kejadian'] = pd.to_numeric(df_b['jumlah_kejadian'], errors='coerce').fillna(0)
             df_b_trend = df_b.groupby(['tahun', 'provinsi'])['jumlah_kejadian'].sum().reset_index()
+            df_b_trend['tahun'] = df_b_trend['tahun'].dropna().astype(int).astype(str)
             fig_l1 = px.bar(df_b_trend, x='tahun', y='jumlah_kejadian', color='provinsi', 
                            title="Frekuensi Bencana Hidrometeorologi (Banjir & Longsor)",
                            barmode='stack',
                            color_discrete_sequence=px.colors.qualitative.Pastel)
             fig_l1.add_hline(y=88, line_dash="dash", line_color="#E74C3C", annotation_text="Batas Darurat Bencana (88/Tahun)", annotation_position="top left")
-            fig_l1.update_layout(barmode='stack', template="plotly_dark", plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=0, r=0, t=40, b=0))
-            st.plotly_chart(fig_l1, use_container_width=True, config={'displayModeBar': False})
+            fig_l1.update_layout(
+                barmode='stack',
+                xaxis=dict(type='category', title="Tahun"),
+                yaxis=dict(title="jumlah_kejadian"),
+                template="plotly_dark",
+                plot_bgcolor="rgba(0,0,0,0)",
+                paper_bgcolor="rgba(0,0,0,0)",
+                margin=dict(l=0, r=0, t=40, b=0)
+            )
+            st.plotly_chart(fig_l1, use_container_width=True, theme=None, config={'displayModeBar': False})
             with st.expander("Tampilkan Data Mentah (BNPB)"):
                 st.dataframe(df_bencana, use_container_width=True)
 
